@@ -1,0 +1,1950 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Gradient – Typst 中文文档</title>
+  <meta name="description" content="Gradient 类型的文档">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#239dad">
+  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/visualize/gradient/">
+  <meta property="og:title" content="Gradient – Typst 中文文档">
+  <meta property="og:site_name" content="Typst">
+  <meta property="og:description" content="Gradient 类型的文档">
+  <meta property="og:type">
+  <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:site" content="@typstapp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/reference/visualize/gradient/">
+  <meta name="twitter:image:alt"
+    content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#239dad">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="/styles/default.css?bust=20230913?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs.css?bust=20230915?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs-cn.css">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Regular.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Bold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-SemiBold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/CascadiaMono-Regular-Sub.woff2" as="font">
+  <link rel="preload" href="/assets/images/blur.webp" as="image">
+  
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js"), document.addEventListener("DOMContentLoaded", (() => { const e = document.cookie.split("; ").find((e => e.startsWith("INSECURE_SIGNED_IN=")))?.split("=")[1].toLowerCase(); if ("1" === e || "true" === e || "yes" === e) { document.documentElement.classList.add("signed-in"); const e = document.querySelector("header nav a.nav-btn"), t = document.querySelector("header nav a.sign-in"); e && (e.innerHTML = "Go to app", e.setAttribute("href", "/app/")), t && (t.innerHTML = "Sign out", t.setAttribute("href", "https://api.typst.app/v1/auth/logout")) } }))</script>
+</head>
+
+<body class="no-js docs has-outline">
+  <div class="alert">
+    <div class="alert-content">
+      <span><b>注意：</b>该中文文档为社区驱动的非官网文档，可能存在错译、漏译或过时等问题，请以官网文档 <a href="https://typst.app/docs/">Documentation</a>
+        为准，如发现错漏，也欢迎 <a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io">您的贡献</a>（<a href="https://gitee.com/orangex4/typst-doc-cn.github.io">镜像</a>）。Typst 非官方中文交流 QQ 群：793548390</span>
+      <br />
+      <span><b>Warning:</b> the Chinese document is a community-driven non-official document, there may be mistranslation, omission or outdated problems, please refer to <a href="https://typst.app/docs/">the official website documentation</a>.</span>
+    </div>
+  </div>
+  <header class="boring">
+    <div><a href="/docs" class="logo-box"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label">
+          <title id="logo-label">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a><button class="hamburger"><img alt="Open navigation"
+          src="/assets/icons/16-hamburger-dark.svg" width="16" height="16"></button>
+      <nav>
+        <ul>
+          <li class="social"><a href="https://twitter.com/typstapp/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-twitter-label">
+                <title id="svg-twitter-label">Twitter</title>
+                <use href="/assets/icons/social.svg#twitter"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://discord.gg/2uDybryKPe"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-discord-label">
+                <title id="svg-discord-label">Discord</title>
+                <use href="/assets/icons/social.svg#discord"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-github-label">
+                <title id="svg-github-label">GitHub</title>
+                <use href="/assets/icons/social.svg#github"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://www.linkedin.com/company/typst/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-linkedin-label">
+                <title id="svg-linkedin-label">LinkedIn</title>
+                <use href="/assets/icons/social.svg#linkedin"></use>
+              </svg></a></li>
+          <li class="secondary"><a href="https://typst.app/">主页</a></li>
+          <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
+          <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main-grid">
+    <nav class="folding"><a href="/docs" class="title-row"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label-nav">
+          <title id="logo-label-nav">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a>
+      <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+      <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
+          type="search" placeholder="搜索" id="docs-search"></div>
+      <ul class="search-results hidden" id="search-results"></ul>
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/" >概览</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/tutorial/" >教程</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/tutorial/writing-in-typst/" >使用 Typst 写作</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/formatting/" >格式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/advanced-styling/" >高级样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/making-a-template/" >制作模板</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/chinese/" >中文用户指南</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/reference/" >参考</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            
+            <li class="category">Language</li>
+            
+            <li>
+              <a href="/docs/reference/syntax/" >语法</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/styling/" >样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/scripting/" >脚本</a>
+              
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/docs/reference/types/" >类型（旧）</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/types/none/" >None</a></li>
+                
+                
+                <li><a href="/docs/reference/types/auto/" >Auto</a></li>
+                
+                
+                <li><a href="/docs/reference/types/boolean/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/types/integer/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/types/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/types/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/types/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/types/relative-length/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/types/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/types/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/types/symbol/" >Symbol</a></li>
+                
+                
+                <li><a href="/docs/reference/types/string/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/types/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/types/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/types/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/types/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/types/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/types/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/types/module/" >Module</a></li>
+                
+              </ul>
+              
+            </li>
+
+            
+            <li class="category">Library</li>
+            
+            <li>
+              <a href="/docs/reference/foundations/" >基础</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/foundations/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bool/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bytes/" >Bytes</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/duration/" >Duration</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/eval/" >Evaluate</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/int/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/label/" >Label</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/module/" >Module</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/plugin/" >Plugin</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/regex/" >Regex</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/repr/" >Representation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/str/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/type/" >Type</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/version/" >Version</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/calc" >Calculation</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/model/" >模型</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/model/bibliography/" >参考文献</a></li>
+                
+                
+                <li><a href="/docs/reference/model/list/" >Bullet List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/cite/" >引用</a></li>
+                
+                
+                <li><a href="/docs/reference/model/document/" >文档</a></li>
+                
+                
+                <li><a href="/docs/reference/model/emph/" >强调（斜体）</a></li>
+                
+                
+                <li><a href="/docs/reference/model/figure/" >图表</a></li>
+                
+                
+                <li><a href="/docs/reference/model/footnote/" >脚注</a></li>
+                
+                
+                <li><a href="/docs/reference/model/heading/" >Heading</a></li>
+                
+                
+                <li><a href="/docs/reference/model/link/" >Link</a></li>
+                
+                
+                <li><a href="/docs/reference/model/enum/" >有序列表</a></li>
+                
+                
+                <li><a href="/docs/reference/model/numbering/" >Numbering</a></li>
+                
+                
+                <li><a href="/docs/reference/model/outline/" >Outline</a></li>
+                
+                
+                <li><a href="/docs/reference/model/par/" >Paragraph</a></li>
+                
+                
+                <li><a href="/docs/reference/model/parbreak/" >Paragraph Break</a></li>
+                
+                
+                <li><a href="/docs/reference/model/quote/" >Quote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/ref/" >Reference</a></li>
+                
+                
+                <li><a href="/docs/reference/model/strong/" >着重强调（加粗）</a></li>
+                
+                
+                <li><a href="/docs/reference/model/table/" >Table</a></li>
+                
+                
+                <li><a href="/docs/reference/model/terms/" >Term List</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/text/" >文本</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/text/highlight/" >文本高亮</a></li>
+                
+                
+                <li><a href="/docs/reference/text/linebreak/" >换行</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lorem/" >假文</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lower/" >转小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/overline/" >上划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/raw/" >原始文本/代码块</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smallcaps/" >显示为小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smartquote/" >智能引号</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strike/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/sub/" >下标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/super/" >上标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/text/" >文本</a></li>
+                
+                
+                <li><a href="/docs/reference/text/underline/" >下划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/upper/" >转大写</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/math/" >数学</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/math/accent/" >重音符号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cancel/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cases/" >左大括号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/class/" >类</a></li>
+                
+                
+                <li><a href="/docs/reference/math/equation/" >数学表达式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/frac/" >分数</a></li>
+                
+                
+                <li><a href="/docs/reference/math/mat/" >矩阵</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >文本运算符</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >向量</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover" >上/下方内容</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants" >字体变体</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes" >显示尺寸</a></li>
+                
+                
+                <li><a href="/docs/reference/math/lr" >Left/Right</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles" >显示样式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/roots" >根式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/attach" >附缀</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/symbols/" >符号</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/symbols/sym/" >通用</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/emoji/" >表情符号</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/symbol/" >符号</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/layout/" >布局</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/layout/align/" >Align</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/alignment/" >Alignment</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/block/" >Block</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/box/" >Box</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/colbreak/" >Column Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/columns/" >Columns</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/direction/" >Direction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/grid/" >Grid</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/hide/" >Hide</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/layout/" >Layout</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/measure/" >Measure</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/move/" >Move</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pad/" >Padding</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/page/" >Page</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pagebreak/" >Page Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/place/" >Place</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/relative/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/repeat/" >Repeat</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/rotate/" >Rotate</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/v/" >Spacing (V)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/stack/" >Stack</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/visualize/" >可视化</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/visualize/circle/" >Circle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/gradient/"  aria-current="page" >Gradient</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/image/" >Image</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/line/" >Line</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/path/" >Path</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/square/" >Square</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/introspection/" >内省</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/introspection/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/locate/" >Locate</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/location/" >Location</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/metadata/" >Metadata</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/query/" >Query</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/state/" >State</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/data-loading/" >数据加载</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/data-loading/cbor/" >CBOR</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/csv/" >CSV</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/json/" >JSON</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/read/" >Read</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/toml/" >TOML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/xml/" >XML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/yaml/" >YAML</a></li>
+                
+              </ul>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/guides/" >指南</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/guides/guide-for-latex-users/" >LaTeX 用户指南</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/page-setup/" >页面设置指南</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/packages/" >第三方包</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/changelog/" >更新日志</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/roadmap/" >路线图</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/community/" >社区</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/glossary/" >术语表</a>
+          
+        </li>
+        
+      </ul>
+
+    </nav>
+    <main>
+      <ul class="breadcrumbs" aria-label="Breadcrumbs">
+        <li class="root"><a href="/docs/"><img src="/assets/icons/16-docs-dark.svg" alt="Docs" width="16"
+              height="16"></a></li>
+
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/">参考</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/visualize/">可视化</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/visualize/gradient/">Gradient</a></li>
+        
+      </ul>
+
+      
+
+<h1 id="summary"><span class="pill pill-obj">gradient</span></h1>
+<p>A color gradient.</p>
+<p>Typst supports linear gradients through the
+<a href="/docs/reference/visualize/gradient/#definitions-linear"><code>gradient.linear</code> function</a>, radial gradients through
+the <a href="/docs/reference/visualize/gradient/#definitions-radial"><code>gradient.radial</code> function</a>, and conic gradients
+through the <a href="/docs/reference/visualize/gradient/#definitions-conic"><code>gradient.conic</code> function</a>.</p>
+<p>A gradient can be used for the following purposes:</p>
+<ul>
+<li>As a fill to paint the interior of a shape:
+<code><span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code></li>
+<li>As a stroke to paint the outline of a shape:
+<code><span class="typ-func">rect</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">1pt</span> <span class="typ-op">+</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code></li>
+<li>As the fill of text:
+<code><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code></li>
+<li>As a color map you can <a href="/docs/reference/visualize/gradient/#definitions-sample">sample</a> from:
+<code>gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">sample</span><span class="typ-punct">(</span><span class="typ-num">0.5</span><span class="typ-punct">)</span></code></li>
+</ul>
+<h2 id="examples">Examples</h2>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
+  dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
+  spacing<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>rainbow<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">radial</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>rainbow<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">conic</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>rainbow<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/dfd0b93470d06c9e36abf8e57a9d8264.png" alt="Preview" width="480" height="190"/></div></div>
+<p>Gradients are also supported on text, but only when setting the
+<a href="/docs/reference/visualize/gradient/#definitions-relative">relativeness</a> to either <code><span class="typ-key">auto</span></code> (the default value) or
+<code><span class="typ-str">&quot;parent&quot;</span></code>. To create word-by-word or glyph-by-glyph gradients, you can
+wrap the words or characters of your text in <a href="/docs/reference/layout/box/">boxes</a> manually or
+through a <a href="/docs/reference/styling/#show-rules">show rule</a>.</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span>red<span class="typ-punct">,</span> blue<span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">rainbow</span><span class="typ-punct">(</span>content<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
+  <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>rainbow<span class="typ-punct">)</span><span class="typ-punct">)</span>
+  <span class="typ-func">box</span><span class="typ-punct">(</span>content<span class="typ-punct">)</span>
+<span class="typ-punct">}</span>
+
+This is a gradient on text, but with a <span class="typ-func">#</span><span class="typ-func">rainbow</span><span class="typ-punct">[</span>twist<span class="typ-punct">]</span>!
+</code></pre><div class="preview"><img src="/assets/docs/28ee492b7f476abb5353acd3248662ad.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="stops">Stops</h2>
+<p>A gradient is composed of a series of stops. Each of these stops has a color
+and an offset. The offset is a <a href="/docs/reference/layout/ratio/">ratio</a> between <code><span class="typ-num">0%</span></code> and <code><span class="typ-num">100%</span></code> or
+an angle between <code><span class="typ-num">0deg</span></code> and <code><span class="typ-num">360deg</span></code>. The offset is a relative position
+that determines how far along the gradient the stop is located. The stop's
+color is the color of the gradient at that position. You can choose to omit
+the offsets when defining a gradient. In this case, Typst will space all
+stops evenly.</p>
+<h2 id="relativeness">Relativeness</h2>
+<p>The location of the <code><span class="typ-num">0%</span></code> and <code><span class="typ-num">100%</span></code> stops depends on the dimensions
+of a container. This container can either be the shape that it is being
+painted on, or the closest surrounding container. This is controlled by the
+<code>relative</code> argument of a gradient constructor. By default, gradients are
+relative to the shape they are being painted on, unless the gradient is
+applied on text, in which case they are relative to the closest ancestor
+container.</p>
+<p>Typst determines the ancestor container as follows:</p>
+<ul>
+<li>For shapes that are placed at the root/top level of the document, the
+closest ancestor is the page itself.</li>
+<li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/"><code>block</code></a> or
+<a href="/docs/reference/layout/box/"><code>box</code></a> that contains the shape. This includes the boxes and blocks
+that are implicitly created by show rules and elements. For example, a
+<a href="/docs/reference/layout/rotate/"><code>rotate</code></a> will not affect the parent of a gradient, but a
+<a href="/docs/reference/layout/grid/"><code>grid</code></a> will.</li>
+</ul>
+<h2 id="color-spaces-and-interpolation">Color spaces and interpolation</h2>
+<p>Gradients can be interpolated in any color space. By default, gradients are
+interpolated in the <a href="/docs/reference/visualize/color/#definitions-oklab">Oklab</a> color space, which is a
+<a href="https://programmingdesignsystems.com/color/perceptually-uniform-color-spaces/index.html">perceptually uniform</a>
+color space. This means that the gradient will be perceived as having a
+smooth progression of colors. This is particularly useful for data
+visualization.</p>
+<p>However, you can choose to interpolate the gradient in any supported color
+space you want, but beware that some color spaces are not suitable for
+perceptually interpolating between colors. Consult the table below when
+choosing an interpolation space.</p>
+<table><thead><tr><th>Color space</th><th>Perceptually uniform?</th></tr></thead><tbody>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-oklab">Oklab</a></td><td><em>Yes</em></td></tr>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-oklch">Oklch</a></td><td><em>Yes</em></td></tr>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-rgb">sRGB</a></td><td><em>No</em></td></tr>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-linear-rgb">linear-RGB</a></td><td><em>Yes</em></td></tr>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-cmyk">CMYK</a></td><td><em>No</em></td></tr>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-luma">Grayscale</a></td><td><em>Yes</em></td></tr>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-hsl">HSL</a></td><td><em>No</em></td></tr>
+<tr><td><a href="/docs/reference/visualize/color/#definitions-hsv">HSV</a></td><td><em>No</em></td></tr>
+</tbody></table>
+<h2 id="direction">Direction</h2>
+<p>Some gradients are sensitive to direction. For example, a linear gradient
+has an angle that determines its direction. Typst uses a clockwise angle,
+with 0° being from left to right, 90° from top to bottom, 180° from right to
+left, and 270° from bottom to top.</p>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
+  dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
+  spacing<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span>red<span class="typ-punct">,</span> blue<span class="typ-punct">,</span> angle<span class="typ-punct">:</span> <span class="typ-num">0deg</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span>red<span class="typ-punct">,</span> blue<span class="typ-punct">,</span> angle<span class="typ-punct">:</span> <span class="typ-num">90deg</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span>red<span class="typ-punct">,</span> blue<span class="typ-punct">,</span> angle<span class="typ-punct">:</span> <span class="typ-num">180deg</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span>red<span class="typ-punct">,</span> blue<span class="typ-punct">,</span> angle<span class="typ-punct">:</span> <span class="typ-num">270deg</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/2e5fc136fe08bd2ce1808cfcfb5313f5.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="presets">Presets</h2>
+<p>Typst predefines color maps that you can use with your gradients. See the
+<a href="/docs/reference/visualize/color//#predefined-color-maps"><code>color</code></a> documentation for more details.</p>
+
+
+
+
+
+<h2 id="definitions">
+  
+<span aria-describedby="definitions-tooltip">定义</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="definitions-tooltip-qm-label">
+    <title id="definitions-tooltip-qm-label">函数和类型可以有与其关联的定义 (成员或方法)。可以使用 "." 操作符来访问调用它们。</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="definitions-tooltip" tabindex="-1">函数和类型可以有与其关联的定义 (成员或方法)。可以使用 "." 操作符来访问调用它们。</div>
+</div>
+
+</h2>
+
+
+  <h3 id="-linear" class="method-head"><span><code>linear</code></span></h3>
+  
+<p>Creates a new linear gradient, in which colors transition along a
+straight line.</p>
+
+<div class="code code-definition ">gradient.<span
+    class="typ-func">linear</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-space">space<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span><span
+      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/direction" class="pill pill-obj">direction</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/angle" class="pill pill-num">angle</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>
+  width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span>
+  height<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span>
+  fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span>
+    <span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>viridis<span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/5622b4d75899d21ebcb7c5171472c318.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-linear-linear-parameters-stops"><code>stops</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/color" class="pill pill-col">color</a>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-linear-linear-parameters-stops-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-linear-linear-parameters-stops-positional-tooltip-qm-label">
+          <title id="definitions-linear-linear-parameters-stops-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-linear-linear-parameters-stops-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-linear-linear-parameters-stops-variadic-tooltip">可变参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-linear-linear-parameters-stops-variadic-tooltip-qm-label">
+          <title id="definitions-linear-linear-parameters-stops-variadic-tooltip-qm-label">可变参数可以多次传入。
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-linear-linear-parameters-stops-variadic-tooltip"
+          tabindex="-1">可变参数可以多次传入。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The color <a href="#stops">stops</a> of the gradient.</p>
+
+
+
+
+<h4 id="definitions-linear-linear-parameters-space"><code>space</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The color space in which to interpolate the gradient.</p>
+<p>Defaults to a perceptually uniform color space called
+<a href="/docs/reference/visualize/color/#definitions-oklab">Oklab</a>.</p>
+
+
+<p>默认：<code>oklab</code></p>
+
+
+
+<h4 id="definitions-linear-linear-parameters-relative"><code>relative</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The <a href="#relativeness">relative placement</a> of the gradient.</p>
+<p>For an element placed at the root/top level of the document, the
+parent is the page itself. For other elements, the parent is the
+innermost block, box, column, grid, or stack that contains the
+element.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->self<!-- -->&quot;</code></div>
+      <div>
+        <p>The gradient is relative to itself (its own bounding box).</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->parent<!-- -->&quot;</code></div>
+      <div>
+        <p>The gradient is relative to its parent (the parent's bounding box).</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>默认：<code><span class="typ-key">auto</span></code></p>
+
+
+
+<h4 id="definitions-linear-linear-parameters-dir"><code>dir</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/direction" class="pill pill-obj">direction</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-linear-linear-parameters-dir-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-linear-linear-parameters-dir-positional-tooltip-qm-label">
+          <title id="definitions-linear-linear-parameters-dir-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-linear-linear-parameters-dir-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The direction of the gradient.</p>
+
+
+<p>默认：<code>ltr</code></p>
+
+
+
+<h4 id="definitions-linear-linear-parameters-angle"><code>angle</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-linear-linear-parameters-angle-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-linear-linear-parameters-angle-positional-tooltip-qm-label">
+          <title id="definitions-linear-linear-parameters-angle-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-linear-linear-parameters-angle-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The angle of the gradient.</p>
+
+
+
+
+
+
+
+  <h3 id="-radial" class="method-head"><span><code>radial</code></span></h3>
+  
+<p>Creates a new radial gradient, in which colors radiate away from an
+origin.</p>
+<p>The gradient is defined by two circles: the focal circle and the end
+circle. The focal circle is a circle with center <code>focal-center</code> and
+radius <code>focal-radius</code>, that defines the points at which the gradient
+starts and has the color of the first stop. The end circle is a circle
+with center <code>center</code> and radius <code>radius</code>, that defines the points at
+which the gradient ends and has the color of the last stop. The gradient
+is then interpolated between these two circles.</p>
+<p>Using these four values, also called the focal point for the starting
+circle and the center and radius for the end circle, we can define a
+gradient with more interesting properties than a basic radial gradient.</p>
+
+<div class="code code-definition ">gradient.<span
+    class="typ-func">radial</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-space">space<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span><span
+      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-center">center<!-- -->: </a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-radius">radius<!-- -->: </a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
+      class="overview-param"><a href="#parameters-focal-center">focal-center<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-focal-radius">focal-radius<!-- -->: </a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
+  dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
+  spacing<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span>
+  <span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">radial</span><span class="typ-punct">(</span>
+    <span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>viridis<span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">radial</span><span class="typ-punct">(</span>
+    <span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>viridis<span class="typ-punct">,</span>
+    focal-center<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">10%</span><span class="typ-punct">,</span> <span class="typ-num">40%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+    focal-radius<span class="typ-punct">:</span> <span class="typ-num">5%</span><span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/620675dca92d685a03c1af303306e654.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-radial-radial-parameters-stops"><code>stops</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/color" class="pill pill-col">color</a>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-radial-radial-parameters-stops-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-radial-radial-parameters-stops-positional-tooltip-qm-label">
+          <title id="definitions-radial-radial-parameters-stops-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-radial-radial-parameters-stops-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-radial-radial-parameters-stops-variadic-tooltip">可变参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-radial-radial-parameters-stops-variadic-tooltip-qm-label">
+          <title id="definitions-radial-radial-parameters-stops-variadic-tooltip-qm-label">可变参数可以多次传入。
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-radial-radial-parameters-stops-variadic-tooltip"
+          tabindex="-1">可变参数可以多次传入。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The color <a href="#stops">stops</a> of the gradient.</p>
+
+
+
+
+<h4 id="definitions-radial-radial-parameters-space"><code>space</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The color space in which to interpolate the gradient.</p>
+<p>Defaults to a perceptually uniform color space called
+<a href="/docs/reference/visualize/color/#definitions-oklab">Oklab</a>.</p>
+
+
+<p>默认：<code>oklab</code></p>
+
+
+
+<h4 id="definitions-radial-radial-parameters-relative"><code>relative</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The <a href="#relativeness">relative placement</a> of the gradient.</p>
+<p>For an element placed at the root/top level of the document, the parent
+is the page itself. For other elements, the parent is the innermost block,
+box, column, grid, or stack that contains the element.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->self<!-- -->&quot;</code></div>
+      <div>
+        <p>The gradient is relative to itself (its own bounding box).</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->parent<!-- -->&quot;</code></div>
+      <div>
+        <p>The gradient is relative to its parent (the parent's bounding box).</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>默认：<code><span class="typ-key">auto</span></code></p>
+
+
+
+<h4 id="definitions-radial-radial-parameters-center"><code>center</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The center of the end circle of the gradient.</p>
+<p>A value of <code><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">,</span> <span class="typ-num">50%</span><span class="typ-punct">)</span></code> means that the end circle is
+centered inside of its container.</p>
+
+
+<p>默认：<code><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">,</span> <span class="typ-num">50%</span><span class="typ-punct">)</span></code></p>
+
+
+
+<h4 id="definitions-radial-radial-parameters-radius"><code>radius</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The radius of the end circle of the gradient.</p>
+<p>By default, it is set to <code><span class="typ-num">50%</span></code>. The ending radius must be bigger
+than the focal radius.</p>
+
+
+<p>默认：<code><span class="typ-num">50%</span></code></p>
+
+
+
+<h4 id="definitions-radial-radial-parameters-focal-center"><code>focal-center</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The center of the focal circle of the gradient.</p>
+<p>The focal center must be inside of the end circle.</p>
+<p>A value of <code><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">,</span> <span class="typ-num">50%</span><span class="typ-punct">)</span></code> means that the focal circle is
+centered inside of its container.</p>
+<p>By default it is set to the same as the center of the last circle.</p>
+
+
+<p>默认：<code><span class="typ-key">auto</span></code></p>
+
+
+
+<h4 id="definitions-radial-radial-parameters-focal-radius"><code>focal-radius</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The radius of the focal circle of the gradient.</p>
+<p>The focal center must be inside of the end circle.</p>
+<p>By default, it is set to <code><span class="typ-num">0%</span></code>. The focal radius must be smaller
+than the ending radius`.</p>
+
+
+<p>默认：<code><span class="typ-num">0%</span></code></p>
+
+
+
+
+
+
+  <h3 id="-conic" class="method-head"><span><code>conic</code></span></h3>
+  
+<p>Creates a new conic gradient, in which colors change radially around a
+center point.</p>
+<p>You can control the center point of the gradient by using the <code>center</code>
+argument. By default, the center point is the center of the shape.</p>
+
+<div class="code code-definition ">gradient.<span
+    class="typ-func">conic</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-angle">angle<!-- -->: </a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a>, </span><span
+      class="overview-param"><a href="#parameters-space">space<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span><span
+      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-center">center<!-- -->: </a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
+  dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
+  spacing<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span>
+  <span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">conic</span><span class="typ-punct">(</span>
+    <span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>viridis<span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">conic</span><span class="typ-punct">(</span>
+    <span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>viridis<span class="typ-punct">,</span>
+    center<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">20%</span><span class="typ-punct">,</span> <span class="typ-num">30%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/b1189896a219532b51943b5da59def30.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-conic-conic-parameters-stops"><code>stops</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/color" class="pill pill-col">color</a>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-conic-conic-parameters-stops-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-conic-conic-parameters-stops-positional-tooltip-qm-label">
+          <title id="definitions-conic-conic-parameters-stops-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-conic-conic-parameters-stops-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-conic-conic-parameters-stops-variadic-tooltip">可变参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-conic-conic-parameters-stops-variadic-tooltip-qm-label">
+          <title id="definitions-conic-conic-parameters-stops-variadic-tooltip-qm-label">可变参数可以多次传入。
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-conic-conic-parameters-stops-variadic-tooltip"
+          tabindex="-1">可变参数可以多次传入。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The color <a href="#stops">stops</a> of the gradient.</p>
+
+
+
+
+<h4 id="definitions-conic-conic-parameters-angle"><code>angle</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The angle of the gradient.</p>
+
+
+<p>默认：<code><span class="typ-num">0deg</span></code></p>
+
+
+
+<h4 id="definitions-conic-conic-parameters-space"><code>space</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The color space in which to interpolate the gradient.</p>
+<p>Defaults to a perceptually uniform color space called
+<a href="/docs/reference/visualize/color/#definitions-oklab">Oklab</a>.</p>
+
+
+<p>默认：<code>oklab</code></p>
+
+
+
+<h4 id="definitions-conic-conic-parameters-relative"><code>relative</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The <a href="#relativeness">relative placement</a> of the gradient.</p>
+<p>For an element placed at the root/top level of the document, the parent
+is the page itself. For other elements, the parent is the innermost block,
+box, column, grid, or stack that contains the element.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->self<!-- -->&quot;</code></div>
+      <div>
+        <p>The gradient is relative to itself (its own bounding box).</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->parent<!-- -->&quot;</code></div>
+      <div>
+        <p>The gradient is relative to its parent (the parent's bounding box).</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>默认：<code><span class="typ-key">auto</span></code></p>
+
+
+
+<h4 id="definitions-conic-conic-parameters-center"><code>center</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The center of the last circle of the gradient.</p>
+<p>A value of <code><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">,</span> <span class="typ-num">50%</span><span class="typ-punct">)</span></code> means that the end circle is
+centered inside of its container.</p>
+
+
+<p>默认：<code><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">,</span> <span class="typ-num">50%</span><span class="typ-punct">)</span></code></p>
+
+
+
+
+
+
+  <h3 id="-sharp" class="method-head"><span><code>sharp</code></span></h3>
+  
+<p>Creates a sharp version of this gradient.</p>
+<p>Sharp gradients have discrete jumps between colors, instead of a
+smooth transition. They are particularly useful for creating color
+lists for a preset gradient.</p>
+
+<div class="code code-definition ">self.<span
+    class="typ-func">sharp</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-smoothness">smoothness<!-- -->: </a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> grad <span class="typ-op">=</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>rainbow<span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> grad<span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> grad<span class="typ-punct">.</span><span class="typ-func">sharp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> grad<span class="typ-punct">.</span><span class="typ-func">sharp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> smoothness<span class="typ-punct">:</span> <span class="typ-num">20%</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/921af5b22a47515b0bfcdcff75eaecb0.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-sharp-sharp-parameters-steps"><code>steps</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-sharp-sharp-parameters-steps-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-sharp-sharp-parameters-steps-positional-tooltip-qm-label">
+          <title id="definitions-sharp-sharp-parameters-steps-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-sharp-sharp-parameters-steps-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number of stops in the gradient.</p>
+
+
+
+
+<h4 id="definitions-sharp-sharp-parameters-smoothness"><code>smoothness</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>How much to smooth the gradient.</p>
+
+
+<p>默认：<code><span class="typ-num">0%</span></code></p>
+
+
+
+
+
+
+  <h3 id="-repeat" class="method-head"><span><code>repeat</code></span></h3>
+  
+<p>Repeats this gradient a given number of times, optionally mirroring it
+at each repetition.</p>
+
+<div class="code code-definition ">self.<span
+    class="typ-func">repeat</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-mirror">mirror<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">circle</span><span class="typ-punct">(</span>
+  radius<span class="typ-punct">:</span> <span class="typ-num">40pt</span><span class="typ-punct">,</span>
+  fill<span class="typ-punct">:</span> gradient
+    <span class="typ-punct">.</span><span class="typ-func">radial</span><span class="typ-punct">(</span>aqua<span class="typ-punct">,</span> white<span class="typ-punct">)</span>
+    <span class="typ-punct">.</span><span class="typ-func">repeat</span><span class="typ-punct">(</span><span class="typ-num">4</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/eaf84a5e3e7993d037696762b956118e.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-repeat-repeat-parameters-repetitions"><code>repetitions</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-repeat-repeat-parameters-repetitions-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-repeat-repeat-parameters-repetitions-positional-tooltip-qm-label">
+          <title id="definitions-repeat-repeat-parameters-repetitions-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-repeat-repeat-parameters-repetitions-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number of times to repeat the gradient.</p>
+
+
+
+
+<h4 id="definitions-repeat-repeat-parameters-mirror"><code>mirror</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>Whether to mirror the gradient at each repetition.</p>
+
+
+<p>默认：<code><span class="typ-key">false</span></code></p>
+
+
+
+
+
+
+  <h3 id="-kind" class="method-head"><span><code>kind</code></span></h3>
+  
+<p>Returns the kind of this gradient.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">kind</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/function" class="pill pill-fn">function</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-stops" class="method-head"><span><code>stops</code></span></h3>
+  
+<p>Returns the stops of this gradient.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">stops</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-space" class="method-head"><span><code>space</code></span></h3>
+  
+<p>Returns the mixing space of this gradient.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">space</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-relative" class="method-head"><span><code>relative</code></span></h3>
+  
+<p>Returns the relative placement of this gradient.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">relative</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-angle" class="method-head"><span><code>angle</code></span></h3>
+  
+<p>Returns the angle of this gradient.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">angle</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-sample" class="method-head"><span><code>sample</code></span></h3>
+  
+<p>Sample the gradient at a given position.</p>
+<p>The position is either a position along the gradient (a <a href="/docs/reference/layout/ratio/">ratio</a>
+between <code><span class="typ-num">0%</span></code> and <code><span class="typ-num">100%</span></code>) or an <a href="/docs/reference/layout/angle/">angle</a>. Any value outside
+of this range will be clamped.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">sample</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/angle" class="pill pill-num">angle</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/color" class="pill pill-col">color</a></div>
+
+
+
+
+
+<h4 id="definitions-sample-sample-parameters-t"><code>t</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-sample-sample-parameters-t-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-sample-sample-parameters-t-positional-tooltip-qm-label">
+          <title id="definitions-sample-sample-parameters-t-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-sample-sample-parameters-t-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The position at which to sample the gradient.</p>
+
+
+
+
+
+
+
+  <h3 id="-samples" class="method-head"><span><code>samples</code></span></h3>
+  
+<p>Samples the gradient at multiple positions at once and returns the
+results as an array.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">samples</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/angle" class="pill pill-num">angle</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+
+
+
+
+
+<h4 id="definitions-samples-samples-parameters-ts"><code>ts</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-samples-samples-parameters-ts-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-samples-samples-parameters-ts-positional-tooltip-qm-label">
+          <title id="definitions-samples-samples-parameters-ts-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-samples-samples-parameters-ts-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-samples-samples-parameters-ts-variadic-tooltip">可变参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-samples-samples-parameters-ts-variadic-tooltip-qm-label">
+          <title id="definitions-samples-samples-parameters-ts-variadic-tooltip-qm-label">可变参数可以多次传入。
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-samples-samples-parameters-ts-variadic-tooltip"
+          tabindex="-1">可变参数可以多次传入。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The positions at which to sample the gradient.</p>
+
+
+
+
+
+
+
+
+
+
+      
+      <div class="page-end-buttons"><a href="/docs/reference/visualize/ellipse/" class="previous"><img
+            src="/assets/icons/16-arrow-right.svg" alt="←">
+          <div><span class="page-title">Ellipse</span><span class="hint">上一页</span></div>
+        </a><a href="/docs/reference/visualize/image/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Image</span><span class="hint">下一页</span></div>
+        </a></div>
+      
+    </main>
+
+    
+    <nav id="page-overview"><strong>目录</strong>
+      <ul>
+        
+        <li data-assoc="summary"><a href="#summary">Summary</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="examples"><a href="#examples">Examples</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="stops"><a href="#stops">Stops</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="relativeness"><a href="#relativeness">Relativeness</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="color-spaces-and-interpolation"><a href="#color-spaces-and-interpolation">Color Spaces And Interpolation</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="direction"><a href="#direction">Direction</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="presets"><a href="#presets">Presets</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="definitions"><a href="#definitions">Definitions</a>
+          <ul></ul>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  <footer>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/">主页</a></li>
+        <li><a href="/docs/">中文文档</a></li>
+        <li><a href="https://typst.app/about/">关于我们</a></li>
+        <li><a href="https://typst.app/contact/">联系</a></li>
+        <li><a href="https://typst.app/privacy/">隐私</a></li>
+        <li><a href="https://typst.app/terms/">服务条款</a></li>
+        <li><a href="https://typst.app/legal/">法律说明</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/blog/">博客</a></li>
+        <li><a href="https://twitter.com/typstapp/">Twitter</a></li>
+        <li><a href="https://discord.gg/2uDybryKPe">Discord</a></li>
+        <li><a href="https://www.linkedin.com/company/typst/">LinkedIn</a></li>
+        <li><a href="https://instagram.com/typstapp/">Instagram</a></li>
+        <li><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Made in Berlin</p>
+    </div>
+  </footer>
+  <script src="/scripts/fuse.basic.min.js"></script>
+  <script src="/scripts/docs.js?bust=20230913"></script>
+  <script src="/scripts/analytics.js" defer></script>
+</body>
+
+</html>

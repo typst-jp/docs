@@ -1,0 +1,1874 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>引用 – Typst 中文文档</title>
+  <meta name="description" content="`cite` 函数的文档">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#239dad">
+  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/model/cite/">
+  <meta property="og:title" content="引用 – Typst 中文文档">
+  <meta property="og:site_name" content="Typst">
+  <meta property="og:description" content="`cite` 函数的文档">
+  <meta property="og:type">
+  <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:site" content="@typstapp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/reference/model/cite/">
+  <meta name="twitter:image:alt"
+    content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#239dad">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="/styles/default.css?bust=20230913?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs.css?bust=20230915?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs-cn.css">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Regular.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Bold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-SemiBold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/CascadiaMono-Regular-Sub.woff2" as="font">
+  <link rel="preload" href="/assets/images/blur.webp" as="image">
+  
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js"), document.addEventListener("DOMContentLoaded", (() => { const e = document.cookie.split("; ").find((e => e.startsWith("INSECURE_SIGNED_IN=")))?.split("=")[1].toLowerCase(); if ("1" === e || "true" === e || "yes" === e) { document.documentElement.classList.add("signed-in"); const e = document.querySelector("header nav a.nav-btn"), t = document.querySelector("header nav a.sign-in"); e && (e.innerHTML = "Go to app", e.setAttribute("href", "/app/")), t && (t.innerHTML = "Sign out", t.setAttribute("href", "https://api.typst.app/v1/auth/logout")) } }))</script>
+</head>
+
+<body class="no-js docs has-outline">
+  <div class="alert">
+    <div class="alert-content">
+      <span><b>注意：</b>该中文文档为社区驱动的非官网文档，可能存在错译、漏译或过时等问题，请以官网文档 <a href="https://typst.app/docs/">Documentation</a>
+        为准，如发现错漏，也欢迎 <a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io">您的贡献</a>（<a href="https://gitee.com/orangex4/typst-doc-cn.github.io">镜像</a>）。Typst 非官方中文交流 QQ 群：793548390</span>
+      <br />
+      <span><b>Warning:</b> the Chinese document is a community-driven non-official document, there may be mistranslation, omission or outdated problems, please refer to <a href="https://typst.app/docs/">the official website documentation</a>.</span>
+    </div>
+  </div>
+  <header class="boring">
+    <div><a href="/docs" class="logo-box"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label">
+          <title id="logo-label">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a><button class="hamburger"><img alt="Open navigation"
+          src="/assets/icons/16-hamburger-dark.svg" width="16" height="16"></button>
+      <nav>
+        <ul>
+          <li class="social"><a href="https://twitter.com/typstapp/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-twitter-label">
+                <title id="svg-twitter-label">Twitter</title>
+                <use href="/assets/icons/social.svg#twitter"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://discord.gg/2uDybryKPe"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-discord-label">
+                <title id="svg-discord-label">Discord</title>
+                <use href="/assets/icons/social.svg#discord"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-github-label">
+                <title id="svg-github-label">GitHub</title>
+                <use href="/assets/icons/social.svg#github"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://www.linkedin.com/company/typst/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-linkedin-label">
+                <title id="svg-linkedin-label">LinkedIn</title>
+                <use href="/assets/icons/social.svg#linkedin"></use>
+              </svg></a></li>
+          <li class="secondary"><a href="https://typst.app/">主页</a></li>
+          <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
+          <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main-grid">
+    <nav class="folding"><a href="/docs" class="title-row"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label-nav">
+          <title id="logo-label-nav">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a>
+      <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+      <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
+          type="search" placeholder="搜索" id="docs-search"></div>
+      <ul class="search-results hidden" id="search-results"></ul>
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/" >概览</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/tutorial/" >教程</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/tutorial/writing-in-typst/" >使用 Typst 写作</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/formatting/" >格式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/advanced-styling/" >高级样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/making-a-template/" >制作模板</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/chinese/" >中文用户指南</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/reference/" >参考</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            
+            <li class="category">Language</li>
+            
+            <li>
+              <a href="/docs/reference/syntax/" >语法</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/styling/" >样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/scripting/" >脚本</a>
+              
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/docs/reference/types/" >类型（旧）</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/types/none/" >None</a></li>
+                
+                
+                <li><a href="/docs/reference/types/auto/" >Auto</a></li>
+                
+                
+                <li><a href="/docs/reference/types/boolean/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/types/integer/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/types/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/types/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/types/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/types/relative-length/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/types/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/types/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/types/symbol/" >Symbol</a></li>
+                
+                
+                <li><a href="/docs/reference/types/string/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/types/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/types/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/types/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/types/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/types/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/types/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/types/module/" >Module</a></li>
+                
+              </ul>
+              
+            </li>
+
+            
+            <li class="category">Library</li>
+            
+            <li>
+              <a href="/docs/reference/foundations/" >基础</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/foundations/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bool/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bytes/" >Bytes</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/duration/" >Duration</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/eval/" >Evaluate</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/int/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/label/" >Label</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/module/" >Module</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/plugin/" >Plugin</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/regex/" >Regex</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/repr/" >Representation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/str/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/type/" >Type</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/version/" >Version</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/calc" >Calculation</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/model/" >模型</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/model/bibliography/" >参考文献</a></li>
+                
+                
+                <li><a href="/docs/reference/model/list/" >Bullet List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/cite/"  aria-current="page" >引用</a></li>
+                
+                
+                <li><a href="/docs/reference/model/document/" >文档</a></li>
+                
+                
+                <li><a href="/docs/reference/model/emph/" >强调（斜体）</a></li>
+                
+                
+                <li><a href="/docs/reference/model/figure/" >图表</a></li>
+                
+                
+                <li><a href="/docs/reference/model/footnote/" >脚注</a></li>
+                
+                
+                <li><a href="/docs/reference/model/heading/" >Heading</a></li>
+                
+                
+                <li><a href="/docs/reference/model/link/" >Link</a></li>
+                
+                
+                <li><a href="/docs/reference/model/enum/" >有序列表</a></li>
+                
+                
+                <li><a href="/docs/reference/model/numbering/" >Numbering</a></li>
+                
+                
+                <li><a href="/docs/reference/model/outline/" >Outline</a></li>
+                
+                
+                <li><a href="/docs/reference/model/par/" >Paragraph</a></li>
+                
+                
+                <li><a href="/docs/reference/model/parbreak/" >Paragraph Break</a></li>
+                
+                
+                <li><a href="/docs/reference/model/quote/" >Quote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/ref/" >Reference</a></li>
+                
+                
+                <li><a href="/docs/reference/model/strong/" >着重强调（加粗）</a></li>
+                
+                
+                <li><a href="/docs/reference/model/table/" >Table</a></li>
+                
+                
+                <li><a href="/docs/reference/model/terms/" >Term List</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/text/" >文本</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/text/highlight/" >文本高亮</a></li>
+                
+                
+                <li><a href="/docs/reference/text/linebreak/" >换行</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lorem/" >假文</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lower/" >转小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/overline/" >上划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/raw/" >原始文本/代码块</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smallcaps/" >显示为小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smartquote/" >智能引号</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strike/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/sub/" >下标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/super/" >上标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/text/" >文本</a></li>
+                
+                
+                <li><a href="/docs/reference/text/underline/" >下划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/upper/" >转大写</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/math/" >数学</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/math/accent/" >重音符号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cancel/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cases/" >左大括号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/class/" >类</a></li>
+                
+                
+                <li><a href="/docs/reference/math/equation/" >数学表达式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/frac/" >分数</a></li>
+                
+                
+                <li><a href="/docs/reference/math/mat/" >矩阵</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >文本运算符</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >向量</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover" >上/下方内容</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants" >字体变体</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes" >显示尺寸</a></li>
+                
+                
+                <li><a href="/docs/reference/math/lr" >Left/Right</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles" >显示样式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/roots" >根式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/attach" >附缀</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/symbols/" >符号</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/symbols/sym/" >通用</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/emoji/" >表情符号</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/symbol/" >符号</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/layout/" >布局</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/layout/align/" >Align</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/alignment/" >Alignment</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/block/" >Block</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/box/" >Box</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/colbreak/" >Column Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/columns/" >Columns</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/direction/" >Direction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/grid/" >Grid</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/hide/" >Hide</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/layout/" >Layout</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/measure/" >Measure</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/move/" >Move</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pad/" >Padding</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/page/" >Page</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pagebreak/" >Page Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/place/" >Place</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/relative/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/repeat/" >Repeat</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/rotate/" >Rotate</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/v/" >Spacing (V)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/stack/" >Stack</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/visualize/" >可视化</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/visualize/circle/" >Circle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/gradient/" >Gradient</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/image/" >Image</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/line/" >Line</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/path/" >Path</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/square/" >Square</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/introspection/" >内省</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/introspection/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/locate/" >Locate</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/location/" >Location</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/metadata/" >Metadata</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/query/" >Query</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/state/" >State</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/data-loading/" >数据加载</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/data-loading/cbor/" >CBOR</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/csv/" >CSV</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/json/" >JSON</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/read/" >Read</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/toml/" >TOML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/xml/" >XML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/yaml/" >YAML</a></li>
+                
+              </ul>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/guides/" >指南</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/guides/guide-for-latex-users/" >LaTeX 用户指南</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/page-setup/" >页面设置指南</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/packages/" >第三方包</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/changelog/" >更新日志</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/roadmap/" >路线图</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/community/" >社区</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/glossary/" >术语表</a>
+          
+        </li>
+        
+      </ul>
+
+    </nav>
+    <main>
+      <ul class="breadcrumbs" aria-label="Breadcrumbs">
+        <li class="root"><a href="/docs/"><img src="/assets/icons/16-docs-dark.svg" alt="Docs" width="16"
+              height="16"></a></li>
+
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/">参考</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/model/">模型</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/model/cite/">引用</a></li>
+        
+      </ul>
+
+      
+
+<h1 id="summary"><code>cite</code><small>
+<span aria-describedby="-tooltip">元素</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="-tooltip-qm-label">
+    <title id="-tooltip-qm-label">元素函数可以通过 set 和 show 规则进行样式自定义。</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="-tooltip" tabindex="-1">元素函数可以通过 set 和 show 规则进行样式自定义。</div>
+</div>
+</small></h1>
+<p>从参考文献中引用一项作品。</p>
+<p>在开始引用之前，您需要在文档的某个位置添加一个<a href="/docs/reference/model/bibliography/">参考文献</a>。</p>
+<h2 id="example">示例</h2>
+<div class="previewed-code"><pre><code>这早在海盗时代就已经被注意到了。
+<span class="typ-ref">@arrgh</span>
+
+多个来源说 <span class="typ-escape">...</span>
+<span class="typ-ref">@arrgh</span> <span class="typ-ref">@netwok</span>。
+
+您还可以显式调用 <span class="typ-raw">`cite`</span>。
+<span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;arrgh&gt;</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">bibliography</span><span class="typ-punct">(</span><span class="typ-str">&quot;works.bib&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/bb07d2a9021052ed3feb5a6b11284f4a.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="syntax">语法</h2>
+<p>此函数间接具有专用语法。可以使用<a href="/docs/reference/model/ref/">引用</a>来引用参考文献中的作品。然后，标签对应于引用键。</p>
+<h2 id="parameters">
+  
+<span aria-describedby="parameters-tooltip">参数</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="parameters-tooltip-qm-label">
+    <title id="parameters-tooltip-qm-label">参数是函数的输入，它们在函数名称后面的括号中传入。</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="parameters-tooltip" tabindex="-1">参数是函数的输入，它们在函数名称后面的括号中传入。</div>
+</div>
+
+</h2>
+
+<div class="code code-definition "><span
+    class="typ-func">cite</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/label" class="pill pill-obj">label</a>, </span><span
+      class="overview-param"><a href="#parameters-supplement">supplement<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="#parameters-form">form<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-style">style<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+
+
+
+
+<h4 id="cite-cite-parameters-key"><code>key</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/label" class="pill pill-obj">label</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="cite-cite-parameters-key-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="cite-cite-parameters-key-positional-tooltip-qm-label">
+          <title id="cite-cite-parameters-key-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="cite-cite-parameters-key-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>标识在参考文献中的要引用的条目的引用键。</p>
+
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-comment">// 都是相同的</span>
+<span class="typ-ref">@netwok</span> <span class="typ-escape">\</span>
+<span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;netwok&gt;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-func">label</span><span class="typ-punct">(</span><span class="typ-str">&quot;netwok&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/e0a009c49d3ca68e4e7127e326f8123c.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="cite-cite-parameters-supplement"><code>supplement</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small><span
+        aria-describedby="cite-cite-parameters-supplement-settable-tooltip">可用 Set 规则</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="cite-cite-parameters-supplement-settable-tooltip-qm-label">
+          <title id="cite-cite-parameters-supplement-settable-tooltip-qm-label">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="cite-cite-parameters-supplement-settable-tooltip"
+          tabindex="-1">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>引文的补充，例如页码或章节编号。</p>
+<p>在引用语法中，可以在方括号中添加补充：</p>
+
+
+<p>默认：<code><span class="typ-key">none</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code>这已经被证明了。 <span class="typ-ref">@distress<span class="typ-punct">[</span>p.<span class="typ-escape">~</span>7<span class="typ-punct">]</span></span>
+
+<span class="typ-func">#</span><span class="typ-func">bibliography</span><span class="typ-punct">(</span><span class="typ-str">&quot;works.bib&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/481a7a6614e1edde3e16e2961c72a1e2.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="cite-cite-parameters-form"><code>form</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    <small><span
+        aria-describedby="cite-cite-parameters-form-settable-tooltip">可用 Set 规则</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="cite-cite-parameters-form-settable-tooltip-qm-label">
+          <title id="cite-cite-parameters-form-settable-tooltip-qm-label">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="cite-cite-parameters-form-settable-tooltip"
+          tabindex="-1">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>要生成的引文类型。不同的形式在不同情境中很有用：标准引文适用于句子末尾的来源，而“散文”引文更适合在文本流中包含。</p>
+<p>如果设置为<code><span class="typ-key">none</span></code>，则引用的作品将包含在参考文献中，但不会显示任何内容。</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->normal<!-- -->&quot;</code></div>
+      <div>
+        <p>以活动样式的标准方式显示。</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->prose<!-- -->&quot;</code></div>
+      <div>
+        <p>生成适用于句子中包含的引文。</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->full<!-- -->&quot;</code></div>
+      <div>
+        <p>模拟参考文献条目，提供有关引用作品的完整信息。</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->author<!-- -->&quot;</code></div>
+      <div>
+        <p>仅显示引用作品的作者。</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->year<!-- -->&quot;</code></div>
+      <div>
+        <p>仅显示引用作品的年份。</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>默认：<code><span class="typ-str">&quot;normal&quot;</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;netwok&gt;</span><span class="typ-punct">,</span> form<span class="typ-punct">:</span> <span class="typ-str">&quot;prose&quot;</span><span class="typ-punct">)</span>
+显示海盗生活对人类心灵的巨大影响。
+</code></pre><div class="preview"><img src="/assets/docs/ab93f7b6b59da5ccd3007651be75c5e9.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="cite-cite-parameters-style"><code>style</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    <small><span
+        aria-describedby="cite-cite-parameters-style-settable-tooltip">可用 Set 规则</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="cite-cite-parameters-style-settable-tooltip-qm-label">
+          <title id="cite-cite-parameters-style-settable-tooltip-qm-label">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="cite-cite-parameters-style-settable-tooltip"
+          tabindex="-1">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>引文样式。</p>
+<p>应为<code><span class="typ-key">auto</span></code>、内置样式之一（见下文）或<a href="https://citationstyles.org/">CSL文件</a>的路径。下面列出的一些样式名称可能会出现两次，一次是完整名称，一次是短别名。</p>
+<p>当设置为<code><span class="typ-key">auto</span></code>时，引用将自动使用<a href="/docs/reference/model/bibliography/#parameters-style">参考文献的样式</a>。</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-anthropological-association<!-- -->&quot;</code></div>
+      <div>
+        <p>美国人类学协会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-lecture-notes-in-computer-science<!-- -->&quot;</code></div>
+      <div>
+        <p>Springer - 计算机科学讲义</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-medical-association<!-- -->&quot;</code></div>
+      <div>
+        <p>美国医学协会 第11版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->sage-vancouver<!-- -->&quot;</code></div>
+      <div>
+        <p>SAGE - 温哥华样式</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->biomed-central<!-- -->&quot;</code></div>
+      <div>
+        <p>BioMed Central</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-society-of-civil-engineers<!-- -->&quot;</code></div>
+      <div>
+        <p>美国土木工程师协会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->taylor-and-francis-chicago-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>Taylor &amp; Francis - 芝加哥风格手册（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->gb-7714-2015-note<!-- -->&quot;</code></div>
+      <div>
+        <p>中国国家标准 GB/T 7714-2015（注释，中文）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-society-for-microbiology<!-- -->&quot;</code></div>
+      <div>
+        <p>美国微生物学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-meteorological-society<!-- -->&quot;</code></div>
+      <div>
+        <p>美国气象学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->future-medicine<!-- -->&quot;</code></div>
+      <div>
+        <p>未来医学期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->bristol-university-press<!-- -->&quot;</code></div>
+      <div>
+        <p>布里斯托大学出版社</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->public-library-of-science<!-- -->&quot;</code></div>
+      <div>
+        <p>科学公共图书馆</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->pensoft<!-- -->&quot;</code></div>
+      <div>
+        <p>Pensoft 期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-institute-of-aeronautics-and-astronautics<!-- -->&quot;</code></div>
+      <div>
+        <p>美国航空航天学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->mary-ann-liebert-vancouver<!-- -->&quot;</code></div>
+      <div>
+        <p>Mary Ann Liebert - 温哥华样式</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->modern-humanities-research-association<!-- -->&quot;</code></div>
+      <div>
+        <p>现代人文研究协会 第3版（带参考文献的注释）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-socpsych-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>Springer - 社会心理学（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->trends<!-- -->&quot;</code></div>
+      <div>
+        <p>Trends 期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->gost-r-705-2008-numeric<!-- -->&quot;</code></div>
+      <div>
+        <p>俄罗斯 GOST R 7.0.5-2008（数字）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-political-science-association<!-- -->&quot;</code></div>
+      <div>
+        <p>美国政治科学协会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->future-science<!-- -->&quot;</code></div>
+      <div>
+        <p>未来科学集团</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->association-for-computing-machinery<!-- -->&quot;</code></div>
+      <div>
+        <p>计算机协会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->elsevier-harvard<!-- -->&quot;</code></div>
+      <div>
+        <p>爱思唯尔 - 哈佛样式（带标题）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-chemical-society<!-- -->&quot;</code></div>
+      <div>
+        <p>美国化学学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->cell<!-- -->&quot;</code></div>
+      <div>
+        <p>Cell 期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->royal-society-of-chemistry<!-- -->&quot;</code></div>
+      <div>
+        <p>皇家化学学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->sist02<!-- -->&quot;</code></div>
+      <div>
+        <p>SIST02（日语）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->gb-7714-2005-numeric<!-- -->&quot;</code></div>
+      <div>
+        <p>中国国家标准 GB/T 7714-2005（数字，中文）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->institute-of-electrical-and-electronics-engineers<!-- -->&quot;</code></div>
+      <div>
+        <p>IEEE</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-humanities-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>Springer - 人文学科（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->deutsche-gesellschaft-für-psychologie<!-- -->&quot;</code></div>
+      <div>
+        <p>德国心理学协会 第5版（德语）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-basic-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>Springer - 基础（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->institute-of-physics-numeric<!-- -->&quot;</code></div>
+      <div>
+        <p>物理学会 (数字)</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->vancouver<!-- -->&quot;</code></div>
+      <div>
+        <p>温哥华</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->nature<!-- -->&quot;</code></div>
+      <div>
+        <p>自然</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->current-opinion<!-- -->&quot;</code></div>
+      <div>
+        <p>Current Opinion 期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->annual-reviews-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>Annual Reviews（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-institute-of-physics<!-- -->&quot;</code></div>
+      <div>
+        <p>美国物理学会第4版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->gb-7714-2015-numeric<!-- -->&quot;</code></div>
+      <div>
+        <p>中国国家标准 GB/T 7714-2015（数字，中文）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->the-lancet<!-- -->&quot;</code></div>
+      <div>
+        <p>The Lancet</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-basic<!-- -->&quot;</code></div>
+      <div>
+        <p>斯普林格 - 基础版（数字，括号）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-geophysical-union<!-- -->&quot;</code></div>
+      <div>
+        <p>美国地球物理联合会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->turabian-fullnote-8<!-- -->&quot;</code></div>
+      <div>
+        <p>图拉宾第8版（全注释）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->taylor-and-francis-national-library-of-medicine<!-- -->&quot;</code></div>
+      <div>
+        <p>Taylor & Francis - 国家医学图书馆</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-physiological-society<!-- -->&quot;</code></div>
+      <div>
+        <p>美国生理学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->thieme<!-- -->&quot;</code></div>
+      <div>
+        <p>Thieme-German（德语）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->copernicus<!-- -->&quot;</code></div>
+      <div>
+        <p>哥白尼出版社</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->the-institution-of-engineering-and-technology<!-- -->&quot;</code></div>
+      <div>
+        <p>工程与技术学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->annual-reviews<!-- -->&quot;</code></div>
+      <div>
+        <p>Annual Reviews（按出现顺序排序）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->deutsche-sprache<!-- -->&quot;</code></div>
+      <div>
+        <p>德国语言学会（德语）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->harvard-cite-them-right<!-- -->&quot;</code></div>
+      <div>
+        <p>引用正确的哈佛大学第12版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->chicago-fullnotes<!-- -->&quot;</code></div>
+      <div>
+        <p>芝加哥风格手册第17版（全注释）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->iso-690-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>ISO-690（作者-日期，英语）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->council-of-science-editors-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>科学编辑协会，姓名-年份（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-mathphys<!-- -->&quot;</code></div>
+      <div>
+        <p>斯普林格 - 数学物理（数字，括号）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-society-of-mechanical-engineers<!-- -->&quot;</code></div>
+      <div>
+        <p>美国机械工程师学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->karger<!-- -->&quot;</code></div>
+      <div>
+        <p>Karger 期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->multidisciplinary-digital-publishing-institute<!-- -->&quot;</code></div>
+      <div>
+        <p>多学科数字出版协会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-psychological-association<!-- -->&quot;</code></div>
+      <div>
+        <p>美国心理学会第7版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->modern-language-association-8<!-- -->&quot;</code></div>
+      <div>
+        <p>现代语言协会第8版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->gb-7714-2015-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>中国国家标准 GB/T 7714-2015（作者-日期，中文）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-vancouver<!-- -->&quot;</code></div>
+      <div>
+        <p>斯普林格 - 温哥华（括号）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->british-medical-journal<!-- -->&quot;</code></div>
+      <div>
+        <p>英国医学杂志</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->turabian-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>图拉宾第9版（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->chicago-author-date<!-- -->&quot;</code></div>
+      <div>
+        <p>芝加哥风格手册第17版（作者-日期）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->associacao-brasileira-de-normas-tecnicas<!-- -->&quot;</code></div>
+      <div>
+        <p>巴西技术标准协会（葡萄牙语 - 巴西）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->vancouver-superscript<!-- -->&quot;</code></div>
+      <div>
+        <p>温哥华（上标）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->angewandte-chemie<!-- -->&quot;</code></div>
+      <div>
+        <p>应用化学国际版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->elsevier-with-titles<!-- -->&quot;</code></div>
+      <div>
+        <p>爱思唯尔（数字，带标题）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->iso-690-numeric<!-- -->&quot;</code></div>
+      <div>
+        <p>ISO-690（数字，英语）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->modern-language-association<!-- -->&quot;</code></div>
+      <div>
+        <p>现代语言协会第9版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->council-of-science-editors<!-- -->&quot;</code></div>
+      <div>
+        <p>科学编辑协会，引文顺序（数字，括号）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->spie<!-- -->&quot;</code></div>
+      <div>
+        <p>SPIE 期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->springer-fachzeitschriften-medizin-psychologie<!-- -->&quot;</code></div>
+      <div>
+        <p>斯普林格 - 专业期刊医学心理学（德语）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->frontiers<!-- -->&quot;</code></div>
+      <div>
+        <p>Frontiers 期刊</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-physics-society<!-- -->&quot;</code></div>
+      <div>
+        <p>美国物理学会</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->american-sociological-association<!-- -->&quot;</code></div>
+      <div>
+        <p>美国社会学会第6版</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->elsevier-vancouver<!-- -->&quot;</code></div>
+      <div>
+        <p>爱思唯尔 - 温哥华</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->chicago-notes<!-- -->&quot;</code></div>
+      <div>
+        <p>芝加哥风格手册第17版（注释）</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->alphanumeric<!-- -->&quot;</code></div>
+      <div>
+        <p>字母数字混合</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>默认：<code><span class="typ-key">auto</span></code></p>
+
+
+
+
+
+
+
+
+
+
+
+      
+      <div class="page-end-buttons"><a href="/docs/reference/model/list/" class="previous"><img
+            src="/assets/icons/16-arrow-right.svg" alt="←">
+          <div><span class="page-title">Bullet List</span><span class="hint">上一页</span></div>
+        </a><a href="/docs/reference/model/document/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">文档</span><span class="hint">下一页</span></div>
+        </a></div>
+      
+    </main>
+
+    
+    <nav id="page-overview"><strong>目录</strong>
+      <ul>
+        
+        <li data-assoc="summary"><a href="#summary">Summary</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="syntax"><a href="#syntax">Syntax</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="parameters"><a href="#parameters">Parameters</a>
+          <ul></ul>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  <footer>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/">主页</a></li>
+        <li><a href="/docs/">中文文档</a></li>
+        <li><a href="https://typst.app/about/">关于我们</a></li>
+        <li><a href="https://typst.app/contact/">联系</a></li>
+        <li><a href="https://typst.app/privacy/">隐私</a></li>
+        <li><a href="https://typst.app/terms/">服务条款</a></li>
+        <li><a href="https://typst.app/legal/">法律说明</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/blog/">博客</a></li>
+        <li><a href="https://twitter.com/typstapp/">Twitter</a></li>
+        <li><a href="https://discord.gg/2uDybryKPe">Discord</a></li>
+        <li><a href="https://www.linkedin.com/company/typst/">LinkedIn</a></li>
+        <li><a href="https://instagram.com/typstapp/">Instagram</a></li>
+        <li><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Made in Berlin</p>
+    </div>
+  </footer>
+  <script src="/scripts/fuse.basic.min.js"></script>
+  <script src="/scripts/docs.js?bust=20230913"></script>
+  <script src="/scripts/analytics.js" defer></script>
+</body>
+
+</html>

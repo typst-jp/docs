@@ -1,0 +1,14 @@
+p {
+  line-height: 1.8;
+  margin: 2em 0em 2em 0em;
+}
+
+.alert {
+  max-width: 100% !important;
+  width: 100%;
+  background-color: #ffc505;
+}
+
+.alert-content {
+  margin: 1em 2em;
+}

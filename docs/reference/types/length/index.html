@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Length – Typst 中文文档</title>
+  <meta name="description" content="`length` 类型文档。">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#239dad">
+  <meta property="og:url" content="https://typst.app/docs/reference/types/length/">
+  <meta property="og:title" content="Length – Typst 中文文档">
+  <meta property="og:site_name" content="Typst">
+  <meta property="og:description" content="`length` 类型文档。">
+  <meta property="og:type">
+  <meta property="og:image" content="https://typst.app/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:site" content="@typstapp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://typst.app/docs/reference/types/length/">
+  <meta name="twitter:image:alt"
+    content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#239dad">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="/styles/default.css">
+  <link rel="stylesheet" href="/styles/docs.css">
+  <link rel="stylesheet" href="/styles/docs-cn.css">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Regular.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Bold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-SemiBold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/CascadiaMono-Regular-Sub.woff2" as="font">
+  <link rel="preload" href="/assets/images/blur.webp" as="image">
+  <script>document.documentElement.className = document.documentElement.className.replace(
+      "no-js",
+      "js",
+    )
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const INSECURE_SIGNED_IN_COOKIE = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("INSECURE_SIGNED_IN="))
+        ?.split("=")[1]
+        .toLowerCase()
+
+      if (
+        INSECURE_SIGNED_IN_COOKIE === "1" ||
+        INSECURE_SIGNED_IN_COOKIE === "true" ||
+        INSECURE_SIGNED_IN_COOKIE === "yes"
+      ) {
+        document.documentElement.classList.add("signed-in")
+        const navButton = document.querySelector("header nav a.nav-btn")
+        const signInEl = document.querySelector("header nav a.sign-in")
+
+        if (navButton) {
+          navButton.innerHTML = "Go to app"
+          navButton.setAttribute("href", "/app/")
+        }
+
+        if (signInEl) {
+          signInEl.innerHTML = "Sign out"
+          signInEl.setAttribute("href", "https://api.typst.app/v1/auth/logout")
+        }
+      }
+    })
+  </script>
+</head>
+
+<body class="no-js docs has-outline">
+  <div class="alert">
+    <div class="alert-content">
+      <span><b>注意：</b>该页面为保留旧有翻译而留下的，新文档并没有该页面，请注意甄别。新的文档可以在 “基础” 部分找到，不过暂未未完全翻译完毕。Typst 非官方中文交流 QQ 群：793548390</span>
+      <br />
+      <span><b>Warning:</b> the Chinese document is a community-driven non-official document, there may be mistranslation, omission or outdated problems, please refer to <a href="https://typst.app/docs/">the official website documentation</a>.</span>
+    </div>
+  </div>
+  <header class="boring">
+    <div><a href="/docs" class="logo-box"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label">
+          <title id="logo-label">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a><button class="hamburger"><img alt="Open navigation"
+          src="/assets/icons/16-hamburger-dark.svg" width="16" height="16"></button>
+      <nav>
+        <ul>
+          <li class="social"><a href="https://twitter.com/typstapp/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-twitter-label">
+                <title id="svg-twitter-label">Twitter</title>
+                <use href="/assets/icons/social.svg#twitter"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://discord.gg/2uDybryKPe"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-discord-label">
+                <title id="svg-discord-label">Discord</title>
+                <use href="/assets/icons/social.svg#discord"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-github-label">
+                <title id="svg-github-label">GitHub</title>
+                <use href="/assets/icons/social.svg#github"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://www.linkedin.com/company/typst/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-linkedin-label">
+                <title id="svg-linkedin-label">LinkedIn</title>
+                <use href="/assets/icons/social.svg#linkedin"></use>
+              </svg></a></li>
+          <li class="secondary"><a href="https://typst.app/">主页</a></li>
+          <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
+          <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main-grid">
+    <nav class="folding"><a href="/docs" class="title-row"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label-nav">
+          <title id="logo-label-nav">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a>
+      <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+      <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
+          type="search" placeholder="搜索" id="docs-search"></div>
+      <ul class="search-results hidden" id="search-results"></ul>
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/" >概览</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/tutorial/" >教程</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/tutorial/writing-in-typst/" >使用 Typst 写作</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/formatting/" >格式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/advanced-styling/" >高级样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/making-a-template/" >制作模板</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/chinese/" >中文用户指南</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/reference/" >参考</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li class="category">Language</li>
+            
+            <li>
+              <a href="/docs/reference/syntax/" >语法</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/styling/" >样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/scripting/" >脚本</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/types/" >类型</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/types/none/" >None</a></li>
+                
+                
+                <li><a href="/docs/reference/types/auto/" >Auto</a></li>
+                
+                
+                <li><a href="/docs/reference/types/boolean/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/types/integer/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/types/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/types/length/"  aria-current="page" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/types/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/types/relative-length/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/types/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/types/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/types/symbol/" >Symbol</a></li>
+                
+                
+                <li><a href="/docs/reference/types/string/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/types/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/types/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/types/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/types/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/types/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/types/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/types/module/" >Module</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li class="category">Content</li>
+            
+            <li>
+              <a href="/docs/reference/text/" >文本</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/text/lorem/" >假文</a></li>
+                
+                
+                <li><a href="/docs/reference/text/emph/" >强调（斜体）</a></li>
+                
+                
+                <li><a href="/docs/reference/text/linebreak/" >换行</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lower/" >转小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/overline/" >上划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/raw/" >原始文本/代码块</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smallcaps/" >显示为小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smartquote/" >智能引号</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strike/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strong/" >着重强调（加粗）</a></li>
+                
+                
+                <li><a href="/docs/reference/text/sub/" >下标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/super/" >上标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/text/" >文本</a></li>
+                
+                
+                <li><a href="/docs/reference/text/underline/" >下划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/upper/" >转大写</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/math/" >数学</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/math/accent/" >重音符号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/attach/" >附缀</a></li>
+                
+                
+                <li><a href="/docs/reference/math/binom/" >二项式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cancel/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cases/" >大括号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/equation/" >数学表达式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/frac/" >分数</a></li>
+                
+                
+                <li><a href="/docs/reference/math/lr/" >Left/Right</a></li>
+                
+                
+                <li><a href="/docs/reference/math/mat/" >矩阵</a></li>
+                
+                
+                <li><a href="/docs/reference/math/roots/" >根式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes/" >显示尺寸</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles/" >显示样式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >文本运算符</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover/" >上/下 方内容</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants/" >字体变体</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >向量</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/layout/" >布局</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/layout/align/" >Align</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/block/" >Block</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/box/" >Box</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/list/" >Bullet List</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/colbreak/" >Column Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/columns/" >Columns</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/grid/" >Grid</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/hide/" >Hide</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/measure/" >Measure</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/move/" >Move</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/enum/" >Numbered List</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pad/" >Padding</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/page/" >Page</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pagebreak/" >Page Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/par/" >Paragraph</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/parbreak/" >Paragraph Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/place/" >Place</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/repeat/" >Repeat</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/rotate/" >Rotate</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/v/" >Spacing (V)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/stack/" >Stack</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/table/" >Table</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/terms/" >Term List</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/visualize/" >可视化</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/visualize/circle/" >Circle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/image/" >Image</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/line/" >Line</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/path/" >Path</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/square/" >Square</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/meta/" >元信息</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/meta/bibliography/" >Bibliography</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/cite/" >Citation</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/document/" >Document</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/figure/" >Figure</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/footnote/" >Footnote</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/heading/" >Heading</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/layout/" >Layout</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/link/" >Link</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/locate/" >Locate</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/numbering/" >Numbering</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/outline/" >Outline</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/query/" >Query</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/ref/" >Reference</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/state/" >State</a></li>
+                
+                
+                <li><a href="/docs/reference/meta/style/" >Style</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/symbols/" >符号</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/symbols/sym/" >General</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li class="category">Compute</li>
+            
+            <li>
+              <a href="/docs/reference/foundations/" >基础</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/eval/" >Evaluate</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/repr/" >Representation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/type/" >Type</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/calculate/" >计算</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/calculate/abs/" >Absolute</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/acos/" >Arccosine</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/asin/" >Arcsine</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/atan/" >Arctangent</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/binom/" >Binomial</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/clamp/" >Clamp</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/cos/" >Cosine</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/even/" >Even</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/exp/" >Exponential</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/fact/" >Factorial</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/atan2/" >Four-quadrant Arctangent</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/fract/" >Fractional</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/gcd/" >Greatest Common Divisor</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/cosh/" >Hyperbolic cosine</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/sinh/" >Hyperbolic sine</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/tanh/" >Hyperbolic tangent</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/lcm/" >Least Common Multiple</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/log/" >Logarithm</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/max/" >Maximum</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/min/" >Minimum</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/ln/" >Natural Logarithm</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/odd/" >Odd</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/perm/" >Permutation</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/pow/" >Power</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/quo/" >Quotient</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/rem/" >Remainder</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/round/" >Round</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/floor/" >Round down</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/ceil/" >Round up</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/sin/" >Sine</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/sqrt/" >Square Root</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/tan/" >Tangent</a></li>
+                
+                
+                <li><a href="/docs/reference/calculate/trunc/" >Truncate</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/construct/" >构造</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/construct/cmyk/" >CMYK</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/int/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/label/" >Label</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/luma/" >Luma</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/rgb/" >RGB</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/range/" >Range</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/regex/" >Regex</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/str/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/construct/symbol/" >Symbol</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/data-loading/" >数据加载</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/data-loading/csv/" >CSV</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/json/" >JSON</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/read/" >Read</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/toml/" >TOML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/xml/" >XML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/yaml/" >YAML</a></li>
+                
+              </ul>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/guides/" >指南</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/guides/guide-for-latex-users/" >LaTeX 用户指南</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/packages/" >第三方包</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/changelog/" >更新日志</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/community/" >社区</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/glossary/" >术语表</a>
+          
+        </li>
+        
+      </ul>
+
+    </nav>
+    <main>
+      <ul class="breadcrumbs" aria-label="Breadcrumbs">
+        <li class="root"><a href="/docs/"><img src="/assets/icons/16-docs-dark.svg" alt="Docs" width="16"
+              height="16"></a></li>
+
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/">参考</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/types/">类型</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/types/length/">Length</a></li>
+        
+      </ul>
+
+      
+
+<h1 id="summary"><span class="pill pill-num">length</span></h1>
+<p>一个尺寸或距离，可能使用上下文单位表示。
+Typst 支持以下长度单位：</p>
+<ul>
+<li>点：<code><span class="typ-num">72pt</span></code></li>
+<li>毫米：<code><span class="typ-num">254mm</span></code></li>
+<li>厘米：<code><span class="typ-num">2.54cm</span></code></li>
+<li>英寸：<code><span class="typ-num">1in</span></code></li>
+<li>相对于字体大小：<code><span class="typ-num">2.5em</span></code></li>
+</ul>
+<h2>Example</h2>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">2em</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1in</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/8dc4636377207bcaa4f3afb046a9f1b9.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+
+
+      
+      <div class="page-end-buttons"><a href="/docs/reference/types/float/" class="previous"><img
+            src="/assets/icons/16-arrow-right.svg" alt="←">
+          <div><span class="page-title">Float</span><span class="hint">上一页</span></div>
+        </a><a href="/docs/reference/types/angle/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Angle</span><span class="hint">下一页</span></div>
+        </a></div>
+      
+    </main>
+
+    
+    <nav id="page-overview"><strong>目录</strong>
+      <ul>
+        
+        <li data-assoc="summary"><a href="#summary">Summary</a>
+          <ul></ul>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  <footer>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/">主页</a></li>
+        <li><a href="/docs/">中文文档</a></li>
+        <li><a href="https://typst.app/about/">关于我们</a></li>
+        <li><a href="https://typst.app/contact/">联系</a></li>
+        <li><a href="https://typst.app/privacy/">隐私</a></li>
+        <li><a href="https://typst.app/terms/">服务条款</a></li>
+        <li><a href="https://typst.app/legal/">法律说明</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/blog/">博客</a></li>
+        <li><a href="https://twitter.com/typstapp/">Twitter</a></li>
+        <li><a href="https://discord.gg/2uDybryKPe">Discord</a></li>
+        <li><a href="https://www.linkedin.com/company/typst/">LinkedIn</a></li>
+        <li><a href="https://instagram.com/typstapp/">Instagram</a></li>
+        <li><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Made in Berlin</p>
+    </div>
+  </footer>
+  <script src="/scripts/docs.js?bust=20230520"></script>
+  <script src="/scripts/analytics.js" defer=""></script>
+</body>
+
+</html>

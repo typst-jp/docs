@@ -1,0 +1,3034 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Calculation – Typst 中文文档</title>
+  <meta name="description" content="calc 函数族的文档.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#239dad">
+  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/foundations/calc">
+  <meta property="og:title" content="Calculation – Typst 中文文档">
+  <meta property="og:site_name" content="Typst">
+  <meta property="og:description" content="calc 函数族的文档.">
+  <meta property="og:type">
+  <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:site" content="@typstapp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/reference/foundations/calc">
+  <meta name="twitter:image:alt"
+    content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#239dad">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="/styles/default.css?bust=20230913?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs.css?bust=20230915?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs-cn.css">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Regular.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Bold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-SemiBold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/CascadiaMono-Regular-Sub.woff2" as="font">
+  <link rel="preload" href="/assets/images/blur.webp" as="image">
+  
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js"), document.addEventListener("DOMContentLoaded", (() => { const e = document.cookie.split("; ").find((e => e.startsWith("INSECURE_SIGNED_IN=")))?.split("=")[1].toLowerCase(); if ("1" === e || "true" === e || "yes" === e) { document.documentElement.classList.add("signed-in"); const e = document.querySelector("header nav a.nav-btn"), t = document.querySelector("header nav a.sign-in"); e && (e.innerHTML = "Go to app", e.setAttribute("href", "/app/")), t && (t.innerHTML = "Sign out", t.setAttribute("href", "https://api.typst.app/v1/auth/logout")) } }))</script>
+</head>
+
+<body class="no-js docs has-outline">
+  <div class="alert">
+    <div class="alert-content">
+      <span><b>注意：</b>该中文文档为社区驱动的非官网文档，可能存在错译、漏译或过时等问题，请以官网文档 <a href="https://typst.app/docs/">Documentation</a>
+        为准，如发现错漏，也欢迎 <a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io">您的贡献</a>（<a href="https://gitee.com/orangex4/typst-doc-cn.github.io">镜像</a>）。Typst 非官方中文交流 QQ 群：793548390</span>
+      <br />
+      <span><b>Warning:</b> the Chinese document is a community-driven non-official document, there may be mistranslation, omission or outdated problems, please refer to <a href="https://typst.app/docs/">the official website documentation</a>.</span>
+    </div>
+  </div>
+  <header class="boring">
+    <div><a href="/docs" class="logo-box"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label">
+          <title id="logo-label">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a><button class="hamburger"><img alt="Open navigation"
+          src="/assets/icons/16-hamburger-dark.svg" width="16" height="16"></button>
+      <nav>
+        <ul>
+          <li class="social"><a href="https://twitter.com/typstapp/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-twitter-label">
+                <title id="svg-twitter-label">Twitter</title>
+                <use href="/assets/icons/social.svg#twitter"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://discord.gg/2uDybryKPe"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-discord-label">
+                <title id="svg-discord-label">Discord</title>
+                <use href="/assets/icons/social.svg#discord"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-github-label">
+                <title id="svg-github-label">GitHub</title>
+                <use href="/assets/icons/social.svg#github"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://www.linkedin.com/company/typst/"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-linkedin-label">
+                <title id="svg-linkedin-label">LinkedIn</title>
+                <use href="/assets/icons/social.svg#linkedin"></use>
+              </svg></a></li>
+          <li class="secondary"><a href="https://typst.app/">主页</a></li>
+          <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
+          <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main-grid">
+    <nav class="folding"><a href="/docs" class="title-row"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label-nav">
+          <title id="logo-label-nav">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>中文文档</span></a>
+      <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+      <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
+          type="search" placeholder="搜索" id="docs-search"></div>
+      <ul class="search-results hidden" id="search-results"></ul>
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/" >概览</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/tutorial/" >教程</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/tutorial/writing-in-typst/" >使用 Typst 写作</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/formatting/" >格式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/advanced-styling/" >高级样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/making-a-template/" >制作模板</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/chinese/" >中文用户指南</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/reference/" >参考</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            
+            <li class="category">Language</li>
+            
+            <li>
+              <a href="/docs/reference/syntax/" >语法</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/styling/" >样式</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/scripting/" >脚本</a>
+              
+            </li>
+            
+            
+            
+            
+            <li>
+              <a href="/docs/reference/types/" >类型（旧）</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/types/none/" >None</a></li>
+                
+                
+                <li><a href="/docs/reference/types/auto/" >Auto</a></li>
+                
+                
+                <li><a href="/docs/reference/types/boolean/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/types/integer/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/types/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/types/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/types/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/types/relative-length/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/types/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/types/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/types/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/types/symbol/" >Symbol</a></li>
+                
+                
+                <li><a href="/docs/reference/types/string/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/types/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/types/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/types/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/types/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/types/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/types/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/types/module/" >Module</a></li>
+                
+              </ul>
+              
+            </li>
+
+            
+            <li class="category">Library</li>
+            
+            <li>
+              <a href="/docs/reference/foundations/" >基础</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/foundations/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bool/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bytes/" >Bytes</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/duration/" >Duration</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/eval/" >Evaluate</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/int/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/label/" >Label</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/module/" >Module</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/plugin/" >Plugin</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/regex/" >Regex</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/repr/" >Representation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/str/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/type/" >Type</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/version/" >Version</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/calc"  aria-current="page" >Calculation</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/model/" >模型</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/model/bibliography/" >参考文献</a></li>
+                
+                
+                <li><a href="/docs/reference/model/list/" >Bullet List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/cite/" >引用</a></li>
+                
+                
+                <li><a href="/docs/reference/model/document/" >文档</a></li>
+                
+                
+                <li><a href="/docs/reference/model/emph/" >强调（斜体）</a></li>
+                
+                
+                <li><a href="/docs/reference/model/figure/" >图表</a></li>
+                
+                
+                <li><a href="/docs/reference/model/footnote/" >脚注</a></li>
+                
+                
+                <li><a href="/docs/reference/model/heading/" >Heading</a></li>
+                
+                
+                <li><a href="/docs/reference/model/link/" >Link</a></li>
+                
+                
+                <li><a href="/docs/reference/model/enum/" >有序列表</a></li>
+                
+                
+                <li><a href="/docs/reference/model/numbering/" >Numbering</a></li>
+                
+                
+                <li><a href="/docs/reference/model/outline/" >Outline</a></li>
+                
+                
+                <li><a href="/docs/reference/model/par/" >Paragraph</a></li>
+                
+                
+                <li><a href="/docs/reference/model/parbreak/" >Paragraph Break</a></li>
+                
+                
+                <li><a href="/docs/reference/model/quote/" >Quote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/ref/" >Reference</a></li>
+                
+                
+                <li><a href="/docs/reference/model/strong/" >着重强调（加粗）</a></li>
+                
+                
+                <li><a href="/docs/reference/model/table/" >Table</a></li>
+                
+                
+                <li><a href="/docs/reference/model/terms/" >Term List</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/text/" >文本</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/text/highlight/" >文本高亮</a></li>
+                
+                
+                <li><a href="/docs/reference/text/linebreak/" >换行</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lorem/" >假文</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lower/" >转小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/overline/" >上划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/raw/" >原始文本/代码块</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smallcaps/" >显示为小写</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smartquote/" >智能引号</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strike/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/sub/" >下标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/super/" >上标</a></li>
+                
+                
+                <li><a href="/docs/reference/text/text/" >文本</a></li>
+                
+                
+                <li><a href="/docs/reference/text/underline/" >下划线</a></li>
+                
+                
+                <li><a href="/docs/reference/text/upper/" >转大写</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/math/" >数学</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/math/accent/" >重音符号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cancel/" >删除线</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cases/" >左大括号</a></li>
+                
+                
+                <li><a href="/docs/reference/math/class/" >类</a></li>
+                
+                
+                <li><a href="/docs/reference/math/equation/" >数学表达式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/frac/" >分数</a></li>
+                
+                
+                <li><a href="/docs/reference/math/mat/" >矩阵</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >文本运算符</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >向量</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover" >上/下方内容</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants" >字体变体</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes" >显示尺寸</a></li>
+                
+                
+                <li><a href="/docs/reference/math/lr" >Left/Right</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles" >显示样式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/roots" >根式</a></li>
+                
+                
+                <li><a href="/docs/reference/math/attach" >附缀</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/symbols/" >符号</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/symbols/sym/" >通用</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/emoji/" >表情符号</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/symbol/" >符号</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/layout/" >布局</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/layout/align/" >Align</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/alignment/" >Alignment</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/block/" >Block</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/box/" >Box</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/colbreak/" >Column Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/columns/" >Columns</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/direction/" >Direction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/grid/" >Grid</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/hide/" >Hide</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/layout/" >Layout</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/measure/" >Measure</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/move/" >Move</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pad/" >Padding</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/page/" >Page</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pagebreak/" >Page Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/place/" >Place</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/relative/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/repeat/" >Repeat</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/rotate/" >Rotate</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/v/" >Spacing (V)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/stack/" >Stack</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/visualize/" >可视化</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/visualize/circle/" >Circle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/gradient/" >Gradient</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/image/" >Image</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/line/" >Line</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/path/" >Path</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/square/" >Square</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/introspection/" >内省</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/introspection/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/locate/" >Locate</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/location/" >Location</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/metadata/" >Metadata</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/query/" >Query</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/state/" >State</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/data-loading/" >数据加载</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/data-loading/cbor/" >CBOR</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/csv/" >CSV</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/json/" >JSON</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/read/" >Read</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/toml/" >TOML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/xml/" >XML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/yaml/" >YAML</a></li>
+                
+              </ul>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/guides/" >指南</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/guides/guide-for-latex-users/" >LaTeX 用户指南</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/page-setup/" >页面设置指南</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/packages/" >第三方包</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/changelog/" >更新日志</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/roadmap/" >路线图</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/community/" >社区</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/glossary/" >术语表</a>
+          
+        </li>
+        
+      </ul>
+
+    </nav>
+    <main>
+      <ul class="breadcrumbs" aria-label="Breadcrumbs">
+        <li class="root"><a href="/docs/"><img src="/assets/icons/16-docs-dark.svg" alt="Docs" width="16"
+              height="16"></a></li>
+
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/">参考</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/foundations/">基础</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/foundations/calc">Calculation</a></li>
+        
+      </ul>
+
+      
+
+<h1 id="summary">Calculation<!-- --> 函数族</h1>
+<p>Module for calculations and processing of numeric values.</p>
+<p>These definitions are part of the <code>calc</code> module and not imported by default.
+In addition to the functions listed below, the <code>calc</code> module also defines
+the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code>, and <code>nan</code>.</p>
+<h2 id="functions">函数族</h2>
+
+  <h3 id="-abs" class="method-head"><span><code>abs</code></span></h3>
+  
+<p>Calculates the absolute value of a numeric value.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">abs</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-num">5pt</span> <span class="typ-op">-</span> <span class="typ-num">2cm</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-num">2fr</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/e510ee8d00f4e2c888a53ba546c26c14.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-abs-abs-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+      <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-abs-abs-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-abs-abs-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-abs-abs-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-abs-abs-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The value whose absolute value to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-pow" class="method-head"><span><code>pow</code></span></h3>
+  
+<p>Raises a value to some exponent.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">pow</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">pow</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/d58c2fba1429f6271ecfa7220f6d8199.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-pow-pow-parameters-base"><code>base</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-pow-pow-parameters-base-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-pow-pow-parameters-base-positional-tooltip-qm-label">
+          <title id="definitions-pow-pow-parameters-base-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-pow-pow-parameters-base-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The base of the power.</p>
+
+
+
+
+<h4 id="definitions-pow-pow-parameters-exponent"><code>exponent</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-pow-pow-parameters-exponent-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-pow-pow-parameters-exponent-positional-tooltip-qm-label">
+          <title id="definitions-pow-pow-parameters-exponent-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-pow-pow-parameters-exponent-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The exponent of the power.</p>
+
+
+
+
+
+
+
+  <h3 id="-exp" class="method-head"><span><code>exp</code></span></h3>
+  
+<p>Raises a value to some exponent of e.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">exp</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">exp</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/49f9c1f68f122165e1705342c87d7985.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-exp-exp-parameters-exponent"><code>exponent</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-exp-exp-parameters-exponent-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-exp-exp-parameters-exponent-positional-tooltip-qm-label">
+          <title id="definitions-exp-exp-parameters-exponent-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-exp-exp-parameters-exponent-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The exponent of the power.</p>
+
+
+
+
+
+
+
+  <h3 id="-sqrt" class="method-head"><span><code>sqrt</code></span></h3>
+  
+<p>Calculates the square root of a number.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">sqrt</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sqrt</span><span class="typ-punct">(</span><span class="typ-num">16</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sqrt</span><span class="typ-punct">(</span><span class="typ-num">2.5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/5b931ca2767047a142be8cc72f87d802.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-sqrt-sqrt-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-sqrt-sqrt-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-sqrt-sqrt-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-sqrt-sqrt-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-sqrt-sqrt-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number whose square root to calculate. Must be non-negative.</p>
+
+
+
+
+
+
+
+  <h3 id="-root" class="method-head"><span><code>root</code></span></h3>
+  
+<p>Calculates the real nth root of a number.</p>
+<p>If the number is negative, then n must be odd.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">root</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">root</span><span class="typ-punct">(</span><span class="typ-num">16.0</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">root</span><span class="typ-punct">(</span><span class="typ-num">27.0</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/9477308c0aacce626b93671a71fa8927.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-root-root-parameters-radicand"><code>radicand</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-root-root-parameters-radicand-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-root-root-parameters-radicand-positional-tooltip-qm-label">
+          <title id="definitions-root-root-parameters-radicand-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-root-root-parameters-radicand-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The expression to take the root of</p>
+
+
+
+
+<h4 id="definitions-root-root-parameters-index"><code>index</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-root-root-parameters-index-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-root-root-parameters-index-positional-tooltip-qm-label">
+          <title id="definitions-root-root-parameters-index-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-root-root-parameters-index-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Which root of the radicand to take</p>
+
+
+
+
+
+
+
+  <h3 id="-sin" class="method-head"><span><code>sin</code></span></h3>
+  
+<p>Calculates the sine of an angle.</p>
+<p>When called with an integer or a float, they will be interpreted as
+radians.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">sin</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span> <span class="typ-op">==</span> calc<span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">270deg</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/9a343f290b69c6546ce3068c8c32d9ea.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-sin-sin-parameters-angle"><code>angle</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-sin-sin-parameters-angle-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-sin-sin-parameters-angle-positional-tooltip-qm-label">
+          <title id="definitions-sin-sin-parameters-angle-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-sin-sin-parameters-angle-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The angle whose sine to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-cos" class="method-head"><span><code>cos</code></span></h3>
+  
+<p>Calculates the cosine of an angle.</p>
+<p>When called with an integer or a float, they will be interpreted as
+radians.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">cos</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cos</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cos</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cos</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/5eefa7a2d93c8b89041d62c4187a2c30.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-cos-cos-parameters-angle"><code>angle</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-cos-cos-parameters-angle-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-cos-cos-parameters-angle-positional-tooltip-qm-label">
+          <title id="definitions-cos-cos-parameters-angle-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-cos-cos-parameters-angle-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The angle whose cosine to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-tan" class="method-head"><span><code>tan</code></span></h3>
+  
+<p>Calculates the tangent of an angle.</p>
+<p>When called with an integer or a float, they will be interpreted as
+radians.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">tan</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">tan</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">tan</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/b0d4d791b53918afd48eadd8d8a486c6.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-tan-tan-parameters-angle"><code>angle</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/angle" class="pill pill-num">angle</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-tan-tan-parameters-angle-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-tan-tan-parameters-angle-positional-tooltip-qm-label">
+          <title id="definitions-tan-tan-parameters-angle-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-tan-tan-parameters-angle-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The angle whose tangent to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-asin" class="method-head"><span><code>asin</code></span></h3>
+  
+<p>Calculates the arcsine of a number.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">asin</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/angle" class="pill pill-num">angle</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">asin</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">asin</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/4e3534f3677072cae71d2151b1ea3cca.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-asin-asin-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-asin-asin-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-asin-asin-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-asin-asin-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-asin-asin-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number whose arcsine to calculate. Must be between -1 and 1.</p>
+
+
+
+
+
+
+
+  <h3 id="-acos" class="method-head"><span><code>acos</code></span></h3>
+  
+<p>Calculates the arccosine of a number.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">acos</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/angle" class="pill pill-num">angle</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">acos</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">acos</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/0423e3e221058490a01d9be936113706.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-acos-acos-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-acos-acos-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-acos-acos-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-acos-acos-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-acos-acos-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number whose arcsine to calculate. Must be between -1 and 1.</p>
+
+
+
+
+
+
+
+  <h3 id="-atan" class="method-head"><span><code>atan</code></span></h3>
+  
+<p>Calculates the arctangent of a number.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">atan</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/angle" class="pill pill-num">angle</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">atan</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">atan</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/0c307d4fe6fb00142b84518f3bb1869a.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-atan-atan-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-atan-atan-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-atan-atan-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-atan-atan-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-atan-atan-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number whose arctangent to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-atan2" class="method-head"><span><code>atan2</code></span></h3>
+  
+<p>Calculates the four-quadrant arctangent of a coordinate.</p>
+<p>The arguments are <code>(x, y)</code>, not <code>(y, x)</code>.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">atan2</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/angle" class="pill pill-num">angle</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">atan2</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">1</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">atan2</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/d804133f4d02ee61b3a7f5a4ad5f0a4c.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-atan2-atan2-parameters-x"><code>x</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-atan2-atan2-parameters-x-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-atan2-atan2-parameters-x-positional-tooltip-qm-label">
+          <title id="definitions-atan2-atan2-parameters-x-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-atan2-atan2-parameters-x-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The X coordinate.</p>
+
+
+
+
+<h4 id="definitions-atan2-atan2-parameters-y"><code>y</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-atan2-atan2-parameters-y-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-atan2-atan2-parameters-y-positional-tooltip-qm-label">
+          <title id="definitions-atan2-atan2-parameters-y-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-atan2-atan2-parameters-y-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The Y coordinate.</p>
+
+
+
+
+
+
+
+  <h3 id="-sinh" class="method-head"><span><code>sinh</code></span></h3>
+  
+<p>Calculates the hyperbolic sine of a hyperbolic angle.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">sinh</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sinh</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sinh</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/c062ac2864096e6a91bf82cade922dbe.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-sinh-sinh-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-sinh-sinh-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-sinh-sinh-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-sinh-sinh-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-sinh-sinh-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The hyperbolic angle whose hyperbolic sine to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-cosh" class="method-head"><span><code>cosh</code></span></h3>
+  
+<p>Calculates the hyperbolic cosine of a hyperbolic angle.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">cosh</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cosh</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cosh</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/8731566fc671a877e2755e69793fc8c9.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-cosh-cosh-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-cosh-cosh-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-cosh-cosh-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-cosh-cosh-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-cosh-cosh-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The hyperbolic angle whose hyperbolic cosine to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-tanh" class="method-head"><span><code>tanh</code></span></h3>
+  
+<p>Calculates the hyperbolic tangent of an hyperbolic angle.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">tanh</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">tanh</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">tanh</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/a5cf70185c7cdd1289b110da69dde187.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-tanh-tanh-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-tanh-tanh-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-tanh-tanh-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-tanh-tanh-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-tanh-tanh-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The hyperbolic angle whose hyperbolic tangent to calculate.</p>
+
+
+
+
+
+
+
+  <h3 id="-log" class="method-head"><span><code>log</code></span></h3>
+  
+<p>Calculates the logarithm of a number.</p>
+<p>If the base is not specified, the logarithm is calculated in base 10.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">log</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="#parameters-base">base<!-- -->: </a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">log</span><span class="typ-punct">(</span><span class="typ-num">100</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/f280746542998704b07551b9c4f7a334.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-log-log-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-log-log-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-log-log-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-log-log-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-log-log-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number whose logarithm to calculate. Must be strictly positive.</p>
+
+
+
+
+<h4 id="definitions-log-log-parameters-base"><code>base</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The base of the logarithm. May not be zero.</p>
+
+
+<p>默认：<code><span class="typ-num">10</span></code></p>
+
+
+
+
+
+
+  <h3 id="-ln" class="method-head"><span><code>ln</code></span></h3>
+  
+<p>Calculates the natural logarithm of a number.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">ln</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">ln</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span>e<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/e809f2f5235f582e80badf01f1c5ec1b.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-ln-ln-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-ln-ln-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-ln-ln-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-ln-ln-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-ln-ln-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number whose logarithm to calculate. Must be strictly positive.</p>
+
+
+
+
+
+
+
+  <h3 id="-fact" class="method-head"><span><code>fact</code></span></h3>
+  
+<p>Calculates the factorial of a number.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">fact</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">fact</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/10eb9ad85b719fb4313dbb869b5f20ad.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-fact-fact-parameters-number"><code>number</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-fact-fact-parameters-number-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-fact-fact-parameters-number-positional-tooltip-qm-label">
+          <title id="definitions-fact-fact-parameters-number-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-fact-fact-parameters-number-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number whose factorial to calculate. Must be non-negative.</p>
+
+
+
+
+
+
+
+  <h3 id="-perm" class="method-head"><span><code>perm</code></span></h3>
+  
+<p>Calculates a permutation.</p>
+<p>Returns the <code>k</code>-permutation of <code>n</code>, or the number of ways to choose <code>k</code>
+items from a set of <code>n</code> with regard to order.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">perm</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-str">&quot;perm&quot;</span>(n, k) <span class="typ-math-op">&amp;</span>= n!<span class="typ-math-op">/</span><span class="typ-punct">(</span>(n <span class="typ-escape">-</span> k)!<span class="typ-punct">)</span> <span class="typ-escape">\</span>
+  <span class="typ-str">&quot;perm&quot;</span>(5, 3) <span class="typ-math-op">&amp;</span>= <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">perm</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/8ba0160417321b9b7330d12b12d38315.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-perm-perm-parameters-base"><code>base</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-perm-perm-parameters-base-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-perm-perm-parameters-base-positional-tooltip-qm-label">
+          <title id="definitions-perm-perm-parameters-base-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-perm-perm-parameters-base-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The base number. Must be non-negative.</p>
+
+
+
+
+<h4 id="definitions-perm-perm-parameters-numbers"><code>numbers</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-perm-perm-parameters-numbers-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-perm-perm-parameters-numbers-positional-tooltip-qm-label">
+          <title id="definitions-perm-perm-parameters-numbers-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-perm-perm-parameters-numbers-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number of permutations. Must be non-negative.</p>
+
+
+
+
+
+
+
+  <h3 id="-binom" class="method-head"><span><code>binom</code></span></h3>
+  
+<p>Calculates a binomial coefficient.</p>
+<p>Returns the <code>k</code>-combination of <code>n</code>, or the number of ways to choose <code>k</code>
+items from a set of <code>n</code> without regard to order.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">binom</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">binom</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/09fcfb4060edd792a9285daa8214210e.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-binom-binom-parameters-n"><code>n</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-binom-binom-parameters-n-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-binom-binom-parameters-n-positional-tooltip-qm-label">
+          <title id="definitions-binom-binom-parameters-n-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-binom-binom-parameters-n-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The upper coefficient. Must be non-negative.</p>
+
+
+
+
+<h4 id="definitions-binom-binom-parameters-k"><code>k</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-binom-binom-parameters-k-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-binom-binom-parameters-k-positional-tooltip-qm-label">
+          <title id="definitions-binom-binom-parameters-k-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-binom-binom-parameters-k-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The lower coefficient. Must be non-negative.</p>
+
+
+
+
+
+
+
+  <h3 id="-gcd" class="method-head"><span><code>gcd</code></span></h3>
+  
+<p>Calculates the greatest common divisor of two integers.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">gcd</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">gcd</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">42</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/c0d8d5caa2ef320457568f72d8e52e67.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-gcd-gcd-parameters-a"><code>a</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-gcd-gcd-parameters-a-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-gcd-gcd-parameters-a-positional-tooltip-qm-label">
+          <title id="definitions-gcd-gcd-parameters-a-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-gcd-gcd-parameters-a-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The first integer.</p>
+
+
+
+
+<h4 id="definitions-gcd-gcd-parameters-b"><code>b</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-gcd-gcd-parameters-b-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-gcd-gcd-parameters-b-positional-tooltip-qm-label">
+          <title id="definitions-gcd-gcd-parameters-b-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-gcd-gcd-parameters-b-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The second integer.</p>
+
+
+
+
+
+
+
+  <h3 id="-lcm" class="method-head"><span><code>lcm</code></span></h3>
+  
+<p>Calculates the least common multiple of two integers.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">lcm</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">lcm</span><span class="typ-punct">(</span><span class="typ-num">96</span><span class="typ-punct">,</span> <span class="typ-num">13</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/76ea73b1ad252a14e59212e49a6375fb.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-lcm-lcm-parameters-a"><code>a</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-lcm-lcm-parameters-a-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-lcm-lcm-parameters-a-positional-tooltip-qm-label">
+          <title id="definitions-lcm-lcm-parameters-a-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-lcm-lcm-parameters-a-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The first integer.</p>
+
+
+
+
+<h4 id="definitions-lcm-lcm-parameters-b"><code>b</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-lcm-lcm-parameters-b-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-lcm-lcm-parameters-b-positional-tooltip-qm-label">
+          <title id="definitions-lcm-lcm-parameters-b-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-lcm-lcm-parameters-b-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The second integer.</p>
+
+
+
+
+
+
+
+  <h3 id="-floor" class="method-head"><span><code>floor</code></span></h3>
+  
+<p>Rounds a number down to the nearest integer.</p>
+<p>If the number is already an integer, it is returned unchanged.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">floor</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">500.1</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/61eb20d7f3cd6373b777b4b105768cc6.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-floor-floor-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-floor-floor-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-floor-floor-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-floor-floor-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-floor-floor-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to round down.</p>
+
+
+
+
+
+
+
+  <h3 id="-ceil" class="method-head"><span><code>ceil</code></span></h3>
+  
+<p>Rounds a number up to the nearest integer.</p>
+<p>If the number is already an integer, it is returned unchanged.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">ceil</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">500.1</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/69b2ab694eb4909e595d80cf4942bd27.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-ceil-ceil-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-ceil-ceil-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-ceil-ceil-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-ceil-ceil-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-ceil-ceil-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to round up.</p>
+
+
+
+
+
+
+
+  <h3 id="-trunc" class="method-head"><span><code>trunc</code></span></h3>
+  
+<p>Returns the integer part of a number.</p>
+<p>If the number is already an integer, it is returned unchanged.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">trunc</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">3.7</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-num">15.9</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/a8f77e7eaa51dc0a953d69933f1e263f.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-trunc-trunc-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-trunc-trunc-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-trunc-trunc-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-trunc-trunc-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-trunc-trunc-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to truncate.</p>
+
+
+
+
+
+
+
+  <h3 id="-fract" class="method-head"><span><code>fract</code></span></h3>
+  
+<p>Returns the fractional part of a number.</p>
+<p>If the number is an integer, returns <code>0</code>.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">fract</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">fract</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">0</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">fract</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">3.1</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/e95d212f509a3f674b880f65d01a720a.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-fract-fract-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-fract-fract-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-fract-fract-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-fract-fract-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-fract-fract-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to truncate.</p>
+
+
+
+
+
+
+
+  <h3 id="-round" class="method-head"><span><code>round</code></span></h3>
+  
+<p>Rounds a number to the nearest integer.</p>
+<p>Optionally, a number of decimal places can be specified.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">round</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="#parameters-digits">digits<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.5</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.1415</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/909cf2add30990bd12abe88252ffd37d.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-round-round-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-round-round-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-round-round-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-round-round-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-round-round-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to round.</p>
+
+
+
+
+<h4 id="definitions-round-round-parameters-digits"><code>digits</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The number of decimal places.</p>
+
+
+<p>默认：<code><span class="typ-num">0</span></code></p>
+
+
+
+
+
+
+  <h3 id="-clamp" class="method-head"><span><code>clamp</code></span></h3>
+  
+<p>Clamps a number between a minimum and maximum value.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">clamp</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">10</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">5</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">,</span> <span class="typ-num">10</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">6</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/73b6c954f13326954ddededb400d41c2.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-clamp-clamp-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-clamp-clamp-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-clamp-clamp-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-clamp-clamp-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-clamp-clamp-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to clamp.</p>
+
+
+
+
+<h4 id="definitions-clamp-clamp-parameters-min"><code>min</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-clamp-clamp-parameters-min-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-clamp-clamp-parameters-min-positional-tooltip-qm-label">
+          <title id="definitions-clamp-clamp-parameters-min-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-clamp-clamp-parameters-min-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The inclusive minimum value.</p>
+
+
+
+
+<h4 id="definitions-clamp-clamp-parameters-max"><code>max</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-clamp-clamp-parameters-max-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-clamp-clamp-parameters-max-positional-tooltip-qm-label">
+          <title id="definitions-clamp-clamp-parameters-max-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-clamp-clamp-parameters-max-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The inclusive maximum value.</p>
+
+
+
+
+
+
+
+  <h3 id="-min" class="method-head"><span><code>min</code></span></h3>
+  
+<p>Determines the minimum of a sequence of values.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">min</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-str">&quot;typst&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;in&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;beta&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/fb22eeb2bde8fae1b41f607e630f4657.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-min-min-parameters-values"><code>values</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-min-min-parameters-values-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-min-min-parameters-values-positional-tooltip-qm-label">
+          <title id="definitions-min-min-parameters-values-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-min-min-parameters-values-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-min-min-parameters-values-variadic-tooltip">可变参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-min-min-parameters-values-variadic-tooltip-qm-label">
+          <title id="definitions-min-min-parameters-values-variadic-tooltip-qm-label">可变参数可以多次传入。
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-min-min-parameters-values-variadic-tooltip"
+          tabindex="-1">可变参数可以多次传入。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The sequence of values from which to extract the minimum.
+Must not be empty.</p>
+
+
+
+
+
+
+
+  <h3 id="-max" class="method-head"><span><code>max</code></span></h3>
+  
+<p>Determines the maximum of a sequence of values.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">max</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">max</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">max</span><span class="typ-punct">(</span><span class="typ-str">&quot;typst&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;in&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;beta&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/0cc0245e974c507873103cb34aacc634.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-max-max-parameters-values"><code>values</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-max-max-parameters-values-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-max-max-parameters-values-positional-tooltip-qm-label">
+          <title id="definitions-max-max-parameters-values-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-max-max-parameters-values-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-max-max-parameters-values-variadic-tooltip">可变参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-max-max-parameters-values-variadic-tooltip-qm-label">
+          <title id="definitions-max-max-parameters-values-variadic-tooltip-qm-label">可变参数可以多次传入。
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-max-max-parameters-values-variadic-tooltip"
+          tabindex="-1">可变参数可以多次传入。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The sequence of values from which to extract the maximum.
+Must not be empty.</p>
+
+
+
+
+
+
+
+  <h3 id="-even" class="method-head"><span><code>even</code></span></h3>
+  
+<p>Determines whether an integer is even.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">even</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">even</span><span class="typ-punct">(</span><span class="typ-num">4</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">even</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-func">#</span><span class="typ-func">range</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">filter</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span>even<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/2621ae26c6c004f52ca08b301541a4b2.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-even-even-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-even-even-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-even-even-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-even-even-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-even-even-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to check for evenness.</p>
+
+
+
+
+
+
+
+  <h3 id="-odd" class="method-head"><span><code>odd</code></span></h3>
+  
+<p>Determines whether an integer is odd.</p>
+
+<div class="code code-definition single-arg">calc.<span
+    class="typ-func">odd</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span><span class="typ-num">4</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-func">#</span><span class="typ-func">range</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">filter</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span>odd<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/afd09ad4fbff9a70a0c9a4458e52bb14.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-odd-odd-parameters-value"><code>value</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-odd-odd-parameters-value-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-odd-odd-parameters-value-positional-tooltip-qm-label">
+          <title id="definitions-odd-odd-parameters-value-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-odd-odd-parameters-value-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The number to check for oddness.</p>
+
+
+
+
+
+
+
+  <h3 id="-rem" class="method-head"><span><code>rem</code></span></h3>
+  
+<p>Calculates the remainder of two numbers.</p>
+<p>The value <code>calc.rem(x, y)</code> always has the same sign as <code>x</code>, and is smaller
+in magnitude than <code>y</code>.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">rem</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem</span><span class="typ-punct">(</span><span class="typ-num">1.75</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/e77bb2090ab9d5d93da0df8237fad1bd.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-rem-rem-parameters-dividend"><code>dividend</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-rem-rem-parameters-dividend-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-rem-rem-parameters-dividend-positional-tooltip-qm-label">
+          <title id="definitions-rem-rem-parameters-dividend-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-rem-rem-parameters-dividend-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The dividend of the remainder.</p>
+
+
+
+
+<h4 id="definitions-rem-rem-parameters-divisor"><code>divisor</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-rem-rem-parameters-divisor-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-rem-rem-parameters-divisor-positional-tooltip-qm-label">
+          <title id="definitions-rem-rem-parameters-divisor-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-rem-rem-parameters-divisor-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The divisor of the remainder.</p>
+
+
+
+
+
+
+
+  <h3 id="-div-euclid" class="method-head"><span><code>div-euclid</code></span></h3>
+  
+<p>Performs euclidean division of two numbers.</p>
+<p>The result of this computation is that of a division rounded to the integer
+<code>n</code> such that the dividend is greater than or equal to <code>n</code> times the divisor.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">div-euclid</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-num">1.75</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/bd780ec1a24e5250e30b9845c23817e7.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-div-euclid-div-euclid-parameters-dividend"><code>dividend</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-div-euclid-div-euclid-parameters-dividend-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-div-euclid-div-euclid-parameters-dividend-positional-tooltip-qm-label">
+          <title id="definitions-div-euclid-div-euclid-parameters-dividend-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-div-euclid-div-euclid-parameters-dividend-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The dividend of the division.</p>
+
+
+
+
+<h4 id="definitions-div-euclid-div-euclid-parameters-divisor"><code>divisor</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-div-euclid-div-euclid-parameters-divisor-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-div-euclid-div-euclid-parameters-divisor-positional-tooltip-qm-label">
+          <title id="definitions-div-euclid-div-euclid-parameters-divisor-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-div-euclid-div-euclid-parameters-divisor-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The divisor of the division.</p>
+
+
+
+
+
+
+
+  <h3 id="-rem-euclid" class="method-head"><span><code>rem-euclid</code></span></h3>
+  
+<p>This calculates the least nonnegative remainder of a division.</p>
+<p>Warning: Due to a floating point round-off error, the remainder may equal the absolute
+value of the divisor if the dividend is much smaller in magnitude than the divisor
+and the dividend is negative. This only applies for floating point inputs.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">rem-euclid</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem</span><span class="typ-punct">(</span><span class="typ-num">1.75</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/44d12330a4ce0842a3cc47a4628cac5f.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-rem-euclid-rem-euclid-parameters-dividend"><code>dividend</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-rem-euclid-rem-euclid-parameters-dividend-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-rem-euclid-rem-euclid-parameters-dividend-positional-tooltip-qm-label">
+          <title id="definitions-rem-euclid-rem-euclid-parameters-dividend-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-rem-euclid-rem-euclid-parameters-dividend-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The dividend of the remainder.</p>
+
+
+
+
+<h4 id="definitions-rem-euclid-rem-euclid-parameters-divisor"><code>divisor</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-rem-euclid-rem-euclid-parameters-divisor-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-rem-euclid-rem-euclid-parameters-divisor-positional-tooltip-qm-label">
+          <title id="definitions-rem-euclid-rem-euclid-parameters-divisor-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-rem-euclid-rem-euclid-parameters-divisor-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The divisor of the remainder.</p>
+
+
+
+
+
+
+
+  <h3 id="-quo" class="method-head"><span><code>quo</code></span></h3>
+  
+<p>Calculates the quotient (floored division) of two numbers.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">quo</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-str">&quot;quo&quot;</span>(a, b) <span class="typ-math-op">&amp;</span>= <span class="typ-func">floor</span><span class="typ-punct">(</span>a<span class="typ-math-op">/</span>b<span class="typ-punct">)</span> <span class="typ-escape">\</span>
+  <span class="typ-str">&quot;quo&quot;</span>(14, 5) <span class="typ-math-op">&amp;</span>= <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">quo</span><span class="typ-punct">(</span><span class="typ-num">14</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+  <span class="typ-str">&quot;quo&quot;</span>(3.46, 0.5) <span class="typ-math-op">&amp;</span>= <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">quo</span><span class="typ-punct">(</span><span class="typ-num">3.46</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/440f7e6e130cf956c93e8db3196f28fc.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-quo-quo-parameters-dividend"><code>dividend</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-quo-quo-parameters-dividend-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-quo-quo-parameters-dividend-positional-tooltip-qm-label">
+          <title id="definitions-quo-quo-parameters-dividend-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-quo-quo-parameters-dividend-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The dividend of the quotient.</p>
+
+
+
+
+<h4 id="definitions-quo-quo-parameters-divisor"><code>divisor</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+    </div>
+    <small>必需参数</small><small><span
+        aria-describedby="definitions-quo-quo-parameters-divisor-positional-tooltip">位置参数</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-quo-quo-parameters-divisor-positional-tooltip-qm-label">
+          <title id="definitions-quo-quo-parameters-divisor-positional-tooltip-qm-label">
+            位置参数按顺序传入，不带名称。</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-quo-quo-parameters-divisor-positional-tooltip"
+          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The divisor of the quotient.</p>
+
+
+
+
+
+
+
+
+
+
+      
+      <div class="page-end-buttons"><a href="/docs/reference/foundations/sys" class="previous"><img
+            src="/assets/icons/16-arrow-right.svg" alt="←">
+          <div><span class="page-title">System</span><span class="hint">上一页</span></div>
+        </a><a href="/docs/reference/model/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">模型</span><span class="hint">下一页</span></div>
+        </a></div>
+      
+    </main>
+
+    
+    <nav id="page-overview"><strong>目录</strong>
+      <ul>
+        
+        <li data-assoc="summary"><a href="#summary">Summary</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="functions"><a href="#functions">Functions</a>
+          <ul></ul>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  <footer>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/">主页</a></li>
+        <li><a href="/docs/">中文文档</a></li>
+        <li><a href="https://typst.app/about/">关于我们</a></li>
+        <li><a href="https://typst.app/contact/">联系</a></li>
+        <li><a href="https://typst.app/privacy/">隐私</a></li>
+        <li><a href="https://typst.app/terms/">服务条款</a></li>
+        <li><a href="https://typst.app/legal/">法律说明</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/blog/">博客</a></li>
+        <li><a href="https://twitter.com/typstapp/">Twitter</a></li>
+        <li><a href="https://discord.gg/2uDybryKPe">Discord</a></li>
+        <li><a href="https://www.linkedin.com/company/typst/">LinkedIn</a></li>
+        <li><a href="https://instagram.com/typstapp/">Instagram</a></li>
+        <li><a href="https://github.com/typst-doc-cn/typst-doc-cn.github.io">GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Made in Berlin</p>
+    </div>
+  </footer>
+  <script src="/scripts/fuse.basic.min.js"></script>
+  <script src="/scripts/docs.js?bust=20230913"></script>
+  <script src="/scripts/analytics.js" defer></script>
+</body>
+
+</html>
