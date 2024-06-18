@@ -546,11 +546,11 @@ async function setUpPackages() {
         return;
     const n = await (await fetch("https://packages.typst.org/preview/index.json")).json();
     // 对 n 中的每一项 name 为 key 的项设置 description 为 value，不存在则不替换
-    const index2cn = await (await fetch("/assets/index2cn.json")).json();
-    if (index2cn) {
+    const index2ja = await (await fetch("/assets/index2ja.json")).json();
+    if (index2ja) {
       n.forEach(item => {
-          if (index2cn[item.name]) {
-              item.description = index2cn[item.name];
+          if (index2ja[item.name]) {
+              item.description = index2ja[item.name];
           }
       });
     }
