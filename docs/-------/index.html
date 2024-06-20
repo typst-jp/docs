@@ -5,21 +5,21 @@
 
 <head>
   <meta charset="utf-8">
-  <title>教程 – Typstドキュメント日本語版</title>
-  <meta name="description" content="Typst 的教程。">
+  <title>チュートリアル – Typstドキュメント日本語版</title>
+  <meta name="description" content="Typst チュートリアル">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
-  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/tutorial/">
-  <meta property="og:title" content="教程 – Typstドキュメント日本語版">
+  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/-------/">
+  <meta property="og:title" content="チュートリアル – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Typst 的教程。">
+  <meta property="og:description" content="Typst チュートリアル">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:site" content="@typstapp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/tutorial/">
+  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/-------/">
   <meta name="twitter:image:alt"
     content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
@@ -100,7 +100,7 @@
         
         
         <li>
-          <a href="/docs/tutorial/"  aria-current="page" >教程</a>
+          <a href="/docs/-------/"  aria-current="page" >チュートリアル</a>
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
@@ -801,36 +801,30 @@
 
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/tutorial/">教程</a></li>
+        <li><a href="/docs/-------/">チュートリアル</a></li>
         
       </ul>
 
       
 
-<h1>教程</h1>
-<p>欢迎来到 Typst 的教程！在本教程中，您将学习如何在 Typst 中编写和格式化文档。
-我们将从一些日常的任务开始，逐步引入更高级的功能。
-本教程并不事先假定您了解 Typst、其他标记语言或相关的编程技术。
-我们只会假定您知道如何编辑一个文本文件。</p>
-<p>开始的最佳方法是去免费注册一个 Typst App 账户，并按照以下步骤操作。
-该 App 将为您提供即时预览，语法高亮和强大的自动补全。
-亦或者您可以使用 <a href="https://github.com/typst/typst">开源 CLI</a> 在本地文本编辑器中进行编辑和编译。</p>
-<h2 id="when-typst">何时使用 Typst</h2>
-<p>在开始之前，让我们考虑一下 Typst 到底是什么，以及我们在什么时候应该使用它。
-Typst 是一种用于排版文档的标记语言，它旨在易于学习、快速且用途广泛。
-Typst 输入带有标记的文本文件，并将其输出为 PDF 格式。</p>
-<p>Typst 是撰写长篇文本（如论文、文章、书籍、报告和作业）的极佳选择。
-并且，Typst 非常适合书写包含数学公式的文档，例如数学、物理和工程领域的论文。
-此外，由于其强大的样式和自动化功能，它是编写具有相同样式的一系列文档（例如丛书）的绝佳选择。</p>
-<h2 id="learnings">你将学到什么</h2>
-<p>本教程共分四章，每一章都建立在上一章的基础上，以下是您将在每个章节中学到的内容：</p>
+<h1>チュートリアル</h1>
+<p>Typstのチュートリアルへようこそ！このチュートリアルでは、Typstを使って文書を書き、書式を整える方法を学びます。
+まずは日常的な作業から始め、徐々に高度な機能を導入していきます。
+このチュートリアルではTypstや他のマークアップ言語、プログラミングに対する予備知識は前提としていません。ただし、テキストファイルの編集方法はすでにご存知であることを前提とします。</p>
+<p>最も良い始め方は、Typst appに無料で登録し、下記の各章を順番に見ていくことです。
+Typst appはリアルタイムプレビュー、シンタックスハイライト、強力なオートコンプリートを提供します。あるいは、<a href="https://github.com/typst/typst">オープンソースのCLI</a>を利用して、ローカルのテキストエディタでこのチュートリアルを試すこともできます。</p>
+<h2 id="when-typst">いつTypstを使うか</h2>
+<p>始める前に、Typstとは何なのか、いつ使うものかを確認しておきましょう。Typstは文書の組版を行うためのマークアップ言語です。Typstは学習しやすく、汎用性が高いように設計されています。Typstはマークアップされたテキストファイルを取り込み、PDFを出力します。</p>
+<p>Typstは、エッセイ・記事・学術論文・本・レポート・宿題など、あらゆる種類の長い文章を書くのに適しています。さらに、数学・物理学・工学分野の論文のような、数式を含んだ文書を書くのにも最適です。その上、強力なスタイリングと自動化機能を備えているため、共通のスタイルを持つ一連の文書（たとえば、書籍のシリーズなど）を書く時にも最高の選択肢となります。</p>
+<h2 id="learnings">チュートリアルで学ぶこと</h2>
+<p>このチュートリアルは4つの章で構成されています。それぞれの章は、前の章の内容を基にしています。それぞれの章で学ぶ内容は以下の通りです：</p>
 <ol>
-<li><a href="/docs/tutorial/writing-in-typst/">使用 Typst 写作</a>：了解如何编写文本和插入图像、数学公式和其他元素。</li>
-<li><a href="/docs/tutorial/formatting/">格式</a>：了解如何调整文稿的格式，包括字体大小、标题样式等。</li>
-<li><a href="/docs/tutorial/advanced-styling/">高级样式</a>：为有排版要求（如作者列表和短标题）的科学论文创建复杂的页面布局。</li>
-<li><a href="/docs/tutorial/making-a-template/">制作模板</a>： 使用您在上一章中编写的论文来构建可复用的模板。</li>
+<li><a href="/docs/tutorial/writing-in-typst/">Typstで執筆するには</a>：テキストの書き方や、画像・数式などの各種要素の挿入方法を学びます。</li>
+<li><a href="/docs/tutorial/formatting/">書式を設定する</a>：文書のフォーマットを調整する方法（フォントサイズ、見出しスタイルなど）を学びます。</li>
+<li><a href="/docs/tutorial/advanced-styling/">高度なスタイリング</a>：著者リストや追い込み見出し(run-in headings)などのタイポグラフィ機能を使用して、学術論文の複雑なページレイアウトを作成します。</li>
+<li><a href="/docs/tutorial/making-a-template/">テンプレートを作成する</a>： 前章で作成した論文を基に、再利用可能なテンプレートを作成します。</li>
 </ol>
-<p>我们希望您会喜欢 Typst！</p>
+<p>Typstをお楽しみ頂けることを願っています！</p>
 
 
 
