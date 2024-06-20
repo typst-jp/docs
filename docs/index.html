@@ -5,15 +5,15 @@
 
 <head>
   <meta charset="utf-8">
-  <title>概要 – Typstドキュメント日本語版</title>
-  <meta name="description" content="Typstをよりよく文章を作成する方法について学ぶ。チュートリアルから始めるか、リファレンスを深く掘り下げてみてください。
+  <title>Typstについて – Typstドキュメント日本語版</title>
+  <meta name="description" content="Typstで素早く文書を作成する方法について学びましょう。お手軽なチュートリアルも、詳しく調べられるリファレンスもあります。
 ">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/">
-  <meta property="og:title" content="概要 – Typstドキュメント日本語版">
+  <meta property="og:title" content="Typstについて – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Typstをよりよく文章を作成する方法について学ぶ。チュートリアルから始めるか、リファレンスを深く掘り下げてみてください。
+  <meta property="og:description" content="Typstで素早く文書を作成する方法について学びましょう。お手軽なチュートリアルも、詳しく調べられるリファレンスもあります。
 ">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
@@ -44,9 +44,9 @@
 <body class="no-js docs has-outline">
   <div class="alert">
     <div class="alert-content">
-      <span>⚠ <b>注意</b>  当サイトは、日本語コミュニティによって作成中の非公式Typstドキュメントであるため、誤訳や未訳、情報が古くなる可能性があるため、公式 <a href="https://typst.app/docs/">Documentation</a> を参照してください。また、ぜひ <a href="https://github.com/typst-jp/typst-jp.github.io">翻訳・訂正・提案などの参加をお願いします。</a>。<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>へもどうぞ。</span>
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.1 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
       <br />
-      <span>⚠ <b>Warning:</b>   This site is a community-translated non-official Japanese Typst documentation, so there may be mistranslation, untranslated or outdated content. Please refer to <a href="https://typst.app/docs/">the official documentation of Typst</a>. You are also welcomed to <a href="https://github.com/typst-jp/typst-jp.github.io">contribute by translation, correction and suggestion</a>, or join <a href="https://discord.gg/9xF7k4aAuH"> our community “Kumihan-Club” </a> for further information </span>
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.1 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
     </div>
   </div>
   <header class="boring">
@@ -68,13 +68,13 @@
                 <title id="svg-discord-label">Discord</title>
                 <use href="/assets/icons/social.svg#discord"></use>
               </svg></a></li>
-          <li class="social"><a href="https://github.com/typst-jp/typst-jp.github.io" title="本プロジェクトのGithubレポジトリ"><svg width="16" height="16" role="img"
+          <li class="social"><a href="https://github.com/typst-jp/typst-jp.github.io" title="本プロジェクトのGitHubレポジトリ"><svg width="16" height="16" role="img"
                 aria-labelledby="svg-github-label">
                 <title id="svg-github-label">GitHub</title>
                 <use href="/assets/icons/social.svg#github"></use>
               </svg></a></li>
-          <li class="secondary"><a href="https://typst.app/">Typst公式</a></li>
-          <li class="secondary"><a href="https://typst.app/docs/">Documentation</a></li>
+          <li class="secondary"><a href="https://typst.app/">Typst公式サイト</a></li>
+          <li class="secondary"><a href="https://typst.app/docs/">Typst公式ドキュメント</a></li>
           <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
           <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
         </ul>
@@ -90,13 +90,13 @@
       <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
           width="16" height="16"></button>
       <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
-          type="search" placeholder="搜索" id="docs-search"></div>
+          type="search" placeholder="検索" id="docs-search"></div>
       <ul class="search-results hidden" id="search-results"></ul>
       <ul>
         
         
         <li>
-          <a href="/docs/"  aria-current="page" >概要</a>
+          <a href="/docs/"  aria-current="page" >Typstについて</a>
           
         </li>
         
@@ -803,29 +803,33 @@
 
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/">概要</a></li>
+        <li><a href="/docs/">Typstについて</a></li>
         
       </ul>
 
       
 
-<h1>概要</h1>
-<blockquote>
-<p>日本語版Typstのドキュメントへようこそ！Typstはアカデミック・ライティング（学術的な文章作成）を念頭においた、今までのシステムを覆しうる革新的な多機能組版エンジンです。もちろん、学術論文に限らず、雑誌や書籍の組版も適しています。このドキュメントは、<a href="https://typst.app/">Typst</a>の<a href="https://typst.app/docs/">公式ドキュメント</a>を日本語コミュニティ「<a href="https://github.com/typst-jp/">Typst Japan Community</a>」のボランティアたちが翻訳を行っております。まだ翻訳途上ですので、翻訳されていない部分や誤訳などがたくさんあり、また情報が古くなる可能性もあるため、ご了承ください。最新の情報は<a href="https://typst.app/docs/">公式ドキュメント</a>をご覧ください。ただし、このドキュメントには公式ドキュメントに含まれない、日本語に特化した視点やコンテンツもあり、Typstをご利用の上で一助になれば幸いにございます。（Typst Japan Communityより）</p>
-</blockquote>
-<p>Typstは、科学のために新たに生まれたマークアップベースの組版システムです。これは、LaTeXのような高度なツールや、WordやGoogleドキュメントのような簡単なツールの両方に代わるものとして設計されています。Typstの目標は、高機能で使いやすい組版ツールを作ることです。</p>
-<p>このドキュメントは、2つの部分に大別されます。Typstを実際の使用例を通じて紹介する初心者向けのチュートリアルと、Typstのすべての概念と機能を説明する包括的なリファレンスです。</p>
-<p>また、私たちがTypstの周りに構築しているコミュニティに参加することもお勧めします。Typstはまだ非常に若いプロジェクトであるため、あなたのフィードバックは非常に貴重です。</p>
+<h1>Typstについて</h1>
+<div class="info-box">
+<p><strong>はじめに: Typst Japan Communityより</strong></p>
+<p>日本語版 Typst のドキュメントへようこそ！ <a href="https://typst.app/">Typst</a> はアカデミック・ライティング用途を念頭に開発された、TeX などの今までのシステムを覆しうる革新的で多機能な組版エンジンです。もちろん、学術論文に限らず、雑誌や書籍の組版にも適しています。</p>
+<p>この Web サイトは、<a href="https://typst.app/legal/">Typst GmbH</a> の許諾を得て、非公式日本語コミュニティ「<a href="https://github.com/typst-jp/">Typst Japan Community</a>」のボランティアたちが<a href="https://typst.app/docs/">公式ドキュメント</a>を翻訳したものです。まだ翻訳途上ですので、翻訳されていない部分や誤訳などがたくさんあり、また情報が古くなる可能性もあるため、ご了承ください。最新の情報は<a href="https://typst.app/docs/">公式ドキュメント</a>をご覧ください。ただし、本 Web サイトには、公式ドキュメントにはない日本語の組版に特化した情報やコンテンツも掲載される予定です。</p>
+<p>皆様が Typst をご利用になる上で、本サイトの情報が一助になれば幸いです。</p>
+</div>
+<hr />
+<p>Typst は、学術用途のために新たに生まれたマークアップベースの組版システムです。LaTeX のような高度なツールや、Word あるいは Google ドキュメントのような手軽なツールの両方に取って代わるものとして設計されています。私たちが Typst を通して目指しているのは、高機能 <em>かつ</em> 使っていて楽しくなるような組版ツールを作ることです。</p>
+<p>このドキュメントは、2つの部分に分かれています：実際の使用例を通じて Typst の使い方を学べる、初心者にやさしいチュートリアル。そして、Typst のあらゆる仕様・機能を扱った包括的なリファレンスです。</p>
+<p>また、私たちが開いた Typst の関連コミュニティにもぜひご参加ください。Typst はまだ出来て間もないプロジェクトであるため、皆さんからのフィードバックが非常に貴重なのです。</p>
 
 
 
       
       <div class="doc-categories"><a class="doc-category" href="/docs/tutorial"><img
-            src="/assets/icons/32-tutorial-c.svg" width="32" height="32" alt="Circled play Icon"><strong>教程</strong>
-          <p>一步步地帮助您开始 Typst 的使用。</p>
+            src="/assets/icons/32-tutorial-c.svg" width="32" height="32" alt="Circled play Icon"><strong>チュートリアル</strong>
+          <p>一歩一歩、Typst の使い方を学びましょう。</p>
         </a><a class="doc-category" href="/docs/reference"><img src="/assets/icons/32-reference-c.svg" width="32"
-            height="32" alt="Circled information icon"><strong>参考</strong>
-          <p>有关 Typst 语法、概念、类型和函数的详细参考。</p>
+            height="32" alt="Circled information icon"><strong>リファレンス</strong>
+          <p>Typst のあらゆる構文、概念、型、関数についての詳細なリファレンスです。</p>
         </a></div>
       
     </main>
@@ -837,7 +841,7 @@
       <ul>
         <li><a href="https://typst.app/">（公式）ホームページ</a></li>
         <li><a href="https://typst.app/docs/">（公式）ドキュメント（英語）</a></li>
-        <li><a href="https://typst.app/about/">（公式）Typst宇宙</a></li>
+        <li><a href="https://typst.app/universe/">（公式）拡張パッケージ・テンプレートの宇宙</a></li>
         <li><a href="https://typst.app/about/">（公式）Typstについて</a></li>
         <li><a href="https://typst.app/contact/">（公式）連絡先</a></li>
         <li><a href="https://typst.app/privacy/">（公式）プライバシーポリシー</a></li>
