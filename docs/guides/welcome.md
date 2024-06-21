@@ -7,5 +7,5 @@ description: Typst 指南。
 目前，仅有两个指南：面向 LaTeX 用户的 Typst 介绍，以及页面设置指南。欢迎为指南部分提出其他话题！
 
 ## 指南列表 { #list-of-guides }
-- [LaTeX 用户指南]($guides/guide-for-latex-users)
+- [LaTeXユーザのためのTypst入門]($guides/guide-for-latex-users)
 - [页面设置指南]($guides/page-setup)
