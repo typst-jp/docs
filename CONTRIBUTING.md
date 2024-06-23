@@ -94,3 +94,7 @@ Node.jsがインストールされている場合は、`npx serve ./dist`でプ�
 * [JTFスタイルガイド](https://www.jtf.jp/tips/styleguide)
 * [ウィキペディア日本語版のスタイルマニュアル](https://ja.wikipedia.org/wiki/Wikipedia:%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB)
 * [ウィキペディア日本語版の表記ガイド](https://ja.wikipedia.org/wiki/Wikipedia:%E8%A1%A8%E8%A8%98%E3%82%AC%E3%82%A4%E3%83%89)
+* [Microsoft Localization Style Guides](https://learn.microsoft.com/ja-jp/globalization/reference/microsoft-style-guides)
+* [WordPress 翻訳ハンドブック](https://ja.wordpress.org/team/handbook/translation/)
+* [Vue.js 公式サイト日本語翻訳ガイド](https://github.com/vuejs-translations/docs-ja/blob/main/.github/CONTRIBUTING.md)
+* [ja.react.dev 翻訳スタイルガイド](https://github.com/reactjs/ja.react.dev/wiki/%E7%BF%BB%E8%A8%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89)
