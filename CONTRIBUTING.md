@@ -1,5 +1,6 @@
 # 翻訳ガイドライン
 
+> [!NOTE]
 > 当プロジェクトの[README](./README.md)や「[はじめに：Typst Japan Communityより](https://typst-jp.github.io/docs/)」、[Typst公式](https://typst.app/)の[ライセンス](https://github.com/typst/typst/blob/main/LICENSE)や[コントリビューション・ガイド](https://github.com/typst/typst/blob/main/CONTRIBUTING.md)も併せてご参照ください。
 
 Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ちいただき、どうもありがとうございます。
