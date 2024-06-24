@@ -1,5 +1,6 @@
 # Typst Japanese Documentation (Unofficial)
 
+> [!NOTE]
 > 日本語版は[README.md](README.md)を参照してください。
 
 This is an unofficial Japanese translation of the documentation for the typesetting system [Typst](https://typst.app/docs). It has been created with the permission of [Typst GmbH](https://typst.app/legal/).
