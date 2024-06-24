@@ -1,5 +1,6 @@
 # Typst 日本語ドキュメント (非公式)
 
+> [!NOTE]
 > For English version, please refer to [README.en.md](README.en.md).
 
 組版システム [Typst](https://typst.app/docs) の非公式な日本語ドキュメントです。[Typst GmbH](https://typst.app/legal/) の許諾を得て作成されています。
