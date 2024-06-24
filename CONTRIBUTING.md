@@ -10,7 +10,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 ## 翻訳の進め方
 
-翻訳は[Github上の当リポジトリ](https://github.com/typst-jp/typst-jp.github.io)を中心に行います。実際の翻訳作業やそれに対する議論や提案などは、主にGithubの[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)や[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls)機能を通じて行います。また、[Discordサーバー「くみはんクラブ」](https://discord.gg/9xF7k4aAuH)の`#typst-翻訳`チャンネルでも、質問の対応や合意の形成などを行うことがあります。
+翻訳は[GitHub上の当リポジトリ](https://github.com/typst-jp/typst-jp.github.io)を中心に行います。実際の翻訳作業やそれに対する議論や提案などは、主にGitHubの[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)や[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls)機能を通じて行います。また、[Discordサーバー「くみはんクラブ」](https://discord.gg/9xF7k4aAuH)の`#typst-翻訳`チャンネルでも、質問の対応や合意の形成などを行うことがあります。
 
 ### 翻訳提案の手順
 
