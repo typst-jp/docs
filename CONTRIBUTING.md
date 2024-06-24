@@ -45,7 +45,7 @@ cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture
 python ./gen.py
 ```
 
-最終的にコンパイルされたファイルは`./dist`にあります。
+最終的にコンパイルされたファイルは`./dist`に出力されます。
 
 Node.jsがインストールされている場合は、`npx serve ./dist`でプレビューできます。
 
