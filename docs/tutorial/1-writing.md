@@ -1,5 +1,5 @@
 ---
-description: Typst 的教程。
+description: Typstのチュートリアルです。
 ---
 # Typstで執筆するには
 
