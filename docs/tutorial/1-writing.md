@@ -216,8 +216,8 @@ by the following equation:
 $ Q = rho A v + "time offset" $
 ```
 
-レポートには和の式も必要です。
-`sum` 記号を使用して、合計の範囲を下付き文字と上付き文字で指定することができます。
+レポートには総和の式も必要です。
+`sum` 記号を使用して、総和の範囲を下付き文字と上付き文字で指定することができます。
 
 ```example
 Total displaced soil by glacial flow:
