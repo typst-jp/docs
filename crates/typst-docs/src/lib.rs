@@ -719,7 +719,7 @@ pub fn urlify(title: &str) -> EcoString {
         "テンプレートを作成する" => "making-a-template".into(),
         "中文用户指南" => "chinese".into(),
         "参考" => "reference".into(),
-        "语法" => "syntax".into(),
+        "構文" => "syntax".into(),
         "样式" => "styling".into(),
         "脚本" => "scripting".into(),
         "指南" => "guides".into(),
@@ -728,7 +728,7 @@ pub fn urlify(title: &str) -> EcoString {
         "更新日志" => "changelog".into(),
         "路线图" => "roadmap".into(),
         "社区" => "community".into(),
-        "术语表" => "glossary".into(),
+        "用語集" => "glossary".into(),
         _ => title
             .chars()
             .map(|c| c.to_ascii_lowercase())

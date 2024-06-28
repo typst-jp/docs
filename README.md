@@ -1,5 +1,7 @@
 # Typst 日本語ドキュメント (非公式)
 
+[![CI/CD for Documentation](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/deploy.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/deploy.yml)
+
 > [!NOTE]
 > For English version, please refer to [README.en.md](README.en.md).
 
