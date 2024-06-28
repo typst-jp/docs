@@ -722,6 +722,7 @@ pub fn urlify(title: &str) -> EcoString {
         "構文" => "syntax".into(),
         "样式" => "styling".into(),
         "脚本" => "scripting".into(),
+        "コンテキスト" => "context".into(),
         "指南" => "guides".into(),
         "LaTeX 用户指南" => "guide-for-latex-users".into(),
         "页面设置指南" => "page-setup".into(),
