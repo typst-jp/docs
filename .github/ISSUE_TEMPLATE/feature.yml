@@ -1,6 +1,7 @@
 name: ✨ 翻訳ドキュメントの新規追加の提案
 description: 翻訳ドキュメントの新規追加を提案するIssueを作成します。
 labels:
+  - translation
   - enhancement
 body:
   - type: markdown

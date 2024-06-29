@@ -1,6 +1,7 @@
 name: 🐛 誤字・脱字・誤訳の報告や翻訳改善の提案
 description: 誤字・脱字・誤訳の報告や翻訳改善を提案するIssueを作成します。
 labels:
+  - translation
   - bug
 body:
   - type: markdown
