@@ -1,29 +1,28 @@
 ---
 description: |
-   How to deal with content that reacts to its location in the document.
+   ドキュメント内の位置に応じて反応するコンテンツの扱い方を説明します。
 ---
 
-# Context
-Sometimes, we want to create content that reacts to its location in the
-document. This could be a localized phrase that depends on the configured text
-language or something as simple as a heading number which prints the right
-value based on how many headings came before it. However, Typst code isn't
-directly aware of its location in the document. Some code at the beginning of
-the source text could yield content that ends up at the back of the document.
+# コンテキスト
 
-To produce content that is reactive to its surroundings, we must thus
-specifically instruct Typst: We do this with the `{context}` keyword, which
-precedes an expression and ensures that it is computed with knowledge of its
-environment. In return, the context expression itself ends up opaque. We cannot
-directly access whatever results from it in our code, precisely because it is
-contextual: There is no one correct result, there may be multiple results in
-different places of the document. For this reason, everything that depends on
-the contextual data must happen inside of the context expression.
+時には、文書内の位置に応じて反応するコンテンツを作成したいことがあります。
+これは、設定されたテキストの言語に依存するローカライズされた語句や、
+前にいくつの見出しがあったかに基づいて正しい値を表示する、
+見出し番号のような単純なものかもしれません。
+しかし、Typstコードは直接的に文書内の位置を認識しているわけではありません。
+ソーステキストの冒頭にあるコードが、ドキュメントの最後に配置されるコンテンツを生成する可能性があります。
 
-Aside from explicit context expressions, context is also established implicitly
-in some places that are also aware of their location in the document:
-[Show rules]($styling/#show-rules) provide context[^1] and numberings in the
-outline, for instance, also provide the proper context to resolve counters.
+そのため、周囲の状況に反応するコンテンツを生成するためには、Typstに明示的に指示を行う必要があります。
+これを行うには、`{context}` キーワードを使用します。
+このキーワードは式の前に置かれ、その式が環境の情報を元に計算されることを保証します。
+その代わりに、コンテキスト式自体は不透明になります。コンテキスト式の結果をコード内で直接アクセスすることはできません。
+なぜなら、コンテキスト式の結果はコンテキストに依存するためです。正しい一つの結果が存在するのではなく、文書の異なる場所に複数の結果が存在する可能性があります。
+そのため、コンテキストデータに依存するすべてのものは、コンテキスト式の内部で行われる必要があります。
+
+明示的なコンテキスト式以外にも、
+ドキュメント内の位置を認識する場所では暗黙的にコンテキストが確立されます。
+例えば、[showルール]($styling/#show-rules)はコンテキストを提供し[^1]、
+アウトライン内の番号付けもカウンターを解決するための適切なコンテキストを提供します。
 
 ## Style context
 With set rules, we can adjust style properties for parts or the whole of our
