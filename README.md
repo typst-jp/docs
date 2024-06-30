@@ -1,5 +1,7 @@
 # Typst 日本語ドキュメント (非公式)
 
+[![CI/CD for Documentation](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/deploy.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/deploy.yml)
+
 組版システム [Typst](https://typst.app/docs) の非公式な日本語ドキュメントです。[Typst GmbH](https://typst.app/legal/) の許諾を得て作成されています。
 
 このリポジトリは[中国語版](https://github.com/typst-doc-cn/typst-doc-cn.github.io)からフォークして作成され、2024年6月時点での最新版である [Typst v0.11.1](https://typst.app/docs/changelog/#v0.11.1) の公式ドキュメントを元に日本語訳を行います。
