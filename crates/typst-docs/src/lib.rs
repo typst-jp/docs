@@ -148,6 +148,7 @@ fn reference_pages(resolver: &dyn Resolver) -> PageModel {
             .with_part("Language"),
         markdown_page(resolver, "/docs/reference/", "reference/styling.md"),
         markdown_page(resolver, "/docs/reference/", "reference/scripting.md"),
+        markdown_page(resolver, "/docs/reference/", "reference/context.md"),
         category_page(resolver, FOUNDATIONS).with_part("Library"),
         category_page(resolver, MODEL),
         category_page(resolver, TEXT),
