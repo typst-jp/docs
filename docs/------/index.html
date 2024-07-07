@@ -5,15 +5,15 @@
 
 <head>
   <meta charset="utf-8">
-  <title>参考 – Typstドキュメント日本語版</title>
-  <meta name="description" content="Typst 参考索引文档是关于 Typst 排版语言的详细文档。
+  <title>リファレンス – Typstドキュメント日本語版</title>
+  <meta name="description" content="Typst リファレンスは、Typst 言語の体系的かつ包括的なガイドです。
 ">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
-  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/">
-  <meta property="og:title" content="参考 – Typstドキュメント日本語版">
+  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/------/">
+  <meta property="og:title" content="リファレンス – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Typst 参考索引文档是关于 Typst 排版语言的详细文档。
+  <meta property="og:description" content="Typst リファレンスは、Typst 言語の体系的かつ包括的なガイドです。
 ">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
@@ -21,7 +21,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:site" content="@typstapp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/reference/">
+  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/------/">
   <meta name="twitter:image:alt"
     content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
@@ -143,7 +143,7 @@
         
         
         <li>
-          <a href="/docs/reference/"  aria-current="page" >参考</a>
+          <a href="/docs/------/"  aria-current="page" >リファレンス</a>
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
@@ -803,37 +803,26 @@
 
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/">参考</a></li>
+        <li><a href="/docs/------/">リファレンス</a></li>
         
       </ul>
 
       
 
-<h1>参考</h1>
-<p>本参考索引是一个综合指南文档，包括 Typst 的语法，概念，类型和函数。
-如果你初识 Typst，建议从 <a href="/docs/tutorial/">学习指南</a> 开始，然后再按需回来学习更多的 Typst 特性。</p>
-<h2 id="language">语言</h2>
-<p>本参考索引第一部分粗略介绍 <a href="/docs/reference/syntax/">Typst 语法</a>，
-包括 <a href="/docs/reference/styling/">文档样式</a> 概念，以及 <a href="/docs/reference/scripting/">Typst 脚本功能</a> 详细文档。</p>
-<h2 id="functions">函数</h2>
-<p>第二部分引入所有能用到的函数，
-有插入文档内容的，有设置文档内容样式的，有文档内容变换的，有布局文档内容的。
-每一个函数均已同样的形式表述，
-有些是表述函数基本功能，有些列举函数参数，有些举例如何使用函数。</p>
-<p>参考索引最后一部分描述的 Typst 代码模式内的函数，用来操作及转换数据的。
-和第二部分一样，每一个函数均已同样的形式表述，
-有些是表述函数基本功能，有些列举函数参数，有些举例如何使用函数。</p>
-<h2 id="advanced">进阶</h2>
-<p>译者注：这部分官方文档没有，是译者自主添加的。</p>
-<p>除了参考，还可以考虑阅读 <a href="https://sitandr.github.io/typst-examples-book/book/">typst-examples-book</a>，里面包含了一些 Typst 的高级知识、简单示例，以及一些最佳实践。</p>
-<p>例如简单地实现类似 Markdown 中的引用文本样式：</p>
-<div class="previewed-code"><pre><code><span class="typ-marker">+</span> <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-  <span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">240</span><span class="typ-punct">)</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>left<span class="typ-punct">:</span> <span class="typ-num">0.25em</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
-    <span class="typ-strong">*Solution:*</span> <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span>
-
-    <span class="typ-math-delim">$</span> a<span class="typ-math-op">_</span><span class="typ-punct">(</span>n+1<span class="typ-punct">)</span>x<span class="typ-math-op">^</span>n = 2<span class="typ-escape">...</span> <span class="typ-math-delim">$</span>
-  <span class="typ-punct">]</span>
-</code></pre><div class="preview"><img src="/assets/docs/a0901a24b13e8d46b39a8f84d18045c0.png" alt="Preview" width="480" height="190"/></div></div>
+<h1>リファレンス</h1>
+<p>このリファレンスは Typst の文法、コンセプト、型、そして関数すべてについての包括的なガイドです。
+Typst を使うのが初めてであればまず<a href="/docs/tutorial/">チュートリアル</a>から始め、
+必要に応じてリファレンスに戻って Typst のより詳しい機能を学ぶことをおすすめします。</p>
+<h2 id="language">言語</h2>
+<p>本リファレンスは<a href="/docs/reference/syntax/">Typst の構文</a>の概要を与える「言語」の章から始まり、
+そこには<a href="/docs/reference/scripting/">Typst のスクリプト機能</a>を用いた<a href="/docs/reference/styling/">ドキュメントの整形</a>に関するコンセプトが含まれています。</p>
+<h2 id="functions">関数</h2>
+<p>2番目の章には、Typst ドキュメントにおけるコンテンツの挿入、整形、変形、
+そしてレイアウトを行うのに用いられるすべての関数についての節が含まれます。
+それぞれの関数にはその役割の説明、引数の一覧、そして使い方の例が記載されています。</p>
+<p>最後の章には、データを操作・変形するためにTypst のコードモード内で用いられる
+すべての関数の説明があります。前の章と同様に、それぞれの関数にはその役割の説明、
+引数の一覧、そして使い方の例が記載されています。</p>
 
 
 
@@ -856,10 +845,6 @@
         </li>
         
         <li data-assoc="functions"><a href="#functions">Functions</a>
-          <ul></ul>
-        </li>
-        
-        <li data-assoc="advanced"><a href="#advanced">Advanced</a>
           <ul></ul>
         </li>
         
