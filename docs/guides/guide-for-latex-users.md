@@ -1,30 +1,17 @@
 ---
 description: |
-  您是 LaTeX 用户吗？本指南解释了 Typst 和 LaTeX 之间的差异和相似之处，以便您可以快速入门。
+  あなたはLaTeXユーザですか？ このガイドではTypstとLaTeXの違いや類似点を説明し、すぐTypstを使い始められるよう手助けをします。
 ---
 
-# LaTeXユーザのためのTypst入門
+# LaTeXユーザー向けガイド { # }
+このページは、過去にLaTeXを使用していたユーザーがTypstを試みるための良い出発点です。ここでは、ユーザー視点からこの2つのシステムの主な違いを探ります。TypstはLaTeXに基づいて開発されてはおらず、構文も異なりますが、LaTeXのスキルを活かしてスムーズにTypstを使い始めることはできます。
 
-如果你已经使用过 LaTeX，并想要尝试 Typst, 这篇文章是个很好的入门指南。
-我们将从用户的角度出发，解释这两套系统之间主要的不同点。
-虽然 Typst 并不基于 LaTeX，语法也完全不同，但通过这篇文章，你可以方便地将 LaTeX 的使用经验转化过来。
+LaTeXと同様に、Typstもマークアップベースの組版システムです。テキストファイルにドキュメントを作成し、コマンドや各種の構文でマークアップします。そして、コンパイラを使用してソースファイルをPDFに組版します。しかし、TypstはLaTeXといくつかの点で異なります。例えば、Typstは一般的なタスクに対してMarkdownに似た専用の構文を使用します。Typstのコマンドはより原則に則っており、すべて同じように動作します。したがって、LaTeXのように各パッケージごとに異なる慣例を学ぶ必要はなく、いくつかの一般的な概念を理解するだけで済みます。さらに、TypstはLaTeXよりもコンパイルが速く、普通はミリ秒単位でコンパイルが完了するため、ウェブアプリでもCLIコンパイラでも即時プレビューをすることができます。
 
-跟 LaTeX 一样，Typst 是一门「基于标记的排版系统」。
-首先在纯文本里编写文档，然后通过一系列命令和语法对其进行修饰，最后使用编译器将源文件排版并渲染成 PDF 文件。
-然而，Typst 跟 LaTeX 之间也在以下几个方面存在区别：
-首先，在日常任务上，Typst 使用更专用的语法 (这一点可以类比 Markdown)。
-Typst 的命令也更加统一：在 LaTeX 中，你可能需要为不同软件包学习不同的语法和约定，但在 Typst 中，命令总是保持一致，所以你只需要理解一些基本的概念。
-此外 Typst 比 LaTeX 快得多：Typst 文件的编译通常只需要几毫秒，而不是几秒，正因如此 Typst 的网页版和编译器可以实现实时增量渲染。
+以下では、LaTeXからTypstに移行するユーザーがドキュメントを作成する際に抱くであろう一般的な質問を取り上げます。ステップバイステップのTypst入門を希望する場合は、[チュートリアル]をチェックしてください。
 
-在接下来的部分里，我们将回答从 LaTeX 切换到 Typst 时一些常见的问题。
-如果你更喜欢从头了解 Typst，请阅读我们的 [教程]($tutorial)。
-
-## 如何创建一个新的空文档？{ #getting-started }
-
-很简单，你只需要创建一个空的文本文档（文件后缀是 `.typ`），无需额外的模板，你就可以直接开始编写，默认使用 A4 纸张大小。
-如果您使用的是 Web App，可以单击 "+ Empty document"，创建一个带有文件的新项目，然后进入编辑器。
-
-[段落分隔符]($parbreak) 和 LaTeX 相同，空一行即可：
+## 新しい空のドキュメントをどうやって作成すればよいですか？ { #getting-started }
+簡単です。新しい空のテキストファイル（拡張子は`.typ`）を作成します。ボイラープレートは不要です。単にテキストを書き始めるだけで良いのです。デフォルトではA4サイズの空のページに設定されます。ウェブアプリを使用している場合は、「+ Empty document」をクリックしてファイル付きの新しいプロジェクトを作成し、エディターに入ります。[段落の区切り]($parbreak)には、LaTeXと同じように空行を使用します。
 
 ```example
 Hey there!
@@ -33,128 +20,85 @@ Here are two paragraphs. The
 output is shown to the right.
 ```
 
-如果你想直接从原有的 LaTeX 文档迁移过来，你可以使用 [Pandocs](https://pandoc.org) 将其转换为 Typst 格式。
-这个转换的工具也集成进了 Typst 的 Web App 中，你可以直接上传你的 LaTeX 文件，然后在上面继续编写。
+既存のLaTeXドキュメントを元にTypstを使い始める場合は、[Pandoc](https://pandoc.org)を使用してソースコードをTypstマークアップに変換できます。この変換はTypstのウェブアプリにも組み込まれているため、`.tex`ファイルをアップロードしてTypstプロジェクトを始めることができます。
 
-## 我如何创建章节标题，强调，...？{ #elements }
+## 見出しや強調などは、どうやって作成すればよいですか？ { #elements }
+LaTeXでは、コマンド`\section`を使用してセクションヘディングを作成します。ネストされたヘディングは、`\subsection`、`\subsubsection`などで示されます。ドキュメントクラスに応じて、`\part`や`\chapter`もあります。
 
-LaTeX 使用 `\section` 命令创建章节标题。多级标题分别用 `\subsection`、`\subsection` 等表示。根据文档种类的不同，还有 `\part` 和 `\chapter`。
+それに対してTypstでは、[ヘディング]($heading)はより簡潔です。行の先頭に等号とスペースを付けると、第1段階のヘディングになります: `[= Introduction]`。第2段階のヘディングが必要な場合は、2つの等号を使用します: `[== In this paper]`。望むだけ多くの等号を追加することで、ヘディングを任意の深さまでネストできます。
 
-在 Typst 中，标题没那么啰嗦：在标题所在的行，前面加上等号和空格，就得到了一级标题：`[= Introduction]`。
-如果你需要一个二级标题，使用两个等号：`[== In this paper]`。
-在前面加上更多的等号，你可以嵌套任意层级的标题。
+強調（通常はイタリック体でレンダリングされます）は、テキストを`[_アンダースコアで囲む_]`ことで表します。強い強調（通常は太字でレンダリングされます）は`[*星印で囲む*]`ことで表します。
 
-<div class="info-box">
-**译者注：**
+以下は、LaTeXで使用される一般的なマークアップコマンドと、それに対応するTypstコマンドの一覧です。[完全な構文チートシート]($syntax)もご覧ください。
 
-类比 Markdown 中 `#` 的作用，在接下来的阅读中你会不断看到这种「Markdown + LaTeX」杂糅的产物，结合这两者分别的痛点，可以更加深入了解 Typst 设计这些语法的原因。
+| 要素              | LaTeX                      | Typst                   | 参照       |
+|:-----------------|:--------------------------|:-----------------------|:-----------|
+| 強調             | `\textbf{strong}`         | `[*強調*]`              | [`strong`] |
+| イタリック       | `\emph{emphasis}`         | `[_強調_]`              | [`emph`]   |
+| 等幅フォント     | `\texttt{print(1)}`       | ``[`print(1)`]``       | [`raw`]    |
+| リンク           | `\url{https://typst.app}` | `[https://typst.app/]`  | [`link`]   |
+| ラベル           | `\label{intro}`           | `[<intro>]`             | [`label`]  |
+| 参照             | `\ref{intro}`             | `[@intro]`              | [`ref`]    |
+| 引用             | `\cite{humphrey97}`       | `[@humphrey97]`         | [`cite`]   |
+| 箇条書きリスト   | `itemize` 環境             | `[- リスト]`            | [`list`]   |
+| 番号付きリスト   | `enumerate` 環境           | `[+ リスト]`            | [`enum`]   |
+| 用語リスト       | `description` 環境         | `[/ 用語: リスト]`      | [`terms`]  |
+| 図               | `figure` 環境              | `figure` 関数           | [`figure`] |
+| 表               | `table` 環境               | `table` 関数            | [`table`]  |
+| 数式             | `$x$`, `align` / `equation` 環境 | `[$x$]`, `[$ x = y $]` | [`equation`]($math.equation) |
 
-</div>
-
-强调（通常以斜体字呈现）是通过用`[_underscores_]`来表达，
-而着重的强调（通常以黑体字呈现）是通过使用`[*Star*]`来表达。
-
-下面是 LaTeX 中使用的常见标记命令，以及 Typst 中对应的表示方式。你也可以查看[完整的语法备忘单]($syntax)。
-
-| 元素            | LaTeX                            | Typst                  | See                          |
-| :-------------- | :------------------------------- | :--------------------- | :--------------------------- |
-| 着重强调        | `\textbf{strong}`                | `[*strong*]`           | [`strong`]($strong)          |
-| 强调            | `\emph{emphasis}`                | `[_emphasis_]`         | [`emph`]($emph)              |
-| 等宽文字 / 代码 | `\texttt{print(1)}`              | `` [`print(1)`] ``     | [`raw`]($raw)                |
-| 链接            | `\url{https://typst.app}`        | `[https://typst.app/]` | [`link`]($link)              |
-| 标签            | `\label{intro}`                  | `[<intro>]`            | [`label`]($label)            |
-| 交叉引用        | `\ref{intro}`                    | `[@intro]`             | [`ref`]($ref)                |
-| 文献引用        | `\cite{humphrey97}`              | `[@humphrey97]`        | [`cite`]($cite)              |
-| 无序列表        | `itemize` 环境                   | `[- List]`             | [`list`]($list)              |
-| 有序列表        | `enumerate` 环境                 | `[+ List]`             | [`enum`]($enum)              |
-| 术语列表        | `description` 环境               | `[/ Term: List]`       | [`terms`]($terms)            |
-| 图片            | `figure` 环境                    | `figure` 函数          | [`figure`]($figure)          |
-| 表格            | `table` 环境                     | `table` 函数           | [`table`]($table)            |
-| 公式            | `$x$`, `align` / `equation` 环境 | `[$x$]`, `[$ x = y $]` | [`equation`]($math.equation) |
-
-在 Typst 中，使用 [列表]($list) 并不需要创建「环境」，而采用一种更为轻量的语法。
-只需要在每行开头前，加入连字符 `-`，就可以创建一个无序列表 (`itemize`)：
+Typstでは[リスト]($list)は環境に依存しません。代わりに、ヘディングのような軽量な構文を持っています。無順リストを作成するには、各アイテムの行頭にハイフンを付けます:
 
 ````example
-To write this list in Typst...
+このリストをTypstで書くには...
 
 ```latex
 \begin{itemize}
-  \item Fast
-  \item Flexible
-  \item Intuitive
+  \item 速い
+  \item 柔軟
+  \item 直感的
 \end{itemize}
 ```
 
-...just type this:
+...次のように入力します:
 
-- Fast
-- Flexible
-- Intuitive
+- 速い
+- 柔軟
+- 直感的
 
 ````
 
-通过正确的缩进，可以实现列表间嵌套。
-在每项间添加空行，可以得到一个行间距更大的列表。
+リストのネストは適切なインデントを使用するだけで機能します。アイテム間に空行を追加すると、より[広く]($list.tight)間隔のあるリストになります。
 
-用 `+` 代替连字符 `-`，可以得到 [有序列表]($enum)（ `enumerate` ）。
-用 `[/ Term: Description]` ，可以得到 [术语列表]($terms)（ `description` ）。
+[番号付きリスト]($enum)を作成するには、ハイフンの代わりに`+`を使用します。[用語リスト]($terms)には、`[/ Term: Description]`と書きます。
 
-## 我如何使用一个命令？ { #commands }
+## コマンドの使い方 { #commands }
+LaTeXは、バックスラッシュで始まるコマンドに大きく依存しています。これらのマクロを使用してタイポグラフィープロセスを制御し、コンテンツを挿入および操作します。いくつかのコマンドは引数を受け取り、最も一般的には中括弧で囲まれます: `\cite{rasmus}`。
 
-LaTeX 十分依赖以反斜杠 `\` 开头的命令，它需要通过这些 _宏_ 来排版、插入或改变内容。
-有些命令接受参数，通常使用大括号括起来。`\cite{rasmus}`
+Typstは[マークアップモードとコードモード]($scripting/#blocks)を区別します。デフォルトはマークアップモードで、テキストを作成して`[*太字用*星印]`のような構文を適用します。一方、コードモードはPythonのようなプログラミング言語に似ており、コードセグメントを入力して実行するオプションを提供します。
 
-Typst 区分两种模式：[「标记模式」和「脚本模式」]($scripting/#blocks)。
-默认处在「标记模式」下。此模式中，你可以直接编排文本、使用不同的语法结构，如 `*使用星号标记粗体文本*`。
-而「脚本模式」下，则提供一个类似 Python 的编程语言，提供了输入、执行代码的选项。
-
-在 Typst 的标记模式中，你可以使用井号（`#`）来使用单个命令（或者 _表达式_）。
-例如，你可以通过这种方式来分割不同的 [文件]($scripting/#modules)，或者基于某些 [条件]($scripting/#conditionals) 渲染文字。
-在「脚本模式」下，也可以通过方括号来包含正常的[内容块]($content)，这些内容如同其他变量一样，被视作一种值。
+Typstのマークアップ内では、ハッシュ記号（`#`）を使用して単一のコマンド（正確には_式_）のためのコードモードに切り替えることができます。これを使用して、プロジェクトをさまざまな[ファイル]($scripting/#modules)に分割したり、条件に基づいてテキストをレンダリングしたりする関数を呼び出します。コードモード内では、角括弧を使用して通常のマークアップ[_コンテンツ_]($content)を含むことができます。このコンテンツは、コードモード内では変数の通常の値として扱われます。
 
 ```example
-First, a rectangle:
+まず、長方形:
 #rect()
 
-Let me show how to do
-#underline([_underlined_ text])
+これを次に示します
+#underline([_下線付き_テキスト])
 
-We can also do some maths:
+数学もできます:
 #calc.max(3, 2 * 4)
 
-And finally a little loop:
+最後に少しループ:
 #for x in range(3) [
   Hi #x.
 ]
 ```
 
-<div class="info-box">
-**译者注：**
+関数呼び出しは常に関数の名前（`rect`、`underline`、`calc.max`($calc.max)、`range`($array.range)）に続いて括弧がつきます（LaTeXでは、マクロが引数を必要としない場合に角括弧と中括弧がオプションであるのとは対照的です）。括弧内に渡される引数リストは具体的な関数によります。詳細は[リファレンス]を参照してください。
 
-这段英文原文就表述的很不清晰，这里提供一点解释。
-
-标记模式，如同 Markdown，不需要额外的内容，默认就处在这个标记模式下：可以直接使用 `_text_` 或者 `*text*` 来实现斜体/粗体（参考上文）。
-
-脚本模式，以 `#` 开头（类比 LaTeX 中以 `\` 开头来书写命令），仅仅存在于一个命令（表达式）中，当这个表达式结束之后，一切又回到标记模式中。
-在脚本模式中，无需额外使用 `#`（命令/关键字会直接识别，不同于 LaTeX），同时在命令中也可以使用标记模式（使用 `[]`，比如例子给出的 `[Hi #x]`）。
-
-此外：
-
-- 在标记模式中，可以引用脚本模式的函数、值，都通过 `#` 进行标记。
-- 在脚本模式中，函数返回值为 `content` 的会在当前位置渲染出来，如果没有显示指明返回值，则默认会将函数体内的所有内容块相加并返回。
-- 在脚本模式中，使用标记模式的内容 (`Content`)，也可以作为变量的值。
-
-</div>
-
-不同于 LaTeX，Typst 中函数定义总是要求函数名（[`rect`]($rect), [`underline`]($underline),
-[`calc.max`]($calc.max), [`range`]($array.range)）+ 括号的形式（而 LaTeX 中，没有参数的情况下，[]和{} 都是可以忽略的）。
-需要向函数传递的具体参数可以在[参考]($reference)中找到。
-
-### 参数 { #arguments }
-
-一个函数可以有多个参数，有些参数是位置参数，只需提供变量的值即可 (不需要提供参数名称), 例如：函数 `[#lower("SCREAM")]` 以全小写的方式返回其传入值。
-很多函数使用命名参数来提高可读性，例如创建一个指定大小和描边的正方形，可以使用如下命名参数：
+### 引数
+関数は複数の引数を持つことができます。いくつかの引数は位置引数であり、単に値を提供するだけです。例えば、`[#lower("SCREAM")]`関数はその引数をすべて小文字にして返します。多くの関数は可読性を高めるために名前付き引数を使用します。たとえば、長方形の寸法とストロークは名前付き引数で定義されます:
 
 ```example
 #rect(
@@ -164,114 +108,89 @@ And finally a little loop:
 )
 ```
 
-指定一个命名参数时，首先输入参数名（上面的 `width`、`height`和`stroke`），然后是冒号和对应的值（`2cm`、`1cm`、`red`）。
-你可以在「函数的参考页」或者「自动补全」中找到可用的命名参数。
-命名参数类似于一些 LaTeX 环境的配置方式，例如，你可以输入`\begin{enumerate}[label={alph*)}]`来启动一个带有标签`a)`、`b)`等的列表。
+名前付き引数を指定するには、まずその名前（上記では`width`、`height`、`stroke`）、コロン、そして値（`2cm`、`1cm`、`red`）を入力します。各関数のリファレンスページまたは入力中のオートコンプリートパネルで利用可能な名前付き引数を確認できます。名前付き引数は、たとえば、`enumerate`環境を開始するために`\begin{enumerate}[label={\alph*)}]`のように書く場合など、LaTeX環境の一部の構成方法と似ています。
 
-多数情况，你会想要向函数传递一些 [内容块]($content)。
-例如，在 LaTeX 中的命令 `\underline{Alternative A}`, 在 Typst 中可以写成 `#underline([Alternative A])`.
-方括号表示其中的值是一个[内容块](content)。
-在这些方括号中，你可以使用正常的标记语法。不过这样写的话，需要的括号还是太多了，因此你可以把「位于尾部的内容块」移到括号外（如果没有其他参数，可以忽略 `()`）：
+しばしば、関数にいくつか[コンテンツ]を提供したくなります。たとえば、LaTeXコマンド`\underline{Alternative A}`は、Typstでは`[#underline([Alternative A])]`に変換されます。角括弧は値が[コンテンツ]であることを示します。これらの括弧内では、通常のマークアップを使用できます。ただし、これはかなり単純な構造に対して多くの括弧です。これは、コンテンツ引数を括弧の後ろに移動させ、括弧が空の場合に省略できるためです。
 
 ```example
-Typst is an #underline[alternative]
-to LaTeX.
+Typstは#underline[LaTeXの代替]
+です。
 
-#rect(fill: aqua)[Get started here!]
+#rect(fill: aqua)[ここから始めよう!]
 ```
 
-### 数据类型 { #data-types }
+### データ型
+引数には異なるデータ型があることに気付いたかもしれません。Typstは多くの[データ型]($type)をサポートしています。以下はそれらのいくつかとその使用例を示す表です。これらの型の値を指定するには、コードモードにいる必要があります!
 
-你可能已经注意到了，上文提到的这些参数有着不同的数据类型。Typst 支持多种 [数据类型]($type)，下表是其中一些比较重要的类型和以及他们的声明办法。
-只有处在脚本模式中才能声明这些类型：
+| データ型                           | 使用例                                |
+|:----------------------------------|:--------------------------------------|
+| [コンテンツ]($content)            | `{[*高速* タイプセッティング]}`       |
+| [文字列]($str)                     | `{"Pietro S. Author"}`                |
+| [整数]($int)                       | `{23}`                                |
+| [浮動小数点数]($float)             | `{1.459}`                             |
+| [絶対長]($length)                  | `{12pt}`, `{5in}`, `{0.3cm}`, ...     |
+| [相対長]($ratio)                   | `{65%}`                               |
 
-| 数据类型                              | 示例                              |
-| :------------------------------------ | :-------------------------------- |
-| [内容块 (content)]($content)          | `{[*fast* typesetting]}`          |
-| [字符串 (str)]($str)                  | `{"Pietro S. Author"}`            |
-| [整型 (int)]($int)                    | `{23}`                            |
-| [浮点数 (float)]($float)              | `{1.459}`                         |
-| [绝对长度 (absolute length)]($length) | `{12pt}`, `{5in}`, `{0.3cm}`, ... |
-| [相对长度 (relative length)]($ratio)  | `{65%}`                           |
+コンテンツと文字列の違いは、コンテンツがマークアップを含むことができるのに対し、文字列は単なる文字のシーケンスであるという点です。
 
-内容块和字符串的区别在于，内容可以包含标记，包括函数调用，而字符串实际上只是一个普通的字符序列。
+Typstは`+`で足し算をするなどの[演算子]($scripting/#operators)や`==`で二つの変数の等価性をチェックする[制御フロー構造]($scripting/#conditionals)を提供します。
 
-Typst 提供了 [条件分支、循环结构]($scripting/#conditionals)，以及常用的[运算符]($scripting/#operators)，例如 `+` 和 `==`。
-
-你也可以在你定义的[变量]($scripting/#bindings)中存储值 (包括函数)。在计算、流程复用或者需要反复使用一个值的时候可能会用到。
-创建新变量的关键字是 `let`, 和 LaTeX 中 `\newcommand` 类似。
+また、値（関数も含む）を自分の[変数]($scripting/#bindings)に格納することもできます。これにより、値に対して計算を実行したり、再利用可能な自動化を作成したり、値を複数回参照したりすることができます。変数バインディングは`let`キーワードを使用し、`\newcommand`のように機能します：
 
 ```example
-// Store the integer `5`.
+// 整数`5`を格納
 #let five = 5
 
-// Define a function that
-// increments a value.
+// 値をインクリメントする関数を定義
 #let inc(i) = i + 1
 
-// Reference the variables.
-I have #five fingers.
+// 変数を参照
+私は#five本の指があります。
 
-If I had one more, I'd have
-#inc(five) fingers. Whoa!
+もう一本あれば、
+#inc(five)本の指があります。わお！
 ```
 
-### 影响后续内容的命令 { #rules }
+### ドキュメント全体に影響を与えるコマンド { #rules }
+LaTeXでは、`\textbf{bold text}`のように引数中括弧を受け取り、その引数にのみ影響を与えるコマンドがあります。他のコマンド（例えば`\bfseries bold text`）はスイッチ（LaTeXでは宣言と呼ばれる）として機能し、ドキュメントや現在のスコープ内のすべての後続のコンテンツの外見を変更します。
 
-在 LaTeX 中，例如 `\textbf{bold text}` 的命令通过大括号传入参数，并且只影响括号内的内容。
-而有些命令，比如 `\bfseries bold text`「起到开关的作用」(在 LaTeX 中这被叫做声明)，在这行命令后的所有内容都会受这个命令的影响。
-
-在 Typst 中，一个函数既可以用来影响文档的剩余部分，也可以只影响传入的参数。
-举例来说，`[#text(weight: "bold")[bold text]]` 仅仅会加粗传入的参数，而 `#set text(weight: "bold")` 的影响会持续「到当前块结束」（或者，如果不在内容块中，影响文档的剩余部分）。
-根据使用方式的不同 (直接调用/在 [set rule]($styling/#set-rules)) 可以直观的表示函数的作用方式。
+Typstでは、同じ関数を使用してドキュメントの残りの部分、ブロック（またはスコープ）、またはその引数にのみ影響を与えることができます。例えば、`[#text(weight: "bold")[太字]]`はその引数のみを太字にしますが、`[#set text(weight: "bold")]`は現在のブロック（またはない場合はドキュメント）の終わりまで任意のテキストを太字にします。関数の効果は、それが呼び出しとして使用されているか、[セットルール]($styling/#set-rules)として使用されているかによって明確です。
 
 ```example
-I am starting out with small text.
+小さなテキストから始めています。
 
 #set text(14pt)
 
-This is a bit #text(18pt)[larger,]
-don't you think?
+これは少し#text(18pt)[大きい]
+と思いませんか？
 ```
 
-Set rules 可以出现在文档的任何部分。它们的作用方式可以类比向函数传递默认参数。
+セットルールはドキュメントのどこにでも現れます。これは、それぞれの関数のデフォルト引数値と考えることができます：
 
 ```example
 #set enum(numbering: "I.")
 
-Good results can only be obtained by
-+ following best practices
-+ being aware of current results
-  of other researchers
-+ checking the data for biases
+良い結果を得るには
++ ベストプラクティスに従うこと
++ 他の研究者の現在の結果を意識すること
++ データのバイアスをチェックすることです
 ```
 
-`+` 是调用 [`{enum}`]($enum) 函数的语法糖（可以把它看作是一种简写），我们在上面应用了一个 set rule。
-从这个意义上讲，[大多数的特殊语法都是只是某一个函数的简写]($syntax)。
-如果你需要重新定义一个组件的样式（仅修改传递参数无法实现），你可以通过 [show rule]($styling/#show-rules) 完全重定义其样式
-（与 LaTeX 中 `\renewcommand` 相似，类似于定义了一个_宏_）.
+`+`は[`{enum}`]($enum)関数の呼び出しのシンタックスシュガー（略記法）であり、その上に上記のセットルールを適用します。
+[ほとんどの構文はこのように関数にリンクされています]($syntax)。引数だけではスタイルを適用できない場合は、[_すべて_の表示ルール]($styling/#show-rules)を使用してその外見を完全に再定義できます（`\\renewcommand`に似ています）。
 
-你可以通过 [`font`]($text.font), [`style`]($text.style), 和 [`weight`]($text.weight) 参数
-来实现 LaTeX 命令 `\textbf`, `\textsf`, `\rmfamily`, `\mdseries`, 和 `\itshape` 的效果。
-`text` 函数可以在 set 规则（声明风格）中使用，也可以带有内容参数。
-为了替换 `\textsc`，你可以使用 `smallcaps` 函数，它会将其内容参数渲染为小型大写字母。
-如果你想要使用它的声明风格（类似于 `\scshape`），你可以使用一个 [_everything_ show 规则]($styling/#show-rules) 来将这个函数应用到作用域的其余部分：
+`\\textbf`、`\\textsf`、`\\rmfamily`、`\\mdseries`、`\\itshape`のようなLaTeXコマンドの効果は、`text`関数の[`font`]($text.font)、[`style`]($text.style)、[`weight`]($text.weight)引数を使用して達成できます。`text`関数はセットルール（宣言スタイル）またはコンテンツ引数を伴って使用できます。`\\textsc`を置き換えるには、`小さな大文字`関数を使用してそのコンテンツ引数を小さな大文字でレンダリングします。宣言スタイルで使用する場合（`\\scshape`のように）、次のような[_すべて_の表示ルール]($styling/#show-rules)で関数を残りのスコープに適用します：
 
 ```example
 #show: smallcaps
 
-Boisterous Accusations
+大きな疑問
 ```
 
-## 如何加载一个文档类 / 模板？ { #templates }
+## ドキュメントクラスの読み込み方 { #templates }
+LaTeXでは、`.tex`ファイルの先頭で`\documentclass{article}`コマンドを使用して、ドキュメントの外見を定義します。このコマンドでは、`article`を`report`や`amsart`などに置き換えて異なる外見を選択できます。
 
-在 LaTeX 中，`.tex` 文件通常以 `\documentclass{article}`开头，来定义文档的样式。
-在这个命令中，你也可以把 `article` 替换为 `report`和 `amsart` 来更改文档的样式。
-
-在 Typst 中，你可以通过 [函数]($function) 来修改文档的样式。通常情况下，你可以使用模板中提供的函数来修改整个文档。
-首先，你可以通过 `#import` 来导入模板函数。
-然后你使用这个函数来对文档使用样式。
-具体的做法是通过 [show rule]($styling/#show-rules) 来将整个文档包装在这个函数中，具体如下：
+Typstを使用する場合、ドキュメントのスタイリングには[関数]($function)を使用します。通常、ドキュメント全体をスタイリングする関数を提供するテンプレートを使用します。まずテンプレートファイルから関数をインポートします。そして、showルールを使ってドキュメント全体にそれを適用します。以下の例でその方法を説明します：
 
 ```example:single
 >>> #let conf(
@@ -356,115 +275,88 @@ Boisterous Accusations
   abstract: lorem(80),
 )
 
-Let's get started writing this
-article by putting insightful
-paragraphs right here!
+Insightful段落をここに!
 ```
 
-这里的 [`import`]($scripting/#modules) 命令，导入了在其他文件中声明的函数，从而可以在当前文件中使用。
-在这个例子中，它从 `conf.typ` 中导入了 `conf` 函数。
-这个函数会将整个文章的样式整理成一个会议论文。
-我们通过 show rule 把这个样式应用到全局，同时也设置了文档的一些元数据。
-在应用 show rule 之后，我们就可以开始写文章了。
+[`{import}`]($scripting/#modules)ステートメントは、他のファイルから[関数]($function)やその他の定義を利用可能にします。この例では、`conf.typ`ファイルから`conf`関数をインポートしています。この関数はドキュメントをカンファレンス記事としてフォーマットします。showルールを使って文書全体に適用し、記事のメタデータも設定します。showルールを適用した後、すぐに記事を書き始められます。
 
 <div class="info-box">
 
-在 Typst 中，函数被称为"命令"，它们可以将其参数转化为输出值，包括文档 _内容_。
-函数是"纯"的，这意味着它们除了创建一个输出值/输出内容外，不能产生任何副作用。
-这与 LaTeX 的宏形成了鲜明的对比，后者可以对你的文档产生任意的效果。
+Functions are Typstの“コマンド”であり、引数を変換して出力値を生成します。ドキュメント_コンテンツ_も含めて、関数は“純粋”であり、出力値や出力コンテンツを超える効果を持たず、これは任意の効果を持つLaTeXマクロとは対照です。
 
-为了使一个函数应用到整个文档，show rule 会处理其后的所有内容，并将其结果作为参数传递给指定的函数。
-`.with` 是一个 _方法_，它接受 `conf` 函数，并在将其传递给 show 规则之前预先配置一些参数。
-
-**译者注：**
-
-`#show: conf.with(title: [标题])` 等价于 Lambda 表达式形式的 `#show: it => conf(title: [标题], it)`
+ドキュメント全体をスタイリングするために、showルールはその後に続くすべてを処理し、指定された関数を引数として呼び出します。`.with`部分は関数を事前に設定する_メソッド_です。
 
 </div>
 
-在 Web App 中，你可以选择一些预先定义好的模板，甚至可以通过模板向导创建自己的模板。
-在本地命令行中，你也可以使用 `typst init` 来从模板创建项目。
-查看发布在 Typst Universe 上的[模板列表](https://typst.app/universe/search?kind=templates), 这是官方的包管理库。
-你也可以访问 [Awesome Typst 仓库](https://github.com/qjcg/awesome-typst) 来查看一些社区提供，尚没有以包发布的模板。
+Webアプリでは、事前定義されたテンプレートを選択でき、自分自身でテンプレートウィザードを使用して作成することもできます。ローカルでは、`typst init`CLIを使用してテンプレートから新しいプロジェクトを作成できます。Typst Universeで公開されている[テンプレートのリスト]($universe/search/?kind=templates)をチェックしてください。また、コミュニティテンプレートを見つけるために[`awesome-typst`リポジトリ](https://github.com/qjcg/awesome-typst)も確認してください。
 
-你也可以 [创建你自己的自定义的模板]($tutorial/making-a-template)。它们比相应的 LaTeX 的 `.sty` 文件短得多，可读性也高得多，所以不妨一试！
+また、[独自のカスタムテンプレートを作成]($tutorial/making-a-template)することもできます。これらは対応するLaTeXの.styファイルよりもはるかに短くて読みやすいので、試してみてください！
 
-## 如何导入包？ { #packages }
+## パッケージの読み込み方法 { #packages }
+Typstは「すぐに使える」システムであり、多くの人気のあるLaTeXパッケージに相当する機能を内蔵しています。以下に頻繁に読み込まれるパッケージと、それに対応するTypst関数の一覧をまとめました。
 
-Typst 就像那种自带电池的玩具，许多流行的 LaTeX 包的对应功能是直接内置到 Typst 里的。
-在下面我们列出一些 LaTeX 中常用的包，和他们对应的 Typst 命令：
+| LaTeXパッケージ                    | Typstの代替                  |
+|:----------------------------------|:-----------------------------|
+| graphicx, svg                      | [`image`]関数                |
+| tabularx                           | [`table`]、[`grid`]関数      |
+| fontenc, inputenc, unicode-math    | 書き始めるだけでOK!            |
+| babel, polyglossia                 | [`text`]($text.lang)関数: `[#set text(lang: "zh")]` |
+| amsmath                            | [数式モード]($category/math) |
+| amsfonts, amssymb                  | [`sym`]($category/symbols)モジュール|
+| geometry, fancyhdr                 | [`page`]関数                 |
+| xcolor                             | [`text`]($text.fill)関数: `[#set text(fill: rgb("#0178A4"))]` |
+| hyperref                           | [`link`]関数                 |
+| bibtex, biblatex, natbib           | [`cite`]、[`bibliography`]関数 |
+| lstlisting, minted                 | [`raw`]関数と構文            |
+| parskip                            | [`block`]($block.spacing)および[`par`]($par.first-line-indent)関数 |
+| csquotes                           | [`text`]($text.lang)言語を設定して、`["]`または`[']` |
+| caption                            | [`figure`]関数               |
+| enumitem                           | [`list`]、[`enum`]、[`terms`]関数 |
 
-| LaTeX 包                        | Typst 替代                                                        |
-| :------------------------------ | :---------------------------------------------------------------- |
-| graphicx, svg                   | [`image`]($image) 函数                                            |
-| tabularx                        | [`table`]($table), [`grid`]($grid) 函数                           |
-| fontenc, inputenc, unicode-math | 直接编写！                                                        |
-| babel, polyglossia              | [`text`]($text.lang) 函数： `[#set text(lang: "zh")]`             |
-| amsmath                         | [数学模式]($category/math)                                        |
-| amsfonts, amssymb               | [`sym`]($category/symbols) 模块和 [syntax]($syntax/#math)         |
-| geometry, fancyhdr              | [`page`]($page) 函数                                              |
-| xcolor                          | [`text`]($text.fill) 函数： `[#set text(fill: rgb("#0178A4"))]`   |
-| hyperref                        | [`link`]($link) 函数                                              |
-| bibtex, biblatex, natbib        | [`cite`]($cite), [`bibliography`]($bibliography) 函数             |
-| lstlisting, minted              | [`raw`]($raw) 函数和语法                                          |
-| parskip                         | [`block`]($block.spacing) 和 [`par`]($par.first-line-indent) 函数 |
-| csquotes                        | 设置 [`text`]($text.lang) 语言，并输入 `["]` or `[']`             |
-| caption                         | [`figure`]($figure) 函数                                          |
-| enumitem                        | [`list`]($list), [`enum`]($enum), [`terms`]($terms) 函数          |
-
-尽管 _很多_ 东西是内置的，但并非所有东西都可以内置。
-这也是 Typst 提供一个内置的 [包管理器]($packages)的原因，社区成员可以在其中共享他们的工作和自动化工具。
-以 _ctez_ 包为例，这个包允许你绘制复杂图形和函数图像。要在文档中使用 ctez，你只需要编写：
+多くの機能が内蔵されていますが、すべては内蔵されていません。そこで、Typstには内蔵の[パッケージマネージャー]($universe)があり、コミュニティが作成したコンテンツや自動化を共有できます。たとえば、_cetz_パッケージを利用すると、複雑な図やグラフを作成できます。このパッケージをドキュメントで使用するには、次のように記述します：
 
 ```typ
-#import "@preview/ctez:0.2.1"
+#import "@preview/cetz:0.2.1"
 ```
 
-(`@preview` 是一个 _namespace_，在包管理器还处于早期和实验状态时使用，它将在将来被替换。)
+（`@preview`はパッケージマネージャーがまだ初期の実験段階にある間で使用される_名前空間_であり、将来的に置き換えられます。）
 
-除了官方的软件包存储库，您可能还会想看 [Awesome Typst 仓库](https://github.com/qjcg/awesome-typst)，其中集合了为 Typst 创建的资源精选列表。
+公式パッケージリポジトリ以外にも、Typstのために作成されたリソースをまとめた[awesome-typstリポジトリ](https://github.com/qjcg/awesome-typst)もチェックしてください。
 
-如果您需要从项目中的另一个文档加载函数和变量，例如使用模板，则可以使用相同的 [`{import}`]($scripting/#modules) 语句，其中应该包含文档名，而不是特定的包。
-要包含另一个文档的文本内容，您可以使用 [`{include}`]($scripting/#modules) 语句。它将读取指定文档的内容，并将其直接置入文档中。
+テンプレートを使用するためにプロジェクト内の他のファイルから関数や変数をロードする必要がある場合は、同じ[`{import}`]($scripting/#modules)ステートメントをファイル名とともに使用します。別のファイルのテキストの内容を含めるには、[`{include}`]($scripting/#modules)ステートメントを使用できます。指定されたファイルの内容を取得してドキュメントに挿入します。
 
-## 如何输入数学公式？ { #maths }
-
-在 Typst 中，把公式包含在 `$` 记号中即可，在两个 `$$` 中添加额外的空格/换行符可以创建块状公式。
+## 数学入力方法 { #maths }
+Typstで数式モードに入るには、式をドル記号で囲みます。スペースや改行を追加することで表示モードに切り替えられます。
 
 ```example
-The sum of the numbers from
-$1$ to $n$ is:
+1からnまでの数の合計は次の通りです:
 
 $ sum_(k=1)^n k = (n(n+1))/2 $
 ```
 
-[数学模式]($category/math) 的工作方式与普通标记或代码模式不同。数字和单个字符被逐字显示，而多个连续（非数字）字符将被解释为 Typst 变量。
+[数学モード]($category/math)は通常のマークアップやコードモードとは異なります。数字や単一の文字は直訳されますが、複数の連続した（数字以外の）文字はTypst変数として解釈されます。
 
-Typst 在数学模式下预先定义了很多有用的变量。所有希腊字母（`alpha`, `beta`, ...）和一些希伯来字母（`alef`, `bet`, ...）都可以通过它们的名字直接使用。
-一些符号还可以通过缩写轻松使用，如 `<=`、`>=` 和 `->`。
+Typstは数学モードで多くの便利な変数を事前定義しています。すべてのギリシャ文字（`α`、`β`、...）および一部のヘブライ文字（`אלף`、`bet`、...）が名前で利用できます。いくつかのシンボルはショートハンドでも利用できます（例：`<=`、`>=`、`->`）。
 
-符号的完整列表请参考 [符号页面]($symbol)。如果缺少某些符号，你也可以通过 [Unicode 转义序列]($syntax/#escapes) 访问它。
+[シンボルページ]を全リストのために参照してください。シンボルが欠けている場合、[Unicodeエスケープシーケンス]($syntax/#escapes)を使用してアクセスすることもできます。
 
-符号的变体通常可以通过在句点后附加一个 [`.` 点修饰符]($symbol) 来选择。例如，`arrow.l.squiggly` 插入了一个向左倾斜的箭头。
-如果你想在你的表达式中插入多字母纯文本，可以用双引号将其括起来：
+シンボルの代替形式や関連形式は、ピリオドの後に修飾子を追加することで選択できます。例えば、`arrow.l.squiggly`は左向きの波状矢印を挿入します。複数文字のテキストを数式内に挿入する場合は、二重引用符で囲みます:
 
 ```example
 $ delta "if" x <= 5 $
 ```
 
-在 Typst 中，定界符将根据内部表达式自动缩放大小，就像在 LaTeX 中自动添加了隐藏的 `\left` 和 `\right` 命令一样。
-你可以使用 [`lr`]($math.lr) 函数自定义定界符的行为。如果你不需要对定界符进行缩放，你可以用反斜线转义定界符。
+Typstでは、`\\left`や`\\right`のコマンドが暗黙的に挿入されているかのように、式に応じて区切り文字が自動的にスケーリングされます。区切り文字の動作をカスタマイズするには、[`lr`](math.lr)関数を使用します。区切り文字のペアがスケーリングされないようにするには、バックスラッシュでエスケープします。
 
-在不破坏运算优先级的前提下，Typst 会自动将斜线 `/` 的两端内容识别成分数。所有没必要的括号将不会出现在编译结果中：
+Typstは、スラッシュ`/`の周囲の項を分数として自動的に設定し、演算子の優先順位を尊重します。分数によって冗長にならない丸括弧は出力に表示されます。
 
 ```example
 $ f(x) = (x + 1) / x $
 ```
 
-[下标和上标]($math.attach) 在 Typst 和 LaTeX 中的作用是相似的。`{$x^2$}` 将产生一个上标，`{$x_2$}` 产生一个下标。
-如果你想在下标或上标中包含一个以上的值，请把它们的内容放在括号里：`$x_(a -> epsilon)$`。
+[下付きと上付き]($math.attach)はTypstでもLaTeXと同様に機能します。`{$x^2$}`は上付き文字を生成し、`{$x_2$}`は下付き文字を生成します。下付きや上付きに複数の値を含めたい場合は、その内容を括弧で囲みます: `{$x_(a -> epsilon)$}`。
 
-由于数学模式下的变量不需要在前面加上 `#` 或 `/` ，所以你也可以无需额外的井号字符来调用函数：
+数学モードでは、変数に`#`や`/`を付ける必要がないため、特殊文字なしで関数を呼び出すことができます。
 
 ```example
 $ f(x, y) := cases(
@@ -475,8 +367,7 @@ $ f(x, y) := cases(
 ) $
 ```
 
-上面的例子用 [`cases`]($math.cases) 函数来表述 `f`。在 `cases` 函数中，参数用逗号来分隔，参数也被解释为数学模式下的内容。
-如果你需要传递 Typst 变量，可以用 `#` 号作为前缀使用：
+上記の例は、`cases`関数を使用してfを記述しています。cases関数内では、引数はカンマで区切られ、引数も数学として解釈されます。引数をTypstの値として解釈する必要がある場合は、`#`を付けます:
 
 ```example
 $ (a + b)^2
@@ -485,7 +376,7 @@ $ (a + b)^2
   + b^2 $
 ```
 
-在数学模式下，你可以使用任意的 Typst 函数或者任何内容，如果你希望他们正常工作，只需要使用 `#` 前缀，没人可以阻止你把长方体或者 emoji 表情作为参数传入：
+すべてのTypst関数を数学モード内で使用でき、任意のコンテンツを挿入できます。それらを通常どおり（引数リストがコードモードになる）機能させたい場合は、呼び出しの前に`#`を付けます。長方形や絵文字を変数として使用することも可能です。
 
 ```example
 $ sum^10_(🥸=1)
@@ -493,9 +384,9 @@ $ sum^10_(🥸=1)
   = 🧠 maltese $
 ```
 
-如果你希望直接以 Unicode 形式输入数学符号，也是可以的。
+数学記号を直接Unicodeとして入力することも可能です！
 
-数学调用可以有二维参数列表，使用 `;` 作为分隔符。这方面最常见的用途是使用 [`mat`]($math.mat) 函数创建矩阵：
+Math callsは、`；`を区切り文字として使用することで二次元の引数リストを持つことができます。これを最も一般的に使用するのは[`mat`関数]($math.mat)で、これは行列を作成します：
 
 ```example
 $ mat(
@@ -506,18 +397,15 @@ $ mat(
 ) $
 ```
 
-## 如何获得 "LaTeX 外观"？ { #latex-look }
+## "LaTeX風の外見"はどうすれば実現できますか？ { #latex-look }
+LaTeXで組版された論文は、そのフォント（コンピュータモダン）、字間調整、狭い行間隔、広い余白によって独特の外見を持っています。
 
-用 LaTeX 编写的论文有一种美观且易于识别的外观。这主要是由于它们的字体 [Computer Modern](https://zh.wikipedia.org/wiki/Computer_Modern)、对齐方式、窄行距和宽边距。
-
-下面是一个示例：
-
-- 设置宽 [边距]($page.margin)
-- 启用 [两端对齐]($par.justify), [更紧密的行间距]($par.leading)
-  和 [首行缩进]($par.first-line-indent)
-- 设置 [字体]($text.font) 为 "New Computer Modern"，这是一个适用于文本和 [代码块]($raw) 的 OpenType 变体
-- 禁用段落 [间距]($block.spacing)
-- 增加 [标题]($heading) 周围的 [间距]($block.spacing)
+以下の例では
+- 広い[余白]($page.margin)を設定
+- [字間調整]($par.justify)、[行間隔を狭める]($par.leading)、および[最初の行のインデント]($par.first-line-indent)を有効化
+- コンピュータモダンのOpenType版である"New Computer Modern"フォントをテキストと[コードブロック]($raw)に設定
+- 段落[間隔]($block.spacing)を無効化
+- [ヘディング]($heading)の周囲の[間隔]($block.spacing)を増加
 
 ```typ
 #set page(margin: 1.75in)
@@ -528,41 +416,31 @@ $ mat(
 #show heading: set block(above: 1.4em, below: 1em)
 ```
 
-这应该是一个很好的起点！如果你想更进一步，为什么不创建一个可重复使用的模板呢？
+これは良い出発点になるはずです。これ以上進めたい場合には、再利用可能なテンプレートを作成してみてはいかがでしょう？
 
-## 参考文献
+## 文献目録
+TypstはBibTeXファイルと互換性のある完全装備の文献目録システムを備えています。`.bib`文学ライブラリを`bibliography`関数で読み込むことで使用し続けることができます。もう一つの可能性は、[TypstのYAMLベースのネイティブ形式](https://github.com/typst/hayagriva/blob/main/docs/file-format.md)を使用することです。
 
-Typst 的参考文献系统与 BibTeX 文件兼容。你可以通过 [`bibliography`]($bibliography) 函数加载你的 `.bib` 文献库。
-也可以使用 [Typst 原生基于 YAML 的格式](https://github.com/typst/hayagriva/blob/main/docs/file-format.md).
+TypstはCitation Style Language（CSL）を使用して引用と文献目録スタイルを定義および処理します。CSLファイルはBibLaTeXの`.bbx`ファイルに相当します。コンパイラーには[80以上の引用スタイル]($bibliography.style)がすでに含まれていますが、CSL準拠のスタイルをCSLリポジトリから使用するか独自に作成することもできます。
 
-Typst 使用引文样式语言（Citation Style Language）来定义和处理引文和参考文献样式。你可以将 CSL 文件与 BibLaTeX 的 `.bbx` 文件进行类比。
-编译器已经包含了 [80 多种引文样式]($bibliography.style)，但你可以使用 [CSL 仓库](https://github.com/citation-style-language/styles) 中的任何符合 CSL 标准的样式，或者编写自己的样式。
+文献目録のエントリを引用するか、ドキュメント内のラベルを参照するには、同じ構文を使用します: `[@key]`（これは`key`というエントリを参照します）。または、[`cite`]関数を使用することもできます。
 
-你可以通过相同的语法 `[@key]` 来引用参考文献中的条目或者引用文档中的标签（这将引用一个名为 `key` 的条目）。
-或者，你可以使用 [`cite`]($cite) 函数。
+引用の代替形式（年のみ）や、自然なプローズでの引用（例：`\citet`や`\textcite`）も利用可能であり、[`[#cite(<key>, form: "prose")]`]($cite.form)のように書きます。
 
-你可以使用 [`[#cite(<key>, form: "prose")]`]($cite.form) 来引用你的引文的其他形式，比如仅年份或者用于自然语言的引文（类似于 `\citet` 和 `\textcite`）。
+[`bibliography`]関数のドキュメントページで詳細情報を見つけられます。
 
-你可以在 [`bibliography`]($bibliography) 函数的文档页面上找到更多信息。
+## インストール
+Typstを使用するには2つの方法があります： [Webアプリ](https://typst.app/signup/)を使用するか、[コンパイラーをインストール](https://github.com/typst/typst/releases)します。Webアプリを使用する場合、バッテリー内蔵の共同編集エディターを提供し、インストールは不要です。
 
-## 安装
+代わりにコンピューターにTypstをインストールすることを選択した場合は、単一の小さなバイナリをダウンロードでき、管理者権限は不要です。LaTeXとは異なり、パッケージは初めて使用する際にダウンロードされ、その後ローカルでキャッシュされ保持されます。ローカルコンパイラを使用してお好みのエディターでファイルを保存できます。
 
-你有两种方式使用 Typst：在[我们的 Web 应用程序](https://typst.app/signup/)中，或者在你的计算机上[安装编译器](https://github.com/typst/typst/releases)。
-当你使用 Web 应用程序时，我们提供一个内置的协作编辑器，并在你的浏览器中运行 Typst，无需安装。
+## Typstは現在LaTeXに比べてどのような制限がありますか？ { #limitations }
+Typstは現在多くの場面でLaTeXの代替手段となることができますが、まだサポートされていない機能があります。ここでは、それらの機能と、それに対応する回避策を紹介します。
 
-如果你选择在你的计算机上使用 Typst，你可以将编译器作为一个单独的小二进制文件下载，任何用户都可以运行，无需 root 权限。
-与 LaTeX 不同，包在你第一次使用时下载，然后在本地缓存，保持你的 Typst 安装精简。
-你可以使用你自己的编辑器，并决定在本地编译器中存储文件的位置。
+- **ネイティブな図やプロット。** LaTeXユーザーはPGF/TikZで図を作成することがよくあります。Typstにはまだ図を描画するツールが含まれていませんが、[`cetz`](https://github.com/johannes-wolf/typst-canvas)のようなコミュニティ主導のソリューションがあります。これらをドキュメントに追加して、図の描画を始めることができます。
 
-## 与 LaTeX 相比，Typst 目前有哪些不足？ { #limitations }
+- **ページマージンの変更。** LaTeXでは、ページブレイクなしでいつでもマージンを調整できますが、Typstでは[`page`関数]($page)を使用してマージンを変更する必要があり、それがページブレイクを強制します。いくつかの段落だけをマージンに広げ、その後元のマージンに戻したい場合は、[`pad`関数]($pad)を負のパディングで使用することができます。
 
-对于大多数人，Typst 现在已经是一个很好的 LaTeX 替代品。
-然而，如果你是一个重度 LaTeX 用户，你可能会发现 Typst 还缺少一些功能：
+- **PDFを画像として含める。** LaTeXでは、PDFやEPSファイルをベクトルグラフィックとして挿入することが一般的です。Typstはこれらの形式を画像形式としてサポートしていませんが、[オンラインツール](https://cloudconvert.com/pdf-to-svg)や[Inkscape](https://inkscape.org/)を使用して、これらを簡単にSVGファイルに変換できます。ウェブアプリは、PDFファイルをアップロードすると自動的にSVGファイルに変換します。
 
-- **原生图表和绘图。** LaTeX 用户通常会在 PGF/TikZ 中创建图表。Typst 目前还没有包含绘图工具，但社区正在提供解决方案，比如 [`cetz`](https://github.com/johannes-wolf/typst-canva)。你可以将这些添加到你的文档中绘制图表。
-
-- **更改页面边距而不换页。** 在 LaTeX 中，你可以在不换页的前提下，调整页边距。你可以使用 [`page` 函数]($page)，但这将强制换页。如果你只是需要调整几个段落的边距，你可以使用 [`pad` 函数]($pad) 来进行负填充。
-
-- **以图片的形式插入 PDF。** 在 LaTeX 中，将矢量图形作为 PDF 或 EPS 文件插入已经成为一种惯例。Typst 不支持以图片形式读取这两个格式，但你可以使用 [在线工具](https://cloudconvert.com/pdf-to-svg) 或 [Inkscape](https://inkscape.org/) 将它们转换为 SVG 文件。Web app 会在上传 PDF 文件时自动将其转换为 SVG 文件。
-
-- **换页符优化。** LaTeX 的算法会智能优化换行符和换页符。Typst 虽然会避免孤行的出现，它所使用的算法远远不及 LaTeX 所使用的复杂。你可以在提交前，插入自定义的换页符：`#pagebreak(weak: true)` 。参数 `weak` 会保证：如果这里本来就该是很自然的换页，不会插入两个换页符，你也可以使用 `#v(1fr)` 在页面中插入一些空白。这点和 LaTeX 的 `\vfill` 相似。
+- **ページブレイクの最適化。** LaTeXはスマートなアルゴリズムを実行して、行だけでなくページブレイクも最適化します。Typstはウィドウやオーファンを避けるために努力しますが、ページブレイクを決定するためのアルゴリズムはそれほど高度ではありません。ドキュメントを提出する前に、カスタムページブレイクを`[#pagebreak(weak: true)]`を使用して挿入することができます。引数`weak`は、このスポットが自然なページブレイクであれば二重ページブレイクを作成しないことを保証します。また、`[#v(1fr)]`を使用してページ上のスペースを配布できます。これはLaTeXの`\vfill`と非常に似ています。
