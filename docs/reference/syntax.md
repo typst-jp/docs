@@ -1,115 +1,145 @@
 ---
 description: |
-   Typst 语法简略参考索引。更多请参考语言的标记模式，数学公式模式和代码模式。
+   Typstの構文に関するコンパクトなリファレンスです。詳細については、言語のマークアップモード、数式モード、およびコードモードを参照してください。
 ---
 
-# 语法
+# 構文
 
-Typst 是一种标记语言。
-这意味着，使用简单的语法就可以进行常用的布局操作，
-再辅以 set 和 show 规则，格式化文档更加简单，更加自动化，
-这些均是基于紧密集成在 Typst 内的脚本语言，
-其内置大量常用函数，用户亦可根据需求自定义函数。
+Typstはマークアップ言語です。
+これは、シンプルな構文を使用して一般的なレイアウトタスクを簡単に行えるということです。
+Typstの軽量なマークアップ構文は、文書を簡単かつ自動的にスタイリングできるsetルールとshowルールによって補完されています。
+これらすべては、組み込み関数およびユーザー定義関数を備えた、緊密に統合されたスクリプト言語によって支えられています。
 
-## 标记模式 { #markup }
+## モード { #modes }
 
-Typst 为常用文档元素内置了语法标记。
-这些语法标记大多只是相关函数的快捷表达方式，
-下表列出了所有语法标记，以及它们的详细使用的链接地址。
+Typstには3種類の構文モードがあります。マークアップモード、数式モード、そしてコードモードです。
+Typst文書では、マークアップモードがデフォルトであり、数式モードでは数式を書くことができ、コードモードではTypstのスクリプト機能を利用することができます。
 
-| 名称            | 示例                      | 详情链接                     |
-| --------------- | ------------------------ | ---------------------------- |
-| 段落中断        | 空行                      | [`parbreak`]($parbreak) |
-| 着重强调        | `[*strong*]`             | [`strong`]($strong)     |
-| 强调            | `[_emphasis_]`           | [`emph`]($emph)         |
-| 代码段          | ``[`print(1)`]``         | [`raw`]($raw)           |
-| 链接            | `[https://typst.app/]`   | [`link`]($link)         |
-| 标签            | `[<intro>]`              | [`label`]($label)       |
-| 引用            | `[@intro]`               | [`ref`]($ref)           |
-| 标题            | `[= Heading]`            | [`heading`]($heading)   |
-| 无序列表        | `[- item]`               | [`list`]($list)         |
-| 有序列表        | `[+ item]`               | [`enum`]($enum)         |
-| 术语列表        | `[/ Term: description]`  | [`terms`]($terms)       |
-| 数学公式        | `[$x^2$]`                | [Math]($category/math)       |
-| 行中断          | `[\]`                    | [`linebreak`]($linebreak) |
-| 智能引号        | `['single' or "double"]` | [`smartquote`]($smartquote) |
-| 快捷符号        | `[~, ---]`               | [Symbols]($category/symbols/sym) |
-| 代码表达式      | `[#rect(width: 1cm)]`    | [Scripting]($scripting/#expressions) |
-| 转义字符        | `[Tweet at us \#ad]`     | [Below](#escapes)            |
-| 注释            | `[/* block */, // line]` | [Below](#comments)           |
+以下の表を参照し、いつでも特定のモードに切り替えることができます。
 
-## 数学模式 { #math }
-
-数学模式是一种特殊的语法标记模式，专门用来输入数学公式。
-通过 `[$]` 字符包裹一个数学公式，
-如果这个公式头尾都至少一个空格（例如`[$ x^2 $]`），这个公式将会形成一个文档块，单独占用一行，
-如果头尾没有空格（例如`[$x^2$]`），这个公式将会排版在行内，
-下面是针对数学模式的语法概述：
-
-| 名称                  | 示例                    | 详情链接                      |
-| --------------------- | ------------------------ | ------------------------ |
-| 行内数学公式           | `[$x^2$]`                | [Math]($category/math)   |
-| 块级数学公式           | `[$ x^2 $]`              | [Math]($category/math)   |
-| 底部附缀              | `[$x_1$]`                | [`attach`]($category/math/attach) |
-| 顶部附缀              | `[$x^2$]`                | [`attach`]($category/math/attach) |
-| 分数                  | `[$1 + (a+b)/5$]`        | [`frac`]($math.frac) |
-| 行中断                | `[$x \ y$]`              | [`linebreak`]($linebreak) |
-| 对齐点                | `[$x &= 2 \ &= 3$]`      | [Math]($category/math)   |
-| 变量访问              | `[$#x$, $pi$]`           | [Math]($category/math)   |
-| 字段访问              | `[$arrow.r.long$]`       | [Scripting]($scripting/#fields) |
-| 隐式乘积              | `[$x y$]`                | [Math]($category/math)   |
-| 快捷符号              | `[$->, !=$]`             | [Symbols]($category/symbols/sym) |
-| 数学公式内字符串       | `[$a "is natural"$]`     | [Math]($category/math)   |
-| 数学函数调用          | `[$floor(x)$]`           | [Math]($category/math)   |
-| 代码表达式            | `[$#rect(width: 1cm)$]`  | [Scripting]($scripting/#expressions) |
-| 转义字符              | `[$x\^2$]`               | [Below](#escapes)        |
-| 注释                 | `[$/* comment */$]`      | [Below](#comments)       |
-
-## 代码模式 { #code }
-
-在代码块和表达式中，新的表达式不再前缀 `#` 字符。
-许多代码语法元素是表达式特有的，
-下面列出了代码模式下所有可用的语法：
+| 新たなモード | 構文                         | 例                              |
+| ------------ | ---------------------------- | ------------------------------- |
+| コード       | コードの前に`#`を付ける      | `[Number: #(1 + 2)]`            |
+| 数式         | 式を`[$..$]`で囲む           | `[$-x$ is the opposite of $x$]` |
+| マークアップ | マークアップを`[[..]]`で囲む | `{let name = [*Typst!*]}`       |
 
 
-| 名称                     | 示例                          | 详情链接                              |
-| ------------------------ | ----------------------------- | ---------------------------------- |
-| 变量访问                 | `{x}`                         | [Scripting]($scripting/#blocks)    |
-| 字面常量                 | `{1pt, "hey"}`                | [Scripting]($scripting/#expressions) |
-| 代码块                   | `{{ let x = 1; x + 2 }}`      | [Scripting]($scripting/#blocks)    |
-| 文档内容块               | `{[*Hello*]}`                 | [Scripting]($scripting/#blocks)    |
-| 括号表达式               | `{(1 + 2)}`                   | [Scripting]($scripting/#blocks)    |
-| 数组                    | `{(1, 2, 3)}`                 | [Array]($array)               |
-| 字典                    | `{(a: "hi", b: 2)}`           | [Dictionary]($dictionary)     |
-| 一元运算符              | `{-x}`                        | [Scripting]($scripting/#operators) |
-| 二元运算符              | `{x + y}`                     | [Scripting]($scripting/#operators) |
-| 赋值                   | `{x = 1}`                     | [Scripting]($scripting/#operators) |
-| 字段访问               | `{x.y}`                       | [Scripting]($scripting/#fields)    |
-| 方法调用               | `{x.flatten()}`               | [Scripting]($scripting/#methods)   |
-| 函数调用               | `{min(x, y)}`                 | [Function]($function)         |
-| 匿名函数               | `{(x, y) => x + y}`           | [Function]($function)         |
-| let 绑定               | `{let x = 1}`                 | [Scripting]($scripting/#bindings)  |
-| 命名函数               | `{let f(x) = 2 * x}`          | [Function]($function)         |
-| set 规则               | `{set text(14pt)}`            | [Styling]($styling/#set-rules)     |
-| set-if 规则            | `{set text(..) if .. }`       | [Styling]($styling/#set-rules)     |
-| show-set 规则          | `{show par: set block(..)}`   | [Styling]($styling/#show-rules)    |
-| 函数式 show 规则        | `{show raw: it => {..}}`      | [Styling]($styling/#show-rules)    |
-| show-everything 规则   | `{show: columns.with(2)}`     | [Styling]($styling/#show-rules)    |
-| 条件表语句             | `{if x == 1 {..} else {..}}`  | [Scripting]($scripting/#conditionals) |
-| for 循环               | `{for x in (1, 2, 3) {..}}`   | [Scripting]($scripting/#loops)     |
-| while 循环             | `{while x < 10 {..}}`         | [Scripting]($scripting/#loops)     |
-| 循环流程控制            | `{break, continue}`           | [Scripting]($scripting/#loops)     |
-| 函数返回                | `{return x}`                  | [Function]($function)         |
-| include 模块           | `{include "bar.typ"}`         | [Scripting]($scripting/#modules)   |
-| import 模块            | `{import "bar.typ"}`          | [Scripting]($scripting/#modules)   |
-| 从模块内 import 条目   | `{import "bar.typ": a, b, c}` | [Scripting]($scripting/#modules)   |
-| 注释                  | `[/* block */, // line]`      | [Below](#comments)                 |
+一度`#`でコードモードに入ると、途中でマークアップモードや数式モードに切り替えない限り、さらにハッシュを使う必要はありません。
 
-## 注释 { #comments }
+## マークアップ { #markup }
 
-Typst 会忽略注释，最终生成的文档不会包含它们。
-它们通常被用于剔除旧版本，或者添加标注说明。
-如果一行开头是 `//`，这行就会被认为是注释：
+Typstは、最も一般的な文書要素に対する組み込みのマークアップを提供します。
+ほとんどの構文要素は、対応する関数のショートカットに過ぎません。
+以下の表は、利用可能なすべてのマークアップと、その構文と使用法について詳しく学ぶための最適なページへのリンクを示しています。
+
+| 名称             | 例                       | 参照                                 |
+| ---------------- | ------------------------ | ------------------------------------ |
+| 段落区切り       | 空行                     | [`parbreak`]($parbreak)              |
+| 強調(太字)       | `[*strong*]`             | [`strong`]($strong)                  |
+| 強調(イタリック) | `[_emphasis_]`           | [`emph`]($emph)                      |
+| rawテキスト      | ``[`print(1)`]``         | [`raw`]($raw)                        |
+| リンク           | `[https://typst.app/]`   | [`link`]($link)                      |
+| ラベル           | `[<intro>]`              | [`label`]($label)                    |
+| 参照             | `[@intro]`               | [`ref`]($ref)                        |
+| 見出し           | `[= Heading]`            | [`heading`]($heading)                |
+| 箇条書きリスト   | `[- item]`               | [`list`]($list)                      |
+| 番号付きリスト   | `[+ item]`               | [`enum`]($enum)                      |
+| 用語リスト       | `[/ Term: description]`  | [`terms`]($terms)                    |
+| 数式             | `[$x^2$]`                | [Math]($category/math)               |
+| 改行             | `[\]`                    | [`linebreak`]($linebreak)            |
+| スマートクオート | `['single' or "double"]` | [`smartquote`]($smartquote)          |
+| 短縮記号         | `[~, ---]`               | [Symbols]($category/symbols/sym)     |
+| コード構文       | `[#rect(width: 1cm)]`    | [Scripting]($scripting/#expressions) |
+| 文字エスケープ   | `[Tweet at us \#ad]`     | [Below](#escapes)                    |
+| コメント         | `[/* block */, // line]` | [Below](#comments)                   |
+
+## 数式モード { #math }
+
+数式モードは、数式を組版するために使用される特別なマークアップモードです。
+数式を `[$]` の文字で囲むことによって、数式モードに入ることができます。
+これはマークアップモードとコードモードの両方で機能します。
+数式が少なくとも一つのスペースで始まり終わる場合、その数式は独自のブロックに組版されます（例：`[$ x^2 $]`）。
+インライン数式は、スペースを省略することで作成できます（例：`[$x^2$]`）。
+以下に、数式モードに特有の構文の概要を示します。
+
+| 名称                    | 例                      | 参照                                 |
+| ----------------------- | ----------------------- | ------------------------------------ |
+| インライン数式          | `[$x^2$]`               | [Math]($category/math)               |
+| ブロック数式            | `[$ x^2 $]`             | [Math]($category/math)               |
+| 下付き添え字            | `[$x_1$]`               | [`attach`]($category/math/attach)    |
+| 上付き添え字            | `[$x^2$]`               | [`attach`]($category/math/attach)    |
+| 分数                    | `[$1 + (a+b)/5$]`       | [`frac`]($math.frac)                 |
+| 改行                    | `[$x \ y$]`             | [`linebreak`]($linebreak)            |
+| 揃え位置                | `[$x &= 2 \ &= 3$]`     | [Math]($category/math)               |
+| 変数アクセス            | `[$#x$, $pi$]`          | [Math]($category/math)               |
+| フィールドアクセス      | `[$arrow.r.long$]`      | [Scripting]($scripting/#fields)      |
+| 暗黙の乗算              | `[$x y$]`               | [Math]($category/math)               |
+| 短縮記号                | `[$->, !=$]`            | [Symbols]($category/symbols/sym)     |
+| 数式内のテキスト/文字列 | `[$a "is natural"$]`    | [Math]($category/math)               |
+| 数式関数呼び出し        | `[$floor(x)$]`          | [Math]($category/math)               |
+| コード構文              | `[$#rect(width: 1cm)$]` | [Scripting]($scripting/#expressions) |
+| 文字エスケープ          | `[$x\^2$]`              | [Below](#escapes)                    |
+| コメント                | `[$/* comment */$]`     | [Below](#comments)                   |
+
+## コードモード { #code }
+
+コードブロックや式の中では、新しい式は先頭に`#`を付けずに始めることができます。
+多くの構文要素は式に特有のものです。
+以下に、コードモードで利用可能なすべての構文の一覧表を示します。
+
+
+| 名称                       | 例                            | 参照                                  |
+| -------------------------- | ----------------------------- | ------------------------------------- |
+| None                       | `{none}`                      | [`none`]                              |
+| 自動                       | `{auto}`                      | [`auto`]                              |
+| ブール値                   | `{false}`, `{true}`           | [`bool`]                              |
+| 整数                       | `{10}`, `{0xff}`              | [`int`]                               |
+| 浮動小数点数               | `{3.14}`, `{1e5}`             | [`float`]                             |
+| 長さ                       | `{2pt}`, `{3mm}`, `{1em}`, .. | [`length`]                            |
+| 角度                       | `{90deg}`, `{1rad}`           | [`angle`]                             |
+| 比率                       | `{2fr}`                       | [`fraction`]                          |
+| 割合                       | `{50%}`                       | [`ratio`]                             |
+| 文字列                     | `{"hello"}`                   | [`str`]                               |
+| ラベル                     | `{<intro>}`                   | [`label`]                             |
+| 数式                       | `[$x^2$]`                     | [Math]($category/math)                |
+| rawテキスト                | ``[`print(1)`]``              | [`raw`]                               |
+| 変数アクセス               | `{x}`                         | [Scripting]($scripting/#blocks)       |
+| コードブロック             | `{{ let x = 1; x + 2 }}`      | [Scripting]($scripting/#blocks)       |
+| コンテンツブロック         | `{[*Hello*]}`                 | [Scripting]($scripting/#blocks)       |
+| 括弧付き式                 | `{(1 + 2)}`                   | [Scripting]($scripting/#blocks)       |
+| 配列                       | `{(1, 2, 3)}`                 | [Array]($array)                       |
+| 辞書                       | `{(a: "hi", b: 2)}`           | [Dictionary]($dictionary)             |
+| 単項演算子                 | `{-x}`                        | [Scripting]($scripting/#operators)    |
+| 二項演算子                 | `{x + y}`                     | [Scripting]($scripting/#operators)    |
+| 代入                       | `{x = 1}`                     | [Scripting]($scripting/#operators)    |
+| フィールドアクセス         | `{x.y}`                       | [Scripting]($scripting/#fields)       |
+| メソッド呼び出し           | `{x.flatten()}`               | [Scripting]($scripting/#methods)      |
+| 関数呼び出し               | `{min(x, y)}`                 | [Function]($function)                 |
+| 引数展開                   | `{min(..nums)}`               | [Arguments]($arguments)               |
+| 無名関数                   | `{(x, y) => x + y}`           | [Function]($function)                 |
+| letバインディング          | `{let x = 1}`                 | [Scripting]($scripting/#bindings)     |
+| 名前付き関数               | `{let f(x) = 2 * x}`          | [Function]($function)                 |
+| setルール                  | `{set text(14pt)}`            | [Styling]($styling/#set-rules)        |
+| set-ifルール               | `{set text(..) if .. }`       | [Styling]($styling/#set-rules)        |
+| show-setルール             | `{show par: set block(..)}`   | [Styling]($styling/#show-rules)       |
+| 関数付きshowルール         | `{show raw: it => {..}}`      | [Styling]($styling/#show-rules)       |
+| show-everythingルール      | `{show: columns.with(2)}`     | [Styling]($styling/#show-rules)       |
+| コンテキスト式             | `{context text.lang}`         | [Context]($context)                   |
+| 条件式                     | `{if x == 1 {..} else {..}}`  | [Scripting]($scripting/#conditionals) |
+| forループ                  | `{for x in (1, 2, 3) {..}}`   | [Scripting]($scripting/#loops)        |
+| whileループ                | `{while x < 10 {..}}`         | [Scripting]($scripting/#loops)        |
+| ループ制御フロー           | `{break, continue}`           | [Scripting]($scripting/#loops)        |
+| 関数からのリターン         | `{return x}`                  | [Function]($function)                 |
+| モジュールをインクルード   | `{include "bar.typ"}`         | [Scripting]($scripting/#modules)      |
+| モジュールをインポート     | `{import "bar.typ"}`          | [Scripting]($scripting/#modules)      |
+| モジュールからのインポート | `{import "bar.typ": a, b, c}` | [Scripting]($scripting/#modules)      |
+| コメント                   | `{/* block */}`, `{// line}`  | [Below](#comments)                    |
+
+## コメント { #comments }
+
+コメントはTypstによって無視され、出力には含まれません。
+これは古いバージョンを除外したり、注釈を追加したりするのに便利です。
+単一行をコメントアウトするには、行の先頭に`//`を付けます。
 
 ```example
 // our data barely supports
@@ -120,7 +150,7 @@ that the difference is
 significant.
 ```
 
-也可以通过 `/*` 和 `*/` 来包裹注释，这种方式，注释可以分布于多行：
+コメントは `/*` と `*/` で囲むこともできます。この場合、コメントを複数行にわたって書くことができます。
 
 ```example
 Our study design is as follows:
@@ -129,12 +159,12 @@ Our study design is as follows:
    - 2x2 data design. */
 ```
 
-## 转义序列 { #escapes }
+## エスケープシーケンス { #escapes }
 
-转义序列可以用来插入难于输入的特殊字符，或者 Typst 内有特殊含义的字符。
-前缀一个反斜杠转义一个字符，转移序列如果是十六进制，
-比如 `[\u{1f600}]`，就会插入一个 Unicode 码点。
-这些类型的转义序列也作用于[字符串]($str)中。
+エスケープシーケンスは、Typstで入力が難しい特殊文字や他に特別な意味を持つ文字を挿入するために使用されます。
+文字をエスケープするには、バックスラッシュをその前に置きます。
+任意のUnicodeコードポイントを挿入するためには、16進エスケープシーケンス(`[\u{1f600}]`)を使用できます。
+このエスケープシーケンスは[文字列]($str)でも機能します。
 
 ```example
 I got an ice cream for

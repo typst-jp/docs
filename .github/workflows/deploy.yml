@@ -1,11 +1,8 @@
 # Based on ripgrep's release action:
 # https://github.com/BurntSushi/ripgrep/blob/master/.github/workflows/release.yml
 
-name: Deploy Documentation
-on:
-  push:
-    branches:
-      - main
+name: CI/CD for Documentation
+on: [push, pull_request]
 permissions:
   contents: write
 jobs:
@@ -25,7 +22,7 @@ jobs:
       - run: python3 ./gen.py
       # deploy ./dist to https://github.com/typst-doc-cn/typst-doc-cn.github.io
       - name: Deploy
+        if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist # The folder the action should deploy.
-          

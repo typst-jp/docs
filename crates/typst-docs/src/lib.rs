@@ -718,17 +718,18 @@ pub fn urlify(title: &str) -> EcoString {
         "高度なスタイリング" => "advanced-styling".into(),
         "テンプレートを作成する" => "making-a-template".into(),
         "中文用户指南" => "chinese".into(),
-        "参考" => "reference".into(),
-        "语法" => "syntax".into(),
+        "リファレンス" => "reference".into(),
+        "構文" => "syntax".into(),
         "样式" => "styling".into(),
         "脚本" => "scripting".into(),
+        "コンテキスト" => "context".into(),
         "指南" => "guides".into(),
         "LaTeXユーザのためのTypst入門" => "guide-for-latex-users".into(),
         "页面设置指南" => "page-setup".into(),
         "更新日志" => "changelog".into(),
         "路线图" => "roadmap".into(),
         "社区" => "community".into(),
-        "术语表" => "glossary".into(),
+        "用語集" => "glossary".into(),
         _ => title
             .chars()
             .map(|c| c.to_ascii_lowercase())

@@ -43,10 +43,13 @@ fn resolve_known(head: &str) -> Option<&'static str> {
         "$syntax" => "/docs/reference/syntax",
         "$styling" => "/docs/reference/styling",
         "$scripting" => "/docs/reference/scripting",
+        "$context" => "/docs/reference/context",
         "$guides" => "/docs/guides",
         "$packages" => "/docs/packages",
         "$changelog" => "/docs/changelog",
         "$community" => "/docs/community",
+        // To official for now, a translated version is required later
+        "$universe" => "https://typst.app/universe",
         _ => return None,
     })
 }
