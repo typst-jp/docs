@@ -12,8 +12,9 @@ description: |
 | typesetting   | 組版             | 排版                    | Typstの主要機能                        |
 | documentation | ドキュメント      | 文档                    |                                      |
 | content       | コンテンツ        | 内容 / 内容块            | 型の一種で、マークアップによって表される |
-| set rule      | setルール        |     set 规则            | [样式]($styling)に出てきます            |
-| show rule     | showルール       |    show 规则            | [样式]($styling)に出てきます           |
+| styling       | 形式      　　　  |  样式 　　　　           |                                      |
+| set rule      | setルール        |     set 规则            | [形式]($styling)に出てきます            |
+| show rule     | showルール       |    show 规则            | [形式]($styling)に出てきます           |
 | markup        | マークアップ      |   标记 / 标记模式        | Typstのデフォルトモード                 |
 | script        | スクリプト       |  脚本 / 脚本模式          | Typstのスクリプトモード、「#」で始まる行    |
 | figure        | 図表            | 图表                     | キャプション付きの図表、`image`ではない   |

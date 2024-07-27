@@ -720,7 +720,7 @@ pub fn urlify(title: &str) -> EcoString {
         "中文用户指南" => "chinese".into(),
         "リファレンス" => "reference".into(),
         "構文" => "syntax".into(),
-        "样式" => "styling".into(),
+        "形式" => "styling".into(),
         "脚本" => "scripting".into(),
         "コンテキスト" => "context".into(),
         "指南" => "guides".into(),
