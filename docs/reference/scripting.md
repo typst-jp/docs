@@ -1,5 +1,5 @@
 ---
-description: 使用 Typst 的脚本功能使得文档更加自动化。
+description: Typstのスクリプティング機能を用いて、文書を自動化しましょう。
 ---
 
 # 脚本
