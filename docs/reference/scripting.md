@@ -183,10 +183,6 @@ forループはさまざまなコレクションを反復処理できます。
 - `{for letter in "abc" {..}}` \
   [文字列]($str)の各文字を反復処理します。厳密に言うと、文字列の書記素クラスタの反復処理を行います。ほとんどの場合、書記素クラスタは単一のコードポイントに対応します。しかし、書記素クラスタは複数のコードポイントを含むことがあります。例えば、国旗の絵文字などです。
 
-- `{for byte in bytes("😀") {..}}` \
-  Iterates over the [bytes], which can be converted from a [string]($str) or
-  [read] from a file without encoding. Each byte value is an [integer]($int)
-  between `{0}` and `{255}`.
 
   [文字列]($str)から変換されたり、エンコーディングなしでファイルから[読み取る]($read)ことができる[バイト]($bytes)を反復処理します。各バイト値は`{0}`から`{255}`までの[整数]($int)です。
 
