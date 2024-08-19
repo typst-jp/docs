@@ -44,9 +44,9 @@
 <body class="no-js docs has-outline">
   <div class="alert">
     <div class="alert-content">
-      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.1 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
       <br />
-      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.1 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
     </div>
   </div>
   <header class="boring">
@@ -137,7 +137,7 @@
         
         
         <li>
-          <a href="/docs/chinese/" >中文用户指南</a>
+          <a href="/docs/japanese/" >日本語ユーザーガイド</a>
           
         </li>
         
@@ -159,13 +159,19 @@
             
             
             <li>
-              <a href="/docs/reference/styling/" >样式</a>
+              <a href="/docs/reference/styling/" >Styling</a>
               
             </li>
             
             
             <li>
-              <a href="/docs/reference/scripting/" >脚本</a>
+              <a href="/docs/reference/scripting/" >Scripting</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/context/" >コンテキスト</a>
               
             </li>
             
@@ -742,20 +748,26 @@
         
         
         <li>
-          <a href="/docs/guides/" >指南</a>
+          <a href="/docs/guides/" >Guides</a>
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
             
             
             <li>
-              <a href="/docs/guides/guide-for-latex-users/" >LaTeX 用户指南</a>
+              <a href="/docs/guides/guide-for-latex-users/" >Guide for LaTeX users</a>
               
             </li>
             
             
             <li>
-              <a href="/docs/guides/page-setup/" >页面设置指南</a>
+              <a href="/docs/guides/page-setup-guide/" >Page setup guide</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/table-guide/" >Table guide</a>
               
             </li>
             
@@ -765,25 +777,25 @@
         
         
         <li>
-          <a href="/docs/packages/" >第三方包</a>
+          <a href="/docs/packages/" >Packages</a>
           
         </li>
         
         
         <li>
-          <a href="/docs/changelog/" >更新日志</a>
+          <a href="/docs/changelog/" >Changelog</a>
           
         </li>
         
         
         <li>
-          <a href="/docs/roadmap/" >路线图</a>
+          <a href="/docs/roadmap/" >Roadmap</a>
           
         </li>
         
         
         <li>
-          <a href="/docs/community/" >社区</a>
+          <a href="/docs/community/" >Community</a>
           
         </li>
         
@@ -848,8 +860,8 @@ Typst文書では、マークアップモードがデフォルトであり、数
 <tr><td>スマートクオート</td><td><code>&#39;single&#39; or &quot;double&quot;</code></td><td><a href="/docs/reference/text/smartquote/"><code>smartquote</code></a></td></tr>
 <tr><td>短縮記号</td><td><code><span class="typ-escape">~</span>, <span class="typ-escape">---</span></code></td><td><a href="/docs/reference/symbols/sym/">Symbols</a></td></tr>
 <tr><td>コード構文</td><td><code><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1cm</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/scripting/#expressions">Scripting</a></td></tr>
-<tr><td>文字エスケープ</td><td><code>Tweet at us <span class="typ-escape">\#</span>ad</code></td><td><a href="#escapes">Below</a></td></tr>
-<tr><td>コメント</td><td><code><span class="typ-comment">/* block */</span>, <span class="typ-comment">// line</span></code></td><td><a href="#comments">Below</a></td></tr>
+<tr><td>文字エスケープ</td><td><code>Tweet at us <span class="typ-escape">\#</span>ad</code></td><td><a href="/docs/reference/syntax/#escapes">Below</a></td></tr>
+<tr><td>コメント</td><td><code><span class="typ-comment">/* block */</span>, <span class="typ-comment">// line</span></code></td><td><a href="/docs/reference/syntax/#comments">Below</a></td></tr>
 </tbody></table>
 <h2 id="math">数式モード</h2>
 <p>数式モードは、数式を組版するために使用される特別なマークアップモードです。
@@ -873,58 +885,46 @@ Typst文書では、マークアップモードがデフォルトであり、数
 <tr><td>数式内のテキスト/文字列</td><td><code><span class="typ-math-delim">$</span>a <span class="typ-str">&quot;is natural&quot;</span><span class="typ-math-delim">$</span></code></td><td><a href="/docs/reference/math/">Math</a></td></tr>
 <tr><td>数式関数呼び出し</td><td><code><span class="typ-math-delim">$</span><span class="typ-func">floor</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span><span class="typ-math-delim">$</span></code></td><td><a href="/docs/reference/math/">Math</a></td></tr>
 <tr><td>コード構文</td><td><code><span class="typ-math-delim">$</span><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1cm</span><span class="typ-punct">)</span><span class="typ-math-delim">$</span></code></td><td><a href="/docs/reference/scripting/#expressions">Scripting</a></td></tr>
-<tr><td>文字エスケープ</td><td><code><span class="typ-math-delim">$</span>x<span class="typ-escape">\^</span>2<span class="typ-math-delim">$</span></code></td><td><a href="#escapes">Below</a></td></tr>
-<tr><td>コメント</td><td><code><span class="typ-math-delim">$</span><span class="typ-comment">/* comment */</span><span class="typ-math-delim">$</span></code></td><td><a href="#comments">Below</a></td></tr>
+<tr><td>文字エスケープ</td><td><code><span class="typ-math-delim">$</span>x<span class="typ-escape">\^</span>2<span class="typ-math-delim">$</span></code></td><td><a href="/docs/reference/syntax/#escapes">Below</a></td></tr>
+<tr><td>コメント</td><td><code><span class="typ-math-delim">$</span><span class="typ-comment">/* comment */</span><span class="typ-math-delim">$</span></code></td><td><a href="/docs/reference/syntax/#comments">Below</a></td></tr>
 </tbody></table>
 <h2 id="code">コードモード</h2>
 <p>コードブロックや式の中では、新しい式は先頭に<code>#</code>を付けずに始めることができます。
 多くの構文要素は式に特有のものです。
 以下に、コードモードで利用可能なすべての構文の一覧表を示します。</p>
 <table><thead><tr><th>名称</th><th>例</th><th>参照</th></tr></thead><tbody>
-<tr><td>None</td><td><code><span class="typ-key">none</span></code></td><td>[<code>none</code>]</td></tr>
-<tr><td>自動</td><td><code><span class="typ-key">auto</span></code></td><td>[<code>auto</code>]</td></tr>
-<tr><td>ブール値</td><td><code><span class="typ-key">false</span></code>, <code><span class="typ-key">true</span></code></td><td>[<code>bool</code>]</td></tr>
-<tr><td>整数</td><td><code><span class="typ-num">10</span></code>, <code><span class="typ-num">0xff</span></code></td><td>[<code>int</code>]</td></tr>
-<tr><td>浮動小数点数</td><td><code><span class="typ-num">3.14</span></code>, <code><span class="typ-num">1e5</span></code></td><td>[<code>float</code>]</td></tr>
-<tr><td>長さ</td><td><code><span class="typ-num">2pt</span></code>, <code><span class="typ-num">3mm</span></code>, <code><span class="typ-num">1em</span></code>, ..</td><td>[<code>length</code>]</td></tr>
-<tr><td>角度</td><td><code><span class="typ-num">90deg</span></code>, <code><span class="typ-num">1rad</span></code></td><td>[<code>angle</code>]</td></tr>
-<tr><td>比率</td><td><code><span class="typ-num">2fr</span></code></td><td>[<code>fraction</code>]</td></tr>
-<tr><td>割合</td><td><code><span class="typ-num">50%</span></code></td><td>[<code>ratio</code>]</td></tr>
-<tr><td>文字列</td><td><code><span class="typ-str">&quot;hello&quot;</span></code></td><td>[<code>str</code>]</td></tr>
-<tr><td>ラベル</td><td><code><span class="typ-label">&lt;intro&gt;</span></code></td><td>[<code>label</code>]</td></tr>
-<tr><td>数式</td><td><code><span class="typ-math-delim">$</span>x<span class="typ-math-op">^</span>2<span class="typ-math-delim">$</span></code></td><td><a href="/docs/reference/math/">Math</a></td></tr>
-<tr><td>rawテキスト</td><td><code><span class="typ-raw">`print(1)`</span></code></td><td>[<code>raw</code>]</td></tr>
 <tr><td>変数アクセス</td><td><code>x</code></td><td><a href="/docs/reference/scripting/#blocks">Scripting</a></td></tr>
+<tr><td>任意のリテラル</td><td><code><span class="typ-num">1pt</span>, <span class="typ-str">&quot;hey&quot;</span></code></td><td><a href="/docs/reference/types/">Types</a></td></tr>
 <tr><td>コードブロック</td><td><code><span class="typ-punct">{</span> <span class="typ-key">let</span> x <span class="typ-op">=</span> <span class="typ-num">1</span><span class="typ-punct">;</span> x <span class="typ-op">+</span> <span class="typ-num">2</span> <span class="typ-punct">}</span></code></td><td><a href="/docs/reference/scripting/#blocks">Scripting</a></td></tr>
 <tr><td>コンテンツブロック</td><td><code><span class="typ-punct">[</span><span class="typ-strong">*Hello*</span><span class="typ-punct">]</span></code></td><td><a href="/docs/reference/scripting/#blocks">Scripting</a></td></tr>
 <tr><td>括弧付き式</td><td><code><span class="typ-punct">(</span><span class="typ-num">1</span> <span class="typ-op">+</span> <span class="typ-num">2</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/scripting/#blocks">Scripting</a></td></tr>
-<tr><td>配列</td><td><code><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/array/">Array</a></td></tr>
-<tr><td>辞書</td><td><code><span class="typ-punct">(</span>a<span class="typ-punct">:</span> <span class="typ-str">&quot;hi&quot;</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/dictionary/">Dictionary</a></td></tr>
+<tr><td>配列</td><td><code><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/type/$array/">Array</a></td></tr>
+<tr><td>辞書</td><td><code><span class="typ-punct">(</span>a<span class="typ-punct">:</span> <span class="typ-str">&quot;hi&quot;</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/type/$dictionary/">Dictionary</a></td></tr>
 <tr><td>単項演算子</td><td><code><span class="typ-op">-</span>x</code></td><td><a href="/docs/reference/scripting/#operators">Scripting</a></td></tr>
 <tr><td>二項演算子</td><td><code>x <span class="typ-op">+</span> y</code></td><td><a href="/docs/reference/scripting/#operators">Scripting</a></td></tr>
 <tr><td>代入</td><td><code>x <span class="typ-op">=</span> <span class="typ-num">1</span></code></td><td><a href="/docs/reference/scripting/#operators">Scripting</a></td></tr>
 <tr><td>フィールドアクセス</td><td><code>x<span class="typ-punct">.</span>y</code></td><td><a href="/docs/reference/scripting/#fields">Scripting</a></td></tr>
 <tr><td>メソッド呼び出し</td><td><code>x<span class="typ-punct">.</span><span class="typ-func">flatten</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/scripting/#methods">Scripting</a></td></tr>
-<tr><td>関数呼び出し</td><td><code><span class="typ-func">min</span><span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/function/">Function</a></td></tr>
-<tr><td>引数展開</td><td><code><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-op">..</span>nums<span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/arguments/">Arguments</a></td></tr>
-<tr><td>無名関数</td><td><code><span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> x <span class="typ-op">+</span> y</code></td><td><a href="/docs/reference/foundations/function/">Function</a></td></tr>
+<tr><td>関数呼び出し</td><td><code><span class="typ-func">min</span><span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/type/$function/">Function</a></td></tr>
+<tr><td>引数展開</td><td><code><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-op">..</span>nums<span class="typ-punct">)</span></code></td><td><a href="/docs/reference/foundations/type/$arguments/">Arguments</a></td></tr>
+<tr><td>無名関数</td><td><code><span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> x <span class="typ-op">+</span> y</code></td><td><a href="/docs/reference/foundations/type/$function/">Function</a></td></tr>
 <tr><td>letバインディング</td><td><code><span class="typ-key">let</span> x <span class="typ-op">=</span> <span class="typ-num">1</span></code></td><td><a href="/docs/reference/scripting/#bindings">Scripting</a></td></tr>
-<tr><td>名前付き関数</td><td><code><span class="typ-key">let</span> <span class="typ-func">f</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-num">2</span> <span class="typ-op">*</span> x</code></td><td><a href="/docs/reference/foundations/function/">Function</a></td></tr>
+<tr><td>名前付き関数</td><td><code><span class="typ-key">let</span> <span class="typ-func">f</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-num">2</span> <span class="typ-op">*</span> x</code></td><td><a href="/docs/reference/foundations/type/$function/">Function</a></td></tr>
 <tr><td>setルール</td><td><code><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">14pt</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/styling/#set-rules">Styling</a></td></tr>
 <tr><td>set-ifルール</td><td><code><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span> <span class="typ-key">if</span> .. </code></td><td><a href="/docs/reference/styling/#set-rules">Styling</a></td></tr>
 <tr><td>show-setルール</td><td><code><span class="typ-key">show</span> <span class="typ-func">par</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/styling/#show-rules">Styling</a></td></tr>
 <tr><td>関数付きshowルール</td><td><code><span class="typ-key">show</span> <span class="typ-func">raw</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>..<span class="typ-punct">}</span></code></td><td><a href="/docs/reference/styling/#show-rules">Styling</a></td></tr>
 <tr><td>show-everythingルール</td><td><code><span class="typ-key">show</span><span class="typ-punct">:</span> columns<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span></code></td><td><a href="/docs/reference/styling/#show-rules">Styling</a></td></tr>
-<tr><td>コンテキスト式</td><td><code>context text<span class="typ-punct">.</span>lang</code></td><td><a href="/docs/reference/context/">Context</a></td></tr>
+<tr><td>コンテキスト式</td><td><code><span class="typ-key">context</span> text<span class="typ-punct">.</span>lang</code></td><td><a href="/docs/reference/context/">Context</a></td></tr>
 <tr><td>条件式</td><td><code><span class="typ-key">if</span> x <span class="typ-op">==</span> <span class="typ-num">1</span> <span class="typ-punct">{</span>..<span class="typ-punct">}</span> <span class="typ-key">else</span> <span class="typ-punct">{</span>..<span class="typ-punct">}</span></code></td><td><a href="/docs/reference/scripting/#conditionals">Scripting</a></td></tr>
 <tr><td>forループ</td><td><code><span class="typ-key">for</span> x <span class="typ-key">in</span> <span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-punct">{</span>..<span class="typ-punct">}</span></code></td><td><a href="/docs/reference/scripting/#loops">Scripting</a></td></tr>
 <tr><td>whileループ</td><td><code><span class="typ-key">while</span> x <span class="typ-op">&lt;</span> <span class="typ-num">10</span> <span class="typ-punct">{</span>..<span class="typ-punct">}</span></code></td><td><a href="/docs/reference/scripting/#loops">Scripting</a></td></tr>
 <tr><td>ループ制御フロー</td><td><code><span class="typ-key">break</span>, <span class="typ-key">continue</span></code></td><td><a href="/docs/reference/scripting/#loops">Scripting</a></td></tr>
-<tr><td>関数からのリターン</td><td><code><span class="typ-key">return</span> x</code></td><td><a href="/docs/reference/foundations/function/">Function</a></td></tr>
+<tr><td>関数からのリターン</td><td><code><span class="typ-key">return</span> x</code></td><td><a href="/docs/reference/foundations/type/$function/">Function</a></td></tr>
 <tr><td>モジュールをインクルード</td><td><code><span class="typ-key">include</span> <span class="typ-str">&quot;bar.typ&quot;</span></code></td><td><a href="/docs/reference/scripting/#modules">Scripting</a></td></tr>
 <tr><td>モジュールをインポート</td><td><code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span></code></td><td><a href="/docs/reference/scripting/#modules">Scripting</a></td></tr>
 <tr><td>モジュールからのインポート</td><td><code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span><span class="typ-punct">:</span> a<span class="typ-punct">,</span> b<span class="typ-punct">,</span> c</code></td><td><a href="/docs/reference/scripting/#modules">Scripting</a></td></tr>
-<tr><td>コメント</td><td><code><span class="typ-comment">/* block */</span></code>, <code><span class="typ-comment">// line</span></code></td><td><a href="#comments">Below</a></td></tr>
+<tr><td>コメント</td><td><code><span class="typ-comment">/* block */</span></code>, <code><span class="typ-comment">// line</span></code></td><td><a href="/docs/reference/syntax/#comments">Below</a></td></tr>
 </tbody></table>
 <h2 id="comments">コメント</h2>
 <p>コメントはTypstによって無視され、出力には含まれません。
@@ -959,7 +959,7 @@ significant.
             src="/assets/icons/16-arrow-right.svg" alt="←">
           <div><span class="page-title">リファレンス</span><span class="hint">前に戻る</span></div>
         </a><a href="/docs/reference/styling/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">样式</span><span class="hint">次に進む</span></div>
+          <div><span class="page-title">Styling</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>
