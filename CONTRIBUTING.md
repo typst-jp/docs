@@ -20,9 +20,9 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
     1. `./docs/i18n/**/`内のYAMLファイル群は、Typstの言語リファレンスの本体です。その中に含まれている、**既存の`*-ja.yaml`ファイルを直接書き換えて翻訳してください**。**`*-en.yaml`や`*-zh.yaml`は翻訳しないでください**。
         - 例：[Reference > Model](https://typst.app/docs/reference/model/)を翻訳する際は、`./docs/i18n/category/model-ja.yaml`を編集してください。`model-en.yaml`や`model-zh.yaml`は放置してください。
     2. `./docs`内のMarkdownファイル群は、Typstのチュートリアルや入門ガイドなど、言語リファレンス以外のページの本体です。**既存のMarkdownファイルを直接書き換えて翻訳してください**。
-    それに加えて、`./crates/typst-docs/src/lib.rs`ファイルの[`urlify`関数](https://github.com/search?q=repo%3Atypst-jp/typst-jp.github.io%20urlify&type=code)を編集して、中国語版の記事タイトルを日本語版のものに書き換えてください。このプロセスを抜かすと、WebページのURLが正しく生成されません。
+    それに加えて、`./docs/src/lib.rs`ファイルの[`urlify`関数](https://github.com/search?q=repo%3Atypst-jp/typst-jp.github.io%20urlify&type=code)を編集して、中国語版の記事タイトルを日本語版のものに書き換えてください。このプロセスを抜かすと、WebページのURLが正しく生成されません。
     3. 「サードパーティパッケージ」のページの翻訳を追加する場合は、`./static/assets/index2ja.json`も編集する必要があります。
-3. 翻訳の際は、[後述のガイドライン](#スタイルマニュアル)を参照し、[v0.11.1時点での公式ドキュメント](https://github.com/typst/typst/tree/v0.11.1/docs)から翻訳してください。
+3. 翻訳の際は、[後述のガイドライン](#スタイルマニュアル)を参照し、[v0.11.0時点での公式ドキュメント](https://github.com/typst/typst/tree/v0.11.0/docs)から翻訳してください。
 4. 翻訳作業の途中でも、Draft Pull Requestを作成して、翻訳の進捗状況を共有することができます。
 5. 翻訳作業が終わったら、Pull Requestを作成し、送信してください。
 

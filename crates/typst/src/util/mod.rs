@@ -4,16 +4,21 @@ pub mod fat;
 
 #[macro_use]
 mod macros;
+mod bitset;
 mod deferred;
+mod hash;
 mod pico;
 mod scalar;
 
+pub use self::bitset::BitSet;
 pub use self::deferred::Deferred;
+pub use self::hash::LazyHash;
 pub use self::pico::PicoStr;
 pub use self::scalar::Scalar;
 
 use std::fmt::{Debug, Formatter};
 use std::hash::Hash;
+use std::iter::{Chain, Flatten, Rev};
 use std::num::NonZeroUsize;
 use std::ops::{Add, Deref, Div, Mul, Neg, Sub};
 use std::sync::Arc;
@@ -114,12 +119,40 @@ where
     }
 }
 
+/// Adapter for reversing iterators conditionally.
+pub trait MaybeReverseIter {
+    type RevIfIter;
+
+    /// Reverse this iterator (apply .rev()) based on some condition.
+    fn rev_if(self, condition: bool) -> Self::RevIfIter
+    where
+        Self: Sized;
+}
+
+impl<I: Iterator + DoubleEndedIterator> MaybeReverseIter for I {
+    type RevIfIter =
+        Chain<Flatten<std::option::IntoIter<I>>, Flatten<std::option::IntoIter<Rev<I>>>>;
+
+    fn rev_if(self, condition: bool) -> Self::RevIfIter
+    where
+        Self: Sized,
+    {
+        let (maybe_self_iter, maybe_rev_iter) =
+            if condition { (None, Some(self.rev())) } else { (Some(self), None) };
+
+        maybe_self_iter
+            .into_iter()
+            .flatten()
+            .chain(maybe_rev_iter.into_iter().flatten())
+    }
+}
+
 /// Check if the [`Option`]-wrapped L is same to R.
 pub fn option_eq<L, R>(left: Option<L>, other: R) -> bool
 where
     L: PartialEq<R>,
 {
-    left.map_or(false, |v| v == other)
+    left.is_some_and(|v| v == other)
 }
 
 /// A container around a static reference that is cheap to clone and hash.

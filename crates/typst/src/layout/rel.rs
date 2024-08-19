@@ -10,9 +10,9 @@ use crate::util::Numeric;
 
 /// A length in relation to some known length.
 ///
-/// This type is a combination of a [length]($length) with a [ratio]($ratio). It
-/// results from addition and subtraction of a length and a ratio. Wherever a
-/// relative length is expected, you can also use a bare length or ratio.
+/// This type is a combination of a [length] with a [ratio]. It results from
+/// addition and subtraction of a length and a ratio. Wherever a relative length
+/// is expected, you can also use a bare length or ratio.
 ///
 /// # Example
 /// ```example
@@ -25,7 +25,7 @@ use crate::util::Numeric;
 /// A relative length has the following fields:
 /// - `length`: Its length component.
 /// - `ratio`: Its ratio component.
-#[ty(name = "relative", title = "Relative Length")]
+#[ty(cast, name = "relative", title = "Relative Length")]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Rel<T: Numeric = Length> {
     /// The relative part.
@@ -259,19 +259,12 @@ where
     }
 }
 
-impl Fold for Rel<Abs> {
-    type Output = Self;
-
-    fn fold(self, _: Self::Output) -> Self::Output {
-        self
-    }
-}
-
-impl Fold for Rel<Length> {
-    type Output = Self;
-
-    fn fold(self, _: Self::Output) -> Self::Output {
-        self
+impl<T> Fold for Rel<T>
+where
+    T: Numeric + Fold,
+{
+    fn fold(self, outer: Self) -> Self {
+        Self { rel: self.rel, abs: self.abs.fold(outer.abs) }
     }
 }
 

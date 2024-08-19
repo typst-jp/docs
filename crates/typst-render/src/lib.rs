@@ -1,4 +1,4 @@
-//! Rendering into raster images.
+//! Rendering of Typst documents into raster images.
 
 use std::io::Read;
 use std::sync::Arc;
@@ -13,17 +13,19 @@ use typst::introspection::Meta;
 use typst::layout::{
     Abs, Axes, Frame, FrameItem, FrameKind, GroupItem, Point, Ratio, Size, Transform,
 };
+use typst::model::Document;
 use typst::text::{Font, TextItem};
 use typst::visualize::{
-    Color, FixedStroke, Geometry, Gradient, Image, ImageKind, LineCap, LineJoin, Paint,
-    Path, PathItem, Pattern, RasterFormat, RelativeTo, Shape,
+    Color, DashPattern, FixedStroke, Geometry, Gradient, Image, ImageKind, LineCap,
+    LineJoin, Paint, Path, PathItem, Pattern, RasterFormat, RelativeTo, Shape,
 };
-use usvg::{NodeExt, TreeParsing};
+use usvg::TreeParsing;
 
 /// Export a frame into a raster image.
 ///
 /// This renders the frame at the given number of pixels per point and returns
 /// the resulting `tiny-skia` pixel buffer.
+#[typst_macros::time(name = "render")]
 pub fn render(frame: &Frame, pixel_per_pt: f32, fill: Color) -> sk::Pixmap {
     let size = frame.size();
     let pxw = (pixel_per_pt * size.x.to_f32()).round().max(1.0) as u32;
@@ -38,19 +40,20 @@ pub fn render(frame: &Frame, pixel_per_pt: f32, fill: Color) -> sk::Pixmap {
     canvas
 }
 
-/// Export multiple frames into a single raster image.
+/// Export a document with potentially multiple pages into a single raster image.
 ///
 /// The padding will be added around and between the individual frames.
 pub fn render_merged(
-    frames: &[Frame],
+    document: &Document,
     pixel_per_pt: f32,
     frame_fill: Color,
     padding: Abs,
     padding_fill: Color,
 ) -> sk::Pixmap {
-    let pixmaps: Vec<_> = frames
+    let pixmaps: Vec<_> = document
+        .pages
         .iter()
-        .map(|frame| render(frame, pixel_per_pt, frame_fill))
+        .map(|page| render(&page.frame, pixel_per_pt, frame_fill))
         .collect();
 
     let padding = (pixel_per_pt * padding.to_f32()).round() as u32;
@@ -164,8 +167,6 @@ fn render_frame(canvas: &mut sk::Pixmap, state: State, frame: &Frame) {
             FrameItem::Meta(meta, _) => match meta {
                 Meta::Link(_) => {}
                 Meta::Elem(_) => {}
-                Meta::PageNumbering(_) => {}
-                Meta::PdfPageLabel(_) => {}
                 Meta::Hide => {}
             },
         }
@@ -254,7 +255,7 @@ fn render_svg_glyph(
     id: GlyphId,
 ) -> Option<()> {
     let ts = &state.transform;
-    let mut data = text.font.ttf().glyph_svg_image(id)?;
+    let mut data = text.font.ttf().glyph_svg_image(id)?.data;
 
     // Decompress SVGZ.
     let mut decoded = vec![];
@@ -271,8 +272,8 @@ fn render_svg_glyph(
 
     // Parse SVG.
     let opts = usvg::Options::default();
-    let usvg_tree = usvg::Tree::from_xmltree(&document, &opts).ok()?;
-    let tree = resvg::Tree::from_usvg(&usvg_tree);
+    let mut tree = usvg::Tree::from_xmltree(&document, &opts).ok()?;
+    tree.calculate_bounding_boxes();
     let view_box = tree.view_box.rect;
 
     // If there's no viewbox defined, use the em square for our scale
@@ -297,10 +298,8 @@ fn render_svg_glyph(
     // See https://github.com/RazrFalcon/resvg/issues/602 for why
     // using the svg size is problematic here.
     let mut bbox = usvg::BBox::default();
-    for node in usvg_tree.root.descendants() {
-        if let Some(rect) = node.calculate_bbox() {
-            bbox = bbox.expand(rect);
-        }
+    if let Some(tree_bbox) = tree.root.bounding_box {
+        bbox = bbox.expand(tree_bbox);
     }
 
     // Compute the bbox after the transform is applied.
@@ -319,7 +318,7 @@ fn render_svg_glyph(
 
     // We offset our transform so that the pixmap starts at the edge of the bbox.
     let ts = ts.post_translate(-bbox.left() as f32, -bbox.top() as f32);
-    tree.render(ts, &mut pixmap.as_mut());
+    resvg::render(&tree, ts, &mut pixmap.as_mut());
 
     canvas.draw_pixmap(
         bbox.left(),
@@ -353,7 +352,7 @@ fn render_bitmap_glyph(
     // and maybe also for Noto Color Emoji. And: Is the size calculation
     // correct?
     let h = text.size;
-    let w = (image.width() as f64 / image.height() as f64) * h;
+    let w = (image.width() / image.height()) * h;
     let dx = (raster.x as f32) / (image.width() as f32) * size;
     let dy = (raster.y as f32) / (image.height() as f32) * size;
     render_image(
@@ -377,7 +376,12 @@ fn render_outline_glyph(
     // Render a glyph directly as a path. This only happens when the fast glyph
     // rasterization can't be used due to very large text size or weird
     // scale/skewing transforms.
-    if ppem > 100.0 || ts.kx != 0.0 || ts.ky != 0.0 || ts.sx != ts.sy {
+    if ppem > 100.0
+        || ts.kx != 0.0
+        || ts.ky != 0.0
+        || ts.sx != ts.sy
+        || text.stroke.is_some()
+    {
         let path = {
             let mut builder = WrappedPathBuilder(sk::PathBuilder::new());
             text.font.ttf().outline_glyph(id, &mut builder)?;
@@ -387,22 +391,50 @@ fn render_outline_glyph(
         let scale = text.size.to_f32() / text.font.units_per_em() as f32;
 
         let mut pixmap = None;
-        let paint = to_sk_paint(
-            &text.fill,
-            state.pre_concat(sk::Transform::from_scale(scale, -scale)),
-            Size::zero(),
-            true,
-            None,
-            &mut pixmap,
-            None,
-        );
 
         let rule = sk::FillRule::default();
 
         // Flip vertically because font design coordinate
         // system is Y-up.
         let ts = ts.pre_scale(scale, -scale);
+        let state_ts = state.pre_concat(sk::Transform::from_scale(scale, -scale));
+        let paint = to_sk_paint(
+            &text.fill,
+            state_ts,
+            Size::zero(),
+            true,
+            None,
+            &mut pixmap,
+            None,
+        );
         canvas.fill_path(&path, &paint, rule, ts, state.mask);
+
+        if let Some(FixedStroke { paint, thickness, cap, join, dash, miter_limit }) =
+            &text.stroke
+        {
+            if thickness.to_f32() > 0.0 {
+                let dash = dash.as_ref().and_then(to_sk_dash_pattern);
+
+                let paint = to_sk_paint(
+                    paint,
+                    state_ts,
+                    Size::zero(),
+                    true,
+                    None,
+                    &mut pixmap,
+                    None,
+                );
+                let stroke = sk::Stroke {
+                    width: thickness.to_f32() / scale, // When we scale the path, we need to scale the stroke width, too.
+                    line_cap: to_sk_line_cap(*cap),
+                    line_join: to_sk_line_join(*join),
+                    dash,
+                    miter_limit: miter_limit.get() as f32,
+                };
+
+                canvas.stroke_path(&path, &paint, &stroke, ts, state.mask);
+            }
+        }
         return Some(());
     }
 
@@ -433,12 +465,7 @@ fn render_outline_glyph(
             write_bitmap(canvas, &bitmap, &state, sampler)?;
         }
         Paint::Solid(color) => {
-            write_bitmap(
-                canvas,
-                &bitmap,
-                &state,
-                to_sk_color_u8_without_alpha(*color).premultiply(),
-            )?;
+            write_bitmap(canvas, &bitmap, &state, to_sk_color_u8(*color).premultiply())?;
         }
         Paint::Pattern(pattern) => {
             let pixmap = render_pattern_frame(&state, pattern);
@@ -516,7 +543,8 @@ fn write_bitmap<S: PaintSampler>(
                 let color = sampler.sample((x as _, y as _));
                 let color = bytemuck::cast(color);
                 let pi = (y * cw + x) as usize;
-                if cov == 255 {
+                // Fast path if color is opaque.
+                if cov == u8::MAX && color & 0xFF == 0xFF {
                     pixels[pi] = color;
                     continue;
                 }
@@ -568,30 +596,14 @@ fn render_shape(canvas: &mut sk::Pixmap, state: State, shape: &Shape) -> Option<
         canvas.fill_path(&path, &paint, rule, ts, state.mask);
     }
 
-    if let Some(FixedStroke {
-        paint,
-        thickness,
-        line_cap,
-        line_join,
-        dash_pattern,
-        miter_limit,
-    }) = &shape.stroke
+    if let Some(FixedStroke { paint, thickness, cap, join, dash, miter_limit }) =
+        &shape.stroke
     {
         let width = thickness.to_f32();
 
         // Don't draw zero-pt stroke.
         if width > 0.0 {
-            let dash = dash_pattern.as_ref().and_then(|pattern| {
-                // tiny-skia only allows dash patterns with an even number of elements,
-                // while pdf allows any number.
-                let pattern_len = pattern.array.len();
-                let len =
-                    if pattern_len % 2 == 1 { 2 * pattern_len } else { pattern_len };
-                let dash_array =
-                    pattern.array.iter().map(|l| l.to_f32()).cycle().take(len).collect();
-
-                sk::StrokeDash::new(dash_array, pattern.phase.to_f32())
-            });
+            let dash = dash.as_ref().and_then(to_sk_dash_pattern);
 
             let bbox = shape.geometry.bbox_size();
             let offset_bbox = (!matches!(shape.geometry, Geometry::Line(..)))
@@ -632,8 +644,8 @@ fn render_shape(canvas: &mut sk::Pixmap, state: State, shape: &Shape) -> Option<
             );
             let stroke = sk::Stroke {
                 width,
-                line_cap: to_sk_line_cap(*line_cap),
-                line_join: to_sk_line_join(*line_join),
+                line_cap: to_sk_line_cap(*cap),
+                line_join: to_sk_line_join(*join),
                 dash,
                 miter_limit: miter_limit.get() as f32,
             };
@@ -726,7 +738,7 @@ fn scaled_texture(image: &Image, w: u32, h: u32) -> Option<Arc<sk::Pixmap>> {
     let mut pixmap = sk::Pixmap::new(w, h)?;
     match image.kind() {
         ImageKind::Raster(raster) => {
-            let downscale = w < image.width();
+            let downscale = w < raster.width();
             let filter =
                 if downscale { FilterType::Lanczos3 } else { FilterType::CatmullRom };
             let buf = raster.dynamic().resize(w, h, filter);
@@ -739,12 +751,11 @@ fn scaled_texture(image: &Image, w: u32, h: u32) -> Option<Arc<sk::Pixmap>> {
         // of `with`.
         ImageKind::Svg(svg) => unsafe {
             svg.with(|tree| {
-                let tree = resvg::Tree::from_usvg(tree);
                 let ts = tiny_skia::Transform::from_scale(
                     w as f32 / tree.size.width(),
                     h as f32 / tree.size.height(),
                 );
-                tree.render(ts, &mut pixmap.as_mut())
+                resvg::render(tree, ts, &mut pixmap.as_mut())
             });
         },
     }
@@ -756,17 +767,6 @@ fn scaled_texture(image: &Image, w: u32, h: u32) -> Option<Arc<sk::Pixmap>> {
 trait PaintSampler: Copy {
     /// Sample the color at the `pos` in the pixmap.
     fn sample(self, pos: (u32, u32)) -> sk::PremultipliedColorU8;
-
-    /// Write the sampler to a pixmap.
-    fn write_to_pixmap(self, canvas: &mut sk::Pixmap) {
-        let width = canvas.width();
-        for x in 0..canvas.width() {
-            for y in 0..canvas.height() {
-                let color = self.sample((x, y));
-                canvas.pixels_mut()[(y * width + x) as usize] = color;
-            }
-        }
-    }
 }
 
 impl PaintSampler for sk::PremultipliedColorU8 {
@@ -820,7 +820,7 @@ impl PaintSampler for GradientSampler<'_> {
         self.transform_to_parent.map_point(&mut point);
 
         // Sample the gradient
-        to_sk_color_u8_without_alpha(self.gradient.sample_at(
+        to_sk_color_u8(self.gradient.sample_at(
             (point.x, point.y),
             (self.container_size.x.to_f32(), self.container_size.y.to_f32()),
         ))
@@ -1008,13 +1008,14 @@ fn render_pattern_frame(state: &State, pattern: &Pattern) -> sk::Pixmap {
 }
 
 fn to_sk_color(color: Color) -> sk::Color {
-    let [r, g, b, a] = color.to_rgb().to_vec4_u8();
-    sk::Color::from_rgba8(r, g, b, a)
+    let [r, g, b, a] = color.to_rgb().to_vec4();
+    sk::Color::from_rgba(r, g, b, a)
+        .expect("components must always be in the range [0..=1]")
 }
 
-fn to_sk_color_u8_without_alpha(color: Color) -> sk::ColorU8 {
-    let [r, g, b, _] = color.to_rgb().to_vec4_u8();
-    sk::ColorU8::from_rgba(r, g, b, 255)
+fn to_sk_color_u8(color: Color) -> sk::ColorU8 {
+    let [r, g, b, a] = color.to_rgb().to_vec4_u8();
+    sk::ColorU8::from_rgba(r, g, b, a)
 }
 
 fn to_sk_line_cap(cap: LineCap) -> sk::LineCap {
@@ -1043,6 +1044,15 @@ fn to_sk_transform(transform: &Transform) -> sk::Transform {
         tx.to_f32(),
         ty.to_f32(),
     )
+}
+
+fn to_sk_dash_pattern(pattern: &DashPattern<Abs, Abs>) -> Option<sk::StrokeDash> {
+    // tiny-skia only allows dash patterns with an even number of elements,
+    // while pdf allows any number.
+    let pattern_len = pattern.array.len();
+    let len = if pattern_len % 2 == 1 { 2 * pattern_len } else { pattern_len };
+    let dash_array = pattern.array.iter().map(|l| l.to_f32()).cycle().take(len).collect();
+    sk::StrokeDash::new(dash_array, pattern.phase.to_f32())
 }
 
 /// Allows to build tiny-skia paths from glyph outlines.

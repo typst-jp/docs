@@ -19,7 +19,7 @@ use crate::util::{Numeric, Scalar};
 /// ```example
 /// #rotate(10deg)[Hello there!]
 /// ```
-#[ty(scope)]
+#[ty(scope, cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Angle(Scalar);
 
@@ -135,7 +135,7 @@ impl Debug for Angle {
 
 impl Repr for Angle {
     fn repr(&self) -> EcoString {
-        repr::format_float(self.to_deg(), Some(2), "deg")
+        repr::format_float_with_unit(self.to_deg(), "deg")
     }
 }
 

@@ -1,27 +1,30 @@
+use comemo::Tracked;
+
+use crate::diag::HintedStrResult;
 use crate::engine::Engine;
-use crate::foundations::{func, Array, LocatableSelector, Value};
+use crate::foundations::{func, Array, Context, LocatableSelector, Value};
 use crate::introspection::Location;
 
 /// Finds elements in the document.
 ///
 /// The `query` functions lets you search your document for elements of a
 /// particular type or with a particular label. To use it, you first need to
-/// retrieve the current document location with the [`locate`]($locate)
-/// function.
+/// ensure that [context] is available.
 ///
+
 /// # Finding elements
 /// In the example below, we create a custom page header that displays the text
 /// "Typst Academy" in small capitals and the current section title. On the
 /// first page, the section title is omitted because the header is before the
 /// first section heading.
 ///
-/// To realize this layout, we call `locate` and then query for all headings
-/// after the current location. The function we pass to locate is called twice
-/// in this case: Once per page.
+/// To realize this layout, we open a `context` and then query for all headings
+/// after the [current location]($here). The code within the context block
+/// runs twice: Once per page.
 ///
 /// - On the first page the query for all headings before the current location
 ///   yields an empty array: There are no previous headings. We check for this
-///   case and and just display "Typst Academy".
+///   case and just display "Typst Academy".
 ///
 /// - For the second page, we retrieve the last element from the query's result.
 ///   This is the latest heading before the current position and as such, it is
@@ -35,21 +38,20 @@ use crate::introspection::Location;
 /// >>>   margin: (top: 35pt, rest: 15pt),
 /// >>>   header-ascent: 12pt,
 /// >>> )
-/// #set page(header: locate(loc => {
+/// #set page(header: context {
 ///   let elems = query(
-///     selector(heading).before(loc),
-///     loc,
+///     selector(heading).before(here()),
 ///   )
 ///   let academy = smallcaps[
 ///     Typst Academy
 ///   ]
-///   if elems == () {
+///   if elems.len() == 0 {
 ///     align(right, academy)
 ///   } else {
 ///     let body = elems.last().body
 ///     academy + h(1fr) + emph(body)
 ///   }
-/// }))
+/// })
 ///
 /// = Introduction
 /// #lorem(23)
@@ -60,6 +62,9 @@ use crate::introspection::Location;
 /// = Analysis
 /// #lorem(15)
 /// ```
+///
+/// You can get the location of the elements returned by `query` with
+/// [`location`]($content.location).
 ///
 /// # A word of caution { #caution }
 /// To resolve all your queries, Typst evaluates and layouts parts of the
@@ -72,27 +77,27 @@ use crate::introspection::Location;
 /// titled `Real`. Thus, `count` is `1` and one `Fake` heading is generated.
 /// Typst sees that the query's result has changed and processes it again. This
 /// time, `count` is `2` and two `Fake` headings are generated. This goes on and
-/// on. As we can see, the output has five headings. This is because Typst
-/// simply gives up after five attempts.
+/// on. As we can see, the output has a finite amount of headings. This is
+/// because Typst simply gives up after a few attempts.
 ///
 /// In general, you should try not to write queries that affect themselves. The
 /// same words of caution also apply to other introspection features like
-/// [counters]($counter) and [state]($state).
+/// [counters]($counter) and [state].
 ///
 /// ```example
 /// = Real
-/// #locate(loc => {
-///   let elems = query(heading, loc)
+/// #context {
+///   let elems = query(heading)
 ///   let count = elems.len()
 ///   count * [= Fake]
-/// })
+/// }
 /// ```
 ///
 /// # Command line queries
 /// You can also perform queries from the command line with the `typst query`
 /// command. This command executes an arbitrary query on the document and
 /// returns the resulting elements in serialized form. Consider the following
-/// `example.typ` file which contains some invisible [metadata]($metadata):
+/// `example.typ` file which contains some invisible [metadata]:
 ///
 /// ```typ
 /// #metadata("This is a note") <note>
@@ -127,33 +132,29 @@ use crate::introspection::Location;
 /// $ typst query example.typ "<note>" --field value --one
 /// "This is a note"
 /// ```
-#[func]
+#[func(contextual)]
 pub fn query(
     /// The engine.
     engine: &mut Engine,
-    /// Can be an element function like a `heading` or `figure`, a `{<label>}`
-    /// or a more complex selector like `{heading.where(level: 1)}`.
+    /// The callsite context.
+    context: Tracked<Context>,
+    /// Can be
+    /// - an element function like a `heading` or `figure`,
+    /// - a `{<label>}`,
+    /// - a more complex selector like `{heading.where(level: 1)}`,
+    /// - or `{selector(heading).before(here())}`.
     ///
-    /// Currently, only a subset of element functions is supported. Aside from
-    /// headings and figures, this includes equations, references and all
-    /// elements with an explicit label. As a result, you _can_ query for e.g.
-    /// [`strong`]($strong) elements, but you will find only those that have an
-    /// explicit label attached to them. This limitation will be resolved in the
-    /// future.
+    /// Only [locatable]($location/#locatable) element functions are supported.
     target: LocatableSelector,
-    /// Can be an arbitrary location, as its value is irrelevant for the
-    /// function's return value. Why is it required then? As noted before, Typst
-    /// has to evaluate parts of your code multiple times to determine the
-    /// values of all state. By only allowing this function within
-    /// [`locate`]($locate) calls, the amount of code that can depend on the
-    /// query's result is reduced. If you could call it directly at the top
-    /// level of a module, the evaluation of the whole module and its exports
-    /// could depend on the query's result.
-    location: Location,
-) -> Array {
-    let _ = location;
+    /// _Compatibility:_ This argument only exists for compatibility with
+    /// Typst 0.10 and lower and shouldn't be used anymore.
+    #[default]
+    location: Option<Location>,
+) -> HintedStrResult<Array> {
+    if location.is_none() {
+        context.introspect()?;
+    }
+
     let vec = engine.introspector.query(&target.0);
-    vec.into_iter()
-        .map(|elem| Value::Content(elem.into_inner()))
-        .collect()
+    Ok(vec.into_iter().map(Value::Content).collect())
 }

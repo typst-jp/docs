@@ -1,6 +1,6 @@
 use crate::diag::SourceResult;
 use crate::engine::Engine;
-use crate::foundations::{elem, Content, Show, StyleChain};
+use crate::foundations::{elem, Content, Packed, Show, StyleChain};
 use crate::text::{ItalicToggle, TextElem};
 
 /// Emphasizes content by toggling italics.
@@ -33,9 +33,9 @@ pub struct EmphElem {
     pub body: Content,
 }
 
-impl Show for EmphElem {
-    #[tracing::instrument(name = "EmphElem::show", skip(self))]
+impl Show for Packed<EmphElem> {
+    #[typst_macros::time(name = "emph", span = self.span())]
     fn show(&self, _: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(self.body().clone().styled(TextElem::set_emph(ItalicToggle)))
+        Ok(self.body().clone().styled(TextElem::set_emph(ItalicToggle(true))))
     }
 }

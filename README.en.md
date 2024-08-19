@@ -5,7 +5,7 @@
 
 This is an unofficial Japanese translation of the documentation for the typesetting system [Typst](https://typst.app/docs). It has been created with the permission of [Typst GmbH](https://typst.app/legal/).
 
-The repository was forked from the [Chinese version](https://github.com/typst-doc-cn/typst-doc-cn.github.io) and is translated into Japanese based on the official documentation of [Typst v0.11.1](https://typst.app/docs/changelog/#v0.11.1) as of June 2024.
+The repository was forked from the [Chinese version](https://github.com/typst-doc-cn/typst-doc-cn.github.io) and is translated into Japanese based on the official documentation of [Typst v0.11.0](https://typst.app/docs/changelog/#v0.11.0) as of June 2024.
 
 The actual working web version can be viewed at the following URL.
 > https://typst-jp.github.io/docs/
