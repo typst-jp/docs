@@ -32,18 +32,21 @@ use std::fmt::{self, Debug, Formatter};
 
 use ecow::{eco_format, EcoString};
 use rustybuzz::{Feature, Tag};
+use smallvec::SmallVec;
 use ttf_parser::Rect;
 
 use crate::diag::{bail, SourceResult, StrResult};
 use crate::engine::Engine;
+use crate::foundations::Packed;
 use crate::foundations::{
     cast, category, elem, Args, Array, Cast, Category, Construct, Content, Dict, Fold,
-    NativeElement, Never, PlainText, Repr, Resolve, Scope, Set, Smart, StyleChain, Value,
+    NativeElement, Never, PlainText, Repr, Resolve, Scope, Set, Smart, StyleChain,
 };
+use crate::layout::Em;
 use crate::layout::{Abs, Axis, Dir, Length, Rel};
 use crate::model::ParElem;
 use crate::syntax::Spanned;
-use crate::visualize::{Color, Paint, RelativeTo};
+use crate::visualize::{Color, Paint, RelativeTo, Stroke};
 
 /// Text styling.
 ///
@@ -85,7 +88,7 @@ pub(super) fn define(global: &mut Scope) {
 ///   With a function call.
 /// ])
 /// ```
-#[elem(Construct, PlainText, Repr)]
+#[elem(Debug, Construct, PlainText, Repr)]
 pub struct TextElem {
     /// A font family name or priority list of font family names.
     ///
@@ -152,9 +155,9 @@ pub struct TextElem {
     /// available either in an italic or oblique style, the difference between
     /// italic and oblique style is rarely observable.
     ///
-    /// If you want to emphasize your text, you should do so using the
-    /// [emph]($emph) function instead. This makes it easy to adapt the style
-    /// later if you change your mind about how to signify the emphasis.
+    /// If you want to emphasize your text, you should do so using the [emph]
+    /// function instead. This makes it easy to adapt the style later if you
+    /// change your mind about how to signify the emphasis.
     ///
     /// ```example
     /// #text(font: "Linux Libertine", style: "italic")[Italic]
@@ -169,9 +172,8 @@ pub struct TextElem {
     /// that is closest in weight.
     ///
     /// If you want to strongly emphasize your text, you should do so using the
-    /// [strong]($strong) function instead. This makes it easy to adapt the
-    /// style later if you change your mind about how to signify the strong
-    /// emphasis.
+    /// [strong] function instead. This makes it easy to adapt the style later
+    /// if you change your mind about how to signify the strong emphasis.
     ///
     /// ```example
     /// #set text(font: "IBM Plex Sans")
@@ -213,7 +215,8 @@ pub struct TextElem {
     /// ```
     #[parse(args.named_or_find("size")?)]
     #[fold]
-    #[default(Abs::pt(11.0))]
+    #[default(TextSize(Abs::pt(11.0).into()))]
+    #[resolve]
     #[ghost]
     pub size: TextSize,
 
@@ -239,6 +242,15 @@ pub struct TextElem {
     #[default(Color::BLACK.into())]
     #[ghost]
     pub fill: Paint,
+
+    /// How to stroke the text.
+    ///
+    /// ```example
+    /// #text(stroke: 0.5pt + red)[Stroked]
+    /// ```
+    #[resolve]
+    #[ghost]
+    pub stroke: Option<Stroke>,
 
     /// The amount of space that should be added between characters.
     ///
@@ -609,6 +621,12 @@ pub struct TextElem {
     #[required]
     pub text: EcoString,
 
+    /// The offset of the text in the text syntax node referenced by this
+    /// element's span.
+    #[internal]
+    #[ghost]
+    pub span_offset: usize,
+
     /// A delta to apply on the font weight.
     #[internal]
     #[fold]
@@ -618,7 +636,7 @@ pub struct TextElem {
     /// Whether the font style should be inverted.
     #[internal]
     #[fold]
-    #[default(false)]
+    #[default(ItalicToggle(false))]
     #[ghost]
     pub emph: ItalicToggle,
 
@@ -626,7 +644,7 @@ pub struct TextElem {
     #[internal]
     #[fold]
     #[ghost]
-    pub deco: Decoration,
+    pub deco: SmallVec<[Decoration; 1]>,
 
     /// A case transformation that should be applied to the text.
     #[internal]
@@ -647,6 +665,12 @@ impl TextElem {
     }
 }
 
+impl Debug for TextElem {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        write!(f, "Text({})", self.text)
+    }
+}
+
 impl Repr for TextElem {
     fn repr(&self) -> EcoString {
         eco_format!("[{}]", self.text)
@@ -664,7 +688,7 @@ impl Construct for TextElem {
     }
 }
 
-impl PlainText for TextElem {
+impl PlainText for Packed<TextElem> {
     fn plain_text(&self, text: &mut EcoString) {
         text.push_str(self.text());
     }
@@ -747,12 +771,12 @@ pub(crate) fn variant(styles: StyleChain) -> FontVariant {
         TextElem::stretch_in(styles),
     );
 
-    let delta = TextElem::delta_in(styles);
+    let WeightDelta(delta) = TextElem::delta_in(styles);
     variant.weight = variant
         .weight
         .thicken(delta.clamp(i16::MIN as i64, i16::MAX as i64) as i16);
 
-    if TextElem::emph_in(styles) {
+    if TextElem::emph_in(styles).0 {
         variant.style = match variant.style {
             FontStyle::Normal => FontStyle::Italic,
             FontStyle::Italic => FontStyle::Normal,
@@ -768,10 +792,20 @@ pub(crate) fn variant(styles: StyleChain) -> FontVariant {
 pub struct TextSize(pub Length);
 
 impl Fold for TextSize {
+    fn fold(self, outer: Self) -> Self {
+        // Multiply the two linear functions.
+        Self(Length {
+            em: Em::new(self.0.em.get() * outer.0.em.get()),
+            abs: self.0.em.get() * outer.0.abs + self.0.abs,
+        })
+    }
+}
+
+impl Resolve for TextSize {
     type Output = Abs;
 
-    fn fold(self, outer: Self::Output) -> Self::Output {
-        self.0.em.at(outer) + self.0.abs
+    fn resolve(self, styles: StyleChain) -> Self::Output {
+        self.0.resolve(styles)
     }
 }
 
@@ -923,7 +957,7 @@ cast! {
     TextDir,
     self => self.0.into_value(),
     v: Smart<Dir> => {
-        if v.map_or(false, |dir| dir.axis() == Axis::Y) {
+        if v.is_custom_and(|dir| dir.axis() == Axis::Y) {
             bail!("text direction must be horizontal");
         }
         Self(v)
@@ -1040,11 +1074,8 @@ cast! {
 }
 
 impl Fold for FontFeatures {
-    type Output = Self;
-
-    fn fold(mut self, outer: Self::Output) -> Self::Output {
-        self.0.extend(outer.0);
-        self
+    fn fold(self, outer: Self) -> Self {
+        Self(self.0.fold(outer.0))
     }
 }
 
@@ -1117,36 +1148,20 @@ pub(crate) fn features(styles: StyleChain) -> Vec<Feature> {
 
 /// A toggle that turns on and off alternatingly if folded.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
-pub struct ItalicToggle;
-
-cast! {
-    ItalicToggle,
-    self => Value::None,
-    _: Value => Self,
-}
+pub struct ItalicToggle(pub bool);
 
 impl Fold for ItalicToggle {
-    type Output = bool;
-
-    fn fold(self, outer: Self::Output) -> Self::Output {
-        !outer
+    fn fold(self, outer: Self) -> Self {
+        Self(self.0 ^ outer.0)
     }
 }
 
 /// A delta that is summed up when folded.
-#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
+#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct WeightDelta(pub i64);
 
-cast! {
-    WeightDelta,
-    self => self.0.into_value(),
-    v: i64 => Self(v),
-}
-
 impl Fold for WeightDelta {
-    type Output = i64;
-
-    fn fold(self, outer: Self::Output) -> Self::Output {
-        outer + self.0
+    fn fold(self, outer: Self) -> Self {
+        Self(outer.0 + self.0)
     }
 }

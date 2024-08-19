@@ -111,7 +111,7 @@ use crate::World;
 /// will be stored as a plain date internally, meaning that you cannot use
 /// components such as `hour` or `minute`, which would only work on datetimes
 /// that have a specified time.
-#[ty(scope)]
+#[ty(scope, cast)]
 #[derive(Debug, Clone, Copy, PartialEq, Hash)]
 pub enum Datetime {
     /// Representation as a date.
@@ -213,8 +213,8 @@ impl Datetime {
 impl Datetime {
     /// Creates a new datetime.
     ///
-    /// You can specify the [datetime]($datetime) using a year, month, day,
-    /// hour, minute, and second.
+    /// You can specify the [datetime] using a year, month, day, hour, minute,
+    /// and second.
     ///
     /// _Note_: Depending on which components of the datetime you specify, Typst
     /// will store it in one of the following three ways:
@@ -306,7 +306,7 @@ impl Datetime {
     ) -> StrResult<Datetime> {
         Ok(engine
             .world
-            .today(offset.as_custom())
+            .today(offset.custom())
             .ok_or("unable to get the current date")?)
     }
 
@@ -317,6 +317,8 @@ impl Datetime {
     /// `[[year]-[month]-[day]]`. If you specified a time, it will be
     /// `[[hour]:[minute]:[second]]`. In the case of a datetime, it will be
     /// `[[year]-[month]-[day] [hour]:[minute]:[second]]`.
+    ///
+    /// See the [format syntax]($datetime/#format) for more information.
     #[func]
     pub fn display(
         &self,

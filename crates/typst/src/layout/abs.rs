@@ -4,7 +4,7 @@ use std::ops::{Add, Div, Mul, Neg, Rem};
 
 use ecow::EcoString;
 
-use crate::foundations::{cast, repr, Repr, Value};
+use crate::foundations::{cast, repr, Fold, Repr, Value};
 use crate::util::{Numeric, Scalar};
 
 /// An absolute length.
@@ -117,17 +117,6 @@ impl Abs {
     pub fn approx_eq(self, other: Self) -> bool {
         self == other || (self - other).to_raw().abs() < 1e-6
     }
-
-    /// Perform a checked division by a number, returning zero if the result
-    /// is not finite.
-    pub fn safe_div(self, number: f64) -> Self {
-        let result = self.to_raw() / number;
-        if result.is_finite() {
-            Self::raw(result)
-        } else {
-            Self::zero()
-        }
-    }
 }
 
 impl Numeric for Abs {
@@ -148,7 +137,7 @@ impl Debug for Abs {
 
 impl Repr for Abs {
     fn repr(&self) -> EcoString {
-        repr::format_float(self.to_pt(), Some(2), "pt")
+        repr::format_float_with_unit(self.to_pt(), "pt")
     }
 }
 
@@ -224,6 +213,12 @@ impl Sum for Abs {
 impl<'a> Sum<&'a Self> for Abs {
     fn sum<I: Iterator<Item = &'a Self>>(iter: I) -> Self {
         Self(iter.map(|s| s.0).sum())
+    }
+}
+
+impl Fold for Abs {
+    fn fold(self, _: Self) -> Self {
+        self
     }
 }
 

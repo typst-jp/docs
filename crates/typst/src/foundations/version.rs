@@ -19,8 +19,8 @@ use crate::foundations::{cast, func, repr, scope, ty, Repr};
 /// as `0`, `0.0`, `0.0.0`, and so on.
 ///
 /// You can convert a version to an array of explicitly given components using
-/// the [`array`]($array) constructor.
-#[ty(scope)]
+/// the [`array`] constructor.
+#[ty(scope, cast)]
 #[derive(Debug, Default, Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
 pub struct Version(EcoVec<u32>);

@@ -274,6 +274,38 @@
 #test(b, 1)
 
 ---
+// Test comma placement in destructuring assignment.
+#let array = (1, 2, 3)
+#((key: array.at(1)) = (key: "hi"))
+#test(array, (1, "hi", 3))
+
+#let array = (1, 2, 3)
+#((array.at(1)) = ("hi"))
+#test(array, (1, "hi", 3))
+
+#let array = (1, 2, 3)
+#((array.at(1),) = ("hi",))
+#test(array, (1, "hi", 3))
+
+#let array = (1, 2, 3)
+#((array.at(1)) = ("hi",))
+#test(array, (1, ("hi",), 3))
+
+---
+// Test nested destructuring assignment.
+#let a
+#let b
+#let c
+#(((a, b), (key: c)) = ((1, 2), (key: 3)))
+#test((a, b, c), (1, 2, 3))
+
+---
+#let array = (1, 2, 3)
+// Error: 3-17 cannot destructure string
+#((array.at(1),) = ("hi"))
+#test(array, (1, ("hi",), 3))
+
+---
 // Error: 3-6 cannot mutate a constant: box
 #(box = 1)
 
@@ -302,6 +334,7 @@
 // Apply positional arguments.
 #let add(x, y) = x + y
 #test(add.with(2)(3), 5)
+#test(add.with(2, 3)(), 5)
 #test(add.with(2).with(3)(), 5)
 #test((add.with(2))(4), 6)
 #test((add.with(2).with(3))(), 5)
@@ -313,3 +346,14 @@
 #let inc2 = inc.with(y: 2)
 #test(inc2(2), 4)
 #test(inc2(2, y: 4), 6)
+
+// Apply arguments to an argument sink.
+#let times(..sink) = {
+  let res = sink.pos().product()
+  if sink.named().at("negate", default: false) { res *= -1 }
+  res
+}
+#test((times.with(2, negate: true).with(5))(), -10)
+#test((times.with(2).with(5).with(negate: true))(), -10)
+#test((times.with(2).with(5, negate: true))(), -10)
+#test((times.with(2).with(negate: true))(5), -10)

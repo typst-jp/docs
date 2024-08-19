@@ -8,13 +8,15 @@ publish = false
 
 [dev-dependencies]
 typst = { workspace = true }
+typst-assets = { workspace = true, features = ["fonts"] }
+typst-dev-assets = { workspace = true }
 typst-pdf = { workspace = true }
 typst-render = { workspace = true }
 typst-svg = { workspace = true }
+typst-ide = { workspace = true }
 clap = { workspace = true }
 comemo = { workspace = true }
 ecow = { workspace = true }
-iai = { workspace = true }
 once_cell = { workspace = true }
 oxipng = { workspace = true }
 rayon = { workspace = true }
@@ -26,11 +28,6 @@ walkdir = { workspace = true }
 [[test]]
 name = "tests"
 path = "src/tests.rs"
-harness = false
-
-[[bench]]
-name = "benches"
-path = "src/benches.rs"
 harness = false
 
 [lints]

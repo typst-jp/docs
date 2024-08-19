@@ -2,7 +2,8 @@ Licenses for third party components used by this project can be found below.
 
 ================================================================================
 The Creative Commons Zero v1.0 Universal License applies to:
-* The ICC profiles found in `crates/typst/icc/*`
+* The ICC profiles found in `crates/typst-pdf/src/icc/*` and
+  `crates/typst/assets/*`.
 
 CC0 1.0 Universal
 
@@ -158,6 +159,10 @@ The MIT License applies to:
    closely modelled after the `DownloadTracker` from rustup
    (https://github.com/rust-lang/rustup/blob/master/src/cli/download_tracker.rs)
 
+* The `SyntaxSet` defined in `crates/typst-syntax/src/set.rs` which is
+  based on the `TokenSet` from rust-analyzer
+  (https://github.com/rust-lang/rust-analyzer/blob/master/crates/parser/src/token_set.rs)
+
 The MIT License (MIT)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -215,7 +220,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ================================================================================
 
 ================================================================================
-Syntaxes in `crates/typst-library/assets/syntect.bin` are generated from syntax
+Syntaxes embedded within the `two-face` crate are generated from syntax
 definitions which can be found here:
 https://github.com/sharkdp/bat/tree/master/assets/syntaxes
 
@@ -672,11 +677,6 @@ The Creative Commons Attribution 4.0 International License applies to:
   Copyright 2016 Brad Erickson
   Copyright 2016 Twitter, Inc.
   (https://github.com/eosrei/twemoji-color-font)
-
-* SVG icons in tools/test-helper/images
-  These are slightly modified versions of emojis from the Twemoji emoji set.
-  Copyright 2020 Twitter, Inc and other contributors
-  (https://github.com/twitter/twemoji)
 
 * Monkey emoji in assets/files/monkey.svg
   Copyright 2018 Vincent Le Moign, Streamline Emoji Project

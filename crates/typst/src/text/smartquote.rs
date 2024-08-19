@@ -67,10 +67,9 @@ pub struct SmartQuoteElem {
     ///   - [string]($str): a string consisting of two characters containing the
     ///     opening and closing double quotes (characters here refer to Unicode
     ///     grapheme clusters)
-    ///   - [array]($array): an array containing the opening and closing double
-    ///     quotes
-    ///   - [dictionary]($dictionary): an array containing the double and single
-    ///     quotes, each specified as either `{auto}`, string, or array
+    ///   - [array]: an array containing the opening and closing double quotes
+    ///   - [dictionary]: an array containing the double and single quotes, each
+    ///     specified as either `{auto}`, string, or array
     ///
     /// ```example
     /// #set text(lang: "de")
@@ -208,7 +207,8 @@ impl<'s> SmartQuotes<'s> {
                 true => low_high,
             },
             "cs" | "da" | "de" | "sk" | "sl" if alternative => ("›", "‹", "»", "«"),
-            "cs" | "da" | "de" | "et" | "is" | "lt" | "lv" | "sk" | "sl" => low_high,
+            "cs" | "de" | "et" | "is" | "lt" | "lv" | "sk" | "sl" => low_high,
+            "da" => ("‘", "’", "“", "”"),
             "fr" | "ru" if alternative => default,
             "fr" => ("‹\u{00A0}", "\u{00A0}›", "«\u{00A0}", "\u{00A0}»"),
             "fi" | "sv" if alternative => ("’", "’", "»", "»"),
@@ -250,7 +250,7 @@ impl<'s> SmartQuotes<'s> {
     }
 
     /// The opening quote.
-    fn open(&self, double: bool) -> &'s str {
+    pub fn open(&self, double: bool) -> &'s str {
         if double {
             self.double_open
         } else {
@@ -259,7 +259,7 @@ impl<'s> SmartQuotes<'s> {
     }
 
     /// The closing quote.
-    fn close(&self, double: bool) -> &'s str {
+    pub fn close(&self, double: bool) -> &'s str {
         if double {
             self.double_close
         } else {
@@ -268,7 +268,7 @@ impl<'s> SmartQuotes<'s> {
     }
 
     /// Which character should be used as a prime.
-    fn prime(&self, double: bool) -> &'static str {
+    pub fn prime(&self, double: bool) -> &'static str {
         if double {
             "″"
         } else {
@@ -277,7 +277,7 @@ impl<'s> SmartQuotes<'s> {
     }
 
     /// Which character should be used as a fallback quote.
-    fn fallback(&self, double: bool) -> &'static str {
+    pub fn fallback(&self, double: bool) -> &'static str {
         if double {
             "\""
         } else {

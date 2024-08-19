@@ -7,7 +7,7 @@ use ecow::{eco_format, EcoString};
 use crate::diag::{bail, SourceResult};
 use crate::engine::Engine;
 use crate::foundations::{func, repr, scope, ty, Content, Smart, StyleChain};
-use crate::layout::{Abs, Axes, Frame, Layout, Length, Regions, Size};
+use crate::layout::{Abs, Axes, Frame, LayoutMultiple, Length, Regions, Size};
 use crate::syntax::{Span, Spanned};
 use crate::util::Numeric;
 use crate::visualize::RelativeTo;
@@ -90,12 +90,11 @@ use crate::World;
 /// Typst determines the ancestor container as follows:
 /// - For shapes that are placed at the root/top level of the document, the
 ///   closest ancestor is the page itself.
-/// - For other shapes, the ancestor is the innermost [`block`]($block) or
-///   [`box`]($box) that contains the shape. This includes the boxes and blocks
-///   that are implicitly created by show rules and elements. For example, a
-///   [`rotate`]($rotate) will not affect the parent of a gradient, but a
-///   [`grid`]($grid) will.
-#[ty(scope)]
+/// - For other shapes, the ancestor is the innermost [`block`] or [`box`] that
+///   contains the shape. This includes the boxes and blocks that are implicitly
+///   created by show rules and elements. For example, a [`rotate`] will not
+///   affect the parent of a gradient, but a [`grid`] will.
+#[ty(scope, cast)]
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 pub struct Pattern(Arc<Repr>);
 

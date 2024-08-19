@@ -1,91 +1,200 @@
-# Typst 编译器架构 
-想要了解如何贡献或者只是对 Typst 的工作原理好奇吗？本文档介绍了 Typst 编译器的一般结构和架构，以便您了解各个部分的位置和相互关系。
+# Typst Compiler Architecture
+Wondering how to contribute or just curious how Typst works? This document
+covers the general structure and architecture of Typst's compiler, so you get an
+understanding of what's where and how everything fits together.
 
-## 目录
-我们首先从了解存储库中的目录的大致概述开始：
 
-- `crates/typst`：定义了完整语言和库的主要编译器 crate。
-- `crates/typst-cli`：Typst 的命令行界面。它是在编译器和导出工具之上的相对较小的一层。
-- `crates/typst-docs`：从 `docs` 文件夹的内容和 Rust 内联文档生成官方 [文档][docs] 的内容生成器。只生成内容和结构，而不是具体的 HTML（这部分当前是闭源的）。
-- `crates/typst-ide`：暴露 IDE 功能。
-- `crates/typst-macros`：编译器的过程宏。
-- `crates/typst-pdf`：PDF 导出工具。
-- `crates/typst-render`：Typst 帧的渲染器。
-- `crates/typst-svg`：SVG 导出工具。
-- `crates/typst-syntax`：解析器和语法树定义的所在位置。
-- `docs`：文档的长格式部分的源文件。个别的元素和函数是通过 Rust 源代码进行内联文档的。
-- `assets`：用于测试和文档的字体和文件。
-- `tests`：Typst 编译的集成测试。
-- `tools`：开发工具。
+## Directories
+Let's start with a broad overview of the directories in this repository:
 
-## 编译
-Typst 文件的源代码到 PDF 的编译过程分为四个阶段。
+- `crates/typst`: The main compiler crate which defines the complete language
+  and library.
+- `crates/typst-cli`: Typst's command line interface. This is a relatively small
+  layer on top of the compiler and the exporters.
+- `crates/typst-docs`: Generates the content of the official
+  [documentation][docs] from the content of the `docs` folder and the inline
+  Rust documentation. Only generates the content and structure, not the concrete
+  HTML (that part is currently closed source).
+- `crates/typst-ide`: Exposes IDE functionality.
+- `crates/typst-macros`: Procedural macros for the compiler.
+- `crates/typst-pdf`: The PDF exporter.
+- `crates/typst-render`: A renderer for Typst frames.
+- `crates/typst-svg`: The SVG exporter.
+- `crates/typst-syntax`: Home to the parser and syntax tree definition.
+- `docs`: Source files for longer-form parts of the documentation. Individual
+  elements and functions are documented inline with the Rust source code.
+- `assets`: Fonts and files used for tests and the documentation.
+- `tests`: Integration tests for Typst compilation.
+- `tools`: Tooling for development.
 
-1. **解析：**将源代码字符串转换为语法树。
-2. **评估：**将语法树及其依赖项转换为内容。
-4. **布局：**将内容布局到帧中。
-5. **导出：**将帧转换为 PDF 等输出格式。
 
-Typst 编译器是 _增量的_：重新编译先前编译过的文档比从头开始编译要快得多。大部分的工作是由我们为 Typst 开发的增量编译框架 [`comemo`] 完成的。然而，编译器仍然是为增量性而精心编写的。下面我们将讨论这四个阶段及增量性对每个阶段的影响。
+## Compilation
+The source-to-PDF compilation process of a Typst file proceeds in four phases.
 
-## 解析
-语法树和解析器位于 `crates/typst-syntax` 中。解析是一个纯函数 `&str -> SyntaxNode`，没有任何其他依赖项。结果是一个具体的语法树，反映了整个文件的结构，包括空格和注释。解析不会失败。如果存在语法错误，则返回的语法树将包含错误节点。解析器对错误的代码处理得好很重要，因为它还用于语法高亮和 IDE 功能。
+1. **Parsing:** Turns a source string into a syntax tree.
+2. **Evaluation:** Turns a syntax tree and its dependencies into content.
+4. **Layout:** Layouts content into frames.
+5. **Export:** Turns frames into an output format like PDF or a raster graphic.
 
-**类型：**
-语法树是无类型的，任何节点都可以具有任何 `SyntaxKind`。这样做的好处是（a）为每个节点附加范围（见下文），（b）在进行语法高亮或者 IDE 分析时遍历树时不会出现额外的复杂性，如访问者模式之类的。`typst::syntax::ast` 模块在原始树之上提供了一个有类型的 API。该 API 类似于传统的抽象语法树，并且由解释器使用。
+The Typst compiler is _incremental:_ Recompiling a document that was compiled
+previously is much faster than compiling from scratch. Most of the hard work is
+done by [`comemo`], an incremental compilation framework we have written for
+Typst. However, the compiler is still carefully written with incrementality in
+mind. Below we discuss the four phases and how incrementality affects each of
+them.
 
-**范围：**
-解析完成后，会为语法树分配 _范围编号_。这些编号是语法节点的唯一标识符，用于将后续编译阶段的错误追溯到特定的语法部分。范围编号是按顺序排列的，这样快速找回与编号对应的节点。
 
-**增量：**
-Typst 有一个增量解析器，可以重新解析标记段或代码/内容块。增量解析后，范围编号会被重新分配。这样远离编辑位置的范围编号就保持稳定。这非常重要，因为它们广泛用于整个编译器，甚至作为记忆化函数的输入。它们发生变化越少，对增量编译就越有利。
+## Parsing
+The syntax tree and parser are located in `crates/typst-syntax`. Parsing is
+a pure function `&str -> SyntaxNode` without any further dependencies. The
+result is a concrete syntax tree reflecting the whole file structure, including
+whitespace and comments. Parsing cannot fail. If there are syntactic errors, the
+returned syntax tree contains error nodes instead. It's important that the
+parser deals well with broken code because it is also used for syntax
+highlighting and IDE functionality.
 
-## 评估
-评估阶段位于 `crates/typst/src/eval` 中。它将已解析的 `Source` 文件评估为一个 `Module`。模块由在其内部编写的 `Content` 和在其中定义的绑定组成。
+**Typedness:**
+The syntax tree is untyped, any node can have any `SyntaxKind`. This makes it
+very easy to (a) attach spans to each node (see below), (b) traverse the tree
+when doing highlighting or IDE analyses (no extra complications like a visitor
+pattern). The `typst::syntax::ast` module provides a typed API on top of
+the raw tree. This API resembles a more classical AST and is used by the
+interpreter.
 
-一个源文件可能依赖于其他文件（导入的源文件、图像、数据文件），这些文件需要解析。由于 Typst 部署在不同的环境中（CLI、Web 应用等），因此这些系统依赖通过称为 `World` 的通用接口来解析。除了文件，该环境还提供配置和字体。
+**Spans:**
+After parsing, the syntax tree is numbered with _span numbers._ These numbers
+are unique identifiers for syntax nodes that are used to trace back errors in
+later compilation phases to a piece of syntax. The span numbers are ordered so
+that the node corresponding to a number can be found quickly.
 
-**解释器：**
-Typst 实现了一种树遍历解释器。要评估一段源代码，首先要用一个作用域栈创建一个 `Vm`。然后，通过形如 `fn eval(&self, vm: &mut Vm) -> Result<Value>` 的 trait 实现递归地对 AST 进行评估。一个有趣的细节是如何处理闭包：当解释器遇到闭包/函数定义时，它遍历闭包的体并找到所有对在闭包内未定义的变量的访问。然后，它复制（_捕捉_）所有这些变量的值，并将它们与闭包的语法定义一起存储在闭包值中。当调用闭包时，会创建一个新的 `Vm`，并且在它的作用域栈中初始化捕获的变量。
+**Incremental:**
+Typst has an incremental parser that can reparse a segment of markup or a
+code/content block. After incremental parsing, span numbers are reassigned
+locally. This way, span numbers further away from an edit stay mostly stable.
+This is important because they are used pervasively throughout the compiler,
+also as input to memoized functions. The less they change, the better for
+incremental compilation.
 
-**增量：**
-在这个阶段，增量编译在模块和闭包的粒度上进行。Typst 在多次编译中记忆化评估源文件的结果。此外，它还记忆化了使用特定参数调用闭包的结果。这是可能的，因为 Typst 确保所有的函数都是纯函数。闭包调用的结果可以重用，如果闭包具有相同的语法和捕捉，即使闭包值来自于不同的模块评估（即，如果重新评估模块，前面对模块中定义的闭包的调用仍然可以重用）。
 
-## 布局
-布局阶段将每个页的内容转换为对应的帧。为了对内容进行布局，我们首先需要通过应用所有相关的显示规则将其“实现”。由于显示规则可以作为 Typst 的闭包定义，实现可能会触发闭包的评估，而闭包评估又会产生递归实现的内容。实现是一个浅层次的过程：当我们将列表项收集到想要进行布局的列表中时，我们尚未实现列表项内部的内容。只有在列表项进行布局时，它们才会延迟实现。
+## Evaluation
+The evaluation phase lives in `crates/typst/src/eval`. It takes a parsed
+`Source` file and evaluates it to a `Module`. A module consists of the `Content`
+that was written in it and a `Scope` with the bindings that were defined within
+it.
 
-当我们将内容实现为可布局元素后，然后可以将它们布局到“区域”中，用于描述希望将内容布局到其中的空间。在这些区域中，一个元素可以根据自己的意愿布局自己，返回每个它想要占用的区域一个 `Frame`。
+A source file may depend on other files (imported sources, images, data files),
+which need to be resolved. Since Typst is deployed in different environments
+(CLI, web app, etc.) these system dependencies are resolved through a general
+interface called a `World`. Apart from files, the world also provides
+configuration and fonts.
 
-**内省：**
-内容布局（和实现）可能取决于它自身的布局方式（例如，通过目录中的页码、计数器、状态等）。Typst 通过 _内省循环_ 解决这些固有的循环依赖关系：布局阶段在循环中运行，直到结果稳定。大多数内省在一到两次迭代后就会稳定下来。但是，有些可能永远无法稳定，所以我们放弃在五次尝试后停止。
+**Interpreter:**
+Typst implements a tree-walking interpreter. To evaluate a piece of source, you
+first create a `Vm` with a scope stack. Then, the AST is recursively evaluated
+through trait impls of the form `fn eval(&self, vm: &mut Vm) -> Result<Value>`.
+An interesting detail is how closures are dealt with: When the interpreter sees
+a closure / function definition, it walks the body of the closure and finds all
+accesses to variables that aren't defined within the closure. It then clones the
+values of all these variables (it _captures_ them) and stores them alongside the
+closure's syntactical definition in a closure value. When the closure is called,
+a fresh `Vm` is created and its scope stack is initialized with the captured
+variables.
 
-**增量：**
-布局缓存的粒度是元素级别。这一点非常重要，因为整体布局是编译过程中最昂贵的阶段，我们希望尽可能地重用。
+**Incremental:**
+In this phase, incremental compilation happens at the granularity of the module
+and the closure. Typst memoizes the result of evaluating a source file across
+compilations. Furthermore, it memoizes the result of calling a closure with a
+certain set of parameters. This is possible because Typst ensures that all
+functions are pure. The result of a closure call can be recycled if the closure
+has the same syntax and captures, even if the closure values stems from a
+different module evaluation (i.e. if a module is reevaluated, previous calls to
+closures defined in the module can still be reused).
 
-## 导出
-导出工具位于单独的 crate 中。它们将布局的帧转换为输出文件格式。
 
-- PDF 导出工具将布局的帧转换为 PDF 文件。
-- SVG 导出工具将帧转换为 SVG。
-- 内置渲染器将帧转换为像素缓冲区。
-- HTML 的导出目前还不存在，但将来会有。然而，这需要一些复杂的编译工作，因为导出将从 `Content` 而不是 `Frames` 开始（布局是浏览器的工作）。
+## Layout
+The layout phase takes `Content` and produces one `Frame` per page for it. To
+layout `Content`, we first have to _realize_ it by applying all relevant show
+rules to the content. Since show rules may be defined as Typst closures,
+realization can trigger closure evaluation, which in turn produces content that
+is recursively realized. Realization is a shallow process: While collecting list
+items into a list that we want to layout, we don't realize the content within
+the list items just yet. This only happens lazily once the list items are
+layouted.
+
+When we a have realized the content into a layoutable element, we can then
+layout it into _regions,_ which describe the space into which the content shall
+be layouted. Within these, an element is free to layout itself as it sees fit,
+returning one `Frame` per region it wants to occupy.
+
+**Introspection:**
+How content layouts (and realizes) may depend on how _it itself_ is layouted
+(e.g., through page numbers in the table of contents, counters, state, etc.).
+Typst resolves these inherently cyclical dependencies through the _introspection
+loop:_ The layout phase runs in a loop until the results stabilize. Most
+introspections stabilize after one or two iterations. However, some may never
+stabilize, so we give up after five attempts.
+
+**Incremental:**
+Layout caching happens at the granularity of the element. This is important
+because overall layout is the most expensive compilation phase, so we want to
+reuse as much as possible.
+
+
+## Export
+Exporters live in separate crates. They turn layouted frames into an output file
+format.
+
+- The PDF exporter takes layouted frames and turns them into a PDF file.
+- The SVG exporter takes a frame and turns it into an SVG.
+- The built-in renderer takes a frame and turns it into a pixel buffer.
+- HTML export does not exist yet, but will in the future. However, this requires
+  some complex compiler work because the export will start with `Content`
+  instead of `Frames` (layout is the browser's job).
+
 
 ## IDE
-`crates/typst-ide` crate 实现了 Typst 的 IDE 功能。它主要依赖于其他模块（尤其是 `syntax` 和 `eval`）。
+The `crates/typst-ide` crate implements IDE functionality for Typst. It
+builds heavily on the other modules (most importantly, `syntax` and `eval`).
 
-**语法：**
-基本的 IDE 功能基于文件的语法。然而，标准语法节点对于编写 IDE 工具来说有些局限性。它不提供对其父节点或兄弟节点的访问。这对于类似于递归遍历的评估来说是可以的，但对于 IDE 的使用场景来说是不实用的。因此，基于语法节点之上还有一个额外的抽象称为 `LinkedNode`，在 `ide` 模块中广泛使用。
+**Syntactic:**
+Basic IDE functionality is based on a file's syntax. However, the standard
+syntax node is a bit too limited for writing IDE tooling. It doesn't provide
+access to its parents or neighbours. This is a fine for an evaluation-like
+recursive traversal, but impractical for IDE use cases. For this reason, there
+is an additional abstraction on top of a syntax node called a `LinkedNode`,
+which is used pervasively across the `ide` module.
 
-**语义：**
-更高级的功能，比如自动完成，需要对源代码进行语义分析。为了获取关于事物的语义信息，如悬停提示，我们直接使用编译器的其他部分。例如，要查找变量的类型，我们评估和实现带有 `Tracer` 的完整文档，该文档在访问变量时发出了该变量的值。从结果值集合中，我们可以计算出一个值所涉及的类型集合。由于增量编译，我们可以重用编译的大部分内容，这在我们必须为了排版文档而做的工作中是可能的。
+**Semantic:**
+More advanced functionality like autocompletion requires semantic analysis of
+the source. To gain semantic information for things like hover tooltips, we
+directly use other parts of the compiler. For instance, to find out the type of
+a variable, we evaluate and realize the full document equipped with a `Tracer`
+that emits the variable's value whenever it is visited. From the set of
+resulting values, we can then compute the set of types a value takes on. Thanks
+to incremental compilation, we can recycle large parts of the compilation that
+we had to do anyway to typeset the document.
 
-**增量：**
-目前，语法 IDE 功能相对较为廉价，因此没有特殊的增量性问题。使用追溯器的语义分析相对较昂贵。然而，追溯分析编译的大部分组件可以重用上一次正常编译的记忆化结果。只有活动文件的模块评估以及在活动文件中求值源代码的布局代码需要重新运行。这一切都由 `comemo` 自动处理，因为追溯器包装在 `comemo::TrackedMut` 容器中。
+**Incremental:**
+Syntactic IDE stuff is relatively cheap for now, so there are no special
+incrementality concerns. Semantic analysis with a tracer is relatively
+expensive. However, large parts of a traced analysis compilation can reuse
+memoized results from a previous normal compilation. Only the module evaluation
+of the active file and layout code that somewhere within evaluates source code
+in the active file needs to re-run. This is all handled automatically by
+`comemo` because the tracer is wrapped in a `comemo::TrackedMut` container.
 
-## 测试
-Typst 有一个广泛的集成测试套件。一个测试文件由多个以 `---` 分隔的测试组成。对于每个测试文件，我们存储一个定义了编译器应该输出的参考图像。要管理这些参考图像，您可以在 `tools/test-helper` 中使用 VS Code 扩展。
 
-集成测试涵盖了解析、评估、实现、布局和渲染。PDF 输出遗憾地没有经过测试，但大多数错误出现在编译器的早期阶段；PDF 输出本身相对简单。IDE 功能也基本没有经过测试。将来应该添加 PDF 和 IDE 测试。
+## Tests
+Typst has an extensive suite of integration tests. A test file consists of
+multiple tests that are separated by `---`. For each test file, we store a
+reference image defining what the compiler _should_ output. To manage the
+reference images, you can use the VS code extension in `tools/test-helper`.
+
+The integration tests cover parsing, evaluation, realization, layout and
+rendering. PDF output is sadly untested, but most bugs are in earlier phases of
+the compiler; the PDF output itself is relatively straight-forward. IDE
+functionality is also mostly untested. PDF and IDE testing should be added in
+the future.
 
 [docs]: https://typst.app/docs/
 [`comemo`]: https://github.com/typst/comemo/

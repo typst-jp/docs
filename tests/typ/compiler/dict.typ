@@ -41,6 +41,16 @@
 #test((a: 1, b: 2).at("c", default: 3), 3)
 
 ---
+// Test insert.
+#{
+  let dict = (a: 1, b: 2)
+  dict.insert("b", 3)
+  test(dict, (a: 1, b: 3))
+  dict.insert("c", 5)
+  test(dict, (a: 1, b: 3, c: 5))
+}
+
+---
 // Test remove with default value.
 #{
   let dict = (a: 1, b: 2)
@@ -56,7 +66,8 @@
 // Missing lvalue is not automatically none-initialized.
 #{
   let dict = (:)
-  // Error: 3-9 dictionary does not contain key "b" and no default value was specified
+  // Error: 3-9 dictionary does not contain key "b"
+  // Hint: 3-9 use `insert` to add or update values
   dict.b += 1
 }
 
@@ -71,6 +82,11 @@
 #dict.remove("c")
 #test("c" in dict, false)
 #test(dict, (a: 3, b: 1))
+
+---
+// Test dictionary constructor
+#dictionary(sys).at("version")
+#dictionary(sys).at("no_crash", default: none)
 
 ---
 // Test that removal keeps order.
@@ -94,7 +110,6 @@
 // Identified as dictionary due to initial colon.
 // The boolean key is allowed for now since it will only cause an error at the evaluation stage.
 // Error: 4-5 expected named or keyed pair, found integer
-// Error: 5 expected comma
 // Error: 17 expected expression
 #(:1 b:"", true:)
 
@@ -105,11 +120,11 @@
 ---
 #{
   let dict = (
-    func: () => 1,
+    call-me: () => 1,
   )
-  // Error: 8-12 type dictionary has no method `func`
-  // Hint: 8-12 to call the function stored in the dictionary, surround the field access with parentheses
-  dict.func()
+  // Error: 8-15 type dictionary has no method `call-me`
+  // Hint: 8-15 to call the function stored in the dictionary, surround the field access with parentheses, e.g. `(dict.call-me)(..)`
+  dict.call-me()
 }
 
 ---
@@ -119,6 +134,7 @@
   )
 
   // Error: 8-15 type dictionary has no method `nonfunc`
+  // Hint: 8-15 did you mean to access the field `nonfunc`?
   dict.nonfunc()
 }
 
@@ -135,7 +151,7 @@
 
 ---
 // Error: 7-10 expected identifier, found group
-// Error: 12-14 expected identifier, found integer
+// Error: 12-14 expected pattern, found integer
 #let ((a): 10) = "world"
 
 ---

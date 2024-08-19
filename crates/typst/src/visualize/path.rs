@@ -3,10 +3,11 @@ use kurbo::{CubicBez, ParamCurveExtrema};
 use crate::diag::{bail, SourceResult};
 use crate::engine::Engine;
 use crate::foundations::{
-    array, cast, elem, Array, NativeElement, Reflect, Resolve, Smart, StyleChain,
+    array, cast, elem, Array, Packed, Reflect, Resolve, Smart, StyleChain,
 };
 use crate::layout::{
-    Abs, Axes, Fragment, Frame, FrameItem, Layout, Length, Point, Regions, Rel, Size,
+    Abs, Axes, Fragment, Frame, FrameItem, LayoutMultiple, Length, Point, Regions, Rel,
+    Size,
 };
 use crate::visualize::{FixedStroke, Geometry, Paint, Shape, Stroke};
 
@@ -25,7 +26,7 @@ use PathVertex::{AllControlPoints, MirroredControlPoint, Vertex};
 ///   ((50%, 0pt), (40pt, 0pt)),
 /// )
 /// ```
-#[elem(Layout)]
+#[elem(LayoutMultiple)]
 pub struct PathElem {
     /// How to fill the path.
     ///
@@ -36,7 +37,7 @@ pub struct PathElem {
     /// rule](https://en.wikipedia.org/wiki/Nonzero-rule).
     pub fill: Option<Paint>,
 
-    /// How to [stroke]($stroke) the path. This can be:
+    /// How to [stroke] the path. This can be:
     ///
     /// Can be set to  `{none}` to disable the stroke or to `{auto}` for a
     /// stroke of `{1pt}` black if and if only if no fill is given.
@@ -55,8 +56,7 @@ pub struct PathElem {
     ///
     /// Each vertex can be defined in 3 ways:
     ///
-    /// - A regular point, as given to the [`line`]($line) or
-    ///   [`polygon`]($polygon) function.
+    /// - A regular point, as given to the [`line`] or [`polygon`] function.
     /// - An array of two points, the first being the vertex and the second
     ///   being the control point. The control point is expressed relative to
     ///   the vertex and is mirrored to get the second control point. The given
@@ -70,8 +70,8 @@ pub struct PathElem {
     pub vertices: Vec<PathVertex>,
 }
 
-impl Layout for PathElem {
-    #[tracing::instrument(name = "PathElem::layout", skip_all)]
+impl LayoutMultiple for Packed<PathElem> {
+    #[typst_macros::time(name = "path", span = self.span())]
     fn layout(
         &self,
         _: &mut Engine,

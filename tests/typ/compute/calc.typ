@@ -20,15 +20,44 @@
 #test(type(float(10)), float)
 
 ---
+// Test float `is-nan()`.
+#test(float(calc.nan).is-nan(), true)
+#test(float(10).is-nan(), false)
+
+---
+// Test float `is-infinite()`.
+#test(float(calc.inf).is-infinite(), true)
+#test(float(-calc.inf).is-infinite(), true)
+#test(float(10).is-infinite(), false)
+#test(float(-10).is-infinite(), false)
+
+---
+// Test float `signum()`
+#test(float(0.0).signum(), 1.0)
+#test(float(1.0).signum(), 1.0)
+#test(float(-1.0).signum(), -1.0)
+#test(float(10.0).signum(), 1.0)
+#test(float(-10.0).signum(), -1.0)
+#test(float(calc.nan).signum().is-nan(), true)
+
+---
+// Test int `signum()`
+#test(int(0).signum(), 0)
+#test(int(1.0).signum(), 1)
+#test(int(-1.0).signum(), -1)
+#test(int(10.0).signum(), 1)
+#test(int(-10.0).signum(), -1)
+
+---
 #test(calc.round(calc.e, digits: 2), 2.72)
 #test(calc.round(calc.pi, digits: 2), 3.14)
 
 ---
-// Error: 6-10 expected boolean, float, string, or integer, found length
+// Error: 6-10 expected integer, boolean, float, or string, found length
 #int(10pt)
 
 ---
-// Error: 8-13 expected boolean, integer, ratio, string, or float, found type
+// Error: 8-13 expected float, boolean, integer, ratio, or string, found type
 #float(float)
 
 ---
@@ -139,7 +168,50 @@
 #test(calc.ln(10), calc.log(10, base: calc.e))
 
 ---
-// Error: 10-16 zero to the power of zero is undefined
+// Test the `bit-not`, `bit-and`, `bit-or` and `bit-xor` functions.
+#test(64.bit-not(), -65)
+#test(0.bit-not(), -1)
+#test((-56).bit-not(), 55)
+#test(128.bit-and(192), 128)
+#test(192.bit-and(224), 192)
+#test((-1).bit-and(325532), 325532)
+#test(0.bit-and(-53), 0)
+#test(0.bit-or(-1), -1)
+#test(5.bit-or(3), 7)
+#test((-50).bit-or(3), -49)
+#test(64.bit-or(32), 96)
+#test((-1).bit-xor(1), -2)
+#test(64.bit-xor(96), 32)
+#test((-1).bit-xor(-7), 6)
+#test(0.bit-xor(492), 492)
+
+---
+// Test the `bit-lshift` and `bit-rshift` functions.
+#test(32.bit-lshift(2), 128)
+#test(694.bit-lshift(0), 694)
+#test(128.bit-rshift(2), 32)
+#test(128.bit-rshift(12345), 0)
+#test((-7).bit-rshift(2), -2)
+#test((-7).bit-rshift(12345), -1)
+#test(128.bit-rshift(2, logical: true), 32)
+#test((-7).bit-rshift(61, logical: true), 7)
+#test(128.bit-rshift(12345, logical: true), 0)
+#test((-7).bit-rshift(12345, logical: true), 0)
+
+---
+// Error: 2-18 the result is too large
+#1.bit-lshift(64)
+
+---
+// Error: 15-17 number must be at least zero
+#1.bit-lshift(-1)
+
+---
+// Error: 15-17 number must be at least zero
+#1.bit-rshift(-1)
+
+---
+// Error: 2-16 zero to the power of zero is undefined
 #calc.pow(0, 0)
 
 ---
@@ -147,7 +219,7 @@
 #calc.pow(2, 10000000000000000)
 
 ---
-// Error: 10-25 the result is too large
+// Error: 2-25 the result is too large
 #calc.pow(2, 2147483647)
 
 ---
@@ -155,7 +227,7 @@
 #calc.pow(2, calc.pow(2.0, 10000.0))
 
 ---
-// Error: 10-19 the result is not a real number
+// Error: 2-19 the result is not a real number
 #calc.pow(-1, 0.5)
 
 ---
@@ -187,7 +259,7 @@
 #calc.log(1, base: 0)
 
 ---
-// Error: 10-24 the result is not a real number
+// Error: 2-24 the result is not a real number
 #calc.log(10, base: -1)
 
 ---
@@ -196,7 +268,7 @@
 #test(calc.fact(5), 120)
 
 ---
-// Error: 11-15 the result is too large
+// Error: 2-15 the result is too large
 #calc.fact(21)
 
 ---
@@ -207,7 +279,7 @@
 #test(calc.perm(5, 6), 0)
 
 ---
-// Error: 11-19 the result is too large
+// Error: 2-19 the result is too large
 #calc.perm(21, 21)
 
 ---
@@ -239,11 +311,11 @@
 #test(calc.lcm(8, 0), 0)
 
 ---
-// Error: 10-41 the return value is too large
+// Error: 2-41 the result is too large
 #calc.lcm(15486487489457, 4874879896543)
 
 ---
-// Error: 10-12 expected at least one value
+// Error: 2-12 expected at least one value
 #calc.min()
 
 ---
@@ -267,7 +339,7 @@
 #test(range(10, 0, step: -3), (10, 7, 4, 1))
 
 ---
-// Error: 7-9 missing argument: end
+// Error: 2-9 missing argument: end
 #range()
 
 ---

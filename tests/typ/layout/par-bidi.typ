@@ -41,11 +41,18 @@ Lריווח #h(1cm) R
 ---
 // Test inline object.
 #set text(lang: "he")
-קרנפיםRh#box(image("/files/rhino.png", height: 11pt))inoחיים
+קרנפיםRh#box(image("/assets/images/rhino.png", height: 11pt))inoחיים
 
 ---
 // Test whether L1 whitespace resetting destroys stuff.
 الغالب #h(70pt) ن#" "ة
+
+---
+// Test explicit dir
+#set text(dir: rtl)
+#text("8:00 - 9:00",dir:ltr) בבוקר
+#linebreak()
+ב #text("12:00 - 13:00",dir:ltr) בצהריים
 
 ---
 // Test setting a vertical direction.
