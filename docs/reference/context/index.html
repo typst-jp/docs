@@ -841,7 +841,7 @@
 文書内の位置を認識する場所では暗黙的にコンテキストが確立されます。
 例えば、<a href="/docs/reference/styling/#show-rules">showルール</a>はコンテキストを提供し<sup class="footnote-reference"><a href="#1">1</a></sup>、
 アウトライン内の番号付けもカウンターを解決するための適切なコンテキストを提供します。</p>
-<h2>書式コンテキスト</h2>
+<h2 id="style-context">書式コンテキスト</h2>
 <p>setルールを使用すると、文書の一部または全体の書式のプロパティを調整できます。
 これらは文書の進行に伴って変更される可能性があるため、既知のコンテスキトがなければこれらにアクセスすることはできません。コンテキストが利用可能な場合、
 個別の要素関数のフィールドとして書式のプロパティにアクセスすることでこれらを簡単に取得できます。</p>
@@ -860,7 +860,7 @@
 <span class="typ-pol">#</span><span class="typ-pol">value</span>
 </code></pre><div class="preview"><img src="/assets/docs/b2174be05e2199048bd2ca7a851707a2.png" alt="Preview" width="480" height="190"/></div></div>
 <p>重要なのは、作成時に <code>value</code> は中身を覗くことができない不透明な <a href="/docs/reference/foundations/content/" title="content">content</a> になることです。それはどこかに配置されたときにのみ解決されます。なぜなら、そのときに初めてコンテキストが認識されるからです。コンテキスト式の本体は、それが配置される場所の数に応じて、0回、1回、または複数回評価される可能性があります。</p>
-<h2>位置コンテキスト</h2>
+<h2 id="location-context">位置コンテキスト</h2>
 <p>コンテキストはsetルールの値へのアクセスを与えてくれるだけではありません。私達が現在文書の <em>どこ</em> にいるか、すなわち他の要素に対してどのような位置にいるか、またページ上で絶対的にどこにいるかを知ることもできます。この情報を使用して、異なる文書の部分間で非常に柔軟な相互作用を作リ出すことができます。これは、見出し番号、目次、または節見出しに依存するページヘッダーなどの機能を支えています。</p>
 <p><a href="/docs/reference/introspection/counter/#definitions-get"><code>counter.get</code></a>のようないくつかの関数は、暗黙的に現在の位置にアクセスします。
 以下の例では、見出しカウンターの値を取得したいとします。
@@ -916,7 +916,7 @@
 </code></pre><div class="preview"><img src="/assets/docs/867352dd609cef936aa4c122bc7fe0aa.png" alt="Preview" width="480" height="190"/></div></div>
 <p>位置コンテキストを利用する関数は他にもありますが、最も顕著なのは <a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a> です。
 これらの詳細については、<a href="/docs/reference/introspection/">introspection</a> カテゴリを参照してください。</p>
-<h2>ネストされたコンテキスト</h2>
+<h2 id="nested-contexts">ネストされたコンテキスト</h2>
 <p>コンテキストは、コンテキストブロック内にネストされた関数呼び出しからもアクセス可能です。
 以下の例では、<code>foo</code> 自体が <a href="/docs/reference/layout/length/#definitions-to-absolute"><code>to-absolute</code></a> と同様のコンテキスト依存の関数になります。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">foo</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-num">1em</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
@@ -961,7 +961,7 @@
   <span class="typ-key">#</span><span class="typ-key">context</span> c<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/9c7f5bad81db30932a0e9656b3888e05.png" alt="Preview" width="480" height="190"/></div></div>
-<h2>コンパイラの反復</h2>
+<h2 id="compiler-iterations">コンパイラの反復</h2>
 <p>コンテキスト依存の相互作用を解決するため、Typstのコンパイラは文書を複数回処理します。
 例えば、<code>locate</code> の呼び出しを解決するために、Typstはまずプレースホルダーの位置を提供し、文書をレイアウトし、レイアウトが完了した位置から既知の位置で再コンパイルします。
 カウンターや状態、クエリを解決するためにも同じアプローチが取られます。
@@ -989,19 +989,19 @@ Typstが5回の試行ですべてを解決できない場合、警告 &quot;layo
     <nav id="page-overview"><strong>目次</strong>
       <ul>
         
-        <li data-assoc=""><a href="#"></a>
+        <li data-assoc="style-context"><a href="#style-context">Style Context</a>
           <ul></ul>
         </li>
         
-        <li data-assoc=""><a href="#"></a>
+        <li data-assoc="location-context"><a href="#location-context">Location Context</a>
           <ul></ul>
         </li>
         
-        <li data-assoc=""><a href="#"></a>
+        <li data-assoc="nested-contexts"><a href="#nested-contexts">Nested Contexts</a>
           <ul></ul>
         </li>
         
-        <li data-assoc=""><a href="#"></a>
+        <li data-assoc="compiler-iterations"><a href="#compiler-iterations">Compiler Iterations</a>
           <ul></ul>
         </li>
         
