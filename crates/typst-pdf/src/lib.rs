@@ -1,4 +1,4 @@
-//! Exporting into PDF documents.
+//! Exporting of Typst documents into PDFs.
 
 mod color;
 mod extg;
@@ -10,17 +10,19 @@ mod page;
 mod pattern;
 
 use std::cmp::Eq;
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::hash::Hash;
 use std::sync::Arc;
 
 use base64::Engine;
 use ecow::{eco_format, EcoString};
 use pdf_writer::types::Direction;
-use pdf_writer::{Finish, Name, Pdf, Ref, TextStr};
-use typst::foundations::Datetime;
+use pdf_writer::writers::Destination;
+use pdf_writer::{Finish, Name, Pdf, Ref, Str, TextStr};
+use typst::foundations::{Datetime, Label, NativeElement, Smart};
+use typst::introspection::Location;
 use typst::layout::{Abs, Dir, Em, Transform};
-use typst::model::Document;
+use typst::model::{Document, HeadingElem};
 use typst::text::{Font, Lang};
 use typst::util::Deferred;
 use typst::visualize::Image;
@@ -30,27 +32,32 @@ use crate::color::ColorSpaces;
 use crate::extg::ExtGState;
 use crate::gradient::PdfGradient;
 use crate::image::EncodedImage;
-use crate::page::Page;
+use crate::page::EncodedPage;
 use crate::pattern::PdfPattern;
 
 /// Export a document into a PDF file.
 ///
 /// Returns the raw bytes making up the PDF file.
 ///
-/// The `ident` parameter shall be a string that uniquely and stably identifies
-/// the document. It should not change between compilations of the same
-/// document. Its hash will be used to create a PDF document identifier (the
-/// identifier itself is not leaked). If `ident` is `None`, a hash of the
-/// document is used instead (which means that it _will_ change across
-/// compilations).
+/// The `ident` parameter, if given, shall be a string that uniquely and stably
+/// identifies the document. It should not change between compilations of the
+/// same document.  **If you cannot provide such a stable identifier, just pass
+/// `Smart::Auto` rather than trying to come up with one.** The CLI, for
+/// example, does not have a well-defined notion of a long-lived project and as
+/// such just passes `Smart::Auto`.
+///
+/// If an `ident` is given, the hash of it will be used to create a PDF document
+/// identifier (the identifier itself is not leaked). If `ident` is `Auto`, a
+/// hash of the document's title and author is used instead (which is reasonably
+/// unique and stable).
 ///
 /// The `timestamp`, if given, is expected to be the creation date of the
 /// document as a UTC datetime. It will only be used if `set document(date: ..)`
 /// is `auto`.
-#[tracing::instrument(skip_all)]
+#[typst_macros::time(name = "pdf")]
 pub fn pdf(
     document: &Document,
-    ident: Option<&str>,
+    ident: Smart<&str>,
     timestamp: Option<Datetime>,
 ) -> Vec<u8> {
     let mut ctx = PdfContext::new(document);
@@ -60,6 +67,7 @@ pub fn pdf(
     gradient::write_gradients(&mut ctx);
     extg::write_external_graphics_states(&mut ctx);
     pattern::write_patterns(&mut ctx);
+    write_named_destinations(&mut ctx);
     page::write_page_tree(&mut ctx);
     write_catalog(&mut ctx, ident, timestamp);
     ctx.pdf.finish()
@@ -72,7 +80,7 @@ struct PdfContext<'a> {
     /// The writer we are writing the PDF into.
     pdf: Pdf,
     /// Content of exported pages.
-    pages: Vec<Page>,
+    pages: Vec<EncodedPage>,
     /// For each font a mapping from used glyphs to their text representation.
     /// May contain multiple chars in case of ligatures or similar things. The
     /// same glyph can have a different text representation within one document,
@@ -82,7 +90,8 @@ struct PdfContext<'a> {
     glyph_sets: HashMap<Font, BTreeMap<u16, EcoString>>,
     /// The number of glyphs for all referenced languages in the document.
     /// We keep track of this to determine the main document language.
-    languages: HashMap<Lang, usize>,
+    /// BTreeMap is used to write sorted list of languages to metadata.
+    languages: BTreeMap<Lang, usize>,
 
     /// Allocator for indirect reference IDs.
     alloc: Ref,
@@ -115,6 +124,11 @@ struct PdfContext<'a> {
     pattern_map: Remapper<PdfPattern>,
     /// Deduplicates external graphics states used across the document.
     extg_map: Remapper<ExtGState>,
+
+    /// A sorted list of all named destinations.
+    dests: Vec<(Label, Ref)>,
+    /// Maps from locations to named destinations that point to them.
+    loc_to_dest: HashMap<Location, Label>,
 }
 
 impl<'a> PdfContext<'a> {
@@ -126,7 +140,7 @@ impl<'a> PdfContext<'a> {
             pdf: Pdf::new(),
             pages: vec![],
             glyph_sets: HashMap::new(),
-            languages: HashMap::new(),
+            languages: BTreeMap::new(),
             alloc,
             page_tree_ref,
             page_refs: vec![],
@@ -142,18 +156,15 @@ impl<'a> PdfContext<'a> {
             gradient_map: Remapper::new(),
             pattern_map: Remapper::new(),
             extg_map: Remapper::new(),
+            dests: vec![],
+            loc_to_dest: HashMap::new(),
         }
     }
 }
 
 /// Write the document catalog.
-#[tracing::instrument(skip_all)]
-fn write_catalog(ctx: &mut PdfContext, ident: Option<&str>, timestamp: Option<Datetime>) {
-    let lang = ctx
-        .languages
-        .iter()
-        .max_by_key(|(&lang, &count)| (count, lang))
-        .map(|(&k, _)| k);
+fn write_catalog(ctx: &mut PdfContext, ident: Smart<&str>, timestamp: Option<Datetime>) {
+    let lang = ctx.languages.iter().max_by_key(|(_, &count)| count).map(|(&l, _)| l);
 
     let dir = if lang.map(Lang::dir) == Some(Dir::RTL) {
         Direction::R2L
@@ -230,18 +241,25 @@ fn write_catalog(ctx: &mut PdfContext, ident: Option<&str>, timestamp: Option<Da
     // changes in the frames.
     let instance_id = hash_base64(&ctx.pdf.as_bytes());
 
-    if let Some(ident) = ident {
-        // A unique ID for the document that stays stable across compilations.
-        let doc_id = hash_base64(&("PDF-1.7", ident));
-        xmp.document_id(&doc_id);
-        xmp.instance_id(&instance_id);
-        ctx.pdf
-            .set_file_id((doc_id.clone().into_bytes(), instance_id.into_bytes()));
+    // Determine the document's ID. It should be as stable as possible.
+    const PDF_VERSION: &str = "PDF-1.7";
+    let doc_id = if let Smart::Custom(ident) = ident {
+        // We were provided with a stable ID. Yay!
+        hash_base64(&(PDF_VERSION, ident))
+    } else if ctx.document.title.is_some() && !ctx.document.author.is_empty() {
+        // If not provided from the outside, but title and author were given, we
+        // compute a hash of them, which should be reasonably stable and unique.
+        hash_base64(&(PDF_VERSION, &ctx.document.title, &ctx.document.author))
     } else {
-        // This is not spec-compliant, but some PDF readers really want an ID.
-        let bytes = instance_id.into_bytes();
-        ctx.pdf.set_file_id((bytes.clone(), bytes));
-    }
+        // The user provided no usable metadata which we can use as an `/ID`.
+        instance_id.clone()
+    };
+
+    // Write IDs.
+    xmp.document_id(&doc_id);
+    xmp.instance_id(&instance_id);
+    ctx.pdf
+        .set_file_id((doc_id.clone().into_bytes(), instance_id.into_bytes()));
 
     xmp.rendition_class(RenditionClass::Proof);
     xmp.pdf_version("1.7");
@@ -259,6 +277,17 @@ fn write_catalog(ctx: &mut PdfContext, ident: Option<&str>, timestamp: Option<Da
     catalog.viewer_preferences().direction(dir);
     catalog.metadata(meta_ref);
 
+    // Write the named destination tree.
+    let mut name_dict = catalog.names();
+    let mut dests_name_tree = name_dict.destinations();
+    let mut names = dests_name_tree.names();
+    for &(name, dest_ref, ..) in &ctx.dests {
+        names.insert(Str(name.as_str().as_bytes()), dest_ref);
+    }
+    names.finish();
+    dests_name_tree.finish();
+    name_dict.finish();
+
     // Insert the page labels.
     if !page_labels.is_empty() {
         let mut num_tree = catalog.page_labels();
@@ -275,10 +304,50 @@ fn write_catalog(ctx: &mut PdfContext, ident: Option<&str>, timestamp: Option<Da
     if let Some(lang) = lang {
         catalog.lang(TextStr(lang.as_str()));
     }
+
+    catalog.finish();
+}
+
+/// Fills in the map and vector for named destinations and writes the indirect
+/// destination objects.
+fn write_named_destinations(ctx: &mut PdfContext) {
+    let mut seen = HashSet::new();
+
+    // Find all headings that have a label and are the first among other
+    // headings with the same label.
+    let mut matches: Vec<_> = ctx
+        .document
+        .introspector
+        .query(&HeadingElem::elem().select())
+        .iter()
+        .filter_map(|elem| elem.location().zip(elem.label()))
+        .filter(|&(_, label)| seen.insert(label))
+        .collect();
+
+    // Named destinations must be sorted by key.
+    matches.sort_by_key(|&(_, label)| label);
+
+    for (loc, label) in matches {
+        let pos = ctx.document.introspector.position(loc);
+        let index = pos.page.get() - 1;
+        let y = (pos.point.y - Abs::pt(10.0)).max(Abs::zero());
+
+        if let Some(page) = ctx.pages.get(index) {
+            let dest_ref = ctx.alloc.bump();
+            let x = pos.point.x.to_f32();
+            let y = (page.size.y - y).to_f32();
+            ctx.dests.push((label, dest_ref));
+            ctx.loc_to_dest.insert(loc, label);
+            ctx.pdf
+                .indirect(dest_ref)
+                .start::<Destination>()
+                .page(page.id)
+                .xyz(x, y, None);
+        }
+    }
 }
 
 /// Compress data with the DEFLATE algorithm.
-#[tracing::instrument(skip_all)]
 fn deflate(data: &[u8]) -> Vec<u8> {
     const COMPRESSION_LEVEL: u8 = 6;
     miniz_oxide::deflate::compress_to_vec_zlib(data, COMPRESSION_LEVEL)
@@ -288,6 +357,13 @@ fn deflate(data: &[u8]) -> Vec<u8> {
 #[comemo::memoize]
 fn deflate_memoized(content: &[u8]) -> Arc<Vec<u8>> {
     Arc::new(deflate(content))
+}
+
+/// Memoized and deferred version of [`deflate`] specialized for a page's content
+/// stream.
+#[comemo::memoize]
+fn deflate_deferred(content: Vec<u8>) -> Deferred<Vec<u8>> {
+    Deferred::new(move || deflate(&content))
 }
 
 /// Create a base64-encoded hash of the value.

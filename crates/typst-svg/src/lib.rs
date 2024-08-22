@@ -1,3 +1,5 @@
+//! Rendering of Typst documents into SVG images.
+
 use std::collections::HashMap;
 use std::f32::consts::TAU;
 use std::fmt::{self, Display, Formatter, Write};
@@ -11,6 +13,7 @@ use typst::layout::{
     Abs, Angle, Axes, Frame, FrameItem, FrameKind, GroupItem, Point, Quadrant, Ratio,
     Size, Transform,
 };
+use typst::model::Document;
 use typst::text::{Font, TextItem};
 use typst::util::hash128;
 use typst::visualize::{
@@ -25,7 +28,7 @@ use xmlwriter::XmlWriter;
 const CONIC_SEGMENT: usize = 360;
 
 /// Export a frame into a SVG file.
-#[tracing::instrument(skip_all)]
+#[typst_macros::time(name = "svg")]
 pub fn svg(frame: &Frame) -> String {
     let mut renderer = SVGRenderer::new();
     renderer.write_header(frame.size());
@@ -35,25 +38,33 @@ pub fn svg(frame: &Frame) -> String {
     renderer.finalize()
 }
 
-/// Export multiple frames into a single SVG file.
+/// Export a document with potentially multiple pages into a single SVG file.
 ///
 /// The padding will be added around and between the individual frames.
-#[tracing::instrument(skip_all)]
-pub fn svg_merged(frames: &[Frame], padding: Abs) -> String {
+pub fn svg_merged(document: &Document, padding: Abs) -> String {
     let width = 2.0 * padding
-        + frames.iter().map(|frame| frame.width()).max().unwrap_or_default();
-    let height = padding + frames.iter().map(|page| page.height() + padding).sum::<Abs>();
-    let size = Size::new(width, height);
+        + document
+            .pages
+            .iter()
+            .map(|page| page.frame.width())
+            .max()
+            .unwrap_or_default();
+    let height = padding
+        + document
+            .pages
+            .iter()
+            .map(|page| page.frame.height() + padding)
+            .sum::<Abs>();
 
     let mut renderer = SVGRenderer::new();
-    renderer.write_header(size);
+    renderer.write_header(Size::new(width, height));
 
     let [x, mut y] = [padding; 2];
-    for frame in frames {
+    for page in &document.pages {
         let ts = Transform::translate(x, y);
-        let state = State::new(frame.size(), Transform::identity());
-        renderer.render_frame(state, ts, frame);
-        y += frame.height() + padding;
+        let state = State::new(page.frame.size(), Transform::identity());
+        renderer.render_frame(state, ts, &page.frame);
+        y += page.frame.height() + padding;
     }
 
     renderer.finalize()
@@ -238,8 +249,10 @@ impl SVGRenderer {
             "viewBox",
             format_args!("0 0 {} {}", size.x.to_pt(), size.y.to_pt()),
         );
-        self.xml.write_attribute("width", &size.x.to_pt());
-        self.xml.write_attribute("height", &size.y.to_pt());
+        self.xml
+            .write_attribute_fmt("width", format_args!("{}pt", size.x.to_pt()));
+        self.xml
+            .write_attribute_fmt("height", format_args!("{}pt", size.y.to_pt()));
         self.xml.write_attribute("xmlns", "http://www.w3.org/2000/svg");
         self.xml
             .write_attribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
@@ -398,8 +411,8 @@ impl SVGRenderer {
 
         let glyph_hash = hash128(&(&text.font, id));
         let id = self.glyphs.insert_with(glyph_hash, || {
-            let width = image.width() as f64;
-            let height = image.height() as f64;
+            let width = image.width();
+            let height = image.height();
             let url = convert_image_to_base64_url(&image);
             let ts = Transform::translate(
                 Abs::pt(bitmap_x_offset),
@@ -415,7 +428,7 @@ impl SVGRenderer {
         // The image is stored with the height of `image.height()`, but we want
         // to render it with a height of `target_height`. So we need to scale
         // it.
-        let scale_factor = target_height / image.height() as f64;
+        let scale_factor = target_height / image.height();
         self.xml.write_attribute("x", &(x_offset / scale_factor));
         self.xml.write_attribute_fmt(
             "transform",
@@ -452,6 +465,13 @@ impl SVGRenderer {
             Size::new(Abs::pt(width), Abs::pt(height)),
             self.text_paint_transform(state, &text.fill),
         );
+        if let Some(stroke) = &text.stroke {
+            self.write_stroke(
+                stroke,
+                Size::new(Abs::pt(width), Abs::pt(height)),
+                self.text_paint_transform(state, &stroke.paint),
+            );
+        }
         self.xml.end_element();
 
         Some(())
@@ -650,7 +670,7 @@ impl SVGRenderer {
         self.xml.write_attribute("stroke-width", &stroke.thickness.to_pt());
         self.xml.write_attribute(
             "stroke-linecap",
-            match stroke.line_cap {
+            match stroke.cap {
                 LineCap::Butt => "butt",
                 LineCap::Round => "round",
                 LineCap::Square => "square",
@@ -658,7 +678,7 @@ impl SVGRenderer {
         );
         self.xml.write_attribute(
             "stroke-linejoin",
-            match stroke.line_join {
+            match stroke.join {
                 LineJoin::Miter => "miter",
                 LineJoin::Round => "round",
                 LineJoin::Bevel => "bevel",
@@ -666,7 +686,7 @@ impl SVGRenderer {
         );
         self.xml
             .write_attribute("stroke-miterlimit", &stroke.miter_limit.get());
-        if let Some(pattern) = &stroke.dash_pattern {
+        if let Some(pattern) = &stroke.dash {
             self.xml.write_attribute("stroke-dashoffset", &pattern.phase.to_pt());
             self.xml.write_attribute(
                 "stroke-dasharray",
@@ -1108,7 +1128,7 @@ fn convert_bitmap_glyph_to_image(font: &Font, id: GlyphId) -> Option<(Image, f64
 /// Convert an SVG glyph to an encoded image URL.
 #[comemo::memoize]
 fn convert_svg_glyph_to_base64_url(font: &Font, id: GlyphId) -> Option<EcoString> {
-    let mut data = font.ttf().glyph_svg_image(id)?;
+    let mut data = font.ttf().glyph_svg_image(id)?.data;
 
     // Decompress SVGZ.
     let mut decoded = vec![];
@@ -1261,7 +1281,7 @@ impl<T> Deduplicator<T> {
         })
     }
 
-    /// Iterate over the the elements alongside their ids.
+    /// Iterate over the elements alongside their ids.
     fn iter(&self) -> impl Iterator<Item = (Id, &T)> {
         self.vec
             .iter()

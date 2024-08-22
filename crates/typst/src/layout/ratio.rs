@@ -17,7 +17,7 @@ use crate::util::{Numeric, Scalar};
 ///   Scaled apart.
 /// ]
 /// ```
-#[ty]
+#[ty(cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Ratio(Scalar);
 
@@ -76,7 +76,7 @@ impl Debug for Ratio {
 
 impl Repr for Ratio {
     fn repr(&self) -> EcoString {
-        repr::format_float(self.get() * 100.0, Some(2), "%")
+        repr::format_float_with_unit(self.get() * 100.0, "%")
     }
 }
 

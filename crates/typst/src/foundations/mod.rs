@@ -11,6 +11,7 @@ mod bool;
 mod bytes;
 mod cast;
 mod content;
+mod context;
 mod datetime;
 mod dict;
 mod duration;
@@ -38,6 +39,7 @@ pub use self::auto::*;
 pub use self::bytes::*;
 pub use self::cast::*;
 pub use self::content::*;
+pub use self::context::*;
 pub use self::datetime::*;
 pub use self::dict::*;
 pub use self::duration::*;
@@ -83,7 +85,7 @@ use crate::syntax::Spanned;
 pub static FOUNDATIONS: Category;
 
 /// Hook up all `foundations` definitions.
-pub(super) fn define(global: &mut Scope) {
+pub(super) fn define(global: &mut Scope, inputs: Dict) {
     global.category(FOUNDATIONS);
     global.define_type::<bool>();
     global.define_type::<i64>();
@@ -110,7 +112,7 @@ pub(super) fn define(global: &mut Scope) {
     global.define_func::<eval>();
     global.define_func::<style>();
     global.define_module(calc::module());
-    global.define_module(sys::module());
+    global.define_module(sys::module(inputs));
 }
 
 /// Fails with an error.
@@ -256,10 +258,9 @@ pub fn eval(
     /// The engine.
     engine: &mut Engine,
     /// A string of Typst code to evaluate.
-    ///
-    /// The code in the string cannot interact with the file system.
     source: Spanned<String>,
-    /// The syntactical mode in which the string is parsed.
+    /// The [syntactical mode]($reference/syntax/#modes) in which the string is
+    /// parsed.
     ///
     /// ```example
     /// #eval("= Heading", mode: "markup")

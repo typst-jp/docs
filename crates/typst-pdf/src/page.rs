@@ -3,19 +3,18 @@ use std::num::NonZeroUsize;
 
 use ecow::{eco_format, EcoString};
 use pdf_writer::types::{
-    ActionType, AnnotationType, ColorSpaceOperand, LineCapStyle, LineJoinStyle,
-    NumberingStyle,
+    ActionType, AnnotationFlags, AnnotationType, ColorSpaceOperand, LineCapStyle,
+    LineJoinStyle, NumberingStyle, TextRenderingMode,
 };
-use pdf_writer::writers::PageLabel;
+use pdf_writer::writers::{PageLabel, Resources};
 use pdf_writer::{Content, Filter, Finish, Name, Rect, Ref, Str, TextStr};
 use typst::introspection::Meta;
 use typst::layout::{
-    Abs, Em, Frame, FrameItem, GroupItem, PdfPageLabel, PdfPageLabelStyle, Point, Ratio,
-    Size, Transform,
+    Abs, Em, Frame, FrameItem, GroupItem, Page, Point, Ratio, Size, Transform,
 };
-use typst::model::Destination;
-use typst::text::{Font, TextItem};
-use typst::util::Numeric;
+use typst::model::{Destination, Numbering};
+use typst::text::{Case, Font, TextItem};
+use typst::util::{Deferred, Numeric};
 use typst::visualize::{
     FixedStroke, Geometry, Image, LineCap, LineJoin, Paint, Path, PathItem, Shape,
 };
@@ -23,37 +22,39 @@ use typst::visualize::{
 use crate::color::PaintEncode;
 use crate::extg::ExtGState;
 use crate::image::deferred_image;
-use crate::{deflate_memoized, AbsExt, EmExt, PdfContext};
+use crate::{deflate_deferred, AbsExt, EmExt, PdfContext};
 
 /// Construct page objects.
-#[tracing::instrument(skip_all)]
-pub(crate) fn construct_pages(ctx: &mut PdfContext, frames: &[Frame]) {
-    for frame in frames {
-        let (page_ref, page) = construct_page(ctx, frame);
+#[typst_macros::time(name = "construct pages")]
+pub(crate) fn construct_pages(ctx: &mut PdfContext, pages: &[Page]) {
+    for page in pages {
+        let (page_ref, mut encoded) = construct_page(ctx, &page.frame);
+        encoded.label = page
+            .numbering
+            .as_ref()
+            .and_then(|num| PdfPageLabel::generate(num, page.number));
         ctx.page_refs.push(page_ref);
-        ctx.pages.push(page);
+        ctx.pages.push(encoded);
     }
 }
 
 /// Construct a page object.
-#[tracing::instrument(skip_all)]
-pub(crate) fn construct_page(ctx: &mut PdfContext, frame: &Frame) -> (Ref, Page) {
+#[typst_macros::time(name = "construct page")]
+pub(crate) fn construct_page(ctx: &mut PdfContext, frame: &Frame) -> (Ref, EncodedPage) {
     let page_ref = ctx.alloc.bump();
 
+    let size = frame.size();
     let mut ctx = PageContext {
         parent: ctx,
         page_ref,
-        label: None,
         uses_opacities: false,
         content: Content::new(),
-        state: State::new(frame.size()),
+        state: State::new(size),
         saves: vec![],
         bottom: 0.0,
         links: vec![],
         resources: HashMap::default(),
     };
-
-    let size = frame.size();
 
     // Make the coordinate system start at the top-left.
     ctx.bottom = size.y.to_f32();
@@ -69,13 +70,13 @@ pub(crate) fn construct_page(ctx: &mut PdfContext, frame: &Frame) -> (Ref, Page)
     // Encode the page into the content stream.
     write_frame(&mut ctx, frame);
 
-    let page = Page {
+    let page = EncodedPage {
         size,
-        content: ctx.content.finish(),
+        content: deflate_deferred(ctx.content.finish()),
         id: ctx.page_ref,
         uses_opacities: ctx.uses_opacities,
         links: ctx.links,
-        label: ctx.label,
+        label: None,
         resources: ctx.resources,
     };
 
@@ -83,18 +84,28 @@ pub(crate) fn construct_page(ctx: &mut PdfContext, frame: &Frame) -> (Ref, Page)
 }
 
 /// Write the page tree.
-#[tracing::instrument(skip_all)]
 pub(crate) fn write_page_tree(ctx: &mut PdfContext) {
+    let resources_ref = write_global_resources(ctx);
+
     for i in 0..ctx.pages.len() {
-        write_page(ctx, i);
+        write_page(ctx, i, resources_ref);
     }
 
-    let mut pages = ctx.pdf.pages(ctx.page_tree_ref);
-    pages
+    ctx.pdf
+        .pages(ctx.page_tree_ref)
         .count(ctx.page_refs.len() as i32)
         .kids(ctx.page_refs.iter().copied());
+}
 
-    let mut resources = pages.resources();
+/// Write the global resource dictionary that will be referenced by all pages.
+///
+/// We add a reference to this dictionary to each page individually instead of
+/// to the root node of the page tree because using the resource inheritance
+/// feature breaks PDF merging with Apple Preview.
+fn write_global_resources(ctx: &mut PdfContext) -> Ref {
+    let resource_ref = ctx.alloc.bump();
+
+    let mut resources = ctx.pdf.indirect(resource_ref).start::<Resources>();
     ctx.colors
         .write_color_spaces(resources.color_spaces(), &mut ctx.alloc);
 
@@ -135,15 +146,15 @@ pub(crate) fn write_page_tree(ctx: &mut PdfContext) {
     ext_gs_states.finish();
 
     resources.finish();
-    pages.finish();
 
     // Write all of the functions used by the document.
     ctx.colors.write_functions(&mut ctx.pdf);
+
+    resource_ref
 }
 
 /// Write a page tree node.
-#[tracing::instrument(skip_all)]
-fn write_page(ctx: &mut PdfContext, i: usize) {
+fn write_page(ctx: &mut PdfContext, i: usize, resources_ref: Ref) {
     let page = &ctx.pages[i];
     let content_id = ctx.alloc.bump();
 
@@ -154,6 +165,7 @@ fn write_page(ctx: &mut PdfContext, i: usize) {
     let h = page.size.y.to_f32();
     page_writer.media_box(Rect::new(0.0, 0.0, w, h));
     page_writer.contents(content_id);
+    page_writer.pair(Name(b"Resources"), resources_ref);
 
     if page.uses_opacities {
         page_writer
@@ -169,7 +181,7 @@ fn write_page(ctx: &mut PdfContext, i: usize) {
     for (dest, rect) in &page.links {
         let mut annotation = annotations.push();
         annotation.subtype(AnnotationType::Link).rect(*rect);
-        annotation.border(0.0, 0.0, 0.0, None);
+        annotation.border(0.0, 0.0, 0.0, None).flags(AnnotationFlags::PRINT);
 
         let pos = match dest {
             Destination::Url(uri) => {
@@ -180,17 +192,29 @@ fn write_page(ctx: &mut PdfContext, i: usize) {
                 continue;
             }
             Destination::Position(pos) => *pos,
-            Destination::Location(loc) => ctx.document.introspector.position(*loc),
+            Destination::Location(loc) => {
+                if let Some(key) = ctx.loc_to_dest.get(loc) {
+                    annotation
+                        .action()
+                        .action_type(ActionType::GoTo)
+                        // `key` must be a `Str`, not a `Name`.
+                        .pair(Name(b"D"), Str(key.as_str().as_bytes()));
+                    continue;
+                } else {
+                    ctx.document.introspector.position(*loc)
+                }
+            }
         };
 
         let index = pos.page.get() - 1;
         let y = (pos.point.y - Abs::pt(10.0)).max(Abs::zero());
+
         if let Some(page) = ctx.pages.get(index) {
             annotation
                 .action()
                 .action_type(ActionType::GoTo)
                 .destination()
-                .page(ctx.page_refs[index])
+                .page(page.id)
                 .xyz(pos.point.x.to_f32(), (page.size.y - y).to_f32(), None);
         }
     }
@@ -198,12 +222,12 @@ fn write_page(ctx: &mut PdfContext, i: usize) {
     annotations.finish();
     page_writer.finish();
 
-    let data = deflate_memoized(&page.content);
-    ctx.pdf.stream(content_id, &data).filter(Filter::FlateDecode);
+    ctx.pdf
+        .stream(content_id, page.content.wait())
+        .filter(Filter::FlateDecode);
 }
 
 /// Write the page labels.
-#[tracing::instrument(skip_all)]
 pub(crate) fn write_page_labels(ctx: &mut PdfContext) -> Vec<(NonZeroUsize, Ref)> {
     let mut result = vec![];
     let mut prev: Option<&PdfPageLabel> = None;
@@ -251,22 +275,100 @@ pub(crate) fn write_page_labels(ctx: &mut PdfContext) -> Vec<(NonZeroUsize, Ref)
     result
 }
 
+/// Specification for a PDF page label.
+#[derive(Debug, Clone, PartialEq, Hash, Default)]
+struct PdfPageLabel {
+    /// Can be any string or none. Will always be prepended to the numbering style.
+    prefix: Option<EcoString>,
+    /// Based on the numbering pattern.
+    ///
+    /// If `None` or numbering is a function, the field will be empty.
+    style: Option<PdfPageLabelStyle>,
+    /// Offset for the page label start.
+    ///
+    /// Describes where to start counting from when setting a style.
+    /// (Has to be greater or equal than 1)
+    offset: Option<NonZeroUsize>,
+}
+
+/// A PDF page label number style.
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
+enum PdfPageLabelStyle {
+    /// Decimal arabic numerals (1, 2, 3).
+    Arabic,
+    /// Lowercase roman numerals (i, ii, iii).
+    LowerRoman,
+    /// Uppercase roman numerals (I, II, III).
+    UpperRoman,
+    /// Lowercase letters (`a` to `z` for the first 26 pages,
+    /// `aa` to `zz` and so on for the next).
+    LowerAlpha,
+    /// Uppercase letters (`A` to `Z` for the first 26 pages,
+    /// `AA` to `ZZ` and so on for the next).
+    UpperAlpha,
+}
+
+impl PdfPageLabel {
+    /// Create a new `PdfNumbering` from a `Numbering` applied to a page
+    /// number.
+    fn generate(numbering: &Numbering, number: usize) -> Option<PdfPageLabel> {
+        let Numbering::Pattern(pat) = numbering else {
+            return None;
+        };
+
+        let Some((prefix, kind, case)) = pat.pieces.first() else {
+            return None;
+        };
+
+        // If there is a suffix, we cannot use the common style optimisation,
+        // since PDF does not provide a suffix field.
+        let mut style = None;
+        if pat.suffix.is_empty() {
+            use {typst::model::NumberingKind as Kind, PdfPageLabelStyle as Style};
+            match (kind, case) {
+                (Kind::Arabic, _) => style = Some(Style::Arabic),
+                (Kind::Roman, Case::Lower) => style = Some(Style::LowerRoman),
+                (Kind::Roman, Case::Upper) => style = Some(Style::UpperRoman),
+                (Kind::Letter, Case::Lower) if number <= 26 => {
+                    style = Some(Style::LowerAlpha)
+                }
+                (Kind::Letter, Case::Upper) if number <= 26 => {
+                    style = Some(Style::UpperAlpha)
+                }
+                _ => {}
+            }
+        }
+
+        // Prefix and offset depend on the style: If it is supported by the PDF
+        // spec, we use the given prefix and an offset. Otherwise, everything
+        // goes into prefix.
+        let prefix = if style.is_none() {
+            Some(pat.apply(&[number]))
+        } else {
+            (!prefix.is_empty()).then(|| prefix.clone())
+        };
+
+        let offset = style.and(NonZeroUsize::new(number));
+        Some(PdfPageLabel { prefix, style, offset })
+    }
+}
+
 /// Data for an exported page.
-pub struct Page {
+pub struct EncodedPage {
     /// The indirect object id of the page.
     pub id: Ref,
     /// The page's dimensions.
     pub size: Size,
     /// The page's content stream.
-    pub content: Vec<u8>,
+    pub content: Deferred<Vec<u8>>,
     /// Whether the page uses opacities.
     pub uses_opacities: bool,
     /// Links in the PDF coordinate system.
     pub links: Vec<(Destination, Rect)>,
-    /// The page's PDF label.
-    pub label: Option<PdfPageLabel>,
     /// The page's used resources
     pub resources: HashMap<PageResource, usize>,
+    /// The page's PDF label.
+    label: Option<PdfPageLabel>,
 }
 
 /// Represents a resource being used in a PDF page by its name.
@@ -328,7 +430,6 @@ impl PageResource {
 pub struct PageContext<'a, 'b> {
     pub(crate) parent: &'a mut PdfContext<'b>,
     page_ref: Ref,
-    label: Option<PdfPageLabel>,
     pub content: Content,
     state: State,
     saves: Vec<State>,
@@ -355,6 +456,7 @@ struct State {
     external_graphics_state: Option<ExtGState>,
     stroke: Option<FixedStroke>,
     stroke_space: Option<Name<'static>>,
+    text_rendering_mode: TextRenderingMode,
 }
 
 impl State {
@@ -370,6 +472,7 @@ impl State {
             external_graphics_state: None,
             stroke: None,
             stroke_space: None,
+            text_rendering_mode: TextRenderingMode::Fill,
         }
     }
 
@@ -503,33 +606,30 @@ impl PageContext<'_, '_> {
         self.state.fill_space = None;
     }
 
-    fn set_stroke(&mut self, stroke: &FixedStroke, transforms: Transforms) {
+    fn set_stroke(
+        &mut self,
+        stroke: &FixedStroke,
+        on_text: bool,
+        transforms: Transforms,
+    ) {
         if self.state.stroke.as_ref() != Some(stroke)
             || matches!(
                 self.state.stroke.as_ref().map(|s| &s.paint),
                 Some(Paint::Gradient(_))
             )
         {
-            let FixedStroke {
-                paint,
-                thickness,
-                line_cap,
-                line_join,
-                dash_pattern,
-                miter_limit,
-            } = stroke;
-
-            paint.set_as_stroke(self, transforms);
+            let FixedStroke { paint, thickness, cap, join, dash, miter_limit } = stroke;
+            paint.set_as_stroke(self, on_text, transforms);
 
             self.content.set_line_width(thickness.to_f32());
-            if self.state.stroke.as_ref().map(|s| &s.line_cap) != Some(line_cap) {
-                self.content.set_line_cap(to_pdf_line_cap(*line_cap));
+            if self.state.stroke.as_ref().map(|s| &s.cap) != Some(cap) {
+                self.content.set_line_cap(to_pdf_line_cap(*cap));
             }
-            if self.state.stroke.as_ref().map(|s| &s.line_join) != Some(line_join) {
-                self.content.set_line_join(to_pdf_line_join(*line_join));
+            if self.state.stroke.as_ref().map(|s| &s.join) != Some(join) {
+                self.content.set_line_join(to_pdf_line_join(*join));
             }
-            if self.state.stroke.as_ref().map(|s| &s.dash_pattern) != Some(dash_pattern) {
-                if let Some(pattern) = dash_pattern {
+            if self.state.stroke.as_ref().map(|s| &s.dash) != Some(dash) {
+                if let Some(pattern) = dash {
                     self.content.set_dash_pattern(
                         pattern.array.iter().map(|l| l.to_f32()),
                         pattern.phase.to_f32(),
@@ -555,6 +655,13 @@ impl PageContext<'_, '_> {
     pub fn reset_stroke_color_space(&mut self) {
         self.state.stroke_space = None;
     }
+
+    fn set_text_rendering_mode(&mut self, mode: TextRenderingMode) {
+        if self.state.text_rendering_mode != mode {
+            self.content.set_text_rendering_mode(mode);
+            self.state.text_rendering_mode = mode;
+        }
+    }
 }
 
 /// Encode a frame into the content stream.
@@ -562,7 +669,6 @@ fn write_frame(ctx: &mut PageContext, frame: &Frame) {
     for &(pos, ref item) in frame.items() {
         let x = pos.x.to_f32();
         let y = pos.y.to_f32();
-
         match item {
             FrameItem::Group(group) => write_group(ctx, pos, group),
             FrameItem::Text(text) => write_text(ctx, pos, text),
@@ -572,8 +678,6 @@ fn write_frame(ctx: &mut PageContext, frame: &Frame) {
                 Meta::Link(dest) => write_link(ctx, pos, dest, *size),
                 Meta::Elem(_) => {}
                 Meta::Hide => {}
-                Meta::PageNumbering(_) => {}
-                Meta::PdfPageLabel(label) => ctx.label = Some(label.clone()),
             },
         }
     }
@@ -620,12 +724,29 @@ fn write_text(ctx: &mut PageContext, pos: Point, text: &TextItem) {
         glyph_set.entry(g.id).or_insert_with(|| segment.into());
     }
 
-    ctx.set_fill(&text.fill, true, ctx.state.transforms(Size::zero(), pos));
+    let fill_transform = ctx.state.transforms(Size::zero(), pos);
+    ctx.set_fill(&text.fill, true, fill_transform);
+
+    let stroke = text.stroke.as_ref().and_then(|stroke| {
+        if stroke.thickness.to_f32() > 0.0 {
+            Some(stroke)
+        } else {
+            None
+        }
+    });
+
+    if let Some(stroke) = stroke {
+        ctx.set_stroke(stroke, true, fill_transform);
+        ctx.set_text_rendering_mode(TextRenderingMode::FillStroke);
+    } else {
+        ctx.set_text_rendering_mode(TextRenderingMode::Fill);
+    }
+
     ctx.set_font(&text.font, text.size);
-    ctx.set_opacities(None, Some(&text.fill));
+    ctx.set_opacities(text.stroke.as_ref(), Some(&text.fill));
     ctx.content.begin_text();
 
-    // Positiosn the text.
+    // Position the text.
     ctx.content.set_text_matrix([1.0, 0.0, 0.0, -1.0, x, y]);
 
     let mut positioned = ctx.content.show_positioned();
@@ -689,7 +810,11 @@ fn write_shape(ctx: &mut PageContext, pos: Point, shape: &Shape) {
     }
 
     if let Some(stroke) = stroke {
-        ctx.set_stroke(stroke, ctx.state.transforms(shape.geometry.bbox_size(), pos));
+        ctx.set_stroke(
+            stroke,
+            false,
+            ctx.state.transforms(shape.geometry.bbox_size(), pos),
+        );
     }
 
     ctx.set_opacities(stroke, shape.fill.as_ref());

@@ -1,10 +1,11 @@
-use std::cell::OnceCell;
 use std::fs;
 use std::path::PathBuf;
+use std::sync::OnceLock;
 
 use fontdb::{Database, Source};
 use typst::diag::StrResult;
 use typst::text::{Font, FontBook, FontInfo, FontVariant};
+use typst_timing::TimingScope;
 
 use crate::args::FontsCommand;
 
@@ -42,7 +43,7 @@ pub struct FontSlot {
     /// to a collection.
     index: u32,
     /// The lazily loaded font.
-    font: OnceCell<Option<Font>>,
+    font: OnceLock<Option<Font>>,
 }
 
 impl FontSlot {
@@ -50,6 +51,7 @@ impl FontSlot {
     pub fn get(&self) -> Option<Font> {
         self.font
             .get_or_init(|| {
+                let _scope = TimingScope::new("load font", None);
                 let data = fs::read(&self.path).ok()?.into();
                 Font::new(data, self.index)
             })
@@ -92,7 +94,7 @@ impl FontSearcher {
                 self.fonts.push(FontSlot {
                     path: path.clone(),
                     index: face.index,
-                    font: OnceCell::new(),
+                    font: OnceLock::new(),
                 });
             }
         }
@@ -105,38 +107,16 @@ impl FontSearcher {
     /// Add fonts that are embedded in the binary.
     #[cfg(feature = "embed-fonts")]
     fn add_embedded(&mut self) {
-        let mut process = |bytes: &'static [u8]| {
-            let buffer = typst::foundations::Bytes::from_static(bytes);
+        for data in typst_assets::fonts() {
+            let buffer = typst::foundations::Bytes::from_static(data);
             for (i, font) in Font::iter(buffer).enumerate() {
                 self.book.push(font.info().clone());
                 self.fonts.push(FontSlot {
                     path: PathBuf::new(),
                     index: i as u32,
-                    font: OnceCell::from(Some(font)),
+                    font: OnceLock::from(Some(font)),
                 });
             }
-        };
-
-        macro_rules! add {
-            ($filename:literal) => {
-                process(include_bytes!(concat!("../../../assets/fonts/", $filename)));
-            };
         }
-
-        // Embed default fonts.
-        add!("LinLibertine_R.ttf");
-        add!("LinLibertine_RB.ttf");
-        add!("LinLibertine_RBI.ttf");
-        add!("LinLibertine_RI.ttf");
-        add!("NewCMMath-Book.otf");
-        add!("NewCMMath-Regular.otf");
-        add!("NewCM10-Regular.otf");
-        add!("NewCM10-Bold.otf");
-        add!("NewCM10-Italic.otf");
-        add!("NewCM10-BoldItalic.otf");
-        add!("DejaVuSansMono.ttf");
-        add!("DejaVuSansMono-Bold.ttf");
-        add!("DejaVuSansMono-Oblique.ttf");
-        add!("DejaVuSansMono-BoldOblique.ttf");
     }
 }

@@ -54,7 +54,7 @@
 // Test lvalue out of bounds.
 #{
   let array = (1, 2, 3)
-  // Error: 3-14 array index out of bounds (index: 3, len: 3) and no default value was specified
+  // Error: 3-14 array index out of bounds (index: 3, len: 3)
   array.at(3) = 5
 }
 
@@ -235,6 +235,26 @@
 #test((1,).intersperse("a"), (1,))
 #test((1, 2).intersperse("a"), (1, "a", 2))
 #test((1, 2, "b").intersperse("a"), (1, "a", 2, "a", "b"))
+
+---
+// Test the `chunks` method.
+#test(().chunks(10), ())
+#test((1, 2, 3).chunks(10), ((1, 2, 3),))
+#test((1, 2, 3, 4, 5, 6).chunks(3), ((1, 2, 3), (4, 5, 6)))
+#test((1, 2, 3, 4, 5, 6, 7, 8).chunks(3), ((1, 2, 3), (4, 5, 6), (7, 8)))
+
+#test(().chunks(10, exact: true), ())
+#test((1, 2, 3).chunks(10, exact: true), ())
+#test((1, 2, 3, 4, 5, 6).chunks(3, exact: true), ((1, 2, 3), (4, 5, 6)))
+#test((1, 2, 3, 4, 5, 6, 7, 8).chunks(3, exact: true), ((1, 2, 3), (4, 5, 6)))
+
+---
+// Error: 19-20 number must be positive
+#(1, 2, 3).chunks(0)
+
+---
+// Error: 19-21 number must be positive
+#(1, 2, 3).chunks(-5)
 
 ---
 // Test the `sorted` method.

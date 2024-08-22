@@ -2,10 +2,11 @@ use std::cmp::Ordering;
 use std::fmt::{self, Debug, Formatter};
 use std::ops::{Add, Div, Mul, Neg};
 
+use comemo::Tracked;
 use ecow::{eco_format, EcoString};
 
-use crate::diag::{At, Hint, SourceResult};
-use crate::foundations::{func, scope, ty, Repr, Resolve, StyleChain};
+use crate::diag::{At, Hint, HintedStrResult, SourceResult};
+use crate::foundations::{func, scope, ty, Context, Fold, Repr, Resolve, StyleChain};
 use crate::layout::{Abs, Em};
 use crate::syntax::Span;
 use crate::util::Numeric;
@@ -37,8 +38,8 @@ use crate::util::Numeric;
 /// # Fields
 /// - `abs`: A length with just the absolute component of the current length
 ///   (that is, excluding the `em` component).
-/// - `em`: The amount of `em` units in this length, as a [float]($float).
-#[ty(scope)]
+/// - `em`: The amount of `em` units in this length, as a [float].
+#[ty(scope, cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Length {
     /// The absolute part.
@@ -131,6 +132,28 @@ impl Length {
     pub fn to_inches(&self, span: Span) -> SourceResult<f64> {
         self.ensure_that_em_is_zero(span, "inches")?;
         Ok(self.abs.to_inches())
+    }
+
+    /// Resolve this length to an absolute length.
+    ///
+    /// ```example
+    /// #set text(size: 12pt)
+    /// #context [
+    ///   #(6pt).to-absolute() \
+    ///   #(6pt + 10em).to-absolute() \
+    ///   #(10em).to-absolute()
+    /// ]
+    ///
+    /// #set text(size: 6pt)
+    /// #context [
+    ///   #(6pt).to-absolute() \
+    ///   #(6pt + 10em).to-absolute() \
+    ///   #(10em).to-absolute()
+    /// ]
+    /// ```
+    #[func]
+    pub fn to_absolute(&self, context: Tracked<Context>) -> HintedStrResult<Length> {
+        Ok(self.resolve(context.styles()?).into())
     }
 }
 
@@ -240,5 +263,11 @@ impl Resolve for Length {
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
         self.abs + self.em.resolve(styles)
+    }
+}
+
+impl Fold for Length {
+    fn fold(self, _: Self) -> Self {
+        self
     }
 }
