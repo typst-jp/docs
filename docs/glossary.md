@@ -12,7 +12,7 @@ description: |
 | typesetting   | 組版             | 排版                    | Typstの主要機能                        |
 | documentation | ドキュメント      | 文档                    |                                      |
 | content       | コンテンツ        | 内容 / 内容块            | 型の一種で、マークアップによって表される |
-| styling       | 形式      　　　  |  样式 　　　　           |                                      |
+| styling       | スタイル設定      |  样式 　　　　           |                                      |
 | set rule      | setルール        |     set 规则            | [形式]($styling)に出てきます            |
 | show rule     | showルール       |    show 规则            | [形式]($styling)に出てきます           |
 | markup        | マークアップ      |   标记 / 标记模式        | Typstのデフォルトモード                 |
