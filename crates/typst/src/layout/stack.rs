@@ -2,10 +2,10 @@ use std::fmt::{self, Debug, Formatter};
 
 use crate::diag::SourceResult;
 use crate::engine::Engine;
-use crate::foundations::{cast, elem, Content, Resolve, StyleChain};
+use crate::foundations::{cast, elem, Content, Packed, Resolve, StyleChain, StyledElem};
 use crate::layout::{
-    Abs, AlignElem, Axes, Axis, Dir, FixedAlign, Fr, Fragment, Frame, Layout, Point,
-    Regions, Size, Spacing,
+    Abs, AlignElem, Axes, Axis, Dir, FixedAlignment, Fr, Fragment, Frame, HElem,
+    LayoutMultiple, Point, Regions, Size, Spacing, VElem,
 };
 use crate::util::{Get, Numeric};
 
@@ -23,7 +23,7 @@ use crate::util::{Get, Numeric};
 ///   rect(width: 90pt),
 /// )
 /// ```
-#[elem(Layout)]
+#[elem(LayoutMultiple)]
 pub struct StackElem {
     /// The direction along which the items are stacked. Possible values are:
     ///
@@ -51,8 +51,8 @@ pub struct StackElem {
     pub children: Vec<StackChild>,
 }
 
-impl Layout for StackElem {
-    #[tracing::instrument(name = "StackElem::layout", skip_all)]
+impl LayoutMultiple for Packed<StackElem> {
+    #[typst_macros::time(name = "stack", span = self.span())]
     fn layout(
         &self,
         engine: &mut Engine,
@@ -60,6 +60,7 @@ impl Layout for StackElem {
         regions: Regions,
     ) -> SourceResult<Fragment> {
         let mut layouter = StackLayouter::new(self.dir(styles), regions, styles);
+        let axis = layouter.dir.axis();
 
         // Spacing to insert before the next block.
         let spacing = self.spacing(styles);
@@ -72,6 +73,20 @@ impl Layout for StackElem {
                     deferred = None;
                 }
                 StackChild::Block(block) => {
+                    // Transparently handle `h`.
+                    if let (Axis::X, Some(h)) = (axis, block.to_packed::<HElem>()) {
+                        layouter.layout_spacing(*h.amount());
+                        deferred = None;
+                        continue;
+                    }
+
+                    // Transparently handle `v`.
+                    if let (Axis::Y, Some(v)) = (axis, block.to_packed::<VElem>()) {
+                        layouter.layout_spacing(*v.amount());
+                        deferred = None;
+                        continue;
+                    }
+
                     if let Some(kind) = deferred {
                         layouter.layout_spacing(kind);
                     }
@@ -146,7 +161,7 @@ enum StackItem {
     /// Fractional spacing between other items.
     Fractional(Fr),
     /// A frame for a layouted block.
-    Frame(Frame, Axes<FixedAlign>),
+    Frame(Frame, Axes<FixedAlignment>),
 }
 
 impl<'a> StackLayouter<'a> {
@@ -173,7 +188,6 @@ impl<'a> StackLayouter<'a> {
     }
 
     /// Add spacing along the spacing direction.
-    #[tracing::instrument(name = "StackLayouter::layout_spacing", skip_all)]
     fn layout_spacing(&mut self, spacing: Spacing) {
         match spacing {
             Spacing::Rel(v) => {
@@ -197,7 +211,6 @@ impl<'a> StackLayouter<'a> {
     }
 
     /// Layout an arbitrary block.
-    #[tracing::instrument(name = "StackLayouter::layout_block", skip_all)]
     fn layout_block(
         &mut self,
         engine: &mut Engine,
@@ -209,10 +222,10 @@ impl<'a> StackLayouter<'a> {
         }
 
         // Block-axis alignment of the `AlignElement` is respected by stacks.
-        let align = if let Some(align) = block.to::<AlignElem>() {
+        let align = if let Some(align) = block.to_packed::<AlignElem>() {
             align.alignment(styles)
-        } else if let Some((_, local)) = block.to_styled() {
-            AlignElem::alignment_in(styles.chain(local))
+        } else if let Some(styled) = block.to_packed::<StyledElem>() {
+            AlignElem::alignment_in(styles.chain(&styled.styles))
         } else {
             AlignElem::alignment_in(styles)
         }
@@ -264,7 +277,7 @@ impl<'a> StackLayouter<'a> {
 
         let mut output = Frame::hard(size);
         let mut cursor = Abs::zero();
-        let mut ruler: FixedAlign = self.dir.start().into();
+        let mut ruler: FixedAlignment = self.dir.start().into();
 
         // Place all frames.
         for item in self.items.drain(..) {

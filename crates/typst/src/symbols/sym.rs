@@ -17,11 +17,14 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
     zwj: '\u{200D}',
     zwnj: '\u{200C}',
     zws: '\u{200B}',
+    lrm: '\u{200E}',
+    rlm: '\u{200F}',
 
     // Spaces.
     space: [
         ' ',
         nobreak: '\u{A0}',
+        nobreak.narrow: '\u{202F}',
         en: '\u{2002}',
         quad: '\u{2003}',
         third: '\u{2004}',
@@ -77,7 +80,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
     at: '@',
     backslash: ['\\', circle: '⦸', not: '⧷'],
     co: '℅',
-    colon: [':', eq: '≔', double.eq: '⩴'],
+    colon: [':', double: '∷', eq: '≔', double.eq: '⩴'],
     comma: ',',
     dagger: ['†', double: '‡'],
     dash: [
@@ -116,6 +119,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
     tilde: [
         op: '∼',
         basic: '~',
+        dot: '⩪',
         eq: '≃',
         eq.not: '≄',
         eq.rev: '⋍',
@@ -237,6 +241,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
         curly.ntilde: '⋩',
         curly.tilde: '≿',
         dot: '⋗',
+        approx: '⪆',
         double: '≫',
         eq: '≥',
         eq.slant: '⩾',
@@ -245,6 +250,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
         equiv: '≧',
         lt: '≷',
         lt.not: '≹',
+        napprox: '⪊',
         nequiv: '≩',
         not: '≯',
         ntilde: '⋧',
@@ -273,6 +279,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
         curly.ntilde: '⋨',
         curly.tilde: '≾',
         dot: '⋖',
+        approx: '⪅',
         double: '≪',
         eq: '≤',
         eq.slant: '⩽' ,
@@ -281,6 +288,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
         equiv: '≦',
         gt: '≶',
         gt.not: '≸',
+        napprox: '⪉',
         nequiv: '≨',
         not: '≮',
         ntilde: '⋦',
@@ -392,7 +400,9 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
     // Calculus.
     infinity: '∞',
     oo: '∞',
-    diff: '∂',
+    diff: '∂', // Deprecation planned
+    partial: '∂',
+    gradient: '∇',
     nabla: '∇',
     sum: ['∑', integral: '⨋'],
     product: ['∏', co: '∐'],
@@ -429,6 +439,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
     or: ['∨', big: '⋁', curly: '⋎', dot: '⟇', double: '⩔'],
     xor: ['⊕', big: '⨁'],
     models: '⊧',
+    forces: ['⊩', not: '⊮'],
     therefore: '∴',
     because: '∵',
     qed: '∎',
@@ -565,7 +576,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
         filled.small: '⬪',
         filled.medium: '⬧',
     ],
-    star: [op: '⋆', stroked: '★', filled: '★'],
+    star: [op: '⋆', stroked: '☆', filled: '★'],
 
     // Arrows, harpoons, and tacks.
     arrow: [
@@ -591,6 +602,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
         r.stop: '⇥',
         r.stroked: '⇨',
         r.tail: '↣',
+        r.tilde: '⥲',
         r.triple: '⇛',
         r.twohead.bar: '⤅',
         r.twohead: '↠',
@@ -617,6 +629,7 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
         l.stop: '⇤',
         l.stroked: '⇦',
         l.tail: '↢',
+        l.tilde: '⭉',
         l.triple: '⇚',
         l.twohead.bar: '⬶',
         l.twohead: '↞',
@@ -833,6 +846,8 @@ pub(crate) const SYM: &[(&str, Symbol)] = symbols! {
      bet: 'ב',
      gimmel: 'ג',
      gimel: 'ג',
+     daleth: 'ד',
+     dalet: 'ד',
      shin: 'ש',
 
      // Double-struck.

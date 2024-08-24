@@ -61,6 +61,15 @@ unicode-script = { workspace = true }
 unicode-segmentation = { workspace = true }
 usvg = { workspace = true }
 wasmi = { workspace = true }
+if_chain = { workspace = true }
+kamadak-exif = { workspace = true }
+phf = { workspace = true }
+png = { workspace = true }
+portable-atomic = { workspace = true }
+qcms = { workspace = true }
+two-face = { workspace = true }
+typst-assets = { workspace = true }
+typst-timing = { workspace = true }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 stacker = { workspace = true }

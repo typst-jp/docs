@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/
 title: Data Loading
-description: Typst 中与 Data Loading 有关联的函数族的文档
+description: Documentation for functions related to Data Loading in Typst.
 part: null
 outline:
 - id: summary
@@ -51,7 +51,7 @@ body:
 children:
 - route: /docs/reference/data-loading/cbor/
   title: CBOR
-  description: '`cbor` 函数的文档'
+  description: Documentation for the `cbor` function.
   part: null
   outline:
   - id: summary
@@ -87,6 +87,7 @@ children:
       keywords: []
       oneliner: Reads structured data from a CBOR file.
       element: false
+      contextual: false
       details: |-
         <p>Reads structured data from a CBOR file.</p>
         <p>The file must contain a valid CBOR serialization. Mappings will be
@@ -120,6 +121,7 @@ children:
         keywords: []
         oneliner: Reads structured data from CBOR bytes.
         element: false
+        contextual: false
         details: <p>Reads structured data from CBOR bytes.</p>
         example: null
         self: false
@@ -146,6 +148,7 @@ children:
         keywords: []
         oneliner: Encode structured data into CBOR bytes.
         element: false
+        contextual: false
         details: <p>Encode structured data into CBOR bytes.</p>
         example: null
         self: false
@@ -168,7 +171,7 @@ children:
   children: []
 - route: /docs/reference/data-loading/csv/
   title: CSV
-  description: '`csv` 函数的文档'
+  description: Documentation for the `csv` function.
   part: null
   outline:
   - id: summary
@@ -186,6 +189,9 @@ children:
     - id: parameters-delimiter
       name: delimiter
       children: []
+    - id: parameters-row-type
+      name: row-type
+      children: []
   - id: definitions
     name: Definitions
     children:
@@ -198,6 +204,9 @@ children:
       - id: definitions-decode-delimiter
         name: delimiter
         children: []
+      - id: definitions-decode-row-type
+        name: row-type
+        children: []
   body:
     kind: func
     content:
@@ -207,6 +216,7 @@ children:
       keywords: []
       oneliner: Reads structured data from a CSV file.
       element: false
+      contextual: false
       details: |-
         <p>Reads structured data from a CSV file.</p>
         <p>The CSV file will be read and parsed into a 2-dimensional array of strings:
@@ -214,14 +224,14 @@ children:
         rows will be collected into a single array. Header rows will not be
         stripped.</p>
         <h2 id="example">Example</h2>
-        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> results <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;data.csv&quot;</span><span class="typ-punct">)</span>
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> results <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;example.csv&quot;</span><span class="typ-punct">)</span>
 
         <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
           columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
           <span class="typ-punct">[</span><span class="typ-strong">*Condition*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Result*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-op">..</span>results<span class="typ-punct">.</span><span class="typ-func">flatten</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
         <span class="typ-punct">)</span>
-        </code></pre><div class="preview"><img src="/assets/docs/08241206dc3f3c0296d2db8f2ee545f4.png" alt="Preview" width="480" height="190"/></div></div>
+        </code></pre><div class="preview"><img src="/assets/docs/d639327a86bcbebeca5ae45c5d3d5c44.png" alt="Preview" width="480" height="190"/></div></div>
       example: null
       self: false
       params:
@@ -251,6 +261,26 @@ children:
         required: false
         variadic: false
         settable: false
+      - name: row-type
+        details: |-
+          <p>How to represent the file's rows.</p>
+          <ul>
+          <li>If set to <code>array</code>, each row is represented as a plain array of
+          strings.</li>
+          <li>If set to <code>dictionary</code>, each row is represented as a dictionary
+          mapping from header keys to strings. This option only makes sense when
+          a header row is present in the CSV file.</li>
+          </ul>
+        example: null
+        types:
+        - type
+        strings: []
+        default: <code>array</code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: false
       returns:
       - array
       scope:
@@ -261,6 +291,7 @@ children:
         keywords: []
         oneliner: Reads structured data from a CSV string/bytes.
         element: false
+        contextual: false
         details: <p>Reads structured data from a CSV string/bytes.</p>
         example: null
         self: false
@@ -292,13 +323,33 @@ children:
           required: false
           variadic: false
           settable: false
+        - name: row-type
+          details: |-
+            <p>How to represent the file's rows.</p>
+            <ul>
+            <li>If set to <code>array</code>, each row is represented as a plain array of
+            strings.</li>
+            <li>If set to <code>dictionary</code>, each row is represented as a dictionary
+            mapping from header keys to strings. This option only makes sense
+            when a header row is present in the CSV file.</li>
+            </ul>
+          example: null
+          types:
+          - type
+          strings: []
+          default: <code>array</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
         returns:
         - array
         scope: []
   children: []
 - route: /docs/reference/data-loading/json/
   title: JSON
-  description: '`json` 函数的文档'
+  description: Documentation for the `json` function.
   part: null
   outline:
   - id: summary
@@ -340,6 +391,7 @@ children:
       keywords: []
       oneliner: Reads structured data from a JSON file.
       element: false
+      contextual: false
       details: |-
         <p>Reads structured data from a JSON file.</p>
         <p>The file must contain a valid JSON object or array. JSON objects will be
@@ -398,6 +450,7 @@ children:
         keywords: []
         oneliner: Reads structured data from a JSON string/bytes.
         element: false
+        contextual: false
         details: <p>Reads structured data from a JSON string/bytes.</p>
         example: null
         self: false
@@ -425,6 +478,7 @@ children:
         keywords: []
         oneliner: Encodes structured data into a JSON string.
         element: false
+        contextual: false
         details: <p>Encodes structured data into a JSON string.</p>
         example: null
         self: false
@@ -459,7 +513,7 @@ children:
   children: []
 - route: /docs/reference/data-loading/read/
   title: Read
-  description: '`read` 函数的文档'
+  description: Documentation for the `read` function.
   part: null
   outline:
   - id: summary
@@ -486,18 +540,19 @@ children:
       keywords: []
       oneliner: Reads plain text or data from a file.
       element: false
+      contextual: false
       details: |-
         <p>Reads plain text or data from a file.</p>
         <p>By default, the file will be read as UTF-8 and returned as a <a href="/docs/reference/foundations/str/">string</a>.</p>
-        <p>If you specify <code>encoding: <span class="typ-key">none</span></code>, this returns raw <a href="/docs/reference/foundations/bytes/">bytes</a> instead.</p>
+        <p>If you specify <code>encoding: <span class="typ-key">none</span></code>, this returns raw <a href="/docs/reference/foundations/bytes/" title="bytes">bytes</a> instead.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code>An example for a HTML file: <span class="typ-escape">\</span>
-        <span class="typ-key">#</span><span class="typ-key">let</span> text <span class="typ-op">=</span> <span class="typ-func">read</span><span class="typ-punct">(</span><span class="typ-str">&quot;data.html&quot;</span><span class="typ-punct">)</span>
+        <span class="typ-key">#</span><span class="typ-key">let</span> text <span class="typ-op">=</span> <span class="typ-func">read</span><span class="typ-punct">(</span><span class="typ-str">&quot;example.html&quot;</span><span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">raw</span><span class="typ-punct">(</span>text<span class="typ-punct">,</span> lang<span class="typ-punct">:</span> <span class="typ-str">&quot;html&quot;</span><span class="typ-punct">)</span>
 
         Raw bytes:
         <span class="typ-func">#</span><span class="typ-func">read</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> encoding<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">)</span>
-        </code></pre><div class="preview"><img src="/assets/docs/e3b17c20df842a68185ce8f383291c9b.png" alt="Preview" width="480" height="190"/></div></div>
+        </code></pre><div class="preview"><img src="/assets/docs/d5462c1d3490748d7f68a1f457aa0bf8.png" alt="Preview" width="480" height="190"/></div></div>
       example: null
       self: false
       params:
@@ -537,7 +592,7 @@ children:
   children: []
 - route: /docs/reference/data-loading/toml/
   title: TOML
-  description: '`toml` 函数的文档'
+  description: Documentation for the `toml` function.
   part: null
   outline:
   - id: summary
@@ -579,6 +634,7 @@ children:
       keywords: []
       oneliner: Reads structured data from a TOML file.
       element: false
+      contextual: false
       details: |-
         <p>Reads structured data from a TOML file.</p>
         <p>The file must contain a valid TOML table. TOML tables will be converted into
@@ -621,6 +677,7 @@ children:
         keywords: []
         oneliner: Reads structured data from a TOML string/bytes.
         element: false
+        contextual: false
         details: <p>Reads structured data from a TOML string/bytes.</p>
         example: null
         self: false
@@ -648,6 +705,7 @@ children:
         keywords: []
         oneliner: Encodes structured data into a TOML string.
         element: false
+        contextual: false
         details: <p>Encodes structured data into a TOML string.</p>
         example: null
         self: false
@@ -682,7 +740,7 @@ children:
   children: []
 - route: /docs/reference/data-loading/xml/
   title: XML
-  description: '`xml` 函数的文档'
+  description: Documentation for the `xml` function.
   part: null
   outline:
   - id: summary
@@ -715,11 +773,12 @@ children:
       keywords: []
       oneliner: Reads structured data from an XML file.
       element: false
+      contextual: false
       details: |-
         <p>Reads structured data from an XML file.</p>
         <p>The XML file is parsed into an array of dictionaries and strings. XML nodes
         can be elements or strings. Elements are represented as dictionaries with
-        the the following keys:</p>
+        the following keys:</p>
         <ul>
         <li><code>tag</code>: The name of the element as a string.</li>
         <li><code>attrs</code>: A dictionary of the element's attributes as strings.</li>
@@ -786,6 +845,7 @@ children:
         keywords: []
         oneliner: Reads structured data from an XML string/bytes.
         element: false
+        contextual: false
         details: <p>Reads structured data from an XML string/bytes.</p>
         example: null
         self: false
@@ -809,7 +869,7 @@ children:
   children: []
 - route: /docs/reference/data-loading/yaml/
   title: YAML
-  description: '`yaml` 函数的文档'
+  description: Documentation for the `yaml` function.
   part: null
   outline:
   - id: summary
@@ -848,6 +908,7 @@ children:
       keywords: []
       oneliner: Reads structured data from a YAML file.
       element: false
+      contextual: false
       details: |-
         <p>Reads structured data from a YAML file.</p>
         <p>The file must contain a valid YAML object or array. YAML mappings will be
@@ -899,6 +960,7 @@ children:
         keywords: []
         oneliner: Reads structured data from a YAML string/bytes.
         element: false
+        contextual: false
         details: <p>Reads structured data from a YAML string/bytes.</p>
         example: null
         self: false
@@ -926,6 +988,7 @@ children:
         keywords: []
         oneliner: Encode structured data into a YAML string.
         element: false
+        contextual: false
         details: <p>Encode structured data into a YAML string.</p>
         example: null
         self: false

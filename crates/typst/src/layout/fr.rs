@@ -8,19 +8,19 @@ use crate::foundations::{repr, ty, Repr};
 use crate::layout::Abs;
 use crate::util::{Numeric, Scalar};
 
-/// Defines how the the remaining space in a layout is distributed.
+/// Defines how the remaining space in a layout is distributed.
 ///
 /// Each fractionally sized element gets space based on the ratio of its
 /// fraction to the sum of all fractions.
 ///
-/// For more details, also see the [h]($h) and [v]($v) functions and the
+/// For more details, also see the [h] and [v] functions and the
 /// [grid function]($grid).
 ///
 /// # Example
 /// ```example
 /// Left #h(1fr) Left-ish #h(2fr) Right
 /// ```
-#[ty(name = "fraction")]
+#[ty(cast, name = "fraction")]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Fr(Scalar);
 
@@ -79,7 +79,7 @@ impl Debug for Fr {
 
 impl Repr for Fr {
     fn repr(&self) -> EcoString {
-        repr::format_float(self.get(), Some(2), "fr")
+        repr::format_float_with_unit(self.get(), "fr")
     }
 }
 

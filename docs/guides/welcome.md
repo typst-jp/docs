@@ -1,11 +1,14 @@
 ---
-description: Typst 指南。
+description: Guides for Typst.
 ---
 
-# 指南
-欢迎来到指南部分！在这里，您可以找到针对特定用户组或使用案例的有用资料。
-目前，仅有两个指南：面向 LaTeX 用户的 Typst 介绍，以及页面设置指南。欢迎为指南部分提出其他话题！
+# Guides
+Welcome to the Guides section! Here, you'll find helpful material for specific
+user groups or use cases. Currently, two guides are available: An introduction
+to Typst for LaTeX users, and a detailed look at page setup. Feel free to
+propose other topics for guides!
 
-## 指南列表 { #list-of-guides }
-- [LaTeX 用户指南]($guides/guide-for-latex-users)
-- [页面设置指南]($guides/page-setup)
+## List of Guides
+- [Guide for LaTeX users]($guides/guide-for-latex-users)
+- [Page setup guide]($guides/page-setup-guide)
+- [Table guide]($guides/table-guide)

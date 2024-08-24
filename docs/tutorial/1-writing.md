@@ -17,7 +17,7 @@ In this report, we will explore the
 various factors that influence fluid
 dynamics in glaciers and how they
 contribute to the formation and
-behavior of these natural structures.
+behaviour of these natural structures.
 ```
 
 _このチュートリアル全体を通して、このようなコード例を紹介します。アプリと同様に、最初のパネルにはマークアップが含まれ、2番目のパネルにはプレビューが表示されます。何が起こっているかわかりやすいように例に合わせてページを縮小しています。_
@@ -31,7 +31,7 @@ In this report, we will explore the
 various factors that influence _fluid
 dynamics_ in glaciers and how they
 contribute to the formation and
-behavior of these natural structures.
+behaviour of these natural structures.
 ```
 
 簡単でしたね！新しい段落を追加するには、2行のテキストの間に空行を追加するだけです。
