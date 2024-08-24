@@ -87,10 +87,22 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 多くの構文要素は式に特有のものです。
 以下に、コードモードで利用可能なすべての構文の一覧表を示します。
 
-| 名称                       | 例                            | 参照                                  |
-| -------------------------- | ----------------------------- | ------------------------------------- |
+| 名称                       | 例                            | 参照                                     |
+| -------------------------- | ----------------------------- | ---------------------------------------- |
+| none                       | `{none}`                      | [`none`]($reference/foundations/none)    |
+| 自動                       | `{auto}`                      | [`auto`]($reference/foundations/auto)    |
+| ブール値                   | `{false}`, `{true}`           | [`bool`]($reference/foundations/bool)    |
+| 整数                       | `{10}`, `{0xff}`              | [`int`]($reference/foundations/int)      |
+| 浮動小数点数               | `{3.14}`, `{1e5}`             | [`float`]($reference/foundations/float)  |
+| 長さ                       | `{2pt}`, `{3mm}`, `{1em}`, .. | [`length`]($reference/layout/length)     |
+| 角度                       | `{90deg}`, `{1rad}`           | [`angle`]($reference/layout/angle)       |
+| 比率                       | `{2fr}`                       | [`fraction`]($reference/layout/fraction) |
+| 割合                       | `{50%}`                       | [`ratio`]($reference/layout/ratio)       |
+| 文字列                     | `{"hello"}`                   | [`str`]($reference/foundations/str)      |
+| ラベル                     | `{<intro>}`                   | [`label`]($reference/foundations/label)  |
+| 数式                       | `[$x^2$]`                     | [Math]($category/math)                   |
+| rawテキスト                | ``[`print(1)`]``              | [`raw`]($reference/text/raw)             |
 | 変数アクセス               | `{x}`                         | [Scripting]($scripting/#blocks)       |
-| 任意のリテラル             | `{1pt, "hey"}`                | [Types]($category/types)              |
 | コードブロック             | `{{ let x = 1; x + 2 }}`      | [Scripting]($scripting/#blocks)       |
 | コンテンツブロック         | `{[*Hello*]}`                 | [Scripting]($scripting/#blocks)       |
 | 括弧付き式                 | `{(1 + 2)}`                   | [Scripting]($scripting/#blocks)       |
@@ -108,7 +120,7 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 | 名前付き関数               | `{let f(x) = 2 * x}`          | [Function]($type/$function)           |
 | setルール                  | `{set text(14pt)}`            | [Styling]($styling/#set-rules)        |
 | set-ifルール               | `{set text(..) if .. }`       | [Styling]($styling/#set-rules)        |
-| show-setルール             | `{show par: set block(..)}`   | [Styling]($styling/#show-rules)       |
+| show-setルール             | `{show heading: set block(..)}` | [Styling]($styling/#show-rules)       |
 | 関数付きshowルール         | `{show raw: it => {..}}`      | [Styling]($styling/#show-rules)       |
 | show-everythingルール      | `{show: columns.with(2)}`     | [Styling]($styling/#show-rules)       |
 | コンテキスト式             | `{context text.lang}`         | [Context]($context)                   |
@@ -116,7 +128,7 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 | forループ                  | `{for x in (1, 2, 3) {..}}`   | [Scripting]($scripting/#loops)        |
 | whileループ                | `{while x < 10 {..}}`         | [Scripting]($scripting/#loops)        |
 | ループ制御フロー           | `{break, continue}`           | [Scripting]($scripting/#loops)        |
-| 関数からのリターン         | `{return x}`                  | [Function]($type/$function)                 |
+| 関数からのリターン         | `{return x}`                  | [Function]($type/$function)           |
 | モジュールをインクルード   | `{include "bar.typ"}`         | [Scripting]($scripting/#modules)      |
 | モジュールをインポート     | `{import "bar.typ"}`          | [Scripting]($scripting/#modules)      |
 | モジュールからのインポート | `{import "bar.typ": a, b, c}` | [Scripting]($scripting/#modules)      |
