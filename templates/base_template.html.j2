@@ -1,5 +1,3 @@
-{% import 'types.html.j2' as types %}
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -103,9 +101,6 @@
           <ul>
             {% for second_level in first_level['children'] %}
             {% if second_level['part'] %}
-            {% if second_level['part'] == 'Library' %}
-            {{ types.types_sidebar_display() }}
-            {% endif %}
             <li class="category">{{ second_level['part'] }}</li>
             {% endif %}
             <li>
