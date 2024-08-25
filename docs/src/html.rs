@@ -307,11 +307,17 @@ impl<'a> Handler<'a> {
 
         *id_slot = (!id.is_empty()).then_some(id);
 
-        // Special case for things like "v0.3.0".
+        let title = self.peeked.as_ref().map(|text| text.to_string());
         let name = if id.starts_with('v') && id.contains('.') {
+            // Special case for things like "v0.3.0".
             id.into()
-        } else {
+        } else if title.iter().all(|c| c.is_ascii()) {
             id.to_title_case().into()
+        } else {
+            self.ids
+                .alloc(title.expect("heading should always have a title"))
+                .as_str()
+                .into()
         };
 
         let mut children = &mut self.outline;
