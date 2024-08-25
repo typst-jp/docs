@@ -46,9 +46,9 @@ forward.
 <body class="no-js docs has-outline">
   <div class="alert">
     <div class="alert-content">
-      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.1 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
       <br />
-      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.1 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
     </div>
   </div>
   <header class="boring">
@@ -824,6 +824,83 @@ forward.
       
 
 <h1>Changelog</h1>
+<h2 id="v0.11.1">Version 0.11.1 (May 17, 2024)</h2>
+<ul>
+<li>
+<p>Security</p>
+<ul>
+<li>Fixed a vulnerability where image files at known paths could be embedded
+into the PDF even if they were outside of the project directory</li>
+</ul>
+</li>
+<li>
+<p>Bibliography</p>
+<ul>
+<li>Fixed et-al handling in subsequent citations</li>
+<li>Fixed suppression of title for citations and bibliography references with no
+author</li>
+<li>Fixed handling of initials in citation styles without a delimiter</li>
+<li>Fixed bug with citations in footnotes</li>
+</ul>
+</li>
+<li>
+<p>Text and Layout</p>
+<ul>
+<li>Fixed interaction of <a href="/docs/reference/model/par/#parameters-first-line-indent"><code>first-line-indent</code></a> and
+<a href="/docs/reference/model/outline/" title="`outline`"><code>outline</code></a></li>
+<li>Fixed compression of CJK punctuation marks at line start and end</li>
+<li>Fixed handling of <a href="/docs/reference/visualize/rect/">rectangles</a> with negative dimensions</li>
+<li>Fixed layout of <a href="/docs/reference/visualize/path/" title="`path`"><code>path</code></a> in explicitly sized container</li>
+<li>Fixed broken <a href="/docs/reference/text/raw/" title="`raw`"><code>raw</code></a> text in right-to-left paragraphs</li>
+<li>Fixed tab rendering in <code>raw</code> text with language <code>typ</code> or <code>typc</code></li>
+<li>Fixed highlighting of multi-line <code>raw</code> text enclosed by single backticks</li>
+<li>Fixed indentation of overflowing lines in <code>raw</code> blocks</li>
+<li>Fixed extra space when <code>raw</code> text ends with a backtick</li>
+</ul>
+</li>
+<li>
+<p>Math</p>
+<ul>
+<li>Fixed broken <a href="/docs/reference/math/equation/">equations</a> in right-to-left paragraphs</li>
+<li>Fixed missing <a href="/docs/reference/math/variants/#functions-bb">blackboard bold</a> letters</li>
+<li>Fixed error on empty arguments in 2D math argument list</li>
+<li>Fixed stretching via <a href="/docs/reference/math/lr/#functions-mid"><code>mid</code></a> for various characters</li>
+<li>Fixed that alignment points in equations were affected by <code><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span></code></li>
+</ul>
+</li>
+<li>
+<p>Export</p>
+<ul>
+<li>Fixed <a href="/docs/reference/text/smartquote/">smart quotes</a> in PDF outline</li>
+<li>Fixed <a href="/docs/reference/visualize/pattern/">patterns</a> with spacing in PDF</li>
+<li>Fixed wrong PDF page labels when <a href="/docs/reference/layout/page/#parameters-numbering">page numbering</a> was
+disabled after being previously enabled</li>
+</ul>
+</li>
+<li>
+<p>Scripting</p>
+<ul>
+<li>Fixed overflow for large numbers in external data files (by converting to
+floats instead)</li>
+<li>Fixed <a href="/docs/reference/foundations/str/#definitions-trim"><code>str<span class="typ-punct">.</span><span class="typ-func">trim</span><span class="typ-punct">(</span>regex<span class="typ-punct">,</span> at<span class="typ-punct">:</span> end<span class="typ-punct">)</span></code></a> when the whole string is
+matched</li>
+</ul>
+</li>
+<li>
+<p>Miscellaneous</p>
+<ul>
+<li>Fixed deformed strokes for specific shapes and thicknesses</li>
+<li>Fixed newline handling in code mode: There can now be comments within
+chained method calls and between an <code>if</code> branch and the <code>else</code> keyword</li>
+<li>Fixed inefficiency with incremental reparsing</li>
+<li>Fixed autocompletions for relative file imports</li>
+<li>Fixed crash in autocompletion handler</li>
+<li>Fixed a bug where the path and entrypoint printed by <code>typst init</code> were not
+properly escaped</li>
+<li>Fixed various documentation errors</li>
+</ul>
+</li>
+</ul>
 <h2 id="v0.11.0">Version 0.11.0 (March 15, 2024)</h2>
 <ul>
 <li>
@@ -2765,6 +2842,10 @@ and <code>dict<span class="typ-punct">.</span><span class="typ-func">insert</spa
     
     <nav id="page-overview"><strong>目次</strong>
       <ul>
+        
+        <li data-assoc="v0.11.1"><a href="#v0.11.1">v0.11.1</a>
+          <ul></ul>
+        </li>
         
         <li data-assoc="v0.11.0"><a href="#v0.11.0">v0.11.0</a>
           <ul></ul>

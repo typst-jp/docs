@@ -46,9 +46,9 @@ explains all you need to know about tables in Typst.
 <body class="no-js docs has-outline">
   <div class="alert">
     <div class="alert-content">
-      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.1 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
       <br />
-      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.1 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
     </div>
   </div>
   <header class="boring">
@@ -905,7 +905,7 @@ quickly becomes useful if your document contains multiple tables!</p>
 applying our styles directly to <code>table.header</code>. This is due to a current
 limitation of Typst that will be fixed in a future release.</p>
 <p>Congratulations, you have created your first table! Now you can proceed to
-<a href="#column-sizes">change column sizes</a>, <a href="#strokes">adjust the strokes</a>, <a href="#striped-rows-and-columns">add
+<a href="#column-sizes">change column sizes</a>, <a href="#strokes">adjust the strokes</a>, <a href="#fills">add
 striped rows</a>, and more!</p>
 <h2 id="column-sizes">How to change the column sizes?</h2>
 <p>If you create a table and specify the number of columns, Typst will make each
@@ -1541,7 +1541,7 @@ argument) with white strokes (<code>table</code>'s <code>stroke</code> argument)
 by the <code>table.cell</code> set rule). Finally, we align all the content of all table
 cells in the body in the center. If you want to know more about the functions
 passed to <code>align</code>, <code>stroke</code>, and <code>fill</code>, you can check out the sections on
-<a href="/docs/reference/layout/alignment/" title="alignment">alignment</a>, <a href="#stroke-functions">strokes</a>, and <a href="#striped-rows-and-columns">striped
+<a href="/docs/reference/layout/alignment/" title="alignment">alignment</a>, <a href="#stroke-functions">strokes</a>, and <a href="#fills">striped
 tables</a>.</p>
 <p>This table would be a great candidate for fully automated generation from an
 external data source! Check out the <a href="#importing-data">section about importing
@@ -1811,7 +1811,7 @@ Then, we return an array with <code>year</code> and <code>rounded</code> that re
 row. In our table, we have added our custom header that tells the reader that
 we've applied a logarithm to the values. Then, we spread the flattened data as
 above.</p>
-<p>We also styled the table with <a href="#striped-rows-and-columns">stripes</a>, a
+<p>We also styled the table with <a href="#fills">stripes</a>, a
 <a href="#individual-lines">horizontal line</a> below the first row, <a href="#alignment">aligned</a>
 everything to the right, and emboldened the first column. Click on the links to
 go to the relevant guide sections and see how it's done!</p>
