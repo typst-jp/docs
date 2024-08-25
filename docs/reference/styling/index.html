@@ -5,14 +5,14 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Styling – Typstドキュメント日本語版</title>
-  <meta name="description" content="All concepts needed to style your document with Typst.">
+  <title>スタイル設定 – Typstドキュメント日本語版</title>
+  <meta name="description" content="Typst で文書のスタイル設定をするために必要な概念">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/styling/">
-  <meta property="og:title" content="Styling – Typstドキュメント日本語版">
+  <meta property="og:title" content="スタイル設定 – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="All concepts needed to style your document with Typst.">
+  <meta property="og:description" content="Typst で文書のスタイル設定をするために必要な概念">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -157,7 +157,7 @@
             
             
             <li>
-              <a href="/docs/reference/styling/"  aria-current="page" >Styling</a>
+              <a href="/docs/reference/styling/"  aria-current="page" >スタイル設定</a>
               
             </li>
             
@@ -816,27 +816,23 @@
         <li><a href="/docs/reference/">リファレンス</a></li>
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/styling/">Styling</a></li>
+        <li><a href="/docs/reference/styling/">スタイル設定</a></li>
         
       </ul>
 
       
 
-<h1>Styling</h1>
-<p>Typst includes a flexible styling system that automatically applies styling of
-your choice to your document. With <em>set rules,</em> you can configure basic
-properties of elements. This way, you create most common styles. However, there
-might not be a built-in property for everything you wish to do. For this reason,
-Typst further supports <em>show rules</em> that can completely redefine the appearance
-of elements.</p>
-<h2 id="set-rules">Set rules</h2>
-<p>With set rules, you can customize the appearance of elements. They are written
-as a <a href="/docs/reference/foundations/function/">function call</a> to an <a href="/docs/reference/foundations/function/#element-functions">element
-function</a> preceded by the <code><span class="typ-key">set</span></code> keyword (or
-<code><span class="typ-key">#</span><span class="typ-key">set</span></code> in markup). Only optional parameters of that function can be provided
-to the set rule. Refer to each function's documentation to see which parameters
-are optional. In the example below, we use two set rules to change the
-<a href="/docs/reference/text/text/#parameters-font">font family</a> and <a href="/docs/reference/model/heading/#parameters-numbering">heading numbering</a>.</p>
+<h1>スタイル設定</h1>
+<p>Typst には柔軟なスタイル設定機能を持ち、出力される文書に対して自動的に任意のスタイル設定を適用します。
+<em>setルール</em> ではエレメントの基本プロパティを設定できます。
+しかし、やりたいことすべてに対応するプロパティがあらかじめ実装されているとは限りません。
+このため、Typst はエレメントの外観を完全に再定義できる <em>showルール</em> もサポートしています。</p>
+<h2 id="set-rules">setルール</h2>
+<p>set ルールを使うと、エレメントの外観をカスタマイズできます。
+これらは、<code><span class="typ-key">set</span></code> キーワード（マークアップでは <code><span class="typ-key">#</span><span class="typ-key">set</span></code>）を前に置いた <a href="/docs/reference/foundations/function/#element-functions">element 関数</a> への<a href="/docs/reference/foundations/function/">関数呼び出し</a>として記述されます。
+set ルールに指定できるのは、その関数のオプションのパラメーターだけです。
+どのパラメーターがオプションであるかは、各関数のドキュメントを参照してください。
+以下の例では、2 つの set ルールを使って、<a href="/docs/reference/text/text/#parameters-font">フォント</a>と<a href="/docs/reference/model/heading/#parameters-numbering">見出し番号</a>を変更しています。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;I.&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
   font<span class="typ-punct">:</span> <span class="typ-str">&quot;New Computer Modern&quot;</span>
@@ -846,11 +842,10 @@ are optional. In the example below, we use two set rules to change the
 With set rules, you can style
 your document.
 </code></pre><div class="preview"><img src="/assets/docs/d36488b1f565fe84c9a233c7c678b1f8.png" alt="Preview" width="480" height="190"/></div></div>
-<p>A top level set rule stays in effect until the end of the file. When nested
-inside of a block, it is only in effect until the end of that block. With a
-block, you can thus restrict the effect of a rule to a particular segment of
-your document. Below, we use a content block to scope the list styling to one
-particular list.</p>
+<p>set ルールは、そのまま記述するとファイルの最後まで適用されます。
+ブロックの中にネストすると、そのブロックの終わりまで適用されます。
+ブロックを使えば、set ルールの効果を指定した部分に限定できます。
+以下では、content ブロックを用いてスコープすることで、特定のリストのスタイルのみを変更しています。</p>
 <div class="previewed-code"><pre><code>This list is affected: <span class="typ-punct">#</span><span class="typ-punct">[</span>
   <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">list</span><span class="typ-punct">(</span>marker<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-escape">--</span><span class="typ-punct">]</span><span class="typ-punct">)</span>
   <span class="typ-marker">-</span> Dash
@@ -859,8 +854,8 @@ particular list.</p>
 This one is not:
 <span class="typ-marker">-</span> Bullet
 </code></pre><div class="preview"><img src="/assets/docs/f129abb09047d8c5069d0c5142a5eed7.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Sometimes, you'll want to apply a set rule conditionally. For this, you can use
-a <em>set-if</em> rule.</p>
+<p>ときには、set ルールを条件付きで設定したい場合もあるでしょう。
+その場合には <em>set-if</em> ルールを使用します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">task</span><span class="typ-punct">(</span>body<span class="typ-punct">,</span> critical<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
   <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>red<span class="typ-punct">)</span> <span class="typ-key">if</span> critical
   <span class="typ-punct">[</span><span class="typ-marker">-</span> <span class="typ-pol">#</span><span class="typ-pol">body</span><span class="typ-punct">]</span>
@@ -869,27 +864,24 @@ a <em>set-if</em> rule.</p>
 <span class="typ-func">#</span><span class="typ-func">task</span><span class="typ-punct">(</span>critical<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Food today?<span class="typ-punct">]</span>
 <span class="typ-func">#</span><span class="typ-func">task</span><span class="typ-punct">(</span>critical<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Work deadline<span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/1c565fdf1da4e5a5e6ccd83bf394867d.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="show-rules">Show rules</h2>
-<p>With show rules, you can deeply customize the look of a type of element. The
-most basic form of show rule is a <em>show-set rule.</em> Such a rule is written as the
-<code><span class="typ-key">show</span></code> keyword followed by a <a href="/docs/reference/foundations/selector/" title="selector">selector</a>, a colon and then a set rule. The most
-basic form of selector is an <a href="/docs/reference/foundations/function/#element-functions">element function</a>.
-This lets the set rule only apply to the selected element. In the example below,
-headings become dark blue while all other text stays black.</p>
+<h2 id="show-rules">showルール</h2>
+<p>show ルールを使えば、特定の種類のエレメントの外観を詳細に設定できます。
+show ルールの基本的な記述方法は、show-set ルールです。
+<code><span class="typ-key">show</span></code> キーワードの後に <a href="/docs/reference/foundations/selector/">セレクター</a>、コロン、set ルールと続けて記述します。
+セレクターの基本的な記述方法は <a href="/docs/reference/foundations/function/#element-functions">element関数</a> を置くことであり、set ルールは選択されたエレメントにのみ適用されます。
+下の例では、見出しは紺色になり、他のテキストは黒色のままです。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>navy<span class="typ-punct">)</span>
 
 <span class="typ-heading">= This is navy-blue</span>
 But this stays black.
 </code></pre><div class="preview"><img src="/assets/docs/256417ece420a98a96c8e3cf65bbecbd.png" alt="Preview" width="480" height="190"/></div></div>
-<p>With show-set rules you can mix and match properties from different functions to
-achieve many different effects. But they still limit you to what is predefined
-in Typst. For maximum flexibility, you can instead write a show rule that
-defines how to format an element from scratch. To write such a show rule,
-replace the set rule after the colon with an arbitrary <a href="/docs/reference/foundations/function/" title="function">function</a>. This function
-receives the element in question and can return arbitrary content. The available
-<a href="/docs/reference/scripting/#fields">fields</a> on the element passed to the function again match
-the parameters of the respective element function. Below, we define a show rule
-that formats headings for a fantasy encyclopedia.</p>
+<p>show-set ルールを使えば、さまざまな関数のプロパティを組み合わせることが可能です。
+しかし、組み合わせられるプロパティは Typst であらかじめ定義されているものに限定されます。
+最大限の柔軟性を得るには、エレメントをゼロからフォーマットする方法を定義する show ルールを書くことができます。
+このような show ルールを書くには、コロンの後の set ルールを任意の<a href="/docs/reference/foundations/function/">関数</a>に置き換えてください。
+この関数は対象のエレメントを受け取り、任意の内容を返すことができます。
+関数に渡されたエレメントで利用可能な<a href="/docs/reference/scripting/#fields">フィールド</a>は、それぞれの element 関数のパラメーターと一致します。
+以下は、ファンタジー百科事典の見出しをフォーマットする show ルールを定義する例です。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(I)&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
   <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
@@ -910,38 +902,33 @@ While less powerful than the
 dragon, the manticore gets
 extra style points.
 </code></pre><div class="preview"><img src="/assets/docs/f5ae77cfb57288910a37d95f5ab9b4e8.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Like set rules, show rules are in effect until the end of the current block or
-file.</p>
-<p>Instead of a function, the right-hand side of a show rule can also take a
-literal string or content block that should be directly substituted for the
-element. And apart from a function, the left-hand side of a show rule can also
-take a number of other <em>selectors</em> that define what to apply the transformation
-to:</p>
+<p>set ルールと同様に、show ルールは、現在のブロック内またはファイルの終わりまで有効です。</p>
+<p>関数の代わりに、show ルールのコロン右側は、エレメントに直接置換されるべきリテラル文字列またはコンテンツブロックを取ることもできます。
+また show ルールのコロン左側は、以下に示すように、変換を適用する対象を定義する <em>セレクター</em> を受け取ることができます。</p>
 <ul>
 <li>
-<p><strong>Everything:</strong> <code><span class="typ-key">show</span><span class="typ-punct">:</span> rest <span class="typ-op">=&gt;</span> ..</code> <br />
-Transform everything after the show rule. This is useful to apply a more
-complex layout to your whole document without wrapping everything in a giant
-function call.</p>
+<p><strong>すべて：</strong> <code><span class="typ-key">show</span><span class="typ-punct">:</span> rest <span class="typ-op">=&gt;</span> ..</code> <br />
+showルール以降のすべてを変換する。
+個別の関数呼び出しでラップすることなく、複雑なレイアウトを文書全体に適用するのに便利です。</p>
 </li>
 <li>
-<p><strong>Text:</strong> <code><span class="typ-key">show</span> <span class="typ-str">&quot;Text&quot;</span><span class="typ-punct">:</span> ..</code> <br />
-Style, transform or replace text.</p>
+<p><strong>文字列：</strong> <code><span class="typ-key">show</span> <span class="typ-str">&quot;Text&quot;</span><span class="typ-punct">:</span> ..</code> <br />
+設定した文字列に対して、スタイル変更や文字の置き換えを行います。</p>
 </li>
 <li>
-<p><strong>Regex:</strong> <code><span class="typ-key">show</span> <span class="typ-func">regex</span><span class="typ-punct">(</span><span class="typ-str">&quot;\w+&quot;</span><span class="typ-punct">)</span><span class="typ-punct">:</span> ..</code> <br />
-Select and transform text with a regular expression for even more flexibility.
-See the documentation of the <a href="/docs/reference/foundations/regex/"><code>regex</code> type</a> for details.</p>
+<p><strong>正規表現：</strong> <code><span class="typ-key">show</span> <span class="typ-func">regex</span><span class="typ-punct">(</span><span class="typ-str">&quot;\w+&quot;</span><span class="typ-punct">)</span><span class="typ-punct">:</span> ..</code> <br />
+正規表現にマッチする文字列に対して、スタイル変更や文字の置き換えを行います。
+正規表現については<a href="/docs/reference/foundations/regex/">regex 関数</a>を参照してください。</p>
 </li>
 <li>
-<p><strong>Function with fields:</strong> <code><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">:</span> ..</code> <br />
-Transform only elements that have the specified fields. For example, you might
-want to only change the style of level-1 headings.</p>
+<p><strong>関数やフィールド：</strong> <code><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">:</span> ..</code> <br />
+指定されたフィールドを持つエレメントのみを変換します。
+たとえば、レベル 1 の見出しのスタイルだけを変更したい場合などに有効です。</p>
 </li>
 <li>
-<p><strong>Label:</strong> <code><span class="typ-key">show</span> <span class="typ-label">&lt;intro&gt;</span><span class="typ-punct">:</span> ..</code> <br />
-Select and transform elements that have the specified label. See the
-documentation of the <a href="/docs/reference/foundations/label/"><code>label</code> type</a> for more details.</p>
+<p><strong>ラベル：</strong> <code><span class="typ-key">show</span> <span class="typ-label">&lt;intro&gt;</span><span class="typ-punct">:</span> ..</code> <br />
+指定されたラベルを持つエレメントに対して適用する。
+ラベルについては<a href="/docs/reference/foundations/label/">labelタイプ</a>を参照してください。</p>
 </li>
 </ul>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-str">&quot;Project&quot;</span><span class="typ-punct">:</span> <span class="typ-func">smallcaps</span>
