@@ -1,6 +1,6 @@
 route: /docs/reference/introspection/state/
 title: State
-description: State 类型的文档
+description: Documentation for the State type.
 part: null
 outline:
 - id: summary
@@ -30,11 +30,20 @@ outline:
 - id: definitions
   name: Definitions
   children:
-  - id: definitions-display
-    name: Display
+  - id: definitions-get
+    name: Get
+    children: []
+  - id: definitions-at
+    name: At
     children:
-    - id: definitions-display-func
-      name: func
+    - id: definitions-at-selector
+      name: selector
+      children: []
+  - id: definitions-final
+    name: Final
+    children:
+    - id: definitions-final-location
+      name: location
       children: []
   - id: definitions-update
     name: Update
@@ -42,17 +51,11 @@ outline:
     - id: definitions-update-update
       name: update
       children: []
-  - id: definitions-at
-    name: At
+  - id: definitions-display
+    name: Display
     children:
-    - id: definitions-at-location
-      name: location
-      children: []
-  - id: definitions-final
-    name: Final
-    children:
-    - id: definitions-final-location
-      name: location
+    - id: definitions-display-func
+      name: func
       children: []
 body:
   kind: type
@@ -69,7 +72,8 @@ body:
       21. However this <strong>does not work</strong> in Typst. If you test this code, you will
       see that Typst complains with the following error message: <em>Variables from
       outside the function are read-only and cannot be modified.</em></p>
-      <pre><code><span class="typ-key">#</span><span class="typ-key">let</span> x <span class="typ-op">=</span> <span class="typ-num">0</span>
+      <pre><code><span class="typ-comment">// This doesn&#39;t work!</span>
+      <span class="typ-key">#</span><span class="typ-key">let</span> x <span class="typ-op">=</span> <span class="typ-num">0</span>
       <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">compute</span><span class="typ-punct">(</span>expr<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
         x <span class="typ-op">=</span> <span class="typ-func">eval</span><span class="typ-punct">(</span>
           expr<span class="typ-punct">.</span><span class="typ-func">replace</span><span class="typ-punct">(</span><span class="typ-str">&quot;x&quot;</span><span class="typ-punct">,</span> <span class="typ-func">str</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span><span class="typ-punct">)</span>
@@ -111,19 +115,20 @@ body:
       <h2 id="state-in-typst">Managing state in Typst</h2>
       <p>So what do we do instead? We use Typst's state management system. Calling
       the <code>state</code> function with an identifying string key and an optional initial
-      value gives you a state value which exposes a few methods. The two most
-      important ones are <code>display</code> and <code>update</code>:</p>
+      value gives you a state value which exposes a few function. The two most
+      important ones are <code>get</code> and <code>update</code>:</p>
       <ul>
       <li>
-      <p>The <code>display</code> method shows the current value of the state. You can
-      optionally give it a function that receives the value and formats it in
-      some way.</p>
+      <p>The <a href="/docs/reference/introspection/state/#definitions-get"><code>get</code></a> function retrieves the current value of the state.
+      Because the value can vary over the course of the document, it is a
+      <em>contextual</em> function that can only be used when <a href="/docs/reference/context/">context</a> is
+      available.</p>
       </li>
       <li>
-      <p>The <code>update</code> method modifies the state. You can give it any value. If
-      given a non-function value, it sets the state to that value. If given a
-      function, that function receives the previous state and has to return the
-      new state.</p>
+      <p>The <a href="/docs/reference/introspection/state/#definitions-update"><code>update</code></a> function modifies the state. You can give it
+      any value. If given a non-function value, it sets the state to that value.
+      If given a function, that function receives the previous state and has to
+      return the new state.</p>
       </li>
       </ul>
       <p>Our initial example would now look like this:</p>
@@ -132,19 +137,19 @@ body:
         <span class="typ-pol">#</span><span class="typ-pol">s</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span>x <span class="typ-op">=&gt;</span>
           <span class="typ-func">eval</span><span class="typ-punct">(</span>expr<span class="typ-punct">.</span><span class="typ-func">replace</span><span class="typ-punct">(</span><span class="typ-str">&quot;x&quot;</span><span class="typ-punct">,</span> <span class="typ-func">str</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
         <span class="typ-punct">)</span>
-        New value is <span class="typ-pol">#</span><span class="typ-pol">s</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>.
+        New value is <span class="typ-key">#</span><span class="typ-key">context</span> s<span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span>.
       <span class="typ-punct">]</span>
 
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;10&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;x + 3&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;x * 2&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;x - 5&quot;</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/a7c1c35241de9094dff62614a94e7211.png" alt="Preview" width="480" height="190"/></div></div>
+      </code></pre><div class="preview"><img src="/assets/docs/035c5adcdb05a6dc50dd02e399360424.png" alt="Preview" width="480" height="190"/></div></div>
       <p>State managed by Typst is always updated in layout order, not in evaluation
       order. The <code>update</code> method returns content and its effect occurs at the
       position where the returned content is inserted into the document.</p>
-      <p>As a result, we can now also store some of the computations in
-      variables, but they still show the correct results:</p>
+      <p>As a result, we can now also store some of the computations in variables,
+      but they still show the correct results:</p>
       <div class="previewed-code"><pre><code><span class="typ-escape">...</span>
 
       <span class="typ-key">#</span><span class="typ-key">let</span> more <span class="typ-op">=</span> <span class="typ-punct">[</span>
@@ -161,26 +166,21 @@ body:
       <a href="/docs/reference/introspection/counter/">counting system</a> is very similar to its state system.</p>
       <h2 id="time-travel">Time Travel</h2>
       <p>By using Typst's state management system you also get time travel
-      capabilities! By combining the state system with <a href="/docs/reference/introspection/locate/"><code>locate</code></a> and
-      <a href="/docs/reference/introspection/query/"><code>query</code></a>, we can find out what the value of the state will be at
-      any position in the document from anywhere else. In particular, the <code>at</code>
-      method gives us the value of the state at any location and the <code>final</code>
+      capabilities! We can find out what the value of the state will be at any
+      position in the document from anywhere else. In particular, the <code>at</code> method
+      gives us the value of the state at any particular location and the <code>final</code>
       methods gives us the value of the state at the end of the document.</p>
       <div class="previewed-code"><pre><code><span class="typ-escape">...</span>
 
       Value at <span class="typ-raw">`&lt;here&gt;`</span> is
-      <span class="typ-func">#</span><span class="typ-func">locate</span><span class="typ-punct">(</span>loc <span class="typ-op">=&gt;</span> s<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span>
-        <span class="typ-func">query</span><span class="typ-punct">(</span><span class="typ-label">&lt;here&gt;</span><span class="typ-punct">,</span> loc<span class="typ-punct">)</span>
-          <span class="typ-punct">.</span><span class="typ-func">first</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-          <span class="typ-punct">.</span><span class="typ-func">location</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-      <span class="typ-punct">)</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">context</span> s<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-label">&lt;here&gt;</span><span class="typ-punct">)</span>
 
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;10&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;x + 3&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-strong">*Here.*</span> <span class="typ-label">&lt;here&gt;</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;x * 2&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">compute</span><span class="typ-punct">(</span><span class="typ-str">&quot;x - 5&quot;</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/3c387c460c628cb0f84801a7b5368d5a.png" alt="Preview" width="480" height="190"/></div></div>
+      </code></pre><div class="preview"><img src="/assets/docs/02b105ee57859ee4f862c09dc530464f.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="caution">A word of caution</h2>
       <p>To resolve the values of all states, Typst evaluates parts of your code
       multiple times. However, there is no guarantee that your state manipulation
@@ -189,18 +189,18 @@ body:
       a state, the results might never converge. The example below illustrates
       this. We initialize our state with <code>1</code> and then update it to its own final
       value plus 1. So it should be <code>2</code>, but then its final value is <code>2</code>, so it
-      should be <code>3</code>, and so on. This example display <code>4</code> because Typst simply
-      gives up after a few attempts.</p>
-      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> s <span class="typ-op">=</span> <span class="typ-func">state</span><span class="typ-punct">(</span><span class="typ-str">&quot;x&quot;</span><span class="typ-punct">,</span> <span class="typ-num">1</span><span class="typ-punct">)</span>
-      <span class="typ-func">#</span><span class="typ-func">locate</span><span class="typ-punct">(</span>loc <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
-        s<span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span>s<span class="typ-punct">.</span><span class="typ-func">final</span><span class="typ-punct">(</span>loc<span class="typ-punct">)</span> <span class="typ-op">+</span> <span class="typ-num">1</span><span class="typ-punct">)</span>
-      <span class="typ-punct">}</span><span class="typ-punct">)</span>
-      <span class="typ-pol">#</span><span class="typ-pol">s</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/93c5bdb21387c960a7486dd14e0a7050.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>In general, you should <em>typically</em> not generate state updates from within
-      <code>locate</code> calls or <code>display</code> calls of state or counters. Instead, pass a
-      function to <code>update</code> that determines the value of the state based on its
-      previous value.</p>
+      should be <code>3</code>, and so on. This example displays a finite value because Typst
+      simply gives up after a few attempts.</p>
+      <div class="previewed-code"><pre><code><span class="typ-comment">// This is bad!</span>
+      <span class="typ-key">#</span><span class="typ-key">let</span> s <span class="typ-op">=</span> <span class="typ-func">state</span><span class="typ-punct">(</span><span class="typ-str">&quot;x&quot;</span><span class="typ-punct">,</span> <span class="typ-num">1</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">context</span> s<span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span>s<span class="typ-punct">.</span><span class="typ-func">final</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-op">+</span> <span class="typ-num">1</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">context</span> s<span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      </code></pre><div class="preview"><img src="/assets/docs/0af50b50863031150534873712deb949.png" alt="Preview" width="480" height="190"/></div></div>
+      <p>In general, you should try not to generate state updates from within context
+      expressions. If possible, try to express your updates as non-contextual
+      values or functions that compute the new value from the previous value.
+      Sometimes, it cannot be helped, but in those cases it is up to you to ensure
+      that the result converges.</p>
     constructor:
       path: []
       name: state
@@ -208,6 +208,7 @@ body:
       keywords: []
       oneliner: Create a new state identified by a key.
       element: false
+      contextual: false
       details: <p>Create a new state identified by a key.</p>
       example: null
       self: false
@@ -242,12 +243,137 @@ body:
     scope:
     - path:
       - state
+      name: get
+      title: Get
+      keywords: []
+      oneliner: Retrieves the value of the state at the current location.
+      element: false
+      contextual: true
+      details: |-
+        <p>Retrieves the value of the state at the current location.</p>
+        <p>This is equivalent to <code>state<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-func">here</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code>.</p>
+      example: null
+      self: true
+      params: []
+      returns:
+      - any
+      scope: []
+    - path:
+      - state
+      name: at
+      title: At
+      keywords: []
+      oneliner: Retrieves the value of the state at the given selector's unique match.
+      element: false
+      contextual: true
+      details: |-
+        <p>Retrieves the value of the state at the given selector's unique match.</p>
+        <p>The <code>selector</code> must match exactly one element in the document. The most
+        useful kinds of selectors for this are <a href="/docs/reference/foundations/label/">labels</a> and
+        <a href="/docs/reference/introspection/location/">locations</a>.</p>
+        <p><em>Compatibility:</em> For compatibility with Typst 0.10 and lower, this
+        function also works without a known context if the <code>selector</code> is a
+        location. This behaviour will be removed in a future release.</p>
+      example: null
+      self: true
+      params:
+      - name: selector
+        details: <p>The place at which the state's value should be retrieved.</p>
+        example: null
+        types:
+        - label
+        - selector
+        - location
+        - function
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - any
+      scope: []
+    - path:
+      - state
+      name: final
+      title: Final
+      keywords: []
+      oneliner: Retrieves the value of the state at the end of the document.
+      element: false
+      contextual: true
+      details: <p>Retrieves the value of the state at the end of the document.</p>
+      example: null
+      self: true
+      params:
+      - name: location
+        details: |-
+          <p><em>Compatibility:</em> This argument only exists for compatibility with
+          Typst 0.10 and lower and shouldn't be used anymore.</p>
+        example: null
+        types:
+        - none
+        - location
+        strings: []
+        default: <code><span class="typ-key">none</span></code>
+        positional: true
+        named: false
+        required: false
+        variadic: false
+        settable: false
+      returns:
+      - any
+      scope: []
+    - path:
+      - state
+      name: update
+      title: Update
+      keywords: []
+      oneliner: Update the value of the state.
+      element: false
+      contextual: false
+      details: |-
+        <p>Update the value of the state.</p>
+        <p>The update will be in effect at the position where the returned content
+        is inserted into the document. If you don't put the output into the
+        document, nothing happens! This would be the case, for example, if you
+        write <code><span class="typ-key">let</span> _ <span class="typ-op">=</span> <span class="typ-func">state</span><span class="typ-punct">(</span><span class="typ-str">&quot;key&quot;</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">)</span></code>. State updates are always
+        applied in layout order and in that case, Typst wouldn't know when to
+        update the state.</p>
+      example: null
+      self: true
+      params:
+      - name: update
+        details: |-
+          <p>If given a non function-value, sets the state to that value. If
+          given a function, that function receives the previous state and has
+          to return the new state.</p>
+        example: null
+        types:
+        - any
+        - function
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - content
+      scope: []
+    - path:
+      - state
       name: display
       title: Display
       keywords: []
       oneliner: Displays the current value of the state.
       element: false
-      details: <p>Displays the current value of the state.</p>
+      contextual: false
+      details: |-
+        <p>Displays the current value of the state.</p>
+        <p><strong>Deprecation planned:</strong> Use <a href="/docs/reference/introspection/state/#definitions-get"><code>get</code></a> instead.</p>
       example: null
       self: true
       params:
@@ -269,106 +395,5 @@ body:
         settable: false
       returns:
       - content
-      scope: []
-    - path:
-      - state
-      name: update
-      title: Update
-      keywords: []
-      oneliner: Update the value of the state.
-      element: false
-      details: |-
-        <p>Update the value of the state.</p>
-        <p>The update will be in effect at the position where the returned content
-        is inserted into the document. If you don't put the output into the
-        document, nothing happens! This would be the case, for example, if you
-        write <code><span class="typ-key">let</span> _ <span class="typ-op">=</span> <span class="typ-func">state</span><span class="typ-punct">(</span><span class="typ-str">&quot;key&quot;</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">)</span></code>. State updates are always
-        applied in layout order and in that case, Typst wouldn't know when to
-        update the state.</p>
-      example: null
-      self: true
-      params:
-      - name: update
-        details: |-
-          <p>If given a non function-value, sets the state to that value. If
-          given a function, that function receives the previous state and has
-          to return the new state.</p>
-        example: null
-        types:
-        - any
-        - function
-        - state-update
-        strings: []
-        default: null
-        positional: true
-        named: false
-        required: true
-        variadic: false
-        settable: false
-      returns:
-      - content
-      scope: []
-    - path:
-      - state
-      name: at
-      title: At
-      keywords: []
-      oneliner: Get the value of the state at the given location.
-      element: false
-      details: <p>Get the value of the state at the given location.</p>
-      example: null
-      self: true
-      params:
-      - name: location
-        details: |-
-          <p>The location at which the state's value should be retrieved. A
-          suitable location can be retrieved from <a href="/docs/reference/introspection/locate/"><code>locate</code></a> or
-          <a href="/docs/reference/introspection/query/"><code>query</code></a>.</p>
-        example: null
-        types:
-        - location
-        strings: []
-        default: null
-        positional: true
-        named: false
-        required: true
-        variadic: false
-        settable: false
-      returns:
-      - any
-      scope: []
-    - path:
-      - state
-      name: final
-      title: Final
-      keywords: []
-      oneliner: Get the value of the state at the end of the document.
-      element: false
-      details: <p>Get the value of the state at the end of the document.</p>
-      example: null
-      self: true
-      params:
-      - name: location
-        details: |-
-          <p>Can be an arbitrary location, as its value is irrelevant for the
-          method's return value. Why is it required then? As noted before,
-          Typst has to evaluate parts of your code multiple times to determine
-          the values of all state. By only allowing this method within
-          <a href="/docs/reference/introspection/locate/"><code>locate</code></a> calls, the amount of code that can depend on the
-          method's result is reduced. If you could call <code>final</code> directly at
-          the top level of a module, the evaluation of the whole module and
-          its exports could depend on the state's value.</p>
-        example: null
-        types:
-        - location
-        strings: []
-        default: null
-        positional: true
-        named: false
-        required: true
-        variadic: false
-        settable: false
-      returns:
-      - any
       scope: []
 children: []

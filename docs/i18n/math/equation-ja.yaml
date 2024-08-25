@@ -1,6 +1,6 @@
 route: /docs/reference/math/equation/
-title: 数学表达式
-description: '`equation` 函数的文档'
+title: Equation
+description: Documentation for the `equation` function.
 part: null
 outline:
 - id: summary
@@ -21,6 +21,9 @@ outline:
   - id: parameters-numbering
     name: numbering
     children: []
+  - id: parameters-number-align
+    name: number-align
+    children: []
   - id: parameters-supplement
     name: supplement
     children: []
@@ -37,9 +40,10 @@ body:
     keywords: []
     oneliner: A mathematical equation.
     element: true
+    contextual: false
     details: |-
-      <p>数学表达式。</p>
-      <p>可以为内联显示或作为单独的文本块显示。</p>
+      <p>A mathematical equation.</p>
+      <p>Can be displayed inline with text or as a separate block.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;New Computer Modern&quot;</span><span class="typ-punct">)</span>
 
@@ -51,10 +55,12 @@ body:
       Prove by induction:
       <span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>k=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n k = <span class="typ-punct">(</span>n(n+1)<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2 <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/2d58c5d646f64f45aaf3c354af40ed6d.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="syntax">语法</h2>
-      <p>该函数也有一个专用语法： 在美元符号内编写数学标记以创建表达式。
-      在表达式开头和结尾添加至少一个空格，可以将其提升至水平居中的单独的文本块中显示中。详情请参考：
-      <a href="/docs/reference/math/">math 页面</a>.</p>
+      <h2 id="syntax">Syntax</h2>
+      <p>This function also has dedicated syntax: Write mathematical markup within
+      dollar signs to create an equation. Starting and ending the equation with at
+      least one space lifts it into a separate block that is centered
+      horizontally. For more details about math syntax, see the
+      <a href="/docs/reference/math/">main math page</a>.</p>
     example: null
     self: false
     params:
@@ -71,7 +77,8 @@ body:
       variadic: false
       settable: true
     - name: numbering
-      details: <p> 如何对表达式进行 <a href="/docs/reference/model/numbering/">编号</a> </p>
+      details: <p>How to <a href="/docs/reference/model/numbering/">number</a> block-level
+        equations.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">)</span>
 
@@ -92,11 +99,35 @@ body:
       required: false
       variadic: false
       settable: true
+    - name: number-align
+      details: |-
+        <p>The alignment of the equation numbering.</p>
+        <p>By default, the alignment is <code>end <span class="typ-op">+</span> horizon</code>. For the horizontal
+        component, you can use <code>right</code>, <code>left</code>, or <code>start</code> and <code>end</code>
+        of the text direction; for the vertical component, you can use
+        <code>top</code>, <code>horizon</code>, or <code>bottom</code>.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">,</span> number-align<span class="typ-punct">:</span> bottom<span class="typ-punct">)</span>
+
+        We can calculate:
+        <span class="typ-math-delim">$</span> E <span class="typ-math-op">&amp;</span>= <span class="typ-func">sqrt</span><span class="typ-punct">(</span>m<span class="typ-math-op">_</span>0<span class="typ-math-op">^</span>2 + p<span class="typ-math-op">^</span>2<span class="typ-punct">)</span> <span class="typ-escape">\</span>
+            <span class="typ-math-op">&amp;</span><span class="typ-pol">approx</span> 125 <span class="typ-str">&quot;GeV&quot;</span> <span class="typ-math-delim">$</span>
+        </code></pre><div class="preview"><img src="/assets/docs/6f028f22ec8696b20f0b320956a618da.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - alignment
+      strings: []
+      default: <code>end <span class="typ-op">+</span> horizon</code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
     - name: supplement
       details: |-
-        <p>数学表达式的补充内容。</p>
-        <p>添加在被引用的公式编号的前面。</p>
-        <p>如果指定了一个函数，将会传入引用的表达式，并返回其内容。</p>
+        <p>A supplement for the equation.</p>
+        <p>For references to equations, this is added before the referenced number.</p>
+        <p>If a function is specified, it is passed the referenced equation and
+        should return content.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">,</span> supplement<span class="typ-punct">:</span> <span class="typ-punct">[</span>Eq.<span class="typ-punct">]</span><span class="typ-punct">)</span>
 

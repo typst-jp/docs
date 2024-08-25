@@ -1,6 +1,6 @@
 route: /docs/reference/math/
-title: 数学
-description: Typst 中与数学有关联的函数族的文档
+title: Math
+description: Documentation for functions related to Math in Typst.
 part: null
 outline:
 - id: summary
@@ -34,15 +34,17 @@ body:
   kind: category
   content:
     name: math
-    title: 数学
+    title: Math
     details: |-
-      <p>Typst 具有特殊的 <a href="/docs/reference/syntax/#math">数学</a> 语法和库函数，用于排版数学公式。
-      数学公式可以嵌入文本中显示，也可以作为单独的块状公式显示。
-      如果数学公式的起始和结束都至少包含一个空格（例如 <code><span class="typ-math-delim">$</span> x<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span></code>），它们将被显示为块状公式。</p>
-      <h2 id="variables">变量</h2>
-      <p>在数学中，单个字母始终按原样显示。
-      然而，多个字母会被解释为变量和函数。
-      要逐字显示多个字母，可以将它们放入引号中，并且要访问单个字母变量，可以使用 <a href="/docs/reference/scripting/#expressions">哈希标签语法</a>。</p>
+      <p>Typst has special <a href="/docs/reference/syntax/#math">syntax</a> and library functions to typeset
+      mathematical formulas. Math formulas can be displayed inline with text or as
+      separate blocks. They will be typeset into their own block if they start and
+      end with at least one space (e.g. <code><span class="typ-math-delim">$</span> x<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span></code>).</p>
+      <h2 id="variables">Variables</h2>
+      <p>In math, single letters are always displayed as is. Multiple letters,
+      however, are interpreted as variables and functions. To display multiple
+      letters verbatim, you can place them into quotes and to access single letter
+      variables, you can use the <a href="/docs/reference/scripting/#expressions">hash syntax</a>.</p>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> A = <span class="typ-pol">pi</span> r<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
       <span class="typ-math-delim">$</span> <span class="typ-str">&quot;area&quot;</span> = <span class="typ-pol">pi</span> <span class="typ-pol">dot</span> <span class="typ-str">&quot;radius&quot;</span><span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
       <span class="typ-math-delim">$</span> <span class="typ-func">cal</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">:=</span>
@@ -50,30 +52,34 @@ body:
       <span class="typ-key">#</span><span class="typ-key">let</span> x <span class="typ-op">=</span> <span class="typ-num">5</span>
       <span class="typ-math-delim">$</span> <span class="typ-pol">#</span><span class="typ-pol">x</span> &lt; 17 <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/99ab9a9118b0d502ef5040b0a7d667c1.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="symbols">符号</h2>
-      <p>数学模式提供多种 <a href="/docs/reference/symbols/sym/">符号</a>，如 <code>pi</code>、<code>dot</code> 或 <code>RR</code>。
-      许多数学符号有不同的变体。
-      您可以通过对符号应用<a href="/docs/reference/symbols/symbol/">修饰符</a>来选择不同的变体。
-      Typst 还识别许多简写序列，如 <code>=&gt;</code>，它们近似表示一个符号。
-      当存在此类简写时，符号的文档中会列出它。</p>
+      <h2 id="symbols">Symbols</h2>
+      <p>Math mode makes a wide selection of <a href="/docs/reference/symbols/sym/">symbols</a> like
+      <code>pi</code>, <code>dot</code>, or <code>RR</code> available. Many mathematical symbols are available in
+      different variants. You can select between different variants by applying
+      <a href="/docs/reference/symbols/symbol/">modifiers</a> to the symbol. Typst further recognizes a number of
+      shorthand sequences like <code>=&gt;</code> that approximate a symbol. When such a
+      shorthand exists, the symbol's documentation lists it.</p>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> x &lt; y <span class="typ-escape">=&gt;</span> x <span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span> y <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/4fd47496c7c8dda5da33f250f15f7fde.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="line-breaks">换行</h2>
-      <p>公式也可以包含换行。
-      每一行可以包含一个或多个<em>对齐点</em>（<code>&amp;</code>），然后这些点将被对齐。</p>
+      <h2 id="line-breaks">Line Breaks</h2>
+      <p>Formulas can also contain line breaks. Each line can contain one or multiple
+      <em>alignment points</em> (<code>&amp;</code>) which are then aligned.</p>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>k=0<span class="typ-punct">)</span><span class="typ-math-op">^</span>n k
           <span class="typ-math-op">&amp;</span>= 1 + <span class="typ-escape">...</span> + n <span class="typ-escape">\</span>
           <span class="typ-math-op">&amp;</span>= <span class="typ-punct">(</span>n(n+1)<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2 <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/909ff8704ddbe7f5616cc6ea915a07aa.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="function-calls">函数调用</h2>
-      <p>数学模式支持特殊的没有哈希前缀的函数调用。
-      在这些“数学调用”中，参数列表的工作方式与代码中的有点不同：</p>
+      <h2 id="function-calls">Function calls</h2>
+      <p>Math mode supports special function calls without the hash prefix. In these
+      &quot;math calls&quot;, the argument list works a little differently than in code:</p>
       <ul>
-      <li>在其中，Typst 仍然处于“数学模式”中。
-      因此，您可以直接将数学写入其中，但需要使用哈希语法传递代码表达式（字符串除外，在数学语法中可用）。</li>
-      <li>它们支持位置参数和命名参数，但不支持尾部内容块和参数扩展。</li>
-      <li>它们为二维参数列表提供附加的语法。
-      分号（<code>;</code>）将逗号分隔的前导参数合并为数组参数。</li>
+      <li>Within them, Typst is still in &quot;math mode&quot;. Thus, you can write math
+      directly into them, but need to use hash syntax to pass code expressions
+      (except for strings, which are available in the math syntax).</li>
+      <li>They support positional and named arguments, but don't support trailing
+      content blocks and argument spreading.</li>
+      <li>They provide additional syntax for 2-dimensional argument lists. The
+      semicolon (<code>;</code>) merges preceding arguments separated by commas into an
+      array argument.</li>
       </ul>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">frac</span><span class="typ-punct">(</span>a<span class="typ-math-op">^</span>2<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
       <span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">,</span> delim<span class="typ-punct">:</span> <span class="typ-str">&quot;[&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -81,93 +87,111 @@ body:
       <span class="typ-math-delim">$</span> <span class="typ-pol">lim</span><span class="typ-math-op">_</span>x =
           <span class="typ-func">op</span><span class="typ-punct">(</span><span class="typ-str">&quot;lim&quot;</span><span class="typ-punct">,</span> limits<span class="typ-punct">:</span> <span class="typ-key">#</span><span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-math-op">_</span>x <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/06124e14b0283641c7181ff875ad0b74.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>要在数学调用中写入逐字的逗号或分号，请用反斜杠进行转义。
-      另一方面，如果冒号直接在标识符之前，则只有在特定方式直接前置的情况下才会被特殊识别，因此在这些情况下逐字显示它，可以在其前插入一个空格。</p>
-      <p>由哈希前缀引导的函数调用是正常的代码函数调用，不受这些规则的影响。</p>
-      <h2 id="alignment">对齐</h2>
-      <p>当方程包含多个<em>对齐点</em>（<code>&amp;</code>）时，这将创建交替右对齐和左对齐的列块。在下面的示例中，表达式<code>(3x + y) / 7</code>是右对齐的，<code>= 9</code>是左对齐的。单词“given”也是左对齐的，因为 <code>&amp;&amp;</code> 在一行中创建两个对齐点，交替对齐两次。<code>&amp; &amp;</code> 和 <code>&amp;&amp;</code> 行为完全相同。与此同时，“multiply by 7”右对齐，因为只有一个 <code>&amp;</code> 位于其前面。每个对齐点简单地交替在右对齐和左对齐之间。</p>
+      <p>To write a verbatim comma or semicolon in a math call, escape it with a
+      backslash. The colon on the other hand is only recognized in a special way
+      if directly preceded by an identifier, so to display it verbatim in those
+      cases, you can just insert a space before it.</p>
+      <p>Functions calls preceded by a hash are normal code function calls and not
+      affected by these rules.</p>
+      <h2 id="alignment">Alignment</h2>
+      <p>When equations include multiple <em>alignment points</em> (<code>&amp;</code>), this creates
+      blocks of alternatingly right- and left-aligned columns. In the example
+      below, the expression <code>(3x + y) / 7</code> is right-aligned and <code>= 9</code> is
+      left-aligned. The word &quot;given&quot; is also left-aligned because <code>&amp;&amp;</code> creates two
+      alignment points in a row, alternating the alignment twice. <code>&amp; &amp;</code> and <code>&amp;&amp;</code>
+      behave exactly the same way. Meanwhile, &quot;multiply by 7&quot; is right-aligned
+      because just one <code>&amp;</code> precedes it. Each alignment point simply alternates
+      between right-aligned/left-aligned.</p>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-punct">(</span>3x + y<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 7 <span class="typ-math-op">&amp;</span>= 9 <span class="typ-math-op">&amp;</span><span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;given&quot;</span> <span class="typ-escape">\</span>
-          3x + y <span class="typ-math-op">&amp;</span>= 63 <span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;multiply by 7&quot;</span> <span class="typ-escape">\</span>
-          3x <span class="typ-math-op">&amp;</span>= 63 <span class="typ-escape">-</span> y <span class="typ-math-op">&amp;</span><span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;subtract y&quot;</span> <span class="typ-escape">\</span>
-          x <span class="typ-math-op">&amp;</span>= 21 <span class="typ-escape">-</span> y<span class="typ-math-op">/</span>3 <span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;divide by 3&quot;</span> <span class="typ-math-delim">$</span>
+        3x + y <span class="typ-math-op">&amp;</span>= 63 <span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;multiply by 7&quot;</span> <span class="typ-escape">\</span>
+        3x <span class="typ-math-op">&amp;</span>= 63 <span class="typ-escape">-</span> y <span class="typ-math-op">&amp;</span><span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;subtract y&quot;</span> <span class="typ-escape">\</span>
+        x <span class="typ-math-op">&amp;</span>= 21 <span class="typ-escape">-</span> y<span class="typ-math-op">/</span>3 <span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;divide by 3&quot;</span> <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/11a200e0bedd9e7f64485b10781b8c9f.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="math-fonts">数学字体</h2>
-      <p>您可以通过 <a href="/docs/reference/styling/#show-rules">show-set规则</a> 来设置数学字体，如下所示。请注意，只有特殊的 OpenType 数学字体适用于数学排版。</p>
+      <h2 id="math-fonts">Math fonts</h2>
+      <p>You can set the math font by with a <a href="/docs/reference/styling/#show-rules">show-set rule</a> as
+      demonstrated below. Note that only special OpenType math fonts are suitable
+      for typesetting maths.</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Fira Math&quot;</span><span class="typ-punct">)</span>
       <span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i <span class="typ-pol">in</span> <span class="typ-pol">NN</span><span class="typ-punct">)</span> 1 + i <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/319069eb903742474e4fe798c5482b0c.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="math-module">数学模块</h2>
-      <p>所有数学函数都属于 <code>math</code> <a href="/docs/reference/scripting/#modules">模块</a>，在方程中默认可用。在方程之外，可以使用 <code>math.</code> 前缀访问它们。</p>
+      <h2 id="math-module">Math module</h2>
+      <p>All math functions are part of the <code>math</code> <a href="/docs/reference/scripting/#modules">module</a>,
+      which is available by default in equations. Outside of equations, they can
+      be accessed with the <code>math.</code> prefix.</p>
     items:
     - name: accent
       route: /docs/reference/math/accent/
-      oneliner: 将重音附加到基底。
+      oneliner: Attaches an accent to a base.
       code: true
     - name: attach
       route: /docs/reference/math/attach
-      oneliner: 下标、上标和限制。
+      oneliner: Subscript, superscripts, and limits.
       code: false
     - name: cancel
       route: /docs/reference/math/cancel/
-      oneliner: 在方程的一部分上显示对角删除线。
+      oneliner: Displays a diagonal line over a part of an equation.
       code: true
     - name: cases
       route: /docs/reference/math/cases/
-      oneliner: 左大括号 / 分支。
+      oneliner: A case distinction.
       code: true
     - name: class
       route: /docs/reference/math/class/
-      oneliner: 强制使用特定的数学类。
+      oneliner: Forced use of a certain math class.
       code: true
     - name: equation
       route: /docs/reference/math/equation/
-      oneliner: 数学方程。
+      oneliner: A mathematical equation.
       code: true
     - name: frac
       route: /docs/reference/math/frac/
-      oneliner: 数学分数。
+      oneliner: A mathematical fraction.
       code: true
     - name: lr
       route: /docs/reference/math/lr
-      oneliner: 定界符匹配。
+      oneliner: Delimiter matching.
       code: false
     - name: mat
       route: /docs/reference/math/mat/
-      oneliner: 矩阵。
+      oneliner: A matrix.
       code: true
     - name: op
       route: /docs/reference/math/op/
-      oneliner: 方程中的文本运算符。
+      oneliner: A text operator in an equation.
+      code: true
+    - name: primes
+      route: /docs/reference/math/primes/
+      oneliner: Grouped primes.
       code: true
     - name: roots
       route: /docs/reference/math/roots
-      oneliner: 平方根和其他方根。
+      oneliner: Square and non-square roots.
       code: false
     - name: sizes
       route: /docs/reference/math/sizes
-      oneliner: 强制公式中表达式的大小样式。
+      oneliner: Forced size styles for expressions within formulas.
       code: false
     - name: styles
       route: /docs/reference/math/styles
-      oneliner: 显示样式。
+      oneliner: Alternate letterforms within formulas.
       code: false
     - name: underover
       route: /docs/reference/math/underover
-      oneliner: 方程的部分上方或下方的定界符。
+      oneliner: Delimiters above or below parts of an equation.
       code: false
     - name: variants
       route: /docs/reference/math/variants
-      oneliner: 公式中的备用字体。
+      oneliner: Alternate typefaces within formulas.
       code: false
     - name: vec
       route: /docs/reference/math/vec/
-      oneliner: 列向量。
+      oneliner: A column vector.
       code: true
     shorthands: null
 children:
 - route: /docs/reference/math/accent/
   title: Accent
-  description: '`accent` 函数的文档'
+  description: Documentation for the `accent` function.
   part: null
   outline:
   - id: summary
@@ -185,6 +209,9 @@ children:
     - id: parameters-accent
       name: accent
       children: []
+    - id: parameters-size
+      name: size
+      children: []
   body:
     kind: func
     content:
@@ -195,6 +222,7 @@ children:
       keywords: []
       oneliner: Attaches an accent to a base.
       element: true
+      contextual: false
       details: |-
         <p>Attaches an accent to a base.</p>
         <h2 id="example">Example</h2>
@@ -233,15 +261,17 @@ children:
           <tr><td>Macron</td><td><code>macron</code></td><td><code>¯</code></td></tr>
           <tr><td>Breve</td><td><code>breve</code></td><td><code>˘</code></td></tr>
           <tr><td>Dot</td><td><code>dot</code></td><td><code>.</code></td></tr>
-          <tr><td>Double dot</td><td><code>dot.double</code></td><td><code>¨</code></td></tr>
+          <tr><td>Double dot, Diaeresis</td><td><code>dot.double</code>, <code>diaer</code></td><td><code>¨</code></td></tr>
           <tr><td>Triple dot</td><td><code>dot.triple</code></td><td><code>⃛</code></td></tr>
           <tr><td>Quadruple dot</td><td><code>dot.quad</code></td><td><code>⃜</code></td></tr>
-          <tr><td>Diaeresis</td><td><code>diaer</code></td><td><code>¨</code></td></tr>
           <tr><td>Circle</td><td><code>circle</code></td><td><code>∘</code></td></tr>
           <tr><td>Double acute</td><td><code>acute.double</code></td><td><code>˝</code></td></tr>
           <tr><td>Caron</td><td><code>caron</code></td><td><code>ˇ</code></td></tr>
           <tr><td>Right arrow</td><td><code>arrow</code>, <code>-&gt;</code></td><td><code>→</code></td></tr>
           <tr><td>Left arrow</td><td><code>arrow.l</code>, <code>&lt;-</code></td><td><code>←</code></td></tr>
+          <tr><td>Left/Right arrow</td><td><code>arrow.l.r</code></td><td><code>↔</code></td></tr>
+          <tr><td>Right harpoon</td><td><code>harpoon</code></td><td><code>⇀</code></td></tr>
+          <tr><td>Left harpoon</td><td><code>harpoon.lt</code></td><td><code>↼</code></td></tr>
           </tbody></table>
         example: null
         types:
@@ -254,13 +284,291 @@ children:
         required: true
         variadic: false
         settable: false
+      - name: size
+        details: <p>The size of the accent, relative to the width of the base.</p>
+        example: null
+        types:
+        - auto
+        - relative
+        strings: []
+        default: <code><span class="typ-key">auto</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
       returns:
       - content
       scope: []
   children: []
+- route: /docs/reference/math/attach
+  title: Attach
+  description: Documentation for the attach functions.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: example
+    name: Example
+    children: []
+  - id: syntax
+    name: Syntax
+    children: []
+  - id: functions
+    name: Functions
+    children:
+    - id: functions-attach
+      name: Attach
+      children:
+      - id: functions-attach-base
+        name: base
+        children: []
+      - id: functions-attach-t
+        name: t
+        children: []
+      - id: functions-attach-b
+        name: b
+        children: []
+      - id: functions-attach-tl
+        name: tl
+        children: []
+      - id: functions-attach-bl
+        name: bl
+        children: []
+      - id: functions-attach-tr
+        name: tr
+        children: []
+      - id: functions-attach-br
+        name: br
+        children: []
+    - id: functions-scripts
+      name: Scripts
+      children:
+      - id: functions-scripts-body
+        name: body
+        children: []
+    - id: functions-limits
+      name: Limits
+      children:
+      - id: functions-limits-body
+        name: body
+        children: []
+      - id: functions-limits-inline
+        name: inline
+        children: []
+  body:
+    kind: group
+    content:
+      name: attach
+      title: Attach
+      details: |-
+        <p>Subscript, superscripts, and limits.</p>
+        <p>Attachments can be displayed either as sub/superscripts, or limits. Typst
+        automatically decides which is more suitable depending on the base, but you
+        can also control this manually with the <code>scripts</code> and <code>limits</code> functions.</p>
+        <h2 id="example">Example</h2>
+        <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i=0<span class="typ-punct">)</span><span class="typ-math-op">^</span>n a<span class="typ-math-op">_</span>i = 2<span class="typ-math-op">^</span><span class="typ-punct">(</span>1+i<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+        </code></pre><div class="preview"><img src="/assets/docs/575e598ddfc00ee58c3fd2f8379f5718.png" alt="Preview" width="480" height="190"/></div></div>
+        <h2 id="syntax">Syntax</h2>
+        <p>This function also has dedicated syntax for attachments after the base: Use
+        the underscore (<code>_</code>) to indicate a subscript i.e. bottom attachment and the
+        hat (<code>^</code>) to indicate a superscript i.e. top attachment.</p>
+      functions:
+      - path:
+        - math
+        name: attach
+        title: Attach
+        keywords: []
+        oneliner: A base with optional attachments.
+        element: true
+        contextual: false
+        details: <p>A base with optional attachments.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">attach</span><span class="typ-punct">(</span>
+            <span class="typ-pol">Pi</span><span class="typ-punct">,</span> t<span class="typ-punct">:</span> <span class="typ-pol">alpha</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-pol">beta</span><span class="typ-punct">,</span>
+            tl<span class="typ-punct">:</span> 1<span class="typ-punct">,</span> tr<span class="typ-punct">:</span> 2+3<span class="typ-punct">,</span> bl<span class="typ-punct">:</span> 4+5<span class="typ-punct">,</span> br<span class="typ-punct">:</span> 6<span class="typ-punct">,</span>
+          <span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/6168007e6f554f79c047e406044982de.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: base
+          details: <p>The base to which things are attached.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: t
+          details: |-
+            <p>The top attachment, smartly positioned at top-right or above the base.</p>
+            <p>You can wrap the base in <code><span class="typ-func">limits</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> or <code><span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> to override the
+            smart positioning.</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: b
+          details: |-
+            <p>The bottom attachment, smartly positioned at the bottom-right or below
+            the base.</p>
+            <p>You can wrap the base in <code><span class="typ-func">limits</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> or <code><span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> to override the
+            smart positioning.</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: tl
+          details: <p>The top-left attachment (before the base).</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: bl
+          details: <p>The bottom-left attachment (before base).</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: tr
+          details: <p>The top-right attachment (after the base).</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: br
+          details: <p>The bottom-right attachment (after the base).</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: scripts
+        title: Scripts
+        keywords: []
+        oneliner: Forces a base to display attachments as scripts.
+        element: true
+        contextual: false
+        details: <p>Forces a base to display attachments as scripts.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-punct">)</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-escape">!=</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/fd2fa3481f1f6d8947d1a6310cd5e827.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The base to attach the scripts to.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: limits
+        title: Limits
+        keywords: []
+        oneliner: Forces a base to display attachments as limits.
+        element: true
+        contextual: false
+        details: <p>Forces a base to display attachments as limits.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">limits</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-escape">!=</span> A<span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/a60dcf87b7850ffbb2f702c04761242c.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The base to attach the limits to.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: inline
+          details: |-
+            <p>Whether to also force limits in inline equations.</p>
+            <p>When applying limits globally (e.g., through a show rule), it is
+            typically a good idea to disable this.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">true</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+  children: []
 - route: /docs/reference/math/cancel/
   title: Cancel
-  description: '`cancel` 函数的文档'
+  description: Documentation for the `cancel` function.
   part: null
   outline:
   - id: summary
@@ -300,6 +608,7 @@ children:
       keywords: []
       oneliner: Displays a diagonal line over a part of an equation.
       element: true
+      contextual: false
       details: |-
         <p>Displays a diagonal line over a part of an equation.</p>
         <p>This is commonly used to show the elimination of a term.</p>
@@ -440,7 +749,7 @@ children:
   children: []
 - route: /docs/reference/math/cases/
   title: Cases
-  description: '`cases` 函数的文档'
+  description: Documentation for the `cases` function.
   part: null
   outline:
   - id: summary
@@ -474,6 +783,7 @@ children:
       keywords: []
       oneliner: A case distinction.
       element: true
+      contextual: false
       details: |-
         <p>A case distinction.</p>
         <p>Content across different branches can be aligned with the <code>&amp;</code> symbol.</p>
@@ -561,7 +871,7 @@ children:
   children: []
 - route: /docs/reference/math/class/
   title: Class
-  description: '`class` 函数的文档'
+  description: Documentation for the `class` function.
   part: null
   outline:
   - id: summary
@@ -589,10 +899,14 @@ children:
       keywords: []
       oneliner: Forced use of a certain math class.
       element: true
+      contextual: false
       details: |-
         <p>Forced use of a certain math class.</p>
         <p>This is useful to treat certain symbols as if they were of a different
-        class, e.g. to make a symbol behave like a relation.</p>
+        class, e.g. to make a symbol behave like a relation. The class of a symbol
+        defines the way it is laid out, including spacing around it, and how its
+        scripts are attached by default. Note that the latter can always be
+        overridden using <a href="/docs/reference/math/attach/#functions-limits"><code>limits</code></a> and <a href="/docs/reference/math/attach/#functions-scripts"><code>scripts</code></a>.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> loves <span class="typ-op">=</span> math<span class="typ-punct">.</span><span class="typ-func">class</span><span class="typ-punct">(</span>
           <span class="typ-str">&quot;relation&quot;</span><span class="typ-punct">,</span>
@@ -654,7 +968,7 @@ children:
   children: []
 - route: /docs/reference/math/equation/
   title: Equation
-  description: '`equation` 函数的文档'
+  description: Documentation for the `equation` function.
   part: null
   outline:
   - id: summary
@@ -675,6 +989,9 @@ children:
     - id: parameters-numbering
       name: numbering
       children: []
+    - id: parameters-number-align
+      name: number-align
+      children: []
     - id: parameters-supplement
       name: supplement
       children: []
@@ -691,6 +1008,7 @@ children:
       keywords: []
       oneliner: A mathematical equation.
       element: true
+      contextual: false
       details: |-
         <p>A mathematical equation.</p>
         <p>Can be displayed inline with text or as a separate block.</p>
@@ -749,6 +1067,29 @@ children:
         required: false
         variadic: false
         settable: true
+      - name: number-align
+        details: |-
+          <p>The alignment of the equation numbering.</p>
+          <p>By default, the alignment is <code>end <span class="typ-op">+</span> horizon</code>. For the horizontal
+          component, you can use <code>right</code>, <code>left</code>, or <code>start</code> and <code>end</code>
+          of the text direction; for the vertical component, you can use
+          <code>top</code>, <code>horizon</code>, or <code>bottom</code>.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">,</span> number-align<span class="typ-punct">:</span> bottom<span class="typ-punct">)</span>
+
+          We can calculate:
+          <span class="typ-math-delim">$</span> E <span class="typ-math-op">&amp;</span>= <span class="typ-func">sqrt</span><span class="typ-punct">(</span>m<span class="typ-math-op">_</span>0<span class="typ-math-op">^</span>2 + p<span class="typ-math-op">^</span>2<span class="typ-punct">)</span> <span class="typ-escape">\</span>
+              <span class="typ-math-op">&amp;</span><span class="typ-pol">approx</span> 125 <span class="typ-str">&quot;GeV&quot;</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/6f028f22ec8696b20f0b320956a618da.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - alignment
+        strings: []
+        default: <code>end <span class="typ-op">+</span> horizon</code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
       - name: supplement
         details: |-
           <p>A supplement for the equation.</p>
@@ -794,7 +1135,7 @@ children:
   children: []
 - route: /docs/reference/math/frac/
   title: Fraction
-  description: '`frac` 函数的文档'
+  description: Documentation for the `frac` function.
   part: null
   outline:
   - id: summary
@@ -825,6 +1166,7 @@ children:
       keywords: []
       oneliner: A mathematical fraction.
       element: true
+      contextual: false
       details: |-
         <p>A mathematical fraction.</p>
         <h2 id="example">Example</h2>
@@ -867,9 +1209,394 @@ children:
       - content
       scope: []
   children: []
+- route: /docs/reference/math/lr
+  title: Left/Right
+  description: Documentation for the lr functions.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: example
+    name: Example
+    children: []
+  - id: functions
+    name: Functions
+    children:
+    - id: functions-lr
+      name: Left/Right
+      children:
+      - id: functions-lr-size
+        name: size
+        children: []
+      - id: functions-lr-body
+        name: body
+        children: []
+    - id: functions-mid
+      name: Mid
+      children:
+      - id: functions-mid-body
+        name: body
+        children: []
+    - id: functions-abs
+      name: Abs
+      children:
+      - id: functions-abs-size
+        name: size
+        children: []
+      - id: functions-abs-body
+        name: body
+        children: []
+    - id: functions-norm
+      name: Norm
+      children:
+      - id: functions-norm-size
+        name: size
+        children: []
+      - id: functions-norm-body
+        name: body
+        children: []
+    - id: functions-floor
+      name: Floor
+      children:
+      - id: functions-floor-size
+        name: size
+        children: []
+      - id: functions-floor-body
+        name: body
+        children: []
+    - id: functions-ceil
+      name: Ceil
+      children:
+      - id: functions-ceil-size
+        name: size
+        children: []
+      - id: functions-ceil-body
+        name: body
+        children: []
+    - id: functions-round
+      name: Round
+      children:
+      - id: functions-round-size
+        name: size
+        children: []
+      - id: functions-round-body
+        name: body
+        children: []
+  body:
+    kind: group
+    content:
+      name: lr
+      title: Left/Right
+      details: |-
+        <p>Delimiter matching.</p>
+        <p>The <code>lr</code> function allows you to match two delimiters and scale them with the
+        content they contain. While this also happens automatically for delimiters
+        that match syntactically, <code>lr</code> allows you to match two arbitrary delimiters
+        and control their size exactly. Apart from the <code>lr</code> function, Typst provides
+        a few more functions that create delimiter pairings for absolute, ceiled,
+        and floored values as well as norms.</p>
+        <h2 id="example">Example</h2>
+        <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> [a, b<span class="typ-math-op">/</span>2] <span class="typ-math-delim">$</span>
+        <span class="typ-math-delim">$</span> <span class="typ-func">lr</span><span class="typ-punct">(</span>]<span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>x=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n] x<span class="typ-punct">,</span> size<span class="typ-punct">:</span> <span class="typ-num">#</span><span class="typ-num">50%</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+        <span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-punct">(</span>x + y<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+        </code></pre><div class="preview"><img src="/assets/docs/41d20606a87dc72e3461b2b0a7ce9acf.png" alt="Preview" width="480" height="190"/></div></div>
+      functions:
+      - path:
+        - math
+        name: lr
+        title: Left/Right
+        keywords: []
+        oneliner: Scales delimiters.
+        element: true
+        contextual: false
+        details: |-
+          <p>Scales delimiters.</p>
+          <p>While matched delimiters scale by default, this can be used to scale
+          unmatched delimiters and to control the delimiter scaling more precisely.</p>
+        example: null
+        self: false
+        params:
+        - name: size
+          details: <p>The size of the brackets, relative to the height of the wrapped
+            content.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: body
+          details: <p>The delimited content, including the delimiters.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: mid
+        title: Mid
+        keywords: []
+        oneliner: Scales delimiters vertically to the nearest surrounding `{lr()}`
+          group.
+        element: true
+        contextual: false
+        details: <p>Scales delimiters vertically to the nearest surrounding <code><span
+          class="typ-func">lr</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code>
+          group.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> { x <span class="typ-func">mid</span><span class="typ-punct">(</span>|<span class="typ-punct">)</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n w<span class="typ-math-op">_</span>i|f<span class="typ-math-op">_</span>i (x)| &lt; 1 } <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/5bb74ab12ab4445fbc6af176433f46c7.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to be scaled.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: abs
+        title: Abs
+        keywords: []
+        oneliner: Takes the absolute value of an expression.
+        element: false
+        contextual: false
+        details: <p>Takes the absolute value of an expression.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/28e475440e93179a23e1e05535ef8b05.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: size
+          details: <p>The size of the brackets, relative to the height of the wrapped
+            content.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          strings: []
+          default: null
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        - name: body
+          details: <p>The expression to take the absolute value of.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: norm
+        title: Norm
+        keywords: []
+        oneliner: Takes the norm of an expression.
+        element: false
+        contextual: false
+        details: <p>Takes the norm of an expression.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">norm</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/b1c37b013016675629fbfab0497e5ce5.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: size
+          details: <p>The size of the brackets, relative to the height of the wrapped
+            content.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          strings: []
+          default: null
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        - name: body
+          details: <p>The expression to take the norm of.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: floor
+        title: Floor
+        keywords: []
+        oneliner: Floors an expression.
+        element: false
+        contextual: false
+        details: <p>Floors an expression.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">floor</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/025f577b807e2e19e782e7ff2f73543a.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: size
+          details: <p>The size of the brackets, relative to the height of the wrapped
+            content.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          strings: []
+          default: null
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        - name: body
+          details: <p>The expression to floor.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: ceil
+        title: Ceil
+        keywords: []
+        oneliner: Ceils an expression.
+        element: false
+        contextual: false
+        details: <p>Ceils an expression.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">ceil</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/5e51dbb63fcb62826c19d8bc8405ec5b.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: size
+          details: <p>The size of the brackets, relative to the height of the wrapped
+            content.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          strings: []
+          default: null
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        - name: body
+          details: <p>The expression to ceil.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: round
+        title: Round
+        keywords: []
+        oneliner: Rounds an expression.
+        element: false
+        contextual: false
+        details: <p>Rounds an expression.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">round</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/b568beef30e9fb70d08ed84d7d609861.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: size
+          details: <p>The size of the brackets, relative to the height of the wrapped
+            content.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          strings: []
+          default: null
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        - name: body
+          details: <p>The expression to round.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+  children: []
 - route: /docs/reference/math/mat/
   title: Matrix
-  description: '`mat` 函数的文档'
+  description: Documentation for the `mat` function.
   part: null
   outline:
   - id: summary
@@ -909,6 +1636,7 @@ children:
       keywords: []
       oneliner: A matrix.
       element: true
+      contextual: false
       details: |-
         <p>A matrix.</p>
         <p>The elements of a row should be separated by commas, while the rows
@@ -1062,9 +1790,545 @@ children:
       - content
       scope: []
   children: []
+- route: /docs/reference/math/primes/
+  title: Primes
+  description: Documentation for the `primes` function.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: syntax
+    name: Syntax
+    children: []
+  - id: parameters
+    name: Parameters
+    children:
+    - id: parameters-count
+      name: count
+      children: []
+  body:
+    kind: func
+    content:
+      path:
+      - math
+      name: primes
+      title: Primes
+      keywords: []
+      oneliner: Grouped primes.
+      element: true
+      contextual: false
+      details: |-
+        <p>Grouped primes.</p>
+        <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> a<span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">_</span>b = a<span class="typ-math-op">^</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">_</span>b <span class="typ-math-delim">$</span>
+        </code></pre><div class="preview"><img src="/assets/docs/49e4d95f75f57911972d25af6758906a.png" alt="Preview" width="480" height="190"/></div></div>
+        <h2 id="syntax">Syntax</h2>
+        <p>This function has dedicated syntax: use apostrophes instead of primes. They
+        will automatically attach to the previous element, moving superscripts to
+        the next level.</p>
+      example: null
+      self: false
+      params:
+      - name: count
+        details: <p>The number of grouped primes.</p>
+        example: null
+        types:
+        - int
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - content
+      scope: []
+  children: []
+- route: /docs/reference/math/roots
+  title: Roots
+  description: Documentation for the roots functions.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: example
+    name: Example
+    children: []
+  - id: functions
+    name: Functions
+    children:
+    - id: functions-root
+      name: Root
+      children:
+      - id: functions-root-index
+        name: index
+        children: []
+      - id: functions-root-radicand
+        name: radicand
+        children: []
+    - id: functions-sqrt
+      name: Square Root
+      children:
+      - id: functions-sqrt-radicand
+        name: radicand
+        children: []
+  body:
+    kind: group
+    content:
+      name: roots
+      title: Roots
+      details: |-
+        <p>Square and non-square roots.</p>
+        <h2 id="example">Example</h2>
+        <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">sqrt</span><span class="typ-punct">(</span>3 <span class="typ-escape">-</span> 2 <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span><span class="typ-punct">)</span> = <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span> <span class="typ-escape">-</span> 1 <span class="typ-math-delim">$</span>
+        <span class="typ-math-delim">$</span> <span class="typ-func">root</span><span class="typ-punct">(</span>3<span class="typ-punct">,</span> x<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+        </code></pre><div class="preview"><img src="/assets/docs/5f6156e04c9fbbe6376dbcd9a88490f3.png" alt="Preview" width="480" height="190"/></div></div>
+      functions:
+      - path:
+        - math
+        name: root
+        title: Root
+        keywords: []
+        oneliner: A general root.
+        element: true
+        contextual: false
+        details: <p>A general root.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">root</span><span class="typ-punct">(</span>3<span class="typ-punct">,</span> x<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/7aa00673dcb0afc96f8085fbc5ed7841.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: index
+          details: <p>Which root of the radicand to take.</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: true
+          named: false
+          required: false
+          variadic: false
+          settable: true
+        - name: radicand
+          details: <p>The expression to take the root of.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: sqrt
+        title: Square Root
+        keywords: []
+        oneliner: A square root.
+        element: false
+        contextual: false
+        details: <p>A square root.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">sqrt</span><span class="typ-punct">(</span>3 <span class="typ-escape">-</span> 2 <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span><span class="typ-punct">)</span> = <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span> <span class="typ-escape">-</span> 1 <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/e7f4a669bc34f013309287acbb8f3c05.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: radicand
+          details: <p>The expression to take the square root of.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+  children: []
+- route: /docs/reference/math/sizes
+  title: Sizes
+  description: Documentation for the sizes functions.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: functions
+    name: Functions
+    children:
+    - id: functions-display
+      name: Display Size
+      children:
+      - id: functions-display-body
+        name: body
+        children: []
+      - id: functions-display-cramped
+        name: cramped
+        children: []
+    - id: functions-inline
+      name: Inline Size
+      children:
+      - id: functions-inline-body
+        name: body
+        children: []
+      - id: functions-inline-cramped
+        name: cramped
+        children: []
+    - id: functions-script
+      name: Script Size
+      children:
+      - id: functions-script-body
+        name: body
+        children: []
+      - id: functions-script-cramped
+        name: cramped
+        children: []
+    - id: functions-sscript
+      name: Script-Script Size
+      children:
+      - id: functions-sscript-body
+        name: body
+        children: []
+      - id: functions-sscript-cramped
+        name: cramped
+        children: []
+  body:
+    kind: group
+    content:
+      name: sizes
+      title: Sizes
+      details: |-
+        <p>Forced size styles for expressions within formulas.</p>
+        <p>These functions allow manual configuration of the size of equation elements
+        to make them look as in a display/inline equation or as if used in a root or
+        sub/superscripts.</p>
+      functions:
+      - path:
+        - math
+        name: display
+        title: Display Size
+        keywords: []
+        oneliner: Forced display style in math.
+        element: false
+        contextual: false
+        details: |-
+          <p>Forced display style in math.</p>
+          <p>This is the normal size for block equations.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/8631c65c70bfbf88891feec80e5e4bba.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to size.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: cramped
+          details: |-
+            <p>Whether to impose a height restriction for exponents, like regular sub-
+            and superscripts do.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">false</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: inline
+        title: Inline Size
+        keywords: []
+        oneliner: Forced inline (text) style in math.
+        element: false
+        contextual: false
+        details: |-
+          <p>Forced inline (text) style in math.</p>
+          <p>This is the normal size for inline equations.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2
+              = <span class="typ-func">inline</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/7f6fabd1a5038cb1e92db98ab2c4938b.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to size.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: cramped
+          details: |-
+            <p>Whether to impose a height restriction for exponents, like regular sub-
+            and superscripts do.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">false</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: script
+        title: Script Size
+        keywords: []
+        oneliner: Forced script style in math.
+        element: false
+        contextual: false
+        details: |-
+          <p>Forced script style in math.</p>
+          <p>This is the smaller size used in powers or sub- or superscripts.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">script</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/29af5c7bf57f3160bd334d93b988775a.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to size.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: cramped
+          details: |-
+            <p>Whether to impose a height restriction for exponents, like regular sub-
+            and superscripts do.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">true</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: sscript
+        title: Script-Script Size
+        keywords: []
+        oneliner: Forced second script style in math.
+        element: false
+        contextual: false
+        details: |-
+          <p>Forced second script style in math.</p>
+          <p>This is the smallest size, used in second-level sub- and superscripts
+          (script of the script).</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">sscript</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/bd925f3212ba0c8c54ffec73165ac1a3.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to size.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: cramped
+          details: |-
+            <p>Whether to impose a height restriction for exponents, like regular sub-
+            and superscripts do.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">true</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+  children: []
+- route: /docs/reference/math/styles
+  title: Styles
+  description: Documentation for the styles functions.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: functions
+    name: Functions
+    children:
+    - id: functions-upright
+      name: Upright
+      children:
+      - id: functions-upright-body
+        name: body
+        children: []
+    - id: functions-italic
+      name: Italic
+      children:
+      - id: functions-italic-body
+        name: body
+        children: []
+    - id: functions-bold
+      name: Bold
+      children:
+      - id: functions-bold-body
+        name: body
+        children: []
+  body:
+    kind: group
+    content:
+      name: styles
+      title: Styles
+      details: |-
+        <p>Alternate letterforms within formulas.</p>
+        <p>These functions are distinct from the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function because math fonts
+        contain multiple variants of each letter.</p>
+      functions:
+      - path:
+        - math
+        name: upright
+        title: Upright
+        keywords: []
+        oneliner: Upright (non-italic) font style in math.
+        element: false
+        contextual: false
+        details: <p>Upright (non-italic) font style in math.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">upright</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">!=</span> A <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/d0ac32f208aa20b1c8b1ea88304aa607.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: italic
+        title: Italic
+        keywords: []
+        oneliner: Italic font style in math.
+        element: false
+        contextual: false
+        details: |-
+          <p>Italic font style in math.</p>
+          <p>For roman letters and greek lowercase letters, this is already the default.</p>
+        example: null
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: bold
+        title: Bold
+        keywords: []
+        oneliner: Bold font style in math.
+        element: false
+        contextual: false
+        details: <p>Bold font style in math.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">bold</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">:=</span> B<span class="typ-math-op">^</span>+ <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/79814838a321e86e80ee113a14074b8f.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+  children: []
 - route: /docs/reference/math/op/
   title: Text Operator
-  description: '`op` 函数的文档'
+  description: Documentation for the `op` function.
   part: null
   outline:
   - id: summary
@@ -1095,6 +2359,7 @@ children:
       keywords: []
       oneliner: A text operator in an equation.
       element: true
+      contextual: false
       details: |-
         <p>A text operator in an equation.</p>
         <h2 id="example">Example</h2>
@@ -1140,9 +2405,546 @@ children:
       - content
       scope: []
   children: []
+- route: /docs/reference/math/underover
+  title: Under/Over
+  description: Documentation for the underover functions.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: functions
+    name: Functions
+    children:
+    - id: functions-underline
+      name: Underline
+      children:
+      - id: functions-underline-body
+        name: body
+        children: []
+    - id: functions-overline
+      name: Overline
+      children:
+      - id: functions-overline-body
+        name: body
+        children: []
+    - id: functions-underbrace
+      name: Underbrace
+      children:
+      - id: functions-underbrace-body
+        name: body
+        children: []
+      - id: functions-underbrace-annotation
+        name: annotation
+        children: []
+    - id: functions-overbrace
+      name: Overbrace
+      children:
+      - id: functions-overbrace-body
+        name: body
+        children: []
+      - id: functions-overbrace-annotation
+        name: annotation
+        children: []
+    - id: functions-underbracket
+      name: Underbracket
+      children:
+      - id: functions-underbracket-body
+        name: body
+        children: []
+      - id: functions-underbracket-annotation
+        name: annotation
+        children: []
+    - id: functions-overbracket
+      name: Overbracket
+      children:
+      - id: functions-overbracket-body
+        name: body
+        children: []
+      - id: functions-overbracket-annotation
+        name: annotation
+        children: []
+  body:
+    kind: group
+    content:
+      name: underover
+      title: Under/Over
+      details: |-
+        <p>Delimiters above or below parts of an equation.</p>
+        <p>The braces and brackets further allow you to add an optional annotation
+        below or above themselves.</p>
+      functions:
+      - path:
+        - math
+        name: underline
+        title: Underline
+        keywords: []
+        oneliner: A horizontal line under content.
+        element: true
+        contextual: false
+        details: <p>A horizontal line under content.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underline</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/a964debc0427ab602297c7dc72630745.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content above the line.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: overline
+        title: Overline
+        keywords: []
+        oneliner: A horizontal line over content.
+        element: true
+        contextual: false
+        details: <p>A horizontal line over content.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overline</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/cdd4cb2e681e2fced8b4b9f63cf90e81.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content below the line.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: underbrace
+        title: Underbrace
+        keywords: []
+        oneliner: A horizontal brace under content, with an optional annotation below.
+        element: true
+        contextual: false
+        details: <p>A horizontal brace under content, with an optional annotation
+          below.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underbrace</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/88b30429e73e3bbc3d0e0ee29c7d06b6.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content above the brace.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: annotation
+          details: <p>The optional content below the brace.</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: true
+          named: false
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: overbrace
+        title: Overbrace
+        keywords: []
+        oneliner: A horizontal brace over content, with an optional annotation above.
+        element: true
+        contextual: false
+        details: <p>A horizontal brace over content, with an optional annotation above.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overbrace</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/9f2eca7814aaf0c6542bb369712f4513.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content below the brace.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: annotation
+          details: <p>The optional content above the brace.</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: true
+          named: false
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: underbracket
+        title: Underbracket
+        keywords: []
+        oneliner: A horizontal bracket under content, with an optional annotation
+          below.
+        element: true
+        contextual: false
+        details: <p>A horizontal bracket under content, with an optional annotation
+          below.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underbracket</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/7a63fcfa0c9ae2df891097e9bba06ab6.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content above the bracket.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: annotation
+          details: <p>The optional content below the bracket.</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: true
+          named: false
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: overbracket
+        title: Overbracket
+        keywords: []
+        oneliner: A horizontal bracket over content, with an optional annotation above.
+        element: true
+        contextual: false
+        details: <p>A horizontal bracket over content, with an optional annotation
+          above.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overbracket</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/b50782925e551ea653c324786dcbc21b.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content below the bracket.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: annotation
+          details: <p>The optional content above the bracket.</p>
+          example: null
+          types:
+          - none
+          - content
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: true
+          named: false
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+  children: []
+- route: /docs/reference/math/variants
+  title: Variants
+  description: Documentation for the variants functions.
+  part: null
+  outline:
+  - id: summary
+    name: Summary
+    children: []
+  - id: functions
+    name: Functions
+    children:
+    - id: functions-serif
+      name: Serif
+      children:
+      - id: functions-serif-body
+        name: body
+        children: []
+    - id: functions-sans
+      name: Sans Serif
+      children:
+      - id: functions-sans-body
+        name: body
+        children: []
+    - id: functions-frak
+      name: Fraktur
+      children:
+      - id: functions-frak-body
+        name: body
+        children: []
+    - id: functions-mono
+      name: Monospace
+      children:
+      - id: functions-mono-body
+        name: body
+        children: []
+    - id: functions-bb
+      name: Blackboard Bold
+      children:
+      - id: functions-bb-body
+        name: body
+        children: []
+    - id: functions-cal
+      name: Calligraphic
+      children:
+      - id: functions-cal-body
+        name: body
+        children: []
+  body:
+    kind: group
+    content:
+      name: variants
+      title: Variants
+      details: |-
+        <p>Alternate typefaces within formulas.</p>
+        <p>These functions are distinct from the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function because math fonts
+        contain multiple variants of each letter.</p>
+      functions:
+      - path:
+        - math
+        name: serif
+        title: Serif
+        keywords: []
+        oneliner: Serif (roman) font style in math.
+        element: false
+        contextual: false
+        details: |-
+          <p>Serif (roman) font style in math.</p>
+          <p>This is already the default.</p>
+        example: null
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: sans
+        title: Sans Serif
+        keywords: []
+        oneliner: Sans-serif font style in math.
+        element: false
+        contextual: false
+        details: <p>Sans-serif font style in math.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">sans</span><span class="typ-punct">(</span>A B C<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/a3e118d9df47ac4a4950d912ca8980ca.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: frak
+        title: Fraktur
+        keywords: []
+        oneliner: Fraktur font style in math.
+        element: false
+        contextual: false
+        details: <p>Fraktur font style in math.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">frak</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/1b1d41aefeb886afda3e40c16eb413c4.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: mono
+        title: Monospace
+        keywords: []
+        oneliner: Monospace font style in math.
+        element: false
+        contextual: false
+        details: <p>Monospace font style in math.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">mono</span><span class="typ-punct">(</span>x + y = z<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/22a327f021c4135a3c29e51704891040.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: bb
+        title: Blackboard Bold
+        keywords: []
+        oneliner: Blackboard bold (double-struck) font style in math.
+        element: false
+        contextual: false
+        details: |-
+          <p>Blackboard bold (double-struck) font style in math.</p>
+          <p>For uppercase latin letters, blackboard bold is additionally available
+          through <a href="/docs/reference/symbols/sym/">symbols</a> of the form <code>NN</code> and <code>RR</code>.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">bb</span><span class="typ-punct">(</span>b<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+          <span class="typ-math-delim">$</span> <span class="typ-func">bb</span><span class="typ-punct">(</span>N<span class="typ-punct">)</span> = <span class="typ-pol">NN</span> <span class="typ-math-delim">$</span>
+          <span class="typ-math-delim">$</span> f: <span class="typ-pol">NN</span> <span class="typ-escape">-&gt;</span> <span class="typ-pol">RR</span> <span class="typ-math-delim">$</span>
+          </code></pre><div class="preview"><img src="/assets/docs/fbfd132e6d631cb8d11f762f30182469.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - math
+        name: cal
+        title: Calligraphic
+        keywords: []
+        oneliner: Calligraphic font style in math.
+        element: false
+        contextual: false
+        details: <p>Calligraphic font style in math.</p>
+        example: |-
+          <div class="previewed-code"><pre><code>Let <span class="typ-math-delim">$</span><span class="typ-func">cal</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span><span class="typ-math-delim">$</span> be the set of <span class="typ-escape">...</span>
+          </code></pre><div class="preview"><img src="/assets/docs/4076bf054496eaa35f7325c6d304bf36.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The content to style.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - content
+        scope: []
+  children: []
 - route: /docs/reference/math/vec/
   title: Vector
-  description: '`vec` 函数的文档'
+  description: Documentation for the `vec` function.
   part: null
   outline:
   - id: summary
@@ -1173,6 +2975,7 @@ children:
       keywords: []
       oneliner: A column vector.
       element: true
+      contextual: false
       details: |-
         <p>A column vector.</p>
         <p>Content in the vector's elements can be aligned with the <code>&amp;</code> symbol.</p>
@@ -1239,1627 +3042,4 @@ children:
       returns:
       - content
       scope: []
-  children: []
-- route: /docs/reference/math/underover
-  title: 下方/上方
-  description: underover 函数族的文档.
-  part: null
-  outline:
-  - id: summary
-    name: Summary
-    children: []
-  - id: functions
-    name: Functions
-    children:
-    - id: functions-underline
-      name: Underline
-      children:
-      - id: functions-underline-body
-        name: body
-        children: []
-    - id: functions-overline
-      name: Overline
-      children:
-      - id: functions-overline-body
-        name: body
-        children: []
-    - id: functions-underbrace
-      name: Underbrace
-      children:
-      - id: functions-underbrace-body
-        name: body
-        children: []
-      - id: functions-underbrace-annotation
-        name: annotation
-        children: []
-    - id: functions-overbrace
-      name: Overbrace
-      children:
-      - id: functions-overbrace-body
-        name: body
-        children: []
-      - id: functions-overbrace-annotation
-        name: annotation
-        children: []
-    - id: functions-underbracket
-      name: Underbracket
-      children:
-      - id: functions-underbracket-body
-        name: body
-        children: []
-      - id: functions-underbracket-annotation
-        name: annotation
-        children: []
-    - id: functions-overbracket
-      name: Overbracket
-      children:
-      - id: functions-overbracket-body
-        name: body
-        children: []
-      - id: functions-overbracket-annotation
-        name: annotation
-        children: []
-  body:
-    kind: group
-    content:
-      name: underover
-      title: 下方/上方
-      details: |-
-        <p>方程的部分上方或下方的定界符。</p>
-        <p>大括号和方括号还允许在它们自己的下方或上方添加可选的注释。</p>
-      functions:
-      - path:
-        - math
-        name: underline
-        title: Underline
-        keywords: []
-        oneliner: A horizontal line under content.
-        element: true
-        details: <p>A horizontal line under content.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underline</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/a964debc0427ab602297c7dc72630745.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content above the line.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: overline
-        title: Overline
-        keywords: []
-        oneliner: A horizontal line over content.
-        element: true
-        details: <p>A horizontal line over content.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overline</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/cdd4cb2e681e2fced8b4b9f63cf90e81.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content below the line.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: underbrace
-        title: Underbrace
-        keywords: []
-        oneliner: A horizontal brace under content, with an optional annotation below.
-        element: true
-        details: <p>A horizontal brace under content, with an optional annotation
-          below.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underbrace</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/88b30429e73e3bbc3d0e0ee29c7d06b6.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content above the brace.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: annotation
-          details: <p>The optional content below the brace.</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: true
-          named: false
-          required: false
-          variadic: false
-          settable: true
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: overbrace
-        title: Overbrace
-        keywords: []
-        oneliner: A horizontal brace over content, with an optional annotation above.
-        element: true
-        details: <p>A horizontal brace over content, with an optional annotation above.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overbrace</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/9f2eca7814aaf0c6542bb369712f4513.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content below the brace.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: annotation
-          details: <p>The optional content above the brace.</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: true
-          named: false
-          required: false
-          variadic: false
-          settable: true
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: underbracket
-        title: Underbracket
-        keywords: []
-        oneliner: A horizontal bracket under content, with an optional annotation
-          below.
-        element: true
-        details: <p>A horizontal bracket under content, with an optional annotation
-          below.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underbracket</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/7a63fcfa0c9ae2df891097e9bba06ab6.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content above the bracket.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: annotation
-          details: <p>The optional content below the bracket.</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: true
-          named: false
-          required: false
-          variadic: false
-          settable: true
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: overbracket
-        title: Overbracket
-        keywords: []
-        oneliner: A horizontal bracket over content, with an optional annotation above.
-        element: true
-        details: <p>A horizontal bracket over content, with an optional annotation
-          above.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overbracket</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/b50782925e551ea653c324786dcbc21b.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content below the bracket.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: annotation
-          details: <p>The optional content above the bracket.</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: true
-          named: false
-          required: false
-          variadic: false
-          settable: true
-        returns:
-        - content
-        scope: []
-  children: []
-- route: /docs/reference/math/variants
-  title: 变体
-  description: variants 函数族的文档.
-  part: null
-  outline:
-  - id: summary
-    name: Summary
-    children: []
-  - id: functions
-    name: Functions
-    children:
-    - id: functions-serif
-      name: Serif
-      children:
-      - id: functions-serif-body
-        name: body
-        children: []
-    - id: functions-sans
-      name: Sans Serif
-      children:
-      - id: functions-sans-body
-        name: body
-        children: []
-    - id: functions-frak
-      name: Fraktur
-      children:
-      - id: functions-frak-body
-        name: body
-        children: []
-    - id: functions-mono
-      name: Monospace
-      children:
-      - id: functions-mono-body
-        name: body
-        children: []
-    - id: functions-bb
-      name: Blackboard Bold
-      children:
-      - id: functions-bb-body
-        name: body
-        children: []
-    - id: functions-cal
-      name: Calligraphic
-      children:
-      - id: functions-cal-body
-        name: body
-        children: []
-  body:
-    kind: group
-    content:
-      name: variants
-      title: 变体
-      details: |-
-        <p>公式中的备用字体。</p>
-        <p>这些函数与 <a href="/docs/reference/text/text/"><code>text</code></a> 函数不同，因为数学字体包含每个字母的多个变体。</p>
-      functions:
-      - path:
-        - math
-        name: serif
-        title: Serif
-        keywords: []
-        oneliner: Serif (roman) font style in math.
-        element: false
-        details: |-
-          <p>Serif (roman) font style in math.</p>
-          <p>This is already the default.</p>
-        example: null
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: sans
-        title: Sans Serif
-        keywords: []
-        oneliner: Sans-serif font style in math.
-        element: false
-        details: <p>Sans-serif font style in math.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">sans</span><span class="typ-punct">(</span>A B C<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/a3e118d9df47ac4a4950d912ca8980ca.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: frak
-        title: Fraktur
-        keywords: []
-        oneliner: Fraktur font style in math.
-        element: false
-        details: <p>Fraktur font style in math.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">frak</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/1b1d41aefeb886afda3e40c16eb413c4.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: mono
-        title: Monospace
-        keywords: []
-        oneliner: Monospace font style in math.
-        element: false
-        details: <p>Monospace font style in math.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">mono</span><span class="typ-punct">(</span>x + y = z<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/22a327f021c4135a3c29e51704891040.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: bb
-        title: Blackboard Bold
-        keywords: []
-        oneliner: Blackboard bold (double-struck) font style in math.
-        element: false
-        details: |-
-          <p>Blackboard bold (double-struck) font style in math.</p>
-          <p>For uppercase latin letters, blackboard bold is additionally available
-          through <a href="/docs/reference/symbols/sym/">symbols</a> of the form <code>NN</code> and <code>RR</code>.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">bb</span><span class="typ-punct">(</span>b<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          <span class="typ-math-delim">$</span> <span class="typ-func">bb</span><span class="typ-punct">(</span>N<span class="typ-punct">)</span> = <span class="typ-pol">NN</span> <span class="typ-math-delim">$</span>
-          <span class="typ-math-delim">$</span> f: <span class="typ-pol">NN</span> <span class="typ-escape">-&gt;</span> <span class="typ-pol">RR</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/fbfd132e6d631cb8d11f762f30182469.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: cal
-        title: Calligraphic
-        keywords: []
-        oneliner: Calligraphic font style in math.
-        element: false
-        details: <p>Calligraphic font style in math.</p>
-        example: |-
-          <div class="previewed-code"><pre><code>Let <span class="typ-math-delim">$</span><span class="typ-func">cal</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span><span class="typ-math-delim">$</span> be the set of <span class="typ-escape">...</span>
-          </code></pre><div class="preview"><img src="/assets/docs/4076bf054496eaa35f7325c6d304bf36.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-  children: []
-- route: /docs/reference/math/sizes
-  title: 大小
-  description: sizes 函数族的文档.
-  part: null
-  outline:
-  - id: summary
-    name: Summary
-    children: []
-  - id: functions
-    name: Functions
-    children:
-    - id: functions-display
-      name: Display Size
-      children:
-      - id: functions-display-body
-        name: body
-        children: []
-      - id: functions-display-cramped
-        name: cramped
-        children: []
-    - id: functions-inline
-      name: Inline Size
-      children:
-      - id: functions-inline-body
-        name: body
-        children: []
-      - id: functions-inline-cramped
-        name: cramped
-        children: []
-    - id: functions-script
-      name: Script Size
-      children:
-      - id: functions-script-body
-        name: body
-        children: []
-      - id: functions-script-cramped
-        name: cramped
-        children: []
-    - id: functions-sscript
-      name: Script-Script Size
-      children:
-      - id: functions-sscript-body
-        name: body
-        children: []
-      - id: functions-sscript-cramped
-        name: cramped
-        children: []
-  body:
-    kind: group
-    content:
-      name: sizes
-      title: 大小
-      details: |-
-        <p>强制公式中表达式的大小样式。</p>
-        <p>这些函数允许手动配置方程元素的大小，使其看起来像在显示/行内方程中使用或像在根或上/下标中使用一样。</p>
-      functions:
-      - path:
-        - math
-        name: display
-        title: Display Size
-        keywords: []
-        oneliner: Forced display style in math.
-        element: false
-        details: |-
-          <p>Forced display style in math.</p>
-          <p>This is the normal size for block equations.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/8631c65c70bfbf88891feec80e5e4bba.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to size.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: cramped
-          details: |-
-            <p>Whether to impose a height restriction for exponents, like regular sub-
-            and superscripts do.</p>
-          example: null
-          types:
-          - bool
-          strings: []
-          default: <code><span class="typ-key">false</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: inline
-        title: Inline Size
-        keywords: []
-        oneliner: Forced inline (text) style in math.
-        element: false
-        details: |-
-          <p>Forced inline (text) style in math.</p>
-          <p>This is the normal size for inline equations.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2
-              = <span class="typ-func">inline</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/7f6fabd1a5038cb1e92db98ab2c4938b.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to size.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: cramped
-          details: |-
-            <p>Whether to impose a height restriction for exponents, like regular sub-
-            and superscripts do.</p>
-          example: null
-          types:
-          - bool
-          strings: []
-          default: <code><span class="typ-key">false</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: script
-        title: Script Size
-        keywords: []
-        oneliner: Forced script style in math.
-        element: false
-        details: |-
-          <p>Forced script style in math.</p>
-          <p>This is the smaller size used in powers or sub- or superscripts.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">script</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/29af5c7bf57f3160bd334d93b988775a.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to size.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: cramped
-          details: |-
-            <p>Whether to impose a height restriction for exponents, like regular sub-
-            and superscripts do.</p>
-          example: null
-          types:
-          - bool
-          strings: []
-          default: <code><span class="typ-key">true</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: sscript
-        title: Script-Script Size
-        keywords: []
-        oneliner: Forced second script style in math.
-        element: false
-        details: |-
-          <p>Forced second script style in math.</p>
-          <p>This is the smallest size, used in second-level sub- and superscripts
-          (script of the script).</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">sscript</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/bd925f3212ba0c8c54ffec73165ac1a3.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to size.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: cramped
-          details: |-
-            <p>Whether to impose a height restriction for exponents, like regular sub-
-            and superscripts do.</p>
-          example: null
-          types:
-          - bool
-          strings: []
-          default: <code><span class="typ-key">true</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-  children: []
-- route: /docs/reference/math/lr
-  title: 左/右
-  description: lr 函数族的文档.
-  part: null
-  outline:
-  - id: summary
-    name: Summary
-    children: []
-  - id: ''
-    name: ''
-    children: []
-  - id: functions
-    name: Functions
-    children:
-    - id: functions-lr
-      name: Left/Right
-      children:
-      - id: functions-lr-size
-        name: size
-        children: []
-      - id: functions-lr-body
-        name: body
-        children: []
-    - id: functions-mid
-      name: Mid
-      children:
-      - id: functions-mid-body
-        name: body
-        children: []
-    - id: functions-abs
-      name: Abs
-      children:
-      - id: functions-abs-size
-        name: size
-        children: []
-      - id: functions-abs-body
-        name: body
-        children: []
-    - id: functions-norm
-      name: Norm
-      children:
-      - id: functions-norm-size
-        name: size
-        children: []
-      - id: functions-norm-body
-        name: body
-        children: []
-    - id: functions-floor
-      name: Floor
-      children:
-      - id: functions-floor-size
-        name: size
-        children: []
-      - id: functions-floor-body
-        name: body
-        children: []
-    - id: functions-ceil
-      name: Ceil
-      children:
-      - id: functions-ceil-size
-        name: size
-        children: []
-      - id: functions-ceil-body
-        name: body
-        children: []
-    - id: functions-round
-      name: Round
-      children:
-      - id: functions-round-size
-        name: size
-        children: []
-      - id: functions-round-body
-        name: body
-        children: []
-  body:
-    kind: group
-    content:
-      name: lr
-      title: 左/右
-      details: |-
-        <p>定界符匹配。</p>
-        <p><code>lr</code> 函数允许您匹配两个定界符并按其包含的内容缩放它们。虽然在语法上匹配的定界符也会自动进行，但 <code>lr</code> 允许您匹配两个任意的定界符并精确控制它们的大小。除了 <code>lr</code> 函数外，Typst 还提供了一些创建绝对值、上取整和下取整值以及范数的定界符配对的其他函数。</p>
-        <h2>示例</h2>
-        <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> [a, b<span class="typ-math-op">/</span>2] <span class="typ-math-delim">$</span>
-        <span class="typ-math-delim">$</span> <span class="typ-func">lr</span><span class="typ-punct">(</span>]<span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>x=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n] x<span class="typ-punct">,</span> size<span class="typ-punct">:</span> <span class="typ-num">#</span><span class="typ-num">50%</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-        <span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-punct">(</span>x + y<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-        </code></pre><div class="preview"><img src="/assets/docs/41d20606a87dc72e3461b2b0a7ce9acf.png" alt="Preview" width="480" height="190"/></div></div>
-      functions:
-      - path:
-        - math
-        name: lr
-        title: Left/Right
-        keywords: []
-        oneliner: Scales delimiters.
-        element: true
-        details: |-
-          <p>Scales delimiters.</p>
-          <p>While matched delimiters scale by default, this can be used to scale
-          unmatched delimiters and to control the delimiter scaling more precisely.</p>
-        example: null
-        self: false
-        params:
-        - name: size
-          details: <p>The size of the brackets, relative to the height of the wrapped
-            content.</p>
-          example: null
-          types:
-          - auto
-          - relative
-          strings: []
-          default: <code><span class="typ-key">auto</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        - name: body
-          details: <p>The delimited content, including the delimiters.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: mid
-        title: Mid
-        keywords: []
-        oneliner: Scales delimiters vertically to the nearest surrounding `{lr()}`
-          group.
-        element: true
-        details: <p>Scales delimiters vertically to the nearest surrounding <code><span
-          class="typ-func">lr</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code>
-          group.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> { x <span class="typ-func">mid</span><span class="typ-punct">(</span>|<span class="typ-punct">)</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n w<span class="typ-math-op">_</span>i|f<span class="typ-math-op">_</span>i (x)| &lt; 1 } <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/5bb74ab12ab4445fbc6af176433f46c7.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to be scaled.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: abs
-        title: Abs
-        keywords: []
-        oneliner: Takes the absolute value of an expression.
-        element: false
-        details: <p>Takes the absolute value of an expression.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/28e475440e93179a23e1e05535ef8b05.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: size
-          details: <p>The size of the brackets, relative to the height of the wrapped
-            content.</p>
-          example: null
-          types:
-          - auto
-          - relative
-          strings: []
-          default: null
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        - name: body
-          details: <p>The expression to take the absolute value of.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: norm
-        title: Norm
-        keywords: []
-        oneliner: Takes the norm of an expression.
-        element: false
-        details: <p>Takes the norm of an expression.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">norm</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/b1c37b013016675629fbfab0497e5ce5.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: size
-          details: <p>The size of the brackets, relative to the height of the wrapped
-            content.</p>
-          example: null
-          types:
-          - auto
-          - relative
-          strings: []
-          default: null
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        - name: body
-          details: <p>The expression to take the norm of.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: floor
-        title: Floor
-        keywords: []
-        oneliner: Floors an expression.
-        element: false
-        details: <p>Floors an expression.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">floor</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/025f577b807e2e19e782e7ff2f73543a.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: size
-          details: <p>The size of the brackets, relative to the height of the wrapped
-            content.</p>
-          example: null
-          types:
-          - auto
-          - relative
-          strings: []
-          default: null
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        - name: body
-          details: <p>The expression to floor.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: ceil
-        title: Ceil
-        keywords: []
-        oneliner: Ceils an expression.
-        element: false
-        details: <p>Ceils an expression.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">ceil</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/5e51dbb63fcb62826c19d8bc8405ec5b.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: size
-          details: <p>The size of the brackets, relative to the height of the wrapped
-            content.</p>
-          example: null
-          types:
-          - auto
-          - relative
-          strings: []
-          default: null
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        - name: body
-          details: <p>The expression to ceil.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: round
-        title: Round
-        keywords: []
-        oneliner: Rounds an expression.
-        element: false
-        details: <p>Rounds an expression.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">round</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/b568beef30e9fb70d08ed84d7d609861.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: size
-          details: <p>The size of the brackets, relative to the height of the wrapped
-            content.</p>
-          example: null
-          types:
-          - auto
-          - relative
-          strings: []
-          default: null
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: false
-        - name: body
-          details: <p>The expression to round.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-  children: []
-- route: /docs/reference/math/styles
-  title: 样式
-  description: styles 函数族的文档.
-  part: null
-  outline:
-  - id: summary
-    name: Summary
-    children: []
-  - id: functions
-    name: Functions
-    children:
-    - id: functions-upright
-      name: Upright
-      children:
-      - id: functions-upright-body
-        name: body
-        children: []
-    - id: functions-italic
-      name: Italic
-      children:
-      - id: functions-italic-body
-        name: body
-        children: []
-    - id: functions-bold
-      name: Bold
-      children:
-      - id: functions-bold-body
-        name: body
-        children: []
-  body:
-    kind: group
-    content:
-      name: styles
-      title: 样式
-      details: |-
-        <p>公式中的备用字形。</p>
-        <p>这些函数与 <a href="/docs/reference/text/text/"><code>text</code></a> 函数不同，因为数学字体包含每个字母的多个变体。</p>
-      functions:
-      - path:
-        - math
-        name: upright
-        title: Upright
-        keywords: []
-        oneliner: Upright (non-italic) font style in math.
-        element: false
-        details: <p>Upright (non-italic) font style in math.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">upright</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">!=</span> A <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/d0ac32f208aa20b1c8b1ea88304aa607.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: italic
-        title: Italic
-        keywords: []
-        oneliner: Italic font style in math.
-        element: false
-        details: |-
-          <p>Italic font style in math.</p>
-          <p>For roman letters and greek lowercase letters, this is already the default.</p>
-        example: null
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: bold
-        title: Bold
-        keywords: []
-        oneliner: Bold font style in math.
-        element: false
-        details: <p>Bold font style in math.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">bold</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">:=</span> B<span class="typ-math-op">^</span>+ <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/79814838a321e86e80ee113a14074b8f.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The content to style.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-  children: []
-- route: /docs/reference/math/roots
-  title: 根
-  description: roots 函数族的文档.
-  part: null
-  outline:
-  - id: summary
-    name: Summary
-    children: []
-  - id: ''
-    name: ''
-    children: []
-  - id: functions
-    name: Functions
-    children:
-    - id: functions-root
-      name: Root
-      children:
-      - id: functions-root-index
-        name: index
-        children: []
-      - id: functions-root-radicand
-        name: radicand
-        children: []
-    - id: functions-sqrt
-      name: Square Root
-      children:
-      - id: functions-sqrt-radicand
-        name: radicand
-        children: []
-  body:
-    kind: group
-    content:
-      name: roots
-      title: 根
-      details: |-
-        <p>平方根和非平方根。</p>
-        <h2>示例</h2>
-        <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">sqrt</span><span class="typ-punct">(</span>3 <span class="typ-escape">-</span> 2 <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span><span class="typ-punct">)</span> = <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span> <span class="typ-escape">-</span> 1 <span class="typ-math-delim">$</span>
-        <span class="typ-math-delim">$</span> <span class="typ-func">root</span><span class="typ-punct">(</span>3<span class="typ-punct">,</span> x<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-        </code></pre><div class="preview"><img src="/assets/docs/5f6156e04c9fbbe6376dbcd9a88490f3.png" alt="Preview" width="480" height="190"/></div></div>
-      functions:
-      - path:
-        - math
-        name: root
-        title: Root
-        keywords: []
-        oneliner: A general root.
-        element: true
-        details: <p>A general root.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">root</span><span class="typ-punct">(</span>3<span class="typ-punct">,</span> x<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/7aa00673dcb0afc96f8085fbc5ed7841.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: index
-          details: <p>Which root of the radicand to take.</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: true
-          named: false
-          required: false
-          variadic: false
-          settable: true
-        - name: radicand
-          details: <p>The expression to take the root of.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: sqrt
-        title: Square Root
-        keywords: []
-        oneliner: A square root.
-        element: false
-        details: <p>A square root.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">sqrt</span><span class="typ-punct">(</span>3 <span class="typ-escape">-</span> 2 <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span><span class="typ-punct">)</span> = <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span> <span class="typ-escape">-</span> 1 <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/e7f4a669bc34f013309287acbb8f3c05.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: radicand
-          details: <p>The expression to take the square root of.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-  children: []
-- route: /docs/reference/math/attach
-  title: 附加
-  description: attach 函数族的文档.
-  part: null
-  outline:
-  - id: summary
-    name: Summary
-    children: []
-  - id: ''
-    name: ''
-    children: []
-  - id: ''
-    name: ''
-    children: []
-  - id: functions
-    name: Functions
-    children:
-    - id: functions-attach
-      name: Attach
-      children:
-      - id: functions-attach-base
-        name: base
-        children: []
-      - id: functions-attach-t
-        name: t
-        children: []
-      - id: functions-attach-b
-        name: b
-        children: []
-      - id: functions-attach-tl
-        name: tl
-        children: []
-      - id: functions-attach-bl
-        name: bl
-        children: []
-      - id: functions-attach-tr
-        name: tr
-        children: []
-      - id: functions-attach-br
-        name: br
-        children: []
-    - id: functions-scripts
-      name: Scripts
-      children:
-      - id: functions-scripts-body
-        name: body
-        children: []
-    - id: functions-limits
-      name: Limits
-      children:
-      - id: functions-limits-body
-        name: body
-        children: []
-      - id: functions-limits-inline
-        name: inline
-        children: []
-  body:
-    kind: group
-    content:
-      name: attach
-      title: 附加
-      details: |-
-        <p>下标、上标和限制。</p>
-        <p>附件可以显示为上/下标或限制。Typst 会根据基数自动决定哪个更适合，但您还可以使用 <code>scripts</code> 和 <code>limits</code> 函数手动控制。</p>
-        <h2>示例</h2>
-        <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i=0<span class="typ-punct">)</span><span class="typ-math-op">^</span>n a<span class="typ-math-op">_</span>i = 2<span class="typ-math-op">^</span><span class="typ-punct">(</span>1+i<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-        </code></pre><div class="preview"><img src="/assets/docs/575e598ddfc00ee58c3fd2f8379f5718.png" alt="Preview" width="480" height="190"/></div></div>
-        <h2>语法</h2>
-        <p>此函数还具有用于在基数之后附加的专用语法：使用下划线 (<code>_</code>) 表示下标，即底部附件，使用脱帽 (<code>^</code>) 表示上标，即顶部附件。</p>
-      functions:
-      - path:
-        - math
-        name: attach
-        title: Attach
-        keywords: []
-        oneliner: A base with optional attachments.
-        element: true
-        details: <p>A base with optional attachments.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">attach</span><span class="typ-punct">(</span>
-            <span class="typ-pol">Pi</span><span class="typ-punct">,</span> t<span class="typ-punct">:</span> <span class="typ-pol">alpha</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-pol">beta</span><span class="typ-punct">,</span>
-            tl<span class="typ-punct">:</span> 1<span class="typ-punct">,</span> tr<span class="typ-punct">:</span> 2+3<span class="typ-punct">,</span> bl<span class="typ-punct">:</span> 4+5<span class="typ-punct">,</span> br<span class="typ-punct">:</span> 6<span class="typ-punct">,</span>
-          <span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/6168007e6f554f79c047e406044982de.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: base
-          details: <p>The base to which things are attached.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: t
-          details: |-
-            <p>The top attachment, smartly positioned at top-right or above the base.</p>
-            <p>You can wrap the base in <code><span class="typ-func">limits</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> or <code><span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> to override the
-            smart positioning.</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        - name: b
-          details: |-
-            <p>The bottom attachment, smartly positioned at the bottom-right or below
-            the base.</p>
-            <p>You can wrap the base in <code><span class="typ-func">limits</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> or <code><span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> to override the
-            smart positioning.</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        - name: tl
-          details: <p>The top-left attachment (before the base).</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        - name: bl
-          details: <p>The bottom-left attachment (before base).</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        - name: tr
-          details: <p>The top-right attachment (after the base).</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        - name: br
-          details: <p>The bottom-right attachment (after the base).</p>
-          example: null
-          types:
-          - none
-          - content
-          strings: []
-          default: <code><span class="typ-key">none</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: scripts
-        title: Scripts
-        keywords: []
-        oneliner: Forces a base to display attachments as scripts.
-        element: true
-        details: <p>Forces a base to display attachments as scripts.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-punct">)</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-escape">!=</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/fd2fa3481f1f6d8947d1a6310cd5e827.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The base to attach the scripts to.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        returns:
-        - content
-        scope: []
-      - path:
-        - math
-        name: limits
-        title: Limits
-        keywords: []
-        oneliner: Forces a base to display attachments as limits.
-        element: true
-        details: <p>Forces a base to display attachments as limits.</p>
-        example: |-
-          <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">limits</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-escape">!=</span> A<span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
-          </code></pre><div class="preview"><img src="/assets/docs/a60dcf87b7850ffbb2f702c04761242c.png" alt="Preview" width="480" height="190"/></div></div>
-        self: false
-        params:
-        - name: body
-          details: <p>The base to attach the limits to.</p>
-          example: null
-          types:
-          - content
-          strings: []
-          default: null
-          positional: true
-          named: false
-          required: true
-          variadic: false
-          settable: false
-        - name: inline
-          details: |-
-            <p>Whether to also force limits in inline equations.</p>
-            <p>When applying limits globally (e.g., through a show rule), it is
-            typically a good idea to disable this.</p>
-          example: null
-          types:
-          - bool
-          strings: []
-          default: <code><span class="typ-key">true</span></code>
-          positional: false
-          named: true
-          required: false
-          variadic: false
-          settable: true
-        returns:
-        - content
-        scope: []
   children: []

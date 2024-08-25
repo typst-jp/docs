@@ -1,6 +1,6 @@
 route: /docs/reference/symbols/symbol/
 title: Symbol
-description: Symbol 类型的文档
+description: Documentation for the Symbol type.
 part: null
 outline:
 - id: summary
@@ -50,6 +50,7 @@ body:
       keywords: []
       oneliner: Create a custom symbol with modifiers.
       element: false
+      contextual: false
       details: <p>Create a custom symbol with modifiers.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> envelope <span class="typ-op">=</span> <span class="typ-func">symbol</span><span class="typ-punct">(</span>

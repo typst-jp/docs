@@ -1,0 +1,25 @@
+route: /docs/reference/foundations/auto/
+title: Auto
+description: Documentation for the Auto type.
+part: null
+outline:
+- id: summary
+  name: Summary
+  children: []
+body:
+  kind: type
+  content:
+    name: auto
+    title: Auto
+    keywords: []
+    oneliner: A value that indicates a smart default.
+    details: |-
+      <p>A value that indicates a smart default.</p>
+      <p>The auto type has exactly one value: <code><span class="typ-key">auto</span></code>.</p>
+      <p>Parameters that support the <code><span class="typ-key">auto</span></code> value have some smart default or
+      contextual behaviour. A good example is the <a href="/docs/reference/text/text/#parameters-dir">text direction</a>
+      parameter. Setting it to <code><span class="typ-key">auto</span></code> lets Typst automatically determine the
+      direction from the <a href="/docs/reference/text/text/#parameters-lang">text language</a>.</p>
+    constructor: null
+    scope: []
+children: []

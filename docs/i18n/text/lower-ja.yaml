@@ -1,6 +1,6 @@
 route: /docs/reference/text/lower/
-title: 转小写
-description: '`lower` 函数的文档'
+title: Lowercase
+description: Documentation for the `lower` function.
 part: null
 outline:
 - id: summary
@@ -22,10 +22,11 @@ body:
     name: lower
     title: Lowercase
     keywords: []
-    oneliner: 将内容转换为小写。
+    oneliner: Converts a string or content to lowercase.
     element: false
+    contextual: false
     details: |-
-      <p>将内容转换为小写。</p>
+      <p>Converts a string or content to lowercase.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">lower</span><span class="typ-punct">(</span><span class="typ-str">&quot;ABC&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">lower</span><span class="typ-punct">[</span><span class="typ-strong">*My Text*</span><span class="typ-punct">]</span> <span class="typ-escape">\</span>
@@ -35,7 +36,7 @@ body:
     self: false
     params:
     - name: text
-      details: <p>转小写的内容。</p>
+      details: <p>The text to convert to lowercase.</p>
       example: null
       types:
       - str

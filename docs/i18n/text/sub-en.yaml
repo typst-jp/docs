@@ -1,6 +1,6 @@
 route: /docs/reference/text/sub/
 title: Subscript
-description: '`sub` 函数的文档'
+description: Documentation for the `sub` function.
 part: null
 outline:
 - id: summary
@@ -33,6 +33,7 @@ body:
     keywords: []
     oneliner: Renders text in subscript.
     element: true
+    contextual: false
     details: |-
       <p>Renders text in subscript.</p>
       <p>The text is rendered smaller and its baseline is lowered.</p>

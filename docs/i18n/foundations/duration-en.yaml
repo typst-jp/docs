@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/duration/
 title: Duration
-description: Duration 类型的文档
+description: Documentation for the Duration type.
 part: null
 outline:
 - id: summary
@@ -57,10 +57,11 @@ body:
       keywords: []
       oneliner: Creates a new duration.
       element: false
+      contextual: false
       details: |-
         <p>Creates a new duration.</p>
-        <p>You can specify the <a href="/docs/reference/foundations/duration/">duration</a> using weeks, days, hours,
-        minutes and seconds. You can also get a duration by subtracting two
+        <p>You can specify the <a href="/docs/reference/foundations/duration/" title="duration">duration</a> using weeks, days, hours, minutes and
+        seconds. You can also get a duration by subtracting two
         <a href="/docs/reference/foundations/datetime/">datetimes</a>.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">duration</span><span class="typ-punct">(</span>
@@ -141,6 +142,7 @@ body:
       keywords: []
       oneliner: The duration expressed in seconds.
       element: false
+      contextual: false
       details: |-
         <p>The duration expressed in seconds.</p>
         <p>This function returns the total duration represented in seconds as a
@@ -158,6 +160,7 @@ body:
       keywords: []
       oneliner: The duration expressed in minutes.
       element: false
+      contextual: false
       details: |-
         <p>The duration expressed in minutes.</p>
         <p>This function returns the total duration represented in minutes as a
@@ -175,6 +178,7 @@ body:
       keywords: []
       oneliner: The duration expressed in hours.
       element: false
+      contextual: false
       details: |-
         <p>The duration expressed in hours.</p>
         <p>This function returns the total duration represented in hours as a
@@ -192,6 +196,7 @@ body:
       keywords: []
       oneliner: The duration expressed in days.
       element: false
+      contextual: false
       details: |-
         <p>The duration expressed in days.</p>
         <p>This function returns the total duration represented in days as a
@@ -209,6 +214,7 @@ body:
       keywords: []
       oneliner: The duration expressed in weeks.
       element: false
+      contextual: false
       details: |-
         <p>The duration expressed in weeks.</p>
         <p>This function returns the total duration represented in weeks as a

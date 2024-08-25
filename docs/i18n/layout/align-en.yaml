@@ -1,6 +1,6 @@
 route: /docs/reference/layout/align/
 title: Align
-description: '`align` 函数的文档'
+description: Documentation for the `align` function.
 part: null
 outline:
 - id: summary
@@ -27,6 +27,7 @@ body:
     keywords: []
     oneliner: Aligns content horizontally and vertically.
     element: true
+    contextual: false
     details: |-
       <p>Aligns content horizontally and vertically.</p>
       <h2 id="example">Example</h2>
@@ -41,8 +42,8 @@ body:
     self: false
     params:
     - name: alignment
-      details: <p>The <a href="/docs/reference/layout/alignment/">alignment</a> along
-        both axes.</p>
+      details: <p>The <a href="/docs/reference/layout/alignment/" title="alignment">alignment</a>
+        along both axes.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">6cm</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>lang<span class="typ-punct">:</span> <span class="typ-str">&quot;ar&quot;</span><span class="typ-punct">)</span>

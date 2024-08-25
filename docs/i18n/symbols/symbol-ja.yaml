@@ -1,6 +1,6 @@
 route: /docs/reference/symbols/symbol/
-title: 符号
-description: Symbol 类型的文档
+title: Symbol
+description: Documentation for the Symbol type.
 part: null
 outline:
 - id: summary
@@ -16,23 +16,29 @@ body:
   kind: type
   content:
     name: symbol
-    title: 符号
+    title: Symbol
     keywords: []
-    oneliner: 一个 Unicode 符号。
+    oneliner: A Unicode symbol.
     details: |-
-      <p>一个 Unicode 符号。</p>
-      <p>Typst 定义了常见符号，以便可以使用标准键盘轻松书写。这些符号在模块中定义，可以使用 <a href="/docs/reference/scripting/#fields">字段访问符号</a> 进行访问：</p>
+      <p>A Unicode symbol.</p>
+      <p>Typst defines common symbols so that they can easily be written with
+      standard keyboards. The symbols are defined in modules, from which they can
+      be accessed using <a href="/docs/reference/scripting/#fields">field access notation</a>:</p>
       <ul>
-      <li>一般符号定义在 <a href="/docs/reference/symbols/sym/"><code>sym</code> 模块</a></li>
-      <li>Emoji 定义在 <a href="/docs/reference/symbols/emoji/"><code>emoji</code> 模块</code></a></li>
+      <li>General symbols are defined in the <a href="/docs/reference/symbols/sym/"><code>sym</code> module</a></li>
+      <li>Emoji are defined in the <a href="/docs/reference/symbols/emoji/"><code>emoji</code> module</a></li>
       </ul>
-      <p>此外，您还可以使用此类型的构造函数定义自定义符号。</p>
+      <p>Moreover, you can define custom symbols with this type's constructor
+      function.</p>
       <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">sym</span><span class="typ-punct">.</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">r</span> <span class="typ-escape">\</span>
       <span class="typ-pol">#</span><span class="typ-pol">sym</span><span class="typ-punct">.</span><span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span> <span class="typ-escape">\</span>
       <span class="typ-math-delim">$</span><span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
       <span class="typ-pol">#</span><span class="typ-pol">emoji</span><span class="typ-punct">.</span><span class="typ-pol">face</span><span class="typ-punct">.</span><span class="typ-pol">halo</span>
       </code></pre><div class="preview"><img src="/assets/docs/bb68a65e391fa7ac5366cd6743423ecb.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>许多符号具有不同的变体，可以通过附加修改符并使用点符号进行选择。修改符的顺序不相关。访问符号模块的文档页面，单击符号，以查看其可用的变体。</p>
+      <p>Many symbols have different variants, which can be selected by appending the
+      modifiers with dot notation. The order of the modifiers is not relevant.
+      Visit the documentation pages of the symbol modules and click on a symbol to
+      see its available variants.</p>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">l</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
       <span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">r</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
       <span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">t</span><span class="typ-punct">.</span><span class="typ-pol">quad</span><span class="typ-math-delim">$</span>
@@ -40,11 +46,12 @@ body:
     constructor:
       path: []
       name: symbol
-      title: 构造函数
+      title: Construct
       keywords: []
-      oneliner: 创建带有修改符的自定义符号。
+      oneliner: Create a custom symbol with modifiers.
       element: false
-      details: <p>创建带有修改符的自定义符号。</p>
+      contextual: false
+      details: <p>Create a custom symbol with modifiers.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> envelope <span class="typ-op">=</span> <span class="typ-func">symbol</span><span class="typ-punct">(</span>
           <span class="typ-str">&quot;🖂&quot;</span><span class="typ-punct">,</span>
@@ -64,8 +71,12 @@ body:
       params:
       - name: variants
         details: |-
-          <p>符号的变体。</p>
-          <p>可以是仅由单个字符组成的字符串，表示无修改符的变体，也可以是包含两个字符串的数组，指定修改符和符号。各个修改符之间应使用点号分隔。在显示符号时，Typst 选择具有所有附加修改符和最少其他修改符的变体中的第一个变体。</p>
+          <p>The variants of the symbol.</p>
+          <p>Can be a just a string consisting of a single character for the
+          modifierless variant or an array with two strings specifying the modifiers
+          and the symbol. Individual modifiers should be separated by dots. When
+          displaying a symbol, Typst selects the first from the variants that have
+          all attached modifiers and the minimum number of other modifiers.</p>
         example: null
         types:
         - str

@@ -1,6 +1,6 @@
 route: /docs/reference/layout/alignment/
 title: Alignment
-description: Alignment 类型的文档
+description: Documentation for the Alignment type.
 part: null
 outline:
 - id: summary
@@ -27,9 +27,9 @@ body:
     name: alignment
     title: Alignment
     keywords: []
-    oneliner: Where to [align]($align) something along an axis.
+    oneliner: Where to [align] something along an axis.
     details: |-
-      <p>Where to <a href="/docs/reference/layout/align/">align</a> something along an axis.</p>
+      <p>Where to <a href="/docs/reference/layout/align/" title="align">align</a> something along an axis.</p>
       <p>Possible values are:</p>
       <ul>
       <li><code>start</code>: Aligns at the <a href="/docs/reference/layout/direction/#definitions-start">start</a> of the <a href="/docs/reference/text/text/#parameters-dir">text
@@ -71,6 +71,7 @@ body:
       keywords: []
       oneliner: The axis this alignment belongs to.
       element: false
+      contextual: false
       details: |-
         <p>The axis this alignment belongs to.</p>
         <ul>
@@ -93,6 +94,7 @@ body:
       keywords: []
       oneliner: The inverse alignment.
       element: false
+      contextual: false
       details: <p>The inverse alignment.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">top</span><span class="typ-punct">.</span><span class="typ-func">inv</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>

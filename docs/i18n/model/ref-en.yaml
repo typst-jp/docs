@@ -1,6 +1,6 @@
 route: /docs/reference/model/ref/
 title: Reference
-description: '`ref` 函数的文档'
+description: Documentation for the `ref` function.
 part: null
 outline:
 - id: summary
@@ -33,20 +33,20 @@ body:
     keywords: []
     oneliner: A reference to a label or bibliography.
     element: true
+    contextual: false
     details: |-
       <p>A reference to a label or bibliography.</p>
       <p>Produces a textual reference to a label. For example, a reference to a
       heading will yield an appropriate string such as &quot;Section 1&quot; for a reference
       to the first heading. The references are also links to the respective
-      element. Reference syntax can also be used to <a href="/docs/reference/model/cite/">cite</a> from a
-      bibliography.</p>
+      element. Reference syntax can also be used to <a href="/docs/reference/model/cite/" title="cite">cite</a> from a bibliography.</p>
       <p>Referenceable elements include <a href="/docs/reference/model/heading/">headings</a>, <a href="/docs/reference/model/figure/">figures</a>,
       <a href="/docs/reference/math/equation/">equations</a>, and <a href="/docs/reference/model/footnote/">footnotes</a>. To create a custom
       referenceable element like a theorem, you can create a figure of a custom
       <a href="/docs/reference/model/figure/#parameters-kind"><code>kind</code></a> and write a show rule for it. In the future, there
       might be a more direct way to define a custom referenceable element.</p>
       <p>If you just want to link to a labelled element and not get an automatic
-      textual reference, consider using the <a href="/docs/reference/model/link/"><code>link</code></a> function instead.</p>
+      textual reference, consider using the <a href="/docs/reference/model/link/" title="`link`"><code>link</code></a> function instead.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
       <span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">)</span>
@@ -109,7 +109,7 @@ body:
       details: |-
         <p>The target label that should be referenced.</p>
         <p>Can be a label that is defined in the document or an entry from the
-        <a href="/docs/reference/model/bibliography/"><code>bibliography</code></a>.</p>
+        <a href="/docs/reference/model/bibliography/" title="`bibliography`"><code>bibliography</code></a>.</p>
       example: null
       types:
       - label

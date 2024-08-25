@@ -1,6 +1,6 @@
 route: /docs/reference/layout/box/
 title: Box
-description: '`box` 函数的文档'
+description: Documentation for the `box` function.
 part: null
 outline:
 - id: summary
@@ -51,6 +51,7 @@ body:
     keywords: []
     oneliner: An inline-level container that sizes content.
     element: true
+    contextual: false
     details: |-
       <p>An inline-level container that sizes content.</p>
       <p>All elements except inline math, text, and boxes are block-level and cannot
@@ -148,7 +149,8 @@ body:
       - pattern
       - dictionary
       strings: []
-      default: <code><span class="typ-key">none</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -163,7 +165,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -181,7 +184,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -206,7 +210,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false

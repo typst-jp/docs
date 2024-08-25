@@ -1,6 +1,6 @@
 route: /docs/reference/model/cite/
-title: 引用
-description: '`cite` 函数的文档'
+title: Cite
+description: Documentation for the `cite` function.
 part: null
 outline:
 - id: summary
@@ -32,34 +32,45 @@ body:
   content:
     path: []
     name: cite
-    title: 引用
+    title: Cite
     keywords: []
-    oneliner: 从参考文献中引用一项作品。
+    oneliner: Cite a work from the bibliography.
     element: true
+    contextual: false
     details: |-
-      <p>从参考文献中引用一项作品。</p>
-      <p>在开始引用之前，您需要在文档的某个位置添加一个<a href="/docs/reference/model/bibliography/">参考文献</a>。</p>
-      <h2 id="example">示例</h2>
-      <div class="previewed-code"><pre><code>这早在海盗时代就已经被注意到了。
-      <span class="typ-ref">@arrgh</span>
+      <p>Cite a work from the bibliography.</p>
+      <p>Before you starting citing, you need to add a <a href="/docs/reference/model/bibliography/" title="bibliography">bibliography</a> somewhere in
+      your document.</p>
+      <h2 id="example">Example</h2>
+      <div class="previewed-code"><pre><code>This was already noted by
+      pirates long ago. <span class="typ-ref">@arrgh</span>
 
-      多个来源说 <span class="typ-escape">...</span>
-      <span class="typ-ref">@arrgh</span> <span class="typ-ref">@netwok</span>。
+      Multiple sources say <span class="typ-escape">...</span>
+      <span class="typ-ref">@arrgh</span> <span class="typ-ref">@netwok</span>.
 
-      您还可以显式调用 <span class="typ-raw">`cite`</span>。
-      <span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;arrgh&gt;</span><span class="typ-punct">)</span>
+      You can also call <span class="typ-raw">`cite`</span>
+      explicitly. <span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;arrgh&gt;</span><span class="typ-punct">)</span>
 
       <span class="typ-func">#</span><span class="typ-func">bibliography</span><span class="typ-punct">(</span><span class="typ-str">&quot;works.bib&quot;</span><span class="typ-punct">)</span>
       </code></pre><div class="preview"><img src="/assets/docs/bb07d2a9021052ed3feb5a6b11284f4a.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="syntax">语法</h2>
-      <p>此函数间接具有专用语法。可以使用<a href="/docs/reference/model/ref/">引用</a>来引用参考文献中的作品。然后，标签对应于引用键。</p>
+      <p>If your source name contains certain characters such as slashes, which are
+      not recognized by the <code>&lt;&gt;</code> syntax, you can explicitly call <code>label</code> instead.</p>
+      <pre><code>Computer Modern is an example of a modernist serif typeface.
+      <span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-func">label</span><span class="typ-punct">(</span><span class="typ-str">&quot;DBLP:books/lib/Knuth86a&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>.
+      </code></pre>
+      <h2 id="syntax">Syntax</h2>
+      <p>This function indirectly has dedicated syntax. <a href="/docs/reference/model/ref/">References</a> can be
+      used to cite works from the bibliography. The label then corresponds to the
+      citation key.</p>
     example: null
     self: false
     params:
     - name: key
-      details: <p>标识在参考文献中的要引用的条目的引用键。</p>
+      details: |-
+        <p>The citation key that identifies the entry in the bibliography that
+        shall be cited, as a label.</p>
       example: |-
-        <div class="previewed-code"><pre><code><span class="typ-comment">// 都是相同的</span>
+        <div class="previewed-code"><pre><code><span class="typ-comment">// All the same</span>
         <span class="typ-ref">@netwok</span> <span class="typ-escape">\</span>
         <span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;netwok&gt;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
         <span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-func">label</span><span class="typ-punct">(</span><span class="typ-str">&quot;netwok&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
@@ -75,10 +86,10 @@ body:
       settable: false
     - name: supplement
       details: |-
-        <p>引文的补充，例如页码或章节编号。</p>
-        <p>在引用语法中，可以在方括号中添加补充：</p>
+        <p>A supplement for the citation such as page or chapter number.</p>
+        <p>In reference syntax, the supplement can be added in square brackets:</p>
       example: |-
-        <div class="previewed-code"><pre><code>这已经被证明了。 <span class="typ-ref">@distress<span class="typ-punct">[</span>p.<span class="typ-escape">~</span>7<span class="typ-punct">]</span></span>
+        <div class="previewed-code"><pre><code>This has been proven. <span class="typ-ref">@distress<span class="typ-punct">[</span>p.<span class="typ-escape">~</span>7<span class="typ-punct">]</span></span>
 
         <span class="typ-func">#</span><span class="typ-func">bibliography</span><span class="typ-punct">(</span><span class="typ-str">&quot;works.bib&quot;</span><span class="typ-punct">)</span>
         </code></pre><div class="preview"><img src="/assets/docs/481a7a6614e1edde3e16e2961c72a1e2.png" alt="Preview" width="480" height="190"/></div></div>
@@ -94,26 +105,32 @@ body:
       settable: true
     - name: form
       details: |-
-        <p>要生成的引文类型。不同的形式在不同情境中很有用：标准引文适用于句子末尾的来源，而“散文”引文更适合在文本流中包含。</p>
-        <p>如果设置为<code><span class="typ-key">none</span></code>，则引用的作品将包含在参考文献中，但不会显示任何内容。</p>
+        <p>The kind of citation to produce. Different forms are useful in different
+        scenarios: A normal citation is useful as a source at the end of a
+        sentence, while a &quot;prose&quot; citation is more suitable for inclusion in the
+        flow of text.</p>
+        <p>If set to <code><span class="typ-key">none</span></code>, the cited work is included in the bibliography, but
+        nothing will be displayed.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;netwok&gt;</span><span class="typ-punct">,</span> form<span class="typ-punct">:</span> <span class="typ-str">&quot;prose&quot;</span><span class="typ-punct">)</span>
-        显示海盗生活对人类心灵的巨大影响。
+        show the outsized effects of
+        pirate life on the human psyche.
         </code></pre><div class="preview"><img src="/assets/docs/ab93f7b6b59da5ccd3007651be75c5e9.png" alt="Preview" width="480" height="190"/></div></div>
       types:
       - none
       - str
       strings:
       - string: normal
-        details: <p>以活动样式的标准方式显示。</p>
+        details: <p>Display in the standard way for the active style.</p>
       - string: prose
-        details: <p>生成适用于句子中包含的引文。</p>
+        details: <p>Produces a citation that is suitable for inclusion in a sentence.</p>
       - string: full
-        details: <p>模拟参考文献条目，提供有关引用作品的完整信息。</p>
+        details: <p>Mimics a bibliography entry, with full information about the cited
+          work.</p>
       - string: author
-        details: <p>仅显示引用作品的作者。</p>
+        details: <p>Shows only the cited work's author(s).</p>
       - string: year
-        details: <p>仅显示引用作品的年份。</p>
+        details: <p>Shows only the cited work's year.</p>
       default: <code><span class="typ-str">&quot;normal&quot;</span></code>
       positional: false
       named: true
@@ -122,176 +139,181 @@ body:
       settable: true
     - name: style
       details: |-
-        <p>引文样式。</p>
-        <p>应为<code><span class="typ-key">auto</span></code>、内置样式之一（见下文）或<a href="https://citationstyles.org/">CSL文件</a>的路径。下面列出的一些样式名称可能会出现两次，一次是完整名称，一次是短别名。</p>
-        <p>当设置为<code><span class="typ-key">auto</span></code>时，引用将自动使用<a href="/docs/reference/model/bibliography/#parameters-style">参考文献的样式</a>。</p>
+        <p>The citation style.</p>
+        <p>Should be either <code><span class="typ-key">auto</span></code>, one of the built-in styles (see below) or a
+        path to a <a href="https://citationstyles.org/">CSL file</a>. Some of the styles
+        listed below appear twice, once with their full name and once with a
+        short alias.</p>
+        <p>When set to <code><span class="typ-key">auto</span></code>, automatically use the
+        <a href="/docs/reference/model/bibliography/#parameters-style">bibliography's style</a> for the citations.</p>
       example: null
       types:
       - auto
       - str
       strings:
-      - string: american-anthropological-association
-        details: <p>美国人类学协会</p>
-      - string: springer-lecture-notes-in-computer-science
-        details: <p>Springer - 计算机科学讲义</p>
-      - string: american-medical-association
-        details: <p>美国医学协会 第11版</p>
-      - string: sage-vancouver
-        details: <p>SAGE - 温哥华样式</p>
-      - string: biomed-central
-        details: <p>BioMed Central</p>
-      - string: american-society-of-civil-engineers
-        details: <p>美国土木工程师协会</p>
-      - string: taylor-and-francis-chicago-author-date
-        details: <p>Taylor &amp; Francis - 芝加哥风格手册（作者-日期）</p>
-      - string: gb-7714-2015-note
-        details: <p>中国国家标准 GB/T 7714-2015（注释，中文）</p>
-      - string: american-society-for-microbiology
-        details: <p>美国微生物学会</p>
-      - string: american-meteorological-society
-        details: <p>美国气象学会</p>
-      - string: future-medicine
-        details: <p>未来医学期刊</p>
-      - string: bristol-university-press
-        details: <p>布里斯托大学出版社</p>
-      - string: public-library-of-science
-        details: <p>科学公共图书馆</p>
+      - string: annual-reviews
+        details: <p>Annual Reviews (sorted by order of appearance)</p>
       - string: pensoft
-        details: <p>Pensoft 期刊</p>
-      - string: american-institute-of-aeronautics-and-astronautics
-        details: <p>美国航空航天学会</p>
-      - string: mary-ann-liebert-vancouver
-        details: <p>Mary Ann Liebert - 温哥华样式</p>
-      - string: modern-humanities-research-association
-        details: <p>现代人文研究协会 第3版（带参考文献的注释）</p>
-      - string: springer-socpsych-author-date
-        details: <p>Springer - 社会心理学（作者-日期）</p>
-      - string: trends
-        details: <p>Trends 期刊</p>
-      - string: gost-r-705-2008-numeric
-        details: <p>俄罗斯 GOST R 7.0.5-2008（数字）</p>
-      - string: american-political-science-association
-        details: <p>美国政治科学协会</p>
-      - string: future-science
-        details: <p>未来科学集团</p>
-      - string: association-for-computing-machinery
-        details: <p>计算机协会</p>
-      - string: elsevier-harvard
-        details: <p>爱思唯尔 - 哈佛样式（带标题）</p>
-      - string: american-chemical-society
-        details: <p>美国化学学会</p>
-      - string: cell
-        details: <p>Cell 期刊</p>
-      - string: royal-society-of-chemistry
-        details: <p>皇家化学学会</p>
-      - string: sist02
-        details: <p>SIST02（日语）</p>
-      - string: gb-7714-2005-numeric
-        details: <p>中国国家标准 GB/T 7714-2005（数字，中文）</p>
-      - string: institute-of-electrical-and-electronics-engineers
-        details: <p>IEEE</p>
-      - string: springer-humanities-author-date
-        details: <p>Springer - 人文学科（作者-日期）</p>
-      - string: deutsche-gesellschaft-für-psychologie
-        details: <p>德国心理学协会 第5版（德语）</p>
-      - string: springer-basic-author-date
-        details: <p>Springer - 基础（作者-日期）</p>
-      - string: institute-of-physics-numeric
-        details: <p>物理学会 (数字)</p>
-      - string: vancouver
-        details: <p>温哥华</p>
-      - string: nature
-        details: <p>自然</p>
-      - string: current-opinion
-        details: <p>Current Opinion 期刊</p>
+        details: <p>Pensoft Journals</p>
       - string: annual-reviews-author-date
-        details: <p>Annual Reviews（作者-日期）</p>
-      - string: american-institute-of-physics
-        details: <p>美国物理学会第4版</p>
-      - string: gb-7714-2015-numeric
-        details: <p>中国国家标准 GB/T 7714-2015（数字，中文）</p>
+        details: <p>Annual Reviews (author-date)</p>
       - string: the-lancet
         details: <p>The Lancet</p>
-      - string: springer-basic
-        details: <p>斯普林格 - 基础版（数字，括号）</p>
-      - string: american-geophysical-union
-        details: <p>美国地球物理联合会</p>
-      - string: turabian-fullnote-8
-        details: <p>图拉宾第8版（全注释）</p>
-      - string: taylor-and-francis-national-library-of-medicine
-        details: <p>Taylor & Francis - 国家医学图书馆</p>
-      - string: american-physiological-society
-        details: <p>美国生理学会</p>
-      - string: thieme
-        details: <p>Thieme-German（德语）</p>
-      - string: copernicus
-        details: <p>哥白尼出版社</p>
-      - string: the-institution-of-engineering-and-technology
-        details: <p>工程与技术学会</p>
-      - string: annual-reviews
-        details: <p>Annual Reviews（按出现顺序排序）</p>
-      - string: deutsche-sprache
-        details: <p>德国语言学会（德语）</p>
-      - string: harvard-cite-them-right
-        details: <p>引用正确的哈佛大学第12版</p>
-      - string: chicago-fullnotes
-        details: <p>芝加哥风格手册第17版（全注释）</p>
-      - string: iso-690-author-date
-        details: <p>ISO-690（作者-日期，英语）</p>
-      - string: council-of-science-editors-author-date
-        details: <p>科学编辑协会，姓名-年份（作者-日期）</p>
-      - string: springer-mathphys
-        details: <p>斯普林格 - 数学物理（数字，括号）</p>
-      - string: american-society-of-mechanical-engineers
-        details: <p>美国机械工程师学会</p>
-      - string: karger
-        details: <p>Karger 期刊</p>
-      - string: multidisciplinary-digital-publishing-institute
-        details: <p>多学科数字出版协会</p>
-      - string: american-psychological-association
-        details: <p>美国心理学会第7版</p>
-      - string: modern-language-association-8
-        details: <p>现代语言协会第8版</p>
-      - string: gb-7714-2015-author-date
-        details: <p>中国国家标准 GB/T 7714-2015（作者-日期，中文）</p>
-      - string: springer-vancouver
-        details: <p>斯普林格 - 温哥华（括号）</p>
-      - string: british-medical-journal
-        details: <p>英国医学杂志</p>
-      - string: turabian-author-date
-        details: <p>图拉宾第9版（作者-日期）</p>
-      - string: chicago-author-date
-        details: <p>芝加哥风格手册第17版（作者-日期）</p>
-      - string: associacao-brasileira-de-normas-tecnicas
-        details: <p>巴西技术标准协会（葡萄牙语 - 巴西）</p>
-      - string: vancouver-superscript
-        details: <p>温哥华（上标）</p>
-      - string: angewandte-chemie
-        details: <p>应用化学国际版</p>
       - string: elsevier-with-titles
-        details: <p>爱思唯尔（数字，带标题）</p>
-      - string: iso-690-numeric
-        details: <p>ISO-690（数字，英语）</p>
-      - string: modern-language-association
-        details: <p>现代语言协会第9版</p>
-      - string: council-of-science-editors
-        details: <p>科学编辑协会，引文顺序（数字，括号）</p>
-      - string: spie
-        details: <p>SPIE 期刊</p>
-      - string: springer-fachzeitschriften-medizin-psychologie
-        details: <p>斯普林格 - 专业期刊医学心理学（德语）</p>
+        details: <p>Elsevier (numeric, with titles)</p>
+      - string: gb-7714-2015-author-date
+        details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
+      - string: royal-society-of-chemistry
+        details: <p>Royal Society of Chemistry</p>
+      - string: american-anthropological-association
+        details: <p>American Anthropological Association</p>
+      - string: sage-vancouver
+        details: <p>SAGE - Vancouver</p>
+      - string: british-medical-journal
+        details: <p>BMJ</p>
       - string: frontiers
-        details: <p>Frontiers 期刊</p>
-      - string: american-physics-society
-        details: <p>美国物理学会</p>
-      - string: american-sociological-association
-        details: <p>美国社会学会第6版</p>
-      - string: elsevier-vancouver
-        details: <p>爱思唯尔 - 温哥华</p>
+        details: <p>Frontiers journals</p>
+      - string: elsevier-harvard
+        details: <p>Elsevier - Harvard (with titles)</p>
+      - string: gb-7714-2005-numeric
+        details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
+      - string: angewandte-chemie
+        details: <p>Angewandte Chemie International Edition</p>
+      - string: gb-7714-2015-note
+        details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
+      - string: springer-basic-author-date
+        details: <p>Springer - Basic (author-date)</p>
+      - string: trends
+        details: <p>Trends journals</p>
+      - string: american-geophysical-union
+        details: <p>American Geophysical Union</p>
+      - string: american-political-science-association
+        details: <p>American Political Science Association</p>
+      - string: american-psychological-association
+        details: <p>American Psychological Association 7th edition</p>
+      - string: cell
+        details: <p>Cell</p>
+      - string: spie
+        details: <p>SPIE journals</p>
+      - string: harvard-cite-them-right
+        details: <p>Cite Them Right 12th edition - Harvard</p>
+      - string: american-institute-of-aeronautics-and-astronautics
+        details: <p>American Institute of Aeronautics and Astronautics</p>
+      - string: council-of-science-editors-author-date
+        details: <p>Council of Science Editors, Name-Year (author-date)</p>
+      - string: copernicus
+        details: <p>Copernicus Publications</p>
+      - string: sist02
+        details: <p>SIST02 (日本語)</p>
+      - string: springer-socpsych-author-date
+        details: <p>Springer - SocPsych (author-date)</p>
+      - string: modern-language-association-8
+        details: <p>Modern Language Association 8th edition</p>
+      - string: nature
+        details: <p>Nature</p>
+      - string: iso-690-numeric
+        details: <p>ISO-690 (numeric, English)</p>
+      - string: springer-mathphys
+        details: <p>Springer - MathPhys (numeric, brackets)</p>
+      - string: springer-lecture-notes-in-computer-science
+        details: <p>Springer - Lecture Notes in Computer Science</p>
+      - string: future-science
+        details: <p>Future Science Group</p>
+      - string: current-opinion
+        details: <p>Current Opinion journals</p>
+      - string: deutsche-gesellschaft-für-psychologie
+        details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
+      - string: american-meteorological-society
+        details: <p>American Meteorological Society</p>
+      - string: modern-humanities-research-association
+        details: <p>Modern Humanities Research Association 3rd edition (note with
+          bibliography)</p>
+      - string: american-society-of-civil-engineers
+        details: <p>American Society of Civil Engineers</p>
       - string: chicago-notes
-        details: <p>芝加哥风格手册第17版（注释）</p>
+        details: <p>Chicago Manual of Style 17th edition (note)</p>
+      - string: institute-of-electrical-and-electronics-engineers
+        details: <p>IEEE</p>
+      - string: deutsche-sprache
+        details: <p>Deutsche Sprache (Deutsch)</p>
+      - string: gb-7714-2015-numeric
+        details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
+      - string: bristol-university-press
+        details: <p>Bristol University Press</p>
+      - string: association-for-computing-machinery
+        details: <p>Association for Computing Machinery</p>
+      - string: associacao-brasileira-de-normas-tecnicas
+        details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
+      - string: american-medical-association
+        details: <p>American Medical Association 11th edition</p>
+      - string: elsevier-vancouver
+        details: <p>Elsevier - Vancouver</p>
+      - string: chicago-author-date
+        details: <p>Chicago Manual of Style 17th edition (author-date)</p>
+      - string: vancouver
+        details: <p>Vancouver</p>
+      - string: chicago-fullnotes
+        details: <p>Chicago Manual of Style 17th edition (full note)</p>
+      - string: turabian-author-date
+        details: <p>Turabian 9th edition (author-date)</p>
+      - string: springer-fachzeitschriften-medizin-psychologie
+        details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
+      - string: thieme
+        details: <p>Thieme-German (Deutsch)</p>
+      - string: taylor-and-francis-national-library-of-medicine
+        details: <p>Taylor &amp; Francis - National Library of Medicine</p>
+      - string: american-chemical-society
+        details: <p>American Chemical Society</p>
+      - string: american-institute-of-physics
+        details: <p>American Institute of Physics 4th edition</p>
+      - string: taylor-and-francis-chicago-author-date
+        details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
+      - string: gost-r-705-2008-numeric
+        details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
+      - string: institute-of-physics-numeric
+        details: <p>Institute of Physics (numeric)</p>
+      - string: iso-690-author-date
+        details: <p>ISO-690 (author-date, English)</p>
+      - string: the-institution-of-engineering-and-technology
+        details: <p>The Institution of Engineering and Technology</p>
+      - string: american-society-for-microbiology
+        details: <p>American Society for Microbiology</p>
+      - string: multidisciplinary-digital-publishing-institute
+        details: <p>Multidisciplinary Digital Publishing Institute</p>
+      - string: springer-basic
+        details: <p>Springer - Basic (numeric, brackets)</p>
+      - string: springer-humanities-author-date
+        details: <p>Springer - Humanities (author-date)</p>
+      - string: turabian-fullnote-8
+        details: <p>Turabian 8th edition (full note)</p>
+      - string: karger
+        details: <p>Karger journals</p>
+      - string: springer-vancouver
+        details: <p>Springer - Vancouver (brackets)</p>
+      - string: vancouver-superscript
+        details: <p>Vancouver (superscript)</p>
+      - string: american-physics-society
+        details: <p>American Physical Society</p>
+      - string: mary-ann-liebert-vancouver
+        details: <p>Mary Ann Liebert - Vancouver</p>
+      - string: american-society-of-mechanical-engineers
+        details: <p>American Society of Mechanical Engineers</p>
+      - string: council-of-science-editors
+        details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
+      - string: american-physiological-society
+        details: <p>American Physiological Society</p>
+      - string: future-medicine
+        details: <p>Future Medicine journals</p>
+      - string: biomed-central
+        details: <p>BioMed Central</p>
+      - string: public-library-of-science
+        details: <p>Public Library of Science</p>
+      - string: american-sociological-association
+        details: <p>American Sociological Association 6th edition</p>
+      - string: modern-language-association
+        details: <p>Modern Language Association 9th edition</p>
       - string: alphanumeric
-        details: <p>字母数字混合</p>
+        details: <p>Alphanumeric</p>
       default: <code><span class="typ-key">auto</span></code>
       positional: false
       named: true

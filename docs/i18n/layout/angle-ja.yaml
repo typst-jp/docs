@@ -1,6 +1,6 @@
 route: /docs/reference/layout/angle/
 title: Angle
-description: Angle 类型的文档
+description: Documentation for the Angle type.
 part: null
 outline:
 - id: summary
@@ -44,6 +44,7 @@ body:
       keywords: []
       oneliner: Converts this angle to radians.
       element: false
+      contextual: false
       details: <p>Converts this angle to radians.</p>
       example: null
       self: true
@@ -58,6 +59,7 @@ body:
       keywords: []
       oneliner: Converts this angle to degrees.
       element: false
+      contextual: false
       details: <p>Converts this angle to degrees.</p>
       example: null
       self: true

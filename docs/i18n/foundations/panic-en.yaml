@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/panic/
 title: Panic
-description: '`panic` 函数的文档'
+description: Documentation for the `panic` function.
 part: null
 outline:
 - id: summary
@@ -25,6 +25,7 @@ body:
     - error
     oneliner: Fails with an error.
     element: false
+    contextual: false
     details: |-
       <p>Fails with an error.</p>
       <p>Arguments are displayed to the user (not rendered in the document) as

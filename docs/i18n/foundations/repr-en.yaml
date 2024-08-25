@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/repr/
 title: Representation
-description: '`repr` 函数的文档'
+description: Documentation for the `repr` function.
 part: null
 outline:
 - id: summary
@@ -24,6 +24,7 @@ body:
     keywords: []
     oneliner: Returns the string representation of a value.
     element: false
+    contextual: false
     details: |-
       <p>Returns the string representation of a value.</p>
       <p>When inserted into content, most values are displayed as this representation

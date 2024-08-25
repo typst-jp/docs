@@ -1,6 +1,6 @@
 route: /docs/reference/layout/v/
 title: Spacing (V)
-description: '`v` 函数的文档'
+description: Documentation for the `v` function.
 part: null
 outline:
 - id: summary
@@ -27,6 +27,7 @@ body:
     keywords: []
     oneliner: Inserts vertical spacing into a flow of blocks.
     element: true
+    contextual: false
     details: |-
       <p>Inserts vertical spacing into a flow of blocks.</p>
       <p>The spacing can be absolute, relative, or fractional. In the last case,

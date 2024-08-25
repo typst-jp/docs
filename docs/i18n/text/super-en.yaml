@@ -1,6 +1,6 @@
 route: /docs/reference/text/super/
 title: Superscript
-description: '`super` 函数的文档'
+description: Documentation for the `super` function.
 part: null
 outline:
 - id: summary
@@ -33,6 +33,7 @@ body:
     keywords: []
     oneliner: Renders text in superscript.
     element: true
+    contextual: false
     details: |-
       <p>Renders text in superscript.</p>
       <p>The text is rendered smaller and its baseline is raised.</p>
@@ -70,7 +71,7 @@ body:
       types:
       - length
       strings: []
-      default: <code><span class="typ-op">−</span><span class="typ-num">0.5em</span></code>
+      default: <code><span class="typ-op">-</span><span class="typ-num">0.5em</span></code>
       positional: false
       named: true
       required: false

@@ -1,6 +1,6 @@
 route: /docs/reference/math/styles
-title: 显示样式
-description: styles 函数族的文档.
+title: Styles
+description: Documentation for the styles functions.
 part: null
 outline:
 - id: summary
@@ -33,12 +33,9 @@ body:
     name: styles
     title: Styles
     details: |-
-      <p>
-      公式中的替代字母形式。
-      </p>
-      <p>
-      这些函数和 <a href="/docs/reference/text/text/"><code>text</code></a> 函数不同，因为数学字体包含每个字母的多个变体。
-      </p>
+      <p>Alternate letterforms within formulas.</p>
+      <p>These functions are distinct from the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function because math fonts
+      contain multiple variants of each letter.</p>
     functions:
     - path:
       - math
@@ -47,17 +44,15 @@ body:
       keywords: []
       oneliner: Upright (non-italic) font style in math.
       element: false
-      details: |-
-        <p>
-        数学中的直立（非斜体）字体样式。
-        </p>
+      contextual: false
+      details: <p>Upright (non-italic) font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">upright</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">!=</span> A <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/d0ac32f208aa20b1c8b1ea88304aa607.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: body
-        details: <p>要设定样式的部分。</p>
+        details: <p>The content to style.</p>
         example: null
         types:
         - content
@@ -78,18 +73,15 @@ body:
       keywords: []
       oneliner: Italic font style in math.
       element: false
+      contextual: false
       details: |-
-        <p>
-        数学中的斜体字体样式。
-        </p>
-        <p>
-        这也是罗马字母和希腊小写字母的默认样式。
-        </p>
+        <p>Italic font style in math.</p>
+        <p>For roman letters and greek lowercase letters, this is already the default.</p>
       example: null
       self: false
       params:
       - name: body
-        details: <p>要设定样式的部分。</p>
+        details: <p>The content to style.</p>
         example: null
         types:
         - content
@@ -110,17 +102,15 @@ body:
       keywords: []
       oneliner: Bold font style in math.
       element: false
-      details: |-
-        <p>
-        数学中的粗体字体样式。
-        </p>
+      contextual: false
+      details: <p>Bold font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">bold</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">:=</span> B<span class="typ-math-op">^</span>+ <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/79814838a321e86e80ee113a14074b8f.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: body
-        details: <p>要设定样式的部分。</p>
+        details: <p>The content to style.</p>
         example: null
         types:
         - content

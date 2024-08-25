@@ -1,6 +1,6 @@
 route: /docs/reference/math/accent/
-title: 重音符号
-description: '`accent` 函数的文档'
+title: Accent
+description: Documentation for the `accent` function.
 part: null
 outline:
 - id: summary
@@ -18,6 +18,9 @@ outline:
   - id: parameters-accent
     name: accent
     children: []
+  - id: parameters-size
+    name: size
+    children: []
 body:
   kind: func
   content:
@@ -28,9 +31,9 @@ body:
     keywords: []
     oneliner: Attaches an accent to a base.
     element: true
+    contextual: false
     details: |-
-      <p>在附基上添加重音符号。</p>
-      <p><i>译者注：</i>形如 a² 这样的形式，我们将 a 称作“附基”（base），将 ² 称作“附缀”（attachment） </p>
+      <p>Attaches an accent to a base.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-func">grave</span><span class="typ-punct">(</span>a<span class="typ-punct">)</span> = <span class="typ-func">accent</span><span class="typ-punct">(</span>a<span class="typ-punct">,</span> `<span class="typ-punct">)</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
       <span class="typ-math-delim">$</span><span class="typ-func">arrow</span><span class="typ-punct">(</span>a<span class="typ-punct">)</span> = <span class="typ-func">accent</span><span class="typ-punct">(</span>a<span class="typ-punct">,</span> <span class="typ-pol">arrow</span><span class="typ-punct">)</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
@@ -40,7 +43,9 @@ body:
     self: false
     params:
     - name: base
-      details: <p>添加重音符号的基数，可以由多个字母组成。</p>
+      details: |-
+        <p>The base to which the accent is applied.
+        May consist of multiple letters.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-func">arrow</span><span class="typ-punct">(</span>A B C<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/d6d6623d6462b4aa8c0201636bd694a7.png" alt="Preview" width="480" height="190"/></div></div>
@@ -55,8 +60,8 @@ body:
       settable: false
     - name: accent
       details: |-
-        <p>可添加于附基的重音符号。</p>
-        <p>支持的重音符号如下：</p>
+        <p>The accent to apply to the base.</p>
+        <p>Supported accents include:</p>
         <table><thead><tr><th>Accent</th><th>Name</th><th>Codepoint</th></tr></thead><tbody>
         <tr><td>Grave</td><td><code>grave</code></td><td><code>`</code></td></tr>
         <tr><td>Acute</td><td><code>acute</code></td><td><code>´</code></td></tr>
@@ -65,15 +70,17 @@ body:
         <tr><td>Macron</td><td><code>macron</code></td><td><code>¯</code></td></tr>
         <tr><td>Breve</td><td><code>breve</code></td><td><code>˘</code></td></tr>
         <tr><td>Dot</td><td><code>dot</code></td><td><code>.</code></td></tr>
-        <tr><td>Double dot</td><td><code>dot.double</code></td><td><code>¨</code></td></tr>
+        <tr><td>Double dot, Diaeresis</td><td><code>dot.double</code>, <code>diaer</code></td><td><code>¨</code></td></tr>
         <tr><td>Triple dot</td><td><code>dot.triple</code></td><td><code>⃛</code></td></tr>
         <tr><td>Quadruple dot</td><td><code>dot.quad</code></td><td><code>⃜</code></td></tr>
-        <tr><td>Diaeresis</td><td><code>diaer</code></td><td><code>¨</code></td></tr>
         <tr><td>Circle</td><td><code>circle</code></td><td><code>∘</code></td></tr>
         <tr><td>Double acute</td><td><code>acute.double</code></td><td><code>˝</code></td></tr>
         <tr><td>Caron</td><td><code>caron</code></td><td><code>ˇ</code></td></tr>
         <tr><td>Right arrow</td><td><code>arrow</code>, <code>-&gt;</code></td><td><code>→</code></td></tr>
         <tr><td>Left arrow</td><td><code>arrow.l</code>, <code>&lt;-</code></td><td><code>←</code></td></tr>
+        <tr><td>Left/Right arrow</td><td><code>arrow.l.r</code></td><td><code>↔</code></td></tr>
+        <tr><td>Right harpoon</td><td><code>harpoon</code></td><td><code>⇀</code></td></tr>
+        <tr><td>Left harpoon</td><td><code>harpoon.lt</code></td><td><code>↼</code></td></tr>
         </tbody></table>
       example: null
       types:
@@ -86,6 +93,19 @@ body:
       required: true
       variadic: false
       settable: false
+    - name: size
+      details: <p>The size of the accent, relative to the width of the base.</p>
+      example: null
+      types:
+      - auto
+      - relative
+      strings: []
+      default: <code><span class="typ-key">auto</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
     returns:
     - content
     scope: []

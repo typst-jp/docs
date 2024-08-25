@@ -1,16 +1,22 @@
 route: /docs/reference/introspection/locate/
 title: Locate
-description: '`locate` 函数的文档'
+description: Documentation for the `locate` function.
 part: null
 outline:
 - id: summary
   name: Summary
   children: []
+- id: examples
+  name: Examples
+  children: []
+- id: compatibility
+  name: Compatibility
+  children: []
 - id: parameters
   name: Parameters
   children:
-  - id: parameters-func
-    name: func
+  - id: parameters-selector
+    name: selector
     children: []
 body:
   kind: func
@@ -19,30 +25,49 @@ body:
     name: locate
     title: Locate
     keywords: []
-    oneliner: Provides access to the location of content.
+    oneliner: Determines the location of an element in the document.
     element: false
+    contextual: true
     details: |-
-      <p>Provides access to the location of content.</p>
-      <p>This is useful in combination with <a href="/docs/reference/introspection/query/">queries</a>, <a href="/docs/reference/introspection/counter/">counters</a>,
-      <a href="/docs/reference/introspection/state/">state</a>, and <a href="/docs/reference/model/link/">links</a>. See their documentation for more
-      details.</p>
-      <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">locate</span><span class="typ-punct">(</span>loc <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
-        My location: <span class="typ-escape">\</span>
-        <span class="typ-pol">#</span><span class="typ-pol">loc</span><span class="typ-punct">.</span><span class="typ-func">position</span><span class="typ-punct">(</span><span class="typ-punct">)</span>!
-      <span class="typ-punct">]</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/d5c00e53d3d78d599f64f77dee4dd799.png" alt="Preview" width="480" height="190"/></div></div>
+      <p>Determines the location of an element in the document.</p>
+      <p>Takes a selector that must match exactly one element and returns that
+      element's <a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a>. This location can, in particular, be used to
+      retrieve the physical <a href="/docs/reference/introspection/location/#definitions-page"><code>page</code></a> number and
+      <a href="/docs/reference/introspection/location/#definitions-position"><code>position</code></a> (page, x, y) for that element.</p>
+      <h2 id="examples">Examples</h2>
+      <p>Locating a specific element:</p>
+      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">[</span>
+        Introduction is at: <span class="typ-escape">\</span>
+        <span class="typ-func">#</span><span class="typ-func">locate</span><span class="typ-punct">(</span><span class="typ-label">&lt;intro&gt;</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">position</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      <span class="typ-punct">]</span>
+
+      <span class="typ-heading">= Introduction</span> <span class="typ-label">&lt;intro&gt;</span>
+      </code></pre><div class="preview"><img src="/assets/docs/a9f407f9956790d25270207dfad46b98.png" alt="Preview" width="480" height="190"/></div></div>
+      <h2 id="compatibility">Compatibility</h2>
+      <p>In Typst 0.10 and lower, the <code>locate</code> function took a closure that made the
+      current location in the document available (like <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> does now).
+      Compatibility with the old way will remain for a while to give package
+      authors time to upgrade. To that effect, <code>locate</code> detects whether it
+      received a selector or a user-defined function and adjusts its semantics
+      accordingly. This behaviour will be removed in the future.</p>
     example: null
     self: false
     params:
-    - name: func
+    - name: selector
       details: |-
-        <p>A function that receives a <a href="/docs/reference/introspection/location/"><code>location</code></a>. Its return value is
-        displayed in the document.</p>
-        <p>This function is called once for each time the content returned by
-        <code>locate</code> appears in the document. That makes it possible to generate
-        content that depends on its own location in the document.</p>
+        <p>A selector that should match exactly one element. This element will be
+        located.</p>
+        <p>Especially useful in combination with</p>
+        <ul>
+        <li><a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> to locate the current context,</li>
+        <li>a <a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a> retrieved from some queried element via the
+        <a href="/docs/reference/foundations/content/#definitions-location"><code>location()</code></a> method on content.</li>
+        </ul>
       example: null
       types:
+      - label
+      - selector
+      - location
       - function
       strings: []
       default: null
@@ -53,5 +78,6 @@ body:
       settable: false
     returns:
     - content
+    - location
     scope: []
 children: []

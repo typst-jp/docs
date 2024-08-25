@@ -1,6 +1,6 @@
 route: /docs/reference/layout/page/
 title: Page
-description: '`page` 函数的文档'
+description: Documentation for the `page` function.
 part: null
 outline:
 - id: summary
@@ -72,6 +72,7 @@ body:
     keywords: []
     oneliner: Layouts its child onto one or multiple pages.
     element: true
+    contextual: false
     details: |-
       <p>Layouts its child onto one or multiple pages.</p>
       <p>Although this function is primarily used in set rules to affect page
@@ -427,8 +428,7 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
-        class="typ-punct">)</span></code>
+      default: <code><span class="typ-key">auto</span></code>
       positional: false
       named: true
       required: false
@@ -604,7 +604,7 @@ body:
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>
           height<span class="typ-punct">:</span> <span class="typ-num">100pt</span><span class="typ-punct">,</span>
           margin<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span>
-          footer<span class="typ-punct">:</span> <span class="typ-punct">[</span>
+          footer<span class="typ-punct">:</span> <span class="typ-key">context</span> <span class="typ-punct">[</span>
             <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>right<span class="typ-punct">)</span>
             <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">8pt</span><span class="typ-punct">)</span>
             <span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>page<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>
@@ -615,7 +615,7 @@ body:
         <span class="typ-punct">)</span>
 
         <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">48</span><span class="typ-punct">)</span>
-        </code></pre><div class="preview"><img src="/assets/docs/2411ffe7e3e75df3aba4830eb664477d.png" alt="Preview" width="480" height="190"/></div></div>
+        </code></pre><div class="preview"><img src="/assets/docs/63d67767a7728f2d2834c9dc9f61d529.png" alt="Preview" width="480" height="190"/></div></div>
       types:
       - none
       - content

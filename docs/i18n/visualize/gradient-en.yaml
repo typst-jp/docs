@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/gradient/
 title: Gradient
-description: Gradient 类型的文档
+description: Documentation for the Gradient type.
 part: null
 outline:
 - id: summary
@@ -23,6 +23,9 @@ outline:
   children: []
 - id: presets
   name: Presets
+  children: []
+- id: note-on-file-sizes
+  name: Note On File Sizes
   children: []
 - id: definitions
   name: Definitions
@@ -198,11 +201,10 @@ body:
       <ul>
       <li>For shapes that are placed at the root/top level of the document, the
       closest ancestor is the page itself.</li>
-      <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/"><code>block</code></a> or
-      <a href="/docs/reference/layout/box/"><code>box</code></a> that contains the shape. This includes the boxes and blocks
-      that are implicitly created by show rules and elements. For example, a
-      <a href="/docs/reference/layout/rotate/"><code>rotate</code></a> will not affect the parent of a gradient, but a
-      <a href="/docs/reference/layout/grid/"><code>grid</code></a> will.</li>
+      <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> or <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> that
+      contains the shape. This includes the boxes and blocks that are implicitly
+      created by show rules and elements. For example, a <a href="/docs/reference/layout/rotate/" title="`rotate`"><code>rotate</code></a> will not
+      affect the parent of a gradient, but a <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> will.</li>
       </ul>
       <h2 id="color-spaces-and-interpolation">Color spaces and interpolation</h2>
       <p>Gradients can be interpolated in any color space. By default, gradients are
@@ -241,7 +243,21 @@ body:
       </code></pre><div class="preview"><img src="/assets/docs/2e5fc136fe08bd2ce1808cfcfb5313f5.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="presets">Presets</h2>
       <p>Typst predefines color maps that you can use with your gradients. See the
-      <a href="/docs/reference/visualize/color//#predefined-color-maps"><code>color</code></a> documentation for more details.</p>
+      <a href="/docs/reference/visualize/color/#predefined-color-maps"><code>color</code></a> documentation for more details.</p>
+      <h2 id="note-on-file-sizes">Note on file sizes</h2>
+      <p>Gradients can be quite large, especially if they have many stops. This is
+      because gradients are stored as a list of colors and offsets, which can
+      take up a lot of space. If you are concerned about file sizes, you should
+      consider the following:</p>
+      <ul>
+      <li>SVG gradients are currently inefficiently encoded. This will be improved
+      in the future.</li>
+      <li>PDF gradients in the <a href="/docs/reference/visualize/color/#definitions-hsv"><code>color.hsv</code></a>, <a href="/docs/reference/visualize/color/#definitions-hsl"><code>color.hsl</code></a>,
+      and <a href="/docs/reference/visualize/color/#definitions-oklch"><code>color.oklch</code></a> color spaces are stored as a list of
+      <a href="/docs/reference/visualize/color/#definitions-oklab"><code>color.oklab</code></a> colors with extra stops in between. This
+      avoids needing to encode these color spaces in your PDF file, but it does
+      add extra stops to your gradient, which can increase the file size.</li>
+      </ul>
     constructor: null
     scope:
     - path:
@@ -251,6 +267,7 @@ body:
       keywords: []
       oneliner: Creates a new linear gradient, in which colors transition along a
       element: false
+      contextual: false
       details: |-
         <p>Creates a new linear gradient, in which colors transition along a
         straight line.</p>
@@ -350,6 +367,7 @@ body:
       keywords: []
       oneliner: Creates a new radial gradient, in which colors radiate away from an
       element: false
+      contextual: false
       details: |-
         <p>Creates a new radial gradient, in which colors radiate away from an
         origin.</p>
@@ -505,6 +523,7 @@ body:
       oneliner: Creates a new conic gradient, in which colors change radially around
         a
       element: false
+      contextual: false
       details: |-
         <p>Creates a new conic gradient, in which colors change radially around a
         center point.</p>
@@ -613,6 +632,7 @@ body:
       keywords: []
       oneliner: Creates a sharp version of this gradient.
       element: false
+      contextual: false
       details: |-
         <p>Creates a sharp version of this gradient.</p>
         <p>Sharp gradients have discrete jumps between colors, instead of a
@@ -662,6 +682,7 @@ body:
       oneliner: Repeats this gradient a given number of times, optionally mirroring
         it
       element: false
+      contextual: false
       details: |-
         <p>Repeats this gradient a given number of times, optionally mirroring it
         at each repetition.</p>
@@ -709,6 +730,7 @@ body:
       keywords: []
       oneliner: Returns the kind of this gradient.
       element: false
+      contextual: false
       details: <p>Returns the kind of this gradient.</p>
       example: null
       self: true
@@ -723,6 +745,7 @@ body:
       keywords: []
       oneliner: Returns the stops of this gradient.
       element: false
+      contextual: false
       details: <p>Returns the stops of this gradient.</p>
       example: null
       self: true
@@ -737,6 +760,7 @@ body:
       keywords: []
       oneliner: Returns the mixing space of this gradient.
       element: false
+      contextual: false
       details: <p>Returns the mixing space of this gradient.</p>
       example: null
       self: true
@@ -751,6 +775,7 @@ body:
       keywords: []
       oneliner: Returns the relative placement of this gradient.
       element: false
+      contextual: false
       details: <p>Returns the relative placement of this gradient.</p>
       example: null
       self: true
@@ -765,6 +790,7 @@ body:
       keywords: []
       oneliner: Returns the angle of this gradient.
       element: false
+      contextual: false
       details: <p>Returns the angle of this gradient.</p>
       example: null
       self: true
@@ -780,11 +806,12 @@ body:
       keywords: []
       oneliner: Sample the gradient at a given position.
       element: false
+      contextual: false
       details: |-
         <p>Sample the gradient at a given position.</p>
-        <p>The position is either a position along the gradient (a <a href="/docs/reference/layout/ratio/">ratio</a>
-        between <code><span class="typ-num">0%</span></code> and <code><span class="typ-num">100%</span></code>) or an <a href="/docs/reference/layout/angle/">angle</a>. Any value outside
-        of this range will be clamped.</p>
+        <p>The position is either a position along the gradient (a <a href="/docs/reference/layout/ratio/" title="ratio">ratio</a> between
+        <code><span class="typ-num">0%</span></code> and <code><span class="typ-num">100%</span></code>) or an <a href="/docs/reference/layout/angle/" title="angle">angle</a>. Any value outside of this range will
+        be clamped.</p>
       example: null
       self: true
       params:
@@ -811,6 +838,7 @@ body:
       keywords: []
       oneliner: Samples the gradient at multiple positions at once and returns the
       element: false
+      contextual: false
       details: |-
         <p>Samples the gradient at multiple positions at once and returns the
         results as an array.</p>

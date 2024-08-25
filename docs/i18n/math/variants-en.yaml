@@ -1,6 +1,6 @@
 route: /docs/reference/math/variants
-title: 变体
-description: variants 函数族的文档.
+title: Variants
+description: Documentation for the variants functions.
 part: null
 outline:
 - id: summary
@@ -49,10 +49,11 @@ body:
   kind: group
   content:
     name: variants
-    title: 变体
+    title: Variants
     details: |-
-      <p>公式中的备用字体。</p>
-      <p>这些函数与 <a href="/docs/reference/text/text/"><code>text</code></a> 函数不同，因为数学字体包含每个字母的多个变体。</p>
+      <p>Alternate typefaces within formulas.</p>
+      <p>These functions are distinct from the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function because math fonts
+      contain multiple variants of each letter.</p>
     functions:
     - path:
       - math
@@ -61,6 +62,7 @@ body:
       keywords: []
       oneliner: Serif (roman) font style in math.
       element: false
+      contextual: false
       details: |-
         <p>Serif (roman) font style in math.</p>
         <p>This is already the default.</p>
@@ -89,6 +91,7 @@ body:
       keywords: []
       oneliner: Sans-serif font style in math.
       element: false
+      contextual: false
       details: <p>Sans-serif font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">sans</span><span class="typ-punct">(</span>A B C<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -117,6 +120,7 @@ body:
       keywords: []
       oneliner: Fraktur font style in math.
       element: false
+      contextual: false
       details: <p>Fraktur font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">frak</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -145,6 +149,7 @@ body:
       keywords: []
       oneliner: Monospace font style in math.
       element: false
+      contextual: false
       details: <p>Monospace font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">mono</span><span class="typ-punct">(</span>x + y = z<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -173,6 +178,7 @@ body:
       keywords: []
       oneliner: Blackboard bold (double-struck) font style in math.
       element: false
+      contextual: false
       details: |-
         <p>Blackboard bold (double-struck) font style in math.</p>
         <p>For uppercase latin letters, blackboard bold is additionally available
@@ -206,6 +212,7 @@ body:
       keywords: []
       oneliner: Calligraphic font style in math.
       element: false
+      contextual: false
       details: <p>Calligraphic font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code>Let <span class="typ-math-delim">$</span><span class="typ-func">cal</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span><span class="typ-math-delim">$</span> be the set of <span class="typ-escape">...</span>

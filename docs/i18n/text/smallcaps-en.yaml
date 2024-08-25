@@ -1,6 +1,6 @@
 route: /docs/reference/text/smallcaps/
 title: Small Capitals
-description: '`smallcaps` 函数的文档'
+description: Documentation for the `smallcaps` function.
 part: null
 outline:
 - id: summary
@@ -24,6 +24,7 @@ body:
     keywords: []
     oneliner: Displays text in small capitals.
     element: false
+    contextual: false
     details: |-
       <p>Displays text in small capitals.</p>
       <p><em>Note:</em> This enables the OpenType <code>smcp</code> feature for the font. Not all fonts

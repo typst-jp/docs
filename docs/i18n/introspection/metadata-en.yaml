@@ -1,6 +1,6 @@
 route: /docs/reference/introspection/metadata/
 title: Metadata
-description: '`metadata` 函数的文档'
+description: Documentation for the `metadata` function.
 part: null
 outline:
 - id: summary
@@ -21,23 +21,25 @@ body:
     keywords: []
     oneliner: Exposes a value to the query system without producing visible content.
     element: true
+    contextual: false
     details: |-
       <p>Exposes a value to the query system without producing visible content.</p>
-      <p>This element can be retrieved with the <a href="/docs/reference/introspection/query/"><code>query</code></a> function and from
-      the command with <a href="/docs/reference/meta/query/#cli-queries"><code>typst query</code></a>. Its
+      <p>This element can be retrieved with the <a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a> function and from the
+      command line with
+      <a href="/docs/reference/introspection/query/#command-line-queries"><code>typst query</code></a>. Its
       purpose is to expose an arbitrary value to the introspection system. To
-      identify a metadata value among others, you can attach a <a href="/docs/reference/foundations/label/"><code>label</code></a>
-      to it and query for that label.</p>
+      identify a metadata value among others, you can attach a <a href="/docs/reference/foundations/label/" title="`label`"><code>label</code></a> to it and
+      query for that label.</p>
       <p>The <code>metadata</code> element is especially useful for command line queries because
       it allows you to expose arbitrary values to the outside world.</p>
       <div class="previewed-code"><pre><code><span class="typ-comment">// Put metadata somewhere.</span>
       <span class="typ-func">#</span><span class="typ-func">metadata</span><span class="typ-punct">(</span><span class="typ-str">&quot;This is a note&quot;</span><span class="typ-punct">)</span> <span class="typ-label">&lt;note&gt;</span>
 
       <span class="typ-comment">// And find it from anywhere else.</span>
-      <span class="typ-func">#</span><span class="typ-func">locate</span><span class="typ-punct">(</span>loc <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
-        <span class="typ-func">query</span><span class="typ-punct">(</span><span class="typ-label">&lt;note&gt;</span><span class="typ-punct">,</span> loc<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">first</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">.</span>value
-      <span class="typ-punct">}</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/b2532137a5dd32f4bfe76b7cc731e041.png" alt="Preview" width="480" height="190"/></div></div>
+      <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">{</span>
+        <span class="typ-func">query</span><span class="typ-punct">(</span><span class="typ-label">&lt;note&gt;</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">first</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">.</span>value
+      <span class="typ-punct">}</span>
+      </code></pre><div class="preview"><img src="/assets/docs/55790290c252252bc77e2bc257e6d7bb.png" alt="Preview" width="480" height="190"/></div></div>
     example: null
     self: false
     params:

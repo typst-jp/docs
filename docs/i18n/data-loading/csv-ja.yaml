@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/csv/
 title: CSV
-description: '`csv` 函数的文档'
+description: Documentation for the `csv` function.
 part: null
 outline:
 - id: summary
@@ -18,6 +18,9 @@ outline:
   - id: parameters-delimiter
     name: delimiter
     children: []
+  - id: parameters-row-type
+    name: row-type
+    children: []
 - id: definitions
   name: Definitions
   children:
@@ -30,6 +33,9 @@ outline:
     - id: definitions-decode-delimiter
       name: delimiter
       children: []
+    - id: definitions-decode-row-type
+      name: row-type
+      children: []
 body:
   kind: func
   content:
@@ -39,25 +45,27 @@ body:
     keywords: []
     oneliner: Reads structured data from a CSV file.
     element: false
+    contextual: false
     details: |-
-      <p>从 CSV 文件中读取结构化数据。</p>
-      <p>CSV 文件将被读取并解析为二维字符串数组：CSV 文件中的每一行都将表示为一个字符串数组，并且所有
-      行将被收集到单个数组中。标题行不会被忽略。
-      剥夺。</p>
-      <h2 id="example">举例</h2>
-      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> results <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;data.csv&quot;</span><span class="typ-punct">)</span>
+      <p>Reads structured data from a CSV file.</p>
+      <p>The CSV file will be read and parsed into a 2-dimensional array of strings:
+      Each row in the CSV file will be represented as an array of strings, and all
+      rows will be collected into a single array. Header rows will not be
+      stripped.</p>
+      <h2 id="example">Example</h2>
+      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> results <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;example.csv&quot;</span><span class="typ-punct">)</span>
 
       <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
         columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
         <span class="typ-punct">[</span><span class="typ-strong">*Condition*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Result*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
         <span class="typ-op">..</span>results<span class="typ-punct">.</span><span class="typ-func">flatten</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
       <span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/08241206dc3f3c0296d2db8f2ee545f4.png" alt="Preview" width="480" height="190"/></div></div>
+      </code></pre><div class="preview"><img src="/assets/docs/d639327a86bcbebeca5ae45c5d3d5c44.png" alt="Preview" width="480" height="190"/></div></div>
     example: null
     self: false
     params:
     - name: path
-      details: <p>CSV 文件路径</p>
+      details: <p>Path to a CSV file.</p>
       example: null
       types:
       - str
@@ -69,12 +77,34 @@ body:
       variadic: false
       settable: false
     - name: delimiter
-      details: <p>CSV 文件的列分隔符必须时单个 ASCII 字符。</p>
+      details: |-
+        <p>The delimiter that separates columns in the CSV file.
+        Must be a single ASCII character.</p>
       example: null
       types:
       - str
       strings: []
       default: <code><span class="typ-str">&quot;,&quot;</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: false
+    - name: row-type
+      details: |-
+        <p>How to represent the file's rows.</p>
+        <ul>
+        <li>If set to <code>array</code>, each row is represented as a plain array of
+        strings.</li>
+        <li>If set to <code>dictionary</code>, each row is represented as a dictionary
+        mapping from header keys to strings. This option only makes sense when
+        a header row is present in the CSV file.</li>
+        </ul>
+      example: null
+      types:
+      - type
+      strings: []
+      default: <code>array</code>
       positional: false
       named: true
       required: false
@@ -90,12 +120,13 @@ body:
       keywords: []
       oneliner: Reads structured data from a CSV string/bytes.
       element: false
-      details: <p>从 CSV 字符串/字节流读取结构化数据。</p>
+      contextual: false
+      details: <p>Reads structured data from a CSV string/bytes.</p>
       example: null
       self: false
       params:
       - name: data
-        details: <p>CSV 数据。</p>
+        details: <p>CSV data.</p>
         example: null
         types:
         - str
@@ -108,12 +139,34 @@ body:
         variadic: false
         settable: false
       - name: delimiter
-        details: <p>CSV 文件的列分隔符必须时单个 ASCII 字符。</p>
+        details: |-
+          <p>The delimiter that separates columns in the CSV file.
+          Must be a single ASCII character.</p>
         example: null
         types:
         - str
         strings: []
         default: <code><span class="typ-str">&quot;,&quot;</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: false
+      - name: row-type
+        details: |-
+          <p>How to represent the file's rows.</p>
+          <ul>
+          <li>If set to <code>array</code>, each row is represented as a plain array of
+          strings.</li>
+          <li>If set to <code>dictionary</code>, each row is represented as a dictionary
+          mapping from header keys to strings. This option only makes sense
+          when a header row is present in the CSV file.</li>
+          </ul>
+        example: null
+        types:
+        - type
+        strings: []
+        default: <code>array</code>
         positional: false
         named: true
         required: false

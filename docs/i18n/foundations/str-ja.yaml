@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/str/
 title: String
-description: String 类型的文档
+description: Documentation for the String type.
 part: null
 outline:
 - id: summary
@@ -193,6 +193,7 @@ body:
       keywords: []
       oneliner: Converts a value to a string.
       element: false
+      contextual: false
       details: |-
         <p>Converts a value to a string.</p>
         <ul>
@@ -255,6 +256,7 @@ body:
       keywords: []
       oneliner: The length of the string in UTF-8 encoded bytes.
       element: false
+      contextual: false
       details: <p>The length of the string in UTF-8 encoded bytes.</p>
       example: null
       self: true
@@ -269,6 +271,7 @@ body:
       keywords: []
       oneliner: Extracts the first grapheme cluster of the string.
       element: false
+      contextual: false
       details: |-
         <p>Extracts the first grapheme cluster of the string.
         Fails with an error if the string is empty.</p>
@@ -285,6 +288,7 @@ body:
       keywords: []
       oneliner: Extracts the last grapheme cluster of the string.
       element: false
+      contextual: false
       details: |-
         <p>Extracts the last grapheme cluster of the string.
         Fails with an error if the string is empty.</p>
@@ -301,6 +305,7 @@ body:
       keywords: []
       oneliner: Extracts the first grapheme cluster after the specified index. Returns
       element: false
+      contextual: false
       details: |-
         <p>Extracts the first grapheme cluster after the specified index. Returns
         the default value if the index is out of bounds or fails with an error
@@ -342,6 +347,7 @@ body:
       keywords: []
       oneliner: Extracts a substring of the string.
       element: false
+      contextual: false
       details: |-
         <p>Extracts a substring of the string.
         Fails with an error if the start or end index is out of bounds.</p>
@@ -402,6 +408,7 @@ body:
       keywords: []
       oneliner: Returns the grapheme clusters of the string as an array of substrings.
       element: false
+      contextual: false
       details: <p>Returns the grapheme clusters of the string as an array of substrings.</p>
       example: null
       self: true
@@ -416,6 +423,7 @@ body:
       keywords: []
       oneliner: Returns the Unicode codepoints of the string as an array of substrings.
       element: false
+      contextual: false
       details: <p>Returns the Unicode codepoints of the string as an array of substrings.</p>
       example: null
       self: true
@@ -430,6 +438,7 @@ body:
       keywords: []
       oneliner: Converts a character into its corresponding code point.
       element: false
+      contextual: false
       details: <p>Converts a character into its corresponding code point.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-str">#</span><span class="typ-str">&quot;a&quot;</span><span class="typ-punct">.</span><span class="typ-func">to-unicode</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -461,6 +470,7 @@ body:
       keywords: []
       oneliner: Converts a unicode code point into its corresponding string.
       element: false
+      contextual: false
       details: <p>Converts a unicode code point into its corresponding string.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">str</span><span class="typ-punct">.</span><span class="typ-func">from-unicode</span><span class="typ-punct">(</span><span class="typ-num">97</span><span class="typ-punct">)</span>
@@ -489,6 +499,7 @@ body:
       keywords: []
       oneliner: Whether the string contains the specified pattern.
       element: false
+      contextual: false
       details: |-
         <p>Whether the string contains the specified pattern.</p>
         <p>This method also has dedicated syntax: You can write <code><span class="typ-str">&quot;bc&quot;</span> <span class="typ-key">in</span> <span class="typ-str">&quot;abcd&quot;</span></code>
@@ -519,6 +530,7 @@ body:
       keywords: []
       oneliner: Whether the string starts with the specified pattern.
       element: false
+      contextual: false
       details: <p>Whether the string starts with the specified pattern.</p>
       example: null
       self: true
@@ -546,6 +558,7 @@ body:
       keywords: []
       oneliner: Whether the string ends with the specified pattern.
       element: false
+      contextual: false
       details: <p>Whether the string ends with the specified pattern.</p>
       example: null
       self: true
@@ -573,6 +586,7 @@ body:
       keywords: []
       oneliner: Searches for the specified pattern in the string and returns the first
       element: false
+      contextual: false
       details: |-
         <p>Searches for the specified pattern in the string and returns the first
         match as a string or <code><span class="typ-key">none</span></code> if there is no match.</p>
@@ -603,6 +617,7 @@ body:
       keywords: []
       oneliner: Searches for the specified pattern in the string and returns the index
       element: false
+      contextual: false
       details: |-
         <p>Searches for the specified pattern in the string and returns the index
         of the first match as an integer or <code><span class="typ-key">none</span></code> if there is no match.</p>
@@ -633,6 +648,7 @@ body:
       keywords: []
       oneliner: Searches for the specified pattern in the string and returns a
       element: false
+      contextual: false
       details: |-
         <p>Searches for the specified pattern in the string and returns a
         dictionary with details about the first match or <code><span class="typ-key">none</span></code> if there is no
@@ -675,6 +691,7 @@ body:
       oneliner: Searches for the specified pattern in the string and returns an array
         of
       element: false
+      contextual: false
       details: |-
         <p>Searches for the specified pattern in the string and returns an array of
         dictionaries with details about all matches. For details about the
@@ -705,6 +722,7 @@ body:
       keywords: []
       oneliner: Replace at most `count` occurrences of the given pattern with a
       element: false
+      contextual: false
       details: |-
         <p>Replace at most <code>count</code> occurrences of the given pattern with a
         replacement string or function (beginning from the start). If no count
@@ -765,6 +783,7 @@ body:
       oneliner: Removes matches of a pattern from one or both sides of the string,
         once or
       element: false
+      contextual: false
       details: |-
         <p>Removes matches of a pattern from one or both sides of the string, once or
         repeatedly and returns the resulting string.</p>
@@ -772,7 +791,8 @@ body:
       self: true
       params:
       - name: pattern
-        details: <p>The pattern to search for.</p>
+        details: <p>The pattern to search for. If <code><span class="typ-key">none</span></code>,
+          trims white spaces.</p>
         example: null
         types:
         - none
@@ -787,8 +807,8 @@ body:
         settable: false
       - name: at
         details: |-
-          <p>Can be <code>start</code> or <code>end</code> to only trim the start or end of the string.
-          If omitted, both sides are trimmed.</p>
+          <p>Can be <code>start</code> or <code>end</code> to only trim the start or end of the
+          string. If omitted, both sides are trimmed.</p>
         example: null
         types:
         - alignment
@@ -823,6 +843,7 @@ body:
       keywords: []
       oneliner: Splits a string at matches of a specified pattern and returns an array
       element: false
+      contextual: false
       details: |-
         <p>Splits a string at matches of a specified pattern and returns an array
         of the resulting parts.</p>
@@ -853,6 +874,7 @@ body:
       keywords: []
       oneliner: Reverse the string.
       element: false
+      contextual: false
       details: <p>Reverse the string.</p>
       example: null
       self: true

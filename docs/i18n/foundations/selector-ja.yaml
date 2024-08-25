@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/selector/
 title: Selector
-description: Selector 类型的文档
+description: Documentation for the Selector type.
 part: null
 outline:
 - id: summary
@@ -59,35 +59,33 @@ body:
       <p>A filter for selecting elements within the document.</p>
       <p>You can construct a selector in the following ways:</p>
       <ul>
-      <li>you can use an element <a href="/docs/reference/foundations/function/">function</a></li>
+      <li>you can use an element <a href="/docs/reference/foundations/function/" title="function">function</a></li>
       <li>you can filter for an element function with
       <a href="/docs/reference/foundations/function/#definitions-where">specific fields</a></li>
       <li>you can use a <a href="/docs/reference/foundations/str/">string</a> or <a href="/docs/reference/foundations/regex/">regular expression</a></li>
       <li>you can use a <a href="/docs/reference/foundations/label/"><code><span class="typ-label">&lt;label&gt;</span></code></a></li>
-      <li>you can use a <a href="/docs/reference/introspection/location/"><code>location</code></a></li>
-      <li>call the <a href="/docs/reference/foundations/selector/"><code>selector</code></a> constructor to convert any of the above
-      types into a selector value and use the methods below to refine it</li>
+      <li>you can use a <a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a></li>
+      <li>call the <a href="/docs/reference/foundations/selector/" title="`selector`"><code>selector</code></a> constructor to convert any of the above types into a
+      selector value and use the methods below to refine it</li>
       </ul>
       <p>Selectors are used to <a href="/docs/reference/styling/#show-rules">apply styling rules</a> to
-      elements. You can also use selectors to <a href="/docs/reference/introspection/query/">query</a> the document for
-      certain types of elements.</p>
+      elements. You can also use selectors to <a href="/docs/reference/introspection/query/" title="query">query</a> the document for certain
+      types of elements.</p>
       <p>Furthermore, you can pass a selector to several of Typst's built-in
-      functions to configure their behaviour. One such example is the
-      <a href="/docs/reference/model/outline/">outline</a> where it can be used to change which elements are listed
-      within the outline.</p>
+      functions to configure their behaviour. One such example is the <a href="/docs/reference/model/outline/" title="outline">outline</a>
+      where it can be used to change which elements are listed within the outline.</p>
       <p>Multiple selectors can be combined using the methods shown below. However,
       not all kinds of selectors are supported in all places, at the moment.</p>
       <h2 id="example">Example</h2>
-      <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">locate</span><span class="typ-punct">(</span>loc <span class="typ-op">=&gt;</span> <span class="typ-func">query</span><span class="typ-punct">(</span>
+      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-func">query</span><span class="typ-punct">(</span>
         heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span>
-          <span class="typ-punct">.</span><span class="typ-func">or</span><span class="typ-punct">(</span>heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-        loc<span class="typ-punct">,</span>
-      <span class="typ-punct">)</span><span class="typ-punct">)</span>
+          <span class="typ-punct">.</span><span class="typ-func">or</span><span class="typ-punct">(</span>heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+      <span class="typ-punct">)</span>
 
       <span class="typ-heading">= This will be found</span>
       <span class="typ-heading">== So will this</span>
       <span class="typ-heading">=== But this will not.</span>
-      </code></pre><div class="preview"><img src="/assets/docs/da862a11bd774f20c7b06214da3ffa85.png" alt="Preview" width="480" height="190"/></div></div>
+      </code></pre><div class="preview"><img src="/assets/docs/b9fb658807ec1c57ad585db807c3adb9.png" alt="Preview" width="480" height="190"/></div></div>
     constructor:
       path: []
       name: selector
@@ -95,6 +93,7 @@ body:
       keywords: []
       oneliner: 'Turns a value into a selector. The following values are accepted:'
       element: false
+      contextual: false
       details: |-
         <p>Turns a value into a selector. The following values are accepted:</p>
         <ul>
@@ -135,6 +134,7 @@ body:
       keywords: []
       oneliner: Selects all elements that match this or any of the other selectors.
       element: false
+      contextual: false
       details: <p>Selects all elements that match this or any of the other selectors.</p>
       example: null
       self: true
@@ -143,8 +143,11 @@ body:
         details: <p>The other selectors to match on.</p>
         example: null
         types:
+        - str
+        - regex
         - label
         - selector
+        - location
         - function
         strings: []
         default: null
@@ -161,9 +164,10 @@ body:
       name: and
       title: And
       keywords: []
-      oneliner: Selects all elements that match this and all of the the other selectors.
+      oneliner: Selects all elements that match this and all of the other selectors.
       element: false
-      details: <p>Selects all elements that match this and all of the the other selectors.</p>
+      contextual: false
+      details: <p>Selects all elements that match this and all of the other selectors.</p>
       example: null
       self: true
       params:
@@ -171,8 +175,11 @@ body:
         details: <p>The other selectors to match on.</p>
         example: null
         types:
+        - str
+        - regex
         - label
         - selector
+        - location
         - function
         strings: []
         default: null
@@ -191,6 +198,7 @@ body:
       keywords: []
       oneliner: Returns a modified selector that will only match elements that occur
       element: false
+      contextual: false
       details: |-
         <p>Returns a modified selector that will only match elements that occur
         before the first match of <code>end</code>.</p>
@@ -203,6 +211,7 @@ body:
         types:
         - label
         - selector
+        - location
         - function
         strings: []
         default: null
@@ -235,6 +244,7 @@ body:
       keywords: []
       oneliner: Returns a modified selector that will only match elements that occur
       element: false
+      contextual: false
       details: |-
         <p>Returns a modified selector that will only match elements that occur
         after the first match of <code>start</code>.</p>
@@ -247,6 +257,7 @@ body:
         types:
         - label
         - selector
+        - location
         - function
         strings: []
         default: null

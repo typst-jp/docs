@@ -1,6 +1,6 @@
 route: /docs/reference/text/strike/
 title: Strikethrough
-description: '`strike` 函数的文档'
+description: Documentation for the `strike` function.
 part: null
 outline:
 - id: summary
@@ -36,6 +36,7 @@ body:
     keywords: []
     oneliner: Strikes through text.
     element: true
+    contextual: false
     details: |-
       <p>Strikes through text.</p>
       <h2 id="example">Example</h2>
@@ -46,7 +47,7 @@ body:
     params:
     - name: stroke
       details: |-
-        <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the line.</p>
+        <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the line.</p>
         <p>If set to <code><span class="typ-key">auto</span></code>, takes on the text's color and a thickness defined in
         the current font.</p>
         <p><em>Note:</em> Please don't use this for real redaction as you can still copy

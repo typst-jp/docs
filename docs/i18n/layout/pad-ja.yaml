@@ -1,6 +1,6 @@
 route: /docs/reference/layout/pad/
 title: Padding
-description: '`pad` 函数的文档'
+description: Documentation for the `pad` function.
 part: null
 outline:
 - id: summary
@@ -45,6 +45,7 @@ body:
     keywords: []
     oneliner: Adds spacing around content.
     element: true
+    contextual: false
     details: |-
       <p>Adds spacing around content.</p>
       <p>The spacing can be specified for each side individually, or for all sides at

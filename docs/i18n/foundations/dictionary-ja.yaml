@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/dictionary/
 title: Dictionary
-description: Dictionary 类型的文档
+description: Documentation for the Dictionary type.
 part: null
 outline:
 - id: summary
@@ -9,6 +9,12 @@ outline:
 - id: example
   name: Example
   children: []
+- id: constructor
+  name: Constructor
+  children:
+  - id: constructor-value
+    name: value
+    children: []
 - id: definitions
   name: Definitions
   children:
@@ -89,7 +95,39 @@ body:
       <span class="typ-pol">#</span><span class="typ-pol">dict</span><span class="typ-punct">.</span><span class="typ-func">insert</span><span class="typ-punct">(</span><span class="typ-str">&quot;city&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;Berlin &quot;</span><span class="typ-punct">)</span>
       <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-str">&quot;name&quot;</span> <span class="typ-key">in</span> dict<span class="typ-punct">)</span>
       </code></pre><div class="preview"><img src="/assets/docs/fcda16a72f295b980f7162495185c606.png" alt="Preview" width="480" height="190"/></div></div>
-    constructor: null
+    constructor:
+      path: []
+      name: dictionary
+      title: Construct
+      keywords: []
+      oneliner: Converts a value into a dictionary.
+      element: false
+      contextual: false
+      details: |-
+        <p>Converts a value into a dictionary.</p>
+        <p>Note that this function is only intended for conversion of a
+        dictionary-like value to a dictionary, not for creation of a dictionary
+        from individual pairs. Use the dictionary syntax <code>(key: value)</code> instead.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">dictionary</span><span class="typ-punct">(</span>sys<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-str">&quot;version&quot;</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/ceab20fb9ed96078a52cbe0f3db6ff33.png" alt="Preview" width="480" height="190"/></div></div>
+      self: false
+      params:
+      - name: value
+        details: <p>The value that should be converted to a dictionary.</p>
+        example: null
+        types:
+        - module
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - dictionary
+      scope: []
     scope:
     - path:
       - dictionary
@@ -98,6 +136,7 @@ body:
       keywords: []
       oneliner: The number of pairs in the dictionary.
       element: false
+      contextual: false
       details: <p>The number of pairs in the dictionary.</p>
       example: null
       self: true
@@ -112,6 +151,7 @@ body:
       keywords: []
       oneliner: Returns the value associated with the specified key in the dictionary.
       element: false
+      contextual: false
       details: |-
         <p>Returns the value associated with the specified key in the dictionary.
         May be used on the left-hand side of an assignment if the key is already
@@ -153,11 +193,12 @@ body:
       name: insert
       title: Insert
       keywords: []
-      oneliner: Inserts a new pair into the dictionary and return the value. If the
+      oneliner: Inserts a new pair into the dictionary. If the dictionary already
       element: false
+      contextual: false
       details: |-
-        <p>Inserts a new pair into the dictionary and return the value. If the
-        dictionary already contains this key, the value is updated.</p>
+        <p>Inserts a new pair into the dictionary. If the dictionary already
+        contains this key, the value is updated.</p>
       example: null
       self: true
       params:
@@ -194,6 +235,7 @@ body:
       keywords: []
       oneliner: Removes a pair from the dictionary by key and return the value.
       element: false
+      contextual: false
       details: <p>Removes a pair from the dictionary by key and return the value.</p>
       example: null
       self: true
@@ -232,6 +274,7 @@ body:
       keywords: []
       oneliner: Returns the keys of the dictionary as an array in insertion order.
       element: false
+      contextual: false
       details: <p>Returns the keys of the dictionary as an array in insertion order.</p>
       example: null
       self: true
@@ -246,6 +289,7 @@ body:
       keywords: []
       oneliner: Returns the values of the dictionary as an array in insertion order.
       element: false
+      contextual: false
       details: <p>Returns the values of the dictionary as an array in insertion order.</p>
       example: null
       self: true
@@ -261,6 +305,7 @@ body:
       oneliner: Returns the keys and values of the dictionary as an array of pairs.
         Each
       element: false
+      contextual: false
       details: |-
         <p>Returns the keys and values of the dictionary as an array of pairs. Each
         pair is represented as an array of length two.</p>

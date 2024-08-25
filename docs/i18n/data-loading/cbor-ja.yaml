@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/cbor/
 title: CBOR
-description: '`cbor` 函数的文档'
+description: Documentation for the `cbor` function.
 part: null
 outline:
 - id: summary
@@ -36,18 +36,22 @@ body:
     keywords: []
     oneliner: Reads structured data from a CBOR file.
     element: false
+    contextual: false
     details: |-
-      <p>从 CBOR 文件中读取结构化数据。</p>
-      <p>文件必须包含有效的 cbor 序列化。
-      映射将被转化为 Typst 字典，序列将转换为 Typst 数组。
-      字符串和布尔值将会转化为相应的 Typst 类型值。
-      Null 类型（<code>null</code>，<code>~</code> 或空字符串 ``）将被转化为 <code><span class=“typ-key”>none</span></code>。
-      数字类型将根据是否为整数转化为浮点值或整数值。</p>
+      <p>Reads structured data from a CBOR file.</p>
+      <p>The file must contain a valid CBOR serialization. Mappings will be
+      converted into Typst dictionaries, and sequences will be converted into
+      Typst arrays. Strings and booleans will be converted into the Typst
+      equivalents, null-values (<code>null</code>, <code>~</code> or empty ``) will be converted into
+      <code><span class="typ-key">none</span></code>, and numbers will be converted to floats or integers depending on
+      whether they are whole numbers.</p>
+      <p>Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
+      floating point numbers, which may result in an approximative value.</p>
     example: null
     self: false
     params:
     - name: path
-      details: <p>CBOR 文件路径。</p>
+      details: <p>Path to a CBOR file.</p>
       example: null
       types:
       - str
@@ -68,12 +72,13 @@ body:
       keywords: []
       oneliner: Reads structured data from CBOR bytes.
       element: false
-      details: <p>从 CBOR 字节流中读取结构化数据。</p>
+      contextual: false
+      details: <p>Reads structured data from CBOR bytes.</p>
       example: null
       self: false
       params:
       - name: data
-        details: <p>cbor 数据。</p>
+        details: <p>cbor data.</p>
         example: null
         types:
         - bytes
@@ -94,12 +99,13 @@ body:
       keywords: []
       oneliner: Encode structured data into CBOR bytes.
       element: false
-      details: <p>将结构化数据编码为 CBOR 字节流。</p>
+      contextual: false
+      details: <p>Encode structured data into CBOR bytes.</p>
       example: null
       self: false
       params:
       - name: value
-        details: <p>被编码的值。</p>
+        details: <p>Value to be encoded.</p>
         example: null
         types:
         - any

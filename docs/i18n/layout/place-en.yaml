@@ -1,6 +1,6 @@
 route: /docs/reference/layout/place/
 title: Place
-description: '`place` 函数的文档'
+description: Documentation for the `place` function.
 part: null
 outline:
 - id: summary
@@ -39,6 +39,7 @@ body:
     keywords: []
     oneliner: Places content at an absolute position.
     element: true
+    contextual: false
     details: |-
       <p>Places content at an absolute position.</p>
       <p>Placed content will not affect the position of other content. Place is
@@ -62,8 +63,10 @@ body:
     - name: alignment
       details: |-
         <p>Relative to which position in the parent container to place the content.</p>
-        <p>Cannot be <code><span class="typ-key">auto</span></code> if <code>float</code> is <code><span class="typ-key">false</span></code> and must be either
-        <code><span class="typ-key">auto</span></code>, <code>top</code>, or <code>bottom</code> if <code>float</code> is <code><span class="typ-key">true</span></code>.</p>
+        <ul>
+        <li>If <code>float</code> is <code><span class="typ-key">false</span></code>, then this can be any alignment other than <code><span class="typ-key">auto</span></code>.</li>
+        <li>If <code>float</code> is <code><span class="typ-key">true</span></code>, then this must be <code><span class="typ-key">auto</span></code>, <code>top</code>, or <code>bottom</code>.</li>
+        </ul>
         <p>When an axis of the page is <code><span class="typ-key">auto</span></code> sized, all alignments relative to
         that axis will be ignored, instead, the item will be placed in the
         origin of the axis.</p>
@@ -129,6 +132,9 @@ body:
           <span class="typ-func">place</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> dx<span class="typ-punct">:</span> amount <span class="typ-op">-</span> <span class="typ-num">32pt</span><span class="typ-punct">,</span> dy<span class="typ-punct">:</span> amount<span class="typ-punct">)</span><span class="typ-punct">[</span>A<span class="typ-punct">]</span>
         <span class="typ-punct">}</span>
         </code></pre><div class="preview"><img src="/assets/docs/2894bae3ce0defe070261a5d5f61fe40.png" alt="Preview" width="480" height="190"/></div></div>
+        <p>This does not affect the layout of in-flow content.
+        In other words, the placed content is treated as if it
+        were wrapped in a <a href="/docs/reference/layout/move/" title="`move`"><code>move</code></a> element.</p>
       types:
       - relative
       strings: []
@@ -139,7 +145,11 @@ body:
       variadic: false
       settable: true
     - name: dy
-      details: <p>The vertical displacement of the placed content.</p>
+      details: |-
+        <p>The vertical displacement of the placed content.</p>
+        <p>This does not affect the layout of in-flow content.
+        In other words, the placed content is treated as if it
+        were wrapped in a <a href="/docs/reference/layout/move/" title="`move`"><code>move</code></a> element.</p>
       example: null
       types:
       - relative

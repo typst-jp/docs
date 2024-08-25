@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/regex/
 title: Regex
-description: Regex 类型的文档
+description: Documentation for the Regex type.
 part: null
 outline:
 - id: summary
@@ -44,6 +44,7 @@ body:
       keywords: []
       oneliner: Create a regular expression from a string.
       element: false
+      contextual: false
       details: <p>Create a regular expression from a string.</p>
       example: null
       self: false

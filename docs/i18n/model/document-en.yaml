@@ -1,6 +1,6 @@
 route: /docs/reference/model/document/
 title: Document
-description: '`document` 函数的文档'
+description: Documentation for the `document` function.
 part: null
 outline:
 - id: summary
@@ -30,6 +30,7 @@ body:
     keywords: []
     oneliner: The root element of a document and its metadata.
     element: true
+    contextual: false
     details: |-
       <p>The root element of a document and its metadata.</p>
       <p>All documents are automatically wrapped in a <code>document</code> element. You cannot
@@ -97,6 +98,8 @@ body:
         into the PDF metadata.</p>
         <p>The year component must be at least zero in order to be embedded into a
         PDF.</p>
+        <p>If you want to create byte-by-byte reproducible PDFs, set this to
+        something other than <code><span class="typ-key">auto</span></code>.</p>
       example: null
       types:
       - none

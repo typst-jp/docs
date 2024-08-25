@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/float/
 title: Float
-description: Float 类型的文档
+description: Documentation for the Float type.
 part: null
 outline:
 - id: summary
@@ -14,6 +14,18 @@ outline:
   children:
   - id: constructor-value
     name: value
+    children: []
+- id: definitions
+  name: Definitions
+  children:
+  - id: definitions-is-nan
+    name: Is Nan
+    children: []
+  - id: definitions-is-infinite
+    name: Is Infinite
+    children: []
+  - id: definitions-signum
+    name: Signum
     children: []
 body:
   kind: type
@@ -40,6 +52,7 @@ body:
       keywords: []
       oneliner: Converts a value to a float.
       element: false
+      contextual: false
       details: |-
         <p>Converts a value to a float.</p>
         <ul>
@@ -78,5 +91,75 @@ body:
       returns:
       - float
       scope: []
-    scope: []
+    scope:
+    - path:
+      - float
+      name: is-nan
+      title: Is Nan
+      keywords: []
+      oneliner: Checks if a float is not a number.
+      element: false
+      contextual: false
+      details: |-
+        <p>Checks if a float is not a number.</p>
+        <p>In IEEE 754, more than one bit pattern represents a NaN. This function
+        returns <code>true</code> if the float is any of those bit patterns.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">float</span><span class="typ-punct">.</span><span class="typ-func">is-nan</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-pol">#</span><span class="typ-pol">float</span><span class="typ-punct">.</span><span class="typ-func">is-nan</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-pol">#</span><span class="typ-pol">float</span><span class="typ-punct">.</span><span class="typ-func">is-nan</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span>nan<span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/218016bc68d46c30db32f1cb515d79d2.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params: []
+      returns:
+      - bool
+      scope: []
+    - path:
+      - float
+      name: is-infinite
+      title: Is Infinite
+      keywords: []
+      oneliner: Checks if a float is infinite.
+      element: false
+      contextual: false
+      details: |-
+        <p>Checks if a float is infinite.</p>
+        <p>For floats, there is positive and negative infinity. This function
+        returns <code>true</code> if the float is either positive or negative infinity.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">float</span><span class="typ-punct">.</span><span class="typ-func">is-infinite</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-pol">#</span><span class="typ-pol">float</span><span class="typ-punct">.</span><span class="typ-func">is-infinite</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-pol">#</span><span class="typ-pol">float</span><span class="typ-punct">.</span><span class="typ-func">is-infinite</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span>inf<span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/315c8d7f1644b6447b4e03fcfa3f2b43.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params: []
+      returns:
+      - bool
+      scope: []
+    - path:
+      - float
+      name: signum
+      title: Signum
+      keywords: []
+      oneliner: Calculates the sign of a floating point number.
+      element: false
+      contextual: false
+      details: |-
+        <p>Calculates the sign of a floating point number.</p>
+        <ul>
+        <li>If the number is positive (including <code><span class="typ-op">+</span><span class="typ-num">0.0</span></code>), returns <code><span class="typ-num">1.0</span></code>.</li>
+        <li>If the number is negative (including <code><span class="typ-op">-</span><span class="typ-num">0.0</span></code>), returns <code><span class="typ-op">-</span><span class="typ-num">1.0</span></code>.</li>
+        <li>If the number is <a href="/docs/reference/foundations/nan/"><code>calc<span class="typ-punct">.</span>nan</code></a>, returns
+        <a href="/docs/reference/foundations/nan/"><code>calc<span class="typ-punct">.</span>nan</code></a>.</li>
+        </ul>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">5.0</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">5.0</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">0.0</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        </code></pre><div class="preview"><img src="/assets/docs/6bcf580e4539680fc32fb5fe50718939.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params: []
+      returns:
+      - float
+      scope: []
 children: []

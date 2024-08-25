@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/bool/
 title: Boolean
-description: Boolean 类型的文档
+description: Documentation for the Boolean type.
 part: null
 outline:
 - id: summary

@@ -1,6 +1,6 @@
 route: /docs/reference/layout/rotate/
 title: Rotate
-description: '`rotate` 函数的文档'
+description: Documentation for the `rotate` function.
 part: null
 outline:
 - id: summary
@@ -18,6 +18,9 @@ outline:
   - id: parameters-origin
     name: origin
     children: []
+  - id: parameters-reflow
+    name: reflow
+    children: []
   - id: parameters-body
     name: body
     children: []
@@ -30,10 +33,11 @@ body:
     keywords: []
     oneliner: Rotates content without affecting layout.
     element: true
+    contextual: false
     details: |-
       <p>Rotates content without affecting layout.</p>
       <p>Rotates an element by a given angle. The layout will act as if the element
-      was not rotated.</p>
+      was not rotated unless you specify <code>reflow: <span class="typ-key">true</span></code>.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
         dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
@@ -77,6 +81,24 @@ body:
       - alignment
       strings: []
       default: <code>center <span class="typ-op">+</span> horizon</code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: reflow
+      details: |-
+        <p>Whether the rotation impacts the layout.</p>
+        <p>If set to <code><span class="typ-key">false</span></code>, the rotated content will retain the bounding box of
+        the original content. If set to <code><span class="typ-key">true</span></code>, the bounding box will take the
+        rotation of the content into account and adjust the layout accordingly.</p>
+      example: |-
+        <div class="previewed-code"><pre><code>Hello <span class="typ-func">#</span><span class="typ-func">rotate</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">,</span> reflow<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>World<span class="typ-punct">]</span>!
+        </code></pre><div class="preview"><img src="/assets/docs/854e09fe68cc99a46f5afa1383e0e604.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - bool
+      strings: []
+      default: <code><span class="typ-key">false</span></code>
       positional: false
       named: true
       required: false

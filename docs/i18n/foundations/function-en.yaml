@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/function/
 title: Function
-description: Function 类型的文档
+description: Documentation for the Function type.
 part: null
 outline:
 - id: summary
@@ -145,6 +145,7 @@ body:
       keywords: []
       oneliner: Returns a new function that has the given arguments pre-applied.
       element: false
+      contextual: false
       details: <p>Returns a new function that has the given arguments pre-applied.</p>
       example: null
       self: true
@@ -153,7 +154,7 @@ body:
         details: <p>The arguments to apply to the function.</p>
         example: null
         types:
-        - arguments
+        - any
         strings: []
         default: null
         positional: true
@@ -171,17 +172,23 @@ body:
       keywords: []
       oneliner: Returns a selector that filters for elements belonging to this function
       element: false
+      contextual: false
       details: |-
         <p>Returns a selector that filters for elements belonging to this function
         whose fields have the values of the given arguments.</p>
-      example: null
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>blue<span class="typ-punct">)</span>
+        <span class="typ-heading">= Section</span>
+        <span class="typ-heading">== Subsection</span>
+        <span class="typ-heading">=== Sub-subection</span>
+        </code></pre><div class="preview"><img src="/assets/docs/02f47c28d78627976e483417c5a1c92f.png" alt="Preview" width="480" height="190"/></div></div>
       self: true
       params:
       - name: fields
         details: <p>The fields to filter for.</p>
         example: null
         types:
-        - arguments
+        - any
         strings: []
         default: null
         positional: true

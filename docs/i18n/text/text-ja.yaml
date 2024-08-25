@@ -1,6 +1,6 @@
 route: /docs/reference/text/text/
-title: 文本
-description: '`text` 函数的文档'
+title: Text
+description: Documentation for the `text` function.
 part: null
 outline:
 - id: summary
@@ -32,6 +32,9 @@ outline:
     children: []
   - id: parameters-fill
     name: fill
+    children: []
+  - id: parameters-stroke
+    name: stroke
     children: []
   - id: parameters-tracking
     name: tracking
@@ -117,11 +120,12 @@ body:
     keywords: []
     oneliner: Customizes the look and layout of text in a variety of ways.
     element: true
+    contextual: false
     details: |-
-      <p>
-      以各种方式自定义文本的外观和布局。</p>
-      <p>
-      该函数经常被使用，无论是 set 规则还是直接使用。虽然 set 规则通常是更简单的选择，但是直接调用 text 函数在将文本作为参数传递给另一个函数时非常有用。</p>
+      <p>Customizes the look and layout of text in a variety of ways.</p>
+      <p>This function is used frequently, both with set rules and directly. While
+      the set rule is often the simpler choice, calling the <code>text</code> function
+      directly can be useful when passing text as an argument to another function.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">18pt</span><span class="typ-punct">)</span>
       With a set rule.
@@ -135,22 +139,28 @@ body:
     params:
     - name: font
       details: |-
-        <p>
-        优先使用的字体系列。</p>
-        <p>
-        当处理文本时，Typst 按顺序尝试所有指定的字体系列，直到找到具有必要字形的字体为止。在下面的示例中，首选字体是 <code>Inria Serif</code>，但由于它不包含阿拉伯字形，因此阿拉伯文本使用 <code>Noto Sans Arabic</code> 替代。</p>
+        <p>A font family name or priority list of font family names.</p>
+        <p>When processing text, Typst tries all specified font families in order
+        until it finds a font that has the necessary glyphs. In the example
+        below, the font <code>Inria Serif</code> is preferred, but since it does not
+        contain Arabic glyphs, the arabic text uses <code>Noto Sans Arabic</code> instead.</p>
         <p>The collection of available fonts differs by platform:</p>
         <ul>
         <li>
         <p>In the web app, you can see the list of available fonts by clicking on
         the &quot;Ag&quot; button. You can provide additional fonts by uploading <code>.ttf</code>
         or <code>.otf</code> files into your project. They will be discovered
-        automatically.</p>
+        automatically. The priority is: project fonts &gt; server fonts.</p>
         </li>
         <li>
-        <p>Locally, Typst uses your installed system fonts. In addition, you can
-        use the <code>--font-path</code> argument or <code>TYPST_FONT_PATHS</code> environment
-        variable to add directories that should be scanned for fonts.</p>
+        <p>Locally, Typst uses your installed system fonts or embedded fonts in
+        the CLI, which are <code>Linux Libertine</code>, <code>New Computer Modern</code>,
+        <code>New Computer Modern Math</code>, and <code>DejaVu Sans Mono</code>. In addition, you
+        can use the <code>--font-path</code> argument or <code>TYPST_FONT_PATHS</code> environment
+        variable to add directories that should be scanned for fonts. The
+        priority is: <code>--font-paths</code> &gt; system fonts &gt; embedded fonts. Run
+        <code>typst fonts</code> to see the fonts that Typst has discovered on your
+        system.</p>
         </li>
         </ul>
       example: |-
@@ -177,10 +187,14 @@ body:
       settable: true
     - name: fallback
       details: |-
-        <p>
-        当主要字体列表中没有匹配项时，是否允许最后的备用字体，Typst 会搜索所有可用字体找到具有必要字形的最相似的字体。</p>
-        <p>
-        <em> 注：</em> 当禁用 fallback 并且找不到适当的字形时不会发出警告，而是以“豆腐块”形式显示文本：表示缺少适当字形的小框。将来，你将能够指示 Typst 发出警告，以便你知道出了什么问题。</p>
+        <p>Whether to allow last resort font fallback when the primary font list
+        contains no match. This lets Typst search through all available fonts
+        for the most similar one that has the necessary glyphs.</p>
+        <p><em>Note:</em> Currently, there are no warnings when fallback is disabled and
+        no glyphs are found. Instead, your text shows up in the form of &quot;tofus&quot;:
+        Small boxes that indicate the lack of an appropriate glyph. In the
+        future, you will be able to instruct Typst to issue warnings so you know
+        something is up.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Inria Serif&quot;</span><span class="typ-punct">)</span>
         هذا عربي
@@ -199,14 +213,16 @@ body:
       settable: true
     - name: style
       details: |-
-        <p>
-        所需的字体样式。</p>
-        <p>
-        <p>
-        当需要 italic 样式但只有 oblique 样式可用时，将使用 oblique ，反之亦然。当 italic 样式和 oblique 样式都不可用时，Typst 会选择 normal 样式。由于大多数字体只有 italic 或 oblique 样式，因此很少能观察到 italic 和 oblique 样式之间的区别。
-        </p>
-        <p>如果你想强调你的文本，你应该使用 <a href=“/docs/reference/text/emph/”>emph</a> 函数。
-        这样，如果您改变主意如何表示强调，以后就可以轻松调整样式.</p>
+        <p>The desired font style.</p>
+        <p>When an italic style is requested and only an oblique one is available,
+        it is used. Similarly, the other way around, an italic style can stand
+        in for an oblique one.  When neither an italic nor an oblique style is
+        available, Typst selects the normal style. Since most fonts are only
+        available either in an italic or oblique style, the difference between
+        italic and oblique style is rarely observable.</p>
+        <p>If you want to emphasize your text, you should do so using the <a href="/docs/reference/model/emph/" title="emph">emph</a>
+        function instead. This makes it easy to adapt the style later if you
+        change your mind about how to signify the emphasis.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Linux Libertine&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;italic&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Italic<span class="typ-punct">]</span>
         <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;DejaVu Sans&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;oblique&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Oblique<span class="typ-punct">]</span>
@@ -215,11 +231,11 @@ body:
       - str
       strings:
       - string: normal
-        details: <p>默认的，典型的直立风格。</p>
+        details: <p>The default, typically upright style.</p>
       - string: italic
-        details: <p>带有自定义字母形式的草书风格（意大利斜体）。</p>
+        details: <p>A cursive style with custom letterform.</p>
       - string: oblique
-        details: <p>仅是正常风格的倾斜版本。（倾斜体）</p>
+        details: <p>Just a slanted version of the normal style.</p>
       default: <code><span class="typ-str">&quot;normal&quot;</span></code>
       positional: false
       named: true
@@ -228,12 +244,13 @@ body:
       settable: true
     - name: weight
       details: |-
-        <p>
-        所需的字体字重。接受介于 <code><span class="typ-num">100</span></code> 和 <code><span class="typ-num">900</span></code> 之间的整数或预定义的字重名称之一。当所需的字重不可用时，Typst 会从字体系列中选择最接近字重的字体。
-        </p>
-        <p>
-        如果要着重强调文本，应使用 <a href="/docs/reference/text/emph/">emph</a> 函数。这样，如果你改变了强调的方式就很容易调整样式。
-        </p>
+        <p>The desired thickness of the font's glyphs. Accepts an integer between
+        <code><span class="typ-num">100</span></code> and <code><span class="typ-num">900</span></code> or one of the predefined weight names. When the
+        desired weight is not available, Typst selects the font from the family
+        that is closest in weight.</p>
+        <p>If you want to strongly emphasize your text, you should do so using the
+        <a href="/docs/reference/model/strong/" title="strong">strong</a> function instead. This makes it easy to adapt the style later
+        if you change your mind about how to signify the strong emphasis.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;IBM Plex Sans&quot;</span><span class="typ-punct">)</span>
 
@@ -273,9 +290,13 @@ body:
       settable: true
     - name: stretch
       details: |-
-        <p>
-        所需的字体拉伸宽度。接受介于 <code><span class="typ-num">50%</span></code> 和 <code><span class="typ-num">200%</span></code> 之间的比率。当所需的字体不可用时，Typst 会从字体系列中选择最接近拉伸的字体。这只会拉伸文本，如果字体的压缩或扩展版本可用，则会选择字体系列中最接近的字体。</p>
-        <p>如果要调整字符之间的间距而不是拉伸字形本身，请改用 <a href="/docs/reference/text/text/#parameters-tracking"><code>tracking</code></a> 属性。</p>
+        <p>The desired width of the glyphs. Accepts a ratio between <code><span class="typ-num">50%</span></code> and
+        <code><span class="typ-num">200%</span></code>. When the desired width is not available, Typst selects the
+        font from the family that is closest in stretch. This will only stretch
+        the text if a condensed or expanded version of the font is available.</p>
+        <p>If you want to adjust the amount of space between characters instead of
+        stretching the glyphs itself, use the <a href="/docs/reference/text/text/#parameters-tracking"><code>tracking</code></a>
+        property instead.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>stretch<span class="typ-punct">:</span> <span class="typ-num">75%</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Condensed<span class="typ-punct">]</span> <span class="typ-escape">\</span>
         <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>stretch<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Normal<span class="typ-punct">]</span>
@@ -291,11 +312,10 @@ body:
       settable: true
     - name: size
       details: |-
-        <p>
-        所需的字体大小。该值构成 <code>em</code> 基础单位：<code><span class="typ-num">1em</span></code> 等于字体大小。
-        </p>
-        <p>
-        你也可以直接给出字体大小，单位为 <code>em</code>。当然，这是相对于前面指定的字体大小。</p>
+        <p>The size of the glyphs. This value forms the basis of the <code>em</code> unit:
+        <code><span class="typ-num">1em</span></code> is equivalent to the font size.</p>
+        <p>You can also give the font size itself in <code>em</code> units. Then, it is
+        relative to the previous font size.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
         very <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">1.5em</span><span class="typ-punct">)</span><span class="typ-punct">[</span>big<span class="typ-punct">]</span> text
@@ -310,7 +330,7 @@ body:
       variadic: false
       settable: true
     - name: fill
-      details: <p>字体填充颜色</p>
+      details: <p>The glyph fill paint.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">)</span>
         This text is red.
@@ -327,8 +347,28 @@ body:
       required: false
       variadic: false
       settable: true
+    - name: stroke
+      details: <p>How to stroke the text.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">0.5pt</span> <span class="typ-op">+</span> red<span class="typ-punct">)</span><span class="typ-punct">[</span>Stroked<span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/29e8536cef37b9bbbbb4b7830afc7637.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - none
+      - length
+      - color
+      - gradient
+      - stroke
+      - pattern
+      - dictionary
+      strings: []
+      default: <code><span class="typ-key">none</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
     - name: tracking
-      details: <p>字符之间的间距。</p>
+      details: <p>The amount of space that should be added between characters.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>tracking<span class="typ-punct">:</span> <span class="typ-num">1.5pt</span><span class="typ-punct">)</span>
         Distant text.
@@ -344,13 +384,11 @@ body:
       settable: true
     - name: spacing
       details: |-
-        <p>
-        单词之间的间距。
-        </p>
-        <p>
-        可以给出绝对长度，也可以相对于字体中空格字符的宽度。</p>
-        <p>
-        如果想调整字符之间的间距而不是单词之间的间距，请改用 <a href="/docs/reference/text/text/#parameters-tracking"><code>tracking</code></a> 属性。</p>
+        <p>The amount of space between words.</p>
+        <p>Can be given as an absolute length, but also relative to the width of
+        the space character in the font.</p>
+        <p>If you want to adjust the amount of space between characters rather than
+        words, use the <a href="/docs/reference/text/text/#parameters-tracking"><code>tracking</code></a> property instead.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">200%</span><span class="typ-punct">)</span>
         Text with distant words.
@@ -384,7 +422,7 @@ body:
       variadic: false
       settable: true
     - name: baseline
-      details: <p>文本基准线移动的距离。</p>
+      details: <p>An amount to shift the text baseline by.</p>
       example: |-
         <div class="previewed-code"><pre><code>A <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>baseline<span class="typ-punct">:</span> <span class="typ-num">3pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>lowered<span class="typ-punct">]</span>
         word.
@@ -399,7 +437,9 @@ body:
       variadic: false
       settable: true
     - name: overhang
-      details: <p>是否允许某些字形悬挂到边距中。这可以使对齐更加美观。</p>
+      details: |-
+        <p>Whether certain glyphs can hang over into the margin in justified text.
+        This can make justification visually more pleasing.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
         This justified text has a hyphen in
@@ -423,7 +463,9 @@ body:
       variadic: false
       settable: true
     - name: top-edge
-      details: <p>文本布局和定位中使用的文本周围概念框的顶端。这会影响包含文本的容器的大小。</p>
+      details: |-
+        <p>The top end of the conceptual frame around the text used for layout and
+        positioning. This affects the size of containers that hold text.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">rect</span><span class="typ-punct">(</span>inset<span class="typ-punct">:</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
@@ -439,15 +481,16 @@ body:
       - str
       strings:
       - string: ascender
-        details: <p>上行线高度，通常超过所有字形的高度。</p>
+        details: <p>The font's ascender, which typically exceeds the height of all
+          glyphs.</p>
       - string: cap-height
-        details: <p>大写字母的近似高度。</p>
+        details: <p>The approximate height of uppercase letters.</p>
       - string: x-height
-        details: <p>非上行线小写字母 x 的近似高度。</p>
+        details: <p>The approximate height of non-ascending lowercase letters.</p>
       - string: baseline
-        details: <p>字母所依托的基线高度。</p>
+        details: <p>The baseline on which the letters rest.</p>
       - string: bounds
-        details: <p>字形边界框的顶部边缘高度。</p>
+        details: <p>The top edge of the glyph's bounding box.</p>
       default: <code><span class="typ-str">&quot;cap-height&quot;</span></code>
       positional: false
       named: true
@@ -455,7 +498,9 @@ body:
       variadic: false
       settable: true
     - name: bottom-edge
-      details: <p>文本布局和定位中使用的文本周围概念框的底部。这会影响包含文本的容器的大小。</p>
+      details: |-
+        <p>The bottom end of the conceptual frame around the text used for layout
+        and positioning. This affects the size of containers that hold text.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">rect</span><span class="typ-punct">(</span>inset<span class="typ-punct">:</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
@@ -471,11 +516,12 @@ body:
       - str
       strings:
       - string: baseline
-        details: <p>字母所依托的基线高度。</p>
+        details: <p>The baseline on which the letters rest.</p>
       - string: descender
-        details: <p>下行线高度，通常超过所有字形的深度。</p>
+        details: <p>The font's descender, which typically exceeds the depth of all
+          glyphs.</p>
       - string: bounds
-        details: <p>字形边界框的底部边缘高度。</p>
+        details: <p>The bottom edge of the glyph's bounding box.</p>
       default: <code><span class="typ-str">&quot;baseline&quot;</span></code>
       positional: false
       named: true
@@ -484,24 +530,14 @@ body:
       settable: true
     - name: lang
       details: |-
-        <p>
-        一个 <a href="https://en.wikipedia.org/wiki/ISO_639">ISO 639-1/2/3 语言代码。</a></p>
-
-        <p>
-        设置正确的语言会影响 Typst 的各个部分：</p>
+        <p>An <a href="https://en.wikipedia.org/wiki/ISO_639">ISO 639-1/2/3 language code.</a></p>
+        <p>Setting the correct language affects various parts of Typst:</p>
         <ul>
-        <li>
-        文本处理功能可以做出更明智的选择。
-        The text processing pipeline can make more informed choices.
-        </li>
-        <li>
-        连字符会匹配相应的语言模式。
-        </li>
-        <li>
-        <a href="/docs/reference/text/smartquote/">智能引号</a> 会变成响应语言的引号。
-        </li>
-        <li>
-        以及其他所有能感知语言的功能。
+        <li>The text processing pipeline can make more informed choices.</li>
+        <li>Hyphenation will use the correct patterns for the language.</li>
+        <li><a href="/docs/reference/text/smartquote/">Smart quotes</a> turns into the correct quotes for the
+        language.</li>
+        <li>And all other things which are language-aware.</li>
         </ul>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>lang<span class="typ-punct">:</span> <span class="typ-str">&quot;de&quot;</span><span class="typ-punct">)</span>
@@ -521,11 +557,8 @@ body:
       settable: true
     - name: region
       details: |-
-        <p>
-        一个 <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2 地区代码。</a></p>
-        <p>
-        这使文本处理功能能够做出更明智的选择。
-        </p>
+        <p>An <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2 region code.</a></p>
+        <p>This lets the text processing pipeline make more informed choices.</p>
       example: null
       types:
       - none
@@ -539,9 +572,15 @@ body:
       settable: true
     - name: script
       details: |-
-        <p>OpenType 编写脚本。</p>
-        <p><code>lang</code> 和 <code>script</code> 的组合决定了字体功能（如字形替换）的实现方式。通常，该值是修改后的（全小写）ISO 15924 脚本标识符，数学书写脚本用于适用于数学符号的特征。</p>
-        <p>当设置为 <code><span class="typ-key">auto</span></code>（默认设置和建议设置）时，将为共享公共 Unicode 脚本属性的每个字符块选择适当的脚本。</p>
+        <p>The OpenType writing script.</p>
+        <p>The combination of <code>lang</code> and <code>script</code> determine how font features,
+        such as glyph substitution, are implemented. Frequently the value is a
+        modified (all-lowercase) ISO 15924 script identifier, and the <code>math</code>
+        writing script is used for features appropriate for mathematical
+        symbols.</p>
+        <p>When set to <code><span class="typ-key">auto</span></code>, the default and recommended setting, an
+        appropriate script is chosen for each block of characters sharing a
+        common Unicode script property.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
           font<span class="typ-punct">:</span> <span class="typ-str">&quot;Linux Libertine&quot;</span><span class="typ-punct">,</span>
@@ -569,20 +608,24 @@ body:
       settable: true
     - name: dir
       details: |-
-        <p>
-        文本和内联对象的主导方向。可能的取值有：</p>
+        <p>The dominant direction for text and inline objects. Possible values are:</p>
         <ul>
-        <li>
-        <code><span class="typ-key">auto</span></code>：从 <code>lang</code> 属性自动推断方向。
-        </li>
-        <li><code>ltr</code>：从左到右布局文本。</li>
-        <li><code>rtl</code>：从右到左布局文本。</li>
+        <li><code><span class="typ-key">auto</span></code>: Automatically infer the direction from the <code>lang</code> property.</li>
+        <li><code>ltr</code>: Layout text from left to right.</li>
+        <li><code>rtl</code>: Layout text from right to left.</li>
         </ul>
-        <p>
-        当使用从右到左的语言（如阿拉伯语或希伯来语）书写时，应设置 <a href="/docs/reference/text/text/#parameters-lang">text language</a> 或 direction。虽然各个文本行会自动按正确的方向布局，但设置主要方向可为双向重新排序算法提供必要的信息，以正确放置标点符号和内联对象。此外，设置方向会影响对齐值 <code>start</code> 和 <code>end</code>，在 <code>ltr</code> 文本中等同于 <code>left</code> 和 <code>right</code>，在 <code>rtl</code> 文本中则相反。</p>
-
-        <p>
-        如果设置为 <code>rtl</code> 遇到错误或某种方式产生不佳的输出，请通过 <a href="https://typst.app/contact">contact table</a> 或我们的 <a href="/docs/community/#discord">Discord server</a> 与我们联系！</p>
+        <p>When writing in right-to-left scripts like Arabic or Hebrew, you should
+        set the <a href="/docs/reference/text/text/#parameters-lang">text language</a> or direction. While individual runs
+        of text are automatically layouted in the correct direction, setting the
+        dominant direction gives the bidirectional reordering algorithm the
+        necessary information to correctly place punctuation and inline objects.
+        Furthermore, setting the direction affects the alignment values <code>start</code>
+        and <code>end</code>, which are equivalent to <code>left</code> and <code>right</code> in <code>ltr</code> text and
+        the other way around in <code>rtl</code> text.</p>
+        <p>If you set this to <code>rtl</code> and experience bugs or in some way bad looking
+        output, please do get in touch with us through the
+        <a href="https://typst.app/contact">contact form</a> or our
+        <a href="/docs/community/#discord">Discord server</a>!</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>dir<span class="typ-punct">:</span> rtl<span class="typ-punct">)</span>
         هذا عربي.
@@ -599,10 +642,10 @@ body:
       settable: true
     - name: hyphenate
       details: |-
-        <p>
-        是否使用连字符改善断行。当设定为 <code><span class="typ-key">auto</span></code> 时，只有在启用对齐时才会连字符化文本。</p>
-        <p>
-        设置 <a href="/docs/reference/text/text/#parameters-lang">text language</a> 可确保使用正确的连字符化模式。</p>
+        <p>Whether to hyphenate text to improve line breaking. When <code><span class="typ-key">auto</span></code>, text
+        will be hyphenated if and only if justification is enabled.</p>
+        <p>Setting the <a href="/docs/reference/text/text/#parameters-lang">text language</a> ensures that the correct
+        hyphenation patterns are used.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">200pt</span><span class="typ-punct">)</span>
 
@@ -628,10 +671,12 @@ body:
       settable: true
     - name: kerning
       details: |-
-        <p>
-        是否应用字距调整。</p>
-        <p>
-        启用后，特定的字母配对会相互靠近或远离，以获得更美观的结果。下面的示例演示了如何通过减小 &quot;T&quot; 和 &quot;o&quot; 之间的间距来获得更自然的外观。将其设置为 <code><span class="typ-key">false</span></code> 会通过关闭 OpenType <code>kern</code> 字体特性来禁用字距调整。</p>
+        <p>Whether to apply kerning.</p>
+        <p>When enabled, specific letter pairings move closer together or further
+        apart for a more visually pleasing result. The example below
+        demonstrates how decreasing the gap between the &quot;T&quot; and &quot;o&quot; results in a
+        more natural look. Setting this to <code><span class="typ-key">false</span></code> disables kerning by turning
+        off the OpenType <code>kern</code> font feature.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">25pt</span><span class="typ-punct">)</span>
         Totally
@@ -650,10 +695,10 @@ body:
       settable: true
     - name: alternates
       details: |-
-        <p>
-        是否应用样式替代。</p>
-        <p>
-        有时一些字体会包含相同代码点的替代字形。将其设置为 <code><span class="typ-key">true</span></code> 会通过启用 OpenType <code>salt</code> 字体特性来切换到这些字形。</p>
+        <p>Whether to apply stylistic alternates.</p>
+        <p>Sometimes fonts contain alternative glyphs for the same codepoint.
+        Setting this to <code><span class="typ-key">true</span></code> switches to these by enabling the OpenType
+        <code>salt</code> font feature.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
           font<span class="typ-punct">:</span> <span class="typ-str">&quot;IBM Plex Sans&quot;</span><span class="typ-punct">,</span>
@@ -676,8 +721,12 @@ body:
       settable: true
     - name: stylistic-set
       details: |-
-        <p>
-        应用哪个样式集。字体设计师可以将替代字形形式分类为样式集。由于该值高度依赖于字体，因此你需要查阅字体以了解可用的集合。当设置为介于 <code><span class="typ-num">1</span></code> 和 <code><span class="typ-num">20</span></code> 之间的整数时，会启用相应的 OpenType 字体特性 <code>ss01</code>、...、<code>ss20</code>。</p>      example: null
+        <p>Which stylistic set to apply. Font designers can categorize alternative
+        glyphs forms into stylistic sets. As this value is highly font-specific,
+        you need to consult your font to know which sets are available. When set
+        to an integer between <code><span class="typ-num">1</span></code> and <code><span class="typ-num">20</span></code>, enables the corresponding
+        OpenType font feature from <code>ss01</code>, ..., <code>ss20</code>.</p>
+      example: null
       types:
       - none
       - int
@@ -690,12 +739,11 @@ body:
       settable: true
     - name: ligatures
       details: |-
-        <p>
-        是否启用标准连字。</p>
-        </p>
-        <p>
-        某些字母组合（例如 &quot;fi&quot;）通常显示为单个合并字形，称为 <em>连字</em>。将其设置为 <code><span class="typ-key">false</span></code> 会通过关闭 OpenType <code>liga</code> 和 <code>clig</code> 字体特性来禁用这些连字。
-        </p>
+        <p>Whether standard ligatures are active.</p>
+        <p>Certain letter combinations like &quot;fi&quot; are often displayed as a single
+        merged glyph called a <em>ligature.</em> Setting this to <code><span class="typ-key">false</span></code> disables
+        these ligatures by turning off the OpenType <code>liga</code> and <code>clig</code> font
+        features.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
         A fine ligature.
@@ -714,9 +762,8 @@ body:
       settable: true
     - name: discretionary-ligatures
       details: |-
-        <p>
-        是否启用应当谨慎使用的连字。将其设置为 <code><span class="typ-key">true</span></code> 会通过启用 OpenType <code>dlig</code> 字体特性来启用这些连字。
-        </p>
+        <p>Whether ligatures that should be used sparingly are active. Setting this
+        to <code><span class="typ-key">true</span></code> enables the OpenType <code>dlig</code> font feature.</p>
       example: null
       types:
       - bool
@@ -729,9 +776,8 @@ body:
       settable: true
     - name: historical-ligatures
       details: |-
-        <p>
-        是否启用历史连字。将其设置为 <code><span class="typ-key">true</span></code> 会通过启用 OpenType <code>hlig</code> 字体特性来启用这些连字。
-        </p>
+        <p>Whether historical ligatures are active. Setting this to <code><span class="typ-key">true</span></code>
+        enables the OpenType <code>hlig</code> font feature.</p>
       example: null
       types:
       - bool
@@ -744,8 +790,8 @@ body:
       settable: true
     - name: number-type
       details: |-
-        <p>
-        选择哪种数字字体。当设置为 <code><span class="typ-key">auto</span></code> 时，使用字体的默认数字。</p>
+        <p>Which kind of numbers / figures to select. When set to <code><span class="typ-key">auto</span></code>, the
+        default numbers for the font are used.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Noto Sans&quot;</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>number-type<span class="typ-punct">:</span> <span class="typ-str">&quot;lining&quot;</span><span class="typ-punct">)</span>
@@ -759,9 +805,13 @@ body:
       - str
       strings:
       - string: lining
-        details: <p>适合大写文本的数字（OpenType <code>lnum</code> 字体功能）。</p>
+        details: |-
+          <p>Numbers that fit well with capital text (the OpenType <code>lnum</code>
+          font feature).</p>
       - string: old-style
-        details: <p>非常适合大写和小写文本流的数字（OpenType <code>onum</code> 字体功能）。</p>
+        details: |-
+          <p>Numbers that fit well into a flow of upper- and lowercase text (the
+          OpenType <code>onum</code> font feature).</p>
       default: <code><span class="typ-key">auto</span></code>
       positional: false
       named: true
@@ -770,9 +820,8 @@ body:
       settable: true
     - name: number-width
       details: |-
-        <p>
-        数字字符的宽度。当设置为 <code><span class="typ-key">auto</span></code> 时，使用字体的默认数字。
-        </p>
+        <p>The width of numbers / figures. When set to <code><span class="typ-key">auto</span></code>, the default
+        numbers for the font are used.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Noto Sans&quot;</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>number-width<span class="typ-punct">:</span> <span class="typ-str">&quot;proportional&quot;</span><span class="typ-punct">)</span>
@@ -788,9 +837,10 @@ body:
       - str
       strings:
       - string: proportional
-        details: <p>具有特定于字形宽度的数字（OpenType <code>pnum</code> 字体功能）。</p>
+        details: <p>Numbers with glyph-specific widths (the OpenType <code>pnum</code>
+          font feature).</p>
       - string: tabular
-        details: <p>等宽的数字（OpenType <code>tnum</code>字体功能）。</p>
+        details: <p>Numbers of equal width (the OpenType <code>tnum</code> font feature).</p>
       default: <code><span class="typ-key">auto</span></code>
       positional: false
       named: true
@@ -799,9 +849,8 @@ body:
       settable: true
     - name: slashed-zero
       details: |-
-        <p>
-        是否使用带斜线的零字形。将其设置为 <code><span class="typ-key">true</span></code> 会通过启用 OpenType <code>zero</code> 字体特性来使用这些字形。
-        </p>
+        <p>Whether to have a slash through the zero glyph. Setting this to <code><span class="typ-key">true</span></code>
+        enables the OpenType <code>zero</code> font feature.</p>
       example: |-
         <div class="previewed-code"><pre><code>0, <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>slashed-zero<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>0<span class="typ-punct">]</span>
         </code></pre><div class="preview"><img src="/assets/docs/5925acaf0363a29e71668bd6a0837504.png" alt="Preview" width="480" height="190"/></div></div>
@@ -816,10 +865,11 @@ body:
       settable: true
     - name: fractions
       details: |-
-        <p>
-        是否将数字转换为分数。将其设置为 <code><span class="typ-key">true</span></code> 会通过启用 OpenType <code>frac</code> 字体特性来使用这些字形。</p>
-        <p>
-        不建议全局启用此属性，因为它会破坏斜杠后所有数字的外观（例如，在 URL 中）。相反，当你想要分数时，请在本地启用它。</p>
+        <p>Whether to turn numbers into fractions. Setting this to <code><span class="typ-key">true</span></code>
+        enables the OpenType <code>frac</code> font feature.</p>
+        <p>It is not advisable to enable this property globally as it will mess
+        with all appearances of numbers after a slash (e.g., in URLs). Instead,
+        enable it locally when you want a fraction.</p>
       example: |-
         <div class="previewed-code"><pre><code>1/2 <span class="typ-escape">\</span>
         <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>fractions<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>1/2<span class="typ-punct">]</span>
@@ -835,11 +885,12 @@ body:
       settable: true
     - name: features
       details: |-
-        <p>
-        要使用的原始 OpenType 功能。</p>
+        <p>Raw OpenType features to apply.</p>
         <ul>
-        <li>如果给定字符串数组，则将字符串标识的功能设置为 <code><span class="typ-num">1</span></code>。</li>
-        <li>如果给定映射到数字的字典，则将键标识的功能设置为值。</li>
+        <li>If given an array of strings, sets the features identified by the
+        strings to <code><span class="typ-num">1</span></code>.</li>
+        <li>If given a dictionary mapping to numbers, sets the features
+        identified by the keys to the values.</li>
         </ul>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-comment">// Enable the `frac` feature manually.</span>
@@ -858,7 +909,7 @@ body:
       variadic: false
       settable: true
     - name: body
-      details: <p>要应用样式的内容，根据其他参数进行设定。</p>
+      details: <p>Content in which all text is styled according to the other arguments.</p>
       example: null
       types:
       - content
@@ -870,7 +921,7 @@ body:
       variadic: false
       settable: false
     - name: text
-      details: <p>该文本。</p>
+      details: <p>The text.</p>
       example: null
       types:
       - str

@@ -1,6 +1,6 @@
 route: /docs/reference/layout/layout/
 title: Layout
-description: '`layout` 函数的文档'
+description: Documentation for the `layout` function.
 part: null
 outline:
 - id: summary
@@ -22,30 +22,29 @@ body:
     oneliner: Provides access to the current outer container's (or page's, if none)
       size
     element: false
+    contextual: false
     details: |-
       <p>Provides access to the current outer container's (or page's, if none) size
       (width and height).</p>
       <p>The given function must accept a single parameter, <code>size</code>, which is a
-      dictionary with keys <code>width</code> and <code>height</code>, both of type <a href="/docs/reference/layout/length/"><code>length</code></a>.</p>
+      dictionary with keys <code>width</code> and <code>height</code>, both of type <a href="/docs/reference/layout/length/" title="`length`"><code>length</code></a>.</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> text <span class="typ-op">=</span> <span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">30</span><span class="typ-punct">)</span>
-      <span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-func">style</span><span class="typ-punct">(</span>styles <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
+      <span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
         <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-punct">(</span>height<span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">measure</span><span class="typ-punct">(</span>
           <span class="typ-func">block</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> size<span class="typ-punct">.</span>width<span class="typ-punct">,</span> text<span class="typ-punct">)</span><span class="typ-punct">,</span>
-          styles<span class="typ-punct">,</span>
         <span class="typ-punct">)</span>
         This text is <span class="typ-pol">#</span><span class="typ-pol">height</span> high with
         the current page width: <span class="typ-escape">\</span>
         <span class="typ-pol">#</span><span class="typ-pol">text</span>
-      <span class="typ-punct">]</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/2e525c8e2988ed07b6ae0cd99f1dd314.png" alt="Preview" width="480" height="190"/></div></div>
+      <span class="typ-punct">]</span><span class="typ-punct">)</span>
+      </code></pre><div class="preview"><img src="/assets/docs/c40525c5c0cb1da6679a02a808d0433b.png" alt="Preview" width="480" height="190"/></div></div>
       <p>If the <code>layout</code> call is placed inside of a box width a width of <code><span class="typ-num">800pt</span></code>
       and a height of <code><span class="typ-num">400pt</span></code>, then the specified function will be given the
       parameter <code><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">800pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">400pt</span><span class="typ-punct">)</span></code>. If it placed directly into the
       page it receives the page's dimensions minus its margins. This is mostly
       useful in combination with <a href="/docs/reference/layout/measure/">measurement</a>.</p>
-      <p>You can also use this function to resolve <a href="/docs/reference/layout/ratio/"><code>ratio</code></a> to fixed
-      lengths. This might come in handy if you're building your own layout
-      abstractions.</p>
+      <p>You can also use this function to resolve <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a> to fixed lengths. This
+      might come in handy if you're building your own layout abstractions.</p>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
         <span class="typ-key">let</span> half <span class="typ-op">=</span> <span class="typ-num">50%</span> <span class="typ-op">*</span> size<span class="typ-punct">.</span>width
         <span class="typ-punct">[</span>Half a page is <span class="typ-pol">#</span><span class="typ-pol">half</span> wide.<span class="typ-punct">]</span>
@@ -60,8 +59,8 @@ body:
       details: |-
         <p>A function to call with the outer container's size. Its return value is
         displayed in the document.</p>
-        <p>The container's size is given as a <a href="/docs/reference/foundations/dictionary/">dictionary</a> with the
-        keys <code>width</code> and <code>height</code>.</p>
+        <p>The container's size is given as a <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a> with the keys <code>width</code>
+        and <code>height</code>.</p>
         <p>This function is called once for each time the content returned by
         <code>layout</code> appears in the document. That makes it possible to generate
         content that depends on the size of the container it is inside of.</p>

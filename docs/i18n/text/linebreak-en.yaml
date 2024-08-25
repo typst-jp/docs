@@ -1,6 +1,6 @@
 route: /docs/reference/text/linebreak/
 title: Line Break
-description: '`linebreak` 函数的文档'
+description: Documentation for the `linebreak` function.
 part: null
 outline:
 - id: summary
@@ -27,6 +27,7 @@ body:
     keywords: []
     oneliner: Inserts a line break.
     element: true
+    contextual: false
     details: |-
       <p>Inserts a line break.</p>
       <p>Advances the paragraph to the next line. A single trailing line break at the

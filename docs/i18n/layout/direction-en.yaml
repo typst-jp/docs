@@ -1,6 +1,6 @@
 route: /docs/reference/layout/direction/
 title: Direction
-description: Direction 类型的文档
+description: Documentation for the Direction type.
 part: null
 outline:
 - id: summary
@@ -52,6 +52,7 @@ body:
       keywords: []
       oneliner: The axis this direction belongs to, either `{"horizontal"}` or
       element: false
+      contextual: false
       details: |-
         <p>The axis this direction belongs to, either <code><span class="typ-str">&quot;horizontal&quot;</span></code> or
         <code><span class="typ-str">&quot;vertical&quot;</span></code>.</p>
@@ -70,6 +71,7 @@ body:
       keywords: []
       oneliner: The start point of this direction, as an alignment.
       element: false
+      contextual: false
       details: <p>The start point of this direction, as an alignment.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">ltr</span><span class="typ-punct">.</span><span class="typ-func">start</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -89,6 +91,7 @@ body:
       keywords: []
       oneliner: The end point of this direction, as an alignment.
       element: false
+      contextual: false
       details: <p>The end point of this direction, as an alignment.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">ltr</span><span class="typ-punct">.</span><span class="typ-func">end</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -108,6 +111,7 @@ body:
       keywords: []
       oneliner: The inverse direction.
       element: false
+      contextual: false
       details: <p>The inverse direction.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">ltr</span><span class="typ-punct">.</span><span class="typ-func">inv</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>

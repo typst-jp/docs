@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/assert/
 title: Assert
-description: '`assert` 函数的文档'
+description: Documentation for the `assert` function.
 part: null
 outline:
 - id: summary
@@ -54,6 +54,7 @@ body:
     keywords: []
     oneliner: Ensures that a condition is fulfilled.
     element: false
+    contextual: false
     details: |-
       <p>Ensures that a condition is fulfilled.</p>
       <p>Fails with an error if the condition is not fulfilled. Does not
@@ -99,6 +100,7 @@ body:
       keywords: []
       oneliner: Ensures that two values are equal.
       element: false
+      contextual: false
       details: |-
         <p>Ensures that two values are equal.</p>
         <p>Fails with an error if the first value is not equal to the second. Does not
@@ -155,6 +157,7 @@ body:
       keywords: []
       oneliner: Ensures that two values are not equal.
       element: false
+      contextual: false
       details: |-
         <p>Ensures that two values are not equal.</p>
         <p>Fails with an error if the first value is equal to the second. Does not

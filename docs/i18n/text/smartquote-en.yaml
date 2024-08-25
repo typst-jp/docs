@@ -1,6 +1,6 @@
 route: /docs/reference/text/smartquote/
 title: Smartquote
-description: '`smartquote` 函数的文档'
+description: Documentation for the `smartquote` function.
 part: null
 outline:
 - id: summary
@@ -36,6 +36,7 @@ body:
     keywords: []
     oneliner: A language-aware quote that reacts to its context.
     element: true
+    contextual: false
     details: |-
       <p>A language-aware quote that reacts to its context.</p>
       <p>Automatically turns into an appropriate opening or closing quote based on
@@ -117,10 +118,9 @@ body:
         <li><a href="/docs/reference/foundations/str/">string</a>: a string consisting of two characters containing the
         opening and closing double quotes (characters here refer to Unicode
         grapheme clusters)</li>
-        <li><a href="/docs/reference/foundations/array/">array</a>: an array containing the opening and closing double
-        quotes</li>
-        <li><a href="/docs/reference/foundations/dictionary/">dictionary</a>: an array containing the double and single
-        quotes, each specified as either <code><span class="typ-key">auto</span></code>, string, or array</li>
+        <li><a href="/docs/reference/foundations/array/" title="array">array</a>: an array containing the opening and closing double quotes</li>
+        <li><a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a>: an array containing the double and single quotes, each
+        specified as either <code><span class="typ-key">auto</span></code>, string, or array</li>
         </ul>
         </li>
         </ul>

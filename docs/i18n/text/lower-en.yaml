@@ -1,6 +1,6 @@
 route: /docs/reference/text/lower/
 title: Lowercase
-description: '`lower` 函数的文档'
+description: Documentation for the `lower` function.
 part: null
 outline:
 - id: summary
@@ -24,6 +24,7 @@ body:
     keywords: []
     oneliner: Converts a string or content to lowercase.
     element: false
+    contextual: false
     details: |-
       <p>Converts a string or content to lowercase.</p>
       <h2 id="example">Example</h2>

@@ -1,6 +1,6 @@
 route: /docs/reference/model/emph/
 title: Emphasis
-description: '`emph` 函数的文档'
+description: Documentation for the `emph` function.
 part: null
 outline:
 - id: summary
@@ -27,6 +27,7 @@ body:
     keywords: []
     oneliner: Emphasizes content by toggling italics.
     element: true
+    contextual: false
     details: |-
       <p>Emphasizes content by toggling italics.</p>
       <ul>

@@ -1,6 +1,6 @@
 route: /docs/reference/math/cases/
 title: Cases
-description: '`cases` 函数的文档'
+description: Documentation for the `cases` function.
 part: null
 outline:
 - id: summary
@@ -34,6 +34,7 @@ body:
     keywords: []
     oneliner: A case distinction.
     element: true
+    contextual: false
     details: |-
       <p>A case distinction.</p>
       <p>Content across different branches can be aligned with the <code>&amp;</code> symbol.</p>

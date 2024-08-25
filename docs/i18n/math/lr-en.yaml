@@ -1,13 +1,13 @@
 route: /docs/reference/math/lr
-title: 左/右
-description: lr 函数族的文档.
+title: Left/Right
+description: Documentation for the lr functions.
 part: null
 outline:
 - id: summary
   name: Summary
   children: []
-- id: ''
-  name: ''
+- id: example
+  name: Example
   children: []
 - id: functions
   name: Functions
@@ -76,11 +76,16 @@ body:
   kind: group
   content:
     name: lr
-    title: 左/右
+    title: Left/Right
     details: |-
-      <p>定界符匹配。</p>
-      <p><code>lr</code> 函数允许您匹配两个定界符并按其包含的内容缩放它们。虽然在语法上匹配的定界符也会自动进行，但 <code>lr</code> 允许您匹配两个任意的定界符并精确控制它们的大小。除了 <code>lr</code> 函数外，Typst 还提供了一些创建绝对值、上取整和下取整值以及范数的定界符配对的其他函数。</p>
-      <h2>示例</h2>
+      <p>Delimiter matching.</p>
+      <p>The <code>lr</code> function allows you to match two delimiters and scale them with the
+      content they contain. While this also happens automatically for delimiters
+      that match syntactically, <code>lr</code> allows you to match two arbitrary delimiters
+      and control their size exactly. Apart from the <code>lr</code> function, Typst provides
+      a few more functions that create delimiter pairings for absolute, ceiled,
+      and floored values as well as norms.</p>
+      <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> [a, b<span class="typ-math-op">/</span>2] <span class="typ-math-delim">$</span>
       <span class="typ-math-delim">$</span> <span class="typ-func">lr</span><span class="typ-punct">(</span>]<span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>x=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n] x<span class="typ-punct">,</span> size<span class="typ-punct">:</span> <span class="typ-num">#</span><span class="typ-num">50%</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
       <span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-punct">(</span>x + y<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -93,6 +98,7 @@ body:
       keywords: []
       oneliner: Scales delimiters.
       element: true
+      contextual: false
       details: |-
         <p>Scales delimiters.</p>
         <p>While matched delimiters scale by default, this can be used to scale
@@ -136,6 +142,7 @@ body:
       keywords: []
       oneliner: Scales delimiters vertically to the nearest surrounding `{lr()}` group.
       element: true
+      contextual: false
       details: <p>Scales delimiters vertically to the nearest surrounding <code><span
         class="typ-func">lr</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code>
         group.</p>
@@ -166,6 +173,7 @@ body:
       keywords: []
       oneliner: Takes the absolute value of an expression.
       element: false
+      contextual: false
       details: <p>Takes the absolute value of an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -208,6 +216,7 @@ body:
       keywords: []
       oneliner: Takes the norm of an expression.
       element: false
+      contextual: false
       details: <p>Takes the norm of an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">norm</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -250,6 +259,7 @@ body:
       keywords: []
       oneliner: Floors an expression.
       element: false
+      contextual: false
       details: <p>Floors an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">floor</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -292,6 +302,7 @@ body:
       keywords: []
       oneliner: Ceils an expression.
       element: false
+      contextual: false
       details: <p>Ceils an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">ceil</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -334,6 +345,7 @@ body:
       keywords: []
       oneliner: Rounds an expression.
       element: false
+      contextual: false
       details: <p>Rounds an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">round</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>

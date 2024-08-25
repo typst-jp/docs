@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/toml/
 title: TOML
-description: '`toml` 函数的文档'
+description: Documentation for the `toml` function.
 part: null
 outline:
 - id: summary
@@ -42,6 +42,7 @@ body:
     keywords: []
     oneliner: Reads structured data from a TOML file.
     element: false
+    contextual: false
     details: |-
       <p>Reads structured data from a TOML file.</p>
       <p>The file must contain a valid TOML table. TOML tables will be converted into
@@ -84,6 +85,7 @@ body:
       keywords: []
       oneliner: Reads structured data from a TOML string/bytes.
       element: false
+      contextual: false
       details: <p>Reads structured data from a TOML string/bytes.</p>
       example: null
       self: false
@@ -111,6 +113,7 @@ body:
       keywords: []
       oneliner: Encodes structured data into a TOML string.
       element: false
+      contextual: false
       details: <p>Encodes structured data into a TOML string.</p>
       example: null
       self: false

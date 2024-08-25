@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/style/
 title: Style
-description: '`style` 函数的文档'
+description: Documentation for the `style` function.
 part: null
 outline:
 - id: summary
@@ -21,12 +21,10 @@ body:
     keywords: []
     oneliner: Provides access to active styles.
     element: false
+    contextual: false
     details: |-
       <p>Provides access to active styles.</p>
-      <p>The styles are currently opaque and only useful in combination with the
-      <a href="/docs/reference/layout/measure/"><code>measure</code></a> function. See its documentation for more details. In
-      the future, the provided styles might also be directly accessed to look up
-      styles defined by <a href="/docs/reference/styling/#set-rules">set rules</a>.</p>
+      <p><strong>Deprecation planned.</strong> Use <a href="/docs/reference/context/" title="context">context</a> instead.</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">thing</span><span class="typ-punct">(</span>body<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">style</span><span class="typ-punct">(</span>styles <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
         <span class="typ-key">let</span> size <span class="typ-op">=</span> <span class="typ-func">measure</span><span class="typ-punct">(</span>body<span class="typ-punct">,</span> styles<span class="typ-punct">)</span>
         <span class="typ-punct">[</span>Width of &quot;<span class="typ-pol">#</span><span class="typ-pol">body</span>&quot; is <span class="typ-pol">#</span><span class="typ-pol">size</span><span class="typ-punct">.</span><span class="typ-pol">width</span><span class="typ-punct">]</span>

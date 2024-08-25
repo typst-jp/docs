@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/content/
 title: Content
-description: Content 类型的文档
+description: Documentation for the Content type.
 part: null
 outline:
 - id: summary
@@ -80,7 +80,7 @@ body:
       arbitrary content from it.</p>
       <p>In the web app, you can hover over a content variable to see exactly which
       elements the content is composed of and what fields they have.
-      Alternatively, you can inspect the output of the <a href="/docs/reference/foundations/repr/"><code>repr</code></a> function.</p>
+      Alternatively, you can inspect the output of the <a href="/docs/reference/foundations/repr/" title="`repr`"><code>repr</code></a> function.</p>
     constructor: null
     scope:
     - path:
@@ -91,6 +91,7 @@ body:
       oneliner: The content's element function. This function can be used to create
         the element
       element: false
+      contextual: false
       details: |-
         <p>The content's element function. This function can be used to create the element
         contained in this content. It can be used in set and show rules for the
@@ -110,6 +111,7 @@ body:
       keywords: []
       oneliner: Whether the content has the specified field.
       element: false
+      contextual: false
       details: <p>Whether the content has the specified field.</p>
       example: null
       self: true
@@ -137,6 +139,7 @@ body:
       oneliner: Access the specified field on the content. Returns the default value
         if
       element: false
+      contextual: false
       details: |-
         <p>Access the specified field on the content. Returns the default value if
         the field does not exist or fails with an error if no default value was
@@ -178,6 +181,7 @@ body:
       keywords: []
       oneliner: Returns the fields of this content.
       element: false
+      contextual: false
       details: <p>Returns the fields of this content.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>
@@ -197,12 +201,12 @@ body:
       keywords: []
       oneliner: The location of the content. This is only available on content returned
       element: false
+      contextual: false
       details: |-
         <p>The location of the content. This is only available on content returned
-        by <a href="/docs/reference/introspection/query/">query</a> or provided by a
-        <a href="/docs/reference/styling/#show-rules">show rule</a>, for other content it will
-        be <code><span class="typ-key">none</span></code>. The resulting location can be used with
-        <a href="/docs/reference/introspection/counter/">counters</a>, <a href="/docs/reference/introspection/state/">state</a> and <a href="/docs/reference/introspection/query/">queries</a>.</p>
+        by <a href="/docs/reference/introspection/query/" title="query">query</a> or provided by a <a href="/docs/reference/styling/#show-rules">show rule</a>,
+        for other content it will be <code><span class="typ-key">none</span></code>. The resulting location can be
+        used with <a href="/docs/reference/introspection/counter/">counters</a>, <a href="/docs/reference/introspection/state/" title="state">state</a> and <a href="/docs/reference/introspection/query/">queries</a>.</p>
       example: null
       self: true
       params: []

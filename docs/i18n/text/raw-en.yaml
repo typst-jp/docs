@@ -1,6 +1,6 @@
 route: /docs/reference/text/raw/
 title: Raw Text / Code
-description: '`raw` 函数的文档'
+description: Documentation for the `raw` function.
 part: null
 outline:
 - id: summary
@@ -63,6 +63,7 @@ body:
     keywords: []
     oneliner: Raw text with optional syntax highlighting.
     element: true
+    contextual: false
     details: |-
       <p>Raw text with optional syntax highlighting.</p>
       <p>Displays the text verbatim and in a monospace font. This is typically used
@@ -88,7 +89,8 @@ body:
       <h2 id="syntax">Syntax</h2>
       <p>This function also has dedicated syntax. You can enclose text in 1 or 3+
       backticks (<code>`</code>) to make it raw. Two backticks produce empty raw text.
-      When you use three or more backticks, you can additionally specify a
+      This works both in markup and code.</p>
+      <p>When you use three or more backticks, you can additionally specify a
       language tag for syntax highlighting directly after the opening backticks.
       Within raw blocks, everything (except for the language tag, if applicable)
       is rendered as is, in particular, there are no escape sequences.</p>
@@ -175,8 +177,9 @@ body:
       details: |-
         <p>The language to syntax-highlight in.</p>
         <p>Apart from typical language tags known from Markdown, this supports the
-        <code><span class="typ-str">&quot;typ&quot;</span></code> and <code><span class="typ-str">&quot;typc&quot;</span></code> tags for Typst markup and Typst code,
-        respectively.</p>
+        <code><span class="typ-str">&quot;typ&quot;</span></code> and <code><span class="typ-str">&quot;typc&quot;</span></code> tags for
+        <a href="/docs/reference/syntax/#markup">Typst markup</a> and
+        <a href="/docs/reference/syntax/#code">Typst code</a>, respectively.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-raw">```typ
         This is *Typst!*
@@ -254,10 +257,9 @@ body:
         <p>Applying a theme only affects the color of specifically highlighted
         text. It does not consider the theme's foreground and background
         properties, so that you retain control over the color of raw text. You
-        can apply the foreground color yourself with the <a href="/docs/reference/text/text/"><code>text</code></a>
-        function and the background with a <a href="/docs/reference/layout/block/#parameters-fill">filled block</a>. You
-        could also use the <a href="/docs/reference/data-loading/xml/"><code>xml</code></a> function to extract these properties
-        from the theme.</p>
+        can apply the foreground color yourself with the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function and
+        the background with a <a href="/docs/reference/layout/block/#parameters-fill">filled block</a>. You could also use
+        the <a href="/docs/reference/data-loading/xml/" title="`xml`"><code>xml</code></a> function to extract these properties from the theme.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">raw</span><span class="typ-punct">(</span>theme<span class="typ-punct">:</span> <span class="typ-str">&quot;halcyon.tmTheme&quot;</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">raw</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-func">block</span><span class="typ-punct">(</span>
@@ -312,9 +314,10 @@ body:
       keywords: []
       oneliner: A highlighted line of raw text.
       element: true
+      contextual: false
       details: |-
         <p>A highlighted line of raw text.</p>
-        <p>This is a helper element that is synthesized by <a href="/docs/reference/text/raw/"><code>raw</code></a> elements.</p>
+        <p>This is a helper element that is synthesized by <a href="/docs/reference/text/raw/" title="`raw`"><code>raw</code></a> elements.</p>
         <p>It allows you to access various properties of the line, such as the line
         number, the raw non-highlighted text, the highlighted text, and whether it
         is the first or last line of the raw block.</p>

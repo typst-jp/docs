@@ -1,6 +1,6 @@
 route: /docs/reference/model/bibliography/
-title: 参考文献
-description: '`bibliography` 函数的文档'
+title: Bibliography
+description: Documentation for the `bibliography` function.
 part: null
 outline:
 - id: summary
@@ -32,47 +32,55 @@ body:
   content:
     path: []
     name: bibliography
-    title: 参考文献
+    title: Bibliography
     keywords: []
-    oneliner: 一份参考文献 / 引用列表。
+    oneliner: A bibliography / reference listing.
     element: true
+    contextual: false
     details: |-
-      <p>一份参考文献 / 引用列表。</p>
-      <p>您可以通过使用以下两种格式之一的路径调用此函数来创建新的参考文献：</p>
+      <p>A bibliography / reference listing.</p>
+      <p>You can create a new bibliography by calling this function with a path
+      to a bibliography file in either one of two formats:</p>
       <ul>
-      <li>Hayagriva <code>.yml</code> 文件。Hayagriva 是一种新的参考文献文件格式，专为 Typst 设计。访问其
-      <a href="https://github.com/typst/hayagriva/blob/main/docs/file-format.md">文档</a>
-      以获取更多详细信息。</li>
-      <li>BibLaTeX <code>.bib</code> 文件。</li>
+      <li>A Hayagriva <code>.yml</code> file. Hayagriva is a new bibliography file format
+      designed for use with Typst. Visit its
+      <a href="https://github.com/typst/hayagriva/blob/main/docs/file-format.md">documentation</a>
+      for more details.</li>
+      <li>A BibLaTeX <code>.bib</code> file.</li>
       </ul>
-      <p>一旦在文档中添加了参考文献，您就可以开始使用引用语法（<code><span class="typ-ref">@key</span></code>）或对
-      <a href="/docs/reference/model/cite/">citation</a> 函数进行明确调用（<code><span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;key&gt;</span><span class="typ-punct">)</span></code>）进行引用。参考文献将仅显示在文档中引用的作品的条目。</p>
-      <h2 id="styles">样式</h2>
-      <p>Typst 提供了多种内置的
-      <a href="/docs/reference/model/bibliography/#parameters-style">引用和参考文献样式</a>。除此之外，您还可以添加并使用自定义的 <a href="https://citationstyles.org/">CSL</a>（引文样式
-      语言）文件。想知道使用哪种样式？以下是一些根据您所在的学科的好默认值：</p>
-      <table><thead><tr><th>领域</th><th>典型样式</th></tr></thead><tbody>
-      <tr><td>工程，IT</td><td><code><span class="typ-str">&quot;ieee&quot;</span></code></td></tr>
-      <tr><td>心理学，生命科学</td><td><code><span class="typ-str">&quot;apa&quot;</span></code></td></tr>
-      <tr><td>社会科学</td><td><code><span class="typ-str">&quot;chicago-author-date&quot;</span></code></td></tr>
-      <tr><td>人文学科</td><td><code><span class="typ-str">&quot;mla&quot;</span></code>, <code><span class="typ-str">&quot;chicago-notes&quot;</span></code>, <code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
-      <tr><td>经济学</td><td><code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
-      <tr><td>物理学</td><td><code><span class="typ-str">&quot;american-physics-society&quot;</span></code></td></tr>
+      <p>As soon as you add a bibliography somewhere in your document, you can start
+      citing things with reference syntax (<code><span class="typ-ref">@key</span></code>) or explicit calls to the
+      <a href="/docs/reference/model/cite/">citation</a> function (<code><span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;key&gt;</span><span class="typ-punct">)</span></code>). The bibliography will only
+      show entries for works that were referenced in the document.</p>
+      <h2 id="styles">Styles</h2>
+      <p>Typst offers a wide selection of built-in
+      <a href="/docs/reference/model/bibliography/#parameters-style">citation and bibliography styles</a>. Beyond those, you
+      can add and use custom <a href="https://citationstyles.org/">CSL</a> (Citation Style
+      Language) files. Wondering which style to use? Here are some good defaults
+      based on what discipline you're working in:</p>
+      <table><thead><tr><th>Fields</th><th>Typical Styles</th></tr></thead><tbody>
+      <tr><td>Engineering, IT</td><td><code><span class="typ-str">&quot;ieee&quot;</span></code></td></tr>
+      <tr><td>Psychology, Life Sciences</td><td><code><span class="typ-str">&quot;apa&quot;</span></code></td></tr>
+      <tr><td>Social sciences</td><td><code><span class="typ-str">&quot;chicago-author-date&quot;</span></code></td></tr>
+      <tr><td>Humanities</td><td><code><span class="typ-str">&quot;mla&quot;</span></code>, <code><span class="typ-str">&quot;chicago-notes&quot;</span></code>, <code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
+      <tr><td>Economics</td><td><code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
+      <tr><td>Physics</td><td><code><span class="typ-str">&quot;american-physics-society&quot;</span></code></td></tr>
       </tbody></table>
-      <h2 id="example">示例</h2>
-      <div class="previewed-code"><pre><code>这早在很久以前就被海盗们注意到了。
-      <span class="typ-ref">@arrgh</span>
+      <h2 id="example">Example</h2>
+      <div class="previewed-code"><pre><code>This was already noted by
+      pirates long ago. <span class="typ-ref">@arrgh</span>
 
-      多个来源可以用 <span class="typ-escape">...</span>
+      Multiple sources say <span class="typ-escape">...</span>
       <span class="typ-ref">@arrgh</span> <span class="typ-ref">@netwok</span>.
 
       <span class="typ-func">#</span><span class="typ-func">bibliography</span><span class="typ-punct">(</span><span class="typ-str">&quot;works.bib&quot;</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/5ef87e0866571ac9b69ad2681174301c.png" alt="预览" width="480" height="190"/></div></div>
+      </code></pre><div class="preview"><img src="/assets/docs/5ef87e0866571ac9b69ad2681174301c.png" alt="Preview" width="480" height="190"/></div></div>
     example: null
     self: false
     params:
     - name: path
-      details: <p>Hayagriva <code>.yml</code> 和/或 BibLaTeX <code>.bib</code> 文件的路径。</p>
+      details: <p>Path(s) to Hayagriva <code>.yml</code> and/or BibLaTeX <code>.bib</code>
+        files.</p>
       example: null
       types:
       - str
@@ -86,15 +94,16 @@ body:
       settable: false
     - name: title
       details: |-
-        <p>参考文献的标题。</p>
+        <p>The title of the bibliography.</p>
         <ul>
-        <li>当设置为 <code><span class="typ-key">auto</span></code> 时，将使用适用于
-        <a href="/docs/reference/text/text/#parameters-lang">文本语言</a> 的适当标题。这是默认值。</li>
-        <li>当设置为 <code><span class="typ-key">none</span></code> 时，参考文献将没有标题。</li>
-        <li>可以通过传递内容来设置自定义标题。</li>
+        <li>When set to <code><span class="typ-key">auto</span></code>, an appropriate title for the
+        <a href="/docs/reference/text/text/#parameters-lang">text language</a> will be used. This is the default.</li>
+        <li>When set to <code><span class="typ-key">none</span></code>, the bibliography will not have a title.</li>
+        <li>A custom title can be set by passing content.</li>
         </ul>
-        <p>默认情况下，参考文献的标题不会被编号，但您可以
-        使用 <code><span class="typ-key">show</span> <span class="typ-func">bibliography</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span></code> 规则强制进行编号。</p>
+        <p>The bibliography's heading will not be numbered by default, but you can
+        force it to be with a show-set rule:
+        <code><span class="typ-key">show</span> <span class="typ-func">bibliography</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span></code></p>
       example: null
       types:
       - none
@@ -109,10 +118,10 @@ body:
       settable: true
     - name: full
       details: |-
-        <p>是否包括给定参考文献文件中的所有作品，即使
-        它们在文档中没有被引用。</p>
-        <p>要有选择地添加单个已引用的作品而不显示它们，您还可以
-        使用 <code>cite</code> 函数，其中 <a href="/docs/reference/model/cite/#parameters-form"><code>form</code></a> 设置为 <code><span class="typ-key">none</span></code>。</p>
+        <p>Whether to include all works from the given bibliography files, even
+        those that weren't cited in the document.</p>
+        <p>To selectively add individual cited works without showing them, you can
+        also use the <code>cite</code> function with <a href="/docs/reference/model/cite/#parameters-form"><code>form</code></a> set to <code><span class="typ-key">none</span></code>.</p>
       example: null
       types:
       - bool
@@ -125,177 +134,178 @@ body:
       settable: true
     - name: style
       details: |-
-        <p>参考文献样式。</p>
-        <p>应该是内置样式之一（见下文）或
-        <a href="https://citationstyles.org/">CSL 文件</a> 的路径。下面列出的
-        一些样式出现两次，一次是它们的全名，一次是它们的简写
-        别名。</p>
+        <p>The bibliography style.</p>
+        <p>Should be either one of the built-in styles (see below) or a path to
+        a <a href="https://citationstyles.org/">CSL file</a>. Some of the styles listed
+        below appear twice, once with their full name and once with a short
+        alias.</p>
       example: null
       types:
       - str
       strings:
-      - string: american-anthropological-association
-        details: <p>美国人类学协会</p>
-      - string: springer-lecture-notes-in-computer-science
-        details: <p>Springer - 计算机科学讲义</p>
-      - string: american-medical-association
-        details: <p>美国医学协会第11版</p>
-      - string: sage-vancouver
-        details: <p>SAGE - 温哥华</p>
-      - string: biomed-central
-        details: <p>BioMed Central</p>
-      - string: american-society-of-civil-engineers
-        details: <p>美国土木工程师协会</p>
-      - string: taylor-and-francis-chicago-author-date
-        details: <p>Taylor &amp; Francis - 芝加哥式样式（作者-日期）</p>
-      - string: gb-7714-2015-note
-        details: <p>中国国家标准 GB/T 7714-2015（注释，中文）</p>
-      - string: american-society-for-microbiology
-        details: <p>美国微生物学协会</p>
-      - string: american-meteorological-society
-        details: <p>美国气象学会</p>
-      - string: future-medicine
-        details: <p>未来医学杂志</p>
-      - string: bristol-university-press
-        details: <p>布里斯托大学出版社</p>
-      - string: public-library-of-science
-        details: <p>科学公共图书馆</p>
+      - string: annual-reviews
+        details: <p>Annual Reviews (sorted by order of appearance)</p>
       - string: pensoft
-        details: <p>Pensoft 期刊</p>
-      - string: american-institute-of-aeronautics-and-astronautics
-        details: <p>美国航空航天学会</p>
-      - string: mary-ann-liebert-vancouver
-        details: <p>Mary Ann Liebert - 温哥华</p>
-      - string: modern-humanities-research-association
-        details: <p>现代人文研究协会第3版（带有 参考文献的注意事项）</p>
-      - string: springer-socpsych-author-date
-        details: <p>Springer - SocPsych（作者-日期）</p>
-      - string: trends
-        details: <p>Trends 期刊</p>
-      - string: gost-r-705-2008-numeric
-        details: <p>俄罗斯 GOST R 7.0.5-2008（数字）</p>
-      - string: american-political-science-association
-        details: <p>美国政治科学协会</p>
-      - string: future-science
-        details: <p>未来科学集团</p>
-      - string: association-for-computing-machinery
-        details: <p>计算机协会</p>
-      - string: elsevier-harvard
-        details: <p>爱思唯尔 - 哈佛（带标题）</p>
-      - string: american-chemical-society
-        details: <p>美国化学学会</p>
-      - string: cell
-        details: <p>细胞</p>
-      - string: royal-society-of-chemistry
-        details: <p>英国皇家化学学会</p>
-      - string: sist02
-        details: <p>SIST02（日本语）</p>
-      - string: gb-7714-2005-numeric
-        details: <p>中国国家标准 GB/T 7714-2005（数字，中文）</p>
-      - string: institute-of-electrical-and-electronics-engineers
-        details: <p>IEEE</p>
-      - string: springer-humanities-author-date
-        details: <p>Springer - 人文学科（作者-日期）</p>
-      - string: deutsche-gesellschaft-für-psychologie
-        details: <p>德国心理学协会第5版（德语）</p>
-      - string: springer-basic-author-date
-        details: <p>Springer - 基础（作者-日期）</p>
-      - string: institute-of-physics-numeric
-        details: <p>物理研究所（数字）</p>
-      - string: vancouver
-        details: <p>温哥华</p>
-      - string: nature
-        details: <p>自然</p>
-      - string: current-opinion
-        details: <p>Current Opinion 期刊</p>
+        details: <p>Pensoft Journals</p>
       - string: annual-reviews-author-date
-        details: <p>年度评论（作者-日期）</p>
-      - string: american-institute-of-physics
-        details: <p>美国物理学会第4版</p>
-      - string: gb-7714-2015-numeric
-        details: <p>中国国家标准 GB/T 7714-2015（数字，中文）</p>
+        details: <p>Annual Reviews (author-date)</p>
       - string: the-lancet
         details: <p>The Lancet</p>
-      - string: springer-basic
-        details: <p>Springer - Basic（数字，括号）</p>
-      - string: american-geophysical-union
-        details: <p>American Geophysical Union</p>
-      - string: turabian-fullnote-8
-        details: <p>Turabian 第8版（完整注释）</p>
-      - string: taylor-and-francis-national-library-of-medicine
-        details: <p>Taylor &amp; Francis - National Library of Medicine</p>
-      - string: american-physiological-society
-        details: <p>American Physiological Society</p>
-      - string: thieme
-        details: <p>Thieme-German（德语）</p>
-      - string: copernicus
-        details: <p>Copernicus Publications</p>
-      - string: the-institution-of-engineering-and-technology
-        details: <p>The Institution of Engineering and Technology</p>
-      - string: annual-reviews
-        details: <p>Annual Reviews（按出现顺序排序）</p>
-      - string: deutsche-sprache
-        details: <p>Deutsche Sprache（德语）</p>
-      - string: harvard-cite-them-right
-        details: <p>Cite Them Right 第12版 - 哈佛风格</p>
-      - string: chicago-fullnotes
-        details: <p>芝加哥风格手册 第17版（完整注释）</p>
-      - string: iso-690-author-date
-        details: <p>ISO-690（作者-日期，英语）</p>
-      - string: council-of-science-editors-author-date
-        details: <p>Council of Science Editors，姓名-年份（作者-日期）</p>
-      - string: springer-mathphys
-        details: <p>Springer - MathPhys（数字，括号）</p>
-      - string: american-society-of-mechanical-engineers
-        details: <p>American Society of Mechanical Engineers</p>
-      - string: karger
-        details: <p>Karger期刊</p>
-      - string: multidisciplinary-digital-publishing-institute
-        details: <p>Multidisciplinary Digital Publishing Institute</p>
-      - string: american-psychological-association
-        details: <p>美国心理学协会 第7版</p>
-      - string: modern-language-association-8
-        details: <p>现代语言协会 第8版</p>
+      - string: elsevier-with-titles
+        details: <p>Elsevier (numeric, with titles)</p>
       - string: gb-7714-2015-author-date
-        details: <p>中国国家标准 GB/T 7714-2015（作者-日期，中文）</p>
-      - string: springer-vancouver
-        details: <p>Springer - Vancouver（括号）</p>
+        details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
+      - string: royal-society-of-chemistry
+        details: <p>Royal Society of Chemistry</p>
+      - string: american-anthropological-association
+        details: <p>American Anthropological Association</p>
+      - string: sage-vancouver
+        details: <p>SAGE - Vancouver</p>
       - string: british-medical-journal
         details: <p>BMJ</p>
-      - string: turabian-author-date
-        details: <p>Turabian 第9版（作者-日期）</p>
-      - string: chicago-author-date
-        details: <p>芝加哥风格手册 第17版（作者-日期）</p>
-      - string: associacao-brasileira-de-normas-tecnicas
-        details: <p>巴西技术标准协会（葡萄牙语 - 巴西）</p>
-      - string: vancouver-superscript
-        details: <p>Vancouver（上标）</p>
+      - string: frontiers
+        details: <p>Frontiers journals</p>
+      - string: elsevier-harvard
+        details: <p>Elsevier - Harvard (with titles)</p>
+      - string: gb-7714-2005-numeric
+        details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
       - string: angewandte-chemie
         details: <p>Angewandte Chemie International Edition</p>
-      - string: elsevier-with-titles
-        details: <p>Elsevier（数字，带标题）</p>
-      - string: iso-690-numeric
-        details: <p>ISO-690（数字，英语）</p>
-      - string: modern-language-association
-        details: <p>现代语言协会 第9版</p>
-      - string: council-of-science-editors
-        details: <p>Council of Science Editors，引文序列（数字，括号）</p>
+      - string: gb-7714-2015-note
+        details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
+      - string: springer-basic-author-date
+        details: <p>Springer - Basic (author-date)</p>
+      - string: trends
+        details: <p>Trends journals</p>
+      - string: american-geophysical-union
+        details: <p>American Geophysical Union</p>
+      - string: american-political-science-association
+        details: <p>American Political Science Association</p>
+      - string: american-psychological-association
+        details: <p>American Psychological Association 7th edition</p>
+      - string: cell
+        details: <p>Cell</p>
       - string: spie
-        details: <p>SPIE期刊</p>
-      - string: springer-fachzeitschriften-medizin-psychologie
-        details: <p>Springer - Fachzeitschriften Medizin Psychologie（德语）</p>
-      - string: frontiers
-        details: <p>Frontiers期刊</p>
-      - string: american-physics-society
-        details: <p>American Physical Society</p>
-      - string: american-sociological-association
-        details: <p>美国社会学协会 第6版</p>
+        details: <p>SPIE journals</p>
+      - string: harvard-cite-them-right
+        details: <p>Cite Them Right 12th edition - Harvard</p>
+      - string: american-institute-of-aeronautics-and-astronautics
+        details: <p>American Institute of Aeronautics and Astronautics</p>
+      - string: council-of-science-editors-author-date
+        details: <p>Council of Science Editors, Name-Year (author-date)</p>
+      - string: copernicus
+        details: <p>Copernicus Publications</p>
+      - string: sist02
+        details: <p>SIST02 (日本語)</p>
+      - string: springer-socpsych-author-date
+        details: <p>Springer - SocPsych (author-date)</p>
+      - string: modern-language-association-8
+        details: <p>Modern Language Association 8th edition</p>
+      - string: nature
+        details: <p>Nature</p>
+      - string: iso-690-numeric
+        details: <p>ISO-690 (numeric, English)</p>
+      - string: springer-mathphys
+        details: <p>Springer - MathPhys (numeric, brackets)</p>
+      - string: springer-lecture-notes-in-computer-science
+        details: <p>Springer - Lecture Notes in Computer Science</p>
+      - string: future-science
+        details: <p>Future Science Group</p>
+      - string: current-opinion
+        details: <p>Current Opinion journals</p>
+      - string: deutsche-gesellschaft-für-psychologie
+        details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
+      - string: american-meteorological-society
+        details: <p>American Meteorological Society</p>
+      - string: modern-humanities-research-association
+        details: <p>Modern Humanities Research Association 3rd edition (note with
+          bibliography)</p>
+      - string: american-society-of-civil-engineers
+        details: <p>American Society of Civil Engineers</p>
+      - string: chicago-notes
+        details: <p>Chicago Manual of Style 17th edition (note)</p>
+      - string: institute-of-electrical-and-electronics-engineers
+        details: <p>IEEE</p>
+      - string: deutsche-sprache
+        details: <p>Deutsche Sprache (Deutsch)</p>
+      - string: gb-7714-2015-numeric
+        details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
+      - string: bristol-university-press
+        details: <p>Bristol University Press</p>
+      - string: association-for-computing-machinery
+        details: <p>Association for Computing Machinery</p>
+      - string: associacao-brasileira-de-normas-tecnicas
+        details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
+      - string: american-medical-association
+        details: <p>American Medical Association 11th edition</p>
       - string: elsevier-vancouver
         details: <p>Elsevier - Vancouver</p>
-      - string: chicago-notes
-        details: <p>芝加哥风格手册 第17版（注释）</p>
+      - string: chicago-author-date
+        details: <p>Chicago Manual of Style 17th edition (author-date)</p>
+      - string: vancouver
+        details: <p>Vancouver</p>
+      - string: chicago-fullnotes
+        details: <p>Chicago Manual of Style 17th edition (full note)</p>
+      - string: turabian-author-date
+        details: <p>Turabian 9th edition (author-date)</p>
+      - string: springer-fachzeitschriften-medizin-psychologie
+        details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
+      - string: thieme
+        details: <p>Thieme-German (Deutsch)</p>
+      - string: taylor-and-francis-national-library-of-medicine
+        details: <p>Taylor &amp; Francis - National Library of Medicine</p>
+      - string: american-chemical-society
+        details: <p>American Chemical Society</p>
+      - string: american-institute-of-physics
+        details: <p>American Institute of Physics 4th edition</p>
+      - string: taylor-and-francis-chicago-author-date
+        details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
+      - string: gost-r-705-2008-numeric
+        details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
+      - string: institute-of-physics-numeric
+        details: <p>Institute of Physics (numeric)</p>
+      - string: iso-690-author-date
+        details: <p>ISO-690 (author-date, English)</p>
+      - string: the-institution-of-engineering-and-technology
+        details: <p>The Institution of Engineering and Technology</p>
+      - string: american-society-for-microbiology
+        details: <p>American Society for Microbiology</p>
+      - string: multidisciplinary-digital-publishing-institute
+        details: <p>Multidisciplinary Digital Publishing Institute</p>
+      - string: springer-basic
+        details: <p>Springer - Basic (numeric, brackets)</p>
+      - string: springer-humanities-author-date
+        details: <p>Springer - Humanities (author-date)</p>
+      - string: turabian-fullnote-8
+        details: <p>Turabian 8th edition (full note)</p>
+      - string: karger
+        details: <p>Karger journals</p>
+      - string: springer-vancouver
+        details: <p>Springer - Vancouver (brackets)</p>
+      - string: vancouver-superscript
+        details: <p>Vancouver (superscript)</p>
+      - string: american-physics-society
+        details: <p>American Physical Society</p>
+      - string: mary-ann-liebert-vancouver
+        details: <p>Mary Ann Liebert - Vancouver</p>
+      - string: american-society-of-mechanical-engineers
+        details: <p>American Society of Mechanical Engineers</p>
+      - string: council-of-science-editors
+        details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
+      - string: american-physiological-society
+        details: <p>American Physiological Society</p>
+      - string: future-medicine
+        details: <p>Future Medicine journals</p>
+      - string: biomed-central
+        details: <p>BioMed Central</p>
+      - string: public-library-of-science
+        details: <p>Public Library of Science</p>
+      - string: american-sociological-association
+        details: <p>American Sociological Association 6th edition</p>
+      - string: modern-language-association
+        details: <p>Modern Language Association 9th edition</p>
       - string: alphanumeric
-        details: <p>字母数字混合</p>
+        details: <p>Alphanumeric</p>
       default: <code><span class="typ-str">&quot;ieee&quot;</span></code>
       positional: false
       named: true

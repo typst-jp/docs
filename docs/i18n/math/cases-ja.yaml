@@ -1,6 +1,6 @@
 route: /docs/reference/math/cases/
-title: 左大括号
-description: '`cases` 函数的文档'
+title: Cases
+description: Documentation for the `cases` function.
 part: null
 outline:
 - id: summary
@@ -32,11 +32,13 @@ body:
     name: cases
     title: Cases
     keywords: []
-    oneliner: 用来分段或组合的左大括号。
+    oneliner: A case distinction.
     element: true
+    contextual: false
     details: |-
-      <p>用来分段或组合方程组的左大括号。</p>
-      <p>不同分支的内容可以通过对齐符  <code>&amp;</code> 来对齐。</p>      <h2 id="example">Example</h2>
+      <p>A case distinction.</p>
+      <p>Content across different branches can be aligned with the <code>&amp;</code> symbol.</p>
+      <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> f(x, y) <span class="typ-escape">:=</span> <span class="typ-func">cases</span><span class="typ-punct">(</span>
         1 <span class="typ-str">&quot;if&quot;</span> <span class="typ-punct">(</span>x <span class="typ-pol">dot</span> y<span class="typ-punct">)</span><span class="typ-math-op">/</span>2 <span class="typ-escape">&lt;=</span> 0<span class="typ-punct">,</span>
         2 <span class="typ-str">&quot;if&quot;</span> x <span class="typ-str">&quot;is even&quot;</span><span class="typ-punct">,</span>
@@ -48,7 +50,7 @@ body:
     self: false
     params:
     - name: delim
-      details: <p>使用的分隔符。</p>
+      details: <p>The delimiter to use.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">cases</span><span class="typ-punct">(</span>delim<span class="typ-punct">:</span> <span class="typ-str">&quot;[&quot;</span><span class="typ-punct">)</span>
         <span class="typ-math-delim">$</span> x = <span class="typ-func">cases</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -73,7 +75,7 @@ body:
       variadic: false
       settable: true
     - name: reverse
-      details: <p>是否翻转为右大括号。</p>
+      details: <p>Whether the direction of cases should be reversed.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">cases</span><span class="typ-punct">(</span>reverse<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
         <span class="typ-math-delim">$</span> <span class="typ-func">cases</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> = x <span class="typ-math-delim">$</span>
@@ -88,7 +90,7 @@ body:
       variadic: false
       settable: true
     - name: gap
-      details: <p>分支间的间距。</p>
+      details: <p>The gap between branches.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">cases</span><span class="typ-punct">(</span>gap<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">)</span>
         <span class="typ-math-delim">$</span> x = <span class="typ-func">cases</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -103,7 +105,7 @@ body:
       variadic: false
       settable: true
     - name: children
-      details: <p>子分支。</p>
+      details: <p>The branches of the case distinction.</p>
       example: null
       types:
       - content

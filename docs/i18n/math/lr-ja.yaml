@@ -1,6 +1,6 @@
 route: /docs/reference/math/lr
 title: Left/Right
-description: lr 函数族的文档.
+description: Documentation for the lr functions.
 part: null
 outline:
 - id: summary
@@ -77,23 +77,19 @@ body:
   content:
     name: lr
     title: Left/Right
-    details: "<p>分隔符（delimiter）匹配。</p>\n<p>\n<code>lr</code> \n函数匹配两个分隔符，并根据所包含的内容自动缩放尺寸。\n\
-      该种操作也会在根据语法匹配分隔符时自动进行，而 <code>lr</code> 函数允许您精确地控制他们的大小。     \n除 <code>lr</code>\
-      \ 函数以外。Typst 还提供了更多函数，用于创建绝对值、向上取整、向下取整以及范数的分隔符配对。\n</p>\n<h2 id=\"example\"\
-      >Example</h2>\n<div class=\"previewed-code\"><pre><code><span class=\"typ-math-delim\"\
-      >$</span> [a, b<span class=\"typ-math-op\">/</span>2] <span class=\"typ-math-delim\"\
-      >$</span>\n<span class=\"typ-math-delim\">$</span> <span class=\"typ-func\"\
-      >lr</span><span class=\"typ-punct\">(</span>]<span class=\"typ-pol\">sum</span><span\
-      \ class=\"typ-math-op\">_</span><span class=\"typ-punct\">(</span>x=1<span class=\"\
-      typ-punct\">)</span><span class=\"typ-math-op\">^</span>n] x<span class=\"typ-punct\"\
-      >,</span> size<span class=\"typ-punct\">:</span> <span class=\"typ-num\">#</span><span\
-      \ class=\"typ-num\">50%</span><span class=\"typ-punct\">)</span> <span class=\"\
-      typ-math-delim\">$</span>\n<span class=\"typ-math-delim\">$</span> <span class=\"\
-      typ-func\">abs</span><span class=\"typ-punct\">(</span><span class=\"typ-punct\"\
-      >(</span>x + y<span class=\"typ-punct\">)</span> <span class=\"typ-math-op\"\
-      >/</span> 2<span class=\"typ-punct\">)</span> <span class=\"typ-math-delim\"\
-      >$</span>\n</code></pre><div class=\"preview\"><img src=\"/assets/docs/41d20606a87dc72e3461b2b0a7ce9acf.png\"\
-      \ alt=\"Preview\" width=\"480\" height=\"190\"/></div></div>"
+    details: |-
+      <p>Delimiter matching.</p>
+      <p>The <code>lr</code> function allows you to match two delimiters and scale them with the
+      content they contain. While this also happens automatically for delimiters
+      that match syntactically, <code>lr</code> allows you to match two arbitrary delimiters
+      and control their size exactly. Apart from the <code>lr</code> function, Typst provides
+      a few more functions that create delimiter pairings for absolute, ceiled,
+      and floored values as well as norms.</p>
+      <h2 id="example">Example</h2>
+      <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> [a, b<span class="typ-math-op">/</span>2] <span class="typ-math-delim">$</span>
+      <span class="typ-math-delim">$</span> <span class="typ-func">lr</span><span class="typ-punct">(</span>]<span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>x=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n] x<span class="typ-punct">,</span> size<span class="typ-punct">:</span> <span class="typ-num">#</span><span class="typ-num">50%</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+      <span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-punct">(</span>x + y<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+      </code></pre><div class="preview"><img src="/assets/docs/41d20606a87dc72e3461b2b0a7ce9acf.png" alt="Preview" width="480" height="190"/></div></div>
     functions:
     - path:
       - math
@@ -102,16 +98,17 @@ body:
       keywords: []
       oneliner: Scales delimiters.
       element: true
+      contextual: false
       details: |-
-        <p>缩放分隔符。</p>
-        <p>
-        虽然默认情况下匹配的分隔符会自动缩放，但这个特性也可以用于对未匹配的分隔符进行缩放，并可以更精确地控制分隔符的缩放。
-        </p>
+        <p>Scales delimiters.</p>
+        <p>While matched delimiters scale by default, this can be used to scale
+        unmatched delimiters and to control the delimiter scaling more precisely.</p>
       example: null
       self: false
       params:
       - name: size
-        details: <p> 括号的大小，取决于包含内容的高度。 </p>
+        details: <p>The size of the brackets, relative to the height of the wrapped
+          content.</p>
         example: null
         types:
         - auto
@@ -124,7 +121,7 @@ body:
         variadic: false
         settable: true
       - name: body
-        details: <p> 被分隔的内容，包括分隔符。 </p>
+        details: <p>The delimited content, including the delimiters.</p>
         example: null
         types:
         - content
@@ -143,17 +140,19 @@ body:
       name: mid
       title: Mid
       keywords: []
-      oneliner: 将定界符在垂直方向上缩放到最近的包围的 `{lr()}` 组。
+      oneliner: Scales delimiters vertically to the nearest surrounding `{lr()}` group.
       element: true
-      details: <p>将定界符在垂直方向上缩放到最近的 <code><span class="typ-func">lr</span><span class="typ-punct">(</span><span
-        class="typ-punct">)</span></code> 组。</p>
+      contextual: false
+      details: <p>Scales delimiters vertically to the nearest surrounding <code><span
+        class="typ-func">lr</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code>
+        group.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> { x <span class="typ-func">mid</span><span class="typ-punct">(</span>|<span class="typ-punct">)</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i=1<span class="typ-punct">)</span><span class="typ-math-op">^</span>n w<span class="typ-math-op">_</span>i|f<span class="typ-math-op">_</span>i (x)| &lt; 1 } <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/5bb74ab12ab4445fbc6af176433f46c7.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: body
-        details: <p>要缩放的内容。</p>
+        details: <p>The content to be scaled.</p>
         example: null
         types:
         - content
@@ -174,17 +173,16 @@ body:
       keywords: []
       oneliner: Takes the absolute value of an expression.
       element: false
-      details: |-
-        <p>
-        取表达式的绝对值。
-        </p>
+      contextual: false
+      details: <p>Takes the absolute value of an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">abs</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/28e475440e93179a23e1e05535ef8b05.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: size
-        details: <p>括号的大小，相对于包裹内容的高度。</p>
+        details: <p>The size of the brackets, relative to the height of the wrapped
+          content.</p>
         example: null
         types:
         - auto
@@ -197,7 +195,7 @@ body:
         variadic: false
         settable: false
       - name: body
-        details: <p> 被取绝对值的内容。 </p>
+        details: <p>The expression to take the absolute value of.</p>
         example: null
         types:
         - content
@@ -218,17 +216,16 @@ body:
       keywords: []
       oneliner: Takes the norm of an expression.
       element: false
-      details: |-
-        <p>
-        对表达式进行范数运算。
-        </p>
+      contextual: false
+      details: <p>Takes the norm of an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">norm</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/b1c37b013016675629fbfab0497e5ce5.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: size
-        details: <p>括号的大小，相对于包裹内容的高度。</p>
+        details: <p>The size of the brackets, relative to the height of the wrapped
+          content.</p>
         example: null
         types:
         - auto
@@ -241,7 +238,7 @@ body:
         variadic: false
         settable: false
       - name: body
-        details: <p> 取范数的内容。 </p>
+        details: <p>The expression to take the norm of.</p>
         example: null
         types:
         - content
@@ -262,17 +259,16 @@ body:
       keywords: []
       oneliner: Floors an expression.
       element: false
-      details: |-
-        <p>
-        对表达式向下取整。
-        </p>
+      contextual: false
+      details: <p>Floors an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">floor</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/025f577b807e2e19e782e7ff2f73543a.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: size
-        details: <p>相对于包裹内容的高度，括号的大小。</p>
+        details: <p>The size of the brackets, relative to the height of the wrapped
+          content.</p>
         example: null
         types:
         - auto
@@ -285,7 +281,7 @@ body:
         variadic: false
         settable: false
       - name: body
-        details: <p>进行向下取整的表达式</p>
+        details: <p>The expression to floor.</p>
         example: null
         types:
         - content
@@ -306,17 +302,16 @@ body:
       keywords: []
       oneliner: Ceils an expression.
       element: false
-      details: |-
-        <p>
-        对表达式向上取整。
-        </p>
+      contextual: false
+      details: <p>Ceils an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">ceil</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/5e51dbb63fcb62826c19d8bc8405ec5b.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: size
-        details: <p>括号的大小，相对于包裹内容的高度。</p>
+        details: <p>The size of the brackets, relative to the height of the wrapped
+          content.</p>
         example: null
         types:
         - auto
@@ -329,7 +324,7 @@ body:
         variadic: false
         settable: false
       - name: body
-        details: <p>进行向上取整的表达式。</p>
+        details: <p>The expression to ceil.</p>
         example: null
         types:
         - content
@@ -350,17 +345,16 @@ body:
       keywords: []
       oneliner: Rounds an expression.
       element: false
-      details: |-
-        <p>
-        对表达式进行四舍五入。
-        </p>
+      contextual: false
+      details: <p>Rounds an expression.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">round</span><span class="typ-punct">(</span>x<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/b568beef30e9fb70d08ed84d7d609861.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: size
-        details: <p>括号的大小，相对于包裹内容的高度。</p>
+        details: <p>The size of the brackets, relative to the height of the wrapped
+          content.</p>
         example: null
         types:
         - auto
@@ -373,7 +367,7 @@ body:
         variadic: false
         settable: false
       - name: body
-        details: <p>进行四舍五入的表达式。</p>
+        details: <p>The expression to round.</p>
         example: null
         types:
         - content

@@ -1,6 +1,6 @@
 route: /docs/reference/math/sizes
-title: 显示尺寸
-description: sizes 函数族的文档.
+title: Sizes
+description: Documentation for the sizes functions.
 part: null
 outline:
 - id: summary
@@ -51,12 +51,10 @@ body:
     name: sizes
     title: Sizes
     details: |-
-      <p>
-      数学公式中表达式的强制大小样式。
-      </p>
-      <p>
-      这些函数允许手动配置表达式元素的尺寸，使它们看起来像处于内联/显示模式，或者在根式、上下标中使用的那样。
-      </p>
+      <p>Forced size styles for expressions within formulas.</p>
+      <p>These functions allow manual configuration of the size of equation elements
+      to make them look as in a display/inline equation or as if used in a root or
+      sub/superscripts.</p>
     functions:
     - path:
       - math
@@ -65,13 +63,10 @@ body:
       keywords: []
       oneliner: Forced display style in math.
       element: false
+      contextual: false
       details: |-
-        <p>
-        在数学模式中强制为“显示样式”。
-        </p>
-        <p>
-        这是公式块的常规大小。
-        </p>
+        <p>Forced display style in math.</p>
+        <p>This is the normal size for block equations.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/8631c65c70bfbf88891feec80e5e4bba.png" alt="Preview" width="480" height="190"/></div></div>
@@ -91,9 +86,8 @@ body:
         settable: false
       - name: cramped
         details: |-
-          <p>
-          是否像常规上下标那样，为指数限制高度。
-          </p>
+          <p>Whether to impose a height restriction for exponents, like regular sub-
+          and superscripts do.</p>
         example: null
         types:
         - bool
@@ -114,13 +108,10 @@ body:
       keywords: []
       oneliner: Forced inline (text) style in math.
       element: false
+      contextual: false
       details: |-
-        <p>
-        强制显示为“内联（文本）样式”。
-        </p>
-        <p>
-        这是内联公式的正常大小。
-        </p>
+        <p>Forced inline (text) style in math.</p>
+        <p>This is the normal size for inline equations.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2
             = <span class="typ-func">inline</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -141,9 +132,8 @@ body:
         settable: false
       - name: cramped
         details: |-
-          <p>
-          是否像常规上下标那样，为指数限制高度。
-          </p>
+          <p>Whether to impose a height restriction for exponents, like regular sub-
+          and superscripts do.</p>
         example: null
         types:
         - bool
@@ -164,13 +154,10 @@ body:
       keywords: []
       oneliner: Forced script style in math.
       element: false
+      contextual: false
       details: |-
-        <p>
-        强制显示为脚本大小。
-        </p>
-        <p>
-        这是用于上下标的较小尺寸。
-        </p>
+        <p>Forced script style in math.</p>
+        <p>This is the smaller size used in powers or sub- or superscripts.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">script</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/29af5c7bf57f3160bd334d93b988775a.png" alt="Preview" width="480" height="190"/></div></div>
@@ -189,7 +176,9 @@ body:
         variadic: false
         settable: false
       - name: cramped
-        details: <p>是否像常规上下标那样，为指数限制高度。</p>
+        details: |-
+          <p>Whether to impose a height restriction for exponents, like regular sub-
+          and superscripts do.</p>
         example: null
         types:
         - bool
@@ -210,20 +199,18 @@ body:
       keywords: []
       oneliner: Forced second script style in math.
       element: false
+      contextual: false
       details: |-
-        <p>
-        在数学中强制显示为次脚本大小。
-        </p>
-        <p>
-        这是用于二级上下标的最小尺寸。
-        </p>
+        <p>Forced second script style in math.</p>
+        <p>This is the smallest size, used in second-level sub- and superscripts
+        (script of the script).</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2 = <span class="typ-func">sscript</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-math-op">_</span>i x<span class="typ-math-op">_</span>i<span class="typ-math-op">/</span>2<span class="typ-punct">)</span><span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/bd925f3212ba0c8c54ffec73165ac1a3.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: body
-        details: <p>要设定大小的内容。</p>
+        details: <p>The content to size.</p>
         example: null
         types:
         - content
@@ -235,7 +222,9 @@ body:
         variadic: false
         settable: false
       - name: cramped
-        details: <p>是否像常规上下标那样，为指数限制高度。</p>
+        details: |-
+          <p>Whether to impose a height restriction for exponents, like regular sub-
+          and superscripts do.</p>
         example: null
         types:
         - bool

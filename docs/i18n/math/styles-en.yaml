@@ -1,6 +1,6 @@
 route: /docs/reference/math/styles
-title: 样式
-description: styles 函数族的文档.
+title: Styles
+description: Documentation for the styles functions.
 part: null
 outline:
 - id: summary
@@ -31,10 +31,11 @@ body:
   kind: group
   content:
     name: styles
-    title: 样式
+    title: Styles
     details: |-
-      <p>公式中的备用字形。</p>
-      <p>这些函数与 <a href="/docs/reference/text/text/"><code>text</code></a> 函数不同，因为数学字体包含每个字母的多个变体。</p>
+      <p>Alternate letterforms within formulas.</p>
+      <p>These functions are distinct from the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function because math fonts
+      contain multiple variants of each letter.</p>
     functions:
     - path:
       - math
@@ -43,6 +44,7 @@ body:
       keywords: []
       oneliner: Upright (non-italic) font style in math.
       element: false
+      contextual: false
       details: <p>Upright (non-italic) font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">upright</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">!=</span> A <span class="typ-math-delim">$</span>
@@ -71,6 +73,7 @@ body:
       keywords: []
       oneliner: Italic font style in math.
       element: false
+      contextual: false
       details: |-
         <p>Italic font style in math.</p>
         <p>For roman letters and greek lowercase letters, this is already the default.</p>
@@ -99,6 +102,7 @@ body:
       keywords: []
       oneliner: Bold font style in math.
       element: false
+      contextual: false
       details: <p>Bold font style in math.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">bold</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">:=</span> B<span class="typ-math-op">^</span>+ <span class="typ-math-delim">$</span>

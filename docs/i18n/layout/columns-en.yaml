@@ -1,6 +1,6 @@
 route: /docs/reference/layout/columns/
 title: Columns
-description: '`columns` 函数的文档'
+description: Documentation for the `columns` function.
 part: null
 outline:
 - id: summary
@@ -30,6 +30,7 @@ body:
     keywords: []
     oneliner: Separates a region into multiple equally sized columns.
     element: true
+    contextual: false
     details: |-
       <p>Separates a region into multiple equally sized columns.</p>
       <p>The <code>column</code> function allows to separate the interior of any container into

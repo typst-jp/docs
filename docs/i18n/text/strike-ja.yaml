@@ -1,6 +1,6 @@
 route: /docs/reference/text/strike/
-title: 删除线
-description: '`strike` 函数的文档'
+title: Strikethrough
+description: Documentation for the `strike` function.
 part: null
 outline:
 - id: summary
@@ -36,8 +36,9 @@ body:
     keywords: []
     oneliner: Strikes through text.
     element: true
+    contextual: false
     details: |-
-      <p>穿过文本的删除线。</p>
+      <p>Strikes through text.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">strike</span><span class="typ-punct">[</span>not<span class="typ-punct">]</span> relevant.
       </code></pre><div class="preview"><img src="/assets/docs/3b08403b55bd279eb85136e82aaf946b.png" alt="Preview" width="480" height="190"/></div></div>
@@ -46,13 +47,11 @@ body:
     params:
     - name: stroke
       details: |-
-        <p>
-        如何绘制线条。
-        </p>
-        <p
-        详细内容参见 <a href="/docs/reference/visualize/line/#parameters-stroke">line 的文档</a>。如果设置为<code><span class="typ-key">auto</span></code>，则采用文本的颜色和当前字体中定义的粗细。
-        </p>
-        <p><em>注：</em>请勿真正用来删除，因为仍然可以复制粘贴文本。</p>
+        <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the line.</p>
+        <p>If set to <code><span class="typ-key">auto</span></code>, takes on the text's color and a thickness defined in
+        the current font.</p>
+        <p><em>Note:</em> Please don't use this for real redaction as you can still copy
+        paste the text.</p>
       example: |-
         <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">strike</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">1.5pt</span> <span class="typ-op">+</span> red<span class="typ-punct">)</span><span class="typ-punct">[</span>very stricken through<span class="typ-punct">]</span>. <span class="typ-escape">\</span>
         This is <span class="typ-func">#</span><span class="typ-func">strike</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>redacted<span class="typ-punct">]</span>.
@@ -61,7 +60,9 @@ body:
       - auto
       - length
       - color
+      - gradient
       - stroke
+      - pattern
       - dictionary
       strings: []
       default: <code><span class="typ-key">auto</span></code>
@@ -72,13 +73,9 @@ body:
       settable: true
     - name: offset
       details: |-
-        <p>
-        相对于基线的线的位置。
-        如果设置为<code><span class="typ-key">auto</span></code>，则从字体表中读取。
-        </p>
-        <p>
-        如果不满足于字体提供的偏移量，可以使用此选项进行微调。
-        </p>
+        <p>The position of the line relative to the baseline. Read from the font
+        tables if <code><span class="typ-key">auto</span></code>.</p>
+        <p>This is useful if you are unhappy with the offset your font provides.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Inria Serif&quot;</span><span class="typ-punct">)</span>
         This is <span class="typ-func">#</span><span class="typ-func">strike</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-key">auto</span><span class="typ-punct">)</span><span class="typ-punct">[</span>low-ish<span class="typ-punct">]</span>. <span class="typ-escape">\</span>
@@ -96,9 +93,8 @@ body:
       settable: true
     - name: extent
       details: |-
-        <p>
-        超出文本长度的量（如果设为负数则缩短）。
-        </p>
+        <p>The amount by which to extend the line beyond (or within if negative)
+        the content.</p>
       example: |-
         <div class="previewed-code"><pre><code>This <span class="typ-func">#</span><span class="typ-func">strike</span><span class="typ-punct">(</span>extent<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">2pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>skips<span class="typ-punct">]</span> parts of the word.
         This <span class="typ-func">#</span><span class="typ-func">strike</span><span class="typ-punct">(</span>extent<span class="typ-punct">:</span> <span class="typ-num">2pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>extends<span class="typ-punct">]</span> beyond the word.
@@ -113,7 +109,7 @@ body:
       variadic: false
       settable: true
     - name: background
-      details: <p>线条是否应该放在内容后</p>
+      details: <p>Whether the line is placed behind the content.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">strike</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> red<span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">strike</span><span class="typ-punct">(</span>background<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>This is behind.<span class="typ-punct">]</span> <span class="typ-escape">\</span>
@@ -129,7 +125,7 @@ body:
       variadic: false
       settable: true
     - name: body
-      details: <p>要添加删除线的内容。</p>
+      details: <p>The content to strike through.</p>
       example: null
       types:
       - content

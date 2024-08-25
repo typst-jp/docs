@@ -1,6 +1,6 @@
 route: /docs/reference/math/cancel/
-title: 删除线
-description: '`cancel` 函数的文档'
+title: Cancel
+description: Documentation for the `cancel` function.
 part: null
 outline:
 - id: summary
@@ -38,11 +38,12 @@ body:
     name: cancel
     title: Cancel
     keywords: []
-    oneliner: 在公式的一部分上显示对角线。
+    oneliner: Displays a diagonal line over a part of an equation.
     element: true
+    contextual: false
     details: |-
-      <p>在公式上显示对角线。</p>
-      <p>通常用于表示删除元素。</p>
+      <p>Displays a diagonal line over a part of an equation.</p>
+      <p>This is commonly used to show the elimination of a term.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>Here, we can simplify:
       <span class="typ-math-delim">$</span> <span class="typ-punct">(</span>a <span class="typ-pol">dot</span> b <span class="typ-pol">dot</span> <span class="typ-func">cancel</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-math-op">/</span>
@@ -52,7 +53,7 @@ body:
     self: false
     params:
     - name: body
-      details: <p>被删除线覆盖的内容。</p>
+      details: <p>The content over which the line should be placed.</p>
       example: null
       types:
       - content
@@ -64,7 +65,10 @@ body:
       variadic: false
       settable: false
     - name: length
-      details: <p>删除线的长度，相对于被“删除”元素的对角线长度；值为<code><span class="typ-num">100%</span></code>时，删除线将恰好穿过元素。</p>
+      details: |-
+        <p>The length of the line, relative to the length of the diagonal spanning
+        the whole element being &quot;cancelled&quot;. A value of <code><span class="typ-num">100%</span></code> would then have
+        the line span precisely the element's diagonal.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> a + <span class="typ-func">cancel</span><span class="typ-punct">(</span>x<span class="typ-punct">,</span> length<span class="typ-punct">:</span> <span class="typ-num">#</span><span class="typ-num">200%</span><span class="typ-punct">)</span>
             <span class="typ-escape">-</span> <span class="typ-func">cancel</span><span class="typ-punct">(</span>x<span class="typ-punct">,</span> length<span class="typ-punct">:</span> <span class="typ-num">#</span><span class="typ-num">200%</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -80,7 +84,10 @@ body:
       variadic: false
       settable: true
     - name: inverted
-      details: <p>是否沿 y 轴反转删除线（指向左上角而非右上角）。</p>
+      details: |-
+        <p>Whether the cancel line should be inverted (flipped along the y-axis).
+        For the default angle setting, inverted means the cancel line
+        points to the top left instead of top right.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-punct">(</span>a <span class="typ-func">cancel</span><span class="typ-punct">(</span>(b + c)<span class="typ-punct">,</span> inverted<span class="typ-punct">:</span> <span class="typ-key">#</span><span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-math-op">/</span>
             <span class="typ-func">cancel</span><span class="typ-punct">(</span>b + c<span class="typ-punct">,</span> inverted<span class="typ-punct">:</span> <span class="typ-key">#</span><span class="typ-key">true</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -95,7 +102,9 @@ body:
       variadic: false
       settable: true
     - name: cross
-      details: <p>是否绘制两条相反的删除线交叉绘制在元素上。会覆盖掉  <code>inverted</code> 参数。</p>
+      details: |-
+        <p>Whether two opposing cancel lines should be drawn, forming a cross over
+        the element. Overrides <code>inverted</code>.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">cancel</span><span class="typ-punct">(</span><span class="typ-pol">Pi</span><span class="typ-punct">,</span> cross<span class="typ-punct">:</span> <span class="typ-key">#</span><span class="typ-key">true</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/6eb45aa7bcd0901ea11b4bb4eff08910.png" alt="Preview" width="480" height="190"/></div></div>
@@ -110,11 +119,15 @@ body:
       settable: true
     - name: angle
       details: |-
-        <p>旋转删除线的角度。</p>
+        <p>How much to rotate the cancel line.</p>
         <ul>
-        <li>如果设置为<code><span class="typ-key">auto</span></code>，线条将采用默认角度；即，沿着内容框的对角线。</li>
-        <li>如果给定一个角度，则线条将按照该角度顺时针方向绕y轴旋转。</li>
-        <li>如果给定一个函数<code>angle =&gt; angle</code>，线条将按照该函数返回的角度旋转。该函数接收默认角度作为输入。</li>
+        <li>If <code><span class="typ-key">auto</span></code>, the line assumes the default angle; that is, along the
+        diagonal line of the content box.</li>
+        <li>If given an angle, the line is rotated by that angle clockwise w.r.t
+        the y-axis.</li>
+        <li>If given a function <code>angle =&gt; angle</code>, the line is rotated by the angle
+        returned by that function. The function receives the default angle as
+        its input.</li>
         </ul>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">cancel</span><span class="typ-punct">(</span><span class="typ-pol">Pi</span><span class="typ-punct">)</span>
@@ -136,9 +149,8 @@ body:
       variadic: false
       settable: true
     - name: stroke
-      details: |-
-        <p>如何 <a href="/docs/reference/visualize/stroke/">绘制</a> 描边线，详情请参考
-        <a href="/docs/reference/visualize/line/#parameters-stroke">line 文档</a> 。</p>
+      details: <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the
+        cancel line.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">cancel</span><span class="typ-punct">(</span>
           <span class="typ-pol">sum</span> x<span class="typ-punct">,</span>

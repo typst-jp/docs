@@ -1,6 +1,6 @@
 route: /docs/reference/math/vec/
-title: 向量
-description: '`vec` 函数的文档'
+title: Vector
+description: Documentation for the `vec` function.
 part: null
 outline:
 - id: summary
@@ -31,13 +31,10 @@ body:
     keywords: []
     oneliner: A column vector.
     element: true
+    contextual: false
     details: |-
-      <p>
-      列向量。
-      </p>
-      <p>
-      向量中的内容可以通过对齐符 <code>&amp;</code> 来对齐。
-      </p>
+      <p>A column vector.</p>
+      <p>Content in the vector's elements can be aligned with the <code>&amp;</code> symbol.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>a<span class="typ-punct">,</span> b<span class="typ-punct">,</span> c<span class="typ-punct">)</span> <span class="typ-pol">dot</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">,</span> 3<span class="typ-punct">)</span>
           = a + 2b + 3c <span class="typ-math-delim">$</span>
@@ -46,7 +43,7 @@ body:
     self: false
     params:
     - name: delim
-      details: <p>使用的分隔符。</p>
+      details: <p>The delimiter to use.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">vec</span><span class="typ-punct">(</span>delim<span class="typ-punct">:</span> <span class="typ-str">&quot;[&quot;</span><span class="typ-punct">)</span>
         <span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -56,15 +53,15 @@ body:
       - str
       strings:
       - string: (
-        details: <p>圆括号分隔。</p>
+        details: <p>Delimit with parentheses.</p>
       - string: '['
-        details: <p>方括号分隔。</p>
+        details: <p>Delimit with brackets.</p>
       - string: '{'
-        details: <p>花括号分隔。</p>
+        details: <p>Delimit with curly braces.</p>
       - string: '|'
-        details: <p>垂直线分隔。</p>
+        details: <p>Delimit with vertical bars.</p>
       - string: '||'
-        details: <p>双垂直线分隔。</p>
+        details: <p>Delimit with double vertical bars.</p>
       default: <code><span class="typ-str">&quot;(&quot;</span></code>
       positional: false
       named: true
@@ -72,7 +69,7 @@ body:
       variadic: false
       settable: true
     - name: gap
-      details: <p>元素间的间距.</p>
+      details: <p>The gap between elements.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">vec</span><span class="typ-punct">(</span>gap<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">)</span>
         <span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -87,7 +84,7 @@ body:
       variadic: false
       settable: true
     - name: children
-      details: <p>向量内的元素。</p>
+      details: <p>The elements of the vector.</p>
       example: null
       types:
       - content

@@ -1,6 +1,6 @@
 route: /docs/reference/model/figure/
 title: Figure
-description: '`figure` 函数的文档'
+description: Documentation for the `figure` function.
 part: null
 outline:
 - id: summary
@@ -66,6 +66,7 @@ body:
     keywords: []
     oneliner: A figure with an optional caption.
     element: true
+    contextual: false
     details: |-
       <p>A figure with an optional caption.</p>
       <p>Automatically detects its kind to select the correct counting track. For
@@ -133,7 +134,8 @@ body:
     self: false
     params:
     - name: body
-      details: <p>The content of the figure. Often, an <a href="/docs/reference/visualize/image/">image</a>.</p>
+      details: <p>The content of the figure. Often, an <a href="/docs/reference/visualize/image/"
+        title="image">image</a>.</p>
       example: null
       types:
       - content
@@ -200,12 +202,12 @@ body:
         <p>If set to <code><span class="typ-key">auto</span></code>, the figure will try to automatically determine its
         kind based on the type of its body. Automatically detected kinds are
         <a href="/docs/reference/model/table/">tables</a> and <a href="/docs/reference/text/raw/">code</a>. In other cases, the inferred kind is
-        that of an <a href="/docs/reference/visualize/image/">image</a>.</p>
+        that of an <a href="/docs/reference/visualize/image/" title="image">image</a>.</p>
         <p>Setting this to something other than <code><span class="typ-key">auto</span></code> will override the
         automatic detection. This can be useful if</p>
         <ul>
         <li>you wish to create a custom figure type that is not an
-        <a href="/docs/reference/visualize/image/">image</a>, a <a href="/docs/reference/model/table/">table</a> or <a href="/docs/reference/text/raw/">code</a>,</li>
+        <a href="/docs/reference/visualize/image/" title="image">image</a>, a <a href="/docs/reference/model/table/" title="table">table</a> or <a href="/docs/reference/text/raw/">code</a>,</li>
         <li>you want to force the figure to use a specific counter regardless of
         its content.</li>
         </ul>
@@ -291,8 +293,8 @@ body:
       variadic: false
       settable: true
     - name: outlined
-      details: <p>Whether the figure should appear in an <a href="/docs/reference/model/outline/"><code>outline</code></a>
-        of figures.</p>
+      details: <p>Whether the figure should appear in an <a href="/docs/reference/model/outline/"
+        title="`outline`"><code>outline</code></a> of figures.</p>
       example: null
       types:
       - bool
@@ -314,14 +316,15 @@ body:
       oneliner: The caption of a figure. This element can be used in set and show
         rules to
       element: true
+      contextual: false
       details: |-
         <p>The caption of a figure. This element can be used in set and show rules to
         customize the appearance of captions for all figures or figures of a
         specific kind.</p>
         <p>In addition to its <code>pos</code> and <code>body</code>, the <code>caption</code> also provides the
-        figure's <code>kind</code>, <code>supplement</code>, <code>counter</code>, <code>numbering</code>, and <code>location</code> as
-        fields. These parts can be used in <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selectors and
-        show rules to build a completely custom caption.</p>
+        figure's <code>kind</code>, <code>supplement</code>, <code>counter</code>, and <code>numbering</code> as fields. These
+        parts can be used in <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selectors and show rules to
+        build a completely custom caption.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">:</span> <span class="typ-func">emph</span>
 
@@ -398,14 +401,15 @@ body:
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
             <span class="typ-func">#</span><span class="typ-func">underline</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>body<span class="typ-punct">)</span> |
-            <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">supplement</span> <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">counter</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>numbering<span class="typ-punct">)</span>
+            <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">supplement</span>
+            <span class="typ-key">#</span><span class="typ-key">context</span> it<span class="typ-punct">.</span>counter<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>numbering<span class="typ-punct">)</span>
           <span class="typ-punct">]</span>
 
           <span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
             <span class="typ-func">rect</span><span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">,</span>
             caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>A rectangle<span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-punct">)</span>
-          </code></pre><div class="preview"><img src="/assets/docs/799a48590ec046b3e9a21ce5f491602b.png" alt="Preview" width="480" height="190"/></div></div>
+          </code></pre><div class="preview"><img src="/assets/docs/90ebad710b55d7fc7703242c1830792f.png" alt="Preview" width="480" height="190"/></div></div>
         types:
         - content
         strings: []

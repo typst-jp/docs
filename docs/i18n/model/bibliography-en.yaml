@@ -1,6 +1,6 @@
 route: /docs/reference/model/bibliography/
 title: Bibliography
-description: '`bibliography` 函数的文档'
+description: Documentation for the `bibliography` function.
 part: null
 outline:
 - id: summary
@@ -36,6 +36,7 @@ body:
     keywords: []
     oneliner: A bibliography / reference listing.
     element: true
+    contextual: false
     details: |-
       <p>A bibliography / reference listing.</p>
       <p>You can create a new bibliography by calling this function with a path
@@ -142,167 +143,167 @@ body:
       types:
       - str
       strings:
-      - string: american-anthropological-association
-        details: <p>American Anthropological Association</p>
-      - string: springer-lecture-notes-in-computer-science
-        details: <p>Springer - Lecture Notes in Computer Science</p>
-      - string: american-medical-association
-        details: <p>American Medical Association 11th edition</p>
-      - string: sage-vancouver
-        details: <p>SAGE - Vancouver</p>
-      - string: biomed-central
-        details: <p>BioMed Central</p>
-      - string: american-society-of-civil-engineers
-        details: <p>American Society of Civil Engineers</p>
-      - string: taylor-and-francis-chicago-author-date
-        details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
-      - string: gb-7714-2015-note
-        details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
-      - string: american-society-for-microbiology
-        details: <p>American Society for Microbiology</p>
-      - string: american-meteorological-society
-        details: <p>American Meteorological Society</p>
-      - string: future-medicine
-        details: <p>Future Medicine journals</p>
-      - string: bristol-university-press
-        details: <p>Bristol University Press</p>
-      - string: public-library-of-science
-        details: <p>Public Library of Science</p>
+      - string: annual-reviews
+        details: <p>Annual Reviews (sorted by order of appearance)</p>
       - string: pensoft
         details: <p>Pensoft Journals</p>
+      - string: annual-reviews-author-date
+        details: <p>Annual Reviews (author-date)</p>
+      - string: the-lancet
+        details: <p>The Lancet</p>
+      - string: elsevier-with-titles
+        details: <p>Elsevier (numeric, with titles)</p>
+      - string: gb-7714-2015-author-date
+        details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
+      - string: royal-society-of-chemistry
+        details: <p>Royal Society of Chemistry</p>
+      - string: american-anthropological-association
+        details: <p>American Anthropological Association</p>
+      - string: sage-vancouver
+        details: <p>SAGE - Vancouver</p>
+      - string: british-medical-journal
+        details: <p>BMJ</p>
+      - string: frontiers
+        details: <p>Frontiers journals</p>
+      - string: elsevier-harvard
+        details: <p>Elsevier - Harvard (with titles)</p>
+      - string: gb-7714-2005-numeric
+        details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
+      - string: angewandte-chemie
+        details: <p>Angewandte Chemie International Edition</p>
+      - string: gb-7714-2015-note
+        details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
+      - string: springer-basic-author-date
+        details: <p>Springer - Basic (author-date)</p>
+      - string: trends
+        details: <p>Trends journals</p>
+      - string: american-geophysical-union
+        details: <p>American Geophysical Union</p>
+      - string: american-political-science-association
+        details: <p>American Political Science Association</p>
+      - string: american-psychological-association
+        details: <p>American Psychological Association 7th edition</p>
+      - string: cell
+        details: <p>Cell</p>
+      - string: spie
+        details: <p>SPIE journals</p>
+      - string: harvard-cite-them-right
+        details: <p>Cite Them Right 12th edition - Harvard</p>
       - string: american-institute-of-aeronautics-and-astronautics
         details: <p>American Institute of Aeronautics and Astronautics</p>
-      - string: mary-ann-liebert-vancouver
-        details: <p>Mary Ann Liebert - Vancouver</p>
+      - string: council-of-science-editors-author-date
+        details: <p>Council of Science Editors, Name-Year (author-date)</p>
+      - string: copernicus
+        details: <p>Copernicus Publications</p>
+      - string: sist02
+        details: <p>SIST02 (日本語)</p>
+      - string: springer-socpsych-author-date
+        details: <p>Springer - SocPsych (author-date)</p>
+      - string: modern-language-association-8
+        details: <p>Modern Language Association 8th edition</p>
+      - string: nature
+        details: <p>Nature</p>
+      - string: iso-690-numeric
+        details: <p>ISO-690 (numeric, English)</p>
+      - string: springer-mathphys
+        details: <p>Springer - MathPhys (numeric, brackets)</p>
+      - string: springer-lecture-notes-in-computer-science
+        details: <p>Springer - Lecture Notes in Computer Science</p>
+      - string: future-science
+        details: <p>Future Science Group</p>
+      - string: current-opinion
+        details: <p>Current Opinion journals</p>
+      - string: deutsche-gesellschaft-für-psychologie
+        details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
+      - string: american-meteorological-society
+        details: <p>American Meteorological Society</p>
       - string: modern-humanities-research-association
         details: <p>Modern Humanities Research Association 3rd edition (note with
           bibliography)</p>
-      - string: springer-socpsych-author-date
-        details: <p>Springer - SocPsych (author-date)</p>
-      - string: trends
-        details: <p>Trends journals</p>
-      - string: gost-r-705-2008-numeric
-        details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
-      - string: american-political-science-association
-        details: <p>American Political Science Association</p>
-      - string: future-science
-        details: <p>Future Science Group</p>
-      - string: association-for-computing-machinery
-        details: <p>Association for Computing Machinery</p>
-      - string: elsevier-harvard
-        details: <p>Elsevier - Harvard (with titles)</p>
-      - string: american-chemical-society
-        details: <p>American Chemical Society</p>
-      - string: cell
-        details: <p>Cell</p>
-      - string: royal-society-of-chemistry
-        details: <p>Royal Society of Chemistry</p>
-      - string: sist02
-        details: <p>SIST02 (日本語)</p>
-      - string: gb-7714-2005-numeric
-        details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
-      - string: institute-of-electrical-and-electronics-engineers
-        details: <p>IEEE</p>
-      - string: springer-humanities-author-date
-        details: <p>Springer - Humanities (author-date)</p>
-      - string: deutsche-gesellschaft-für-psychologie
-        details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
-      - string: springer-basic-author-date
-        details: <p>Springer - Basic (author-date)</p>
-      - string: institute-of-physics-numeric
-        details: <p>Institute of Physics (numeric)</p>
-      - string: vancouver
-        details: <p>Vancouver</p>
-      - string: nature
-        details: <p>Nature</p>
-      - string: current-opinion
-        details: <p>Current Opinion journals</p>
-      - string: annual-reviews-author-date
-        details: <p>Annual Reviews (author-date)</p>
-      - string: american-institute-of-physics
-        details: <p>American Institute of Physics 4th edition</p>
-      - string: gb-7714-2015-numeric
-        details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
-      - string: the-lancet
-        details: <p>The Lancet</p>
-      - string: springer-basic
-        details: <p>Springer - Basic (numeric, brackets)</p>
-      - string: american-geophysical-union
-        details: <p>American Geophysical Union</p>
-      - string: turabian-fullnote-8
-        details: <p>Turabian 8th edition (full note)</p>
-      - string: taylor-and-francis-national-library-of-medicine
-        details: <p>Taylor &amp; Francis - National Library of Medicine</p>
-      - string: american-physiological-society
-        details: <p>American Physiological Society</p>
-      - string: thieme
-        details: <p>Thieme-German (Deutsch)</p>
-      - string: copernicus
-        details: <p>Copernicus Publications</p>
-      - string: the-institution-of-engineering-and-technology
-        details: <p>The Institution of Engineering and Technology</p>
-      - string: annual-reviews
-        details: <p>Annual Reviews (sorted by order of appearance)</p>
-      - string: deutsche-sprache
-        details: <p>Deutsche Sprache (Deutsch)</p>
-      - string: harvard-cite-them-right
-        details: <p>Cite Them Right 12th edition - Harvard</p>
-      - string: chicago-fullnotes
-        details: <p>Chicago Manual of Style 17th edition (full note)</p>
-      - string: iso-690-author-date
-        details: <p>ISO-690 (author-date, English)</p>
-      - string: council-of-science-editors-author-date
-        details: <p>Council of Science Editors, Name-Year (author-date)</p>
-      - string: springer-mathphys
-        details: <p>Springer - MathPhys (numeric, brackets)</p>
-      - string: american-society-of-mechanical-engineers
-        details: <p>American Society of Mechanical Engineers</p>
-      - string: karger
-        details: <p>Karger journals</p>
-      - string: multidisciplinary-digital-publishing-institute
-        details: <p>Multidisciplinary Digital Publishing Institute</p>
-      - string: american-psychological-association
-        details: <p>American Psychological Association 7th edition</p>
-      - string: modern-language-association-8
-        details: <p>Modern Language Association 8th edition</p>
-      - string: gb-7714-2015-author-date
-        details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
-      - string: springer-vancouver
-        details: <p>Springer - Vancouver (brackets)</p>
-      - string: british-medical-journal
-        details: <p>BMJ</p>
-      - string: turabian-author-date
-        details: <p>Turabian 9th edition (author-date)</p>
-      - string: chicago-author-date
-        details: <p>Chicago Manual of Style 17th edition (author-date)</p>
-      - string: associacao-brasileira-de-normas-tecnicas
-        details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
-      - string: vancouver-superscript
-        details: <p>Vancouver (superscript)</p>
-      - string: angewandte-chemie
-        details: <p>Angewandte Chemie International Edition</p>
-      - string: elsevier-with-titles
-        details: <p>Elsevier (numeric, with titles)</p>
-      - string: iso-690-numeric
-        details: <p>ISO-690 (numeric, English)</p>
-      - string: modern-language-association
-        details: <p>Modern Language Association 9th edition</p>
-      - string: council-of-science-editors
-        details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
-      - string: spie
-        details: <p>SPIE journals</p>
-      - string: springer-fachzeitschriften-medizin-psychologie
-        details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
-      - string: frontiers
-        details: <p>Frontiers journals</p>
-      - string: american-physics-society
-        details: <p>American Physical Society</p>
-      - string: american-sociological-association
-        details: <p>American Sociological Association 6th edition</p>
-      - string: elsevier-vancouver
-        details: <p>Elsevier - Vancouver</p>
+      - string: american-society-of-civil-engineers
+        details: <p>American Society of Civil Engineers</p>
       - string: chicago-notes
         details: <p>Chicago Manual of Style 17th edition (note)</p>
+      - string: institute-of-electrical-and-electronics-engineers
+        details: <p>IEEE</p>
+      - string: deutsche-sprache
+        details: <p>Deutsche Sprache (Deutsch)</p>
+      - string: gb-7714-2015-numeric
+        details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
+      - string: bristol-university-press
+        details: <p>Bristol University Press</p>
+      - string: association-for-computing-machinery
+        details: <p>Association for Computing Machinery</p>
+      - string: associacao-brasileira-de-normas-tecnicas
+        details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
+      - string: american-medical-association
+        details: <p>American Medical Association 11th edition</p>
+      - string: elsevier-vancouver
+        details: <p>Elsevier - Vancouver</p>
+      - string: chicago-author-date
+        details: <p>Chicago Manual of Style 17th edition (author-date)</p>
+      - string: vancouver
+        details: <p>Vancouver</p>
+      - string: chicago-fullnotes
+        details: <p>Chicago Manual of Style 17th edition (full note)</p>
+      - string: turabian-author-date
+        details: <p>Turabian 9th edition (author-date)</p>
+      - string: springer-fachzeitschriften-medizin-psychologie
+        details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
+      - string: thieme
+        details: <p>Thieme-German (Deutsch)</p>
+      - string: taylor-and-francis-national-library-of-medicine
+        details: <p>Taylor &amp; Francis - National Library of Medicine</p>
+      - string: american-chemical-society
+        details: <p>American Chemical Society</p>
+      - string: american-institute-of-physics
+        details: <p>American Institute of Physics 4th edition</p>
+      - string: taylor-and-francis-chicago-author-date
+        details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
+      - string: gost-r-705-2008-numeric
+        details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
+      - string: institute-of-physics-numeric
+        details: <p>Institute of Physics (numeric)</p>
+      - string: iso-690-author-date
+        details: <p>ISO-690 (author-date, English)</p>
+      - string: the-institution-of-engineering-and-technology
+        details: <p>The Institution of Engineering and Technology</p>
+      - string: american-society-for-microbiology
+        details: <p>American Society for Microbiology</p>
+      - string: multidisciplinary-digital-publishing-institute
+        details: <p>Multidisciplinary Digital Publishing Institute</p>
+      - string: springer-basic
+        details: <p>Springer - Basic (numeric, brackets)</p>
+      - string: springer-humanities-author-date
+        details: <p>Springer - Humanities (author-date)</p>
+      - string: turabian-fullnote-8
+        details: <p>Turabian 8th edition (full note)</p>
+      - string: karger
+        details: <p>Karger journals</p>
+      - string: springer-vancouver
+        details: <p>Springer - Vancouver (brackets)</p>
+      - string: vancouver-superscript
+        details: <p>Vancouver (superscript)</p>
+      - string: american-physics-society
+        details: <p>American Physical Society</p>
+      - string: mary-ann-liebert-vancouver
+        details: <p>Mary Ann Liebert - Vancouver</p>
+      - string: american-society-of-mechanical-engineers
+        details: <p>American Society of Mechanical Engineers</p>
+      - string: council-of-science-editors
+        details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
+      - string: american-physiological-society
+        details: <p>American Physiological Society</p>
+      - string: future-medicine
+        details: <p>Future Medicine journals</p>
+      - string: biomed-central
+        details: <p>BioMed Central</p>
+      - string: public-library-of-science
+        details: <p>Public Library of Science</p>
+      - string: american-sociological-association
+        details: <p>American Sociological Association 6th edition</p>
+      - string: modern-language-association
+        details: <p>Modern Language Association 9th edition</p>
       - string: alphanumeric
         details: <p>Alphanumeric</p>
       default: <code><span class="typ-str">&quot;ieee&quot;</span></code>

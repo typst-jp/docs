@@ -1,10 +1,13 @@
 route: /docs/reference/introspection/counter/
 title: Counter
-description: Counter 类型的文档
+description: Documentation for the Counter type.
 part: null
 outline:
 - id: summary
   name: Summary
+  children: []
+- id: accessing
+  name: Accessing
   children: []
 - id: displaying
   name: Displaying
@@ -12,11 +15,14 @@ outline:
 - id: modifying
   name: Modifying
   children: []
-- id: how-to-step
-  name: How To Step
-  children: []
 - id: page-counter
   name: Page Counter
+  children: []
+- id: custom-counters
+  name: Custom Counters
+  children: []
+- id: how-to-step
+  name: How To Step
   children: []
 - id: time-travel
   name: Time Travel
@@ -33,6 +39,9 @@ outline:
 - id: definitions
   name: Definitions
   children:
+  - id: definitions-get
+    name: Get
+    children: []
   - id: definitions-display
     name: Display
     children:
@@ -41,6 +50,18 @@ outline:
       children: []
     - id: definitions-display-both
       name: both
+      children: []
+  - id: definitions-at
+    name: At
+    children:
+    - id: definitions-at-selector
+      name: selector
+      children: []
+  - id: definitions-final
+    name: Final
+    children:
+    - id: definitions-final-location
+      name: location
       children: []
   - id: definitions-step
     name: Step
@@ -54,18 +75,6 @@ outline:
     - id: definitions-update-update
       name: update
       children: []
-  - id: definitions-at
-    name: At
-    children:
-    - id: definitions-at-location
-      name: location
-      children: []
-  - id: definitions-final
-    name: Final
-    children:
-    - id: definitions-final-location
-      name: location
-      children: []
 body:
   kind: type
   content:
@@ -78,39 +87,52 @@ body:
       <p>With the counter function, you can access and modify counters for pages,
       headings, figures, and more. Moreover, you can define custom counters for
       other things you want to count.</p>
+      <p>Since counters change throughout the course of the document, their current
+      value is <em>contextual.</em> It is recommended to read the chapter on <a href="/docs/reference/context/" title="context">context</a>
+      before continuing here.</p>
+      <h2 id="accessing">Accessing a counter</h2>
+      <p>To access the raw value of a counter, we can use the <a href="/docs/reference/introspection/counter/#definitions-get"><code>get</code></a>
+      function. This function returns an <a href="/docs/reference/foundations/array/" title="array">array</a>: Counters can have multiple
+      levels (in the case of headings for sections, subsections, and so on), and
+      each item in the array corresponds to one level.</p>
+      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
+
+      <span class="typ-heading">= Introduction</span>
+      Raw value of heading counter is
+      <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      </code></pre><div class="preview"><img src="/assets/docs/f0000cf7b18d1b2ca2529086d06d3eff.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="displaying">Displaying a counter</h2>
-      <p>To display the current value of the heading counter, you call the <code>counter</code>
-      function with the <code>key</code> set to <code>heading</code> and then call the <code>display</code> method
-      on the counter. To see any output, you also have to enable heading
-      <a href="/docs/reference/model/heading/#parameters-numbering">numbering</a>.</p>
-      <p>The <code>display</code> method optionally takes an argument telling it how to format
-      the counter. This can be a <a href="/docs/reference/model/numbering/">numbering pattern or a function</a>.</p>
+      <p>Often, we want to display the value of a counter in a more human-readable
+      way. To do that, we can call the <a href="/docs/reference/introspection/counter/#definitions-display"><code>display</code></a> function on
+      the counter. This function retrieves the current counter value and formats
+      it either with a provided or with an automatically inferred <a href="/docs/reference/model/numbering/" title="numbering">numbering</a>.</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 
       <span class="typ-heading">= Introduction</span>
       Some text here.
 
       <span class="typ-heading">= Background</span>
-      The current value is:
-      <span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      The current value is: <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">{</span>
+        <span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      <span class="typ-punct">}</span>
 
-      Or in roman numerals:
-      <span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-str">&quot;I&quot;</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/3c91f06c6e12011f1262a3edaf9de993.png" alt="Preview" width="480" height="190"/></div></div>
+      Or in roman numerals: <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">{</span>
+        <span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-str">&quot;I&quot;</span><span class="typ-punct">)</span>
+      <span class="typ-punct">}</span>
+      </code></pre><div class="preview"><img src="/assets/docs/ab2436dd536a100339549def96a8068a.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="modifying">Modifying a counter</h2>
       <p>To modify a counter, you can use the <code>step</code> and <code>update</code> methods:</p>
       <ul>
       <li>
       <p>The <code>step</code> method increases the value of the counter by one. Because
-      counters can have multiple levels (in the case of headings for sections,
-      subsections, and so on), the <code>step</code> method optionally takes a <code>level</code>
+      counters can have multiple levels , it optionally takes a <code>level</code>
       argument. If given, the counter steps at the given depth.</p>
       </li>
       <li>
       <p>The <code>update</code> method allows you to arbitrarily modify the counter. In its
-      basic form, you give it an integer (or multiple for multiple levels). For
-      more flexibility, you can instead also give it a function that gets the
-      current value and returns a new value.</p>
+      basic form, you give it an integer (or an array for multiple levels). For
+      more flexibility, you can instead also give it a function that receives
+      the current value and returns a new value.</p>
       </li>
       </ul>
       <p>The heading counter is stepped before the heading is displayed, so
@@ -130,41 +152,10 @@ body:
       <span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">step</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
 
       <span class="typ-heading">== Analysis</span>
-      Still at <span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>.
-      </code></pre><div class="preview"><img src="/assets/docs/dc3be507febcfa78e096b4d4eb924e01.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>To define your own counter, call the <code>counter</code> function with a string as a
-      key. This key identifies the counter globally.</p>
-      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> mine <span class="typ-op">=</span> <span class="typ-func">counter</span><span class="typ-punct">(</span><span class="typ-str">&quot;mycounter&quot;</span><span class="typ-punct">)</span>
-      <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-      <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">step</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-      <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-      <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span>c <span class="typ-op">=&gt;</span> c <span class="typ-op">*</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
-      <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-      </code></pre><div class="preview"><img src="/assets/docs/8d57dcf6f8381bff15ee2ff13bf8bc91.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="how-to-step">How to step</h2>
-      <p>When you define and use a custom counter, in general, you should first step
-      the counter and then display it. This way, the stepping behaviour of a
-      counter can depend on the element it is stepped for. If you were writing a
-      counter for, let's say, theorems, your theorem's definition would thus first
-      include the counter step and only then display the counter and the theorem's
-      contents.</p>
-      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> c <span class="typ-op">=</span> <span class="typ-func">counter</span><span class="typ-punct">(</span><span class="typ-str">&quot;theorem&quot;</span><span class="typ-punct">)</span>
-      <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">theorem</span><span class="typ-punct">(</span>it<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">block</span><span class="typ-punct">[</span>
-        <span class="typ-pol">#</span><span class="typ-pol">c</span><span class="typ-punct">.</span><span class="typ-func">step</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-        <span class="typ-strong">*Theorem <span class="typ-pol">#</span><span class="typ-pol">c</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>:*</span> <span class="typ-pol">#</span><span class="typ-pol">it</span>
-      <span class="typ-punct">]</span>
-
-      <span class="typ-func">#</span><span class="typ-func">theorem</span><span class="typ-punct">[</span><span class="typ-math-delim">$</span>1 = 1<span class="typ-math-delim">$</span><span class="typ-punct">]</span>
-      <span class="typ-func">#</span><span class="typ-func">theorem</span><span class="typ-punct">[</span><span class="typ-math-delim">$</span>2 &lt; 3<span class="typ-math-delim">$</span><span class="typ-punct">]</span>
-      </code></pre><div class="preview"><img src="/assets/docs/b97977cf07ea730ac9e00f19761bd36c.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>The rationale behind this is best explained on the example of the heading
-      counter: An update to the heading counter depends on the heading's level.
-      By stepping directly before the heading, we can correctly step from <code>1</code> to
-      <code>1.1</code> when encountering a level 2 heading. If we were to step after the
-      heading, we wouldn't know what to step to.</p>
-      <p>Because counters should always be stepped before the elements they count,
-      they always start at zero. This way, they are at one for the first display
-      (which happens after the first step).</p>
+      Still at <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">{</span>
+        <span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      <span class="typ-punct">}</span>
+      </code></pre><div class="preview"><img src="/assets/docs/88fb4b6bcd763483f95d2ed86200bc95.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="page-counter">Page counter</h2>
       <p>The page counter is special. It is automatically stepped at each pagebreak.
       But like other counters, you can also step it manually. For example, you
@@ -185,6 +176,41 @@ body:
       page and total number of pages in
       Arabic numbers.
       </code></pre><div class="preview"><img src="/assets/docs/6e042ee9b3964a4ce84bb21b9ca876e8.png" alt="Preview" width="480" height="190"/></div></div>
+      <h2 id="custom-counters">Custom counters</h2>
+      <p>To define your own counter, call the <code>counter</code> function with a string as a
+      key. This key identifies the counter globally.</p>
+      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> mine <span class="typ-op">=</span> <span class="typ-func">counter</span><span class="typ-punct">(</span><span class="typ-str">&quot;mycounter&quot;</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">context</span> mine<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+      <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">step</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">context</span> mine<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+      <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span>c <span class="typ-op">=&gt;</span> c <span class="typ-op">*</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">context</span> mine<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      </code></pre><div class="preview"><img src="/assets/docs/04d7c42c410aa3e442052c6ecdce5d3a.png" alt="Preview" width="480" height="190"/></div></div>
+      <h2 id="how-to-step">How to step</h2>
+      <p>When you define and use a custom counter, in general, you should first step
+      the counter and then display it. This way, the stepping behaviour of a
+      counter can depend on the element it is stepped for. If you were writing a
+      counter for, let's say, theorems, your theorem's definition would thus first
+      include the counter step and only then display the counter and the theorem's
+      contents.</p>
+      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> c <span class="typ-op">=</span> <span class="typ-func">counter</span><span class="typ-punct">(</span><span class="typ-str">&quot;theorem&quot;</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">theorem</span><span class="typ-punct">(</span>it<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">block</span><span class="typ-punct">[</span>
+        <span class="typ-pol">#</span><span class="typ-pol">c</span><span class="typ-punct">.</span><span class="typ-func">step</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+        <span class="typ-strong">*Theorem <span class="typ-key">#</span><span class="typ-key">context</span> c<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>:*</span>
+        <span class="typ-pol">#</span><span class="typ-pol">it</span>
+      <span class="typ-punct">]</span>
+
+      <span class="typ-func">#</span><span class="typ-func">theorem</span><span class="typ-punct">[</span><span class="typ-math-delim">$</span>1 = 1<span class="typ-math-delim">$</span><span class="typ-punct">]</span>
+      <span class="typ-func">#</span><span class="typ-func">theorem</span><span class="typ-punct">[</span><span class="typ-math-delim">$</span>2 &lt; 3<span class="typ-math-delim">$</span><span class="typ-punct">]</span>
+      </code></pre><div class="preview"><img src="/assets/docs/c8a2c4e5de1a6dbf1e6b53005ea99f1d.png" alt="Preview" width="480" height="190"/></div></div>
+      <p>The rationale behind this is best explained on the example of the heading
+      counter: An update to the heading counter depends on the heading's level. By
+      stepping directly before the heading, we can correctly step from <code>1</code> to
+      <code>1.1</code> when encountering a level 2 heading. If we were to step after the
+      heading, we wouldn't know what to step to.</p>
+      <p>Because counters should always be stepped before the elements they count,
+      they always start at zero. This way, they are at one for the first display
+      (which happens after the first step).</p>
       <h2 id="time-travel">Time travel</h2>
       <p>Counters can travel through time! You can find out the final value of the
       counter before it is reached and even determine what the value was at any
@@ -192,17 +218,11 @@ body:
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> mine <span class="typ-op">=</span> <span class="typ-func">counter</span><span class="typ-punct">(</span><span class="typ-str">&quot;mycounter&quot;</span><span class="typ-punct">)</span>
 
       <span class="typ-heading">= Values</span>
-      <span class="typ-func">#</span><span class="typ-func">locate</span><span class="typ-punct">(</span>loc <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
-        <span class="typ-key">let</span> start-val <span class="typ-op">=</span> mine<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span>loc<span class="typ-punct">)</span>
-        <span class="typ-key">let</span> elements <span class="typ-op">=</span> <span class="typ-func">query</span><span class="typ-punct">(</span><span class="typ-label">&lt;intro&gt;</span><span class="typ-punct">,</span> loc<span class="typ-punct">)</span>
-        <span class="typ-key">let</span> intro-val <span class="typ-op">=</span> mine<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span>
-          elements<span class="typ-punct">.</span><span class="typ-func">first</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">location</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-        <span class="typ-punct">)</span>
-        <span class="typ-key">let</span> final-val <span class="typ-op">=</span> mine<span class="typ-punct">.</span><span class="typ-func">final</span><span class="typ-punct">(</span>loc<span class="typ-punct">)</span>
-        <span class="typ-punct">[</span>Starts as: <span class="typ-pol">#</span><span class="typ-pol">start-val</span> <span class="typ-escape">\</span>
-         Value at intro is: <span class="typ-pol">#</span><span class="typ-pol">intro-val</span> <span class="typ-escape">\</span>
-         Final value is: <span class="typ-pol">#</span><span class="typ-pol">final-val</span> <span class="typ-escape">\</span> <span class="typ-punct">]</span>
-      <span class="typ-punct">}</span><span class="typ-punct">)</span>
+      <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">[</span>
+        Value here: <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        At intro: <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-label">&lt;intro&gt;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        Final value: <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">final</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+      <span class="typ-punct">]</span>
 
       <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span>n <span class="typ-op">=&gt;</span> n <span class="typ-op">+</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
 
@@ -211,34 +231,9 @@ body:
 
       <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">step</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
       <span class="typ-pol">#</span><span class="typ-pol">mine</span><span class="typ-punct">.</span><span class="typ-func">step</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/2bb4fadda762ecd725b12fa5c261cb7a.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>Let's dissect what happens in the example above:</p>
-      <ul>
-      <li>
-      <p>We call <a href="/docs/reference/introspection/locate/"><code>locate</code></a> to get access to the current location in the
-      document. We then pass this location to our counter's <code>at</code> method to get
-      its value at the current location. The <code>at</code> method always returns an array
-      because counters can have multiple levels. As the counter starts at zero,
-      the first value is thus <code><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">,</span><span class="typ-punct">)</span></code>.</p>
-      </li>
-      <li>
-      <p>We now <a href="/docs/reference/introspection/query/"><code>query</code></a> the document for all elements with the
-      <code><span class="typ-label">&lt;intro&gt;</span></code> label. The result is an array from which we extract the first
-      (and only) element's <a href="/docs/reference/foundations/content/#definitions-location">location</a>. We then look up the
-      value of the counter at that location. The first update to the counter
-      sets it to <code><span class="typ-num">0</span> <span class="typ-op">+</span> <span class="typ-num">3</span> <span class="typ-op">=</span> <span class="typ-num">3</span></code>. At the introduction heading, the value is thus
-      <code><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">,</span><span class="typ-punct">)</span></code>.</p>
-      </li>
-      <li>
-      <p>Last but not least, we call the <code>final</code> method on the counter. It tells us
-      what the counter's value will be at the end of the document. We also need
-      to give it a location to prove that we are inside of a <code>locate</code> call, but
-      which one doesn't matter. After the heading follow two calls to <code>step()</code>,
-      so the final value is <code><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span><span class="typ-punct">)</span></code>.</p>
-      </li>
-      </ul>
+      </code></pre><div class="preview"><img src="/assets/docs/45afacb654d448206f10f3a6401ebe71.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="other-state">Other kinds of state</h2>
-      <p>The <code>counter</code> type is closely related to <a href="/docs/reference/introspection/state/">state</a> type. Read its
+      <p>The <code>counter</code> type is closely related to <a href="/docs/reference/introspection/state/" title="state">state</a> type. Read its
       documentation for more details on state management in Typst and why it
       doesn't just use normal variables for counters.</p>
     constructor:
@@ -248,6 +243,7 @@ body:
       keywords: []
       oneliner: Create a new counter identified by a key.
       element: false
+      contextual: false
       details: <p>Create a new counter identified by a key.</p>
       example: null
       self: false
@@ -258,17 +254,21 @@ body:
           <ul>
           <li>If it is a string, creates a custom counter that is only affected
           by manual updates,</li>
-          <li>If this is a <code><span class="typ-label">&lt;label&gt;</span></code>, counts through all elements with that
-          label,</li>
-          <li>If this is an element function or selector, counts through its
-          elements,</li>
-          <li>If this is the <a href="/docs/reference/layout/page/"><code>page</code></a> function, counts through pages.</li>
+          <li>If it is the <a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> function, counts through pages,</li>
+          <li>If it is a <a href="/docs/reference/foundations/selector/" title="selector">selector</a>, counts through elements that matches with the
+          selector. For example,
+          <ul>
+          <li>provide an element function: counts elements of that type,</li>
+          <li>provide a <a href="/docs/reference/foundations/label/"><code><span class="typ-label">&lt;label&gt;</span></code></a>: counts elements with that label.</li>
+          </ul>
+          </li>
           </ul>
         example: null
         types:
         - str
         - label
         - selector
+        - location
         - function
         strings: []
         default: null
@@ -283,12 +283,38 @@ body:
     scope:
     - path:
       - counter
+      name: get
+      title: Get
+      keywords: []
+      oneliner: Retrieves the value of the counter at the current location. Always
+      element: false
+      contextual: true
+      details: |-
+        <p>Retrieves the value of the counter at the current location. Always
+        returns an array of integers, even if the counter has just one number.</p>
+        <p>This is equivalent to <code>counter<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-func">here</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code>.</p>
+      example: null
+      self: true
+      params: []
+      returns:
+      - int
+      - array
+      scope: []
+    - path:
+      - counter
       name: display
       title: Display
       keywords: []
-      oneliner: Displays the current value of the counter.
+      oneliner: Displays the current value of the counter with a numbering and returns
       element: false
-      details: <p>Displays the current value of the counter.</p>
+      contextual: true
+      details: |-
+        <p>Displays the current value of the counter with a numbering and returns
+        the formatted output.</p>
+        <p><em>Compatibility:</em> For compatibility with Typst 0.10 and lower, this
+        function also works without an established context. Then, it will create
+        opaque contextual content rather than directly returning the output of
+        the numbering. This behaviour will be removed in a future release.</p>
       example: null
       self: true
       params:
@@ -299,16 +325,16 @@ body:
           each number of the counter as a separate argument. If the amount of
           numbers varies, e.g. for the heading argument, you can use an
           <a href="/docs/reference/foundations/arguments/">argument sink</a>.</p>
-          <p>If this is omitted, displays the counter with the numbering style
-          for the counted element or with the pattern <code><span class="typ-str">&quot;1.1&quot;</span></code> if no such
-          style exists.</p>
+          <p>If this is omitted or set to <code><span class="typ-key">auto</span></code>, displays the counter with the
+          numbering style for the counted element or with the pattern
+          <code><span class="typ-str">&quot;1.1&quot;</span></code> if no such style exists.</p>
         example: null
         types:
-        - none
+        - auto
         - str
         - function
         strings: []
-        default: <code><span class="typ-key">none</span></code>
+        default: <code><span class="typ-key">auto</span></code>
         positional: true
         named: false
         required: false
@@ -331,7 +357,79 @@ body:
         variadic: false
         settable: false
       returns:
-      - content
+      - any
+      scope: []
+    - path:
+      - counter
+      name: at
+      title: At
+      keywords: []
+      oneliner: Retrieves the value of the counter at the given location. Always returns
+      element: false
+      contextual: true
+      details: |-
+        <p>Retrieves the value of the counter at the given location. Always returns
+        an array of integers, even if the counter has just one number.</p>
+        <p>The <code>selector</code> must match exactly one element in the document. The most
+        useful kinds of selectors for this are <a href="/docs/reference/foundations/label/">labels</a> and
+        <a href="/docs/reference/introspection/location/">locations</a>.</p>
+        <p><em>Compatibility:</em> For compatibility with Typst 0.10 and lower, this
+        function also works without a known context if the <code>selector</code> is a
+        location. This behaviour will be removed in a future release.</p>
+      example: null
+      self: true
+      params:
+      - name: selector
+        details: <p>The place at which the counter's value should be retrieved.</p>
+        example: null
+        types:
+        - label
+        - selector
+        - location
+        - function
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - int
+      - array
+      scope: []
+    - path:
+      - counter
+      name: final
+      title: Final
+      keywords: []
+      oneliner: Retrieves the value of the counter at the end of the document. Always
+      element: false
+      contextual: true
+      details: |-
+        <p>Retrieves the value of the counter at the end of the document. Always
+        returns an array of integers, even if the counter has just one number.</p>
+      example: null
+      self: true
+      params:
+      - name: location
+        details: |-
+          <p><em>Compatibility:</em> This argument only exists for compatibility with
+          Typst 0.10 and lower and shouldn't be used anymore.</p>
+        example: null
+        types:
+        - none
+        - location
+        strings: []
+        default: <code><span class="typ-key">none</span></code>
+        positional: true
+        named: false
+        required: false
+        variadic: false
+        settable: false
+      returns:
+      - int
+      - array
       scope: []
     - path:
       - counter
@@ -340,6 +438,7 @@ body:
       keywords: []
       oneliner: Increases the value of the counter by one.
       element: false
+      contextual: false
       details: |-
         <p>Increases the value of the counter by one.</p>
         <p>The update will be in effect at the position where the returned content
@@ -374,6 +473,7 @@ body:
       keywords: []
       oneliner: Updates the value of the counter.
       element: false
+      contextual: false
       details: |-
         <p>Updates the value of the counter.</p>
         <p>Just like with <code>step</code>, the update only occurs if you put the resulting
@@ -392,7 +492,6 @@ body:
         - int
         - array
         - function
-        - counter-update
         strings: []
         default: null
         positional: true
@@ -402,75 +501,5 @@ body:
         settable: false
       returns:
       - content
-      scope: []
-    - path:
-      - counter
-      name: at
-      title: At
-      keywords: []
-      oneliner: Gets the value of the counter at the given location. Always returns
-        an
-      element: false
-      details: |-
-        <p>Gets the value of the counter at the given location. Always returns an
-        array of integers, even if the counter has just one number.</p>
-      example: null
-      self: true
-      params:
-      - name: location
-        details: |-
-          <p>The location at which the counter value should be retrieved. A
-          suitable location can be retrieved from <a href="/docs/reference/introspection/locate/"><code>locate</code></a> or
-          <a href="/docs/reference/introspection/query/"><code>query</code></a>.</p>
-        example: null
-        types:
-        - location
-        strings: []
-        default: null
-        positional: true
-        named: false
-        required: true
-        variadic: false
-        settable: false
-      returns:
-      - int
-      - array
-      scope: []
-    - path:
-      - counter
-      name: final
-      title: Final
-      keywords: []
-      oneliner: Gets the value of the counter at the end of the document. Always returns
-      element: false
-      details: |-
-        <p>Gets the value of the counter at the end of the document. Always returns
-        an array of integers, even if the counter has just one number.</p>
-      example: null
-      self: true
-      params:
-      - name: location
-        details: |-
-          <p>Can be an arbitrary location, as its value is irrelevant for the
-          method's return value. Why is it required then? Typst has to
-          evaluate parts of your code multiple times to determine all counter
-          values. By only allowing this method within <a href="/docs/reference/introspection/locate/"><code>locate</code></a>
-          calls, the amount of code that can depend on the method's result is
-          reduced. If you could call <code>final</code> directly at the top level of a
-          module, the evaluation of the whole module and its exports could
-          depend on the counter's value.</p>
-        example: null
-        types:
-        - location
-        strings: []
-        default: null
-        positional: true
-        named: false
-        required: true
-        variadic: false
-        settable: false
-      returns:
-      - int
-      - array
       scope: []
 children: []

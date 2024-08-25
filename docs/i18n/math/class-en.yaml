@@ -1,6 +1,6 @@
 route: /docs/reference/math/class/
 title: Class
-description: '`class` 函数的文档'
+description: Documentation for the `class` function.
 part: null
 outline:
 - id: summary
@@ -28,10 +28,14 @@ body:
     keywords: []
     oneliner: Forced use of a certain math class.
     element: true
+    contextual: false
     details: |-
       <p>Forced use of a certain math class.</p>
       <p>This is useful to treat certain symbols as if they were of a different
-      class, e.g. to make a symbol behave like a relation.</p>
+      class, e.g. to make a symbol behave like a relation. The class of a symbol
+      defines the way it is laid out, including spacing around it, and how its
+      scripts are attached by default. Note that the latter can always be
+      overridden using <a href="/docs/reference/math/attach/#functions-limits"><code>limits</code></a> and <a href="/docs/reference/math/attach/#functions-scripts"><code>scripts</code></a>.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> loves <span class="typ-op">=</span> math<span class="typ-punct">.</span><span class="typ-func">class</span><span class="typ-punct">(</span>
         <span class="typ-str">&quot;relation&quot;</span><span class="typ-punct">,</span>
