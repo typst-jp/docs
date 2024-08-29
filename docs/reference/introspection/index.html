@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="utf-8">
-  <title>内省 – Typstドキュメント日本語版</title>
-  <meta name="description" content="Typst 中与内省有关联的函数族的文档">
+  <title>Introspection – Typstドキュメント日本語版</title>
+  <meta name="description" content="Documentation for functions related to Introspection in Typst.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/introspection/">
-  <meta property="og:title" content="内省 – Typstドキュメント日本語版">
+  <meta property="og:title" content="Introspection – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Typst 中与内省有关联的函数族的文档">
+  <meta property="og:description" content="Documentation for functions related to Introspection in Typst.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -174,7 +174,7 @@
             <li class="category">Library</li>
             
             <li>
-              <a href="/docs/reference/foundations/" >基础</a>
+              <a href="/docs/reference/foundations/" >Foundations</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
@@ -189,10 +189,16 @@
                 <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/auto/" >Auto</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/bool/" >Boolean</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/bytes/" >Bytes</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/calc" >Calculation</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/content/" >Content</a></li>
@@ -225,6 +231,9 @@
                 <li><a href="/docs/reference/foundations/module/" >Module</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/none/" >None</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
                 
                 
@@ -246,16 +255,13 @@
                 <li><a href="/docs/reference/foundations/style/" >Style</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/version/" >Version</a></li>
-                
-                
-                <li><a href="/docs/reference/foundations/sys" >System</a></li>
-                
-                
-                <li><a href="/docs/reference/foundations/calc" >Calculation</a></li>
                 
               </ul>
               
@@ -263,31 +269,31 @@
             
             
             <li>
-              <a href="/docs/reference/model/" >模型</a>
+              <a href="/docs/reference/model/" >Model</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
                 
                 
-                <li><a href="/docs/reference/model/bibliography/" >参考文献</a></li>
+                <li><a href="/docs/reference/model/bibliography/" >Bibliography</a></li>
                 
                 
                 <li><a href="/docs/reference/model/list/" >Bullet List</a></li>
                 
                 
-                <li><a href="/docs/reference/model/cite/" >引用</a></li>
+                <li><a href="/docs/reference/model/cite/" >Cite</a></li>
                 
                 
-                <li><a href="/docs/reference/model/document/" >文档</a></li>
+                <li><a href="/docs/reference/model/document/" >Document</a></li>
                 
                 
-                <li><a href="/docs/reference/model/emph/" >强调（斜体）</a></li>
+                <li><a href="/docs/reference/model/emph/" >Emphasis</a></li>
                 
                 
-                <li><a href="/docs/reference/model/figure/" >图表</a></li>
+                <li><a href="/docs/reference/model/figure/" >Figure</a></li>
                 
                 
-                <li><a href="/docs/reference/model/footnote/" >脚注</a></li>
+                <li><a href="/docs/reference/model/footnote/" >Footnote</a></li>
                 
                 
                 <li><a href="/docs/reference/model/heading/" >Heading</a></li>
@@ -296,7 +302,7 @@
                 <li><a href="/docs/reference/model/link/" >Link</a></li>
                 
                 
-                <li><a href="/docs/reference/model/enum/" >有序列表</a></li>
+                <li><a href="/docs/reference/model/enum/" >Numbered List</a></li>
                 
                 
                 <li><a href="/docs/reference/model/numbering/" >Numbering</a></li>
@@ -317,7 +323,7 @@
                 <li><a href="/docs/reference/model/ref/" >Reference</a></li>
                 
                 
-                <li><a href="/docs/reference/model/strong/" >着重强调（加粗）</a></li>
+                <li><a href="/docs/reference/model/strong/" >Strong Emphasis</a></li>
                 
                 
                 <li><a href="/docs/reference/model/table/" >Table</a></li>
@@ -331,52 +337,52 @@
             
             
             <li>
-              <a href="/docs/reference/text/" >文本</a>
+              <a href="/docs/reference/text/" >Text</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
                 
                 
-                <li><a href="/docs/reference/text/highlight/" >文本高亮</a></li>
+                <li><a href="/docs/reference/text/highlight/" >Highlight</a></li>
                 
                 
-                <li><a href="/docs/reference/text/linebreak/" >换行</a></li>
+                <li><a href="/docs/reference/text/linebreak/" >Line Break</a></li>
                 
                 
-                <li><a href="/docs/reference/text/lorem/" >假文</a></li>
+                <li><a href="/docs/reference/text/lorem/" >Lorem</a></li>
                 
                 
-                <li><a href="/docs/reference/text/lower/" >转小写</a></li>
+                <li><a href="/docs/reference/text/lower/" >Lowercase</a></li>
                 
                 
-                <li><a href="/docs/reference/text/overline/" >上划线</a></li>
+                <li><a href="/docs/reference/text/overline/" >Overline</a></li>
                 
                 
-                <li><a href="/docs/reference/text/raw/" >原始文本/代码块</a></li>
+                <li><a href="/docs/reference/text/raw/" >Raw Text / Code</a></li>
                 
                 
-                <li><a href="/docs/reference/text/smallcaps/" >显示为小写</a></li>
+                <li><a href="/docs/reference/text/smallcaps/" >Small Capitals</a></li>
                 
                 
-                <li><a href="/docs/reference/text/smartquote/" >智能引号</a></li>
+                <li><a href="/docs/reference/text/smartquote/" >Smartquote</a></li>
                 
                 
-                <li><a href="/docs/reference/text/strike/" >删除线</a></li>
+                <li><a href="/docs/reference/text/strike/" >Strikethrough</a></li>
                 
                 
-                <li><a href="/docs/reference/text/sub/" >下标</a></li>
+                <li><a href="/docs/reference/text/sub/" >Subscript</a></li>
                 
                 
-                <li><a href="/docs/reference/text/super/" >上标</a></li>
+                <li><a href="/docs/reference/text/super/" >Superscript</a></li>
                 
                 
-                <li><a href="/docs/reference/text/text/" >文本</a></li>
+                <li><a href="/docs/reference/text/text/" >Text</a></li>
                 
                 
-                <li><a href="/docs/reference/text/underline/" >下划线</a></li>
+                <li><a href="/docs/reference/text/underline/" >Underline</a></li>
                 
                 
-                <li><a href="/docs/reference/text/upper/" >转大写</a></li>
+                <li><a href="/docs/reference/text/upper/" >Uppercase</a></li>
                 
               </ul>
               
@@ -384,58 +390,61 @@
             
             
             <li>
-              <a href="/docs/reference/math/" >数学</a>
+              <a href="/docs/reference/math/" >Math</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
                 
                 
-                <li><a href="/docs/reference/math/accent/" >重音符号</a></li>
+                <li><a href="/docs/reference/math/accent/" >Accent</a></li>
                 
                 
-                <li><a href="/docs/reference/math/cancel/" >删除线</a></li>
+                <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
-                <li><a href="/docs/reference/math/cases/" >左大括号</a></li>
+                <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
-                <li><a href="/docs/reference/math/class/" >类</a></li>
+                <li><a href="/docs/reference/math/cases/" >Cases</a></li>
                 
                 
-                <li><a href="/docs/reference/math/equation/" >数学表达式</a></li>
+                <li><a href="/docs/reference/math/class/" >Class</a></li>
                 
                 
-                <li><a href="/docs/reference/math/frac/" >分数</a></li>
+                <li><a href="/docs/reference/math/equation/" >Equation</a></li>
                 
                 
-                <li><a href="/docs/reference/math/mat/" >矩阵</a></li>
-                
-                
-                <li><a href="/docs/reference/math/op/" >文本运算符</a></li>
-                
-                
-                <li><a href="/docs/reference/math/vec/" >向量</a></li>
-                
-                
-                <li><a href="/docs/reference/math/underover" >上/下方内容</a></li>
-                
-                
-                <li><a href="/docs/reference/math/variants" >字体变体</a></li>
-                
-                
-                <li><a href="/docs/reference/math/sizes" >显示尺寸</a></li>
+                <li><a href="/docs/reference/math/frac/" >Fraction</a></li>
                 
                 
                 <li><a href="/docs/reference/math/lr" >Left/Right</a></li>
                 
                 
-                <li><a href="/docs/reference/math/styles" >显示样式</a></li>
+                <li><a href="/docs/reference/math/mat/" >Matrix</a></li>
                 
                 
-                <li><a href="/docs/reference/math/roots" >根式</a></li>
+                <li><a href="/docs/reference/math/primes/" >Primes</a></li>
                 
                 
-                <li><a href="/docs/reference/math/attach" >附缀</a></li>
+                <li><a href="/docs/reference/math/roots" >Roots</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles" >Styles</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >Text Operator</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover" >Under/Over</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants" >Variants</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >Vector</a></li>
                 
               </ul>
               
@@ -443,19 +452,19 @@
             
             
             <li>
-              <a href="/docs/reference/symbols/" >符号</a>
+              <a href="/docs/reference/symbols/" >Symbols</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
                 
                 
-                <li><a href="/docs/reference/symbols/sym/" >通用</a></li>
+                <li><a href="/docs/reference/symbols/sym/" >General</a></li>
                 
                 
-                <li><a href="/docs/reference/symbols/emoji/" >表情符号</a></li>
+                <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
                 
-                <li><a href="/docs/reference/symbols/symbol/" >符号</a></li>
+                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
                 
               </ul>
               
@@ -463,7 +472,7 @@
             
             
             <li>
-              <a href="/docs/reference/layout/" >布局</a>
+              <a href="/docs/reference/layout/" >Layout</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
@@ -555,7 +564,7 @@
             
             
             <li>
-              <a href="/docs/reference/visualize/" >可视化</a>
+              <a href="/docs/reference/visualize/" >Visualize</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
@@ -602,13 +611,16 @@
             
             
             <li>
-              <a href="/docs/reference/introspection/"  aria-current="page" >内省</a>
+              <a href="/docs/reference/introspection/"  aria-current="page" >Introspection</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
                 
                 
                 <li><a href="/docs/reference/introspection/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/here/" >Here</a></li>
                 
                 
                 <li><a href="/docs/reference/introspection/locate/" >Locate</a></li>
@@ -631,7 +643,7 @@
             
             
             <li>
-              <a href="/docs/reference/data-loading/" >数据加载</a>
+              <a href="/docs/reference/data-loading/" >Data Loading</a>
               
               <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
               <ul>
@@ -737,45 +749,56 @@
         <li><a href="/docs/reference/">リファレンス</a></li>
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/introspection/">内省</a></li>
+        <li><a href="/docs/reference/introspection/">Introspection</a></li>
         
       </ul>
 
       
 
 <h1 id="summary">introspection</h1>
-<p>文档部分之间的交互。</p>
-<p>这个类别是 Typst 的内省能力的所在：通过 <code>counter</code> 函数，您可以访问和操作页面、节、图表和方程计数器，或创建自定义计数器。与此同时，<code>query</code> 函数允许您在文档中搜索元素，以构建诸如图表列表或显示当前章节标题的标题等内容。</p>
-<h2 id="definitions">定义</h2>
+<p>Interactions between document parts.</p>
+<p>This category is home to Typst's introspection capabilities: With the
+<code>counter</code> function, you can access and manipulate page, section, figure, and
+equation counters or create custom ones. Meanwhile, the <code>query</code> function
+lets you search for elements in the document to construct things like a list
+of figures or headers which show the current chapter title.</p>
+<p>Most of the functions are <em>contextual.</em> It is recommended to read the chapter
+on <a href="/docs/reference/context/" title="context">context</a> before continuing here.</p>
+<h2 id="definitions">Definitions</h2>
 <ul class="subgridded">
   
   
-  <li><a href="/docs/reference/introspection/counter/"><code>counter</code></a><span>对页面、元素等进行计数。</span>
+  <li><a href="/docs/reference/introspection/counter/"><code>counter</code></a><span>Counts through pages, elements, and more.</span>
   </li>
   
   
   
-  <li><a href="/docs/reference/introspection/locate/"><code>locate</code></a><span>提供对内容位置的访问。</span>
+  <li><a href="/docs/reference/introspection/here/"><code>here</code></a><span>Provides the current location in the document.</span>
   </li>
   
   
   
-  <li><a href="/docs/reference/introspection/location/"><code>location</code></a><span>标识文档中的元素。</span>
+  <li><a href="/docs/reference/introspection/locate/"><code>locate</code></a><span>Determines the location of an element in the document.</span>
   </li>
   
   
   
-  <li><a href="/docs/reference/introspection/metadata/"><code>metadata</code></a><span>在不产生可见内容的情况下向查询系统公开一个值。</span>
+  <li><a href="/docs/reference/introspection/location/"><code>location</code></a><span>Identifies an element in the document.</span>
   </li>
   
   
   
-  <li><a href="/docs/reference/introspection/query/"><code>query</code></a><span>在文档中查找元素。</span>
+  <li><a href="/docs/reference/introspection/metadata/"><code>metadata</code></a><span>Exposes a value to the query system without producing visible content.</span>
   </li>
   
   
   
-  <li><a href="/docs/reference/introspection/state/"><code>state</code></a><span>管理文档中具有状态的部分。</span>
+  <li><a href="/docs/reference/introspection/query/"><code>query</code></a><span>Finds elements in the document.</span>
+  </li>
+  
+  
+  
+  <li><a href="/docs/reference/introspection/state/"><code>state</code></a><span>Manages stateful parts of your document.</span>
   </li>
   
   
