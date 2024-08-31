@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/ellipse/
 title: Ellipse
-description: '`ellipse` 函数的文档'
+description: Documentation for the `ellipse` function.
 part: null
 outline:
 - id: summary
@@ -42,6 +42,7 @@ body:
     keywords: []
     oneliner: An ellipse with optional content.
     element: true
+    contextual: false
     details: |-
       <p>An ellipse with optional content.</p>
       <h2 id="example">Example</h2>
@@ -146,7 +147,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false

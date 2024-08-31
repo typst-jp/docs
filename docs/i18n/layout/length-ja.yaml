@@ -1,6 +1,6 @@
 route: /docs/reference/layout/length/
 title: Length
-description: Length 类型的文档
+description: Documentation for the Length type.
 part: null
 outline:
 - id: summary
@@ -26,6 +26,9 @@ outline:
     children: []
   - id: definitions-inches
     name: Inches
+    children: []
+  - id: definitions-to-absolute
+    name: To Absolute
     children: []
 body:
   kind: type
@@ -59,7 +62,7 @@ body:
       <ul>
       <li><code>abs</code>: A length with just the absolute component of the current length
       (that is, excluding the <code>em</code> component).</li>
-      <li><code>em</code>: The amount of <code>em</code> units in this length, as a <a href="/docs/reference/foundations/float/">float</a>.</li>
+      <li><code>em</code>: The amount of <code>em</code> units in this length, as a <a href="/docs/reference/foundations/float/" title="float">float</a>.</li>
       </ul>
     constructor: null
     scope:
@@ -70,6 +73,7 @@ body:
       keywords: []
       oneliner: Converts this length to points.
       element: false
+      contextual: false
       details: |-
         <p>Converts this length to points.</p>
         <p>Fails with an error if this length has non-zero <code>em</code> units (such as
@@ -89,6 +93,7 @@ body:
       keywords: []
       oneliner: Converts this length to millimeters.
       element: false
+      contextual: false
       details: |-
         <p>Converts this length to millimeters.</p>
         <p>Fails with an error if this length has non-zero <code>em</code> units. See the
@@ -106,6 +111,7 @@ body:
       keywords: []
       oneliner: Converts this length to centimeters.
       element: false
+      contextual: false
       details: |-
         <p>Converts this length to centimeters.</p>
         <p>Fails with an error if this length has non-zero <code>em</code> units. See the
@@ -123,6 +129,7 @@ body:
       keywords: []
       oneliner: Converts this length to inches.
       element: false
+      contextual: false
       details: |-
         <p>Converts this length to inches.</p>
         <p>Fails with an error if this length has non-zero <code>em</code> units. See the
@@ -132,5 +139,34 @@ body:
       params: []
       returns:
       - float
+      scope: []
+    - path:
+      - length
+      name: to-absolute
+      title: To Absolute
+      keywords: []
+      oneliner: Resolve this length to an absolute length.
+      element: false
+      contextual: false
+      details: <p>Resolve this length to an absolute length.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">12pt</span><span class="typ-punct">)</span>
+        <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">[</span>
+          <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+          <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span> <span class="typ-op">+</span> <span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+          <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+        <span class="typ-punct">]</span>
+
+        <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">6pt</span><span class="typ-punct">)</span>
+        <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">[</span>
+          <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+          <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span> <span class="typ-op">+</span> <span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+          <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+        <span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/bc2ac6da596c573de6ebf3bbb1621a2e.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params: []
+      returns:
+      - length
       scope: []
 children: []

@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/line/
 title: Line
-description: '`line` 函数的文档'
+description: Documentation for the `line` function.
 part: null
 outline:
 - id: summary
@@ -36,6 +36,7 @@ body:
     keywords: []
     oneliner: A line from one point to another.
     element: true
+    contextual: false
     details: |-
       <p>A line from one point to another.</p>
       <h2 id="example">Example</h2>
@@ -107,8 +108,8 @@ body:
       variadic: false
       settable: true
     - name: stroke
-      details: <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the
-        line.</p>
+      details: <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a>
+        the line.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>

@@ -1,0 +1,30 @@
+route: /docs/reference/foundations/none/
+title: None
+description: Documentation for the None type.
+part: null
+outline:
+- id: summary
+  name: Summary
+  children: []
+- id: example
+  name: Example
+  children: []
+body:
+  kind: type
+  content:
+    name: none
+    title: None
+    keywords: []
+    oneliner: A value that indicates the absence of any other value.
+    details: |-
+      <p>A value that indicates the absence of any other value.</p>
+      <p>The none type has exactly one value: <code><span class="typ-key">none</span></code>.</p>
+      <p>When inserted into the document, it is not visible. This is also the value
+      that is produced by empty code blocks. It can be
+      <a href="/docs/reference/scripting/#blocks">joined</a> with any value, yielding the other value.</p>
+      <h2 id="example">Example</h2>
+      <div class="previewed-code"><pre><code>Not visible: <span class="typ-key">#</span><span class="typ-key">none</span>
+      </code></pre><div class="preview"><img src="/assets/docs/6caa7433f3f477e3c7cfb6d6b041af0d.png" alt="Preview" width="480" height="190"/></div></div>
+    constructor: null
+    scope: []
+children: []

@@ -1,6 +1,6 @@
 route: /docs/reference/layout/
-title: 布局
-description: Typst 中与布局有关联的函数族的文档
+title: Layout
+description: Documentation for functions related to Layout in Typst.
 part: null
 outline:
 - id: summary
@@ -13,124 +13,125 @@ body:
   kind: category
   content:
     name: layout
-    title: 布局
+    title: Layout
     details: |-
-      <p>以不同方式在页面上排列元素。</p>
-      <p>通过组合布局函数，您可以创建复杂且自动的布局。</p>
+      <p>Arranging elements on the page in different ways.</p>
+      <p>By combining layout functions, you can create complex and automatic layouts.</p>
     items:
     - name: align
       route: /docs/reference/layout/align/
-      oneliner: 在水平和垂直方向上对齐内容。
+      oneliner: Aligns content horizontally and vertically.
       code: true
     - name: alignment
       route: /docs/reference/layout/alignment/
-      oneliner: 在沿轴线的何处[对齐]($align)某物。
+      oneliner: Where to [align] something along an axis.
       code: true
     - name: angle
       route: /docs/reference/layout/angle/
-      oneliner: 描述旋转的角度。
+      oneliner: An angle describing a rotation.
       code: true
     - name: block
       route: /docs/reference/layout/block/
-      oneliner: 一个块级容器。
+      oneliner: A block-level container.
       code: true
     - name: box
       route: /docs/reference/layout/box/
-      oneliner: 一个内联级容器，可调整内容的大小。
+      oneliner: An inline-level container that sizes content.
       code: true
     - name: colbreak
       route: /docs/reference/layout/colbreak/
-      oneliner: 强制列中断。
+      oneliner: Forces a column break.
       code: true
     - name: columns
       route: /docs/reference/layout/columns/
-      oneliner: 将区域分割为多个大小相等的列。
+      oneliner: Separates a region into multiple equally sized columns.
       code: true
     - name: direction
       route: /docs/reference/layout/direction/
-      oneliner: 内容可以布局的四个方向。
+      oneliner: The four directions into which content can be laid out.
       code: true
     - name: fraction
       route: /docs/reference/layout/fraction/
-      oneliner: 定义布局中剩余空间的分布方式。
+      oneliner: Defines how the remaining space in a layout is distributed.
       code: true
     - name: grid
       route: /docs/reference/layout/grid/
-      oneliner: 将内容排列成网格。
+      oneliner: Arranges content in a grid.
       code: true
     - name: h
       route: /docs/reference/layout/h/
-      oneliner: 在段落中插入水平间距。
+      oneliner: Inserts horizontal spacing into a paragraph.
       code: true
     - name: hide
       route: /docs/reference/layout/hide/
-      oneliner: 隐藏内容而不影响布局。
+      oneliner: Hides content without affecting layout.
       code: true
     - name: layout
       route: /docs/reference/layout/layout/
-      oneliner: 提供对当前外部容器（如果没有，则是页面的）大小的访问。
+      oneliner: Provides access to the current outer container's (or page's, if none)
+        size
       code: true
     - name: length
       route: /docs/reference/layout/length/
-      oneliner: 一个大小或距离，可能使用上下文单位表示。
+      oneliner: A size or distance, possibly expressed with contextual units.
       code: true
     - name: measure
       route: /docs/reference/layout/measure/
-      oneliner: 测量内容的布局大小。
+      oneliner: Measures the layouted size of content.
       code: true
     - name: move
       route: /docs/reference/layout/move/
-      oneliner: 移动内容而不影响布局。
+      oneliner: Moves content without affecting layout.
       code: true
     - name: pad
       route: /docs/reference/layout/pad/
-      oneliner: 在内容周围添加间距。
+      oneliner: Adds spacing around content.
       code: true
     - name: page
       route: /docs/reference/layout/page/
-      oneliner: 将其子元素布局到一个或多个页面上。
+      oneliner: Layouts its child onto one or multiple pages.
       code: true
     - name: pagebreak
       route: /docs/reference/layout/pagebreak/
-      oneliner: 手动分页。
+      oneliner: A manual page break.
       code: true
     - name: place
       route: /docs/reference/layout/place/
-      oneliner: 在绝对位置放置内容。
+      oneliner: Places content at an absolute position.
       code: true
     - name: ratio
       route: /docs/reference/layout/ratio/
-      oneliner: 整体的比率。
+      oneliner: A ratio of a whole.
       code: true
     - name: relative
       route: /docs/reference/layout/relative/
-      oneliner: 相对于某个已知长度的长度。
+      oneliner: A length in relation to some known length.
       code: true
     - name: repeat
       route: /docs/reference/layout/repeat/
-      oneliner: 将内容重复到可用空间。
+      oneliner: Repeats content to the available space.
       code: true
     - name: rotate
       route: /docs/reference/layout/rotate/
-      oneliner: 旋转内容而不影响布局。
+      oneliner: Rotates content without affecting layout.
       code: true
     - name: scale
       route: /docs/reference/layout/scale/
-      oneliner: 缩放内容而不影响布局。
+      oneliner: Scales content without affecting layout.
       code: true
     - name: stack
       route: /docs/reference/layout/stack/
-      oneliner: 水平或垂直地排列内容和间距。
+      oneliner: Arranges content and spacing horizontally or vertically.
       code: true
     - name: v
       route: /docs/reference/layout/v/
-      oneliner: 在块流中插入垂直间距。
+      oneliner: Inserts vertical spacing into a flow of blocks.
       code: true
     shorthands: null
 children:
 - route: /docs/reference/layout/align/
   title: Align
-  description: '`align` 函数的文档'
+  description: Documentation for the `align` function.
   part: null
   outline:
   - id: summary
@@ -157,6 +158,7 @@ children:
       keywords: []
       oneliner: Aligns content horizontally and vertically.
       element: true
+      contextual: false
       details: |-
         <p>Aligns content horizontally and vertically.</p>
         <h2 id="example">Example</h2>
@@ -171,7 +173,7 @@ children:
       self: false
       params:
       - name: alignment
-        details: <p>The <a href="/docs/reference/layout/alignment/">alignment</a>
+        details: <p>The <a href="/docs/reference/layout/alignment/" title="alignment">alignment</a>
           along both axes.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">6cm</span><span class="typ-punct">)</span>
@@ -210,7 +212,7 @@ children:
   children: []
 - route: /docs/reference/layout/alignment/
   title: Alignment
-  description: Alignment 类型的文档
+  description: Documentation for the Alignment type.
   part: null
   outline:
   - id: summary
@@ -237,9 +239,9 @@ children:
       name: alignment
       title: Alignment
       keywords: []
-      oneliner: Where to [align]($align) something along an axis.
+      oneliner: Where to [align] something along an axis.
       details: |-
-        <p>Where to <a href="/docs/reference/layout/align/">align</a> something along an axis.</p>
+        <p>Where to <a href="/docs/reference/layout/align/" title="align">align</a> something along an axis.</p>
         <p>Possible values are:</p>
         <ul>
         <li><code>start</code>: Aligns at the <a href="/docs/reference/layout/direction/#definitions-start">start</a> of the <a href="/docs/reference/text/text/#parameters-dir">text
@@ -281,6 +283,7 @@ children:
         keywords: []
         oneliner: The axis this alignment belongs to.
         element: false
+        contextual: false
         details: |-
           <p>The axis this alignment belongs to.</p>
           <ul>
@@ -303,6 +306,7 @@ children:
         keywords: []
         oneliner: The inverse alignment.
         element: false
+        contextual: false
         details: <p>The inverse alignment.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">top</span><span class="typ-punct">.</span><span class="typ-func">inv</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -318,7 +322,7 @@ children:
   children: []
 - route: /docs/reference/layout/angle/
   title: Angle
-  description: Angle 类型的文档
+  description: Documentation for the Angle type.
   part: null
   outline:
   - id: summary
@@ -362,6 +366,7 @@ children:
         keywords: []
         oneliner: Converts this angle to radians.
         element: false
+        contextual: false
         details: <p>Converts this angle to radians.</p>
         example: null
         self: true
@@ -376,6 +381,7 @@ children:
         keywords: []
         oneliner: Converts this angle to degrees.
         element: false
+        contextual: false
         details: <p>Converts this angle to degrees.</p>
         example: null
         self: true
@@ -386,7 +392,7 @@ children:
   children: []
 - route: /docs/reference/layout/block/
   title: Block
-  description: '`block` 函数的文档'
+  description: Documentation for the `block` function.
   part: null
   outline:
   - id: summary
@@ -446,6 +452,7 @@ children:
       keywords: []
       oneliner: A block-level container.
       element: true
+      contextual: false
       details: |-
         <p>A block-level container.</p>
         <p>Such a container can be used to separate content, size it, and give it a
@@ -570,7 +577,8 @@ children:
         - pattern
         - dictionary
         strings: []
-        default: <code><span class="typ-key">none</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -585,7 +593,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -600,7 +609,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -615,7 +625,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -705,7 +716,7 @@ children:
   children: []
 - route: /docs/reference/layout/box/
   title: Box
-  description: '`box` 函数的文档'
+  description: Documentation for the `box` function.
   part: null
   outline:
   - id: summary
@@ -756,6 +767,7 @@ children:
       keywords: []
       oneliner: An inline-level container that sizes content.
       element: true
+      contextual: false
       details: |-
         <p>An inline-level container that sizes content.</p>
         <p>All elements except inline math, text, and boxes are block-level and cannot
@@ -853,7 +865,8 @@ children:
         - pattern
         - dictionary
         strings: []
-        default: <code><span class="typ-key">none</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -868,7 +881,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -886,7 +900,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -911,7 +926,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -948,7 +964,7 @@ children:
   children: []
 - route: /docs/reference/layout/colbreak/
   title: Column Break
-  description: '`colbreak` 函数的文档'
+  description: Documentation for the `colbreak` function.
   part: null
   outline:
   - id: summary
@@ -972,6 +988,7 @@ children:
       keywords: []
       oneliner: Forces a column break.
       element: true
+      contextual: false
       details: |-
         <p>Forces a column break.</p>
         <p>The function will behave like a <a href="/docs/reference/layout/pagebreak/">page break</a> when used in a
@@ -1016,7 +1033,7 @@ children:
   children: []
 - route: /docs/reference/layout/columns/
   title: Columns
-  description: '`columns` 函数的文档'
+  description: Documentation for the `columns` function.
   part: null
   outline:
   - id: summary
@@ -1046,6 +1063,7 @@ children:
       keywords: []
       oneliner: Separates a region into multiple equally sized columns.
       element: true
+      contextual: false
       details: |-
         <p>Separates a region into multiple equally sized columns.</p>
         <p>The <code>column</code> function allows to separate the interior of any container into
@@ -1119,7 +1137,7 @@ children:
   children: []
 - route: /docs/reference/layout/direction/
   title: Direction
-  description: Direction 类型的文档
+  description: Documentation for the Direction type.
   part: null
   outline:
   - id: summary
@@ -1171,6 +1189,7 @@ children:
         keywords: []
         oneliner: The axis this direction belongs to, either `{"horizontal"}` or
         element: false
+        contextual: false
         details: |-
           <p>The axis this direction belongs to, either <code><span class="typ-str">&quot;horizontal&quot;</span></code> or
           <code><span class="typ-str">&quot;vertical&quot;</span></code>.</p>
@@ -1189,6 +1208,7 @@ children:
         keywords: []
         oneliner: The start point of this direction, as an alignment.
         element: false
+        contextual: false
         details: <p>The start point of this direction, as an alignment.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">ltr</span><span class="typ-punct">.</span><span class="typ-func">start</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -1208,6 +1228,7 @@ children:
         keywords: []
         oneliner: The end point of this direction, as an alignment.
         element: false
+        contextual: false
         details: <p>The end point of this direction, as an alignment.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">ltr</span><span class="typ-punct">.</span><span class="typ-func">end</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -1227,6 +1248,7 @@ children:
         keywords: []
         oneliner: The inverse direction.
         element: false
+        contextual: false
         details: <p>The inverse direction.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">ltr</span><span class="typ-punct">.</span><span class="typ-func">inv</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -1242,7 +1264,7 @@ children:
   children: []
 - route: /docs/reference/layout/fraction/
   title: Fraction
-  description: Fraction 类型的文档
+  description: Documentation for the Fraction type.
   part: null
   outline:
   - id: summary
@@ -1257,12 +1279,12 @@ children:
       name: fraction
       title: Fraction
       keywords: []
-      oneliner: Defines how the the remaining space in a layout is distributed.
+      oneliner: Defines how the remaining space in a layout is distributed.
       details: |-
-        <p>Defines how the the remaining space in a layout is distributed.</p>
+        <p>Defines how the remaining space in a layout is distributed.</p>
         <p>Each fractionally sized element gets space based on the ratio of its
         fraction to the sum of all fractions.</p>
-        <p>For more details, also see the <a href="/docs/reference/layout/h/">h</a> and <a href="/docs/reference/layout/v/">v</a> functions and the
+        <p>For more details, also see the <a href="/docs/reference/layout/h/" title="h">h</a> and <a href="/docs/reference/layout/v/" title="v">v</a> functions and the
         <a href="/docs/reference/layout/grid/">grid function</a>.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code>Left <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> Left-ish <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">2fr</span><span class="typ-punct">)</span> Right
@@ -1272,7 +1294,7 @@ children:
   children: []
 - route: /docs/reference/layout/grid/
   title: Grid
-  description: '`grid` 函数的文档'
+  description: Documentation for the `grid` function.
   part: null
   outline:
   - id: summary
@@ -1281,6 +1303,12 @@ children:
   - id: examples
     name: Examples
     children: []
+  - id: styling-the-grid
+    name: Styling The Grid
+    children:
+    - id: stroke-styling-precedence
+      name: Stroke Styling Precedence
+      children: []
   - id: parameters
     name: Parameters
     children:
@@ -1299,9 +1327,111 @@ children:
     - id: parameters-row-gutter
       name: row-gutter
       children: []
+    - id: parameters-fill
+      name: fill
+      children: []
+    - id: parameters-align
+      name: align
+      children: []
+    - id: parameters-stroke
+      name: stroke
+      children: []
+    - id: parameters-inset
+      name: inset
+      children: []
     - id: parameters-children
       name: children
       children: []
+  - id: definitions
+    name: Definitions
+    children:
+    - id: definitions-cell
+      name: Grid Cell
+      children:
+      - id: definitions-cell-body
+        name: body
+        children: []
+      - id: definitions-cell-x
+        name: x
+        children: []
+      - id: definitions-cell-y
+        name: y
+        children: []
+      - id: definitions-cell-colspan
+        name: colspan
+        children: []
+      - id: definitions-cell-rowspan
+        name: rowspan
+        children: []
+      - id: definitions-cell-fill
+        name: fill
+        children: []
+      - id: definitions-cell-align
+        name: align
+        children: []
+      - id: definitions-cell-inset
+        name: inset
+        children: []
+      - id: definitions-cell-stroke
+        name: stroke
+        children: []
+      - id: definitions-cell-breakable
+        name: breakable
+        children: []
+    - id: definitions-hline
+      name: Grid Horizontal Line
+      children:
+      - id: definitions-hline-y
+        name: y
+        children: []
+      - id: definitions-hline-start
+        name: start
+        children: []
+      - id: definitions-hline-end
+        name: end
+        children: []
+      - id: definitions-hline-stroke
+        name: stroke
+        children: []
+      - id: definitions-hline-position
+        name: position
+        children: []
+    - id: definitions-vline
+      name: Grid Vertical Line
+      children:
+      - id: definitions-vline-x
+        name: x
+        children: []
+      - id: definitions-vline-start
+        name: start
+        children: []
+      - id: definitions-vline-end
+        name: end
+        children: []
+      - id: definitions-vline-stroke
+        name: stroke
+        children: []
+      - id: definitions-vline-position
+        name: position
+        children: []
+    - id: definitions-header
+      name: Grid Header
+      children:
+      - id: definitions-header-repeat
+        name: repeat
+        children: []
+      - id: definitions-header-children
+        name: children
+        children: []
+    - id: definitions-footer
+      name: Grid Footer
+      children:
+      - id: definitions-footer-repeat
+        name: repeat
+        children: []
+      - id: definitions-footer-children
+        name: children
+        children: []
   body:
     kind: func
     content:
@@ -1311,21 +1441,31 @@ children:
       keywords: []
       oneliner: Arranges content in a grid.
       element: true
+      contextual: false
       details: |-
         <p>Arranges content in a grid.</p>
         <p>The grid element allows you to arrange content in a grid. You can define the
         number of rows and columns, as well as the size of the gutters between them.
         There are multiple sizing modes for columns and rows that can be used to
         create complex layouts.</p>
-        <p>The sizing of the grid is determined by the track sizes specified in the
-        arguments. Because each of the sizing parameters accepts the same values, we
-        will explain them just once, here. Each sizing argument accepts an array of
+        <p>While the grid and table elements work very similarly, they are intended for
+        different use cases and carry different semantics. The grid element is
+        intended for presentational and layout purposes, while the
+        <a href="/docs/reference/model/table/"><code>table</code></a> element is intended for, in broad terms, presenting
+        multiple related data points. In the future, Typst will annotate its output
+        such that screenreaders will annouce content in <code>table</code> as tabular while a
+        grid's content will be announced no different than multiple content blocks
+        in the document flow. Set and show rules on one of these elements do not
+        affect the other.</p>
+        <p>A grid's sizing is determined by the track sizes specified in the arguments.
+        Because each of the sizing parameters accepts the same values, we will
+        explain them just once, here. Each sizing argument accepts an array of
         individual track sizes. A track size is either:</p>
         <ul>
         <li>
         <p><code><span class="typ-key">auto</span></code>: The track will be sized to fit its contents. It will be at most
         as large as the remaining space. If there is more than one <code><span class="typ-key">auto</span></code> track
-        which, and together they claim more than the available space, the <code><span class="typ-key">auto</span></code>
+        width, and together they claim more than the available space, the <code><span class="typ-key">auto</span></code>
         tracks will fairly distribute the available space among themselves.</p>
         </li>
         <li>
@@ -1345,7 +1485,9 @@ children:
         instead of an array. For example, <code>columns:</code> <code><span class="typ-num">3</span></code> is equivalent to
         <code>columns:</code> <code><span class="typ-punct">(</span><span class="typ-key">auto</span><span class="typ-punct">,</span> <span class="typ-key">auto</span><span class="typ-punct">,</span> <span class="typ-key">auto</span><span class="typ-punct">)</span></code>.</p>
         <h2 id="examples">Examples</h2>
-        <p>The example below demonstrates the different track sizing options.</p>
+        <p>The example below demonstrates the different track sizing options. It also
+        shows how you can use <a href="/docs/reference/layout/grid/#definitions-cell"><code>grid.cell</code></a> to make an individual cell
+        span two grid tracks.</p>
         <div class="previewed-code"><pre><code><span class="typ-comment">// We use `rect` to emphasize the</span>
         <span class="typ-comment">// area of cells.</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">rect</span><span class="typ-punct">(</span>
@@ -1362,11 +1504,13 @@ children:
           <span class="typ-func">rect</span><span class="typ-punct">[</span>1/3 of the remains<span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-func">rect</span><span class="typ-punct">[</span>2/3 of the remains<span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-func">rect</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Fixed height<span class="typ-punct">]</span><span class="typ-punct">,</span>
-          <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-          <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+          grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>
+            colspan<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
+            <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span><span class="typ-punct">,</span>
         <span class="typ-punct">)</span>
-        </code></pre><div class="preview"><img src="/assets/docs/43c676900a73f4788d9f6365f842d270.png" alt="Preview" width="480" height="190"/></div></div>
-        <p>You can also <a href="/docs/reference/foundations/arguments//#spreading">spread</a> an array of strings or content
+        </code></pre><div class="preview"><img src="/assets/docs/3d8debc331705b864e1ab85611aa79ba.png" alt="Preview" width="480" height="190"/></div></div>
+        <p>You can also <a href="/docs/reference/foundations/arguments/#spreading">spread</a> an array of strings or content
         into a grid to populate its cells.</p>
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">grid</span><span class="typ-punct">(</span>
           columns<span class="typ-punct">:</span> <span class="typ-num">5</span><span class="typ-punct">,</span>
@@ -1374,6 +1518,38 @@ children:
           <span class="typ-op">..</span><span class="typ-func">range</span><span class="typ-punct">(</span><span class="typ-num">25</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">map</span><span class="typ-punct">(</span>str<span class="typ-punct">)</span>
         <span class="typ-punct">)</span>
         </code></pre><div class="preview"><img src="/assets/docs/c37e373dde75e6eaac9c3c1fa3f5bc64.png" alt="Preview" width="480" height="190"/></div></div>
+        <h2 id="styling-the-grid">Styling the grid</h2>
+        <p>The grid's appearance can be customized through different parameters. These
+        are the most important ones:</p>
+        <ul>
+        <li><a href="/docs/reference/layout/grid/#parameters-fill"><code>fill</code></a> to give all cells a background</li>
+        <li><a href="/docs/reference/layout/grid/#parameters-align"><code>align</code></a> to change how cells are aligned</li>
+        <li><a href="/docs/reference/layout/grid/#parameters-inset"><code>inset</code></a> to optionally add internal padding to each cell</li>
+        <li><a href="/docs/reference/layout/grid/#parameters-stroke"><code>stroke</code></a> to optionally enable grid lines with a certain
+        stroke</li>
+        </ul>
+        <p>If you need to override one of the above options for a single cell, you can
+        use the <a href="/docs/reference/layout/grid/#definitions-cell"><code>grid.cell</code></a> element. Likewise, you can override
+        individual grid lines with the <a href="/docs/reference/layout/grid/#definitions-hline"><code>grid.hline</code></a> and
+        <a href="/docs/reference/layout/grid/#definitions-vline"><code>grid.vline</code></a> elements.</p>
+        <p>Alternatively, if you need the appearance options to depend on a cell's
+        position (column and row), you may specify a function to <code>fill</code> or <code>align</code>
+        of the form <code>(column, row) =&gt; value</code>. You may also use a show rule on
+        <a href="/docs/reference/layout/grid/#definitions-cell"><code>grid.cell</code></a> - see that element's examples or the examples
+        below for more information.</p>
+        <p>Locating most of your styling in set and show rules is recommended, as it
+        keeps the grid's or table's actual usages clean and easy to read. It also
+        allows you to easily change the grid's appearance in one place.</p>
+        <h3 id="stroke-styling-precedence">Stroke styling precedence</h3>
+        <p>There are three ways to set the stroke of a grid cell: through
+        <a href="/docs/reference/layout/grid/#definitions-cell-stroke"><code>grid<span class="typ-punct">.</span>cell</code>'s <code>stroke</code> field</a>, by using
+        <a href="/docs/reference/layout/grid/#definitions-hline"><code>grid<span class="typ-punct">.</span>hline</code></a> and <a href="/docs/reference/layout/grid/#definitions-vline"><code>grid<span class="typ-punct">.</span>vline</code></a>, or by
+        setting the <a href="/docs/reference/layout/grid/#parameters-stroke"><code>grid</code>'s <code>stroke</code> field</a>. When multiple of
+        these settings are present and conflict, the <code>hline</code> and <code>vline</code> settings
+        take the highest precedence, followed by the <code>cell</code> settings, and finally
+        the <code>grid</code> settings.</p>
+        <p>Furthermore, strokes of a repeated grid header or footer will take
+        precedence over regular cell strokes.</p>
       example: null
       self: false
       params:
@@ -1419,7 +1595,7 @@ children:
         settable: true
       - name: gutter
         details: |-
-          <p>The gaps between rows &amp; columns.</p>
+          <p>The gaps between rows and columns.</p>
           <p>If there are more gutters than defined sizes, the last gutter is repeated.</p>
         example: null
         types:
@@ -1467,9 +1643,180 @@ children:
         required: false
         variadic: false
         settable: true
+      - name: fill
+        details: |-
+          <p>How to fill the cells.</p>
+          <p>This can be a color or a function that returns a color. The function
+          receives the cells' column and row indices, starting from zero. This can
+          be used to implement striped grids.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">grid</span><span class="typ-punct">(</span>
+            fill<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span>
+              <span class="typ-key">if</span> calc<span class="typ-punct">.</span><span class="typ-func">even</span><span class="typ-punct">(</span>x <span class="typ-op">+</span> y<span class="typ-punct">)</span> <span class="typ-punct">{</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">230</span><span class="typ-punct">)</span> <span class="typ-punct">}</span>
+              <span class="typ-key">else</span> <span class="typ-punct">{</span> white <span class="typ-punct">}</span><span class="typ-punct">,</span>
+            align<span class="typ-punct">:</span> center <span class="typ-op">+</span> horizon<span class="typ-punct">,</span>
+            columns<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span>
+            inset<span class="typ-punct">:</span> <span class="typ-num">2pt</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>O<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>X<span class="typ-punct">]</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/6e4d244fbb9962a92622e256417f0be8.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - none
+        - color
+        - gradient
+        - array
+        - pattern
+        - function
+        strings: []
+        default: <code><span class="typ-key">none</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
+      - name: align
+        details: |-
+          <p>How to align the cells' content.</p>
+          <p>This can either be a single alignment, an array of alignments
+          (corresponding to each column) or a function that returns an alignment.
+          The function receives the cells' column and row indices, starting from
+          zero. If set to <code><span class="typ-key">auto</span></code>, the outer alignment is used.</p>
+          <p>You can find an example for this argument at the
+          <a href="/docs/reference/model/table/#parameters-align"><code>table.align</code></a> parameter.</p>
+        example: null
+        types:
+        - auto
+        - array
+        - alignment
+        - function
+        strings: []
+        default: <code><span class="typ-key">auto</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
+      - name: stroke
+        details: |-
+          <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the cells.</p>
+          <p>Grids have no strokes by default, which can be changed by setting this
+          option to the desired stroke.</p>
+          <p>If it is necessary to place lines which can cross spacing between cells
+          produced by the <code>gutter</code> option, or to override the stroke between
+          multiple specific cells, consider specifying one or more of
+          <a href="/docs/reference/layout/grid/#definitions-hline"><code>grid.hline</code></a> and <a href="/docs/reference/layout/grid/#definitions-vline"><code>grid.vline</code></a> alongside
+          your grid cells.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">13em</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">26em</span><span class="typ-punct">)</span>
+
+          <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">cv</span><span class="typ-punct">(</span><span class="typ-op">..</span>jobs<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">grid</span><span class="typ-punct">(</span>
+              columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
+              inset<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span>
+              stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-key">if</span> x <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-key">and</span> y <span class="typ-op">&gt;</span> <span class="typ-num">0</span> <span class="typ-punct">{</span>
+                <span class="typ-punct">(</span>right<span class="typ-punct">:</span> <span class="typ-punct">(</span>
+                  paint<span class="typ-punct">:</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">180</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+                  thickness<span class="typ-punct">:</span> <span class="typ-num">1.5pt</span><span class="typ-punct">,</span>
+                  dash<span class="typ-punct">:</span> <span class="typ-str">&quot;dotted&quot;</span>
+                <span class="typ-punct">)</span><span class="typ-punct">)</span>
+              <span class="typ-punct">}</span><span class="typ-punct">,</span>
+              grid<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>colspan<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+                <span class="typ-strong">*Professional Experience*</span>
+                <span class="typ-func">#</span><span class="typ-func">box</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">180</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+              <span class="typ-punct">]</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+              <span class="typ-op">..</span><span class="typ-punct">{</span>
+                <span class="typ-key">let</span> last <span class="typ-op">=</span> <span class="typ-key">none</span>
+                <span class="typ-key">for</span> job <span class="typ-key">in</span> jobs<span class="typ-punct">.</span><span class="typ-func">pos</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-punct">{</span>
+                  <span class="typ-punct">(</span>
+                    <span class="typ-key">if</span> job<span class="typ-punct">.</span>year <span class="typ-op">!=</span> last <span class="typ-punct">[</span><span class="typ-strong">*<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">year</span>*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+                    <span class="typ-punct">[</span>
+                      <span class="typ-strong">*<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">company</span>*</span> - <span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">role</span> <span class="typ-emph">_(<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">timeframe</span>)_</span> <span class="typ-escape">\</span>
+                      <span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">details</span>
+                    <span class="typ-punct">]</span>
+                  <span class="typ-punct">)</span>
+                  last <span class="typ-op">=</span> job<span class="typ-punct">.</span>year
+                <span class="typ-punct">}</span>
+              <span class="typ-punct">}</span>
+            <span class="typ-punct">)</span>
+
+            <span class="typ-func">#</span><span class="typ-func">cv</span><span class="typ-punct">(</span>
+              <span class="typ-punct">(</span>
+                year<span class="typ-punct">:</span> <span class="typ-num">2012</span><span class="typ-punct">,</span>
+                company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Pear Seed &amp; Co.<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                role<span class="typ-punct">:</span> <span class="typ-punct">[</span>Lead Engineer<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jul - Dec<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                details<span class="typ-punct">:</span> <span class="typ-punct">[</span>
+                  <span class="typ-marker">-</span> Raised engineers from 3x to 10x
+                  <span class="typ-marker">-</span> Did a great job
+                <span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">)</span><span class="typ-punct">,</span>
+              <span class="typ-punct">(</span>
+                year<span class="typ-punct">:</span> <span class="typ-num">2012</span><span class="typ-punct">,</span>
+                company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Mega Corp.<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                role<span class="typ-punct">:</span> <span class="typ-punct">[</span>VP of Sales<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Mar - Jun<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Closed tons of customers<span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">)</span><span class="typ-punct">,</span>
+              <span class="typ-punct">(</span>
+                year<span class="typ-punct">:</span> <span class="typ-num">2013</span><span class="typ-punct">,</span>
+                company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Tiny Co.<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                role<span class="typ-punct">:</span> <span class="typ-punct">[</span>CEO<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jan - Dec<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Delivered 4x more shareholder value<span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">)</span><span class="typ-punct">,</span>
+              <span class="typ-punct">(</span>
+                year<span class="typ-punct">:</span> <span class="typ-num">2014</span><span class="typ-punct">,</span>
+                company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Glorbocorp Ltd<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                role<span class="typ-punct">:</span> <span class="typ-punct">[</span>CTO<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jan - Mar<span class="typ-punct">]</span><span class="typ-punct">,</span>
+                details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Drove containerization forward<span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/e9464720efad510c8c513110d40d323a.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - none
+        - length
+        - color
+        - gradient
+        - array
+        - stroke
+        - pattern
+        - dictionary
+        - function
+        strings: []
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
+      - name: inset
+        details: |-
+          <p>How much to pad the cells' content.</p>
+          <p>You can find an example for this argument at the
+          <a href="/docs/reference/model/table/#parameters-inset"><code>table.inset</code></a> parameter.</p>
+        example: null
+        types:
+        - relative
+        - array
+        - dictionary
+        - function
+        strings: []
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
       - name: children
         details: |-
-          <p>The contents of the grid cells.</p>
+          <p>The contents of the grid cells, plus any extra grid lines specified
+          with the <a href="/docs/reference/layout/grid/#definitions-hline"><code>grid.hline</code></a> and <a href="/docs/reference/layout/grid/#definitions-vline"><code>grid.vline</code></a>
+          elements.</p>
           <p>The cells are populated in row-major order.</p>
         example: null
         types:
@@ -1483,11 +1830,580 @@ children:
         settable: false
       returns:
       - content
-      scope: []
+      scope:
+      - path:
+        - grid
+        name: cell
+        title: Grid Cell
+        keywords: []
+        oneliner: A cell in the grid. You can use this function in the argument list
+          of a grid
+        element: true
+        contextual: false
+        details: |-
+          <p>A cell in the grid. You can use this function in the argument list of a grid
+          to override grid style properties for an individual cell or manually
+          positioning it within the grid. You can also use this function in show rules
+          to apply certain styles to multiple cells at once.</p>
+          <p>For example, you can override the position and stroke for a single cell:</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">15pt</span><span class="typ-punct">,</span> font<span class="typ-punct">:</span> <span class="typ-str">&quot;Noto Sans Symbols 2&quot;</span><span class="typ-punct">)</span>
+          <span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">regex</span><span class="typ-punct">(</span><span class="typ-str">&quot;[♚-♟︎]&quot;</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> <span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-str">&quot;21212A&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+          <span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">regex</span><span class="typ-punct">(</span><span class="typ-str">&quot;[♔-♙]&quot;</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> <span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-str">&quot;111015&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+
+          <span class="typ-func">#</span><span class="typ-func">grid</span><span class="typ-punct">(</span>
+            fill<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-func">rgb</span><span class="typ-punct">(</span>
+              <span class="typ-key">if</span> calc<span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span>x <span class="typ-op">+</span> y<span class="typ-punct">)</span> <span class="typ-punct">{</span> <span class="typ-str">&quot;EFF0F3&quot;</span> <span class="typ-punct">}</span>
+              <span class="typ-key">else</span> <span class="typ-punct">{</span> <span class="typ-str">&quot;7F8396&quot;</span> <span class="typ-punct">}</span>
+            <span class="typ-punct">)</span><span class="typ-punct">,</span>
+            columns<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">1em</span><span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">*</span> <span class="typ-num">8</span><span class="typ-punct">,</span>
+            rows<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">,</span>
+            align<span class="typ-punct">:</span> center <span class="typ-op">+</span> horizon<span class="typ-punct">,</span>
+
+            <span class="typ-punct">[</span>♜<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♞<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♝<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♛<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♚<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♝<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♞<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♜<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span>  <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>
+              x<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span> y<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
+              stroke<span class="typ-punct">:</span> blue<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">60%</span><span class="typ-punct">)</span>
+            <span class="typ-punct">)</span><span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span>
+
+            <span class="typ-op">..</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">6</span><span class="typ-punct">)</span><span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">*</span> <span class="typ-num">8</span><span class="typ-punct">,</span>
+            <span class="typ-op">..</span><span class="typ-punct">(</span><span class="typ-punct">[</span>♖<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♘<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♗<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♕<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♔<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♗<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♘<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♖<span class="typ-punct">]</span><span class="typ-punct">)</span>
+              <span class="typ-punct">.</span><span class="typ-func">map</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span>cell<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">7</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/9b7cb9300b3b4743d51c03b7666786a1.png" alt="Preview" width="480" height="190"/></div></div>
+          <p>You may also apply a show rule on <code>grid.cell</code> to style all cells at once,
+          which allows you, for example, to apply styles based on a cell's position.
+          Refer to the examples of the <a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a> element to learn
+          more about this.</p>
+        self: false
+        params:
+        - name: body
+          details: <p>The cell's body.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: x
+          details: |-
+            <p>The cell's column (zero-indexed).
+            This field may be used in show rules to style a cell depending on its
+            column.</p>
+            <p>You may override this field to pick in which column the cell must
+            be placed. If no row (<code>y</code>) is chosen, the cell will be placed in the
+            first row (starting at row 0) with that column available (or a new row
+            if none). If both <code>x</code> and <code>y</code> are chosen, however, the cell will be
+            placed in that exact position. An error is raised if that position is
+            not available (thus, it is usually wise to specify cells with a custom
+            position before cells with automatic positions).</p>
+          example: |-
+            <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">circ</span><span class="typ-punct">(</span>c<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">circle</span><span class="typ-punct">(</span>
+                fill<span class="typ-punct">:</span> c<span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">5mm</span>
+            <span class="typ-punct">)</span>
+
+            <span class="typ-func">#</span><span class="typ-func">grid</span><span class="typ-punct">(</span>
+              columns<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span>
+              rows<span class="typ-punct">:</span> <span class="typ-num">7mm</span><span class="typ-punct">,</span>
+              stroke<span class="typ-punct">:</span> <span class="typ-num">.5pt</span> <span class="typ-op">+</span> blue<span class="typ-punct">,</span>
+              align<span class="typ-punct">:</span> center <span class="typ-op">+</span> horizon<span class="typ-punct">,</span>
+              inset<span class="typ-punct">:</span> <span class="typ-num">1mm</span><span class="typ-punct">,</span>
+
+              grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> y<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-func">circ</span><span class="typ-punct">(</span>aqua<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+              <span class="typ-func">circ</span><span class="typ-punct">(</span>yellow<span class="typ-punct">)</span><span class="typ-punct">,</span>
+              grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-func">circ</span><span class="typ-punct">(</span>green<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+              <span class="typ-func">circ</span><span class="typ-punct">(</span>black<span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span>
+            </code></pre><div class="preview"><img src="/assets/docs/638f3a3f6cdef9192a12ae0380e5b8f6.png" alt="Preview" width="480" height="190"/></div></div>
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: y
+          details: |-
+            <p>The cell's row (zero-indexed).
+            This field may be used in show rules to style a cell depending on its
+            row.</p>
+            <p>You may override this field to pick in which row the cell must be
+            placed. If no column (<code>x</code>) is chosen, the cell will be placed in the
+            first column (starting at column 0) available in the chosen row. If all
+            columns in the chosen row are already occupied, an error is raised.</p>
+          example: |-
+            <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">tri</span><span class="typ-punct">(</span>c<span class="typ-punct">)</span> <span class="typ-op">=</span> polygon<span class="typ-punct">.</span><span class="typ-func">regular</span><span class="typ-punct">(</span>
+              fill<span class="typ-punct">:</span> c<span class="typ-punct">,</span>
+              size<span class="typ-punct">:</span> <span class="typ-num">5mm</span><span class="typ-punct">,</span>
+              vertices<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span>
+
+            <span class="typ-func">#</span><span class="typ-func">grid</span><span class="typ-punct">(</span>
+              columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
+              stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+              inset<span class="typ-punct">:</span> <span class="typ-num">1mm</span><span class="typ-punct">,</span>
+
+              <span class="typ-func">tri</span><span class="typ-punct">(</span>black<span class="typ-punct">)</span><span class="typ-punct">,</span>
+              grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-func">tri</span><span class="typ-punct">(</span>teal<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+              grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-func">tri</span><span class="typ-punct">(</span>red<span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+              grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-func">tri</span><span class="typ-punct">(</span>orange<span class="typ-punct">)</span><span class="typ-punct">)</span>
+            <span class="typ-punct">)</span>
+            </code></pre><div class="preview"><img src="/assets/docs/72115795997887d7fd9e9d67c33eb0ac.png" alt="Preview" width="480" height="190"/></div></div>
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: colspan
+          details: <p>The amount of columns spanned by this cell.</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">1</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: rowspan
+          details: <p>The amount of rows spanned by this cell.</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">1</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: fill
+          details: <p>The cell's <a href="/docs/reference/layout/grid/#parameters-fill">fill</a>
+            override.</p>
+          example: null
+          types:
+          - none
+          - auto
+          - color
+          - gradient
+          - pattern
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: align
+          details: <p>The cell's <a href="/docs/reference/layout/grid/#parameters-align">alignment</a>
+            override.</p>
+          example: null
+          types:
+          - auto
+          - alignment
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: inset
+          details: <p>The cell's <a href="/docs/reference/layout/grid/#parameters-inset">inset</a>
+            override.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          - dictionary
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: stroke
+          details: <p>The cell's <a href="/docs/reference/layout/grid/#parameters-stroke">stroke</a>
+            override.</p>
+          example: null
+          types:
+          - none
+          - length
+          - color
+          - gradient
+          - stroke
+          - pattern
+          - dictionary
+          strings: []
+          default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+            class="typ-punct">)</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: breakable
+          details: |-
+            <p>Whether rows spanned by this cell can be placed in different pages.
+            When equal to <code><span class="typ-key">auto</span></code>, a cell spanning only fixed-size rows is
+            unbreakable, while a cell spanning at least one <code><span class="typ-key">auto</span></code>-sized row is
+            breakable.</p>
+          example: null
+          types:
+          - auto
+          - bool
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - grid
+        name: hline
+        title: Grid Horizontal Line
+        keywords: []
+        oneliner: A horizontal line in the grid.
+        element: true
+        contextual: false
+        details: |-
+          <p>A horizontal line in the grid.</p>
+          <p>Overrides any per-cell stroke, including stroke specified through the grid's
+          <code>stroke</code> field. Can cross spacing between cells created through the grid's
+          <code>column-gutter</code> option.</p>
+          <p>An example for this function can be found at the
+          <a href="/docs/reference/model/table/#definitions-hline"><code>table.hline</code></a> element.</p>
+        example: null
+        self: false
+        params:
+        - name: y
+          details: |-
+            <p>The row above which the horizontal line is placed (zero-indexed).
+            If the <code>position</code> field is set to <code>bottom</code>, the line is placed below
+            the row with the given index instead (see that field's docs for
+            details).</p>
+            <p>Specifying <code><span class="typ-key">auto</span></code> causes the line to be placed at the row below the
+            last automatically positioned cell (that is, cell without coordinate
+            overrides) before the line among the grid's children. If there is no
+            such cell before the line, it is placed at the top of the grid (row 0).
+            Note that specifying for this option exactly the total amount of rows
+            in the grid causes this horizontal line to override the bottom border
+            of the grid, while a value of 0 overrides the top border.</p>
+          example: null
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: start
+          details: <p>The column at which the horizontal line starts (zero-indexed,
+            inclusive).</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">0</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: end
+          details: |-
+            <p>The column before which the horizontal line ends (zero-indexed,
+            exclusive).
+            Therefore, the horizontal line will be drawn up to and across column
+            <code>end - 1</code>.</p>
+            <p>A value equal to <code><span class="typ-key">none</span></code> or to the amount of columns causes it to
+            extend all the way towards the end of the grid.</p>
+          example: null
+          types:
+          - none
+          - int
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: stroke
+          details: |-
+            <p>The line's stroke.</p>
+            <p>Specifying <code><span class="typ-key">none</span></code> removes any lines previously placed across this
+            line's range, including hlines or per-cell stroke below it.</p>
+          example: null
+          types:
+          - none
+          - length
+          - color
+          - gradient
+          - stroke
+          - pattern
+          - dictionary
+          strings: []
+          default: <code><span class="typ-num">1pt</span> <span class="typ-op">+</span>
+            black</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: position
+          details: |-
+            <p>The position at which the line is placed, given its row (<code>y</code>) - either
+            <code>top</code> to draw above it or <code>bottom</code> to draw below it.</p>
+            <p>This setting is only relevant when row gutter is enabled (and
+            shouldn't be used otherwise - prefer just increasing the <code>y</code> field by
+            one instead), since then the position below a row becomes different
+            from the position above the next row due to the spacing between both.</p>
+          example: null
+          types:
+          - alignment
+          strings: []
+          default: <code>top</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - grid
+        name: vline
+        title: Grid Vertical Line
+        keywords: []
+        oneliner: A vertical line in the grid.
+        element: true
+        contextual: false
+        details: |-
+          <p>A vertical line in the grid.</p>
+          <p>Overrides any per-cell stroke, including stroke specified through the
+          grid's <code>stroke</code> field. Can cross spacing between cells created through
+          the grid's <code>row-gutter</code> option.</p>
+        example: null
+        self: false
+        params:
+        - name: x
+          details: |-
+            <p>The column before which the horizontal line is placed (zero-indexed).
+            If the <code>position</code> field is set to <code>end</code>, the line is placed after the
+            column with the given index instead (see that field's docs for
+            details).</p>
+            <p>Specifying <code><span class="typ-key">auto</span></code> causes the line to be placed at the column after
+            the last automatically positioned cell (that is, cell without
+            coordinate overrides) before the line among the grid's children. If
+            there is no such cell before the line, it is placed before the grid's
+            first column (column 0).
+            Note that specifying for this option exactly the total amount of
+            columns in the grid causes this vertical line to override the end
+            border of the grid (right in LTR, left in RTL), while a value of 0
+            overrides the start border (left in LTR, right in RTL).</p>
+          example: null
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: start
+          details: <p>The row at which the vertical line starts (zero-indexed, inclusive).</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">0</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: end
+          details: |-
+            <p>The row on top of which the vertical line ends (zero-indexed,
+            exclusive).
+            Therefore, the vertical line will be drawn up to and across row
+            <code>end - 1</code>.</p>
+            <p>A value equal to <code><span class="typ-key">none</span></code> or to the amount of rows causes it to extend
+            all the way towards the bottom of the grid.</p>
+          example: null
+          types:
+          - none
+          - int
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: stroke
+          details: |-
+            <p>The line's stroke.</p>
+            <p>Specifying <code><span class="typ-key">none</span></code> removes any lines previously placed across this
+            line's range, including vlines or per-cell stroke below it.</p>
+          example: null
+          types:
+          - none
+          - length
+          - color
+          - gradient
+          - stroke
+          - pattern
+          - dictionary
+          strings: []
+          default: <code><span class="typ-num">1pt</span> <span class="typ-op">+</span>
+            black</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: position
+          details: |-
+            <p>The position at which the line is placed, given its column (<code>x</code>) -
+            either <code>start</code> to draw before it or <code>end</code> to draw after it.</p>
+            <p>The values <code>left</code> and <code>right</code> are also accepted, but discouraged as
+            they cause your grid to be inconsistent between left-to-right and
+            right-to-left documents.</p>
+            <p>This setting is only relevant when column gutter is enabled (and
+            shouldn't be used otherwise - prefer just increasing the <code>x</code> field by
+            one instead), since then the position after a column becomes different
+            from the position before the next column due to the spacing between
+            both.</p>
+          example: null
+          types:
+          - alignment
+          strings: []
+          default: <code>start</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - grid
+        name: header
+        title: Grid Header
+        keywords: []
+        oneliner: A repeatable grid header.
+        element: true
+        contextual: false
+        details: |-
+          <p>A repeatable grid header.</p>
+          <p>If <code>repeat</code> is set to <code>true</code>, the header will be repeated across pages. For
+          an example, refer to the <a href="/docs/reference/model/table/#definitions-header"><code>table.header</code></a> element and the
+          <a href="/docs/reference/layout/grid/#parameters-stroke"><code>grid.stroke</code></a> parameter.</p>
+        example: null
+        self: false
+        params:
+        - name: repeat
+          details: <p>Whether this header should be repeated across pages.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">true</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: children
+          details: <p>The cells and lines within the header.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: true
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - grid
+        name: footer
+        title: Grid Footer
+        keywords: []
+        oneliner: A repeatable grid footer.
+        element: true
+        contextual: false
+        details: |-
+          <p>A repeatable grid footer.</p>
+          <p>Just like the <a href="/docs/reference/layout/grid/#definitions-header"><code>grid.header</code></a> element, the footer can repeat
+          itself on every page of the table.</p>
+          <p>No other grid cells may be placed after the footer.</p>
+        example: null
+        self: false
+        params:
+        - name: repeat
+          details: <p>Whether this footer should be repeated across pages.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">true</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: children
+          details: <p>The cells and lines within the footer.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: true
+          settable: false
+        returns:
+        - content
+        scope: []
   children: []
 - route: /docs/reference/layout/hide/
   title: Hide
-  description: '`hide` 函数的文档'
+  description: Documentation for the `hide` function.
   part: null
   outline:
   - id: summary
@@ -1511,6 +2427,7 @@ children:
       keywords: []
       oneliner: Hides content without affecting layout.
       element: true
+      contextual: false
       details: |-
         <p>Hides content without affecting layout.</p>
         <p>The <code>hide</code> function allows you to hide content while the layout still 'sees'
@@ -1542,7 +2459,7 @@ children:
   children: []
 - route: /docs/reference/layout/layout/
   title: Layout
-  description: '`layout` 函数的文档'
+  description: Documentation for the `layout` function.
   part: null
   outline:
   - id: summary
@@ -1564,30 +2481,29 @@ children:
       oneliner: Provides access to the current outer container's (or page's, if none)
         size
       element: false
+      contextual: false
       details: |-
         <p>Provides access to the current outer container's (or page's, if none) size
         (width and height).</p>
         <p>The given function must accept a single parameter, <code>size</code>, which is a
-        dictionary with keys <code>width</code> and <code>height</code>, both of type <a href="/docs/reference/layout/length/"><code>length</code></a>.</p>
+        dictionary with keys <code>width</code> and <code>height</code>, both of type <a href="/docs/reference/layout/length/" title="`length`"><code>length</code></a>.</p>
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> text <span class="typ-op">=</span> <span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">30</span><span class="typ-punct">)</span>
-        <span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-func">style</span><span class="typ-punct">(</span>styles <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
+        <span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
           <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-punct">(</span>height<span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">measure</span><span class="typ-punct">(</span>
             <span class="typ-func">block</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> size<span class="typ-punct">.</span>width<span class="typ-punct">,</span> text<span class="typ-punct">)</span><span class="typ-punct">,</span>
-            styles<span class="typ-punct">,</span>
           <span class="typ-punct">)</span>
           This text is <span class="typ-pol">#</span><span class="typ-pol">height</span> high with
           the current page width: <span class="typ-escape">\</span>
           <span class="typ-pol">#</span><span class="typ-pol">text</span>
-        <span class="typ-punct">]</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-        </code></pre><div class="preview"><img src="/assets/docs/2e525c8e2988ed07b6ae0cd99f1dd314.png" alt="Preview" width="480" height="190"/></div></div>
+        <span class="typ-punct">]</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/c40525c5c0cb1da6679a02a808d0433b.png" alt="Preview" width="480" height="190"/></div></div>
         <p>If the <code>layout</code> call is placed inside of a box width a width of <code><span class="typ-num">800pt</span></code>
         and a height of <code><span class="typ-num">400pt</span></code>, then the specified function will be given the
         parameter <code><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">800pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">400pt</span><span class="typ-punct">)</span></code>. If it placed directly into the
         page it receives the page's dimensions minus its margins. This is mostly
         useful in combination with <a href="/docs/reference/layout/measure/">measurement</a>.</p>
-        <p>You can also use this function to resolve <a href="/docs/reference/layout/ratio/"><code>ratio</code></a> to fixed
-        lengths. This might come in handy if you're building your own layout
-        abstractions.</p>
+        <p>You can also use this function to resolve <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a> to fixed lengths. This
+        might come in handy if you're building your own layout abstractions.</p>
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
           <span class="typ-key">let</span> half <span class="typ-op">=</span> <span class="typ-num">50%</span> <span class="typ-op">*</span> size<span class="typ-punct">.</span>width
           <span class="typ-punct">[</span>Half a page is <span class="typ-pol">#</span><span class="typ-pol">half</span> wide.<span class="typ-punct">]</span>
@@ -1602,8 +2518,8 @@ children:
         details: |-
           <p>A function to call with the outer container's size. Its return value is
           displayed in the document.</p>
-          <p>The container's size is given as a <a href="/docs/reference/foundations/dictionary/">dictionary</a> with the
-          keys <code>width</code> and <code>height</code>.</p>
+          <p>The container's size is given as a <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a> with the keys <code>width</code>
+          and <code>height</code>.</p>
           <p>This function is called once for each time the content returned by
           <code>layout</code> appears in the document. That makes it possible to generate
           content that depends on the size of the container it is inside of.</p>
@@ -1623,7 +2539,7 @@ children:
   children: []
 - route: /docs/reference/layout/length/
   title: Length
-  description: Length 类型的文档
+  description: Documentation for the Length type.
   part: null
   outline:
   - id: summary
@@ -1649,6 +2565,9 @@ children:
       children: []
     - id: definitions-inches
       name: Inches
+      children: []
+    - id: definitions-to-absolute
+      name: To Absolute
       children: []
   body:
     kind: type
@@ -1682,7 +2601,7 @@ children:
         <ul>
         <li><code>abs</code>: A length with just the absolute component of the current length
         (that is, excluding the <code>em</code> component).</li>
-        <li><code>em</code>: The amount of <code>em</code> units in this length, as a <a href="/docs/reference/foundations/float/">float</a>.</li>
+        <li><code>em</code>: The amount of <code>em</code> units in this length, as a <a href="/docs/reference/foundations/float/" title="float">float</a>.</li>
         </ul>
       constructor: null
       scope:
@@ -1693,6 +2612,7 @@ children:
         keywords: []
         oneliner: Converts this length to points.
         element: false
+        contextual: false
         details: |-
           <p>Converts this length to points.</p>
           <p>Fails with an error if this length has non-zero <code>em</code> units (such as
@@ -1712,6 +2632,7 @@ children:
         keywords: []
         oneliner: Converts this length to millimeters.
         element: false
+        contextual: false
         details: |-
           <p>Converts this length to millimeters.</p>
           <p>Fails with an error if this length has non-zero <code>em</code> units. See the
@@ -1729,6 +2650,7 @@ children:
         keywords: []
         oneliner: Converts this length to centimeters.
         element: false
+        contextual: false
         details: |-
           <p>Converts this length to centimeters.</p>
           <p>Fails with an error if this length has non-zero <code>em</code> units. See the
@@ -1746,6 +2668,7 @@ children:
         keywords: []
         oneliner: Converts this length to inches.
         element: false
+        contextual: false
         details: |-
           <p>Converts this length to inches.</p>
           <p>Fails with an error if this length has non-zero <code>em</code> units. See the
@@ -1756,10 +2679,39 @@ children:
         returns:
         - float
         scope: []
+      - path:
+        - length
+        name: to-absolute
+        title: To Absolute
+        keywords: []
+        oneliner: Resolve this length to an absolute length.
+        element: false
+        contextual: false
+        details: <p>Resolve this length to an absolute length.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">12pt</span><span class="typ-punct">)</span>
+          <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">[</span>
+            <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+            <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span> <span class="typ-op">+</span> <span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+            <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+          <span class="typ-punct">]</span>
+
+          <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">6pt</span><span class="typ-punct">)</span>
+          <span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">[</span>
+            <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+            <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">6pt</span> <span class="typ-op">+</span> <span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+            <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">10em</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-absolute</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+          <span class="typ-punct">]</span>
+          </code></pre><div class="preview"><img src="/assets/docs/bc2ac6da596c573de6ebf3bbb1621a2e.png" alt="Preview" width="480" height="190"/></div></div>
+        self: true
+        params: []
+        returns:
+        - length
+        scope: []
   children: []
 - route: /docs/reference/layout/measure/
   title: Measure
-  description: '`measure` 函数的文档'
+  description: Documentation for the `measure` function.
   part: null
   outline:
   - id: summary
@@ -1786,35 +2738,34 @@ children:
       keywords: []
       oneliner: Measures the layouted size of content.
       element: false
+      contextual: true
       details: |-
         <p>Measures the layouted size of content.</p>
         <p>The <code>measure</code> function lets you determine the layouted size of content. Note
         that an infinite space is assumed, therefore the measured height/width may
         not necessarily match the final height/width of the measured content. If you
         want to measure in the current layout dimensions, you can combine <code>measure</code>
-        and <a href="/docs/reference/layout/layout/"><code>layout</code></a>.</p>
+        and <a href="/docs/reference/layout/layout/" title="`layout`"><code>layout</code></a>.</p>
         <h2 id="example">Example</h2>
-        <p>The same content can have a different size depending on the styles that
-        are active when it is layouted. For example, in the example below
-        <code><span class="typ-pol">#</span><span class="typ-pol">content</span></code> is of course bigger when we increase the font size.</p>
+        <p>The same content can have a different size depending on the <a href="/docs/reference/context/" title="context">context</a> that
+        it is placed into. For example, in the example below <code><span class="typ-pol">#</span><span class="typ-pol">content</span></code> is of
+        course bigger when we increase the font size.</p>
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> content <span class="typ-op">=</span> <span class="typ-punct">[</span>Hello!<span class="typ-punct">]</span>
         <span class="typ-pol">#</span><span class="typ-pol">content</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">14pt</span><span class="typ-punct">)</span>
         <span class="typ-pol">#</span><span class="typ-pol">content</span>
         </code></pre><div class="preview"><img src="/assets/docs/49695415724cfa126178f05a5eba18a5.png" alt="Preview" width="480" height="190"/></div></div>
-        <p>To do a meaningful measurement, you therefore first need to retrieve the
-        active styles with the <a href="/docs/reference/foundations/style/"><code>style</code></a> function. You can then pass them to
-        the <code>measure</code> function.</p>
-        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">thing</span><span class="typ-punct">(</span>body<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">style</span><span class="typ-punct">(</span>styles <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
-          <span class="typ-key">let</span> size <span class="typ-op">=</span> <span class="typ-func">measure</span><span class="typ-punct">(</span>body<span class="typ-punct">,</span> styles<span class="typ-punct">)</span>
+        <p>For this reason, you can only measure when context is available.</p>
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">thing</span><span class="typ-punct">(</span>body<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-key">context</span> <span class="typ-punct">{</span>
+          <span class="typ-key">let</span> size <span class="typ-op">=</span> <span class="typ-func">measure</span><span class="typ-punct">(</span>body<span class="typ-punct">)</span>
           <span class="typ-punct">[</span>Width of &quot;<span class="typ-pol">#</span><span class="typ-pol">body</span>&quot; is <span class="typ-pol">#</span><span class="typ-pol">size</span><span class="typ-punct">.</span><span class="typ-pol">width</span><span class="typ-punct">]</span>
-        <span class="typ-punct">}</span><span class="typ-punct">)</span>
+        <span class="typ-punct">}</span>
 
         <span class="typ-func">#</span><span class="typ-func">thing</span><span class="typ-punct">[</span>Hey<span class="typ-punct">]</span> <span class="typ-escape">\</span>
         <span class="typ-func">#</span><span class="typ-func">thing</span><span class="typ-punct">[</span>Welcome<span class="typ-punct">]</span>
-        </code></pre><div class="preview"><img src="/assets/docs/83a224c4e09a77e16796d6bccb0b41fd.png" alt="Preview" width="480" height="190"/></div></div>
+        </code></pre><div class="preview"><img src="/assets/docs/cf540ff75425a9966913f51a6150bf41.png" alt="Preview" width="480" height="190"/></div></div>
         <p>The measure function returns a dictionary with the entries <code>width</code> and
-        <code>height</code>, both of type <a href="/docs/reference/layout/length/"><code>length</code></a>.</p>
+        <code>height</code>, both of type <a href="/docs/reference/layout/length/" title="`length`"><code>length</code></a>.</p>
       example: null
       self: false
       params:
@@ -1831,15 +2782,18 @@ children:
         variadic: false
         settable: false
       - name: styles
-        details: <p>The styles with which to layout the content.</p>
+        details: |-
+          <p><em>Compatibility:</em> This argument only exists for compatibility with
+          Typst 0.10 and lower and shouldn't be used anymore.</p>
         example: null
         types:
+        - none
         - styles
         strings: []
-        default: null
+        default: <code><span class="typ-key">none</span></code>
         positional: true
         named: false
-        required: true
+        required: false
         variadic: false
         settable: false
       returns:
@@ -1848,7 +2802,7 @@ children:
   children: []
 - route: /docs/reference/layout/move/
   title: Move
-  description: '`move` 函数的文档'
+  description: Documentation for the `move` function.
   part: null
   outline:
   - id: summary
@@ -1878,9 +2832,10 @@ children:
       keywords: []
       oneliner: Moves content without affecting layout.
       element: true
+      contextual: false
       details: |-
         <p>Moves content without affecting layout.</p>
-        <p>The <code>move</code> function allows you to move content while the layout still 'sees'
+        <p>The <code>move</code> function allows you to move content while th layout still 'sees'
         it at the original positions. Containers will still be sized as if the
         content was not moved.</p>
         <h2 id="example">Example</h2>
@@ -1939,7 +2894,7 @@ children:
   children: []
 - route: /docs/reference/layout/pad/
   title: Padding
-  description: '`pad` 函数的文档'
+  description: Documentation for the `pad` function.
   part: null
   outline:
   - id: summary
@@ -1984,6 +2939,7 @@ children:
       keywords: []
       oneliner: Adds spacing around content.
       element: true
+      contextual: false
       details: |-
         <p>Adds spacing around content.</p>
         <p>The spacing can be specified for each side individually, or for all sides at
@@ -2105,7 +3061,7 @@ children:
   children: []
 - route: /docs/reference/layout/page/
   title: Page
-  description: '`page` 函数的文档'
+  description: Documentation for the `page` function.
   part: null
   outline:
   - id: summary
@@ -2177,6 +3133,7 @@ children:
       keywords: []
       oneliner: Layouts its child onto one or multiple pages.
       element: true
+      contextual: false
       details: |-
         <p>Layouts its child onto one or multiple pages.</p>
         <p>Although this function is primarily used in set rules to affect page
@@ -2532,8 +3489,7 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
-          class="typ-punct">)</span></code>
+        default: <code><span class="typ-key">auto</span></code>
         positional: false
         named: true
         required: false
@@ -2709,7 +3665,7 @@ children:
           <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>
             height<span class="typ-punct">:</span> <span class="typ-num">100pt</span><span class="typ-punct">,</span>
             margin<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span>
-            footer<span class="typ-punct">:</span> <span class="typ-punct">[</span>
+            footer<span class="typ-punct">:</span> <span class="typ-key">context</span> <span class="typ-punct">[</span>
               <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>right<span class="typ-punct">)</span>
               <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">8pt</span><span class="typ-punct">)</span>
               <span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>page<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>
@@ -2720,7 +3676,7 @@ children:
           <span class="typ-punct">)</span>
 
           <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">48</span><span class="typ-punct">)</span>
-          </code></pre><div class="preview"><img src="/assets/docs/2411ffe7e3e75df3aba4830eb664477d.png" alt="Preview" width="480" height="190"/></div></div>
+          </code></pre><div class="preview"><img src="/assets/docs/63d67767a7728f2d2834c9dc9f61d529.png" alt="Preview" width="480" height="190"/></div></div>
         types:
         - none
         - content
@@ -2812,7 +3768,7 @@ children:
   children: []
 - route: /docs/reference/layout/pagebreak/
   title: Page Break
-  description: '`pagebreak` 函数的文档'
+  description: Documentation for the `pagebreak` function.
   part: null
   outline:
   - id: summary
@@ -2839,6 +3795,7 @@ children:
       keywords: []
       oneliner: A manual page break.
       element: true
+      contextual: false
       details: |-
         <p>A manual page break.</p>
         <p>Must not be used inside any containers.</p>
@@ -2898,7 +3855,7 @@ children:
   children: []
 - route: /docs/reference/layout/place/
   title: Place
-  description: '`place` 函数的文档'
+  description: Documentation for the `place` function.
   part: null
   outline:
   - id: summary
@@ -2937,6 +3894,7 @@ children:
       keywords: []
       oneliner: Places content at an absolute position.
       element: true
+      contextual: false
       details: |-
         <p>Places content at an absolute position.</p>
         <p>Placed content will not affect the position of other content. Place is
@@ -2960,8 +3918,10 @@ children:
       - name: alignment
         details: |-
           <p>Relative to which position in the parent container to place the content.</p>
-          <p>Cannot be <code><span class="typ-key">auto</span></code> if <code>float</code> is <code><span class="typ-key">false</span></code> and must be either
-          <code><span class="typ-key">auto</span></code>, <code>top</code>, or <code>bottom</code> if <code>float</code> is <code><span class="typ-key">true</span></code>.</p>
+          <ul>
+          <li>If <code>float</code> is <code><span class="typ-key">false</span></code>, then this can be any alignment other than <code><span class="typ-key">auto</span></code>.</li>
+          <li>If <code>float</code> is <code><span class="typ-key">true</span></code>, then this must be <code><span class="typ-key">auto</span></code>, <code>top</code>, or <code>bottom</code>.</li>
+          </ul>
           <p>When an axis of the page is <code><span class="typ-key">auto</span></code> sized, all alignments relative to
           that axis will be ignored, instead, the item will be placed in the
           origin of the axis.</p>
@@ -3027,6 +3987,9 @@ children:
             <span class="typ-func">place</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> dx<span class="typ-punct">:</span> amount <span class="typ-op">-</span> <span class="typ-num">32pt</span><span class="typ-punct">,</span> dy<span class="typ-punct">:</span> amount<span class="typ-punct">)</span><span class="typ-punct">[</span>A<span class="typ-punct">]</span>
           <span class="typ-punct">}</span>
           </code></pre><div class="preview"><img src="/assets/docs/2894bae3ce0defe070261a5d5f61fe40.png" alt="Preview" width="480" height="190"/></div></div>
+          <p>This does not affect the layout of in-flow content.
+          In other words, the placed content is treated as if it
+          were wrapped in a <a href="/docs/reference/layout/move/" title="`move`"><code>move</code></a> element.</p>
         types:
         - relative
         strings: []
@@ -3037,7 +4000,11 @@ children:
         variadic: false
         settable: true
       - name: dy
-        details: <p>The vertical displacement of the placed content.</p>
+        details: |-
+          <p>The vertical displacement of the placed content.</p>
+          <p>This does not affect the layout of in-flow content.
+          In other words, the placed content is treated as if it
+          were wrapped in a <a href="/docs/reference/layout/move/" title="`move`"><code>move</code></a> element.</p>
         example: null
         types:
         - relative
@@ -3066,7 +4033,7 @@ children:
   children: []
 - route: /docs/reference/layout/ratio/
   title: Ratio
-  description: Ratio 类型的文档
+  description: Documentation for the Ratio type.
   part: null
   outline:
   - id: summary
@@ -3096,7 +4063,7 @@ children:
   children: []
 - route: /docs/reference/layout/relative/
   title: Relative Length
-  description: Relative Length 类型的文档
+  description: Documentation for the Relative Length type.
   part: null
   outline:
   - id: summary
@@ -3114,9 +4081,9 @@ children:
       oneliner: A length in relation to some known length.
       details: |-
         <p>A length in relation to some known length.</p>
-        <p>This type is a combination of a <a href="/docs/reference/layout/length/">length</a> with a <a href="/docs/reference/layout/ratio/">ratio</a>. It
-        results from addition and subtraction of a length and a ratio. Wherever a
-        relative length is expected, you can also use a bare length or ratio.</p>
+        <p>This type is a combination of a <a href="/docs/reference/layout/length/" title="length">length</a> with a <a href="/docs/reference/layout/ratio/" title="ratio">ratio</a>. It results from
+        addition and subtraction of a length and a ratio. Wherever a relative length
+        is expected, you can also use a bare length or ratio.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">100%</span> <span class="typ-op">-</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span>
 
@@ -3133,7 +4100,7 @@ children:
   children: []
 - route: /docs/reference/layout/repeat/
   title: Repeat
-  description: '`repeat` 函数的文档'
+  description: Documentation for the `repeat` function.
   part: null
   outline:
   - id: summary
@@ -3157,6 +4124,7 @@ children:
       keywords: []
       oneliner: Repeats content to the available space.
       element: true
+      contextual: false
       details: |-
         <p>Repeats content to the available space.</p>
         <p>This can be useful when implementing a custom index, reference, or outline.</p>
@@ -3195,7 +4163,7 @@ children:
   children: []
 - route: /docs/reference/layout/rotate/
   title: Rotate
-  description: '`rotate` 函数的文档'
+  description: Documentation for the `rotate` function.
   part: null
   outline:
   - id: summary
@@ -3213,6 +4181,9 @@ children:
     - id: parameters-origin
       name: origin
       children: []
+    - id: parameters-reflow
+      name: reflow
+      children: []
     - id: parameters-body
       name: body
       children: []
@@ -3225,10 +4196,11 @@ children:
       keywords: []
       oneliner: Rotates content without affecting layout.
       element: true
+      contextual: false
       details: |-
         <p>Rotates content without affecting layout.</p>
         <p>Rotates an element by a given angle. The layout will act as if the element
-        was not rotated.</p>
+        was not rotated unless you specify <code>reflow: <span class="typ-key">true</span></code>.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
           dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
@@ -3277,6 +4249,24 @@ children:
         required: false
         variadic: false
         settable: true
+      - name: reflow
+        details: |-
+          <p>Whether the rotation impacts the layout.</p>
+          <p>If set to <code><span class="typ-key">false</span></code>, the rotated content will retain the bounding box of
+          the original content. If set to <code><span class="typ-key">true</span></code>, the bounding box will take the
+          rotation of the content into account and adjust the layout accordingly.</p>
+        example: |-
+          <div class="previewed-code"><pre><code>Hello <span class="typ-func">#</span><span class="typ-func">rotate</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">,</span> reflow<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>World<span class="typ-punct">]</span>!
+          </code></pre><div class="preview"><img src="/assets/docs/854e09fe68cc99a46f5afa1383e0e604.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - bool
+        strings: []
+        default: <code><span class="typ-key">false</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
       - name: body
         details: <p>The content to rotate.</p>
         example: null
@@ -3295,7 +4285,7 @@ children:
   children: []
 - route: /docs/reference/layout/scale/
   title: Scale
-  description: '`scale` 函数的文档'
+  description: Documentation for the `scale` function.
   part: null
   outline:
   - id: summary
@@ -3316,6 +4306,9 @@ children:
     - id: parameters-origin
       name: origin
       children: []
+    - id: parameters-reflow
+      name: reflow
+      children: []
     - id: parameters-body
       name: body
       children: []
@@ -3328,13 +4321,15 @@ children:
       keywords: []
       oneliner: Scales content without affecting layout.
       element: true
+      contextual: false
       details: |-
         <p>Scales content without affecting layout.</p>
         <p>Lets you mirror content by specifying a negative scale on a single axis.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">scale</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">[</span>This is mirrored.<span class="typ-punct">]</span>
-        </code></pre><div class="preview"><img src="/assets/docs/4c21783e7c03adcefd350157917031c4.png" alt="Preview" width="480" height="190"/></div></div>
+        <span class="typ-func">#</span><span class="typ-func">scale</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">100%</span><span class="typ-punct">,</span> reflow<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>This is mirrored.<span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/8812bed42df654a6ce5b213b253e59ed.png" alt="Preview" width="480" height="190"/></div></div>
       example: null
       self: false
       params:
@@ -3381,6 +4376,24 @@ children:
         required: false
         variadic: false
         settable: true
+      - name: reflow
+        details: |-
+          <p>Whether the scaling impacts the layout.</p>
+          <p>If set to <code><span class="typ-key">false</span></code>, the scaled content will be allowed to overlap
+          other content. If set to <code><span class="typ-key">true</span></code>, it will compute the new size of
+          the scaled content and adjust the layout accordingly.</p>
+        example: |-
+          <div class="previewed-code"><pre><code>Hello <span class="typ-func">#</span><span class="typ-func">scale</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-num">20%</span><span class="typ-punct">,</span> y<span class="typ-punct">:</span> <span class="typ-num">40%</span><span class="typ-punct">,</span> reflow<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>World<span class="typ-punct">]</span>!
+          </code></pre><div class="preview"><img src="/assets/docs/d7c0756c76636519aaff4fae2156f90f.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - bool
+        strings: []
+        default: <code><span class="typ-key">false</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
       - name: body
         details: <p>The content to scale.</p>
         example: null
@@ -3399,7 +4412,7 @@ children:
   children: []
 - route: /docs/reference/layout/h/
   title: Spacing (H)
-  description: '`h` 函数的文档'
+  description: Documentation for the `h` function.
   part: null
   outline:
   - id: summary
@@ -3429,6 +4442,7 @@ children:
       keywords: []
       oneliner: Inserts horizontal spacing into a paragraph.
       element: true
+      contextual: false
       details: |-
         <p>Inserts horizontal spacing into a paragraph.</p>
         <p>The spacing can be absolute, relative, or fractional. In the last case, the
@@ -3498,7 +4512,7 @@ children:
   children: []
 - route: /docs/reference/layout/v/
   title: Spacing (V)
-  description: '`v` 函数的文档'
+  description: Documentation for the `v` function.
   part: null
   outline:
   - id: summary
@@ -3525,6 +4539,7 @@ children:
       keywords: []
       oneliner: Inserts vertical spacing into a flow of blocks.
       element: true
+      contextual: false
       details: |-
         <p>Inserts vertical spacing into a flow of blocks.</p>
         <p>The spacing can be absolute, relative, or fractional. In the last case,
@@ -3588,7 +4603,7 @@ children:
   children: []
 - route: /docs/reference/layout/stack/
   title: Stack
-  description: '`stack` 函数的文档'
+  description: Documentation for the `stack` function.
   part: null
   outline:
   - id: summary
@@ -3618,6 +4633,7 @@ children:
       keywords: []
       oneliner: Arranges content and spacing horizontally or vertically.
       element: true
+      contextual: false
       details: |-
         <p>Arranges content and spacing horizontally or vertically.</p>
         <p>The stack places a list of items along an axis, with optional spacing

@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/toml/
 title: TOML
-description: '`toml` 函数的文档'
+description: Documentation for the `toml` function.
 part: null
 outline:
 - id: summary
@@ -42,14 +42,17 @@ body:
     keywords: []
     oneliner: Reads structured data from a TOML file.
     element: false
+    contextual: false
     details: |-
-      <p>从 TOML 文件读取结构化数据。</p>
-      <p>文件必须包含有效的 TOML 表。
-      TOML 表将被转换为 Typst 字典，TOML 数组将被转换为 Typst 数组。
-      字符串、布尔值和日期时间将被转换为相应的 Typst 类型值。
-      数字将根据是否为整数转化为浮点值或整数值。</p>
-      <p>示例中的 TOML 文件为一个带有 <code>title</code>，<code>version</code> 和 <code>authors</code> 键值的表。</p>
-      <h2 id="example">举例</h2>
+      <p>Reads structured data from a TOML file.</p>
+      <p>The file must contain a valid TOML table. TOML tables will be converted into
+      Typst dictionaries, and TOML arrays will be converted into Typst arrays.
+      Strings, booleans and datetimes will be converted into the Typst equivalents
+      and numbers will be converted to floats or integers depending on whether
+      they are whole numbers.</p>
+      <p>The TOML file in the example consists of a table with the keys <code>title</code>,
+      <code>version</code>, and <code>authors</code>.</p>
+      <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> details <span class="typ-op">=</span> <span class="typ-func">toml</span><span class="typ-punct">(</span><span class="typ-str">&quot;details.toml&quot;</span><span class="typ-punct">)</span>
 
       Title: <span class="typ-pol">#</span><span class="typ-pol">details</span><span class="typ-punct">.</span><span class="typ-pol">title</span> <span class="typ-escape">\</span>
@@ -61,7 +64,7 @@ body:
     self: false
     params:
     - name: path
-      details: <p>TOML 文件路径。</p>
+      details: <p>Path to a TOML file.</p>
       example: null
       types:
       - str
@@ -82,12 +85,13 @@ body:
       keywords: []
       oneliner: Reads structured data from a TOML string/bytes.
       element: false
-      details: <p>从 TOML 字符串/字节流读取结构化数据。</p>
+      contextual: false
+      details: <p>Reads structured data from a TOML string/bytes.</p>
       example: null
       self: false
       params:
       - name: data
-        details: <p>TOML 数据。</p>
+        details: <p>TOML data.</p>
         example: null
         types:
         - str
@@ -109,12 +113,13 @@ body:
       keywords: []
       oneliner: Encodes structured data into a TOML string.
       element: false
-      details: <p>将结构化数据编码为 TOML 字符串。</p>
+      contextual: false
+      details: <p>Encodes structured data into a TOML string.</p>
       example: null
       self: false
       params:
       - name: value
-        details: <p>被编码的值。</p>
+        details: <p>Value to be encoded.</p>
         example: null
         types:
         - any
@@ -126,7 +131,7 @@ body:
         variadic: false
         settable: false
       - name: pretty
-        details: <p>是否结构化输出编码后的 TOML 字符串</p>
+        details: <p>Whether to pretty-print the resulting TOML.</p>
         example: null
         types:
         - bool

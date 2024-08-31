@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/polygon/
 title: Polygon
-description: '`polygon` 函数的文档'
+description: Documentation for the `polygon` function.
 part: null
 outline:
 - id: summary
@@ -48,6 +48,7 @@ body:
     keywords: []
     oneliner: A closed polygon.
     element: true
+    contextual: false
     details: |-
       <p>A closed polygon.</p>
       <p>The polygon is defined by its corner points and is closed automatically.</p>
@@ -86,7 +87,7 @@ body:
       settable: true
     - name: stroke
       details: |-
-        <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the polygon. This can be:</p>
+        <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the polygon. This can be:</p>
         <p>Can be set to  <code><span class="typ-key">none</span></code> to disable the stroke or to <code><span class="typ-key">auto</span></code> for a
         stroke of <code><span class="typ-num">1pt</span></code> black if and if only if no fill is given.</p>
       example: null
@@ -130,6 +131,7 @@ body:
       keywords: []
       oneliner: A regular polygon, defined by its size and number of vertices.
       element: false
+      contextual: false
       details: <p>A regular polygon, defined by its size and number of vertices.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">polygon</span><span class="typ-punct">.</span><span class="typ-func">regular</span><span class="typ-punct">(</span>

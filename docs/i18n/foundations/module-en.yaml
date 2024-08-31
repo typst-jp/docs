@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/module/
 title: Module
-description: Module 类型的文档
+description: Documentation for the Module type.
 part: null
 outline:
 - id: summary
@@ -20,7 +20,10 @@ body:
       <p>An evaluated module, either built-in or resulting from a file.</p>
       <p>You can access definitions from the module using
       <a href="/docs/reference/scripting/#fields">field access notation</a> and interact with it using the
-      <a href="/docs/reference/scripting/#modules">import and include syntaxes</a>.</p>
+      <a href="/docs/reference/scripting/#modules">import and include syntaxes</a>. Alternatively, it is
+      possible to convert a module to a dictionary, and therefore access its
+      contents dynamically, using the
+      <a href="/docs/reference/foundations/dictionary/#constructor">dictionary constructor</a>.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">import</span> <span class="typ-str">&quot;utils.typ&quot;</span>
       <span class="typ-pol">#</span><span class="typ-pol">utils</span><span class="typ-punct">.</span><span class="typ-func">add</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">)</span>

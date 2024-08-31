@@ -1,6 +1,6 @@
 route: /docs/reference/text/smartquote/
-title: 智能引号
-description: '`smartquote` 函数的文档'
+title: Smartquote
+description: Documentation for the `smartquote` function.
 part: null
 outline:
 - id: summary
@@ -36,14 +36,11 @@ body:
     keywords: []
     oneliner: A language-aware quote that reacts to its context.
     element: true
+    contextual: false
     details: |-
-      <p>
-      感知上下文的语言感知引号。
-      A language-aware quote that reacts to its context.
-      </p>
-      <p>
-      根据<a href="/docs/reference/text/text/#parameters-lang">文本语言</a>自动转换为适当的开头或结尾引号。
-      </p>
+      <p>A language-aware quote that reacts to its context.</p>
+      <p>Automatically turns into an appropriate opening or closing quote based on
+      the active <a href="/docs/reference/text/text/#parameters-lang">text language</a>.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>&quot;This is in quotes.&quot;
 
@@ -54,14 +51,13 @@ body:
       &quot;C&#39;est entre guillemets.&quot;
       </code></pre><div class="preview"><img src="/assets/docs/d8ae0e27ceabe7db27a5d570785d0e09.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="syntax">Syntax</h2>
-      <p>
-      该函数还有专用语法：普通引号（<code>'</code>和<code>&quot;</code>）。Typst会自动转换引号形式。
-      </p>
+      <p>This function also has dedicated syntax: The normal quote characters
+      (<code>'</code> and <code>&quot;</code>). Typst automatically makes your quotes smart.</p>
     example: null
     self: false
     params:
     - name: double
-      details: <p>是否应当是双引号。</p>
+      details: <p>Whether this should be a double quote.</p>
       example: null
       types:
       - bool
@@ -74,8 +70,9 @@ body:
       settable: true
     - name: enabled
       details: |-
-        <p>是否启用智能引号。</p>
-        <p>要禁用智能引号，还可以用反斜杠进行转义。</p>
+        <p>Whether smart quotes are enabled.</p>
+        <p>To disable smartness for a single quote, you can also escape it with a
+        backslash.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">smartquote</span><span class="typ-punct">(</span>enabled<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">)</span>
 
@@ -92,8 +89,9 @@ body:
       settable: true
     - name: alternative
       details: |-
-        <p>是否使用替代引号。</p>
-        <p>对于没有替代引号或已设置显式引号的语言，不起作用。</p>
+        <p>Whether to use alternative quotes.</p>
+        <p>Does nothing for languages that don't have alternative quotes, or if
+        explicit quotes were set.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>lang<span class="typ-punct">:</span> <span class="typ-str">&quot;de&quot;</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">smartquote</span><span class="typ-punct">(</span>alternative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
@@ -111,14 +109,18 @@ body:
       settable: true
     - name: quotes
       details: |-
-        <p>要使用的引号。</p>
+        <p>The quotes to use.</p>
         <ul>
-        <li>当设置为<code><span class="typ-key">auto</span></code>时，将使用<a href="/docs/reference/text/text/#parameters-lang">文本语言</a>的适当单引号。这是默认设置。</li>
-        <li>可以将自定义引号作为字符串、数组或包含以下内容的字典传递
+        <li>When set to <code><span class="typ-key">auto</span></code>, the appropriate single quotes for the
+        <a href="/docs/reference/text/text/#parameters-lang">text language</a> will be used. This is the default.</li>
+        <li>Custom quotes can be passed as a string, array, or dictionary of either
         <ul>
-        <li><a href="/docs/reference/foundations/str/">字符串</a>: 包含开启和关闭双引号的两个字符的字符串（这里的字符指的是Unicode图形簇）</li>
-        <li><a href="/docs/reference/foundations/array/">数组</a>: 包含开启和关闭双引号的数组</li>
-        <li><a href="/docs/reference/foundations/dictionary/">字典</a>: 包含双引号和单引号的数组，每个都指定为<code><span class="typ-key">auto</span></code>、字符串或数组</li>
+        <li><a href="/docs/reference/foundations/str/">string</a>: a string consisting of two characters containing the
+        opening and closing double quotes (characters here refer to Unicode
+        grapheme clusters)</li>
+        <li><a href="/docs/reference/foundations/array/" title="array">array</a>: an array containing the opening and closing double quotes</li>
+        <li><a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a>: an array containing the double and single quotes, each
+        specified as either <code><span class="typ-key">auto</span></code>, string, or array</li>
         </ul>
         </li>
         </ul>

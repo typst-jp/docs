@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/int/
 title: Integer
-description: Integer 类型的文档
+description: Documentation for the Integer type.
 part: null
 outline:
 - id: summary
@@ -15,6 +15,48 @@ outline:
   - id: constructor-value
     name: value
     children: []
+- id: definitions
+  name: Definitions
+  children:
+  - id: definitions-signum
+    name: Signum
+    children: []
+  - id: definitions-bit-not
+    name: Bitwise NOT
+    children: []
+  - id: definitions-bit-and
+    name: Bitwise AND
+    children:
+    - id: definitions-bit-and-rhs
+      name: rhs
+      children: []
+  - id: definitions-bit-or
+    name: Bitwise OR
+    children:
+    - id: definitions-bit-or-rhs
+      name: rhs
+      children: []
+  - id: definitions-bit-xor
+    name: Bitwise XOR
+    children:
+    - id: definitions-bit-xor-rhs
+      name: rhs
+      children: []
+  - id: definitions-bit-lshift
+    name: Bitwise Left Shift
+    children:
+    - id: definitions-bit-lshift-shift
+      name: shift
+      children: []
+  - id: definitions-bit-rshift
+    name: Bitwise Right Shift
+    children:
+    - id: definitions-bit-rshift-shift
+      name: shift
+      children: []
+    - id: definitions-bit-rshift-logical
+      name: logical
+      children: []
 body:
   kind: type
   content:
@@ -46,6 +88,7 @@ body:
       keywords: []
       oneliner: Converts a value to an integer.
       element: false
+      contextual: false
       details: |-
         <p>Converts a value to an integer.</p>
         <ul>
@@ -79,5 +122,242 @@ body:
       returns:
       - int
       scope: []
-    scope: []
+    scope:
+    - path:
+      - int
+      name: signum
+      title: Signum
+      keywords: []
+      oneliner: Calculates the sign of an integer.
+      element: false
+      contextual: false
+      details: |-
+        <p>Calculates the sign of an integer.</p>
+        <ul>
+        <li>If the number is positive, returns <code><span class="typ-num">1</span></code>.</li>
+        <li>If the number is negative, returns <code><span class="typ-op">-</span><span class="typ-num">1</span></code>.</li>
+        <li>If the number is zero, returns <code><span class="typ-num">0</span></code>.</li>
+        </ul>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+        </code></pre><div class="preview"><img src="/assets/docs/bd14a549d87f8c942f6bc810481af286.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params: []
+      returns:
+      - int
+      scope: []
+    - path:
+      - int
+      name: bit-not
+      title: Bitwise NOT
+      keywords: []
+      oneliner: Calculates the bitwise NOT of an integer.
+      element: false
+      contextual: false
+      details: |-
+        <p>Calculates the bitwise NOT of an integer.</p>
+        <p>For the purposes of this function, the operand is treated as a signed
+        integer of 64 bits.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">4</span><span class="typ-punct">.</span><span class="typ-func">bit-not</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-not</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/7f7cba54ef9eb0a3cf75c261e4e159df.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params: []
+      returns:
+      - int
+      scope: []
+    - path:
+      - int
+      name: bit-and
+      title: Bitwise AND
+      keywords: []
+      oneliner: Calculates the bitwise AND between two integers.
+      element: false
+      contextual: false
+      details: |-
+        <p>Calculates the bitwise AND between two integers.</p>
+        <p>For the purposes of this function, the operands are treated as signed
+        integers of 64 bits.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">128</span><span class="typ-punct">.</span><span class="typ-func">bit-and</span><span class="typ-punct">(</span><span class="typ-num">192</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/a029ddfe7648a39d6cfda7edc2b39945.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: rhs
+        details: <p>The right-hand operand of the bitwise AND.</p>
+        example: null
+        types:
+        - int
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - int
+      scope: []
+    - path:
+      - int
+      name: bit-or
+      title: Bitwise OR
+      keywords: []
+      oneliner: Calculates the bitwise OR between two integers.
+      element: false
+      contextual: false
+      details: |-
+        <p>Calculates the bitwise OR between two integers.</p>
+        <p>For the purposes of this function, the operands are treated as signed
+        integers of 64 bits.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">64</span><span class="typ-punct">.</span><span class="typ-func">bit-or</span><span class="typ-punct">(</span><span class="typ-num">32</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/395464ea28c8c37fdc527f0880474b77.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: rhs
+        details: <p>The right-hand operand of the bitwise OR.</p>
+        example: null
+        types:
+        - int
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - int
+      scope: []
+    - path:
+      - int
+      name: bit-xor
+      title: Bitwise XOR
+      keywords: []
+      oneliner: Calculates the bitwise XOR between two integers.
+      element: false
+      contextual: false
+      details: |-
+        <p>Calculates the bitwise XOR between two integers.</p>
+        <p>For the purposes of this function, the operands are treated as signed
+        integers of 64 bits.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">64</span><span class="typ-punct">.</span><span class="typ-func">bit-xor</span><span class="typ-punct">(</span><span class="typ-num">96</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/e17e691de5b3e82ba8bbdeaa9d2b6466.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: rhs
+        details: <p>The right-hand operand of the bitwise XOR.</p>
+        example: null
+        types:
+        - int
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - int
+      scope: []
+    - path:
+      - int
+      name: bit-lshift
+      title: Bitwise Left Shift
+      keywords: []
+      oneliner: Shifts the operand's bits to the left by the specified amount.
+      element: false
+      contextual: false
+      details: |-
+        <p>Shifts the operand's bits to the left by the specified amount.</p>
+        <p>For the purposes of this function, the operand is treated as a signed
+        integer of 64 bits. An error will occur if the result is too large to
+        fit in a 64-bit integer.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">33</span><span class="typ-punct">.</span><span class="typ-func">bit-lshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-lshift</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/4b5c2baf72dc4956b1eee15e2832d816.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: shift
+        details: <p>The amount of bits to shift. Must not be negative.</p>
+        example: null
+        types:
+        - int
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - int
+      scope: []
+    - path:
+      - int
+      name: bit-rshift
+      title: Bitwise Right Shift
+      keywords: []
+      oneliner: Shifts the operand's bits to the right by the specified amount.
+      element: false
+      contextual: false
+      details: |-
+        <p>Shifts the operand's bits to the right by the specified amount.
+        Performs an arithmetic shift by default (extends the sign bit to the left,
+        such that negative numbers stay negative), but that can be changed by the
+        <code>logical</code> parameter.</p>
+        <p>For the purposes of this function, the operand is treated as a signed
+        integer of 64 bits.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">64</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">8</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span>
+        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">8</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> logical<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/4f500913a0f8ed85afe6d51b81471eec.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: shift
+        details: |-
+          <p>The amount of bits to shift. Must not be negative.</p>
+          <p>Shifts larger than 63 are allowed and will cause the return value to
+          saturate. For non-negative numbers, the return value saturates at <code>0</code>,
+          while, for negative numbers, it saturates at <code>-1</code> if <code>logical</code> is set
+          to <code>false</code>, or <code>0</code> if it is <code>true</code>. This behavior is consistent with
+          just applying this operation multiple times. Therefore, the shift will
+          always succeed.</p>
+        example: null
+        types:
+        - int
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      - name: logical
+        details: |-
+          <p>Toggles whether a logical (unsigned) right shift should be performed
+          instead of arithmetic right shift.
+          If this is <code>true</code>, negative operands will not preserve their sign bit,
+          and bits which appear to the left after the shift will be <code>0</code>.
+          This parameter has no effect on non-negative operands.</p>
+        example: null
+        types:
+        - bool
+        strings: []
+        default: <code><span class="typ-key">false</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: false
+      returns:
+      - int
+      scope: []
 children: []

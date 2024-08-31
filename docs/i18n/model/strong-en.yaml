@@ -1,6 +1,6 @@
 route: /docs/reference/model/strong/
 title: Strong Emphasis
-description: '`strong` 函数的文档'
+description: Documentation for the `strong` function.
 part: null
 outline:
 - id: summary
@@ -30,6 +30,7 @@ body:
     keywords: []
     oneliner: Strongly emphasizes content by increasing the font weight.
     element: true
+    contextual: false
     details: |-
       <p>Strongly emphasizes content by increasing the font weight.</p>
       <p>Increases the current font weight by a given <code>delta</code>.</p>

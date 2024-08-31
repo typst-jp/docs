@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/json/
 title: JSON
-description: '`json` 函数的文档'
+description: Documentation for the `json` function.
 part: null
 outline:
 - id: summary
@@ -42,14 +42,19 @@ body:
     keywords: []
     oneliner: Reads structured data from a JSON file.
     element: false
+    contextual: false
     details: |-
       <p>Reads structured data from a JSON file.</p>
-      <p>The file must contain a valid JSON object or array. JSON objects will be
-      converted into Typst dictionaries, and JSON arrays will be converted into
-      Typst arrays. Strings and booleans will be converted into the Typst
-      equivalents, <code>null</code> will be converted into <code><span class="typ-key">none</span></code>, and numbers will be
-      converted to floats or integers depending on whether they are whole numbers.</p>
-      <p>The function returns a dictionary or an array, depending on the JSON file.</p>
+      <p>The file must contain a valid JSON value, such as object or array. JSON
+      objects will be converted into Typst dictionaries, and JSON arrays will be
+      converted into Typst arrays. Strings and booleans will be converted into the
+      Typst equivalents, <code>null</code> will be converted into <code><span class="typ-key">none</span></code>, and numbers will
+      be converted to floats or integers depending on whether they are whole
+      numbers.</p>
+      <p>Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
+      floating point numbers, which may result in an approximative value.</p>
+      <p>The function returns a dictionary, an array or, depending on the JSON file,
+      another JSON data type.</p>
       <p>The JSON files in the example contain objects with the keys <code>temperature</code>,
       <code>unit</code>, and <code>weather</code>.</p>
       <h2 id="example">Example</h2>
@@ -100,6 +105,7 @@ body:
       keywords: []
       oneliner: Reads structured data from a JSON string/bytes.
       element: false
+      contextual: false
       details: <p>Reads structured data from a JSON string/bytes.</p>
       example: null
       self: false
@@ -127,6 +133,7 @@ body:
       keywords: []
       oneliner: Encodes structured data into a JSON string.
       element: false
+      contextual: false
       details: <p>Encodes structured data into a JSON string.</p>
       example: null
       self: false

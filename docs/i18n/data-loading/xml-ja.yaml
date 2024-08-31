@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/xml/
 title: XML
-description: '`xml` 函数的文档'
+description: Documentation for the `xml` function.
 part: null
 outline:
 - id: summary
@@ -33,17 +33,22 @@ body:
     keywords: []
     oneliner: Reads structured data from an XML file.
     element: false
+    contextual: false
     details: |-
-      <p>从 XML 文件读取结构化数据。</p>
-      <p>XML 文件将被解析为由字典和字符串构成的数组。
-      XML 节点可以是元素或字符串。其中，元素将转化为字典字典和如下键值</p>
+      <p>Reads structured data from an XML file.</p>
+      <p>The XML file is parsed into an array of dictionaries and strings. XML nodes
+      can be elements or strings. Elements are represented as dictionaries with
+      the following keys:</p>
       <ul>
-      <li><code>标签</code>：字符串形式的元素名称。</li>
-      <li><code>属性</code>：字符串形式的元素属性字典。</li>
-      <li><code>子节点</code>：元素子节点数组。</li>
+      <li><code>tag</code>: The name of the element as a string.</li>
+      <li><code>attrs</code>: A dictionary of the element's attributes as strings.</li>
+      <li><code>children</code>: An array of the element's child nodes.</li>
       </ul>
-      <p>示例中的 XML 文件包含一个 <code>news</code> 根标签，其中包含多个 <code>article</code> 标签。每个 <code>article</code> 标签都有一个 <code>title</code>、<code>author</code> 和 <code>content</code> 标签。<code>content</code> 标签包含一个或多个段落，表示为 <code>p</code> 标签。</p>
-      <h2 id="example">举例</h2>
+      <p>The XML file in the example contains a root <code>news</code> tag with multiple
+      <code>article</code> tags. Each article has a <code>title</code>, <code>author</code>, and <code>content</code> tag. The
+      <code>content</code> tag contains one or more paragraphs, which are represented as <code>p</code>
+      tags.</p>
+      <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">find-child</span><span class="typ-punct">(</span>elem<span class="typ-punct">,</span> tag<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
         elem<span class="typ-punct">.</span>children
           <span class="typ-punct">.</span><span class="typ-func">find</span><span class="typ-punct">(</span>e <span class="typ-op">=&gt;</span> <span class="typ-str">&quot;tag&quot;</span> <span class="typ-key">in</span> e <span class="typ-key">and</span> e<span class="typ-punct">.</span>tag <span class="typ-op">==</span> tag<span class="typ-punct">)</span>
@@ -79,7 +84,7 @@ body:
     self: false
     params:
     - name: path
-      details: <p>XML 文件路径。</p>
+      details: <p>Path to an XML file.</p>
       example: null
       types:
       - str
@@ -100,12 +105,13 @@ body:
       keywords: []
       oneliner: Reads structured data from an XML string/bytes.
       element: false
-      details: <p>从 XML 字符串/字节流读取结构化数据。</p>
+      contextual: false
+      details: <p>Reads structured data from an XML string/bytes.</p>
       example: null
       self: false
       params:
       - name: data
-        details: <p>XML 数据。</p>
+        details: <p>XML data.</p>
         example: null
         types:
         - str

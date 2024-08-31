@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/eval/
 title: Evaluate
-description: '`eval` 函数的文档'
+description: Documentation for the `eval` function.
 part: null
 outline:
 - id: summary
@@ -30,6 +30,7 @@ body:
     keywords: []
     oneliner: Evaluates a string as Typst code.
     element: false
+    contextual: false
     details: |-
       <p>Evaluates a string as Typst code.</p>
       <p>This function should only be used as a last resort.</p>
@@ -42,9 +43,7 @@ body:
     self: false
     params:
     - name: source
-      details: |-
-        <p>A string of Typst code to evaluate.</p>
-        <p>The code in the string cannot interact with the file system.</p>
+      details: <p>A string of Typst code to evaluate.</p>
       example: null
       types:
       - str
@@ -56,7 +55,9 @@ body:
       variadic: false
       settable: false
     - name: mode
-      details: <p>The syntactical mode in which the string is parsed.</p>
+      details: |-
+        <p>The <a href="/docs/reference/syntax/#modes">syntactical mode</a> in which the string is
+        parsed.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">eval</span><span class="typ-punct">(</span><span class="typ-str">&quot;= Heading&quot;</span><span class="typ-punct">,</span> mode<span class="typ-punct">:</span> <span class="typ-str">&quot;markup&quot;</span><span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">eval</span><span class="typ-punct">(</span><span class="typ-str">&quot;1_2^3&quot;</span><span class="typ-punct">,</span> mode<span class="typ-punct">:</span> <span class="typ-str">&quot;math&quot;</span><span class="typ-punct">)</span>

@@ -1,6 +1,6 @@
 route: /docs/reference/layout/ratio/
 title: Ratio
-description: Ratio 类型的文档
+description: Documentation for the Ratio type.
 part: null
 outline:
 - id: summary

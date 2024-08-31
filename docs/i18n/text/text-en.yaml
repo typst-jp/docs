@@ -1,6 +1,6 @@
 route: /docs/reference/text/text/
 title: Text
-description: '`text` 函数的文档'
+description: Documentation for the `text` function.
 part: null
 outline:
 - id: summary
@@ -32,6 +32,9 @@ outline:
     children: []
   - id: parameters-fill
     name: fill
+    children: []
+  - id: parameters-stroke
+    name: stroke
     children: []
   - id: parameters-tracking
     name: tracking
@@ -117,6 +120,7 @@ body:
     keywords: []
     oneliner: Customizes the look and layout of text in a variety of ways.
     element: true
+    contextual: false
     details: |-
       <p>Customizes the look and layout of text in a variety of ways.</p>
       <p>This function is used frequently, both with set rules and directly. While
@@ -146,12 +150,17 @@ body:
         <p>In the web app, you can see the list of available fonts by clicking on
         the &quot;Ag&quot; button. You can provide additional fonts by uploading <code>.ttf</code>
         or <code>.otf</code> files into your project. They will be discovered
-        automatically.</p>
+        automatically. The priority is: project fonts &gt; server fonts.</p>
         </li>
         <li>
-        <p>Locally, Typst uses your installed system fonts. In addition, you can
-        use the <code>--font-path</code> argument or <code>TYPST_FONT_PATHS</code> environment
-        variable to add directories that should be scanned for fonts.</p>
+        <p>Locally, Typst uses your installed system fonts or embedded fonts in
+        the CLI, which are <code>Linux Libertine</code>, <code>New Computer Modern</code>,
+        <code>New Computer Modern Math</code>, and <code>DejaVu Sans Mono</code>. In addition, you
+        can use the <code>--font-path</code> argument or <code>TYPST_FONT_PATHS</code> environment
+        variable to add directories that should be scanned for fonts. The
+        priority is: <code>--font-paths</code> &gt; system fonts &gt; embedded fonts. Run
+        <code>typst fonts</code> to see the fonts that Typst has discovered on your
+        system.</p>
         </li>
         </ul>
       example: |-
@@ -211,9 +220,9 @@ body:
         available, Typst selects the normal style. Since most fonts are only
         available either in an italic or oblique style, the difference between
         italic and oblique style is rarely observable.</p>
-        <p>If you want to emphasize your text, you should do so using the
-        <a href="/docs/reference/model/emph/">emph</a> function instead. This makes it easy to adapt the style
-        later if you change your mind about how to signify the emphasis.</p>
+        <p>If you want to emphasize your text, you should do so using the <a href="/docs/reference/model/emph/" title="emph">emph</a>
+        function instead. This makes it easy to adapt the style later if you
+        change your mind about how to signify the emphasis.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Linux Libertine&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;italic&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Italic<span class="typ-punct">]</span>
         <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;DejaVu Sans&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;oblique&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Oblique<span class="typ-punct">]</span>
@@ -240,9 +249,8 @@ body:
         desired weight is not available, Typst selects the font from the family
         that is closest in weight.</p>
         <p>If you want to strongly emphasize your text, you should do so using the
-        <a href="/docs/reference/model/strong/">strong</a> function instead. This makes it easy to adapt the
-        style later if you change your mind about how to signify the strong
-        emphasis.</p>
+        <a href="/docs/reference/model/strong/" title="strong">strong</a> function instead. This makes it easy to adapt the style later
+        if you change your mind about how to signify the strong emphasis.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;IBM Plex Sans&quot;</span><span class="typ-punct">)</span>
 
@@ -334,6 +342,26 @@ body:
       strings: []
       default: <code><span class="typ-func">luma</span><span class="typ-punct">(</span><span
         class="typ-num">0%</span><span class="typ-punct">)</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: stroke
+      details: <p>How to stroke the text.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">0.5pt</span> <span class="typ-op">+</span> red<span class="typ-punct">)</span><span class="typ-punct">[</span>Stroked<span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/29e8536cef37b9bbbbb4b7830afc7637.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - none
+      - length
+      - color
+      - gradient
+      - stroke
+      - pattern
+      - dictionary
+      strings: []
+      default: <code><span class="typ-key">none</span></code>
       positional: false
       named: true
       required: false

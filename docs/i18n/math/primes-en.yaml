@@ -1,0 +1,55 @@
+route: /docs/reference/math/primes/
+title: Primes
+description: Documentation for the `primes` function.
+part: null
+outline:
+- id: summary
+  name: Summary
+  children: []
+- id: syntax
+  name: Syntax
+  children: []
+- id: parameters
+  name: Parameters
+  children:
+  - id: parameters-count
+    name: count
+    children: []
+body:
+  kind: func
+  content:
+    path:
+    - math
+    name: primes
+    title: Primes
+    keywords: []
+    oneliner: Grouped primes.
+    element: true
+    contextual: false
+    details: |-
+      <p>Grouped primes.</p>
+      <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> a<span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">_</span>b = a<span class="typ-math-op">^</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">&#39;</span><span class="typ-math-op">_</span>b <span class="typ-math-delim">$</span>
+      </code></pre><div class="preview"><img src="/assets/docs/49e4d95f75f57911972d25af6758906a.png" alt="Preview" width="480" height="190"/></div></div>
+      <h2 id="syntax">Syntax</h2>
+      <p>This function has dedicated syntax: use apostrophes instead of primes. They
+      will automatically attach to the previous element, moving superscripts to
+      the next level.</p>
+    example: null
+    self: false
+    params:
+    - name: count
+      details: <p>The number of grouped primes.</p>
+      example: null
+      types:
+      - int
+      strings: []
+      default: null
+      positional: true
+      named: false
+      required: true
+      variadic: false
+      settable: false
+    returns:
+    - content
+    scope: []
+children: []

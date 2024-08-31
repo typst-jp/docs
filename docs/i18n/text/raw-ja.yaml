@@ -1,6 +1,6 @@
 route: /docs/reference/text/raw/
-title: 原始文本/代码块
-description: '`raw` 函数的文档'
+title: Raw Text / Code
+description: Documentation for the `raw` function.
 part: null
 outline:
 - id: summary
@@ -63,9 +63,11 @@ body:
     keywords: []
     oneliner: Raw text with optional syntax highlighting.
     element: true
+    contextual: false
     details: |-
-      <p>带有可选语法高亮的原始文本。</p>
-      <p>使用等宽字体逐字显示文本，通常用于将代码嵌入文档中。</p>
+      <p>Raw text with optional syntax highlighting.</p>
+      <p>Displays the text verbatim and in a monospace font. This is typically used
+      to embed computer code into your document.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>Adding <span class="typ-raw">`rbx`</span> to <span class="typ-raw">`rcx`</span> gives
       the desired result.
@@ -87,7 +89,8 @@ body:
       <h2 id="syntax">Syntax</h2>
       <p>This function also has dedicated syntax. You can enclose text in 1 or 3+
       backticks (<code>`</code>) to make it raw. Two backticks produce empty raw text.
-      When you use three or more backticks, you can additionally specify a
+      This works both in markup and code.</p>
+      <p>When you use three or more backticks, you can additionally specify a
       language tag for syntax highlighting directly after the opening backticks.
       Within raw blocks, everything (except for the language tag, if applicable)
       is rendered as is, in particular, there are no escape sequences.</p>
@@ -102,8 +105,9 @@ body:
     params:
     - name: text
       details: |-
-        <p>原始文本块。</p>
-        <p>你还可以创造性地使用原始块为你的自动化创建自定义语法。</p>
+        <p>The raw text.</p>
+        <p>You can also use raw blocks creatively to create custom syntaxes for
+        your automations.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-comment">// Parse numbers in raw blocks with the</span>
         <span class="typ-comment">// `mydsl` tag and sum them up.</span>
@@ -130,11 +134,10 @@ body:
       settable: false
     - name: block
       details: |-
-        <p>是否将原始文本显示在一个单独的块中。</p>
-        <p>
-        在标记模式中，使用一个反引号会将此值设置为 <code><span class="typ-key">false</span></code>。
-        如果包含的内容至少包含一个换行符，则使用三个反引号会将其设置为 <code><span class="typ-key">true</span></code>。
-        </p>
+        <p>Whether the raw text is displayed as a separate block.</p>
+        <p>In markup mode, using one-backtick notation makes this <code><span class="typ-key">false</span></code>.
+        Using three-backtick notation makes it <code><span class="typ-key">true</span></code> if the enclosed content
+        contains at least one line break.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-comment">// Display inline code in a small box</span>
         <span class="typ-comment">// that retains the correct baseline.</span>
@@ -172,9 +175,11 @@ body:
       settable: true
     - name: lang
       details: |-
-        <p>要在其中突出显示语法的语言。</p>
-        <p>要在其中突出显示语法的语言，用法与 Markdown 代码块类似。
-          除了 Markdown 中也有的典型编程语言后缀外，它还分别支持 Typst 标记模式和 Typst 脚本模式分别对应的“typ”和“typc”后缀。</p>
+        <p>The language to syntax-highlight in.</p>
+        <p>Apart from typical language tags known from Markdown, this supports the
+        <code><span class="typ-str">&quot;typ&quot;</span></code> and <code><span class="typ-str">&quot;typc&quot;</span></code> tags for
+        <a href="/docs/reference/syntax/#markup">Typst markup</a> and
+        <a href="/docs/reference/syntax/#code">Typst code</a>, respectively.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-raw">```typ
         This is *Typst!*
@@ -247,8 +252,14 @@ body:
       settable: true
     - name: theme
       details: |-
-        <p>用于语法高亮的主题。主题文件应该使用<a href="https://www.sublimetext.com/docs/color_schemes_tmtheme.html"><code>tmTheme</code>文件格式</a>。</p>
-        <p>应用主题仅影响特定突出显示文本的颜色。它不考虑主题的前景和背景属性，因此您可以保留对原始文本颜色的控制。您可以使用<a href="/docs/reference/text/text/"><code>text</code></a>函数自行应用前景颜色，使用<a href="/docs/reference/layout/block/#parameters-fill">填充块</a>应用背景颜色。您还可以使用<a href="/docs/reference/data-loading/xml/"><code>xml</code></a>函数从主题中提取这些属性。</p>
+        <p>The theme to use for syntax highlighting. Theme files should be in the
+        in the <a href="https://www.sublimetext.com/docs/color_schemes_tmtheme.html"><code>tmTheme</code> file format</a>.</p>
+        <p>Applying a theme only affects the color of specifically highlighted
+        text. It does not consider the theme's foreground and background
+        properties, so that you retain control over the color of raw text. You
+        can apply the foreground color yourself with the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function and
+        the background with a <a href="/docs/reference/layout/block/#parameters-fill">filled block</a>. You could also use
+        the <a href="/docs/reference/data-loading/xml/" title="`xml`"><code>xml</code></a> function to extract these properties from the theme.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">raw</span><span class="typ-punct">(</span>theme<span class="typ-punct">:</span> <span class="typ-str">&quot;halcyon.tmTheme&quot;</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">raw</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-func">block</span><span class="typ-punct">(</span>
@@ -274,7 +285,9 @@ body:
       variadic: false
       settable: true
     - name: tab-size
-      details: <p>以空格为单位的制表符停止的大小。制表符将替换为足够的空格，以与下一个大小的倍数对齐。</p>
+      details: |-
+        <p>The size for a tab stop in spaces. A tab is replaced with enough spaces to
+        align with the next multiple of the size.</p>
       example: "<div class=\"previewed-code\"><pre><code><span class=\"typ-key\">#</span><span\
         \ class=\"typ-key\">set</span> <span class=\"typ-func\">raw</span><span class=\"\
         typ-punct\">(</span>tab-size<span class=\"typ-punct\">:</span> <span class=\"\
@@ -299,17 +312,21 @@ body:
       name: line
       title: Raw Text / Code Line
       keywords: []
-      oneliner: 一行突出显示的原始文本。
+      oneliner: A highlighted line of raw text.
       element: true
+      contextual: false
       details: |-
-        <p>一行突出显示的原始文本。</p>
-        <p>这是由<a href="/docs/reference/text/raw/"><code>raw</code></a>元素合成的助手元素。</p>
-        <p>它允许您访问行的各种属性，如行号、原始非突出显示的文本、突出显示的文本以及它是否是原始块的第一行或最后一行。</p>
+        <p>A highlighted line of raw text.</p>
+        <p>This is a helper element that is synthesized by <a href="/docs/reference/text/raw/" title="`raw`"><code>raw</code></a> elements.</p>
+        <p>It allows you to access various properties of the line, such as the line
+        number, the raw non-highlighted text, the highlighted text, and whether it
+        is the first or last line of the raw block.</p>
       example: null
       self: false
       params:
       - name: number
-        details: <p>原始块内原始行的行号，从 1 开始。</p>
+        details: <p>The line number of the raw line inside of the raw block, starts
+          at 1.</p>
         example: null
         types:
         - int

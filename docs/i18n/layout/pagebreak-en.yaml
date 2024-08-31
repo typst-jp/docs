@@ -1,6 +1,6 @@
 route: /docs/reference/layout/pagebreak/
 title: Page Break
-description: '`pagebreak` 函数的文档'
+description: Documentation for the `pagebreak` function.
 part: null
 outline:
 - id: summary
@@ -27,6 +27,7 @@ body:
     keywords: []
     oneliner: A manual page break.
     element: true
+    contextual: false
     details: |-
       <p>A manual page break.</p>
       <p>Must not be used inside any containers.</p>

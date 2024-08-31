@@ -1,6 +1,6 @@
 route: /docs/reference/model/quote/
 title: Quote
-description: '`quote` 函数的文档'
+description: Documentation for the `quote` function.
 part: null
 outline:
 - id: summary
@@ -33,6 +33,7 @@ body:
     keywords: []
     oneliner: Displays a quote alongside an optional attribution.
     element: true
+    contextual: false
     details: |-
       <p>Displays a quote alongside an optional attribution.</p>
       <h2 id="example">Example</h2>
@@ -94,8 +95,7 @@ body:
       details: |-
         <p>Whether double quotes should be added around this quote.</p>
         <p>The double quotes used are inferred from the <code>quotes</code> property on
-        <a href="/docs/reference/text/smartquote/">smartquote</a>, which is affected by the <code>lang</code> property on
-        <a href="/docs/reference/text/text/">text</a>.</p>
+        <a href="/docs/reference/text/smartquote/" title="smartquote">smartquote</a>, which is affected by the <code>lang</code> property on <a href="/docs/reference/text/text/" title="text">text</a>.</p>
         <ul>
         <li><code><span class="typ-key">true</span></code>: Wrap this quote in double quotes.</li>
         <li><code><span class="typ-key">false</span></code>: Do not wrap this quote in double quotes.</li>

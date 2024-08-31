@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/
-title: 可视化
-description: Typst 中与可视化有关联的函数族的文档
+title: Visualize
+description: Documentation for functions related to Visualize in Typst.
 part: null
 outline:
 - id: summary
@@ -13,64 +13,66 @@ body:
   kind: category
   content:
     name: visualize
-    title: 可视化
+    title: Visualize
     details: |-
-      <p>绘图和数据可视化。</p>
-      <p>如果您想创建更高级的绘图或图表，请同时查看 <a href="https://github.com/johannes-wolf/cetz">CetZ</a> 包以及更多针对您用例的专业化 <a href="/docs/packages/">第三方包</a>。</p>
+      <p>Drawing and data visualization.</p>
+      <p>If you want to create more advanced drawings or plots, also have a look at
+      the <a href="https://github.com/johannes-wolf/cetz">CetZ</a> package as well as more
+      specialized <a href="https://typst.app/universe/">packages</a> for your use case.</p>
     items:
     - name: circle
       route: /docs/reference/visualize/circle/
-      oneliner: 一个带有可选参数的圆。
+      oneliner: A circle with optional content.
       code: true
     - name: color
       route: /docs/reference/visualize/color/
-      oneliner: 特定颜色空间中的颜色。
+      oneliner: A color in a specific color space.
       code: true
     - name: ellipse
       route: /docs/reference/visualize/ellipse/
-      oneliner: 一个带有可选参数的椭圆。
+      oneliner: An ellipse with optional content.
       code: true
     - name: gradient
       route: /docs/reference/visualize/gradient/
-      oneliner: 渐变颜色。
+      oneliner: A color gradient.
       code: true
     - name: image
       route: /docs/reference/visualize/image/
-      oneliner: 光栅或矢量图形。
+      oneliner: A raster or vector graphic.
       code: true
     - name: line
       route: /docs/reference/visualize/line/
-      oneliner: 从一个点到另一个点的线。
+      oneliner: A line from one point to another.
       code: true
     - name: path
       route: /docs/reference/visualize/path/
-      oneliner: 通过一系列点绘制的路径，由贝塞尔曲线连接。
+      oneliner: A path through a list of points, connected by Bezier curves.
       code: true
     - name: pattern
       route: /docs/reference/visualize/pattern/
-      oneliner: 重复图案填充。
+      oneliner: A repeating pattern fill.
       code: true
     - name: polygon
       route: /docs/reference/visualize/polygon/
-      oneliner: 封闭的多边形。
+      oneliner: A closed polygon.
       code: true
     - name: rect
       route: /docs/reference/visualize/rect/
-      oneliner: 一个带有可选内容的矩形。
+      oneliner: A rectangle with optional content.
       code: true
     - name: square
       route: /docs/reference/visualize/square/
-      oneliner: 一个带有可选内容的正方形。
+      oneliner: A square with optional content.
       code: true
     - name: stroke
       route: /docs/reference/visualize/stroke/
-      oneliner: 定义如何绘制线条。
+      oneliner: Defines how to draw a line.
       code: true
     shorthands: null
 children:
 - route: /docs/reference/visualize/circle/
   title: Circle
-  description: '`circle` 函数的文档'
+  description: Documentation for the `circle` function.
   part: null
   outline:
   - id: summary
@@ -115,6 +117,7 @@ children:
       keywords: []
       oneliner: A circle with optional content.
       element: true
+      contextual: false
       details: |-
         <p>A circle with optional content.</p>
         <h2 id="example">Example</h2>
@@ -241,7 +244,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -268,7 +272,7 @@ children:
   children: []
 - route: /docs/reference/visualize/color/
   title: Color
-  description: Color 类型的文档
+  description: Documentation for the Color type.
   part: null
   outline:
   - id: summary
@@ -291,6 +295,9 @@ children:
       children:
       - id: definitions-luma-lightness
         name: lightness
+        children: []
+      - id: definitions-luma-alpha
+        name: alpha
         children: []
       - id: definitions-luma-color
         name: color
@@ -462,7 +469,10 @@ children:
         children: []
     - id: definitions-negate
       name: Negate
-      children: []
+      children:
+      - id: definitions-negate-space
+        name: space
+        children: []
     - id: definitions-rotate
       name: Rotate
       children:
@@ -480,6 +490,18 @@ children:
         children: []
       - id: definitions-mix-space
         name: space
+        children: []
+    - id: definitions-transparentize
+      name: Transparentize
+      children:
+      - id: definitions-transparentize-scale
+        name: scale
+        children: []
+    - id: definitions-opacify
+      name: Opacify
+      children:
+      - id: definitions-opacify-scale
+        name: scale
         children: []
   body:
     kind: type
@@ -531,8 +553,10 @@ children:
         either <code>color.red</code> or just <code>red</code>.</p>
         <h2 id="predefined-color-maps">Predefined color maps</h2>
         <p>Typst also includes a number of preset color maps that can be used for
-        gradients. Most of these color maps are chosen to be color blind friendly.</p>
-        <table><thead><tr><th>Map</th><th style="text-align: left">Details</th></tr></thead><tbody>
+        <a href="/docs/reference/visualize/gradient/#definitions-linear">gradients</a>. These are simply arrays of colors defined in
+        the module <code>color.map</code>.</p>
+        <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>crest<span class="typ-punct">)</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/2c2ef5b1f24d9348a16192e851ca0419.png" alt="Preview" width="480" height="190"/></div></div><table><thead><tr><th>Map</th><th style="text-align: left">Details</th></tr></thead><tbody>
         <tr><td><code>turbo</code></td><td style="text-align: left">A perceptually uniform rainbow-like color map. Read <a href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html">this blog post</a> for more details.</td></tr>
         <tr><td><code>cividis</code></td><td style="text-align: left">A blue to gray to yellow color map. See <a href="https://bids.github.io/colormap/">this blog post</a> for more details.</td></tr>
         <tr><td><code>rainbow</code></td><td style="text-align: left">Cycles through the full color spectrum. This color map is best used by setting the interpolation color space to <a href="/docs/reference/visualize/color/#definitions-hsl">HSL</a>. The rainbow gradient is <strong>not suitable</strong> for data visualization because it is not perceptually uniform, so the differences between values become unclear to your readers. It should only be used for decorative purposes.</td></tr>
@@ -562,6 +586,7 @@ children:
         keywords: []
         oneliner: Create a grayscale color.
         element: false
+        contextual: false
         details: |-
           <p>Create a grayscale color.</p>
           <p>A grayscale color is represented internally by a single <code>lightness</code>
@@ -580,6 +605,18 @@ children:
           example: null
           types:
           - int
+          - ratio
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: alpha
+          details: <p>The alpha component.</p>
+          example: null
+          types:
           - ratio
           strings: []
           default: null
@@ -612,6 +649,7 @@ children:
         keywords: []
         oneliner: Create an [Oklab](https://bottosson.github.io/posts/oklab/) color.
         element: false
+        contextual: false
         details: |-
           <p>Create an <a href="https://bottosson.github.io/posts/oklab/">Oklab</a> color.</p>
           <p>This color space is well suited for the following use cases:</p>
@@ -623,12 +661,12 @@ children:
           <p>A linear Oklab color is represented internally by an array of four
           components:</p>
           <ul>
-          <li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>a (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+          <li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>a (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
           Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-          <li>b (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+          <li>b (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
           Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-          <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+          <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
           </ul>
           <p>These components are also available using the
           <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -713,6 +751,7 @@ children:
         keywords: []
         oneliner: Create an [Oklch](https://bottosson.github.io/posts/oklab/) color.
         element: false
+        contextual: false
         details: |-
           <p>Create an <a href="https://bottosson.github.io/posts/oklab/">Oklch</a> color.</p>
           <p>This color space is well suited for the following use cases:</p>
@@ -724,11 +763,11 @@ children:
           <p>A linear Oklch color is represented internally by an array of four
           components:</p>
           <ul>
-          <li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>chroma (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+          <li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>chroma (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
           Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-          <li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-          <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+          <li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+          <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
           </ul>
           <p>These components are also available using the
           <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -812,6 +851,7 @@ children:
         keywords: []
         oneliner: Create an RGB(A) color with linear luma.
         element: false
+        contextual: false
         details: |-
           <p>Create an RGB(A) color with linear luma.</p>
           <p>This color space is similar to sRGB, but with the distinction that the
@@ -821,10 +861,10 @@ children:
           <p>A linear RGB(A) color is represented internally by an array of four
           components:</p>
           <ul>
-          <li>red (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>green (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>blue (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+          <li>red (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>green (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>blue (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
           </ul>
           <p>These components are also available using the
           <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -911,15 +951,16 @@ children:
         keywords: []
         oneliner: Create an RGB(A) color.
         element: false
+        contextual: false
         details: |-
           <p>Create an RGB(A) color.</p>
           <p>The color is specified in the sRGB color space.</p>
           <p>An RGB(A) color is represented internally by an array of four components:</p>
           <ul>
-          <li>red (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>green (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>blue (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+          <li>red (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>green (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>blue (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
           </ul>
           <p>These components are also available using the <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a>
           method.</p>
@@ -1026,17 +1067,18 @@ children:
         keywords: []
         oneliner: Create a CMYK color.
         element: false
+        contextual: false
         details: |-
           <p>Create a CMYK color.</p>
           <p>This is useful if you want to target a specific printer. The conversion
           to RGB for display preview might differ from how your printer reproduces
           the color.</p>
-          <p>An HSL color is represented internally by an array of four components:</p>
+          <p>A CMYK color is represented internally by an array of four components:</p>
           <ul>
-          <li>cyan (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>magenta (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>yellow (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>key (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+          <li>cyan (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>magenta (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>yellow (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>key (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
           </ul>
           <p>These components are also available using the
           <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -1119,6 +1161,7 @@ children:
         keywords: []
         oneliner: Create an HSL color.
         element: false
+        contextual: false
         details: |-
           <p>Create an HSL color.</p>
           <p>This color space is useful for specifying colors by hue, saturation and
@@ -1126,10 +1169,10 @@ children:
           while keeping perceived hue.</p>
           <p>An HSL color is represented internally by an array of four components:</p>
           <ul>
-          <li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-          <li>saturation (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+          <li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+          <li>saturation (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
           </ul>
           <p>These components are also available using the
           <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -1215,6 +1258,7 @@ children:
         keywords: []
         oneliner: Create an HSV color.
         element: false
+        contextual: false
         details: |-
           <p>Create an HSV color.</p>
           <p>This color space is useful for specifying colors by hue, saturation and
@@ -1222,10 +1266,10 @@ children:
           while keeping perceived hue.</p>
           <p>An HSV color is represented internally by an array of four components:</p>
           <ul>
-          <li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-          <li>saturation (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>value (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-          <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+          <li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+          <li>saturation (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>value (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+          <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
           </ul>
           <p>These components are also available using the
           <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -1311,6 +1355,7 @@ children:
         keywords: []
         oneliner: Extracts the components of this color.
         element: false
+        contextual: false
         details: |-
           <p>Extracts the components of this color.</p>
           <p>The size and values of this array depends on the color space. You can
@@ -1333,8 +1378,8 @@ children:
           component is included.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-comment">// note that the alpha component is included by default</span>
-          <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">components</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">,</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-          </code></pre><div class="preview"><img src="/assets/docs/6256b6a7300a0fc8a2526dd5401230c8.png" alt="Preview" width="480" height="190"/></div></div>
+          <span class="typ-func">#</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">components</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/43a9b4ace8d343e07ec2b841211eace5.png" alt="Preview" width="480" height="190"/></div></div>
         self: true
         params:
         - name: alpha
@@ -1359,6 +1404,7 @@ children:
         keywords: []
         oneliner: 'Returns the constructor function for this color''s space:'
         element: false
+        contextual: false
         details: |-
           <p>Returns the constructor function for this color's space:</p>
           <ul>
@@ -1388,6 +1434,7 @@ children:
         oneliner: Returns the color's RGB(A) hex representation (such as `#ffaa32`
           or
         element: false
+        contextual: false
         details: |-
           <p>Returns the color's RGB(A) hex representation (such as <code>#ffaa32</code> or
           <code>#020304fe</code>). The alpha component (last two digits in <code>#020304fe</code>) is
@@ -1405,6 +1452,7 @@ children:
         keywords: []
         oneliner: Lightens a color by a given factor.
         element: false
+        contextual: false
         details: <p>Lightens a color by a given factor.</p>
         example: null
         self: true
@@ -1431,6 +1479,7 @@ children:
         keywords: []
         oneliner: Darkens a color by a given factor.
         element: false
+        contextual: false
         details: <p>Darkens a color by a given factor.</p>
         example: null
         self: true
@@ -1457,6 +1506,7 @@ children:
         keywords: []
         oneliner: Increases the saturation of a color by a given factor.
         element: false
+        contextual: false
         details: <p>Increases the saturation of a color by a given factor.</p>
         example: null
         self: true
@@ -1483,6 +1533,7 @@ children:
         keywords: []
         oneliner: Decreases the saturation of a color by a given factor.
         element: false
+        contextual: false
         details: <p>Decreases the saturation of a color by a given factor.</p>
         example: null
         self: true
@@ -1507,12 +1558,32 @@ children:
         name: negate
         title: Negate
         keywords: []
-        oneliner: Produces the negative of the color.
+        oneliner: Produces the complementary color using a provided color space.
         element: false
-        details: <p>Produces the negative of the color.</p>
-        example: null
+        contextual: false
+        details: |-
+          <p>Produces the complementary color using a provided color space.
+          You can think of it as the opposite side on a color wheel.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">)</span>
+          <span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">.</span><span class="typ-func">negate</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+          <span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">.</span><span class="typ-func">negate</span><span class="typ-punct">(</span>space<span class="typ-punct">:</span> rgb<span class="typ-punct">)</span><span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/c5a504a60de2ba1432400efa9cd96d1e.png" alt="Preview" width="480" height="190"/></div></div>
         self: true
-        params: []
+        params:
+        - name: space
+          details: <p>The color space used for the transformation. By default, a perceptual
+            color space is used.</p>
+          example: null
+          types:
+          - any
+          strings: []
+          default: <code>oklab</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: false
         returns:
         - color
         scope: []
@@ -1523,6 +1594,7 @@ children:
         keywords: []
         oneliner: Rotates the hue of the color by a given angle.
         element: false
+        contextual: false
         details: <p>Rotates the hue of the color by a given angle.</p>
         example: null
         self: true
@@ -1563,7 +1635,12 @@ children:
         keywords: []
         oneliner: Create a color by mixing two or more colors.
         element: false
-        details: <p>Create a color by mixing two or more colors.</p>
+        contextual: false
+        details: |-
+          <p>Create a color by mixing two or more colors.</p>
+          <p>In color spaces with a hue component (hsl, hsv, oklch), only two colors
+          can be mixed at once. Mixing more than two colors in such a space will
+          result in an error!</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span>
           <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">mix</span><span class="typ-punct">(</span>blue<span class="typ-punct">)</span><span class="typ-punct">)</span>
@@ -1607,10 +1684,81 @@ children:
         returns:
         - color
         scope: []
+      - path:
+        - color
+        name: transparentize
+        title: Transparentize
+        keywords: []
+        oneliner: Makes a color more transparent by a given factor.
+        element: false
+        contextual: false
+        details: |-
+          <p>Makes a color more transparent by a given factor.</p>
+          <p>This method is relative to the existing alpha value.
+          If the scale is positive, calculates <code>alpha - alpha * scale</code>.
+          Negative scales behave like <code>color.opacify(-scale)</code>.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">)</span><span class="typ-punct">[</span>opaque<span class="typ-punct">]</span>
+          <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>half red<span class="typ-punct">]</span>
+          <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">75%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>quarter red<span class="typ-punct">]</span>
+          </code></pre><div class="preview"><img src="/assets/docs/50f36ba47d4fc9bfab94e835d6f5cc77.png" alt="Preview" width="480" height="190"/></div></div>
+        self: true
+        params:
+        - name: scale
+          details: <p>The factor to change the alpha value by.</p>
+          example: null
+          types:
+          - ratio
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - color
+        scope: []
+      - path:
+        - color
+        name: opacify
+        title: Opacify
+        keywords: []
+        oneliner: Makes a color more opaque by a given scale.
+        element: false
+        contextual: false
+        details: |-
+          <p>Makes a color more opaque by a given scale.</p>
+          <p>This method is relative to the existing alpha value.
+          If the scale is positive, calculates <code>alpha + scale - alpha * scale</code>.
+          Negative scales behave like <code>color.transparentize(-scale)</code>.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> half-red <span class="typ-op">=</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span>
+          <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>opaque<span class="typ-punct">]</span>
+          <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>three quarters red<span class="typ-punct">]</span>
+          <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>one quarter red<span class="typ-punct">]</span>
+          </code></pre><div class="preview"><img src="/assets/docs/91170e321308a99ae59cbe3fe5cd895a.png" alt="Preview" width="480" height="190"/></div></div>
+        self: true
+        params:
+        - name: scale
+          details: <p>The scale to change the alpha value by.</p>
+          example: null
+          types:
+          - ratio
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        returns:
+        - color
+        scope: []
   children: []
 - route: /docs/reference/visualize/ellipse/
   title: Ellipse
-  description: '`ellipse` 函数的文档'
+  description: Documentation for the `ellipse` function.
   part: null
   outline:
   - id: summary
@@ -1652,6 +1800,7 @@ children:
       keywords: []
       oneliner: An ellipse with optional content.
       element: true
+      contextual: false
       details: |-
         <p>An ellipse with optional content.</p>
         <h2 id="example">Example</h2>
@@ -1756,7 +1905,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -1784,7 +1934,7 @@ children:
   children: []
 - route: /docs/reference/visualize/gradient/
   title: Gradient
-  description: Gradient 类型的文档
+  description: Documentation for the Gradient type.
   part: null
   outline:
   - id: summary
@@ -1807,6 +1957,9 @@ children:
     children: []
   - id: presets
     name: Presets
+    children: []
+  - id: note-on-file-sizes
+    name: Note On File Sizes
     children: []
   - id: definitions
     name: Definitions
@@ -1982,11 +2135,10 @@ children:
         <ul>
         <li>For shapes that are placed at the root/top level of the document, the
         closest ancestor is the page itself.</li>
-        <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/"><code>block</code></a> or
-        <a href="/docs/reference/layout/box/"><code>box</code></a> that contains the shape. This includes the boxes and blocks
-        that are implicitly created by show rules and elements. For example, a
-        <a href="/docs/reference/layout/rotate/"><code>rotate</code></a> will not affect the parent of a gradient, but a
-        <a href="/docs/reference/layout/grid/"><code>grid</code></a> will.</li>
+        <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> or <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> that
+        contains the shape. This includes the boxes and blocks that are implicitly
+        created by show rules and elements. For example, a <a href="/docs/reference/layout/rotate/" title="`rotate`"><code>rotate</code></a> will not
+        affect the parent of a gradient, but a <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> will.</li>
         </ul>
         <h2 id="color-spaces-and-interpolation">Color spaces and interpolation</h2>
         <p>Gradients can be interpolated in any color space. By default, gradients are
@@ -2025,7 +2177,21 @@ children:
         </code></pre><div class="preview"><img src="/assets/docs/2e5fc136fe08bd2ce1808cfcfb5313f5.png" alt="Preview" width="480" height="190"/></div></div>
         <h2 id="presets">Presets</h2>
         <p>Typst predefines color maps that you can use with your gradients. See the
-        <a href="/docs/reference/visualize/color//#predefined-color-maps"><code>color</code></a> documentation for more details.</p>
+        <a href="/docs/reference/visualize/color/#predefined-color-maps"><code>color</code></a> documentation for more details.</p>
+        <h2 id="note-on-file-sizes">Note on file sizes</h2>
+        <p>Gradients can be quite large, especially if they have many stops. This is
+        because gradients are stored as a list of colors and offsets, which can
+        take up a lot of space. If you are concerned about file sizes, you should
+        consider the following:</p>
+        <ul>
+        <li>SVG gradients are currently inefficiently encoded. This will be improved
+        in the future.</li>
+        <li>PDF gradients in the <a href="/docs/reference/visualize/color/#definitions-hsv"><code>color.hsv</code></a>, <a href="/docs/reference/visualize/color/#definitions-hsl"><code>color.hsl</code></a>,
+        and <a href="/docs/reference/visualize/color/#definitions-oklch"><code>color.oklch</code></a> color spaces are stored as a list of
+        <a href="/docs/reference/visualize/color/#definitions-oklab"><code>color.oklab</code></a> colors with extra stops in between. This
+        avoids needing to encode these color spaces in your PDF file, but it does
+        add extra stops to your gradient, which can increase the file size.</li>
+        </ul>
       constructor: null
       scope:
       - path:
@@ -2036,6 +2202,7 @@ children:
         oneliner: Creates a new linear gradient, in which colors transition along
           a
         element: false
+        contextual: false
         details: |-
           <p>Creates a new linear gradient, in which colors transition along a
           straight line.</p>
@@ -2136,6 +2303,7 @@ children:
         oneliner: Creates a new radial gradient, in which colors radiate away from
           an
         element: false
+        contextual: false
         details: |-
           <p>Creates a new radial gradient, in which colors radiate away from an
           origin.</p>
@@ -2291,6 +2459,7 @@ children:
         oneliner: Creates a new conic gradient, in which colors change radially around
           a
         element: false
+        contextual: false
         details: |-
           <p>Creates a new conic gradient, in which colors change radially around a
           center point.</p>
@@ -2399,6 +2568,7 @@ children:
         keywords: []
         oneliner: Creates a sharp version of this gradient.
         element: false
+        contextual: false
         details: |-
           <p>Creates a sharp version of this gradient.</p>
           <p>Sharp gradients have discrete jumps between colors, instead of a
@@ -2448,6 +2618,7 @@ children:
         oneliner: Repeats this gradient a given number of times, optionally mirroring
           it
         element: false
+        contextual: false
         details: |-
           <p>Repeats this gradient a given number of times, optionally mirroring it
           at each repetition.</p>
@@ -2495,6 +2666,7 @@ children:
         keywords: []
         oneliner: Returns the kind of this gradient.
         element: false
+        contextual: false
         details: <p>Returns the kind of this gradient.</p>
         example: null
         self: true
@@ -2509,6 +2681,7 @@ children:
         keywords: []
         oneliner: Returns the stops of this gradient.
         element: false
+        contextual: false
         details: <p>Returns the stops of this gradient.</p>
         example: null
         self: true
@@ -2523,6 +2696,7 @@ children:
         keywords: []
         oneliner: Returns the mixing space of this gradient.
         element: false
+        contextual: false
         details: <p>Returns the mixing space of this gradient.</p>
         example: null
         self: true
@@ -2537,6 +2711,7 @@ children:
         keywords: []
         oneliner: Returns the relative placement of this gradient.
         element: false
+        contextual: false
         details: <p>Returns the relative placement of this gradient.</p>
         example: null
         self: true
@@ -2551,6 +2726,7 @@ children:
         keywords: []
         oneliner: Returns the angle of this gradient.
         element: false
+        contextual: false
         details: <p>Returns the angle of this gradient.</p>
         example: null
         self: true
@@ -2566,11 +2742,12 @@ children:
         keywords: []
         oneliner: Sample the gradient at a given position.
         element: false
+        contextual: false
         details: |-
           <p>Sample the gradient at a given position.</p>
-          <p>The position is either a position along the gradient (a <a href="/docs/reference/layout/ratio/">ratio</a>
-          between <code><span class="typ-num">0%</span></code> and <code><span class="typ-num">100%</span></code>) or an <a href="/docs/reference/layout/angle/">angle</a>. Any value outside
-          of this range will be clamped.</p>
+          <p>The position is either a position along the gradient (a <a href="/docs/reference/layout/ratio/" title="ratio">ratio</a> between
+          <code><span class="typ-num">0%</span></code> and <code><span class="typ-num">100%</span></code>) or an <a href="/docs/reference/layout/angle/" title="angle">angle</a>. Any value outside of this range will
+          be clamped.</p>
         example: null
         self: true
         params:
@@ -2597,6 +2774,7 @@ children:
         keywords: []
         oneliner: Samples the gradient at multiple positions at once and returns the
         element: false
+        contextual: false
         details: |-
           <p>Samples the gradient at multiple positions at once and returns the
           results as an array.</p>
@@ -2622,7 +2800,7 @@ children:
   children: []
 - route: /docs/reference/visualize/image/
   title: Image
-  description: '`image` 函数的文档'
+  description: Documentation for the `image` function.
   part: null
   outline:
   - id: summary
@@ -2685,6 +2863,7 @@ children:
       keywords: []
       oneliner: A raster or vector graphic.
       element: true
+      contextual: false
       details: |-
         <p>A raster or vector graphic.</p>
         <p>Supported formats are PNG, JPEG, GIF and SVG.</p>
@@ -2776,19 +2955,35 @@ children:
         variadic: false
         settable: true
       - name: fit
-        details: <p>How the image should adjust itself to a given area.</p>
-        example: null
+        details: |-
+          <p>How the image should adjust itself to a given area (the area is defined
+          by the <code>width</code> and <code>height</code> fields). Note that <code>fit</code> doesn't visually
+          change anything if the area's aspect ratio is the same as the image's
+          one.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">300pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">50pt</span><span class="typ-punct">,</span> margin<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span>
+          <span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> fit<span class="typ-punct">:</span> <span class="typ-str">&quot;cover&quot;</span><span class="typ-punct">)</span>
+          <span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> fit<span class="typ-punct">:</span> <span class="typ-str">&quot;contain&quot;</span><span class="typ-punct">)</span>
+          <span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> fit<span class="typ-punct">:</span> <span class="typ-str">&quot;stretch&quot;</span><span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/edbb68fb5d64a9b724bfd36b869e8425.png" alt="Preview" width="480" height="190"/></div></div>
         types:
         - str
         strings:
         - string: cover
-          details: <p>The image should completely cover the area. This is the default.</p>
+          details: |-
+            <p>The image should completely cover the area (preserves aspect ratio by
+            cropping the image only horizontally or vertically). This is the
+            default.</p>
         - string: contain
-          details: <p>The image should be fully contained in the area.</p>
+          details: |-
+            <p>The image should be fully contained in the area (preserves aspect
+            ratio; doesn't crop the image; one dimension can be narrower than
+            specified).</p>
         - string: stretch
           details: |-
             <p>The image should be stretched so that it exactly fills the area, even if
-            this means that the image will be distorted.</p>
+            this means that the image will be distorted (doesn't preserve aspect
+            ratio and doesn't crop the image).</p>
         default: <code><span class="typ-str">&quot;cover&quot;</span></code>
         positional: false
         named: true
@@ -2805,6 +3000,7 @@ children:
         keywords: []
         oneliner: Decode a raster or vector graphic from bytes or a string.
         element: false
+        contextual: false
         details: <p>Decode a raster or vector graphic from bytes or a string.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> original <span class="typ-op">=</span> <span class="typ-func">read</span><span class="typ-punct">(</span><span class="typ-str">&quot;diagram.svg&quot;</span><span class="typ-punct">)</span>
@@ -2898,13 +3094,20 @@ children:
           - str
           strings:
           - string: cover
-            details: <p>The image should completely cover the area. This is the default.</p>
+            details: |-
+              <p>The image should completely cover the area (preserves aspect ratio by
+              cropping the image only horizontally or vertically). This is the
+              default.</p>
           - string: contain
-            details: <p>The image should be fully contained in the area.</p>
+            details: |-
+              <p>The image should be fully contained in the area (preserves aspect
+              ratio; doesn't crop the image; one dimension can be narrower than
+              specified).</p>
           - string: stretch
             details: |-
               <p>The image should be stretched so that it exactly fills the area, even if
-              this means that the image will be distorted.</p>
+              this means that the image will be distorted (doesn't preserve aspect
+              ratio and doesn't crop the image).</p>
           default: null
           positional: false
           named: true
@@ -2917,7 +3120,7 @@ children:
   children: []
 - route: /docs/reference/visualize/line/
   title: Line
-  description: '`line` 函数的文档'
+  description: Documentation for the `line` function.
   part: null
   outline:
   - id: summary
@@ -2953,6 +3156,7 @@ children:
       keywords: []
       oneliner: A line from one point to another.
       element: true
+      contextual: false
       details: |-
         <p>A line from one point to another.</p>
         <h2 id="example">Example</h2>
@@ -3024,7 +3228,7 @@ children:
         variadic: false
         settable: true
       - name: stroke
-        details: <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a>
+        details: <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a>
           the line.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span>
@@ -3057,7 +3261,7 @@ children:
   children: []
 - route: /docs/reference/visualize/path/
   title: Path
-  description: '`path` 函数的文档'
+  description: Documentation for the `path` function.
   part: null
   outline:
   - id: summary
@@ -3090,6 +3294,7 @@ children:
       keywords: []
       oneliner: A path through a list of points, connected by Bezier curves.
       element: true
+      contextual: false
       details: |-
         <p>A path through a list of points, connected by Bezier curves.</p>
         <h2 id="example">Example</h2>
@@ -3127,7 +3332,7 @@ children:
         settable: true
       - name: stroke
         details: |-
-          <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the path. This can be:</p>
+          <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the path. This can be:</p>
           <p>Can be set to  <code><span class="typ-key">none</span></code> to disable the stroke or to <code><span class="typ-key">auto</span></code> for a
           stroke of <code><span class="typ-num">1pt</span></code> black if and if only if no fill is given.</p>
         example: null
@@ -3168,8 +3373,7 @@ children:
           <p>The vertices of the path.</p>
           <p>Each vertex can be defined in 3 ways:</p>
           <ul>
-          <li>A regular point, as given to the <a href="/docs/reference/visualize/line/"><code>line</code></a> or
-          <a href="/docs/reference/visualize/polygon/"><code>polygon</code></a> function.</li>
+          <li>A regular point, as given to the <a href="/docs/reference/visualize/line/" title="`line`"><code>line</code></a> or <a href="/docs/reference/visualize/polygon/" title="`polygon`"><code>polygon</code></a> function.</li>
           <li>An array of two points, the first being the vertex and the second
           being the control point. The control point is expressed relative to
           the vertex and is mirrored to get the second control point. The given
@@ -3196,7 +3400,7 @@ children:
   children: []
 - route: /docs/reference/visualize/pattern/
   title: Pattern
-  description: Pattern 类型的文档
+  description: Documentation for the Pattern type.
   part: null
   outline:
   - id: summary
@@ -3297,11 +3501,10 @@ children:
         <ul>
         <li>For shapes that are placed at the root/top level of the document, the
         closest ancestor is the page itself.</li>
-        <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/"><code>block</code></a> or
-        <a href="/docs/reference/layout/box/"><code>box</code></a> that contains the shape. This includes the boxes and blocks
-        that are implicitly created by show rules and elements. For example, a
-        <a href="/docs/reference/layout/rotate/"><code>rotate</code></a> will not affect the parent of a gradient, but a
-        <a href="/docs/reference/layout/grid/"><code>grid</code></a> will.</li>
+        <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> or <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> that
+        contains the shape. This includes the boxes and blocks that are implicitly
+        created by show rules and elements. For example, a <a href="/docs/reference/layout/rotate/" title="`rotate`"><code>rotate</code></a> will not
+        affect the parent of a gradient, but a <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> will.</li>
         </ul>
       constructor:
         path: []
@@ -3310,6 +3513,7 @@ children:
         keywords: []
         oneliner: Construct a new pattern.
         element: false
+        contextual: false
         details: <p>Construct a new pattern.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> pat <span class="typ-op">=</span> <span class="typ-func">pattern</span><span class="typ-punct">(</span>
@@ -3397,7 +3601,7 @@ children:
   children: []
 - route: /docs/reference/visualize/polygon/
   title: Polygon
-  description: '`polygon` 函数的文档'
+  description: Documentation for the `polygon` function.
   part: null
   outline:
   - id: summary
@@ -3445,6 +3649,7 @@ children:
       keywords: []
       oneliner: A closed polygon.
       element: true
+      contextual: false
       details: |-
         <p>A closed polygon.</p>
         <p>The polygon is defined by its corner points and is closed automatically.</p>
@@ -3483,7 +3688,7 @@ children:
         settable: true
       - name: stroke
         details: |-
-          <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the polygon. This can be:</p>
+          <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the polygon. This can be:</p>
           <p>Can be set to  <code><span class="typ-key">none</span></code> to disable the stroke or to <code><span class="typ-key">auto</span></code> for a
           stroke of <code><span class="typ-num">1pt</span></code> black if and if only if no fill is given.</p>
         example: null
@@ -3527,6 +3732,7 @@ children:
         keywords: []
         oneliner: A regular polygon, defined by its size and number of vertices.
         element: false
+        contextual: false
         details: <p>A regular polygon, defined by its size and number of vertices.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">polygon</span><span class="typ-punct">.</span><span class="typ-func">regular</span><span class="typ-punct">(</span>
@@ -3608,7 +3814,7 @@ children:
   children: []
 - route: /docs/reference/visualize/rect/
   title: Rectangle
-  description: '`rect` 函数的文档'
+  description: Documentation for the `rect` function.
   part: null
   outline:
   - id: summary
@@ -3653,6 +3859,7 @@ children:
       keywords: []
       oneliner: A rectangle with optional content.
       element: true
+      contextual: false
       details: |-
         <p>A rectangle with optional content.</p>
         <h2 id="example">Example</h2>
@@ -3721,7 +3928,7 @@ children:
           <li><code><span class="typ-key">none</span></code> to disable stroking</li>
           <li><code><span class="typ-key">auto</span></code> for a stroke of <code><span class="typ-num">1pt</span> <span class="typ-op">+</span> black</code> if and if only if no fill is
           given.</li>
-          <li>Any kind of <a href="/docs/reference/visualize/stroke/">stroke</a></li>
+          <li>Any kind of <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a></li>
           <li>A dictionary describing the stroke for each side inidvidually. The
           dictionary can contain the following keys in order of precedence:
           <ul>
@@ -3804,7 +4011,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -3834,7 +4042,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -3862,7 +4071,7 @@ children:
   children: []
 - route: /docs/reference/visualize/square/
   title: Square
-  description: '`square` 函数的文档'
+  description: Documentation for the `square` function.
   part: null
   outline:
   - id: summary
@@ -3910,6 +4119,7 @@ children:
       keywords: []
       oneliner: A square with optional content.
       element: true
+      contextual: false
       details: |-
         <p>A square with optional content.</p>
         <h2 id="example">Example</h2>
@@ -4019,7 +4229,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -4049,7 +4260,8 @@ children:
         - relative
         - dictionary
         strings: []
-        default: <code><span class="typ-num">0pt</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -4078,7 +4290,7 @@ children:
   children: []
 - route: /docs/reference/visualize/stroke/
   title: Stroke
-  description: Stroke 类型的文档
+  description: Documentation for the Stroke type.
   part: null
   outline:
   - id: summary
@@ -4148,10 +4360,9 @@ children:
         <li>A stroke combined from color and thickness using the <code>+</code> operator as in
         <code><span class="typ-num">2pt</span> <span class="typ-op">+</span> red</code>.</li>
         </ul>
-        <p>For full control, you can also provide a <a href="/docs/reference/foundations/dictionary/">dictionary</a> or a
-        <code>stroke</code> object to any function that expects a stroke. The dictionary's
-        keys may include any of the parameters for the constructor function, shown
-        below.</p>
+        <p>For full control, you can also provide a <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a> or a <code>stroke</code> object
+        to any function that expects a stroke. The dictionary's keys may include any
+        of the parameters for the constructor function, shown below.</p>
         <h2 id="fields">Fields</h2>
         <p>On a stroke object, you can access any of the fields listed in the
         constructor function. For example, <code><span class="typ-punct">(</span><span class="typ-num">2pt</span> <span class="typ-op">+</span> blue<span class="typ-punct">)</span><span class="typ-punct">.</span>thickness</code> is <code><span class="typ-num">2pt</span></code>.
@@ -4164,6 +4375,7 @@ children:
         keywords: []
         oneliner: Converts a value to a stroke or constructs a stroke with the given
         element: false
+        contextual: false
         details: |-
           <p>Converts a value to a stroke or constructs a stroke with the given
           parameters.</p>
@@ -4278,11 +4490,12 @@ children:
             <li><code><span class="typ-str">&quot;loosely-dash-dotted&quot;</span></code></li>
             </ul>
             </li>
-            <li>An <a href="/docs/reference/foundations/array/">array</a> with alternating lengths for dashes and gaps. You can
-            also use the string <code><span class="typ-str">&quot;dot&quot;</span></code> for a length equal to the line thickness.</li>
-            <li>A <a href="/docs/reference/foundations/dictionary/">dictionary</a> with the keys <code>array</code> (same as the array
-            above), and <code>phase</code> (of type <a href="/docs/reference/layout/length/">length</a>), which defines where in
-            the pattern to start drawing.</li>
+            <li>An <a href="/docs/reference/foundations/array/" title="array">array</a> with alternating lengths for dashes and gaps. You can
+            also use the string <code><span class="typ-str">&quot;dot&quot;</span></code> for a length equal to the line
+            thickness.</li>
+            <li>A <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a> with the keys <code>array</code> (same as the array above),
+            and <code>phase</code> (of type <a href="/docs/reference/layout/length/" title="length">length</a>), which defines where in the pattern
+            to start drawing.</li>
             </ul>
             <p>If set to <code><span class="typ-key">auto</span></code>, the value is inherited, defaulting to <code><span class="typ-key">none</span></code>.</p>
           example: |-

@@ -18,3 +18,26 @@
 [翻訳ガイドライン (CONTRIBUTING.md)](CONTRIBUTING.md) をご覧の上、[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls) を作成してください。[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)での質問や議論も歓迎します。
 
 ご質問などがある場合は、[「くみはんクラブ」のDiscordサーバー](https://discord.gg/9xF7k4aAuH)に参加してご連絡ください。
+
+## 翻訳参加者
+
+<table cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mkpoli"><img src="https://github.com/mkpoli.png" width="100px" alt="mkpoli"/><br /><sub><b>mkpoli</b></sub></a><br/><code>mkpoli</code><br/>言い出しっぺ<br/>保守者</td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/3w36zj6"><img src="https://github.com/3w36zj6.png" width="100px" alt="3w36zj6"/><br /><sub><b>3w36zj6</b></sub></a><br/><code>3w36zj6</code><br/>インフラ整備<br/>保守者</td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/stepney141"><img src="https://github.com/stepney141.png" width="100px" alt="stepney141"/><br /><sub><b>stepney141</b></sub></a><br/><code>stepney141</code><br/>インフラ整備<br/>保守者</td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/gomazarashi"><img src="https://github.com/gomazarashi.png" width="100px" alt="gomazarashi"/><br /><sub><b>gomazarashi</b></sub></a><br/><code>gomazarashi</code><br/>翻訳者<br/>保守者</td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/monaqa"><img src="https://github.com/monaqa.png" width="100px" alt="monaqa"/><br /><sub><b>monaqa</b></sub></a><br/><code>monaqa</code><br/>翻訳者<br/>保守者</td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kimushun1101"><img src="https://github.com/kimushun1101.png" width="100px" alt="Shunsuke KIMURA"/><br /><sub><b>Shunsuke KIMURA</b></sub></a><br/><code>kimshun1101</code><br/>保守者<br/>翻訳者</td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/zr-tex8r"><img src="https://github.com/zr-tex8r.png" width="100px" alt="Takayuki YATO"/><br /><sub><b>Takayuki YATO</b></sub></a><br/><code>zr-tex8r</code><br/>アドバイザー</td>
+            <td align="center" valign="top" width="14.28%"><a href="https://github.com/m1sk9"><img src="https://github.com/m1sk9.png" width="100px" alt="Sho Sakuma"/><br /><sub><b>Sho Sakuma</b></sub></a><br/><code>m1sk9</code><br/>校正者</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

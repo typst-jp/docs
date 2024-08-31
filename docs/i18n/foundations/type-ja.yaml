@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/type/
 title: Type
-description: Type 类型的文档
+description: Documentation for the Type type.
 part: null
 outline:
 - id: summary
@@ -58,7 +58,7 @@ body:
       <ul>
       <li>Checks like <code>int <span class="typ-op">==</span> <span class="typ-str">&quot;integer&quot;</span></code> evaluate to <code><span class="typ-key">true</span></code></li>
       <li>Adding/joining a type and string will yield a string</li>
-      <li>The <code><span class="typ-key">in</span></code> operator on a type and a dictionary will evaluate to <code><span class="typ-key">true</span></code>
+      <li>The <code>in</code> operator on a type and a dictionary will evaluate to <code><span class="typ-key">true</span></code>
       if the dictionary has a string key matching the type's name</li>
       </ul>
     constructor:
@@ -68,6 +68,7 @@ body:
       keywords: []
       oneliner: Determines a value's type.
       element: false
+      contextual: false
       details: <p>Determines a value's type.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">type</span><span class="typ-punct">(</span><span class="typ-num">12</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>

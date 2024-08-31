@@ -1,6 +1,6 @@
 route: /docs/reference/text/
-title: 文本
-description: Typst 中与文本有关联的函数族的文档
+title: Text
+description: Documentation for functions related to Text in Typst.
 part: null
 outline:
 - id: summary
@@ -13,72 +13,72 @@ body:
   kind: category
   content:
     name: text
-    title: 文本
+    title: Text
     details: |-
-      <p>文本样式。</p>
-      <p>其中 <a href="/docs/reference/text/text/">文本函数</a> 尤其有趣。</p>
+      <p>Text styling.</p>
+      <p>The <a href="/docs/reference/text/text/">text function</a> is of particular interest.</p>
     items:
     - name: highlight
       route: /docs/reference/text/highlight/
-      oneliner: 高亮显示文本。
+      oneliner: Highlights text with a background color.
       code: true
     - name: linebreak
       route: /docs/reference/text/linebreak/
-      oneliner: 插入换行符。
+      oneliner: Inserts a line break.
       code: true
     - name: lorem
       route: /docs/reference/text/lorem/
-      oneliner: 创建假文。
+      oneliner: Creates blind text.
       code: true
     - name: lower
       route: /docs/reference/text/lower/
-      oneliner: 将字符串或内容转换为小写。
+      oneliner: Converts a string or content to lowercase.
       code: true
     - name: overline
       route: /docs/reference/text/overline/
-      oneliner: 在文本上方添加一条线。
+      oneliner: Adds a line over text.
       code: true
     - name: raw
       route: /docs/reference/text/raw/
-      oneliner: 具有可选语法突出显示的原始文本。
+      oneliner: Raw text with optional syntax highlighting.
       code: true
     - name: smallcaps
       route: /docs/reference/text/smallcaps/
-      oneliner: 以小大写字母显示文本。
+      oneliner: Displays text in small capitals.
       code: true
     - name: smartquote
       route: /docs/reference/text/smartquote/
-      oneliner: 对其上下文做出反应的语言感知引号。
+      oneliner: A language-aware quote that reacts to its context.
       code: true
     - name: strike
       route: /docs/reference/text/strike/
-      oneliner: 在文本中画一条线。
+      oneliner: Strikes through text.
       code: true
     - name: sub
       route: /docs/reference/text/sub/
-      oneliner: 以下标形式呈现文本。
+      oneliner: Renders text in subscript.
       code: true
     - name: super
       route: /docs/reference/text/super/
-      oneliner: 以上标形式呈现文本。
+      oneliner: Renders text in superscript.
       code: true
     - name: text
       route: /docs/reference/text/text/
-      oneliner: 以各种方式自定义文本的外观和布局。
+      oneliner: Customizes the look and layout of text in a variety of ways.
       code: true
     - name: underline
       route: /docs/reference/text/underline/
-      oneliner: 给文本加下划线。
+      oneliner: Underlines text.
       code: true
     - name: upper
       route: /docs/reference/text/upper/
-      oneliner: 将字符串或内容转换为大写。
+      oneliner: Converts a string or content to uppercase.
       code: true
     shorthands: null
 children:
 - route: /docs/reference/text/highlight/
   title: Highlight
-  description: '`highlight` 函数的文档'
+  description: Documentation for the `highlight` function.
   part: null
   outline:
   - id: summary
@@ -93,6 +93,9 @@ children:
     - id: parameters-fill
       name: fill
       children: []
+    - id: parameters-stroke
+      name: stroke
+      children: []
     - id: parameters-top-edge
       name: top-edge
       children: []
@@ -101,6 +104,9 @@ children:
       children: []
     - id: parameters-extent
       name: extent
+      children: []
+    - id: parameters-radius
+      name: radius
       children: []
     - id: parameters-body
       name: body
@@ -114,6 +120,7 @@ children:
       keywords: []
       oneliner: Highlights text with a background color.
       element: true
+      contextual: false
       details: |-
         <p>Highlights text with a background color.</p>
         <h2 id="example">Example</h2>
@@ -123,9 +130,7 @@ children:
       self: false
       params:
       - name: fill
-        details: |-
-          <p>The color to highlight the text with.
-          (Default: 0xffff5f)</p>
+        details: <p>The color to highlight the text with.</p>
         example: |-
           <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> blue<span class="typ-punct">)</span><span class="typ-punct">[</span>with blue<span class="typ-punct">]</span>.
           </code></pre><div class="preview"><img src="/assets/docs/111d0ec4615abd9bf808872af2ab2278.png" alt="Preview" width="480" height="190"/></div></div>
@@ -135,7 +140,28 @@ children:
         - pattern
         strings: []
         default: <code><span class="typ-func">rgb</span><span class="typ-punct">(</span><span
-          class="typ-str">&quot;#ffff5f&quot;</span><span class="typ-punct">)</span></code>
+          class="typ-str">&quot;#fffd11a1&quot;</span><span class="typ-punct">)</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
+      - name: stroke
+        details: |-
+          <p>The highlight's border color. See the
+          <a href="/docs/reference/visualize/rect/#parameters-stroke">rectangle's documentation</a> for more details.</p>
+        example: null
+        types:
+        - none
+        - length
+        - color
+        - gradient
+        - stroke
+        - pattern
+        - dictionary
+        strings: []
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -213,6 +239,22 @@ children:
         required: false
         variadic: false
         settable: true
+      - name: radius
+        details: |-
+          <p>How much to round the highlight's corners. See the
+          <a href="/docs/reference/visualize/rect/#parameters-radius">rectangle's documentation</a> for more details.</p>
+        example: null
+        types:
+        - relative
+        - dictionary
+        strings: []
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+          class="typ-punct">)</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
       - name: body
         details: <p>The content that should be highlighted.</p>
         example: null
@@ -231,7 +273,7 @@ children:
   children: []
 - route: /docs/reference/text/linebreak/
   title: Line Break
-  description: '`linebreak` 函数的文档'
+  description: Documentation for the `linebreak` function.
   part: null
   outline:
   - id: summary
@@ -258,6 +300,7 @@ children:
       keywords: []
       oneliner: Inserts a line break.
       element: true
+      contextual: false
       details: |-
         <p>Inserts a line break.</p>
         <p>Advances the paragraph to the next line. A single trailing line break at the
@@ -303,7 +346,7 @@ children:
   children: []
 - route: /docs/reference/text/lorem/
   title: Lorem
-  description: '`lorem` 函数的文档'
+  description: Documentation for the `lorem` function.
   part: null
   outline:
   - id: summary
@@ -328,6 +371,7 @@ children:
       - Blind Text
       oneliner: Creates blind text.
       element: false
+      contextual: false
       details: |-
         <p>Creates blind text.</p>
         <p>This function yields a Latin-like <em>Lorem Ipsum</em> blind text with the given
@@ -362,7 +406,7 @@ children:
   children: []
 - route: /docs/reference/text/lower/
   title: Lowercase
-  description: '`lower` 函数的文档'
+  description: Documentation for the `lower` function.
   part: null
   outline:
   - id: summary
@@ -386,6 +430,7 @@ children:
       keywords: []
       oneliner: Converts a string or content to lowercase.
       element: false
+      contextual: false
       details: |-
         <p>Converts a string or content to lowercase.</p>
         <h2 id="example">Example</h2>
@@ -416,7 +461,7 @@ children:
   children: []
 - route: /docs/reference/text/overline/
   title: Overline
-  description: '`overline` 函数的文档'
+  description: Documentation for the `overline` function.
   part: null
   outline:
   - id: summary
@@ -455,6 +500,7 @@ children:
       keywords: []
       oneliner: Adds a line over text.
       element: true
+      contextual: false
       details: |-
         <p>Adds a line over text.</p>
         <h2 id="example">Example</h2>
@@ -465,7 +511,7 @@ children:
       params:
       - name: stroke
         details: |-
-          <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the line.</p>
+          <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the line.</p>
           <p>If set to <code><span class="typ-key">auto</span></code>, takes on the text's color and a thickness defined in
           the current font.</p>
         example: |-
@@ -584,7 +630,7 @@ children:
   children: []
 - route: /docs/reference/text/raw/
   title: Raw Text / Code
-  description: '`raw` 函数的文档'
+  description: Documentation for the `raw` function.
   part: null
   outline:
   - id: summary
@@ -647,6 +693,7 @@ children:
       keywords: []
       oneliner: Raw text with optional syntax highlighting.
       element: true
+      contextual: false
       details: |-
         <p>Raw text with optional syntax highlighting.</p>
         <p>Displays the text verbatim and in a monospace font. This is typically used
@@ -672,7 +719,8 @@ children:
         <h2 id="syntax">Syntax</h2>
         <p>This function also has dedicated syntax. You can enclose text in 1 or 3+
         backticks (<code>`</code>) to make it raw. Two backticks produce empty raw text.
-        When you use three or more backticks, you can additionally specify a
+        This works both in markup and code.</p>
+        <p>When you use three or more backticks, you can additionally specify a
         language tag for syntax highlighting directly after the opening backticks.
         Within raw blocks, everything (except for the language tag, if applicable)
         is rendered as is, in particular, there are no escape sequences.</p>
@@ -759,8 +807,9 @@ children:
         details: |-
           <p>The language to syntax-highlight in.</p>
           <p>Apart from typical language tags known from Markdown, this supports the
-          <code><span class="typ-str">&quot;typ&quot;</span></code> and <code><span class="typ-str">&quot;typc&quot;</span></code> tags for Typst markup and Typst code,
-          respectively.</p>
+          <code><span class="typ-str">&quot;typ&quot;</span></code> and <code><span class="typ-str">&quot;typc&quot;</span></code> tags for
+          <a href="/docs/reference/syntax/#markup">Typst markup</a> and
+          <a href="/docs/reference/syntax/#code">Typst code</a>, respectively.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-raw">```typ
           This is *Typst!*
@@ -838,10 +887,9 @@ children:
           <p>Applying a theme only affects the color of specifically highlighted
           text. It does not consider the theme's foreground and background
           properties, so that you retain control over the color of raw text. You
-          can apply the foreground color yourself with the <a href="/docs/reference/text/text/"><code>text</code></a>
-          function and the background with a <a href="/docs/reference/layout/block/#parameters-fill">filled block</a>. You
-          could also use the <a href="/docs/reference/data-loading/xml/"><code>xml</code></a> function to extract these properties
-          from the theme.</p>
+          can apply the foreground color yourself with the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function and
+          the background with a <a href="/docs/reference/layout/block/#parameters-fill">filled block</a>. You could also use
+          the <a href="/docs/reference/data-loading/xml/" title="`xml`"><code>xml</code></a> function to extract these properties from the theme.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">raw</span><span class="typ-punct">(</span>theme<span class="typ-punct">:</span> <span class="typ-str">&quot;halcyon.tmTheme&quot;</span><span class="typ-punct">)</span>
           <span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">raw</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-func">block</span><span class="typ-punct">(</span>
@@ -896,9 +944,10 @@ children:
         keywords: []
         oneliner: A highlighted line of raw text.
         element: true
+        contextual: false
         details: |-
           <p>A highlighted line of raw text.</p>
-          <p>This is a helper element that is synthesized by <a href="/docs/reference/text/raw/"><code>raw</code></a> elements.</p>
+          <p>This is a helper element that is synthesized by <a href="/docs/reference/text/raw/" title="`raw`"><code>raw</code></a> elements.</p>
           <p>It allows you to access various properties of the line, such as the line
           number, the raw non-highlighted text, the highlighted text, and whether it
           is the first or last line of the raw block.</p>
@@ -960,7 +1009,7 @@ children:
   children: []
 - route: /docs/reference/text/smallcaps/
   title: Small Capitals
-  description: '`smallcaps` 函数的文档'
+  description: Documentation for the `smallcaps` function.
   part: null
   outline:
   - id: summary
@@ -984,6 +1033,7 @@ children:
       keywords: []
       oneliner: Displays text in small capitals.
       element: false
+      contextual: false
       details: |-
         <p>Displays text in small capitals.</p>
         <p><em>Note:</em> This enables the OpenType <code>smcp</code> feature for the font. Not all fonts
@@ -1025,7 +1075,7 @@ children:
   children: []
 - route: /docs/reference/text/smartquote/
   title: Smartquote
-  description: '`smartquote` 函数的文档'
+  description: Documentation for the `smartquote` function.
   part: null
   outline:
   - id: summary
@@ -1061,6 +1111,7 @@ children:
       keywords: []
       oneliner: A language-aware quote that reacts to its context.
       element: true
+      contextual: false
       details: |-
         <p>A language-aware quote that reacts to its context.</p>
         <p>Automatically turns into an appropriate opening or closing quote based on
@@ -1142,10 +1193,9 @@ children:
           <li><a href="/docs/reference/foundations/str/">string</a>: a string consisting of two characters containing the
           opening and closing double quotes (characters here refer to Unicode
           grapheme clusters)</li>
-          <li><a href="/docs/reference/foundations/array/">array</a>: an array containing the opening and closing double
-          quotes</li>
-          <li><a href="/docs/reference/foundations/dictionary/">dictionary</a>: an array containing the double and single
-          quotes, each specified as either <code><span class="typ-key">auto</span></code>, string, or array</li>
+          <li><a href="/docs/reference/foundations/array/" title="array">array</a>: an array containing the opening and closing double quotes</li>
+          <li><a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a>: an array containing the double and single quotes, each
+          specified as either <code><span class="typ-key">auto</span></code>, string, or array</li>
           </ul>
           </li>
           </ul>
@@ -1177,7 +1227,7 @@ children:
   children: []
 - route: /docs/reference/text/strike/
   title: Strikethrough
-  description: '`strike` 函数的文档'
+  description: Documentation for the `strike` function.
   part: null
   outline:
   - id: summary
@@ -1213,6 +1263,7 @@ children:
       keywords: []
       oneliner: Strikes through text.
       element: true
+      contextual: false
       details: |-
         <p>Strikes through text.</p>
         <h2 id="example">Example</h2>
@@ -1223,7 +1274,7 @@ children:
       params:
       - name: stroke
         details: |-
-          <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the line.</p>
+          <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the line.</p>
           <p>If set to <code><span class="typ-key">auto</span></code>, takes on the text's color and a thickness defined in
           the current font.</p>
           <p><em>Note:</em> Please don't use this for real redaction as you can still copy
@@ -1318,7 +1369,7 @@ children:
   children: []
 - route: /docs/reference/text/sub/
   title: Subscript
-  description: '`sub` 函数的文档'
+  description: Documentation for the `sub` function.
   part: null
   outline:
   - id: summary
@@ -1351,6 +1402,7 @@ children:
       keywords: []
       oneliner: Renders text in subscript.
       element: true
+      contextual: false
       details: |-
         <p>Renders text in subscript.</p>
         <p>The text is rendered smaller and its baseline is lowered.</p>
@@ -1427,7 +1479,7 @@ children:
   children: []
 - route: /docs/reference/text/super/
   title: Superscript
-  description: '`super` 函数的文档'
+  description: Documentation for the `super` function.
   part: null
   outline:
   - id: summary
@@ -1460,6 +1512,7 @@ children:
       keywords: []
       oneliner: Renders text in superscript.
       element: true
+      contextual: false
       details: |-
         <p>Renders text in superscript.</p>
         <p>The text is rendered smaller and its baseline is raised.</p>
@@ -1497,7 +1550,7 @@ children:
         types:
         - length
         strings: []
-        default: <code><span class="typ-op">−</span><span class="typ-num">0.5em</span></code>
+        default: <code><span class="typ-op">-</span><span class="typ-num">0.5em</span></code>
         positional: false
         named: true
         required: false
@@ -1536,7 +1589,7 @@ children:
   children: []
 - route: /docs/reference/text/text/
   title: Text
-  description: '`text` 函数的文档'
+  description: Documentation for the `text` function.
   part: null
   outline:
   - id: summary
@@ -1568,6 +1621,9 @@ children:
       children: []
     - id: parameters-fill
       name: fill
+      children: []
+    - id: parameters-stroke
+      name: stroke
       children: []
     - id: parameters-tracking
       name: tracking
@@ -1653,6 +1709,7 @@ children:
       keywords: []
       oneliner: Customizes the look and layout of text in a variety of ways.
       element: true
+      contextual: false
       details: |-
         <p>Customizes the look and layout of text in a variety of ways.</p>
         <p>This function is used frequently, both with set rules and directly. While
@@ -1682,12 +1739,17 @@ children:
           <p>In the web app, you can see the list of available fonts by clicking on
           the &quot;Ag&quot; button. You can provide additional fonts by uploading <code>.ttf</code>
           or <code>.otf</code> files into your project. They will be discovered
-          automatically.</p>
+          automatically. The priority is: project fonts &gt; server fonts.</p>
           </li>
           <li>
-          <p>Locally, Typst uses your installed system fonts. In addition, you can
-          use the <code>--font-path</code> argument or <code>TYPST_FONT_PATHS</code> environment
-          variable to add directories that should be scanned for fonts.</p>
+          <p>Locally, Typst uses your installed system fonts or embedded fonts in
+          the CLI, which are <code>Linux Libertine</code>, <code>New Computer Modern</code>,
+          <code>New Computer Modern Math</code>, and <code>DejaVu Sans Mono</code>. In addition, you
+          can use the <code>--font-path</code> argument or <code>TYPST_FONT_PATHS</code> environment
+          variable to add directories that should be scanned for fonts. The
+          priority is: <code>--font-paths</code> &gt; system fonts &gt; embedded fonts. Run
+          <code>typst fonts</code> to see the fonts that Typst has discovered on your
+          system.</p>
           </li>
           </ul>
         example: |-
@@ -1747,9 +1809,9 @@ children:
           available, Typst selects the normal style. Since most fonts are only
           available either in an italic or oblique style, the difference between
           italic and oblique style is rarely observable.</p>
-          <p>If you want to emphasize your text, you should do so using the
-          <a href="/docs/reference/model/emph/">emph</a> function instead. This makes it easy to adapt the style
-          later if you change your mind about how to signify the emphasis.</p>
+          <p>If you want to emphasize your text, you should do so using the <a href="/docs/reference/model/emph/" title="emph">emph</a>
+          function instead. This makes it easy to adapt the style later if you
+          change your mind about how to signify the emphasis.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Linux Libertine&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;italic&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Italic<span class="typ-punct">]</span>
           <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;DejaVu Sans&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;oblique&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Oblique<span class="typ-punct">]</span>
@@ -1776,9 +1838,8 @@ children:
           desired weight is not available, Typst selects the font from the family
           that is closest in weight.</p>
           <p>If you want to strongly emphasize your text, you should do so using the
-          <a href="/docs/reference/model/strong/">strong</a> function instead. This makes it easy to adapt the
-          style later if you change your mind about how to signify the strong
-          emphasis.</p>
+          <a href="/docs/reference/model/strong/" title="strong">strong</a> function instead. This makes it easy to adapt the style later
+          if you change your mind about how to signify the strong emphasis.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;IBM Plex Sans&quot;</span><span class="typ-punct">)</span>
 
@@ -1870,6 +1931,26 @@ children:
         strings: []
         default: <code><span class="typ-func">luma</span><span class="typ-punct">(</span><span
           class="typ-num">0%</span><span class="typ-punct">)</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
+      - name: stroke
+        details: <p>How to stroke the text.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">0.5pt</span> <span class="typ-op">+</span> red<span class="typ-punct">)</span><span class="typ-punct">[</span>Stroked<span class="typ-punct">]</span>
+          </code></pre><div class="preview"><img src="/assets/docs/29e8536cef37b9bbbbb4b7830afc7637.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - none
+        - length
+        - color
+        - gradient
+        - stroke
+        - pattern
+        - dictionary
+        strings: []
+        default: <code><span class="typ-key">none</span></code>
         positional: false
         named: true
         required: false
@@ -2448,7 +2529,7 @@ children:
   children: []
 - route: /docs/reference/text/underline/
   title: Underline
-  description: '`underline` 函数的文档'
+  description: Documentation for the `underline` function.
   part: null
   outline:
   - id: summary
@@ -2487,6 +2568,7 @@ children:
       keywords: []
       oneliner: Underlines text.
       element: true
+      contextual: false
       details: |-
         <p>Underlines text.</p>
         <h2 id="example">Example</h2>
@@ -2497,7 +2579,7 @@ children:
       params:
       - name: stroke
         details: |-
-          <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the line.</p>
+          <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the line.</p>
           <p>If set to <code><span class="typ-key">auto</span></code>, takes on the text's color and a thickness defined in
           the current font.</p>
         example: |-
@@ -2610,7 +2692,7 @@ children:
   children: []
 - route: /docs/reference/text/upper/
   title: Uppercase
-  description: '`upper` 函数的文档'
+  description: Documentation for the `upper` function.
   part: null
   outline:
   - id: summary
@@ -2634,6 +2716,7 @@ children:
       keywords: []
       oneliner: Converts a string or content to uppercase.
       element: false
+      contextual: false
       details: |-
         <p>Converts a string or content to uppercase.</p>
         <h2 id="example">Example</h2>

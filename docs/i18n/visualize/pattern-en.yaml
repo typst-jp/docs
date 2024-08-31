@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/pattern/
 title: Pattern
-description: Pattern 类型的文档
+description: Documentation for the Pattern type.
 part: null
 outline:
 - id: summary
@@ -101,11 +101,10 @@ body:
       <ul>
       <li>For shapes that are placed at the root/top level of the document, the
       closest ancestor is the page itself.</li>
-      <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/"><code>block</code></a> or
-      <a href="/docs/reference/layout/box/"><code>box</code></a> that contains the shape. This includes the boxes and blocks
-      that are implicitly created by show rules and elements. For example, a
-      <a href="/docs/reference/layout/rotate/"><code>rotate</code></a> will not affect the parent of a gradient, but a
-      <a href="/docs/reference/layout/grid/"><code>grid</code></a> will.</li>
+      <li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> or <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> that
+      contains the shape. This includes the boxes and blocks that are implicitly
+      created by show rules and elements. For example, a <a href="/docs/reference/layout/rotate/" title="`rotate`"><code>rotate</code></a> will not
+      affect the parent of a gradient, but a <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> will.</li>
       </ul>
     constructor:
       path: []
@@ -114,6 +113,7 @@ body:
       keywords: []
       oneliner: Construct a new pattern.
       element: false
+      contextual: false
       details: <p>Construct a new pattern.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> pat <span class="typ-op">=</span> <span class="typ-func">pattern</span><span class="typ-punct">(</span>

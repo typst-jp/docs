@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/color/
 title: Color
-description: Color 类型的文档
+description: Documentation for the Color type.
 part: null
 outline:
 - id: summary
@@ -23,6 +23,9 @@ outline:
     children:
     - id: definitions-luma-lightness
       name: lightness
+      children: []
+    - id: definitions-luma-alpha
+      name: alpha
       children: []
     - id: definitions-luma-color
       name: color
@@ -194,7 +197,10 @@ outline:
       children: []
   - id: definitions-negate
     name: Negate
-    children: []
+    children:
+    - id: definitions-negate-space
+      name: space
+      children: []
   - id: definitions-rotate
     name: Rotate
     children:
@@ -212,6 +218,18 @@ outline:
       children: []
     - id: definitions-mix-space
       name: space
+      children: []
+  - id: definitions-transparentize
+    name: Transparentize
+    children:
+    - id: definitions-transparentize-scale
+      name: scale
+      children: []
+  - id: definitions-opacify
+    name: Opacify
+    children:
+    - id: definitions-opacify-scale
+      name: scale
       children: []
 body:
   kind: type
@@ -263,8 +281,10 @@ body:
       either <code>color.red</code> or just <code>red</code>.</p>
       <h2 id="predefined-color-maps">Predefined color maps</h2>
       <p>Typst also includes a number of preset color maps that can be used for
-      gradients. Most of these color maps are chosen to be color blind friendly.</p>
-      <table><thead><tr><th>Map</th><th style="text-align: left">Details</th></tr></thead><tbody>
+      <a href="/docs/reference/visualize/gradient/#definitions-linear">gradients</a>. These are simply arrays of colors defined in
+      the module <code>color.map</code>.</p>
+      <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>crest<span class="typ-punct">)</span><span class="typ-punct">)</span>
+      </code></pre><div class="preview"><img src="/assets/docs/2c2ef5b1f24d9348a16192e851ca0419.png" alt="Preview" width="480" height="190"/></div></div><table><thead><tr><th>Map</th><th style="text-align: left">Details</th></tr></thead><tbody>
       <tr><td><code>turbo</code></td><td style="text-align: left">A perceptually uniform rainbow-like color map. Read <a href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html">this blog post</a> for more details.</td></tr>
       <tr><td><code>cividis</code></td><td style="text-align: left">A blue to gray to yellow color map. See <a href="https://bids.github.io/colormap/">this blog post</a> for more details.</td></tr>
       <tr><td><code>rainbow</code></td><td style="text-align: left">Cycles through the full color spectrum. This color map is best used by setting the interpolation color space to <a href="/docs/reference/visualize/color/#definitions-hsl">HSL</a>. The rainbow gradient is <strong>not suitable</strong> for data visualization because it is not perceptually uniform, so the differences between values become unclear to your readers. It should only be used for decorative purposes.</td></tr>
@@ -294,6 +314,7 @@ body:
       keywords: []
       oneliner: Create a grayscale color.
       element: false
+      contextual: false
       details: |-
         <p>Create a grayscale color.</p>
         <p>A grayscale color is represented internally by a single <code>lightness</code>
@@ -312,6 +333,18 @@ body:
         example: null
         types:
         - int
+        - ratio
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      - name: alpha
+        details: <p>The alpha component.</p>
+        example: null
+        types:
         - ratio
         strings: []
         default: null
@@ -344,6 +377,7 @@ body:
       keywords: []
       oneliner: Create an [Oklab](https://bottosson.github.io/posts/oklab/) color.
       element: false
+      contextual: false
       details: |-
         <p>Create an <a href="https://bottosson.github.io/posts/oklab/">Oklab</a> color.</p>
         <p>This color space is well suited for the following use cases:</p>
@@ -355,12 +389,12 @@ body:
         <p>A linear Oklab color is represented internally by an array of four
         components:</p>
         <ul>
-        <li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>a (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+        <li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>a (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
         Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-        <li>b (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+        <li>b (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
         Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-        <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+        <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
         </ul>
         <p>These components are also available using the
         <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -445,6 +479,7 @@ body:
       keywords: []
       oneliner: Create an [Oklch](https://bottosson.github.io/posts/oklab/) color.
       element: false
+      contextual: false
       details: |-
         <p>Create an <a href="https://bottosson.github.io/posts/oklab/">Oklch</a> color.</p>
         <p>This color space is well suited for the following use cases:</p>
@@ -456,11 +491,11 @@ body:
         <p>A linear Oklch color is represented internally by an array of four
         components:</p>
         <ul>
-        <li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>chroma (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+        <li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>chroma (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
         Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-        <li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-        <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+        <li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+        <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
         </ul>
         <p>These components are also available using the
         <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -544,6 +579,7 @@ body:
       keywords: []
       oneliner: Create an RGB(A) color with linear luma.
       element: false
+      contextual: false
       details: |-
         <p>Create an RGB(A) color with linear luma.</p>
         <p>This color space is similar to sRGB, but with the distinction that the
@@ -553,10 +589,10 @@ body:
         <p>A linear RGB(A) color is represented internally by an array of four
         components:</p>
         <ul>
-        <li>red (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>green (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>blue (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+        <li>red (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>green (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>blue (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
         </ul>
         <p>These components are also available using the
         <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -643,15 +679,16 @@ body:
       keywords: []
       oneliner: Create an RGB(A) color.
       element: false
+      contextual: false
       details: |-
         <p>Create an RGB(A) color.</p>
         <p>The color is specified in the sRGB color space.</p>
         <p>An RGB(A) color is represented internally by an array of four components:</p>
         <ul>
-        <li>red (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>green (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>blue (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+        <li>red (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>green (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>blue (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
         </ul>
         <p>These components are also available using the <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a>
         method.</p>
@@ -758,17 +795,18 @@ body:
       keywords: []
       oneliner: Create a CMYK color.
       element: false
+      contextual: false
       details: |-
         <p>Create a CMYK color.</p>
         <p>This is useful if you want to target a specific printer. The conversion
         to RGB for display preview might differ from how your printer reproduces
         the color.</p>
-        <p>An HSL color is represented internally by an array of four components:</p>
+        <p>A CMYK color is represented internally by an array of four components:</p>
         <ul>
-        <li>cyan (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>magenta (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>yellow (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>key (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+        <li>cyan (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>magenta (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>yellow (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>key (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
         </ul>
         <p>These components are also available using the
         <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -851,6 +889,7 @@ body:
       keywords: []
       oneliner: Create an HSL color.
       element: false
+      contextual: false
       details: |-
         <p>Create an HSL color.</p>
         <p>This color space is useful for specifying colors by hue, saturation and
@@ -858,10 +897,10 @@ body:
         while keeping perceived hue.</p>
         <p>An HSL color is represented internally by an array of four components:</p>
         <ul>
-        <li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-        <li>saturation (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+        <li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+        <li>saturation (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
         </ul>
         <p>These components are also available using the
         <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -947,6 +986,7 @@ body:
       keywords: []
       oneliner: Create an HSV color.
       element: false
+      contextual: false
       details: |-
         <p>Create an HSV color.</p>
         <p>This color space is useful for specifying colors by hue, saturation and
@@ -954,10 +994,10 @@ body:
         while keeping perceived hue.</p>
         <p>An HSV color is represented internally by an array of four components:</p>
         <ul>
-        <li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-        <li>saturation (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>value (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-        <li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+        <li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+        <li>saturation (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>value (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+        <li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
         </ul>
         <p>These components are also available using the
         <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -1043,6 +1083,7 @@ body:
       keywords: []
       oneliner: Extracts the components of this color.
       element: false
+      contextual: false
       details: |-
         <p>Extracts the components of this color.</p>
         <p>The size and values of this array depends on the color space. You can
@@ -1065,8 +1106,8 @@ body:
         component is included.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-comment">// note that the alpha component is included by default</span>
-        <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">components</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">,</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-        </code></pre><div class="preview"><img src="/assets/docs/6256b6a7300a0fc8a2526dd5401230c8.png" alt="Preview" width="480" height="190"/></div></div>
+        <span class="typ-func">#</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">components</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/43a9b4ace8d343e07ec2b841211eace5.png" alt="Preview" width="480" height="190"/></div></div>
       self: true
       params:
       - name: alpha
@@ -1091,6 +1132,7 @@ body:
       keywords: []
       oneliner: 'Returns the constructor function for this color''s space:'
       element: false
+      contextual: false
       details: |-
         <p>Returns the constructor function for this color's space:</p>
         <ul>
@@ -1119,6 +1161,7 @@ body:
       keywords: []
       oneliner: Returns the color's RGB(A) hex representation (such as `#ffaa32` or
       element: false
+      contextual: false
       details: |-
         <p>Returns the color's RGB(A) hex representation (such as <code>#ffaa32</code> or
         <code>#020304fe</code>). The alpha component (last two digits in <code>#020304fe</code>) is
@@ -1136,6 +1179,7 @@ body:
       keywords: []
       oneliner: Lightens a color by a given factor.
       element: false
+      contextual: false
       details: <p>Lightens a color by a given factor.</p>
       example: null
       self: true
@@ -1162,6 +1206,7 @@ body:
       keywords: []
       oneliner: Darkens a color by a given factor.
       element: false
+      contextual: false
       details: <p>Darkens a color by a given factor.</p>
       example: null
       self: true
@@ -1188,6 +1233,7 @@ body:
       keywords: []
       oneliner: Increases the saturation of a color by a given factor.
       element: false
+      contextual: false
       details: <p>Increases the saturation of a color by a given factor.</p>
       example: null
       self: true
@@ -1214,6 +1260,7 @@ body:
       keywords: []
       oneliner: Decreases the saturation of a color by a given factor.
       element: false
+      contextual: false
       details: <p>Decreases the saturation of a color by a given factor.</p>
       example: null
       self: true
@@ -1238,12 +1285,32 @@ body:
       name: negate
       title: Negate
       keywords: []
-      oneliner: Produces the negative of the color.
+      oneliner: Produces the complementary color using a provided color space.
       element: false
-      details: <p>Produces the negative of the color.</p>
-      example: null
+      contextual: false
+      details: |-
+        <p>Produces the complementary color using a provided color space.
+        You can think of it as the opposite side on a color wheel.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">)</span>
+        <span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">.</span><span class="typ-func">negate</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+        <span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">.</span><span class="typ-func">negate</span><span class="typ-punct">(</span>space<span class="typ-punct">:</span> rgb<span class="typ-punct">)</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/c5a504a60de2ba1432400efa9cd96d1e.png" alt="Preview" width="480" height="190"/></div></div>
       self: true
-      params: []
+      params:
+      - name: space
+        details: <p>The color space used for the transformation. By default, a perceptual
+          color space is used.</p>
+        example: null
+        types:
+        - any
+        strings: []
+        default: <code>oklab</code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: false
       returns:
       - color
       scope: []
@@ -1254,6 +1321,7 @@ body:
       keywords: []
       oneliner: Rotates the hue of the color by a given angle.
       element: false
+      contextual: false
       details: <p>Rotates the hue of the color by a given angle.</p>
       example: null
       self: true
@@ -1294,7 +1362,12 @@ body:
       keywords: []
       oneliner: Create a color by mixing two or more colors.
       element: false
-      details: <p>Create a color by mixing two or more colors.</p>
+      contextual: false
+      details: |-
+        <p>Create a color by mixing two or more colors.</p>
+        <p>In color spaces with a hue component (hsl, hsv, oklch), only two colors
+        can be mixed at once. Mixing more than two colors in such a space will
+        result in an error!</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">mix</span><span class="typ-punct">(</span>blue<span class="typ-punct">)</span><span class="typ-punct">)</span>
@@ -1333,6 +1406,77 @@ body:
         positional: false
         named: true
         required: false
+        variadic: false
+        settable: false
+      returns:
+      - color
+      scope: []
+    - path:
+      - color
+      name: transparentize
+      title: Transparentize
+      keywords: []
+      oneliner: Makes a color more transparent by a given factor.
+      element: false
+      contextual: false
+      details: |-
+        <p>Makes a color more transparent by a given factor.</p>
+        <p>This method is relative to the existing alpha value.
+        If the scale is positive, calculates <code>alpha - alpha * scale</code>.
+        Negative scales behave like <code>color.opacify(-scale)</code>.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">)</span><span class="typ-punct">[</span>opaque<span class="typ-punct">]</span>
+        <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>half red<span class="typ-punct">]</span>
+        <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">75%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>quarter red<span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/50f36ba47d4fc9bfab94e835d6f5cc77.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: scale
+        details: <p>The factor to change the alpha value by.</p>
+        example: null
+        types:
+        - ratio
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      returns:
+      - color
+      scope: []
+    - path:
+      - color
+      name: opacify
+      title: Opacify
+      keywords: []
+      oneliner: Makes a color more opaque by a given scale.
+      element: false
+      contextual: false
+      details: |-
+        <p>Makes a color more opaque by a given scale.</p>
+        <p>This method is relative to the existing alpha value.
+        If the scale is positive, calculates <code>alpha + scale - alpha * scale</code>.
+        Negative scales behave like <code>color.transparentize(-scale)</code>.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> half-red <span class="typ-op">=</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span>
+        <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>opaque<span class="typ-punct">]</span>
+        <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>three quarters red<span class="typ-punct">]</span>
+        <span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>one quarter red<span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/91170e321308a99ae59cbe3fe5cd895a.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: scale
+        details: <p>The scale to change the alpha value by.</p>
+        example: null
+        types:
+        - ratio
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
         variadic: false
         settable: false
       returns:

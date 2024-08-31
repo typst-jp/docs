@@ -1,6 +1,6 @@
 route: /docs/reference/layout/scale/
 title: Scale
-description: '`scale` 函数的文档'
+description: Documentation for the `scale` function.
 part: null
 outline:
 - id: summary
@@ -21,6 +21,9 @@ outline:
   - id: parameters-origin
     name: origin
     children: []
+  - id: parameters-reflow
+    name: reflow
+    children: []
   - id: parameters-body
     name: body
     children: []
@@ -33,13 +36,15 @@ body:
     keywords: []
     oneliner: Scales content without affecting layout.
     element: true
+    contextual: false
     details: |-
       <p>Scales content without affecting layout.</p>
       <p>Lets you mirror content by specifying a negative scale on a single axis.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
       <span class="typ-func">#</span><span class="typ-func">scale</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">[</span>This is mirrored.<span class="typ-punct">]</span>
-      </code></pre><div class="preview"><img src="/assets/docs/4c21783e7c03adcefd350157917031c4.png" alt="Preview" width="480" height="190"/></div></div>
+      <span class="typ-func">#</span><span class="typ-func">scale</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">100%</span><span class="typ-punct">,</span> reflow<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>This is mirrored.<span class="typ-punct">]</span>
+      </code></pre><div class="preview"><img src="/assets/docs/8812bed42df654a6ce5b213b253e59ed.png" alt="Preview" width="480" height="190"/></div></div>
     example: null
     self: false
     params:
@@ -81,6 +86,24 @@ body:
       - alignment
       strings: []
       default: <code>center <span class="typ-op">+</span> horizon</code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: reflow
+      details: |-
+        <p>Whether the scaling impacts the layout.</p>
+        <p>If set to <code><span class="typ-key">false</span></code>, the scaled content will be allowed to overlap
+        other content. If set to <code><span class="typ-key">true</span></code>, it will compute the new size of
+        the scaled content and adjust the layout accordingly.</p>
+      example: |-
+        <div class="previewed-code"><pre><code>Hello <span class="typ-func">#</span><span class="typ-func">scale</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-num">20%</span><span class="typ-punct">,</span> y<span class="typ-punct">:</span> <span class="typ-num">40%</span><span class="typ-punct">,</span> reflow<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>World<span class="typ-punct">]</span>!
+        </code></pre><div class="preview"><img src="/assets/docs/d7c0756c76636519aaff4fae2156f90f.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - bool
+      strings: []
+      default: <code><span class="typ-key">false</span></code>
       positional: false
       named: true
       required: false

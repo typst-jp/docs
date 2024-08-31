@@ -1,6 +1,6 @@
 route: /docs/reference/text/super/
-title: 上标
-description: '`super` 函数的文档'
+title: Superscript
+description: Documentation for the `super` function.
 part: null
 outline:
 - id: summary
@@ -33,13 +33,10 @@ body:
     keywords: []
     oneliner: Renders text in superscript.
     element: true
+    contextual: false
     details: |-
-      <p>
-      以上标形式呈现文本。
-      </p>
-      <p>
-      文本将会呈现为较小的形式，基准线也会上升。
-      </p>
+      <p>Renders text in superscript.</p>
+      <p>The text is rendered smaller and its baseline is raised.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>1<span class="typ-func">#</span><span class="typ-func">super</span><span class="typ-punct">[</span>st<span class="typ-punct">]</span> try!
       </code></pre><div class="preview"><img src="/assets/docs/fd50918366fd34c3aeaf45b2e2e38b4c.png" alt="Preview" width="480" height="190"/></div></div>
@@ -48,12 +45,10 @@ body:
     params:
     - name: typographic
       details: |-
-        <p>
-        是否启用字体的专用上标字符。
-        </p>
-        <p>
-        如果启用，Typst 首先尝试将文本转换为上标代码点。如果失败，它将尝试渲染升高和缩小的普通字母。
-        </p>
+        <p>Whether to prefer the dedicated superscript characters of the font.</p>
+        <p>If this is enabled, Typst first tries to transform the text to
+        superscript codepoints. If that fails, it falls back to rendering
+        raised and shrunk normal letters.</p>
       example: |-
         <div class="previewed-code"><pre><code>N<span class="typ-func">#</span><span class="typ-func">super</span><span class="typ-punct">(</span>typographic<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>1<span class="typ-punct">]</span>
         N<span class="typ-func">#</span><span class="typ-func">super</span><span class="typ-punct">(</span>typographic<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">)</span><span class="typ-punct">[</span>1<span class="typ-punct">]</span>
@@ -69,14 +64,14 @@ body:
       settable: true
     - name: baseline
       details: |-
-        <p>
-        合成上标的基线偏移量。
-        如果<code>typographic</code>为 true，并且字体对给定的<code>body</code>有上标代码点，则不适用。</p>
+        <p>The baseline shift for synthetic superscripts. Does not apply if
+        <code>typographic</code> is true and the font has superscript codepoints for the
+        given <code>body</code>.</p>
       example: null
       types:
       - length
       strings: []
-      default: <code><span class="typ-op">−</span><span class="typ-num">0.5em</span></code>
+      default: <code><span class="typ-op">-</span><span class="typ-num">0.5em</span></code>
       positional: false
       named: true
       required: false
@@ -84,9 +79,9 @@ body:
       settable: true
     - name: size
       details: |-
-        <p>
-        合成上标的字体大小。
-        如果<code>typographic</code>为 true ，并且字体对给定的<code>body</code>有上标代码点，则不适用。</p></p>
+        <p>The font size for synthetic superscripts. Does not apply if
+        <code>typographic</code> is true and the font has superscript codepoints for the
+        given <code>body</code>.</p>
       example: null
       types:
       - length

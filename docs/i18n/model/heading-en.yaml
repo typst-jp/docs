@@ -1,6 +1,6 @@
 route: /docs/reference/model/heading/
 title: Heading
-description: '`heading` 函数的文档'
+description: Documentation for the `heading` function.
 part: null
 outline:
 - id: summary
@@ -17,6 +17,12 @@ outline:
   children:
   - id: parameters-level
     name: level
+    children: []
+  - id: parameters-depth
+    name: depth
+    children: []
+  - id: parameters-offset
+    name: offset
     children: []
   - id: parameters-numbering
     name: numbering
@@ -42,19 +48,20 @@ body:
     keywords: []
     oneliner: A section heading.
     element: true
+    contextual: false
     details: |-
       <p>A section heading.</p>
       <p>With headings, you can structure your document into sections. Each heading
       has a <em>level,</em> which starts at one and is unbounded upwards. This level
       indicates the logical role of the following content (section, subsection,
-      etc.)  A top-level heading indicates a top-level section of the document
+      etc.) A top-level heading indicates a top-level section of the document
       (not the document's title).</p>
       <p>Typst can automatically number your headings for you. To enable numbering,
       specify how you want your headings to be numbered with a
       <a href="/docs/reference/model/numbering/">numbering pattern or function</a>.</p>
-      <p>Independently from the numbering, Typst can also automatically generate an
-      <a href="/docs/reference/model/outline/">outline</a> of all headings for you. To exclude one or more headings
-      from this outline, you can set the <code>outlined</code> parameter to <code><span class="typ-key">false</span></code>.</p>
+      <p>Independently of the numbering, Typst can also automatically generate an
+      <a href="/docs/reference/model/outline/" title="outline">outline</a> of all headings for you. To exclude one or more headings from this
+      outline, you can set the <code>outlined</code> parameter to <code><span class="typ-key">false</span></code>.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.a)&quot;</span><span class="typ-punct">)</span>
 
@@ -67,17 +74,74 @@ body:
       <h2 id="syntax">Syntax</h2>
       <p>Headings have dedicated syntax: They can be created by starting a line with
       one or multiple equals signs, followed by a space. The number of equals
-      signs determines the heading's logical nesting depth.</p>
+      signs determines the heading's logical nesting depth. The <code>offset</code> field
+      can be set to configure the starting depth.</p>
     example: null
     self: false
     params:
     - name: level
-      details: <p>The logical nesting depth of the heading, starting from one.</p>
+      details: |-
+        <p>The absolute nesting depth of the heading, starting from one. If set
+        to <code><span class="typ-key">auto</span></code>, it is computed from <code>offset <span class="typ-op">+</span> depth</code>.</p>
+        <p>This is primarily useful for usage in <a href="/docs/reference/styling/#show-rules">show rules</a>
+        (either with <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selectors or by accessing the
+        level directly on a shown heading).</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>red<span class="typ-punct">)</span>
+
+        <span class="typ-heading">= Level 1</span>
+        <span class="typ-heading">== Level 2</span>
+
+        <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span>
+        <span class="typ-heading">= Also level 2</span>
+        <span class="typ-heading">== Level 3</span>
+        </code></pre><div class="preview"><img src="/assets/docs/56a29451a542295344b4a2795f223036.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - auto
+      - int
+      strings: []
+      default: <code><span class="typ-key">auto</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: depth
+      details: |-
+        <p>The relative nesting depth of the heading, starting from one. This is
+        combined with <code>offset</code> to compute the actual <code>level</code>.</p>
+        <p>This is set by the heading syntax, such that <code><span class="typ-heading">== Heading</span></code> creates a
+        heading with logical depth of 2, but actual level <code>offset <span class="typ-op">+</span> <span class="typ-num">2</span></code>. If you
+        construct a heading manually, you should typically prefer this over
+        setting the absolute level.</p>
       example: null
       types:
       - int
       strings: []
       default: <code><span class="typ-num">1</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: offset
+      details: |-
+        <p>The starting offset of each heading's <code>level</code>, used to turn its
+        relative <code>depth</code> into its absolute <code>level</code>.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-heading">= Level 1</span>
+
+        <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.1&quot;</span><span class="typ-punct">)</span>
+        <span class="typ-heading">= Level 2</span>
+
+        <span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> depth<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+          I&#39;m level 4
+        <span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/8b10af74ad1e0d282dca850ce8da1571.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - int
+      strings: []
+      default: <code><span class="typ-num">0</span></code>
       positional: false
       named: true
       required: false
@@ -134,7 +198,7 @@ body:
       settable: true
     - name: outlined
       details: |-
-        <p>Whether the heading should appear in the <a href="/docs/reference/model/outline/">outline</a>.</p>
+        <p>Whether the heading should appear in the <a href="/docs/reference/model/outline/" title="outline">outline</a>.</p>
         <p>Note that this property, if set to <code><span class="typ-key">true</span></code>, ensures the heading is also
         shown as a bookmark in the exported PDF's outline (when exporting to
         PDF). To change that behavior, use the <code>bookmarked</code> property.</p>
@@ -163,9 +227,9 @@ body:
         outline. Doesn't affect other export formats, such as PNG.</p>
         <p>The default value of <code><span class="typ-key">auto</span></code> indicates that the heading will only
         appear in the exported PDF's outline if its <code>outlined</code> property is set
-        to <code><span class="typ-key">true</span></code>, that is, if it would also be listed in Typst's
-        <a href="/docs/reference/model/outline/">outline</a>. Setting this property to either <code><span class="typ-key">true</span></code> (bookmark)
-        or <code><span class="typ-key">false</span></code> (don't bookmark) bypasses that behavior.</p>
+        to <code><span class="typ-key">true</span></code>, that is, if it would also be listed in Typst's <a href="/docs/reference/model/outline/" title="outline">outline</a>.
+        Setting this property to either <code><span class="typ-key">true</span></code> (bookmark) or <code><span class="typ-key">false</span></code> (don't
+        bookmark) bypasses that behavior.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">[</span>Normal heading<span class="typ-punct">]</span>
         This heading will be shown in

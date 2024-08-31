@@ -1,6 +1,6 @@
 route: /docs/reference/model/
-title: 模型
-description: Typst 中与模型有关联的函数族的文档
+title: Model
+description: Documentation for functions related to Model in Typst.
 part: null
 outline:
 - id: summary
@@ -13,92 +13,94 @@ body:
   kind: category
   content:
     name: model
-    title: 模型
+    title: Model
     details: |-
-      <p>文档结构。</p>
-      <p>在这里，您可以找到用于构建文档结构并与该结构进行交互的函数。包括章节标题、图表、文献管理、交叉引用等内容。</p>
+      <p>Document structuring.</p>
+      <p>Here, you can find functions to structure your document and interact with
+      that structure. This includes section headings, figures, bibliography
+      management, cross-referencing and more.</p>
     items:
     - name: bibliography
       route: /docs/reference/model/bibliography/
-      oneliner: 文献目录 / 引用列表。
+      oneliner: A bibliography / reference listing.
       code: true
     - name: cite
       route: /docs/reference/model/cite/
-      oneliner: 引用文献或元素。
+      oneliner: Cite a work from the bibliography.
       code: true
     - name: document
       route: /docs/reference/model/document/
-      oneliner: 文档的根元素及其元数据。
+      oneliner: The root element of a document and its metadata.
       code: true
     - name: emph
       route: /docs/reference/model/emph/
-      oneliner: 通过切换至斜体强调内容。
+      oneliner: Emphasizes content by toggling italics.
       code: true
     - name: enum
       route: /docs/reference/model/enum/
-      oneliner: 有序列表。
+      oneliner: A numbered list.
       code: true
     - name: figure
       route: /docs/reference/model/figure/
-      oneliner: 带有可选描述的图表。
+      oneliner: A figure with an optional caption.
       code: true
     - name: footnote
       route: /docs/reference/model/footnote/
-      oneliner: 脚注。
+      oneliner: A footnote.
       code: true
     - name: heading
       route: /docs/reference/model/heading/
-      oneliner: 章节标题。
+      oneliner: A section heading.
       code: true
     - name: link
       route: /docs/reference/model/link/
-      oneliner: 链接到 URL 或文档中的位置。
+      oneliner: Links to a URL or a location in the document.
       code: true
     - name: list
       route: /docs/reference/model/list/
-      oneliner: 无序列表。
+      oneliner: A bullet list.
       code: true
     - name: numbering
       route: /docs/reference/model/numbering/
-      oneliner: 对有序的事物应用编号。
+      oneliner: Applies a numbering to a sequence of numbers.
       code: true
     - name: outline
       route: /docs/reference/model/outline/
-      oneliner: 目录、图表或其他元素的大纲。
+      oneliner: A table of contents, figures, or other elements.
       code: true
     - name: par
       route: /docs/reference/model/par/
-      oneliner: 将文本、间距和内联级元素排列成段落。
+      oneliner: Arranges text, spacing and inline-level elements into a paragraph.
       code: true
     - name: parbreak
       route: /docs/reference/model/parbreak/
-      oneliner: 段落分隔。
+      oneliner: A paragraph break.
       code: true
     - name: quote
       route: /docs/reference/model/quote/
-      oneliner: 显示引用，带有一系列可选属性。
+      oneliner: Displays a quote alongside an optional attribution.
       code: true
     - name: ref
       route: /docs/reference/model/ref/
-      oneliner: 对标签或文献的引用。
+      oneliner: A reference to a label or bibliography.
       code: true
     - name: strong
       route: /docs/reference/model/strong/
-      oneliner: 通过增加字重强调内容。
+      oneliner: Strongly emphasizes content by increasing the font weight.
       code: true
     - name: table
       route: /docs/reference/model/table/
-      oneliner: 表格。
+      oneliner: A table of items.
       code: true
     - name: terms
       route: /docs/reference/model/terms/
-      oneliner: 术语列表。
+      oneliner: A list of terms and their descriptions.
       code: true
     shorthands: null
 children:
 - route: /docs/reference/model/bibliography/
   title: Bibliography
-  description: '`bibliography` 函数的文档'
+  description: Documentation for the `bibliography` function.
   part: null
   outline:
   - id: summary
@@ -134,6 +136,7 @@ children:
       keywords: []
       oneliner: A bibliography / reference listing.
       element: true
+      contextual: false
       details: |-
         <p>A bibliography / reference listing.</p>
         <p>You can create a new bibliography by calling this function with a path
@@ -240,167 +243,167 @@ children:
         types:
         - str
         strings:
-        - string: american-anthropological-association
-          details: <p>American Anthropological Association</p>
-        - string: springer-lecture-notes-in-computer-science
-          details: <p>Springer - Lecture Notes in Computer Science</p>
-        - string: american-medical-association
-          details: <p>American Medical Association 11th edition</p>
-        - string: sage-vancouver
-          details: <p>SAGE - Vancouver</p>
-        - string: biomed-central
-          details: <p>BioMed Central</p>
-        - string: american-society-of-civil-engineers
-          details: <p>American Society of Civil Engineers</p>
-        - string: taylor-and-francis-chicago-author-date
-          details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
-        - string: gb-7714-2015-note
-          details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
-        - string: american-society-for-microbiology
-          details: <p>American Society for Microbiology</p>
-        - string: american-meteorological-society
-          details: <p>American Meteorological Society</p>
-        - string: future-medicine
-          details: <p>Future Medicine journals</p>
-        - string: bristol-university-press
-          details: <p>Bristol University Press</p>
-        - string: public-library-of-science
-          details: <p>Public Library of Science</p>
+        - string: annual-reviews
+          details: <p>Annual Reviews (sorted by order of appearance)</p>
         - string: pensoft
           details: <p>Pensoft Journals</p>
+        - string: annual-reviews-author-date
+          details: <p>Annual Reviews (author-date)</p>
+        - string: the-lancet
+          details: <p>The Lancet</p>
+        - string: elsevier-with-titles
+          details: <p>Elsevier (numeric, with titles)</p>
+        - string: gb-7714-2015-author-date
+          details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
+        - string: royal-society-of-chemistry
+          details: <p>Royal Society of Chemistry</p>
+        - string: american-anthropological-association
+          details: <p>American Anthropological Association</p>
+        - string: sage-vancouver
+          details: <p>SAGE - Vancouver</p>
+        - string: british-medical-journal
+          details: <p>BMJ</p>
+        - string: frontiers
+          details: <p>Frontiers journals</p>
+        - string: elsevier-harvard
+          details: <p>Elsevier - Harvard (with titles)</p>
+        - string: gb-7714-2005-numeric
+          details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
+        - string: angewandte-chemie
+          details: <p>Angewandte Chemie International Edition</p>
+        - string: gb-7714-2015-note
+          details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
+        - string: springer-basic-author-date
+          details: <p>Springer - Basic (author-date)</p>
+        - string: trends
+          details: <p>Trends journals</p>
+        - string: american-geophysical-union
+          details: <p>American Geophysical Union</p>
+        - string: american-political-science-association
+          details: <p>American Political Science Association</p>
+        - string: american-psychological-association
+          details: <p>American Psychological Association 7th edition</p>
+        - string: cell
+          details: <p>Cell</p>
+        - string: spie
+          details: <p>SPIE journals</p>
+        - string: harvard-cite-them-right
+          details: <p>Cite Them Right 12th edition - Harvard</p>
         - string: american-institute-of-aeronautics-and-astronautics
           details: <p>American Institute of Aeronautics and Astronautics</p>
-        - string: mary-ann-liebert-vancouver
-          details: <p>Mary Ann Liebert - Vancouver</p>
+        - string: council-of-science-editors-author-date
+          details: <p>Council of Science Editors, Name-Year (author-date)</p>
+        - string: copernicus
+          details: <p>Copernicus Publications</p>
+        - string: sist02
+          details: <p>SIST02 (日本語)</p>
+        - string: springer-socpsych-author-date
+          details: <p>Springer - SocPsych (author-date)</p>
+        - string: modern-language-association-8
+          details: <p>Modern Language Association 8th edition</p>
+        - string: nature
+          details: <p>Nature</p>
+        - string: iso-690-numeric
+          details: <p>ISO-690 (numeric, English)</p>
+        - string: springer-mathphys
+          details: <p>Springer - MathPhys (numeric, brackets)</p>
+        - string: springer-lecture-notes-in-computer-science
+          details: <p>Springer - Lecture Notes in Computer Science</p>
+        - string: future-science
+          details: <p>Future Science Group</p>
+        - string: current-opinion
+          details: <p>Current Opinion journals</p>
+        - string: deutsche-gesellschaft-für-psychologie
+          details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
+        - string: american-meteorological-society
+          details: <p>American Meteorological Society</p>
         - string: modern-humanities-research-association
           details: <p>Modern Humanities Research Association 3rd edition (note with
             bibliography)</p>
-        - string: springer-socpsych-author-date
-          details: <p>Springer - SocPsych (author-date)</p>
-        - string: trends
-          details: <p>Trends journals</p>
-        - string: gost-r-705-2008-numeric
-          details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
-        - string: american-political-science-association
-          details: <p>American Political Science Association</p>
-        - string: future-science
-          details: <p>Future Science Group</p>
-        - string: association-for-computing-machinery
-          details: <p>Association for Computing Machinery</p>
-        - string: elsevier-harvard
-          details: <p>Elsevier - Harvard (with titles)</p>
-        - string: american-chemical-society
-          details: <p>American Chemical Society</p>
-        - string: cell
-          details: <p>Cell</p>
-        - string: royal-society-of-chemistry
-          details: <p>Royal Society of Chemistry</p>
-        - string: sist02
-          details: <p>SIST02 (日本語)</p>
-        - string: gb-7714-2005-numeric
-          details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
-        - string: institute-of-electrical-and-electronics-engineers
-          details: <p>IEEE</p>
-        - string: springer-humanities-author-date
-          details: <p>Springer - Humanities (author-date)</p>
-        - string: deutsche-gesellschaft-für-psychologie
-          details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
-        - string: springer-basic-author-date
-          details: <p>Springer - Basic (author-date)</p>
-        - string: institute-of-physics-numeric
-          details: <p>Institute of Physics (numeric)</p>
-        - string: vancouver
-          details: <p>Vancouver</p>
-        - string: nature
-          details: <p>Nature</p>
-        - string: current-opinion
-          details: <p>Current Opinion journals</p>
-        - string: annual-reviews-author-date
-          details: <p>Annual Reviews (author-date)</p>
-        - string: american-institute-of-physics
-          details: <p>American Institute of Physics 4th edition</p>
-        - string: gb-7714-2015-numeric
-          details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
-        - string: the-lancet
-          details: <p>The Lancet</p>
-        - string: springer-basic
-          details: <p>Springer - Basic (numeric, brackets)</p>
-        - string: american-geophysical-union
-          details: <p>American Geophysical Union</p>
-        - string: turabian-fullnote-8
-          details: <p>Turabian 8th edition (full note)</p>
-        - string: taylor-and-francis-national-library-of-medicine
-          details: <p>Taylor &amp; Francis - National Library of Medicine</p>
-        - string: american-physiological-society
-          details: <p>American Physiological Society</p>
-        - string: thieme
-          details: <p>Thieme-German (Deutsch)</p>
-        - string: copernicus
-          details: <p>Copernicus Publications</p>
-        - string: the-institution-of-engineering-and-technology
-          details: <p>The Institution of Engineering and Technology</p>
-        - string: annual-reviews
-          details: <p>Annual Reviews (sorted by order of appearance)</p>
-        - string: deutsche-sprache
-          details: <p>Deutsche Sprache (Deutsch)</p>
-        - string: harvard-cite-them-right
-          details: <p>Cite Them Right 12th edition - Harvard</p>
-        - string: chicago-fullnotes
-          details: <p>Chicago Manual of Style 17th edition (full note)</p>
-        - string: iso-690-author-date
-          details: <p>ISO-690 (author-date, English)</p>
-        - string: council-of-science-editors-author-date
-          details: <p>Council of Science Editors, Name-Year (author-date)</p>
-        - string: springer-mathphys
-          details: <p>Springer - MathPhys (numeric, brackets)</p>
-        - string: american-society-of-mechanical-engineers
-          details: <p>American Society of Mechanical Engineers</p>
-        - string: karger
-          details: <p>Karger journals</p>
-        - string: multidisciplinary-digital-publishing-institute
-          details: <p>Multidisciplinary Digital Publishing Institute</p>
-        - string: american-psychological-association
-          details: <p>American Psychological Association 7th edition</p>
-        - string: modern-language-association-8
-          details: <p>Modern Language Association 8th edition</p>
-        - string: gb-7714-2015-author-date
-          details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
-        - string: springer-vancouver
-          details: <p>Springer - Vancouver (brackets)</p>
-        - string: british-medical-journal
-          details: <p>BMJ</p>
-        - string: turabian-author-date
-          details: <p>Turabian 9th edition (author-date)</p>
-        - string: chicago-author-date
-          details: <p>Chicago Manual of Style 17th edition (author-date)</p>
-        - string: associacao-brasileira-de-normas-tecnicas
-          details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
-        - string: vancouver-superscript
-          details: <p>Vancouver (superscript)</p>
-        - string: angewandte-chemie
-          details: <p>Angewandte Chemie International Edition</p>
-        - string: elsevier-with-titles
-          details: <p>Elsevier (numeric, with titles)</p>
-        - string: iso-690-numeric
-          details: <p>ISO-690 (numeric, English)</p>
-        - string: modern-language-association
-          details: <p>Modern Language Association 9th edition</p>
-        - string: council-of-science-editors
-          details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
-        - string: spie
-          details: <p>SPIE journals</p>
-        - string: springer-fachzeitschriften-medizin-psychologie
-          details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
-        - string: frontiers
-          details: <p>Frontiers journals</p>
-        - string: american-physics-society
-          details: <p>American Physical Society</p>
-        - string: american-sociological-association
-          details: <p>American Sociological Association 6th edition</p>
-        - string: elsevier-vancouver
-          details: <p>Elsevier - Vancouver</p>
+        - string: american-society-of-civil-engineers
+          details: <p>American Society of Civil Engineers</p>
         - string: chicago-notes
           details: <p>Chicago Manual of Style 17th edition (note)</p>
+        - string: institute-of-electrical-and-electronics-engineers
+          details: <p>IEEE</p>
+        - string: deutsche-sprache
+          details: <p>Deutsche Sprache (Deutsch)</p>
+        - string: gb-7714-2015-numeric
+          details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
+        - string: bristol-university-press
+          details: <p>Bristol University Press</p>
+        - string: association-for-computing-machinery
+          details: <p>Association for Computing Machinery</p>
+        - string: associacao-brasileira-de-normas-tecnicas
+          details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
+        - string: american-medical-association
+          details: <p>American Medical Association 11th edition</p>
+        - string: elsevier-vancouver
+          details: <p>Elsevier - Vancouver</p>
+        - string: chicago-author-date
+          details: <p>Chicago Manual of Style 17th edition (author-date)</p>
+        - string: vancouver
+          details: <p>Vancouver</p>
+        - string: chicago-fullnotes
+          details: <p>Chicago Manual of Style 17th edition (full note)</p>
+        - string: turabian-author-date
+          details: <p>Turabian 9th edition (author-date)</p>
+        - string: springer-fachzeitschriften-medizin-psychologie
+          details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
+        - string: thieme
+          details: <p>Thieme-German (Deutsch)</p>
+        - string: taylor-and-francis-national-library-of-medicine
+          details: <p>Taylor &amp; Francis - National Library of Medicine</p>
+        - string: american-chemical-society
+          details: <p>American Chemical Society</p>
+        - string: american-institute-of-physics
+          details: <p>American Institute of Physics 4th edition</p>
+        - string: taylor-and-francis-chicago-author-date
+          details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
+        - string: gost-r-705-2008-numeric
+          details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
+        - string: institute-of-physics-numeric
+          details: <p>Institute of Physics (numeric)</p>
+        - string: iso-690-author-date
+          details: <p>ISO-690 (author-date, English)</p>
+        - string: the-institution-of-engineering-and-technology
+          details: <p>The Institution of Engineering and Technology</p>
+        - string: american-society-for-microbiology
+          details: <p>American Society for Microbiology</p>
+        - string: multidisciplinary-digital-publishing-institute
+          details: <p>Multidisciplinary Digital Publishing Institute</p>
+        - string: springer-basic
+          details: <p>Springer - Basic (numeric, brackets)</p>
+        - string: springer-humanities-author-date
+          details: <p>Springer - Humanities (author-date)</p>
+        - string: turabian-fullnote-8
+          details: <p>Turabian 8th edition (full note)</p>
+        - string: karger
+          details: <p>Karger journals</p>
+        - string: springer-vancouver
+          details: <p>Springer - Vancouver (brackets)</p>
+        - string: vancouver-superscript
+          details: <p>Vancouver (superscript)</p>
+        - string: american-physics-society
+          details: <p>American Physical Society</p>
+        - string: mary-ann-liebert-vancouver
+          details: <p>Mary Ann Liebert - Vancouver</p>
+        - string: american-society-of-mechanical-engineers
+          details: <p>American Society of Mechanical Engineers</p>
+        - string: council-of-science-editors
+          details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
+        - string: american-physiological-society
+          details: <p>American Physiological Society</p>
+        - string: future-medicine
+          details: <p>Future Medicine journals</p>
+        - string: biomed-central
+          details: <p>BioMed Central</p>
+        - string: public-library-of-science
+          details: <p>Public Library of Science</p>
+        - string: american-sociological-association
+          details: <p>American Sociological Association 6th edition</p>
+        - string: modern-language-association
+          details: <p>Modern Language Association 9th edition</p>
         - string: alphanumeric
           details: <p>Alphanumeric</p>
         default: <code><span class="typ-str">&quot;ieee&quot;</span></code>
@@ -415,7 +418,7 @@ children:
   children: []
 - route: /docs/reference/model/list/
   title: Bullet List
-  description: '`list` 函数的文档'
+  description: Documentation for the `list` function.
   part: null
   outline:
   - id: summary
@@ -466,6 +469,7 @@ children:
       keywords: []
       oneliner: A bullet list.
       element: true
+      contextual: false
       details: |-
         <p>A bullet list.</p>
         <p>Displays a sequence of items vertically, with each item introduced by a
@@ -529,7 +533,7 @@ children:
           <p>The marker which introduces each item.</p>
           <p>Instead of plain content, you can also pass an array with multiple
           markers that should be used for nested lists. If the list nesting depth
-          exceeds the number of markers, the last one is repeated. For total
+          exceeds the number of markers, the markers are cycled. For total
           control, you may pass a function that maps the list's nesting depth
           (starting from <code><span class="typ-num">0</span></code>) to a desired marker.</p>
         example: |-
@@ -548,7 +552,10 @@ children:
         - array
         - function
         strings: []
-        default: <code><span class="typ-punct">[</span>•<span class="typ-punct">]</span></code>
+        default: <code><span class="typ-punct">(</span><span class="typ-punct">[</span>•<span
+          class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>‣<span
+          class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>–<span
+          class="typ-punct">]</span><span class="typ-punct">)</span></code>
         positional: false
         named: true
         required: false
@@ -623,6 +630,7 @@ children:
         keywords: []
         oneliner: A bullet list item.
         element: true
+        contextual: false
         details: <p>A bullet list item.</p>
         example: null
         self: false
@@ -645,7 +653,7 @@ children:
   children: []
 - route: /docs/reference/model/cite/
   title: Cite
-  description: '`cite` 函数的文档'
+  description: Documentation for the `cite` function.
   part: null
   outline:
   - id: summary
@@ -681,10 +689,11 @@ children:
       keywords: []
       oneliner: Cite a work from the bibliography.
       element: true
+      contextual: false
       details: |-
         <p>Cite a work from the bibliography.</p>
-        <p>Before you starting citing, you need to add a <a href="/docs/reference/model/bibliography/">bibliography</a>
-        somewhere in your document.</p>
+        <p>Before you starting citing, you need to add a <a href="/docs/reference/model/bibliography/" title="bibliography">bibliography</a> somewhere in
+        your document.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code>This was already noted by
         pirates long ago. <span class="typ-ref">@arrgh</span>
@@ -697,6 +706,11 @@ children:
 
         <span class="typ-func">#</span><span class="typ-func">bibliography</span><span class="typ-punct">(</span><span class="typ-str">&quot;works.bib&quot;</span><span class="typ-punct">)</span>
         </code></pre><div class="preview"><img src="/assets/docs/bb07d2a9021052ed3feb5a6b11284f4a.png" alt="Preview" width="480" height="190"/></div></div>
+        <p>If your source name contains certain characters such as slashes, which are
+        not recognized by the <code>&lt;&gt;</code> syntax, you can explicitly call <code>label</code> instead.</p>
+        <pre><code>Computer Modern is an example of a modernist serif typeface.
+        <span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-func">label</span><span class="typ-punct">(</span><span class="typ-str">&quot;DBLP:books/lib/Knuth86a&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>.
+        </code></pre>
         <h2 id="syntax">Syntax</h2>
         <p>This function indirectly has dedicated syntax. <a href="/docs/reference/model/ref/">References</a> can be
         used to cite works from the bibliography. The label then corresponds to the
@@ -790,167 +804,167 @@ children:
         - auto
         - str
         strings:
-        - string: american-anthropological-association
-          details: <p>American Anthropological Association</p>
-        - string: springer-lecture-notes-in-computer-science
-          details: <p>Springer - Lecture Notes in Computer Science</p>
-        - string: american-medical-association
-          details: <p>American Medical Association 11th edition</p>
-        - string: sage-vancouver
-          details: <p>SAGE - Vancouver</p>
-        - string: biomed-central
-          details: <p>BioMed Central</p>
-        - string: american-society-of-civil-engineers
-          details: <p>American Society of Civil Engineers</p>
-        - string: taylor-and-francis-chicago-author-date
-          details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
-        - string: gb-7714-2015-note
-          details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
-        - string: american-society-for-microbiology
-          details: <p>American Society for Microbiology</p>
-        - string: american-meteorological-society
-          details: <p>American Meteorological Society</p>
-        - string: future-medicine
-          details: <p>Future Medicine journals</p>
-        - string: bristol-university-press
-          details: <p>Bristol University Press</p>
-        - string: public-library-of-science
-          details: <p>Public Library of Science</p>
+        - string: annual-reviews
+          details: <p>Annual Reviews (sorted by order of appearance)</p>
         - string: pensoft
           details: <p>Pensoft Journals</p>
+        - string: annual-reviews-author-date
+          details: <p>Annual Reviews (author-date)</p>
+        - string: the-lancet
+          details: <p>The Lancet</p>
+        - string: elsevier-with-titles
+          details: <p>Elsevier (numeric, with titles)</p>
+        - string: gb-7714-2015-author-date
+          details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
+        - string: royal-society-of-chemistry
+          details: <p>Royal Society of Chemistry</p>
+        - string: american-anthropological-association
+          details: <p>American Anthropological Association</p>
+        - string: sage-vancouver
+          details: <p>SAGE - Vancouver</p>
+        - string: british-medical-journal
+          details: <p>BMJ</p>
+        - string: frontiers
+          details: <p>Frontiers journals</p>
+        - string: elsevier-harvard
+          details: <p>Elsevier - Harvard (with titles)</p>
+        - string: gb-7714-2005-numeric
+          details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
+        - string: angewandte-chemie
+          details: <p>Angewandte Chemie International Edition</p>
+        - string: gb-7714-2015-note
+          details: <p>China National Standard GB/T 7714-2015 (note, 中文)</p>
+        - string: springer-basic-author-date
+          details: <p>Springer - Basic (author-date)</p>
+        - string: trends
+          details: <p>Trends journals</p>
+        - string: american-geophysical-union
+          details: <p>American Geophysical Union</p>
+        - string: american-political-science-association
+          details: <p>American Political Science Association</p>
+        - string: american-psychological-association
+          details: <p>American Psychological Association 7th edition</p>
+        - string: cell
+          details: <p>Cell</p>
+        - string: spie
+          details: <p>SPIE journals</p>
+        - string: harvard-cite-them-right
+          details: <p>Cite Them Right 12th edition - Harvard</p>
         - string: american-institute-of-aeronautics-and-astronautics
           details: <p>American Institute of Aeronautics and Astronautics</p>
-        - string: mary-ann-liebert-vancouver
-          details: <p>Mary Ann Liebert - Vancouver</p>
+        - string: council-of-science-editors-author-date
+          details: <p>Council of Science Editors, Name-Year (author-date)</p>
+        - string: copernicus
+          details: <p>Copernicus Publications</p>
+        - string: sist02
+          details: <p>SIST02 (日本語)</p>
+        - string: springer-socpsych-author-date
+          details: <p>Springer - SocPsych (author-date)</p>
+        - string: modern-language-association-8
+          details: <p>Modern Language Association 8th edition</p>
+        - string: nature
+          details: <p>Nature</p>
+        - string: iso-690-numeric
+          details: <p>ISO-690 (numeric, English)</p>
+        - string: springer-mathphys
+          details: <p>Springer - MathPhys (numeric, brackets)</p>
+        - string: springer-lecture-notes-in-computer-science
+          details: <p>Springer - Lecture Notes in Computer Science</p>
+        - string: future-science
+          details: <p>Future Science Group</p>
+        - string: current-opinion
+          details: <p>Current Opinion journals</p>
+        - string: deutsche-gesellschaft-für-psychologie
+          details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
+        - string: american-meteorological-society
+          details: <p>American Meteorological Society</p>
         - string: modern-humanities-research-association
           details: <p>Modern Humanities Research Association 3rd edition (note with
             bibliography)</p>
-        - string: springer-socpsych-author-date
-          details: <p>Springer - SocPsych (author-date)</p>
-        - string: trends
-          details: <p>Trends journals</p>
-        - string: gost-r-705-2008-numeric
-          details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
-        - string: american-political-science-association
-          details: <p>American Political Science Association</p>
-        - string: future-science
-          details: <p>Future Science Group</p>
-        - string: association-for-computing-machinery
-          details: <p>Association for Computing Machinery</p>
-        - string: elsevier-harvard
-          details: <p>Elsevier - Harvard (with titles)</p>
-        - string: american-chemical-society
-          details: <p>American Chemical Society</p>
-        - string: cell
-          details: <p>Cell</p>
-        - string: royal-society-of-chemistry
-          details: <p>Royal Society of Chemistry</p>
-        - string: sist02
-          details: <p>SIST02 (日本語)</p>
-        - string: gb-7714-2005-numeric
-          details: <p>China National Standard GB/T 7714-2005 (numeric, 中文)</p>
-        - string: institute-of-electrical-and-electronics-engineers
-          details: <p>IEEE</p>
-        - string: springer-humanities-author-date
-          details: <p>Springer - Humanities (author-date)</p>
-        - string: deutsche-gesellschaft-für-psychologie
-          details: <p>Deutsche Gesellschaft für Psychologie 5. Auflage (Deutsch)</p>
-        - string: springer-basic-author-date
-          details: <p>Springer - Basic (author-date)</p>
-        - string: institute-of-physics-numeric
-          details: <p>Institute of Physics (numeric)</p>
-        - string: vancouver
-          details: <p>Vancouver</p>
-        - string: nature
-          details: <p>Nature</p>
-        - string: current-opinion
-          details: <p>Current Opinion journals</p>
-        - string: annual-reviews-author-date
-          details: <p>Annual Reviews (author-date)</p>
-        - string: american-institute-of-physics
-          details: <p>American Institute of Physics 4th edition</p>
-        - string: gb-7714-2015-numeric
-          details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
-        - string: the-lancet
-          details: <p>The Lancet</p>
-        - string: springer-basic
-          details: <p>Springer - Basic (numeric, brackets)</p>
-        - string: american-geophysical-union
-          details: <p>American Geophysical Union</p>
-        - string: turabian-fullnote-8
-          details: <p>Turabian 8th edition (full note)</p>
-        - string: taylor-and-francis-national-library-of-medicine
-          details: <p>Taylor &amp; Francis - National Library of Medicine</p>
-        - string: american-physiological-society
-          details: <p>American Physiological Society</p>
-        - string: thieme
-          details: <p>Thieme-German (Deutsch)</p>
-        - string: copernicus
-          details: <p>Copernicus Publications</p>
-        - string: the-institution-of-engineering-and-technology
-          details: <p>The Institution of Engineering and Technology</p>
-        - string: annual-reviews
-          details: <p>Annual Reviews (sorted by order of appearance)</p>
-        - string: deutsche-sprache
-          details: <p>Deutsche Sprache (Deutsch)</p>
-        - string: harvard-cite-them-right
-          details: <p>Cite Them Right 12th edition - Harvard</p>
-        - string: chicago-fullnotes
-          details: <p>Chicago Manual of Style 17th edition (full note)</p>
-        - string: iso-690-author-date
-          details: <p>ISO-690 (author-date, English)</p>
-        - string: council-of-science-editors-author-date
-          details: <p>Council of Science Editors, Name-Year (author-date)</p>
-        - string: springer-mathphys
-          details: <p>Springer - MathPhys (numeric, brackets)</p>
-        - string: american-society-of-mechanical-engineers
-          details: <p>American Society of Mechanical Engineers</p>
-        - string: karger
-          details: <p>Karger journals</p>
-        - string: multidisciplinary-digital-publishing-institute
-          details: <p>Multidisciplinary Digital Publishing Institute</p>
-        - string: american-psychological-association
-          details: <p>American Psychological Association 7th edition</p>
-        - string: modern-language-association-8
-          details: <p>Modern Language Association 8th edition</p>
-        - string: gb-7714-2015-author-date
-          details: <p>China National Standard GB/T 7714-2015 (author-date, 中文)</p>
-        - string: springer-vancouver
-          details: <p>Springer - Vancouver (brackets)</p>
-        - string: british-medical-journal
-          details: <p>BMJ</p>
-        - string: turabian-author-date
-          details: <p>Turabian 9th edition (author-date)</p>
-        - string: chicago-author-date
-          details: <p>Chicago Manual of Style 17th edition (author-date)</p>
-        - string: associacao-brasileira-de-normas-tecnicas
-          details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
-        - string: vancouver-superscript
-          details: <p>Vancouver (superscript)</p>
-        - string: angewandte-chemie
-          details: <p>Angewandte Chemie International Edition</p>
-        - string: elsevier-with-titles
-          details: <p>Elsevier (numeric, with titles)</p>
-        - string: iso-690-numeric
-          details: <p>ISO-690 (numeric, English)</p>
-        - string: modern-language-association
-          details: <p>Modern Language Association 9th edition</p>
-        - string: council-of-science-editors
-          details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
-        - string: spie
-          details: <p>SPIE journals</p>
-        - string: springer-fachzeitschriften-medizin-psychologie
-          details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
-        - string: frontiers
-          details: <p>Frontiers journals</p>
-        - string: american-physics-society
-          details: <p>American Physical Society</p>
-        - string: american-sociological-association
-          details: <p>American Sociological Association 6th edition</p>
-        - string: elsevier-vancouver
-          details: <p>Elsevier - Vancouver</p>
+        - string: american-society-of-civil-engineers
+          details: <p>American Society of Civil Engineers</p>
         - string: chicago-notes
           details: <p>Chicago Manual of Style 17th edition (note)</p>
+        - string: institute-of-electrical-and-electronics-engineers
+          details: <p>IEEE</p>
+        - string: deutsche-sprache
+          details: <p>Deutsche Sprache (Deutsch)</p>
+        - string: gb-7714-2015-numeric
+          details: <p>China National Standard GB/T 7714-2015 (numeric, 中文)</p>
+        - string: bristol-university-press
+          details: <p>Bristol University Press</p>
+        - string: association-for-computing-machinery
+          details: <p>Association for Computing Machinery</p>
+        - string: associacao-brasileira-de-normas-tecnicas
+          details: <p>Associação Brasileira de Normas Técnicas (Português - Brasil)</p>
+        - string: american-medical-association
+          details: <p>American Medical Association 11th edition</p>
+        - string: elsevier-vancouver
+          details: <p>Elsevier - Vancouver</p>
+        - string: chicago-author-date
+          details: <p>Chicago Manual of Style 17th edition (author-date)</p>
+        - string: vancouver
+          details: <p>Vancouver</p>
+        - string: chicago-fullnotes
+          details: <p>Chicago Manual of Style 17th edition (full note)</p>
+        - string: turabian-author-date
+          details: <p>Turabian 9th edition (author-date)</p>
+        - string: springer-fachzeitschriften-medizin-psychologie
+          details: <p>Springer - Fachzeitschriften Medizin Psychologie (Deutsch)</p>
+        - string: thieme
+          details: <p>Thieme-German (Deutsch)</p>
+        - string: taylor-and-francis-national-library-of-medicine
+          details: <p>Taylor &amp; Francis - National Library of Medicine</p>
+        - string: american-chemical-society
+          details: <p>American Chemical Society</p>
+        - string: american-institute-of-physics
+          details: <p>American Institute of Physics 4th edition</p>
+        - string: taylor-and-francis-chicago-author-date
+          details: <p>Taylor &amp; Francis - Chicago Manual of Style (author-date)</p>
+        - string: gost-r-705-2008-numeric
+          details: <p>Russian GOST R 7.0.5-2008 (numeric)</p>
+        - string: institute-of-physics-numeric
+          details: <p>Institute of Physics (numeric)</p>
+        - string: iso-690-author-date
+          details: <p>ISO-690 (author-date, English)</p>
+        - string: the-institution-of-engineering-and-technology
+          details: <p>The Institution of Engineering and Technology</p>
+        - string: american-society-for-microbiology
+          details: <p>American Society for Microbiology</p>
+        - string: multidisciplinary-digital-publishing-institute
+          details: <p>Multidisciplinary Digital Publishing Institute</p>
+        - string: springer-basic
+          details: <p>Springer - Basic (numeric, brackets)</p>
+        - string: springer-humanities-author-date
+          details: <p>Springer - Humanities (author-date)</p>
+        - string: turabian-fullnote-8
+          details: <p>Turabian 8th edition (full note)</p>
+        - string: karger
+          details: <p>Karger journals</p>
+        - string: springer-vancouver
+          details: <p>Springer - Vancouver (brackets)</p>
+        - string: vancouver-superscript
+          details: <p>Vancouver (superscript)</p>
+        - string: american-physics-society
+          details: <p>American Physical Society</p>
+        - string: mary-ann-liebert-vancouver
+          details: <p>Mary Ann Liebert - Vancouver</p>
+        - string: american-society-of-mechanical-engineers
+          details: <p>American Society of Mechanical Engineers</p>
+        - string: council-of-science-editors
+          details: <p>Council of Science Editors, Citation-Sequence (numeric, brackets)</p>
+        - string: american-physiological-society
+          details: <p>American Physiological Society</p>
+        - string: future-medicine
+          details: <p>Future Medicine journals</p>
+        - string: biomed-central
+          details: <p>BioMed Central</p>
+        - string: public-library-of-science
+          details: <p>Public Library of Science</p>
+        - string: american-sociological-association
+          details: <p>American Sociological Association 6th edition</p>
+        - string: modern-language-association
+          details: <p>Modern Language Association 9th edition</p>
         - string: alphanumeric
           details: <p>Alphanumeric</p>
         default: <code><span class="typ-key">auto</span></code>
@@ -965,7 +979,7 @@ children:
   children: []
 - route: /docs/reference/model/document/
   title: Document
-  description: '`document` 函数的文档'
+  description: Documentation for the `document` function.
   part: null
   outline:
   - id: summary
@@ -995,6 +1009,7 @@ children:
       keywords: []
       oneliner: The root element of a document and its metadata.
       element: true
+      contextual: false
       details: |-
         <p>The root element of a document and its metadata.</p>
         <p>All documents are automatically wrapped in a <code>document</code> element. You cannot
@@ -1062,6 +1077,8 @@ children:
           into the PDF metadata.</p>
           <p>The year component must be at least zero in order to be embedded into a
           PDF.</p>
+          <p>If you want to create byte-by-byte reproducible PDFs, set this to
+          something other than <code><span class="typ-key">auto</span></code>.</p>
         example: null
         types:
         - none
@@ -1080,7 +1097,7 @@ children:
   children: []
 - route: /docs/reference/model/emph/
   title: Emphasis
-  description: '`emph` 函数的文档'
+  description: Documentation for the `emph` function.
   part: null
   outline:
   - id: summary
@@ -1107,6 +1124,7 @@ children:
       keywords: []
       oneliner: Emphasizes content by toggling italics.
       element: true
+      contextual: false
       details: |-
         <p>Emphasizes content by toggling italics.</p>
         <ul>
@@ -1150,7 +1168,7 @@ children:
   children: []
 - route: /docs/reference/model/figure/
   title: Figure
-  description: '`figure` 函数的文档'
+  description: Documentation for the `figure` function.
   part: null
   outline:
   - id: summary
@@ -1216,6 +1234,7 @@ children:
       keywords: []
       oneliner: A figure with an optional caption.
       element: true
+      contextual: false
       details: |-
         <p>A figure with an optional caption.</p>
         <p>Automatically detects its kind to select the correct counting track. For
@@ -1283,7 +1302,8 @@ children:
       self: false
       params:
       - name: body
-        details: <p>The content of the figure. Often, an <a href="/docs/reference/visualize/image/">image</a>.</p>
+        details: <p>The content of the figure. Often, an <a href="/docs/reference/visualize/image/"
+          title="image">image</a>.</p>
         example: null
         types:
         - content
@@ -1350,12 +1370,12 @@ children:
           <p>If set to <code><span class="typ-key">auto</span></code>, the figure will try to automatically determine its
           kind based on the type of its body. Automatically detected kinds are
           <a href="/docs/reference/model/table/">tables</a> and <a href="/docs/reference/text/raw/">code</a>. In other cases, the inferred kind is
-          that of an <a href="/docs/reference/visualize/image/">image</a>.</p>
+          that of an <a href="/docs/reference/visualize/image/" title="image">image</a>.</p>
           <p>Setting this to something other than <code><span class="typ-key">auto</span></code> will override the
           automatic detection. This can be useful if</p>
           <ul>
           <li>you wish to create a custom figure type that is not an
-          <a href="/docs/reference/visualize/image/">image</a>, a <a href="/docs/reference/model/table/">table</a> or <a href="/docs/reference/text/raw/">code</a>,</li>
+          <a href="/docs/reference/visualize/image/" title="image">image</a>, a <a href="/docs/reference/model/table/" title="table">table</a> or <a href="/docs/reference/text/raw/">code</a>,</li>
           <li>you want to force the figure to use a specific counter regardless of
           its content.</li>
           </ul>
@@ -1441,8 +1461,8 @@ children:
         variadic: false
         settable: true
       - name: outlined
-        details: <p>Whether the figure should appear in an <a href="/docs/reference/model/outline/"><code>outline</code></a>
-          of figures.</p>
+        details: <p>Whether the figure should appear in an <a href="/docs/reference/model/outline/"
+          title="`outline`"><code>outline</code></a> of figures.</p>
         example: null
         types:
         - bool
@@ -1464,14 +1484,15 @@ children:
         oneliner: The caption of a figure. This element can be used in set and show
           rules to
         element: true
+        contextual: false
         details: |-
           <p>The caption of a figure. This element can be used in set and show rules to
           customize the appearance of captions for all figures or figures of a
           specific kind.</p>
           <p>In addition to its <code>pos</code> and <code>body</code>, the <code>caption</code> also provides the
-          figure's <code>kind</code>, <code>supplement</code>, <code>counter</code>, <code>numbering</code>, and <code>location</code> as
-          fields. These parts can be used in <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selectors and
-          show rules to build a completely custom caption.</p>
+          figure's <code>kind</code>, <code>supplement</code>, <code>counter</code>, and <code>numbering</code> as fields. These
+          parts can be used in <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selectors and show rules to
+          build a completely custom caption.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">:</span> <span class="typ-func">emph</span>
 
@@ -1548,14 +1569,15 @@ children:
           example: |-
             <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
               <span class="typ-func">#</span><span class="typ-func">underline</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>body<span class="typ-punct">)</span> |
-              <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">supplement</span> <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">counter</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>numbering<span class="typ-punct">)</span>
+              <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">supplement</span>
+              <span class="typ-key">#</span><span class="typ-key">context</span> it<span class="typ-punct">.</span>counter<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>numbering<span class="typ-punct">)</span>
             <span class="typ-punct">]</span>
 
             <span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
               <span class="typ-func">rect</span><span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">,</span>
               caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>A rectangle<span class="typ-punct">]</span><span class="typ-punct">,</span>
             <span class="typ-punct">)</span>
-            </code></pre><div class="preview"><img src="/assets/docs/799a48590ec046b3e9a21ce5f491602b.png" alt="Preview" width="480" height="190"/></div></div>
+            </code></pre><div class="preview"><img src="/assets/docs/90ebad710b55d7fc7703242c1830792f.png" alt="Preview" width="480" height="190"/></div></div>
           types:
           - content
           strings: []
@@ -1571,7 +1593,7 @@ children:
   children: []
 - route: /docs/reference/model/footnote/
   title: Footnote
-  description: '`footnote` 函数的文档'
+  description: Documentation for the `footnote` function.
   part: null
   outline:
   - id: summary
@@ -1619,6 +1641,7 @@ children:
       keywords: []
       oneliner: A footnote.
       element: true
+      contextual: false
       details: |-
         <p>A footnote.</p>
         <p>Includes additional remarks and references on the same page with footnotes.
@@ -1627,8 +1650,9 @@ children:
         and can break across multiple pages.</p>
         <p>To customize the appearance of the entry in the footnote listing, see
         <a href="/docs/reference/model/footnote/#definitions-entry"><code>footnote.entry</code></a>. The footnote itself is realized as a
-        normal superscript, so you can use a set rule on the <a href="/docs/reference/text/super/"><code>super</code></a>
-        function to customize it.</p>
+        normal superscript, so you can use a set rule on the <a href="/docs/reference/text/super/" title="`super`"><code>super</code></a> function to
+        customize it. You can also apply a show rule to customize only the footnote
+        marker (superscript number) in the running text.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code>Check the docs for more details.
         <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span><span class="typ-link">https://typst.app/docs</span><span class="typ-punct">]</span>
@@ -1652,8 +1676,8 @@ children:
           <p>How to number footnotes.</p>
           <p>By default, the footnote numbering continues throughout your document.
           If you prefer per-page footnote numbering, you can reset the footnote
-          <a href="/docs/reference/introspection/counter/">counter</a> in the page <a href="/docs/reference/layout/page/#parameters-header">header</a>. In the future,
-          there might be a simpler way to achieve this.</p>
+          <a href="/docs/reference/introspection/counter/" title="counter">counter</a> in the page <a href="/docs/reference/layout/page/#parameters-header">header</a>. In the future, there might
+          be a simpler way to achieve this.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">footnote</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;*&quot;</span><span class="typ-punct">)</span>
 
@@ -1696,14 +1720,11 @@ children:
         keywords: []
         oneliner: An entry in a footnote list.
         element: true
+        contextual: false
         details: |-
           <p>An entry in a footnote list.</p>
           <p>This function is not intended to be called directly. Instead, it is used
           in set and show rules to customize footnote listings.</p>
-          <p><em>Note:</em> Set and show rules for <code>footnote.entry</code> must be defined at the
-          beginning of the document in order to work correctly.
-          See <a href="https://github.com/typst/typst/issues/1348#issuecomment-1566316463">here</a>
-          for more information.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> footnote<span class="typ-punct">.</span><span class="typ-func">entry</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>red<span class="typ-punct">)</span>
 
@@ -1711,6 +1732,9 @@ children:
           <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span>It&#39;s down here<span class="typ-punct">]</span>
           has red text!
           </code></pre><div class="preview"><img src="/assets/docs/e07bed06d522a25126bd74abd9d30066.png" alt="Preview" width="480" height="190"/></div></div>
+          <p><em>Note:</em> Set and show rules for <code>footnote.entry</code> must be defined at the
+          beginning of the document in order to work correctly. See <a href="https://github.com/typst/typst/issues/1467#issuecomment-1588799440">here</a> for
+          more information.</p>
         self: false
         params:
         - name: note
@@ -1825,7 +1849,7 @@ children:
   children: []
 - route: /docs/reference/model/heading/
   title: Heading
-  description: '`heading` 函数的文档'
+  description: Documentation for the `heading` function.
   part: null
   outline:
   - id: summary
@@ -1842,6 +1866,12 @@ children:
     children:
     - id: parameters-level
       name: level
+      children: []
+    - id: parameters-depth
+      name: depth
+      children: []
+    - id: parameters-offset
+      name: offset
       children: []
     - id: parameters-numbering
       name: numbering
@@ -1867,19 +1897,20 @@ children:
       keywords: []
       oneliner: A section heading.
       element: true
+      contextual: false
       details: |-
         <p>A section heading.</p>
         <p>With headings, you can structure your document into sections. Each heading
         has a <em>level,</em> which starts at one and is unbounded upwards. This level
         indicates the logical role of the following content (section, subsection,
-        etc.)  A top-level heading indicates a top-level section of the document
+        etc.) A top-level heading indicates a top-level section of the document
         (not the document's title).</p>
         <p>Typst can automatically number your headings for you. To enable numbering,
         specify how you want your headings to be numbered with a
         <a href="/docs/reference/model/numbering/">numbering pattern or function</a>.</p>
-        <p>Independently from the numbering, Typst can also automatically generate an
-        <a href="/docs/reference/model/outline/">outline</a> of all headings for you. To exclude one or more headings
-        from this outline, you can set the <code>outlined</code> parameter to <code><span class="typ-key">false</span></code>.</p>
+        <p>Independently of the numbering, Typst can also automatically generate an
+        <a href="/docs/reference/model/outline/" title="outline">outline</a> of all headings for you. To exclude one or more headings from this
+        outline, you can set the <code>outlined</code> parameter to <code><span class="typ-key">false</span></code>.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.a)&quot;</span><span class="typ-punct">)</span>
 
@@ -1892,17 +1923,74 @@ children:
         <h2 id="syntax">Syntax</h2>
         <p>Headings have dedicated syntax: They can be created by starting a line with
         one or multiple equals signs, followed by a space. The number of equals
-        signs determines the heading's logical nesting depth.</p>
+        signs determines the heading's logical nesting depth. The <code>offset</code> field
+        can be set to configure the starting depth.</p>
       example: null
       self: false
       params:
       - name: level
-        details: <p>The logical nesting depth of the heading, starting from one.</p>
+        details: |-
+          <p>The absolute nesting depth of the heading, starting from one. If set
+          to <code><span class="typ-key">auto</span></code>, it is computed from <code>offset <span class="typ-op">+</span> depth</code>.</p>
+          <p>This is primarily useful for usage in <a href="/docs/reference/styling/#show-rules">show rules</a>
+          (either with <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selectors or by accessing the
+          level directly on a shown heading).</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>red<span class="typ-punct">)</span>
+
+          <span class="typ-heading">= Level 1</span>
+          <span class="typ-heading">== Level 2</span>
+
+          <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span>
+          <span class="typ-heading">= Also level 2</span>
+          <span class="typ-heading">== Level 3</span>
+          </code></pre><div class="preview"><img src="/assets/docs/56a29451a542295344b4a2795f223036.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - auto
+        - int
+        strings: []
+        default: <code><span class="typ-key">auto</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
+      - name: depth
+        details: |-
+          <p>The relative nesting depth of the heading, starting from one. This is
+          combined with <code>offset</code> to compute the actual <code>level</code>.</p>
+          <p>This is set by the heading syntax, such that <code><span class="typ-heading">== Heading</span></code> creates a
+          heading with logical depth of 2, but actual level <code>offset <span class="typ-op">+</span> <span class="typ-num">2</span></code>. If you
+          construct a heading manually, you should typically prefer this over
+          setting the absolute level.</p>
         example: null
         types:
         - int
         strings: []
         default: <code><span class="typ-num">1</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: true
+      - name: offset
+        details: |-
+          <p>The starting offset of each heading's <code>level</code>, used to turn its
+          relative <code>depth</code> into its absolute <code>level</code>.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-heading">= Level 1</span>
+
+          <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.1&quot;</span><span class="typ-punct">)</span>
+          <span class="typ-heading">= Level 2</span>
+
+          <span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> depth<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+            I&#39;m level 4
+          <span class="typ-punct">]</span>
+          </code></pre><div class="preview"><img src="/assets/docs/8b10af74ad1e0d282dca850ce8da1571.png" alt="Preview" width="480" height="190"/></div></div>
+        types:
+        - int
+        strings: []
+        default: <code><span class="typ-num">0</span></code>
         positional: false
         named: true
         required: false
@@ -1959,7 +2047,7 @@ children:
         settable: true
       - name: outlined
         details: |-
-          <p>Whether the heading should appear in the <a href="/docs/reference/model/outline/">outline</a>.</p>
+          <p>Whether the heading should appear in the <a href="/docs/reference/model/outline/" title="outline">outline</a>.</p>
           <p>Note that this property, if set to <code><span class="typ-key">true</span></code>, ensures the heading is also
           shown as a bookmark in the exported PDF's outline (when exporting to
           PDF). To change that behavior, use the <code>bookmarked</code> property.</p>
@@ -1988,9 +2076,9 @@ children:
           outline. Doesn't affect other export formats, such as PNG.</p>
           <p>The default value of <code><span class="typ-key">auto</span></code> indicates that the heading will only
           appear in the exported PDF's outline if its <code>outlined</code> property is set
-          to <code><span class="typ-key">true</span></code>, that is, if it would also be listed in Typst's
-          <a href="/docs/reference/model/outline/">outline</a>. Setting this property to either <code><span class="typ-key">true</span></code> (bookmark)
-          or <code><span class="typ-key">false</span></code> (don't bookmark) bypasses that behavior.</p>
+          to <code><span class="typ-key">true</span></code>, that is, if it would also be listed in Typst's <a href="/docs/reference/model/outline/" title="outline">outline</a>.
+          Setting this property to either <code><span class="typ-key">true</span></code> (bookmark) or <code><span class="typ-key">false</span></code> (don't
+          bookmark) bypasses that behavior.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">[</span>Normal heading<span class="typ-punct">]</span>
           This heading will be shown in
@@ -2029,7 +2117,7 @@ children:
   children: []
 - route: /docs/reference/model/link/
   title: Link
-  description: '`link` 函数的文档'
+  description: Documentation for the `link` function.
   part: null
   outline:
   - id: summary
@@ -2059,6 +2147,7 @@ children:
       keywords: []
       oneliner: Links to a URL or a location in the document.
       element: true
+      contextual: false
       details: |-
         <p>Links to a URL or a location in the document.</p>
         <p>By default, links are not styled any different from normal text. However,
@@ -2094,18 +2183,18 @@ children:
           forms:</p>
           <ul>
           <li>
-          <p>A <a href="/docs/reference/foundations/label/">label</a> attached to an element. If you also want automatic
-          text for the link based on the element, consider using a
+          <p>A <a href="/docs/reference/foundations/label/" title="label">label</a> attached to an element. If you also want automatic text
+          for the link based on the element, consider using a
           <a href="/docs/reference/model/ref/">reference</a> instead.</p>
           </li>
           <li>
-          <p>A <a href="/docs/reference/introspection/locate/">location</a> resulting from a <a href="/docs/reference/introspection/locate/"><code>locate</code></a> call or
-          <a href="/docs/reference/introspection/query/"><code>query</code></a>.</p>
+          <p>A <a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a> (typically retrieved from <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a>, <a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a> or
+          <a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a>).</p>
           </li>
           <li>
           <p>A dictionary with a <code>page</code> key of type <a href="/docs/reference/foundations/int/">integer</a> and <code>x</code> and
-          <code>y</code> coordinates of type <a href="/docs/reference/layout/length/">length</a>. Pages are counted from
-          one, and the coordinates are relative to the page's top left corner.</p>
+          <code>y</code> coordinates of type <a href="/docs/reference/layout/length/" title="length">length</a>. Pages are counted from one, and
+          the coordinates are relative to the page's top left corner.</p>
           </li>
           </ul>
           </li>
@@ -2151,7 +2240,7 @@ children:
   children: []
 - route: /docs/reference/model/enum/
   title: Numbered List
-  description: '`enum` 函数的文档'
+  description: Documentation for the `enum` function.
   part: null
   outline:
   - id: summary
@@ -2214,6 +2303,7 @@ children:
       keywords: []
       oneliner: A numbered list.
       element: true
+      contextual: false
       details: |-
         <p>A numbered list.</p>
         <p>Displays a sequence of items vertically and numbers them consecutively.</p>
@@ -2409,7 +2499,7 @@ children:
           The choice of <code>end</code> for horizontal alignment of enum numbers is
           usually preferred over <code>start</code>, as numbers then grow away from the
           text instead of towards it, avoiding certain visual issues. This option
-          lets you override this behavior, however. (Also to note is that the
+          lets you override this behaviour, however. (Also to note is that the
           <a href="/docs/reference/model/list/">unordered list</a> uses a different method for this, by giving the
           <code>marker</code> content an alignment directly.).</p>
         example: |-
@@ -2464,6 +2554,7 @@ children:
         keywords: []
         oneliner: An enumeration item.
         element: true
+        contextual: false
         details: <p>An enumeration item.</p>
         example: null
         self: false
@@ -2499,7 +2590,7 @@ children:
   children: []
 - route: /docs/reference/model/numbering/
   title: Numbering
-  description: '`numbering` 函数的文档'
+  description: Documentation for the `numbering` function.
   part: null
   outline:
   - id: summary
@@ -2526,6 +2617,7 @@ children:
       keywords: []
       oneliner: Applies a numbering to a sequence of numbers.
       element: false
+      contextual: false
       details: |-
         <p>Applies a numbering to a sequence of numbers.</p>
         <p>A numbering defines how a sequence of numbers should be displayed as
@@ -2552,7 +2644,7 @@ children:
       - name: numbering
         details: |-
           <p>Defines how the numbering works.</p>
-          <p><strong>Counting symbols</strong> are <code>1</code>, <code>a</code>, <code>A</code>, <code>i</code>, <code>I</code>, <code>い</code>, <code>イ</code>, <code>א</code>, <code>가</code>,
+          <p><strong>Counting symbols</strong> are <code>1</code>, <code>a</code>, <code>A</code>, <code>i</code>, <code>I</code>, <code>一</code>, <code>壹</code>, <code>あ</code>, <code>い</code>, <code>ア</code>, <code>イ</code>, <code>א</code>, <code>가</code>,
           <code>ㄱ</code>, and <code>*</code>. They are replaced by the number in the sequence, in the
           given case.</p>
           <p>The <code>*</code> character means that symbols should be used to count, in the
@@ -2601,7 +2693,7 @@ children:
   children: []
 - route: /docs/reference/model/outline/
   title: Outline
-  description: '`outline` 函数的文档'
+  description: Documentation for the `outline` function.
   part: null
   outline:
   - id: summary
@@ -2665,6 +2757,7 @@ children:
       - Table of Contents
       oneliner: A table of contents, figures, or other elements.
       element: true
+      contextual: false
       details: |-
         <p>A table of contents, figures, or other elements.</p>
         <p>This function generates a list of all occurrences of an element in the
@@ -2716,7 +2809,7 @@ children:
           <p>The outline's heading will not be numbered by default, but you can
           force it to be with a show-set rule:
           <code><span class="typ-key">show</span> <span class="typ-func">outline</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span></code></p>
-        example: <pre></pre>
+        example: null
         types:
         - none
         - auto
@@ -2751,6 +2844,7 @@ children:
         types:
         - label
         - selector
+        - location
         - function
         strings: []
         default: <code>heading<span class="typ-punct">.</span><span class="typ-func">where</span><span
@@ -2882,6 +2976,7 @@ children:
         oneliner: Represents each entry line in an outline, including the reference
           to the
         element: true
+        contextual: false
         details: |-
           <p>Represents each entry line in an outline, including the reference to the
           outlined element, its page number, and the filler content between both.</p>
@@ -2960,9 +3055,9 @@ children:
             its page number, as defined by the outline element this entry is
             located in. When <code><span class="typ-key">none</span></code>, empty space is inserted in that gap instead.</p>
             <p>Note that, when using show rules to override outline entries, it is
-            recommended to wrap the filling content in a <a href="/docs/reference/layout/box/"><code>box</code></a> with
-            fractional width. For example, <code><span class="typ-func">box</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-func">repeat</span><span class="typ-punct">[</span>-<span class="typ-punct">]</span><span class="typ-punct">)</span></code> would show
-            precisely as many <code>-</code> characters as necessary to fill a particular gap.</p>
+            recommended to wrap the filling content in a <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> with fractional
+            width. For example, <code><span class="typ-func">box</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-func">repeat</span><span class="typ-punct">[</span>-<span class="typ-punct">]</span><span class="typ-punct">)</span></code> would show precisely
+            as many <code>-</code> characters as necessary to fill a particular gap.</p>
           example: null
           types:
           - none
@@ -2994,7 +3089,7 @@ children:
   children: []
 - route: /docs/reference/model/par/
   title: Paragraph
-  description: '`par` 函数的文档'
+  description: Documentation for the `par` function.
   part: null
   outline:
   - id: summary
@@ -3033,6 +3128,7 @@ children:
       keywords: []
       oneliner: Arranges text, spacing and inline-level elements into a paragraph.
       element: true
+      contextual: false
       details: |-
         <p>Arranges text, spacing and inline-level elements into a paragraph.</p>
         <p>Although this function is primarily used in set rules to affect paragraph
@@ -3077,8 +3173,8 @@ children:
           <p>Hyphenation will be enabled for justified paragraphs if the
           <a href="/docs/reference/text/text/#parameters-hyphenate">text function's <code>hyphenate</code> property</a> is set to
           <code><span class="typ-key">auto</span></code> and the current language is known.</p>
-          <p>Note that the current <a href="/docs/reference/layout/align/">alignment</a> still has an effect on the
-          placement of the last line except if it ends with a
+          <p>Note that the current <a href="/docs/reference/layout/align/#parameters-alignment">alignment</a> still has an effect
+          on the placement of the last line except if it ends with a
           <a href="/docs/reference/text/linebreak/#parameters-justify">justified line break</a>.</p>
         example: null
         types:
@@ -3135,8 +3231,8 @@ children:
           the first one in a block or on the page).</p>
           <p>By typographic convention, paragraph breaks are indicated either by some
           space between paragraphs or by indented first lines. Consider reducing
-          the <a href="/docs/reference/layout/block/#parameters-spacing">paragraph spacing</a> to the [<code>leading</code>] when
-          using this property (e.g. using
+          the <a href="/docs/reference/layout/block/#parameters-spacing">paragraph spacing</a> to the <a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a>
+          when using this property (e.g. using
           <code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">par</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">)</span></code>).</p>
         example: null
         types:
@@ -3178,7 +3274,7 @@ children:
   children: []
 - route: /docs/reference/model/parbreak/
   title: Paragraph Break
-  description: '`parbreak` 函数的文档'
+  description: Documentation for the `parbreak` function.
   part: null
   outline:
   - id: summary
@@ -3199,6 +3295,7 @@ children:
       keywords: []
       oneliner: A paragraph break.
       element: true
+      contextual: false
       details: |-
         <p>A paragraph break.</p>
         <p>This starts a new paragraph. Especially useful when used within code like
@@ -3223,7 +3320,7 @@ children:
   children: []
 - route: /docs/reference/model/quote/
   title: Quote
-  description: '`quote` 函数的文档'
+  description: Documentation for the `quote` function.
   part: null
   outline:
   - id: summary
@@ -3256,6 +3353,7 @@ children:
       keywords: []
       oneliner: Displays a quote alongside an optional attribution.
       element: true
+      contextual: false
       details: |-
         <p>Displays a quote alongside an optional attribution.</p>
         <h2 id="example">Example</h2>
@@ -3317,8 +3415,7 @@ children:
         details: |-
           <p>Whether double quotes should be added around this quote.</p>
           <p>The double quotes used are inferred from the <code>quotes</code> property on
-          <a href="/docs/reference/text/smartquote/">smartquote</a>, which is affected by the <code>lang</code> property on
-          <a href="/docs/reference/text/text/">text</a>.</p>
+          <a href="/docs/reference/text/smartquote/" title="smartquote">smartquote</a>, which is affected by the <code>lang</code> property on <a href="/docs/reference/text/text/" title="text">text</a>.</p>
           <ul>
           <li><code><span class="typ-key">true</span></code>: Wrap this quote in double quotes.</li>
           <li><code><span class="typ-key">false</span></code>: Do not wrap this quote in double quotes.</li>
@@ -3412,7 +3509,7 @@ children:
   children: []
 - route: /docs/reference/model/ref/
   title: Reference
-  description: '`ref` 函数的文档'
+  description: Documentation for the `ref` function.
   part: null
   outline:
   - id: summary
@@ -3445,20 +3542,20 @@ children:
       keywords: []
       oneliner: A reference to a label or bibliography.
       element: true
+      contextual: false
       details: |-
         <p>A reference to a label or bibliography.</p>
         <p>Produces a textual reference to a label. For example, a reference to a
         heading will yield an appropriate string such as &quot;Section 1&quot; for a reference
         to the first heading. The references are also links to the respective
-        element. Reference syntax can also be used to <a href="/docs/reference/model/cite/">cite</a> from a
-        bibliography.</p>
+        element. Reference syntax can also be used to <a href="/docs/reference/model/cite/" title="cite">cite</a> from a bibliography.</p>
         <p>Referenceable elements include <a href="/docs/reference/model/heading/">headings</a>, <a href="/docs/reference/model/figure/">figures</a>,
         <a href="/docs/reference/math/equation/">equations</a>, and <a href="/docs/reference/model/footnote/">footnotes</a>. To create a custom
         referenceable element like a theorem, you can create a figure of a custom
         <a href="/docs/reference/model/figure/#parameters-kind"><code>kind</code></a> and write a show rule for it. In the future, there
         might be a more direct way to define a custom referenceable element.</p>
         <p>If you just want to link to a labelled element and not get an automatic
-        textual reference, consider using the <a href="/docs/reference/model/link/"><code>link</code></a> function instead.</p>
+        textual reference, consider using the <a href="/docs/reference/model/link/" title="`link`"><code>link</code></a> function instead.</p>
         <h2 id="example">Example</h2>
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">)</span>
@@ -3521,7 +3618,7 @@ children:
         details: |-
           <p>The target label that should be referenced.</p>
           <p>Can be a label that is defined in the document or an entry from the
-          <a href="/docs/reference/model/bibliography/"><code>bibliography</code></a>.</p>
+          <a href="/docs/reference/model/bibliography/" title="`bibliography`"><code>bibliography</code></a>.</p>
         example: null
         types:
         - label
@@ -3573,7 +3670,7 @@ children:
   children: []
 - route: /docs/reference/model/strong/
   title: Strong Emphasis
-  description: '`strong` 函数的文档'
+  description: Documentation for the `strong` function.
   part: null
   outline:
   - id: summary
@@ -3603,6 +3700,7 @@ children:
       keywords: []
       oneliner: Strongly emphasizes content by increasing the font weight.
       element: true
+      contextual: false
       details: |-
         <p>Strongly emphasizes content by increasing the font weight.</p>
         <p>Increases the current font weight by a given <code>delta</code>.</p>
@@ -3654,7 +3752,7 @@ children:
   children: []
 - route: /docs/reference/model/table/
   title: Table
-  description: '`table` 函数的文档'
+  description: Documentation for the `table` function.
   part: null
   outline:
   - id: summary
@@ -3696,6 +3794,96 @@ children:
     - id: parameters-children
       name: children
       children: []
+  - id: definitions
+    name: Definitions
+    children:
+    - id: definitions-cell
+      name: Table Cell
+      children:
+      - id: definitions-cell-body
+        name: body
+        children: []
+      - id: definitions-cell-x
+        name: x
+        children: []
+      - id: definitions-cell-y
+        name: y
+        children: []
+      - id: definitions-cell-colspan
+        name: colspan
+        children: []
+      - id: definitions-cell-rowspan
+        name: rowspan
+        children: []
+      - id: definitions-cell-fill
+        name: fill
+        children: []
+      - id: definitions-cell-align
+        name: align
+        children: []
+      - id: definitions-cell-inset
+        name: inset
+        children: []
+      - id: definitions-cell-stroke
+        name: stroke
+        children: []
+      - id: definitions-cell-breakable
+        name: breakable
+        children: []
+    - id: definitions-hline
+      name: Table Horizontal Line
+      children:
+      - id: definitions-hline-y
+        name: y
+        children: []
+      - id: definitions-hline-start
+        name: start
+        children: []
+      - id: definitions-hline-end
+        name: end
+        children: []
+      - id: definitions-hline-stroke
+        name: stroke
+        children: []
+      - id: definitions-hline-position
+        name: position
+        children: []
+    - id: definitions-vline
+      name: Table Vertical Line
+      children:
+      - id: definitions-vline-x
+        name: x
+        children: []
+      - id: definitions-vline-start
+        name: start
+        children: []
+      - id: definitions-vline-end
+        name: end
+        children: []
+      - id: definitions-vline-stroke
+        name: stroke
+        children: []
+      - id: definitions-vline-position
+        name: position
+        children: []
+    - id: definitions-header
+      name: Table Header
+      children:
+      - id: definitions-header-repeat
+        name: repeat
+        children: []
+      - id: definitions-header-children
+        name: children
+        children: []
+    - id: definitions-footer
+      name: Table Footer
+      children:
+      - id: definitions-footer-repeat
+        name: repeat
+        children: []
+      - id: definitions-footer-children
+        name: children
+        children: []
   body:
     kind: func
     content:
@@ -3705,21 +3893,42 @@ children:
       keywords: []
       oneliner: A table of items.
       element: true
+      contextual: false
       details: |-
         <p>A table of items.</p>
         <p>Tables are used to arrange content in cells. Cells can contain arbitrary
         content, including multiple paragraphs and are specified in row-major order.
-        Because tables are just grids with configurable cell properties, refer to
-        the <a href="/docs/reference/layout/grid/">grid documentation</a> for more information on how to size the
-        table tracks.</p>
+        For a hands-on explanation of all the ways you can use and customize tables
+        in Typst, check out the <a href="/docs/guides/table-guide/">table guide</a>.</p>
+        <p>Because tables are just grids with different defaults for some cell
+        properties (notably <code>stroke</code> and <code>inset</code>), refer to the <a href="/docs/reference/layout/grid/">grid
+        documentation</a> for more information on how to size the table tracks
+        and specify the cell appearance properties.</p>
+        <p>If you are unsure whether you should be using a table or a grid, consider
+        whether the content you are arranging semantically belongs together as a set
+        of related data points or similar or whether you are just want to enhance
+        your presentation by arranging unrelated content in a grid. In the former
+        case, a table is the right choice, while in the latter case, a grid is more
+        appropriate. Furthermore, Typst will annotate its output in the future such
+        that screenreaders will annouce content in <code>table</code> as tabular while a grid's
+        content will be announced no different than multiple content blocks in the
+        document flow.</p>
+        <p>Note that, to override a particular cell's properties or apply show rules on
+        table cells, you can use the <a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a> element. See its
+        documentation for more information.</p>
+        <p>Although the <code>table</code> and the <code>grid</code> share most properties, set and show
+        rules on one of them do not affect the other.</p>
         <p>To give a table a caption and make it <a href="/docs/reference/model/ref/">referenceable</a>, put it into a
-        <a href="/docs/reference/model/figure/">figure</a>.</p>
+        <a href="/docs/reference/model/figure/" title="figure">figure</a>.</p>
         <h2 id="example">Example</h2>
+        <p>The example below demonstrates some of the most common table options.</p>
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
           columns<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-key">auto</span><span class="typ-punct">,</span> <span class="typ-key">auto</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
           inset<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">,</span>
           align<span class="typ-punct">:</span> horizon<span class="typ-punct">,</span>
-          <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Area*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Parameters*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+          table<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>
+            <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Area*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Parameters*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span><span class="typ-punct">,</span>
           <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;cylinder.svg&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
           <span class="typ-math-delim">$</span> <span class="typ-pol">pi</span> h <span class="typ-punct">(</span>D<span class="typ-math-op">^</span>2 <span class="typ-escape">-</span> d<span class="typ-math-op">^</span>2<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 4 <span class="typ-math-delim">$</span><span class="typ-punct">,</span>
           <span class="typ-punct">[</span>
@@ -3731,7 +3940,45 @@ children:
           <span class="typ-math-delim">$</span> <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 12 a<span class="typ-math-op">^</span>3 <span class="typ-math-delim">$</span><span class="typ-punct">,</span>
           <span class="typ-punct">[</span><span class="typ-math-delim">$</span>a<span class="typ-math-delim">$</span>: edge length<span class="typ-punct">]</span>
         <span class="typ-punct">)</span>
-        </code></pre><div class="preview"><img src="/assets/docs/def578cdeaad880e80767056b9577c66.png" alt="Preview" width="480" height="190"/></div></div>
+        </code></pre><div class="preview"><img src="/assets/docs/291ffba835d6b37da3942ed85abc7ad5.png" alt="Preview" width="480" height="190"/></div></div>
+        <p>Much like with grids, you can use <a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a> to customize
+        the appearance and the position of each cell.</p>
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">table</span><span class="typ-punct">(</span>
+          stroke<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">,</span>
+          gutter<span class="typ-punct">:</span> <span class="typ-num">0.2em</span><span class="typ-punct">,</span>
+          fill<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span>
+            <span class="typ-key">if</span> x <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-key">or</span> y <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span> gray <span class="typ-punct">}</span><span class="typ-punct">,</span>
+          inset<span class="typ-punct">:</span> <span class="typ-punct">(</span>right<span class="typ-punct">:</span> <span class="typ-num">1.5em</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+        <span class="typ-punct">)</span>
+
+        <span class="typ-key">#</span><span class="typ-key">show</span> table<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
+          <span class="typ-key">if</span> it<span class="typ-punct">.</span>x <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-key">or</span> it<span class="typ-punct">.</span>y <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span>
+            <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>white<span class="typ-punct">)</span>
+            <span class="typ-func">strong</span><span class="typ-punct">(</span>it<span class="typ-punct">)</span>
+          <span class="typ-punct">}</span> <span class="typ-key">else</span> <span class="typ-key">if</span> it<span class="typ-punct">.</span>body <span class="typ-op">==</span> <span class="typ-punct">[</span><span class="typ-punct">]</span> <span class="typ-punct">{</span>
+            <span class="typ-comment">// Replace empty cells with &#39;N/A&#39;</span>
+            <span class="typ-func">pad</span><span class="typ-punct">(</span><span class="typ-op">..</span>it<span class="typ-punct">.</span>inset<span class="typ-punct">)</span><span class="typ-punct">[</span><span class="typ-emph">_N/A_</span><span class="typ-punct">]</span>
+          <span class="typ-punct">}</span> <span class="typ-key">else</span> <span class="typ-punct">{</span>
+            it
+          <span class="typ-punct">}</span>
+        <span class="typ-punct">}</span>
+
+        <span class="typ-key">#</span><span class="typ-key">let</span> a <span class="typ-op">=</span> table<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>
+          fill<span class="typ-punct">:</span> green<span class="typ-punct">.</span><span class="typ-func">lighten</span><span class="typ-punct">(</span><span class="typ-num">60%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+        <span class="typ-punct">)</span><span class="typ-punct">[</span>A<span class="typ-punct">]</span>
+        <span class="typ-key">#</span><span class="typ-key">let</span> b <span class="typ-op">=</span> table<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>
+          fill<span class="typ-punct">:</span> aqua<span class="typ-punct">.</span><span class="typ-func">lighten</span><span class="typ-punct">(</span><span class="typ-num">60%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+        <span class="typ-punct">)</span><span class="typ-punct">[</span>B<span class="typ-punct">]</span>
+
+        <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
+          columns<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span>
+          <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Exam 1<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Exam 2<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Exam 3<span class="typ-punct">]</span><span class="typ-punct">,</span>
+
+          <span class="typ-punct">[</span>John<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> a<span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+          <span class="typ-punct">[</span>Mary<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> a<span class="typ-punct">,</span> a<span class="typ-punct">,</span>
+          <span class="typ-punct">[</span>Robert<span class="typ-punct">]</span><span class="typ-punct">,</span> b<span class="typ-punct">,</span> a<span class="typ-punct">,</span> b<span class="typ-punct">,</span>
+        <span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/6ee115de51dd55921e5c86fdd60f9308.png" alt="Preview" width="480" height="190"/></div></div>
       example: null
       self: false
       params:
@@ -3773,8 +4020,8 @@ children:
         settable: true
       - name: gutter
         details: |-
-          <p>The gaps between rows &amp; columns. See the <a href="/docs/reference/layout/grid/">grid documentation</a> for
-          more information on gutters.</p>
+          <p>The gaps between rows and columns. See the <a href="/docs/reference/layout/grid/">grid documentation</a>
+          for more information on gutters.</p>
         example: null
         types:
         - auto
@@ -3828,15 +4075,17 @@ children:
       - name: fill
         details: |-
           <p>How to fill the cells.</p>
-          <p>This can be a color or a function that returns a color. The function is
-          passed the cells' column and row index, starting at zero. This can be
-          used to implement striped tables.</p>
+          <p>This can be a color or a function that returns a color. The function
+          receives the cells' column and row indices, starting from zero. This can
+          be used to implement striped tables.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
-            fill<span class="typ-punct">:</span> <span class="typ-punct">(</span>col<span class="typ-punct">,</span> _<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-key">if</span> calc<span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span>col<span class="typ-punct">)</span> <span class="typ-punct">{</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">240</span><span class="typ-punct">)</span> <span class="typ-punct">}</span> <span class="typ-key">else</span> <span class="typ-punct">{</span> white <span class="typ-punct">}</span><span class="typ-punct">,</span>
-            align<span class="typ-punct">:</span> <span class="typ-punct">(</span>col<span class="typ-punct">,</span> row<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span>
-              <span class="typ-key">if</span> row <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span> center <span class="typ-punct">}</span>
-              <span class="typ-key">else</span> <span class="typ-key">if</span> col <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span> left <span class="typ-punct">}</span>
+            fill<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> _<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span>
+              <span class="typ-key">if</span> calc<span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span> <span class="typ-punct">{</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">240</span><span class="typ-punct">)</span> <span class="typ-punct">}</span>
+              <span class="typ-key">else</span> <span class="typ-punct">{</span> white <span class="typ-punct">}</span><span class="typ-punct">,</span>
+            align<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span>
+              <span class="typ-key">if</span> y <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span> center <span class="typ-punct">}</span>
+              <span class="typ-key">else</span> <span class="typ-key">if</span> x <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span> left <span class="typ-punct">}</span>
               <span class="typ-key">else</span> <span class="typ-punct">{</span> right <span class="typ-punct">}</span><span class="typ-punct">,</span>
             columns<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span>
             <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Q1*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Q2*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Q3*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
@@ -3844,7 +4093,7 @@ children:
             <span class="typ-punct">[</span>Expenses:<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>500 €<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>1000 €<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>1500 €<span class="typ-punct">]</span><span class="typ-punct">,</span>
             <span class="typ-punct">[</span>Profit:<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>500 €<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>1000 €<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>1500 €<span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-punct">)</span>
-          </code></pre><div class="preview"><img src="/assets/docs/cb2582ac1a1db1e8719b8fd119e5fe8c.png" alt="Preview" width="480" height="190"/></div></div>
+          </code></pre><div class="preview"><img src="/assets/docs/5caff4e56ac567f3a0afe9bd99c0e0c8.png" alt="Preview" width="480" height="190"/></div></div>
         types:
         - none
         - color
@@ -3864,16 +4113,16 @@ children:
           <p>How to align the cells' content.</p>
           <p>This can either be a single alignment, an array of alignments
           (corresponding to each column) or a function that returns an alignment.
-          The function is passed the cells' column and row index, starting at zero.
-          If set to <code><span class="typ-key">auto</span></code>, the outer alignment is used.</p>
+          The function receives the cells' column and row indices, starting from
+          zero. If set to <code><span class="typ-key">auto</span></code>, the outer alignment is used.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
             columns<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
-            align<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-punct">(</span>left<span class="typ-punct">,</span> center<span class="typ-punct">,</span> right<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span>x<span class="typ-punct">)</span><span class="typ-punct">,</span>
+            align<span class="typ-punct">:</span> <span class="typ-punct">(</span>left<span class="typ-punct">,</span> center<span class="typ-punct">,</span> right<span class="typ-punct">)</span><span class="typ-punct">,</span>
             <span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">,</span>
             <span class="typ-punct">[</span>A<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>B<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>C<span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-punct">)</span>
-          </code></pre><div class="preview"><img src="/assets/docs/5fcf012efff110eb740ed2d90febb2e0.png" alt="Preview" width="480" height="190"/></div></div>
+          </code></pre><div class="preview"><img src="/assets/docs/5751df9a4dd055b8933a7905f55fde63.png" alt="Preview" width="480" height="190"/></div></div>
         types:
         - auto
         - array
@@ -3888,20 +4137,26 @@ children:
         settable: true
       - name: stroke
         details: |-
-          <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the cells.</p>
+          <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the cells.</p>
           <p>Strokes can be disabled by setting this to <code><span class="typ-key">none</span></code>.</p>
-          <p><em>Note:</em> Richer stroke customization for individual cells is not yet
-          implemented, but will be in the future. In the meantime, you can use the
-          third-party <a href="https://github.com/PgBiel/typst-tablex/">tablex library</a>.</p>
+          <p>If it is necessary to place lines which can cross spacing between cells
+          produced by the <code>gutter</code> option, or to override the stroke between
+          multiple specific cells, consider specifying one or more of
+          <a href="/docs/reference/model/table/#definitions-hline"><code>table.hline</code></a> and <a href="/docs/reference/model/table/#definitions-vline"><code>table.vline</code></a>
+          alongside your table cells.</p>
+          <p>See the <a href="/docs/reference/layout/grid/#parameters-stroke">grid documentation</a> for more information on
+          strokes.</p>
         example: null
         types:
         - none
         - length
         - color
         - gradient
+        - array
         - stroke
         - pattern
         - dictionary
+        - function
         strings: []
         default: <code><span class="typ-num">1pt</span> <span class="typ-op">+</span>
           black</code>
@@ -3931,7 +4186,9 @@ children:
           </code></pre><div class="preview"><img src="/assets/docs/51ec900d498b539d860dbaed5df278b1.png" alt="Preview" width="480" height="190"/></div></div>
         types:
         - relative
+        - array
         - dictionary
+        - function
         strings: []
         default: <code><span class="typ-num">5pt</span></code>
         positional: false
@@ -3940,7 +4197,10 @@ children:
         variadic: false
         settable: true
       - name: children
-        details: <p>The contents of the table cells.</p>
+        details: |-
+          <p>The contents of the table cells, plus any extra table lines specified
+          with the <a href="/docs/reference/model/table/#definitions-hline"><code>table.hline</code></a> and
+          <a href="/docs/reference/model/table/#definitions-vline"><code>table.vline</code></a> elements.</p>
         example: null
         types:
         - content
@@ -3953,11 +4213,598 @@ children:
         settable: false
       returns:
       - content
-      scope: []
+      scope:
+      - path:
+        - table
+        name: cell
+        title: Table Cell
+        keywords: []
+        oneliner: A cell in the table. Use this to position a cell manually or to
+          apply
+        element: true
+        contextual: false
+        details: |-
+          <p>A cell in the table. Use this to position a cell manually or to apply
+          styling. To do the latter, you can either use the function to override the
+          properties for a particular cell, or use it in show rules to apply certain
+          styles to multiple cells at once.</p>
+          <p>Perhaps the most important use case of <code>table<span class="typ-punct">.</span>cell</code> is to make a cell span
+          multiple columns and/or rows with the <code>colspan</code> and <code>rowspan</code> fields.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
+            columns<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
+            table<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>
+              <span class="typ-punct">[</span>Substance<span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">[</span>Subcritical °C<span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">[</span>Supercritical °C<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Hydrochloric Acid<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>12.0<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>92.1<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Sodium Myreth Sulfate<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>16.6<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>104<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Potassium Hydroxide<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            table<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>colspan<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>24.7<span class="typ-punct">]</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/fe2170650b3ad4cae5e69b85359932ef.png" alt="Preview" width="480" height="190"/></div></div>
+          <p>For example, you can override the fill, alignment or inset for a single
+          cell:</p>
+          <div class="previewed-code"><pre><code><span class="typ-comment">// You can also import those.</span>
+          <span class="typ-key">#</span><span class="typ-key">import</span> table<span class="typ-punct">:</span> cell<span class="typ-punct">,</span> header
+
+          <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
+            columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
+            align<span class="typ-punct">:</span> center<span class="typ-punct">,</span>
+            <span class="typ-func">header</span><span class="typ-punct">(</span>
+              <span class="typ-punct">[</span><span class="typ-strong">*Trip progress*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">[</span><span class="typ-strong">*Itinerary*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-func">cell</span><span class="typ-punct">(</span>
+              align<span class="typ-punct">:</span> right<span class="typ-punct">,</span>
+              fill<span class="typ-punct">:</span> fuchsia<span class="typ-punct">.</span><span class="typ-func">lighten</span><span class="typ-punct">(</span><span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+              <span class="typ-punct">[</span>🚗<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Get in, folks!<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>🚗<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Eat curbside hotdog<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-func">cell</span><span class="typ-punct">(</span>align<span class="typ-punct">:</span> left<span class="typ-punct">)</span><span class="typ-punct">[</span>🌴🚗<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-func">cell</span><span class="typ-punct">(</span>
+              inset<span class="typ-punct">:</span> <span class="typ-num">0.06em</span><span class="typ-punct">,</span>
+              <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">1.62em</span><span class="typ-punct">)</span><span class="typ-punct">[</span>🛖🌅🌊<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/9721910ca4683115d9c3f94b1ea66344.png" alt="Preview" width="480" height="190"/></div></div>
+          <p>You may also apply a show rule on <code>table.cell</code> to style all cells at once.
+          Combined with selectors, this allows you to apply styles based on a cell's
+          position:</p>
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> table<span class="typ-punct">.</span>cell<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-func">strong</span>
+
+          <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
+            columns<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
+            gutter<span class="typ-punct">:</span> <span class="typ-num">3pt</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Name<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Age<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Strength<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Hannes<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>36<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Grace<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Irma<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>50<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Resourcefulness<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Vikram<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>49<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Perseverance<span class="typ-punct">]</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/bacfff05798c2dc10339427b5e5a04fe.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: body
+          details: <p>The cell's body.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: false
+          settable: false
+        - name: x
+          details: |-
+            <p>The cell's column (zero-indexed).
+            Functions identically to the <code>x</code> field in <a href="/docs/reference/layout/grid/#definitions-cell"><code>grid.cell</code></a>.</p>
+          example: null
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: y
+          details: |-
+            <p>The cell's row (zero-indexed).
+            Functions identically to the <code>y</code> field in <a href="/docs/reference/layout/grid/#definitions-cell"><code>grid.cell</code></a>.</p>
+          example: null
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: colspan
+          details: <p>The amount of columns spanned by this cell.</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">1</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: rowspan
+          details: <p>The amount of rows spanned by this cell.</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">1</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: fill
+          details: <p>The cell's <a href="/docs/reference/model/table/#parameters-fill">fill</a>
+            override.</p>
+          example: null
+          types:
+          - none
+          - auto
+          - color
+          - gradient
+          - pattern
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: align
+          details: <p>The cell's <a href="/docs/reference/model/table/#parameters-align">alignment</a>
+            override.</p>
+          example: null
+          types:
+          - auto
+          - alignment
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: inset
+          details: <p>The cell's <a href="/docs/reference/model/table/#parameters-inset">inset</a>
+            override.</p>
+          example: null
+          types:
+          - auto
+          - relative
+          - dictionary
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: stroke
+          details: <p>The cell's <a href="/docs/reference/model/table/#parameters-stroke">stroke</a>
+            override.</p>
+          example: null
+          types:
+          - none
+          - length
+          - color
+          - gradient
+          - stroke
+          - pattern
+          - dictionary
+          strings: []
+          default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+            class="typ-punct">)</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: breakable
+          details: |-
+            <p>Whether rows spanned by this cell can be placed in different pages.
+            When equal to <code><span class="typ-key">auto</span></code>, a cell spanning only fixed-size rows is
+            unbreakable, while a cell spanning at least one <code><span class="typ-key">auto</span></code>-sized row is
+            breakable.</p>
+          example: null
+          types:
+          - auto
+          - bool
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - table
+        name: hline
+        title: Table Horizontal Line
+        keywords: []
+        oneliner: A horizontal line in the table.
+        element: true
+        contextual: false
+        details: |-
+          <p>A horizontal line in the table.</p>
+          <p>Overrides any per-cell stroke, including stroke specified through the
+          table's <code>stroke</code> field. Can cross spacing between cells created through the
+          table's <a href="/docs/reference/model/table/#parameters-column-gutter"><code>column-gutter</code></a> option.</p>
+          <p>Use this function instead of the table's <code>stroke</code> field if you want to
+          manually place a horizontal line at a specific position in a single table.
+          Consider using <a href="/docs/reference/model/table/#parameters-stroke">table's <code>stroke</code></a> field or <a href="/docs/reference/model/table/#definitions-cell-stroke"><code>table.cell</code>'s
+          <code>stroke</code></a> field instead if the line you want to place is
+          part of all your tables' designs.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> table<span class="typ-punct">.</span><span class="typ-func">hline</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">.6pt</span><span class="typ-punct">)</span>
+
+          <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
+            stroke<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">,</span>
+            columns<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-key">auto</span><span class="typ-punct">,</span> <span class="typ-num">1fr</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>09:00<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Badge pick up<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>09:45<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Opening Keynote<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>10:30<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Talk: Typst&#39;s Future<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>11:15<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Session: Good PRs<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            table<span class="typ-punct">.</span><span class="typ-func">hline</span><span class="typ-punct">(</span>start<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>Noon<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-emph">_Lunch break_</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+            table<span class="typ-punct">.</span><span class="typ-func">hline</span><span class="typ-punct">(</span>start<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>14:00<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Talk: Tracked Layout<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>15:00<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Talk: Automations<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>16:00<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Workshop: Tables<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            table<span class="typ-punct">.</span><span class="typ-func">hline</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>19:00<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Day 1 Attendee Mixer<span class="typ-punct">]</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/30e75ea855253693d540cc9028aad0cf.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: y
+          details: |-
+            <p>The row above which the horizontal line is placed (zero-indexed).
+            Functions identically to the <code>y</code> field in <a href="/docs/reference/layout/grid/#definitions-hline-y"><code>grid.hline</code></a>.</p>
+          example: null
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: start
+          details: <p>The column at which the horizontal line starts (zero-indexed,
+            inclusive).</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">0</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: end
+          details: |-
+            <p>The column before which the horizontal line ends (zero-indexed,
+            exclusive).</p>
+          example: null
+          types:
+          - none
+          - int
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: stroke
+          details: |-
+            <p>The line's stroke.</p>
+            <p>Specifying <code><span class="typ-key">none</span></code> removes any lines previously placed across this
+            line's range, including hlines or per-cell stroke below it.</p>
+          example: null
+          types:
+          - none
+          - length
+          - color
+          - gradient
+          - stroke
+          - pattern
+          - dictionary
+          strings: []
+          default: <code><span class="typ-num">1pt</span> <span class="typ-op">+</span>
+            black</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: position
+          details: |-
+            <p>The position at which the line is placed, given its row (<code>y</code>) - either
+            <code>top</code> to draw above it or <code>bottom</code> to draw below it.</p>
+            <p>This setting is only relevant when row gutter is enabled (and
+            shouldn't be used otherwise - prefer just increasing the <code>y</code> field by
+            one instead), since then the position below a row becomes different
+            from the position above the next row due to the spacing between both.</p>
+          example: null
+          types:
+          - alignment
+          strings: []
+          default: <code>top</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - table
+        name: vline
+        title: Table Vertical Line
+        keywords: []
+        oneliner: A vertical line in the table. See the docs for [`grid.vline`]($grid.vline)
+        element: true
+        contextual: false
+        details: |-
+          <p>A vertical line in the table. See the docs for <a href="/docs/reference/layout/grid/#definitions-vline"><code>grid.vline</code></a>
+          for more information regarding how to use this element's fields.</p>
+          <p>Overrides any per-cell stroke, including stroke specified through the
+          table's <code>stroke</code> field. Can cross spacing between cells created through the
+          table's <a href="/docs/reference/model/table/#parameters-row-gutter"><code>row-gutter</code></a> option.</p>
+          <p>Similar to <a href="/docs/reference/model/table/#definitions-hline"><code>table.hline</code></a>, use this function if you want to
+          manually place a vertical line at a specific position in a single table and
+          use the <a href="/docs/reference/model/table/#parameters-stroke">table's <code>stroke</code></a> field or <a href="/docs/reference/model/table/#definitions-cell-stroke"><code>table.cell</code>'s
+          <code>stroke</code></a> field instead if the line you want to place is
+          part of all your tables' designs.</p>
+        example: null
+        self: false
+        params:
+        - name: x
+          details: |-
+            <p>The column before which the horizontal line is placed (zero-indexed).
+            Functions identically to the <code>x</code> field in <a href="/docs/reference/layout/grid/#definitions-vline"><code>grid.vline</code></a>.</p>
+          example: null
+          types:
+          - auto
+          - int
+          strings: []
+          default: <code><span class="typ-key">auto</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: start
+          details: <p>The row at which the vertical line starts (zero-indexed, inclusive).</p>
+          example: null
+          types:
+          - int
+          strings: []
+          default: <code><span class="typ-num">0</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: end
+          details: |-
+            <p>The row on top of which the vertical line ends (zero-indexed,
+            exclusive).</p>
+          example: null
+          types:
+          - none
+          - int
+          strings: []
+          default: <code><span class="typ-key">none</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: stroke
+          details: |-
+            <p>The line's stroke.</p>
+            <p>Specifying <code><span class="typ-key">none</span></code> removes any lines previously placed across this
+            line's range, including vlines or per-cell stroke below it.</p>
+          example: null
+          types:
+          - none
+          - length
+          - color
+          - gradient
+          - stroke
+          - pattern
+          - dictionary
+          strings: []
+          default: <code><span class="typ-num">1pt</span> <span class="typ-op">+</span>
+            black</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: position
+          details: |-
+            <p>The position at which the line is placed, given its column (<code>x</code>) -
+            either <code>start</code> to draw before it or <code>end</code> to draw after it.</p>
+            <p>The values <code>left</code> and <code>right</code> are also accepted, but discouraged as
+            they cause your table to be inconsistent between left-to-right and
+            right-to-left documents.</p>
+            <p>This setting is only relevant when column gutter is enabled (and
+            shouldn't be used otherwise - prefer just increasing the <code>x</code> field by
+            one instead), since then the position after a column becomes different
+            from the position before the next column due to the spacing between
+            both.</p>
+          example: null
+          types:
+          - alignment
+          strings: []
+          default: <code>start</code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        returns:
+        - content
+        scope: []
+      - path:
+        - table
+        name: header
+        title: Table Header
+        keywords: []
+        oneliner: A repeatable table header.
+        element: true
+        contextual: false
+        details: |-
+          <p>A repeatable table header.</p>
+          <p>You should wrap your tables' heading rows in this function even if you do not
+          plan to wrap your table across pages because Typst will use this function to
+          attach accessibility metadata to tables in the future and ensure universal
+          access to your document.</p>
+          <p>You can use the <code>repeat</code> parameter to control whether your table's header
+          will be repeated across pages.</p>
+        example: |-
+          <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">11.5em</span><span class="typ-punct">)</span>
+          <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">table</span><span class="typ-punct">(</span>
+            fill<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span>
+              <span class="typ-key">if</span> x <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-key">or</span> y <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span>
+                gray<span class="typ-punct">.</span><span class="typ-func">lighten</span><span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">)</span>
+              <span class="typ-punct">}</span><span class="typ-punct">,</span>
+            align<span class="typ-punct">:</span> right<span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+
+          <span class="typ-key">#</span><span class="typ-key">show</span> table<span class="typ-punct">.</span>cell<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>x<span class="typ-punct">:</span> <span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-func">strong</span>
+          <span class="typ-key">#</span><span class="typ-key">show</span> table<span class="typ-punct">.</span>cell<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-func">strong</span>
+
+          <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
+            columns<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span>
+            table<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>
+              <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Blue chip<span class="typ-punct">]</span><span class="typ-punct">,</span>
+              <span class="typ-punct">[</span>Fresh IPO<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Penny st&#39;k<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span><span class="typ-punct">,</span>
+            table<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>
+              rowspan<span class="typ-punct">:</span> <span class="typ-num">6</span><span class="typ-punct">,</span>
+              align<span class="typ-punct">:</span> horizon<span class="typ-punct">,</span>
+              <span class="typ-func">rotate</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">90deg</span><span class="typ-punct">,</span> reflow<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+                <span class="typ-strong">*USD / day*</span>
+              <span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">)</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>0.20<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>104<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>5<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>3.17<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>108<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>4<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>1.59<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>84<span class="typ-punct">]</span><span class="typ-punct">,</span>  <span class="typ-punct">[</span>1<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>0.26<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>98<span class="typ-punct">]</span><span class="typ-punct">,</span>  <span class="typ-punct">[</span>15<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>0.01<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>195<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>4<span class="typ-punct">]</span><span class="typ-punct">,</span>
+            <span class="typ-punct">[</span>7.34<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>57<span class="typ-punct">]</span><span class="typ-punct">,</span>  <span class="typ-punct">[</span>2<span class="typ-punct">]</span><span class="typ-punct">,</span>
+          <span class="typ-punct">)</span>
+          </code></pre><div class="preview"><img src="/assets/docs/03426c23cc565f1e1d7efbcb9b690f8b.png" alt="Preview" width="480" height="190"/></div></div>
+        self: false
+        params:
+        - name: repeat
+          details: <p>Whether this header should be repeated across pages.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">true</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: children
+          details: <p>The cells and lines within the header.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: true
+          settable: false
+        returns:
+        - content
+        scope: []
+      - path:
+        - table
+        name: footer
+        title: Table Footer
+        keywords: []
+        oneliner: A repeatable table footer.
+        element: true
+        contextual: false
+        details: |-
+          <p>A repeatable table footer.</p>
+          <p>Just like the <a href="/docs/reference/model/table/#definitions-header"><code>table.header</code></a> element, the footer can repeat
+          itself on every page of the table. This is useful for improving legibility
+          by adding the column labels in both the header and footer of a large table,
+          totals, or other information that should be visible on every page.</p>
+          <p>No other table cells may be placed after the footer.</p>
+        example: null
+        self: false
+        params:
+        - name: repeat
+          details: <p>Whether this footer should be repeated across pages.</p>
+          example: null
+          types:
+          - bool
+          strings: []
+          default: <code><span class="typ-key">true</span></code>
+          positional: false
+          named: true
+          required: false
+          variadic: false
+          settable: true
+        - name: children
+          details: <p>The cells and lines within the footer.</p>
+          example: null
+          types:
+          - content
+          strings: []
+          default: null
+          positional: true
+          named: false
+          required: true
+          variadic: true
+          settable: false
+        returns:
+        - content
+        scope: []
   children: []
 - route: /docs/reference/model/terms/
   title: Term List
-  description: '`terms` 函数的文档'
+  description: Documentation for the `terms` function.
   part: null
   outline:
   - id: summary
@@ -4011,6 +4858,7 @@ children:
       keywords: []
       oneliner: A list of terms and their descriptions.
       element: true
+      contextual: false
       details: |-
         <p>A list of terms and their descriptions.</p>
         <p>Displays a sequence of terms and their descriptions vertically. When the
@@ -4157,6 +5005,7 @@ children:
         keywords: []
         oneliner: A term list item.
         element: true
+        contextual: false
         details: <p>A term list item.</p>
         example: null
         self: false

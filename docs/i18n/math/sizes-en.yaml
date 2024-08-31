@@ -1,6 +1,6 @@
 route: /docs/reference/math/sizes
-title: 大小
-description: sizes 函数族的文档.
+title: Sizes
+description: Documentation for the sizes functions.
 part: null
 outline:
 - id: summary
@@ -49,10 +49,12 @@ body:
   kind: group
   content:
     name: sizes
-    title: 大小
+    title: Sizes
     details: |-
-      <p>强制公式中表达式的大小样式。</p>
-      <p>这些函数允许手动配置方程元素的大小，使其看起来像在显示/行内方程中使用或像在根或上/下标中使用一样。</p>
+      <p>Forced size styles for expressions within formulas.</p>
+      <p>These functions allow manual configuration of the size of equation elements
+      to make them look as in a display/inline equation or as if used in a root or
+      sub/superscripts.</p>
     functions:
     - path:
       - math
@@ -61,6 +63,7 @@ body:
       keywords: []
       oneliner: Forced display style in math.
       element: false
+      contextual: false
       details: |-
         <p>Forced display style in math.</p>
         <p>This is the normal size for block equations.</p>
@@ -105,6 +108,7 @@ body:
       keywords: []
       oneliner: Forced inline (text) style in math.
       element: false
+      contextual: false
       details: |-
         <p>Forced inline (text) style in math.</p>
         <p>This is the normal size for inline equations.</p>
@@ -150,6 +154,7 @@ body:
       keywords: []
       oneliner: Forced script style in math.
       element: false
+      contextual: false
       details: |-
         <p>Forced script style in math.</p>
         <p>This is the smaller size used in powers or sub- or superscripts.</p>
@@ -194,6 +199,7 @@ body:
       keywords: []
       oneliner: Forced second script style in math.
       element: false
+      contextual: false
       details: |-
         <p>Forced second script style in math.</p>
         <p>This is the smallest size, used in second-level sub- and superscripts

@@ -1,6 +1,6 @@
 route: /docs/reference/layout/repeat/
 title: Repeat
-description: '`repeat` 函数的文档'
+description: Documentation for the `repeat` function.
 part: null
 outline:
 - id: summary
@@ -24,6 +24,7 @@ body:
     keywords: []
     oneliner: Repeats content to the available space.
     element: true
+    contextual: false
     details: |-
       <p>Repeats content to the available space.</p>
       <p>This can be useful when implementing a custom index, reference, or outline.</p>

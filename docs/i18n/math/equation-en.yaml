@@ -1,6 +1,6 @@
 route: /docs/reference/math/equation/
 title: Equation
-description: '`equation` 函数的文档'
+description: Documentation for the `equation` function.
 part: null
 outline:
 - id: summary
@@ -21,6 +21,9 @@ outline:
   - id: parameters-numbering
     name: numbering
     children: []
+  - id: parameters-number-align
+    name: number-align
+    children: []
   - id: parameters-supplement
     name: supplement
     children: []
@@ -37,6 +40,7 @@ body:
     keywords: []
     oneliner: A mathematical equation.
     element: true
+    contextual: false
     details: |-
       <p>A mathematical equation.</p>
       <p>Can be displayed inline with text or as a separate block.</p>
@@ -90,6 +94,29 @@ body:
       - function
       strings: []
       default: <code><span class="typ-key">none</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: number-align
+      details: |-
+        <p>The alignment of the equation numbering.</p>
+        <p>By default, the alignment is <code>end <span class="typ-op">+</span> horizon</code>. For the horizontal
+        component, you can use <code>right</code>, <code>left</code>, or <code>start</code> and <code>end</code>
+        of the text direction; for the vertical component, you can use
+        <code>top</code>, <code>horizon</code>, or <code>bottom</code>.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">,</span> number-align<span class="typ-punct">:</span> bottom<span class="typ-punct">)</span>
+
+        We can calculate:
+        <span class="typ-math-delim">$</span> E <span class="typ-math-op">&amp;</span>= <span class="typ-func">sqrt</span><span class="typ-punct">(</span>m<span class="typ-math-op">_</span>0<span class="typ-math-op">^</span>2 + p<span class="typ-math-op">^</span>2<span class="typ-punct">)</span> <span class="typ-escape">\</span>
+            <span class="typ-math-op">&amp;</span><span class="typ-pol">approx</span> 125 <span class="typ-str">&quot;GeV&quot;</span> <span class="typ-math-delim">$</span>
+        </code></pre><div class="preview"><img src="/assets/docs/6f028f22ec8696b20f0b320956a618da.png" alt="Preview" width="480" height="190"/></div></div>
+      types:
+      - alignment
+      strings: []
+      default: <code>end <span class="typ-op">+</span> horizon</code>
       positional: false
       named: true
       required: false

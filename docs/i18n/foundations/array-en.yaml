@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/array/
 title: Array
-description: Array 类型的文档
+description: Documentation for the Array type.
 part: null
 outline:
 - id: summary
@@ -189,6 +189,15 @@ outline:
     - id: definitions-intersperse-separator
       name: separator
       children: []
+  - id: definitions-chunks
+    name: Chunks
+    children:
+    - id: definitions-chunks-chunk-size
+      name: chunk-size
+      children: []
+    - id: definitions-chunks-exact
+      name: exact
+      children: []
   - id: definitions-sorted
     name: Sorted
     children:
@@ -240,6 +249,7 @@ body:
       keywords: []
       oneliner: Converts a value to an array.
       element: false
+      contextual: false
       details: |-
         <p>Converts a value to an array.</p>
         <p>Note that this function is only intended for conversion of a collection-like
@@ -276,6 +286,7 @@ body:
       keywords: []
       oneliner: The number of values in the array.
       element: false
+      contextual: false
       details: <p>The number of values in the array.</p>
       example: null
       self: true
@@ -291,6 +302,7 @@ body:
       oneliner: Returns the first item in the array. May be used on the left-hand
         side
       element: false
+      contextual: false
       details: |-
         <p>Returns the first item in the array. May be used on the left-hand side
         of an assignment. Fails with an error if the array is empty.</p>
@@ -308,6 +320,7 @@ body:
       oneliner: Returns the last item in the array. May be used on the left-hand side
         of
       element: false
+      contextual: false
       details: |-
         <p>Returns the last item in the array. May be used on the left-hand side of
         an assignment. Fails with an error if the array is empty.</p>
@@ -325,6 +338,7 @@ body:
       oneliner: Returns the item at the specified index in the array. May be used
         on the
       element: false
+      contextual: false
       details: |-
         <p>Returns the item at the specified index in the array. May be used on the
         left-hand side of an assignment. Returns the default value if the index
@@ -369,6 +383,7 @@ body:
       keywords: []
       oneliner: Adds a value to the end of the array.
       element: false
+      contextual: false
       details: <p>Adds a value to the end of the array.</p>
       example: null
       self: true
@@ -395,6 +410,7 @@ body:
       oneliner: Removes the last item from the array and returns it. Fails with an
         error
       element: false
+      contextual: false
       details: |-
         <p>Removes the last item from the array and returns it. Fails with an error
         if the array is empty.</p>
@@ -412,6 +428,7 @@ body:
       oneliner: Inserts a value into the array at the specified index. Fails with
         an
       element: false
+      contextual: false
       details: |-
         <p>Inserts a value into the array at the specified index. Fails with an
         error if the index is out of bounds.</p>
@@ -454,6 +471,7 @@ body:
       oneliner: Removes the value at the specified index from the array and return
         it.
       element: false
+      contextual: false
       details: <p>Removes the value at the specified index from the array and return
         it.</p>
       example: null
@@ -496,6 +514,7 @@ body:
       oneliner: Extracts a subslice of the array. Fails with an error if the start
         or
       element: false
+      contextual: false
       details: |-
         <p>Extracts a subslice of the array. Fails with an error if the start or
         index is out of bounds.</p>
@@ -553,6 +572,7 @@ body:
       keywords: []
       oneliner: Whether the array contains the specified value.
       element: false
+      contextual: false
       details: |-
         <p>Whether the array contains the specified value.</p>
         <p>This method also has dedicated syntax: You can write <code><span class="typ-num">2</span> <span class="typ-key">in</span> <span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span></code>
@@ -583,6 +603,7 @@ body:
       oneliner: Searches for an item for which the given function returns `{true}`
         and
       element: false
+      contextual: false
       details: |-
         <p>Searches for an item for which the given function returns <code><span class="typ-key">true</span></code> and
         returns the first match or <code><span class="typ-key">none</span></code> if there is no match.</p>
@@ -613,6 +634,7 @@ body:
       oneliner: Searches for an item for which the given function returns `{true}`
         and
       element: false
+      contextual: false
       details: |-
         <p>Searches for an item for which the given function returns <code><span class="typ-key">true</span></code> and
         returns the index of the first match or <code><span class="typ-key">none</span></code> if there is no match.</p>
@@ -642,6 +664,7 @@ body:
       keywords: []
       oneliner: Create an array consisting of a sequence of numbers.
       element: false
+      contextual: false
       details: |-
         <p>Create an array consisting of a sequence of numbers.</p>
         <p>If you pass just one positional parameter, it is interpreted as the
@@ -705,6 +728,7 @@ body:
       oneliner: Produces a new array with only the items from the original one for
         which
       element: false
+      contextual: false
       details: |-
         <p>Produces a new array with only the items from the original one for which
         the given function returns true.</p>
@@ -733,6 +757,7 @@ body:
       keywords: []
       oneliner: Produces a new array in which all items from the original one were
       element: false
+      contextual: false
       details: |-
         <p>Produces a new array in which all items from the original one were
         transformed with the given function.</p>
@@ -761,6 +786,7 @@ body:
       keywords: []
       oneliner: Returns a new array with the values alongside their indices.
       element: false
+      contextual: false
       details: |-
         <p>Returns a new array with the values alongside their indices.</p>
         <p>The returned array consists of <code>(index, value)</code> pairs in the form of
@@ -791,6 +817,7 @@ body:
       keywords: []
       oneliner: Zips the array with other arrays.
       element: false
+      contextual: false
       details: |-
         <p>Zips the array with other arrays.</p>
         <p>Returns an array of arrays, where the <code>i</code>th inner array contains all the
@@ -826,6 +853,7 @@ body:
       keywords: []
       oneliner: Folds all items into a single value using an accumulator function.
       element: false
+      contextual: false
       details: <p>Folds all items into a single value using an accumulator function.</p>
       example: null
       self: true
@@ -866,6 +894,7 @@ body:
       keywords: []
       oneliner: Sums all items (works for all types that can be added).
       element: false
+      contextual: false
       details: <p>Sums all items (works for all types that can be added).</p>
       example: null
       self: true
@@ -894,6 +923,7 @@ body:
       keywords: []
       oneliner: Calculates the product all items (works for all types that can be
       element: false
+      contextual: false
       details: |-
         <p>Calculates the product all items (works for all types that can be
         multiplied).</p>
@@ -924,6 +954,7 @@ body:
       keywords: []
       oneliner: Whether the given function returns `{true}` for any item in the array.
       element: false
+      contextual: false
       details: <p>Whether the given function returns <code><span class="typ-key">true</span></code>
         for any item in the array.</p>
       example: null
@@ -951,6 +982,7 @@ body:
       keywords: []
       oneliner: Whether the given function returns `{true}` for all items in the array.
       element: false
+      contextual: false
       details: <p>Whether the given function returns <code><span class="typ-key">true</span></code>
         for all items in the array.</p>
       example: null
@@ -978,6 +1010,7 @@ body:
       keywords: []
       oneliner: Combine all nested arrays into a single flat one.
       element: false
+      contextual: false
       details: <p>Combine all nested arrays into a single flat one.</p>
       example: null
       self: true
@@ -992,6 +1025,7 @@ body:
       keywords: []
       oneliner: Return a new array with the same items, but in reverse order.
       element: false
+      contextual: false
       details: <p>Return a new array with the same items, but in reverse order.</p>
       example: null
       self: true
@@ -1006,6 +1040,7 @@ body:
       keywords: []
       oneliner: Split the array at occurrences of the specified value.
       element: false
+      contextual: false
       details: <p>Split the array at occurrences of the specified value.</p>
       example: null
       self: true
@@ -1032,6 +1067,7 @@ body:
       keywords: []
       oneliner: Combine all items in the array into one.
       element: false
+      contextual: false
       details: <p>Combine all items in the array into one.</p>
       example: null
       self: true
@@ -1071,6 +1107,7 @@ body:
       keywords: []
       oneliner: Returns an array with a copy of the separator value placed between
       element: false
+      contextual: false
       details: |-
         <p>Returns an array with a copy of the separator value placed between
         adjacent elements.</p>
@@ -1094,11 +1131,60 @@ body:
       scope: []
     - path:
       - array
+      name: chunks
+      title: Chunks
+      keywords: []
+      oneliner: Splits an array into non-overlapping chunks, starting at the beginning,
+      element: false
+      contextual: false
+      details: |-
+        <p>Splits an array into non-overlapping chunks, starting at the beginning,
+        ending with a single remainder chunk.</p>
+        <p>All chunks but the last have <code>chunk-size</code> elements.
+        If <code>exact</code> is set to <code><span class="typ-key">true</span></code>, the remainder is dropped if it
+        contains less than <code>chunk-size</code> elements.</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> array <span class="typ-op">=</span> <span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">,</span> <span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">8</span><span class="typ-punct">)</span>
+        <span class="typ-pol">#</span><span class="typ-pol">array</span><span class="typ-punct">.</span><span class="typ-func">chunks</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span>
+        <span class="typ-pol">#</span><span class="typ-pol">array</span><span class="typ-punct">.</span><span class="typ-func">chunks</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">,</span> exact<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+        </code></pre><div class="preview"><img src="/assets/docs/9288412dcfc29845a4138c240448252f.png" alt="Preview" width="480" height="190"/></div></div>
+      self: true
+      params:
+      - name: chunk-size
+        details: <p>How many elements each chunk may at most contain.</p>
+        example: null
+        types:
+        - int
+        strings: []
+        default: null
+        positional: true
+        named: false
+        required: true
+        variadic: false
+        settable: false
+      - name: exact
+        details: <p>Whether to keep the remainder if its size is less than <code>chunk-size</code>.</p>
+        example: null
+        types:
+        - bool
+        strings: []
+        default: <code><span class="typ-key">false</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: false
+      returns:
+      - array
+      scope: []
+    - path:
+      - array
       name: sorted
       title: Sorted
       keywords: []
       oneliner: Return a sorted version of this array, optionally by a given key
       element: false
+      contextual: false
       details: |-
         <p>Return a sorted version of this array, optionally by a given key
         function. The sorting algorithm used is stable.</p>
@@ -1131,6 +1217,7 @@ body:
       keywords: []
       oneliner: Deduplicates all items in the array.
       element: false
+      contextual: false
       details: |-
         <p>Deduplicates all items in the array.</p>
         <p>Returns a new array with all duplicate items removed. Only the first

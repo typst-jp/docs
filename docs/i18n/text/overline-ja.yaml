@@ -1,6 +1,6 @@
 route: /docs/reference/text/overline/
-title: 上划线
-description: '`overline` 函数的文档'
+title: Overline
+description: Documentation for the `overline` function.
 part: null
 outline:
 - id: summary
@@ -39,8 +39,9 @@ body:
     keywords: []
     oneliner: Adds a line over text.
     element: true
+    contextual: false
     details: |-
-      <p>在文本上添加上划线。</p>
+      <p>Adds a line over text.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">overline</span><span class="typ-punct">[</span>A line over text.<span class="typ-punct">]</span>
       </code></pre><div class="preview"><img src="/assets/docs/c3bb5d5987203353af84bd6015985b33.png" alt="Preview" width="480" height="190"/></div></div>
@@ -49,8 +50,9 @@ body:
     params:
     - name: stroke
       details: |-
-        <p>如何绘制线条。</p>
-        <p>详细内容参见 <a href="/docs/reference/visualize/line/#parameters-stroke">line 的文档</a>  如果设为 <code><span class="typ-key">auto</span></code>， 则采用文本颜色和当前字体定义的粗细。</p>
+        <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the line.</p>
+        <p>If set to <code><span class="typ-key">auto</span></code>, takes on the text's color and a thickness defined in
+        the current font.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> olive<span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">overline</span><span class="typ-punct">(</span>
@@ -75,7 +77,9 @@ body:
       variadic: false
       settable: true
     - name: offset
-      details: <p>上划线相对于基准线的位置。如果设为 <code><span class="typ-key">auto</span></code>，则从字体表中读取。</p>
+      details: |-
+        <p>The position of the line relative to the baseline. Read from the font
+        tables if <code><span class="typ-key">auto</span></code>.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">overline</span><span class="typ-punct">(</span>offset<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">1.2em</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
           The Tale Of A Faraway Line II
@@ -92,7 +96,9 @@ body:
       variadic: false
       settable: true
     - name: extent
-      details: <p>超出文本长度的量（如果设为负数则缩短）。</p>
+      details: |-
+        <p>The amount by which to extend the line beyond (or within if negative)
+        the content.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">overline</span><span class="typ-punct">(</span>extent<span class="typ-punct">:</span> <span class="typ-num">4pt</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">underline</span><span class="typ-punct">(</span>extent<span class="typ-punct">:</span> <span class="typ-num">4pt</span><span class="typ-punct">)</span>
@@ -108,7 +114,9 @@ body:
       variadic: false
       settable: true
     - name: evade
-      details: <p>是否跳过与字形冲突的部分。</p>
+      details: |-
+        <p>Whether the line skips sections in which it would collide with the
+        glyphs.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">overline</span><span class="typ-punct">(</span>
           evade<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">,</span>
@@ -128,7 +136,7 @@ body:
       variadic: false
       settable: true
     - name: background
-      details: <p>上划线是否位于内容后面。</p>
+      details: <p>Whether the line is placed behind the content it overlines.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">overline</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>thickness<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">,</span> paint<span class="typ-punct">:</span> maroon<span class="typ-punct">,</span> cap<span class="typ-punct">:</span> <span class="typ-str">&quot;round&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">overline</span><span class="typ-punct">(</span>background<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>This is stylized.<span class="typ-punct">]</span> <span class="typ-escape">\</span>
@@ -144,7 +152,7 @@ body:
       variadic: false
       settable: true
     - name: body
-      details: <p>要添加上划线的内容。</p>
+      details: <p>The content to add a line over.</p>
       example: null
       types:
       - content

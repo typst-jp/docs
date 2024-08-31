@@ -1,6 +1,6 @@
 route: /docs/reference/text/underline/
 title: Underline
-description: '`underline` 函数的文档'
+description: Documentation for the `underline` function.
 part: null
 outline:
 - id: summary
@@ -39,6 +39,7 @@ body:
     keywords: []
     oneliner: Underlines text.
     element: true
+    contextual: false
     details: |-
       <p>Underlines text.</p>
       <h2 id="example">Example</h2>
@@ -49,7 +50,7 @@ body:
     params:
     - name: stroke
       details: |-
-        <p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the line.</p>
+        <p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the line.</p>
         <p>If set to <code><span class="typ-key">auto</span></code>, takes on the text's color and a thickness defined in
         the current font.</p>
       example: |-

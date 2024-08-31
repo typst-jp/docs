@@ -1,6 +1,6 @@
 route: /docs/reference/model/par/
 title: Paragraph
-description: '`par` 函数的文档'
+description: Documentation for the `par` function.
 part: null
 outline:
 - id: summary
@@ -39,6 +39,7 @@ body:
     keywords: []
     oneliner: Arranges text, spacing and inline-level elements into a paragraph.
     element: true
+    contextual: false
     details: |-
       <p>Arranges text, spacing and inline-level elements into a paragraph.</p>
       <p>Although this function is primarily used in set rules to affect paragraph
@@ -83,8 +84,8 @@ body:
         <p>Hyphenation will be enabled for justified paragraphs if the
         <a href="/docs/reference/text/text/#parameters-hyphenate">text function's <code>hyphenate</code> property</a> is set to
         <code><span class="typ-key">auto</span></code> and the current language is known.</p>
-        <p>Note that the current <a href="/docs/reference/layout/align/">alignment</a> still has an effect on the
-        placement of the last line except if it ends with a
+        <p>Note that the current <a href="/docs/reference/layout/align/#parameters-alignment">alignment</a> still has an effect
+        on the placement of the last line except if it ends with a
         <a href="/docs/reference/text/linebreak/#parameters-justify">justified line break</a>.</p>
       example: null
       types:
@@ -141,8 +142,8 @@ body:
         the first one in a block or on the page).</p>
         <p>By typographic convention, paragraph breaks are indicated either by some
         space between paragraphs or by indented first lines. Consider reducing
-        the <a href="/docs/reference/layout/block/#parameters-spacing">paragraph spacing</a> to the [<code>leading</code>] when
-        using this property (e.g. using
+        the <a href="/docs/reference/layout/block/#parameters-spacing">paragraph spacing</a> to the <a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a>
+        when using this property (e.g. using
         <code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">par</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">)</span></code>).</p>
       example: null
       types:

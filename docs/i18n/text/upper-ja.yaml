@@ -1,6 +1,6 @@
 route: /docs/reference/text/upper/
-title: 转大写
-description: '`upper` 函数的文档'
+title: Uppercase
+description: Documentation for the `upper` function.
 part: null
 outline:
 - id: summary
@@ -22,10 +22,11 @@ body:
     name: upper
     title: Uppercase
     keywords: []
-    oneliner: Converts text or content to uppercase.
+    oneliner: Converts a string or content to uppercase.
     element: false
+    contextual: false
     details: |-
-      <p>将内容转为大写。</p>
+      <p>Converts a string or content to uppercase.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">upper</span><span class="typ-punct">(</span><span class="typ-str">&quot;abc&quot;</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
       <span class="typ-func">#</span><span class="typ-func">upper</span><span class="typ-punct">[</span><span class="typ-strong">*my text*</span><span class="typ-punct">]</span> <span class="typ-escape">\</span>
@@ -35,7 +36,7 @@ body:
     self: false
     params:
     - name: text
-      details: <p>转大写的内容。</p>
+      details: <p>The text to convert to uppercase.</p>
       example: null
       types:
       - str

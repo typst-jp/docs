@@ -1,6 +1,6 @@
 route: /docs/reference/model/document/
-title: 文档
-description: '`document` 函数的文档'
+title: Document
+description: Documentation for the `document` function.
 part: null
 outline:
 - id: summary
@@ -26,30 +26,33 @@ body:
   content:
     path: []
     name: document
-    title: 文档
+    title: Document
     keywords: []
-    oneliner: 文档根元素及其元数据。
+    oneliner: The root element of a document and its metadata.
     element: true
+    contextual: false
     details: |-
-      <p>文档根元素及其元数据。</p>
-      <p>所有文档都会自动包装在一个 <code>document</code> 元素中。您不能自己创建文档元素。
-      此功能仅能与
-      <a href="/docs/reference/styling/#set-rules">Set 规则</a> 一起使用，以指定文档元数据。此类 Set 规则必须出现在文档内容之前。</p>
+      <p>The root element of a document and its metadata.</p>
+      <p>All documents are automatically wrapped in a <code>document</code> element. You cannot
+      create a document element yourself. This function is only used with
+      <a href="/docs/reference/styling/#set-rules">set rules</a> to specify document metadata. Such a set
+      rule must appear before any of the document's contents.</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">document</span><span class="typ-punct">(</span>title<span class="typ-punct">:</span> <span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">)</span>
 
-      这没有可见的输出，但会将元数据嵌入 PDF 中！
+      This has no visible output, but
+      embeds metadata into the PDF!
       </code></pre><div class="preview"><img src="/assets/docs/b00d966ea2446c868ea7ea0602641a2c.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>请注意，使用此功能设置的元数据不会在
-      文档内呈现。相反，它被嵌入到编译后的 PDF 文件中。</p>
+      <p>Note that metadata set with this function is not rendered within the
+      document. Instead, it is embedded in the compiled PDF file.</p>
     example: null
     self: false
     params:
     - name: title
       details: |-
-        <p>文档的标题。这通常会呈现为
-        PDF 查看器窗口的标题。</p>
-        <p>虽然这可以是任意内容块，但 PDF 查看器仅支持纯文本
-        标题，因此转换可能会有损失。</p>
+        <p>The document's title. This is often rendered as the title of the
+        PDF viewer window.</p>
+        <p>While this can be arbitrary content, PDF viewers only support plain text
+        titles, so the conversion might be lossy.</p>
       example: null
       types:
       - none
@@ -62,7 +65,7 @@ body:
       variadic: false
       settable: true
     - name: author
-      details: <p>文档的作者。</p>
+      details: <p>The document's authors.</p>
       example: null
       types:
       - str
@@ -75,7 +78,7 @@ body:
       variadic: false
       settable: true
     - name: keywords
-      details: <p>文档的关键词。</p>
+      details: <p>The document's keywords.</p>
       example: null
       types:
       - str
@@ -89,12 +92,14 @@ body:
       settable: true
     - name: date
       details: |-
-        <p>文档的创建日期。</p>
-        <p>如果这是 <code><span class="typ-key">auto</span></code>（默认），Typst 使用当前日期和时间。
-        将其设置为 <code><span class="typ-key">none</span></code> 可以防止 Typst 嵌入任何创建日期
-        到 PDF 元数据中。</p>
-        <p>年份必须至少为零才能嵌入到
-        PDF。</p>
+        <p>The document's creation date.</p>
+        <p>If this is <code><span class="typ-key">auto</span></code> (default), Typst uses the current date and time.
+        Setting it to <code><span class="typ-key">none</span></code> prevents Typst from embedding any creation date
+        into the PDF metadata.</p>
+        <p>The year component must be at least zero in order to be embedded into a
+        PDF.</p>
+        <p>If you want to create byte-by-byte reproducible PDFs, set this to
+        something other than <code><span class="typ-key">auto</span></code>.</p>
       example: null
       types:
       - none

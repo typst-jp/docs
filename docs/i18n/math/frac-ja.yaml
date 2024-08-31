@@ -1,6 +1,6 @@
 route: /docs/reference/math/frac/
-title: 分数
-description: '`frac` 函数的文档'
+title: Fraction
+description: Documentation for the `frac` function.
 part: null
 outline:
 - id: summary
@@ -31,22 +31,23 @@ body:
     keywords: []
     oneliner: A mathematical fraction.
     element: true
+    contextual: false
     details: |-
-      <p>显示为分数形式。</p>
+      <p>A mathematical fraction.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> 1<span class="typ-math-op">/</span>2 &lt; <span class="typ-punct">(</span>x+1<span class="typ-punct">)</span><span class="typ-math-op">/</span>2 <span class="typ-math-delim">$</span>
       <span class="typ-math-delim">$</span> <span class="typ-punct">(</span>(x+1)<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2 = <span class="typ-func">frac</span><span class="typ-punct">(</span>a<span class="typ-punct">,</span> b<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
       </code></pre><div class="preview"><img src="/assets/docs/36a9d954136db2a90a824daa56f9e19c.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="syntax">语法</h2>
-      <p>
-      此函数也有一个专用语法：使用斜杠（/）将相邻的表达式转换为分数形式。
-      多个元素可以使用圆括号组合为单个表达式，最终输出会移除这些括号，但您可以嵌套括号来强制保留。
-      </p>
+      <h2 id="syntax">Syntax</h2>
+      <p>This function also has dedicated syntax: Use a slash to turn neighbouring
+      expressions into a fraction. Multiple atoms can be grouped into a single
+      expression using round grouping parenthesis. Such parentheses are removed
+      from the output, but you can nest multiple to force them.</p>
     example: null
     self: false
     params:
     - name: num
-      details: <p>分数的分子。</p>
+      details: <p>The fraction's numerator.</p>
       example: null
       types:
       - content
@@ -58,7 +59,7 @@ body:
       variadic: false
       settable: false
     - name: denom
-      details: <p>分数的分母。</p>
+      details: <p>The fraction's denominator.</p>
       example: null
       types:
       - content

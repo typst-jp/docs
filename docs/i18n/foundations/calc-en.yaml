@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/calc
-title: 计算
-description: calc 函数族的文档.
+title: Calculation
+description: Documentation for the calc functions.
 part: null
 outline:
 - id: summary
@@ -274,10 +274,12 @@ body:
   kind: group
   content:
     name: calc
-    title: 计算
+    title: Calculation
     details: |-
-      <p>用于计算和处理数字值的模块。</p>
-      <p>这些定义是 <code>calc</code> 模块的一部分，不会默认导入。除了下面列出的功能之外，<code>calc</code> 模块还定义了常量 <code>pi</code>、<code>tau</code>、<code>e</code>、<code>inf</code> 和 <code>nan</code>。</p>
+      <p>Module for calculations and processing of numeric values.</p>
+      <p>These definitions are part of the <code>calc</code> module and not imported by default.
+      In addition to the functions listed below, the <code>calc</code> module also defines
+      the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code>, and <code>nan</code>.</p>
     functions:
     - path:
       - calc
@@ -286,6 +288,7 @@ body:
       keywords: []
       oneliner: Calculates the absolute value of a numeric value.
       element: false
+      contextual: false
       details: <p>Calculates the absolute value of a numeric value.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -321,6 +324,7 @@ body:
       keywords: []
       oneliner: Raises a value to some exponent.
       element: false
+      contextual: false
       details: <p>Raises a value to some exponent.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">pow</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
@@ -364,6 +368,7 @@ body:
       keywords: []
       oneliner: Raises a value to some exponent of e.
       element: false
+      contextual: false
       details: <p>Raises a value to some exponent of e.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">exp</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span>
@@ -393,6 +398,7 @@ body:
       keywords: []
       oneliner: Calculates the square root of a number.
       element: false
+      contextual: false
       details: <p>Calculates the square root of a number.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sqrt</span><span class="typ-punct">(</span><span class="typ-num">16</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -423,6 +429,7 @@ body:
       keywords: []
       oneliner: Calculates the real nth root of a number.
       element: false
+      contextual: false
       details: |-
         <p>Calculates the real nth root of a number.</p>
         <p>If the number is negative, then n must be odd.</p>
@@ -466,6 +473,7 @@ body:
       keywords: []
       oneliner: Calculates the sine of an angle.
       element: false
+      contextual: false
       details: |-
         <p>Calculates the sine of an angle.</p>
         <p>When called with an integer or a float, they will be interpreted as
@@ -501,6 +509,7 @@ body:
       keywords: []
       oneliner: Calculates the cosine of an angle.
       element: false
+      contextual: false
       details: |-
         <p>Calculates the cosine of an angle.</p>
         <p>When called with an integer or a float, they will be interpreted as
@@ -536,6 +545,7 @@ body:
       keywords: []
       oneliner: Calculates the tangent of an angle.
       element: false
+      contextual: false
       details: |-
         <p>Calculates the tangent of an angle.</p>
         <p>When called with an integer or a float, they will be interpreted as
@@ -570,6 +580,7 @@ body:
       keywords: []
       oneliner: Calculates the arcsine of a number.
       element: false
+      contextual: false
       details: <p>Calculates the arcsine of a number.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">asin</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -601,6 +612,7 @@ body:
       keywords: []
       oneliner: Calculates the arccosine of a number.
       element: false
+      contextual: false
       details: <p>Calculates the arccosine of a number.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">acos</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -632,6 +644,7 @@ body:
       keywords: []
       oneliner: Calculates the arctangent of a number.
       element: false
+      contextual: false
       details: <p>Calculates the arctangent of a number.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">atan</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -662,6 +675,7 @@ body:
       keywords: []
       oneliner: Calculates the four-quadrant arctangent of a coordinate.
       element: false
+      contextual: false
       details: |-
         <p>Calculates the four-quadrant arctangent of a coordinate.</p>
         <p>The arguments are <code>(x, y)</code>, not <code>(y, x)</code>.</p>
@@ -707,6 +721,7 @@ body:
       keywords: []
       oneliner: Calculates the hyperbolic sine of a hyperbolic angle.
       element: false
+      contextual: false
       details: <p>Calculates the hyperbolic sine of a hyperbolic angle.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sinh</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -736,6 +751,7 @@ body:
       keywords: []
       oneliner: Calculates the hyperbolic cosine of a hyperbolic angle.
       element: false
+      contextual: false
       details: <p>Calculates the hyperbolic cosine of a hyperbolic angle.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cosh</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -765,6 +781,7 @@ body:
       keywords: []
       oneliner: Calculates the hyperbolic tangent of an hyperbolic angle.
       element: false
+      contextual: false
       details: <p>Calculates the hyperbolic tangent of an hyperbolic angle.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">tanh</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -794,6 +811,7 @@ body:
       keywords: []
       oneliner: Calculates the logarithm of a number.
       element: false
+      contextual: false
       details: |-
         <p>Calculates the logarithm of a number.</p>
         <p>If the base is not specified, the logarithm is calculated in base 10.</p>
@@ -821,7 +839,7 @@ body:
         types:
         - float
         strings: []
-        default: <code><span class="typ-num">10</span></code>
+        default: <code><span class="typ-num">10.0</span></code>
         positional: false
         named: true
         required: false
@@ -837,6 +855,7 @@ body:
       keywords: []
       oneliner: Calculates the natural logarithm of a number.
       element: false
+      contextual: false
       details: <p>Calculates the natural logarithm of a number.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">ln</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span>e<span class="typ-punct">)</span>
@@ -866,6 +885,7 @@ body:
       keywords: []
       oneliner: Calculates the factorial of a number.
       element: false
+      contextual: false
       details: <p>Calculates the factorial of a number.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">fact</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span>
@@ -894,6 +914,7 @@ body:
       keywords: []
       oneliner: Calculates a permutation.
       element: false
+      contextual: false
       details: |-
         <p>Calculates a permutation.</p>
         <p>Returns the <code>k</code>-permutation of <code>n</code>, or the number of ways to choose <code>k</code>
@@ -938,6 +959,7 @@ body:
       keywords: []
       oneliner: Calculates a binomial coefficient.
       element: false
+      contextual: false
       details: |-
         <p>Calculates a binomial coefficient.</p>
         <p>Returns the <code>k</code>-combination of <code>n</code>, or the number of ways to choose <code>k</code>
@@ -981,6 +1003,7 @@ body:
       keywords: []
       oneliner: Calculates the greatest common divisor of two integers.
       element: false
+      contextual: false
       details: <p>Calculates the greatest common divisor of two integers.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">gcd</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">42</span><span class="typ-punct">)</span>
@@ -1021,6 +1044,7 @@ body:
       keywords: []
       oneliner: Calculates the least common multiple of two integers.
       element: false
+      contextual: false
       details: <p>Calculates the least common multiple of two integers.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">lcm</span><span class="typ-punct">(</span><span class="typ-num">96</span><span class="typ-punct">,</span> <span class="typ-num">13</span><span class="typ-punct">)</span>
@@ -1061,6 +1085,7 @@ body:
       keywords: []
       oneliner: Rounds a number down to the nearest integer.
       element: false
+      contextual: false
       details: |-
         <p>Rounds a number down to the nearest integer.</p>
         <p>If the number is already an integer, it is returned unchanged.</p>
@@ -1094,6 +1119,7 @@ body:
       keywords: []
       oneliner: Rounds a number up to the nearest integer.
       element: false
+      contextual: false
       details: |-
         <p>Rounds a number up to the nearest integer.</p>
         <p>If the number is already an integer, it is returned unchanged.</p>
@@ -1127,6 +1153,7 @@ body:
       keywords: []
       oneliner: Returns the integer part of a number.
       element: false
+      contextual: false
       details: |-
         <p>Returns the integer part of a number.</p>
         <p>If the number is already an integer, it is returned unchanged.</p>
@@ -1160,6 +1187,7 @@ body:
       keywords: []
       oneliner: Returns the fractional part of a number.
       element: false
+      contextual: false
       details: |-
         <p>Returns the fractional part of a number.</p>
         <p>If the number is an integer, returns <code>0</code>.</p>
@@ -1193,6 +1221,7 @@ body:
       keywords: []
       oneliner: Rounds a number to the nearest integer.
       element: false
+      contextual: false
       details: |-
         <p>Rounds a number to the nearest integer.</p>
         <p>Optionally, a number of decimal places can be specified.</p>
@@ -1239,6 +1268,7 @@ body:
       keywords: []
       oneliner: Clamps a number between a minimum and maximum value.
       element: false
+      contextual: false
       details: <p>Clamps a number between a minimum and maximum value.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">10</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">5</span><span class="typ-punct">)</span>
@@ -1297,6 +1327,7 @@ body:
       keywords: []
       oneliner: Determines the minimum of a sequence of values.
       element: false
+      contextual: false
       details: <p>Determines the minimum of a sequence of values.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -1328,6 +1359,7 @@ body:
       keywords: []
       oneliner: Determines the maximum of a sequence of values.
       element: false
+      contextual: false
       details: <p>Determines the maximum of a sequence of values.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">max</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -1359,6 +1391,7 @@ body:
       keywords: []
       oneliner: Determines whether an integer is even.
       element: false
+      contextual: false
       details: <p>Determines whether an integer is even.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">even</span><span class="typ-punct">(</span><span class="typ-num">4</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -1389,6 +1422,7 @@ body:
       keywords: []
       oneliner: Determines whether an integer is odd.
       element: false
+      contextual: false
       details: <p>Determines whether an integer is odd.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span><span class="typ-num">4</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
@@ -1419,6 +1453,7 @@ body:
       keywords: []
       oneliner: Calculates the remainder of two numbers.
       element: false
+      contextual: false
       details: |-
         <p>Calculates the remainder of two numbers.</p>
         <p>The value <code>calc.rem(x, y)</code> always has the same sign as <code>x</code>, and is smaller
@@ -1469,6 +1504,7 @@ body:
       keywords: []
       oneliner: Performs euclidean division of two numbers.
       element: false
+      contextual: false
       details: |-
         <p>Performs euclidean division of two numbers.</p>
         <p>The result of this computation is that of a division rounded to the integer
@@ -1519,6 +1555,7 @@ body:
       keywords: []
       oneliner: This calculates the least nonnegative remainder of a division.
       element: false
+      contextual: false
       details: |-
         <p>This calculates the least nonnegative remainder of a division.</p>
         <p>Warning: Due to a floating point round-off error, the remainder may equal the absolute
@@ -1570,6 +1607,7 @@ body:
       keywords: []
       oneliner: Calculates the quotient (floored division) of two numbers.
       element: false
+      contextual: false
       details: <p>Calculates the quotient (floored division) of two numbers.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-str">&quot;quo&quot;</span>(a, b) <span class="typ-math-op">&amp;</span>= <span class="typ-func">floor</span><span class="typ-punct">(</span>a<span class="typ-math-op">/</span>b<span class="typ-punct">)</span> <span class="typ-escape">\</span>

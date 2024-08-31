@@ -28,37 +28,37 @@
       <a href="/docs/reference/types/{{ t }}" class="pill {{ type2class(t) }}">{{ t }}</a>
       {% endfor %}
     </div>
-    {% if param['required'] %}<small>必需参数</small>{% endif %}{% if param['positional'] %}<small><span
-        aria-describedby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-positional-tooltip">位置参数</span>
+    {% if param['required'] %}<small>Required</small>{% endif %}{% if param['positional'] %}<small><span
+        aria-describedby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-positional-tooltip">Positional</span>
       <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
           aria-labelledby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-positional-tooltip-qm-label">
           <title id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-positional-tooltip-qm-label">
-            位置参数按顺序传入，不带名称。</title>
+            Positional parameters are specified in order, without names.</title>
           <use href="/assets/icons/12-tooltip.svg#icon"></use>
         </svg>
         <div role="tooltip" id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-positional-tooltip"
-          tabindex="-1">位置参数按顺序传入，不带名称。</div>
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
       </div>
     </small>{% endif %}{% if param['variadic'] %}<small><span
-        aria-describedby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-variadic-tooltip">可变参数</span>
+        aria-describedby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-variadic-tooltip">Variadic</span>
       <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
           aria-labelledby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-variadic-tooltip-qm-label">
-          <title id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-variadic-tooltip-qm-label">可变参数可以多次传入。
+          <title id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-variadic-tooltip-qm-label">Variadic parameters can be specified multiple times.
           </title>
           <use href="/assets/icons/12-tooltip.svg#icon"></use>
         </svg>
         <div role="tooltip" id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-variadic-tooltip"
-          tabindex="-1">可变参数可以多次传入。</div>
+          tabindex="-1">Variadic parameters can be specified multiple times.</div>
       </div>
     </small>{% endif %}{% if param['settable'] %}<small><span
-        aria-describedby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-settable-tooltip">可用 Set 规则</span>
+        aria-describedby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-settable-tooltip">Settable</span>
       <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
           aria-labelledby="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-settable-tooltip-qm-label">
-          <title id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-settable-tooltip-qm-label">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</title>
+          <title id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
           <use href="/assets/icons/12-tooltip.svg#icon"></use>
         </svg>
         <div role="tooltip" id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}-settable-tooltip"
-          tabindex="-1">可以使用 Set 规则，为函数后续所有的使用设置默认参数。</div>
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
       </div>
     </small>{% endif %}
   </div>
@@ -79,11 +79,11 @@
 </ul>
 {% endif %}
 {% if param['default'] %}
-<p>默认：{{ param['default'] | safe }}</p>
+<p>Default:{{ param['default'] | safe }}</p>
 {% endif %}
 {% if param['example'] %}
 <details class="folding-example">
-  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
   <div class="folding">
     {{ param['example'] | safe }}
   </div>
@@ -97,7 +97,7 @@
 {{ function_definition_display(function, type2class, gen_path, prefix) }}
 {% if function['example'] and is_example_folding %}
   <details class="folding-example">
-    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">查看示例</summary>
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
     <div class="folding">
     {{ function['example'] | safe }}
     </div>

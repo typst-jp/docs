@@ -1,6 +1,6 @@
 route: /docs/reference/math/attach
-title: 附缀
-description: attach 函数族的文档.
+title: Attach
+description: Documentation for the attach functions.
 part: null
 outline:
 - id: summary
@@ -59,20 +59,18 @@ body:
   content:
     name: attach
     title: Attach
-    details: "<p>上下标, 和上下限。</p>\n<p><code>attach</code> 函数支持形如\n<code><span class=\"\
-      typ-math-delim\">$</span>a<span class=\"typ-math-op\">_</span>b<span class=\"\
-      typ-math-op\">^</span>c<span class=\"typ-math-delim\">$</span></code> \n的语法，可以为方程的某个方位添加附缀。\n\
-      附缀可以显示为上下标和上下限的形式。\nTypst会自动调整为合适的显示方式，但是您也可以使用\n<code>scripts</code> 函数和 <code>limits</code>\
-      \ 函数\n手动调整。\n</p>\n<h2 id=\"example\">Example</h2>\n<div class=\"previewed-code\"\
-      ><pre><code><span class=\"typ-math-delim\">$</span> <span class=\"typ-pol\"\
-      >sum</span><span class=\"typ-math-op\">_</span><span class=\"typ-punct\">(</span>i=0<span\
-      \ class=\"typ-punct\">)</span><span class=\"typ-math-op\">^</span>n a<span class=\"\
-      typ-math-op\">_</span>i = 2<span class=\"typ-math-op\">^</span><span class=\"\
-      typ-punct\">(</span>1+i<span class=\"typ-punct\">)</span> <span class=\"typ-math-delim\"\
-      >$</span>\n</code></pre><div class=\"preview\"><img src=\"/assets/docs/575e598ddfc00ee58c3fd2f8379f5718.png\"\
-      \ alt=\"Preview\" width=\"480\" height=\"190\"/></div></div>\n<h2 id=\"syntax\"\
-      >语法</h2>\n<p>此函数还具有用于附基之后的附缀的专用语法：使用下划线 (<code>_</code>) 表示下标，即底部附缀，使用帽子 (<code>^</code>)\
-      \ 表示上标，即顶部附缀。</p>"
+    details: |-
+      <p>Subscript, superscripts, and limits.</p>
+      <p>Attachments can be displayed either as sub/superscripts, or limits. Typst
+      automatically decides which is more suitable depending on the base, but you
+      can also control this manually with the <code>scripts</code> and <code>limits</code> functions.</p>
+      <h2 id="example">Example</h2>
+      <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i=0<span class="typ-punct">)</span><span class="typ-math-op">^</span>n a<span class="typ-math-op">_</span>i = 2<span class="typ-math-op">^</span><span class="typ-punct">(</span>1+i<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+      </code></pre><div class="preview"><img src="/assets/docs/575e598ddfc00ee58c3fd2f8379f5718.png" alt="Preview" width="480" height="190"/></div></div>
+      <h2 id="syntax">Syntax</h2>
+      <p>This function also has dedicated syntax for attachments after the base: Use
+      the underscore (<code>_</code>) to indicate a subscript i.e. bottom attachment and the
+      hat (<code>^</code>) to indicate a superscript i.e. top attachment.</p>
     functions:
     - path:
       - math
@@ -81,7 +79,8 @@ body:
       keywords: []
       oneliner: A base with optional attachments.
       element: true
-      details: <p>带有可选附缀的附基。</p>
+      contextual: false
+      details: <p>A base with optional attachments.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">attach</span><span class="typ-punct">(</span>
           <span class="typ-pol">Pi</span><span class="typ-punct">,</span> t<span class="typ-punct">:</span> <span class="typ-pol">alpha</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-pol">beta</span><span class="typ-punct">,</span>
@@ -91,7 +90,7 @@ body:
       self: false
       params:
       - name: base
-        details: <p>供附缀附着的部分。</p>
+        details: <p>The base to which things are attached.</p>
         example: null
         types:
         - content
@@ -103,11 +102,10 @@ body:
         variadic: false
         settable: false
       - name: t
-        details: "<p>顶部附缀，智能定位于附基的上方或右上方。</p>\n<p>你也可以将附基包裹在<code><span class=\"typ-func\"\
-          >limits</span><span class=\"typ-punct\">(</span><span class=\"typ-punct\"\
-          >)</span></code> \n或\n<code><span class=\"typ-func\">scripts</span><span\
-          \ class=\"typ-punct\">(</span><span class=\"typ-punct\">)</span></code>\
-          \ \n来覆盖掉智能定位。</p>"
+        details: |-
+          <p>The top attachment, smartly positioned at top-right or above the base.</p>
+          <p>You can wrap the base in <code><span class="typ-func">limits</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> or <code><span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> to override the
+          smart positioning.</p>
         example: null
         types:
         - none
@@ -120,11 +118,11 @@ body:
         variadic: false
         settable: true
       - name: b
-        details: "<p>底部附缀，智能定位于附基的下方或右下方。</p>\n<p>你也可以将附基包裹在<code><span class=\"typ-func\"\
-          >limits</span><span class=\"typ-punct\">(</span><span class=\"typ-punct\"\
-          >)</span></code> \n或 \n<code><span class=\"typ-func\">scripts</span><span\
-          \ class=\"typ-punct\">(</span><span class=\"typ-punct\">)</span></code>\
-          \ \n来覆盖掉智能定位。</p>"
+        details: |-
+          <p>The bottom attachment, smartly positioned at the bottom-right or below
+          the base.</p>
+          <p>You can wrap the base in <code><span class="typ-func">limits</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> or <code><span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> to override the
+          smart positioning.</p>
         example: null
         types:
         - none
@@ -137,7 +135,7 @@ body:
         variadic: false
         settable: true
       - name: tl
-        details: <p>左上角附缀。</p>
+        details: <p>The top-left attachment (before the base).</p>
         example: null
         types:
         - none
@@ -150,7 +148,7 @@ body:
         variadic: false
         settable: true
       - name: bl
-        details: <p>左下角附缀。</p>
+        details: <p>The bottom-left attachment (before base).</p>
         example: null
         types:
         - none
@@ -163,7 +161,7 @@ body:
         variadic: false
         settable: true
       - name: tr
-        details: <p>右上角附缀。</p>
+        details: <p>The top-right attachment (after the base).</p>
         example: null
         types:
         - none
@@ -176,7 +174,7 @@ body:
         variadic: false
         settable: true
       - name: br
-        details: <p>右下角附缀。</p>
+        details: <p>The bottom-right attachment (after the base).</p>
         example: null
         types:
         - none
@@ -198,14 +196,15 @@ body:
       keywords: []
       oneliner: Forces a base to display attachments as scripts.
       element: true
-      details: <p>强制将附缀显示为脚本形式（即角标形式）。</p>
+      contextual: false
+      details: <p>Forces a base to display attachments as scripts.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">scripts</span><span class="typ-punct">(</span><span class="typ-pol">sum</span><span class="typ-punct">)</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-escape">!=</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/fd2fa3481f1f6d8947d1a6310cd5e827.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: body
-        details: <p>供脚本附缀附着的部分。</p>
+        details: <p>The base to attach the scripts to.</p>
         example: null
         types:
         - content
@@ -226,14 +225,15 @@ body:
       keywords: []
       oneliner: Forces a base to display attachments as limits.
       element: true
-      details: <p>强制将附缀显示为上下限形式（即显示在正上方和正下方）。</p>
+      contextual: false
+      details: <p>Forces a base to display attachments as limits.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">limits</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span><span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-escape">!=</span> A<span class="typ-math-op">_</span>1<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
         </code></pre><div class="preview"><img src="/assets/docs/a60dcf87b7850ffbb2f702c04761242c.png" alt="Preview" width="480" height="190"/></div></div>
       self: false
       params:
       - name: body
-        details: <p>供上下限附缀附着的部分。</p>
+        details: <p>The base to attach the limits to.</p>
         example: null
         types:
         - content
@@ -246,8 +246,9 @@ body:
         settable: false
       - name: inline
         details: |-
-          <p>是否强制显示为内联公式。</p>
-          <p>全局应用limits时（如使用 set 规则）最好禁用此功能。</p>
+          <p>Whether to also force limits in inline equations.</p>
+          <p>When applying limits globally (e.g., through a show rule), it is
+          typically a good idea to disable this.</p>
         example: null
         types:
         - bool

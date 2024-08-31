@@ -1,6 +1,6 @@
 route: /docs/reference/text/upper/
 title: Uppercase
-description: '`upper` 函数的文档'
+description: Documentation for the `upper` function.
 part: null
 outline:
 - id: summary
@@ -24,6 +24,7 @@ body:
     keywords: []
     oneliner: Converts a string or content to uppercase.
     element: false
+    contextual: false
     details: |-
       <p>Converts a string or content to uppercase.</p>
       <h2 id="example">Example</h2>

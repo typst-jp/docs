@@ -1,6 +1,6 @@
 route: /docs/reference/math/op/
 title: Text Operator
-description: '`op` 函数的文档'
+description: Documentation for the `op` function.
 part: null
 outline:
 - id: summary
@@ -31,6 +31,7 @@ body:
     keywords: []
     oneliner: A text operator in an equation.
     element: true
+    contextual: false
     details: |-
       <p>A text operator in an equation.</p>
       <h2 id="example">Example</h2>

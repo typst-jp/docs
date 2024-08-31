@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/stroke/
 title: Stroke
-description: Stroke 类型的文档
+description: Documentation for the Stroke type.
 part: null
 outline:
 - id: summary
@@ -70,10 +70,9 @@ body:
       <li>A stroke combined from color and thickness using the <code>+</code> operator as in
       <code><span class="typ-num">2pt</span> <span class="typ-op">+</span> red</code>.</li>
       </ul>
-      <p>For full control, you can also provide a <a href="/docs/reference/foundations/dictionary/">dictionary</a> or a
-      <code>stroke</code> object to any function that expects a stroke. The dictionary's
-      keys may include any of the parameters for the constructor function, shown
-      below.</p>
+      <p>For full control, you can also provide a <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a> or a <code>stroke</code> object
+      to any function that expects a stroke. The dictionary's keys may include any
+      of the parameters for the constructor function, shown below.</p>
       <h2 id="fields">Fields</h2>
       <p>On a stroke object, you can access any of the fields listed in the
       constructor function. For example, <code><span class="typ-punct">(</span><span class="typ-num">2pt</span> <span class="typ-op">+</span> blue<span class="typ-punct">)</span><span class="typ-punct">.</span>thickness</code> is <code><span class="typ-num">2pt</span></code>.
@@ -86,6 +85,7 @@ body:
       keywords: []
       oneliner: Converts a value to a stroke or constructs a stroke with the given
       element: false
+      contextual: false
       details: |-
         <p>Converts a value to a stroke or constructs a stroke with the given
         parameters.</p>
@@ -200,11 +200,12 @@ body:
           <li><code><span class="typ-str">&quot;loosely-dash-dotted&quot;</span></code></li>
           </ul>
           </li>
-          <li>An <a href="/docs/reference/foundations/array/">array</a> with alternating lengths for dashes and gaps. You can
-          also use the string <code><span class="typ-str">&quot;dot&quot;</span></code> for a length equal to the line thickness.</li>
-          <li>A <a href="/docs/reference/foundations/dictionary/">dictionary</a> with the keys <code>array</code> (same as the array
-          above), and <code>phase</code> (of type <a href="/docs/reference/layout/length/">length</a>), which defines where in
-          the pattern to start drawing.</li>
+          <li>An <a href="/docs/reference/foundations/array/" title="array">array</a> with alternating lengths for dashes and gaps. You can
+          also use the string <code><span class="typ-str">&quot;dot&quot;</span></code> for a length equal to the line
+          thickness.</li>
+          <li>A <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a> with the keys <code>array</code> (same as the array above),
+          and <code>phase</code> (of type <a href="/docs/reference/layout/length/" title="length">length</a>), which defines where in the pattern
+          to start drawing.</li>
           </ul>
           <p>If set to <code><span class="typ-key">auto</span></code>, the value is inherited, defaulting to <code><span class="typ-key">none</span></code>.</p>
         example: |-

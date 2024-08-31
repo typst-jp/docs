@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/yaml/
 title: YAML
-description: '`yaml` 函数的文档'
+description: Documentation for the `yaml` function.
 part: null
 outline:
 - id: summary
@@ -39,6 +39,7 @@ body:
     keywords: []
     oneliner: Reads structured data from a YAML file.
     element: false
+    contextual: false
     details: |-
       <p>Reads structured data from a YAML file.</p>
       <p>The file must contain a valid YAML object or array. YAML mappings will be
@@ -48,6 +49,8 @@ body:
       <code><span class="typ-key">none</span></code>, and numbers will be converted to floats or integers depending on
       whether they are whole numbers. Custom YAML tags are ignored, though the
       loaded value will still be present.</p>
+      <p>Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
+      floating point numbers, which may give an approximative value.</p>
       <p>The YAML files in the example contain objects with authors as keys,
       each with a sequence of their own submapping with the keys
       &quot;title&quot; and &quot;published&quot;</p>
@@ -90,6 +93,7 @@ body:
       keywords: []
       oneliner: Reads structured data from a YAML string/bytes.
       element: false
+      contextual: false
       details: <p>Reads structured data from a YAML string/bytes.</p>
       example: null
       self: false
@@ -117,6 +121,7 @@ body:
       keywords: []
       oneliner: Encode structured data into a YAML string.
       element: false
+      contextual: false
       details: <p>Encode structured data into a YAML string.</p>
       example: null
       self: false

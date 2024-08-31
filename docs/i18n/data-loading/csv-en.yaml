@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/csv/
 title: CSV
-description: '`csv` 函数的文档'
+description: Documentation for the `csv` function.
 part: null
 outline:
 - id: summary
@@ -18,6 +18,9 @@ outline:
   - id: parameters-delimiter
     name: delimiter
     children: []
+  - id: parameters-row-type
+    name: row-type
+    children: []
 - id: definitions
   name: Definitions
   children:
@@ -30,6 +33,9 @@ outline:
     - id: definitions-decode-delimiter
       name: delimiter
       children: []
+    - id: definitions-decode-row-type
+      name: row-type
+      children: []
 body:
   kind: func
   content:
@@ -39,6 +45,7 @@ body:
     keywords: []
     oneliner: Reads structured data from a CSV file.
     element: false
+    contextual: false
     details: |-
       <p>Reads structured data from a CSV file.</p>
       <p>The CSV file will be read and parsed into a 2-dimensional array of strings:
@@ -46,14 +53,14 @@ body:
       rows will be collected into a single array. Header rows will not be
       stripped.</p>
       <h2 id="example">Example</h2>
-      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> results <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;data.csv&quot;</span><span class="typ-punct">)</span>
+      <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> results <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;example.csv&quot;</span><span class="typ-punct">)</span>
 
       <span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
         columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
         <span class="typ-punct">[</span><span class="typ-strong">*Condition*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Result*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
         <span class="typ-op">..</span>results<span class="typ-punct">.</span><span class="typ-func">flatten</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
       <span class="typ-punct">)</span>
-      </code></pre><div class="preview"><img src="/assets/docs/08241206dc3f3c0296d2db8f2ee545f4.png" alt="Preview" width="480" height="190"/></div></div>
+      </code></pre><div class="preview"><img src="/assets/docs/d639327a86bcbebeca5ae45c5d3d5c44.png" alt="Preview" width="480" height="190"/></div></div>
     example: null
     self: false
     params:
@@ -83,6 +90,26 @@ body:
       required: false
       variadic: false
       settable: false
+    - name: row-type
+      details: |-
+        <p>How to represent the file's rows.</p>
+        <ul>
+        <li>If set to <code>array</code>, each row is represented as a plain array of
+        strings.</li>
+        <li>If set to <code>dictionary</code>, each row is represented as a dictionary
+        mapping from header keys to strings. This option only makes sense when
+        a header row is present in the CSV file.</li>
+        </ul>
+      example: null
+      types:
+      - type
+      strings: []
+      default: <code>array</code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: false
     returns:
     - array
     scope:
@@ -93,6 +120,7 @@ body:
       keywords: []
       oneliner: Reads structured data from a CSV string/bytes.
       element: false
+      contextual: false
       details: <p>Reads structured data from a CSV string/bytes.</p>
       example: null
       self: false
@@ -119,6 +147,26 @@ body:
         - str
         strings: []
         default: <code><span class="typ-str">&quot;,&quot;</span></code>
+        positional: false
+        named: true
+        required: false
+        variadic: false
+        settable: false
+      - name: row-type
+        details: |-
+          <p>How to represent the file's rows.</p>
+          <ul>
+          <li>If set to <code>array</code>, each row is represented as a plain array of
+          strings.</li>
+          <li>If set to <code>dictionary</code>, each row is represented as a dictionary
+          mapping from header keys to strings. This option only makes sense
+          when a header row is present in the CSV file.</li>
+          </ul>
+        example: null
+        types:
+        - type
+        strings: []
+        default: <code>array</code>
         positional: false
         named: true
         required: false

@@ -1,6 +1,6 @@
 route: /docs/reference/math/underover
-title: 下方/上方
-description: underover 函数族的文档.
+title: Under/Over
+description: Documentation for the underover functions.
 part: null
 outline:
 - id: summary
@@ -61,10 +61,11 @@ body:
   kind: group
   content:
     name: underover
-    title: 下方/上方
+    title: Under/Over
     details: |-
-      <p>方程的部分上方或下方的定界符。</p>
-      <p>大括号和方括号还允许在它们自己的下方或上方添加可选的注释。</p>
+      <p>Delimiters above or below parts of an equation.</p>
+      <p>The braces and brackets further allow you to add an optional annotation
+      below or above themselves.</p>
     functions:
     - path:
       - math
@@ -73,6 +74,7 @@ body:
       keywords: []
       oneliner: A horizontal line under content.
       element: true
+      contextual: false
       details: <p>A horizontal line under content.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underline</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -101,6 +103,7 @@ body:
       keywords: []
       oneliner: A horizontal line over content.
       element: true
+      contextual: false
       details: <p>A horizontal line over content.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overline</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -129,6 +132,7 @@ body:
       keywords: []
       oneliner: A horizontal brace under content, with an optional annotation below.
       element: true
+      contextual: false
       details: <p>A horizontal brace under content, with an optional annotation below.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underbrace</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -170,6 +174,7 @@ body:
       keywords: []
       oneliner: A horizontal brace over content, with an optional annotation above.
       element: true
+      contextual: false
       details: <p>A horizontal brace over content, with an optional annotation above.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overbrace</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
@@ -211,6 +216,7 @@ body:
       keywords: []
       oneliner: A horizontal bracket under content, with an optional annotation below.
       element: true
+      contextual: false
       details: <p>A horizontal bracket under content, with an optional annotation
         below.</p>
       example: |-
@@ -253,6 +259,7 @@ body:
       keywords: []
       oneliner: A horizontal bracket over content, with an optional annotation above.
       element: true
+      contextual: false
       details: <p>A horizontal bracket over content, with an optional annotation above.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overbracket</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>

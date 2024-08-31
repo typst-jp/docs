@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/yaml/
 title: YAML
-description: '`yaml` 函数的文档'
+description: Documentation for the `yaml` function.
 part: null
 outline:
 - id: summary
@@ -39,17 +39,22 @@ body:
     keywords: []
     oneliner: Reads structured data from a YAML file.
     element: false
+    contextual: false
     details: |-
-      <p>从 YAML 文件读取结构和化数据</p>
-      <p>文件必须包含有效的 YAML 对象或数组。
-      YAML 映射将被转换为 Typst 字典，YAML 序列将被转换为 Typst 数组。
-      字符串和布尔值将被转换为相应的 Typst 类型值。
-      null 值（<code>null</code>、<code>~</code> 或空字符串 ''）将转换为
-      <code><span class=“typ-key”>none</span></code>。
-      数字将根据是否为整数转化为浮点值或整数值。
-      自定义 YAML 标签将被忽略，但加载的值仍将存在。</p>
-      <p>示例中的 YAML 文件为一个以 author 为键，子键为 “title” 和 “published” 的对象。</p>
-      <h2 id="example">举例</h2>
+      <p>Reads structured data from a YAML file.</p>
+      <p>The file must contain a valid YAML object or array. YAML mappings will be
+      converted into Typst dictionaries, and YAML sequences will be converted into
+      Typst arrays. Strings and booleans will be converted into the Typst
+      equivalents, null-values (<code>null</code>, <code>~</code> or empty ``) will be converted into
+      <code><span class="typ-key">none</span></code>, and numbers will be converted to floats or integers depending on
+      whether they are whole numbers. Custom YAML tags are ignored, though the
+      loaded value will still be present.</p>
+      <p>Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
+      floating point numbers, which may give an approximative value.</p>
+      <p>The YAML files in the example contain objects with authors as keys,
+      each with a sequence of their own submapping with the keys
+      &quot;title&quot; and &quot;published&quot;</p>
+      <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">bookshelf</span><span class="typ-punct">(</span>contents<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
         <span class="typ-key">for</span> <span class="typ-punct">(</span>author<span class="typ-punct">,</span> works<span class="typ-punct">)</span> <span class="typ-key">in</span> contents <span class="typ-punct">{</span>
           author
@@ -67,7 +72,7 @@ body:
     self: false
     params:
     - name: path
-      details: <p>YAML 文件路径。</p>
+      details: <p>Path to a YAML file.</p>
       example: null
       types:
       - str
@@ -88,12 +93,13 @@ body:
       keywords: []
       oneliner: Reads structured data from a YAML string/bytes.
       element: false
-      details: <p>从 YAML 字符串/字节流读取结构化数据。</p>
+      contextual: false
+      details: <p>Reads structured data from a YAML string/bytes.</p>
       example: null
       self: false
       params:
       - name: data
-        details: <p>YAML 数据。</p>
+        details: <p>YAML data.</p>
         example: null
         types:
         - str
@@ -115,12 +121,13 @@ body:
       keywords: []
       oneliner: Encode structured data into a YAML string.
       element: false
-      details: <p>将结构化数据编码为一个 YAML 字符串</p>
+      contextual: false
+      details: <p>Encode structured data into a YAML string.</p>
       example: null
       self: false
       params:
       - name: value
-        details: <p>被编码的值。</p>
+        details: <p>Value to be encoded.</p>
         example: null
         types:
         - any

@@ -1,6 +1,6 @@
 route: /docs/reference/text/lorem/
 title: Lorem
-description: '`lorem` 函数的文档'
+description: Documentation for the `lorem` function.
 part: null
 outline:
 - id: summary
@@ -25,6 +25,7 @@ body:
     - Blind Text
     oneliner: Creates blind text.
     element: false
+    contextual: false
     details: |-
       <p>Creates blind text.</p>
       <p>This function yields a Latin-like <em>Lorem Ipsum</em> blind text with the given

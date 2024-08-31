@@ -1,6 +1,6 @@
 route: /docs/reference/model/figure/
-title: 图表
-description: '`figure` 函数的文档'
+title: Figure
+description: Documentation for the `figure` function.
 part: null
 outline:
 - id: summary
@@ -62,71 +62,80 @@ body:
   content:
     path: []
     name: figure
-    title: 图表
+    title: Figure
     keywords: []
-    oneliner: 一个带有可选标题的图表。
+    oneliner: A figure with an optional caption.
     element: true
+    contextual: false
     details: |-
-      <p>一个带有可选标题的图表。</p>
-      <p>自动检测其类型以选择正确的计数轨道。例如，包含图像的图表将单独编号，而包含表格的图表将单独编号。</p>
-      <h2 id="examples">示例</h2>
-      <p>下面的示例显示了带有图像的基本图表：</p>
-      <div class="previewed-code"><pre><code><span class="typ-ref">@glacier</span> 展示了一座冰川。冰川
-      是复杂的系统。
+      <p>A figure with an optional caption.</p>
+      <p>Automatically detects its kind to select the correct counting track. For
+      example, figures containing images will be numbered separately from figures
+      containing tables.</p>
+      <h2 id="examples">Examples</h2>
+      <p>The example below shows a basic figure with an image:</p>
+      <div class="previewed-code"><pre><code><span class="typ-ref">@glacier</span> shows a glacier. Glaciers
+      are complex systems.
 
       <span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
         <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;glacier.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>一个好奇的图表。<span class="typ-punct">]</span><span class="typ-punct">,</span>
+        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>A curious figure.<span class="typ-punct">]</span><span class="typ-punct">,</span>
       <span class="typ-punct">)</span> <span class="typ-label">&lt;glacier&gt;</span>
       </code></pre><div class="preview"><img src="/assets/docs/b09671cdf78ea3377e94f6b859169380.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>您还可以在图表中插入 <a href="/docs/reference/model/table/">表格</a> 以添加标题。
-      图表将检测到这一点，并自动使用单独的计数器。</p>
+      <p>You can also insert <a href="/docs/reference/model/table/">tables</a> into figures to give them a caption.
+      The figure will detect this and automatically use a separate counter.</p>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
         <span class="typ-func">table</span><span class="typ-punct">(</span>
           columns<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span>
           <span class="typ-punct">[</span>t<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>1<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>2<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>3<span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-punct">[</span>y<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>0.3s<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>0.4s<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>0.8s<span class="typ-punct">]</span><span class="typ-punct">,</span>
         <span class="typ-punct">)</span><span class="typ-punct">,</span>
-        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>定时结果<span class="typ-punct">]</span><span class="typ-punct">,</span>
+        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>Timing results<span class="typ-punct">]</span><span class="typ-punct">,</span>
       <span class="typ-punct">)</span>
       </code></pre><div class="preview"><img src="/assets/docs/a387ba00bc1048db021396309eaa9db6.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>此行为可以通过明确指定图表的 <code>kind</code> 来覆盖。</p>
-      <h2 id="figure-behaviour">图表行为</h2>
-      <p>默认情况下，图表放置在内容流中。要使其漂浮到页面的顶部或底部，您可以使用
-      <a href="/docs/reference/model/figure/#parameters-placement"><code>placement</code></a> 参数。</p>
-      <p>如果您的图表太大，其内容可以跨页分割
-      （例如，如果它包含一个大表格），那么您可以使图表本身
-      也可以跨页分割，如下所示：</p>
+      <p>This behaviour can be overridden by explicitly specifying the figure's
+      <code>kind</code>. All figures of the same kind share a common counter.</p>
+      <h2 id="figure-behaviour">Figure behaviour</h2>
+      <p>By default, figures are placed within the flow of content. To make them
+      float to the top or bottom of the page, you can use the
+      <a href="/docs/reference/model/figure/#parameters-placement"><code>placement</code></a> argument.</p>
+      <p>If your figure is too large and its contents are breakable across pages
+      (e.g. if it contains a large table), then you can make the figure itself
+      breakable across pages as well with this show rule:</p>
       <pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">figure</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>breakable<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
       </code></pre>
-      <p>有关可分割块和不可分割块的更多信息，请参见 <a href="/docs/reference/layout/block/#parameters-breakable">block</a> 文档。</p>
-      <h2 id="caption-customization">标题定制</h2>
-      <p>您可以使用与其关联的图表标题的 <a href="/docs/reference/model/figure/#definitions-caption"><code>caption</code></a> 函数修改其外观。在下面的示例中，我们强调
-      所有的标题：</p>
+      <p>See the <a href="/docs/reference/layout/block/#parameters-breakable">block</a> documentation for more information about
+      breakable and non-breakable blocks.</p>
+      <h2 id="caption-customization">Caption customization</h2>
+      <p>You can modify the appearance of the figure's caption with its associated
+      <a href="/docs/reference/model/figure/#definitions-caption"><code>caption</code></a> function. In the example below, we emphasize
+      all captions:</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">:</span> <span class="typ-func">emph</span>
 
       <span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
         <span class="typ-func">rect</span><span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">,</span>
-        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>我被强调了！<span class="typ-punct">]</span><span class="typ-punct">,</span>
+        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>I am emphasized!<span class="typ-punct">]</span><span class="typ-punct">,</span>
       <span class="typ-punct">)</span>
       </code></pre><div class="preview"><img src="/assets/docs/d6f2c1c705909d49bde78ef346cf66a4.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>通过使用 <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> 选择器，我们可以将这些规则限定
-      在特定类型的图表范围内。例如，要将标题定位到
-      表格上方，但对于所有其他类型的图表，保持其下方，我们可以编写以下显示设置规则：</p>
+      <p>By using a <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selector, we can scope such rules to
+      specific kinds of figures. For example, to position the caption above
+      tables, but keep it below for all other kinds of figures, we could write the
+      following show-set rule:</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>
         kind<span class="typ-punct">:</span> table
       <span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">(</span>position<span class="typ-punct">:</span> top<span class="typ-punct">)</span>
 
       <span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
         <span class="typ-func">table</span><span class="typ-punct">(</span>columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>A<span class="typ-punct">]</span><span class="typ-punct">[</span>B<span class="typ-punct">]</span><span class="typ-punct">[</span>C<span class="typ-punct">]</span><span class="typ-punct">[</span>D<span class="typ-punct">]</span><span class="typ-punct">,</span>
-        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>我在这里<span class="typ-punct">]</span><span class="typ-punct">,</span>
+        caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>I&#39;m up here<span class="typ-punct">]</span><span class="typ-punct">,</span>
       <span class="typ-punct">)</span>
       </code></pre><div class="preview"><img src="/assets/docs/a0595def8feb7fdaf8b71b9cf3b8851f.png" alt="Preview" width="480" height="190"/></div></div>
     example: null
     self: false
     params:
     - name: body
-      details: <p>图片的内容。通常是 <a href="/docs/reference/visualize/image/">image</a>。</p>
+      details: <p>The content of the figure. Often, an <a href="/docs/reference/visualize/image/"
+        title="image">image</a>.</p>
       example: null
       types:
       - content
@@ -139,15 +148,18 @@ body:
       settable: false
     - name: placement
       details: |-
-        <p>图片在页面上的放置位置。</p>
+        <p>The figure's placement on the page.</p>
         <ul>
-        <li><code><span class="typ-key">none</span></code>: 图片保持在流中的确切位置
-        与其他内容一样。</li>
-        <li><code><span class="typ-key">auto</span></code>: 图片根据离它更近的位置选择 <code>top</code> 或 <code>bottom</code>。</li>
-        <li><code>top</code>: 图片漂浮到页面顶部。</li>
-        <li><code>bottom</code>: 图片漂浮到页面底部。</li>
+        <li><code><span class="typ-key">none</span></code>: The figure stays in-flow exactly where it was specified
+        like other content.</li>
+        <li><code><span class="typ-key">auto</span></code>: The figure picks <code>top</code> or <code>bottom</code> depending on which
+        is closer.</li>
+        <li><code>top</code>: The figure floats to the top of the page.</li>
+        <li><code>bottom</code>: The figure floats to the bottom of the page.</li>
         </ul>
-        <p>主流内容与浮动图片之间的间隙由 <a href="/docs/reference/layout/place/#parameters-clearance"><code>clearance</code></a> 参数控制。</p>
+        <p>The gap between the main flow content and the floating figure is
+        controlled by the <a href="/docs/reference/layout/place/#parameters-clearance"><code>clearance</code></a> argument on the
+        <code>place</code> function.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">200pt</span><span class="typ-punct">)</span>
 
@@ -185,20 +197,24 @@ body:
       settable: true
     - name: kind
       details: |-
-        <p>图表的种类。</p>
-        <p>所有相同种类的图表共享一个通用计数器。</p>
-        <p>如果设置为 <code><span class="typ-key">auto</span></code>，图表将尝试根据其主体的类型自动确定其种类。
-        自动检测到的种类包括<a href="/docs/reference/model/table/">表格</a>和<a href="/docs/reference/text/raw/">代码</a>。在其他情况下，推断的种类是
-        <a href="/docs/reference/visualize/image/">图像</a>。</p>
-        <p>将其设置为除 <code><span class="typ-key">auto</span></code> 之外的其他内容将覆盖
-        自动检测。如果</p>
+        <p>The kind of figure this is.</p>
+        <p>All figures of the same kind share a common counter.</p>
+        <p>If set to <code><span class="typ-key">auto</span></code>, the figure will try to automatically determine its
+        kind based on the type of its body. Automatically detected kinds are
+        <a href="/docs/reference/model/table/">tables</a> and <a href="/docs/reference/text/raw/">code</a>. In other cases, the inferred kind is
+        that of an <a href="/docs/reference/visualize/image/" title="image">image</a>.</p>
+        <p>Setting this to something other than <code><span class="typ-key">auto</span></code> will override the
+        automatic detection. This can be useful if</p>
         <ul>
-        <li>您想创建一个不是<a href="/docs/reference/visualize/image/">图像</a>、<a href="/docs/reference/model/table/">表格</a>或<a href="/docs/reference/text/raw/">代码</a>的自定义图形类型，</li>
-        <li>您希望强制图表使用特定计数器，而不考虑其内容。</li>
+        <li>you wish to create a custom figure type that is not an
+        <a href="/docs/reference/visualize/image/" title="image">image</a>, a <a href="/docs/reference/model/table/" title="table">table</a> or <a href="/docs/reference/text/raw/">code</a>,</li>
+        <li>you want to force the figure to use a specific counter regardless of
+        its content.</li>
         </ul>
-        <p>您可以将种类设置为元素函数或字符串。如果将其设置为<a href="/docs/reference/model/table/"><code>table</code></a>、<a href="/docs/reference/text/raw/"><code>raw</code></a>
-        或<a href="/docs/reference/visualize/image/"><code>image</code></a>之外的元素函数，则需要手动指定图的
-        补充。</p>
+        <p>You can set the kind to be an element function or a string. If you set
+        it to an element function other than <a href="/docs/reference/model/table/"><code>table</code></a>, <a href="/docs/reference/text/raw/"><code>raw</code></a>
+        or <a href="/docs/reference/visualize/image/"><code>image</code></a>, you will need to manually specify the figure's
+        supplement.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
           <span class="typ-func">circle</span><span class="typ-punct">(</span>radius<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
@@ -220,12 +236,14 @@ body:
       settable: true
     - name: supplement
       details: |-
-        <p>图表的补充。</p>
-        <p>如果设置为 <code><span class="typ-key">auto</span></code>，图表将尝试根据 <code>kind</code> 和活动
-        <a href="/docs/reference/text/text/#parameters-lang">文本语言</a> 自动确定正确的补充。如果使用自定义图表类型，您
-        将需要手动指定补充。</p>
-        <p>如果指定了函数，则将其传递给指定 <code>kind</code> 的第一个后代（通常是图表的主体），
-        并应返回内容。</p>
+        <p>The figure's supplement.</p>
+        <p>If set to <code><span class="typ-key">auto</span></code>, the figure will try to automatically determine the
+        correct supplement based on the <code>kind</code> and the active
+        <a href="/docs/reference/text/text/#parameters-lang">text language</a>. If you are using a custom figure type, you
+        will need to manually specify the supplement.</p>
+        <p>If a function is specified, it is passed the first descendant of the
+        specified <code>kind</code> (typically, the figure's body) and should return
+        content.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
           <span class="typ-punct">[</span>The contents of my figure!<span class="typ-punct">]</span><span class="typ-punct">,</span>
@@ -247,7 +265,9 @@ body:
       variadic: false
       settable: true
     - name: numbering
-      details: <p>如何对图表进行编号。接受<a href="/docs/reference/model/numbering/">编号模式或函数</a>。</p>
+      details: |-
+        <p>How to number the figure. Accepts a
+        <a href="/docs/reference/model/numbering/">numbering pattern or function</a>.</p>
       example: null
       types:
       - none
@@ -261,7 +281,7 @@ body:
       variadic: false
       settable: true
     - name: gap
-      details: <p>主体和标题之间的垂直间隙。</p>
+      details: <p>The vertical gap between the body and caption.</p>
       example: null
       types:
       - length
@@ -273,7 +293,8 @@ body:
       variadic: false
       settable: true
     - name: outlined
-      details: <p>图表是否应出现在<a href="/docs/reference/model/outline/"><code>outline</code></a>中。</p>
+      details: <p>Whether the figure should appear in an <a href="/docs/reference/model/outline/"
+        title="`outline`"><code>outline</code></a> of figures.</p>
       example: null
       types:
       - bool
@@ -290,15 +311,20 @@ body:
     - path:
       - figure
       name: caption
-      title: 标题
+      title: Caption
       keywords: []
-      oneliner: 图表的标题。此元素可用于 Set / Show 规则以定制所有图表或特定种类图表的标题外观
+      oneliner: The caption of a figure. This element can be used in set and show
+        rules to
       element: true
+      contextual: false
       details: |-
-        <p>图表的标题。此元素可用于 Set / Show 规则以定制所有图表或特定种类图表的标题外观。</p>
-        <p>除了其 <code>pos</code> 和 <code>body</code> 之外，<code>caption</code> 还提供了图表的 <code>kind</code>、<code>supplement</code>、<code>counter</code>、<code>numbering</code> 和 <code>location</code> 作为
-        字段。这些部分可用于<a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a>选择器和
-         Show 规则中构建完全自定义的标题。</p>
+        <p>The caption of a figure. This element can be used in set and show rules to
+        customize the appearance of captions for all figures or figures of a
+        specific kind.</p>
+        <p>In addition to its <code>pos</code> and <code>body</code>, the <code>caption</code> also provides the
+        figure's <code>kind</code>, <code>supplement</code>, <code>counter</code>, and <code>numbering</code> as fields. These
+        parts can be used in <a href="/docs/reference/foundations/function/#definitions-where"><code>where</code></a> selectors and show rules to
+        build a completely custom caption.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">:</span> <span class="typ-func">emph</span>
 
@@ -310,7 +336,8 @@ body:
       self: false
       params:
       - name: position
-        details: <p>标题在图中的位置。可以是 <code>top</code> 或 <code>bottom</code>。</p>
+        details: <p>The caption's position in the figure. Either <code>top</code>
+          or <code>bottom</code>.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>
             kind<span class="typ-punct">:</span> table
@@ -345,9 +372,9 @@ body:
         settable: true
       - name: separator
         details: |-
-          <p>将出现在编号和主体之间的分隔符。</p>
-          <p>如果设置为 <code><span class="typ-key">auto</span></code>，分隔符将适应当前
-          <a href="/docs/reference/text/text/#parameters-lang">语言</a> 和 <a href="/docs/reference/text/text/#parameters-region">地区</a>。</p>
+          <p>The separator which will appear between the number and body.</p>
+          <p>If set to <code><span class="typ-key">auto</span></code>, the separator will be adapted to the current
+          <a href="/docs/reference/text/text/#parameters-lang">language</a> and <a href="/docs/reference/text/text/#parameters-region">region</a>.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">(</span>separator<span class="typ-punct">:</span> <span class="typ-punct">[</span> <span class="typ-escape">---</span> <span class="typ-punct">]</span><span class="typ-punct">)</span>
 
@@ -368,20 +395,21 @@ body:
         settable: true
       - name: body
         details: |-
-          <p>标题的主体。</p>
-          <p>可以与 <code>kind</code>、<code>supplement</code>、<code>counter</code>、<code>numbering</code> 和
-          <code>location</code> 一起使用，以完全自定义标题。</p>
+          <p>The caption's body.</p>
+          <p>Can be used alongside <code>kind</code>, <code>supplement</code>, <code>counter</code>, <code>numbering</code>, and
+          <code>location</code> to completely customize the caption.</p>
         example: |-
           <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> figure<span class="typ-punct">.</span><span class="typ-func">caption</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
             <span class="typ-func">#</span><span class="typ-func">underline</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>body<span class="typ-punct">)</span> |
-            <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">supplement</span> <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">counter</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>numbering<span class="typ-punct">)</span>
+            <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">supplement</span>
+            <span class="typ-key">#</span><span class="typ-key">context</span> it<span class="typ-punct">.</span>counter<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span>it<span class="typ-punct">.</span>numbering<span class="typ-punct">)</span>
           <span class="typ-punct">]</span>
 
           <span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
             <span class="typ-func">rect</span><span class="typ-punct">[</span>Hello<span class="typ-punct">]</span><span class="typ-punct">,</span>
             caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>A rectangle<span class="typ-punct">]</span><span class="typ-punct">,</span>
           <span class="typ-punct">)</span>
-          </code></pre><div class="preview"><img src="/assets/docs/799a48590ec046b3e9a21ce5f491602b.png" alt="Preview" width="480" height="190"/></div></div>
+          </code></pre><div class="preview"><img src="/assets/docs/90ebad710b55d7fc7703242c1830792f.png" alt="Preview" width="480" height="190"/></div></div>
         types:
         - content
         strings: []

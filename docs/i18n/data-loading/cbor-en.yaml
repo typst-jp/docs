@@ -1,6 +1,6 @@
 route: /docs/reference/data-loading/cbor/
 title: CBOR
-description: '`cbor` 函数的文档'
+description: Documentation for the `cbor` function.
 part: null
 outline:
 - id: summary
@@ -36,6 +36,7 @@ body:
     keywords: []
     oneliner: Reads structured data from a CBOR file.
     element: false
+    contextual: false
     details: |-
       <p>Reads structured data from a CBOR file.</p>
       <p>The file must contain a valid CBOR serialization. Mappings will be
@@ -44,6 +45,8 @@ body:
       equivalents, null-values (<code>null</code>, <code>~</code> or empty ``) will be converted into
       <code><span class="typ-key">none</span></code>, and numbers will be converted to floats or integers depending on
       whether they are whole numbers.</p>
+      <p>Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
+      floating point numbers, which may result in an approximative value.</p>
     example: null
     self: false
     params:
@@ -69,6 +72,7 @@ body:
       keywords: []
       oneliner: Reads structured data from CBOR bytes.
       element: false
+      contextual: false
       details: <p>Reads structured data from CBOR bytes.</p>
       example: null
       self: false
@@ -95,6 +99,7 @@ body:
       keywords: []
       oneliner: Encode structured data into CBOR bytes.
       element: false
+      contextual: false
       details: <p>Encode structured data into CBOR bytes.</p>
       example: null
       self: false

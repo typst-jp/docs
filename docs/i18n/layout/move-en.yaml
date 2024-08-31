@@ -1,6 +1,6 @@
 route: /docs/reference/layout/move/
 title: Move
-description: '`move` 函数的文档'
+description: Documentation for the `move` function.
 part: null
 outline:
 - id: summary
@@ -30,9 +30,10 @@ body:
     keywords: []
     oneliner: Moves content without affecting layout.
     element: true
+    contextual: false
     details: |-
       <p>Moves content without affecting layout.</p>
-      <p>The <code>move</code> function allows you to move content while the layout still 'sees'
+      <p>The <code>move</code> function allows you to move content while th layout still 'sees'
       it at the original positions. Containers will still be sized as if the
       content was not moved.</p>
       <h2 id="example">Example</h2>

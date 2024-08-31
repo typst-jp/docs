@@ -1,6 +1,6 @@
 route: /docs/reference/model/outline/
 title: Outline
-description: '`outline` 函数的文档'
+description: Documentation for the `outline` function.
 part: null
 outline:
 - id: summary
@@ -64,6 +64,7 @@ body:
     - Table of Contents
     oneliner: A table of contents, figures, or other elements.
     element: true
+    contextual: false
     details: |-
       <p>A table of contents, figures, or other elements.</p>
       <p>This function generates a list of all occurrences of an element in the
@@ -115,7 +116,7 @@ body:
         <p>The outline's heading will not be numbered by default, but you can
         force it to be with a show-set rule:
         <code><span class="typ-key">show</span> <span class="typ-func">outline</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span></code></p>
-      example: <pre></pre>
+      example: null
       types:
       - none
       - auto
@@ -150,6 +151,7 @@ body:
       types:
       - label
       - selector
+      - location
       - function
       strings: []
       default: <code>heading<span class="typ-punct">.</span><span class="typ-func">where</span><span
@@ -281,6 +283,7 @@ body:
       oneliner: Represents each entry line in an outline, including the reference
         to the
       element: true
+      contextual: false
       details: |-
         <p>Represents each entry line in an outline, including the reference to the
         outlined element, its page number, and the filler content between both.</p>
@@ -359,9 +362,9 @@ body:
           its page number, as defined by the outline element this entry is
           located in. When <code><span class="typ-key">none</span></code>, empty space is inserted in that gap instead.</p>
           <p>Note that, when using show rules to override outline entries, it is
-          recommended to wrap the filling content in a <a href="/docs/reference/layout/box/"><code>box</code></a> with
-          fractional width. For example, <code><span class="typ-func">box</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-func">repeat</span><span class="typ-punct">[</span>-<span class="typ-punct">]</span><span class="typ-punct">)</span></code> would show
-          precisely as many <code>-</code> characters as necessary to fill a particular gap.</p>
+          recommended to wrap the filling content in a <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> with fractional
+          width. For example, <code><span class="typ-func">box</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-func">repeat</span><span class="typ-punct">[</span>-<span class="typ-punct">]</span><span class="typ-punct">)</span></code> would show precisely
+          as many <code>-</code> characters as necessary to fill a particular gap.</p>
         example: null
         types:
         - none

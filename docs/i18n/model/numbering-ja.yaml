@@ -1,6 +1,6 @@
 route: /docs/reference/model/numbering/
 title: Numbering
-description: '`numbering` 函数的文档'
+description: Documentation for the `numbering` function.
 part: null
 outline:
 - id: summary
@@ -27,6 +27,7 @@ body:
     keywords: []
     oneliner: Applies a numbering to a sequence of numbers.
     element: false
+    contextual: false
     details: |-
       <p>Applies a numbering to a sequence of numbers.</p>
       <p>A numbering defines how a sequence of numbers should be displayed as
@@ -53,7 +54,7 @@ body:
     - name: numbering
       details: |-
         <p>Defines how the numbering works.</p>
-        <p><strong>Counting symbols</strong> are <code>1</code>, <code>a</code>, <code>A</code>, <code>i</code>, <code>I</code>, <code>い</code>, <code>イ</code>, <code>א</code>, <code>가</code>,
+        <p><strong>Counting symbols</strong> are <code>1</code>, <code>a</code>, <code>A</code>, <code>i</code>, <code>I</code>, <code>一</code>, <code>壹</code>, <code>あ</code>, <code>い</code>, <code>ア</code>, <code>イ</code>, <code>א</code>, <code>가</code>,
         <code>ㄱ</code>, and <code>*</code>. They are replaced by the number in the sequence, in the
         given case.</p>
         <p>The <code>*</code> character means that symbols should be used to count, in the

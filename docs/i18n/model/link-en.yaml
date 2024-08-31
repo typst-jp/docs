@@ -1,6 +1,6 @@
 route: /docs/reference/model/link/
 title: Link
-description: '`link` 函数的文档'
+description: Documentation for the `link` function.
 part: null
 outline:
 - id: summary
@@ -30,6 +30,7 @@ body:
     keywords: []
     oneliner: Links to a URL or a location in the document.
     element: true
+    contextual: false
     details: |-
       <p>Links to a URL or a location in the document.</p>
       <p>By default, links are not styled any different from normal text. However,
@@ -65,18 +66,18 @@ body:
         forms:</p>
         <ul>
         <li>
-        <p>A <a href="/docs/reference/foundations/label/">label</a> attached to an element. If you also want automatic
-        text for the link based on the element, consider using a
+        <p>A <a href="/docs/reference/foundations/label/" title="label">label</a> attached to an element. If you also want automatic text
+        for the link based on the element, consider using a
         <a href="/docs/reference/model/ref/">reference</a> instead.</p>
         </li>
         <li>
-        <p>A <a href="/docs/reference/introspection/locate/">location</a> resulting from a <a href="/docs/reference/introspection/locate/"><code>locate</code></a> call or
-        <a href="/docs/reference/introspection/query/"><code>query</code></a>.</p>
+        <p>A <a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a> (typically retrieved from <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a>, <a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a> or
+        <a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a>).</p>
         </li>
         <li>
         <p>A dictionary with a <code>page</code> key of type <a href="/docs/reference/foundations/int/">integer</a> and <code>x</code> and
-        <code>y</code> coordinates of type <a href="/docs/reference/layout/length/">length</a>. Pages are counted from
-        one, and the coordinates are relative to the page's top left corner.</p>
+        <code>y</code> coordinates of type <a href="/docs/reference/layout/length/" title="length">length</a>. Pages are counted from one, and
+        the coordinates are relative to the page's top left corner.</p>
         </li>
         </ul>
         </li>

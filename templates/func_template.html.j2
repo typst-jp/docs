@@ -3,11 +3,11 @@
 {% extends "base_template.html.j2" %}
 {% block content %}
 
-<h1 id="summary"><code>{{ body['content']['name'] }}</code><small>{% if body['content']['element'] %}{{ 
-  macros.tooltip_display('元素', '元素函数可以通过 set 和 show 规则进行样式自定义。') }}{% endif %}</small></h1>
+<h1 id="summary"><code>{{ body['content']['name'] }}</code><small>{% if body['content']['element'] %}{{
+  macros.tooltip_display('Element', 'Element functions can be customized with <code>set</code> and <code>show</code> rules.') }}{% endif %}</small></h1>
 {{ body['content']['details'] | safe }}
 <h2 id="parameters">
-  {{ macros.tooltip_display('参数', '参数是函数的输入，它们在函数名称后面的括号中传入。', prefix='parameters') }}
+  {{ macros.tooltip_display('Parameters', 'Parameters are the inputs to a function. They are specified in parentheses after the function name.', prefix='parameters') }}
 </h2>
 {{ macros.function_definition_display(body['content'], type2class, gen_path, prefix=body['content']['name']) }}
 {% if body['content']['example'] %}
@@ -18,7 +18,7 @@
 
 {% if body['content']['scope'].__len__() > 0 %}
 <h2 id="definitions">
-  {{ macros.tooltip_display('定义', '函数和类型可以有与其关联的定义 (成员或方法)。可以使用 "." 操作符来访问调用它们。', prefix='definitions') }}
+  {{ macros.tooltip_display('Definitions', 'Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition\'s name.', prefix='definitions') }}
 </h2>
 {% endif %}
 {% for method in body['content']['scope'] %}

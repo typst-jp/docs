@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/arguments/
 title: Arguments
-description: Arguments 类型的文档
+description: Documentation for the Arguments type.
 part: null
 outline:
 - id: summary
@@ -66,6 +66,7 @@ body:
       keywords: []
       oneliner: Construct spreadable arguments in place.
       element: false
+      contextual: false
       details: |-
         <p>Construct spreadable arguments in place.</p>
         <p>This function behaves like <code><span class="typ-key">let</span> <span class="typ-func">args</span><span class="typ-punct">(</span><span class="typ-op">..</span>sink<span class="typ-punct">)</span> <span class="typ-op">=</span> sink</code>.</p>
@@ -79,7 +80,7 @@ body:
         details: <p>The arguments to construct.</p>
         example: null
         types:
-        - arguments
+        - any
         strings: []
         default: null
         positional: true
@@ -98,6 +99,7 @@ body:
       keywords: []
       oneliner: Returns the captured positional arguments as an array.
       element: false
+      contextual: false
       details: <p>Returns the captured positional arguments as an array.</p>
       example: null
       self: true
@@ -112,6 +114,7 @@ body:
       keywords: []
       oneliner: Returns the captured named arguments as a dictionary.
       element: false
+      contextual: false
       details: <p>Returns the captured named arguments as a dictionary.</p>
       example: null
       self: true

@@ -1,6 +1,6 @@
 route: /docs/reference/text/highlight/
 title: Highlight
-description: '`highlight` 函数的文档'
+description: Documentation for the `highlight` function.
 part: null
 outline:
 - id: summary
@@ -15,6 +15,9 @@ outline:
   - id: parameters-fill
     name: fill
     children: []
+  - id: parameters-stroke
+    name: stroke
+    children: []
   - id: parameters-top-edge
     name: top-edge
     children: []
@@ -23,6 +26,9 @@ outline:
     children: []
   - id: parameters-extent
     name: extent
+    children: []
+  - id: parameters-radius
+    name: radius
     children: []
   - id: parameters-body
     name: body
@@ -36,6 +42,7 @@ body:
     keywords: []
     oneliner: Highlights text with a background color.
     element: true
+    contextual: false
     details: |-
       <p>Highlights text with a background color.</p>
       <h2 id="example">Example</h2>
@@ -45,9 +52,7 @@ body:
     self: false
     params:
     - name: fill
-      details: |-
-        <p>The color to highlight the text with.
-        (Default: 0xffff5f)</p>
+      details: <p>The color to highlight the text with.</p>
       example: |-
         <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> blue<span class="typ-punct">)</span><span class="typ-punct">[</span>with blue<span class="typ-punct">]</span>.
         </code></pre><div class="preview"><img src="/assets/docs/111d0ec4615abd9bf808872af2ab2278.png" alt="Preview" width="480" height="190"/></div></div>
@@ -57,7 +62,28 @@ body:
       - pattern
       strings: []
       default: <code><span class="typ-func">rgb</span><span class="typ-punct">(</span><span
-        class="typ-str">&quot;#ffff5f&quot;</span><span class="typ-punct">)</span></code>
+        class="typ-str">&quot;#fffd11a1&quot;</span><span class="typ-punct">)</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: stroke
+      details: |-
+        <p>The highlight's border color. See the
+        <a href="/docs/reference/visualize/rect/#parameters-stroke">rectangle's documentation</a> for more details.</p>
+      example: null
+      types:
+      - none
+      - length
+      - color
+      - gradient
+      - stroke
+      - pattern
+      - dictionary
+      strings: []
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -130,6 +156,22 @@ body:
       - length
       strings: []
       default: <code><span class="typ-num">0pt</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: radius
+      details: |-
+        <p>How much to round the highlight's corners. See the
+        <a href="/docs/reference/visualize/rect/#parameters-radius">rectangle's documentation</a> for more details.</p>
+      example: null
+      types:
+      - relative
+      - dictionary
+      strings: []
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false

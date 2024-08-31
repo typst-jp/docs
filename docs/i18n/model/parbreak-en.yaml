@@ -1,6 +1,6 @@
 route: /docs/reference/model/parbreak/
 title: Paragraph Break
-description: '`parbreak` 函数的文档'
+description: Documentation for the `parbreak` function.
 part: null
 outline:
 - id: summary
@@ -21,6 +21,7 @@ body:
     keywords: []
     oneliner: A paragraph break.
     element: true
+    contextual: false
     details: |-
       <p>A paragraph break.</p>
       <p>This starts a new paragraph. Especially useful when used within code like

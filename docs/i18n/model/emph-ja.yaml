@@ -1,6 +1,6 @@
 route: /docs/reference/model/emph/
-title: 强调（斜体）
-description: '`emph` 函数的文档'
+title: Emphasis
+description: Documentation for the `emph` function.
 part: null
 outline:
 - id: summary
@@ -25,15 +25,16 @@ body:
     name: emph
     title: Emphasis
     keywords: []
-    oneliner: 用斜体来突出内容。
+    oneliner: Emphasizes content by toggling italics.
     element: true
+    contextual: false
     details: |-
-      <p>用斜体来突出内容。</p>
+      <p>Emphasizes content by toggling italics.</p>
       <ul>
-      <li>如果当前的 <a href="/docs/reference/text/text/#parameters-style">文本样式</a> 是 <code><span class="typ-str">&quot;normal&quot;</span></code>，
-      则将其变为 <code><span class="typ-str">&quot;italic&quot;</span></code>。</li>
-      <li>如果已经是 <code><span class="typ-str">&quot;italic&quot;</span></code> 或者 <code><span class="typ-str">&quot;oblique&quot;</span></code>，
-      则将其恢复为 <code><span class="typ-str">&quot;normal&quot;</span></code>。</li>
+      <li>If the current <a href="/docs/reference/text/text/#parameters-style">text style</a> is <code><span class="typ-str">&quot;normal&quot;</span></code>, this turns it
+      into <code><span class="typ-str">&quot;italic&quot;</span></code>.</li>
+      <li>If it is already <code><span class="typ-str">&quot;italic&quot;</span></code> or <code><span class="typ-str">&quot;oblique&quot;</span></code>, it turns it back to
+      <code><span class="typ-str">&quot;normal&quot;</span></code>.</li>
       </ul>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>This is <span class="typ-emph">_emphasized._</span> <span class="typ-escape">\</span>
@@ -46,12 +47,14 @@ body:
       This is <span class="typ-emph">_emphasized_</span> differently.
       </code></pre><div class="preview"><img src="/assets/docs/e994151e9b1baafdc57d2fb5046ee42b.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="syntax">Syntax</h2>
-      <p>这个功能还有特定的语法：要强调内容，只需用下划线 (_) 将其括起来。请注意，这仅在词边界起作用。要强调单词的一部分，必须使用这个函数，例如"#emph[eng]lish"，而"_eng_lish"会报错。</p>
+      <p>This function also has dedicated syntax: To emphasize content, simply
+      enclose it in underscores (<code>_</code>). Note that this only works at word
+      boundaries. To emphasize part of a word, you have to use the function.</p>
     example: null
     self: false
     params:
     - name: body
-      details: <p>要强调的内容。</p>
+      details: <p>The content to emphasize.</p>
       example: null
       types:
       - content

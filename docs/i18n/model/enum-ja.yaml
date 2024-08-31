@@ -1,6 +1,6 @@
 route: /docs/reference/model/enum/
-title: 有序列表
-description: '`enum` 函数的文档'
+title: Numbered List
+description: Documentation for the `enum` function.
 part: null
 outline:
 - id: summary
@@ -59,59 +59,72 @@ body:
   content:
     path: []
     name: enum
-    title: 有序列表
+    title: Numbered List
     keywords: []
-    oneliner: 有序列表。
+    oneliner: A numbered list.
     element: true
+    contextual: false
     details: |-
-      <p>有序列表。</p>
-      <p>垂直显示项目序列并按顺序编号。</p>
-      <h2 id="example">示例</h2>
-      <div class="previewed-code"><pre><code>自动编号：
-      <span class="typ-marker">+</span> 准备工作
-      <span class="typ-marker">+</span> 分析
-      <span class="typ-marker">+</span> 结论
+      <p>A numbered list.</p>
+      <p>Displays a sequence of items vertically and numbers them consecutively.</p>
+      <h2 id="example">Example</h2>
+      <div class="previewed-code"><pre><code>Automatically numbered:
+      <span class="typ-marker">+</span> Preparations
+      <span class="typ-marker">+</span> Analysis
+      <span class="typ-marker">+</span> Conclusions
 
-      手动编号：
-      <span class="typ-marker">2.</span> 第一步是什么？
-      <span class="typ-marker">5.</span> 我迷惑了。
-      <span class="typ-marker">+</span> 继续 <span class="typ-escape">...</span>
+      Manually numbered:
+      <span class="typ-marker">2.</span> What is the first step?
+      <span class="typ-marker">5.</span> I am confused.
+      <span class="typ-marker">+</span>  Moving on <span class="typ-escape">...</span>
 
-      多行：
-      <span class="typ-marker">+</span> 此枚举项有多行，因为下一行缩进了。
+      Multiple lines:
+      <span class="typ-marker">+</span> This enum item has multiple
+        lines because the next line
+        is indented.
 
-      函数调用。
+      Function call.
       <span class="typ-func">#</span><span class="typ-func">enum</span><span class="typ-punct">[</span>First<span class="typ-punct">]</span><span class="typ-punct">[</span>Second<span class="typ-punct">]</span>
       </code></pre><div class="preview"><img src="/assets/docs/7f1849410764a429269845fbfbe70e06.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>您可以使用集合规则轻松切换所有枚举的不同编号样式。</p>
+      <p>You can easily switch all your enumerations to a different numbering style
+      with a set rule.</p>
       <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">enum</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;a)&quot;</span><span class="typ-punct">)</span>
 
-      <span class="typ-marker">+</span> 开始 <span class="typ-escape">...</span>
-      <span class="typ-marker">+</span> 不要忘记第二步
+      <span class="typ-marker">+</span> Starting off <span class="typ-escape">...</span>
+      <span class="typ-marker">+</span> Don&#39;t forget step two
       </code></pre><div class="preview"><img src="/assets/docs/e99fd30bf2771e1086e84995cb06129f.png" alt="Preview" width="480" height="190"/></div></div>
-      <p>您还可以使用 <a href="/docs/reference/model/enum/#definitions-item"><code>enum.item</code></a> 以编程方式自定义枚举中每个项目的编号：</p>
+      <p>You can also use <a href="/docs/reference/model/enum/#definitions-item"><code>enum.item</code></a> to programmatically customize the
+      number of each item in the enumeration:</p>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">enum</span><span class="typ-punct">(</span>
-        enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">[</span>第一步<span class="typ-punct">]</span><span class="typ-punct">,</span>
-        enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">[</span>第五步<span class="typ-punct">]</span><span class="typ-punct">,</span>
-        enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span><span class="typ-punct">[</span>第十步<span class="typ-punct">]</span>
+        enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">[</span>First step<span class="typ-punct">]</span><span class="typ-punct">,</span>
+        enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Fifth step<span class="typ-punct">]</span><span class="typ-punct">,</span>
+        enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Tenth step<span class="typ-punct">]</span>
       <span class="typ-punct">)</span>
       </code></pre><div class="preview"><img src="/assets/docs/4ef4c95adffafce967eed5d6682bc04a.png" alt="Preview" width="480" height="190"/></div></div>
-      <h2 id="syntax">语法</h2>
-      <p>此功能还具有专用语法：</p>
+      <h2 id="syntax">Syntax</h2>
+      <p>This functions also has dedicated syntax:</p>
       <ul>
-      <li>以加号开头的行会创建自动编号的枚举项。</li>
-      <li>以数字后跟点号的行会创建明确编号的枚举项。</li>
+      <li>Starting a line with a plus sign creates an automatically numbered
+      enumeration item.</li>
+      <li>Starting a line with a number followed by a dot creates an explicitly
+      numbered enumeration item.</li>
       </ul>
-      <p>枚举项可以包含多个段落和其他块级内容。所有缩进超过项目标记的内容都将成为该项目的一部分。</p>
+      <p>Enumeration items can contain multiple paragraphs and other block-level
+      content. All content that is indented more than an item's marker becomes
+      part of that item.</p>
     example: null
     self: false
     params:
     - name: tight
       details: |-
-        <p>如果为 <code><span class="typ-key">false</span></code>，则使用 <a href="/docs/reference/model/enum/#parameters-spacing">enum spacing</a> 将项目间隔开。
-        如果为 <code><span class="typ-key">true</span></code>，则使用正常的 <a href="/docs/reference/model/par/#parameters-leading">leading</a>。如果项目很短，则这样做可能看起来更好。</p>
-        <p>在标记模式中，此参数的值是基于项目是否用空行分隔而确定的。
-        如果项目直接相邻，则设置为 <code><span class="typ-key">true</span></code>；如果项目之间用空行分隔，则设置为 <code><span class="typ-key">false</span></code>。</p>
+        <p>If this is <code><span class="typ-key">false</span></code>, the items are spaced apart with
+        <a href="/docs/reference/model/enum/#parameters-spacing">enum spacing</a>. If it is <code><span class="typ-key">true</span></code>, they use normal
+        <a href="/docs/reference/model/par/#parameters-leading">leading</a> instead. This makes the enumeration more
+        compact, which can look better if the items are short.</p>
+        <p>In markup mode, the value of this parameter is determined based on
+        whether items are separated with a blank line. If items directly follow
+        each other, this is set to <code><span class="typ-key">true</span></code>; if items are separated by a blank
+        line, this is set to <code><span class="typ-key">false</span></code>.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-marker">+</span> If an enum has a lot of text, and
           maybe other inline content, it
@@ -132,9 +145,11 @@ body:
       settable: true
     - name: numbering
       details: |-
-        <p>如何为枚举编号。接受 <a href="/docs/reference/model/numbering/">numbering pattern or function</a>。</p>
-        <p>如果编号模式包含多个计数符号，则它们适用于嵌套的枚举。
-        如果给定一个函数，如果 <code>full</code> 为 <code><span class="typ-key">false</span></code>，则函数接收一个参数；如果 <code>full</code> 为 <code><span class="typ-key">true</span></code>，则函数接收多个参数。</p>
+        <p>How to number the enumeration. Accepts a
+        <a href="/docs/reference/model/numbering/">numbering pattern or function</a>.</p>
+        <p>If the numbering pattern contains multiple counting symbols, they apply
+        to nested enums. If given a function, the function receives one argument
+        if <code>full</code> is <code><span class="typ-key">false</span></code> and multiple arguments if <code>full</code> is <code><span class="typ-key">true</span></code>.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">enum</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.a)&quot;</span><span class="typ-punct">)</span>
         <span class="typ-marker">+</span> Different
@@ -158,7 +173,7 @@ body:
       variadic: false
       settable: true
     - name: start
-      details: <p>从哪个数字开始进行枚举。</p>
+      details: <p>Which number to start the enumeration with.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">enum</span><span class="typ-punct">(</span>
           start<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
@@ -176,7 +191,9 @@ body:
       variadic: false
       settable: true
     - name: full
-      details: <p>是否显示完整编号，包括所有父枚举的编号。</p>
+      details: |-
+        <p>Whether to display the full numbering, including the numbers of
+        all parent enumerations.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">enum</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.a)&quot;</span><span class="typ-punct">,</span> full<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
         <span class="typ-marker">+</span> Cook
@@ -194,7 +211,7 @@ body:
       variadic: false
       settable: true
     - name: indent
-      details: <p>每个项目的缩进。</p>
+      details: <p>The indentation of each item.</p>
       example: null
       types:
       - length
@@ -206,7 +223,7 @@ body:
       variadic: false
       settable: true
     - name: body-indent
-      details: <p>编号和每个项目主体之间的空格。</p>
+      details: <p>The space between the numbering and the body of each item.</p>
       example: null
       types:
       - length
@@ -219,8 +236,8 @@ body:
       settable: true
     - name: spacing
       details: |-
-        <p>宽（非紧凑）枚举项目之间的间距。</p>
-        <p>如果设置为 <code><span class="typ-key">auto</span></code>，则使用 <a href="/docs/reference/layout/block/#parameters-below">块下方</a> 的间距。</p>
+        <p>The spacing between the items of a wide (non-tight) enumeration.</p>
+        <p>If set to <code><span class="typ-key">auto</span></code>, uses the spacing <a href="/docs/reference/layout/block/#parameters-below">below blocks</a>.</p>
       example: null
       types:
       - auto
@@ -235,12 +252,16 @@ body:
       settable: true
     - name: number-align
       details: |-
-        <p>枚举号码应具有的对齐方式。</p>
-        <p>默认情况下，这设置为 <code>end <span class="typ-op">+</span> top</code>，将枚举号码对齐到当前文本方向的末尾
-        （例如，在从左到右的脚本中，这与 <code>right</code> 相同），并位于行顶部。
-        对于水平对齐枚举号码，通常首选 <code>end</code>，因为这样数字就远离文本而不是朝向文本，避免了某些视觉问题。
-        但是，此选项允许您覆盖此行为。 （还要注意的是，<a href="/docs/reference/model/list/">无序列表</a> 使用不同的方法，通过直接给
-        <code>marker</code> 内容提供对齐方式）。</p>
+        <p>The alignment that enum numbers should have.</p>
+        <p>By default, this is set to <code>end <span class="typ-op">+</span> top</code>, which aligns enum numbers
+        towards end of the current text direction (in left-to-right script,
+        for example, this is the same as <code>right</code>) and at the top of the line.
+        The choice of <code>end</code> for horizontal alignment of enum numbers is
+        usually preferred over <code>start</code>, as numbers then grow away from the
+        text instead of towards it, avoiding certain visual issues. This option
+        lets you override this behaviour, however. (Also to note is that the
+        <a href="/docs/reference/model/list/">unordered list</a> uses a different method for this, by giving the
+        <code>marker</code> content an alignment directly.).</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">enum</span><span class="typ-punct">(</span>number-align<span class="typ-punct">:</span> start <span class="typ-op">+</span> bottom<span class="typ-punct">)</span>
 
@@ -263,8 +284,9 @@ body:
       settable: true
     - name: children
       details: |-
-        <p>编号列表的项目。</p>
-        <p>在使用枚举语法时，相邻的项目会自动收集到枚举中，即使通过像 for 循环这样的结构。</p>
+        <p>The numbered list's items.</p>
+        <p>When using the enum syntax, adjacent items are automatically collected
+        into enumerations, even through constructs like for loops.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">for</span> phase <span class="typ-key">in</span> <span class="typ-punct">(</span>
            <span class="typ-str">&quot;Launch&quot;</span><span class="typ-punct">,</span>
@@ -290,14 +312,15 @@ body:
       name: item
       title: Numbered List Item
       keywords: []
-      oneliner: 枚举项。
+      oneliner: An enumeration item.
       element: true
-      details: <p>枚举项。</p>
+      contextual: false
+      details: <p>An enumeration item.</p>
       example: null
       self: false
       params:
       - name: number
-        details: <p>项目的编号。</p>
+        details: <p>The item's number.</p>
         example: null
         types:
         - none
@@ -310,7 +333,7 @@ body:
         variadic: false
         settable: true
       - name: body
-        details: <p>项目的正文。</p>
+        details: <p>The item's body.</p>
         example: null
         types:
         - content

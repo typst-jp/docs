@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/circle/
 title: Circle
-description: '`circle` 函数的文档'
+description: Documentation for the `circle` function.
 part: null
 outline:
 - id: summary
@@ -45,6 +45,7 @@ body:
     keywords: []
     oneliner: A circle with optional content.
     element: true
+    contextual: false
     details: |-
       <p>A circle with optional content.</p>
       <h2 id="example">Example</h2>
@@ -171,7 +172,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false

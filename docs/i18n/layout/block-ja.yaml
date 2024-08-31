@@ -1,6 +1,6 @@
 route: /docs/reference/layout/block/
 title: Block
-description: '`block` 函数的文档'
+description: Documentation for the `block` function.
 part: null
 outline:
 - id: summary
@@ -60,6 +60,7 @@ body:
     keywords: []
     oneliner: A block-level container.
     element: true
+    contextual: false
     details: |-
       <p>A block-level container.</p>
       <p>Such a container can be used to separate content, size it, and give it a
@@ -184,7 +185,8 @@ body:
       - pattern
       - dictionary
       strings: []
-      default: <code><span class="typ-key">none</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -199,7 +201,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -214,7 +217,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -229,7 +233,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false

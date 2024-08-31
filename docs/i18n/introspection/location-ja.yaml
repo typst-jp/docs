@@ -1,10 +1,13 @@
 route: /docs/reference/introspection/location/
 title: Location
-description: Location 类型的文档
+description: Documentation for the Location type.
 part: null
 outline:
 - id: summary
   name: Summary
+  children: []
+- id: locatable
+  name: Locatable
   children: []
 - id: definitions
   name: Definitions
@@ -29,9 +32,14 @@ body:
       <p>Identifies an element in the document.</p>
       <p>A location uniquely identifies an element in the document and lets you
       access its absolute position on the pages. You can retrieve the current
-      location with the <a href="/docs/reference/introspection/locate/"><code>locate</code></a> function and the location of a queried
-      or shown element with the <a href="/docs/reference/foundations/content/#definitions-location"><code>location()</code></a> method on
-      content.</p>
+      location with the <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> function and the location of a queried or shown
+      element with the <a href="/docs/reference/foundations/content/#definitions-location"><code>location()</code></a> method on content.</p>
+      <h2 id="locatable">Locatable elements</h2>
+      <p>Currently, only a subset of element functions is locatable. Aside from
+      headings and figures, this includes equations, references and all elements
+      with an explicit label. As a result, you <em>can</em> query for e.g. <a href="/docs/reference/model/strong/" title="`strong`"><code>strong</code></a>
+      elements, but you will find only those that have an explicit label attached
+      to them. This limitation will be resolved in the future.</p>
     constructor: null
     scope:
     - path:
@@ -39,15 +47,23 @@ body:
       name: page
       title: Page
       keywords: []
-      oneliner: Return the page number for this location.
+      oneliner: Returns the page number for this location.
       element: false
+      contextual: false
       details: |-
-        <p>Return the page number for this location.</p>
+        <p>Returns the page number for this location.</p>
         <p>Note that this does not return the value of the <a href="/docs/reference/introspection/counter/">page counter</a>
         at this location, but the true page number (starting from one).</p>
         <p>If you want to know the value of the page counter, use
         <code><span class="typ-func">counter</span><span class="typ-punct">(</span>page<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span>loc<span class="typ-punct">)</span></code> instead.</p>
-      example: null
+        <p>Can be used with <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> to retrieve the physical page position
+        of the current context:</p>
+      example: |-
+        <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">[</span>
+          I am located on
+          page <span class="typ-func">#</span><span class="typ-func">here</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">page</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+        <span class="typ-punct">]</span>
+        </code></pre><div class="preview"><img src="/assets/docs/2c0d02d7e318107ab94071a9a3844b38.png" alt="Preview" width="480" height="190"/></div></div>
       self: true
       params: []
       returns:
@@ -58,11 +74,12 @@ body:
       name: position
       title: Position
       keywords: []
-      oneliner: Return a dictionary with the page number and the x, y position for
+      oneliner: Returns a dictionary with the page number and the x, y position for
         this
       element: false
+      contextual: false
       details: |-
-        <p>Return a dictionary with the page number and the x, y position for this
+        <p>Returns a dictionary with the page number and the x, y position for this
         location. The page number starts at one and the coordinates are measured
         from the top-left of the page.</p>
         <p>If you only need the page number, use <code>page()</code> instead as it allows
@@ -80,6 +97,7 @@ body:
       keywords: []
       oneliner: Returns the page numbering pattern of the page at this location. This
       element: false
+      contextual: false
       details: |-
         <p>Returns the page numbering pattern of the page at this location. This
         can be used when displaying the page counter in order to obtain the

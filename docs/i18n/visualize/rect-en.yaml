@@ -1,6 +1,6 @@
 route: /docs/reference/visualize/rect/
 title: Rectangle
-description: '`rect` 函数的文档'
+description: Documentation for the `rect` function.
 part: null
 outline:
 - id: summary
@@ -45,6 +45,7 @@ body:
     keywords: []
     oneliner: A rectangle with optional content.
     element: true
+    contextual: false
     details: |-
       <p>A rectangle with optional content.</p>
       <h2 id="example">Example</h2>
@@ -113,7 +114,7 @@ body:
         <li><code><span class="typ-key">none</span></code> to disable stroking</li>
         <li><code><span class="typ-key">auto</span></code> for a stroke of <code><span class="typ-num">1pt</span> <span class="typ-op">+</span> black</code> if and if only if no fill is
         given.</li>
-        <li>Any kind of <a href="/docs/reference/visualize/stroke/">stroke</a></li>
+        <li>Any kind of <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a></li>
         <li>A dictionary describing the stroke for each side inidvidually. The
         dictionary can contain the following keys in order of precedence:
         <ul>
@@ -196,7 +197,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
@@ -226,7 +228,8 @@ body:
       - relative
       - dictionary
       strings: []
-      default: <code><span class="typ-num">0pt</span></code>
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false

@@ -1,6 +1,6 @@
 route: /docs/reference/text/highlight/
-title: 文本高亮
-description: '`highlight` 函数的文档'
+title: Highlight
+description: Documentation for the `highlight` function.
 part: null
 outline:
 - id: summary
@@ -15,6 +15,9 @@ outline:
   - id: parameters-fill
     name: fill
     children: []
+  - id: parameters-stroke
+    name: stroke
+    children: []
   - id: parameters-top-edge
     name: top-edge
     children: []
@@ -23,6 +26,9 @@ outline:
     children: []
   - id: parameters-extent
     name: extent
+    children: []
+  - id: parameters-radius
+    name: radius
     children: []
   - id: parameters-body
     name: body
@@ -36,8 +42,9 @@ body:
     keywords: []
     oneliner: Highlights text with a background color.
     element: true
+    contextual: false
     details: |-
-      <p>用背景颜色高亮文本。</p>
+      <p>Highlights text with a background color.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">[</span>important<span class="typ-punct">]</span>.
       </code></pre><div class="preview"><img src="/assets/docs/f83e413af4289329bae19114bf7b5ade.png" alt="Preview" width="480" height="190"/></div></div>
@@ -45,9 +52,7 @@ body:
     self: false
     params:
     - name: fill
-      details: |-
-        <p>高亮文本的颜色。
-        (默认: 0xffff5f)</p>
+      details: <p>The color to highlight the text with.</p>
       example: |-
         <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> blue<span class="typ-punct">)</span><span class="typ-punct">[</span>with blue<span class="typ-punct">]</span>.
         </code></pre><div class="preview"><img src="/assets/docs/111d0ec4615abd9bf808872af2ab2278.png" alt="Preview" width="480" height="190"/></div></div>
@@ -57,14 +62,35 @@ body:
       - pattern
       strings: []
       default: <code><span class="typ-func">rgb</span><span class="typ-punct">(</span><span
-        class="typ-str">&quot;#ffff5f&quot;</span><span class="typ-punct">)</span></code>
+        class="typ-str">&quot;#fffd11a1&quot;</span><span class="typ-punct">)</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
+    - name: stroke
+      details: |-
+        <p>The highlight's border color. See the
+        <a href="/docs/reference/visualize/rect/#parameters-stroke">rectangle's documentation</a> for more details.</p>
+      example: null
+      types:
+      - none
+      - length
+      - color
+      - gradient
+      - stroke
+      - pattern
+      - dictionary
+      strings: []
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
       positional: false
       named: true
       required: false
       variadic: false
       settable: true
     - name: top-edge
-      details: <p>背景矩形的顶端。</p>
+      details: <p>The top end of the background rectangle.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">highlight</span><span class="typ-punct">(</span>top-edge<span class="typ-punct">:</span> <span class="typ-str">&quot;ascender&quot;</span><span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">[</span>a<span class="typ-punct">]</span> <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">[</span>aib<span class="typ-punct">]</span>
@@ -77,15 +103,16 @@ body:
       - str
       strings:
       - string: ascender
-        details: <p>上行线高度，通常超过所有字形的高度。</p>
+        details: <p>The font's ascender, which typically exceeds the height of all
+          glyphs.</p>
       - string: cap-height
-        details: <p>大写字母的近似高度。</p>
+        details: <p>The approximate height of uppercase letters.</p>
       - string: x-height
-        details: <p>非上行线小写字母 x 的近似高度。</p>
+        details: <p>The approximate height of non-ascending lowercase letters.</p>
       - string: baseline
-        details: <p>字母所依托的基线高度。</p>
+        details: <p>The baseline on which the letters rest.</p>
       - string: bounds
-        details: <p>字形边界框的顶部边缘高度。</p>
+        details: <p>The top edge of the glyph's bounding box.</p>
       default: <code><span class="typ-str">&quot;ascender&quot;</span></code>
       positional: false
       named: true
@@ -93,7 +120,7 @@ body:
       variadic: false
       settable: true
     - name: bottom-edge
-      details: <p>背景矩形的底端。</p>
+      details: <p>The bottom end of the background rectangle.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">highlight</span><span class="typ-punct">(</span>bottom-edge<span class="typ-punct">:</span> <span class="typ-str">&quot;descender&quot;</span><span class="typ-punct">)</span>
         <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">[</span>a<span class="typ-punct">]</span> <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">[</span>ap<span class="typ-punct">]</span>
@@ -106,11 +133,12 @@ body:
       - str
       strings:
       - string: baseline
-        details: <p>字母所依托的基线高度。</p>
+        details: <p>The baseline on which the letters rest.</p>
       - string: descender
-        details: <p>下行线高度，通常超过所有字形的深度。</p>
+        details: <p>The font's descender, which typically exceeds the depth of all
+          glyphs.</p>
       - string: bounds
-        details: <p>字形边界框的底部边缘高度。</p>
+        details: <p>The bottom edge of the glyph's bounding box.</p>
       default: <code><span class="typ-str">&quot;descender&quot;</span></code>
       positional: false
       named: true
@@ -118,7 +146,9 @@ body:
       variadic: false
       settable: true
     - name: extent
-      details: <p>将背景扩展到内容之外（负数则在内容之内）的数量。</p>
+      details: |-
+        <p>The amount by which to extend the background to the sides beyond
+        (or within if negative) the content.</p>
       example: |-
         <div class="previewed-code"><pre><code>A long <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>extent<span class="typ-punct">:</span> <span class="typ-num">4pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>background<span class="typ-punct">]</span>.
         </code></pre><div class="preview"><img src="/assets/docs/e9ec3d05ec75a5cbefed05e0bd438c4b.png" alt="Preview" width="480" height="190"/></div></div>
@@ -131,8 +161,24 @@ body:
       required: false
       variadic: false
       settable: true
+    - name: radius
+      details: |-
+        <p>How much to round the highlight's corners. See the
+        <a href="/docs/reference/visualize/rect/#parameters-radius">rectangle's documentation</a> for more details.</p>
+      example: null
+      types:
+      - relative
+      - dictionary
+      strings: []
+      default: <code><span class="typ-punct">(</span><span class="typ-punct">:</span><span
+        class="typ-punct">)</span></code>
+      positional: false
+      named: true
+      required: false
+      variadic: false
+      settable: true
     - name: body
-      details: <p>高亮的内容。</p>
+      details: <p>The content that should be highlighted.</p>
       example: null
       types:
       - content

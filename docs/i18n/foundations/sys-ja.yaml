@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/sys
 title: System
-description: sys 函数族的文档.
+description: Documentation for the sys functions.
 part: null
 outline:
 - id: summary
@@ -16,8 +16,21 @@ body:
     title: System
     details: |-
       <p>Module for system interactions.</p>
-      <p>Currently, this module defines a single item: The <code>sys.version</code> constant
-      (of type <a href="/docs/reference/foundations/version/"><code>version</code></a>), that specifies the currently active
-      Typst compiler version.</p>
+      <p>This module defines the following items:</p>
+      <ul>
+      <li>
+      <p>The <code>sys.version</code> constant (of type <a href="/docs/reference/foundations/version/" title="`version`"><code>version</code></a>) that specifies
+      the currently active Typst compiler version.</p>
+      </li>
+      <li>
+      <p>The <code>sys.inputs</code> <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a>, which makes external inputs
+      available to the project. An input specified in the command line as
+      <code>--input key=value</code> becomes available under <code>sys.inputs.key</code> as
+      <code><span class="typ-str">&quot;value&quot;</span></code>. To include spaces in the value, it may be enclosed with
+      single or double quotes.</p>
+      <p>The value is always of type <a href="/docs/reference/foundations/str/">string</a>. More complex data
+      may be parsed manually using functions like <a href="/docs/reference/data-loading/json/#definitions-decode"><code>json.decode</code></a>.</p>
+      </li>
+      </ul>
     functions: []
 children: []

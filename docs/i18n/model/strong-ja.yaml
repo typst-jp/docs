@@ -1,6 +1,6 @@
 route: /docs/reference/model/strong/
-title: 着重强调（加粗）
-description: '`strong` 函数的文档'
+title: Strong Emphasis
+description: Documentation for the `strong` function.
 part: null
 outline:
 - id: summary
@@ -30,13 +30,10 @@ body:
     keywords: []
     oneliner: Strongly emphasizes content by increasing the font weight.
     element: true
+    contextual: false
     details: |-
-      <p>
-      用粗体来强调内容。
-      </p>
-      <p>
-      按给定增量增加当前字体粗细。
-      </p>
+      <p>Strongly emphasizes content by increasing the font weight.</p>
+      <p>Increases the current font weight by a given <code>delta</code>.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>This is <span class="typ-strong">*strong.*</span> <span class="typ-escape">\</span>
       This is <span class="typ-func">#</span><span class="typ-func">strong</span><span class="typ-punct">[</span>too.<span class="typ-punct">]</span> <span class="typ-escape">\</span>
@@ -45,15 +42,15 @@ body:
       And this is <span class="typ-strong">*evermore.*</span>
       </code></pre><div class="preview"><img src="/assets/docs/014685f115101d62862a2bf909e6e378.png" alt="Preview" width="480" height="190"/></div></div>
       <h2 id="syntax">Syntax</h2>
-      <p>
-      该功能还有专用语法：要强调内容，请将其括在两个星号 (<code>*</code>) 中。请注意，这仅对单词生效，如果要强调单词的一部分，必须使用函数。例如"#strong[eng]lish"，而"*eng*lish"会报错。
-
-      </p>
+      <p>This function also has dedicated syntax: To strongly emphasize content,
+      simply enclose it in stars/asterisks (<code>*</code>). Note that this only works at
+      word boundaries. To strongly emphasize part of a word, you have to use the
+      function.</p>
     example: null
     self: false
     params:
     - name: delta
-      details: <p>要应用于字体粗细的增量。</p>
+      details: <p>The delta to apply on the font weight.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">strong</span><span class="typ-punct">(</span>delta<span class="typ-punct">:</span> <span class="typ-num">0</span><span class="typ-punct">)</span>
         No <span class="typ-strong">*effect!*</span>
@@ -68,7 +65,7 @@ body:
       variadic: false
       settable: true
     - name: body
-      details: <p>要强调的内容。</p>
+      details: <p>The content to strongly emphasize.</p>
       example: null
       types:
       - content

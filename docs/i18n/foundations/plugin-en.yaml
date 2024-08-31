@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/plugin/
 title: Plugin
-description: Plugin 类型的文档
+description: Documentation for the Plugin type.
 part: null
 outline:
 - id: summary
@@ -153,6 +153,7 @@ body:
       keywords: []
       oneliner: Creates a new plugin from a WebAssembly file.
       element: false
+      contextual: false
       details: <p>Creates a new plugin from a WebAssembly file.</p>
       example: null
       self: false

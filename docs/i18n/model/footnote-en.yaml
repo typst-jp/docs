@@ -1,6 +1,6 @@
 route: /docs/reference/model/footnote/
 title: Footnote
-description: '`footnote` 函数的文档'
+description: Documentation for the `footnote` function.
 part: null
 outline:
 - id: summary
@@ -48,6 +48,7 @@ body:
     keywords: []
     oneliner: A footnote.
     element: true
+    contextual: false
     details: |-
       <p>A footnote.</p>
       <p>Includes additional remarks and references on the same page with footnotes.
@@ -56,8 +57,9 @@ body:
       and can break across multiple pages.</p>
       <p>To customize the appearance of the entry in the footnote listing, see
       <a href="/docs/reference/model/footnote/#definitions-entry"><code>footnote.entry</code></a>. The footnote itself is realized as a
-      normal superscript, so you can use a set rule on the <a href="/docs/reference/text/super/"><code>super</code></a>
-      function to customize it.</p>
+      normal superscript, so you can use a set rule on the <a href="/docs/reference/text/super/" title="`super`"><code>super</code></a> function to
+      customize it. You can also apply a show rule to customize only the footnote
+      marker (superscript number) in the running text.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>Check the docs for more details.
       <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span><span class="typ-link">https://typst.app/docs</span><span class="typ-punct">]</span>
@@ -81,8 +83,8 @@ body:
         <p>How to number footnotes.</p>
         <p>By default, the footnote numbering continues throughout your document.
         If you prefer per-page footnote numbering, you can reset the footnote
-        <a href="/docs/reference/introspection/counter/">counter</a> in the page <a href="/docs/reference/layout/page/#parameters-header">header</a>. In the future,
-        there might be a simpler way to achieve this.</p>
+        <a href="/docs/reference/introspection/counter/" title="counter">counter</a> in the page <a href="/docs/reference/layout/page/#parameters-header">header</a>. In the future, there might
+        be a simpler way to achieve this.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">footnote</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;*&quot;</span><span class="typ-punct">)</span>
 
@@ -125,14 +127,11 @@ body:
       keywords: []
       oneliner: An entry in a footnote list.
       element: true
+      contextual: false
       details: |-
         <p>An entry in a footnote list.</p>
         <p>This function is not intended to be called directly. Instead, it is used
         in set and show rules to customize footnote listings.</p>
-        <p><em>Note:</em> Set and show rules for <code>footnote.entry</code> must be defined at the
-        beginning of the document in order to work correctly.
-        See <a href="https://github.com/typst/typst/issues/1348#issuecomment-1566316463">here</a>
-        for more information.</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> footnote<span class="typ-punct">.</span><span class="typ-func">entry</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>red<span class="typ-punct">)</span>
 
@@ -140,6 +139,9 @@ body:
         <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span>It&#39;s down here<span class="typ-punct">]</span>
         has red text!
         </code></pre><div class="preview"><img src="/assets/docs/e07bed06d522a25126bd74abd9d30066.png" alt="Preview" width="480" height="190"/></div></div>
+        <p><em>Note:</em> Set and show rules for <code>footnote.entry</code> must be defined at the
+        beginning of the document in order to work correctly. See <a href="https://github.com/typst/typst/issues/1467#issuecomment-1588799440">here</a> for
+        more information.</p>
       self: false
       params:
       - name: note

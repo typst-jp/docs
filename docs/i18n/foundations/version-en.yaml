@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/version/
 title: Version
-description: Version 类型的文档
+description: Documentation for the Version type.
 part: null
 outline:
 - id: summary
@@ -37,7 +37,7 @@ body:
       special case, the empty version (that has no components at all) is the same
       as <code>0</code>, <code>0.0</code>, <code>0.0.0</code>, and so on.</p>
       <p>You can convert a version to an array of explicitly given components using
-      the <a href="/docs/reference/foundations/array/"><code>array</code></a> constructor.</p>
+      the <a href="/docs/reference/foundations/array/" title="`array`"><code>array</code></a> constructor.</p>
     constructor:
       path: []
       name: version
@@ -45,6 +45,7 @@ body:
       keywords: []
       oneliner: Creates a new version.
       element: false
+      contextual: false
       details: |-
         <p>Creates a new version.</p>
         <p>It can have any number of components (even zero).</p>
@@ -81,6 +82,7 @@ body:
       keywords: []
       oneliner: Retrieves a component of a version.
       element: false
+      contextual: false
       details: |-
         <p>Retrieves a component of a version.</p>
         <p>The returned integer is always non-negative. Returns <code>0</code> if the version

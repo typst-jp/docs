@@ -1,6 +1,6 @@
 route: /docs/reference/layout/fraction/
 title: Fraction
-description: Fraction 类型的文档
+description: Documentation for the Fraction type.
 part: null
 outline:
 - id: summary
@@ -15,12 +15,12 @@ body:
     name: fraction
     title: Fraction
     keywords: []
-    oneliner: Defines how the the remaining space in a layout is distributed.
+    oneliner: Defines how the remaining space in a layout is distributed.
     details: |-
-      <p>Defines how the the remaining space in a layout is distributed.</p>
+      <p>Defines how the remaining space in a layout is distributed.</p>
       <p>Each fractionally sized element gets space based on the ratio of its
       fraction to the sum of all fractions.</p>
-      <p>For more details, also see the <a href="/docs/reference/layout/h/">h</a> and <a href="/docs/reference/layout/v/">v</a> functions and the
+      <p>For more details, also see the <a href="/docs/reference/layout/h/" title="h">h</a> and <a href="/docs/reference/layout/v/" title="v">v</a> functions and the
       <a href="/docs/reference/layout/grid/">grid function</a>.</p>
       <h2 id="example">Example</h2>
       <div class="previewed-code"><pre><code>Left <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> Left-ish <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">2fr</span><span class="typ-punct">)</span> Right

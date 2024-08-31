@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/datetime/
 title: Datetime
-description: Datetime 类型的文档
+description: Documentation for the Datetime type.
 part: null
 outline:
 - id: summary
@@ -206,10 +206,11 @@ body:
       keywords: []
       oneliner: Creates a new datetime.
       element: false
+      contextual: false
       details: |-
         <p>Creates a new datetime.</p>
-        <p>You can specify the <a href="/docs/reference/foundations/datetime/">datetime</a> using a year, month, day,
-        hour, minute, and second.</p>
+        <p>You can specify the <a href="/docs/reference/foundations/datetime/" title="datetime">datetime</a> using a year, month, day, hour, minute,
+        and second.</p>
         <p><em>Note</em>: Depending on which components of the datetime you specify, Typst
         will store it in one of the following three ways:</p>
         <ul>
@@ -312,6 +313,7 @@ body:
       keywords: []
       oneliner: Returns the current date.
       element: false
+      contextual: false
       details: <p>Returns the current date.</p>
       example: |-
         <div class="previewed-code"><pre><code>Today&#39;s date is
@@ -344,6 +346,7 @@ body:
       keywords: []
       oneliner: Displays the datetime in a specified format.
       element: false
+      contextual: false
       details: |-
         <p>Displays the datetime in a specified format.</p>
         <p>Depending on whether you have defined just a date, a time or both, the
@@ -351,6 +354,7 @@ body:
         <code>[year]-[month]-[day]</code>. If you specified a time, it will be
         <code>[hour]:[minute]:[second]</code>. In the case of a datetime, it will be
         <code>[year]-[month]-[day] [hour]:[minute]:[second]</code>.</p>
+        <p>See the <a href="/docs/reference/foundations/datetime/#format">format syntax</a> for more information.</p>
       example: null
       self: true
       params:
@@ -377,6 +381,7 @@ body:
       keywords: []
       oneliner: The year if it was specified, or `{none}` for times without a date.
       element: false
+      contextual: false
       details: <p>The year if it was specified, or <code><span class="typ-key">none</span></code>
         for times without a date.</p>
       example: null
@@ -393,6 +398,7 @@ body:
       keywords: []
       oneliner: The month if it was specified, or `{none}` for times without a date.
       element: false
+      contextual: false
       details: <p>The month if it was specified, or <code><span class="typ-key">none</span></code>
         for times without a date.</p>
       example: null
@@ -410,6 +416,7 @@ body:
       oneliner: The weekday (counting Monday as 1) or `{none}` for times without a
         date.
       element: false
+      contextual: false
       details: <p>The weekday (counting Monday as 1) or <code><span class="typ-key">none</span></code>
         for times without a date.</p>
       example: null
@@ -426,6 +433,7 @@ body:
       keywords: []
       oneliner: The day if it was specified, or `{none}` for times without a date.
       element: false
+      contextual: false
       details: <p>The day if it was specified, or <code><span class="typ-key">none</span></code>
         for times without a date.</p>
       example: null
@@ -442,6 +450,7 @@ body:
       keywords: []
       oneliner: The hour if it was specified, or `{none}` for dates without a time.
       element: false
+      contextual: false
       details: <p>The hour if it was specified, or <code><span class="typ-key">none</span></code>
         for dates without a time.</p>
       example: null
@@ -458,6 +467,7 @@ body:
       keywords: []
       oneliner: The minute if it was specified, or `{none}` for dates without a time.
       element: false
+      contextual: false
       details: <p>The minute if it was specified, or <code><span class="typ-key">none</span></code>
         for dates without a time.</p>
       example: null
@@ -474,6 +484,7 @@ body:
       keywords: []
       oneliner: The second if it was specified, or `{none}` for dates without a time.
       element: false
+      contextual: false
       details: <p>The second if it was specified, or <code><span class="typ-key">none</span></code>
         for dates without a time.</p>
       example: null
@@ -490,6 +501,7 @@ body:
       keywords: []
       oneliner: The ordinal (day of the year), or `{none}` for times without a date.
       element: false
+      contextual: false
       details: <p>The ordinal (day of the year), or <code><span class="typ-key">none</span></code>
         for times without a date.</p>
       example: null

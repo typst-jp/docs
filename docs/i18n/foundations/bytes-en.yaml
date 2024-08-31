@@ -1,6 +1,6 @@
 route: /docs/reference/foundations/bytes/
 title: Bytes
-description: Bytes 类型的文档
+description: Documentation for the Bytes type.
 part: null
 outline:
 - id: summary
@@ -49,13 +49,14 @@ body:
     details: |-
       <p>A sequence of bytes.</p>
       <p>This is conceptually similar to an array of <a href="/docs/reference/foundations/int/">integers</a> between <code><span class="typ-num">0</span></code>
-      and <code><span class="typ-num">255</span></code>, but represented much more efficiently.</p>
+      and <code><span class="typ-num">255</span></code>, but represented much more efficiently. You can iterate over it
+      using a <a href="/docs/reference/scripting/#loops">for loop</a>.</p>
       <p>You can convert</p>
       <ul>
-      <li>a <a href="/docs/reference/foundations/str/">string</a> or an <a href="/docs/reference/foundations/array/">array</a> of integers to bytes with the
-      <a href="/docs/reference/foundations/bytes/"><code>bytes</code></a> constructor</li>
-      <li>bytes to a string with the <a href="/docs/reference/foundations/str/"><code>str</code></a> constructor</li>
-      <li>bytes to an array of integers with the <a href="/docs/reference/foundations/array/"><code>array</code></a> constructor</li>
+      <li>a <a href="/docs/reference/foundations/str/">string</a> or an <a href="/docs/reference/foundations/array/" title="array">array</a> of integers to bytes with the <a href="/docs/reference/foundations/bytes/" title="`bytes`"><code>bytes</code></a>
+      constructor</li>
+      <li>bytes to a string with the <a href="/docs/reference/foundations/str/" title="`str`"><code>str</code></a> constructor, with UTF-8 encoding</li>
+      <li>bytes to an array of integers with the <a href="/docs/reference/foundations/array/" title="`array`"><code>array</code></a> constructor</li>
       </ul>
       <p>When <a href="/docs/reference/data-loading/read/">reading</a> data from a file, you can decide whether to load it
       as a string or as raw bytes.</p>
@@ -78,6 +79,7 @@ body:
       keywords: []
       oneliner: Converts a value to bytes.
       element: false
+      contextual: false
       details: |-
         <p>Converts a value to bytes.</p>
         <ul>
@@ -118,6 +120,7 @@ body:
       keywords: []
       oneliner: The length in bytes.
       element: false
+      contextual: false
       details: <p>The length in bytes.</p>
       example: null
       self: true
@@ -133,6 +136,7 @@ body:
       oneliner: Returns the byte at the specified index. Returns the default value
         if
       element: false
+      contextual: false
       details: |-
         <p>Returns the byte at the specified index. Returns the default value if
         the index is out of bounds or fails with an error if no default value
@@ -175,6 +179,7 @@ body:
       oneliner: Extracts a subslice of the bytes. Fails with an error if the start
         or
       element: false
+      contextual: false
       details: |-
         <p>Extracts a subslice of the bytes. Fails with an error if the start or
         index is out of bounds.</p>

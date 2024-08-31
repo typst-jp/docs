@@ -1,6 +1,6 @@
 route: /docs/reference/model/enum/
 title: Numbered List
-description: '`enum` 函数的文档'
+description: Documentation for the `enum` function.
 part: null
 outline:
 - id: summary
@@ -63,6 +63,7 @@ body:
     keywords: []
     oneliner: A numbered list.
     element: true
+    contextual: false
     details: |-
       <p>A numbered list.</p>
       <p>Displays a sequence of items vertically and numbers them consecutively.</p>
@@ -258,7 +259,7 @@ body:
         The choice of <code>end</code> for horizontal alignment of enum numbers is
         usually preferred over <code>start</code>, as numbers then grow away from the
         text instead of towards it, avoiding certain visual issues. This option
-        lets you override this behavior, however. (Also to note is that the
+        lets you override this behaviour, however. (Also to note is that the
         <a href="/docs/reference/model/list/">unordered list</a> uses a different method for this, by giving the
         <code>marker</code> content an alignment directly.).</p>
       example: |-
@@ -313,6 +314,7 @@ body:
       keywords: []
       oneliner: An enumeration item.
       element: true
+      contextual: false
       details: <p>An enumeration item.</p>
       example: null
       self: false
