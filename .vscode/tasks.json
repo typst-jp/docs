@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "preview: typst-jp documentation",
+      "type": "shell",
+      "command": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && echo reload or open http://localhost:3000",
+      "problemMatcher": []
+    }
+  ]
+}

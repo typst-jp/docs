@@ -1,0 +1,11 @@
+{
+  "name": "typst-jp-domumentation",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "forwardPorts": [3000],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/workspace",
+  "postStartCommand": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && npx serve -n ./dist"
+}
