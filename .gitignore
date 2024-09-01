@@ -1,6 +1,5 @@
 # General
-.vscode/*
-!.vscode/tasks.json
+# .vscode
 .idea
 _things
 desktop.ini
