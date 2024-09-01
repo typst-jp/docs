@@ -7,11 +7,11 @@ RUN apt-get update && \
     # install python3, jinja2 pyyaml
     python3 \
     python3-pip \
-    && pip3 install --break-system-packages jinja2 pyyaml \
+    && python3 -m pip install --break-system-packages jinja2 PyYAML \
     # install nodejs and serve
     && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g serve \
+    && npm install -g serve@14.2.3 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
 
