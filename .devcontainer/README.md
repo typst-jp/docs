@@ -2,9 +2,9 @@
 
 Visual Studio Codeで編集する場合には、[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)を使用してローカル環境でWebページの仕上がりを確認することができます。
 Visual Studio Codeでtypst-jp.github.ioディレクトリを開き以下の操作を実施してください。
-1. Ctrl+Shift+Pから`>Dev Containers: Reopen in Container`を実行
+1. Ctrl+Shift+Pから`> Dev Containers: Reopen in Container`を実行
 2. ビルドが完了したらブラウザで http://localhost:3000 に接続
-3. ページを更新した際には、Ctrl+shift+Pから`Tasks: Run task`を実行し`preview: typst-jp documentation`を選択。ビルドが完了したらブラウザを更新。
+3. ページを更新した際には、Ctrl+shift+Pから`> Tasks: Run task`を実行し`preview: typst-jp documentation`を選択。ビルドが完了したらブラウザを更新。
 
 
 ## 別のエディターを使用している場合
