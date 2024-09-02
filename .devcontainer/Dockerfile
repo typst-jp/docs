@@ -9,7 +9,7 @@ RUN apt-get update && \
     python3-pip \
     && python3 -m pip install --break-system-packages jinja2 PyYAML \
     # install nodejs and serve
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g serve@14.2.3 \
     && apt-get clean \
