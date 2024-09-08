@@ -50,7 +50,7 @@ python ./gen.py
 
 Node.jsがインストールされている場合は、`npx serve ./dist`でプレビューできます。
 
-上記のローカル環境を構築するDokcerfileも整備しております。詳細は[.devcontainer/README.md](.devcontainer/README.md)をご参照ください。
+上記のローカル環境を構築するDockerfileも整備しております。詳細は[.devcontainer/README.md](.devcontainer/README.md)をご参照ください。
 
 ## スタイルマニュアル
 
