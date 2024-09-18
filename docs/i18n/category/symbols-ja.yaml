@@ -1,6 +1,6 @@
 route: /docs/reference/symbols/
 title: Symbols
-description: Documentation for functions related to Symbols in Typst.
+description: Typstにおける記号に関する関数についてのドキュメントです。
 part: null
 outline:
 - id: summary
