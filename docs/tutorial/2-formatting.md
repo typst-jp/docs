@@ -353,7 +353,7 @@ Typstがマークアップの代わりにコードを期待している場合、
 この事象は、パラメーターリスト、関数定義、[コードブロック]($scripting)で見られます。
 
 <!-- ## Review -->
-## 振り返り { #review }
+## まとめ { #review }
 <!-- You now know how to apply basic formatting to your Typst documents. You learned
 how to set the font, justify your paragraphs, change the page dimensions, and
 add numbering to your headings with set rules. You also learned how to use a
