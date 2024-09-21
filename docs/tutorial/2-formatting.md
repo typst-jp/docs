@@ -225,7 +225,7 @@ center alignment. Vertical and horizontal alignments can be combined with the
 垂直配置と水平配置を `{+}` 演算子で組み合わせることで2次元配置を指定できます。
 
 <!-- ## A hint of sophistication { #sophistication } -->
-## より高度な設定 { #sophistication }
+## 洗練のヒント { #sophistication }
 <!-- To structure our document more clearly, we now want to number our headings. We
 can do this by setting the `numbering` parameter of the [`heading`] function. -->
 文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
