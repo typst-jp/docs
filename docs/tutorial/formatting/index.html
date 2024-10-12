@@ -756,17 +756,14 @@
       
 
 <h1>書式を設定する</h1>
-<p>So far, you have written a report with some text, a few equations and images.
-However, it still looks very plain. Your teaching assistant does not yet know
-that you are using a new typesetting system, and you want your report to fit in
-with the other student's submissions. In this chapter, we will see how to format
-your report using Typst's styling system.</p>
-<h2 id="set-rules">Set rules</h2>
-<p>As we have seen in the previous chapter, Typst has functions that <em>insert</em>
-content (e.g. the <a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a> function) and others that <em>manipulate</em> content that
-they received as arguments (e.g. the <a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a> function). The first impulse you
-might have when you want, for example, to justify the report, could be to look
-for a function that does that and wrap the complete document in it.</p>
+<p>前章までで、あなたはいくつかのテキスト、少しの数式や画像を含むレポートを書いてきました。
+しかし、その見た目はまだとても地味です。
+ティーチングアシスタントはあなたが新しい組版システムを使っていることをまだ知らず、あなたは自身のレポートを他の学生の提出物に合わせたいと思うでしょう。
+この章では、Typstの組版システムを使ってレポートの体裁を整える方法を示します。</p>
+<h2 id="set-rule">setルール</h2>
+<p>前章で見たように、Typstにはコンテンツを挿入する関数（例：<a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a>関数）と、引数として受け取ったコンテンツを操作する関数（例：<a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a>関数）があります。
+あなたが所望する書式設定をしたいとき最初に思いつくことは、それを行う関数を探して、その関数で文書全体を囲うことでしょう。
+たとえば、レポートを両端揃えにしたい場合には以下のように記述します。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
   <span class="typ-heading">= Background</span>
   In the case of glaciers, fluid
@@ -779,19 +776,15 @@ for a function that does that and wrap the complete document in it.</p>
   water).
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/16928393d537b3d5aad61eae79e2ce36.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Wait, shouldn't all arguments of a function be specified within parentheses? Why
-is there a second set of square brackets with content <em>after</em> the parentheses?
-The answer is that, as passing content to a function is such a common thing to
-do in Typst, there is special syntax for it: Instead of putting the content
-inside of the argument list, you can write it in square brackets directly after
-the normal arguments, saving on punctuation.</p>
-<p>As seen above, that works. The <a href="/docs/reference/model/par/" title="`par`"><code>par</code></a> function justifies all paragraphs within
-it. However, wrapping the document in countless functions and applying styles
-selectively and in-situ can quickly become cumbersome.</p>
-<p>Fortunately, Typst has a more elegant solution. With <em>set rules,</em> you can apply
-style properties to all occurrences of some kind of content. You write a set
-rule by entering the <code><span class="typ-key">set</span></code> keyword, followed by the name of the function whose
-properties you want to set, and a list of arguments in parentheses.</p>
+<p>ここで、関数のすべての引数は括弧の中で指定されるべきではないか？と思うでしょう。
+なぜ括弧の <em>後</em> にコンテンツを記述する2つ目の角括弧があるのでしょうか？
+答えは、関数にコンテンツを渡すことはTypstではよくあるため、特別な構文があるからです。
+コンテンツを引数リストの中に入れる代わりに、通常の引数の後に角括弧内でコンテンツを直接書くことが可能であり、これによりカンマ区切りを減らすことができます。</p>
+<p>上で見たように、これは正しく動作し、<a href="/docs/reference/model/par/" title="`par`"><code>par</code></a>関数はその段落のすべて文章を両端揃えにします。
+しかし、無数の関数で文書を囲み、選択的に各場所でスタイル適用をしようとするとすぐ面倒になります。</p>
+<p>幸いなことに、Typstにはもっと簡潔な記法があります。
+<em>setルール</em> を使えば、以後現れるすべてのコンテンツに対してスタイル設定を適用可能です。
+<code><span class="typ-key">set</span></code>キーワードを入力し、その後に設定したい関数の名前と引数のリストを括弧で囲んでsetルールを記述します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
 
 <span class="typ-heading">= Background</span>
@@ -804,40 +797,34 @@ temperature, pressure, and the
 presence of other fluids (such as
 water).
 </code></pre><div class="preview"><img src="/assets/docs/5efe9b7aefaf2e05de169f57a3e460a1.png" alt="Preview" width="480" height="190"/></div></div><div class="info-box">
-<p>Want to know in more technical terms what is happening here?</p>
-<p>Set rules can be conceptualized as setting default values
-for some of the parameters of a function for all future
-uses of that function.</p>
+<p>ここで起こっていることをより専門的な用語で説明すると、
+setルールでは、ある関数のパラメーターに、それ以降にその関数を使うときのデフォルト値を設定しています。</p>
 </div>
-<h2 id="autocomplete">The autocomplete panel</h2>
-<p>If you followed along and tried a few things in the app, you might have noticed
-that always after you enter a <code>#</code> character, a panel pops up to show you the
-available functions, and, within an argument list, the available parameters.
-That's the autocomplete panel. It can be very useful while you are writing your
-document: You can apply its suggestions by hitting the Return key or navigate to
-the desired completion with the arrow keys. The panel can be dismissed by
-hitting the Escape key and opened again by typing <code>#</code> or hitting
-<kbd>Ctrl</kbd> + <kbd>Space</kbd>. Use the autocomplete panel to discover the
-right arguments for functions. Most suggestions come with a small description of
-what they do.</p>
+<h2 id="autocomplete">補完パネル</h2>
+<p>Typst appを使用していると、<code>#</code>を入力した後に、使用可能な関数と引数リスト内で使用可能なパラメーターを表示するパネルがポップアップ表示されることに気づいたかもしれません。
+これは補完パネルといい、文書を書いているときにとても便利な機能です。
+矢印キーで入力したい補完項目に移動し、Returnキーを押せば補完入力されます。
+パネルはEscapeキーを押すことで解除でき、<code>#</code>とタイプするか、<kbd>Ctrl</kbd> + <kbd>Space</kbd>キーを押すことで再び開くことができます。
+補完パネルを使って関数の正しい引数を見つけましょう。
+ほとんどの補完候補には、その項目が何をするかについての小さな説明がついています。</p>
 <p><img src="/assets/docs/2-formatting-autocomplete.png" alt="Autocomplete panel" /></p>
-<h2 id="page-setup">Set up the page</h2>
-<p>Back to set rules: When writing a rule, you choose the function depending on
-what type of element you want to style. Here is a list of some functions that
-are commonly used in set rules:</p>
+<h2 id="page-setup">ページの設定</h2>
+<p>setルールの説明に戻ります。
+setルールを書くときは、スタイルを設定したい要素の種類に応じて関数を選択します。
+以下は、setルールでよく使われる関数のリストです。</p>
 <ul>
-<li><a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> to set font family, size, color, and other properties of text</li>
-<li><a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> to set the page size, margins, headers, enable columns, and footers</li>
-<li><a href="/docs/reference/model/par/" title="`par`"><code>par</code></a> to justify paragraphs, set line spacing, and more</li>
-<li><a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a> to set the appearance of headings and enable numbering</li>
-<li><a href="/docs/reference/model/document/" title="`document`"><code>document</code></a> to set the metadata contained in the PDF output, such as title
-and author</li>
+<li><a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> フォントの種類、大きさ、色などのテキストのプロパティを設定</li>
+<li><a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> ページサイズ、余白（マージン）、ヘッダー、段組み、フッターを設定</li>
+<li><a href="/docs/reference/model/par/" title="`par`"><code>par</code></a> 段落の両端揃え、行間の幅など</li>
+<li><a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a> 見出しの見た目や番号付</li>
+<li><a href="/docs/reference/model/document/" title="`document`"><code>document</code></a> タイトルや著者情報などPDF出力に含まれるメタデータ</li>
 </ul>
-<p>Not all function parameters can be set. In general, only parameters that tell
-a function <em>how</em> to do something can be set, not those that tell it <em>what</em> to
-do it with. The function reference pages indicate which parameters are settable.</p>
-<p>Let's add a few more styles to our document. We want larger margins and a serif
-font. For the purposes of the example, we'll also set another page size.</p>
+<p>関数のパラメーターはすべて設定できるわけではありません。
+一般的に、関数のパラメーターを設定できるのは、関数に <em>どのように</em> 実行させるかを指示するパラメーターだけであり、関数に <em>何を</em> 実行させるかを指示するパラメーターは設定できません。
+関数のリファレンスページには、設定可能なパラメーターが示されています。</p>
+<p>文書にもう少しスタイルを追加してみましょう。
+余白を大きくし、セリフ体のフォントを使用します。
+この例では、ページサイズも設定します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
   font<span class="typ-punct">:</span> <span class="typ-str">&quot;New Computer Modern&quot;</span><span class="typ-punct">,</span>
   size<span class="typ-punct">:</span> <span class="typ-num">10pt</span>
@@ -868,29 +855,26 @@ behaviour of these natural structures.
   system.*</span>
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/75bffc9422b85b5b7704b55cea4915ce.png" alt="Preview" width="480" height="190"/></div></div>
-<p>There are a few things of note here.</p>
-<p>First is the <a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> set rule. It receives two arguments: the page size and
-margins for the page. The page size is a string. Typst accepts <a href="/docs/reference/layout/page/#parameters-paper">many standard
-page sizes,</a> but you can also specify a custom page size. The
-margins are specified as a <a href="/docs/reference/foundations/dictionary/">dictionary.</a> Dictionaries are a
-collection of key-value pairs. In this case, the keys are <code>x</code> and <code>y</code>, and the
-values are the horizontal and vertical margins, respectively. We could also have
-specified separate margins for each side by passing a dictionary with the keys
-<code>left</code>, <code>right</code>, <code>top</code>, and <code>bottom</code>.</p>
-<p>Next is the set <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> set rule. Here, we set the font size to <code><span class="typ-num">10pt</span></code> and
-font family to <code><span class="typ-str">&quot;New Computer Modern&quot;</span></code>. The Typst app comes with many fonts
-that you can try for your document. When you are in the text function's argument
-list, you can discover the available fonts in the autocomplete panel.</p>
-<p>We have also set the spacing between lines (a.k.a. leading): It is specified as
-a <a href="/docs/reference/layout/length/" title="length">length</a> value, and we used the <code>em</code> unit to specify the leading relative to
-the size of the font: <code><span class="typ-num">1em</span></code> is equivalent to the current font size (which
-defaults to <code><span class="typ-num">11pt</span></code>).</p>
-<p>Finally, we have bottom aligned our image by adding a vertical alignment to our
-center alignment. Vertical and horizontal alignments can be combined with the
-<code><span class="typ-op">+</span></code> operator to yield a 2D alignment.</p>
-<h2 id="sophistication">A hint of sophistication</h2>
-<p>To structure our document more clearly, we now want to number our headings. We
-can do this by setting the <code>numbering</code> parameter of the <a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a> function.</p>
+<p>ここで注目していただきたい点を以下に記載します。</p>
+<p>まず、<a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> setルールです。
+これはページサイズと余白の2つの引数を受け取ります。
+ページサイズは文字列であり、Typstは<a href="/docs/reference/layout/page/#parameters-paper">多くの標準ページサイズ</a>を受け付けますが、カスタムページサイズを指定することもできます。
+余白は<a href="/docs/reference/foundations/dictionary/">辞書型</a>で指定します。辞書型とはキーと値のペアの集まりです。
+この場合、キーは<code>x</code>と<code>y</code>で、値はそれぞれ水平マージンと垂直マージンです。
+<code>left</code>, <code>right</code>, <code>top</code>, and <code>bottom</code>をキーとする辞書を渡すことで、各辺に別々の余白を指定することもできます。</p>
+<p>つぎに<a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> setルールです。
+ここでは、フォントサイズを<code><span class="typ-num">10pt</span></code>、フォントの種類を <code><span class="typ-str">&quot;New Computer Modern&quot;</span></code>に設定します。
+Typst appには多くのフォントが用意されております。
+text関数の引数リストにいるとき、補完パネルで利用可能なフォントを探すことができます。</p>
+<p>また、行間の幅（leading）も設定しました。
+これは<a href="/docs/reference/layout/length/" title="length">length</a>の値として指定され、<code>em</code>という単位を使ってフォントのサイズに対する行間を指定しています。
+<code><span class="typ-num">1em</span></code>は現在のフォントサイズ（デフォルトは<code><span class="typ-num">11pt</span></code>）に相当します。</p>
+<p>最後に、中央揃えに垂直配置を追加して、画像をページの下部に配置しました。
+垂直配置と水平配置を <code><span class="typ-op">+</span></code> 演算子で組み合わせることで2次元配置を指定できます。</p>
+<h2 id="sophistication">洗練のヒント</h2>
+<p>can do this by setting the <code>numbering</code> parameter of the <a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a> function. --&gt;
+文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
+これを行うには、<a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a>関数の<code>numbering</code>パラメーターを設定します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 
 <span class="typ-heading">= Introduction</span>
@@ -902,10 +886,9 @@ can do this by setting the <code>numbering</code> parameter of the <a href="/doc
 <span class="typ-heading">== Methods</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">15</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/90e8ad154db6ebc386236767ac952a9b.png" alt="Preview" width="480" height="190"/></div></div>
-<p>We specified the string <code><span class="typ-str">&quot;1.&quot;</span></code> as the numbering parameter. This tells Typst to
-number the headings with arabic numerals and to put a dot between the number of
-each level. We can also use <a href="/docs/reference/model/numbering/">letters, roman numerals, and symbols</a>
-for our headings:</p>
+<p>番号付けのパラメーターとして文字列 <code>「<span class="typ-num">1.</span>」</code> を指定しました。
+これは、見出しにアラビア数字で番号を付け、各レベルの番号の間にドットを置くようにTypstに指示します。
+見出しに<a href="/docs/reference/model/numbering/">文字、ローマ数字、記号</a>を使用することも可能です。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.a&quot;</span><span class="typ-punct">)</span>
 
 <span class="typ-heading">= Introduction</span>
@@ -917,30 +900,23 @@ for our headings:</p>
 <span class="typ-heading">== Methods</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">15</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/982f5c0a15c27b495b6ebcf47d42db36.png" alt="Preview" width="480" height="190"/></div></div>
-<p>This example also uses the <a href="/docs/reference/text/lorem/" title="`lorem`"><code>lorem</code></a> function to generate some placeholder text.
-This function takes a number as an argument and generates that many words of
-<em>Lorem Ipsum</em> text.</p>
+<p>この例では、<a href="/docs/reference/text/lorem/" title="`lorem`"><code>lorem</code></a>関数を使って仮テキストを生成しています。
+この関数は引数に数値を取り、その単語数の <em>Lorem Ipsum</em> テキストを生成します。</p>
 <div class="info-box">
-<p>Did you wonder why the headings and text set rules apply to all text and headings,
-even if they are not produced with the respective functions?</p>
-<p>Typst internally calls the <code>heading</code> function every time you write
-<code><span class="typ-heading">= Conclusion</span></code>. In fact, the function call <code><span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">[</span>Conclusion<span class="typ-punct">]</span></code> is
-equivalent to the heading markup above. Other markup elements work similarly,
-they are only <em>syntax sugar</em> for the corresponding function calls.</p>
+<p>headingとtextのsetルールが、それぞれの関数で作成されていなくても、すべての見出しと文章に適用されることを不思議に思いませんでしたか？</p>
+<p>Typstは内部的に<code><span class="typ-heading">= Conclusion</span></code>と書くたびに<code>heading</code>関数を呼び出します。
+実際に、関数呼び出し <code><span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">[</span>Conclusion<span class="typ-punct">]</span></code> は上記の見出しマークアップと同等です。
+他のマークアップ要素も同様に機能し、対応する関数呼び出しのための <em>シンタックスシュガー</em> に過ぎません。</p>
 </div>
-<h2 id="show-rules">Show rules</h2>
-<p>You are already pretty happy with how this turned out. But one last thing needs
-to be fixed: The report you are writing is intended for a larger project and
-that project's name should always be accompanied by a logo, even in prose.</p>
-<p>You consider your options. You could add an <code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;logo.svg&quot;</span><span class="typ-punct">)</span></code> call before
-every instance of the logo using search and replace. That sounds very tedious.
-Instead, you could maybe
-<a href="/docs/reference/foundations/function/#defining-functions">define a custom function</a> that always yields the
-logo with its image. However, there is an even easier way:</p>
-<p>With show rules, you can redefine how Typst displays certain elements. You
-specify which elements Typst should show differently and how they should look.
-Show rules can be applied to instances of text, many functions, and even the
-whole document.</p>
+<h2 id="show-rule">showルール</h2>
+<p>書式設定によりレポートの出来栄えにかなり満足してきましたが、最後にひとつだけ修正が必要な点があります。
+あなたが書いているレポートは、より大きなプロジェクトのためのものであり、そのプロジェクト名には、たとえ散文であっても、常にロゴを添えるべきでしょう。</p>
+<p>一つの方法として、検索と置換を使ってロゴを添えるすべての場所に<code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;logo.svg&quot;</span><span class="typ-punct">)</span></code>の呼び出しを追加することもできますが、それはとても面倒です。
+別の方法として、<a href="/docs/reference/foundations/function/#defining-functions">カスタム関数を定義する</a>ことで、常にロゴを画像として生成することもできます。
+しかし、これらよりももっと簡単な方法があります。</p>
+<p>showルールを使用すると、Typstが特定の要素をどのように表示するかを再定義できます。
+これにより、Typstがどの要素をどのように表示するかを指定します。
+Showルールはテキストのインスタンスや多くの関数、さらには文書全体にも適用可能です。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-str">&quot;ArtosFlow&quot;</span><span class="typ-punct">:</span> name <span class="typ-op">=&gt;</span> <span class="typ-func">box</span><span class="typ-punct">[</span>
   <span class="typ-func">#</span><span class="typ-func">box</span><span class="typ-punct">(</span><span class="typ-func">image</span><span class="typ-punct">(</span>
     <span class="typ-str">&quot;logo.svg&quot;</span><span class="typ-punct">,</span>
@@ -953,27 +929,22 @@ This report is embedded in the
 ArtosFlow project. ArtosFlow is a
 project of the Artos Institute.
 </code></pre><div class="preview"><img src="/assets/docs/d3f53f4266ed6100f3b03a0d3ad50d9e.png" alt="Preview" width="480" height="190"/></div></div>
-<p>There is a lot of new syntax in this example: We write the <code><span class="typ-key">show</span></code> keyword,
-followed by a string of text we want to show differently and a colon. Then, we
-write a function that takes the content that shall be shown as an argument.
-Here, we called that argument <code>name</code>. We can now use the <code>name</code> variable in the
-function's body to print the ArtosFlow name. Our show rule adds the logo image
-in front of the name and puts the result into a box to prevent linebreaks from
-occurring between logo and name. The image is also put inside of a box, so that
-it does not appear in its own paragraph.</p>
-<p>The calls to the first box function and the image function did not require a
-leading <code>#</code> because they were not embedded directly in markup. When Typst
-expects code instead of markup, the leading <code>#</code> is not needed to access
-functions, keywords, and variables. This can be observed in parameter lists,
-function definitions, and <a href="/docs/reference/scripting/">code blocks</a>.</p>
-<h2 id="review">Review</h2>
-<p>You now know how to apply basic formatting to your Typst documents. You learned
-how to set the font, justify your paragraphs, change the page dimensions, and
-add numbering to your headings with set rules. You also learned how to use a
-basic show rule to change how text appears throughout your document.</p>
-<p>You have handed in your report. Your supervisor was so happy with it that they
-want to adapt it into a conference paper! In the next section, we will learn how
-to format your document as a paper using more advanced show rules and functions.</p>
+<p>この例には新しい構文がたくさんあります。
+ここでは、<code><span class="typ-key">show</span></code>キーワードを記述し、その後に表示させたいテキストの文字列とコロンを記述しています。
+そして、表示したい内容を引数として受け取る関数を書いています。
+ここでは、その引数を<code>name</code>と定義しました。
+これで、ArtosFlowの名前を表示するために、関数本体で変数<code>name</code>を使えます。
+このshowルールでは、名前の前にロゴ画像を追加し、ロゴと名前の間に改行が入らないように、結果をboxの中に入れます。
+画像もboxの中に入れることで、画像が段落として表示されないようにしています。</p>
+<p>最初のbox関数とimage関数の呼び出しは、マークアップに直接埋め込まれていないため、先頭の<code>#</code>は必要ありませんでした。
+Typstがマークアップの代わりにコードを期待している場合、関数、キーワード、変数を使用する際に、先頭の<code>#</code>は必要ありません。
+この事象は、パラメーターリスト、関数定義、<a href="/docs/reference/scripting/">コードブロック</a>で見られます。</p>
+<h2 id="review">まとめ</h2>
+<p>Typst文書に基本的な書式を適用する方法を分かりいただけたと思います。
+setルールを用いて、フォントを設定し、段落の両端を揃え、ページ寸法を変更し、見出しに番号を追加する方法を学びました。
+また、基本的なshowルールを使用して、文書全体のテキストの表示方法を変更する方法も学びました。</p>
+<p>ここで学んだ方法で作成したレポートを提出すると、あなたの指導教員はそれをとても気に入り、学会用の論文に仕立てたいと言うでしょう！
+次章では、より高度なshowルールと関数を使用して、文書を論文としてフォーマットする方法を学びます。</p>
 
 
 
@@ -991,27 +962,27 @@ to format your document as a paper using more advanced show rules and functions.
     <nav id="page-overview"><strong>目次</strong>
       <ul>
         
-        <li data-assoc="set-rules"><a href="#set-rules">Set Rules</a>
+        <li data-assoc="set-rule"><a href="#set-rule">setルール</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="autocomplete"><a href="#autocomplete">Autocomplete</a>
+        <li data-assoc="autocomplete"><a href="#autocomplete">補完パネル</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="page-setup"><a href="#page-setup">Page Setup</a>
+        <li data-assoc="page-setup"><a href="#page-setup">ページの設定</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="sophistication"><a href="#sophistication">Sophistication</a>
+        <li data-assoc="sophistication"><a href="#sophistication">洗練のヒント</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="show-rules"><a href="#show-rules">Show Rules</a>
+        <li data-assoc="show-rule"><a href="#show-rule">showルール</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="review"><a href="#review">Review</a>
+        <li data-assoc="review"><a href="#review">まとめ</a>
           <ul></ul>
         </li>
         
