@@ -756,45 +756,37 @@
       
 
 <h1>高度なスタイリング</h1>
-<p>In the previous two chapters of this tutorial, you have learned how to write a
-document in Typst and how to change its formatting. The report you wrote
-throughout the last two chapters got a straight A and your supervisor wants to
-base a conference paper on it! The report will of course have to comply with the
-conference's style guide. Let's see how we can achieve that.</p>
-<p>Before we start, let's create a team, invite your supervisor and add them to the
-team. You can do this by going back to the app dashboard with the four-circles
-icon in the top left corner of the editor. Then, choose the plus icon in the
-left toolbar and create a team. Finally, click on the new team and go to its
-settings by clicking 'manage team' next to the team name. Now you can invite
-your supervisor by email.</p>
+<p>このチュートリアルの前の2つの章では、Typstで文書を書く方法とその書式を変更する方法を学びました。
+それらの章を通して書いたレポートが優れた評価を得たため、指導教員はそれを基に学会論文を書いてほしいと考えています！
+もちろん、論文は学会のスタイルガイドに従わなければなりません。
+どうすればそれを達成できるか見てみましょう。</p>
+<p>始める前に、チームを作成して、そのチームに教員を招待して追加しましょう。
+まず、エディターの左上にある戻るアイコンでアプリのダッシュボードに戻ります。
+次に、左のツールバーのプラスアイコンを選択し、チームを作成します。
+最後に、新しいチームをクリックし、チーム名の横にあるmanage teamをクリックして設定に進みます。
+これで教員をメールで招待することができます。</p>
 <p><img src="/assets/docs/3-advanced-team-settings.png" alt="The team settings" /></p>
-<p>Next, move your project into the team: Open it, going to its settings by
-choosing the gear icon in the left toolbar and selecting your new team from the
-owners dropdown. Don't forget to save your changes!</p>
-<p>Now, your supervisor can also edit the project and you can both see the changes
-in real time. You can join our <a href="https://discord.gg/2uDybryKPe">Discord server</a>
-to find other users and try teams with them!</p>
-<h2 id="guidelines">The conference guidelines</h2>
-<p>The layout guidelines are available on the conference website. Let's take a look
-at them:</p>
+<p>次に、プロジェクトをチームに移動します。
+プロジェクトを開き、左のツールバーの歯車アイコンを選んで設定に行き、Ownerのドロップダウンから新しいチームを選択します。
+変更を保存するのを忘れないでください！</p>
+<p>あなたの教員もプロジェクトを編集することができ、お互いにリアルタイムで変更を確認できます。
+公式の<a href="https://discord.gg/2uDybryKPe">Discordサーバー</a>に参加して他のユーザーを見つけ、一緒にチームを組んでみることも可能です！</p>
+<h2 id="guidelines">学会ガイドライン</h2>
+<p>レイアウトのガイドラインは学会ウェブサイトに掲載されております。
+ここでは以下の条件であった場合を考えましょう。</p>
 <ul>
-<li>The font should be an 11pt serif font</li>
-<li>The title should be in 17pt and bold</li>
-<li>The paper contains a single-column abstract and two-column main text</li>
-<li>The abstract should be centered</li>
-<li>The main text should be justified</li>
-<li>First level section headings should be 13pt, centered, and rendered in small
-capitals</li>
-<li>Second level headings are run-ins, italicized and have the same size as the
-body text</li>
-<li>Finally, the pages should be US letter sized, numbered in the center of the
-footer and the top right corner of each page should contain the title of the
-paper</li>
+<li>フォントは11ptのセリフ体</li>
+<li>タイトルは17ptで太字</li>
+<li>アブストラクトは1段組みで本文は2段組み</li>
+<li>アブストラクトは中央揃え</li>
+<li>本文は両端揃え</li>
+<li>第1レベルのセクションの見出しは13ptで中央に配置し、小さな大文字で表示</li>
+<li>第2レベルの見出しは斜体で、本文と同じ大きさ</li>
+<li>ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載</li>
 </ul>
-<p>We already know how to do many of these things, but for some of them, we'll need
-to learn some new tricks.</p>
-<h2 id="set-rules">Writing the right set rules</h2>
-<p>Let's start by writing some set rules for the document.</p>
+<p>これらのうち、多くの項目については既に対応方法を知っていますが、いくつかについては新しい記法を学ぶ必要があります。</p>
+<h2 id="set-rules">setルール</h2>
+<p>まず、文書のsetルールを書くことから始めましょう。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>
   paper<span class="typ-punct">:</span> <span class="typ-str">&quot;us-letter&quot;</span><span class="typ-punct">,</span>
   header<span class="typ-punct">:</span> <span class="typ-func">align</span><span class="typ-punct">(</span>right<span class="typ-punct">)</span><span class="typ-punct">[</span>
@@ -811,31 +803,29 @@ to learn some new tricks.</p>
 
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">600</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/d3b182eff06cc6c1b746eb497451db10.png" alt="Preview" width="480" height="190"/></div></div>
-<p>You are already familiar with most of what is going on here. We set the text
-size to <code><span class="typ-num">11pt</span></code> and the font to Linux Libertine. We also enable paragraph
-justification and set the page size to US letter.</p>
-<p>The <code>header</code> argument is new: With it, we can provide content to fill the top
-margin of every page. In the header, we specify our paper's title as requested
-by the conference style guide. We use the <code>align</code> function to align the text to
-the right.</p>
-<p>Last but not least is the <code>numbering</code> argument. Here, we can provide a
-<a href="/docs/reference/model/numbering/">numbering pattern</a> that defines how to number the pages. By
-setting into to <code><span class="typ-str">&quot;1&quot;</span></code>, Typst only displays the bare page number. Setting it to
-<code><span class="typ-str">&quot;(1/1)&quot;</span></code> would have displayed the current page and total number of pages
-surrounded by parentheses. And we could even have provided a completely custom
-function here to format things to our liking.</p>
-<h2 id="title-and-abstract">Creating a title and abstract</h2>
-<p>Now, let's add a title and an abstract. We'll start with the title. We center
-align it and increase its font weight by enclosing it in <code><span class="typ-strong">*stars*</span></code>.</p>
+<p>ここで行われていることの大半は、すでに分かりでしょう。
+テキストサイズを<code><span class="typ-num">11pt</span></code>に、フォントをLinux Libertineに設定しています。
+また、段落の両端揃えを有効にし、ページサイズをUSレターとしています。</p>
+<p>ここで、<code>header</code>は新しい引数で、各ページの上部の余白に置くコンテンツを設定できます。
+ヘッダーには、学会のスタイルガイドで要求されているように、論文のタイトルを指定します。
+<code>align</code>関数を用いてそのテキストを右寄せにします。</p>
+<p>最後に <code>numbering</code> 引数について説明します。
+ここでは、ページ番号の付け方を定義する<a href="/docs/reference/model/numbering/">numbering pattern</a>を指定できます。
+例えば<code><span class="typ-str">&quot;1&quot;</span></code>と設定すると、Typstは素のページ番号のみを表示します。
+また<code><span class="typ-str">&quot;(1/1)&quot;</span></code>と設定すると、カッコで囲まれた現在のページと総ページ数が表示されるでしょう。
+さらに、カスタム関数を用意して完全に好みの書式にすることも可能です。</p>
+<h2 id="title-and-abstract">タイトルと要旨</h2>
+<p>それでは、タイトルとアブストラクトを追加しましょう。
+まずはタイトルを中央揃えにし、<code><span class="typ-strong">*stars*</span></code>で囲んでフォントを太文字にします。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">17pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
   <span class="typ-strong">*A fluid dynamic model
   for glacier flow*</span>
 <span class="typ-punct">]</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/cb6aa3582f9258f9196f463ab496fd0e.png" alt="Preview" width="480" height="190"/></div></div>
-<p>This looks right. We used the <code>text</code> function to override the previous text
-set rule locally, increasing the size to 17pt for the function's argument. Let's
-also add the author list: Since we are writing this paper together with our
-supervisor, we'll add our own and their name.</p>
+<p>正しく動作していることが確認できます。
+<code>text</code>関数を使って、前のテキストのsetルールをローカルで上書きし、関数の引数で文字サイズを17ptに大きくしました。
+次に、著者リストも追加しましょう。
+指導教員と一緒にこの論文を書いているため、自分の名前と教員の名前を追加します。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">grid</span><span class="typ-punct">(</span>
   columns<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-num">1fr</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
   <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span><span class="typ-punct">[</span>
@@ -850,19 +840,18 @@ supervisor, we'll add our own and their name.</p>
   <span class="typ-punct">]</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/574b815b90ad7adacf43395f58f77530.png" alt="Preview" width="480" height="190"/></div></div>
-<p>The two author blocks are laid out next to each other. We use the <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a>
-function to create this layout. With a grid, we can control exactly how large
-each column is and which content goes into which cell. The <code>columns</code> argument
-takes an array of <a href="/docs/reference/layout/relative/">relative lengths</a> or <a href="/docs/reference/layout/fraction/">fractions</a>. In
-this case, we passed it two equal fractional sizes, telling it to split the
-available space into two equal columns. We then passed two content arguments to
-the grid function. The first with our own details, and the second with our
-supervisors'. We again use the <code>align</code> function to center the content within the
-column. The grid takes an arbitrary number of content arguments specifying the
-cells. Rows are added automatically, but they can also be manually sized with
-the <code>rows</code> argument.</p>
-<p>Now, let's add the abstract. Remember that the conference wants the abstract to
-be set ragged and centered.</p>
+<p>著者情報が記載された2つのブロックが隣り合わせにレイアウトされています。
+このレイアウトを作るために<a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a>関数を使っています。
+これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御することができます。
+<code>columns</code>引数には、<a href="/docs/reference/layout/relative/">相対長さ</a>または<a href="/docs/reference/layout/fraction/">割合</a>の配列を渡します。
+この場合、2つの等しい割合のサイズを渡し、使用可能なスペースを2つの等しい列に分割するように指示します。
+次に、grid関数に2つの内容引数を渡しました。
+ひとつは主著者であるあなたの情報で、もうひとつは指導教員の情報です。
+ここでも <code>align</code> 関数を使用して、コンテンツを列の中央に配置しています。
+grid関数はセルを指定するcontent引数を任意の数で受け取れます。
+行は自動的に追加されますが、<code>rows</code>引数で手動でサイズを指定することも可能です。</p>
+<p>それでは、アブストラクトを追加しましょう。
+学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。</p>
 <div class="previewed-code"><pre><code><span class="typ-escape">...</span>
 
 <span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span><span class="typ-punct">[</span>
@@ -871,14 +860,11 @@ be set ragged and centered.</p>
   <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">80</span><span class="typ-punct">)</span>
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/6d4166f4cf839d52d60ede1a8e32dfb2.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Well done! One notable thing is that we used a set rule within the content
-argument of <code>align</code> to turn off justification for the abstract. This does not
-affect the remainder of the document even though it was specified after the
-first set rule because content blocks <em>scope</em> styling. Anything set within a
-content block will only affect the content within that block.</p>
-<p>Another tweak could be to save the paper title in a variable, so that we do not
-have to type it twice, for header and title. We can do that with the <code><span class="typ-key">let</span></code>
-keyword:</p>
+<p>できました！特筆すべき点は、<code>align</code>のcontent引数の中にあるsetルールを使って、アブストラクトの両端揃えをオフにしたことです。
+これは、最初のsetルールの後に指定されたにもかかわらず、文書の残りの部分には影響しません。
+コンテンツ・ブロック内で設定されたものは、そのブロック内のコンテンツにのみ影響します。</p>
+<p>ヘッダーとタイトルの2回入力する必要がないように、論文タイトルを変数に保存することも可能です。
+変数の宣言には<code><span class="typ-key">let</span></code>を使用します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> title <span class="typ-op">=</span> <span class="typ-punct">[</span>
   A fluid dynamic model
   for glacier flow
@@ -901,21 +887,19 @@ keyword:</p>
 <span class="typ-escape">...</span>
 
 </code></pre><div class="preview"><img src="/assets/docs/bec7513982f4e4a7eae35f5e5cbb2abc.png" alt="Preview" width="480" height="190"/></div></div>
-<p>After we bound the content to the <code>title</code> variable, we can use it in functions
-and also within markup (prefixed by <code>#</code>, like functions). This way, if we decide
-on another title, we can easily change it in one place.</p>
-<h2 id="columns-and-headings">Adding columns and headings</h2>
-<p>The paper above unfortunately looks like a wall of lead. To fix that, let's add
-some headings and switch our paper to a two-column layout. The <a href="/docs/reference/layout/columns/" title="`columns`"><code>columns</code></a>
-function takes a number and content, and layouts the content into the specified
-number of columns. Since we want everything after the abstract to be in two
-columns, we need to apply the column function to our whole document.</p>
-<p>Instead of wrapping the whole document in a giant function call, we can use an
-&quot;everything&quot; show rule. To write such a show rule, put a colon directly behind
-the show keyword and then provide a function. This function is given the rest of
-the document as a parameter. We have called the parameter <code>rest</code> here, but you
-are free to choose any name. The function can then do anything with this
-content. In our case, it passes it on to the <code>columns</code> function.</p>
+<p><code>title</code>変数にコンテンツを設定した後は、関数内やマークアップ内（関数のように接頭辞に<code>#</code>をつける）で使用できます。
+こうすることで、別のタイトルに決めた場合、一箇所で簡単に変更することができます。</p>
+<h2 id="columns-and-headings">段組みと見出し</h2>
+<p>上の論文は、残念ながら文字が単調にぎっしり詰まっていて読みにくい見た目をしています。
+これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。
+<a href="/docs/reference/layout/columns/" title="`columns`"><code>columns</code></a>関数は数値と内容を受け取り、指定された列数に内容を段組みします。
+アブストラクト以降はすべて2段組みにしたいため、文書全体にcolumn関数を適用する必要があります。</p>
+<p>文書全体を巨大な関数呼び出しで囲う代わりに、「以降すべて」に対してshowルールを使うことができます。
+このようなshowルールを書くには、showキーワードの直後にコロンを置き、それから関数を指定します。
+この関数は、文書の残りの部分をパラメータとして与えます。
+ここではパラメータを <code>rest</code> と宣言していますが、どのような名前を選んでもかまいません。
+この関数は、このコンテンツに対して様々な処理を適用できます。
+この例では、<code>columns</code>関数に渡します。</p>
 <div class="previewed-code"><pre><code><span class="typ-escape">...</span>
 
 <span class="typ-key">#</span><span class="typ-key">show</span><span class="typ-punct">:</span> rest <span class="typ-op">=&gt;</span> <span class="typ-func">columns</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> rest<span class="typ-punct">)</span>
@@ -926,9 +910,9 @@ content. In our case, it passes it on to the <code>columns</code> function.</p>
 <span class="typ-heading">= Related Work</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">200</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/daf1b13ec316c0a2223266d8915ad28d.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Now there is only one thing left to do: Style our headings. We need to make them
-centered and use small capitals. Because the <code>heading</code> function does not offer
-a way to set any of that, we need to write our own heading show rule.</p>
+<p>最後に見出しのスタイルの設定をしましょう。
+ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
+<code>heading</code>関数はそのような設定を提供していないため、独自の見出しshowルールを書く必要があります。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
   <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
   <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">12pt</span><span class="typ-punct">,</span> weight<span class="typ-punct">:</span> <span class="typ-str">&quot;regular&quot;</span><span class="typ-punct">)</span>
@@ -937,19 +921,16 @@ a way to set any of that, we need to write our own heading show rule.</p>
 
 <span class="typ-escape">...</span>
 </code></pre><div class="preview"><img src="/assets/docs/93b40a7ebff375e015089f35e1668dd3.png" alt="Preview" width="480" height="190"/></div></div>
-<p>This looks great! We used a show rule that applies to all headings. We give it a
-function that gets passed the heading as a parameter. That parameter can be used
-as content but it also has some fields like <code>title</code>, <code>numbers</code>, and <code>level</code> from
-which we can compose a custom look. Here, we are center-aligning, setting the
-font weight to <code><span class="typ-str">&quot;regular&quot;</span></code> because headings are bold by default, and use the
-<a href="/docs/reference/text/smallcaps/" title="`smallcaps`"><code>smallcaps</code></a> function to render the heading's title in small capitals.</p>
-<p>The only remaining problem is that all headings look the same now. The
-&quot;Motivation&quot; and &quot;Problem Statement&quot; subsections ought to be italic run in
-headers, but right now, they look indistinguishable from the section headings. We
-can fix that by using a <code>where</code> selector on our set rule: This is a
-<a href="/docs/reference/scripting/#methods">method</a> we can call on headings (and other
-elements) that allows us to filter them by their level. We can use it to
-differentiate between section and subsection headings:</p>
+<p>うまくできました！
+すべての見出しに適用されるshowルールを使用しました。
+この関数にパラメータとして見出しを渡します。
+このパラメータはコンテンツとして使用することもできますが、<code>title</code>、<code>numbers</code>、<code>level</code>といったフィールドも持っているため、そこから独自の書式を構成することも可能です。
+ここではセンター揃えにし、見出しはデフォルトで太字なのでフォントのウェイトを <code><span class="typ-str">&quot;regular&quot;</span></code> に設定し、<a href="/docs/reference/text/smallcaps/" title="`smallcaps`"><code>smallcaps</code></a> 関数を使って見出しのタイトルを小さな大文字でレンダリングしています。</p>
+<p>残る唯一の問題は、すべての見出しが同じように見えることです。
+MotivationとProblem Statementはサブセクションであり、イタリック体であるべきですが、今はセクションの見出しと見分けがつきません。
+この問題は、setルールに<code>where</code>セレクターを使うことで解決できます。
+これは、見出し（および他の要素）に対して呼び出せる<a href="/docs/reference/scripting/#methods">メソッド</a>で、レベルごとにフィルタリングすることが可能です。
+これによりセクションとサブセクションの見出しを区別できます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>
   level<span class="typ-punct">:</span> <span class="typ-num">1</span>
 <span class="typ-punct">)</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-func">block</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
@@ -967,45 +948,36 @@ differentiate between section and subsection headings:</p>
   it<span class="typ-punct">.</span>body <span class="typ-op">+</span> <span class="typ-punct">[</span>.<span class="typ-punct">]</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/1279b82219a0c1d922617a62af27daf7.png" alt="Preview" width="480" height="190"/></div></div>
-<p>This looks great! We wrote two show rules that each selectively apply to the
-first and second level headings. We used a <code>where</code> selector to filter the
-headings by their level. We then rendered the subsection headings as run-ins. We
-also automatically add a period to the end of the subsection headings.</p>
-<p>Let's review the conference's style guide:</p>
+<p>これは素晴らしい！
+第1レベルと第2レベルの見出しにそれぞれ選択的に適用される2つのshowルールを書きました。
+<code>where</code>セレクタを使用して、見出しをレベルでフィルタリングしました。
+そして、サブセクションの見出しを本文と改行せずにレンダリングしました。
+また、サブセクションの見出しの最後にピリオドを自動的に追加してます。</p>
+<p>ここで、学会のスタイルガイドを確認しましょう。</p>
 <ul>
-<li>The font should be an 11pt serif font ✓</li>
-<li>The title should be in 17pt and bold ✓</li>
-<li>The paper contains a single-column abstract and two-column main text ✓</li>
-<li>The abstract should be centered ✓</li>
-<li>The main text should be justified ✓</li>
-<li>First level section headings should be centered, rendered in small caps and in
-13pt ✓</li>
-<li>Second level headings are run-ins, italicized and have the same size as the
-body text ✓</li>
-<li>Finally, the pages should be US letter sized, numbered in the center and the
-top right corner of each page should contain the title of the paper ✓</li>
+<li>フォントは11ptのセリフ体 ✓</li>
+<li>タイトルは17ptで太字 ✓</li>
+<li>アブストラクトは1段組みで本文は2段組み ✓</li>
+<li>アブストラクトは中央揃え ✓</li>
+<li>本文は両端揃え ✓</li>
+<li>第1レベルのセクションの見出しは13ptで中央に配置し、小さな大文字で表示 ✓</li>
+<li>第2レベルの見出しは斜体で、本文と同じ大きさ ✓</li>
+<li>ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載 ✓</li>
 </ul>
-<p>We are now in compliance with all of these styles and can submit the paper to
-the conference! The finished paper looks like this:</p>
-<p><img
+<p>これで、すべてのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。
+<img
   src="/assets/docs/3-advanced-paper.png"
   alt="The finished paper"
   style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 500px; max-width: 100%; display: block; margin: 24px auto;"
 ></p>
-<h2 id="review">Review</h2>
-<p>You have now learned how to create headers and footers, how to use functions and
-scopes to locally override styles, how to create more complex layouts with the
-<a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> function and how to write show rules for individual functions, and the
-whole document. You also learned how to use the
-<a href="/docs/reference/styling/#show-rules"><code>where</code> selector</a> to filter the headings by their level.</p>
-<p>The paper was a great success! You've met a lot of like-minded researchers at
-the conference and are planning a project which you hope to publish at the same
-venue next year. You'll need to write a new paper using the same style guide
-though, so maybe now you want to create a time-saving template for you and your
-team?</p>
-<p>In the next section, we will learn how to create templates that can be reused in
-multiple documents. This is a more advanced topic, so feel free to come back
-to it later if you don't feel up to it right now.</p>
+<h2>まとめ</h2>
+<p>このセクションでは、ヘッダーとフッターの作成方法、関数とスコープを使用してローカルにスタイルをオーバーライドする方法、<a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a>関数を使用してより複雑なレイアウトを作成する方法、個々の関数と文書全体のshowルールを記述する方法を学びました。
+また、<a href="/docs/reference/styling/#show-rules"><code>where</code>セレクタ</a>を使用して、見出しをそのレベルによってフィルタリングする方法も学びました。</p>
+<p>結果として論文は大成功でした！
+あなたはその学会にて同じ志を持つ研究者にたくさん出会い、来年同じ学会で発表したいプロジェクトを計画しています。
+その際に、同じスタイルガイドを使って新しい論文を書く必要があるため、あなたやあなたのチームのために、時間を節約できるテンプレートを作りたいと思うのではないでしょうか？</p>
+<p>次のセクションでは、複数の文書で再利用できるテンプレートの作成方法を学びます。
+これはより高度なトピックですので、今すぐには手が出せないという方は、後ほどお気軽にお越しください。</p>
 
 
 
@@ -1023,23 +995,23 @@ to it later if you don't feel up to it right now.</p>
     <nav id="page-overview"><strong>目次</strong>
       <ul>
         
-        <li data-assoc="guidelines"><a href="#guidelines">Guidelines</a>
+        <li data-assoc="guidelines"><a href="#guidelines">学会ガイドライン</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="set-rules"><a href="#set-rules">Set Rules</a>
+        <li data-assoc="set-rules"><a href="#set-rules">setルール</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="title-and-abstract"><a href="#title-and-abstract">Title And Abstract</a>
+        <li data-assoc="title-and-abstract"><a href="#title-and-abstract">タイトルと要旨</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="columns-and-headings"><a href="#columns-and-headings">Columns And Headings</a>
+        <li data-assoc="columns-and-headings"><a href="#columns-and-headings">段組みと見出し</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="review"><a href="#review">Review</a>
+        <li data-assoc=""><a href="#">まとめ</a>
           <ul></ul>
         </li>
         
