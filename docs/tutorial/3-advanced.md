@@ -3,51 +3,43 @@ description: Typst's tutorial.
 ---
 
 # 高度なスタイリング
-In the previous two chapters of this tutorial, you have learned how to write a
-document in Typst and how to change its formatting. The report you wrote
-throughout the last two chapters got a straight A and your supervisor wants to
-base a conference paper on it! The report will of course have to comply with the
-conference's style guide. Let's see how we can achieve that.
+このチュートリアルの前の2つの章では、Typstで文書を書く方法とその書式を変更する方法を学びました。
+それらの章を通して書いたレポートが優れた評価を得たため、指導教員はそれを基に学会論文を書いてほしいと考えています！
+もちろん、論文は学会のスタイルガイドに従わなければなりません。
+どうすればそれを達成できるか見てみましょう。
 
-Before we start, let's create a team, invite your supervisor and add them to the
-team. You can do this by going back to the app dashboard with the four-circles
-icon in the top left corner of the editor. Then, choose the plus icon in the
-left toolbar and create a team. Finally, click on the new team and go to its
-settings by clicking 'manage team' next to the team name. Now you can invite
-your supervisor by email.
+始める前に、チームを作成して、そのチームに教員を招待して追加しましょう。
+まず、エディターの左上にある戻るアイコンでアプリのダッシュボードに戻ります。
+次に、左のツールバーのプラスアイコンを選択し、チームを作成します。
+最後に、新しいチームをクリックし、チーム名の横にあるmanage teamをクリックして設定に進みます。
+これで教員をメールで招待することができます。
 
 ![The team settings](3-advanced-team-settings.png)
 
-Next, move your project into the team: Open it, going to its settings by
-choosing the gear icon in the left toolbar and selecting your new team from the
-owners dropdown. Don't forget to save your changes!
+次に、プロジェクトをチームに移動します。
+プロジェクトを開き、左のツールバーの歯車アイコンを選んで設定に行き、Ownerのドロップダウンから新しいチームを選択します。
+変更を保存するのを忘れないでください！
 
-Now, your supervisor can also edit the project and you can both see the changes
-in real time. You can join our [Discord server](https://discord.gg/2uDybryKPe)
-to find other users and try teams with them!
+あなたの教員もプロジェクトを編集することができ、お互いにリアルタイムで変更を確認できます。
+公式の[Discordサーバー](https://discord.gg/2uDybryKPe)に参加して他のユーザーを見つけ、一緒にチームを組んでみることも可能です！
 
-## The conference guidelines { #guidelines }
-The layout guidelines are available on the conference website. Let's take a look
-at them:
+## 学会ガイドライン { #guidelines }
+レイアウトのガイドラインは学会ウェブサイトに掲載されております。
+ここでは以下の条件であった場合を考えましょう。
 
-- The font should be an 11pt serif font
-- The title should be in 17pt and bold
-- The paper contains a single-column abstract and two-column main text
-- The abstract should be centered
-- The main text should be justified
-- First level section headings should be 13pt, centered, and rendered in small
-  capitals
-- Second level headings are run-ins, italicized and have the same size as the
-  body text
-- Finally, the pages should be US letter sized, numbered in the center of the
-  footer and the top right corner of each page should contain the title of the
-  paper
+- フォントは11ptのセリフ体
+- タイトルは17ptで太字
+- アブストラクトは1段組みで本文は2段組み
+- アブストラクトは中央揃え
+- 本文は両端揃え
+- 第1レベルのセクションの見出しは13ptで中央に配置し、小さな大文字で表示
+- 第2レベルの見出しは斜体で、本文と同じ大きさ
+- ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載
 
-We already know how to do many of these things, but for some of them, we'll need
-to learn some new tricks.
+これらのうち、多くの項目については既に対応方法を知っていますが、いくつかについては新しい記法を学ぶ必要があります。
 
-## Writing the right set rules { #set-rules }
-Let's start by writing some set rules for the document.
+## setルール { #set-rules }
+まず、文書のsetルールを書くことから始めましょう。
 
 ```example
 #set page(
@@ -68,25 +60,23 @@ Let's start by writing some set rules for the document.
 #lorem(600)
 ```
 
-You are already familiar with most of what is going on here. We set the text
-size to `{11pt}` and the font to Linux Libertine. We also enable paragraph
-justification and set the page size to US letter.
+ここで行われていることの大半は、すでに分かりでしょう。
+テキストサイズを`{11pt}`に、フォントをLinux Libertineに設定しています。
+また、段落の両端揃えを有効にし、ページサイズをUSレターとしています。
 
-The `header` argument is new: With it, we can provide content to fill the top
-margin of every page. In the header, we specify our paper's title as requested
-by the conference style guide. We use the `align` function to align the text to
-the right.
+ここで、`header`は新しい引数で、各ページの上部の余白に置くコンテンツを設定できます。
+ヘッダーには、学会のスタイルガイドで要求されているように、論文のタイトルを指定します。
+`align`関数を用いてそのテキストを右寄せにします。
 
-Last but not least is the `numbering` argument. Here, we can provide a
-[numbering pattern]($numbering) that defines how to number the pages. By
-setting into to `{"1"}`, Typst only displays the bare page number. Setting it to
-`{"(1/1)"}` would have displayed the current page and total number of pages
-surrounded by parentheses. And we could even have provided a completely custom
-function here to format things to our liking.
+最後に `numbering` 引数について説明します。
+ここでは、ページ番号の付け方を定義する[numbering pattern]($numbering)を指定できます。
+例えば`{"1"}`と設定すると、Typstは素のページ番号のみを表示します。
+また`{"(1/1)"}`と設定すると、カッコで囲まれた現在のページと総ページ数が表示されるでしょう。
+さらに、カスタム関数を用意して完全に好みの書式にすることも可能です。
 
-## Creating a title and abstract { #title-and-abstract }
-Now, let's add a title and an abstract. We'll start with the title. We center
-align it and increase its font weight by enclosing it in `[*stars*]`.
+## タイトルと要旨 { #title-and-abstract }
+それでは、タイトルとアブストラクトを追加しましょう。
+まずはタイトルを中央揃えにし、`[*stars*]`で囲んでフォントを太文字にします。
 
 ```example
 >>> #set page(width: 300pt, margin: 30pt)
@@ -97,10 +87,10 @@ align it and increase its font weight by enclosing it in `[*stars*]`.
 ])
 ```
 
-This looks right. We used the `text` function to override the previous text
-set rule locally, increasing the size to 17pt for the function's argument. Let's
-also add the author list: Since we are writing this paper together with our
-supervisor, we'll add our own and their name.
+正しく動作していることが確認できます。
+`text`関数を使って、前のテキストのsetルールをローカルで上書きし、関数の引数で文字サイズを17ptに大きくしました。
+次に、著者リストも追加しましょう。
+指導教員と一緒にこの論文を書いているため、自分の名前と教員の名前を追加します。
 
 ```example
 >>> #set page(width: 300pt, margin: 30pt)
@@ -125,20 +115,19 @@ supervisor, we'll add our own and their name.
 )
 ```
 
-The two author blocks are laid out next to each other. We use the [`grid`]
-function to create this layout. With a grid, we can control exactly how large
-each column is and which content goes into which cell. The `columns` argument
-takes an array of [relative lengths]($relative) or [fractions]($fraction). In
-this case, we passed it two equal fractional sizes, telling it to split the
-available space into two equal columns. We then passed two content arguments to
-the grid function. The first with our own details, and the second with our
-supervisors'. We again use the `align` function to center the content within the
-column. The grid takes an arbitrary number of content arguments specifying the
-cells. Rows are added automatically, but they can also be manually sized with
-the `rows` argument.
+著者情報が記載された2つのブロックが隣り合わせにレイアウトされています。
+このレイアウトを作るために[`grid`]関数を使っています。
+これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御することができます。
+`columns`引数には、[相対長さ]($relative)または[割合]($fraction)の配列を渡します。
+この場合、2つの等しい割合のサイズを渡し、使用可能なスペースを2つの等しい列に分割するように指示します。
+次に、grid関数に2つの内容引数を渡しました。
+ひとつは主著者であるあなたの情報で、もうひとつは指導教員の情報です。
+ここでも `align` 関数を使用して、コンテンツを列の中央に配置しています。
+grid関数はセルを指定するcontent引数を任意の数で受け取れます。
+行は自動的に追加されますが、`rows`引数で手動でサイズを指定することも可能です。
 
-Now, let's add the abstract. Remember that the conference wants the abstract to
-be set ragged and centered.
+それでは、アブストラクトを追加しましょう。
+学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。
 
 ```example:0,0,612,317.5
 >>> #set text(font: "Linux Libertine", 11pt)
@@ -182,15 +171,12 @@ be set ragged and centered.
 >>> #lorem(600)
 ```
 
-Well done! One notable thing is that we used a set rule within the content
-argument of `align` to turn off justification for the abstract. This does not
-affect the remainder of the document even though it was specified after the
-first set rule because content blocks _scope_ styling. Anything set within a
-content block will only affect the content within that block.
+できました！特筆すべき点は、`align`のcontent引数の中にあるsetルールを使って、アブストラクトの両端揃えをオフにしたことです。
+これは、最初のsetルールの後に指定されたにもかかわらず、文書の残りの部分には影響しません。
+コンテンツ・ブロック内で設定されたものは、そのブロック内のコンテンツにのみ影響します。
 
-Another tweak could be to save the paper title in a variable, so that we do not
-have to type it twice, for header and title. We can do that with the `{let}`
-keyword:
+ヘッダーとタイトルの2回入力する必要がないように、論文タイトルを変数に保存することも可能です。
+変数の宣言には`{let}`を使用します。
 
 ```example:single
 #let title = [
@@ -242,23 +228,21 @@ keyword:
 >>> #lorem(600)
 ```
 
-After we bound the content to the `title` variable, we can use it in functions
-and also within markup (prefixed by `#`, like functions). This way, if we decide
-on another title, we can easily change it in one place.
+`title`変数にコンテンツを設定した後は、関数内やマークアップ内（関数のように接頭辞に`#`をつける）で使用できます。
+こうすることで、別のタイトルに決めた場合、一箇所で簡単に変更することができます。
 
-## Adding columns and headings { #columns-and-headings }
-The paper above unfortunately looks like a wall of lead. To fix that, let's add
-some headings and switch our paper to a two-column layout. The [`columns`]
-function takes a number and content, and layouts the content into the specified
-number of columns. Since we want everything after the abstract to be in two
-columns, we need to apply the column function to our whole document.
+## 段組みと見出し { #columns-and-headings }
+上の論文は、残念ながら文字が単調にぎっしり詰まっていて読みにくい見た目をしています。
+これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。
+[`columns`]関数は数値と内容を受け取り、指定された列数に内容を段組みします。
+アブストラクト以降はすべて2カラムにしたいので、文書全体にcolumn関数を適用する必要があります。
 
-Instead of wrapping the whole document in a giant function call, we can use an
-"everything" show rule. To write such a show rule, put a colon directly behind
-the show keyword and then provide a function. This function is given the rest of
-the document as a parameter. We have called the parameter `rest` here, but you
-are free to choose any name. The function can then do anything with this
-content. In our case, it passes it on to the `columns` function.
+文書全体を巨大な関数呼び出しで囲う代わりに、「以降すべて」に対してshowルールを使うことができます。
+このようなshowルールを書くには、showキーワードの直後にコロンを置き、それから関数を指定します。
+この関数は、文書の残りの部分をパラメータとして与えます。
+ここではパラメータを `rest` と宣言していますが、どのような名前を選んでもかまいません。
+この関数は、このコンテンツに対して様々な処理を適用できます。
+この例では、`columns`関数に渡します。
 
 ```example:single
 >>> #let title = [
@@ -315,9 +299,9 @@ content. In our case, it passes it on to the `columns` function.
 #lorem(200)
 ```
 
-Now there is only one thing left to do: Style our headings. We need to make them
-centered and use small capitals. Because the `heading` function does not offer
-a way to set any of that, we need to write our own heading show rule.
+最後に見出しのスタイルの設定をしましょう。
+ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
+`heading`関数はそのような設定を提供していないため、独自の見出しshowルールを書く必要があります。
 
 ```example:50,250,265,270
 >>> #let title = [
@@ -380,20 +364,17 @@ a way to set any of that, we need to write our own heading show rule.
 >>> #lorem(45)
 ```
 
-This looks great! We used a show rule that applies to all headings. We give it a
-function that gets passed the heading as a parameter. That parameter can be used
-as content but it also has some fields like `title`, `numbers`, and `level` from
-which we can compose a custom look. Here, we are center-aligning, setting the
-font weight to `{"regular"}` because headings are bold by default, and use the
-[`smallcaps`] function to render the heading's title in small capitals.
+うまくできました！
+すべての見出しに適用されるshowルールを使用しました。
+この関数にパラメータとして見出しを渡します。
+このパラメータはコンテンツとして使用することもできますが、`title`、`numbers`、`level`といったフィールドも持っているため、そこから独自の書式を構成することも可能です。
+ここではセンター揃えにし、見出しはデフォルトで太字なのでフォントのウェイトを `{"regular"}` に設定し、[`smallcaps`] 関数を使って見出しのタイトルを小さな大文字でレンダリングしています。
 
-The only remaining problem is that all headings look the same now. The
-"Motivation" and "Problem Statement" subsections ought to be italic run in
-headers, but right now, they look indistinguishable from the section headings. We
-can fix that by using a `where` selector on our set rule: This is a
-[method]($scripting/#methods) we can call on headings (and other
-elements) that allows us to filter them by their level. We can use it to
-differentiate between section and subsection headings:
+残る唯一の問題は、すべての見出しが同じように見えることです。
+MotivationとProblem Statementはサブセクションであり、ヘッダーでイタリック体であるべきだが、今はセクションの見出しと見分けがつきません。
+この問題は、setルールに`where`セレクターを使うことで解決できます。
+これは、見出し（および他の要素）に対して呼び出せる[メソッド]($scripting/#methods)で、レベルごとにフィルタリングすることが可能です。
+これによりセクションとサブセクションの見出しを区別できます。
 
 ```example:50,250,265,245
 >>> #let title = [
@@ -466,46 +447,37 @@ differentiate between section and subsection headings:
 >>> #lorem(45)
 ```
 
-This looks great! We wrote two show rules that each selectively apply to the
-first and second level headings. We used a `where` selector to filter the
-headings by their level. We then rendered the subsection headings as run-ins. We
-also automatically add a period to the end of the subsection headings.
+これは素晴らしい！
+第1レベルと第2レベルの見出しにそれぞれ選択的に適用される2つのshowルールを書きました。
+`where`セレクタを使用して、見出しをレベルでフィルタリングしました。
+そして、サブセクションの見出しを本文と改行せずにレンダリングしました。
+また、サブセクションの見出しの最後にピリオドを自動的に追加してます。
 
-Let's review the conference's style guide:
-- The font should be an 11pt serif font ✓
-- The title should be in 17pt and bold ✓
-- The paper contains a single-column abstract and two-column main text ✓
-- The abstract should be centered ✓
-- The main text should be justified ✓
-- First level section headings should be centered, rendered in small caps and in
-  13pt ✓
-- Second level headings are run-ins, italicized and have the same size as the
-  body text ✓
-- Finally, the pages should be US letter sized, numbered in the center and the
-  top right corner of each page should contain the title of the paper ✓
+ここで、学会のスタイルガイドを確認しましょう。
 
-We are now in compliance with all of these styles and can submit the paper to
-the conference! The finished paper looks like this:
+- フォントは11ptのセリフ体 ✓
+- タイトルは17ptで太字 ✓
+- アブストラクトは1段組みで本文は2段組み ✓
+- アブストラクトは中央揃え ✓
+- 本文は両端揃え ✓
+- 第1レベルのセクションの見出しは13ptで中央に配置し、小さな大文字で表示 ✓
+- 第2レベルの見出しは斜体で、本文と同じ大きさ ✓
+- ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載 ✓
 
+これで、すべてのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。
 <img
   src="3-advanced-paper.png"
   alt="The finished paper"
   style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 500px; max-width: 100%; display: block; margin: 24px auto;"
 >
 
-## Review
-You have now learned how to create headers and footers, how to use functions and
-scopes to locally override styles, how to create more complex layouts with the
-[`grid`] function and how to write show rules for individual functions, and the
-whole document. You also learned how to use the
-[`where` selector]($styling/#show-rules) to filter the headings by their level.
+## まとめ
+このセクションでは、ヘッダーとフッターの作成方法、関数とスコープを使用してローカルにスタイルをオーバーライドする方法、[`grid`]関数を使用してより複雑なレイアウトを作成する方法、個々の関数と文書全体のshowルールを記述する方法を学びました。
+また、[`where`セレクタ]($styling/#show-rules)を使用して、見出しをそのレベルによってフィルタリングする方法も学びました。
 
-The paper was a great success! You've met a lot of like-minded researchers at
-the conference and are planning a project which you hope to publish at the same
-venue next year. You'll need to write a new paper using the same style guide
-though, so maybe now you want to create a time-saving template for you and your
-team?
+結果として論文は大成功でした！
+あなたはその学会にて同じ志を持つ研究者にたくさん出会い、来年同じ学会で発表したいプロジェクトを計画しています。
+その際に、同じスタイルガイドを使って新しい論文を書く必要があるため、あなたやあなたのチームのために、時間を節約できるテンプレートを作りたいと思うのではないでしょうか？
 
-In the next section, we will learn how to create templates that can be reused in
-multiple documents. This is a more advanced topic, so feel free to come back
-to it later if you don't feel up to it right now.
+次のセクションでは、複数の文書で再利用できるテンプレートの作成方法を学びます。
+これはより高度なトピックですので、今すぐには手が出せないという方は、後ほどお気軽にお越しください。
