@@ -1,37 +1,17 @@
 ---
 description: |
-  Are you a LaTeX user? This guide explains the differences and
-  similarities between Typst and LaTeX so you can get started quickly.
+  あなたはLaTeXユーザですか？ このガイドではTypstとLaTeXの違いや類似点を説明し、すぐTypstを使い始められるよう手助けをします。
 ---
 
-# Guide for LaTeX users { # }
-This page is a good starting point if you have used LaTeX before and want to try
-out Typst. We will explore the main differences between these two systems from a
-user perspective. Although Typst is not built upon LaTeX and has a different
-syntax, you will learn how to use your LaTeX skills to get a head start.
+# LaTeXユーザー向けガイド { # }
+このページは、過去にLaTeXを使用していたユーザーがTypstを試みるための良い出発点です。ここでは、ユーザー視点からこの2つのシステムの主な違いを探ります。TypstはLaTeXに基づいて開発されてはおらず、構文も異なりますが、LaTeXのスキルを活かしてスムーズにTypstを使い始めることはできます。
 
-Just like LaTeX, Typst is a markup-based typesetting system: You compose your
-document in a text file and mark it up with commands and other syntax. Then, you
-use a compiler to typeset the source file into a PDF. However, Typst also
-differs from LaTeX in several aspects: For one, Typst uses more dedicated syntax
-(like you may know from Markdown) for common tasks. Typst's commands are also
-more principled: They all work the same, so unlike in LaTeX, you just need to
-understand a few general concepts instead of learning different conventions for
-each package. Moreover Typst compiles faster than LaTeX: Compilation usually
-takes milliseconds, not seconds, so the web app and the compiler can both
-provide instant previews.
+LaTeXと同様に、Typstもマークアップベースの組版システムです。テキストファイルにドキュメントを作成し、コマンドや各種の構文でマークアップします。そして、コンパイラを使用してソースファイルをPDFに組版します。しかし、TypstはLaTeXといくつかの点で異なります。例えば、Typstは一般的なタスクに対してMarkdownに似た専用の構文を使用します。Typstのコマンドはより原則に則っており、すべて同じように動作します。したがって、LaTeXのように各パッケージごとに異なる慣例を学ぶ必要はなく、いくつかの一般的な概念を理解するだけで済みます。さらに、TypstはLaTeXよりもコンパイルが速く、普通はミリ秒単位でコンパイルが完了するため、ウェブアプリでもCLIコンパイラでも即時プレビューをすることができます。
 
-In the following, we will cover some of the most common questions a user
-switching from LaTeX will have when composing a document in Typst. If you prefer
-a step-by-step introduction to Typst, check out our [tutorial].
+以下では、LaTeXからTypstに移行するユーザーがドキュメントを作成する際に抱くであろう一般的な質問を取り上げます。ステップバイステップのTypst入門を希望する場合は、[チュートリアル]をチェックしてください。
 
-## How do I create a new, empty document? { #getting-started }
-That's easy. You just create a new, empty text file (the file extension is
-`.typ`). No boilerplate is needed to get started. Simply start by writing your
-text. It will be set on an empty A4-sized page. If you are using the web app,
-click "+ Empty document" to create a new project with a file and enter the
-editor. [Paragraph breaks]($parbreak) work just as they do in LaTeX, just use a
-blank line.
+## 新しい空のドキュメントをどうやって作成すればよいですか？ { #getting-started }
+簡単です。新しい空のテキストファイル（拡張子は`.typ`）を作成します。ボイラープレートは不要です。単にテキストを書き始めるだけで良いのです。デフォルトではA4サイズの空のページに設定されます。ウェブアプリを使用している場合は、「+ Empty document」をクリックしてファイル付きの新しいプロジェクトを作成し、エディターに入ります。[段落の区切り]($parbreak)には、LaTeXと同じように空行を使用します。
 
 ```example
 Hey there!
@@ -40,124 +20,85 @@ Here are two paragraphs. The
 output is shown to the right.
 ```
 
-If you want to start from an preexisting LaTeX document instead, you can use
-[Pandoc](https://pandoc.org) to convert your source code to Typst markup. This
-conversion is also built into our web app, so you can upload your `.tex` file to
-start your project in Typst.
+既存のLaTeXドキュメントを元にTypstを使い始める場合は、[Pandoc](https://pandoc.org)を使用してソースコードをTypstマークアップに変換できます。この変換はTypstのウェブアプリにも組み込まれているため、`.tex`ファイルをアップロードしてTypstプロジェクトを始めることができます。
 
-## How do I create section headings, emphasis, ...? { #elements }
-LaTeX uses the command `\section` to create a section heading. Nested headings
-are indicated with `\subsection`, `\subsubsection`, etc. Depending on your
-document class, there is also `\part` or `\chapter`.
+## 見出しや強調などは、どうやって作成すればよいですか？ { #elements }
+LaTeXでは、コマンド`\section`を使用してセクションヘディングを作成します。ネストされたヘディングは、`\subsection`、`\subsubsection`などで示されます。ドキュメントクラスに応じて、`\part`や`\chapter`もあります。
 
-In Typst, [headings]($heading) are less verbose: You prefix the line with the
-heading on it with an equals sign and a space to get a first-order heading:
-`[= Introduction]`. If you need a second-order heading, you use two equals
-signs: `[== In this paper]`. You can nest headings as deeply as you'd like by
-adding more equals signs.
+それに対してTypstでは、[ヘディング]($heading)はより簡潔です。行の先頭に等号とスペースを付けると、第1段階のヘディングになります: `[= Introduction]`。第2段階のヘディングが必要な場合は、2つの等号を使用します: `[== In this paper]`。望むだけ多くの等号を追加することで、ヘディングを任意の深さまでネストできます。
 
-Emphasis (usually rendered as italic text) is expressed by enclosing text in
-`[_underscores_]` and strong emphasis (usually rendered in boldface) by using
-`[*stars*]` instead.
+強調（通常はイタリック体でレンダリングされます）は、テキストを`[_アンダースコアで囲む_]`ことで表します。強い強調（通常は太字でレンダリングされます）は`[*星印で囲む*]`ことで表します。
 
-Here is a list of common markup commands used in LaTeX and their Typst
-equivalents. You can also check out the [full syntax cheat sheet]($syntax).
+以下は、LaTeXで使用される一般的なマークアップコマンドと、それに対応するTypstコマンドの一覧です。[完全な構文チートシート]($syntax)もご覧ください。
 
-| Element          | LaTeX                     | Typst                  | See        |
+| 要素              | LaTeX                      | Typst                   | 参照       |
 |:-----------------|:--------------------------|:-----------------------|:-----------|
-| Strong emphasis  | `\textbf{strong}`         | `[*strong*]`           | [`strong`] |
-| Emphasis         | `\emph{emphasis}`         | `[_emphasis_]`         | [`emph`]   |
-| Monospace / code | `\texttt{print(1)}`       | ``[`print(1)`]``       | [`raw`]    |
-| Link             | `\url{https://typst.app}` | `[https://typst.app/]` | [`link`]   |
-| Label            | `\label{intro}`           | `[<intro>]`            | [`label`]  |
-| Reference        | `\ref{intro}`             | `[@intro]`             | [`ref`]    |
-| Citation         | `\cite{humphrey97}`       | `[@humphrey97]`        | [`cite`]   |
-| Bullet list      | `itemize` environment     | `[- List]`             | [`list`]   |
-| Numbered list    | `enumerate` environment   | `[+ List]`             | [`enum`]   |
-| Term list        | `description` environment | `[/ Term: List]`       | [`terms`]  |
-| Figure           | `figure` environment      | `figure` function      | [`figure`] |
-| Table            | `table` environment       | `table` function       | [`table`]  |
-| Equation         | `$x$`, `align` / `equation` environments | `[$x$]`, `[$ x = y $]` | [`equation`]($math.equation) |
+| 強調             | `\textbf{strong}`         | `[*強調*]`              | [`strong`] |
+| イタリック       | `\emph{emphasis}`         | `[_強調_]`              | [`emph`]   |
+| 等幅フォント     | `\texttt{print(1)}`       | ``[`print(1)`]``       | [`raw`]    |
+| リンク           | `\url{https://typst.app}` | `[https://typst.app/]`  | [`link`]   |
+| ラベル           | `\label{intro}`           | `[<intro>]`             | [`label`]  |
+| 参照             | `\ref{intro}`             | `[@intro]`              | [`ref`]    |
+| 引用             | `\cite{humphrey97}`       | `[@humphrey97]`         | [`cite`]   |
+| 箇条書きリスト   | `itemize` 環境             | `[- リスト]`            | [`list`]   |
+| 番号付きリスト   | `enumerate` 環境           | `[+ リスト]`            | [`enum`]   |
+| 用語リスト       | `description` 環境         | `[/ 用語: リスト]`      | [`terms`]  |
+| 図               | `figure` 環境              | `figure` 関数           | [`figure`] |
+| 表               | `table` 環境               | `table` 関数            | [`table`]  |
+| 数式             | `$x$`, `align` / `equation` 環境 | `[$x$]`, `[$ x = y $]` | [`equation`]($math.equation) |
 
-[Lists]($list) do not rely on environments in Typst. Instead, they have
-lightweight syntax like headings. To create an unordered list (`itemize`),
-prefix each line of an item with a hyphen:
+Typstでは[リスト]($list)は環境に依存しません。代わりに、ヘディングのような軽量な構文を持っています。無順リストを作成するには、各アイテムの行頭にハイフンを付けます:
 
 ````example
-To write this list in Typst...
+このリストをTypstで書くには...
 
 ```latex
 \begin{itemize}
-  \item Fast
-  \item Flexible
-  \item Intuitive
+  \item 速い
+  \item 柔軟
+  \item 直感的
 \end{itemize}
 ```
 
-...just type this:
+...次のように入力します:
 
-- Fast
-- Flexible
-- Intuitive
+- 速い
+- 柔軟
+- 直感的
 
 ````
 
-Nesting lists works just by using proper indentation. Adding a blank line in
-between items results in a more [widely]($list.tight) spaced list.
+リストのネストは適切なインデントを使用するだけで機能します。アイテム間に空行を追加すると、より[広く]($list.tight)間隔のあるリストになります。
 
-To get a [numbered list]($enum) (`enumerate`) instead, use a `+` instead of the
-hyphen. For a [term list]($terms) (`description`), write `[/ Term: Description]`
-instead.
+[番号付きリスト]($enum)を作成するには、ハイフンの代わりに`+`を使用します。[用語リスト]($terms)には、`[/ Term: Description]`と書きます。
 
-## How do I use a command? { #commands }
-LaTeX heavily relies on commands (prefixed by backslashes). It uses these
-_macros_ to affect the typesetting process and to insert and manipulate content.
-Some commands accept arguments, which are most frequently enclosed in curly
-braces: `\cite{rasmus}`.
+## コマンドの使い方 { #commands }
+LaTeXは、バックスラッシュで始まるコマンドに大きく依存しています。これらのマクロを使用してタイポグラフィープロセスを制御し、コンテンツを挿入および操作します。いくつかのコマンドは引数を受け取り、最も一般的には中括弧で囲まれます: `\cite{rasmus}`。
 
-Typst differentiates between [markup mode and code mode]($scripting/#blocks).
-The default is markup mode, where you compose text and apply syntactic
-constructs such as `[*stars for bold text*]`. Code mode, on the other hand,
-parallels programming languages like Python, providing the option to input and
-execute segments of code.
+Typstは[マークアップモードとコードモード]($scripting/#blocks)を区別します。デフォルトはマークアップモードで、テキストを作成して`[*太字用*星印]`のような構文を適用します。一方、コードモードはPythonのようなプログラミング言語に似ており、コードセグメントを入力して実行するオプションを提供します。
 
-Within Typst's markup, you can switch to code mode for a single command (or
-rather, _expression_) using a hash (`#`). This is how you call functions to, for
-example, split your project into different [files]($scripting/#modules) or
-render text based on some [condition]($scripting/#conditionals). Within code
-mode, it is possible to include normal markup [_content_]($content) by using
-square brackets. Within code mode, this content is treated just as any other
-normal value for a variable.
+Typstのマークアップ内では、ハッシュ記号（`#`）を使用して単一のコマンド（正確には_式_）のためのコードモードに切り替えることができます。これを使用して、プロジェクトをさまざまな[ファイル]($scripting/#modules)に分割したり、条件に基づいてテキストをレンダリングしたりする関数を呼び出します。コードモード内では、角括弧を使用して通常のマークアップ[_コンテンツ_]($content)を含むことができます。このコンテンツは、コードモード内では変数の通常の値として扱われます。
 
 ```example
-First, a rectangle:
+まず、長方形:
 #rect()
 
-Let me show how to do
-#underline([_underlined_ text])
+これを次に示します
+#underline([_下線付き_テキスト])
 
-We can also do some maths:
+数学もできます:
 #calc.max(3, 2 * 4)
 
-And finally a little loop:
+最後に少しループ:
 #for x in range(3) [
   Hi #x.
 ]
 ```
 
-A function call always involves the name of the function ([`rect`],
-[`underline`], [`calc.max`]($calc.max), [`range`]($array.range)) followed by
-parentheses (as opposed to LaTeX where the square brackets and curly braces are
-optional if the macro requires no arguments). The expected list of arguments
-passed within those parentheses depends on the concrete function and is
-specified in the [reference].
+関数呼び出しは常に関数の名前（`rect`、`underline`、`calc.max`($calc.max)、`range`($array.range)）に続いて括弧がつきます（LaTeXでは、マクロが引数を必要としない場合に角括弧と中括弧がオプションであるのとは対照的です）。括弧内に渡される引数リストは具体的な関数によります。詳細は[リファレンス]を参照してください。
 
-### Arguments
-A function can have multiple arguments. Some arguments are positional, i.e., you
-just provide the value: The function `[#lower("SCREAM")]` returns its argument
-in all-lowercase. Many functions use named arguments instead of positional
-arguments to increase legibility. For example, the dimensions and stroke of a
-rectangle are defined with named arguments:
+### 引数
+関数は複数の引数を持つことができます。いくつかの引数は位置引数であり、単に値を提供するだけです。例えば、`[#lower("SCREAM")]`関数はその引数をすべて小文字にして返します。多くの関数は可読性を高めるために名前付き引数を使用します。たとえば、長方形の寸法とストロークは名前付き引数で定義されます:
 
 ```example
 #rect(
@@ -167,144 +108,89 @@ rectangle are defined with named arguments:
 )
 ```
 
-You specify a named argument by first entering its name (above, it's `width`,
-`height`, and `stroke`), then a colon, followed by the value (`2cm`, `1cm`,
-`red`). You can find the available named arguments in the [reference
-page]($reference) for each function or in the autocomplete panel when typing.
-Named arguments are similar to how some LaTeX environments are configured, for
-example, you would type `\begin{enumerate}[label={\alph*)}]` to start a list
-with the labels `a)`, `b)`, and so on.
+名前付き引数を指定するには、まずその名前（上記では`width`、`height`、`stroke`）、コロン、そして値（`2cm`、`1cm`、`red`）を入力します。各関数のリファレンスページまたは入力中のオートコンプリートパネルで利用可能な名前付き引数を確認できます。名前付き引数は、たとえば、`enumerate`環境を開始するために`\begin{enumerate}[label={\alph*)}]`のように書く場合など、LaTeX環境の一部の構成方法と似ています。
 
-Often, you want to provide some [content] to a function. For example, the LaTeX
-command `\underline{Alternative A}` would translate to
-`[#underline([Alternative A])]` in Typst. The square brackets indicate that a
-value is [content]. Within these brackets, you can use normal markup.
-However, that's a lot of parentheses for a pretty simple construct. This is why
-you can also move trailing content arguments after the parentheses (and omit the
-parentheses if they would end up empty).
+しばしば、関数にいくつか[コンテンツ]を提供したくなります。たとえば、LaTeXコマンド`\underline{Alternative A}`は、Typstでは`[#underline([Alternative A])]`に変換されます。角括弧は値が[コンテンツ]であることを示します。これらの括弧内では、通常のマークアップを使用できます。ただし、これはかなり単純な構造に対して多くの括弧です。これは、コンテンツ引数を括弧の後ろに移動させ、括弧が空の場合に省略できるためです。
 
 ```example
-Typst is an #underline[alternative]
-to LaTeX.
+Typstは#underline[LaTeXの代替]
+です。
 
-#rect(fill: aqua)[Get started here!]
+#rect(fill: aqua)[ここから始めよう!]
 ```
 
-### Data types
-You likely already noticed that the arguments have distinctive data types. Typst
-supports many [data types]($type). Below, there is a table with some of the most
-important ones and how to write them. In order to specify values of any of these
-types, you have to be in code mode!
+### データ型
+引数には異なるデータ型があることに気付いたかもしれません。Typstは多くの[データ型]($type)をサポートしています。以下はそれらのいくつかとその使用例を示す表です。これらの型の値を指定するには、コードモードにいる必要があります!
 
-| Data type                       | Example                           |
-|:--------------------------------|:----------------------------------|
-| [Content]($content)             | `{[*fast* typesetting]}`          |
-| [String]($str)                  | `{"Pietro S. Author"}`            |
-| [Integer]($int)                 | `{23}`                            |
-| [Floating point number]($float) | `{1.459}`                         |
-| [Absolute length]($length)      | `{12pt}`, `{5in}`, `{0.3cm}`, ... |
-| [Relative length]($ratio)       | `{65%}`                           |
+| データ型                           | 使用例                                |
+|:----------------------------------|:--------------------------------------|
+| [コンテンツ]($content)            | `{[*高速* タイプセッティング]}`       |
+| [文字列]($str)                     | `{"Pietro S. Author"}`                |
+| [整数]($int)                       | `{23}`                                |
+| [浮動小数点数]($float)             | `{1.459}`                             |
+| [絶対長]($length)                  | `{12pt}`, `{5in}`, `{0.3cm}`, ...     |
+| [相対長]($ratio)                   | `{65%}`                               |
 
-The difference between content and string is that content can contain markup,
-including function calls, while a string really is just a plain sequence of
-characters.
+コンテンツと文字列の違いは、コンテンツがマークアップを含むことができるのに対し、文字列は単なる文字のシーケンスであるという点です。
 
-Typst provides [control flow constructs]($scripting/#conditionals) and
-[operators]($scripting/#operators) such as `+` for adding things or `==` for
-checking equality between two variables.
+Typstは`+`で足し算をするなどの[演算子]($scripting/#operators)や`==`で二つの変数の等価性をチェックする[制御フロー構造]($scripting/#conditionals)を提供します。
 
-You can also store values, including functions, in your own
-[variables]($scripting/#bindings). This can be useful to perform computations on
-them, create reusable automations, or reference a value multiple times. The
-variable binding is accomplished with the let keyword, which works similar to
-`\newcommand`:
+また、値（関数も含む）を自分の[変数]($scripting/#bindings)に格納することもできます。これにより、値に対して計算を実行したり、再利用可能な自動化を作成したり、値を複数回参照したりすることができます。変数バインディングは`let`キーワードを使用し、`\newcommand`のように機能します：
 
 ```example
-// Store the integer `5`.
+// 整数`5`を格納
 #let five = 5
 
-// Define a function that
-// increments a value.
+// 値をインクリメントする関数を定義
 #let inc(i) = i + 1
 
-// Reference the variables.
-I have #five fingers.
+// 変数を参照
+私は#five本の指があります。
 
-If I had one more, I'd have
-#inc(five) fingers. Whoa!
+もう一本あれば、
+#inc(five)本の指があります。わお！
 ```
 
-### Commands to affect the remaining document { #rules }
-In LaTeX, some commands like `\textbf{bold text}` receive an argument in curly
-braces and only affect that argument. Other commands such as `\bfseries bold
-text` act as switches (LaTeX calls this a declaration), altering the appearance
-of all subsequent content within the document or current scope.
+### ドキュメント全体に影響を与えるコマンド { #rules }
+LaTeXでは、`\textbf{bold text}`のように引数中括弧を受け取り、その引数にのみ影響を与えるコマンドがあります。他のコマンド（例えば`\bfseries bold text`）はスイッチ（LaTeXでは宣言と呼ばれる）として機能し、ドキュメントや現在のスコープ内のすべての後続のコンテンツの外見を変更します。
 
-In Typst, the same function can be used both to affect the appearance for the
-remainder of the document, a block (or scope), or just its arguments. For
-example, `[#text(weight: "bold")[bold text]]` will only embolden its argument,
-while `[#set text(weight: "bold")]` will embolden any text until the end of the
-current block, or, if there is none, document. The effects of a function are
-immediately obvious based on whether it is used in a call or a
-[set rule.]($styling/#set-rules)
+Typstでは、同じ関数を使用してドキュメントの残りの部分、ブロック（またはスコープ）、またはその引数にのみ影響を与えることができます。例えば、`[#text(weight: "bold")[太字]]`はその引数のみを太字にしますが、`[#set text(weight: "bold")]`は現在のブロック（またはない場合はドキュメント）の終わりまで任意のテキストを太字にします。関数の効果は、それが呼び出しとして使用されているか、[セットルール]($styling/#set-rules)として使用されているかによって明確です。
 
 ```example
-I am starting out with small text.
+小さなテキストから始めています。
 
 #set text(14pt)
 
-This is a bit #text(18pt)[larger,]
-don't you think?
+これは少し#text(18pt)[大きい]
+と思いませんか？
 ```
 
-Set rules may appear anywhere in the document. They can be thought of as
-default argument values of their respective function:
+セットルールはドキュメントのどこにでも現れます。これは、それぞれの関数のデフォルト引数値と考えることができます：
 
 ```example
 #set enum(numbering: "I.")
 
-Good results can only be obtained by
-+ following best practices
-+ being aware of current results
-  of other researchers
-+ checking the data for biases
+良い結果を得るには
++ ベストプラクティスに従うこと
++ 他の研究者の現在の結果を意識すること
++ データのバイアスをチェックすることです
 ```
 
-The `+` is syntactic sugar (think of it as an abbreviation) for a call to the
-[`{enum}`]($enum) function, to which we apply a set rule above.
-[Most syntax is linked to a function in this way.]($syntax) If you need to style
-an element beyond what its arguments enable, you can completely redefine its
-appearance with a [show rule]($styling/#show-rules) (somewhat comparable to
-`\renewcommand`).
+`+`は[`{enum}`]($enum)関数の呼び出しのシンタックスシュガー（略記法）であり、その上に上記のセットルールを適用します。
+[ほとんどの構文はこのように関数にリンクされています]($syntax)。引数だけではスタイルを適用できない場合は、[_すべて_の表示ルール]($styling/#show-rules)を使用してその外見を完全に再定義できます（`\\renewcommand`に似ています）。
 
-You can achieve the effects of LaTeX commands like `\textbf`, `\textsf`,
-`\rmfamily`, `\mdseries`, and `\itshape` with the [`font`]($text.font),
-[`style`]($text.style), and [`weight`]($text.weight) arguments of the `text`
-function. The text function can be used in a set rule (declaration style) or
-with a content argument. To replace `\textsc`, you can use the [`smallcaps`]
-function, which renders its content argument as smallcaps. Should you want to
-use it declaration style (like `\scshape`), you can use an
-[_everything_ show rule]($styling/#show-rules) that applies the function to the
-rest of the scope:
+`\\textbf`、`\\textsf`、`\\rmfamily`、`\\mdseries`、`\\itshape`のようなLaTeXコマンドの効果は、`text`関数の[`font`]($text.font)、[`style`]($text.style)、[`weight`]($text.weight)引数を使用して達成できます。`text`関数はセットルール（宣言スタイル）またはコンテンツ引数を伴って使用できます。`\\textsc`を置き換えるには、`小さな大文字`関数を使用してそのコンテンツ引数を小さな大文字でレンダリングします。宣言スタイルで使用する場合（`\\scshape`のように）、次のような[_すべて_の表示ルール]($styling/#show-rules)で関数を残りのスコープに適用します：
 
 ```example
 #show: smallcaps
 
-Boisterous Accusations
+大きな疑問
 ```
 
-## How do I load a document class? { #templates }
-In LaTeX, you start your main `.tex` file with the `\documentclass{article}`
-command to define how your document is supposed to look. In that command, you
-may have replaced `article` with another value such as `report` and `amsart` to
-select a different look.
+## ドキュメントクラスの読み込み方 { #templates }
+LaTeXでは、`.tex`ファイルの先頭で`\documentclass{article}`コマンドを使用して、ドキュメントの外見を定義します。このコマンドでは、`article`を`report`や`amsart`などに置き換えて異なる外見を選択できます。
 
-When using Typst, you style your documents with [functions]($function).
-Typically, you use a template that provides a function that styles your whole
-document. First, you import the function from a template file. Then, you apply
-it to your whole document. This is accomplished with a
-[show rule]($styling/#show-rules) that wraps the following document in a given
-function. The following example illustrates how it works:
+Typstを使用する場合、ドキュメントのスタイリングには[関数]($function)を使用します。通常、ドキュメント全体をスタイリングする関数を提供するテンプレートを使用します。まずテンプレートファイルから関数をインポートします。そして、showルールを使ってドキュメント全体にそれを適用します。以下の例でその方法を説明します：
 
 ```example:single
 >>> #let conf(
@@ -389,146 +275,89 @@ function. The following example illustrates how it works:
   abstract: lorem(80),
 )
 
-Let's get started writing this
-article by putting insightful
-paragraphs right here!
+Insightful段落をここに!
 ```
 
-The [`{import}`]($scripting/#modules) statement makes
-[functions]($function) (and other definitions) from another file available.
-In this example, it imports the `conf` function from the `conf.typ` file. This
-function formats a document as a conference article. We use a show rule to apply
-it to the document and also configure some metadata of the article. After
-applying the show rule, we can start writing our article right away!
+[`{import}`]($scripting/#modules)ステートメントは、他のファイルから[関数]($function)やその他の定義を利用可能にします。この例では、`conf.typ`ファイルから`conf`関数をインポートしています。この関数はドキュメントをカンファレンス記事としてフォーマットします。showルールを使って文書全体に適用し、記事のメタデータも設定します。showルールを適用した後、すぐに記事を書き始められます。
 
 <div class="info-box">
 
-Functions are Typst's "commands" and can transform their arguments to an output
-value, including document _content._ Functions are "pure", which means that they
-cannot have any effects beyond creating an output value / output content. This
-is in stark contrast to LaTeX macros that can have arbitrary effects on your
-document.
+Functions are Typstの“コマンド”であり、引数を変換して出力値を生成します。ドキュメント_コンテンツ_も含めて、関数は“純粋”であり、出力値や出力コンテンツを超える効果を持たず、これは任意の効果を持つLaTeXマクロとは対照です。
 
-To let a function style your whole document, the show rule processes everything
-that comes after it and calls the function specified after the colon with the
-result as an argument. The `.with` part is a _method_ that takes the `conf`
-function and pre-configures some if its arguments before passing it on to the
-show rule.
+ドキュメント全体をスタイリングするために、showルールはその後に続くすべてを処理し、指定された関数を引数として呼び出します。`.with`部分は関数を事前に設定する_メソッド_です。
+
 </div>
 
-In the web app, you can choose from predefined templates or even
-create your own using the template wizard. Locally, you can use the
-`typst init` CLI to create a new project from a template. Check out
-[the list of templates]($universe/search/?kind=templates) published on Typst
-Universe, our official package ecosystem. You can also take a look at the
-[`awesome-typst` repository](https://github.com/qjcg/awesome-typst) to find
-community templates that aren't yet available as packages.
+Webアプリでは、事前定義されたテンプレートを選択でき、自分自身でテンプレートウィザードを使用して作成することもできます。ローカルでは、`typst init`CLIを使用してテンプレートから新しいプロジェクトを作成できます。Typst Universeで公開されている[テンプレートのリスト]($universe/search/?kind=templates)をチェックしてください。また、コミュニティテンプレートを見つけるために[`awesome-typst`リポジトリ](https://github.com/qjcg/awesome-typst)も確認してください。
 
-You can also [create your own, custom templates.]($tutorial/making-a-template)
-They are shorter and more readable than the corresponding LaTeX `.sty` files by
-orders of magnitude, so give it a try!
+また、[独自のカスタムテンプレートを作成]($tutorial/making-a-template)することもできます。これらは対応するLaTeXの.styファイルよりもはるかに短くて読みやすいので、試してみてください！
 
-## How do I load packages? { #packages }
-Typst is "batteries included," so the equivalent of many popular LaTeX packages
-is built right-in. Below, we compiled a table with frequently loaded packages
-and their corresponding Typst functions.
+## パッケージの読み込み方法 { #packages }
+Typstは「すぐに使える」システムであり、多くの人気のあるLaTeXパッケージに相当する機能を内蔵しています。以下に頻繁に読み込まれるパッケージと、それに対応するTypst関数の一覧をまとめました。
 
-| LaTeX Package                   | Typst Alternative                          |
-|:--------------------------------|:-------------------------------------------|
-| graphicx, svg                   | [`image`] function                         |
-| tabularx                        | [`table`], [`grid`] functions              |
-| fontenc, inputenc, unicode-math | Just start writing!                        |
-| babel, polyglossia              | [`text`]($text.lang) function: `[#set text(lang: "zh")]` |
-| amsmath                         | [Math mode]($category/math)                |
-| amsfonts, amssymb               | [`sym`]($category/symbols) module and [syntax]($syntax/#math) |
-| geometry, fancyhdr              | [`page`] function                          |
-| xcolor                          | [`text`]($text.fill) function: `[#set text(fill: rgb("#0178A4"))]` |
-| hyperref                        | [`link`] function                          |
-| bibtex, biblatex, natbib        | [`cite`], [`bibliography`] functions       |
-| lstlisting, minted              | [`raw`] function and syntax                |
-| parskip                         | [`block`]($block.spacing) and [`par`]($par.first-line-indent) functions |
-| csquotes                        | Set the [`text`]($text.lang) language and type `["]` or `[']` |
-| caption                         | [`figure`] function                        |
-| enumitem                        | [`list`], [`enum`], [`terms`] functions    |
+| LaTeXパッケージ                    | Typstの代替                  |
+|:----------------------------------|:-----------------------------|
+| graphicx, svg                      | [`image`]関数                |
+| tabularx                           | [`table`]、[`grid`]関数      |
+| fontenc, inputenc, unicode-math    | 書き始めるだけでOK!            |
+| babel, polyglossia                 | [`text`]($text.lang)関数: `[#set text(lang: "zh")]` |
+| amsmath                            | [数式モード]($category/math) |
+| amsfonts, amssymb                  | [`sym`]($category/symbols)モジュール|
+| geometry, fancyhdr                 | [`page`]関数                 |
+| xcolor                             | [`text`]($text.fill)関数: `[#set text(fill: rgb("#0178A4"))]` |
+| hyperref                           | [`link`]関数                 |
+| bibtex, biblatex, natbib           | [`cite`]、[`bibliography`]関数 |
+| lstlisting, minted                 | [`raw`]関数と構文            |
+| parskip                            | [`block`]($block.spacing)および[`par`]($par.first-line-indent)関数 |
+| csquotes                           | [`text`]($text.lang)言語を設定して、`["]`または`[']` |
+| caption                            | [`figure`]関数               |
+| enumitem                           | [`list`]、[`enum`]、[`terms`]関数 |
 
-Although _many_ things are built-in, not everything can be. That's why Typst has
-a built-in [package manager]($universe) where the community can share their
-creations and automations. Let's take, for instance, the _cetz_ package: This
-package allows you to create complex drawings and plots. To use cetz in your
-document, you can just write:
+多くの機能が内蔵されていますが、すべては内蔵されていません。そこで、Typstには内蔵の[パッケージマネージャー]($universe)があり、コミュニティが作成したコンテンツや自動化を共有できます。たとえば、_cetz_パッケージを利用すると、複雑な図やグラフを作成できます。このパッケージをドキュメントで使用するには、次のように記述します：
 
 ```typ
 #import "@preview/cetz:0.2.1"
+#import "@preview/cetz:0.2.1"
 ```
 
-(The `@preview` is a _namespace_ that is used while the package manager is still
-in its early and experimental state. It will be replaced in the future.)
+（`@preview`はパッケージマネージャーがまだ初期の実験段階にある間で使用される_名前空間_であり、将来的に置き換えられます。）
 
-Aside from the official package repository, you might also want to check out the
-[awesome-typst repository](https://github.com/qjcg/awesome-typst), which
-compiles a curated list of resources created for Typst.
+公式パッケージリポジトリ以外にも、Typstのために作成されたリソースをまとめた[awesome-typstリポジトリ](https://github.com/qjcg/awesome-typst)もチェックしてください。
 
-If you need to load functions and variables from another file within your
-project, for example to use a template, you can use use the same
-[`{import}`]($scripting/#modules) statement with a file name rather than a
-package specification. To instead include the textual content of another file,
-you can use an [`{include}`]($scripting/#modules) statement. It will retrieve
-the content of the specified file and put it in your document.
+テンプレートを使用するためにプロジェクト内の他のファイルから関数や変数をロードする必要がある場合は、同じ[`{import}`]($scripting/#modules)ステートメントをファイル名とともに使用します。別のファイルのテキストの内容を含めるには、[`{include}`]($scripting/#modules)ステートメントを使用できます。指定されたファイルの内容を取得してドキュメントに挿入します。
 
-## How do I input maths? { #maths }
-To enter math mode in Typst, just enclose your equation in dollar signs. You can
-enter display mode by adding spaces or newlines between the equation's contents
-and its enclosing dollar signs.
+## 数学入力方法 { #maths }
+Typstで数式モードに入るには、式をドル記号で囲みます。スペースや改行を追加することで表示モードに切り替えられます。
 
 ```example
-The sum of the numbers from
-$1$ to $n$ is:
+1からnまでの数の合計は次の通りです:
 
 $ sum_(k=1)^n k = (n(n+1))/2 $
 ```
 
-[Math mode]($category/math) works differently than regular markup or code mode.
-Numbers and single characters are displayed verbatim, while multiple consecutive
-(non-number) characters will be interpreted as Typst variables.
+[数学モード]($category/math)は通常のマークアップやコードモードとは異なります。数字や単一の文字は直訳されますが、複数の連続した（数字以外の）文字はTypst変数として解釈されます。
 
-Typst pre-defines a lot of useful variables in math mode. All Greek (`alpha`,
-`beta`, ...) and some Hebrew letters (`alef`, `bet`, ...) are available through
-their name. Some symbols are additionally available through shorthands, such as
-`<=`, `>=`, and `->`.
+Typstは数学モードで多くの便利な変数を事前定義しています。すべてのギリシャ文字（`α`、`β`、...）および一部のヘブライ文字（`אלף`、`bet`、...）が名前で利用できます。いくつかのシンボルはショートハンドでも利用できます（例：`<=`、`>=`、`->`）。
 
-Refer to the [symbol pages]($reference/symbols) for a full list of the symbols.
-If a symbol is missing, you can also access it through a
-[Unicode escape sequence]($syntax/#escapes).
+[シンボルページ]を全リストのために参照してください。シンボルが欠けている場合、[Unicodeエスケープシーケンス]($syntax/#escapes)を使用してアクセスすることもできます。
 
-Alternate and related forms of symbols can often be selected by
-[appending a modifier]($symbol) after a period. For example,
-`arrow.l.squiggly` inserts a squiggly left-pointing arrow. If you want to insert
-multiletter text in your expression instead, enclose it in double quotes:
+シンボルの代替形式や関連形式は、ピリオドの後に修飾子を追加することで選択できます。例えば、`arrow.l.squiggly`は左向きの波状矢印を挿入します。複数文字のテキストを数式内に挿入する場合は、二重引用符で囲みます:
 
 ```example
 $ delta "if" x <= 5 $
 ```
 
-In Typst, delimiters will scale automatically for their expressions, just as if
-`\left` and `\right` commands were implicitly inserted in LaTeX. You can
-customize delimiter behaviour using the [`lr` function]($math.lr). To
-prevent a pair of delimiters from scaling, you can escape them with backslashes.
+Typstでは、`\\left`や`\\right`のコマンドが暗黙的に挿入されているかのように、式に応じて区切り文字が自動的にスケーリングされます。区切り文字の動作をカスタマイズするには、[`lr`](math.lr)関数を使用します。区切り文字のペアがスケーリングされないようにするには、バックスラッシュでエスケープします。
 
-Typst will automatically set terms around a slash `/` as a fraction while
-honoring operator precedence. All round parentheses not made redundant by the
-fraction will appear in the output.
+Typstは、スラッシュ`/`の周囲の項を分数として自動的に設定し、演算子の優先順位を尊重します。分数によって冗長にならない丸括弧は出力に表示されます。
 
 ```example
 $ f(x) = (x + 1) / x $
 ```
 
-[Sub- and superscripts]($math.attach) work similarly in Typst and LaTeX.
-`{$x^2$}` will produce a superscript, `{$x_2$}` yields a subscript. If you want
-to include more than one value in a sub- or superscript, enclose their contents
-in parentheses: `{$x_(a -> epsilon)$}`.
+[下付きと上付き]($math.attach)はTypstでもLaTeXと同様に機能します。`{$x^2$}`は上付き文字を生成し、`{$x_2$}`は下付き文字を生成します。下付きや上付きに複数の値を含めたい場合は、その内容を括弧で囲みます: `{$x_(a -> epsilon)$}`。
 
-Since variables in math mode do not need to be prepended with a `#` or a `/`,
-you can also call functions without these special characters:
+数学モードでは、変数に`#`や`/`を付ける必要がないため、特殊文字なしで関数を呼び出すことができます。
 
 ```example
 $ f(x, y) := cases(
@@ -539,10 +368,7 @@ $ f(x, y) := cases(
 ) $
 ```
 
-The above example uses the [`cases` function]($math.cases) to describe f. Within
-the cases function, arguments are delimited using commas and the arguments are
-also interpreted as math. If you need to interpret arguments as Typst
-values instead, prefix them with a `#`:
+上記の例は、`cases`関数を使用してfを記述しています。cases関数内では、引数はカンマで区切られ、引数も数学として解釈されます。引数をTypstの値として解釈する必要がある場合は、`#`を付けます:
 
 ```example
 $ (a + b)^2
@@ -551,10 +377,7 @@ $ (a + b)^2
   + b^2 $
 ```
 
-You can use all Typst functions within math mode and insert any content. If you
-want them to work normally, with code mode in the argument list, you can prefix
-their call with a `#`. Nobody can stop you from using rectangles or emoji as
-your variables anymore:
+すべてのTypst関数を数学モード内で使用でき、任意のコンテンツを挿入できます。それらを通常どおり（引数リストがコードモードになる）機能させたい場合は、呼び出しの前に`#`を付けます。長方形や絵文字を変数として使用することも可能です。
 
 ```example
 $ sum^10_(🥸=1)
@@ -562,12 +385,9 @@ $ sum^10_(🥸=1)
   = 🧠 maltese $
 ```
 
-If you'd like to enter your mathematical symbols directly as Unicode, that is
-possible, too!
+数学記号を直接Unicodeとして入力することも可能です！
 
-Math calls can have two-dimensional argument lists using `;` as a delimiter. The
-most common use for this is the [`mat` function]($math.mat) that creates
-matrices:
+Math callsは、`；`を区切り文字として使用することで二次元の引数リストを持つことができます。これを最も一般的に使用するのは[`mat`関数]($math.mat)で、これは行列を作成します：
 
 ```example
 $ mat(
@@ -578,18 +398,15 @@ $ mat(
 ) $
 ```
 
-## How do I get the "LaTeX look?" { #latex-look }
-Papers set in LaTeX have an unmistakeable look. This is mostly due to their
-font, Computer Modern, justification, narrow line spacing, and wide margins.
+## "LaTeX風の外見"はどうすれば実現できますか？ { #latex-look }
+LaTeXで組版された論文は、そのフォント（コンピュータモダン）、字間調整、狭い行間隔、広い余白によって独特の外見を持っています。
 
-The example below
-- sets wide [margins]($page.margin)
-- enables [justification]($par.justify), [tighter lines]($par.leading) and
-  [first-line-indent]($par.first-line-indent)
-- [sets the font]($text.font) to "New Computer Modern", an OpenType derivative of
-  Computer Modern for both text and [code blocks]($raw)
-- disables paragraph [spacing]($block.spacing)
-- increases [spacing]($block.spacing) around [headings]($heading)
+以下の例では
+- 広い[余白]($page.margin)を設定
+- [字間調整]($par.justify)、[行間隔を狭める]($par.leading)、および[最初の行のインデント]($par.first-line-indent)を有効化
+- コンピュータモダンのOpenType版である"New Computer Modern"フォントをテキストと[コードブロック]($raw)に設定
+- 段落[間隔]($block.spacing)を無効化
+- [ヘディング]($heading)の周囲の[間隔]($block.spacing)を増加
 
 ```typ
 #set page(margin: 1.75in)
@@ -600,74 +417,31 @@ The example below
 #show heading: set block(above: 1.4em, below: 1em)
 ```
 
-This should be a good starting point! If you want to go further, why not create
-a reusable template?
+これは良い出発点になるはずです。これ以上進めたい場合には、再利用可能なテンプレートを作成してみてはいかがでしょう？
 
-## Bibliographies
-Typst includes a fully-featured bibliography system that is compatible with
-BibTeX files. You can continue to use your `.bib` literature libraries by
-loading them with the [`bibliography`] function. Another possibility is to use
-[Typst's YAML-based native format](https://github.com/typst/hayagriva/blob/main/docs/file-format.md).
+## 文献目録
+TypstはBibTeXファイルと互換性のある完全装備の文献目録システムを備えています。`.bib`文学ライブラリを`bibliography`関数で読み込むことで使用し続けることができます。もう一つの可能性は、[TypstのYAMLベースのネイティブ形式](https://github.com/typst/hayagriva/blob/main/docs/file-format.md)を使用することです。
 
-Typst uses the Citation Style Language to define and process citation and
-bibliography styles. You can compare CSL files to BibLaTeX's `.bbx` files.
-The compiler already includes [over 80 citation styles]($bibliography.style),
-but you can use any CSL-compliant style from the
-[CSL repository](https://github.com/citation-style-language/styles) or write
-your own.
+TypstはCitation Style Language（CSL）を使用して引用と文献目録スタイルを定義および処理します。CSLファイルはBibLaTeXの`.bbx`ファイルに相当します。コンパイラーには[80以上の引用スタイル]($bibliography.style)がすでに含まれていますが、CSL準拠のスタイルをCSLリポジトリから使用するか独自に作成することもできます。
 
-You can cite an entry in your bibliography or reference a label in your document
-with the same syntax: `[@key]` (this would reference an entry called `key`).
-Alternatively, you can use the [`cite`] function.
+文献目録のエントリを引用するか、ドキュメント内のラベルを参照するには、同じ構文を使用します: `[@key]`（これは`key`というエントリを参照します）。または、[`cite`]関数を使用することもできます。
 
-Alternative forms for your citation, such as year only and citations for natural
-use in prose (cf. `\citet` and `\textcite`) are available with
-[`[#cite(<key>, form: "prose")]`]($cite.form).
+引用の代替形式（年のみ）や、自然なプローズでの引用（例：`\citet`や`\textcite`）も利用可能であり、[`[#cite(<key>, form: "prose")]`]($cite.form)のように書きます。
 
-You can find more information on the documentation page of the [`bibliography`]
-function.
+[`bibliography`]関数のドキュメントページで詳細情報を見つけられます。
 
-## Installation
-You have two ways to use Typst: In [our web app](https://typst.app/signup/) or
-by [installing the compiler](https://github.com/typst/typst/releases) on your
-computer. When you use the web app, we provide a batteries-included
-collaborative editor and run Typst in your browser, no installation required.
+## インストール
+Typstを使用するには2つの方法があります： [Webアプリ](https://typst.app/signup/)を使用するか、[コンパイラーをインストール](https://github.com/typst/typst/releases)します。Webアプリを使用する場合、バッテリー内蔵の共同編集エディターを提供し、インストールは不要です。
 
-If you choose to use Typst on your computer instead, you can download the
-compiler as a single, small binary which any user can run, no root privileges
-required. Unlike LaTeX, packages are downloaded  when you first use them and
-then cached locally, keeping your Typst installation lean. You can use your own
-editor and decide where to store your files with the local compiler.
+代わりにコンピューターにTypstをインストールすることを選択した場合は、単一の小さなバイナリをダウンロードでき、管理者権限は不要です。LaTeXとは異なり、パッケージは初めて使用する際にダウンロードされ、その後ローカルでキャッシュされ保持されます。ローカルコンパイラを使用してお好みのエディターでファイルを保存できます。
 
-## What limitations does Typst currently have compared to LaTeX? { #limitations }
-Although Typst can be a LaTeX replacement for many today, there are still
-features that Typst does not (yet) support. Here is a list of them which, where
-applicable, contains possible workarounds.
+## Typstは現在LaTeXに比べてどのような制限がありますか？ { #limitations }
+Typstは現在多くの場面でLaTeXの代替手段となることができますが、まだサポートされていない機能があります。ここでは、それらの機能と、それに対応する回避策を紹介します。
 
-- **Native charts and plots.** LaTeX users often create charts along with their
-  documents in PGF/TikZ. Typst does not yet include tools to draw diagrams, but
-  the community is stepping up with solutions such as
-  [`cetz`](https://github.com/johannes-wolf/typst-canvas). You can add those
-  to your document to get started with drawing diagrams.
+- **ネイティブな図やプロット。** LaTeXユーザーはPGF/TikZで図を作成することがよくあります。Typstにはまだ図を描画するツールが含まれていませんが、[`cetz`](https://github.com/johannes-wolf/typst-canvas)のようなコミュニティ主導のソリューションがあります。これらをドキュメントに追加して、図の描画を始めることができます。
 
-- **Change page margins without a pagebreak.** In LaTeX, margins can always be
-  adjusted, even without a pagebreak. To change margins in Typst, you use the
-  [`page` function]($page) which will force a page break. If you just want a few
-  paragraphs to stretch into the margins, then reverting to the old margins, you
-  can use the [`pad` function]($pad) with negative padding.
+- **ページマージンの変更。** LaTeXでは、ページブレイクなしでいつでもマージンを調整できますが、Typstでは[`page`関数]($page)を使用してマージンを変更する必要があり、それがページブレイクを強制します。いくつかの段落だけをマージンに広げ、その後元のマージンに戻したい場合は、[`pad`関数]($pad)を負のパディングで使用することができます。
 
-- **Include PDFs as images.** In LaTeX, it has become customary to insert vector
-  graphics as PDF or EPS files. Typst supports neither format as an image
-  format, but you can easily convert both into SVG files with [online
-  tools](https://cloudconvert.com/pdf-to-svg) or
-  [Inkscape](https://inkscape.org/). The web app will automatically convert PDF
-  files to SVG files upon uploading them.
+- **PDFを画像として含める。** LaTeXでは、PDFやEPSファイルをベクトルグラフィックとして挿入することが一般的です。Typstはこれらの形式を画像形式としてサポートしていませんが、[オンラインツール](https://cloudconvert.com/pdf-to-svg)や[Inkscape](https://inkscape.org/)を使用して、これらを簡単にSVGファイルに変換できます。ウェブアプリは、PDFファイルをアップロードすると自動的にSVGファイルに変換します。
 
-- **Page break optimization.** LaTeX runs some smart algorithms to not only
-  optimize line but also page breaks. While Typst tries to avoid widows and
-  orphans, it uses less sophisticated algorithms to determine page breaks. You
-  can insert custom page breaks in Typst using `[#pagebreak(weak: true)]` before
-  submitting your document. The argument `weak` ensures that no double page
-  break will be created if this spot would be a natural page break anyways. You
-  can also use `[#v(1fr)]` to distribute space on your page. It works quite
-  similar to LaTeX's `\vfill`.
+- **ページブレイクの最適化。** LaTeXはスマートなアルゴリズムを実行して、行だけでなくページブレイクも最適化します。Typstはウィドウやオーファンを避けるために努力しますが、ページブレイクを決定するためのアルゴリズムはそれほど高度ではありません。ドキュメントを提出する前に、カスタムページブレイクを`[#pagebreak(weak: true)]`を使用して挿入することができます。引数`weak`は、このスポットが自然なページブレイクであれば二重ページブレイクを作成しないことを保証します。また、`[#v(1fr)]`を使用してページ上のスペースを配布できます。これはLaTeXの`\vfill`と非常に似ています。
