@@ -40,9 +40,9 @@
 <body class="no-js docs has-outline">
   <div class="alert">
     <div class="alert-content">
-      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.11.1 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.12.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
       <br />
-      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.11.1 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.12.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
     </div>
   </div>
   <header class="boring">
@@ -708,31 +708,96 @@
         
         
         <li>
-          <a href="/docs/packages/" >Packages</a>
-          
-        </li>
-        
-        
-        <li>
           <a href="/docs/changelog/" >Changelog</a>
           
-        </li>
-        
-        
-        <li>
-          <a href="/docs/roadmap/" >Roadmap</a>
-          
-        </li>
-        
-        
-        <li>
-          <a href="/docs/community/" >Community</a>
-          
-        </li>
-        
-        
-        <li>
-          <a href="/docs/glossary/" >用語集</a>
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.12.0/" >0.12.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.1/" >0.11.1</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.0/" >0.11.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.10.0/" >0.10.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.9.0/" >0.9.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.8.0/" >0.8.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.7.0/" >0.7.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.6.0/" >0.6.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.5.0/" >0.5.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.4.0/" >0.4.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.3.0/" >0.3.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.2.0/" >0.2.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.1.0/" >0.1.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/earlier/" >Earlier</a>
+              
+            </li>
+            
+          </ul>
           
         </li>
         
@@ -803,7 +868,7 @@
 <h2 id="bindings">バインディングと分割</h2>
 <p>前述のように、変数は<code><span class="typ-key">let</span></code>バインディングで定義できます。
 変数には<code>=</code>記号のあとに続く式の値が代入されます。値の代入は任意であり、値が代入されなければ変数は<code><span class="typ-key">none</span></code>として初期化されます。
-<code><span class="typ-key">let</span></code>キーワードは、<a href="/docs/reference/foundations/function/#definitions">カスタム名前付き関数</a>を作成するためにも使用できます。
+<code><span class="typ-key">let</span></code>キーワードは、<a href="/docs/reference/foundations/function/#defining-functions">カスタム名前付き関数</a>を作成するためにも使用できます。
 変数は、それが含まれるブロックの残りの部分(または、変数が含まれるブロックがない場合はファイル全体)の中でアクセスできます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> name <span class="typ-op">=</span> <span class="typ-str">&quot;Typst&quot;</span>
 This is <span class="typ-pol">#</span><span class="typ-pol">name</span>&#39;s documentation.
@@ -953,9 +1018,9 @@ Typstは、<code><span class="typ-key">for</span></code>ループと<code><span 
 <span class="typ-str">#</span><span class="typ-str">&quot;abc&quot;</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/68a97a415ea8fd416893c9f6da91d031.png" alt="Preview" width="480" height="190"/></div></div>
 <p>メソッド呼び出しの構造は<code>value<span class="typ-punct">.</span><span class="typ-func">method</span><span class="typ-punct">(</span><span class="typ-op">..</span>args<span class="typ-punct">)</span></code>であり、これと等価である完全な関数呼び出しは<code><span class="typ-func">type</span><span class="typ-punct">(</span>value<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">method</span><span class="typ-punct">(</span>value<span class="typ-punct">,</span> <span class="typ-op">..</span>args<span class="typ-punct">)</span></code>です。各型のドキュメントには、その型に関連付けられた関数が一覧表示されています。現在、独自のメソッドは定義できません</p>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> array <span class="typ-op">=</span> <span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">array</span><span class="typ-punct">.</span><span class="typ-func">pop</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">array</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> values <span class="typ-op">=</span> <span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">values</span><span class="typ-punct">.</span><span class="typ-func">pop</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">values</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 
 <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-str">&quot;a, b, c&quot;</span>
     <span class="typ-punct">.</span><span class="typ-func">split</span><span class="typ-punct">(</span><span class="typ-str">&quot;, &quot;</span><span class="typ-punct">)</span>
@@ -963,7 +1028,7 @@ Typstは、<code><span class="typ-key">for</span></code>ループと<code><span 
 
 <span class="typ-str">#</span><span class="typ-str">&quot;abc&quot;</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-punct">)</span> is the same as
 <span class="typ-pol">#</span><span class="typ-pol">str</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-str">&quot;abc&quot;</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/19fb3dfca4e9a8903455b87821619bc8.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/0548ab013972482f019079267f128a44.png" alt="Preview" width="480" height="190"/></div></div>
 <p>特定の値に対して呼び出された際に、その値を変更する特別な関数がいくつかあります(例: <a href="/docs/reference/foundations/array/#definitions-push"><code>array.push</code></a>)。
 これらの関数は、<em>必ず</em> メソッド形式で呼び出す必要があります。
 場合によっては、メソッドが副作用のためだけに呼び出されるとき、その戻り値は無視されるべきです(結合に加わるべきではありません)。
@@ -981,7 +1046,8 @@ letバインディングを使用することです。</p>
 <p><strong>インポート：</strong> <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span></code> <br />
 パス<code>bar.typ</code>にあるファイルを評価し、その結果として得られる
 <a href="/docs/reference/foundations/module/">モジュール</a>を現在のスコープに<code>bar</code>(拡張子なしのファイル名)として挿入します。次のように、<code>as</code>キーワードを使用してモジュール名を変更できます。
-<code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span> <span class="typ-key">as</span> baz</code></p>
+<code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span> <span class="typ-key">as</span> baz</code>
+You can import nested items using dot notation: <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span><span class="typ-punct">:</span> baz<span class="typ-punct">.</span>a</code>.</p>
 </li>
 <li>
 <p><strong>アイテムのインポート:</strong> <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span><span class="typ-punct">:</span> a<span class="typ-punct">,</span> b</code> <br />

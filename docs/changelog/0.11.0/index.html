@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>0.11.0 – Typstドキュメント日本語版</title>
+  <meta name="description" content="Changes in Typst 0.11.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#239dad">
+  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/changelog/0.11.0/">
+  <meta property="og:title" content="0.11.0 – Typstドキュメント日本語版">
+  <meta property="og:site_name" content="Typst">
+  <meta property="og:description" content="Changes in Typst 0.11.0">
+  <meta property="og:type">
+  <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:site" content="@typstapp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/changelog/0.11.0/">
+  <meta name="twitter:image:alt"
+    content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#239dad">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="/styles/default.css?bust=20230913?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs.css?bust=20230915?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs-cn.css">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Regular.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Bold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-SemiBold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/CascadiaMono-Regular-Sub.woff2" as="font">
+  <link rel="preload" href="/assets/images/blur.webp" as="image">
+  
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js"), document.addEventListener("DOMContentLoaded", (() => { const e = document.cookie.split("; ").find((e => e.startsWith("INSECURE_SIGNED_IN=")))?.split("=")[1].toLowerCase(); if ("1" === e || "true" === e || "yes" === e) { document.documentElement.classList.add("signed-in"); const e = document.querySelector("header nav a.nav-btn"), t = document.querySelector("header nav a.sign-in"); e && (e.innerHTML = "Go to app", e.setAttribute("href", "/app/")), t && (t.innerHTML = "Sign out", t.setAttribute("href", "https://api.typst.app/v1/auth/logout")) } }))</script>
+</head>
+
+<body class="no-js docs has-outline">
+  <div class="alert">
+    <div class="alert-content">
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.12.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <br />
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.12.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+    </div>
+  </div>
+  <header class="boring">
+    <div><a href="/docs" class="logo-box"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label">
+          <title id="logo-label">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>ドキュメント日本語版</span></a><button class="hamburger"><img alt="Open navigation"
+          src="/assets/icons/16-hamburger-dark.svg" width="16" height="16"></button>
+      <nav>
+        <ul>
+          <li class="social"><a href="https://x.com/mkpoli/status/1802227029447725538" title="関連ツイート"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-twitter-label">
+                <title id="svg-twitter-label">Twitter</title>
+                <use href="/assets/icons/social.svg#twitter"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://discord.gg/9xF7k4aAuH" title="「くみはんクラブ」Discordサーバー"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-discord-label">
+                <title id="svg-discord-label">Discord</title>
+                <use href="/assets/icons/social.svg#discord"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://github.com/typst-jp/typst-jp.github.io" title="本プロジェクトのGitHubレポジトリ"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-github-label">
+                <title id="svg-github-label">GitHub</title>
+                <use href="/assets/icons/social.svg#github"></use>
+              </svg></a></li>
+          <li class="secondary"><a href="https://typst.app/">Typst公式サイト</a></li>
+          <li class="secondary"><a href="https://typst.app/docs/">Typst公式ドキュメント</a></li>
+          <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
+          <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main-grid">
+    <nav class="folding"><a href="/docs" class="title-row"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label-nav">
+          <title id="logo-label-nav">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>ドキュメント日本語版</span></a>
+      <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+      <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
+          type="search" placeholder="検索" id="docs-search"></div>
+      <ul class="search-results hidden" id="search-results"></ul>
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/" >Typstについて</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/tutorial/" >チュートリアル</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/tutorial/writing-in-typst/" >Typstで執筆するには</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/formatting/" >書式を設定する</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/advanced-styling/" >高度なスタイリング</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/making-a-template/" >テンプレートを作成する</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/japanese/" >日本語ユーザーガイド</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/reference/" >リファレンス</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li class="category">Language</li>
+            
+            <li>
+              <a href="/docs/reference/syntax/" >構文</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/styling/" >スタイル設定</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/scripting/" >スクリプト記述</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/context/" >コンテキスト</a>
+              
+            </li>
+            
+            
+            <li class="category">Library</li>
+            
+            <li>
+              <a href="/docs/reference/foundations/" >Foundations</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/foundations/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/auto/" >Auto</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bool/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bytes/" >Bytes</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/calc" >Calculation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/duration/" >Duration</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/eval/" >Evaluate</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/int/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/label/" >Label</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/module/" >Module</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/none/" >None</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/plugin/" >Plugin</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/regex/" >Regex</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/repr/" >Representation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/str/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/type/" >Type</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/version/" >Version</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/model/" >Model</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/model/bibliography/" >Bibliography</a></li>
+                
+                
+                <li><a href="/docs/reference/model/list/" >Bullet List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/cite/" >Cite</a></li>
+                
+                
+                <li><a href="/docs/reference/model/document/" >Document</a></li>
+                
+                
+                <li><a href="/docs/reference/model/emph/" >Emphasis</a></li>
+                
+                
+                <li><a href="/docs/reference/model/figure/" >Figure</a></li>
+                
+                
+                <li><a href="/docs/reference/model/footnote/" >Footnote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/heading/" >Heading</a></li>
+                
+                
+                <li><a href="/docs/reference/model/link/" >Link</a></li>
+                
+                
+                <li><a href="/docs/reference/model/enum/" >Numbered List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/numbering/" >Numbering</a></li>
+                
+                
+                <li><a href="/docs/reference/model/outline/" >Outline</a></li>
+                
+                
+                <li><a href="/docs/reference/model/par/" >Paragraph</a></li>
+                
+                
+                <li><a href="/docs/reference/model/parbreak/" >Paragraph Break</a></li>
+                
+                
+                <li><a href="/docs/reference/model/quote/" >Quote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/ref/" >Reference</a></li>
+                
+                
+                <li><a href="/docs/reference/model/strong/" >Strong Emphasis</a></li>
+                
+                
+                <li><a href="/docs/reference/model/table/" >Table</a></li>
+                
+                
+                <li><a href="/docs/reference/model/terms/" >Term List</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/text/" >Text</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/text/highlight/" >Highlight</a></li>
+                
+                
+                <li><a href="/docs/reference/text/linebreak/" >Line Break</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lorem/" >Lorem</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lower/" >Lowercase</a></li>
+                
+                
+                <li><a href="/docs/reference/text/overline/" >Overline</a></li>
+                
+                
+                <li><a href="/docs/reference/text/raw/" >Raw Text / Code</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smallcaps/" >Small Capitals</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smartquote/" >Smartquote</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strike/" >Strikethrough</a></li>
+                
+                
+                <li><a href="/docs/reference/text/sub/" >Subscript</a></li>
+                
+                
+                <li><a href="/docs/reference/text/super/" >Superscript</a></li>
+                
+                
+                <li><a href="/docs/reference/text/text/" >Text</a></li>
+                
+                
+                <li><a href="/docs/reference/text/underline/" >Underline</a></li>
+                
+                
+                <li><a href="/docs/reference/text/upper/" >Uppercase</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/math/" >Math</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/math/accent/" >Accent</a></li>
+                
+                
+                <li><a href="/docs/reference/math/attach" >Attach</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cases/" >Cases</a></li>
+                
+                
+                <li><a href="/docs/reference/math/class/" >Class</a></li>
+                
+                
+                <li><a href="/docs/reference/math/equation/" >Equation</a></li>
+                
+                
+                <li><a href="/docs/reference/math/frac/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/math/lr" >Left/Right</a></li>
+                
+                
+                <li><a href="/docs/reference/math/mat/" >Matrix</a></li>
+                
+                
+                <li><a href="/docs/reference/math/primes/" >Primes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/roots" >Roots</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles" >Styles</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >Text Operator</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover" >Under/Over</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants" >Variants</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >Vector</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/symbols/" >Symbols</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/symbols/sym/" >General</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/layout/" >Layout</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/layout/align/" >Align</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/alignment/" >Alignment</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/block/" >Block</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/box/" >Box</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/colbreak/" >Column Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/columns/" >Columns</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/direction/" >Direction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/grid/" >Grid</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/hide/" >Hide</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/layout/" >Layout</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/measure/" >Measure</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/move/" >Move</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pad/" >Padding</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/page/" >Page</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pagebreak/" >Page Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/place/" >Place</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/relative/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/repeat/" >Repeat</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/rotate/" >Rotate</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/v/" >Spacing (V)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/stack/" >Stack</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/visualize/" >Visualize</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/visualize/circle/" >Circle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/gradient/" >Gradient</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/image/" >Image</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/line/" >Line</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/path/" >Path</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/square/" >Square</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/introspection/" >Introspection</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/introspection/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/here/" >Here</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/locate/" >Locate</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/location/" >Location</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/metadata/" >Metadata</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/query/" >Query</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/state/" >State</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/data-loading/" >Data Loading</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/data-loading/cbor/" >CBOR</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/csv/" >CSV</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/json/" >JSON</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/read/" >Read</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/toml/" >TOML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/xml/" >XML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/yaml/" >YAML</a></li>
+                
+              </ul>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/guides/" >Guides</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/guides/guide-for-latex-users/" >Guide for LaTeX users</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/page-setup-guide/" >Page setup guide</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/table-guide/" >Table guide</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/changelog/" >Changelog</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.12.0/" >0.12.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.1/" >0.11.1</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.0/"  aria-current="page" >0.11.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.10.0/" >0.10.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.9.0/" >0.9.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.8.0/" >0.8.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.7.0/" >0.7.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.6.0/" >0.6.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.5.0/" >0.5.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.4.0/" >0.4.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.3.0/" >0.3.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.2.0/" >0.2.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.1.0/" >0.1.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/earlier/" >Earlier</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+      </ul>
+
+    </nav>
+    <main>
+      <ul class="breadcrumbs" aria-label="Breadcrumbs">
+        <li class="root"><a href="/docs/"><img src="/assets/icons/16-docs-dark.svg" alt="Docs" width="16"
+              height="16"></a></li>
+
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/changelog/">Changelog</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/changelog/0.11.0/">0.11.0</a></li>
+        
+      </ul>
+
+      
+
+<h1>Version 0.11.0 (March 15, 2024)</h1>
+<h2 id="tables">Tables</h2>
+<ul>
+<li>Tables are now <em>much</em> more flexible, read the new
+<a href="/docs/guides/table-guide/">table guide</a> to get started</li>
+<li>Added <a href="/docs/reference/model/table/#definitions-cell" title="`table.cell`"><code>table.cell</code></a> element for per-cell configuration</li>
+<li>Cells can now span multiple <a href="/docs/reference/model/table/#definitions-cell-colspan">columns</a> or
+<a href="/docs/reference/model/table/#definitions-cell-rowspan">rows</a></li>
+<li>The <a href="/docs/reference/model/table/#definitions-cell-stroke">stroke</a> of individual cells can now be customized</li>
+<li>The <a href="/docs/reference/model/table/#parameters-align"><code>align</code></a> and <a href="/docs/reference/model/table/#parameters-inset"><code>inset</code></a> arguments of the table
+function now also take <code><span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> ..</code> functions</li>
+<li>Added <a href="/docs/reference/model/table/#definitions-hline" title="`table.hline`"><code>table.hline</code></a> and <a href="/docs/reference/model/table/#definitions-vline" title="`table.vline`"><code>table.vline</code></a> for convenient line customization</li>
+<li>Added <a href="/docs/reference/model/table/#definitions-header" title="`table.header`"><code>table.header</code></a> element for table headers that repeat on every page</li>
+<li>Added <a href="/docs/reference/model/table/#definitions-footer" title="`table.footer`"><code>table.footer</code></a> element for table footers that repeat on every page</li>
+<li>All the new table functionality is also available for <a href="/docs/reference/layout/grid/">grids</a></li>
+<li>Fixed gutter-related bugs</li>
+</ul>
+<p><em>Thanks to <a href="https://github.com/PgBiel">@PgBiel</a> for his work on tables!</em></p>
+<h2 id="templates">Templates</h2>
+<ul>
+<li>You can now use template packages to get started with new projects. Click
+<em>Start from template</em> on the web app's dashboard and choose your preferred
+template or run the <code>typst init &lt;template&gt;</code> command in the CLI. You can
+<a href="https://typst.app/universe/search/?kind=templates">browse the available templates here</a>.</li>
+<li>Switching templates after the fact has become easier. You can just import a
+styling function from a different template package.</li>
+<li>Package authors can now submit their own templates to the
+<a href="https://github.com/typst/packages">package repository</a>. Share a template
+for a paper, your institution, or an original work to help the community get
+a head start on their projects.</li>
+<li>Templates and packages are now organized by category and discipline. Filter
+packages by either taxonomy in the <em>Start from template</em> wizard. If you are a
+package author, take a look at the new documentation for
+<a href="https://github.com/typst/packages/blob/main/CATEGORIES.md">categories</a> and
+<a href="https://github.com/typst/packages/blob/main/DISCIPLINES.md">disciplines</a>.</li>
+</ul>
+<h2 id="context">Context</h2>
+<ul>
+<li>Added <em>context expressions:</em> Read the chapter on <a href="/docs/reference/context/" title="context">context</a> to get started</li>
+<li>With context, you can access settable properties, e.g. <code><span class="typ-key">context</span> text<span class="typ-punct">.</span>lang</code>
+to access the language set via <code><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>lang<span class="typ-punct">:</span> <span class="typ-str">&quot;..&quot;</span><span class="typ-punct">)</span></code></li>
+<li>The following existing functions have been made contextual: <a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a>,
+<a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a>, <a href="/docs/reference/layout/measure/" title="`measure`"><code>measure</code></a>, <a href="/docs/reference/introspection/counter/#definitions-display" title="`counter.display`"><code>counter.display</code></a>, <a href="/docs/reference/introspection/counter/#definitions-at" title="`counter.at`"><code>counter.at</code></a>,
+<a href="/docs/reference/introspection/counter/#definitions-final" title="`counter.final`"><code>counter.final</code></a>, <a href="/docs/reference/introspection/state/#definitions-at" title="`state.at`"><code>state.at</code></a>, and <a href="/docs/reference/introspection/state/#definitions-final" title="`state.final`"><code>state.final</code></a></li>
+<li>Added contextual methods <a href="/docs/reference/introspection/counter/#definitions-get" title="`counter.get`"><code>counter.get</code></a> and <a href="/docs/reference/introspection/state/#definitions-get" title="`state.get`"><code>state.get</code></a> to retrieve the
+value of a counter or state in the current context</li>
+<li>Added contextual function <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> to retrieve the <a href="/docs/reference/introspection/location/" title="location">location</a> of the current
+context</li>
+<li>The <a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a> function now returns the location of a selector's unique match.
+Its old behavior has been replaced by context expressions and only remains
+temporarily available for compatibility.</li>
+<li>The <a href="/docs/reference/introspection/counter/#definitions-at" title="`counter.at`"><code>counter.at</code></a> and <a href="/docs/reference/introspection/state/#definitions-at" title="`state.at`"><code>state.at</code></a> methods are now more flexible: They
+directly accept any kind of <a href="/docs/reference/introspection/location/#locatable">locatable</a> selector with a
+unique match (e.g. a label) instead of just locations</li>
+<li>When context is available, <a href="/docs/reference/introspection/counter/#definitions-display" title="`counter.display`"><code>counter.display</code></a> now directly returns the result
+of applying the numbering instead of yielding opaque content. It should not be
+used anymore without context. (Deprecation planned)</li>
+<li>The <a href="/docs/reference/introspection/state/#definitions-display" title="`state.display`"><code>state.display</code></a> function should not be used anymore, use <a href="/docs/reference/introspection/state/#definitions-get" title="`state.get`"><code>state.get</code></a>
+instead (Deprecation planned)</li>
+<li>The <code>location</code> argument of <a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a>, <a href="/docs/reference/introspection/counter/#definitions-final" title="`counter.final`"><code>counter.final</code></a>, and <a href="/docs/reference/introspection/state/#definitions-final" title="`state.final`"><code>state.final</code></a>
+should not be used anymore (Deprecation planned)</li>
+<li>The <a href="/docs/reference/layout/measure/#parameters-styles"><code>styles</code></a> argument of the <code>measure</code> function should not
+be used anymore (Deprecation planned)</li>
+<li>The <a href="/docs/reference/foundations/style/" title="`style`"><code>style</code></a> function should not be used anymore, use context instead
+(Deprecation planned)</li>
+<li>The correct context is now also provided in various other places where it is
+available, e.g. in show rules, layout callbacks, and numbering functions in
+the outline</li>
+</ul>
+<h2 id="styling">Styling</h2>
+<ul>
+<li>Fixed priority of multiple <a href="/docs/reference/styling/#show-rules">show-set rules</a>: They now
+apply in the same order as normal set rules would</li>
+<li>Show-set rules on the same element (e.g. <code><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span></code>) now work properly</li>
+<li>Setting properties on an element within a transformational show rule (e.g.
+<code><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span> <span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span><span class="typ-punct">;</span> it <span class="typ-punct">}</span></code>) is <strong>not</strong> supported anymore
+(previously it also only worked sometimes); use show-set rules instead
+<strong>(Breaking change)</strong></li>
+<li>Text show rules that match their own output now work properly (e.g.
+<code><span class="typ-key">show</span> <span class="typ-str">&quot;cmd&quot;</span><span class="typ-punct">:</span> <span class="typ-raw">`cmd`</span></code>)</li>
+<li>The elements passed to show rules and returned by queries now contain all
+fields of their respective element functions rather than just specific ones</li>
+<li>All settable properties can now be used in <a href="/docs/reference/foundations/function/#definitions-where">where</a> selectors</li>
+<li><a href="/docs/reference/foundations/selector/#definitions-and">And</a> and <a href="/docs/reference/foundations/selector/#definitions-or">or</a> selectors can now be used with
+show rules</li>
+<li>Errors within show rules and context expressions are now ignored in all but
+the last introspection iteration, in line with the behavior of the old
+<a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a></li>
+<li>Fixed a bug where document set rules were allowed after content</li>
+</ul>
+<h2 id="layout">Layout</h2>
+<ul>
+<li>Added <code>reflow</code> argument to <a href="/docs/reference/layout/rotate/"><code>rotate</code></a> and <a href="/docs/reference/layout/scale/"><code>scale</code></a> which
+lets them affect the layout</li>
+<li>Fixed a bug where <a href="/docs/reference/layout/place/#parameters-float">floating placement</a> or
+<a href="/docs/reference/model/figure/#parameters-placement">floating figures</a> could end up out of order</li>
+<li>Fixed overlap of text and figure for full-page floating figures</li>
+<li>Fixed various cases where the <a href="/docs/reference/layout/hide/" title="`hide`"><code>hide</code></a> function didn't hide its contents
+properly</li>
+<li>Fixed usage of <a href="/docs/reference/layout/h/" title="`h`"><code>h</code></a> and <a href="/docs/reference/layout/v/" title="`v`"><code>v</code></a> in <a href="/docs/reference/layout/stack/">stacks</a></li>
+<li>Invisible content like a counter update will no longer force a visible block
+for just itself</li>
+<li>Fixed a bug with horizontal spacing followed by invisible content (like a
+counter update) directly at the start of a paragraph</li>
+</ul>
+<h2 id="text">Text</h2>
+<ul>
+<li>Added <a href="/docs/reference/text/text/#parameters-stroke"><code>stroke</code></a> property for text</li>
+<li>Added basic i18n for Serbian and Catalan</li>
+<li>Added support for contemporary Japanese <a href="/docs/reference/model/numbering/" title="numbering">numbering</a> method</li>
+<li>Added patches for various wrong metadata in specific fonts</li>
+<li>The <a href="/docs/reference/text/text/#parameters-dir">text direction</a> can now be overridden within a paragraph</li>
+<li>Fixed Danish <a href="/docs/reference/text/smartquote/">smart quotes</a></li>
+<li>Fixed font fallback next to a line break</li>
+<li>Fixed width adjustment of JIS-style Japanese punctuation</li>
+<li>Fixed Finnish translation of &quot;Listing&quot;</li>
+<li>Fixed Z-ordering of multiple text decorations (underlines, etc.)</li>
+<li>Fixed a bug due to which text <a href="/docs/reference/text/text/#parameters-features">features</a> could not be
+overridden in consecutive set rules</li>
+</ul>
+<h2 id="model">Model</h2>
+<ul>
+<li>Added <a href="/docs/reference/model/heading/#parameters-depth"><code>depth</code></a> and <a href="/docs/reference/model/heading/#parameters-offset"><code>offset</code></a> arguments to
+heading to increase or decrease the heading level for a bunch of content; the
+heading syntax now sets <code>depth</code> rather than <code>level</code> <strong>(Breaking change)</strong></li>
+<li>List <a href="/docs/reference/model/list/#parameters-marker">markers</a> now cycle by default</li>
+<li>The <a href="/docs/reference/model/quote/" title="`quote`"><code>quote</code></a> function now more robustly selects the correct quotes based on
+language and nesting</li>
+<li>Fixed indent bugs related to the default show rule of <a href="/docs/reference/model/terms/" title="terms">terms</a></li>
+</ul>
+<h2 id="math">Math</h2>
+<ul>
+<li>Inline equations now automatically linebreak at appropriate places</li>
+<li>Added <a href="/docs/reference/math/equation/#parameters-number-align"><code>number-align</code></a> argument to equations</li>
+<li>Added support for adjusting the <a href="/docs/reference/math/accent/#parameters-size"><code>size</code></a> of accents
+relative to their base</li>
+<li>Improved positioning of accents</li>
+<li><a href="/docs/reference/math/primes/">Primes</a> are now always attached as <a href="/docs/reference/math/attach/#functions-scripts">scripts</a> by
+default</li>
+<li>Exposed <a href="/docs/reference/math/primes/" title="`math.primes`"><code>math.primes</code></a> element which backs the <code><span class="typ-math-delim">$</span>f<span class="typ-math-op">&#39;</span><span class="typ-math-delim">$</span></code> syntax in math</li>
+<li>Math mode is not affected by <a href="/docs/reference/model/strong/" title="`strong`"><code>strong</code></a> and <a href="/docs/reference/model/emph/" title="`emph`"><code>emph</code></a> anymore</li>
+<li>Fixed <a href="/docs/reference/math/attach/#functions-attach"><code>attach</code></a> under <a href="/docs/reference/math/frac/">fractions</a></li>
+<li>Fixed that <a href="/docs/reference/math/class/" title="`math.class`"><code>math.class</code></a> did not affect smart limit placement</li>
+<li>Fixed weak spacing in <a href="/docs/reference/math/lr/#functions-lr"><code>lr</code></a> groups</li>
+<li>Fixed layout of large operators for Cambria Math font</li>
+<li>Fixed math styling of Hebrew symbol codepoints</li>
+</ul>
+<h2 id="symbols">Symbols</h2>
+<ul>
+<li>Added <code>gradient</code> as an alias for <code>nabla</code></li>
+<li>Added <code>partial</code> as an alias for <code>diff</code>, <code>diff</code> will be deprecated in the
+future</li>
+<li>Added <code>colon.double</code>, <code>gt.approx</code>, <code>gt.napprox</code>, <code>lt.approx</code>, and <code>lt.napprox</code></li>
+<li>Added <code>arrow.r.tilde</code> and <code>arrow.l.tilde</code></li>
+<li>Added <code>tilde.dot</code></li>
+<li>Added <code>forces</code> and <code>forces.not</code></li>
+<li>Added <code>space.nobreak.narrow</code></li>
+<li>Added <code>lrm</code> (Left-to-Right Mark) and <code>rlm</code> (Right-to-Left Mark)</li>
+<li>Fixed <code>star.stroked</code> symbol (which previously had the wrong codepoint)</li>
+</ul>
+<h2 id="scripting">Scripting</h2>
+<ul>
+<li>Arrays can now be compared lexicographically</li>
+<li>Added contextual method <a href="/docs/reference/layout/length/#definitions-to-absolute"><code>to-absolute</code></a> to lengths</li>
+<li>Added <a href="/docs/reference/foundations/calc/#functions-root"><code>calc.root</code></a></li>
+<li>Added <a href="/docs/reference/foundations/int/#definitions-signum" title="`int.signum`"><code>int.signum</code></a> and <a href="/docs/reference/foundations/float/#definitions-signum" title="`float.signum`"><code>float.signum</code></a> methods</li>
+<li>Added <a href="/docs/reference/foundations/float/#definitions-is-nan" title="`float.is-nan`"><code>float.is-nan</code></a> and <a href="/docs/reference/foundations/float/#definitions-is-infinite" title="`float.is-infinite`"><code>float.is-infinite</code></a> methods</li>
+<li>Added <a href="/docs/reference/foundations/int/#definitions-bit-not" title="`int.bit-not`"><code>int.bit-not</code></a>, <a href="/docs/reference/foundations/int/#definitions-bit-and" title="`int.bit-and`"><code>int.bit-and</code></a>, <a href="/docs/reference/foundations/int/#definitions-bit-or" title="`int.bit-or`"><code>int.bit-or</code></a>, <a href="/docs/reference/foundations/int/#definitions-bit-xor" title="`int.bit-xor`"><code>int.bit-xor</code></a>,
+<a href="/docs/reference/foundations/int/#definitions-bit-lshift" title="`int.bit-lshift`"><code>int.bit-lshift</code></a>, and <a href="/docs/reference/foundations/int/#definitions-bit-rshift" title="`int.bit-rshift`"><code>int.bit-rshift</code></a> methods</li>
+<li>Added <a href="/docs/reference/foundations/array/#definitions-chunks" title="`array.chunks`"><code>array.chunks</code></a> method</li>
+<li>A module can now be converted to a dictionary with the
+<a href="/docs/reference/foundations/dictionary/#constructor">dictionary constructor</a> to access its contents
+dynamically</li>
+<li>Added <a href="/docs/reference/data-loading/csv/#parameters-row-type"><code>row-type</code></a> argument to <code>csv</code> function to configure
+how rows will be represented</li>
+<li><a href="/docs/reference/data-loading/xml/">XML parsing</a> now allows DTDs (document type definitions)</li>
+<li>Improved formatting of negative numbers with <a href="/docs/reference/foundations/str/"><code>str</code></a> and <a href="/docs/reference/foundations/repr/"><code>repr</code></a></li>
+<li>For loops can now iterate over <a href="/docs/reference/foundations/bytes/" title="bytes">bytes</a></li>
+<li>Fixed a bug with pattern matching in for loops</li>
+<li>Fixed a bug with labels not being part of <a href="/docs/reference/foundations/content/#definitions-fields"><code>.<span class="typ-func">fields</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code></a>
+dictionaries</li>
+<li>Fixed a bug where unnamed argument sinks wouldn't capture excess arguments</li>
+<li>Fixed typo in <code>repr</code> output of strokes</li>
+</ul>
+<h2 id="syntax">Syntax</h2>
+<ul>
+<li>Added support for nested <a href="/docs/reference/scripting/#bindings">destructuring patterns</a></li>
+<li>Special spaces (like thin or non-breaking spaces) are now parsed literally
+instead of being collapsed into normal spaces <strong>(Breaking change)</strong></li>
+<li>Korean text can now use emphasis syntax without adding spaces
+<strong>(Breaking change)</strong></li>
+<li>The token <a href="/docs/reference/context/" title="`context`"><code>context</code></a> is now a keyword and cannot be used as an identifier
+anymore <strong>(Breaking change)</strong></li>
+<li>Nested line comments aren't allowed anymore in block comments
+<strong>(Breaking change)</strong></li>
+<li>Fixed a bug where <code>x.)</code> would be treated as a field access</li>
+<li>Text elements can now span across curly braces in markup</li>
+<li>Fixed silently wrong parsing when function name is parenthesized</li>
+<li>Fixed various bugs with parsing of destructuring patterns, arrays, and
+dictionaries</li>
+</ul>
+<h2 id="tooling-diagnostics">Tooling &amp; Diagnostics</h2>
+<ul>
+<li>Click-to-jump now works properly within <a href="/docs/reference/text/raw/" title="`raw`"><code>raw</code></a> text</li>
+<li>Added suggestion for accessing a field if a method doesn't exist</li>
+<li>Improved hint for calling a function stored in a dictionary</li>
+<li>Improved errors for mutable accessor functions on arrays and dictionaries</li>
+<li>Fixed error message when calling constructor of type that doesn't have one</li>
+<li>Fixed confusing error message with nested dictionaries for strokes on
+different sides</li>
+<li>Fixed autocompletion for multiple packages with the same name from different
+namespaces</li>
+</ul>
+<h2 id="visualization">Visualization</h2>
+<ul>
+<li>The <a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a> function doesn't upscale images beyond their natural size
+anymore</li>
+<li>The <a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a> function now respects rotation stored in EXIF metadata</li>
+<li>Added support for SVG filters</li>
+<li>Added alpha component to <a href="/docs/reference/visualize/color/#definitions-luma"><code>luma</code></a> colors</li>
+<li>Added <a href="/docs/reference/visualize/color/#definitions-transparentize" title="`color.transparentize`"><code>color.transparentize</code></a> and <a href="/docs/reference/visualize/color/#definitions-opacify" title="`color.opacify`"><code>color.opacify</code></a> methods</li>
+<li>Improved <a href="/docs/reference/visualize/color/#definitions-negate" title="`color.negate`"><code>color.negate</code></a> function</li>
+<li>Added <a href="/docs/reference/text/highlight/#parameters-stroke"><code>stroke</code></a> and <a href="/docs/reference/text/highlight/#parameters-radius"><code>radius</code></a>
+arguments to <code>highlight</code> function</li>
+<li>Changed default <a href="/docs/reference/text/highlight/" title="`highlight`"><code>highlight</code></a> color to be transparent</li>
+<li>CMYK to RGB conversion is now color-managed</li>
+<li>Fixed crash with gradients in Oklch color space</li>
+<li>Fixed color-mixing for hue-based spaces</li>
+<li>Fixed bugs with color conversion</li>
+<li>SVG sizes are not rounded anymore, preventing slightly wrong aspect ratios</li>
+<li>Fixed a few other SVG-related bugs</li>
+<li><a href="/docs/reference/visualize/color/#definitions-components" title="`color.components`"><code>color.components</code></a> doesn't round anything anymore</li>
+</ul>
+<h2 id="export">Export</h2>
+<ul>
+<li>PDFs now contain named destinations for headings derived from their labels</li>
+<li>The internal PDF structure was changed to make it easier for external tools to
+extract or modify individual pages, avoiding a bug with Typst PDFs in Apple
+Preview</li>
+<li>PDFs produced by Typst should now be byte-by-byte reproducible when
+<code><span class="typ-key">set</span> <span class="typ-func">document</span><span class="typ-punct">(</span>date<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">)</span></code> is set</li>
+<li>Added missing flag to PDF annotation</li>
+<li>Fixed multiple bugs with gradients in PDF export</li>
+<li>Fixed a bug with patterns in PDF export</li>
+<li>Fixed a bug with embedding of grayscale images in PDF export</li>
+<li>Fixed a bug with To-Unicode mapping of CFF fonts in PDF export</li>
+<li>Fixed a bug with the generation of the PDF outline</li>
+<li>Fixed a sorting bug in PDF export leading to non-reproducible output</li>
+<li>Fixed a bug with transparent text in PNG export</li>
+<li>Exported SVG files now include units in their top-level <code>width</code> and <code>height</code></li>
+</ul>
+<h2 id="command-line-interface">Command line interface</h2>
+<ul>
+<li>Added support for passing <a href="/docs/reference/foundations/sys/">inputs</a> via a CLI flag</li>
+<li>When passing the filename <code>-</code>, Typst will now read input from stdin</li>
+<li>Now uses the system-native TLS implementation for network fetching which
+should be generally more robust</li>
+<li>Watch mode will now properly detect when a previously missing file is created</li>
+<li>Added <code>--color</code> flag to configure whether to print colored output</li>
+<li>Fixed user agent with which packages are downloaded</li>
+<li>Updated bundled fonts to the newest versions</li>
+</ul>
+<h2 id="development">Development</h2>
+<ul>
+<li>Added <code>--vendor-openssl</code> to CLI to configure whether to link OpenSSL
+statically instead of dynamically (not applicable to Windows and Apple
+platforms)</li>
+<li>Removed old tracing (and its verbosity) flag from the CLI</li>
+<li>Added new <code>--timings</code> flag which supersedes the old flamegraph profiling in
+the CLI</li>
+<li>Added minimal CLI to <code>typst-docs</code> crate for extracting the language and
+standard library documentation as JSON</li>
+<li>The <code>typst_pdf::export</code> function's <code>ident</code> argument switched from <code>Option</code> to
+<code>Smart</code>. It should only be set to <code>Smart::Custom</code> if you can provide a stable
+identifier (like the web app can). The CLI sets <code>Smart::Auto</code>.</li>
+</ul>
+<h2 id="contributors">Contributors</h2>
+
+
+
+      
+      <div class="page-end-buttons"><a href="/docs/changelog/0.11.1/" class="previous"><img
+            src="/assets/icons/16-arrow-right.svg" alt="←">
+          <div><span class="page-title">0.11.1</span><span class="hint">前に戻る</span></div>
+        </a><a href="/docs/changelog/0.10.0/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">0.10.0</span><span class="hint">次に進む</span></div>
+        </a></div>
+      
+    </main>
+
+    
+    <nav id="page-overview"><strong>目次</strong>
+      <ul>
+        
+        <li data-assoc="tables"><a href="#tables">Tables</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="templates"><a href="#templates">Templates</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="context"><a href="#context">Context</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="styling"><a href="#styling">Styling</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="layout"><a href="#layout">Layout</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="text"><a href="#text">Text</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="model"><a href="#model">Model</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="math"><a href="#math">Math</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="symbols"><a href="#symbols">Symbols</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="scripting"><a href="#scripting">Scripting</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="syntax"><a href="#syntax">Syntax</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="tooling-diagnostics"><a href="#tooling-diagnostics">Tooling Diagnostics</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="visualization"><a href="#visualization">Visualization</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="export"><a href="#export">Export</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="command-line-interface"><a href="#command-line-interface">Command Line Interface</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="development"><a href="#development">Development</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="contributors"><a href="#contributors">Contributors</a>
+          <ul></ul>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  <footer>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/">（公式）ホームページ</a></li>
+        <li><a href="https://typst.app/docs/">（公式）ドキュメント（英語）</a></li>
+        <li><a href="https://typst.app/universe/">（公式）拡張パッケージ・テンプレートの宇宙</a></li>
+        <li><a href="https://typst.app/about/">（公式）Typstについて</a></li>
+        <li><a href="https://typst.app/contact/">（公式）連絡先</a></li>
+        <li><a href="https://typst.app/privacy/">（公式）プライバシーポリシー</a></li>
+        <li><a href="https://typst.app/terms/">（公式）サービス規約</a></li>
+        <li><a href="https://typst.app/legal/">（公式）免責事項</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/tools/">（公式）ツール</a></li>
+        <li><a href="https://typst.app/blog/">（公式）ブログ</a></li>
+        <li><a href="https://twitter.com/typstapp/">（公式）Twitter</a></li>
+        <li><a href="https://discord.gg/2uDybryKPe">（公式）Discord</a></li>
+        <li><a rel="me" href="https://mastodon.social/@typst">（公式）Mastodon</a></li>
+        <li><a href="https://www.linkedin.com/company/typst/">（公式）LinkedIn</a></li>
+        <li><a href="https://instagram.com/typstapp/">（公式）Instagram</a></li>
+        <li><a href="https://github.com/typst/">（公式）GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Made in Berlin</p>
+      <p>Translated by <a href="https://github.com/typst-jp">Typst Japan Community</a></p>
+    </div>
+  </footer>
+  <script src="/scripts/fuse.basic.min.js"></script>
+  <script src="/scripts/docs.js?bust=20230913"></script>
+  <script src="/scripts/analytics.js" defer></script>
+</body>
+
+</html>
