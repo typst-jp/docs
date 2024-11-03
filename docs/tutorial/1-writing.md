@@ -1,5 +1,5 @@
 ---
-description: Typst チュートリアル
+description: Typstチュートリアル
 ---
 # Typstで執筆するには
 
