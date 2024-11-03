@@ -1,5 +1,5 @@
 ---
-description: Typst チュートリアル
+description: Typstチュートリアル
 ---
 
 # テンプレートを作成する
