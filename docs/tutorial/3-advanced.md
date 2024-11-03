@@ -1,5 +1,5 @@
 ---
-description: Typst's tutorial.
+description: Typst チュートリアル
 ---
 
 # 高度なスタイリング

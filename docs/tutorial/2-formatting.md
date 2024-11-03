@@ -1,5 +1,5 @@
 ---
-description: Typst's tutorial.
+description: Typst チュートリアル
 ---
 
 # 書式を設定する
