@@ -1,25 +1,25 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
   <meta charset="utf-8">
-  <title>Module – Typstドキュメント日本語版</title>
-  <meta name="description" content="Documentation for the Module type.">
+  <title>用語集 – Typstドキュメント日本語版</title>
+  <meta name="description" content="英語・日本語・中国語対照翻訳用語集
+">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
-  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/foundations/module/">
-  <meta property="og:title" content="Module – Typstドキュメント日本語版">
+  <meta property="og:url" content="https://typst-doc-cn.github.io/docs/glossary/">
+  <meta property="og:title" content="用語集 – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Documentation for the Module type.">
+  <meta property="og:description" content="英語・日本語・中国語対照翻訳用語集
+">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:site" content="@typstapp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/reference/foundations/module/">
+  <link rel="canonical" href="https://typst-doc-cn.github.io/docs/glossary/">
   <meta name="twitter:image:alt"
     content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
@@ -230,7 +230,7 @@
                 <li><a href="/docs/reference/foundations/label/" >Label</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/module/"  aria-current="page" >Module</a></li>
+                <li><a href="/docs/reference/foundations/module/" >Module</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/none/" >None</a></li>
@@ -805,7 +805,7 @@
         
         
         <li>
-          <a href="/docs/glossary/" >用語集</a>
+          <a href="/docs/glossary/"  aria-current="page" >用語集</a>
           
         </li>
         
@@ -819,66 +819,32 @@
 
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/">リファレンス</a></li>
-        
-        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/foundations/">Foundations</a></li>
-        
-        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/foundations/module/">Module</a></li>
+        <li><a href="/docs/glossary/">用語集</a></li>
         
       </ul>
 
       
 
-<h1 id="summary"><span class="pill pill-obj">module</span></h1>
-<p>An evaluated module, either built-in or resulting from a file.</p>
-<p>You can access definitions from the module using
-<a href="/docs/reference/scripting/#fields">field access notation</a> and interact with it using the
-<a href="/docs/reference/scripting/#modules">import and include syntaxes</a>. Alternatively, it is
-possible to convert a module to a dictionary, and therefore access its
-contents dynamically, using the
-<a href="/docs/reference/foundations/dictionary/#constructor">dictionary constructor</a>.</p>
-<h2 id="example">Example</h2>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">import</span> <span class="typ-str">&quot;utils.typ&quot;</span>
-<span class="typ-pol">#</span><span class="typ-pol">utils</span><span class="typ-punct">.</span><span class="typ-func">add</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">)</span>
-
-<span class="typ-key">#</span><span class="typ-key">import</span> utils<span class="typ-punct">:</span> sub
-<span class="typ-func">#</span><span class="typ-func">sub</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/6fe97a329e091260081ea42c8dee85f5.png" alt="Preview" width="480" height="190"/></div></div>
-
+<h1>用語集</h1>
+<p>以下は翻訳時に使用される英日中対照の用語集です。</p>
+<table><thead><tr><th>英語</th><th>日本語</th><th>中文</th><th>備考</th></tr></thead><tbody>
+<tr><td>Typst</td><td>Typst</td><td>Typst</td><td>翻訳対象のプロジェクト名、訳しません</td></tr>
+<tr><td>typesetting</td><td>組版</td><td>排版</td><td>Typstの主要機能</td></tr>
+<tr><td>documentation</td><td>ドキュメント</td><td>文档</td><td></td></tr>
+<tr><td>content</td><td>コンテンツ</td><td>内容 / 内容块</td><td>型の一種で、マークアップによって表される</td></tr>
+<tr><td>styling</td><td>スタイル設定</td><td>样式 　　　　</td><td></td></tr>
+<tr><td>set rule</td><td>setルール</td><td>set 规则</td><td><a href="/docs/reference/styling/">スタイル設定</a>に出てきます</td></tr>
+<tr><td>show rule</td><td>showルール</td><td>show 规则</td><td><a href="/docs/reference/styling/">スタイル設定</a>に出てきます</td></tr>
+<tr><td>markup</td><td>マークアップ</td><td>标记 / 标记模式</td><td>Typstのデフォルトモード</td></tr>
+<tr><td>script</td><td>スクリプト</td><td>脚本 / 脚本模式</td><td>Typstのスクリプトモード、「#」で始まる行</td></tr>
+<tr><td>figure</td><td>図表</td><td>图表</td><td>キャプション付きの図表、<code>image</code>ではない</td></tr>
+</tbody></table>
 
 
 
-
-
-
-
-
-      
-      <div class="page-end-buttons"><a href="/docs/reference/foundations/label/" class="previous"><img
-            src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">Label</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/foundations/none/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">None</span><span class="hint">次に進む</span></div>
-        </a></div>
       
     </main>
 
-    
-    <nav id="page-overview"><strong>目次</strong>
-      <ul>
-        
-        <li data-assoc="summary"><a href="#summary">Summary</a>
-          <ul></ul>
-        </li>
-        
-        <li data-assoc="example"><a href="#example">Example</a>
-          <ul></ul>
-        </li>
-        
-      </ul>
-    </nav>
     
   </div>
   <footer>
