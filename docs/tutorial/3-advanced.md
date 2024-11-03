@@ -74,7 +74,7 @@ description: Typst's tutorial.
 また`{"(1/1)"}`と設定すると、カッコで囲まれた現在のページと総ページ数が表示されるでしょう。
 さらに、カスタム関数を用意して完全に好みの書式にすることも可能です。
 
-## タイトルと要旨 { #title-and-abstract }
+## タイトルとアブストラクトの作成 { #title-and-abstract }
 それでは、タイトルとアブストラクトを追加しましょう。
 まずはタイトルを中央揃えにし、`[*stars*]`で囲んでフォントを太文字にします。
 
@@ -231,23 +231,18 @@ grid関数はセルを指定するcontent引数を任意の数で受け取れま
 `title`変数にコンテンツを設定した後は、関数内やマークアップ内（関数のように接頭辞に`#`をつける）で使用できます。
 こうすることで、別のタイトルに決めた場合、一箇所で簡単に変更することができます。
 
-## Adding columns and headings { #columns-and-headings }
+## 段組みと見出しの追加 { #columns-and-headings }
 上の論文は、残念ながら文字が単調にぎっしり詰まっていて読みにくい見た目をしています。
-これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。 Fortunately, that's
-easy to do: We just need to amend our `page` set rule with the `columns`
-argument.
+これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。 
+幸いなことに、setルールで`page`に`column`引数を追加することで簡単に行えます。
 
-
-By adding `{columns: 2}` to the argument list, we have wrapped the whole
-document in two columns. However, that would also affect the title and authors
-overview. To keep them spanning the whole page, we can wrap them in a function
-call to [`{place}`]($place). Place expects an alignment and the content it
-should place as positional arguments. Using the named `{scope}` argument, we can
-decide if the items should be placed relative to the current column or its
-parent (the page). There is one more thing to configure: If no other arguments
-are provided, `{place}` takes its content out of the flow of the document and
-positions it over the other content without affecting the layout of other
-content in its container:
+引数リストに`{columns: 2}`を加えることで、文書全体を2段組みとなります。
+しかし、これではタイトルと著者、アブストラクトにも影響が出てしまいます。
+それらを1段組みのままに維持するためには、[`{place}`]($place)関数を呼び出して囲みましょう。
+place関数は引数として配置とコンテンツを受け取ります。
+オプション引数である`{scope}`引数を使えば、現在の段組みとその親（ページ）のどちらに対して配置するかを決めることが可能です。
+これらに加えて、もうひとつ設定することがあります。
+オプション引数がない場合、`{place}`はそのコンテンツを文書の流れから外し、他のレイアウトに影響を与えることなく、他のコンテンツの上に配置します。
 
 ```example
 #place(
@@ -257,11 +252,11 @@ content in its container:
 #lorem(30)
 ```
 
-If we hadn't used `{place}` here, the square would be in its own line, but here
-it overlaps the few lines of text following it. Likewise, that text acts like as
-if there was no square. To change this behavior, we can pass the argument
-`{float: true}` to ensure that the space taken up by the placed item at the top
-or bottom of the page is not occupied by any other content.
+もしここで`{place}`を使わなければ、黒塗りの長方形は独立した行になるはずですが、
+`{place}`を使うと、それに続く数行のテキストの上に重なります。
+同様に、テキスト側もこの長方形がないかのように振る舞います。
+この動作を変更するには、引数`{float: true}`を渡してください。
+これにより`{place}`でページの上部または下部に配置されたアイテムが、他のコンテンツと重ならないように設定できます。
 
 ```example:single
 >>> #let title = [
@@ -323,10 +318,9 @@ or bottom of the page is not occupied by any other content.
 #lorem(200)
 ```
 
-In this example, we also used the `clearance` argument of the `{place}` function
-to provide the space between it and the body instead of using the [`{v}`]($v)
-function. We can also remove the explicit `{align(center, ..)}` calls around the
-various parts since they inherit the center alignment from the placement.
+この例では、`{place}` 関数の `clearance` 引数も使用しています。
+これにより、[`{v}`]($v)関数を使用する代わりに、本文との間にスペースを設けています。
+また、コンテンツはcenter引数を継承しているため、各パーツごとに行っていた明示的な `{align(center, ...)}` 呼び出しも削除できます。
 
 最後に見出しのスタイルの設定をしましょう。
 ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
