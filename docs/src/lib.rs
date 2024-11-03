@@ -93,6 +93,7 @@ pub fn provide(resolver: &dyn Resolver) -> Vec<PageModel> {
         reference_pages(resolver),
         guide_pages(resolver),
         changelog_pages(resolver),
+        md_page(resolver, base, load!("glossary.md")),
     ]
 }
 
