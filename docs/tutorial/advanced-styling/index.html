@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <title>高度なスタイリング – Typstドキュメント日本語版</title>
-  <meta name="description" content="Typst's tutorial.">
+  <meta name="description" content="Typstチュートリアル">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/tutorial/advanced-styling/">
   <meta property="og:title" content="高度なスタイリング – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Typst's tutorial.">
+  <meta property="og:description" content="Typstチュートリアル">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -885,7 +885,7 @@
 例えば<code><span class="typ-str">&quot;1&quot;</span></code>と設定すると、Typstは素のページ番号のみを表示します。
 また<code><span class="typ-str">&quot;(1/1)&quot;</span></code>と設定すると、カッコで囲まれた現在のページと総ページ数が表示されるでしょう。
 さらに、カスタム関数を用意して完全に好みの書式にすることも可能です。</p>
-<h2 id="title-and-abstract">タイトルと要旨</h2>
+<h2 id="title-and-abstract">タイトルとアブストラクトの作成</h2>
 <p>それでは、タイトルとアブストラクトを追加しましょう。
 まずはタイトルを中央揃えにし、<code><span class="typ-strong">*stars*</span></code>で囲んでフォントを太文字にします。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">17pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
@@ -960,32 +960,28 @@ grid関数はセルを指定するcontent引数を任意の数で受け取れま
 </code></pre><div class="preview"><img src="/assets/docs/bec7513982f4e4a7eae35f5e5cbb2abc.png" alt="Preview" width="480" height="190"/></div></div>
 <p><code>title</code>変数にコンテンツを設定した後は、関数内やマークアップ内（関数のように接頭辞に<code>#</code>をつける）で使用できます。
 こうすることで、別のタイトルに決めた場合、一箇所で簡単に変更することができます。</p>
-<h2 id="columns-and-headings">Adding columns and headings</h2>
+<h2 id="columns-and-headings">段組みと見出しの追加</h2>
 <p>上の論文は、残念ながら文字が単調にぎっしり詰まっていて読みにくい見た目をしています。
-これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。 Fortunately, that's
-easy to do: We just need to amend our <code>page</code> set rule with the <code>columns</code>
-argument.</p>
-<p>By adding <code>columns: <span class="typ-num">2</span></code> to the argument list, we have wrapped the whole
-document in two columns. However, that would also affect the title and authors
-overview. To keep them spanning the whole page, we can wrap them in a function
-call to <a href="/docs/reference/layout/place/"><code>place</code></a>. Place expects an alignment and the content it
-should place as positional arguments. Using the named <code>scope</code> argument, we can
-decide if the items should be placed relative to the current column or its
-parent (the page). There is one more thing to configure: If no other arguments
-are provided, <code>place</code> takes its content out of the flow of the document and
-positions it over the other content without affecting the layout of other
-content in its container:</p>
+これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。 
+幸いなことに、setルールで<code>page</code>に<code>column</code>引数を追加することで簡単に行えます。</p>
+<p>引数リストに<code>columns: <span class="typ-num">2</span></code>を加えることで、文書全体を2段組みとなります。
+しかし、これではタイトルと著者、アブストラクトにも影響が出てしまいます。
+それらを1段組みのままに維持するためには、<a href="/docs/reference/layout/place/"><code>place</code></a>関数を呼び出して囲みましょう。
+place関数は引数として配置とコンテンツを受け取ります。
+オプション引数である<code>scope</code>引数を使えば、現在の段組みとその親（ページ）のどちらに対して配置するかを決めることが可能です。
+これらに加えて、もうひとつ設定することがあります。
+オプション引数がない場合、<code>place</code>はそのコンテンツを文書の流れから外し、他のレイアウトに影響を与えることなく、他のコンテンツの上に配置します。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span>
   top <span class="typ-op">+</span> center<span class="typ-punct">,</span>
   <span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> black<span class="typ-punct">)</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">30</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/6fa5745579aab074876ef000be8bba4d.png" alt="Preview" width="480" height="190"/></div></div>
-<p>If we hadn't used <code>place</code> here, the square would be in its own line, but here
-it overlaps the few lines of text following it. Likewise, that text acts like as
-if there was no square. To change this behavior, we can pass the argument
-<code>float: <span class="typ-key">true</span></code> to ensure that the space taken up by the placed item at the top
-or bottom of the page is not occupied by any other content.</p>
+<p>もしここで<code>place</code>を使わなければ、黒塗りの長方形は独立した行になるはずですが、
+<code>place</code>を使うと、それに続く数行のテキストの上に重なります。
+同様に、テキスト側もこの長方形がないかのように振る舞います。
+この動作を変更するには、引数<code>float: <span class="typ-key">true</span></code>を渡してください。
+これにより<code>place</code>でページの上部または下部に配置されたアイテムが、他のコンテンツと重ならないように設定できます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>
   paper<span class="typ-punct">:</span> <span class="typ-str">&quot;us-letter&quot;</span><span class="typ-punct">,</span>
   header<span class="typ-punct">:</span> <span class="typ-func">align</span><span class="typ-punct">(</span>
@@ -1016,10 +1012,9 @@ or bottom of the page is not occupied by any other content.</p>
 <span class="typ-heading">= Related Work</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">200</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/c6e431fb0936b65c7e7519e40ec000f3.png" alt="Preview" width="480" height="190"/></div></div>
-<p>In this example, we also used the <code>clearance</code> argument of the <code>place</code> function
-to provide the space between it and the body instead of using the <a href="/docs/reference/layout/v/"><code>v</code></a>
-function. We can also remove the explicit <code><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> <span class="typ-op">..</span><span class="typ-punct">)</span></code> calls around the
-various parts since they inherit the center alignment from the placement.</p>
+<p>この例では、<code>place</code> 関数の <code>clearance</code> 引数も使用しています。
+これにより、<a href="/docs/reference/layout/v/"><code>v</code></a>関数を使用する代わりに、本文との間にスペースを設けています。
+また、コンテンツはcenter引数を継承しているため、各パーツごとに行っていた明示的な <code><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> <span class="typ-op">..</span><span class="typ-punct">.</span><span class="typ-punct">)</span></code> 呼び出しも削除できます。</p>
 <p>最後に見出しのスタイルの設定をしましょう。
 ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
 <code>heading</code>関数はそのような設定を提供していないため、独自の見出しshowルールを書く必要があります。</p>
@@ -1113,11 +1108,11 @@ MotivationとProblem Statementはサブセクションであり、イタリッ�
           <ul></ul>
         </li>
         
-        <li data-assoc="title-and-abstract"><a href="#title-and-abstract">タイトルと要旨</a>
+        <li data-assoc="title-and-abstract"><a href="#title-and-abstract">タイトルとアブストラクトの作成</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="columns-and-headings"><a href="#columns-and-headings">Columns And Headings</a>
+        <li data-assoc="columns-and-headings"><a href="#columns-and-headings">段組みと見出しの追加</a>
           <ul></ul>
         </li>
         
