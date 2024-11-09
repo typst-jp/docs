@@ -3,6 +3,7 @@ FROM rust:1.77-slim
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+    git openssh-client \
     curl \
     # install python3, jinja2 pyyaml
     python3 \
