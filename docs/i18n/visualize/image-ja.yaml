@@ -1,16 +1,16 @@
 route: /docs/reference/visualize/image/
 title: Image
-description: '`image` 函数的文档'
+description: '`image` 関数のドキュメント'
 part: null
 outline:
 - id: summary
-  name: Summary
+  name: まとめ
   children: []
 - id: example
-  name: Example
+  name: 例
   children: []
 - id: parameters
-  name: Parameters
+  name: パラメーター
   children:
   - id: parameters-path
     name: path
@@ -31,7 +31,7 @@ outline:
     name: fit
     children: []
 - id: definitions
-  name: Definitions
+  name: 定義
   children:
   - id: definitions-decode
     name: Decode Image
@@ -64,12 +64,12 @@ body:
     oneliner: A raster or vector graphic.
     element: true
     details: |-
-      <p>A raster or vector graphic.</p>
-      <p>Supported formats are PNG, JPEG, GIF and SVG.</p>
-      <p><em>Note:</em> Work on SVG export is ongoing and there might be visual inaccuracies
-      in the resulting PDF. Make sure to double-check embedded SVG images. If you
-      have an issue, also feel free to report it on <a href="https://github.com/typst/typst/issues?q=is%3Aopen+is%3Aissue+label%3Asvg">GitHub</a>.</p>
-      <h2 id="example">Example</h2>
+      <p>ラスター画像やベクター画像</p>
+      <p>サポートされている拡張子は PNG, JPEG, GIF, SVGです。</p>
+      <p><em>Note:</em> 注：SVGエクスポートに関する作業は進行中であり、結果のPDFには視覚的に不正確な部分があるかもしれません。
+      埋め込まれたSVG画像を再確認してください。
+      もし問題があれば、<a href="https://github.com/typst/typst/issues?q=is%3Aopen+is%3Aissue+label%3Asvg">GitHub</a>で報告してください。.</p>
+      <h2 id="example">例</h2>
       <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
         <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;molecular.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
         caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>
@@ -82,7 +82,7 @@ body:
     self: false
     params:
     - name: path
-      details: <p>Path to an image file.</p>
+      details: <p>画像ファイルのパス</p>
       example: null
       types:
       - str
@@ -94,20 +94,20 @@ body:
       variadic: false
       settable: false
     - name: format
-      details: <p>The image's format. Detected automatically by default.</p>
+      details: <p>画像のフォーマット。デフォルトでは自動的に検出されます。</p>
       example: null
       types:
       - auto
       - str
       strings:
       - string: png
-        details: <p>Raster format for illustrations and transparent graphics.</p>
+        details: <p>イラストや透明グラフィック用のラスターフォーマット。</p>
       - string: jpg
-        details: <p>Lossy raster format suitable for photos.</p>
+        details: <p>写真に適した非可逆ラスターフォーマット。</p>
       - string: gif
-        details: <p>Raster format that is typically used for short animated clips.</p>
+        details: <p>短いアニメーションクリップによく使われるラスターフォーマット。</p>
       - string: svg
-        details: <p>The vector graphics format of the web.</p>
+        details: <p>ウェブのベクター画像フォーマット。</p>
       default: <code><span class="typ-key">auto</span></code>
       positional: false
       named: true
@@ -115,7 +115,7 @@ body:
       variadic: false
       settable: true
     - name: width
-      details: <p>The width of the image.</p>
+      details: <p>画像の幅。</p>
       example: null
       types:
       - auto
@@ -128,7 +128,7 @@ body:
       variadic: false
       settable: true
     - name: height
-      details: <p>The height of the image.</p>
+      details: <p>画像の高さ。</p>
       example: null
       types:
       - auto
@@ -141,7 +141,7 @@ body:
       variadic: false
       settable: true
     - name: alt
-      details: <p>A text describing the image.</p>
+      details: <p>画像の説明文。</p>
       example: null
       types:
       - none
@@ -154,19 +154,18 @@ body:
       variadic: false
       settable: true
     - name: fit
-      details: <p>How the image should adjust itself to a given area.</p>
+      details: <p>与えられた領域に対して、画像をどのように調整するか。</p>
       example: null
       types:
       - str
       strings:
       - string: cover
-        details: <p>The image should completely cover the area. This is the default.</p>
+        details: <p>領域を完全にカバーします。これがデフォルトです。</p>
       - string: contain
-        details: <p>The image should be fully contained in the area.</p>
+        details: <p>領域内に完全に収まるようにします。</p>
       - string: stretch
         details: |-
-          <p>The image should be stretched so that it exactly fills the area, even if
-          this means that the image will be distorted.</p>
+          <p>たとえ画像が歪むことになっても、その領域を正確に埋めるように引き伸ばします。</p>
       default: <code><span class="typ-str">&quot;cover&quot;</span></code>
       positional: false
       named: true
@@ -183,7 +182,7 @@ body:
       keywords: []
       oneliner: Decode a raster or vector graphic from bytes or a string.
       element: false
-      details: <p>Decode a raster or vector graphic from bytes or a string.</p>
+      details: <p>バイトまたは文字列からラスターまたはベクトル図形をデコードします。</p>
       example: |-
         <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> original <span class="typ-op">=</span> <span class="typ-func">read</span><span class="typ-punct">(</span><span class="typ-str">&quot;diagram.svg&quot;</span><span class="typ-punct">)</span>
         <span class="typ-key">#</span><span class="typ-key">let</span> changed <span class="typ-op">=</span> original<span class="typ-punct">.</span><span class="typ-func">replace</span><span class="typ-punct">(</span>
@@ -197,7 +196,7 @@ body:
       self: false
       params:
       - name: data
-        details: <p>The data to decode as an image. Can be a string for SVGs.</p>
+        details: <p>画像としてデコードするデータ。SVG の場合は文字列です。</p>
         example: null
         types:
         - str
@@ -210,20 +209,20 @@ body:
         variadic: false
         settable: false
       - name: format
-        details: <p>The image's format. Detected automatically by default.</p>
+        details: <p>画像のフォーマット。デフォルトでは自動的に検出されます。</p>
         example: null
         types:
         - auto
         - str
         strings:
         - string: png
-          details: <p>Raster format for illustrations and transparent graphics.</p>
+          details: <p>イラストや透明グラフィック用のラスターフォーマット。</p>
         - string: jpg
-          details: <p>Lossy raster format suitable for photos.</p>
+          details: <p>写真に適した非可逆ラスターフォーマット。</p>
         - string: gif
-          details: <p>Raster format that is typically used for short animated clips.</p>
+          details: <p>短いアニメーションクリップによく使われるラスターフォーマット。</p>
         - string: svg
-          details: <p>The vector graphics format of the web.</p>
+          details: <p>ウェブのベクター画像フォーマット。</p>
         default: null
         positional: false
         named: true
@@ -231,7 +230,7 @@ body:
         variadic: false
         settable: false
       - name: width
-        details: <p>The width of the image.</p>
+        details: <p>画像の幅。</p>
         example: null
         types:
         - auto
@@ -244,7 +243,7 @@ body:
         variadic: false
         settable: false
       - name: height
-        details: <p>The height of the image.</p>
+        details: <p>画像の高さ。</p>
         example: null
         types:
         - auto
@@ -257,7 +256,7 @@ body:
         variadic: false
         settable: false
       - name: alt
-        details: <p>A text describing the image.</p>
+        details: <p>画像の説明文。</p>
         example: null
         types:
         - none
@@ -270,19 +269,18 @@ body:
         variadic: false
         settable: false
       - name: fit
-        details: <p>How the image should adjust itself to a given area.</p>
+        details: <p>与えられた領域に対して、画像をどのように調整するか。</p>
         example: null
         types:
         - str
         strings:
         - string: cover
-          details: <p>The image should completely cover the area. This is the default.</p>
+          details: <p>領域を完全にカバーします。これがデフォルトです。</p>
         - string: contain
-          details: <p>The image should be fully contained in the area.</p>
+          details: <p>領域内に完全に収まるようにします。</p>
         - string: stretch
           details: |-
-            <p>The image should be stretched so that it exactly fills the area, even if
-            this means that the image will be distorted.</p>
+            <p>たとえ画像が歪むことになっても、その領域を正確に埋めるように引き伸ばします。</p>
         default: null
         positional: false
         named: true
