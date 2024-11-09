@@ -1,0 +1,9 @@
+[tools]
+# python is managed by .python-version
+uv = "0.5.1"
+
+[env]
+_.python.venv = { path = ".venv", create = true }
+
+[settings]
+yes = true
