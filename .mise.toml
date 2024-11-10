@@ -7,3 +7,18 @@ _.python.venv = { path = ".venv", create = true }
 
 [settings]
 yes = true
+
+[tasks.generate-docs]
+run = "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture"
+
+[tasks.generate-web]
+run = ".venv/bin/python gen.py"
+
+[tasks.generate]
+run = [
+    "mise run generate-web",
+    "mise run generate-docs"
+]
+
+[tasks.preview]
+run = ".venv/bin/python -m http.server -d dist"
