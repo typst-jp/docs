@@ -17,8 +17,8 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - uses: jdx/mise-action@v2
       - run: uv sync --locked
-      - run: cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture
-      - run: .venv/bin/python ./gen.py
+      - run: mise run generate-docs
+      - run: mise run generate-web
       # deploy ./dist to https://github.com/typst-doc-cn/typst-doc-cn.github.io
       - name: Deploy
         if: github.ref == 'refs/heads/main'
