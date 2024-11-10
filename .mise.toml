@@ -16,8 +16,8 @@ run = "uv run gen.py"
 
 [tasks.generate]
 run = [
-    "mise run generate-web",
-    "mise run generate-docs"
+    "mise run generate-docs",
+    "mise run generate-web"
 ]
 
 [tasks.preview]
