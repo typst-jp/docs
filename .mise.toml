@@ -12,7 +12,7 @@ yes = true
 run = "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture"
 
 [tasks.generate-web]
-run = ".venv/bin/python gen.py"
+run = "uv run gen.py"
 
 [tasks.generate]
 run = [
@@ -21,4 +21,4 @@ run = [
 ]
 
 [tasks.preview]
-run = ".venv/bin/python -m http.server -d dist"
+run = "uv run -m http.server -d dist"
