@@ -36,7 +36,9 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 ### ローカル環境でWebページを生成する
 
-当プロジェクトでは、Rustを除く開発ツールおよびコマンドを[mise](https://mise.jdx.dev/)で一元管理しています。導入していない場合は、[Getting Started | mise-en-place](https://mise.jdx.dev/getting-started.html)に従ってインストールしてください。
+当プロジェクトは[typst/typst](https://github.com/typst/typst/)の派生リポジトリであり、Webページを生成するためにはRustが必要です。導入していない場合は、[Install Rust - Rust Programming Language](https://www.rust-lang.org/tools/install)に従ってインストールしてください。
+
+また、当プロジェクトが独自に導入しているRustを除く開発ツールおよびコマンドは[mise](https://mise.jdx.dev/)で一元管理しています。導入していない場合は、[Getting Started | mise-en-place](https://mise.jdx.dev/getting-started.html)に従ってインストールしてください。
 
 > [!NOTE]
 > 以下の内容はmise v2024.11.5に基づいています。内容の不備を発見した場合は、Issueを立ててください。
