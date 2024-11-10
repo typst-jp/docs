@@ -1,132 +1,166 @@
-import jinja2
+"""typst-docsが出力したJSONファイルを読み込んでHTMLファイルを出力する"""
+
 import json
-import os
 import shutil
-import yaml
+from pathlib import Path
+from typing import Any, TypedDict
+
+import jinja2
 
 
-def str_presenter(dumper, data):
-    if len(data.splitlines()) > 1:  # check for multiline string
-        return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
-    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+class OutlineItemDict(TypedDict):
+    """アウトライン情報"""
+
+    id: str
+    name: str
+    children: list["OutlineItemDict"]
 
 
-yaml.add_representer(str, str_presenter)
+class BodyDict(TypedDict):
+    """本文情報"""
+
+    kind: str
+    # NOTE: dict[str, Any]の正確な型はtypst-docsの出力を参照してください
+    content: str | dict[str, Any]
 
 
-def translate_with_yaml(page):
-    if page['body']['kind'] in ['func', 'type', 'group', 'category']:
-        route = page['route'][:-1] if page['route'].endswith('/') else page['route']
-        assert route.startswith('/docs/reference/')
-        if page['body']['kind'] == 'category':
-            path = ['category'] + route[len('/docs/reference/'):].split('/')
-        else:
-            path = route[len('/docs/reference/'):].split('/')
-        assert len(path) == 2, str(path) + ' ' + route
-        # if docs/i18n/{path[0]} not exists, create it
-        if not os.path.exists('docs/i18n/' + path[0]):
-            os.mkdir('docs/i18n/' + path[0])
-        # without quotes and with indent
-        en_path = 'docs/i18n/' + path[0] + '/' + path[1] + '-en.yaml'
-        ja_path = 'docs/i18n/' + path[0] + '/' + path[1] + '-ja.yaml'
-        with open(en_path, 'w', encoding='utf-8') as f:
-            yaml.dump(page, f, allow_unicode=True, default_flow_style=False,
-                      indent=2, sort_keys=False, encoding='utf-8')
-        if not os.path.exists(ja_path):
-            with open(ja_path, 'w', encoding='utf-8') as f:
-                yaml.dump(page, f, allow_unicode=True, default_flow_style=False,
-                          indent=2, sort_keys=False, encoding='utf-8')
-        if os.path.exists(ja_path):
-            with open(ja_path, 'r', encoding='utf-8') as f:
-                page = yaml.load(f, Loader=yaml.FullLoader)
-    for i in range(len(page['children'])):
-        page['children'][i] = translate_with_yaml(page['children'][i])
-    return page
+class PageDict(TypedDict):
+    """ページ情報"""
+
+    route: str
+    title: str
+    description: str
+    part: str | None
+    outline: list[OutlineItemDict]
+    body: BodyDict
+    children: list["PageDict"]
 
 
-type2class_map = {
-    'none': 'pill-kw',
-    'auto': 'pill-kw',
-    'function': 'pill-fn',
-    'string': 'pill-str',
-    'str': 'pill-str',
-    'content': 'pill-con',
-    'color': 'pill-col',
-    'bool': 'pill-bool',
-    'boolean': 'pill-bool',
-    'integer': 'pill-num',
-    'int': 'pill-num',
-    'ratio': 'pill-num',
-    'length': 'pill-num',
-    'relative length': 'pill-num',
-    'float': 'pill-num',
-    'angle': 'pill-num',
-    'fraction': 'pill-num',
-}
+def type2class(parameter_type: str) -> str:
+    """関数の引数の型名からCSSのクラス名を取得する"""
+    type2class_map: dict[str, str] = {
+        "none": "pill-kw",
+        "auto": "pill-kw",
+        "function": "pill-fn",
+        "string": "pill-str",
+        "str": "pill-str",
+        "content": "pill-con",
+        "color": "pill-col",
+        "bool": "pill-bool",
+        "boolean": "pill-bool",
+        "integer": "pill-num",
+        "int": "pill-num",
+        "ratio": "pill-num",
+        "length": "pill-num",
+        "relative length": "pill-num",
+        "float": "pill-num",
+        "angle": "pill-num",
+        "fraction": "pill-num",
+    }
+    return type2class_map.get(parameter_type, "pill-obj")
 
 
-def type2class(type):
-    return type2class_map.get(type, 'pill-obj')
-
-def gen_path(item):
-    return ''.join([s + '.' for s in item['path']])
+def gen_path(item: dict[str, Any]) -> str:
+    """pathを連結する"""
+    return "".join([s + "." for s in item["path"]])
 
 
-def render_jinja_html(template_loc, file_name, **context):
-    return jinja2.Environment(
-        loader=jinja2.FileSystemLoader(template_loc + '/')
-    ).get_template(file_name).render(context)
+def render_jinja_html(
+    template_loc: str,
+    file_name: str,
+    **context: Any,  # noqa: ANN401
+) -> str:
+    """Jinja2テンプレートをレンダリングする"""
+    return (
+        jinja2.Environment(
+            loader=jinja2.FileSystemLoader(f"{template_loc}/"),
+            autoescape=False,  # noqa: S701
+        )
+        .get_template(file_name)
+        .render(context)
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    # 出力先のディレクトリを初期化する
+    if Path("./dist").exists():
+        shutil.rmtree("./dist")
 
-    flattern_pages = []
-    index = 0
+    shutil.copytree("./static", "./dist")
 
-    def dfs(page, docs):
-        flattern_pages.append(page)
-        for child in page['children']:
-            dfs(child, docs)
+    if Path("./dist/assets/docs").exists():
+        shutil.rmtree("./dist/assets/docs")
 
-    def render_to_files(page, docs, path):
-        global index
-        prev = flattern_pages[index - 1] if index > 0 else None
-        next = flattern_pages[index +
-                              1] if index < len(flattern_pages) - 1 else None
-        if not os.path.exists('./dist' + page['route']):
-            os.makedirs('./dist' + page['route'])
-        with open('./dist' + page['route'] + ('/' if not page['route'].endswith('/') else '') + 'index.html', 'w', encoding='utf-8') as f:
-            f.write(render_jinja_html('./templates/', page['body']['kind'] + '_template.html.j2',
-                    docs=docs, path=path, prev=prev, next=next, type2class=type2class, gen_path=gen_path, **page))
-        index += 1
-        for child in page['children']:
-            render_to_files(child, docs, path + [child])
+    shutil.copytree("./assets/docs", "./dist/assets/docs")
 
-    # cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture
-
-    # clean dist
-    if os.path.exists('./dist'):
-        shutil.rmtree('./dist')
-
-    # copy static to dist
-    shutil.copytree('./static', './dist')
-
-    # delete ./dist/assets/docs
-    if os.path.exists('./dist/assets/docs'):
-        shutil.rmtree('./dist/assets/docs')
-
-    # copy assets/docs to dist/assets/docs
-    shutil.copytree('./assets/docs', './dist/assets/docs')
-
-    # load docs.json and render to files
-    with open('./assets/docs.json', 'r', encoding='utf-8') as f:
+    # typst-docsが出力したJSONファイルを読み込む
+    docs: list[PageDict] = []
+    with Path("./assets/docs.json").open(encoding="utf-8") as f:
         docs = json.load(f)
-        # if docs/i18n not exists, create it
-        if not os.path.exists('docs/i18n'):
-            os.mkdir('docs/i18n')
-        for i in range(len(docs)):
-            docs[i] = translate_with_yaml(docs[i])
-        for page in docs:
-            dfs(page, docs)
-        for page in docs:
-            render_to_files(page, docs, [page])
+
+    # ドキュメントの階層構造を平坦化する
+    # パンくずリストと前後のページ情報を取得するため
+    flattened_pages: list[PageDict] = []  # 平坦化されたページ情報のリスト
+    page_paths: list[list[PageDict]] = []  # ページ情報[i]のパス情報
+
+    def _flatten_docs(page: PageDict, page_path: list[PageDict]) -> None:
+        """ドキュメントの階層構造を平坦化する
+
+        Args:
+            page (PageDict): ページ情報
+            page_path (list[PageDict]): ページ情報のパス
+        """
+        flattened_pages.append(page)
+        page_paths.append(page_path)
+        for child_page in page["children"]:
+            _flatten_docs(child_page, [*page_path, child_page])
+
+    for page in docs:
+        _flatten_docs(page, [page])
+
+    # ドキュメントをHTMLファイルに出力する
+    def _render_to_file(
+        page: PageDict,
+        path: list[PageDict],
+        page_index: int,
+    ) -> None:
+        """ページをHTMLファイルに出力する
+
+        Args:
+            page (PageDict): ページ情報
+            path (list[PageDict]): パンくずリストを生成するためのページ情報のリスト
+            page_index (int): 前後のページ情報を取得するためのページのインデックス
+        """
+        previous_page: PageDict | None = (
+            flattened_pages[page_index - 1] if page_index > 0 else None
+        )
+        next_page: PageDict | None = (
+            flattened_pages[page_index + 1]
+            if page_index < len(flattened_pages) - 1
+            else None
+        )
+        if not Path(f"./dist{page['route']}").exists():
+            Path(f"./dist{page['route']}").mkdir(parents=True)
+        with Path(
+            f"./dist{page['route']}{'/' if not page['route'].endswith('/') else ''}index.html",  # noqa: E501
+        ).open(
+            mode="w",
+            encoding="utf-8",
+        ) as f:
+            f.write(
+                render_jinja_html(
+                    "./templates/",
+                    f"{page['body']['kind']}_template.html.j2",
+                    docs=docs,
+                    path=path,
+                    prev=previous_page,
+                    next=next_page,
+                    type2class=type2class,
+                    gen_path=gen_path,
+                    **page,
+                ),
+            )
+            print(f"Generated: {page['route']}")  # noqa: T201
+
+    for i, (page, path) in enumerate(zip(flattened_pages, page_paths, strict=True)):
+        _render_to_file(page, path, i)
