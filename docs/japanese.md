@@ -80,6 +80,8 @@ Typstに関する日本語の記事は[Zenn](https://zenn.dev/)や[Qiita](https:
 - [Typst で技術同人誌を書く。](https://techbookfest.org/product/mSFLXEDy9TX7ymSmib198P?productVariantID=sPgvPBmuabt08PfCeC6E2B) - 技術書典17
 - [Typstで技術同人誌を書こう！すぐに役立つ20のトピック](https://techbookfest.org/product/3zT3xbGrxx4bdwSNGsD83e?productVariantID=VsMLWXRzNEC2YjyfPkeYh) - 技術書典17
 - [やりたいことから始めるTypst](https://qiita.com/tomoyatajika/items/649884befe95c5f1dcea) - @tomoyatajika
+- [初めてのTypst：構文の基礎から応用](https://qiita.com/naoppy/items/55a0df837858e553d430) - Naoppy (@naoppy)
+- [Typstのここがすごい！！](https://qiita.com/hikoharu14142/items/aa8cfb70d079b0324fba) - @hikoharu14142
 - [\[打倒LaTeX !!\] 生まれたての組版システム'Typst'の使い方と便利な機能を実装した話(2023.10)](https://zenn.dev/taiiin02/articles/typst_articles_main) - @taiiin02
 - [新興組版システム typst のススメ](https://zenn.dev/msakuta/articles/2f1cd11d6099d6) - @msakuta
 - [これからLaTeXをするなら Typst はオススメ！](https://zenn.dev/saito_atsushi/articles/2b56f58c4fe3ca) - @saito_atsushi
