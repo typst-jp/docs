@@ -76,6 +76,7 @@ Typstに関する日本語の記事は[Zenn](https://zenn.dev/)や[Qiita](https:
 - [Typst - TeX Wiki](https://texwiki.texjp.org/?Typst) - Tex Wiki
 - [組版処理システム Typst の紹介](https://itpass.scitec.kobe-u.ac.jp/~itpass/seminar/lecture/fy2024/241002/pub/itpass_seminar_20241002_typst.pdf) - 樫村博基（神戸大学）
 - [Typst を試す・学ぶための記事](https://www.metaphysica.info/2024/typst-guidance/) - 高校数学調律研究室
+- [Typstで論文を書く](https://kimushun1101.github.io/How-to-use-typst-for-paper-jp/How-to-use-typst-for-paper-jp.pdf) - Shunsuke Kimura (@kimushun1101)
 - [Typst で技術同人誌を書く。](https://techbookfest.org/product/mSFLXEDy9TX7ymSmib198P?productVariantID=sPgvPBmuabt08PfCeC6E2B) - 技術書典17
 - [Typstで技術同人誌を書こう！すぐに役立つ20のトピック](https://techbookfest.org/product/3zT3xbGrxx4bdwSNGsD83e?productVariantID=VsMLWXRzNEC2YjyfPkeYh) - 技術書典17
 - [やりたいことから始めるTypst](https://qiita.com/tomoyatajika/items/649884befe95c5f1dcea) - @tomoyatajika
