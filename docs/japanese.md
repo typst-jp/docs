@@ -23,10 +23,10 @@ description: |
 - [How-to-use-typst-for-paper-jp](https://github.com/kimushun1101/How-to-use-typst-for-paper-jp) - Typstの特徴と使い方、論文を書くときに使えるコード例をまとめた資料
 - [typst-jp-conf-template](https://github.com/kimushun1101/typst-jp-conf-template) - Typstで日本語論文を書くときのテンプレート
 - [master_thesis_template_for_typst](https://github.com/ut-khanlab/master_thesis_template_for_typst) - 修論用のTypstのテンプレート
+- [rinko_template_for_typst](https://github.com/hamataku/rinko_template_for_typst) - 東京大学電気系の輪講資料を作成するためのテンプレート
 - [ipsj-typst-template](https://github.com/mkpoli/ipsj-typst-template) - 情報処理学会（IPSJ）の研究報告テンプレート
 - [ipsj-national-convention-typst-template](https://github.com/kajiLabTeam/ipsj-national-convention-typst-template) - 情報処理学会全国大会テンプレート
-- [rinko_template_for_typst](https://github.com/hamataku/rinko_template_for_typst) - 東京大学電気系の輪講資料を作成するためのテンプレート
--
+- [Typst 備忘録 -自作書式のサンプル-](https://powercore.hatenablog.com/entry/2023/12/21/114030) - 電気学会全国大会テンプレート
 
 ### 学会
 
