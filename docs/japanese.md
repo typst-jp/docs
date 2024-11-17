@@ -22,6 +22,7 @@ description: |
 - [typst-jp-conf-template](https://github.com/kimushun1101/typst-jp-conf-template) - Typstで日本語論文を書くときのテンプレート
 - [master_thesis_template_for_typst](https://github.com/ut-khanlab/master_thesis_template_for_typst) - 修論用のTypstのテンプレート
 - [rinko_template_for_typst](https://github.com/hamataku/rinko_template_for_typst) - 東京大学電気系の輪講資料を作成するためのテンプレート
+- [academic-writing-templates](https://github.com/borh-lab/academic-writing-templates) - 大阪大学大学院の中間発表テンプレート
 
 ### 学会
 
