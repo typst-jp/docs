@@ -12,3 +12,11 @@ p {
 .alert-content {
   margin: 1em 2em;
 }
+
+.alert > button {
+  position: absolute;
+  top: 1em;
+  right: 0.25em;
+  background: none;
+  border: none;
+}
