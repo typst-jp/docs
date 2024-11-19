@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -881,7 +893,7 @@ More text.
 <div class="code code-definition "><span
     class="typ-func">block</span>(<div class="arguments"><span
       class="overview-param"><a href="#parameters-width">width<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
-      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
+      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
       class="overview-param"><a href="#parameters-breakable">breakable<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a>, </span><span
       class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
@@ -889,9 +901,10 @@ More text.
       class="overview-param"><a href="#parameters-inset">inset<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-outset">outset<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-spacing">spacing<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
-      class="overview-param"><a href="#parameters-above">above<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
-      class="overview-param"><a href="#parameters-below">below<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
+      class="overview-param"><a href="#parameters-above">above<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
+      class="overview-param"><a href="#parameters-below">below<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
       class="overview-param"><a href="#parameters-clip">clip<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
+      class="overview-param"><a href="#parameters-sticky">sticky<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
 
@@ -947,6 +960,8 @@ More text.
       <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
       
       <a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>
+      
+      <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
       
     </div>
     <small><span
@@ -1212,8 +1227,17 @@ the <a href="/docs/reference/layout/box/#parameters-outset">box's documentation<
     </small>
   </div>
 </h4>
-<p>The spacing around this block. This is shorthand to set <code>above</code> and
-<code>below</code> to the same value.</p>
+<p>The spacing around the block. When <code><span class="typ-key">auto</span></code>, inherits the paragraph
+<a href="/docs/reference/model/par/#parameters-spacing"><code>spacing</code></a>.</p>
+<p>For two adjacent blocks, the larger of the first block's <code>above</code> and the
+second block's <code>below</code> spacing wins. Moreover, block spacing takes
+precedence over paragraph <a href="/docs/reference/model/par/#parameters-spacing"><code>spacing</code></a>.</p>
+<p>Note that this is only a shorthand to set <code>above</code> and <code>below</code> to the
+same value. Since the values for <code>above</code> and <code>below</code> might differ, a
+<a href="/docs/reference/context/" title="context">context</a> block only provides access to <code>block<span class="typ-punct">.</span>above</code> and
+<code>block<span class="typ-punct">.</span>below</code>, not to <code>block<span class="typ-punct">.</span>spacing</code> directly.</p>
+<p>This property can be used in combination with a show rule to adjust the
+spacing around arbitrary block-level elements.</p>
 
 
 <p>Default:<code><span class="typ-num">1.2em</span></code></p>
@@ -1237,6 +1261,8 @@ A second paragraph.
   <div class="additional-info">
     <div>
       
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
       <a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>
       
       <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
@@ -1255,18 +1281,18 @@ A second paragraph.
     </small>
   </div>
 </h4>
-<p>The spacing between this block and its predecessor. Takes precedence
-over <code>spacing</code>. Can be used in combination with a show rule to adjust
-the spacing around arbitrary block-level elements.</p>
+<p>The spacing between this block and its predecessor.</p>
 
 
-<p>Default:<code><span class="typ-num">1.2em</span></code></p>
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 
 <h4 id="block-block-parameters-below"><code>below</code>
   <div class="additional-info">
     <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
       
       <a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>
       
@@ -1286,11 +1312,10 @@ the spacing around arbitrary block-level elements.</p>
     </small>
   </div>
 </h4>
-<p>The spacing between this block and its successor. Takes precedence
-over <code>spacing</code>.</p>
+<p>The spacing between this block and its successor.</p>
 
 
-<p>Default:<code><span class="typ-num">1.2em</span></code></p>
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 
@@ -1315,10 +1340,68 @@ over <code>spacing</code>.</p>
   </div>
 </h4>
 <p>Whether to clip the content inside the block.</p>
+<p>Clipping is useful when the block's content is larger than the block itself,
+as any content that exceeds the block's bounds will be hidden.</p>
 
 
 <p>Default:<code><span class="typ-key">false</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>
+  width<span class="typ-punct">:</span> <span class="typ-num">50pt</span><span class="typ-punct">,</span>
+  height<span class="typ-punct">:</span> <span class="typ-num">50pt</span><span class="typ-punct">,</span>
+  clip<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
+  <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">100pt</span><span class="typ-punct">)</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/b9ef1411cdecea5f9cbf7765411c1445.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="block-block-parameters-sticky"><code>sticky</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+      
+    </div>
+    <small><span
+        aria-describedby="block-block-parameters-sticky-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="block-block-parameters-sticky-settable-tooltip-qm-label">
+          <title id="block-block-parameters-sticky-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="block-block-parameters-sticky-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Whether this block must stick to the following one, with no break in
+between.</p>
+<p>This is, by default, set on heading blocks to prevent orphaned headings
+at the bottom of the page.</p>
+
+
+<p>Default:<code><span class="typ-key">false</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-comment">// Disable stickiness of headings.</span>
+<span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>sticky<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">20</span><span class="typ-punct">)</span>
+
+<span class="typ-heading">= Chapter</span>
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/f18b1e4d3bf0b0f22a49122c076a52ea.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="block-block-parameters-body"><code>body</code>

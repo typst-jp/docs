@@ -6,13 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Color – Typstドキュメント日本語版</title>
-  <meta name="description" content="Color 类型的文档">
+  <meta name="description" content="Documentation for the Color type.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/visualize/color/">
   <meta property="og:title" content="Color – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Color 类型的文档">
+  <meta property="og:description" content="Documentation for the Color type.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -207,6 +207,9 @@
                 
                 
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -874,8 +886,10 @@ available globally and also in the color type's scope, so you can write
 either <code>color.red</code> or just <code>red</code>.</p>
 <h2 id="predefined-color-maps">Predefined color maps</h2>
 <p>Typst also includes a number of preset color maps that can be used for
-gradients. Most of these color maps are chosen to be color blind friendly.</p>
-<table><thead><tr><th>Map</th><th style="text-align: left">Details</th></tr></thead><tbody>
+<a href="/docs/reference/visualize/gradient/#definitions-linear">gradients</a>. These are simply arrays of colors defined in
+the module <code>color.map</code>.</p>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>crest<span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/2c2ef5b1f24d9348a16192e851ca0419.png" alt="Preview" width="480" height="190"/></div></div><table><thead><tr><th>Map</th><th style="text-align: left">Details</th></tr></thead><tbody>
 <tr><td><code>turbo</code></td><td style="text-align: left">A perceptually uniform rainbow-like color map. Read <a href="https://ai.googleblog.com/2019/08/turbo-improved-rainbow-colormap-for.html">this blog post</a> for more details.</td></tr>
 <tr><td><code>cividis</code></td><td style="text-align: left">A blue to gray to yellow color map. See <a href="https://bids.github.io/colormap/">this blog post</a> for more details.</td></tr>
 <tr><td><code>rainbow</code></td><td style="text-align: left">Cycles through the full color spectrum. This color map is best used by setting the interpolation color space to <a href="/docs/reference/visualize/color/#definitions-hsl">HSL</a>. The rainbow gradient is <strong>not suitable</strong> for data visualization because it is not perceptually uniform, so the differences between values become unclear to your readers. It should only be used for decorative purposes.</td></tr>
@@ -926,6 +940,7 @@ component.</p>
 <div class="code code-definition ">color.<span
     class="typ-func">luma</span>(<div class="arguments"><span
       class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/color" class="pill pill-col">color</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/color" class="pill pill-col">color</a></div>
 
 
@@ -966,6 +981,32 @@ component.</p>
   </div>
 </h4>
 <p>The lightness component.</p>
+
+
+
+
+<h4 id="definitions-luma-luma-parameters-alpha"><code>alpha</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-luma-luma-parameters-alpha-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-luma-luma-parameters-alpha-positional-tooltip-qm-label">
+          <title id="definitions-luma-luma-parameters-alpha-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-luma-luma-parameters-alpha-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The alpha component.</p>
 
 
 
@@ -1012,12 +1053,12 @@ component.</p>
 <p>A linear Oklab color is represented internally by an array of four
 components:</p>
 <ul>
-<li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>a (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+<li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>a (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
 Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-<li>b (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+<li>b (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
 Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-<li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+<li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
 </ul>
 <p>These components are also available using the
 <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -1194,11 +1235,11 @@ Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <c
 <p>A linear Oklch color is represented internally by an array of four
 components:</p>
 <ul>
-<li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>chroma (<a href="/docs/reference/foundations/float/"><code>float</code></a> or <a href="/docs/reference/layout/ratio/"><code>ratio</code></a>.
+<li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>chroma (<a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>.
 Ratios are relative to <code><span class="typ-num">0.4</span></code>; meaning <code><span class="typ-num">50%</span></code> is equal to <code><span class="typ-num">0.2</span></code>)</li>
-<li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-<li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+<li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+<li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
 </ul>
 <p>These components are also available using the
 <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -1371,10 +1412,10 @@ should prefer to use the <a href="/docs/reference/visualize/color/#definitions-o
 <p>A linear RGB(A) color is represented internally by an array of four
 components:</p>
 <ul>
-<li>red (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>green (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>blue (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+<li>red (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>green (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>blue (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
 </ul>
 <p>These components are also available using the
 <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -1549,10 +1590,10 @@ components:</p>
 <p>The color is specified in the sRGB color space.</p>
 <p>An RGB(A) color is represented internally by an array of four components:</p>
 <ul>
-<li>red (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>green (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>blue (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+<li>red (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>green (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>blue (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
 </ul>
 <p>These components are also available using the <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a>
 method.</p>
@@ -1767,15 +1808,17 @@ a leading hash.</p>
 <p>This is useful if you want to target a specific printer. The conversion
 to RGB for display preview might differ from how your printer reproduces
 the color.</p>
-<p>An HSL color is represented internally by an array of four components:</p>
+<p>A CMYK color is represented internally by an array of four components:</p>
 <ul>
-<li>cyan (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>magenta (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>yellow (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>key (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+<li>cyan (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>magenta (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>yellow (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>key (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
 </ul>
 <p>These components are also available using the
 <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
+<p>Note that CMYK colors are not currently supported when PDF/A output is
+enabled.</p>
 
 <div class="code code-definition ">color.<span
     class="typ-func">cmyk</span>(<div class="arguments"><span
@@ -1941,10 +1984,10 @@ lightness. It is also useful for color manipulation, such as saturating
 while keeping perceived hue.</p>
 <p>An HSL color is represented internally by an array of four components:</p>
 <ul>
-<li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-<li>saturation (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>lightness (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+<li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+<li>saturation (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>lightness (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
 </ul>
 <p>These components are also available using the
 <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -2119,10 +2162,10 @@ value. It is also useful for color manipulation, such as saturating
 while keeping perceived hue.</p>
 <p>An HSV color is represented internally by an array of four components:</p>
 <ul>
-<li>hue (<a href="/docs/reference/layout/angle/"><code>angle</code></a>)</li>
-<li>saturation (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>value (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
-<li>alpha (<a href="/docs/reference/layout/ratio/"><code>ratio</code></a>)</li>
+<li>hue (<a href="/docs/reference/layout/angle/" title="`angle`"><code>angle</code></a>)</li>
+<li>saturation (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>value (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
+<li>alpha (<a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a>)</li>
 </ul>
 <p>These components are also available using the
 <a href="/docs/reference/visualize/color/#definitions-components"><code>components</code></a> method.</p>
@@ -2320,8 +2363,8 @@ component is included.</p>
     <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
     <div class="folding">
     <div class="previewed-code"><pre><code><span class="typ-comment">// note that the alpha component is included by default</span>
-<span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">components</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">,</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/6256b6a7300a0fc8a2526dd5401230c8.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-func">#</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-num">40%</span><span class="typ-punct">,</span> <span class="typ-num">60%</span><span class="typ-punct">,</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">components</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/43a9b4ace8d343e07ec2b841211eace5.png" alt="Preview" width="480" height="190"/></div></div>
     </div>
   </details>
 
@@ -2563,12 +2606,41 @@ omitted if it is equal to <code>ff</code> (255 / 100%).</p>
 
   <h3 id="-negate" class="method-head"><span><code>negate</code></span></h3>
   
-<p>Produces the negative of the color.</p>
+<p>Produces the complementary color using a provided color space.
+You can think of it as the opposite side on a color wheel.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">negate</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/color" class="pill pill-col">color</a></div>
+    class="typ-func">negate</span>(<div class="arguments"><span
+      class="overview-param"><a href="#parameters-space">space<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/color" class="pill pill-col">color</a></div>
 
 
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">.</span><span class="typ-func">negate</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">square</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> yellow<span class="typ-punct">.</span><span class="typ-func">negate</span><span class="typ-punct">(</span>space<span class="typ-punct">:</span> rgb<span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/c5a504a60de2ba1432400efa9cd96d1e.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-negate-negate-parameters-space"><code>space</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The color space used for the transformation. By default, a perceptual color space is used.</p>
+
+
+<p>Default:<code>oklab</code></p>
 
 
 
@@ -2638,6 +2710,9 @@ color space (<a href="/docs/reference/visualize/color/#definitions-oklch"><code>
   <h3 id="-mix" class="method-head"><span><code>mix</code></span></h3>
   
 <p>Create a color by mixing two or more colors.</p>
+<p>In color spaces with a hue component (hsl, hsv, oklch), only two colors
+can be mixed at once. Mixing more than two colors in such a space will
+result in an error!</p>
 
 <div class="code code-definition ">color.<span
     class="typ-func">mix</span>(<div class="arguments"><span
@@ -2717,6 +2792,115 @@ color space (<a href="/docs/reference/visualize/color/#definitions-oklab"><code>
 
 
 <p>Default:<code>oklab</code></p>
+
+
+
+
+
+
+  <h3 id="-transparentize" class="method-head"><span><code>transparentize</code></span></h3>
+  
+<p>Makes a color more transparent by a given factor.</p>
+<p>This method is relative to the existing alpha value.
+If the scale is positive, calculates <code>alpha - alpha * scale</code>.
+Negative scales behave like <code>color.opacify(-scale)</code>.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">transparentize</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/color" class="pill pill-col">color</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">)</span><span class="typ-punct">[</span>opaque<span class="typ-punct">]</span>
+<span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>half red<span class="typ-punct">]</span>
+<span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">75%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>quarter red<span class="typ-punct">]</span>
+</code></pre><div class="preview"><img src="/assets/docs/50f36ba47d4fc9bfab94e835d6f5cc77.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-transparentize-transparentize-parameters-scale"><code>scale</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-transparentize-transparentize-parameters-scale-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-transparentize-transparentize-parameters-scale-positional-tooltip-qm-label">
+          <title id="definitions-transparentize-transparentize-parameters-scale-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-transparentize-transparentize-parameters-scale-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The factor to change the alpha value by.</p>
+
+
+
+
+
+
+
+  <h3 id="-opacify" class="method-head"><span><code>opacify</code></span></h3>
+  
+<p>Makes a color more opaque by a given scale.</p>
+<p>This method is relative to the existing alpha value.
+If the scale is positive, calculates <code>alpha + scale - alpha * scale</code>.
+Negative scales behave like <code>color.transparentize(-scale)</code>.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">opacify</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/color" class="pill pill-col">color</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> half-red <span class="typ-op">=</span> red<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>opaque<span class="typ-punct">]</span>
+<span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>three quarters red<span class="typ-punct">]</span>
+<span class="typ-func">#</span><span class="typ-func">block</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> half-red<span class="typ-punct">.</span><span class="typ-func">opacify</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">50%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>one quarter red<span class="typ-punct">]</span>
+</code></pre><div class="preview"><img src="/assets/docs/91170e321308a99ae59cbe3fe5cd895a.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-opacify-opacify-parameters-scale"><code>scale</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-opacify-opacify-parameters-scale-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-opacify-opacify-parameters-scale-positional-tooltip-qm-label">
+          <title id="definitions-opacify-opacify-parameters-scale-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-opacify-opacify-parameters-scale-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The scale to change the alpha value by.</p>
+
 
 
 

@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -920,6 +932,7 @@ following show-set rule:</p>
     class="typ-func">figure</span>(<div class="arguments"><span
       class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-placement">placement<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
+      class="overview-param"><a href="#parameters-scope">scope<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-caption">caption<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-kind">kind<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="#parameters-supplement">supplement<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/content" class="pill pill-con">content</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a>, </span><span
@@ -1010,6 +1023,75 @@ controlled by the <a href="/docs/reference/layout/place/#parameters-clearance"><
 <span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">60</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/535010f94ae951ccf010bad63d268d81.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="figure-figure-parameters-scope"><code>scope</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    <small><span
+        aria-describedby="figure-figure-parameters-scope-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="figure-figure-parameters-scope-settable-tooltip-qm-label">
+          <title id="figure-figure-parameters-scope-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="figure-figure-parameters-scope-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Relative to which containing scope the figure is placed.</p>
+<p>Set this to <code><span class="typ-str">&quot;parent&quot;</span></code> to create a full-width figure in a two-column
+document.</p>
+<p>Has no effect if <code>placement</code> is <code><span class="typ-key">none</span></code>.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->column<!-- -->&quot;</code></div>
+      <div>
+        <p>Place into the current column.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->parent<!-- -->&quot;</code></div>
+      <div>
+        <p>Place relative to the parent, letting the content span over all columns.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;column&quot;</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">250pt</span><span class="typ-punct">,</span> columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
+
+<span class="typ-heading">= Introduction</span>
+<span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
+  placement<span class="typ-punct">:</span> bottom<span class="typ-punct">,</span>
+  scope<span class="typ-punct">:</span> <span class="typ-str">&quot;parent&quot;</span><span class="typ-punct">,</span>
+  caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>A glacier<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;glacier.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">60%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">60</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/57ceb5974ee15ce07788df4104ee085d.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 

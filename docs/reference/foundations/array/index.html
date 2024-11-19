@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -1101,8 +1113,10 @@ if the array is empty.</p>
 
   <h3 id="-insert" class="method-head"><span><code>insert</code></span></h3>
   
-<p>Inserts a value into the array at the specified index. Fails with an
-error if the index is out of bounds.</p>
+<p>Inserts a value into the array at the specified index, shifting all
+subsequent elements to the right. Fails with an error if the index is
+out of bounds.</p>
+<p>To replace an element of an array, use <a href="/docs/reference/foundations/array/#definitions-at"><code>at</code></a>.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">insert</span>(<div class="arguments"><span
@@ -1229,7 +1243,7 @@ the back.</p>
 
   <h3 id="-slice" class="method-head"><span><code>slice</code></span></h3>
   
-<p>Extracts a subslice of the array. Fails with an error if the start or
+<p>Extracts a subslice of the array. Fails with an error if the start or end
 index is out of bounds.</p>
 
 <div class="code code-definition ">self.<span
@@ -1681,11 +1695,31 @@ ignored.</p>
 together at once: <code><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">zip</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-str">&quot;A&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;B&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code> yields
 <code><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-str">&quot;A&quot;</span><span class="typ-punct">,</span> <span class="typ-num">10</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-str">&quot;B&quot;</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code>.</p>
 
-<div class="code code-definition single-arg">self.<span
+<div class="code code-definition ">self.<span
     class="typ-func">zip</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/array" class="pill pill-obj">array</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="#parameters-exact">exact<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
 
 
+
+
+
+<h4 id="definitions-zip-zip-parameters-exact"><code>exact</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>Whether all arrays have to have the same length.
+For example, <code><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">zip</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span><span class="typ-punct">,</span> exact<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span></code> produces an
+error.</p>
+
+
+<p>Default:<code><span class="typ-key">false</span></code></p>
 
 
 
@@ -2188,6 +2222,57 @@ contains less than <code>chunk-size</code> elements.</p>
 
 
 
+  <h3 id="-windows" class="method-head"><span><code>windows</code></span></h3>
+  
+<p>Returns sliding windows of <code>window-size</code> elements over an array.</p>
+<p>If the array length is less than <code>window-size</code>, this will return an empty array.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">windows</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> array <span class="typ-op">=</span> <span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">,</span> <span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">8</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">array</span><span class="typ-punct">.</span><span class="typ-func">windows</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/8502236b398e01811829a9df4f60de04.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-windows-windows-parameters-window-size"><code>window-size</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-windows-windows-parameters-window-size-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-windows-windows-parameters-window-size-positional-tooltip-qm-label">
+          <title id="definitions-windows-windows-parameters-window-size-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-windows-windows-parameters-window-size-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>How many elements each window will contain.</p>
+
+
+
+
+
+
+
   <h3 id="-sorted" class="method-head"><span><code>sorted</code></span></h3>
   
 <p>Return a sorted version of this array, optionally by a given key
@@ -2256,6 +2341,84 @@ element of each duplicate is kept.</p>
 </h4>
 <p>If given, applies this function to the elements in the array to
 determine the keys to deduplicate by.</p>
+
+
+
+
+
+
+
+  <h3 id="-to-dict" class="method-head"><span><code>to-dict</code></span></h3>
+  
+<p>Converts an array of pairs into a dictionary.
+The first value of each pair is the key, the second the value.</p>
+<p>If the same key occurs multiple times, the last value is selected.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">to-dict</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-punct">#</span><span class="typ-punct">(</span>
+  <span class="typ-punct">(</span><span class="typ-str">&quot;apples&quot;</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-str">&quot;peaches&quot;</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-str">&quot;apples&quot;</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">to-dict</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/38bf2b861377d56939f2e9910ced826f.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+
+
+
+  <h3 id="-reduce" class="method-head"><span><code>reduce</code></span></h3>
+  
+<p>Reduces the elements to a single one, by repeatedly applying a reducing
+operation.</p>
+<p>If the array is empty, returns <code><span class="typ-key">none</span></code>, otherwise, returns the result
+of the reduction.</p>
+<p>The reducing function is a closure with two arguments: an &quot;accumulator&quot;,
+and an element.</p>
+<p>For arrays with at least one element, this is the same as <a href="/docs/reference/foundations/array/#definitions-fold" title="`array.fold`"><code>array.fold</code></a>
+with the first element of the array as the initial accumulator value,
+folding every subsequent element into it.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">reduce</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+
+
+
+
+
+<h4 id="definitions-reduce-reduce-parameters-reducer"><code>reducer</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-reduce-reduce-parameters-reducer-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-reduce-reduce-parameters-reducer-positional-tooltip-qm-label">
+          <title id="definitions-reduce-reduce-parameters-reducer-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-reduce-reduce-parameters-reducer-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The reducing function. Must have two parameters: One for the
+accumulated value and one for an item.</p>
 
 
 

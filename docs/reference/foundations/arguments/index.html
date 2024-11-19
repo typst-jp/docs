@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -941,6 +953,70 @@ dictionaries into a function call with the <code>..spread</code> operator:</p>
 </div>
 
 </h2>
+
+
+  <h3 id="-at" class="method-head"><span><code>at</code></span></h3>
+  
+<p>Returns the positional argument at the specified index, or the named
+argument with the specified name.</p>
+<p>If the key is an <a href="/docs/reference/foundations/int/">integer</a>, this is equivalent to first calling
+<a href="/docs/reference/foundations/arguments/#definitions-pos"><code>pos</code></a> and then <a href="/docs/reference/foundations/array/#definitions-at" title="`array.at`"><code>array.at</code></a>. If it is a <a href="/docs/reference/foundations/str/">string</a>,
+this is equivalent to first calling <a href="/docs/reference/foundations/arguments/#definitions-named"><code>named</code></a> and then
+<a href="/docs/reference/foundations/dictionary/#definitions-at" title="`dictionary.at`"><code>dictionary.at</code></a>.</p>
+
+<div class="code code-definition ">self.<span
+    class="typ-func">at</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+
+
+
+
+
+<h4 id="definitions-at-at-parameters-key"><code>key</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-at-at-parameters-key-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-at-at-parameters-key-positional-tooltip-qm-label">
+          <title id="definitions-at-at-parameters-key-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-at-at-parameters-key-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The index or name of the argument to get.</p>
+
+
+
+
+<h4 id="definitions-at-at-parameters-default"><code>default</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>A default value to return if the key is invalid.</p>
+
+
+
+
+
 
 
   <h3 id="-pos" class="method-head"><span><code>pos</code></span></h3>

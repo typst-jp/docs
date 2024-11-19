@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -1071,6 +1083,22 @@ through <a href="/docs/reference/symbols/sym/">symbols</a> of the form <code>NN<
 
   <div class="previewed-code"><pre><code>Let <span class="typ-math-delim">$</span><span class="typ-func">cal</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span><span class="typ-math-delim">$</span> be the set of <span class="typ-escape">...</span>
 </code></pre><div class="preview"><img src="/assets/docs/4076bf054496eaa35f7325c6d304bf36.png" alt="Preview" width="480" height="190"/></div></div>
+<p>This corresponds both to LaTeX's <code>\mathcal</code> and <code>\mathscr</code> as both of these
+styles share the same Unicode codepoints. Switching between the styles is
+thus only possible if supported by the font via
+<a href="/docs/reference/text/text/#parameters-features">font features</a>.</p>
+<p>For the default math font, the roundhand style is available through the
+<code>ss01</code> feature. Therefore, you could define your own version of <code>\mathscr</code>
+like this:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">scr</span><span class="typ-punct">(</span>it<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
+  features<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-str">&quot;ss01&quot;</span><span class="typ-punct">,</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">box</span><span class="typ-punct">(</span><span class="typ-math-delim">$</span><span class="typ-func">cal</span><span class="typ-punct">(</span><span class="typ-pol">it</span><span class="typ-punct">)</span><span class="typ-math-delim">$</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+We establish <span class="typ-math-delim">$</span><span class="typ-func">cal</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span> <span class="typ-escape">!=</span> <span class="typ-func">scr</span><span class="typ-punct">(</span>P<span class="typ-punct">)</span><span class="typ-math-delim">$</span>.
+</code></pre><div class="preview"><img src="/assets/docs/f8f61799c48a9188b198a521737b00a4.png" alt="Preview" width="480" height="190"/></div></div>
+<p>(The box is not conceptually necessary, but unfortunately currently needed
+due to limitations in Typst's text style handling in math.)</p>
 
 
 

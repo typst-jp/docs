@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -882,7 +894,7 @@ number the <code>Introduction</code> with <code>1</code> and the <code>Outline</
 <h2 id="state-in-typst">Managing state in Typst</h2>
 <p>So what do we do instead? We use Typst's state management system. Calling
 the <code>state</code> function with an identifying string key and an optional initial
-value gives you a state value which exposes a few function. The two most
+value gives you a state value which exposes a few functions. The two most
 important ones are <code>get</code> and <code>update</code>:</p>
 <ul>
 <li>
@@ -1171,8 +1183,9 @@ location. This behaviour will be removed in a future release.</p>
     </small>
   </div>
 </h4>
-<p><em>Compatibility:</em> This argument only exists for compatibility with
-Typst 0.10 and lower and shouldn't be used anymore.</p>
+<p><em>Compatibility:</em> This argument is deprecated. It only exists for
+compatibility with Typst 0.10 and lower and shouldn't be used
+anymore.</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>

@@ -6,13 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Pattern – Typstドキュメント日本語版</title>
-  <meta name="description" content="Pattern 类型的文档">
+  <meta name="description" content="Documentation for the Pattern type.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/visualize/pattern/">
   <meta property="og:title" content="Pattern – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Pattern 类型的文档">
+  <meta property="og:description" content="Documentation for the Pattern type.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -207,6 +207,9 @@
                 
                 
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -837,7 +849,7 @@
 pattern is repeated in a grid-like fashion, covering the entire area of an
 element that is filled or stroked. The pattern is defined by a tile size and
 a body defining the content of each cell. You can also add horizontal or
-vertical spacing between the cells of the patterng.</p>
+vertical spacing between the cells of the pattern.</p>
 <h2 id="examples">Examples</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> pat <span class="typ-op">=</span> <span class="typ-func">pattern</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">30pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
   <span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span><span class="typ-func">line</span><span class="typ-punct">(</span>start<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">0%</span><span class="typ-punct">,</span> <span class="typ-num">0%</span><span class="typ-punct">)</span><span class="typ-punct">,</span> end<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">100%</span><span class="typ-punct">,</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
@@ -898,11 +910,10 @@ container.</p>
 <ul>
 <li>For shapes that are placed at the root/top level of the document, the
 closest ancestor is the page itself.</li>
-<li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/"><code>block</code></a> or
-<a href="/docs/reference/layout/box/"><code>box</code></a> that contains the shape. This includes the boxes and blocks
-that are implicitly created by show rules and elements. For example, a
-<a href="/docs/reference/layout/rotate/"><code>rotate</code></a> will not affect the parent of a gradient, but a
-<a href="/docs/reference/layout/grid/"><code>grid</code></a> will.</li>
+<li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> or <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> that
+contains the shape. This includes the boxes and blocks that are implicitly
+created by show rules and elements. For example, a <a href="/docs/reference/layout/rotate/" title="`rotate`"><code>rotate</code></a> will not
+affect the parent of a gradient, but a <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> will.</li>
 </ul>
 
 

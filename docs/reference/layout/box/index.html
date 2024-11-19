@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -979,7 +991,7 @@ and more might be added in the future.</p>
 <p>An amount to shift the box's baseline by.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 <details class="folding-example">
@@ -1201,10 +1213,25 @@ generalized version of the example below, see the documentation for the
   </div>
 </h4>
 <p>Whether to clip the content inside the box.</p>
+<p>Clipping is useful when the box's content is larger than the box itself,
+as any content that exceeds the box's bounds will be hidden.</p>
 
 
 <p>Default:<code><span class="typ-key">false</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">box</span><span class="typ-punct">(</span>
+  width<span class="typ-punct">:</span> <span class="typ-num">50pt</span><span class="typ-punct">,</span>
+  height<span class="typ-punct">:</span> <span class="typ-num">50pt</span><span class="typ-punct">,</span>
+  clip<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
+  <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">100pt</span><span class="typ-punct">)</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/932ce9b9ea92fde18652de3603721ce9.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="box-box-parameters-body"><code>body</code>

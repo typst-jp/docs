@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -833,15 +845,15 @@
 
 <h1 id="summary"><code>measure</code><small></small></h1>
 <p>Measures the layouted size of content.</p>
-<p>The <code>measure</code> function lets you determine the layouted size of content. Note
-that an infinite space is assumed, therefore the measured height/width may
-not necessarily match the final height/width of the measured content. If you
-want to measure in the current layout dimensions, you can combine <code>measure</code>
-and <a href="/docs/reference/layout/layout/" title="`layout`"><code>layout</code></a>.</p>
+<p>The <code>measure</code> function lets you determine the layouted size of content.
+By default an infinite space is assumed, so the measured dimensions may
+not necessarily match the final dimensions of the content.
+If you want to measure in the current layout dimensions, you can combine
+<code>measure</code> and <a href="/docs/reference/layout/layout/" title="`layout`"><code>layout</code></a>.</p>
 <h2 id="example">Example</h2>
 <p>The same content can have a different size depending on the <a href="/docs/reference/context/" title="context">context</a> that
-it is placed into. For example, in the example below <code><span class="typ-pol">#</span><span class="typ-pol">content</span></code> is of
-course bigger when we increase the font size.</p>
+it is placed into. In the example below, the <code><span class="typ-pol">#</span><span class="typ-pol">content</span></code> is of course
+bigger when we increase the font size.</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> content <span class="typ-op">=</span> <span class="typ-punct">[</span>Hello!<span class="typ-punct">]</span>
 <span class="typ-pol">#</span><span class="typ-pol">content</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">14pt</span><span class="typ-punct">)</span>
@@ -873,9 +885,65 @@ course bigger when we increase the font size.</p>
 
 <div class="code code-definition "><span
     class="typ-func">measure</span>(<div class="arguments"><span
+      class="overview-param"><a href="#parameters-width">width<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
+      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/styles" class="pill pill-obj">styles</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a></div>
 
+
+
+
+<h4 id="measure-measure-parameters-width"><code>width</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The width available to layout the content.</p>
+<p>Setting this to <code><span class="typ-key">auto</span></code> indicates infinite available width.</p>
+<p>Note that using the <code>width</code> and <code>height</code> parameters of this function is
+different from measuring a sized <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> containing the content. In
+the following example, the former will get the dimensions of the inner
+content instead of the dimensions of the block.</p>
+
+
+<p>Default:<code><span class="typ-key">auto</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-func">measure</span><span class="typ-punct">(</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">100</span><span class="typ-punct">)</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">400pt</span><span class="typ-punct">)</span>
+
+<span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-func">measure</span><span class="typ-punct">(</span><span class="typ-func">block</span><span class="typ-punct">(</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">100</span><span class="typ-punct">)</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">400pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/ab3d09b5f6527bb333d6c8a7f9ac813c.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="measure-measure-parameters-height"><code>height</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The height available to layout the content.</p>
+<p>Setting this to <code><span class="typ-key">auto</span></code> indicates infinite available height.</p>
+
+
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 
@@ -928,8 +996,8 @@ course bigger when we increase the font size.</p>
     </small>
   </div>
 </h4>
-<p><em>Compatibility:</em> This argument only exists for compatibility with
-Typst 0.10 and lower and shouldn't be used anymore.</p>
+<p><em>Compatibility:</em> This argument is deprecated. It only exists for
+compatibility with Typst 0.10 and lower and shouldn't be used anymore.</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>

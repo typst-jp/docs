@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -876,12 +888,12 @@ There you go, US friends!
       class="overview-param"><a href="#parameters-margin">margin<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-binding">binding<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
       class="overview-param"><a href="#parameters-columns">columns<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a>, </span><span
       class="overview-param"><a href="#parameters-numbering">numbering<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="#parameters-number-align">number-align<!-- -->: </a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
-      class="overview-param"><a href="#parameters-header">header<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="#parameters-header">header<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-header-ascent">header-ascent<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
-      class="overview-param"><a href="#parameters-footer">footer<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="#parameters-footer">footer<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-footer-descent">footer-descent<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
       class="overview-param"><a href="#parameters-background">background<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-foreground">foreground<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
@@ -911,6 +923,8 @@ There you go, US friends!
   </div>
 </h4>
 <p>A standard paper size to set width and height.</p>
+<p>This is just a shorthand for setting <code>width</code> and <code>height</code> and, as such,
+cannot be retrieved in a context expression.</p>
 
 <ul class="type-args">
   
@@ -2171,6 +2185,8 @@ of a rapidly changing climate.
       
       <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
       
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
       <a href="/docs/reference/types/color" class="pill pill-col">color</a>
       
       <a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a>
@@ -2191,14 +2207,20 @@ of a rapidly changing climate.
     </small>
   </div>
 </h4>
-<p>The page's background color.</p>
-<p>This instructs the printer to color the complete page with the given
-color. If you are considering larger production runs, it may be more
-environmentally friendly and cost-effective to source pre-dyed pages and
-not set this property.</p>
+<p>The page's background fill.</p>
+<p>Setting this to something non-transparent instructs the printer to color
+the complete page. If you are considering larger production runs, it may
+be more environmentally friendly and cost-effective to source pre-dyed
+pages and not set this property.</p>
+<p>When set to <code><span class="typ-key">none</span></code>, the background becomes transparent. Note that PDF
+pages will still appear with a (usually white) background in viewers,
+but they are actually transparent. (If you print them, no color is used
+for the background.)</p>
+<p>The default of <code><span class="typ-key">auto</span></code> results in <code><span class="typ-key">none</span></code> for PDF output, and
+<code>white</code> for PNG and SVG.</p>
 
 
-<p>Default:<code><span class="typ-key">none</span></code></p>
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 <details class="folding-example">
@@ -2310,6 +2332,8 @@ given, the numbering is ignored.</p>
       
       <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
       
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
       <a href="/docs/reference/types/content" class="pill pill-con">content</a>
       
     </div>
@@ -2327,9 +2351,15 @@ given, the numbering is ignored.</p>
   </div>
 </h4>
 <p>The page's header. Fills the top margin of each page.</p>
+<ul>
+<li>Content: Shows the content as the header.</li>
+<li><code><span class="typ-key">auto</span></code>: Shows the page number if a <code>numbering</code> is set and
+<code>number-align</code> is <code>top</code>.</li>
+<li><code><span class="typ-key">none</span></code>: Suppresses the header.</li>
+</ul>
 
 
-<p>Default:<code><span class="typ-key">none</span></code></p>
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 <details class="folding-example">
@@ -2374,7 +2404,7 @@ given, the numbering is ignored.</p>
 <p>The amount the header is raised into the top margin.</p>
 
 
-<p>Default:<code><span class="typ-num">30%</span></code></p>
+<p>Default:<code><span class="typ-num">30%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -2383,6 +2413,8 @@ given, the numbering is ignored.</p>
     <div>
       
       <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
       
       <a href="/docs/reference/types/content" class="pill pill-con">content</a>
       
@@ -2401,12 +2433,18 @@ given, the numbering is ignored.</p>
   </div>
 </h4>
 <p>The page's footer. Fills the bottom margin of each page.</p>
-<p>For just a page number, the <code>numbering</code> property, typically suffices. If
-you want to create a custom footer, but still display the page number,
+<ul>
+<li>Content: Shows the content as the footer.</li>
+<li><code><span class="typ-key">auto</span></code>: Shows the page number if a <code>numbering</code> is set and
+<code>number-align</code> is <code>bottom</code>.</li>
+<li><code><span class="typ-key">none</span></code>: Suppresses the footer.</li>
+</ul>
+<p>For just a page number, the <code>numbering</code> property typically suffices. If
+you want to create a custom footer but still display the page number,
 you can directly access the <a href="/docs/reference/introspection/counter/">page counter</a>.</p>
 
 
-<p>Default:<code><span class="typ-key">none</span></code></p>
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 <details class="folding-example">
@@ -2455,7 +2493,7 @@ you can directly access the <a href="/docs/reference/introspection/counter/">pag
 <p>The amount the footer is lowered into the bottom margin.</p>
 
 
-<p>Default:<code><span class="typ-num">30%</span></code></p>
+<p>Default:<code><span class="typ-num">30%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 

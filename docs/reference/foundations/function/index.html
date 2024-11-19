@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -838,7 +850,7 @@
 Additionally, you can pass any number of trailing content blocks arguments
 to a function <em>after</em> the normal argument list. If the normal argument list
 would become empty, it can be omitted. Typst supports positional and named
-arguments. The former are identified by position and type, while the later
+arguments. The former are identified by position and type, while the latter
 are written as <code>name: value</code>.</p>
 <p>Within math mode, function calls have special behaviour. See the
 <a href="/docs/reference/math/">math documentation</a> for more details.</p>
@@ -885,6 +897,9 @@ values of each expression in the block.</p>
 optionally specify a return value. If no explicit return value is given, the
 body evaluates to the result of joining all expressions preceding the
 <code>return</code>.</p>
+<p>Functions that don't return any meaningful value return <a href="/docs/reference/foundations/none/" title="`none`"><code>none</code></a> instead.
+The return type of such functions is not explicitly specified in the
+documentation. (An example of this is <a href="/docs/reference/foundations/array/#definitions-push" title="`array.push`"><code>array.push</code></a>).</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">alert</span><span class="typ-punct">(</span>body<span class="typ-punct">,</span> fill<span class="typ-punct">:</span> red<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
   <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>white<span class="typ-punct">)</span>
   <span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
@@ -904,6 +919,11 @@ body evaluates to the result of joining all expressions preceding the
   KEEP OFF TRACKS
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/a46deb725efaf4d901b99ab85859e676.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="importing-functions">Importing functions</h2>
+<p>Functions can be imported from one file (<a href="/docs/reference/scripting/#modules"><code>module</code></a>) into
+another using <code><span class="typ-key">import</span></code>. For example, assume that we have defined the <code>alert</code>
+function from the previous example in a file called <code>foo.typ</code>. We can import
+it into another file by writing <code><span class="typ-key">import</span> <span class="typ-str">&quot;foo.typ&quot;</span><span class="typ-punct">:</span> alert</code>.</p>
 <h2 id="unnamed">Unnamed functions</h2>
 <p>You can also created an unnamed function without creating a binding by
 specifying a parameter list followed by <code>=&gt;</code> and the function body. If your
@@ -1008,8 +1028,8 @@ whose fields have the values of the given arguments.</p>
     <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>level<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>blue<span class="typ-punct">)</span>
 <span class="typ-heading">= Section</span>
 <span class="typ-heading">== Subsection</span>
-<span class="typ-heading">=== Sub-subection</span>
-</code></pre><div class="preview"><img src="/assets/docs/02f47c28d78627976e483417c5a1c92f.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-heading">=== Sub-subsection</span>
+</code></pre><div class="preview"><img src="/assets/docs/2ad1b0c6056668fbbccf1b9db75ac341.png" alt="Preview" width="480" height="190"/></div></div>
     </div>
   </details>
 
@@ -1090,6 +1110,10 @@ whose fields have the values of the given arguments.</p>
         </li>
         
         <li data-assoc="defining-functions"><a href="#defining-functions">Defining Functions</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="importing-functions"><a href="#importing-functions">Importing Functions</a>
           <ul></ul>
         </li>
         

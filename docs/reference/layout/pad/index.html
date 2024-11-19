@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -901,7 +913,7 @@ once by specifying a positional argument.</p>
 <p>The padding at the left side.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -928,7 +940,7 @@ once by specifying a positional argument.</p>
 <p>The padding at the top side.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -955,7 +967,7 @@ once by specifying a positional argument.</p>
 <p>The padding at the right side.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -982,7 +994,7 @@ once by specifying a positional argument.</p>
 <p>The padding at the bottom side.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -1006,11 +1018,10 @@ once by specifying a positional argument.</p>
     </small>
   </div>
 </h4>
-<p>The horizontal padding. Both <code>left</code> and <code>right</code> take precedence over
-this.</p>
+<p>A shorthand to set <code>left</code> and <code>right</code> to the same value.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -1034,10 +1045,10 @@ this.</p>
     </small>
   </div>
 </h4>
-<p>The vertical padding. Both <code>top</code> and <code>bottom</code> take precedence over this.</p>
+<p>A shorthand to set <code>top</code> and <code>bottom</code> to the same value.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -1061,11 +1072,10 @@ this.</p>
     </small>
   </div>
 </h4>
-<p>The padding for all sides. All other parameters take precedence over
-this.</p>
+<p>A shorthand to set all four sides to the same value.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 

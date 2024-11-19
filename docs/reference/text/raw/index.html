@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -862,6 +874,10 @@ This has <span class="typ-raw">``` `backticks` ```</span> in it
 <span class="typ-raw">``` here```</span> the leading space is
 also trimmed.
 </code></pre><div class="preview"><img src="/assets/docs/4d059815fc030797337a320eb65c3828.png" alt="Preview" width="480" height="190"/></div></div>
+<p>You can also construct a <a href="/docs/reference/text/raw/" title="`raw`"><code>raw</code></a> element programmatically from a string (and
+provide the language tag via the optional <a href="/docs/reference/text/raw/#parameters-lang"><code>lang</code></a> argument).</p>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">raw</span><span class="typ-punct">(</span><span class="typ-str">&quot;fn &quot;</span> <span class="typ-op">+</span> <span class="typ-str">&quot;main() {}&quot;</span><span class="typ-punct">,</span> lang<span class="typ-punct">:</span> <span class="typ-str">&quot;rust&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/ddf3515e87fd846986faee6794064f83.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="syntax">Syntax</h2>
 <p>This function also has dedicated syntax. You can enclose text in 1 or 3+
 backticks (<code>`</code>) to make it raw. Two backticks produce empty raw text.
@@ -896,7 +912,7 @@ backtick, put a space before or after it (it will be trimmed).</p>
       class="overview-param"><a href="#parameters-lang">lang<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-align">align<!-- -->: </a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
       class="overview-param"><a href="#parameters-syntaxes">syntaxes<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span><span
-      class="overview-param"><a href="#parameters-theme">theme<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-theme">theme<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-tab-size">tab-size<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
 
@@ -1035,9 +1051,10 @@ rg &quot;Hello World&quot;
 </h4>
 <p>The language to syntax-highlight in.</p>
 <p>Apart from typical language tags known from Markdown, this supports the
-<code><span class="typ-str">&quot;typ&quot;</span></code> and <code><span class="typ-str">&quot;typc&quot;</span></code> tags for
-<a href="/docs/reference/syntax/#markup">Typst markup</a> and
-<a href="/docs/reference/syntax/#code">Typst code</a>, respectively.</p>
+<code><span class="typ-str">&quot;typ&quot;</span></code>, <code><span class="typ-str">&quot;typc&quot;</span></code>, and <code><span class="typ-str">&quot;typm&quot;</span></code> tags for
+<a href="/docs/reference/syntax/#markup">Typst markup</a>,
+<a href="/docs/reference/syntax/#code">Typst code</a>, and
+<a href="/docs/reference/syntax/#math">Typst math</a>, respectively.</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>
@@ -1156,6 +1173,8 @@ definitions should be in the
       
       <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
       
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
       <a href="/docs/reference/types/str" class="pill pill-str">str</a>
       
     </div>
@@ -1173,16 +1192,17 @@ definitions should be in the
   </div>
 </h4>
 <p>The theme to use for syntax highlighting. Theme files should be in the
-in the <a href="https://www.sublimetext.com/docs/color_schemes_tmtheme.html"><code>tmTheme</code> file format</a>.</p>
+<a href="https://www.sublimetext.com/docs/color_schemes_tmtheme.html"><code>tmTheme</code> file format</a>.</p>
 <p>Applying a theme only affects the color of specifically highlighted
 text. It does not consider the theme's foreground and background
 properties, so that you retain control over the color of raw text. You
 can apply the foreground color yourself with the <a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> function and
 the background with a <a href="/docs/reference/layout/block/#parameters-fill">filled block</a>. You could also use
 the <a href="/docs/reference/data-loading/xml/" title="`xml`"><code>xml</code></a> function to extract these properties from the theme.</p>
+<p>Additionally, you can set the theme to <code><span class="typ-key">none</span></code> to disable highlighting.</p>
 
 
-<p>Default:<code><span class="typ-key">none</span></code></p>
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 <details class="folding-example">

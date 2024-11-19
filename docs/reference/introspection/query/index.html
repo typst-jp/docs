@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -837,52 +849,51 @@
 particular type or with a particular label. To use it, you first need to
 ensure that <a href="/docs/reference/context/" title="context">context</a> is available.</p>
 <h2 id="finding-elements">Finding elements</h2>
-<p>In the example below, we create a custom page header that displays the text
-&quot;Typst Academy&quot; in small capitals and the current section title. On the
-first page, the section title is omitted because the header is before the
-first section heading.</p>
-<p>To realize this layout, we open a <code>context</code> and then query for all headings
-after the <a href="/docs/reference/introspection/here/">current location</a>. The code within the context block
-runs twice: Once per page.</p>
-<ul>
-<li>
-<p>On the first page the query for all headings before the current location
-yields an empty array: There are no previous headings. We check for this
-case and just display &quot;Typst Academy&quot;.</p>
-</li>
-<li>
-<p>For the second page, we retrieve the last element from the query's result.
-This is the latest heading before the current position and as such, it is
-the heading of the section we are currently in. We access its content
-through the <code>body</code> field and display it alongside &quot;Typst Academy&quot;.</p>
-</li>
-</ul>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>header<span class="typ-punct">:</span> <span class="typ-key">context</span> <span class="typ-punct">{</span>
-  <span class="typ-key">let</span> elems <span class="typ-op">=</span> <span class="typ-func">query</span><span class="typ-punct">(</span>
-    <span class="typ-func">selector</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">before</span><span class="typ-punct">(</span><span class="typ-func">here</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<p>In the example below, we manually create a table of contents instead of
+using the <a href="/docs/reference/model/outline/" title="`outline`"><code>outline</code></a> function.</p>
+<p>To do this, we first query for all headings in the document at level 1 and
+where <code>outlined</code> is true. Querying only for headings at level 1 ensures
+that, for the purpose of this example, sub-headings are not included in the
+table of contents. The <code>outlined</code> field is used to exclude the &quot;Table of
+Contents&quot; heading itself.</p>
+<p>Note that we open a <code>context</code> to be able to use the <code>query</code> function.</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1&quot;</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">(</span>outlined<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+  Table of Contents
+<span class="typ-punct">]</span>
+<span class="typ-key">#</span><span class="typ-key">context</span> <span class="typ-punct">{</span>
+  <span class="typ-key">let</span> chapters <span class="typ-op">=</span> <span class="typ-func">query</span><span class="typ-punct">(</span>
+    heading<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>
+      level<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span>
+      outlined<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
+    <span class="typ-punct">)</span>
   <span class="typ-punct">)</span>
-  <span class="typ-key">let</span> academy <span class="typ-op">=</span> <span class="typ-func">smallcaps</span><span class="typ-punct">[</span>
-    Typst Academy
-  <span class="typ-punct">]</span>
-  <span class="typ-key">if</span> elems<span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span>
-    <span class="typ-func">align</span><span class="typ-punct">(</span>right<span class="typ-punct">,</span> academy<span class="typ-punct">)</span>
-  <span class="typ-punct">}</span> <span class="typ-key">else</span> <span class="typ-punct">{</span>
-    <span class="typ-key">let</span> body <span class="typ-op">=</span> elems<span class="typ-punct">.</span><span class="typ-func">last</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">.</span>body
-    academy <span class="typ-op">+</span> <span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> <span class="typ-op">+</span> <span class="typ-func">emph</span><span class="typ-punct">(</span>body<span class="typ-punct">)</span>
+  <span class="typ-key">for</span> chapter <span class="typ-key">in</span> chapters <span class="typ-punct">{</span>
+    <span class="typ-key">let</span> loc <span class="typ-op">=</span> chapter<span class="typ-punct">.</span><span class="typ-func">location</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+    <span class="typ-key">let</span> nr <span class="typ-op">=</span> <span class="typ-func">numbering</span><span class="typ-punct">(</span>
+      loc<span class="typ-punct">.</span><span class="typ-func">page-numbering</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+      <span class="typ-op">..</span><span class="typ-func">counter</span><span class="typ-punct">(</span>page<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span>loc<span class="typ-punct">)</span><span class="typ-punct">,</span>
+    <span class="typ-punct">)</span>
+    <span class="typ-punct">[</span><span class="typ-pol">#</span><span class="typ-pol">chapter</span><span class="typ-punct">.</span><span class="typ-pol">body</span> <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> <span class="typ-pol">#</span><span class="typ-pol">nr</span> <span class="typ-escape">\</span> <span class="typ-punct">]</span>
   <span class="typ-punct">}</span>
-<span class="typ-punct">}</span><span class="typ-punct">)</span>
+<span class="typ-punct">}</span>
 
 <span class="typ-heading">= Introduction</span>
-<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">23</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">pagebreak</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
 
-<span class="typ-heading">= Background</span>
-<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">30</span><span class="typ-punct">)</span>
+<span class="typ-heading">== Sub-Heading</span>
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">8</span><span class="typ-punct">)</span>
 
-<span class="typ-heading">= Analysis</span>
-<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">15</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/1c9276617894de0b283073a4f1321d5b.png" alt="Preview" width="480" height="190"/></div></div>
-<p>You can get the location of the elements returned by <code>query</code> with
-<a href="/docs/reference/foundations/content/#definitions-location"><code>location</code></a>.</p>
+<span class="typ-heading">= Discussion</span>
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">18</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/5f34bb504a693bb2b2cc0a87c26ceb71.png" alt="Preview" width="480" height="190"/></div></div>
+<p>To get the page numbers, we first get the location of the elements returned
+by <code>query</code> with <a href="/docs/reference/foundations/content/#definitions-location"><code>location</code></a>. We then also retrieve the
+<a href="/docs/reference/introspection/location/#definitions-page-numbering">page numbering</a> and <a href="/docs/reference/introspection/counter/#page-counter">page
+counter</a> at that location and apply the numbering to
+the counter.</p>
 <h2 id="caution">A word of caution</h2>
 <p>To resolve all your queries, Typst evaluates and layouts parts of the
 document multiple times. However, there is no guarantee that your queries
@@ -1020,8 +1031,8 @@ flag to extract just it.</p>
     </small>
   </div>
 </h4>
-<p><em>Compatibility:</em> This argument only exists for compatibility with
-Typst 0.10 and lower and shouldn't be used anymore.</p>
+<p><em>Compatibility:</em> This argument is deprecated. It only exists for
+compatibility with Typst 0.10 and lower and shouldn't be used anymore.</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>

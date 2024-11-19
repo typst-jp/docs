@@ -6,13 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Image – Typstドキュメント日本語版</title>
-  <meta name="description" content="`image` 函数的文档">
+  <meta name="description" content="Documentation for the `image` function.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/visualize/image/">
   <meta property="og:title" content="Image – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="`image` 函数的文档">
+  <meta property="og:description" content="Documentation for the `image` function.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -207,6 +207,9 @@
                 
                 
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -842,10 +854,10 @@
 </div>
 </small></h1>
 <p>A raster or vector graphic.</p>
-<p>Supported formats are PNG, JPEG, GIF and SVG.</p>
-<p><em>Note:</em> Work on SVG export is ongoing and there might be visual inaccuracies
-in the resulting PDF. Make sure to double-check embedded SVG images. If you
-have an issue, also feel free to report it on <a href="https://github.com/typst/typst/issues?q=is%3Aopen+is%3Aissue+label%3Asvg">GitHub</a>.</p>
+<p>You can wrap the image in a <a href="/docs/reference/model/figure/" title="`figure`"><code>figure</code></a> to give it a number and caption.</p>
+<p>Like most elements, images are <em>block-level</em> by default and thus do not
+integrate themselves into adjacent paragraphs. To force an image to become
+inline, put it into a <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a>.</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
   <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;molecular.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
@@ -873,7 +885,7 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
       class="overview-param"><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-format">format<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-width">width<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
-      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
+      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
       class="overview-param"><a href="#parameters-alt">alt<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-fit">fit<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
@@ -901,7 +913,8 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
     </small>
   </div>
 </h4>
-<p>Path to an image file.</p>
+<p>Path to an image file</p>
+<p>For more details, see the <a href="/docs/reference/syntax/#paths">Paths section</a>.</p>
 
 
 
@@ -929,6 +942,8 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
   </div>
 </h4>
 <p>The image's format. Detected automatically by default.</p>
+<p>Supported formats are PNG, JPEG, GIF, and SVG. Using a PDF as an image
+is <a href="https://github.com/typst/typst/issues/145">not currently supported</a>.</p>
 
 <ul class="type-args">
   
@@ -1012,6 +1027,8 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
       
       <a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>
       
+      <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
+      
     </div>
     <small><span
         aria-describedby="image-image-parameters-height-settable-tooltip">Settable</span>
@@ -1082,7 +1099,10 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
     </small>
   </div>
 </h4>
-<p>How the image should adjust itself to a given area.</p>
+<p>How the image should adjust itself to a given area (the area is defined
+by the <code>width</code> and <code>height</code> fields). Note that <code>fit</code> doesn't visually
+change anything if the area's aspect ratio is the same as the image's
+one.</p>
 
 <ul class="type-args">
   
@@ -1090,7 +1110,9 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->cover<!-- -->&quot;</code></div>
       <div>
-        <p>The image should completely cover the area. This is the default.</p>
+        <p>The image should completely cover the area (preserves aspect ratio by
+cropping the image only horizontally or vertically). This is the
+default.</p>
       </div>
     </div>
   </li>
@@ -1099,7 +1121,9 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->contain<!-- -->&quot;</code></div>
       <div>
-        <p>The image should be fully contained in the area.</p>
+        <p>The image should be fully contained in the area (preserves aspect
+ratio; doesn't crop the image; one dimension can be narrower than
+specified).</p>
       </div>
     </div>
   </li>
@@ -1109,7 +1133,8 @@ have an issue, also feel free to report it on <a href="https://github.com/typst/
       <div><code class="typ-str">&quot;<!-- -->stretch<!-- -->&quot;</code></div>
       <div>
         <p>The image should be stretched so that it exactly fills the area, even if
-this means that the image will be distorted.</p>
+this means that the image will be distorted (doesn't preserve aspect
+ratio and doesn't crop the image).</p>
       </div>
     </div>
   </li>
@@ -1119,6 +1144,17 @@ this means that the image will be distorted.</p>
 
 <p>Default:<code><span class="typ-str">&quot;cover&quot;</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">300pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">50pt</span><span class="typ-punct">,</span> margin<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> fit<span class="typ-punct">:</span> <span class="typ-str">&quot;cover&quot;</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> fit<span class="typ-punct">:</span> <span class="typ-str">&quot;contain&quot;</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;tiger.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> fit<span class="typ-punct">:</span> <span class="typ-str">&quot;stretch&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/edbb68fb5d64a9b724bfd36b869e8425.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 
@@ -1148,7 +1184,7 @@ this means that the image will be distorted.</p>
       class="overview-param"><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a>, </span><span
       class="overview-param"><a href="#parameters-format">format<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-width">width<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
-      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
+      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
       class="overview-param"><a href="#parameters-alt">alt<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-fit">fit<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
@@ -1281,6 +1317,8 @@ this means that the image will be distorted.</p>
       
       <a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>
       
+      <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
+      
     </div>
     
   </div>
@@ -1325,7 +1363,9 @@ this means that the image will be distorted.</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->cover<!-- -->&quot;</code></div>
       <div>
-        <p>The image should completely cover the area. This is the default.</p>
+        <p>The image should completely cover the area (preserves aspect ratio by
+cropping the image only horizontally or vertically). This is the
+default.</p>
       </div>
     </div>
   </li>
@@ -1334,7 +1374,9 @@ this means that the image will be distorted.</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->contain<!-- -->&quot;</code></div>
       <div>
-        <p>The image should be fully contained in the area.</p>
+        <p>The image should be fully contained in the area (preserves aspect
+ratio; doesn't crop the image; one dimension can be narrower than
+specified).</p>
       </div>
     </div>
   </li>
@@ -1344,7 +1386,8 @@ this means that the image will be distorted.</p>
       <div><code class="typ-str">&quot;<!-- -->stretch<!-- -->&quot;</code></div>
       <div>
         <p>The image should be stretched so that it exactly fills the area, even if
-this means that the image will be distorted.</p>
+this means that the image will be distorted (doesn't preserve aspect
+ratio and doesn't crop the image).</p>
       </div>
     </div>
   </li>

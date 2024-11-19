@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -856,9 +868,9 @@ of related data points or similar or whether you are just want to enhance
 your presentation by arranging unrelated content in a grid. In the former
 case, a table is the right choice, while in the latter case, a grid is more
 appropriate. Furthermore, Typst will annotate its output in the future such
-that screenreaders will annouce content in <code>table</code> as tabular while a grid's
-content will be announced no different than multiple content blocks in the
-document flow.</p>
+that screenreaders will announce content in <code>table</code> as tabular while a
+grid's content will be announced no different than multiple content blocks
+in the document flow.</p>
 <p>Note that, to override a particular cell's properties or apply show rules on
 table cells, you can use the <a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a> element. See its
 documentation for more information.</p>
@@ -873,7 +885,7 @@ rules on one of them do not affect the other.</p>
   inset<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">,</span>
   align<span class="typ-punct">:</span> horizon<span class="typ-punct">,</span>
   table<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>
-    <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Area*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Parameters*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+    <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Volume*</span><span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-strong">*Parameters*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
   <span class="typ-punct">)</span><span class="typ-punct">,</span>
   <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;cylinder.svg&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
   <span class="typ-math-delim">$</span> <span class="typ-pol">pi</span> h <span class="typ-punct">(</span>D<span class="typ-math-op">^</span>2 <span class="typ-escape">-</span> d<span class="typ-math-op">^</span>2<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 4 <span class="typ-math-delim">$</span><span class="typ-punct">,</span>
@@ -886,7 +898,7 @@ rules on one of them do not affect the other.</p>
   <span class="typ-math-delim">$</span> <span class="typ-func">sqrt</span><span class="typ-punct">(</span>2<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 12 a<span class="typ-math-op">^</span>3 <span class="typ-math-delim">$</span><span class="typ-punct">,</span>
   <span class="typ-punct">[</span><span class="typ-math-delim">$</span>a<span class="typ-math-delim">$</span>: edge length<span class="typ-punct">]</span>
 <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/291ffba835d6b37da3942ed85abc7ad5.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/e132e6f0ed4993141cbe7f5dabf83c69.png" alt="Preview" width="480" height="190"/></div></div>
 <p>Much like with grids, you can use <a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a> to customize
 the appearance and the position of each cell.</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">table</span><span class="typ-punct">(</span>
@@ -1054,8 +1066,9 @@ on track sizing.</p>
     </small>
   </div>
 </h4>
-<p>The gaps between rows and columns. See the <a href="/docs/reference/layout/grid/">grid documentation</a>
-for more information on gutters.</p>
+<p>The gaps between rows and columns. This is a shorthand for setting
+<code>column-gutter</code> and <code>row-gutter</code> to the same value. See the <a href="/docs/reference/layout/grid/">grid
+documentation</a> for more information on gutters.</p>
 
 
 <p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">)</span></code></p>
@@ -1325,7 +1338,7 @@ strokes.</p>
 <p>How much to pad the cells' content.</p>
 
 
-<p>Default:<code><span class="typ-num">5pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">5pt</span></code></p>
 
 
 <details class="folding-example">
@@ -1434,7 +1447,18 @@ multiple columns and/or rows with the <code>colspan</code> and <code>rowspan</co
   <details class="folding-example">
     <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
     <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> table<span class="typ-punct">.</span>cell<span class="typ-punct">.</span><span class="typ-func">where</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">:</span> <span class="typ-func">strong</span>
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">table</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-key">if</span> y <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-punct">{</span>
+    <span class="typ-punct">(</span>bottom<span class="typ-punct">:</span> <span class="typ-num">0.7pt</span> <span class="typ-op">+</span> black<span class="typ-punct">)</span>
+  <span class="typ-punct">}</span><span class="typ-punct">,</span>
+  align<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-punct">(</span>
+    <span class="typ-key">if</span> x <span class="typ-op">&gt;</span> <span class="typ-num">0</span> <span class="typ-punct">{</span> center <span class="typ-punct">}</span>
+    <span class="typ-key">else</span> <span class="typ-punct">{</span> left <span class="typ-punct">}</span>
+  <span class="typ-punct">)</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">table</span><span class="typ-punct">(</span>
   columns<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
   table<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>
     <span class="typ-punct">[</span>Substance<span class="typ-punct">]</span><span class="typ-punct">,</span>
@@ -1448,7 +1472,7 @@ multiple columns and/or rows with the <code>colspan</code> and <code>rowspan</co
   <span class="typ-punct">[</span>Potassium Hydroxide<span class="typ-punct">]</span><span class="typ-punct">,</span>
   table<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>colspan<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>24.7<span class="typ-punct">]</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/fe2170650b3ad4cae5e69b85359932ef.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/f2bc91ad03d6122aa9a52a7d3fad7f0b.png" alt="Preview" width="480" height="190"/></div></div>
 <p>For example, you can override the fill, alignment or inset for a single
 cell:</p>
 <div class="previewed-code"><pre><code><span class="typ-comment">// You can also import those.</span>

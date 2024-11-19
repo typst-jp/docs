@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -832,10 +844,13 @@
       
 
 <h1 id="summary"><code>layout</code><small></small></h1>
-<p>Provides access to the current outer container's (or page's, if none) size
-(width and height).</p>
-<p>The given function must accept a single parameter, <code>size</code>, which is a
-dictionary with keys <code>width</code> and <code>height</code>, both of type <a href="/docs/reference/layout/length/" title="`length`"><code>length</code></a>.</p>
+<p>Provides access to the current outer container's (or page's, if none)
+dimensions (width and height).</p>
+<p>Accepts a function that receives a single parameter, which is a dictionary
+with keys <code>width</code> and <code>height</code>, both of type <a href="/docs/reference/layout/length/" title="`length`"><code>length</code></a>. The function is
+provided <a href="/docs/reference/context/" title="context">context</a>, meaning you don't need to use it in combination with the
+<code>context</code> keyword. This is why <a href="/docs/reference/layout/measure/" title="`measure`"><code>measure</code></a> can be called in the example
+below.</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> text <span class="typ-op">=</span> <span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">30</span><span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-punct">[</span>
   <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-punct">(</span>height<span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">measure</span><span class="typ-punct">(</span>
@@ -846,11 +861,14 @@ dictionary with keys <code>width</code> and <code>height</code>, both of type <a
   <span class="typ-pol">#</span><span class="typ-pol">text</span>
 <span class="typ-punct">]</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/c40525c5c0cb1da6679a02a808d0433b.png" alt="Preview" width="480" height="190"/></div></div>
-<p>If the <code>layout</code> call is placed inside of a box width a width of <code><span class="typ-num">800pt</span></code>
-and a height of <code><span class="typ-num">400pt</span></code>, then the specified function will be given the
-parameter <code><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">800pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">400pt</span><span class="typ-punct">)</span></code>. If it placed directly into the
-page it receives the page's dimensions minus its margins. This is mostly
-useful in combination with <a href="/docs/reference/layout/measure/">measurement</a>.</p>
+<p>Note that the <code>layout</code> function forces its contents into a <a href="/docs/reference/layout/block/" title="block">block</a>-level
+container, so placement relative to the page or pagebreaks are not possible
+within it.</p>
+<p>If the <code>layout</code> call is placed inside a box with a width of <code><span class="typ-num">800pt</span></code> and a
+height of <code><span class="typ-num">400pt</span></code>, then the specified function will be given the argument
+<code><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">800pt</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">400pt</span><span class="typ-punct">)</span></code>. If it is placed directly into the page, it
+receives the page's dimensions minus its margins. This is mostly useful in
+combination with <a href="/docs/reference/layout/measure/">measurement</a>.</p>
 <p>You can also use this function to resolve <a href="/docs/reference/layout/ratio/" title="`ratio`"><code>ratio</code></a> to fixed lengths. This
 might come in handy if you're building your own layout abstractions.</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">layout</span><span class="typ-punct">(</span>size <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
@@ -858,8 +876,8 @@ might come in handy if you're building your own layout abstractions.</p>
   <span class="typ-punct">[</span>Half a page is <span class="typ-pol">#</span><span class="typ-pol">half</span> wide.<span class="typ-punct">]</span>
 <span class="typ-punct">}</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/19a1c5918ef068a85d6938ba5c41544b.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Note that this function will provide an infinite width or height if one of
-the page width or height is <code>auto</code>, respectively.</p>
+<p>Note that the width or height provided by <code>layout</code> will be infinite if the
+corresponding page dimension is set to <code><span class="typ-key">auto</span></code>.</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -906,8 +924,8 @@ displayed in the document.</p>
 <p>The container's size is given as a <a href="/docs/reference/foundations/dictionary/" title="dictionary">dictionary</a> with the keys <code>width</code>
 and <code>height</code>.</p>
 <p>This function is called once for each time the content returned by
-<code>layout</code> appears in the document. That makes it possible to generate
-content that depends on the size of the container it is inside of.</p>
+<code>layout</code> appears in the document. This makes it possible to generate
+content that depends on the dimensions of its container.</p>
 
 
 

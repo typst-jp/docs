@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -843,13 +855,54 @@
 </small></h1>
 <p>Aligns content horizontally and vertically.</p>
 <h2 id="example">Example</h2>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
+<p>Let's start with centering our content horizontally:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">120pt</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
 
 Centered text, a sight to see <span class="typ-escape">\</span>
 In perfect balance, visually <span class="typ-escape">\</span>
 Not left nor right, it stands alone <span class="typ-escape">\</span>
 A work of art, a visual throne
-</code></pre><div class="preview"><img src="/assets/docs/99b62ab7d2744a6c2a0f96112724a0be.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/b6b7a8716be1064542879e668575dcef.png" alt="Preview" width="480" height="190"/></div></div>
+<p>To center something vertically, use <em>horizon</em> alignment:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">120pt</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>horizon<span class="typ-punct">)</span>
+
+Vertically centered, <span class="typ-escape">\</span>
+the stage had entered, <span class="typ-escape">\</span>
+a new paragraph.
+</code></pre><div class="preview"><img src="/assets/docs/6c38fc2d11e8adce1a8e61335f57c78e.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="combining-alignments">Combining alignments</h2>
+<p>You can combine two alignments with the <code>+</code> operator. Let's also only apply
+this to one piece of content by using the function form instead of a set
+rule:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">120pt</span><span class="typ-punct">)</span>
+Though left in the beginning <span class="typ-escape">...</span>
+
+<span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>right <span class="typ-op">+</span> bottom<span class="typ-punct">)</span><span class="typ-punct">[</span>
+  <span class="typ-escape">...</span> they were right in the end, <span class="typ-escape">\</span>
+  and with addition had gotten, <span class="typ-escape">\</span>
+  the paragraph to the bottom!
+<span class="typ-punct">]</span>
+</code></pre><div class="preview"><img src="/assets/docs/43a09074bb333ab200ff18f40d531723.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="nested-alignment">Nested alignment</h2>
+<p>You can use varying alignments for layout containers and the elements within
+them. This way, you can create intricate layouts:</p>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> <span class="typ-func">block</span><span class="typ-punct">[</span>
+  <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>left<span class="typ-punct">)</span>
+  Though centered together <span class="typ-escape">\</span>
+  alone <span class="typ-escape">\</span>
+  we <span class="typ-escape">\</span>
+  are <span class="typ-escape">\</span>
+  left.
+<span class="typ-punct">]</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/8b96cb721e0e4db9de9a79e8da4361a4.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="alignment-within-the-same-line">Alignment within the same line</h2>
+<p>The <code>align</code> function performs block-level alignment and thus always
+interrupts the current paragraph. To have different alignment for parts
+of the same line, you should use <a href="/docs/reference/layout/h/">fractional spacing</a> instead:</p>
+<div class="previewed-code"><pre><code>Start <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> End
+</code></pre><div class="preview"><img src="/assets/docs/3da5fdcbb7d71b7b1af58b13acaae5f8.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -977,6 +1030,18 @@ A work of art, a visual throne
         </li>
         
         <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="combining-alignments"><a href="#combining-alignments">Combining Alignments</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="nested-alignment"><a href="#nested-alignment">Nested Alignment</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="alignment-within-the-same-line"><a href="#alignment-within-the-same-line">Alignment Within The Same Line</a>
           <ul></ul>
         </li>
         

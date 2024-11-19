@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -831,26 +843,47 @@
 
       
 
-<h1 id="summary"><code>smallcaps</code><small></small></h1>
+<h1 id="summary"><code>smallcaps</code><small>
+<span aria-describedby="-tooltip">Element</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="-tooltip-qm-label">
+    <title id="-tooltip-qm-label">Element functions can be customized with <code>set</code> and <code>show</code> rules.</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
+</div>
+</small></h1>
 <p>Displays text in small capitals.</p>
-<p><em>Note:</em> This enables the OpenType <code>smcp</code> feature for the font. Not all fonts
-support this feature. Sometimes smallcaps are part of a dedicated font and
-sometimes they are not available at all. In the future, this function will
-support selecting a dedicated smallcaps font as well as synthesizing
-smallcaps from normal letters, but this is not yet implemented.</p>
 <h2 id="example">Example</h2>
+<div class="previewed-code"><pre><code>Hello <span class="typ-escape">\</span>
+<span class="typ-func">#</span><span class="typ-func">smallcaps</span><span class="typ-punct">[</span>Hello<span class="typ-punct">]</span>
+</code></pre><div class="preview"><img src="/assets/docs/5dac413e3620136e27ca2418eb200337.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="smallcaps-fonts">Smallcaps fonts</h2>
+<p>By default, this enables the OpenType <code>smcp</code> feature for the font. Not all
+fonts support this feature. Sometimes smallcaps are part of a dedicated
+font. This is, for example, the case for the <em>Latin Modern</em> family of fonts.
+In those cases, you can use a show-set rule to customize the appearance of
+the text in smallcaps:</p>
+<pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">smallcaps</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Latin Modern Roman Caps&quot;</span><span class="typ-punct">)</span>
+</code></pre>
+<p>In the future, this function will support synthesizing smallcaps from normal
+letters, but this is not yet implemented.</p>
+<h2 id="smallcaps-headings">Smallcaps headings</h2>
+<p>You can use a <a href="/docs/reference/styling/#show-rules">show rule</a> to apply smallcaps
+formatting to all your headings. In the example below, we also center-align
+our headings and disable the standard bold font.</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;I.&quot;</span><span class="typ-punct">)</span>
 
-<span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
-  <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>below<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span>
-  <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>weight<span class="typ-punct">:</span> <span class="typ-str">&quot;regular&quot;</span><span class="typ-punct">)</span>
-  <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> <span class="typ-func">smallcaps</span><span class="typ-punct">(</span>it<span class="typ-punct">)</span><span class="typ-punct">)</span>
-<span class="typ-punct">}</span>
+<span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> <span class="typ-func">smallcaps</span>
+<span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">heading</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
+  weight<span class="typ-punct">:</span> <span class="typ-str">&quot;regular&quot;</span>
+<span class="typ-punct">)</span>
 
 <span class="typ-heading">= Introduction</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">40</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/cdf947cb116d99f7ab9b7491b11f5676.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/687420948ce895c8798cc92063bdef12.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -892,7 +925,7 @@ smallcaps from normal letters, but this is not yet implemented.</p>
     </small>
   </div>
 </h4>
-<p>The text to display to small capitals.</p>
+<p>The content to display in small capitals.</p>
 
 
 
@@ -924,6 +957,14 @@ smallcaps from normal letters, but this is not yet implemented.</p>
         </li>
         
         <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="smallcaps-fonts"><a href="#smallcaps-fonts">Smallcaps Fonts</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="smallcaps-headings"><a href="#smallcaps-headings">Smallcaps Headings</a>
           <ul></ul>
         </li>
         

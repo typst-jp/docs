@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -872,7 +884,7 @@ followed by a term, a colon and a description creates a term list item.</p>
       class="overview-param"><a href="#parameters-separator">separator<!-- -->: </a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-indent">indent<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-hanging-indent">hanging-indent<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
-      class="overview-param"><a href="#parameters-spacing">spacing<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
+      class="overview-param"><a href="#parameters-spacing">spacing<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
 
@@ -898,14 +910,16 @@ followed by a term, a colon and a description creates a term list item.</p>
     </small>
   </div>
 </h4>
-<p>If this is <code><span class="typ-key">false</span></code>, the items are spaced apart with
-<a href="/docs/reference/model/terms/#parameters-spacing">term list spacing</a>. If it is <code><span class="typ-key">true</span></code>, they use normal
-<a href="/docs/reference/model/par/#parameters-leading">leading</a> instead. This makes the term list more compact,
-which can look better if the items are short.</p>
+<p>Defines the default <a href="/docs/reference/model/terms/#parameters-spacing">spacing</a> of the term list. If it is
+<code><span class="typ-key">false</span></code>, the items are spaced apart with
+<a href="/docs/reference/model/par/#parameters-spacing">paragraph spacing</a>. If it is <code><span class="typ-key">true</span></code>, they use
+<a href="/docs/reference/model/par/#parameters-leading">paragraph leading</a> instead. This makes the list more
+compact, which can look better if the items are short.</p>
 <p>In markup mode, the value of this parameter is determined based on
 whether items are separated with a blank line. If items directly follow
 each other, this is set to <code><span class="typ-key">true</span></code>; if items are separated by a blank
-line, this is set to <code><span class="typ-key">false</span></code>.</p>
+line, this is set to <code><span class="typ-key">false</span></code>. The markup-defined tightness cannot be
+overridden with set rules.</p>
 
 
 <p>Default:<code><span class="typ-key">true</span></code></p>
@@ -1038,9 +1052,7 @@ desired amount of space.</p>
       
       <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
       
-      <a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>
-      
-      <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
       
     </div>
     <small><span
@@ -1056,8 +1068,10 @@ desired amount of space.</p>
     </small>
   </div>
 </h4>
-<p>The spacing between the items of a wide (non-tight) term list.</p>
-<p>If set to <code><span class="typ-key">auto</span></code>, uses the spacing <a href="/docs/reference/layout/block/#parameters-below">below blocks</a>.</p>
+<p>The spacing between the items of the term list.</p>
+<p>If set to <code><span class="typ-key">auto</span></code>, uses paragraph <a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a> for tight
+term lists and paragraph <a href="/docs/reference/model/par/#parameters-spacing"><code>spacing</code></a> for wide
+(non-tight) term lists.</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>

@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -1256,6 +1268,346 @@ below or above themselves.</p>
   </div>
 </h4>
 <p>The optional content above the bracket.</p>
+
+
+<p>Default:<code><span class="typ-key">none</span></code></p>
+
+
+
+
+
+
+  <h3 id="-underparen" class="method-head"><span><code>underparen</code></span></h3>
+  
+<p>A horizontal parenthesis under content, with an optional annotation below.</p>
+
+<div class="code code-definition ">math.<span
+    class="typ-func">underparen</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">underparen</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/2f55e2a579885b4dcc0f8bb2447086a8.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-underparen-underparen-parameters-body"><code>body</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-underparen-underparen-parameters-body-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-underparen-underparen-parameters-body-positional-tooltip-qm-label">
+          <title id="definitions-underparen-underparen-parameters-body-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-underparen-underparen-parameters-body-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The content above the parenthesis.</p>
+
+
+
+
+<h4 id="definitions-underparen-underparen-parameters-annotation"><code>annotation</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-underparen-underparen-parameters-annotation-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-underparen-underparen-parameters-annotation-positional-tooltip-qm-label">
+          <title id="definitions-underparen-underparen-parameters-annotation-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-underparen-underparen-parameters-annotation-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-underparen-underparen-parameters-annotation-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-underparen-underparen-parameters-annotation-settable-tooltip-qm-label">
+          <title id="definitions-underparen-underparen-parameters-annotation-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-underparen-underparen-parameters-annotation-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The optional content below the parenthesis.</p>
+
+
+<p>Default:<code><span class="typ-key">none</span></code></p>
+
+
+
+
+
+
+  <h3 id="-overparen" class="method-head"><span><code>overparen</code></span></h3>
+  
+<p>A horizontal parenthesis over content, with an optional annotation above.</p>
+
+<div class="code code-definition ">math.<span
+    class="typ-func">overparen</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overparen</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/0a43d2bb26a1df9e46464218f684757b.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-overparen-overparen-parameters-body"><code>body</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-overparen-overparen-parameters-body-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-overparen-overparen-parameters-body-positional-tooltip-qm-label">
+          <title id="definitions-overparen-overparen-parameters-body-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-overparen-overparen-parameters-body-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The content below the parenthesis.</p>
+
+
+
+
+<h4 id="definitions-overparen-overparen-parameters-annotation"><code>annotation</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-overparen-overparen-parameters-annotation-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-overparen-overparen-parameters-annotation-positional-tooltip-qm-label">
+          <title id="definitions-overparen-overparen-parameters-annotation-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-overparen-overparen-parameters-annotation-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-overparen-overparen-parameters-annotation-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-overparen-overparen-parameters-annotation-settable-tooltip-qm-label">
+          <title id="definitions-overparen-overparen-parameters-annotation-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-overparen-overparen-parameters-annotation-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The optional content above the parenthesis.</p>
+
+
+<p>Default:<code><span class="typ-key">none</span></code></p>
+
+
+
+
+
+
+  <h3 id="-undershell" class="method-head"><span><code>undershell</code></span></h3>
+  
+<p>A horizontal tortoise shell bracket under content, with an optional annotation below.</p>
+
+<div class="code code-definition ">math.<span
+    class="typ-func">undershell</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">undershell</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/17209d7e916a6377e2b3e274e0f7bddf.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-undershell-undershell-parameters-body"><code>body</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-undershell-undershell-parameters-body-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-undershell-undershell-parameters-body-positional-tooltip-qm-label">
+          <title id="definitions-undershell-undershell-parameters-body-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-undershell-undershell-parameters-body-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The content above the tortoise shell bracket.</p>
+
+
+
+
+<h4 id="definitions-undershell-undershell-parameters-annotation"><code>annotation</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-undershell-undershell-parameters-annotation-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-undershell-undershell-parameters-annotation-positional-tooltip-qm-label">
+          <title id="definitions-undershell-undershell-parameters-annotation-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-undershell-undershell-parameters-annotation-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-undershell-undershell-parameters-annotation-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-undershell-undershell-parameters-annotation-settable-tooltip-qm-label">
+          <title id="definitions-undershell-undershell-parameters-annotation-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-undershell-undershell-parameters-annotation-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The optional content below the tortoise shell bracket.</p>
+
+
+<p>Default:<code><span class="typ-key">none</span></code></p>
+
+
+
+
+
+
+  <h3 id="-overshell" class="method-head"><span><code>overshell</code></span></h3>
+  
+<p>A horizontal tortoise shell bracket over content, with an optional annotation above.</p>
+
+<div class="code code-definition ">math.<span
+    class="typ-func">overshell</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">overshell</span><span class="typ-punct">(</span>1 + 2 + <span class="typ-escape">...</span> + 5<span class="typ-punct">,</span> <span class="typ-str">&quot;numbers&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/dee69b96c8eeea486aa684f82dc55d29.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-overshell-overshell-parameters-body"><code>body</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-overshell-overshell-parameters-body-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-overshell-overshell-parameters-body-positional-tooltip-qm-label">
+          <title id="definitions-overshell-overshell-parameters-body-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-overshell-overshell-parameters-body-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The content below the tortoise shell bracket.</p>
+
+
+
+
+<h4 id="definitions-overshell-overshell-parameters-annotation"><code>annotation</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/content" class="pill pill-con">content</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-overshell-overshell-parameters-annotation-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-overshell-overshell-parameters-annotation-positional-tooltip-qm-label">
+          <title id="definitions-overshell-overshell-parameters-annotation-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-overshell-overshell-parameters-annotation-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-overshell-overshell-parameters-annotation-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-overshell-overshell-parameters-annotation-settable-tooltip-qm-label">
+          <title id="definitions-overshell-overshell-parameters-annotation-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-overshell-overshell-parameters-annotation-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The optional content above the tortoise shell bracket.</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>

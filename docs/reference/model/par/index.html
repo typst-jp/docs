@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -846,9 +858,9 @@
 properties, it can also be used to explicitly render its argument onto a
 paragraph of its own.</p>
 <h2 id="example">Example</h2>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">par</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">)</span>
-<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>
   first-line-indent<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">,</span>
+  spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">,</span>
   justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 
@@ -862,7 +874,7 @@ integer value of <span class="typ-math-delim">$</span>n &gt; 2<span class="typ-m
 Without loss of generality,
 let <span class="typ-math-delim">$</span>a<span class="typ-math-delim">$</span> be the smallest of the
 three integers. Then, we <span class="typ-escape">...</span>
-</code></pre><div class="preview"><img src="/assets/docs/4ad0c7e875ca044b839c4c85e8b6cb15.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/6fc94211d5ad3ae310d85891f4867593.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -879,6 +891,7 @@ three integers. Then, we <span class="typ-escape">...</span>
 <div class="code code-definition "><span
     class="typ-func">par</span>(<div class="arguments"><span
       class="overview-param"><a href="#parameters-leading">leading<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
+      class="overview-param"><a href="#parameters-spacing">spacing<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-justify">justify<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-linebreaks">linebreaks<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-first-line-indent">first-line-indent<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
@@ -909,9 +922,53 @@ three integers. Then, we <span class="typ-escape">...</span>
   </div>
 </h4>
 <p>The spacing between lines.</p>
+<p>Leading defines the spacing between the <a href="/docs/reference/text/text/#parameters-bottom-edge">bottom edge</a>
+of one line and the <a href="/docs/reference/text/text/#parameters-top-edge">top edge</a> of the following line. By
+default, these two properties are up to the font, but they can also be
+configured manually with a text set rule.</p>
+<p>By setting top edge, bottom edge, and leading, you can also configure a
+consistent baseline-to-baseline distance. You could, for instance, set
+the leading to <code><span class="typ-num">1em</span></code>, the top-edge to <code><span class="typ-num">0.8em</span></code>, and the bottom-edge
+to <code><span class="typ-op">-</span><span class="typ-num">0.2em</span></code> to get a baseline gap of exactly <code><span class="typ-num">2em</span></code>. The exact
+distribution of the top- and bottom-edge values affects the bounds of
+the first and last line.</p>
 
 
 <p>Default:<code><span class="typ-num">0.65em</span></code></p>
+
+
+
+<h4 id="par-par-parameters-spacing"><code>spacing</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+    </div>
+    <small><span
+        aria-describedby="par-par-parameters-spacing-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="par-par-parameters-spacing-settable-tooltip-qm-label">
+          <title id="par-par-parameters-spacing-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="par-par-parameters-spacing-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The spacing between paragraphs.</p>
+<p>Just like leading, this defines the spacing between the bottom edge of a
+paragraph's last line and the top edge of the next paragraph's first
+line.</p>
+<p>When a paragraph is adjacent to a <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> that is not a paragraph,
+that block's <a href="/docs/reference/layout/block/#parameters-above"><code>above</code></a> or <a href="/docs/reference/layout/block/#parameters-below"><code>below</code></a> property
+takes precedence over the paragraph spacing. Headings, for instance,
+reduce the spacing below them by default for a better look.</p>
+
+
+<p>Default:<code><span class="typ-num">1.2em</span></code></p>
 
 
 
@@ -1050,8 +1107,7 @@ the first one in a block or on the page).</p>
 <p>By typographic convention, paragraph breaks are indicated either by some
 space between paragraphs or by indented first lines. Consider reducing
 the <a href="/docs/reference/layout/block/#parameters-spacing">paragraph spacing</a> to the <a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a>
-when using this property (e.g. using
-<code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">par</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">)</span></code>).</p>
+when using this property (e.g. using <code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">)</span></code>).</p>
 
 
 <p>Default:<code><span class="typ-num">0pt</span></code></p>
@@ -1115,6 +1171,342 @@ when using this property (e.g. using
 
 
 
+<h2 id="definitions">
+  
+<span aria-describedby="definitions-tooltip">Definitions</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="definitions-tooltip-qm-label">
+    <title id="definitions-tooltip-qm-label">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="definitions-tooltip" tabindex="-1">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</div>
+</div>
+
+</h2>
+
+
+  <h3 id="-line" class="method-head"><span><code>line</code></span></h3>
+  
+<p>A paragraph line.</p>
+<p>This element is exclusively used for line number configuration through set
+rules and cannot be placed.</p>
+<p>The <a href="/docs/reference/model/par/#definitions-line-numbering"><code>numbering</code></a> option is used to enable line
+numbers by specifying a numbering format.</p>
+
+<div class="code code-definition ">par.<span
+    class="typ-func">line</span>(<div class="arguments"><span
+      class="overview-param"><a href="#parameters-numbering">numbering<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a>, </span><span
+      class="overview-param"><a href="#parameters-number-align">number-align<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
+      class="overview-param"><a href="#parameters-number-margin">number-margin<!-- -->: </a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
+      class="overview-param"><a href="#parameters-number-clearance">number-clearance<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
+      class="overview-param"><a href="#parameters-numbering-scope">numbering-scope<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1&quot;</span><span class="typ-punct">)</span>
+
+Roses are red. <span class="typ-escape">\</span>
+Violets are blue. <span class="typ-escape">\</span>
+Typst is there for you.
+</code></pre><div class="preview"><img src="/assets/docs/05b80287a51104e48bb5b4d065c7452f.png" alt="Preview" width="480" height="190"/></div></div>
+<p>The <code>numbering</code> option takes either a predefined
+<a href="/docs/reference/model/numbering/">numbering pattern</a> or a function returning styled content. You
+can disable line numbers for text inside certain elements by setting the
+numbering to <code><span class="typ-key">none</span></code> using show-set rules.</p>
+<div class="previewed-code"><pre><code><span class="typ-comment">// Styled red line numbers.</span>
+<span class="typ-key">#</span><span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>
+  numbering<span class="typ-punct">:</span> n <span class="typ-op">=&gt;</span> <span class="typ-func">text</span><span class="typ-punct">(</span>red<span class="typ-punct">)</span><span class="typ-punct">[</span><span class="typ-pol">#</span><span class="typ-pol">n</span><span class="typ-punct">]</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-comment">// Disable numbers inside figures.</span>
+<span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">figure</span><span class="typ-punct">:</span> <span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>
+  numbering<span class="typ-punct">:</span> <span class="typ-key">none</span>
+<span class="typ-punct">)</span>
+
+Roses are red. <span class="typ-escape">\</span>
+Violets are blue.
+
+<span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
+  caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>Without line numbers.<span class="typ-punct">]</span>
+<span class="typ-punct">)</span><span class="typ-punct">[</span>
+  Lorem ipsum <span class="typ-escape">\</span>
+  dolor sit amet
+<span class="typ-punct">]</span>
+
+The text above is a sample <span class="typ-escape">\</span>
+originating from distant times.
+</code></pre><div class="preview"><img src="/assets/docs/d4bced55ad58a39d64488f4ea8a4f0c3.png" alt="Preview" width="480" height="190"/></div></div>
+<p>This element exposes further options which may be used to control other
+aspects of line numbering, such as its <a href="/docs/reference/model/par/#definitions-line-number-align">alignment</a>
+or <a href="/docs/reference/model/par/#definitions-line-number-margin">margin</a>. In addition, you can control whether
+the numbering is reset on each page through the
+<a href="/docs/reference/model/par/#definitions-line-numbering-scope"><code>numbering-scope</code></a> option.</p>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-line-line-parameters-numbering"><code>numbering</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-line-line-parameters-numbering-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-line-line-parameters-numbering-settable-tooltip-qm-label">
+          <title id="definitions-line-line-parameters-numbering-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-line-line-parameters-numbering-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>How to number each line. Accepts a
+<a href="/docs/reference/model/numbering/">numbering pattern or function</a>.</p>
+
+
+<p>Default:<code><span class="typ-key">none</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;I&quot;</span><span class="typ-punct">)</span>
+
+Roses are red. <span class="typ-escape">\</span>
+Violets are blue. <span class="typ-escape">\</span>
+Typst is there for you.
+</code></pre><div class="preview"><img src="/assets/docs/dc3a1deec9339dfc5e0212107456598b.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="definitions-line-line-parameters-number-align"><code>number-align</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-line-line-parameters-number-align-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-line-line-parameters-number-align-settable-tooltip-qm-label">
+          <title id="definitions-line-line-parameters-number-align-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-line-line-parameters-number-align-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The alignment of line numbers associated with each line.</p>
+<p>The default of <code><span class="typ-key">auto</span></code> indicates a smart default where numbers grow
+horizontally away from the text, considering the margin they're in and
+the current text direction.</p>
+
+
+<p>Default:<code><span class="typ-key">auto</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>
+  numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;I&quot;</span><span class="typ-punct">,</span>
+  number-align<span class="typ-punct">:</span> left<span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+Hello world! <span class="typ-escape">\</span>
+Today is a beautiful day <span class="typ-escape">\</span>
+For exploring the world.
+</code></pre><div class="preview"><img src="/assets/docs/19af005e7549a91f6313af4fbe59a0ae.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="definitions-line-line-parameters-number-margin"><code>number-margin</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-line-line-parameters-number-margin-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-line-line-parameters-number-margin-settable-tooltip-qm-label">
+          <title id="definitions-line-line-parameters-number-margin-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-line-line-parameters-number-margin-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The margin at which line numbers appear.</p>
+<p><em>Note:</em> In a multi-column document, the line numbers for paragraphs
+inside the last column will always appear on the <code>end</code> margin (right
+margin for left-to-right text and left margin for right-to-left),
+regardless of this configuration. That behavior cannot be changed at
+this moment.</p>
+
+
+<p>Default:<code>start</code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>
+  numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1&quot;</span><span class="typ-punct">,</span>
+  number-margin<span class="typ-punct">:</span> right<span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-heading">= Report</span>
+<span class="typ-marker">-</span> Brightness: Dark, yet darker
+<span class="typ-marker">-</span> Readings: Negative
+</code></pre><div class="preview"><img src="/assets/docs/404762a064d6063f425a33b2b750584f.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="definitions-line-line-parameters-number-clearance"><code>number-clearance</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-line-line-parameters-number-clearance-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-line-line-parameters-number-clearance-settable-tooltip-qm-label">
+          <title id="definitions-line-line-parameters-number-clearance-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-line-line-parameters-number-clearance-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The distance between line numbers and text.</p>
+<p>The default value of <code><span class="typ-key">auto</span></code> results in a clearance that is adaptive to
+the page width and yields reasonable results in most cases.</p>
+
+
+<p>Default:<code><span class="typ-key">auto</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>
+  numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1&quot;</span><span class="typ-punct">,</span>
+  number-clearance<span class="typ-punct">:</span> <span class="typ-num">4pt</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+Typesetting <span class="typ-escape">\</span>
+Styling <span class="typ-escape">\</span>
+Layout
+</code></pre><div class="preview"><img src="/assets/docs/e8e77a87b0b6d7160ac53f29fda614e4.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="definitions-line-line-parameters-numbering-scope"><code>numbering-scope</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-line-line-parameters-numbering-scope-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-line-line-parameters-numbering-scope-settable-tooltip-qm-label">
+          <title id="definitions-line-line-parameters-numbering-scope-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-line-line-parameters-numbering-scope-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Controls when to reset line numbering.</p>
+<p><em>Note:</em> The line numbering scope must be uniform across each page run (a
+page run is a sequence of pages without an explicit pagebreak in
+between). For this reason, set rules for it should be defined before any
+page content, typically at the very start of the document.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->document<!-- -->&quot;</code></div>
+      <div>
+        <p>Indicates the line number counter spans the whole document, that is,
+is never automatically reset.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->page<!-- -->&quot;</code></div>
+      <div>
+        <p>Indicates the line number counter should be reset at the start of every
+new page.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;document&quot;</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> par<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span>
+  numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1&quot;</span><span class="typ-punct">,</span>
+  numbering-scope<span class="typ-punct">:</span> <span class="typ-str">&quot;page&quot;</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+First line <span class="typ-escape">\</span>
+Second line
+<span class="typ-func">#</span><span class="typ-func">pagebreak</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+First line again <span class="typ-escape">\</span>
+Second line again
+</code></pre><div class="preview"><img src="/assets/docs/5d18091750a47f478849ec2ffadb6d99.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+
+
 
 
 
@@ -1142,6 +1534,10 @@ when using this property (e.g. using
         </li>
         
         <li data-assoc="parameters"><a href="#parameters">Parameters</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="definitions"><a href="#definitions">Definitions</a>
           <ul></ul>
         </li>
         

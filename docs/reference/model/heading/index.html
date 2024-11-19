@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -889,6 +901,7 @@ can be set to configure the starting depth.</p>
       class="overview-param"><a href="#parameters-supplement">supplement<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/content" class="pill pill-con">content</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="#parameters-outlined">outlined<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-bookmarked">bookmarked<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
+      class="overview-param"><a href="#parameters-hanging-indent">hanging-indent<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
 
@@ -1202,6 +1215,46 @@ This heading won&#39;t be
 bookmarked in the resulting
 PDF.
 </code></pre><div class="preview"><img src="/assets/docs/89a3cd37c6bae985e30435309b12d888.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="heading-heading-parameters-hanging-indent"><code>hanging-indent</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+    </div>
+    <small><span
+        aria-describedby="heading-heading-parameters-hanging-indent-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="heading-heading-parameters-hanging-indent-settable-tooltip-qm-label">
+          <title id="heading-heading-parameters-hanging-indent-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="heading-heading-parameters-hanging-indent-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The indent all but the first line of a heading should have.</p>
+<p>The default value of <code><span class="typ-key">auto</span></code> indicates that the subsequent heading
+lines will be indented based on the width of the numbering.</p>
+
+
+<p>Default:<code><span class="typ-key">auto</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">heading</span><span class="typ-punct">[</span>A very, very, very, very, very, very long heading<span class="typ-punct">]</span>
+</code></pre><div class="preview"><img src="/assets/docs/77198026b01555b3d9dd5d0f8210713f.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 

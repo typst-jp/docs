@@ -6,13 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Circle – Typstドキュメント日本語版</title>
-  <meta name="description" content="`circle` 函数的文档">
+  <meta name="description" content="Documentation for the `circle` function.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/visualize/circle/">
   <meta property="og:title" content="Circle – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="`circle` 函数的文档">
+  <meta property="og:description" content="Documentation for the `circle` function.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -207,6 +207,9 @@
                 
                 
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -870,7 +882,7 @@
     class="typ-func">circle</span>(<div class="arguments"><span
       class="overview-param"><a href="#parameters-radius">radius<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-width">width<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
-      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
+      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>, </span><span
       class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a>, </span><span
       class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-inset">inset<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
@@ -947,6 +959,8 @@ width.</p>
       <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
       
       <a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>
+      
+      <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
       
     </div>
     <small><span
@@ -1074,7 +1088,7 @@ for more details.</p>
 <a href="/docs/reference/layout/box/#parameters-inset">box's documentation</a> for more details.</p>
 
 
-<p>Default:<code><span class="typ-num">5pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">5pt</span></code></p>
 
 
 
@@ -1104,7 +1118,7 @@ for more details.</p>
 the <a href="/docs/reference/layout/box/#parameters-outset">box's documentation</a> for more details.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">:</span><span class="typ-punct">)</span></code></p>
 
 
 

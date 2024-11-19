@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -851,6 +863,16 @@ label, which means that <code>Hello <span class="typ-punct">#</span><span class=
 <p>This function also has dedicated syntax: You can create a label by enclosing
 its name in angle brackets. This works both in markup and code. A label's
 name can contain letters, numbers, <code>_</code>, <code>-</code>, <code>:</code>, and <code>.</code>.</p>
+<p>Note that there is a syntactical difference when using the dedicated syntax
+for this function. In the code below, the <code><span class="typ-label">&lt;a&gt;</span></code> terminates the heading and
+thus attaches to the heading itself, whereas the <code><span class="typ-func">#</span><span class="typ-func">label</span><span class="typ-punct">(</span><span class="typ-str">&quot;b&quot;</span><span class="typ-punct">)</span></code> is part of
+the heading and thus attaches to the heading's text.</p>
+<pre><code><span class="typ-comment">// Equivalent to `#heading[Introduction] &lt;a&gt;`.</span>
+<span class="typ-heading">= Introduction</span> <span class="typ-label">&lt;a&gt;</span>
+
+<span class="typ-comment">// Equivalent to `#heading[Conclusion #label(&quot;b&quot;)]`.</span>
+<span class="typ-heading">= Conclusion <span class="typ-func">#</span><span class="typ-func">label</span><span class="typ-punct">(</span><span class="typ-str">&quot;b&quot;</span><span class="typ-punct">)</span></span>
+</code></pre>
 <p>Currently, labels can only be attached to elements in markup mode, not in
 code mode. This might change in the future.</p>
 

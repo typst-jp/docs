@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -851,7 +863,7 @@ different use cases and carry different semantics. The grid element is
 intended for presentational and layout purposes, while the
 <a href="/docs/reference/model/table/"><code>table</code></a> element is intended for, in broad terms, presenting
 multiple related data points. In the future, Typst will annotate its output
-such that screenreaders will annouce content in <code>table</code> as tabular while a
+such that screenreaders will announce content in <code>table</code> as tabular while a
 grid's content will be announced no different than multiple content blocks
 in the document flow. Set and show rules on one of these elements do not
 affect the other.</p>
@@ -1082,7 +1094,10 @@ repeated until there are no more cells.</p>
   </div>
 </h4>
 <p>The gaps between rows and columns.</p>
-<p>If there are more gutters than defined sizes, the last gutter is repeated.</p>
+<p>If there are more gutters than defined sizes, the last gutter is
+repeated.</p>
+<p>This is a shorthand to set <code>column-gutter</code> and <code>row-gutter</code> to the same
+value.</p>
 
 
 <p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">)</span></code></p>
@@ -1117,7 +1132,7 @@ repeated until there are no more cells.</p>
     </small>
   </div>
 </h4>
-<p>The gaps between columns. Takes precedence over <code>gutter</code>.</p>
+<p>The gaps between columns.</p>
 
 
 <p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">)</span></code></p>
@@ -1152,7 +1167,7 @@ repeated until there are no more cells.</p>
     </small>
   </div>
 </h4>
-<p>The gaps between rows. Takes precedence over <code>gutter</code>.</p>
+<p>The gaps between rows.</p>
 
 
 <p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">)</span></code></p>
@@ -1502,25 +1517,25 @@ to apply certain styles to multiple cells at once.</p>
 
 <span class="typ-func">#</span><span class="typ-func">grid</span><span class="typ-punct">(</span>
   fill<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-func">rgb</span><span class="typ-punct">(</span>
-    <span class="typ-key">if</span> calc<span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span>x <span class="typ-op">+</span> y<span class="typ-punct">)</span> <span class="typ-punct">{</span> <span class="typ-str">&quot;EFF0F3&quot;</span> <span class="typ-punct">}</span>
-    <span class="typ-key">else</span> <span class="typ-punct">{</span> <span class="typ-str">&quot;7F8396&quot;</span> <span class="typ-punct">}</span>
+    <span class="typ-key">if</span> calc<span class="typ-punct">.</span><span class="typ-func">odd</span><span class="typ-punct">(</span>x <span class="typ-op">+</span> y<span class="typ-punct">)</span> <span class="typ-punct">{</span> <span class="typ-str">&quot;7F8396&quot;</span> <span class="typ-punct">}</span>
+    <span class="typ-key">else</span> <span class="typ-punct">{</span> <span class="typ-str">&quot;EFF0F3&quot;</span> <span class="typ-punct">}</span>
   <span class="typ-punct">)</span><span class="typ-punct">,</span>
   columns<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">1em</span><span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">*</span> <span class="typ-num">8</span><span class="typ-punct">,</span>
   rows<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">,</span>
   align<span class="typ-punct">:</span> center <span class="typ-op">+</span> horizon<span class="typ-punct">,</span>
 
-  <span class="typ-punct">[</span>♜<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♞<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♝<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♛<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♚<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♝<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♞<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♜<span class="typ-punct">]</span><span class="typ-punct">,</span>
-  <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span>  <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">[</span>♖<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♘<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♗<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♕<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♔<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♗<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♘<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♖<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span><span class="typ-punct">]</span><span class="typ-punct">,</span>  <span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span>
   grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>
     x<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">,</span> y<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
     stroke<span class="typ-punct">:</span> blue<span class="typ-punct">.</span><span class="typ-func">transparentize</span><span class="typ-punct">(</span><span class="typ-num">60%</span><span class="typ-punct">)</span>
-  <span class="typ-punct">)</span><span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span>
 
-  <span class="typ-op">..</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">6</span><span class="typ-punct">)</span><span class="typ-punct">[</span>♙<span class="typ-punct">]</span><span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">*</span> <span class="typ-num">8</span><span class="typ-punct">,</span>
-  <span class="typ-op">..</span><span class="typ-punct">(</span><span class="typ-punct">[</span>♖<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♘<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♗<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♕<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♔<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♗<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♘<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♖<span class="typ-punct">]</span><span class="typ-punct">)</span>
+  <span class="typ-op">..</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">6</span><span class="typ-punct">)</span><span class="typ-punct">[</span>♟<span class="typ-punct">]</span><span class="typ-punct">,</span><span class="typ-punct">)</span> <span class="typ-op">*</span> <span class="typ-num">8</span><span class="typ-punct">,</span>
+  <span class="typ-op">..</span><span class="typ-punct">(</span><span class="typ-punct">[</span>♜<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♞<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♝<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♛<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♚<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♝<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♞<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>♜<span class="typ-punct">]</span><span class="typ-punct">)</span>
     <span class="typ-punct">.</span><span class="typ-func">map</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span>cell<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span>y<span class="typ-punct">:</span> <span class="typ-num">7</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/9b7cb9300b3b4743d51c03b7666786a1.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/aac963439b453da5433a9ba3a9bcbd90.png" alt="Preview" width="480" height="190"/></div></div>
 <p>You may also apply a show rule on <code>grid.cell</code> to style all cells at once,
 which allows you, for example, to apply styles based on a cell's position.
 Refer to the examples of the <a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a> element to learn

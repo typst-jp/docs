@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -839,10 +851,10 @@ location with the <a href="/docs/reference/introspection/here/" title="`here`"><
 element with the <a href="/docs/reference/foundations/content/#definitions-location"><code>location()</code></a> method on content.</p>
 <h2 id="locatable">Locatable elements</h2>
 <p>Currently, only a subset of element functions is locatable. Aside from
-headings and figures, this includes equations, references and all elements
-with an explicit label. As a result, you <em>can</em> query for e.g. <a href="/docs/reference/model/strong/" title="`strong`"><code>strong</code></a>
-elements, but you will find only those that have an explicit label attached
-to them. This limitation will be resolved in the future.</p>
+headings and figures, this includes equations, references, quotes and all
+elements with an explicit label. As a result, you <em>can</em> query for e.g.
+<a href="/docs/reference/model/strong/" title="`strong`"><code>strong</code></a> elements, but you will find only those that have an explicit
+label attached to them. This limitation will be resolved in the future.</p>
 
 
 
@@ -917,8 +929,8 @@ Typst to skip unnecessary work.</p>
 can be used when displaying the page counter in order to obtain the
 local numbering. This is useful if you are building custom indices or
 outlines.</p>
-<p>If the page numbering is set to <code>none</code> at that location, this function
-returns <code>none</code>.</p>
+<p>If the page numbering is set to <code><span class="typ-key">none</span></code> at that location, this function
+returns <code><span class="typ-key">none</span></code>.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">page-numbering</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a></div>

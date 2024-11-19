@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/"  aria-current="page" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -859,6 +871,24 @@ constructor function or getting the current date with
   <span class="typ-str">&quot;h:[hour repr:12][period]&quot;</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/c7feef8e99a37cb24589ba0f7c6af3c0.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="datetime-and-duration">Datetime and Duration</h2>
+<p>You can get a <a href="/docs/reference/foundations/duration/" title="duration">duration</a> by subtracting two datetime:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> first-of-march <span class="typ-op">=</span> <span class="typ-func">datetime</span><span class="typ-punct">(</span>day<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> month<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span> year<span class="typ-punct">:</span> <span class="typ-num">2024</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> first-of-jan <span class="typ-op">=</span> <span class="typ-func">datetime</span><span class="typ-punct">(</span>day<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> month<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> year<span class="typ-punct">:</span> <span class="typ-num">2024</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> distance <span class="typ-op">=</span> first-of-march <span class="typ-op">-</span> first-of-jan
+<span class="typ-pol">#</span><span class="typ-pol">distance</span><span class="typ-punct">.</span><span class="typ-func">hours</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/fd567bf8218591feeaa098442fca4f04.png" alt="Preview" width="480" height="190"/></div></div>
+<p>You can also add/subtract a datetime and a duration to retrieve a new,
+offset datetime:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> date <span class="typ-op">=</span> <span class="typ-func">datetime</span><span class="typ-punct">(</span>day<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> month<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span> year<span class="typ-punct">:</span> <span class="typ-num">2024</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> two-days <span class="typ-op">=</span> <span class="typ-func">duration</span><span class="typ-punct">(</span>days<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> two-days-earlier <span class="typ-op">=</span> date <span class="typ-op">-</span> two-days
+<span class="typ-key">#</span><span class="typ-key">let</span> two-days-later <span class="typ-op">=</span> date <span class="typ-op">+</span> two-days
+
+<span class="typ-pol">#</span><span class="typ-pol">date</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">two-days-earlier</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">two-days-later</span><span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/583e21e6a1ed0e8ec288b8a3556b5daf.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="format">Format</h2>
 <p>You can specify a customized formatting using the
 <a href="/docs/reference/foundations/datetime/#definitions-display"><code>display</code></a> method. The format of a datetime is
@@ -1324,8 +1354,8 @@ default format will be different. If you specified a date, it will be
       <div class="page-end-buttons"><a href="/docs/reference/foundations/content/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
           <div><span class="page-title">Content</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/foundations/dictionary/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">Dictionary</span><span class="hint">次に進む</span></div>
+        </a><a href="/docs/reference/foundations/decimal/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Decimal</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>
@@ -1339,6 +1369,10 @@ default format will be different. If you specified a date, it will be
         </li>
         
         <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="datetime-and-duration"><a href="#datetime-and-duration">Datetime And Duration</a>
           <ul></ul>
         </li>
         

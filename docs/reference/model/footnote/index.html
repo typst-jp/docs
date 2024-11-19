@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -982,8 +994,8 @@ footnote this one should point to.</p>
   <h3 id="-entry" class="method-head"><span><code>entry</code></span></h3>
   
 <p>An entry in a footnote list.</p>
-<p>This function is not intended to be called directly. Instead, it is used
-in set and show rules to customize footnote listings.</p>
+<p>This function is not intended to be called directly. Instead, it is used in
+set and show rules to customize footnote listings.</p>
 
 <div class="code code-definition ">footnote.<span
     class="typ-func">entry</span>(<div class="arguments"><span
@@ -1003,9 +1015,10 @@ My footnote listing
 <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span>It&#39;s down here<span class="typ-punct">]</span>
 has red text!
 </code></pre><div class="preview"><img src="/assets/docs/e07bed06d522a25126bd74abd9d30066.png" alt="Preview" width="480" height="190"/></div></div>
-<p><em>Note:</em> Set and show rules for <code>footnote.entry</code> must be defined at the
-beginning of the document in order to work correctly. See <a href="https://github.com/typst/typst/issues/1467#issuecomment-1588799440">here</a> for
-more information.</p>
+<p><em>Note:</em> Footnote entry properties must be uniform across each page run (a
+page run is a sequence of pages without an explicit pagebreak in between).
+For this reason, set and show rules for footnote entries should be defined
+before any page content, typically at the very start of the document.</p>
     </div>
   </details>
 
@@ -1080,7 +1093,7 @@ listing <span class="typ-func">#</span><span class="typ-func">footnote</span><sp
 <p>The separator between the document body and the footnote listing.</p>
 
 
-<p>Default:<code><span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">30%</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-num">0.5pt</span><span class="typ-punct">)</span></code></p>
+<p>Default:<code><span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">30%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-num">0.5pt</span><span class="typ-punct">)</span></code></p>
 
 
 <details class="folding-example">

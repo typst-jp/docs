@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -863,24 +875,27 @@ starting it with a zero followed by either <code>x</code>, <code>o</code>, or <c
 
 </h2>
 
-<p>Converts a value to an integer.</p>
+<p>Converts a value to an integer. Raises an error if there is an attempt
+to produce an integer larger than the maximum 64-bit signed integer
+or smaller than the minimum 64-bit signed integer.</p>
 <ul>
 <li>Booleans are converted to <code>0</code> or <code>1</code>.</li>
-<li>Floats are floored to the next 64-bit integer.</li>
+<li>Floats and decimals are truncated to the next 64-bit integer.</li>
 <li>Strings are parsed in base 10.</li>
 </ul>
 
 <div class="code code-definition single-arg"><span
     class="typ-func">int</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/str" class="pill pill-str">str</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+      class="overview-param"><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
 
 
 
   <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">int</span><span class="typ-punct">(</span><span class="typ-key">false</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-func">#</span><span class="typ-func">int</span><span class="typ-punct">(</span><span class="typ-key">true</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-func">#</span><span class="typ-func">int</span><span class="typ-punct">(</span><span class="typ-num">2.7</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-func">#</span><span class="typ-func">int</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;3.8&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-func">int</span><span class="typ-punct">(</span><span class="typ-str">&quot;27&quot;</span><span class="typ-punct">)</span> <span class="typ-op">+</span> <span class="typ-func">int</span><span class="typ-punct">(</span><span class="typ-str">&quot;4&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/bed8f1a290541ff07b75487efc835f33.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/57a5bfaabcdcd83c335a6ec9aed49d66.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -895,6 +910,8 @@ starting it with a zero followed by either <code>x</code>, <code>o</code>, or <c
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
       
       <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -954,8 +971,8 @@ starting it with a zero followed by either <code>x</code>, <code>o</code>, or <c
     <div class="folding">
     <div class="previewed-code"><pre><code><span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-</code></pre><div class="preview"><img src="/assets/docs/bd14a549d87f8c942f6bc810481af286.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">signum</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/246011f53eefe893bf8d6db973ee6f4b.png" alt="Preview" width="480" height="190"/></div></div>
     </div>
   </details>
 
@@ -978,9 +995,9 @@ integer of 64 bits.</p>
   <details class="folding-example">
     <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
     <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">4</span><span class="typ-punct">.</span><span class="typ-func">bit-not</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+    <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">4</span><span class="typ-punct">.</span><span class="typ-func">bit-not</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-not</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/7f7cba54ef9eb0a3cf75c261e4e159df.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/b990af7412db29bbe0f1b70960287db6.png" alt="Preview" width="480" height="190"/></div></div>
     </div>
   </details>
 
@@ -1158,9 +1175,9 @@ fit in a 64-bit integer.</p>
   <details class="folding-example">
     <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
     <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">33</span><span class="typ-punct">.</span><span class="typ-func">bit-lshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span>
+    <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">33</span><span class="typ-punct">.</span><span class="typ-func">bit-lshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-lshift</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/4b5c2baf72dc4956b1eee15e2832d816.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/ec3aa1d82afc27fe6a252623bc55ad08.png" alt="Preview" width="480" height="190"/></div></div>
     </div>
   </details>
 
@@ -1214,10 +1231,10 @@ integer of 64 bits.</p>
   <details class="folding-example">
     <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
     <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">64</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span>
-<span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">8</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span>
+    <div class="previewed-code"><pre><code><span class="typ-num">#</span><span class="typ-num">64</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">8</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">8</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">bit-rshift</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> logical<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/4f500913a0f8ed85afe6d51b81471eec.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/75baa55a3e2ae66a4fcdb4e57f666f9e.png" alt="Preview" width="480" height="190"/></div></div>
     </div>
   </details>
 
@@ -1247,11 +1264,11 @@ integer of 64 bits.</p>
 </h4>
 <p>The amount of bits to shift. Must not be negative.</p>
 <p>Shifts larger than 63 are allowed and will cause the return value to
-saturate. For non-negative numbers, the return value saturates at <code>0</code>,
-while, for negative numbers, it saturates at <code>-1</code> if <code>logical</code> is set
-to <code>false</code>, or <code>0</code> if it is <code>true</code>. This behavior is consistent with
-just applying this operation multiple times. Therefore, the shift will
-always succeed.</p>
+saturate. For non-negative numbers, the return value saturates at
+<code><span class="typ-num">0</span></code>, while, for negative numbers, it saturates at <code><span class="typ-op">-</span><span class="typ-num">1</span></code> if
+<code>logical</code> is set to <code><span class="typ-key">false</span></code>, or <code><span class="typ-num">0</span></code> if it is <code><span class="typ-key">true</span></code>. This
+behavior is consistent with just applying this operation multiple
+times. Therefore, the shift will always succeed.</p>
 
 
 
@@ -1268,12 +1285,219 @@ always succeed.</p>
 </h4>
 <p>Toggles whether a logical (unsigned) right shift should be performed
 instead of arithmetic right shift.
-If this is <code>true</code>, negative operands will not preserve their sign bit,
-and bits which appear to the left after the shift will be <code>0</code>.
-This parameter has no effect on non-negative operands.</p>
+If this is <code><span class="typ-key">true</span></code>, negative operands will not preserve their sign
+bit, and bits which appear to the left after the shift will be
+<code><span class="typ-num">0</span></code>. This parameter has no effect on non-negative operands.</p>
 
 
 <p>Default:<code><span class="typ-key">false</span></code></p>
+
+
+
+
+
+
+  <h3 id="-from-bytes" class="method-head"><span><code>from-bytes</code></span></h3>
+  
+<p>Converts bytes to an integer.</p>
+
+<div class="code code-definition ">int.<span
+    class="typ-func">from-bytes</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a>, </span><span
+      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-signed">signed<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">int</span><span class="typ-punct">.</span><span class="typ-func">from-bytes</span><span class="typ-punct">(</span><span class="typ-func">bytes</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">int</span><span class="typ-punct">.</span><span class="typ-func">from-bytes</span><span class="typ-punct">(</span><span class="typ-func">bytes</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span> endian<span class="typ-punct">:</span> <span class="typ-str">&quot;big&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/25803243e8df78600f96b7b0c58fef0b.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-from-bytes-from-bytes-parameters-bytes"><code>bytes</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a>
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-from-bytes-from-bytes-parameters-bytes-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-from-bytes-from-bytes-parameters-bytes-positional-tooltip-qm-label">
+          <title id="definitions-from-bytes-from-bytes-parameters-bytes-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-from-bytes-from-bytes-parameters-bytes-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The bytes that should be converted to an integer.</p>
+<p>Must be of length at most 8 so that the result fits into a 64-bit
+signed integer.</p>
+
+
+
+
+<h4 id="definitions-from-bytes-from-bytes-parameters-endian"><code>endian</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The endianness of the conversion.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->big<!-- -->&quot;</code></div>
+      <div>
+        <p>Big-endian byte order: The highest-value byte is at the beginning of the
+bytes.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->little<!-- -->&quot;</code></div>
+      <div>
+        <p>Little-endian byte order: The lowest-value byte is at the beginning of
+the bytes.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;little&quot;</span></code></p>
+
+
+
+<h4 id="definitions-from-bytes-from-bytes-parameters-signed"><code>signed</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>Whether the bytes should be treated as a signed integer. If this is
+<code><span class="typ-key">true</span></code> and the most significant bit is set, the resulting number
+will negative.</p>
+
+
+<p>Default:<code><span class="typ-key">true</span></code></p>
+
+
+
+
+
+
+  <h3 id="-to-bytes" class="method-head"><span><code>to-bytes</code></span></h3>
+  
+<p>Converts an integer to bytes.</p>
+
+<div class="code code-definition ">self.<span
+    class="typ-func">to-bytes</span>(<div class="arguments"><span
+      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-size">size<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">array</span><span class="typ-punct">(</span><span class="typ-num">10000</span><span class="typ-punct">.</span><span class="typ-func">to-bytes</span><span class="typ-punct">(</span>endian<span class="typ-punct">:</span> <span class="typ-str">&quot;big&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-func">#</span><span class="typ-func">array</span><span class="typ-punct">(</span><span class="typ-num">10000</span><span class="typ-punct">.</span><span class="typ-func">to-bytes</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/d9b727d533eb42b76ba141a8db3211d6.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-to-bytes-to-bytes-parameters-endian"><code>endian</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The endianness of the conversion.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->big<!-- -->&quot;</code></div>
+      <div>
+        <p>Big-endian byte order: The highest-value byte is at the beginning of the
+bytes.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->little<!-- -->&quot;</code></div>
+      <div>
+        <p>Little-endian byte order: The lowest-value byte is at the beginning of
+the bytes.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;little&quot;</span></code></p>
+
+
+
+<h4 id="definitions-to-bytes-to-bytes-parameters-size"><code>size</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The size in bytes of the resulting bytes (must be at least zero). If
+the integer is too large to fit in the specified size, the
+conversion will truncate the remaining bytes based on the
+endianness. To keep the same resulting value, if the endianness is
+big-endian, the truncation will happen at the rightmost bytes.
+Otherwise, if the endianness is little-endian, the truncation will
+happen at the leftmost bytes.</p>
+<p>Be aware that if the integer is negative and the size is not enough
+to make the number fit, when passing the resulting bytes to
+<code>int.from-bytes</code>, the resulting number might be positive, as the
+most significant bit might not be set to 1.</p>
+
+
+<p>Default:<code><span class="typ-num">8</span></code></p>
 
 
 

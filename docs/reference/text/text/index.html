@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -888,9 +900,10 @@ With a set rule.
       class="overview-param"><a href="#parameters-script">script<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-dir">dir<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/direction" class="pill pill-obj">direction</a>, </span><span
       class="overview-param"><a href="#parameters-hyphenate">hyphenate<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
+      class="overview-param"><a href="#parameters-costs">costs<!-- -->: </a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-kerning">kerning<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-alternates">alternates<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
-      class="overview-param"><a href="#parameters-stylistic-set">stylistic-set<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-stylistic-set">stylistic-set<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span><span
       class="overview-param"><a href="#parameters-ligatures">ligatures<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-discretionary-ligatures">discretionary-ligatures<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-historical-ligatures">historical-ligatures<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
@@ -942,18 +955,19 @@ automatically. The priority is: project fonts &gt; server fonts.</p>
 </li>
 <li>
 <p>Locally, Typst uses your installed system fonts or embedded fonts in
-the CLI, which are <code>Linux Libertine</code>, <code>New Computer Modern</code>,
+the CLI, which are <code>Libertinus Serif</code>, <code>New Computer Modern</code>,
 <code>New Computer Modern Math</code>, and <code>DejaVu Sans Mono</code>. In addition, you
 can use the <code>--font-path</code> argument or <code>TYPST_FONT_PATHS</code> environment
 variable to add directories that should be scanned for fonts. The
 priority is: <code>--font-paths</code> &gt; system fonts &gt; embedded fonts. Run
 <code>typst fonts</code> to see the fonts that Typst has discovered on your
-system.</p>
+system. Note that you can pass the <code>--ignore-system-fonts</code> parameter
+to the CLI to ensure Typst won't search for system fonts.</p>
 </li>
 </ul>
 
 
-<p>Default:<code><span class="typ-str">&quot;linux libertine&quot;</span></code></p>
+<p>Default:<code><span class="typ-str">&quot;libertinus serif&quot;</span></code></p>
 
 
 <details class="folding-example">
@@ -1089,9 +1103,9 @@ change your mind about how to signify the emphasis.</p>
 <details class="folding-example">
   <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
   <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Linux Libertine&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;italic&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Italic<span class="typ-punct">]</span>
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Libertinus Serif&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;italic&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Italic<span class="typ-punct">]</span>
 <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;DejaVu Sans&quot;</span><span class="typ-punct">,</span> style<span class="typ-punct">:</span> <span class="typ-str">&quot;oblique&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Oblique<span class="typ-punct">]</span>
-</code></pre><div class="preview"><img src="/assets/docs/50f6c17278b2799fc7207e00ab68d482.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/30aa7b4eac5d18ef96999e6ed8916afb.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 
@@ -1461,7 +1475,7 @@ the space character in the font.</p>
 words, use the <a href="/docs/reference/text/text/#parameters-tracking"><code>tracking</code></a> property instead.</p>
 
 
-<p>Default:<code><span class="typ-num">100%</span></code></p>
+<p>Default:<code><span class="typ-num">100%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 <details class="folding-example">
@@ -1884,7 +1898,7 @@ common Unicode script property.</p>
   <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
   <div class="folding">
     <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
-  font<span class="typ-punct">:</span> <span class="typ-str">&quot;Linux Libertine&quot;</span><span class="typ-punct">,</span>
+  font<span class="typ-punct">:</span> <span class="typ-str">&quot;Libertinus Serif&quot;</span><span class="typ-punct">,</span>
   size<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 
@@ -1896,7 +1910,7 @@ common Unicode script property.</p>
 
 <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>lang<span class="typ-punct">:</span> <span class="typ-str">&quot;ro&quot;</span><span class="typ-punct">,</span> script<span class="typ-punct">:</span> <span class="typ-str">&quot;grek&quot;</span><span class="typ-punct">)</span>
 <span class="typ-pol">#</span><span class="typ-pol">scedilla</span> <span class="typ-comment">// S with a cedilla</span>
-</code></pre><div class="preview"><img src="/assets/docs/c92bd58e8ea706185de662638c552133.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/45ff76a793d97b44375d19dad343f036.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 
@@ -1938,9 +1952,10 @@ Furthermore, setting the direction affects the alignment values <code>start</cod
 and <code>end</code>, which are equivalent to <code>left</code> and <code>right</code> in <code>ltr</code> text and
 the other way around in <code>rtl</code> text.</p>
 <p>If you set this to <code>rtl</code> and experience bugs or in some way bad looking
-output, please do get in touch with us through the
-<a href="https://typst.app/contact">contact form</a> or our
-<a href="/docs/community/#discord">Discord server</a>!</p>
+output, please get in touch with us through the
+<a href="https://forum.typst.app/">Forum</a>,
+<a href="https://discord.gg/2uDybryKPe">Discord server</a>,
+or our <a href="https://typst.app/contact">contact form</a>.</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>
@@ -2002,6 +2017,78 @@ This text illustrates how
 enabling hyphenation can
 improve justification.
 </code></pre><div class="preview"><img src="/assets/docs/c71fcc1deec3442f9ad0d6a67a2efabf.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="text-text-parameters-costs"><code>costs</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>
+      
+    </div>
+    <small><span
+        aria-describedby="text-text-parameters-costs-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="text-text-parameters-costs-settable-tooltip-qm-label">
+          <title id="text-text-parameters-costs-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="text-text-parameters-costs-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The &quot;cost&quot; of various choices when laying out text. A higher cost means
+the layout engine will make the choice less often. Costs are specified
+as a ratio of the default cost, so <code><span class="typ-num">50%</span></code> will make text layout twice
+as eager to make a given choice, while <code><span class="typ-num">200%</span></code> will make it half as
+eager.</p>
+<p>Currently, the following costs can be customized:</p>
+<ul>
+<li><code>hyphenation</code>: splitting a word across multiple lines</li>
+<li><code>runt</code>: ending a paragraph with a line with a single word</li>
+<li><code>widow</code>: leaving a single line of paragraph on the next page</li>
+<li><code>orphan</code>: leaving single line of paragraph on the previous page</li>
+</ul>
+<p>Hyphenation is generally avoided by placing the whole word on the next
+line, so a higher hyphenation cost can result in awkward justification
+spacing.</p>
+<p>Runts are avoided by placing more or fewer words on previous lines, so a
+higher runt cost can result in more awkward in justification spacing.</p>
+<p>Text layout prevents widows and orphans by default because they are
+generally discouraged by style guides. However, in some contexts they
+are allowed because the prevention method, which moves a line to the
+next page, can result in an uneven number of lines between pages. The
+<code>widow</code> and <code>orphan</code> costs allow disabling these modifications.
+(Currently, <code><span class="typ-num">0%</span></code> allows widows/orphans; anything else, including the
+default of <code><span class="typ-num">100%</span></code>, prevents them. More nuanced cost specification for
+these modifications is planned for the future.)</p>
+
+
+<p>Default:<code><span class="typ-punct">(</span>
+  hyphenation<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span>
+  runt<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span>
+  widow<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span>
+  orphan<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>hyphenate<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span> size<span class="typ-punct">:</span> <span class="typ-num">11.4pt</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span>
+
+<span class="typ-comment">// Set hyphenation to ten times the normal cost.</span>
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>costs<span class="typ-punct">:</span> <span class="typ-punct">(</span>hyphenation<span class="typ-punct">:</span> <span class="typ-num">1000%</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/27a2effcf4c7a6d25dd80fccfed0f302.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 
@@ -2104,6 +2191,8 @@ Setting this to <code><span class="typ-key">true</span></code> switches to these
       
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
     </div>
     <small><span
         aria-describedby="text-text-parameters-stylistic-set-settable-tooltip">Settable</span>
@@ -2118,15 +2207,27 @@ Setting this to <code><span class="typ-key">true</span></code> switches to these
     </small>
   </div>
 </h4>
-<p>Which stylistic set to apply. Font designers can categorize alternative
+<p>Which stylistic sets to apply. Font designers can categorize alternative
 glyphs forms into stylistic sets. As this value is highly font-specific,
-you need to consult your font to know which sets are available. When set
-to an integer between <code><span class="typ-num">1</span></code> and <code><span class="typ-num">20</span></code>, enables the corresponding
-OpenType font feature from <code>ss01</code>, ..., <code>ss20</code>.</p>
+you need to consult your font to know which sets are available.</p>
+<p>This can be set to an integer or an array of integers, all
+of which must be between <code><span class="typ-num">1</span></code> and <code><span class="typ-num">20</span></code>, enabling the
+corresponding OpenType feature(s) from <code>ss01</code> to <code>ss20</code>.
+Setting this to <code><span class="typ-key">none</span></code> will disable all stylistic sets.</p>
 
 
-<p>Default:<code><span class="typ-key">none</span></code></p>
+<p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">)</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;IBM Plex Serif&quot;</span><span class="typ-punct">)</span>
+ß vs <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>stylistic-set<span class="typ-punct">:</span> <span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">[</span>ß<span class="typ-punct">]</span> <span class="typ-escape">\</span>
+10 years ago vs <span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>stylistic-set<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>10 years ago<span class="typ-punct">]</span>
+</code></pre><div class="preview"><img src="/assets/docs/c9ce75fc52205bd218c7408c4688dcba.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="text-text-parameters-ligatures"><code>ligatures</code>

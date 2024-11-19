@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/"  aria-current="page" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -863,8 +875,9 @@
 
 <div class="code code-definition "><span
     class="typ-func">scale</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-x">x<!-- -->: </a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
-      class="overview-param"><a href="#parameters-y">y<!-- -->: </a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
+      class="overview-param"><a href="#parameters-x">x<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
+      class="overview-param"><a href="#parameters-y">y<!-- -->: </a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>, </span><span
       class="overview-param"><a href="#parameters-origin">origin<!-- -->: </a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
       class="overview-param"><a href="#parameters-reflow">reflow<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
@@ -872,9 +885,57 @@
 
 
 
+<h4 id="scale-scale-parameters-factor"><code>factor</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+      
+    </div>
+    <small><span
+        aria-describedby="scale-scale-parameters-factor-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="scale-scale-parameters-factor-positional-tooltip-qm-label">
+          <title id="scale-scale-parameters-factor-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="scale-scale-parameters-factor-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="scale-scale-parameters-factor-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="scale-scale-parameters-factor-settable-tooltip-qm-label">
+          <title id="scale-scale-parameters-factor-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="scale-scale-parameters-factor-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The scaling factor for both axes, as a positional argument. This is just
+an optional shorthand notation for setting <code>x</code> and <code>y</code> to the same
+value.</p>
+
+
+<p>Default:<code><span class="typ-num">100%</span></code></p>
+
+
+
 <h4 id="scale-scale-parameters-x"><code>x</code>
   <div class="additional-info">
     <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
       
       <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
       
@@ -903,6 +964,10 @@
 <h4 id="scale-scale-parameters-y"><code>y</code>
   <div class="additional-info">
     <div>
+      
+      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
       
       <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
       
@@ -1040,8 +1105,8 @@ the scaled content and adjust the layout accordingly.</p>
       <div class="page-end-buttons"><a href="/docs/reference/layout/rotate/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
           <div><span class="page-title">Rotate</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/layout/h/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">Spacing (H)</span><span class="hint">次に進む</span></div>
+        </a><a href="/docs/reference/layout/skew/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Skew</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>

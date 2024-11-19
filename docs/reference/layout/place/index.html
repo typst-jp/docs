@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -841,22 +853,60 @@
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
 </small></h1>
-<p>Places content at an absolute position.</p>
-<p>Placed content will not affect the position of other content. Place is
-always relative to its parent container and will be in the foreground of all
-other content in the container. Page margins will be respected.</p>
-<h2 id="example">Example</h2>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">60pt</span><span class="typ-punct">)</span>
+<p>Places content relatively to its parent container.</p>
+<p>Placed content can be either overlaid (the default) or floating. Overlaid
+content is aligned with the parent container according to the given
+<a href="/docs/reference/layout/place/#parameters-alignment"><code>alignment</code></a>, and shown over any other content added so
+far in the container. Floating content is placed at the top or bottom of
+the container, displacing other content down or up respectively. In both
+cases, the content position can be adjusted with <a href="/docs/reference/layout/place/#parameters-dx"><code>dx</code></a> and
+<a href="/docs/reference/layout/place/#parameters-dy"><code>dy</code></a> offsets without affecting the layout.</p>
+<p>The parent can be any container such as a <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a>, <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a>,
+<a href="/docs/reference/visualize/rect/" title="`rect`"><code>rect</code></a>, etc. A top level <code>place</code> call will place content directly
+in the text area of the current page. This can be used for absolute
+positioning on the page: with a <code>top + left</code>
+<a href="/docs/reference/layout/place/#parameters-alignment"><code>alignment</code></a>, the offsets <code>dx</code> and <code>dy</code> will set the
+position of the element's top left corner relatively to the top left corner
+of the text area. For absolute positioning on the full page including
+margins, you can use <code>place</code> in <a href="/docs/reference/layout/page/#parameters-foreground"><code>page.foreground</code></a> or
+<a href="/docs/reference/layout/page/#parameters-background"><code>page.background</code></a>.</p>
+<h2 id="examples">Examples</h2>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">120pt</span><span class="typ-punct">)</span>
 Hello, world!
 
-<span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span>
-  top <span class="typ-op">+</span> right<span class="typ-punct">,</span>
-  <span class="typ-func">square</span><span class="typ-punct">(</span>
-    width<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span>
-    stroke<span class="typ-punct">:</span> <span class="typ-num">2pt</span> <span class="typ-op">+</span> blue
-  <span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>
+  width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span>
+  height<span class="typ-punct">:</span> <span class="typ-num">2cm</span><span class="typ-punct">,</span>
+  <span class="typ-func">place</span><span class="typ-punct">(</span>horizon <span class="typ-op">+</span> right<span class="typ-punct">,</span> <span class="typ-func">square</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/2f21fdc6427bee49b180be0a51e8155d.png" alt="Preview" width="480" height="190"/></div></div>
+
+<span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span>
+  top <span class="typ-op">+</span> left<span class="typ-punct">,</span>
+  dx<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">5pt</span><span class="typ-punct">,</span>
+  <span class="typ-func">square</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span> fill<span class="typ-punct">:</span> red<span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/53c8eb9bccd11c631e9e24875bc3b418.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="effect-on-other-elements">Effect on the position of other elements</h2>
+<p>Overlaid elements don't take space in the flow of content, but a <code>place</code>
+call inserts an invisible block-level element in the flow. This can
+affect the layout by breaking the current paragraph. To avoid this,
+you can wrap the <code>place</code> call in a <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> when the call is made
+in the middle of a paragraph. The alignment and offsets will then be
+relative to this zero-size box. To make sure it doesn't interfere with
+spacing, the box should be attached to a word using a word joiner.</p>
+<p>For example, the following defines a function for attaching an annotation
+to the following word:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">annotate</span><span class="typ-punct">(</span><span class="typ-op">..</span>args<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
+  <span class="typ-func">box</span><span class="typ-punct">(</span><span class="typ-func">place</span><span class="typ-punct">(</span><span class="typ-op">..</span>args<span class="typ-punct">)</span><span class="typ-punct">)</span>
+  sym<span class="typ-punct">.</span>wj
+  <span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> weak<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+<span class="typ-punct">}</span>
+
+A placed <span class="typ-func">#</span><span class="typ-func">annotate</span><span class="typ-punct">(</span><span class="typ-func">square</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span> dy<span class="typ-punct">:</span> <span class="typ-num">2pt</span><span class="typ-punct">)</span>
+square in my text.
+</code></pre><div class="preview"><img src="/assets/docs/08441666a4637e7a5267c2de9c646aa2.png" alt="Preview" width="480" height="190"/></div></div>
+<p>The zero-width weak spacing serves to discard spaces between the function
+call and the next word.</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -873,6 +923,7 @@ Hello, world!
 <div class="code code-definition "><span
     class="typ-func">place</span>(<div class="arguments"><span
       class="overview-param"><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
+      class="overview-param"><a href="#parameters-scope">scope<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-float">float<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-clearance">clearance<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-dx">dx<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
@@ -920,13 +971,85 @@ Hello, world!
 <li>If <code>float</code> is <code><span class="typ-key">false</span></code>, then this can be any alignment other than <code><span class="typ-key">auto</span></code>.</li>
 <li>If <code>float</code> is <code><span class="typ-key">true</span></code>, then this must be <code><span class="typ-key">auto</span></code>, <code>top</code>, or <code>bottom</code>.</li>
 </ul>
-<p>When an axis of the page is <code><span class="typ-key">auto</span></code> sized, all alignments relative to
-that axis will be ignored, instead, the item will be placed in the
-origin of the axis.</p>
+<p>When <code>float</code> is <code><span class="typ-key">false</span></code> and no vertical alignment is specified, the
+content is placed at the current position on the vertical axis.</p>
 
 
 <p>Default:<code>start</code></p>
 
+
+
+<h4 id="place-place-parameters-scope"><code>scope</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    <small><span
+        aria-describedby="place-place-parameters-scope-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="place-place-parameters-scope-settable-tooltip-qm-label">
+          <title id="place-place-parameters-scope-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="place-place-parameters-scope-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Relative to which containing scope something is placed.</p>
+<p>The parent scope is primarily used with figures and, for
+this reason, the figure function has a mirrored <a href="/docs/reference/model/figure/#parameters-scope"><code>scope</code>
+parameter</a>. Nonetheless, it can also be more generally
+useful to break out of the columns. A typical example would be to
+<a href="/docs/guides/page-setup-guide/#columns">create a single-column title section</a>
+in a two-column document.</p>
+<p>Note that parent-scoped placement is currently only supported if <code>float</code>
+is <code><span class="typ-key">true</span></code>. This may change in the future.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->column<!-- -->&quot;</code></div>
+      <div>
+        <p>Place into the current column.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->parent<!-- -->&quot;</code></div>
+      <div>
+        <p>Place relative to the parent, letting the content span over all columns.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;column&quot;</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">150pt</span><span class="typ-punct">,</span> columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span>
+  top <span class="typ-op">+</span> center<span class="typ-punct">,</span>
+  scope<span class="typ-punct">:</span> <span class="typ-str">&quot;parent&quot;</span><span class="typ-punct">,</span>
+  float<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
+  <span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">80%</span><span class="typ-punct">,</span> fill<span class="typ-punct">:</span> aqua<span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">25</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/9f896a62e48a0c0af46a6222112933c2.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="place-place-parameters-float"><code>float</code>
@@ -950,8 +1073,10 @@ origin of the axis.</p>
   </div>
 </h4>
 <p>Whether the placed element has floating layout.</p>
-<p>Floating elements are positioned at the top or bottom of the page,
-displacing in-flow content.</p>
+<p>Floating elements are positioned at the top or bottom of the parent
+container, displacing in-flow content. They are always placed in the
+in-flow order relative to each other, as well as before any content
+following a later <a href="/docs/reference/layout/place/#definitions-flush" title="`place.flush`"><code>place.flush</code></a> element.</p>
 
 
 <p>Default:<code><span class="typ-key">false</span></code></p>
@@ -999,7 +1124,9 @@ displacing in-flow content.</p>
     </small>
   </div>
 </h4>
-<p>The amount of clearance the placed element has in a floating layout.</p>
+<p>The spacing between the placed element and other elements in a floating
+layout.</p>
+<p>Has no effect if <code>float</code> is <code><span class="typ-key">false</span></code>.</p>
 
 
 <p>Default:<code><span class="typ-num">1.5em</span></code></p>
@@ -1029,7 +1156,7 @@ displacing in-flow content.</p>
 <p>The horizontal displacement of the placed content.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 <details class="folding-example">
@@ -1074,7 +1201,7 @@ In other words, the placed content is treated as if it
 were wrapped in a <a href="/docs/reference/layout/move/" title="`move`"><code>move</code></a> element.</p>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -1108,6 +1235,54 @@ were wrapped in a <a href="/docs/reference/layout/move/" title="`move`"><code>mo
 
 
 
+<h2 id="definitions">
+  
+<span aria-describedby="definitions-tooltip">Definitions</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="definitions-tooltip-qm-label">
+    <title id="definitions-tooltip-qm-label">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="definitions-tooltip" tabindex="-1">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</div>
+</div>
+
+</h2>
+
+
+  <h3 id="-flush" class="method-head"><span><code>flush</code></span></h3>
+  
+<p>Asks the layout algorithm to place pending floating elements before
+continuing with the content.</p>
+<p>This is useful for preventing floating figures from spilling
+into the next section.</p>
+
+<div class="code code-definition single-arg">place.<span
+    class="typ-func">flush</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">15</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
+  <span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  placement<span class="typ-punct">:</span> <span class="typ-key">auto</span><span class="typ-punct">,</span>
+  caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>A rectangle<span class="typ-punct">]</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-pol">#</span><span class="typ-pol">place</span><span class="typ-punct">.</span><span class="typ-func">flush</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
+
+This text appears after the figure.
+</code></pre><div class="preview"><img src="/assets/docs/547fce749dadcf79da9e1c349d81617a.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+
+
 
 
 
@@ -1130,11 +1305,19 @@ were wrapped in a <a href="/docs/reference/layout/move/" title="`move`"><code>mo
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="examples"><a href="#examples">Examples</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="effect-on-other-elements"><a href="#effect-on-other-elements">Effect On Other Elements</a>
           <ul></ul>
         </li>
         
         <li data-assoc="parameters"><a href="#parameters">Parameters</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="definitions"><a href="#definitions">Definitions</a>
           <ul></ul>
         </li>
         

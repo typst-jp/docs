@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -866,7 +878,7 @@
 
 <div class="code code-definition ">math.<span
     class="typ-func">cases</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-delim">delim<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-delim">delim<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a><a href="/docs/reference/types/symbol" class="pill pill-obj">symbol</a>, </span><span
       class="overview-param"><a href="#parameters-reverse">reverse<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-gap">gap<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
@@ -878,7 +890,13 @@
   <div class="additional-info">
     <div>
       
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+      
       <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+      <a href="/docs/reference/types/symbol" class="pill pill-obj">symbol</a>
       
     </div>
     <small><span
@@ -895,58 +913,12 @@
   </div>
 </h4>
 <p>The delimiter to use.</p>
-
-<ul class="type-args">
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->(<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with parentheses.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->[<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with brackets.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->{<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with curly braces.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->|<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with vertical bars.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->||<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with double vertical bars.</p>
-      </div>
-    </div>
-  </li>
-  
-</ul>
+<p>Can be a single character specifying the left delimiter, in which case
+the right delimiter is inferred. Otherwise, can be an array containing a
+left and a right delimiter.</p>
 
 
-<p>Default:<code><span class="typ-str">&quot;{&quot;</span></code></p>
+<p>Default:<code><span class="typ-punct">(</span><span class="typ-str">&quot;{&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;}&quot;</span><span class="typ-punct">)</span></code></p>
 
 
 <details class="folding-example">
@@ -1018,7 +990,7 @@
 <p>The gap between branches.</p>
 
 
-<p>Default:<code><span class="typ-num">0.5em</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0.2em</span></code></p>
 
 
 <details class="folding-example">

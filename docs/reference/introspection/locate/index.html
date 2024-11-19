@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -848,11 +860,12 @@ retrieve the physical <a href="/docs/reference/introspection/location/#definitio
 </code></pre><div class="preview"><img src="/assets/docs/a9f407f9956790d25270207dfad46b98.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="compatibility">Compatibility</h2>
 <p>In Typst 0.10 and lower, the <code>locate</code> function took a closure that made the
-current location in the document available (like <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> does now).
-Compatibility with the old way will remain for a while to give package
-authors time to upgrade. To that effect, <code>locate</code> detects whether it
-received a selector or a user-defined function and adjusts its semantics
-accordingly. This behaviour will be removed in the future.</p>
+current location in the document available (like <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> does now). This
+usage pattern is deprecated. Compatibility with the old way will remain for
+a while to give package authors time to upgrade. To that effect, <code>locate</code>
+detects whether it received a selector or a user-defined function and
+adjusts its semantics accordingly. This behaviour will be removed in the
+future.</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>

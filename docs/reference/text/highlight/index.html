@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -860,7 +872,7 @@
 
 <div class="code code-definition "><span
     class="typ-func">highlight</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a>, </span><span
       class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-top-edge">top-edge<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-bottom-edge">bottom-edge<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
@@ -874,6 +886,8 @@
 <h4 id="highlight-highlight-parameters-fill"><code>fill</code>
   <div class="additional-info">
     <div>
+      
+      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
       
       <a href="/docs/reference/types/color" class="pill pill-col">color</a>
       
@@ -904,8 +918,10 @@
 <details class="folding-example">
   <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
   <div class="folding">
-    <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> blue<span class="typ-punct">)</span><span class="typ-punct">[</span>with blue<span class="typ-punct">]</span>.
-</code></pre><div class="preview"><img src="/assets/docs/111d0ec4615abd9bf808872af2ab2278.png" alt="Preview" width="480" height="190"/></div></div>
+    <div class="previewed-code"><pre><code>This is <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>
+  fill<span class="typ-punct">:</span> blue
+<span class="typ-punct">)</span><span class="typ-punct">[</span>highlighted with blue<span class="typ-punct">]</span>.
+</code></pre><div class="preview"><img src="/assets/docs/c136c4b72ebffb4392796c9d356c5572.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 
@@ -948,6 +964,16 @@
 
 <p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">:</span><span class="typ-punct">)</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code>This is a <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> fuchsia
+<span class="typ-punct">)</span><span class="typ-punct">[</span>stroked highlighting<span class="typ-punct">]</span>.
+</code></pre><div class="preview"><img src="/assets/docs/d69325be49a971d67b61f7737c098e99.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="highlight-highlight-parameters-top-edge"><code>top-edge</code>
@@ -1176,6 +1202,16 @@
 
 <p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">:</span><span class="typ-punct">)</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code>Listen <span class="typ-func">#</span><span class="typ-func">highlight</span><span class="typ-punct">(</span>
+  radius<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span> extent<span class="typ-punct">:</span> <span class="typ-num">2pt</span>
+<span class="typ-punct">)</span><span class="typ-punct">[</span>carefully<span class="typ-punct">]</span>, it will be on the test.
+</code></pre><div class="preview"><img src="/assets/docs/8a9c64d16937179ecfdcbf6b621c4345.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="highlight-highlight-parameters-body"><code>body</code>

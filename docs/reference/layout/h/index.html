@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/"  aria-current="page" >Spacing (H)</a></li>
@@ -847,12 +859,20 @@ remaining space on the line is distributed among all fractional spacings
 according to their relative fractions.</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code>First <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1cm</span><span class="typ-punct">)</span> Second <span class="typ-escape">\</span>
-First <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">30%</span><span class="typ-punct">)</span> Second <span class="typ-escape">\</span>
+First <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">30%</span><span class="typ-punct">)</span> Second
+</code></pre><div class="preview"><img src="/assets/docs/b02a615c7d8ead62904c6013c3acddcb.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="fractional-spacing">Fractional spacing</h2>
+<p>With fractional spacing, you can align things within a line without forcing
+a paragraph break (like <a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a> would). Each fractionally sized element
+gets space based on the ratio of its fraction to the sum of all fractions.</p>
+<div class="previewed-code"><pre><code>First <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> Second <span class="typ-escape">\</span>
+First <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> Second <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> Third <span class="typ-escape">\</span>
 First <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">2fr</span><span class="typ-punct">)</span> Second <span class="typ-func">#</span><span class="typ-func">h</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span> Third
-</code></pre><div class="preview"><img src="/assets/docs/75141e42b71ab9e6bb69e34b0ae0d2e5.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/a11a34ad0a90d498d4e87a59219ac584.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="math-spacing">Mathematical Spacing</h2>
 <p>In <a href="/docs/reference/math/">mathematical formulas</a>, you can additionally use these
-constants to add spacing between elements: <code>thin</code>, <code>med</code>, <code>thick</code>, <code>quad</code>, <code>wide</code>.</p>
+constants to add spacing between elements: <code>thin</code> (1/6 em), <code>med</code> (2/9 em),
+<code>thick</code> (5/18 em), <code>quad</code> (1 em), <code>wide</code> (2 em).</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -965,9 +985,9 @@ adjacent markup spaces.
 
 
       
-      <div class="page-end-buttons"><a href="/docs/reference/layout/scale/" class="previous"><img
+      <div class="page-end-buttons"><a href="/docs/reference/layout/skew/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">Scale</span><span class="hint">前に戻る</span></div>
+          <div><span class="page-title">Skew</span><span class="hint">前に戻る</span></div>
         </a><a href="/docs/reference/layout/v/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
           <div><span class="page-title">Spacing (V)</span><span class="hint">次に進む</span></div>
         </a></div>
@@ -983,6 +1003,10 @@ adjacent markup spaces.
         </li>
         
         <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="fractional-spacing"><a href="#fractional-spacing">Fractional Spacing</a>
           <ul></ul>
         </li>
         

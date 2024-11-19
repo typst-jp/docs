@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -851,6 +863,20 @@ suffix are repeated as-is.</p>
   <span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/c49443caf46299c5a909ea27c0c42f0c.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="numbering-patterns-and-numbering-functions">Numbering patterns and numbering functions</h2>
+<p>There are multiple instances where you can provide a numbering pattern or
+function in Typst. For example, when defining how to number
+<a href="/docs/reference/model/heading/">headings</a> or <a href="/docs/reference/model/figure/">figures</a>. Every time, the expected format
+is the same as the one described below for the
+<a href="/docs/reference/model/numbering/#parameters-numbering"><code>numbering</code></a> parameter.</p>
+<p>The following example illustrates that a numbering function is just a
+regular <a href="/docs/reference/foundations/function/" title="function">function</a> that accepts numbers and returns <a href="/docs/reference/foundations/content/" title="`content`"><code>content</code></a>.</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">unary</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">,</span> last<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-str">&quot;|&quot;</span> <span class="typ-op">*</span> last
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> unary<span class="typ-punct">)</span>
+<span class="typ-heading">= First heading</span>
+<span class="typ-heading">= Second heading</span>
+<span class="typ-heading">= Third heading</span>
+</code></pre><div class="preview"><img src="/assets/docs/23c05f576c9d548d7cb95b198224ecf5.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -896,12 +922,12 @@ suffix are repeated as-is.</p>
   </div>
 </h4>
 <p>Defines how the numbering works.</p>
-<p><strong>Counting symbols</strong> are <code>1</code>, <code>a</code>, <code>A</code>, <code>i</code>, <code>I</code>, <code>一</code>, <code>壹</code>, <code>あ</code>, <code>い</code>, <code>ア</code>, <code>イ</code>, <code>א</code>, <code>가</code>,
-<code>ㄱ</code>, and <code>*</code>. They are replaced by the number in the sequence, in the
-given case.</p>
+<p><strong>Counting symbols</strong> are <code>1</code>, <code>a</code>, <code>A</code>, <code>i</code>, <code>I</code>, <code>一</code>, <code>壹</code>, <code>あ</code>, <code>い</code>,
+<code>ア</code>, <code>イ</code>, <code>א</code>, <code>가</code>, <code>ㄱ</code>, <code>*</code>, <code>①</code>, and <code>⓵</code>. They are replaced by the
+number in the sequence, preserving the original case.</p>
 <p>The <code>*</code> character means that symbols should be used to count, in the
-order of <code>*</code>, <code>†</code>, <code>‡</code>, <code>§</code>, <code>¶</code>, and <code>‖</code>. If there are more than six
-items, the number is represented using multiple symbols.</p>
+order of <code>*</code>, <code>†</code>, <code>‡</code>, <code>§</code>, <code>¶</code>, <code>‖</code>. If there are more than six
+items, the number is represented using repeated symbols.</p>
 <p><strong>Suffixes</strong> are all characters after the last counting symbol. They are
 repeated as-is at the end of any rendered number.</p>
 <p><strong>Prefixes</strong> are all characters that are neither counting symbols nor
@@ -983,6 +1009,10 @@ given, the last counting symbol with its prefix is repeated.</p>
         </li>
         
         <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="numbering-patterns-and-numbering-functions"><a href="#numbering-patterns-and-numbering-functions">Numbering Patterns And Numbering Functions</a>
           <ul></ul>
         </li>
         

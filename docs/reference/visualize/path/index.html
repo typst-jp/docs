@@ -6,13 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Path – Typstドキュメント日本語版</title>
-  <meta name="description" content="`path` 函数的文档">
+  <meta name="description" content="Documentation for the `path` function.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-doc-cn.github.io/docs/reference/visualize/path/">
   <meta property="og:title" content="Path – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="`path` 函数的文档">
+  <meta property="og:description" content="Documentation for the `path` function.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-doc-cn.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -207,6 +207,9 @@
                 
                 
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -868,6 +880,7 @@
 <div class="code code-definition "><span
     class="typ-func">path</span>(<div class="arguments"><span
       class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a>, </span><span
+      class="overview-param"><a href="#parameters-fill-rule">fill-rule<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/color" class="pill pill-col">color</a><a href="/docs/reference/types/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/types/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/types/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-closed">closed<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
@@ -904,12 +917,81 @@
 <p>How to fill the path.</p>
 <p>When setting a fill, the default stroke disappears. To create a
 rectangle with both fill and stroke, you have to configure both.</p>
-<p>Currently all paths are filled according to the <a href="https://en.wikipedia.org/wiki/Nonzero-rule">non-zero winding
-rule</a>.</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>
 
+
+
+<h4 id="path-path-parameters-fill-rule"><code>fill-rule</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+    </div>
+    <small><span
+        aria-describedby="path-path-parameters-fill-rule-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="path-path-parameters-fill-rule-settable-tooltip-qm-label">
+          <title id="path-path-parameters-fill-rule-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="path-path-parameters-fill-rule-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The drawing rule used to fill the path.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->non-zero<!-- -->&quot;</code></div>
+      <div>
+        <p>Specifies that &quot;inside&quot; is computed by a non-zero sum of signed edge crossings.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->even-odd<!-- -->&quot;</code></div>
+      <div>
+        <p>Specifies that &quot;inside&quot; is computed by an odd number of edge crossings.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;non-zero&quot;</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-comment">// We use `.with` to get a new</span>
+<span class="typ-comment">// function that has the common</span>
+<span class="typ-comment">// arguments pre-applied.</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> star <span class="typ-op">=</span> path<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span>
+  fill<span class="typ-punct">:</span> red<span class="typ-punct">,</span>
+  closed<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-num">25pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">star</span><span class="typ-punct">(</span>fill-rule<span class="typ-punct">:</span> <span class="typ-str">&quot;non-zero&quot;</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">star</span><span class="typ-punct">(</span>fill-rule<span class="typ-punct">:</span> <span class="typ-str">&quot;even-odd&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/b35f212b97cac5bc0415862bd35fa59e.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="path-path-parameters-stroke"><code>stroke</code>
@@ -946,7 +1028,7 @@ rule</a>.</p>
     </small>
   </div>
 </h4>
-<p>How to <a href="/docs/reference/visualize/stroke/">stroke</a> the path. This can be:</p>
+<p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the path. This can be:</p>
 <p>Can be set to  <code><span class="typ-key">none</span></code> to disable the stroke or to <code><span class="typ-key">auto</span></code> for a
 stroke of <code><span class="typ-num">1pt</span></code> black if and if only if no fill is given.</p>
 
@@ -1020,8 +1102,7 @@ start point.</p>
 <p>The vertices of the path.</p>
 <p>Each vertex can be defined in 3 ways:</p>
 <ul>
-<li>A regular point, as given to the <a href="/docs/reference/visualize/line/"><code>line</code></a> or
-<a href="/docs/reference/visualize/polygon/"><code>polygon</code></a> function.</li>
+<li>A regular point, as given to the <a href="/docs/reference/visualize/line/" title="`line`"><code>line</code></a> or <a href="/docs/reference/visualize/polygon/" title="`polygon`"><code>polygon</code></a> function.</li>
 <li>An array of two points, the first being the vertex and the second
 being the control point. The control point is expressed relative to
 the vertex and is mirrored to get the second control point. The given

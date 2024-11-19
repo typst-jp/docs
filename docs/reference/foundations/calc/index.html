@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -835,7 +847,7 @@
 <p>Module for calculations and processing of numeric values.</p>
 <p>These definitions are part of the <code>calc</code> module and not imported by default.
 In addition to the functions listed below, the <code>calc</code> module also defines
-the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code>, and <code>nan</code>.</p>
+the constants <code>pi</code>, <code>tau</code>, <code>e</code>, and <code>inf</code>.</p>
 <h2 id="functions">Calculation</h2>
 
   <h3 id="-abs" class="method-head"><span><code>abs</code></span></h3>
@@ -844,14 +856,15 @@ the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code
 
 <div class="code code-definition single-arg">calc.<span
     class="typ-func">abs</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/length" class="pill pill-num">length</a><a href="/docs/reference/types/angle" class="pill pill-num">angle</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a><a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
 
 
 
   <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-num">5pt</span> <span class="typ-op">-</span> <span class="typ-num">2cm</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-num">2fr</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/e510ee8d00f4e2c888a53ba546c26c14.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-num">2fr</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">abs</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;-342.440&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/88c5e57b0553009825b7fcb754db5919.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -870,6 +883,8 @@ the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code
       <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
       
       <a href="/docs/reference/types/fraction" class="pill pill-num">fraction</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -900,13 +915,14 @@ the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code
 
 <div class="code code-definition ">calc.<span
     class="typ-func">pow</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">pow</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/d58c2fba1429f6271ecfa7220f6d8199.png" alt="Preview" width="480" height="190"/></div></div>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">pow</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">pow</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;2.5&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/4b5c9213d648d07837738306519dd34c.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -917,6 +933,8 @@ the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -934,6 +952,7 @@ the constants <code>pi</code>, <code>tau</code>, <code>e</code>, <code>inf</code
   </div>
 </h4>
 <p>The base of the power.</p>
+<p>If this is a <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a>, the exponent can only be an <a href="/docs/reference/foundations/int/">integer</a>.</p>
 
 
 
@@ -1147,10 +1166,9 @@ radians.</p>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span> <span class="typ-op">==</span> calc<span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">270deg</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">sin</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/9a343f290b69c6546ce3068c8c32d9ea.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/a19cb0d1fdbcedc7c99c89fbf3c90fec.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -1199,10 +1217,9 @@ radians.</p>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cos</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cos</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cos</span><span class="typ-punct">(</span><span class="typ-num">1.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">cos</span><span class="typ-punct">(</span><span class="typ-num">90deg</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/5eefa7a2d93c8b89041d62c4187a2c30.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/d8787c444f722297a8d51354995d724a.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2091,17 +2108,21 @@ items from a set of <code>n</code> without regard to order.</p>
   
 <p>Rounds a number down to the nearest integer.</p>
 <p>If the number is already an integer, it is returned unchanged.</p>
+<p>Note that this function will always return an <a href="/docs/reference/foundations/int/">integer</a>, and will
+error if the resulting <a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> is larger than the maximum
+64-bit signed integer or smaller than the minimum for that type.</p>
 
 <div class="code code-definition single-arg">calc.<span
     class="typ-func">floor</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">500.1</span><span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">500.1</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/61eb20d7f3cd6373b777b4b105768cc6.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">floor</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;-3.14&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-op">-</span><span class="typ-num">4</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/7250aa6779d292f0841f01fb92280d9f.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2112,6 +2133,8 @@ items from a set of <code>n</code> without regard to order.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2140,17 +2163,21 @@ items from a set of <code>n</code> without regard to order.</p>
   
 <p>Rounds a number up to the nearest integer.</p>
 <p>If the number is already an integer, it is returned unchanged.</p>
+<p>Note that this function will always return an <a href="/docs/reference/foundations/int/">integer</a>, and will
+error if the resulting <a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> is larger than the maximum
+64-bit signed integer or smaller than the minimum for that type.</p>
 
 <div class="code code-definition single-arg">calc.<span
     class="typ-func">ceil</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">500.1</span><span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">500.1</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/69b2ab694eb4909e595d80cf4942bd27.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">ceil</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;-3.14&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/21685689e6370997f711812b2ea75313.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2161,6 +2188,8 @@ items from a set of <code>n</code> without regard to order.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2189,17 +2218,21 @@ items from a set of <code>n</code> without regard to order.</p>
   
 <p>Returns the integer part of a number.</p>
 <p>If the number is already an integer, it is returned unchanged.</p>
+<p>Note that this function will always return an <a href="/docs/reference/foundations/int/">integer</a>, and will
+error if the resulting <a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> is larger than the maximum
+64-bit signed integer or smaller than the minimum for that type.</p>
 
 <div class="code code-definition single-arg">calc.<span
     class="typ-func">trunc</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-num">15.9</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">3.7</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-num">15.9</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/a8f77e7eaa51dc0a953d69933f1e263f.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">trunc</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;8493.12949582390&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">8493</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/da38c613cde795c6d89079f6043bca28.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2210,6 +2243,8 @@ items from a set of <code>n</code> without regard to order.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2241,13 +2276,14 @@ items from a set of <code>n</code> without regard to order.</p>
 
 <div class="code code-definition single-arg">calc.<span
     class="typ-func">fract</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">fract</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">0</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">fract</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">3.1</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/e95d212f509a3f674b880f65d01a720a.png" alt="Preview" width="480" height="190"/></div></div>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">fract</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">3.1</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">fract</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">0</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">fract</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;234.23949211&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;0.23949211&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/a984f3a7bebd06b77e7e468c167645fa.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2258,6 +2294,8 @@ items from a set of <code>n</code> without regard to order.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2284,20 +2322,41 @@ items from a set of <code>n</code> without regard to order.</p>
 
   <h3 id="-round" class="method-head"><span><code>round</code></span></h3>
   
-<p>Rounds a number to the nearest integer.</p>
+<p>Rounds a number to the nearest integer away from zero.</p>
 <p>Optionally, a number of decimal places can be specified.</p>
+<p>If the number of digits is negative, its absolute value will indicate the
+amount of significant integer digits to remove before the decimal point.</p>
+<p>Note that this function will return the same type as the operand. That is,
+applying <code>round</code> to a <a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> will return a <code>float</code>, and to a <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a>,
+another <code>decimal</code>. You may explicitly convert the output of this function to
+an integer with <a href="/docs/reference/foundations/int/" title="`int`"><code>int</code></a>, but note that such a conversion will error if the
+<code>float</code> or <code>decimal</code> is larger than the maximum 64-bit signed integer or
+smaller than the minimum integer.</p>
+<p>In addition, this function can error if there is an attempt to round beyond
+the maximum or minimum integer or <code>decimal</code>. If the number is a <code>float</code>,
+such an attempt will cause <code>float<span class="typ-punct">.</span>inf</code> or <code><span class="typ-op">-</span>float<span class="typ-punct">.</span>inf</code> to be returned
+for maximum and minimum respectively.</p>
 
 <div class="code code-definition ">calc.<span
     class="typ-func">round</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="#parameters-digits">digits<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="#parameters-digits">digits<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
-<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.5</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.1415</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/909cf2add30990bd12abe88252ffd37d.png" alt="Preview" width="480" height="190"/></div></div>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.1415</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.14</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3.5</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">4.0</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3333.45</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">2</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3300.0</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">48953.45</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-op">-</span><span class="typ-num">49000.0</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-num">3333</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">2</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">3300</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">48953</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-op">-</span><span class="typ-num">49000</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;-6.5&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;-7&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;7.123456789&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-num">6</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;7.123457&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;3333.45&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">2</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;3300&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">round</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;-48953.45&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> digits<span class="typ-punct">:</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;-49000&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/d492129fb8d03a180f7b99d22f6a26c2.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2308,6 +2367,8 @@ items from a set of <code>n</code> without regard to order.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2339,7 +2400,9 @@ items from a set of <code>n</code> without regard to order.</p>
     
   </div>
 </h4>
-<p>The number of decimal places.</p>
+<p>If positive, the number of decimal places.</p>
+<p>If negative, the number of significant integer digits that should be
+removed before the decimal point.</p>
 
 
 <p>Default:<code><span class="typ-num">0</span></code></p>
@@ -2355,16 +2418,18 @@ items from a set of <code>n</code> without regard to order.</p>
 
 <div class="code code-definition ">calc.<span
     class="typ-func">clamp</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">10</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">5</span><span class="typ-punct">)</span>
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">10</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">5</span><span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">,</span> <span class="typ-num">10</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-num">6</span><span class="typ-punct">)</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">0</span><span class="typ-punct">,</span> <span class="typ-num">4</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/73b6c954f13326954ddededb400d41c2.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;5.45&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;45.9&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;5.45&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">assert</span><span class="typ-punct">(</span>calc<span class="typ-punct">.</span><span class="typ-func">clamp</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;5.45&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;6.75&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-num">12</span><span class="typ-punct">)</span> <span class="typ-op">==</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;6.75&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/852e98fde1f643b04057171340e4a904.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2375,6 +2440,8 @@ items from a set of <code>n</code> without regard to order.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2404,6 +2471,8 @@ items from a set of <code>n</code> without regard to order.</p>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
       
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
+      
     </div>
     <small>Required</small><small><span
         aria-describedby="definitions-clamp-clamp-parameters-min-positional-tooltip">Positional</span>
@@ -2431,6 +2500,8 @@ items from a set of <code>n</code> without regard to order.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2466,8 +2537,8 @@ items from a set of <code>n</code> without regard to order.</p>
 
 
   <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-str">&quot;typst&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;in&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;beta&quot;</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/fb22eeb2bde8fae1b41f607e630f4657.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">min</span><span class="typ-punct">(</span><span class="typ-str">&quot;typst&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;is&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;cool&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/411cb18fd81e000e28a105cb205dfca5.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2523,8 +2594,8 @@ Must not be empty.</p>
 
 
   <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">max</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">5</span><span class="typ-punct">,</span> <span class="typ-num">20</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">6</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">max</span><span class="typ-punct">(</span><span class="typ-str">&quot;typst&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;in&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;beta&quot;</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/0cc0245e974c507873103cb34aacc634.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">max</span><span class="typ-punct">(</span><span class="typ-str">&quot;typst&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;is&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;cool&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/387cc7b41a296991d227d66fe7a9396a.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2666,11 +2737,13 @@ Must not be empty.</p>
 <p>Calculates the remainder of two numbers.</p>
 <p>The value <code>calc.rem(x, y)</code> always has the same sign as <code>x</code>, and is smaller
 in magnitude than <code>y</code>.</p>
+<p>This can error if given a <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> input and the dividend is too small in
+magnitude compared to the divisor.</p>
 
 <div class="code code-definition ">calc.<span
     class="typ-func">rem</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a></div>
 
 
 
@@ -2690,6 +2763,8 @@ in magnitude than <code>y</code>.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2718,6 +2793,8 @@ in magnitude than <code>y</code>.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2750,8 +2827,8 @@ in magnitude than <code>y</code>.</p>
 
 <div class="code code-definition ">calc.<span
     class="typ-func">div-euclid</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a></div>
 
 
 
@@ -2759,8 +2836,9 @@ in magnitude than <code>y</code>.</p>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-num">1.75</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/bd780ec1a24e5250e30b9845c23817e7.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-num">1.75</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">div-euclid</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;1.75&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;0.5&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/e35b988805ca89c9d732f56afb3564f2.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2771,6 +2849,8 @@ in magnitude than <code>y</code>.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2800,6 +2880,8 @@ in magnitude than <code>y</code>.</p>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
       
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
+      
     </div>
     <small>Required</small><small><span
         aria-describedby="definitions-div-euclid-div-euclid-parameters-divisor-positional-tooltip">Positional</span>
@@ -2826,14 +2908,17 @@ in magnitude than <code>y</code>.</p>
   <h3 id="-rem-euclid" class="method-head"><span><code>rem-euclid</code></span></h3>
   
 <p>This calculates the least nonnegative remainder of a division.</p>
-<p>Warning: Due to a floating point round-off error, the remainder may equal the absolute
-value of the divisor if the dividend is much smaller in magnitude than the divisor
-and the dividend is negative. This only applies for floating point inputs.</p>
+<p>Warning: Due to a floating point round-off error, the remainder may equal
+the absolute value of the divisor if the dividend is much smaller in
+magnitude than the divisor and the dividend is negative. This only applies
+for floating point inputs.</p>
+<p>In addition, this can error if given a <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> input and the dividend is
+too small in magnitude compared to the divisor.</p>
 
 <div class="code code-definition ">calc.<span
     class="typ-func">rem-euclid</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a></div>
 
 
 
@@ -2841,8 +2926,9 @@ and the dividend is negative. This only applies for floating point inputs.</p>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-op">-</span><span class="typ-num">7</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem</span><span class="typ-punct">(</span><span class="typ-num">1.75</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/44d12330a4ce0842a3cc47a4628cac5f.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-num">1.75</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">rem-euclid</span><span class="typ-punct">(</span><span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;1.75&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-func">decimal</span><span class="typ-punct">(</span><span class="typ-str">&quot;0.5&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/8b16f866e2600cceda15a7455417aa61.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
@@ -2853,6 +2939,8 @@ and the dividend is negative. This only applies for floating point inputs.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2882,6 +2970,8 @@ and the dividend is negative. This only applies for floating point inputs.</p>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
       
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
+      
     </div>
     <small>Required</small><small><span
         aria-describedby="definitions-rem-euclid-rem-euclid-parameters-divisor-positional-tooltip">Positional</span>
@@ -2908,11 +2998,14 @@ and the dividend is negative. This only applies for floating point inputs.</p>
   <h3 id="-quo" class="method-head"><span><code>quo</code></span></h3>
   
 <p>Calculates the quotient (floored division) of two numbers.</p>
+<p>Note that this function will always return an <a href="/docs/reference/foundations/int/">integer</a>, and will
+error if the resulting <a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> or <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> is larger than the maximum
+64-bit signed integer or smaller than the minimum for that type.</p>
 
 <div class="code code-definition ">calc.<span
     class="typ-func">quo</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span><span
+      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
 
 
 
@@ -2930,6 +3023,8 @@ and the dividend is negative. This only applies for floating point inputs.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span
@@ -2958,6 +3053,8 @@ and the dividend is negative. This only applies for floating point inputs.</p>
       <a href="/docs/reference/types/int" class="pill pill-num">int</a>
       
       <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+      
+      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
       
     </div>
     <small>Required</small><small><span

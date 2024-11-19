@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -842,32 +854,36 @@
 </div>
 </small></h1>
 <p>Separates a region into multiple equally sized columns.</p>
-<p>The <code>column</code> function allows to separate the interior of any container into
-multiple columns. It will not equalize the height of the columns, instead,
-the columns will take up the height of their container or the remaining
-height on the page. The columns function can break across pages if
-necessary.</p>
-<p>If you need to insert columns across your whole document, you can use the
-<a href="/docs/reference/layout/page/#parameters-columns"><code>page</code> function's <code>columns</code> parameter</a> instead.</p>
-<h2 id="example">Example</h2>
-<div class="previewed-code"><pre><code><span class="typ-heading">= Towards Advanced Deep Learning</span>
+<p>The <code>column</code> function lets you separate the interior of any container into
+multiple columns. It will currently not balance the height of the columns.
+Instead, the columns will take up the height of their container or the
+remaining height on the page. Support for balanced columns is planned for
+the future.</p>
+<h2 id="page-level">Page-level columns</h2>
+<p>If you need to insert columns across your whole document, use the <code>page</code>
+function's <a href="/docs/reference/layout/page/#parameters-columns"><code>columns</code> parameter</a> instead. This will create
+the columns directly at the page-level rather than wrapping all of your
+content in a layout container. As a result, things like
+<a href="/docs/reference/layout/pagebreak/">pagebreaks</a>, <a href="/docs/reference/model/footnote/">footnotes</a>, and <a href="/docs/reference/model/par/#definitions-line">line
+numbers</a> will continue to work as expected. For more information,
+also read the <a href="/docs/guides/page-setup-guide/#columns">relevant part of the page setup
+guide</a>.</p>
+<h2 id="breaking-out">Breaking out of columns</h2>
+<p>To temporarily break out of columns (e.g. for a paper's title), use
+parent-scoped floating placement:</p>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">150pt</span><span class="typ-punct">)</span>
 
-<span class="typ-func">#</span><span class="typ-func">box</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">68pt</span><span class="typ-punct">,</span>
- <span class="typ-func">columns</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> gutter<span class="typ-punct">:</span> <span class="typ-num">11pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
-   <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
-   This research was funded by the
-   National Academy of Sciences.
-   NAoS provided support for field
-   tests and interviews with a
-   grant of up to USD 40.000 for a
-   period of 6 months.
- <span class="typ-punct">]</span>
+<span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span>
+  top <span class="typ-op">+</span> center<span class="typ-punct">,</span>
+  scope<span class="typ-punct">:</span> <span class="typ-str">&quot;parent&quot;</span><span class="typ-punct">,</span>
+  float<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
+  <span class="typ-func">text</span><span class="typ-punct">(</span><span class="typ-num">1.4em</span><span class="typ-punct">,</span> weight<span class="typ-punct">:</span> <span class="typ-str">&quot;bold&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+    My document
+  <span class="typ-punct">]</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 
-In recent years, deep learning has
-increasingly been used to solve a
-variety of problems.
-</code></pre><div class="preview"><img src="/assets/docs/c5eb795a3e563522297d1f157b2eb6d5.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">40</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/38a6fa2245d9d4ae65a4c1a481be6e80.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">Parameters</span>
@@ -951,7 +967,7 @@ variety of problems.
 <p>The size of the gutter space between each column.</p>
 
 
-<p>Default:<code><span class="typ-num">4%</span></code></p>
+<p>Default:<code><span class="typ-num">4%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span></code></p>
 
 
 
@@ -1007,7 +1023,11 @@ variety of problems.
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="page-level"><a href="#page-level">Page Level</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="breaking-out"><a href="#breaking-out">Breaking Out</a>
           <ul></ul>
         </li>
         

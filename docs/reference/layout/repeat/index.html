@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -844,7 +856,7 @@
 <p>Repeats content to the available space.</p>
 <p>This can be useful when implementing a custom index, reference, or outline.</p>
 <p>Space may be inserted between the instances of the body parameter, so be
-sure to include negative space if you need the instances to overlap.</p>
+sure to adjust the <a href="/docs/reference/layout/repeat/#parameters-justify"><code>justify</code></a> parameter accordingly.</p>
 <p>Errors if there no bounds on the available space, as it would create
 infinite content.</p>
 <h2 id="example">Example</h2>
@@ -870,9 +882,11 @@ infinite content.</p>
 
 </h2>
 
-<div class="code code-definition single-arg"><span
+<div class="code code-definition "><span
     class="typ-func">repeat</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+      class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span><span
+      class="overview-param"><a href="#parameters-gap">gap<!-- -->: </a><a href="/docs/reference/types/length" class="pill pill-num">length</a>, </span><span
+      class="overview-param"><a href="#parameters-justify">justify<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
 
 
@@ -900,6 +914,61 @@ infinite content.</p>
 </h4>
 <p>The content to repeat.</p>
 
+
+
+
+<h4 id="repeat-repeat-parameters-gap"><code>gap</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/length" class="pill pill-num">length</a>
+      
+    </div>
+    <small><span
+        aria-describedby="repeat-repeat-parameters-gap-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="repeat-repeat-parameters-gap-settable-tooltip-qm-label">
+          <title id="repeat-repeat-parameters-gap-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="repeat-repeat-parameters-gap-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The gap between each instance of the body.</p>
+
+
+<p>Default:<code><span class="typ-num">0pt</span></code></p>
+
+
+
+<h4 id="repeat-repeat-parameters-justify"><code>justify</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+      
+    </div>
+    <small><span
+        aria-describedby="repeat-repeat-parameters-justify-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="repeat-repeat-parameters-justify-settable-tooltip-qm-label">
+          <title id="repeat-repeat-parameters-justify-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="repeat-repeat-parameters-justify-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Whether to increase the gap between instances to completely fill the
+available space.</p>
+
+
+<p>Default:<code><span class="typ-key">true</span></code></p>
 
 
 

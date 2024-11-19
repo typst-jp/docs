@@ -209,6 +209,9 @@
                 <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
                 
                 
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
                 <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
                 
                 
@@ -404,6 +407,9 @@
                 <li><a href="/docs/reference/math/attach" >Attach</a></li>
                 
                 
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
                 <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
                 
                 
@@ -432,6 +438,9 @@
                 
                 
                 <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
                 
                 
                 <li><a href="/docs/reference/math/styles" >Styles</a></li>
@@ -550,6 +559,9 @@
                 
                 
                 <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
                 
                 
                 <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
@@ -842,7 +854,8 @@
 </div>
 </small></h1>
 <p>A column vector.</p>
-<p>Content in the vector's elements can be aligned with the <code>&amp;</code> symbol.</p>
+<p>Content in the vector's elements can be aligned with the
+<a href="/docs/reference/math/vec/#parameters-align"><code>align</code></a> parameter, or the <code>&amp;</code> symbol.</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>a<span class="typ-punct">,</span> b<span class="typ-punct">,</span> c<span class="typ-punct">)</span> <span class="typ-pol">dot</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">,</span> 3<span class="typ-punct">)</span>
     = a + 2b + 3c <span class="typ-math-delim">$</span>
@@ -862,7 +875,8 @@
 
 <div class="code code-definition ">math.<span
     class="typ-func">vec</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-delim">delim<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-delim">delim<!-- -->: </a><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a><a href="/docs/reference/types/symbol" class="pill pill-obj">symbol</a>, </span><span
+      class="overview-param"><a href="#parameters-align">align<!-- -->: </a><a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>, </span><span
       class="overview-param"><a href="#parameters-gap">gap<!-- -->: </a><a href="/docs/reference/types/relative" class="pill pill-obj">relative</a>, </span><span
       class="overview-param"><a href="/docs/reference/types/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
 
@@ -876,6 +890,10 @@
       <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
       
       <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+      
+      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+      
+      <a href="/docs/reference/types/symbol" class="pill pill-obj">symbol</a>
       
     </div>
     <small><span
@@ -892,58 +910,12 @@
   </div>
 </h4>
 <p>The delimiter to use.</p>
-
-<ul class="type-args">
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->(<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with parentheses.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->[<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with brackets.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->{<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with curly braces.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->|<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with vertical bars.</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->||<!-- -->&quot;</code></div>
-      <div>
-        <p>Delimit with double vertical bars.</p>
-      </div>
-    </div>
-  </li>
-  
-</ul>
+<p>Can be a single character specifying the left delimiter, in which case
+the right delimiter is inferred. Otherwise, can be an array containing a
+left and a right delimiter.</p>
 
 
-<p>Default:<code><span class="typ-str">&quot;(&quot;</span></code></p>
+<p>Default:<code><span class="typ-punct">(</span><span class="typ-str">&quot;(&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;)&quot;</span><span class="typ-punct">)</span></code></p>
 
 
 <details class="folding-example">
@@ -952,6 +924,42 @@
     <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">vec</span><span class="typ-punct">(</span>delim<span class="typ-punct">:</span> <span class="typ-str">&quot;[&quot;</span><span class="typ-punct">)</span>
 <span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
 </code></pre><div class="preview"><img src="/assets/docs/697bbf8b2455e76872bc76d3cc23a219.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="vec-vec-parameters-align"><code>align</code>
+  <div class="additional-info">
+    <div>
+      
+      <a href="/docs/reference/types/alignment" class="pill pill-obj">alignment</a>
+      
+    </div>
+    <small><span
+        aria-describedby="vec-vec-parameters-align-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="vec-vec-parameters-align-settable-tooltip-qm-label">
+          <title id="vec-vec-parameters-align-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="vec-vec-parameters-align-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The horizontal alignment that each element should have.</p>
+
+
+<p>Default:<code>center</code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">vec</span><span class="typ-punct">(</span>align<span class="typ-punct">:</span> right<span class="typ-punct">)</span>
+<span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span><span class="typ-escape">-</span>1<span class="typ-punct">,</span> 1<span class="typ-punct">,</span> <span class="typ-escape">-</span>1<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/5f521e91597ec3b5afcb4ca8756e929e.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 
@@ -979,7 +987,7 @@
 <p>The gap between elements.</p>
 
 
-<p>Default:<code><span class="typ-num">0.5em</span></code></p>
+<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">0.2em</span></code></p>
 
 
 <details class="folding-example">
