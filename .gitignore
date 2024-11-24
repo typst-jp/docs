@@ -31,3 +31,6 @@ package-lock.json
 /assets/docs
 /assets/docs.json
 /dist
+
+# mise
+.venv
