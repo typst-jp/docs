@@ -32,7 +32,7 @@ use crate::utils::LazyHash;
 use crate::visualize::Path;
 use crate::World;
 
-/// ラスターまたはベクター画像。
+/// ラスターまたはベクター画像
 ///
 /// 画像を[`figure`]で囲むことで、番号とキャプションを与えることができます。
 ///
@@ -53,7 +53,7 @@ use crate::World;
 pub struct ImageElem {
     /// 画像ファイルのパス
     ///
-    /// より詳細な情報は[Pathsの章]($syntax/#paths)を参照
+    /// より詳細な情報は[Pathsの章]($syntax/#paths)を参照してください。
     #[required]
     #[parse(
         let Spanned { v: path, span } =
@@ -74,20 +74,20 @@ pub struct ImageElem {
     /// 画像のフォーマット。デフォルトでは自動的に検出されます。
     ///
     /// サポートされている拡張子は PNG, JPEG, GIF, SVGです。
-    /// [PDFの画像はまだサポートされていません。](https://github.com/typst/typst/issues/145).
+    /// [PDFの画像はまだサポートされていません。](https://github.com/typst/typst/issues/145)
     pub format: Smart<ImageFormat>,
 
-    /// 画像の幅。
+    /// 画像の幅
     pub width: Smart<Rel<Length>>,
 
-    /// 画像の高さ。
+    /// 画像の高さ
     pub height: Sizing,
 
-    /// 画像の説明文。
+    /// 画像の説明文
     pub alt: Option<EcoString>,
 
     /// 与えられた領域に対して、画像をどのように調整するか。
-    /// （領域は `width` や `height` フィールドで定義します。）
+    /// 領域は `width` や `height` フィールドで定義します。
     /// 領域の縦横比が画像の縦横比と同じであれば、`fit` で見た目が変わらないことに注意してください。
     ///
     /// ```example
@@ -123,13 +123,13 @@ impl ImageElem {
         /// 画像のフォーマット。デフォルトでは自動的に検出されます。
         #[named]
         format: Option<Smart<ImageFormat>>,
-        /// 画像の幅。
+        /// 画像の幅
         #[named]
         width: Option<Smart<Rel<Length>>>,
-        /// 画像の高さ。
+        /// 画像の高さ
         #[named]
         height: Option<Sizing>,
-        /// 画像の説明文。
+        /// 画像の説明文
         #[named]
         alt: Option<Option<EcoString>>,
         /// 与えられた領域に対して、画像をどのように調整するか。
@@ -304,14 +304,14 @@ fn determine_format(path: &str, data: &Readable) -> StrResult<ImageFormat> {
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum ImageFit {
     /// 領域を完全にカバーします。
-    /// (水平または垂直方向にのみ画像をトリミングすることで、アスペクト比を保持します。)
+    /// 水平または垂直方向にのみ画像をトリミングすることで、アスペクト比を保持します。
     /// これがデフォルトです。
     Cover,
     /// 画像は領域内に完全に収まるようにします。
-    /// （アスペクト比を維持して、画像を切り取らず、1つの寸法は指定より狭くします。）
+    /// アスペクト比を維持して、画像を切り取らず、1つの寸法は指定より狭くします。
     Contain,
     /// たとえ画像が歪むことになっても、その領域を正確に埋めるように引き伸ばします。
-    /// （アスペクト比は保たれず、画像は切り取られません。）
+    /// アスペクト比は保たれず、画像は切り取られません。
     Stretch,
 }
 
@@ -463,7 +463,7 @@ pub enum ImageFormat {
 /// A vector graphics format.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum VectorFormat {
-    /// ウェブのベクター画像フォーマット。
+    /// Webサイトに用いられるベクターフォーマット
     Svg,
 }
 
