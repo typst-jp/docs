@@ -110,11 +110,11 @@ impl Hash for Repr {
 /// A raster graphics format.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum RasterFormat {
-    /// Raster format for illustrations and transparent graphics.
+    /// イラストや透明グラフィック用のラスターフォーマット。
     Png,
-    /// Lossy raster format suitable for photos.
+    /// 写真に適した非可逆ラスターフォーマット。
     Jpg,
-    /// Raster format that is typically used for short animated clips.
+    /// 短いアニメーションクリップによく使われるラスターフォーマット。
     Gif,
 }
 

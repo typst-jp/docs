@@ -32,13 +32,12 @@ use crate::utils::LazyHash;
 use crate::visualize::Path;
 use crate::World;
 
-/// A raster or vector graphic.
+/// ラスターまたはベクター画像。
 ///
-/// You can wrap the image in a [`figure`] to give it a number and caption.
+/// 画像を[`figure`]で囲むことで、番号とキャプションを与えることができます。
 ///
-/// Like most elements, images are _block-level_ by default and thus do not
-/// integrate themselves into adjacent paragraphs. To force an image to become
-/// inline, put it into a [`box`].
+/// ほとんどの要素と同様に、画像はデフォルトでは _ブロックレベル_ であるため、隣接する段落に統合されることはありません。
+/// 画像を強制的にインラインにするには、[`box`]の中に入れてください。
 ///
 /// # Example
 /// ```example
@@ -52,9 +51,9 @@ use crate::World;
 /// ```
 #[elem(scope, Show, LocalName, Figurable)]
 pub struct ImageElem {
-    /// Path to an image file
+    /// 画像ファイルのパス
     ///
-    /// For more details, see the [Paths section]($syntax/#paths).
+    /// より詳細な情報は[Pathsの章]($syntax/#paths)を参照
     #[required]
     #[parse(
         let Spanned { v: path, span } =
@@ -72,25 +71,24 @@ pub struct ImageElem {
     #[parse(Readable::Bytes(data))]
     pub data: Readable,
 
-    /// The image's format. Detected automatically by default.
+    /// 画像のフォーマット。デフォルトでは自動的に検出されます。
     ///
-    /// Supported formats are PNG, JPEG, GIF, and SVG. Using a PDF as an image
-    /// is [not currently supported](https://github.com/typst/typst/issues/145).
+    /// サポートされている拡張子は PNG, JPEG, GIF, SVGです。
+    /// [PDFの画像はまだサポートされていません。](https://github.com/typst/typst/issues/145).
     pub format: Smart<ImageFormat>,
 
-    /// The width of the image.
+    /// 画像の幅。
     pub width: Smart<Rel<Length>>,
 
-    /// The height of the image.
+    /// 画像の高さ。
     pub height: Sizing,
 
-    /// A text describing the image.
+    /// 画像の説明文。
     pub alt: Option<EcoString>,
 
-    /// How the image should adjust itself to a given area (the area is defined
-    /// by the `width` and `height` fields). Note that `fit` doesn't visually
-    /// change anything if the area's aspect ratio is the same as the image's
-    /// one.
+    /// 与えられた領域に対して、画像をどのように調整するか。
+    /// （領域は `width` や `height` フィールドで定義します。）
+    /// 領域の縦横比が画像の縦横比と同じであれば、`fit` で見た目が変わらないことに注意してください。
     ///
     /// ```example
     /// #set page(width: 300pt, height: 50pt, margin: 10pt)
@@ -104,7 +102,7 @@ pub struct ImageElem {
 
 #[scope]
 impl ImageElem {
-    /// Decode a raster or vector graphic from bytes or a string.
+    /// バイトまたは文字列からラスターまたはベクトル図形をデコードします。
     ///
     /// ```example
     /// #let original = read("diagram.svg")
@@ -120,21 +118,21 @@ impl ImageElem {
     pub fn decode(
         /// The call span of this function.
         span: Span,
-        /// The data to decode as an image. Can be a string for SVGs.
+        /// 画像としてデコードするデータ。SVG の場合は文字列です。
         data: Readable,
-        /// The image's format. Detected automatically by default.
+        /// 画像のフォーマット。デフォルトでは自動的に検出されます。
         #[named]
         format: Option<Smart<ImageFormat>>,
-        /// The width of the image.
+        /// 画像の幅。
         #[named]
         width: Option<Smart<Rel<Length>>>,
-        /// The height of the image.
+        /// 画像の高さ。
         #[named]
         height: Option<Sizing>,
-        /// A text describing the image.
+        /// 画像の説明文。
         #[named]
         alt: Option<Option<EcoString>>,
-        /// How the image should adjust itself to a given area.
+        /// 与えられた領域に対して、画像をどのように調整するか。
         #[named]
         fit: Option<ImageFit>,
     ) -> StrResult<Content> {
@@ -305,17 +303,15 @@ fn determine_format(path: &str, data: &Readable) -> StrResult<ImageFormat> {
 /// How an image should adjust itself to a given area,
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum ImageFit {
-    /// The image should completely cover the area (preserves aspect ratio by
-    /// cropping the image only horizontally or vertically). This is the
-    /// default.
+    /// 領域を完全にカバーします。
+    /// (水平または垂直方向にのみ画像をトリミングすることで、アスペクト比を保持します。)
+    /// これがデフォルトです。
     Cover,
-    /// The image should be fully contained in the area (preserves aspect
-    /// ratio; doesn't crop the image; one dimension can be narrower than
-    /// specified).
+    /// 画像は領域内に完全に収まるようにします。
+    /// （アスペクト比を維持して、画像を切り取らず、1つの寸法は指定より狭くします。）
     Contain,
-    /// The image should be stretched so that it exactly fills the area, even if
-    /// this means that the image will be distorted (doesn't preserve aspect
-    /// ratio and doesn't crop the image).
+    /// たとえ画像が歪むことになっても、その領域を正確に埋めるように引き伸ばします。
+    /// （アスペクト比は保たれず、画像は切り取られません。）
     Stretch,
 }
 
@@ -467,7 +463,7 @@ pub enum ImageFormat {
 /// A vector graphics format.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum VectorFormat {
-    /// The vector graphics format of the web.
+    /// ウェブのベクター画像フォーマット。
     Svg,
 }
 
