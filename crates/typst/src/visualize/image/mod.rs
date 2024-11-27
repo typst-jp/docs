@@ -53,7 +53,7 @@ use crate::World;
 pub struct ImageElem {
     /// 画像ファイルのパス
     ///
-    /// より詳細な情報は[Pathsの章]($syntax/#paths)を参照してください。
+    /// より詳細な情報は[パスの章]($syntax/#paths)を参照してください。
     #[required]
     #[parse(
         let Spanned { v: path, span } =

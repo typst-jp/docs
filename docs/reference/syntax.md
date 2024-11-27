@@ -170,7 +170,7 @@ I got an ice cream for
 \$1.50! \u{1f600}
 ```
 
-## Paths
+## パス { #paths }
 Typst has various features that require a file path to reference external
 resources such as images, Typst files, or data files. Paths are represented as
 [strings]($str). There are two kinds of paths: Relative and absolute.
