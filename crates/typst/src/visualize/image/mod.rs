@@ -32,7 +32,7 @@ use crate::utils::LazyHash;
 use crate::visualize::Path;
 use crate::World;
 
-/// ラスターまたはベクター画像
+/// ラスターまたはベクター画像。
 ///
 /// 画像を[`figure`]で囲むことで、番号とキャプションを与えることができます。
 ///
@@ -51,7 +51,7 @@ use crate::World;
 /// ```
 #[elem(scope, Show, LocalName, Figurable)]
 pub struct ImageElem {
-    /// 画像ファイルのパス
+    /// 画像ファイルのパス。
     ///
     /// より詳細な情報は[パスの章]($syntax/#paths)を参照してください。
     #[required]
@@ -77,13 +77,13 @@ pub struct ImageElem {
     /// [PDFの画像はまだサポートされていません。](https://github.com/typst/typst/issues/145)
     pub format: Smart<ImageFormat>,
 
-    /// 画像の幅
+    /// 画像の幅。
     pub width: Smart<Rel<Length>>,
 
-    /// 画像の高さ
+    /// 画像の高さ。
     pub height: Sizing,
 
-    /// 画像の説明文
+    /// 画像の説明文。
     pub alt: Option<EcoString>,
 
     /// 与えられた領域に対して、画像をどのように調整するか。
@@ -123,13 +123,13 @@ impl ImageElem {
         /// 画像のフォーマット。デフォルトでは自動的に検出されます。
         #[named]
         format: Option<Smart<ImageFormat>>,
-        /// 画像の幅
+        /// 画像の幅。
         #[named]
         width: Option<Smart<Rel<Length>>>,
-        /// 画像の高さ
+        /// 画像の高さ。
         #[named]
         height: Option<Sizing>,
-        /// 画像の説明文
+        /// 画像の説明文。
         #[named]
         alt: Option<Option<EcoString>>,
         /// 与えられた領域に対して、画像をどのように調整するか。
@@ -463,7 +463,7 @@ pub enum ImageFormat {
 /// A vector graphics format.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum VectorFormat {
-    /// Webサイトに用いられるベクターフォーマット
+    /// Webサイトに用いられるベクターフォーマット。
     Svg,
 }
 
