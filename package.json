@@ -2,7 +2,9 @@
   "name": "typst-jp.github.io",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "textlint": "^14.3.0",
+    "textlint-rule-preset-jtf-style": "^2.3.14"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
