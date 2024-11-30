@@ -7,5 +7,6 @@
   "forwardPorts": [3000],
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
-  "postStartCommand": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && npx serve -n ./dist"
+  "postStartCommand": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && npx serve -n ./dist",
+  "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}"
 }
