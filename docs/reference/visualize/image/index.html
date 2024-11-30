@@ -855,11 +855,10 @@
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
 </small></h1>
-<p>A raster or vector graphic.</p>
-<p>You can wrap the image in a <a href="/docs/reference/model/figure/" title="`figure`"><code>figure</code></a> to give it a number and caption.</p>
-<p>Like most elements, images are <em>block-level</em> by default and thus do not
-integrate themselves into adjacent paragraphs. To force an image to become
-inline, put it into a <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a>.</p>
+<p>ラスターまたはベクター画像。</p>
+<p>画像を<a href="/docs/reference/model/figure/" title="`figure`"><code>figure</code></a>で囲むことで、番号とキャプションを与えることができます。</p>
+<p>ほとんどの要素と同様に、画像はデフォルトでは <em>ブロックレベル</em> であるため、隣接する段落に統合されることはありません。
+画像を強制的にインラインにするには、<a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a>の中に入れてください。</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
   <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;molecular.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
@@ -915,8 +914,8 @@ inline, put it into a <a href="/docs/reference/layout/box/" title="`box`"><code>
     </small>
   </div>
 </h4>
-<p>Path to an image file</p>
-<p>For more details, see the <a href="/docs/reference/syntax/#paths">Paths section</a>.</p>
+<p>画像ファイルのパス。</p>
+<p>より詳細な情報は<a href="/docs/reference/syntax/#paths">パスの章</a>を参照してください。</p>
 
 
 
@@ -943,9 +942,9 @@ inline, put it into a <a href="/docs/reference/layout/box/" title="`box`"><code>
     </small>
   </div>
 </h4>
-<p>The image's format. Detected automatically by default.</p>
-<p>Supported formats are PNG, JPEG, GIF, and SVG. Using a PDF as an image
-is <a href="https://github.com/typst/typst/issues/145">not currently supported</a>.</p>
+<p>画像のフォーマット。デフォルトでは自動的に検出されます。</p>
+<p>サポートされている拡張子は PNG, JPEG, GIF, SVGです。
+<a href="https://github.com/typst/typst/issues/145">PDFの画像はまだサポートされていません。</a></p>
 
 <ul class="type-args">
   
@@ -953,7 +952,7 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->png<!-- -->&quot;</code></div>
       <div>
-        <p>Raster format for illustrations and transparent graphics.</p>
+        <p>イラストや透明グラフィック用のラスターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -962,7 +961,7 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->jpg<!-- -->&quot;</code></div>
       <div>
-        <p>Lossy raster format suitable for photos.</p>
+        <p>写真に適した非可逆ラスターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -971,7 +970,7 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->gif<!-- -->&quot;</code></div>
       <div>
-        <p>Raster format that is typically used for short animated clips.</p>
+        <p>短いアニメーションクリップによく使われるラスターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -980,7 +979,7 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->svg<!-- -->&quot;</code></div>
       <div>
-        <p>The vector graphics format of the web.</p>
+        <p>Webサイトに用いられるベクターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -1014,7 +1013,7 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     </small>
   </div>
 </h4>
-<p>The width of the image.</p>
+<p>画像の幅。</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>
@@ -1045,7 +1044,7 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     </small>
   </div>
 </h4>
-<p>The height of the image.</p>
+<p>画像の高さ。</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>
@@ -1074,7 +1073,7 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     </small>
   </div>
 </h4>
-<p>A text describing the image.</p>
+<p>画像の説明文。</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>
@@ -1101,10 +1100,9 @@ is <a href="https://github.com/typst/typst/issues/145">not currently supported</
     </small>
   </div>
 </h4>
-<p>How the image should adjust itself to a given area (the area is defined
-by the <code>width</code> and <code>height</code> fields). Note that <code>fit</code> doesn't visually
-change anything if the area's aspect ratio is the same as the image's
-one.</p>
+<p>与えられた領域に対して、画像をどのように調整するか。
+領域は <code>width</code> や <code>height</code> フィールドで定義します。
+領域の縦横比が画像の縦横比と同じであれば、<code>fit</code> で見た目が変わらないことに注意してください。</p>
 
 <ul class="type-args">
   
@@ -1112,9 +1110,9 @@ one.</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->cover<!-- -->&quot;</code></div>
       <div>
-        <p>The image should completely cover the area (preserves aspect ratio by
-cropping the image only horizontally or vertically). This is the
-default.</p>
+        <p>領域を完全にカバーします。
+水平または垂直方向にのみ画像をトリミングすることで、アスペクト比を保持します。
+これがデフォルトです。</p>
       </div>
     </div>
   </li>
@@ -1123,9 +1121,8 @@ default.</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->contain<!-- -->&quot;</code></div>
       <div>
-        <p>The image should be fully contained in the area (preserves aspect
-ratio; doesn't crop the image; one dimension can be narrower than
-specified).</p>
+        <p>画像は領域内に完全に収まるようにします。
+アスペクト比を維持して、画像を切り取らず、1つの寸法は指定より狭くします。</p>
       </div>
     </div>
   </li>
@@ -1134,9 +1131,8 @@ specified).</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->stretch<!-- -->&quot;</code></div>
       <div>
-        <p>The image should be stretched so that it exactly fills the area, even if
-this means that the image will be distorted (doesn't preserve aspect
-ratio and doesn't crop the image).</p>
+        <p>たとえ画像が歪むことになっても、その領域を正確に埋めるように引き伸ばします。
+アスペクト比は保たれず、画像は切り取られません。</p>
       </div>
     </div>
   </li>
@@ -1179,7 +1175,7 @@ ratio and doesn't crop the image).</p>
 
   <h3 id="-decode" class="method-head"><span><code>decode</code></span></h3>
   
-<p>Decode a raster or vector graphic from bytes or a string.</p>
+<p>バイトまたは文字列からラスターまたはベクトル図形をデコードします。</p>
 
 <div class="code code-definition ">image.<span
     class="typ-func">decode</span>(<div class="arguments"><span
@@ -1232,7 +1228,7 @@ ratio and doesn't crop the image).</p>
     </small>
   </div>
 </h4>
-<p>The data to decode as an image. Can be a string for SVGs.</p>
+<p>画像としてデコードするデータ。SVG の場合は文字列です。</p>
 
 
 
@@ -1249,7 +1245,7 @@ ratio and doesn't crop the image).</p>
     
   </div>
 </h4>
-<p>The image's format. Detected automatically by default.</p>
+<p>画像のフォーマット。デフォルトでは自動的に検出されます。</p>
 
 <ul class="type-args">
   
@@ -1257,7 +1253,7 @@ ratio and doesn't crop the image).</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->png<!-- -->&quot;</code></div>
       <div>
-        <p>Raster format for illustrations and transparent graphics.</p>
+        <p>イラストや透明グラフィック用のラスターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -1266,7 +1262,7 @@ ratio and doesn't crop the image).</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->jpg<!-- -->&quot;</code></div>
       <div>
-        <p>Lossy raster format suitable for photos.</p>
+        <p>写真に適した非可逆ラスターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -1275,7 +1271,7 @@ ratio and doesn't crop the image).</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->gif<!-- -->&quot;</code></div>
       <div>
-        <p>Raster format that is typically used for short animated clips.</p>
+        <p>短いアニメーションクリップによく使われるラスターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -1284,7 +1280,7 @@ ratio and doesn't crop the image).</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->svg<!-- -->&quot;</code></div>
       <div>
-        <p>The vector graphics format of the web.</p>
+        <p>Webサイトに用いられるベクターフォーマット。</p>
       </div>
     </div>
   </li>
@@ -1306,7 +1302,7 @@ ratio and doesn't crop the image).</p>
     
   </div>
 </h4>
-<p>The width of the image.</p>
+<p>画像の幅。</p>
 
 
 
@@ -1325,7 +1321,7 @@ ratio and doesn't crop the image).</p>
     
   </div>
 </h4>
-<p>The height of the image.</p>
+<p>画像の高さ。</p>
 
 
 
@@ -1342,7 +1338,7 @@ ratio and doesn't crop the image).</p>
     
   </div>
 </h4>
-<p>A text describing the image.</p>
+<p>画像の説明文。</p>
 
 
 
@@ -1357,7 +1353,7 @@ ratio and doesn't crop the image).</p>
     
   </div>
 </h4>
-<p>How the image should adjust itself to a given area.</p>
+<p>与えられた領域に対して、画像をどのように調整するか。</p>
 
 <ul class="type-args">
   
@@ -1365,9 +1361,9 @@ ratio and doesn't crop the image).</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->cover<!-- -->&quot;</code></div>
       <div>
-        <p>The image should completely cover the area (preserves aspect ratio by
-cropping the image only horizontally or vertically). This is the
-default.</p>
+        <p>領域を完全にカバーします。
+水平または垂直方向にのみ画像をトリミングすることで、アスペクト比を保持します。
+これがデフォルトです。</p>
       </div>
     </div>
   </li>
@@ -1376,9 +1372,8 @@ default.</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->contain<!-- -->&quot;</code></div>
       <div>
-        <p>The image should be fully contained in the area (preserves aspect
-ratio; doesn't crop the image; one dimension can be narrower than
-specified).</p>
+        <p>画像は領域内に完全に収まるようにします。
+アスペクト比を維持して、画像を切り取らず、1つの寸法は指定より狭くします。</p>
       </div>
     </div>
   </li>
@@ -1387,9 +1382,8 @@ specified).</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->stretch<!-- -->&quot;</code></div>
       <div>
-        <p>The image should be stretched so that it exactly fills the area, even if
-this means that the image will be distorted (doesn't preserve aspect
-ratio and doesn't crop the image).</p>
+        <p>たとえ画像が歪むことになっても、その領域を正確に埋めるように引き伸ばします。
+アスペクト比は保たれず、画像は切り取られません。</p>
       </div>
     </div>
   </li>
