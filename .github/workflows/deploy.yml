@@ -1,27 +1,66 @@
-# Based on ripgrep's release action:
-# https://github.com/BurntSushi/ripgrep/blob/master/.github/workflows/release.yml
-
 name: CI/CD for Documentation
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   build-and-deploy:
-    name: build-and-deploy
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: '1.77'
+          toolchain: "1.77"
       - uses: Swatinem/rust-cache@v2
       - uses: jdx/mise-action@v2
       - run: uv sync --locked
       - run: mise run generate-docs
       - run: mise run generate-web
-      # deploy ./dist to https://github.com/typst-doc-cn/typst-doc-cn.github.io
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist # The folder the action should deploy.
+
+  textlint-md:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+      - name: Setup tools
+        uses: jdx/mise-action@v2
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Lint Markdown using textlint
+        run: bun run --bun textlint-md
+        continue-on-error: true
+
+  textlint-html:
+    runs-on: ubuntu-24.04
+    needs: build-and-deploy
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist
+      - uses: jdx/mise-action@v2
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Lint HTML using textlint
+        run: bun run --bun textlint-html
+        continue-on-error: true
