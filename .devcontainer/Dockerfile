@@ -1,7 +1,13 @@
-# Rust v1.77 as a base image
 FROM rust:1.77-slim
 
-RUN apt-get update \
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    && chsh -s /bin/bash $USERNAME \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
         git \
         openssh-client \
@@ -13,3 +19,4 @@ RUN apt-get update \
 
 WORKDIR /workspace
 ENV PATH="/root/.cargo/bin:${PATH}"
+USER $USERNAME

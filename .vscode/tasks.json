@@ -4,7 +4,7 @@
     {
       "label": "gen: typst-jp documentation",
       "type": "shell",
-      "command": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && echo reload or open http://localhost:3000",
+      "command": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && echo reload or open http://localhost:8000",
       "problemMatcher": []
     }
   ]
