@@ -78,7 +78,7 @@ Typstに関する日本語の記事は[Zenn](https://zenn.dev/)や[Qiita](https:
 ### 総合入門
 
 - [Typst入門](https://okumuralab.org/~okumura/misc/241111.html) - LaTeX美文書作成入門の著者として知られる奥村晴彦氏によるTypst入門記事
-- [Typstの使い方](https://kumaroot.readthedocs.io/ja/latest/typst/typst-usage.html) - 「くまROOT」 by Shota TAKAHASHI
+- [Typstの使い方](https://kumaroot.readthedocs.io/ja/latest/typst/typst-usage.html) -「くまROOT」by Shota TAKAHASHI
 - [Typst - TeX Wiki](https://texwiki.texjp.org/?Typst) - Tex Wiki
 - [組版処理システム Typst の紹介](https://itpass.scitec.kobe-u.ac.jp/~itpass/seminar/lecture/fy2024/241002/pub/itpass_seminar_20241002_typst.pdf) - 樫村博基（神戸大学）
 - [Typst を試す・学ぶための記事](https://www.metaphysica.info/2024/typst-guidance/) - 高校数学調律研究室

@@ -23,7 +23,7 @@ provide instant previews.
 
 In the following, we will cover some of the most common questions a user
 switching from LaTeX will have when composing a document in Typst. If you prefer
-a step-by-step introduction to Typst, check out our [tutorial].
+a step-by-step introduction to Typst, check out our [tutorial]($tutorial).
 
 ## Installation
 You have two ways to use Typst: In [our web app](https://typst.app/signup/) or
@@ -162,7 +162,7 @@ A function call always involves the name of the function ([`rect`],
 parentheses (as opposed to LaTeX where the square brackets and curly braces are
 optional if the macro requires no arguments). The expected list of arguments
 passed within those parentheses depends on the concrete function and is
-specified in the [reference].
+specified in the [reference]($reference).
 
 ### Arguments
 A function can have multiple arguments. Some arguments are positional, i.e., you
@@ -187,10 +187,10 @@ Named arguments are similar to how some LaTeX environments are configured, for
 example, you would type `\begin{enumerate}[label={\alph*)}]` to start a list
 with the labels `a)`, `b)`, and so on.
 
-Often, you want to provide some [content] to a function. For example, the LaTeX
+Often, you want to provide some [content]($content) to a function. For example, the LaTeX
 command `\underline{Alternative A}` would translate to
 `[#underline([Alternative A])]` in Typst. The square brackets indicate that a
-value is [content]. Within these brackets, you can use normal markup.
+value is [content]($content). Within these brackets, you can use normal markup.
 However, that's a lot of parentheses for a pretty simple construct. This is why
 you can also move trailing content arguments after the parentheses (and omit the
 parentheses if they would end up empty).
@@ -293,7 +293,7 @@ You can achieve the effects of LaTeX commands like `\textbf`, `\textsf`,
 `\rmfamily`, `\mdseries`, and `\itshape` with the [`font`]($text.font),
 [`style`]($text.style), and [`weight`]($text.weight) arguments of the `text`
 function. The text function can be used in a set rule (declaration style) or
-with a content argument. To replace `\textsc`, you can use the [`smallcaps`]
+with a content argument. To replace `\textsc`, you can use the [`smallcaps`]($smallcaps)
 function, which renders its content argument as smallcaps. Should you want to
 use it declaration style (like `\scshape`), you can use an
 [_everything_ show rule]($styling/#show-rules) that applies the function to the
@@ -628,7 +628,7 @@ a reusable template?
 ## Bibliographies
 Typst includes a fully-featured bibliography system that is compatible with
 BibTeX files. You can continue to use your `.bib` literature libraries by
-loading them with the [`bibliography`] function. Another possibility is to use
+loading them with the [`bibliography`]($bibliography) function. Another possibility is to use
 [Typst's YAML-based native format](https://github.com/typst/hayagriva/blob/main/docs/file-format.md).
 
 Typst uses the Citation Style Language to define and process citation and
@@ -640,13 +640,13 @@ your own.
 
 You can cite an entry in your bibliography or reference a label in your document
 with the same syntax: `[@key]` (this would reference an entry called `key`).
-Alternatively, you can use the [`cite`] function.
+Alternatively, you can use the [`cite`]($cite) function.
 
 Alternative forms for your citation, such as year only and citations for natural
 use in prose (cf. `\citet` and `\textcite`) are available with
 [`[#cite(<key>, form: "prose")]`]($cite.form).
 
-You can find more information on the documentation page of the [`bibliography`]
+You can find more information on the documentation page of the [`bibliography`]($bibliography)
 function.
 
 ## What limitations does Typst currently have compared to LaTeX? { #limitations }

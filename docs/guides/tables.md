@@ -163,7 +163,7 @@ the last column is `1fr` wide as to fill the whole page.
 )
 ```
 
-Here, we have passed our list of column lengths as an [array], enclosed in round
+Here, we have passed our list of column lengths as an [array]($array), enclosed in round
 parentheses, with its elements separated by commas. The first two columns are
 automatically sized, so that they take on the size of their content and the
 third column is sized as `{1fr}` so that it fills up the remainder of the space
@@ -483,7 +483,7 @@ depends on the modification you want to make and your intent:
 - Do you want to change, add, or remove the stroke around a single cell? Use the
   `table.cell` element in the argument list of your table call.
 - Do you want to change, add, or remove a single horizontal or vertical stroke
-  in a single table? Use the [`table.hline`] and [`table.vline`] elements in the
+  in a single table? Use the [`table.hline`]($table.hline) and [`table.vline`]($table.vline) elements in the
   argument list of your table call.
 
 We will go over all of these options with examples next! First, we will tackle
@@ -569,8 +569,8 @@ achieve more complex stroking patterns.
 
 ### Adding individual lines in the table { #individual-lines }
 If you want to add a single horizontal or vertical line in your table, for
-example to separate a group of rows, you can use the [`table.hline`] and
-[`table.vline`] elements for horizontal and vertical lines, respectively. Add
+example to separate a group of rows, you can use the [`table.hline`]($table.hline) and
+[`table.vline`]($table.vline) elements for horizontal and vertical lines, respectively. Add
 them to the argument list of the `table` function just like you would add
 individual cells and a header.
 
@@ -858,11 +858,11 @@ rows, since it is the last entry in the array.
 You can use multiple mechanisms to align the content in your table. You can
 either use the `table` function's `align` argument to set the alignment for your
 whole table (or use it in a set rule to set the alignment for tables throughout
-your document) or the [`align`] function (or `table.cell`'s `align` argument) to
+your document) or the [`align`]($align) function (or `table.cell`'s `align` argument) to
 override the alignment of a single cell.
 
 When using the `table` function's align argument, you can choose between three
-methods to specify an [alignment]:
+methods to specify an [alignment]($alignment):
 
 - Just specify a single alignment like `right` (aligns in the top-right corner)
   or `center + horizon` (centers all cell content). This changes the alignment
@@ -936,7 +936,7 @@ you can group for example a sales data table by quarter in the first row and by
 months in the second row.
 
 A merged cell spans multiple rows and/or columns. You can achieve it with the
-[`table.cell`] function's `rowspan` and `colspan` arguments: Just specify how
+[`table.cell`]($table.cell) function's `rowspan` and `colspan` arguments: Just specify how
 many rows or columns you want your cell to span.
 
 The example below contains an attendance calendar for an office with in-person
@@ -1117,22 +1117,22 @@ upright:
 ```
 
 Here, we take the same table and the other content we want to set with it and
-put it into a call to the [`page`] function while supplying `{true}` to the
+put it into a call to the [`page`]($page) function while supplying `{true}` to the
 `flipped` argument. This will instruct Typst to create new pages with width and
 height swapped and place the contents of the function call onto a new page.
 Notice how the page number is also on the long edge of the paper now. At the
-bottom of the page, we use the [`pad`] function to constrain the width of the
+bottom of the page, we use the [`pad`]($pad) function to constrain the width of the
 paragraph to achieve a nice and legible line length.
 
 ## How to break a table across pages? { #table-across-pages }
 It is best to contain a table on a single page. However, some tables just have
 many rows, so breaking them across pages becomes unavoidable. Fortunately, Typst
 supports breaking tables across pages out of the box. If you are using the
-[`table.header`] and [`table.footer`] functions, their contents will be repeated
+[`table.header`]($table.header) and [`table.footer`]($table.footer) functions, their contents will be repeated
 on each page as the first and last rows, respectively. If you want to disable
 this behavior, you can set `repeat` to `{false}` on either of them.
 
-If you have placed your table inside of a [figure], it becomes unable to break
+If you have placed your table inside of a [figure]($figure), it becomes unable to break
 across pages by default. However, you can change this behavior. Let's take a
 look:
 
@@ -1162,7 +1162,7 @@ look:
 )
 ```
 
-A figure automatically produces a [block] which cannot break by default.
+A figure automatically produces a [block]($block) which cannot break by default.
 However, we can reconfigure the block of the figure using a show rule to make it
 `breakable`. Now, the figure spans multiple pages with the headers and footers
 repeating.
@@ -1201,7 +1201,7 @@ whom the metric applies), Code, the year, and the number of transistors per
 microprocessor. Only the last two columns change between each row, so we can
 disregard "Entity" and "Code".
 
-First, let's start by loading this file with the [`csv`] function. It accepts
+First, let's start by loading this file with the [`csv`]($csv) function. It accepts
 the file name of the file we want to load as a string argument:
 
 ```typ
@@ -1326,17 +1326,17 @@ cells itself conveys information.
 To make this difference clear to other software and allow templates to heavily
 style tables, Typst has two functions for grid and table layout:
 
-- The [`table`] function explained throughout this guide which is intended for
+- The [`table`]($table) function explained throughout this guide which is intended for
   tabular data.
-- The [`grid`] function which is intended for presentational purposes and page
+- The [`grid`]($grid) function which is intended for presentational purposes and page
   layout.
 
 Both elements work the same way and have the same arguments. You can apply
 everything you have learned about tables in this guide to grids. There are only
 three differences:
 
-- You'll need to use the [`grid.cell`], [`grid.vline`], and [`grid.hline`]
-  elements instead of [`table.cell`], [`table.vline`], and [`table.hline`].
+- You'll need to use the [`grid.cell`]($grid.cell), [`grid.vline`]($grid.vline), and [`grid.hline`]($grid.hline)
+  elements instead of [`table.cell`]($table.cell), [`table.vline`]($table.vline), and [`table.hline`]($table.hline).
 - The grid has different defaults: It draws no strokes by default and has no
   spacing (`inset`) inside of its cells.
 - Elements like `figure` do not react to grids since they are supposed to have

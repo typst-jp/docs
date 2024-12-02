@@ -187,7 +187,7 @@ conditionally remove the header on the first page:
 
 This example may look intimidating, but let's break it down: By using the
 `{context}` keyword, we are telling Typst that the header depends on where we
-are in the document. We then ask Typst if the page [counter] is larger than one
+are in the document. We then ask Typst if the page [counter]($counter) is larger than one
 at our (context-dependent) current position. The page counter starts at one, so
 we are skipping the header on a single page. Counters may have multiple levels.
 This feature is used for items like headings, but the page counter will always
@@ -200,7 +200,7 @@ the first page instead.
 The technique described in the previous section can be adapted to perform more
 advanced tasks using Typst's labels. For example, pages with big tables could
 omit their headers to help keep clutter down. We will mark our tables with a
-`<big-table>` [label] and use the [query system]($query) to find out if such a
+`<big-table>` [label]($label) and use the [query system]($query) to find out if such a
 label exists on the current page:
 
 ```typ
@@ -333,9 +333,9 @@ This page has a custom footer.
 ```
 
 In this example, we use the number of pages to create an array of
-[circles]($circle). The circles are wrapped in a [box] so they can all appear on
+[circles]($circle). The circles are wrapped in a [box]($box) so they can all appear on
 the same line because they are blocks and would otherwise create paragraph
-breaks. The length of this [array] depends on the current page number.
+breaks. The length of this [array]($array) depends on the current page number.
 
 We then insert the circles at the right side of the footer, with 1pt of space
 between them. The join method of an array will attempt to
@@ -352,7 +352,7 @@ want to start with the first page only after the title page. Or maybe you need
 to skip a few page numbers because you will insert pages into the final printed
 product.
 
-The right way to modify the page number is to manipulate the page [counter]. The
+The right way to modify the page number is to manipulate the page [counter]($counter). The
 simplest manipulation is to set the counter back to 1.
 
 ```typ
@@ -372,7 +372,7 @@ counter and `n + 5` is the return value of our function.
 
 In case you need to retrieve the actual page number instead of the value of the
 page counter, you can use the [`page`]($location.page) method on the return
-value of the [`here`] function:
+value of the [`here`]($here) function:
 
 ```example
 #counter(page).update(n => n + 5)

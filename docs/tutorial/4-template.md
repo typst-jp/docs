@@ -209,7 +209,7 @@ Next, we copy the code that generates title, abstract and authors from the
 previous chapter into the template, replacing the fixed details with the
 parameters.
 
-The new `authors` parameter expects an [array] of [dictionaries]($dictionary)
+The new `authors` parameter expects an [array]($array) of [dictionaries]($dictionary)
 with the keys `name`, `affiliation` and `email`. Because we can have an
 arbitrary number of authors, we dynamically determine if we need one, two or
 three columns for the author list. First, we determine the number of authors

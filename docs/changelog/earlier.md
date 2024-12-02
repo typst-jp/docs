@@ -26,7 +26,7 @@ description: Changes in early, unversioned Typst
   - Numberings now allow zeros. To reset a counter, you can write
     `[#counter(..).update(0)]`
   - Added documentation for `{page()}` and `{position()}` methods on
-    [`location`] type
+    [`location`]($location) type
   - Added symbols for double, triple, and quadruple dot accent
   - Added smart quotes for Norwegian Bokmål
   - Added Nix flake
@@ -35,7 +35,7 @@ description: Changes in early, unversioned Typst
   - Fixed parsing of unbalanced delimiters in fractions: `[$1/(2 (x)$]`
   - Fixed unexpected parsing of numbers as enumerations, e.g. in `[1.2]`
   - Fixed combination of page fill and header
-  - Fixed compiler crash if [`repeat`] is used in page with automatic width
+  - Fixed compiler crash if [`repeat`]($repeat) is used in page with automatic width
   - Fixed [matrices]($math.mat) with explicit delimiter
   - Fixed [`indent`]($terms.indent) property of term lists
   - Numerous documentation fixes
@@ -55,35 +55,35 @@ description: Changes in early, unversioned Typst
     - `[$ A = pi r^2 $ <area>]`
 
 - Introspection system for interactions between different parts of the document
-  - [`counter`] function
+  - [`counter`]($counter) function
     - Access and modify counters for pages, headings, figures, and equations
     - Define and use your own custom counters
     - Time travel: Find out what the counter value was or will be at some other
       point in the document (e.g. when you're building a list of figures, you
       can determine the value of the figure counter at any given figure).
     - Counters count in layout order and not in code order
-  - [`state`] function
+  - [`state`]($state) function
     - Manage arbitrary state across your document
     - Time travel: Find out the value of your state at any position in the
       document
     - State is modified in layout order and not in code order
-  - [`query`] function
+  - [`query`]($query) function
     - Find all occurrences of an element or a label, either in the whole
       document or before/after some location
     - Link to elements, find out their position on the pages and access their
       fields
     - Example use cases: Custom list of figures or page header with current
       chapter title
-  - [`locate`] function
+  - [`locate`]($locate) function
     - Determines the location of itself in the final layout
     - Can be accessed to get the `page` and `x`, `y` coordinates
     - Can be used with counters and state to find out their values at that
       location
     - Can be used with queries to find elements before or after its location
 
-- New [`measure`] function
+- New [`measure`]($measure) function
   - Measure the layouted size of elements
-  - To be used in combination with the new [`style`] function that lets you
+  - To be used in combination with the new [`style`]($style) function that lets you
     generate different content based on the style context something is inserted
     into (because that affects the measured size of content)
 
@@ -91,21 +91,21 @@ description: Changes in early, unversioned Typst
   - Content is not opaque anymore
   - Content can be compared for equality
   - The tree of content elements can be traversed with code
-  - Can be observed in hover tooltips or with [`repr`]
+  - Can be observed in hover tooltips or with [`repr`]($repr)
   - New [methods]($content) on content: `func`, `has`, `at`, and `location`
   - All optional fields on elements are now settable
   - More uniform field names (`heading.title` becomes `heading.body`,
     `list.items` becomes `list.children`, and a few more changes)
 
 - Further improvements
-  - Added [`figure`] function
+  - Added [`figure`]($figure) function
   - Added [`numbering`]($math.equation.numbering) parameter on equation function
   - Added [`numbering`]($page.numbering) and
     [`number-align`]($page.number-align) parameters on page function
   - The page function's [`header`]($page.header) and [`footer`]($page.footer)
     parameters do not take functions anymore. If you want to customize them
     based on the page number, use the new [`numbering`]($page.numbering)
-    parameter or [`counter`] function instead.
+    parameter or [`counter`]($counter) function instead.
   - Added [`footer-descent`]($page.footer-descent) and
     [`header-ascent`]($page.header-ascent) parameters
   - Better default alignment in header and footer
@@ -117,7 +117,7 @@ description: Changes in early, unversioned Typst
   - Renamed paragraph `indent` to [`first-line-indent`]($par.first-line-indent)
   - More accurate [logarithm]($calc.log) when base is `2` or `10`
   - Improved some error messages
-  - Fixed layout of [`terms`] list
+  - Fixed layout of [`terms`]($terms) list
 
 - Web app improvements
   - Added template gallery
@@ -144,9 +144,9 @@ description: Changes in early, unversioned Typst
   - Lots of new math fonts available
   - Removed Latin Modern fonts in favor of New Computer Modern family
   - Removed unnecessary smallcaps fonts which are already accessible through the
-    corresponding main font and the [`smallcaps`] function
+    corresponding main font and the [`smallcaps`]($smallcaps) function
 - Improved default spacing for headings
-- Added [`panic`] function
+- Added [`panic`]($panic) function
 - Added [`clusters`]($str.clusters) and [`codepoints`]($str.codepoints) methods
   for strings
 - Support for multiple authors in [`set document`]($document.author)
@@ -159,14 +159,14 @@ description: Changes in early, unversioned Typst
 - Improved incremental compilation for user-defined functions
 
 ## February 15, 2023
-- [Box]($box) and [block] have gained `fill`, `stroke`, `radius`, and `inset`
+- [Box]($box) and [block]($block) have gained `fill`, `stroke`, `radius`, and `inset`
   properties
 - Blocks may now be explicitly sized, fixed-height blocks can still break across
   pages
 - Blocks can now be configured to be [`breakable`]($block.breakable) or not
 - [Numbering style]($enum.numbering) can now be configured for nested enums
 - [Markers]($list.marker) can now be configured for nested lists
-- The [`eval`] function now expects code instead of markup and returns an
+- The [`eval`]($eval) function now expects code instead of markup and returns an
   arbitrary value. Markup can still be evaluated by surrounding the string with
   brackets.
 - PDFs generated by Typst now contain XMP metadata
@@ -176,7 +176,7 @@ description: Changes in early, unversioned Typst
 
 ## February 12, 2023
 - Shapes, images, and transformations (move/rotate/scale/repeat) are now
-  block-level. To integrate them into a paragraph, use a [`box`] as with other
+  block-level. To integrate them into a paragraph, use a [`box`]($box) as with other
   elements.
 - A colon is now required in an "everything" show rule: Write `{show: it => ..}`
   instead of `{show it => ..}`. This prevents intermediate states that ruin your
@@ -190,14 +190,14 @@ description: Changes in early, unversioned Typst
 - Fixed bug where columns jump to next page
 - Fixed bug where list items have no leading
 - Fixed relative sizing in lists, squares and grid auto columns
-- Fixed relative displacement in [`place`] function
+- Fixed relative displacement in [`place`]($place) function
 - Fixed that lines don't have a size
 - Fixed bug where `{set document(..)}` complains about being after content
 - Fixed parsing of `{not in}` operation
 - Fixed hover tooltips in math
 - Fixed bug where a heading show rule may not contain a pagebreak when an
   outline is present
-- Added [`baseline`]($box.baseline) property on [`box`]
+- Added [`baseline`]($box.baseline) property on [`box`]($box)
 - Added [`tg`]($math.op) and [`ctg`]($math.op) operators in math
 - Added delimiter setting for [`cases`]($math.cases) function
 - Parentheses are now included when accepting a function autocompletion
