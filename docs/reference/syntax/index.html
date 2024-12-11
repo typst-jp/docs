@@ -885,7 +885,7 @@ Typst文書では、マークアップモードがデフォルトであり、数
 <p>数式モードは、数式を組版するために使用される特別なマークアップモードです。
 数式を <code>$</code> の文字で囲むことによって、数式モードに入ることができます。
 これはマークアップモードとコードモードの両方で機能します。
-数式が少なくとも一つのスペースで始まり終わる場合、その数式は独自のブロックに組版されます（例：<code><span class="typ-math-delim">$</span> x<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span></code>）。
+数式が少なくとも1つのスペースで始まり終わる場合、その数式は独自のブロックに組版されます（例：<code><span class="typ-math-delim">$</span> x<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span></code>）。
 インライン数式は、スペースを省略することで作成できます（例：<code><span class="typ-math-delim">$</span>x<span class="typ-math-op">^</span>2<span class="typ-math-delim">$</span></code>）。
 以下に、数式モードに特有の構文の概要を示します。</p>
 <table><thead><tr><th>名称</th><th>例</th><th>参照</th></tr></thead><tbody>
@@ -976,7 +976,7 @@ significant.
 <h2 id="escapes">エスケープシーケンス</h2>
 <p>エスケープシーケンスは、Typstで入力が難しい特殊文字や他に特別な意味を持つ文字を挿入するために使用されます。
 文字をエスケープするには、バックスラッシュをその前に置きます。
-任意のUnicodeコードポイントを挿入するためには、16進エスケープシーケンス(<code><span class="typ-escape">\u{1f600}</span></code>)を使用できます。
+任意のUnicodeコードポイントを挿入するためには、16進エスケープシーケンス（<code><span class="typ-escape">\u{1f600}</span></code>）を使用できます。
 このエスケープシーケンスは<a href="/docs/reference/foundations/str/">文字列</a>でも機能します。</p>
 <div class="previewed-code"><pre><code>I got an ice cream for
 <span class="typ-escape">\$</span>1.50! <span class="typ-escape">\u{1f600}</span>

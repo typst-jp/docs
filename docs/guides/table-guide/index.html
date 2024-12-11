@@ -968,7 +968,7 @@ the last column is <code>1fr</code> wide as to fill the whole page.</p>
   <span class="typ-punct">[</span>24/01/11<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>051<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Cycled treatment substrate<span class="typ-punct">]</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/bea1708c403579f7a167d4c5cbfa6c13.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Here, we have passed our list of column lengths as an <a href="/docs/reference/foundations/array/" title="array">array</a>, enclosed in round
+<p>Here, we have passed our list of column lengths as an <a href="/docs/reference/foundations/array/">array</a>, enclosed in round
 parentheses, with its elements separated by commas. The first two columns are
 automatically sized, so that they take on the size of their content and the
 third column is sized as <code><span class="typ-num">1fr</span></code> so that it fills up the remainder of the space
@@ -1175,7 +1175,7 @@ function's <a href="/docs/reference/model/table/#parameters-stroke">stroke</a> a
 <li>Do you want to change, add, or remove the stroke around a single cell? Use the
 <code>table.cell</code> element in the argument list of your table call.</li>
 <li>Do you want to change, add, or remove a single horizontal or vertical stroke
-in a single table? Use the <a href="/docs/reference/model/table/#definitions-hline" title="`table.hline`"><code>table.hline</code></a> and <a href="/docs/reference/model/table/#definitions-vline" title="`table.vline`"><code>table.vline</code></a> elements in the
+in a single table? Use the <a href="/docs/reference/model/table/#definitions-hline"><code>table.hline</code></a> and <a href="/docs/reference/model/table/#definitions-vline"><code>table.vline</code></a> elements in the
 argument list of your table call.</li>
 </ul>
 <p>We will go over all of these options with examples next! First, we will tackle
@@ -1245,8 +1245,8 @@ in the stroke argument to customize all strokes individually. This is how you
 achieve more complex stroking patterns.</p>
 <h3 id="individual-lines">Adding individual lines in the table</h3>
 <p>If you want to add a single horizontal or vertical line in your table, for
-example to separate a group of rows, you can use the <a href="/docs/reference/model/table/#definitions-hline" title="`table.hline`"><code>table.hline</code></a> and
-<a href="/docs/reference/model/table/#definitions-vline" title="`table.vline`"><code>table.vline</code></a> elements for horizontal and vertical lines, respectively. Add
+example to separate a group of rows, you can use the <a href="/docs/reference/model/table/#definitions-hline"><code>table.hline</code></a> and
+<a href="/docs/reference/model/table/#definitions-vline"><code>table.vline</code></a> elements for horizontal and vertical lines, respectively. Add
 them to the argument list of the <code>table</code> function just like you would add
 individual cells and a header.</p>
 <p>Let's take a look at the following example from the reference:</p>
@@ -1442,10 +1442,10 @@ rows, since it is the last entry in the array.</p>
 <p>You can use multiple mechanisms to align the content in your table. You can
 either use the <code>table</code> function's <code>align</code> argument to set the alignment for your
 whole table (or use it in a set rule to set the alignment for tables throughout
-your document) or the <a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a> function (or <code>table.cell</code>'s <code>align</code> argument) to
+your document) or the <a href="/docs/reference/layout/align/"><code>align</code></a> function (or <code>table.cell</code>'s <code>align</code> argument) to
 override the alignment of a single cell.</p>
 <p>When using the <code>table</code> function's align argument, you can choose between three
-methods to specify an <a href="/docs/reference/layout/alignment/" title="alignment">alignment</a>:</p>
+methods to specify an <a href="/docs/reference/layout/alignment/">alignment</a>:</p>
 <ul>
 <li>Just specify a single alignment like <code>right</code> (aligns in the top-right corner)
 or <code>center + horizon</code> (centers all cell content). This changes the alignment
@@ -1505,7 +1505,7 @@ Another use case for cell groups are table headers with multiple rows: That way,
 you can group for example a sales data table by quarter in the first row and by
 months in the second row.</p>
 <p>A merged cell spans multiple rows and/or columns. You can achieve it with the
-<a href="/docs/reference/model/table/#definitions-cell" title="`table.cell`"><code>table.cell</code></a> function's <code>rowspan</code> and <code>colspan</code> arguments: Just specify how
+<a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a> function's <code>rowspan</code> and <code>colspan</code> arguments: Just specify how
 many rows or columns you want your cell to span.</p>
 <p>The example below contains an attendance calendar for an office with in-person
 and remote days for each team member. To make the table more glanceable, we
@@ -1666,20 +1666,20 @@ upright:</p>
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/8f6840ed54f564b02249844c52fab4a7.png" alt="Preview" width="480" height="190"/></div></div>
 <p>Here, we take the same table and the other content we want to set with it and
-put it into a call to the <a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> function while supplying <code><span class="typ-key">true</span></code> to the
+put it into a call to the <a href="/docs/reference/layout/page/"><code>page</code></a> function while supplying <code><span class="typ-key">true</span></code> to the
 <code>flipped</code> argument. This will instruct Typst to create new pages with width and
 height swapped and place the contents of the function call onto a new page.
 Notice how the page number is also on the long edge of the paper now. At the
-bottom of the page, we use the <a href="/docs/reference/layout/pad/" title="`pad`"><code>pad</code></a> function to constrain the width of the
+bottom of the page, we use the <a href="/docs/reference/layout/pad/"><code>pad</code></a> function to constrain the width of the
 paragraph to achieve a nice and legible line length.</p>
 <h2 id="table-across-pages">How to break a table across pages?</h2>
 <p>It is best to contain a table on a single page. However, some tables just have
 many rows, so breaking them across pages becomes unavoidable. Fortunately, Typst
 supports breaking tables across pages out of the box. If you are using the
-<a href="/docs/reference/model/table/#definitions-header" title="`table.header`"><code>table.header</code></a> and <a href="/docs/reference/model/table/#definitions-footer" title="`table.footer`"><code>table.footer</code></a> functions, their contents will be repeated
+<a href="/docs/reference/model/table/#definitions-header"><code>table.header</code></a> and <a href="/docs/reference/model/table/#definitions-footer"><code>table.footer</code></a> functions, their contents will be repeated
 on each page as the first and last rows, respectively. If you want to disable
 this behavior, you can set <code>repeat</code> to <code><span class="typ-key">false</span></code> on either of them.</p>
-<p>If you have placed your table inside of a <a href="/docs/reference/model/figure/" title="figure">figure</a>, it becomes unable to break
+<p>If you have placed your table inside of a <a href="/docs/reference/model/figure/">figure</a>, it becomes unable to break
 across pages by default. However, you can change this behavior. Let's take a
 look:</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">9cm</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">6cm</span><span class="typ-punct">)</span>
@@ -1706,7 +1706,7 @@ look:</p>
   <span class="typ-punct">)</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/60da0b307828363a627a34f007ab1895.png" alt="Preview" width="480" height="190"/></div></div>
-<p>A figure automatically produces a <a href="/docs/reference/layout/block/" title="block">block</a> which cannot break by default.
+<p>A figure automatically produces a <a href="/docs/reference/layout/block/">block</a> which cannot break by default.
 However, we can reconfigure the block of the figure using a show rule to make it
 <code>breakable</code>. Now, the figure spans multiple pages with the headers and footers
 repeating.</p>
@@ -1738,7 +1738,7 @@ structured:</p>
 whom the metric applies), Code, the year, and the number of transistors per
 microprocessor. Only the last two columns change between each row, so we can
 disregard &quot;Entity&quot; and &quot;Code&quot;.</p>
-<p>First, let's start by loading this file with the <a href="/docs/reference/data-loading/csv/" title="`csv`"><code>csv</code></a> function. It accepts
+<p>First, let's start by loading this file with the <a href="/docs/reference/data-loading/csv/"><code>csv</code></a> function. It accepts
 the file name of the file we want to load as a string argument:</p>
 <pre><code><span class="typ-key">#</span><span class="typ-key">let</span> moore <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;moore.csv&quot;</span><span class="typ-punct">)</span>
 </code></pre>
@@ -1842,17 +1842,17 @@ cells itself conveys information.</p>
 <p>To make this difference clear to other software and allow templates to heavily
 style tables, Typst has two functions for grid and table layout:</p>
 <ul>
-<li>The <a href="/docs/reference/model/table/" title="`table`"><code>table</code></a> function explained throughout this guide which is intended for
+<li>The <a href="/docs/reference/model/table/"><code>table</code></a> function explained throughout this guide which is intended for
 tabular data.</li>
-<li>The <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> function which is intended for presentational purposes and page
+<li>The <a href="/docs/reference/layout/grid/"><code>grid</code></a> function which is intended for presentational purposes and page
 layout.</li>
 </ul>
 <p>Both elements work the same way and have the same arguments. You can apply
 everything you have learned about tables in this guide to grids. There are only
 three differences:</p>
 <ul>
-<li>You'll need to use the <a href="/docs/reference/layout/grid/#definitions-cell" title="`grid.cell`"><code>grid.cell</code></a>, <a href="/docs/reference/layout/grid/#definitions-vline" title="`grid.vline`"><code>grid.vline</code></a>, and <a href="/docs/reference/layout/grid/#definitions-hline" title="`grid.hline`"><code>grid.hline</code></a>
-elements instead of <a href="/docs/reference/model/table/#definitions-cell" title="`table.cell`"><code>table.cell</code></a>, <a href="/docs/reference/model/table/#definitions-vline" title="`table.vline`"><code>table.vline</code></a>, and <a href="/docs/reference/model/table/#definitions-hline" title="`table.hline`"><code>table.hline</code></a>.</li>
+<li>You'll need to use the <a href="/docs/reference/layout/grid/#definitions-cell"><code>grid.cell</code></a>, <a href="/docs/reference/layout/grid/#definitions-vline"><code>grid.vline</code></a>, and <a href="/docs/reference/layout/grid/#definitions-hline"><code>grid.hline</code></a>
+elements instead of <a href="/docs/reference/model/table/#definitions-cell"><code>table.cell</code></a>, <a href="/docs/reference/model/table/#definitions-vline"><code>table.vline</code></a>, and <a href="/docs/reference/model/table/#definitions-hline"><code>table.hline</code></a>.</li>
 <li>The grid has different defaults: It draws no strokes by default and has no
 spacing (<code>inset</code>) inside of its cells.</li>
 <li>Elements like <code>figure</code> do not react to grids since they are supposed to have

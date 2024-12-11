@@ -848,9 +848,9 @@
 <h2 id="set-rules">setルール</h2>
 <p>setルールを使うと、エレメントの外観をカスタマイズできます。
 これらは、<code><span class="typ-key">set</span></code>キーワード（マークアップでは<code><span class="typ-key">#</span><span class="typ-key">set</span></code>）を前に置いた<a href="/docs/reference/foundations/function/#element-functions">element 関数</a>への<a href="/docs/reference/foundations/function/">関数呼び出し</a>として記述されます。
-set ルールに指定できるのは、その関数のオプションのパラメーターだけです。
+setルールに指定できるのは、その関数のオプションのパラメーターだけです。
 どのパラメーターがオプションであるかは、各関数のドキュメントを参照してください。
-以下の例では、2 つの set ルールを使って、<a href="/docs/reference/text/text/#parameters-font">フォント</a>と<a href="/docs/reference/model/heading/#parameters-numbering">見出し番号</a>を変更しています。</p>
+以下の例では、2つのsetルールを使って、<a href="/docs/reference/text/text/#parameters-font">フォント</a>と<a href="/docs/reference/model/heading/#parameters-numbering">見出し番号</a>を変更しています。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;I.&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
   font<span class="typ-punct">:</span> <span class="typ-str">&quot;New Computer Modern&quot;</span>
@@ -922,7 +922,7 @@ extra style points.
 </code></pre><div class="preview"><img src="/assets/docs/f5ae77cfb57288910a37d95f5ab9b4e8.png" alt="Preview" width="480" height="190"/></div></div>
 <p>setルールと同様に、showルールは、現在のブロック内またはファイルの終わりまで有効です。</p>
 <p>関数の代わりに、showルールのコロン右側は、エレメントに直接置換されるべきリテラル文字列またはコンテンツブロックを取ることもできます。
-また showルールのコロン左側は、以下に示すように、変換を適用する対象を定義する <em>セレクター</em> を受け取ることができます。</p>
+またshowルールのコロン左側は、以下に示すように、変換を適用する対象を定義する <em>セレクター</em> を受け取ることができます。</p>
 <ul>
 <li>
 <p><strong>すべて：</strong> <code><span class="typ-key">show</span><span class="typ-punct">:</span> rest <span class="typ-op">=&gt;</span> ..</code> <br />

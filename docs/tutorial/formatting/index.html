@@ -898,11 +898,11 @@ setルールでは、ある関数のパラメーターに、それ以降にそ�
 setルールを書くときは、スタイルを設定したい要素の種類に応じて関数を選択します。
 以下は、setルールでよく使われる関数のリストです。</p>
 <ul>
-<li><a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> フォントの種類、大きさ、色などのテキストのプロパティを設定</li>
-<li><a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> ページサイズ、余白（マージン）、ヘッダー、段組み、フッターを設定</li>
-<li><a href="/docs/reference/model/par/" title="`par`"><code>par</code></a> 段落の両端揃え、行間の幅など</li>
-<li><a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a> 見出しの見た目や番号付</li>
-<li><a href="/docs/reference/model/document/" title="`document`"><code>document</code></a> タイトルや著者情報などPDF出力に含まれるメタデータ</li>
+<li><a href="/docs/reference/text/text/"><code>text</code></a> フォントの種類、大きさ、色などのテキストのプロパティを設定</li>
+<li><a href="/docs/reference/layout/page/"><code>page</code></a> ページサイズ、余白（マージン）、ヘッダー、段組み、フッターを設定</li>
+<li><a href="/docs/reference/model/par/"><code>par</code></a> 段落の両端揃え、行間の幅など</li>
+<li><a href="/docs/reference/model/heading/"><code>heading</code></a> 見出しの見た目や番号付</li>
+<li><a href="/docs/reference/model/document/"><code>document</code></a> タイトルや著者情報などPDF出力に含まれるメタデータ</li>
 </ul>
 <p>関数のパラメーターはすべて設定できるわけではありません。
 一般的に、関数のパラメーターを設定できるのは、関数に <em>どのように</em> 実行させるかを指示するパラメーターだけであり、関数に <em>何を</em> 実行させるかを指示するパラメーターは設定できません。
@@ -941,23 +941,23 @@ behaviour of these natural structures.
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/625c72f2cd76cb8c34edf40b5829aaed.png" alt="Preview" width="480" height="190"/></div></div>
 <p>ここで注目していただきたい点を以下に記載します。</p>
-<p>まず、<a href="/docs/reference/layout/page/" title="`page`"><code>page</code></a> setルールです。
+<p>まず、<a href="/docs/reference/layout/page/"><code>page</code></a> setルールです。
 これはページサイズと余白の2つの引数を受け取ります。
 ページサイズは文字列であり、Typstは<a href="/docs/reference/layout/page/#parameters-paper">多くの標準ページサイズ</a>を受け付けますが、カスタムページサイズを指定することもできます。
 余白は<a href="/docs/reference/foundations/dictionary/">辞書型</a>で指定します。辞書型とはキーと値のペアの集まりです。
 この場合、キーは<code>x</code>と<code>y</code>で、値はそれぞれ水平マージンと垂直マージンです。
 <code>left</code>, <code>right</code>, <code>top</code>, and <code>bottom</code>をキーとする辞書を渡すことで、各辺に別々の余白を指定することもできます。</p>
-<p>つぎに<a href="/docs/reference/text/text/" title="`text`"><code>text</code></a> setルールです。
+<p>つぎに<a href="/docs/reference/text/text/"><code>text</code></a> setルールです。
 ここでは、フォントサイズを<code><span class="typ-num">10pt</span></code>、フォントの種類を <code><span class="typ-str">&quot;New Computer Modern&quot;</span></code>に設定します。
 Typst appには多くのフォントが用意されております。
 text関数の引数リストにいるとき、補完パネルで利用可能なフォントを探すことができます。</p>
 <p>また、行間の幅（leading）も設定しました。
-これは<a href="/docs/reference/layout/length/" title="length">length</a>の値として指定され、<code>em</code>という単位を使ってフォントのサイズに対する行間を指定しています。
+これは<a href="/docs/reference/layout/length/">length</a>の値として指定され、<code>em</code>という単位を使ってフォントのサイズに対する行間を指定しています。
 <code><span class="typ-num">1em</span></code>は現在のフォントサイズ（デフォルトは<code><span class="typ-num">11pt</span></code>）に相当します。</p>
 <p>最後に、中央揃えに垂直配置を追加して、画像をページの下部に配置しました。
 垂直配置と水平配置を <code><span class="typ-op">+</span></code> 演算子で組み合わせることで2次元配置を指定できます。</p>
 <h2 id="sophistication">洗練のヒント</h2>
-<p>can do this by setting the <code>numbering</code> parameter of the <a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a> function. --&gt;
+<p>can do this by setting the <code>numbering</code> parameter of the <a href="/docs/reference/model/heading/"><code>heading</code></a> function. --&gt;
 文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
 これを行うには、<a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a>関数の<code>numbering</code>パラメーターを設定します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
@@ -996,7 +996,7 @@ text関数の引数リストにいるとき、補完パネルで利用可能な�
 <h2 id="show-rule">showルール</h2>
 <p>書式設定によりレポートの出来栄えにかなり満足してきましたが、最後にひとつだけ修正が必要な点があります。
 あなたが書いているレポートは、より大きなプロジェクトのためのものであり、そのプロジェクト名には、たとえ散文であっても、常にロゴを添えるべきでしょう。</p>
-<p>一つの方法として、検索と置換を使ってロゴを添えるすべての場所に<code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;logo.svg&quot;</span><span class="typ-punct">)</span></code>の呼び出しを追加することもできますが、それはとても面倒です。
+<p>1つの方法として、検索と置換を使ってロゴを添えるすべての場所に<code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;logo.svg&quot;</span><span class="typ-punct">)</span></code>の呼び出しを追加することもできますが、それはとても面倒です。
 別の方法として、<a href="/docs/reference/foundations/function/#defining-functions">カスタム関数を定義する</a>ことで、常にロゴを画像として生成することもできます。
 しかし、これらよりももっと簡単な方法があります。</p>
 <p>showルールを使用すると、Typstが特定の要素をどのように表示するかを再定義できます。

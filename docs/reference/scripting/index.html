@@ -846,9 +846,9 @@
 <h2 id="expressions">式</h2>
 <p>Typstでは、マークアップとコードが一体となっています。
 最も一般的な要素以外のものは　<em>関数</em> を使って作成されます。
-これを可能な限り便利にするため、Typstはコード式をマークアップに埋め込むためのコンパクトな構文を提供しています。式はハッシュ(<code>#</code>)で始まり、
+これを可能な限り便利にするため、Typstはコード式をマークアップに埋め込むためのコンパクトな構文を提供しています。式はハッシュ（<code>#</code>）で始まり、
 この式が終了すると通常のマークアップの解析が再開されます。
-式の直後に通常の文字列として解釈されるべき文字が続く場合、セミコロン(<code>;</code>)を使って式を強制的に終了できます。</p>
+式の直後に通常の文字列として解釈されるべき文字が続く場合、セミコロン（<code>;</code>）を使って式を強制的に終了できます。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">emph</span><span class="typ-punct">[</span>Hello<span class="typ-punct">]</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">emoji</span><span class="typ-punct">.</span><span class="typ-pol">face</span> <span class="typ-escape">\</span>
 <span class="typ-str">#</span><span class="typ-str">&quot;hello&quot;</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
@@ -857,7 +857,7 @@
 <a href="/docs/reference/scripting/#fields">フィールドアクセス</a>、
 そして<a href="/docs/reference/scripting/#methods">メソッド呼び出し</a>などのいくつかの使用可能な式を示しています。
 この章の残りでは、より多くの種類の式について説明します。
-いくつかの種類の式はハッシュ構文と互換性がありません(例えば二項演算子式)。
+いくつかの種類の式はハッシュ構文と互換性がありません（例えば二項演算子式）。
 このような式をマークアップに埋め込むためには、<code><span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-op">+</span><span class="typ-num">2</span><span class="typ-punct">)</span></code>のように丸括弧を使用します。</p>
 <h2 id="blocks">ブロック</h2>
 <p>コードを構造化し、マークアップを埋め込むために、Typstは次の二種類の <em>ブロック</em> を提供します。</p>
@@ -865,7 +865,7 @@
 <li>
 <p><strong>コードブロック</strong> <code><span class="typ-punct">{</span> <span class="typ-key">let</span> x <span class="typ-op">=</span> <span class="typ-num">1</span><span class="typ-punct">;</span> x <span class="typ-op">+</span> <span class="typ-num">2</span> <span class="typ-punct">}</span></code> <br />
 コードを書く際には、計算を複数のステートメントに分割したり、中間変数を作成したりすることがあるでしょう。
-コードブロックを使用すると、複数の式を一つのブロックにまとめられます。ブロック内の個々の式は改行またはセミコロンで区切られます。
+コードブロックを使用すると、複数の式を1つのブロックにまとめられます。ブロック内の個々の式は改行またはセミコロンで区切られます。
 コードブロック内の個々の式の出力値は結合され、ブロックの値を決定します。
 <code><span class="typ-key">let</span></code>バインディングのように有用な出力のない式は<code><span class="typ-key">none</span></code>を生成し、これはどの値とも影響なく結合できます。</p>
 </li>
@@ -889,7 +889,7 @@
 <p>前述のように、変数は<code><span class="typ-key">let</span></code>バインディングで定義できます。
 変数には<code>=</code>記号のあとに続く式の値が代入されます。値の代入は任意であり、値が代入されなければ変数は<code><span class="typ-key">none</span></code>として初期化されます。
 <code><span class="typ-key">let</span></code>キーワードは、<a href="/docs/reference/foundations/function/#defining-functions">カスタム名前付き関数</a>を作成するためにも使用できます。
-変数は、それが含まれるブロックの残りの部分(または、変数が含まれるブロックがない場合はファイル全体)の中でアクセスできます。</p>
+変数は、それが含まれるブロックの残りの部分（または、変数が含まれるブロックがない場合はファイル全体）の中でアクセスできます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> name <span class="typ-op">=</span> <span class="typ-str">&quot;Typst&quot;</span>
 This is <span class="typ-pol">#</span><span class="typ-pol">name</span>&#39;s documentation.
 It explains <span class="typ-pol">#</span><span class="typ-pol">name</span>.
@@ -964,7 +964,7 @@ Typstは<code><span class="typ-key">if</span></code>式、<code>else <span class
 <p>ループを使用すると、コンテンツを繰り返したり、何かを反復的に計算したりできます。
 Typstは、<code><span class="typ-key">for</span></code>ループと<code><span class="typ-key">while</span></code>ループの2つのループをサポートしています。
 前者は指定されたコレクションを反復するのに対し、後者は条件が満たされている限り反復を続けます。
-ブロックと同様に、ループは各反復からの結果を一つの値に <em>結合</em> します。</p>
+ブロックと同様に、ループは各反復からの結果を1つの値に <em>結合</em> します。</p>
 <p>以下の例では、forループによって作成された3つの文が1つのコンテンツ値に結合され、whileループの中の長さ1の配列が1つの大きな配列に結合されます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">for</span> c <span class="typ-key">in</span> <span class="typ-str">&quot;ABC&quot;</span> <span class="typ-punct">[</span>
   <span class="typ-pol">#</span><span class="typ-pol">c</span> is a letter.
@@ -1014,6 +1014,7 @@ Typstは、<code><span class="typ-key">for</span></code>ループと<code><span 
 </ul>
 <h2 id="fields">フィールド</h2>
 <p><em>ドット記法</em> を使用することで値のフィールドにアクセスできます。<a href="/docs/reference/foundations/content/">コンテンツ</a>型の値については、<a href="/docs/reference/foundations/content/#definitions-fields">fields</a>関数を使用してフィールドを一覧表示できます。</p>
+<!-- textlint-disable jtf-style/1.1.3.箇条書き -->
 <p>対象の値は以下のいずれかです。</p>
 <ul>
 <li>指定されたキーを持つ<a href="/docs/reference/foundations/dictionary/">辞書</a>、</li>
@@ -1021,6 +1022,7 @@ Typstは、<code><span class="typ-key">for</span></code>ループと<code><span 
 <li>指定された定義を含む<a href="/docs/reference/foundations/module/">モジュール</a>、</li>
 <li>指定されたフィールドを持つ要素で構成された<a href="/docs/reference/foundations/content/">コンテンツ</a>。利用可能なフィールドは、その要素が構築された際に与えられた<a href="/docs/reference/foundations/function/#element-functions">要素関数</a>の引数と一致します。</li>
 </ul>
+<!-- textlint-enable -->
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> it <span class="typ-op">=</span> <span class="typ-punct">[</span><span class="typ-heading">= Heading</span><span class="typ-punct">]</span>
 <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">body</span> <span class="typ-escape">\</span>
 <span class="typ-pol">#</span><span class="typ-pol">it</span><span class="typ-punct">.</span><span class="typ-pol">depth</span> <span class="typ-escape">\</span>
@@ -1049,14 +1051,15 @@ Typstは、<code><span class="typ-key">for</span></code>ループと<code><span 
 <span class="typ-str">#</span><span class="typ-str">&quot;abc&quot;</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-punct">)</span> is the same as
 <span class="typ-pol">#</span><span class="typ-pol">str</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-str">&quot;abc&quot;</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/0548ab013972482f019079267f128a44.png" alt="Preview" width="480" height="190"/></div></div>
-<p>特定の値に対して呼び出された際に、その値を変更する特別な関数がいくつかあります(例: <a href="/docs/reference/foundations/array/#definitions-push"><code>array.push</code></a>)。
+<p>特定の値に対して呼び出された際に、その値を変更する特別な関数がいくつかあります（例： <a href="/docs/reference/foundations/array/#definitions-push"><code>array.push</code></a>）。
 これらの関数は、<em>必ず</em> メソッド形式で呼び出す必要があります。
-場合によっては、メソッドが副作用のためだけに呼び出されるとき、その戻り値は無視されるべきです(結合に加わるべきではありません)。
+場合によっては、メソッドが副作用のためだけに呼び出されるとき、その戻り値は無視されるべきです（結合に加わるべきではありません）。
 値を破棄する標準的な方法は、<code><span class="typ-key">let</span> _ <span class="typ-op">=</span> array<span class="typ-punct">.</span><span class="typ-func">remove</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span></code>のように
 letバインディングを使用することです。</p>
 <h2 id="modules">モジュール</h2>
 <p>Typstプロジェクトを、<em>モジュール</em> と呼ばれる複数のファイルに分割できます。
 モジュールは他のモジュールの内容や定義を複数の方法で参照できます。</p>
+<!-- textlint-disable jtf-style/1.1.3.箇条書き -->
 <ul>
 <li>
 <p><strong>インクルード：</strong> <code><span class="typ-key">include</span> <span class="typ-str">&quot;bar.typ&quot;</span></code> <br />
@@ -1065,19 +1068,20 @@ letバインディングを使用することです。</p>
 <li>
 <p><strong>インポート：</strong> <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span></code> <br />
 パス<code>bar.typ</code>にあるファイルを評価し、その結果として得られる
-<a href="/docs/reference/foundations/module/">モジュール</a>を現在のスコープに<code>bar</code>(拡張子なしのファイル名)として挿入します。次のように、<code>as</code>キーワードを使用してモジュール名を変更できます。
+<a href="/docs/reference/foundations/module/">モジュール</a>を現在のスコープに<code>bar</code>（拡張子なしのファイル名）として挿入します。次のように、<code>as</code>キーワードを使用してモジュール名を変更できます。
 <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span> <span class="typ-key">as</span> baz</code>
 You can import nested items using dot notation: <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span><span class="typ-punct">:</span> baz<span class="typ-punct">.</span>a</code>.</p>
 </li>
 <li>
 <p><strong>アイテムのインポート:</strong> <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span><span class="typ-punct">:</span> a<span class="typ-punct">,</span> b</code> <br />
 パス<code>bar.typ</code>にあるファイルを評価して、変数<code>a</code>と<code>b</code>の値
-(これらは<code>bar.typ</code>で、例えば<code><span class="typ-key">let</span></code>バインディングを通じて定義されている必要があります)
+（これらは<code>bar.typ</code>で、例えば<code><span class="typ-key">let</span></code>バインディングを通じて定義されている必要があります）
 を抽出し、現在のファイルで定義します。  <code>a, b</code>を<code>*</code>に置き換えると、モジュールで定義されたすべての変数が読み込まれます。
 次のように、<code>as</code>キーワードを使用してモジュール名を変更できます。
 <code><span class="typ-key">import</span> <span class="typ-str">&quot;bar.typ&quot;</span><span class="typ-punct">:</span> a <span class="typ-key">as</span> one<span class="typ-punct">,</span> b <span class="typ-key">as</span> two</code></p>
 </li>
 </ul>
+<!-- textlint-enable -->
 <p>以下の例に示すように、パスの代わりに<a href="/docs/reference/foundations/module/">モジュール値</a>を使用できます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">import</span> emoji<span class="typ-punct">:</span> face
 <span class="typ-pol">#</span><span class="typ-pol">face</span><span class="typ-punct">.</span><span class="typ-pol">grin</span>

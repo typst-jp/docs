@@ -871,7 +871,7 @@ delimiters. Generally with <code><span class="typ-key">#</span><span class="typ-
 <li>Numberings now allow zeros. To reset a counter, you can write
 <code><span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span><span class="typ-num">0</span><span class="typ-punct">)</span></code></li>
 <li>Added documentation for <code><span class="typ-func">page</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> and <code><span class="typ-func">position</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> methods on
-<a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a> type</li>
+<a href="/docs/reference/introspection/location/"><code>location</code></a> type</li>
 <li>Added symbols for double, triple, and quadruple dot accent</li>
 <li>Added smart quotes for Norwegian Bokmål</li>
 <li>Added Nix flake</li>
@@ -880,7 +880,7 @@ delimiters. Generally with <code><span class="typ-key">#</span><span class="typ-
 <li>Fixed parsing of unbalanced delimiters in fractions: <code><span class="typ-math-delim">$</span>1<span class="typ-math-op">/</span>(2 (x)<span class="typ-math-delim">$</span></code></li>
 <li>Fixed unexpected parsing of numbers as enumerations, e.g. in <code>1.2</code></li>
 <li>Fixed combination of page fill and header</li>
-<li>Fixed compiler crash if <a href="/docs/reference/layout/repeat/" title="`repeat`"><code>repeat</code></a> is used in page with automatic width</li>
+<li>Fixed compiler crash if <a href="/docs/reference/layout/repeat/"><code>repeat</code></a> is used in page with automatic width</li>
 <li>Fixed <a href="/docs/reference/math/mat/">matrices</a> with explicit delimiter</li>
 <li>Fixed <a href="/docs/reference/model/terms/#parameters-indent"><code>indent</code></a> property of term lists</li>
 <li>Numerous documentation fixes</li>
@@ -909,7 +909,7 @@ the bibliography with <code><span class="typ-ref">@label</span></code></li>
 <li>
 <p>Introspection system for interactions between different parts of the document</p>
 <ul>
-<li><a href="/docs/reference/introspection/counter/" title="`counter`"><code>counter</code></a> function
+<li><a href="/docs/reference/introspection/counter/"><code>counter</code></a> function
 <ul>
 <li>Access and modify counters for pages, headings, figures, and equations</li>
 <li>Define and use your own custom counters</li>
@@ -919,7 +919,7 @@ can determine the value of the figure counter at any given figure).</li>
 <li>Counters count in layout order and not in code order</li>
 </ul>
 </li>
-<li><a href="/docs/reference/introspection/state/" title="`state`"><code>state</code></a> function
+<li><a href="/docs/reference/introspection/state/"><code>state</code></a> function
 <ul>
 <li>Manage arbitrary state across your document</li>
 <li>Time travel: Find out the value of your state at any position in the
@@ -927,7 +927,7 @@ document</li>
 <li>State is modified in layout order and not in code order</li>
 </ul>
 </li>
-<li><a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a> function
+<li><a href="/docs/reference/introspection/query/"><code>query</code></a> function
 <ul>
 <li>Find all occurrences of an element or a label, either in the whole
 document or before/after some location</li>
@@ -937,7 +937,7 @@ fields</li>
 chapter title</li>
 </ul>
 </li>
-<li><a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a> function
+<li><a href="/docs/reference/introspection/locate/"><code>locate</code></a> function
 <ul>
 <li>Determines the location of itself in the final layout</li>
 <li>Can be accessed to get the <code>page</code> and <code>x</code>, <code>y</code> coordinates</li>
@@ -949,10 +949,10 @@ location</li>
 </ul>
 </li>
 <li>
-<p>New <a href="/docs/reference/layout/measure/" title="`measure`"><code>measure</code></a> function</p>
+<p>New <a href="/docs/reference/layout/measure/"><code>measure</code></a> function</p>
 <ul>
 <li>Measure the layouted size of elements</li>
-<li>To be used in combination with the new <a href="/docs/reference/foundations/style/" title="`style`"><code>style</code></a> function that lets you
+<li>To be used in combination with the new <a href="/docs/reference/foundations/style/"><code>style</code></a> function that lets you
 generate different content based on the style context something is inserted
 into (because that affects the measured size of content)</li>
 </ul>
@@ -963,7 +963,7 @@ into (because that affects the measured size of content)</li>
 <li>Content is not opaque anymore</li>
 <li>Content can be compared for equality</li>
 <li>The tree of content elements can be traversed with code</li>
-<li>Can be observed in hover tooltips or with <a href="/docs/reference/foundations/repr/" title="`repr`"><code>repr</code></a></li>
+<li>Can be observed in hover tooltips or with <a href="/docs/reference/foundations/repr/"><code>repr</code></a></li>
 <li>New <a href="/docs/reference/foundations/content/">methods</a> on content: <code>func</code>, <code>has</code>, <code>at</code>, and <code>location</code></li>
 <li>All optional fields on elements are now settable</li>
 <li>More uniform field names (<code>heading.title</code> becomes <code>heading.body</code>,
@@ -973,14 +973,14 @@ into (because that affects the measured size of content)</li>
 <li>
 <p>Further improvements</p>
 <ul>
-<li>Added <a href="/docs/reference/model/figure/" title="`figure`"><code>figure</code></a> function</li>
+<li>Added <a href="/docs/reference/model/figure/"><code>figure</code></a> function</li>
 <li>Added <a href="/docs/reference/math/equation/#parameters-numbering"><code>numbering</code></a> parameter on equation function</li>
 <li>Added <a href="/docs/reference/layout/page/#parameters-numbering"><code>numbering</code></a> and
 <a href="/docs/reference/layout/page/#parameters-number-align"><code>number-align</code></a> parameters on page function</li>
 <li>The page function's <a href="/docs/reference/layout/page/#parameters-header"><code>header</code></a> and <a href="/docs/reference/layout/page/#parameters-footer"><code>footer</code></a>
 parameters do not take functions anymore. If you want to customize them
 based on the page number, use the new <a href="/docs/reference/layout/page/#parameters-numbering"><code>numbering</code></a>
-parameter or <a href="/docs/reference/introspection/counter/" title="`counter`"><code>counter</code></a> function instead.</li>
+parameter or <a href="/docs/reference/introspection/counter/"><code>counter</code></a> function instead.</li>
 <li>Added <a href="/docs/reference/layout/page/#parameters-footer-descent"><code>footer-descent</code></a> and
 <a href="/docs/reference/layout/page/#parameters-header-ascent"><code>header-ascent</code></a> parameters</li>
 <li>Better default alignment in header and footer</li>
@@ -992,7 +992,7 @@ parameter or <a href="/docs/reference/introspection/counter/" title="`counter`">
 <li>Renamed paragraph <code>indent</code> to <a href="/docs/reference/model/par/#parameters-first-line-indent"><code>first-line-indent</code></a></li>
 <li>More accurate <a href="/docs/reference/foundations/calc/#functions-log">logarithm</a> when base is <code>2</code> or <code>10</code></li>
 <li>Improved some error messages</li>
-<li>Fixed layout of <a href="/docs/reference/model/terms/" title="`terms`"><code>terms</code></a> list</li>
+<li>Fixed layout of <a href="/docs/reference/model/terms/"><code>terms</code></a> list</li>
 </ul>
 </li>
 <li>
@@ -1026,11 +1026,11 @@ works in show rules</li>
 <li>Lots of new math fonts available</li>
 <li>Removed Latin Modern fonts in favor of New Computer Modern family</li>
 <li>Removed unnecessary smallcaps fonts which are already accessible through the
-corresponding main font and the <a href="/docs/reference/text/smallcaps/" title="`smallcaps`"><code>smallcaps</code></a> function</li>
+corresponding main font and the <a href="/docs/reference/text/smallcaps/"><code>smallcaps</code></a> function</li>
 </ul>
 </li>
 <li>Improved default spacing for headings</li>
-<li>Added <a href="/docs/reference/foundations/panic/" title="`panic`"><code>panic</code></a> function</li>
+<li>Added <a href="/docs/reference/foundations/panic/"><code>panic</code></a> function</li>
 <li>Added <a href="/docs/reference/foundations/str/#definitions-clusters"><code>clusters</code></a> and <a href="/docs/reference/foundations/str/#definitions-codepoints"><code>codepoints</code></a> methods
 for strings</li>
 <li>Support for multiple authors in <a href="/docs/reference/model/document/#parameters-author"><code>set document</code></a></li>
@@ -1044,14 +1044,14 @@ Computer Modern families)</li>
 </ul>
 <h2 id="february-15-2023">February 15, 2023</h2>
 <ul>
-<li><a href="/docs/reference/layout/box/">Box</a> and <a href="/docs/reference/layout/block/" title="block">block</a> have gained <code>fill</code>, <code>stroke</code>, <code>radius</code>, and <code>inset</code>
+<li><a href="/docs/reference/layout/box/">Box</a> and <a href="/docs/reference/layout/block/">block</a> have gained <code>fill</code>, <code>stroke</code>, <code>radius</code>, and <code>inset</code>
 properties</li>
 <li>Blocks may now be explicitly sized, fixed-height blocks can still break across
 pages</li>
 <li>Blocks can now be configured to be <a href="/docs/reference/layout/block/#parameters-breakable"><code>breakable</code></a> or not</li>
 <li><a href="/docs/reference/model/enum/#parameters-numbering">Numbering style</a> can now be configured for nested enums</li>
 <li><a href="/docs/reference/model/list/#parameters-marker">Markers</a> can now be configured for nested lists</li>
-<li>The <a href="/docs/reference/foundations/eval/" title="`eval`"><code>eval</code></a> function now expects code instead of markup and returns an
+<li>The <a href="/docs/reference/foundations/eval/"><code>eval</code></a> function now expects code instead of markup and returns an
 arbitrary value. Markup can still be evaluated by surrounding the string with
 brackets.</li>
 <li>PDFs generated by Typst now contain XMP metadata</li>
@@ -1062,7 +1062,7 @@ brackets.</li>
 <h2 id="february-12-2023">February 12, 2023</h2>
 <ul>
 <li>Shapes, images, and transformations (move/rotate/scale/repeat) are now
-block-level. To integrate them into a paragraph, use a <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> as with other
+block-level. To integrate them into a paragraph, use a <a href="/docs/reference/layout/box/"><code>box</code></a> as with other
 elements.</li>
 <li>A colon is now required in an &quot;everything&quot; show rule: Write <code><span class="typ-key">show</span><span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> ..</code>
 instead of <code><span class="typ-key">show</span> it <span class="typ-op">=&gt;</span> ..</code>. This prevents intermediate states that ruin your
@@ -1076,14 +1076,14 @@ vertically</li>
 <li>Fixed bug where columns jump to next page</li>
 <li>Fixed bug where list items have no leading</li>
 <li>Fixed relative sizing in lists, squares and grid auto columns</li>
-<li>Fixed relative displacement in <a href="/docs/reference/layout/place/" title="`place`"><code>place</code></a> function</li>
+<li>Fixed relative displacement in <a href="/docs/reference/layout/place/"><code>place</code></a> function</li>
 <li>Fixed that lines don't have a size</li>
 <li>Fixed bug where <code><span class="typ-key">set</span> <span class="typ-func">document</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-punct">)</span></code> complains about being after content</li>
 <li>Fixed parsing of <code><span class="typ-key">not</span> <span class="typ-key">in</span></code> operation</li>
 <li>Fixed hover tooltips in math</li>
 <li>Fixed bug where a heading show rule may not contain a pagebreak when an
 outline is present</li>
-<li>Added <a href="/docs/reference/layout/box/#parameters-baseline"><code>baseline</code></a> property on <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a></li>
+<li>Added <a href="/docs/reference/layout/box/#parameters-baseline"><code>baseline</code></a> property on <a href="/docs/reference/layout/box/"><code>box</code></a></li>
 <li>Added <a href="/docs/reference/math/op/"><code>tg</code></a> and <a href="/docs/reference/math/op/"><code>ctg</code></a> operators in math</li>
 <li>Added delimiter setting for <a href="/docs/reference/math/cases/"><code>cases</code></a> function</li>
 <li>Parentheses are now included when accepting a function autocompletion</li>

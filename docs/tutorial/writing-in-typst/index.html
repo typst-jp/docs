@@ -892,16 +892,16 @@ Typstでは、PNG、JPEG、GIF、SVGの形式の画像をサポートしてい�
 これによりアップロードダイアログが開き、コンピュータからアップロードするファイルを選択できます。
 レポートに用いる画像ファイルを選んでください。</p>
 <p><img src="/assets/docs/1-writing-upload.png" alt="Upload dialog" /></p>
-<p>以前にも見てきたように、Typstでは特定の記号（ <em>マークアップ</em> と呼ばれる）が特有の意味を持ちます。
+<p>以前にも見てきたように、Typstでは特定の記号（<em>マークアップ</em> と呼ばれる）が特有の意味を持ちます。
 <code>=</code>、<code>-</code>、<code>+</code>、<code>_</code> をそれぞれ見出し、リスト、強調テキストを作成するために使用することができます。
 しかし、文書に挿入したいもの全てに特別な記号を割り当てると、すぐに分かりづらく、そして扱いづらくなってしまいます。
 そのため、Typstでは一般的な書式にのみマークアップ記号を用意し、それ以外は全て <em>関数</em> を使って挿入します。</p>
-<p>ページに画像を表示させるためには、Typstの <a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a> 関数を使用します。</p>
+<p>ページに画像を表示させるためには、Typstの<a href="/docs/reference/visualize/image/"><code>image</code></a>関数を使用します。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;glacier.jpg&quot;</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/e65b151dfe412be3d4134a72cf3ae846.png" alt="Preview" width="480" height="190"/></div></div>
 <p>一般的に、関数は一連の <em>引数</em> に対して何らかの出力を生成します。
-マークアップ内で関数を <em>呼び出す</em> 時は、あなたが関数の引数を指定すると、Typstがその結果（関数の <em>戻り値</em> ）を文書に挿入してくれます。
-今回の場合、<code>image</code> 関数は一つの引数として画像ファイルへのパスを受け取ります。
+マークアップ内で関数を <em>呼び出す</em> 時は、あなたが関数の引数を指定すると、Typstがその結果（関数の <em>戻り値</em>）を文書に挿入してくれます。
+今回の場合、<code>image</code> 関数は1つの引数として画像ファイルへのパスを受け取ります。
 マークアップで関数を呼び出すには、まず <code>#</code> 文字を入力し、直後に関数の名前を記述します。
 その後、引数を丸括弧で囲みます。
 Typstは引数リスト内でさまざまなデータ型を認識します。
@@ -951,7 +951,7 @@ we don&#39;t take action soon!
 どちらもテキストを含んでいるように見えますが、違いは何でしょうか？</p>
 <p>コンテンツブロックはテキストを含むことができますが、それ以外にもさまざまなマークアップ、関数呼び出しなどを含むことができます。
 一方、文字列は本当に <em>文字の並び</em> に過ぎません。</p>
-<p>例えば、image 関数は、引数として画像ファイルへのパスが渡されることを想定しています。ここに文章の段落や他の画像を渡しても意味がありません。
+<p>例えば、image関数は、引数として画像ファイルへのパスが渡されることを想定しています。ここに文章の段落や他の画像を渡しても意味がありません。
 image関数の引数としてマークアップがダメで文字列が許可されるのは、そういうわけなのです。
 それとは反対に、文字列はコンテンツブロックが期待される場所であればどこにでも書くことが出来ます。なぜなら、文字列は単なる文字の並びであり、文字の並びは有効なコンテンツの一種だからです。</p>
 </div>
@@ -1024,7 +1024,7 @@ Typstは丸括弧で囲まれた部分式を適切に解釈して自動的に置
 <p>数式モード内でのみ使用可能な関数もあります。
 例えば、<a href="/docs/reference/math/variants/#functions-cal"><code>cal</code></a> 関数は集合などに一般的に使用されるカリグラフィ文字を表示するために使われます。
 数式モードが提供するすべての関数の完全なリストについては、<a href="/docs/reference/math/">リファレンスの数式セクション</a>を参照してください。</p>
-<p>もう一つ、矢印などの多くの記号には多くのバリエーションがあります。
+<p>もう1つ、矢印などの多くの記号には多くのバリエーションがあります。
 こうした様々なバリエーションの中から特定の記号を選択するには、その記号のカテゴリ名の後に、ドットと具体的な記号の種類を示す修飾子を追加します。</p>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> a <span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">squiggly</span> b <span class="typ-math-delim">$</span>
 </code></pre><div class="preview"><img src="/assets/docs/b4cc131d22826c75b24f0c145830ad06.png" alt="Preview" width="480" height="190"/></div></div>

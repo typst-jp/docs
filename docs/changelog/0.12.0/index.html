@@ -869,31 +869,31 @@ bottom of the page</li>
 <h2 id="layout">Layout</h2>
 <ul>
 <li>Added support for multi-column floating placement and figures via
-<a href="/docs/reference/layout/place/#parameters-scope" title="`place.scope`"><code>place.scope</code></a> and <a href="/docs/reference/model/figure/#parameters-scope" title="`figure.scope`"><code>figure.scope</code></a>.  Two-column documents should now prefer
+<a href="/docs/reference/layout/place/#parameters-scope"><code>place.scope</code></a> and <a href="/docs/reference/model/figure/#parameters-scope"><code>figure.scope</code></a>.  Two-column documents should now prefer
 <code><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span></code> over <code><span class="typ-key">show</span><span class="typ-punct">:</span> column<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span></code> (see the
 <a href="/docs/guides/page-setup-guide/#columns">page setup guide</a>).</li>
 <li>Added support for automatic <a href="/docs/reference/model/par/#definitions-line">line numbering</a> (often used in
 academic papers)</li>
-<li>Added <a href="/docs/reference/model/par/#parameters-spacing" title="`par.spacing`"><code>par.spacing</code></a> property for configuring paragraph spacing. This should
+<li>Added <a href="/docs/reference/model/par/#parameters-spacing"><code>par.spacing</code></a> property for configuring paragraph spacing. This should
 now be used instead of <code><span class="typ-key">show</span> <span class="typ-func">par</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-op">..</span><span class="typ-punct">)</span></code>
 <strong>(Breaking change)</strong></li>
 <li>Block-level elements like lists, grids, and stacks now show themselves as
 blocks and are thus affected by all block properties (e.g. <code>stroke</code>) rather
 than just <code>spacing</code> <strong>(Breaking change)</strong></li>
-<li>Added <a href="/docs/reference/layout/block/#parameters-sticky" title="`block.sticky`"><code>block.sticky</code></a> property which prevents a page break after a block</li>
-<li>Added <a href="/docs/reference/layout/place/#definitions-flush" title="`place.flush`"><code>place.flush</code></a> function which forces all floating figures to be placed
+<li>Added <a href="/docs/reference/layout/block/#parameters-sticky"><code>block.sticky</code></a> property which prevents a page break after a block</li>
+<li>Added <a href="/docs/reference/layout/place/#definitions-flush"><code>place.flush</code></a> function which forces all floating figures to be placed
 before any further content</li>
-<li>Added <a href="/docs/reference/layout/skew/" title="`skew`"><code>skew</code></a> function</li>
-<li>Added <code><span class="typ-key">auto</span></code> option for <a href="/docs/reference/layout/page/#parameters-header" title="`page.header`"><code>page.header</code></a> and <a href="/docs/reference/layout/page/#parameters-footer" title="`page.footer`"><code>page.footer</code></a> which results in
+<li>Added <a href="/docs/reference/layout/skew/"><code>skew</code></a> function</li>
+<li>Added <code><span class="typ-key">auto</span></code> option for <a href="/docs/reference/layout/page/#parameters-header"><code>page.header</code></a> and <a href="/docs/reference/layout/page/#parameters-footer"><code>page.footer</code></a> which results in
 an automatic header/footer based on the numbering (which was previously
 inaccessible after a change)</li>
-<li>Added <code>gap</code> and <code>justify</code> parameters to <a href="/docs/reference/layout/repeat/" title="`repeat`"><code>repeat</code></a> function</li>
-<li>Added <code>width</code> and <code>height</code> parameters to the <a href="/docs/reference/layout/measure/" title="`measure`"><code>measure</code></a> function to define
+<li>Added <code>gap</code> and <code>justify</code> parameters to <a href="/docs/reference/layout/repeat/"><code>repeat</code></a> function</li>
+<li>Added <code>width</code> and <code>height</code> parameters to the <a href="/docs/reference/layout/measure/"><code>measure</code></a> function to define
 the space in which the content should be measured. Especially useful in
-combination with <a href="/docs/reference/layout/layout/" title="`layout`"><code>layout</code></a>.</li>
+combination with <a href="/docs/reference/layout/layout/"><code>layout</code></a>.</li>
 <li>The height of a <code>block</code>, <code>image</code>, <code>rect</code>, <code>square</code>, <code>ellipse</code>, or <code>circle</code> can
 now be specified in <a href="/docs/reference/layout/fraction/">fractional units</a></li>
-<li>The <a href="/docs/reference/layout/scale/" title="`scale`"><code>scale</code></a> function now supports absolute lengths for <code>x</code>, <code>y</code>, <code>factor</code>.
+<li>The <a href="/docs/reference/layout/scale/"><code>scale</code></a> function now supports absolute lengths for <code>x</code>, <code>y</code>, <code>factor</code>.
 This way an element of unknown size can be scaled to a fixed size.</li>
 <li>The values of <code>block.above</code> and <code>block.below</code> can now be retrieved in context
 expressions.</li>
@@ -903,17 +903,17 @@ page</li>
 <li>Fixed footnotes within breakable blocks appearing on the page where the
 breakable block ends instead of at the page where the footnote marker is</li>
 <li>Fixed numbering of nested footnotes and footnotes in floats</li>
-<li>Fixed empty pages appearing when a <a href="/docs/reference/context/" title="context">context</a> expression wraps whole pages</li>
+<li>Fixed empty pages appearing when a <a href="/docs/reference/context/">context</a> expression wraps whole pages</li>
 <li>Fixed <code><span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> x<span class="typ-punct">)</span></code> behaving differently from
 <code><span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>above<span class="typ-punct">:</span> x<span class="typ-punct">,</span> below<span class="typ-punct">:</span> x<span class="typ-punct">)</span></code></li>
-<li>Fixed behavior of <a href="/docs/reference/layout/rotate/" title="`rotate`"><code>rotate</code></a> and <a href="/docs/reference/layout/scale/" title="`scale`"><code>scale</code></a> with <code>reflow: <span class="typ-key">true</span></code></li>
+<li>Fixed behavior of <a href="/docs/reference/layout/rotate/"><code>rotate</code></a> and <a href="/docs/reference/layout/scale/"><code>scale</code></a> with <code>reflow: <span class="typ-key">true</span></code></li>
 <li>Fixed interaction of <code><span class="typ-func">align</span><span class="typ-punct">(</span>horizon<span class="typ-punct">)</span></code> and <code><span class="typ-func">v</span><span class="typ-punct">(</span><span class="typ-num">1fr</span><span class="typ-punct">)</span></code></li>
 <li>Fixed various bugs where floating placement would yield overlapping results</li>
 <li>Fixed a bug where widow/orphan prevention would unnecessarily move text into
 the next column</li>
 <li>Fixed <a href="/docs/reference/layout/h/#parameters-weak">weak spacing</a> not being trimmed at the start and end of lines
 in a paragraph (only at the start and end of paragraphs)</li>
-<li>Fixed interaction of weak page break and <a href="/docs/reference/layout/pagebreak/#parameters-to" title="`pagebreak.to`"><code>pagebreak.to</code></a></li>
+<li>Fixed interaction of weak page break and <a href="/docs/reference/layout/pagebreak/#parameters-to"><code>pagebreak.to</code></a></li>
 <li>Fixed compilation output of a single weak page break</li>
 <li>Fixed crash when <a href="/docs/reference/layout/pad/">padding</a> by <code><span class="typ-num">100%</span></code></li>
 </ul>
@@ -927,15 +927,15 @@ old default font Linux Libertine. <strong>(May lead to smaller reflows)</strong>
 <li>Setting the font to an unavailable family will now result in a warning</li>
 <li>Implemented a new smart quote algorithm, fixing various bugs where smart
 quotes weren't all that smart</li>
-<li>Added <a href="/docs/reference/text/text/#parameters-costs" title="`text.costs`"><code>text.costs</code></a> parameter for tweaking various parameters that affect the
+<li>Added <a href="/docs/reference/text/text/#parameters-costs"><code>text.costs</code></a> parameter for tweaking various parameters that affect the
 choices of the layout engine during text layout</li>
 <li>Added <code>typm</code> highlighting mode for math in <a href="/docs/reference/text/raw/#parameters-lang">raw blocks</a></li>
 <li>Added basic i18n for Galician, Catalan, Latin, Icelandic, Hebrew</li>
 <li>Implemented hyphenation duplication for Czech, Croatian, Lower Sorbian,
 Polish, Portuguese, Slovak, and Spanish.</li>
-<li>The <a href="/docs/reference/text/smallcaps/" title="`smallcaps`"><code>smallcaps</code></a> function is now an element function and can thereby be used
+<li>The <a href="/docs/reference/text/smallcaps/"><code>smallcaps</code></a> function is now an element function and can thereby be used
 in show(-set) rules.</li>
-<li>The <a href="/docs/reference/text/raw/#parameters-theme" title="`raw.theme`"><code>raw.theme</code></a> parameter can now be set to <code><span class="typ-key">none</span></code> to disable highlighting
+<li>The <a href="/docs/reference/text/raw/#parameters-theme"><code>raw.theme</code></a> parameter can now be set to <code><span class="typ-key">none</span></code> to disable highlighting
 even in the presence of a language tag, and to <code><span class="typ-key">auto</span></code> to reset to the
 default</li>
 <li>Multiple <a href="/docs/reference/text/text/#parameters-stylistic-set">stylistic sets</a> can now be enabled at once</li>
@@ -946,7 +946,7 @@ default</li>
 <li>Fixed bugs related to empty paragraphs created via <code>#&quot;&quot;</code></li>
 <li>Fixed accidental trailing spaces for line breaks immediately preceding an
 inline equation</li>
-<li>Fixed <a href="/docs/reference/text/text/#parameters-historical-ligatures" title="`text.historical-ligatures`"><code>text.historical-ligatures</code></a> not working correctly</li>
+<li>Fixed <a href="/docs/reference/text/text/#parameters-historical-ligatures"><code>text.historical-ligatures</code></a> not working correctly</li>
 <li>Fixed accidental repetition of Thai characters around line breaks in some
 circumstances</li>
 <li>Fixed <a href="/docs/reference/text/smartquote/">smart quotes</a> for Swiss French</li>
@@ -986,7 +986,7 @@ parameters</li>
 <li>Fixed multiple minor layout bugs with attachments</li>
 <li>Fixed that alignment points could affect line height in math</li>
 <li>Fixed that spaces could show up between text and invisible elements like
-<a href="/docs/reference/introspection/metadata/" title="`metadata`"><code>metadata</code></a> in math</li>
+<a href="/docs/reference/introspection/metadata/"><code>metadata</code></a> in math</li>
 <li>Fixed a crash with recursive show rules in math</li>
 <li>Fixed <a href="/docs/reference/math/lr/#functions-lr-size"><code>lr.size</code></a> not affecting characters enclosed in
 <a href="/docs/reference/math/lr/#functions-mid"><code>mid</code></a> in some cases</li>
@@ -1005,7 +1005,7 @@ through a new, more principled implementation</li>
 page when isolated by weak page breaks. This allows, for instance, updating a
 counter before the first page header and background.</li>
 <li>Fixed logical ordering of introspections within footnotes and figures</li>
-<li>Fixed incorrect <a href="/docs/reference/introspection/here/"><code>here().position()</code></a> when <a href="/docs/reference/layout/place/" title="`place`"><code>place</code></a> was used in a
+<li>Fixed incorrect <a href="/docs/reference/introspection/here/"><code>here().position()</code></a> when <a href="/docs/reference/layout/place/"><code>place</code></a> was used in a
 context expression</li>
 <li>Fixed resolved positions of elements (in particular, headings) whose show rule
 emits an invisible element (like a state update) before a page break</li>
@@ -1024,10 +1024,10 @@ containers.</li>
 respected for tight lists</li>
 <li>Tight lists now only attach (with tighter spacing) to preceding paragraphs,
 not arbitrary blocks</li>
-<li>The <a href="/docs/reference/model/quote/" title="`quote`"><code>quote</code></a> element is now locatable (can be used in queries)</li>
+<li>The <a href="/docs/reference/model/quote/"><code>quote</code></a> element is now locatable (can be used in queries)</li>
 <li>The bibliography heading now uses <code>depth</code> instead of <code>level</code> so that its level
 can still be configured via a show-set rule</li>
-<li>Added support for more <a href="/docs/reference/model/numbering/" title="numbering">numbering</a> formats: Devanagari, Eastern Arabic,
+<li>Added support for more <a href="/docs/reference/model/numbering/">numbering</a> formats: Devanagari, Eastern Arabic,
 Bengali, and circled numbers</li>
 <li>Added <a href="/docs/reference/model/heading/#parameters-hanging-indent"><code>hanging-indent</code></a> parameter to heading
 function to tweak the appearance of multi-line headings and improved default
@@ -1082,29 +1082,29 @@ immediately followed by comments</li>
 </ul>
 <h2 id="scripting">Scripting</h2>
 <ul>
-<li>Added new fixed-point <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> number type for highly precise arithmetic on
+<li>Added new fixed-point <a href="/docs/reference/foundations/decimal/"><code>decimal</code></a> number type for highly precise arithmetic on
 numbers in base 10, as needed for finance</li>
 <li>Added <code>std</code> module for accessing standard library definitions even when a
 variable with the same name shadows/overwrites it</li>
-<li>Added <a href="/docs/reference/foundations/array/#definitions-to-dict" title="`array.to-dict`"><code>array.to-dict</code></a>, <a href="/docs/reference/foundations/array/#definitions-reduce" title="`array.reduce`"><code>array.reduce</code></a>, <a href="/docs/reference/foundations/array/#definitions-windows" title="`array.windows`"><code>array.windows</code></a> methods</li>
-<li>Added <code>exact</code> argument to <a href="/docs/reference/foundations/array/#definitions-zip" title="`array.zip`"><code>array.zip</code></a></li>
-<li>Added <a href="/docs/reference/foundations/arguments/#definitions-at" title="`arguments.at`"><code>arguments.at</code></a> method</li>
-<li>Added <a href="/docs/reference/foundations/int/#definitions-from-bytes" title="`int.from-bytes`"><code>int.from-bytes</code></a>, <a href="/docs/reference/foundations/int/#definitions-to-bytes" title="`int.to-bytes`"><code>int.to-bytes</code></a>, <a href="/docs/reference/foundations/float/#definitions-from-bytes" title="`float.from-bytes`"><code>float.from-bytes</code></a>, and
-<a href="/docs/reference/foundations/float/#definitions-to-bytes" title="`float.to-bytes`"><code>float.to-bytes</code></a></li>
+<li>Added <a href="/docs/reference/foundations/array/#definitions-to-dict"><code>array.to-dict</code></a>, <a href="/docs/reference/foundations/array/#definitions-reduce"><code>array.reduce</code></a>, <a href="/docs/reference/foundations/array/#definitions-windows"><code>array.windows</code></a> methods</li>
+<li>Added <code>exact</code> argument to <a href="/docs/reference/foundations/array/#definitions-zip"><code>array.zip</code></a></li>
+<li>Added <a href="/docs/reference/foundations/arguments/#definitions-at"><code>arguments.at</code></a> method</li>
+<li>Added <a href="/docs/reference/foundations/int/#definitions-from-bytes"><code>int.from-bytes</code></a>, <a href="/docs/reference/foundations/int/#definitions-to-bytes"><code>int.to-bytes</code></a>, <a href="/docs/reference/foundations/float/#definitions-from-bytes"><code>float.from-bytes</code></a>, and
+<a href="/docs/reference/foundations/float/#definitions-to-bytes"><code>float.to-bytes</code></a></li>
 <li>Added proper support for negative values of the <code>digits</code> parameter of
-<a href="/docs/reference/foundations/calc/#functions-round" title="`calc.round`"><code>calc.round</code></a> (the behaviour existed before but was subtly broken)</li>
-<li>Conversions from <a href="/docs/reference/foundations/int/" title="`int`"><code>int</code></a> to <a href="/docs/reference/foundations/float/" title="`float`"><code>float</code></a> will now error instead of saturating if
+<a href="/docs/reference/foundations/calc/#functions-round"><code>calc.round</code></a> (the behaviour existed before but was subtly broken)</li>
+<li>Conversions from <a href="/docs/reference/foundations/int/"><code>int</code></a> to <a href="/docs/reference/foundations/float/"><code>float</code></a> will now error instead of saturating if
 the float is too large <strong>(Minor breaking change)</strong></li>
 <li>Added <code>float.nan</code> and <code>float.inf</code>, removed <code>calc.nan</code>
 <strong>(Minor breaking change)</strong></li>
 <li>Certain symbols are now generally callable like functions and not only
 specifically in math. Examples are accents or <a href="/docs/reference/math/lr/#functions-floor"><code>floor</code></a> and
 <a href="/docs/reference/math/lr/#functions-ceil"><code>ceil</code></a>.</li>
-<li>Improved <a href="/docs/reference/foundations/repr/" title="`repr`"><code>repr</code></a> of relative values, sequences, infinities, NaN,
+<li>Improved <a href="/docs/reference/foundations/repr/"><code>repr</code></a> of relative values, sequences, infinities, NaN,
 <code><span class="typ-func">type</span><span class="typ-punct">(</span><span class="typ-key">none</span><span class="typ-punct">)</span></code> and <code><span class="typ-func">type</span><span class="typ-punct">(</span><span class="typ-key">auto</span><span class="typ-punct">)</span></code></li>
 <li>Fixed crash on whole packages (rather than just files) cyclically importing
 each other</li>
-<li>Fixed return type of <a href="/docs/reference/foundations/calc/#functions-round" title="`calc.round`"><code>calc.round</code></a> on integers when a non-zero value is
+<li>Fixed return type of <a href="/docs/reference/foundations/calc/#functions-round"><code>calc.round</code></a> on integers when a non-zero value is
 provided for <code>digits</code></li>
 </ul>
 <h2 id="styling">Styling</h2>
@@ -1123,7 +1123,7 @@ properly retrieved in context expressions</li>
 <li>Emoji are now exported properly in PDF</li>
 <li>Added initial support for PDF/A. For now, only the standard PDF/A-2b is
 supported, but more is planned for the future. Enabled via <code>--pdf-standard a-2b</code> in the CLI and via the UI in File &gt; Export as &gt; PDF in the web app.</li>
-<li>Setting <a href="/docs/reference/layout/page/#parameters-fill" title="`page.fill`"><code>page.fill</code></a> to <code><span class="typ-key">none</span></code> will now lead to transparent pages instead
+<li>Setting <a href="/docs/reference/layout/page/#parameters-fill"><code>page.fill</code></a> to <code><span class="typ-key">none</span></code> will now lead to transparent pages instead
 of white ones in PNG and SVG. The new default of <code><span class="typ-key">auto</span></code> means transparent
 for PDF and white for PNG and SVG.</li>
 <li>Improved text copy-paste from PDF in complex scenarios</li>
@@ -1229,14 +1229,14 @@ from ▷ to △, <code>emoji.face.tired</code> <strong>(Breaking change)</strong
 </ul>
 <h2 id="deprecations">Deprecations</h2>
 <ul>
-<li><a href="/docs/reference/introspection/counter/#definitions-display" title="`counter.display`"><code>counter.display</code></a> without an established context</li>
-<li><a href="/docs/reference/introspection/counter/#definitions-final" title="`counter.final`"><code>counter.final</code></a> with a location</li>
-<li><a href="/docs/reference/introspection/state/#definitions-final" title="`state.final`"><code>state.final</code></a> with a location</li>
-<li><a href="/docs/reference/introspection/state/#definitions-display" title="`state.display`"><code>state.display</code></a></li>
-<li><a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a> with a location as the second argument</li>
-<li><a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a> with a callback function</li>
-<li><a href="/docs/reference/layout/measure/" title="`measure`"><code>measure</code></a> with styles</li>
-<li><a href="/docs/reference/foundations/style/" title="`style`"><code>style</code></a></li>
+<li><a href="/docs/reference/introspection/counter/#definitions-display"><code>counter.display</code></a> without an established context</li>
+<li><a href="/docs/reference/introspection/counter/#definitions-final"><code>counter.final</code></a> with a location</li>
+<li><a href="/docs/reference/introspection/state/#definitions-final"><code>state.final</code></a> with a location</li>
+<li><a href="/docs/reference/introspection/state/#definitions-display"><code>state.display</code></a></li>
+<li><a href="/docs/reference/introspection/query/"><code>query</code></a> with a location as the second argument</li>
+<li><a href="/docs/reference/introspection/locate/"><code>locate</code></a> with a callback function</li>
+<li><a href="/docs/reference/layout/measure/"><code>measure</code></a> with styles</li>
+<li><a href="/docs/reference/foundations/style/"><code>style</code></a></li>
 </ul>
 <h2 id="development">Development</h2>
 <ul>

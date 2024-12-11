@@ -988,7 +988,7 @@ conditionally remove the header on the first page:</p>
 </code></pre>
 <p>This example may look intimidating, but let's break it down: By using the
 <code><span class="typ-key">context</span></code> keyword, we are telling Typst that the header depends on where we
-are in the document. We then ask Typst if the page <a href="/docs/reference/introspection/counter/" title="counter">counter</a> is larger than one
+are in the document. We then ask Typst if the page <a href="/docs/reference/introspection/counter/">counter</a> is larger than one
 at our (context-dependent) current position. The page counter starts at one, so
 we are skipping the header on a single page. Counters may have multiple levels.
 This feature is used for items like headings, but the page counter will always
@@ -999,7 +999,7 @@ the first page instead.</p>
 <p>The technique described in the previous section can be adapted to perform more
 advanced tasks using Typst's labels. For example, pages with big tables could
 omit their headers to help keep clutter down. We will mark our tables with a
-<code>&lt;big-table&gt;</code> <a href="/docs/reference/foundations/label/" title="label">label</a> and use the <a href="/docs/reference/introspection/query/">query system</a> to find out if such a
+<code>&lt;big-table&gt;</code> <a href="/docs/reference/foundations/label/">label</a> and use the <a href="/docs/reference/introspection/query/">query system</a> to find out if such a
 label exists on the current page:</p>
 <pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>header<span class="typ-punct">:</span> <span class="typ-key">context</span> <span class="typ-punct">{</span>
   <span class="typ-key">let</span> page-counter <span class="typ-op">=</span>
@@ -1104,9 +1104,9 @@ circle for each page.</p>
 This page has a custom footer.
 </code></pre><div class="preview"><img src="/assets/docs/4911acbde0bc283f9a432b8b5ccecfd6.png" alt="Preview" width="480" height="190"/></div></div>
 <p>In this example, we use the number of pages to create an array of
-<a href="/docs/reference/visualize/circle/">circles</a>. The circles are wrapped in a <a href="/docs/reference/layout/box/" title="box">box</a> so they can all appear on
+<a href="/docs/reference/visualize/circle/">circles</a>. The circles are wrapped in a <a href="/docs/reference/layout/box/">box</a> so they can all appear on
 the same line because they are blocks and would otherwise create paragraph
-breaks. The length of this <a href="/docs/reference/foundations/array/" title="array">array</a> depends on the current page number.</p>
+breaks. The length of this <a href="/docs/reference/foundations/array/">array</a> depends on the current page number.</p>
 <p>We then insert the circles at the right side of the footer, with 1pt of space
 between them. The join method of an array will attempt to
 <a href="/docs/reference/scripting/#blocks"><em>join</em></a> the different values of an array into a single
@@ -1120,7 +1120,7 @@ a bit so they line up nicely with the text.</p>
 want to start with the first page only after the title page. Or maybe you need
 to skip a few page numbers because you will insert pages into the final printed
 product.</p>
-<p>The right way to modify the page number is to manipulate the page <a href="/docs/reference/introspection/counter/" title="counter">counter</a>. The
+<p>The right way to modify the page number is to manipulate the page <a href="/docs/reference/introspection/counter/">counter</a>. The
 simplest manipulation is to set the counter back to 1.</p>
 <pre><code><span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>page<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span>
 </code></pre>
@@ -1133,7 +1133,7 @@ update the counter given its previous value by passing a function:</p>
 counter and <code>n + 5</code> is the return value of our function.</p>
 <p>In case you need to retrieve the actual page number instead of the value of the
 page counter, you can use the <a href="/docs/reference/introspection/location/#definitions-page"><code>page</code></a> method on the return
-value of the <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a> function:</p>
+value of the <a href="/docs/reference/introspection/here/"><code>here</code></a> function:</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">counter</span><span class="typ-punct">(</span>page<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span>n <span class="typ-op">=&gt;</span> n <span class="typ-op">+</span> <span class="typ-num">5</span><span class="typ-punct">)</span>
 
 <span class="typ-comment">// This returns one even though the</span>

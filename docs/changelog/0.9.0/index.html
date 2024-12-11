@@ -849,11 +849,11 @@ load custom <code>.csl</code> files.</li>
 <li>Added new <a href="/docs/reference/model/cite/#parameters-form"><code>form</code></a> argument to the <code>cite</code> function to produce
 different forms of citations (e.g. for producing a citation suitable for
 inclusion in prose)</li>
-<li>The <a href="/docs/reference/model/cite/" title="`cite`"><code>cite</code></a> function now takes only a single label/key instead of allowing
+<li>The <a href="/docs/reference/model/cite/"><code>cite</code></a> function now takes only a single label/key instead of allowing
 multiple. Adjacent citations are merged and formatted according to the
 citation style's rules automatically. This works both with the reference
 syntax and explicit calls to the <code>cite</code> function. <strong>(Breaking change)</strong></li>
-<li>The <code>cite</code> function now takes a <a href="/docs/reference/foundations/label/" title="label">label</a> instead of a string
+<li>The <code>cite</code> function now takes a <a href="/docs/reference/foundations/label/">label</a> instead of a string
 <strong>(Breaking change)</strong></li>
 <li>Added <a href="/docs/reference/model/bibliography/#parameters-full"><code>full</code></a> argument to bibliography function to print
 the full bibliography even if not all works were cited</li>
@@ -887,7 +887,7 @@ color maps that can be used with gradients</li>
 stroke widths</li>
 <li>Added support for properly clipping <a href="/docs/reference/layout/box/#parameters-clip">boxes</a> and
 <a href="/docs/reference/layout/block/#parameters-clip">blocks</a> with a border radius</li>
-<li>Added <code>background</code> parameter to <a href="/docs/reference/text/overline/" title="`overline`"><code>overline</code></a>, <a href="/docs/reference/text/underline/" title="`underline`"><code>underline</code></a>, and <a href="/docs/reference/text/strike/" title="`strike`"><code>strike</code></a>
+<li>Added <code>background</code> parameter to <a href="/docs/reference/text/overline/"><code>overline</code></a>, <a href="/docs/reference/text/underline/"><code>underline</code></a>, and <a href="/docs/reference/text/strike/"><code>strike</code></a>
 functions</li>
 <li>Fixed inaccurate color embedding in PDFs</li>
 <li>Fixed ICC profile handling for images embedded in PDFs</li>
@@ -898,7 +898,7 @@ functions</li>
 <a href="/docs/reference/text/text/#parameters-cjk-latin-spacing">spacing</a> between CJK and Latin text (enabled by
 default)</li>
 <li>Added support for automatic adjustment of more CJK punctuation</li>
-<li>Added <a href="/docs/reference/model/quote/" title="`quote`"><code>quote</code></a> element for inserting inline and block quotes with optional
+<li>Added <a href="/docs/reference/model/quote/"><code>quote</code></a> element for inserting inline and block quotes with optional
 attributions</li>
 <li>Added <a href="/docs/reference/text/raw/#definitions-line"><code>raw.line</code></a> element for customizing the display of
 individual lines of raw text, e.g. to add line numbers while keeping proper
@@ -927,8 +927,8 @@ justification is enabled</li>
 <li>Fixed spacing around <a href="/docs/reference/layout/place/">placed</a> elements</li>
 <li>Fixed coalescing of <a href="/docs/reference/layout/block/#parameters-above"><code>above</code></a> and <a href="/docs/reference/layout/block/#parameters-below"><code>below</code></a>
 spacing if given in em units and the font sizes differ</li>
-<li>Fixed handling of <code>extent</code> parameter of <a href="/docs/reference/text/underline/" title="`underline`"><code>underline</code></a>, <a href="/docs/reference/text/overline/" title="`overline`"><code>overline</code></a>, and
-<a href="/docs/reference/text/strike/" title="`strike`"><code>strike</code></a> functions</li>
+<li>Fixed handling of <code>extent</code> parameter of <a href="/docs/reference/text/underline/"><code>underline</code></a>, <a href="/docs/reference/text/overline/"><code>overline</code></a>, and
+<a href="/docs/reference/text/strike/"><code>strike</code></a> functions</li>
 <li>Fixed crash for <a href="/docs/reference/layout/place/#parameters-float">floating placed elements</a> with no specified
 vertical alignment</li>
 <li>Partially fixed a bug with citations in footnotes</li>
@@ -1010,10 +1010,10 @@ PNG or SVG export</li>
 </ul>
 <h2 id="miscellaneous-improvements">Miscellaneous Improvements</h2>
 <ul>
-<li>Added <a href="/docs/reference/foundations/version/" title="`version`"><code>version</code></a> type and <code>sys.version</code> constant specifying the current
+<li>Added <a href="/docs/reference/foundations/version/"><code>version</code></a> type and <code>sys.version</code> constant specifying the current
 compiler version. Can be used to gracefully support multiple versions.</li>
 <li>The U+2212 MINUS SIGN is now used when displaying a numeric value, in the
-<a href="/docs/reference/foundations/repr/" title="`repr`"><code>repr</code></a> of any numeric value and to replace a normal hyphen in text mode when
+<a href="/docs/reference/foundations/repr/"><code>repr</code></a> of any numeric value and to replace a normal hyphen in text mode when
 before a digit. This improves, in particular, how negative integer values are
 displayed in math mode.</li>
 <li>Added support for specifying a default value instead of failing for <code>remove</code>
