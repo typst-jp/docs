@@ -73,7 +73,7 @@ pub struct ImageElem {
 
     /// 画像のフォーマット。デフォルトでは自動的に検出されます。
     ///
-    /// サポートされている拡張子は PNG, JPEG, GIF, SVGです。
+    /// サポートされている拡張子はPNG, JPEG, GIF, SVGです。
     /// [PDFの画像はまだサポートされていません。](https://github.com/typst/typst/issues/145)
     pub format: Smart<ImageFormat>,
 
@@ -118,7 +118,7 @@ impl ImageElem {
     pub fn decode(
         /// The call span of this function.
         span: Span,
-        /// 画像としてデコードするデータ。SVG の場合は文字列です。
+        /// 画像としてデコードするデータ。SVGの場合は文字列です。
         data: Readable,
         /// 画像のフォーマット。デフォルトでは自動的に検出されます。
         #[named]
