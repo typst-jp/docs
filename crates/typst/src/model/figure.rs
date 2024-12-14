@@ -27,7 +27,7 @@ use crate::visualize::ImageElem;
 /// 自動的にその種類を検出し、それぞれに応じて番号付けします。
 /// 例えば、画像を含む図表は表を含む図表とは別々に番号が付けられます。
 ///
-/// # Examples
+/// # 例
 /// 以下の例は、画像を含む基本的な図表を示しています。
 /// ```example
 /// @glacier shows a glacier. Glaciers
