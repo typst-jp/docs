@@ -70,7 +70,7 @@ use crate::World;
 /// | 経済学   | `{"harvard-cite-them-right"}`                                 |
 /// | 物理学   | `{"american-physics-society"}`                                |
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This was already noted by
 /// pirates long ago. @arrgh
