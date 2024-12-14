@@ -44,37 +44,31 @@ use crate::text::{
 use crate::utils::{LazyHash, NonZeroExt, PicoStr};
 use crate::World;
 
-/// A bibliography / reference listing.
+/// 参考文献 / 引用文献リスト。
 ///
-/// You can create a new bibliography by calling this function with a path
-/// to a bibliography file in either one of two formats:
+/// 次の2つの形式のどちらかの参考文献ファイルへのパスを指定してこの関数を呼び出すと、新しい引用文献リストを作成できます。
 ///
-/// - A Hayagriva `.yml` file. Hayagriva is a new bibliography file format
-///   designed for use with Typst. Visit its
-///   [documentation](https://github.com/typst/hayagriva/blob/main/docs/file-format.md)
-///   for more details.
-/// - A BibLaTeX `.bib` file.
+/// - Hayagriva `.yml` ファイル。
+///   HayagrivaはTypstで使用するためにデザインされた新しい書誌ファイルフォーマットです。
+///   詳しくは[ドキュメント](https://github.com/typst/hayagriva/blob/main/docs/file-format.md)をご覧ください。
+/// - BibLaTeX `.bib` ファイル。
 ///
-/// As soon as you add a bibliography somewhere in your document, you can start
-/// citing things with reference syntax (`[@key]`) or explicit calls to the
-/// [citation]($cite) function (`[#cite(<key>)]`). The bibliography will only
-/// show entries for works that were referenced in the document.
+/// 文書内に参考文献を追加すると、参照構文（`[@key]`）や引用関数の明示的な呼び出し（`[#cite(<key>)]`）を使って[引用]($cite)を始めることができます。
+/// 参考文献リストには、文書内で参照された作品の文献だけが表示されます。
 ///
-/// # Styles
-/// Typst offers a wide selection of built-in
-/// [citation and bibliography styles]($bibliography.style). Beyond those, you
-/// can add and use custom [CSL](https://citationstyles.org/) (Citation Style
-/// Language) files. Wondering which style to use? Here are some good defaults
-/// based on what discipline you're working in:
+/// # スタイル
+/// Typstは、内蔵の[引用と文献スタイル]($bibliography.style)を幅広く取り揃えています。
+/// さらに、独自の[CSL](https://citationstyles.org/)（Citation Style Language）ファイルを追加して使用することもできます。
+/// どのスタイルを使えばいいか迷う方のために、分野ごとによく使われるスタイルを以下の表にまとめています。
 ///
-/// | Fields          | Typical Styles                                         |
+/// | 分野     | Typical Styles                                                |
 /// |-----------------|--------------------------------------------------------|
-/// | Engineering, IT | `{"ieee"}`                                             |
-/// | Psychology, Life Sciences | `{"apa"}`                                    |
-/// | Social sciences | `{"chicago-author-date"}`                              |
-/// | Humanities      | `{"mla"}`, `{"chicago-notes"}`, `{"harvard-cite-them-right"}` |
-/// | Economics       | `{"harvard-cite-them-right"}`                          |
-/// | Physics         | `{"american-physics-society"}`                         |
+/// | 工学、IT | `{"ieee"}`                                                    |
+/// | 心理学、ライフサイエンス | `{"apa"}`                                       |
+/// | 社会科学 | `{"chicago-author-date"}`                                     |
+/// | 人文学   | `{"mla"}`, `{"chicago-notes"}`, `{"harvard-cite-them-right"}` |
+/// | 経済学   | `{"harvard-cite-them-right"}`                                 |
+/// | 物理学   | `{"american-physics-society"}`                                |
 ///
 /// # Example
 /// ```example
@@ -88,7 +82,7 @@ use crate::World;
 /// ```
 #[elem(Locatable, Synthesize, Show, ShowSet, LocalName)]
 pub struct BibliographyElem {
-    /// Path(s) to Hayagriva `.yml` and/or BibLaTeX `.bib` files.
+    /// Hayagriva `.yml`やBibLaTeX `.bib`などのファイルパス。
     #[required]
     #[parse(
         let (paths, bibliography) = Bibliography::parse(engine, args)?;
@@ -96,32 +90,26 @@ pub struct BibliographyElem {
     )]
     pub path: BibliographyPaths,
 
-    /// The title of the bibliography.
+    /// 参考文献のタイトル。
     ///
-    /// - When set to `{auto}`, an appropriate title for the
-    ///   [text language]($text.lang) will be used. This is the default.
-    /// - When set to `{none}`, the bibliography will not have a title.
-    /// - A custom title can be set by passing content.
+    /// - `{auto}`に設定すると、[テキストの言語]($text.lang)に適したタイトルが表示されます。これがデフォルトです。
+    /// - `{none}`に設定すると、参考文献のタイトルは何も表示されません。
+    /// - 独自のタイトルはコンテンツで渡します。
     ///
-    /// The bibliography's heading will not be numbered by default, but you can
-    /// force it to be with a show-set rule:
+    /// 参考文献の見出しはデフォルトでは番号が振られませんが、show-setルールで強制的に見出し番号をつけることも可能です。
     /// `{show bibliography: set heading(numbering: "1.")}`
     pub title: Smart<Option<Content>>,
 
-    /// Whether to include all works from the given bibliography files, even
-    /// those that weren't cited in the document.
+    /// 文書内で引用されていないものも含めて、参考文献ファイルにあるすべての文献を出力するかどうか。
     ///
-    /// To selectively add individual cited works without showing them, you can
-    /// also use the `cite` function with [`form`]($cite.form) set to `{none}`.
+    /// 個々の引用文献を表示させずに追加するには、 [`form`]($cite.form) を `{none}`として [`cite`]($cite) 関数を使用します。
     #[default(false)]
     pub full: bool,
 
-    /// The bibliography style.
+    /// 参考文献スタイル。
     ///
-    /// Should be either one of the built-in styles (see below) or a path to
-    /// a [CSL file](https://citationstyles.org/). Some of the styles listed
-    /// below appear twice, once with their full name and once with a short
-    /// alias.
+    /// 下記にある内蔵スタイルや [CSL ファイル](https://citationstyles.org/)へのパスを指定します。
+    /// 以下に挙げるスタイルのいくつかは、フルネームと短いエイリアスの2回表示されています。
     #[parse(CslStyle::parse(engine, args)?)]
     #[default(CslStyle::from_name("ieee").unwrap())]
     pub style: CslStyle,
