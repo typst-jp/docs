@@ -325,9 +325,17 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         _ => &title_name,
     };
     let details = Html::markdown(resolver, category.docs(), Some(1));
-    let mut outline = vec![OutlineItem::from_name("Summary")];
+    let mut outline = vec![OutlineItem {
+        id: "summary".into(),
+        name: "概要".into(),
+        children: vec![],
+    }];
     outline.extend(details.outline());
-    outline.push(OutlineItem::from_name("Definitions"));
+    outline.push(OutlineItem {
+        id: "definitions".into(),
+        name: "定義".into(),
+        children: vec![],
+    });
     if shorthands.is_some() {
         outline.push(OutlineItem::from_name("Shorthands"));
     }
@@ -500,13 +508,17 @@ fn func_outline(model: &FuncModel, id_base: &str) -> Vec<OutlineItem> {
     let mut outline = vec![];
 
     if id_base.is_empty() {
-        outline.push(OutlineItem::from_name("Summary"));
+        outline.push(OutlineItem {
+            id: "summary".into(),
+            name: "概要".into(),
+            children: vec![],
+        });
         outline.extend(model.details.outline());
 
         if !model.params.is_empty() {
             outline.push(OutlineItem {
                 id: "parameters".into(),
-                name: "Parameters".into(),
+                name: "引数".into(),
                 children: model
                     .params
                     .iter()
@@ -539,7 +551,7 @@ fn scope_outline(scope: &[FuncModel]) -> Option<OutlineItem> {
 
     Some(OutlineItem {
         id: "definitions".into(),
-        name: "Definitions".into(),
+        name: "定義".into(),
         children: scope
             .iter()
             .map(|func| {
@@ -558,7 +570,11 @@ fn group_page(
     group: &GroupData,
 ) -> (PageModel, CategoryItem) {
     let mut functions = vec![];
-    let mut outline = vec![OutlineItem::from_name("Summary")];
+    let mut outline = vec![OutlineItem {
+        id: "summary".into(),
+        name: "概要".into(),
+        children: vec![],
+    }];
 
     let path: Vec<_> = group.path.iter().map(|s| s.as_str()).collect();
     let details = Html::markdown(resolver, &group.details, Some(1));
@@ -642,13 +658,17 @@ fn type_model(resolver: &dyn Resolver, ty: &Type) -> TypeModel {
 
 /// Produce an outline for a type page.
 fn type_outline(model: &TypeModel) -> Vec<OutlineItem> {
-    let mut outline = vec![OutlineItem::from_name("Summary")];
+    let mut outline = vec![OutlineItem {
+        id: "summary".into(),
+        name: "概要".into(),
+        children: vec![],
+    }];
     outline.extend(model.details.outline());
 
     if let Some(func) = &model.constructor {
         outline.push(OutlineItem {
             id: "constructor".into(),
-            name: "Constructor".into(),
+            name: "コンストラクタ".into(),
             children: func_outline(func, "constructor"),
         });
     }

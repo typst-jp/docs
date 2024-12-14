@@ -8,7 +8,7 @@
 
 {% if body['content']['constructor'] %}
 <h2 id="constructor">
-  {{ macros.tooltip_display('Constructor', 'If a type has a constructor, you can call it like a function to create a new value of the type.', prefix='constructor') }}
+  {{ macros.tooltip_display('コンストラクタ', 'If a type has a constructor, you can call it like a function to create a new value of the type.', prefix='constructor') }}
 </h2>
 {{ macros.function_display(body['content']['constructor'], type2class, gen_path, prefix='constructor', is_example_folding=false) }}
 {% endif %}
@@ -16,7 +16,7 @@
 
 {% if body['content']['scope'].__len__() > 0 %}
 <h2 id="definitions">
-  {{ macros.tooltip_display('Definitions', 'Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition\'s name.', prefix='definitions') }}
+  {{ macros.tooltip_display('定義', 'Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition\'s name.', prefix='definitions') }}
 </h2>
 {% endif %}
 {% for method in body['content']['scope'] %}
