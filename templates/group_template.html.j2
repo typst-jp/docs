@@ -3,7 +3,7 @@
 {% extends "base_template.html.j2" %}
 {% block content %}
 
-<h1 id="summary">{{ body['content']['title'] }}<!-- --> Calculation</h1>
+<h1 id="summary">{{ body['content']['title'] }}</h1>
 {{ body['content']['details'] | safe }}
 <h2 id="functions">Calculation</h2>
 {% for method in body['content']['functions'] %}
