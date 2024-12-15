@@ -172,6 +172,7 @@ fn reference_pages(resolver: &dyn Resolver) -> PageModel {
 fn guide_pages(resolver: &dyn Resolver) -> PageModel {
     let mut page = md_page(resolver, resolver.base(), load!("guides/welcome.md"));
     let base = format!("{}guides/", resolver.base());
+    page.title = "ガイド".into();
     page.children = vec![
         md_page(resolver, &base, load!("guides/guide-for-latex-users.md")),
         md_page(resolver, &base, load!("guides/page-setup.md")),
@@ -184,6 +185,7 @@ fn guide_pages(resolver: &dyn Resolver) -> PageModel {
 fn changelog_pages(resolver: &dyn Resolver) -> PageModel {
     let mut page = md_page(resolver, resolver.base(), load!("changelog/welcome.md"));
     let base = format!("{}changelog/", resolver.base());
+    page.title = "変更履歴".into();
     page.children = vec![
         md_page(resolver, &base, load!("changelog/0.12.0.md")),
         md_page(resolver, &base, load!("changelog/0.11.1.md")),
@@ -340,9 +342,22 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         outline.push(OutlineItem::from_name("Shorthands"));
     }
 
+    let translated_title = match name {
+        "Foundations" => "基礎",
+        "Model" => "モデル",
+        "Text" => "文章",
+        "Math" => "数学",
+        "Symbols" => "記号",
+        "Layout" => "レイアウト",
+        "Visualize" => "視覚化",
+        "Introspection" => "イントロスペクション",
+        "Data Loading" => "データの読み込み",
+        _ => name,
+    };
+
     PageModel {
         route,
-        title: name.into(),
+        title: translated_title.into(),
         description: eco_format!(
             "Documentation for functions related to {name} in Typst."
         ),
