@@ -346,11 +346,11 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         "Foundations" => "基礎",
         "Model" => "モデル",
         "Text" => "文章",
-        "Math" => "数学",
+        "Math" => "数式",
         "Symbols" => "記号",
         "Layout" => "レイアウト",
         "Visualize" => "視覚化",
-        "Introspection" => "イントロスペクション",
+        "Introspection" => "内省",
         "Data Loading" => "データの読み込み",
         _ => name,
     };
