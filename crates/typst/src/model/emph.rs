@@ -3,7 +3,7 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, Packed, Show, StyleChain};
 use crate::text::{ItalicToggle, TextElem};
 
-/// Emphasizes content by toggling italics.
+/// 斜体への切り替えによるコンテンツの強調。
 ///
 /// - If the current [text style]($text.style) is `{"normal"}`, this turns it
 ///   into `{"italic"}`.
