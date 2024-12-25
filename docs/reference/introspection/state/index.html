@@ -1024,8 +1024,8 @@ that the result converges.</p>
 
 <div class="code code-definition "><span
     class="typ-func">state</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/state" class="pill pill-obj">state</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><span class="pill pill-obj">any</span>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/introspection/state" class="pill pill-obj">state</a></div>
 
 
 
@@ -1035,7 +1035,10 @@ that the result converges.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1061,7 +1064,10 @@ that the result converges.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small><span
@@ -1111,7 +1117,7 @@ that the result converges.</p>
 <p>This is equivalent to <code>state<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-func">here</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code>.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">get</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+    class="typ-func">get</span>(<div class="arguments"></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1132,7 +1138,7 @@ location. This behaviour will be removed in a future release.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">at</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/label" class="pill pill-obj">label</a><a href="/docs/reference/types/selector" class="pill pill-obj">selector</a><a href="/docs/reference/types/location" class="pill pill-obj">location</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/label" class="pill pill-obj">label</a><a href="/docs/reference/foundations/selector" class="pill pill-obj">selector</a><a href="/docs/reference/introspection/location" class="pill pill-obj">location</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1142,13 +1148,25 @@ location. This behaviour will be removed in a future release.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/label" class="pill pill-obj">label</a>
+        
+        
+          <a href="/docs/reference/foundations/label" class="pill pill-obj">label</a>
+        
       
-      <a href="/docs/reference/types/selector" class="pill pill-obj">selector</a>
+        
+        
+          <a href="/docs/reference/foundations/selector" class="pill pill-obj">selector</a>
+        
       
-      <a href="/docs/reference/types/location" class="pill pill-obj">location</a>
+        
+        
+          <a href="/docs/reference/introspection/location" class="pill pill-obj">location</a>
+        
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1179,7 +1197,7 @@ location. This behaviour will be removed in a future release.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">final</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/location" class="pill pill-obj">location</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/introspection/location" class="pill pill-obj">location</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1189,9 +1207,15 @@ location. This behaviour will be removed in a future release.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
       
-      <a href="/docs/reference/types/location" class="pill pill-obj">location</a>
+        
+        
+          <a href="/docs/reference/introspection/location" class="pill pill-obj">location</a>
+        
       
     </div>
     <small><span
@@ -1232,7 +1256,7 @@ update the state.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">update</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+      class="overview-param"><span class="pill pill-obj">any</span><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
 
@@ -1242,9 +1266,15 @@ update the state.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1278,7 +1308,7 @@ to return the new state.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">display</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
 
@@ -1288,9 +1318,15 @@ to return the new state.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small><span

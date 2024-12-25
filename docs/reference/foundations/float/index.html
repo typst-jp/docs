@@ -909,7 +909,7 @@ notation is supported.</li>
 
 <div class="code code-definition single-arg"><span
     class="typ-func">float</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/float" class="pill pill-num">float</a><a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/foundations/float" class="pill pill-num">float</a><a href="/docs/reference/layout/ratio" class="pill pill-num">ratio</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/decimal" class="pill pill-obj">decimal</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/float" class="pill pill-num">float</a></div>
 
 
 
@@ -927,17 +927,35 @@ notation is supported.</li>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
-      <a href="/docs/reference/types/float" class="pill pill-num">float</a>
+        
+        
+          <a href="/docs/reference/foundations/float" class="pill pill-num">float</a>
+        
       
-      <a href="/docs/reference/types/ratio" class="pill pill-num">ratio</a>
+        
+        
+          <a href="/docs/reference/layout/ratio" class="pill pill-num">ratio</a>
+        
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
-      <a href="/docs/reference/types/decimal" class="pill pill-obj">decimal</a>
+        
+        
+          <a href="/docs/reference/foundations/decimal" class="pill pill-obj">decimal</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -986,7 +1004,7 @@ notation is supported.</li>
 returns <code>true</code> if the float is any of those bit patterns.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">is-nan</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a></div>
+    class="typ-func">is-nan</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a></div>
 
 
   <details class="folding-example">
@@ -1012,7 +1030,7 @@ returns <code>true</code> if the float is any of those bit patterns.</p>
 function returns <code><span class="typ-key">true</span></code> if the float is an infinity.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">is-infinite</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a></div>
+    class="typ-func">is-infinite</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a></div>
 
 
   <details class="folding-example">
@@ -1041,7 +1059,7 @@ function returns <code><span class="typ-key">true</span></code> if the float is 
 </ul>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">signum</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+    class="typ-func">signum</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/float" class="pill pill-num">float</a></div>
 
 
   <details class="folding-example">
@@ -1067,8 +1085,8 @@ function returns <code><span class="typ-key">true</span></code> if the float is 
 
 <div class="code code-definition ">float.<span
     class="typ-func">from-bytes</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a>, </span><span
-      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/float" class="pill pill-num">float</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>, </span><span
+      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/float" class="pill pill-num">float</a></div>
 
 
   <details class="folding-example">
@@ -1087,7 +1105,10 @@ function returns <code><span class="typ-key">true</span></code> if the float is 
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a>
+        
+        
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1115,7 +1136,10 @@ float.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
     </div>
     
@@ -1161,7 +1185,7 @@ the bytes.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">to-bytes</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/types/str" class="pill pill-str">str</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a></div>
+      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a></div>
 
 
   <details class="folding-example">
@@ -1180,7 +1204,10 @@ the bytes.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
     </div>
     

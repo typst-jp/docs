@@ -915,7 +915,7 @@ the array syntax <code>(1, 2, 3)</code> (or <code>(1,)</code> for a single-eleme
 
 <div class="code code-definition single-arg"><span
     class="typ-func">array</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a><a href="/docs/reference/types/version" class="pill pill-obj">version</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/foundations/version" class="pill pill-obj">version</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -929,11 +929,20 @@ the array syntax <code>(1, 2, 3)</code> (or <code>(1,)</code> for a single-eleme
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/bytes" class="pill pill-obj">bytes</a>
+        
+        
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
+        
       
-      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
       
-      <a href="/docs/reference/types/version" class="pill pill-obj">version</a>
+        
+        
+          <a href="/docs/reference/foundations/version" class="pill pill-obj">version</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -980,7 +989,7 @@ the array syntax <code>(1, 2, 3)</code> (or <code>(1,)</code> for a single-eleme
 <p>The number of values in the array.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">len</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+    class="typ-func">len</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/int" class="pill pill-num">int</a></div>
 
 
 
@@ -995,7 +1004,7 @@ the array syntax <code>(1, 2, 3)</code> (or <code>(1,)</code> for a single-eleme
 of an assignment. Fails with an error if the array is empty.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">first</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+    class="typ-func">first</span>(<div class="arguments"></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1010,7 +1019,7 @@ of an assignment. Fails with an error if the array is empty.</p>
 an assignment. Fails with an error if the array is empty.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">last</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+    class="typ-func">last</span>(<div class="arguments"></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1028,8 +1037,8 @@ specified.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">at</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><span class="pill pill-obj">any</span>, </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1039,7 +1048,10 @@ specified.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1066,7 +1078,10 @@ the back.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     
@@ -1086,7 +1101,7 @@ the back.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">push</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) </div>
+      class="overview-param"><span class="pill pill-obj">any</span> </span></div>) </div>
 
 
 
@@ -1096,7 +1111,10 @@ the back.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1127,7 +1145,7 @@ the back.</p>
 if the array is empty.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">pop</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+    class="typ-func">pop</span>(<div class="arguments"></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1145,8 +1163,8 @@ out of bounds.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">insert</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) </div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><span class="pill pill-obj">any</span>, </span></div>) </div>
 
 
 
@@ -1156,7 +1174,10 @@ out of bounds.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1183,7 +1204,10 @@ the back.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1214,8 +1238,8 @@ the back.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">remove</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><span class="pill pill-obj">any</span>, </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1225,7 +1249,10 @@ the back.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1252,7 +1279,10 @@ the back.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     
@@ -1273,9 +1303,9 @@ index is out of bounds.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">slice</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-count">count<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-count">count<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1285,7 +1315,10 @@ index is out of bounds.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1311,9 +1344,15 @@ index is out of bounds.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small><span
@@ -1342,7 +1381,10 @@ of the array is extracted. If negative, indexes from the back.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     
@@ -1365,7 +1407,7 @@ instead of <code><span class="typ-punct">(</span><span class="typ-num">1</span><
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">contains</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a></div>
+      class="overview-param"><span class="pill pill-obj">any</span> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a></div>
 
 
 
@@ -1375,7 +1417,10 @@ instead of <code><span class="typ-punct">(</span><span class="typ-num">1</span><
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1407,7 +1452,7 @@ returns the first match or <code><span class="typ-key">none</span></code> if the
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">find</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a><a href="/docs/reference/types/none" class="pill pill-kw">none</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span>, <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a></div>
 
 
 
@@ -1417,7 +1462,10 @@ returns the first match or <code><span class="typ-key">none</span></code> if the
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1449,7 +1497,7 @@ returns the index of the first match or <code><span class="typ-key">none</span><
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">position</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>, <a href="/docs/reference/foundations/int" class="pill pill-num">int</a></div>
 
 
 
@@ -1459,7 +1507,10 @@ returns the index of the first match or <code><span class="typ-key">none</span><
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1495,9 +1546,9 @@ globally.</p>
 
 <div class="code code-definition ">array.<span
     class="typ-func">range</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-step">step<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-step">step<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
   <details class="folding-example">
@@ -1519,7 +1570,10 @@ globally.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small><span
@@ -1547,7 +1601,10 @@ globally.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1573,7 +1630,10 @@ globally.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     
@@ -1596,7 +1656,7 @@ the given function returns true.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">filter</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1606,7 +1666,10 @@ the given function returns true.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1638,7 +1701,7 @@ transformed with the given function.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">map</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1648,7 +1711,10 @@ transformed with the given function.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1682,7 +1748,7 @@ a let binding or for loop.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">enumerate</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1692,7 +1758,10 @@ a let binding or for loop.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     
@@ -1722,8 +1791,8 @@ together at once: <code><span class="typ-punct">(</span><span class="typ-num">1<
 
 <div class="code code-definition ">self.<span
     class="typ-func">zip</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-exact">exact<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/array" class="pill pill-obj">array</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="#parameters-exact">exact<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1733,7 +1802,10 @@ together at once: <code><span class="typ-punct">(</span><span class="typ-num">1<
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
       
     </div>
     
@@ -1752,7 +1824,10 @@ error.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1794,8 +1869,8 @@ error.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">fold</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><span class="pill pill-obj">any</span>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1805,7 +1880,10 @@ error.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1831,7 +1909,10 @@ error.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1863,7 +1944,7 @@ accumulated value and one for an item.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">sum</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><span class="pill pill-obj">any</span> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1873,7 +1954,10 @@ accumulated value and one for an item.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     
@@ -1895,7 +1979,7 @@ multiplied).</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">product</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><span class="pill pill-obj">any</span> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1905,7 +1989,10 @@ multiplied).</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     
@@ -1926,7 +2013,7 @@ be empty.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">any</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a></div>
 
 
 
@@ -1936,7 +2023,10 @@ be empty.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1967,7 +2057,7 @@ be empty.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">all</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a></div>
 
 
 
@@ -1977,7 +2067,10 @@ be empty.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -2007,7 +2100,7 @@ be empty.</p>
 <p>Combine all nested arrays into a single flat one.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">flatten</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+    class="typ-func">flatten</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -2021,7 +2114,7 @@ be empty.</p>
 <p>Return a new array with the same items, but in reverse order.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">rev</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+    class="typ-func">rev</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -2036,7 +2129,7 @@ be empty.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">split</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><span class="pill pill-obj">any</span> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -2046,7 +2139,10 @@ be empty.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small>Required</small><small><span
@@ -2077,8 +2173,8 @@ be empty.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">join</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a><a href="/docs/reference/types/none" class="pill pill-kw">none</a>, </span><span
-      class="overview-param"><a href="#parameters-last">last<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><span class="pill pill-obj">any</span><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>, </span><span
+      class="overview-param"><a href="#parameters-last">last<!-- -->: </a><span class="pill pill-obj">any</span>, </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -2088,9 +2184,15 @@ be empty.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
-      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
       
     </div>
     <small><span
@@ -2118,7 +2220,10 @@ be empty.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     
@@ -2139,7 +2244,7 @@ adjacent elements.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">intersperse</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><span class="pill pill-obj">any</span> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -2149,7 +2254,10 @@ adjacent elements.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small>Required</small><small><span
@@ -2184,8 +2292,8 @@ contains less than <code>chunk-size</code> elements.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">chunks</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-exact">exact<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-exact">exact<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
   <details class="folding-example">
@@ -2205,7 +2313,10 @@ contains less than <code>chunk-size</code> elements.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -2231,7 +2342,10 @@ contains less than <code>chunk-size</code> elements.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
       
     </div>
     
@@ -2254,7 +2368,7 @@ contains less than <code>chunk-size</code> elements.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">windows</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
   <details class="folding-example">
@@ -2273,7 +2387,10 @@ contains less than <code>chunk-size</code> elements.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -2307,7 +2424,7 @@ function (if given) yields an error.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">sorted</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-key">key<!-- -->: </a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="#parameters-key">key<!-- -->: </a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -2317,7 +2434,10 @@ function (if given) yields an error.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     
@@ -2340,7 +2460,7 @@ element of each duplicate is kept.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">dedup</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-key">key<!-- -->: </a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="#parameters-key">key<!-- -->: </a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
   <details class="folding-example">
@@ -2358,7 +2478,10 @@ element of each duplicate is kept.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     
@@ -2380,7 +2503,7 @@ The first value of each pair is the key, the second the value.</p>
 <p>If the same key occurs multiple times, the last value is selected.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">to-dict</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a></div>
+    class="typ-func">to-dict</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a></div>
 
 
   <details class="folding-example">
@@ -2415,7 +2538,7 @@ folding every subsequent element into it.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">reduce</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -2425,7 +2548,10 @@ folding every subsequent element into it.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span

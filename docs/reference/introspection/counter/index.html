@@ -1041,7 +1041,7 @@ doesn't just use normal variables for counters.</p>
 
 <div class="code code-definition single-arg"><span
     class="typ-func">counter</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/label" class="pill pill-obj">label</a><a href="/docs/reference/types/selector" class="pill pill-obj">selector</a><a href="/docs/reference/types/location" class="pill pill-obj">location</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/counter" class="pill pill-obj">counter</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/label" class="pill pill-obj">label</a><a href="/docs/reference/foundations/selector" class="pill pill-obj">selector</a><a href="/docs/reference/introspection/location" class="pill pill-obj">location</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/introspection/counter" class="pill pill-obj">counter</a></div>
 
 
 
@@ -1051,15 +1051,30 @@ doesn't just use normal variables for counters.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
-      <a href="/docs/reference/types/label" class="pill pill-obj">label</a>
+        
+        
+          <a href="/docs/reference/foundations/label" class="pill pill-obj">label</a>
+        
       
-      <a href="/docs/reference/types/selector" class="pill pill-obj">selector</a>
+        
+        
+          <a href="/docs/reference/foundations/selector" class="pill pill-obj">selector</a>
+        
       
-      <a href="/docs/reference/types/location" class="pill pill-obj">location</a>
+        
+        
+          <a href="/docs/reference/introspection/location" class="pill pill-obj">location</a>
+        
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1120,7 +1135,7 @@ returns an array of integers, even if the counter has just one number.</p>
 <p>This is equivalent to <code>counter<span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-func">here</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">)</span></code>.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">get</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+    class="typ-func">get</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1140,8 +1155,8 @@ the numbering. This behaviour will be removed in a future release.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">display</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/auto" class="pill pill-kw">auto</a><a href="/docs/reference/types/str" class="pill pill-str">str</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a>, </span><span
-      class="overview-param"><a href="#parameters-both">both<!-- -->: </a><a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
+      class="overview-param"><a href="#parameters-both">both<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1151,11 +1166,20 @@ the numbering. This behaviour will be removed in a future release.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/auto" class="pill pill-kw">auto</a>
+        
+        
+          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
+        
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small><span
@@ -1190,7 +1214,10 @@ numbering style for the counted element or with the pattern
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/bool" class="pill pill-bool">bool</a>
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
       
     </div>
     
@@ -1222,7 +1249,7 @@ location. This behaviour will be removed in a future release.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">at</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/label" class="pill pill-obj">label</a><a href="/docs/reference/types/selector" class="pill pill-obj">selector</a><a href="/docs/reference/types/location" class="pill pill-obj">location</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/label" class="pill pill-obj">label</a><a href="/docs/reference/foundations/selector" class="pill pill-obj">selector</a><a href="/docs/reference/introspection/location" class="pill pill-obj">location</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1232,13 +1259,25 @@ location. This behaviour will be removed in a future release.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/label" class="pill pill-obj">label</a>
+        
+        
+          <a href="/docs/reference/foundations/label" class="pill pill-obj">label</a>
+        
       
-      <a href="/docs/reference/types/selector" class="pill pill-obj">selector</a>
+        
+        
+          <a href="/docs/reference/foundations/selector" class="pill pill-obj">selector</a>
+        
       
-      <a href="/docs/reference/types/location" class="pill pill-obj">location</a>
+        
+        
+          <a href="/docs/reference/introspection/location" class="pill pill-obj">location</a>
+        
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1270,7 +1309,7 @@ returns an array of integers, even if the counter has just one number.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">final</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/none" class="pill pill-kw">none</a><a href="/docs/reference/types/location" class="pill pill-obj">location</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/introspection/location" class="pill pill-obj">location</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1280,9 +1319,15 @@ returns an array of integers, even if the counter has just one number.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/none" class="pill pill-kw">none</a>
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
       
-      <a href="/docs/reference/types/location" class="pill pill-obj">location</a>
+        
+        
+          <a href="/docs/reference/introspection/location" class="pill pill-obj">location</a>
+        
       
     </div>
     <small><span
@@ -1323,7 +1368,7 @@ step the counter.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">step</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-level">level<!-- -->: </a><a href="/docs/reference/types/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+      class="overview-param"><a href="#parameters-level">level<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
 
@@ -1333,7 +1378,10 @@ step the counter.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
     </div>
     
@@ -1357,7 +1405,7 @@ content into the document.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">update</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/int" class="pill pill-num">int</a><a href="/docs/reference/types/array" class="pill pill-obj">array</a><a href="/docs/reference/types/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/content" class="pill pill-con">content</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
 
@@ -1367,11 +1415,20 @@ content into the document.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/int" class="pill pill-num">int</a>
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
       
-      <a href="/docs/reference/types/array" class="pill pill-obj">array</a>
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
       
-      <a href="/docs/reference/types/function" class="pill pill-fn">function</a>
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
       
     </div>
     <small>Required</small><small><span

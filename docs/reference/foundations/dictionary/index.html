@@ -921,7 +921,7 @@ from individual pairs. Use the dictionary syntax <code>(key: value)</code> inste
 
 <div class="code code-definition single-arg"><span
     class="typ-func">dictionary</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/module" class="pill pill-obj">module</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/dictionary" class="pill pill-obj">dictionary</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/module" class="pill pill-obj">module</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a></div>
 
 
 
@@ -934,7 +934,10 @@ from individual pairs. Use the dictionary syntax <code>(key: value)</code> inste
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/module" class="pill pill-obj">module</a>
+        
+        
+          <a href="/docs/reference/foundations/module" class="pill pill-obj">module</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -981,7 +984,7 @@ from individual pairs. Use the dictionary syntax <code>(key: value)</code> inste
 <p>The number of pairs in the dictionary.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">len</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/int" class="pill pill-num">int</a></div>
+    class="typ-func">len</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/int" class="pill pill-num">int</a></div>
 
 
 
@@ -1000,8 +1003,8 @@ specified.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">at</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><span class="pill pill-obj">any</span>, </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1011,7 +1014,10 @@ specified.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1037,7 +1043,10 @@ specified.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     
@@ -1058,8 +1067,8 @@ contains this key, the value is updated.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">insert</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) </div>
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><span class="pill pill-obj">any</span>, </span></div>) </div>
 
 
 
@@ -1069,7 +1078,10 @@ contains this key, the value is updated.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1095,7 +1107,10 @@ contains this key, the value is updated.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1126,8 +1141,8 @@ contains this key, the value is updated.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">remove</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/types/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><a href="/docs/reference/types/any" class="pill pill-obj">any</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/types/any" class="pill pill-obj">any</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-default">default<!-- -->: </a><span class="pill pill-obj">any</span>, </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
@@ -1137,7 +1152,10 @@ contains this key, the value is updated.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/str" class="pill pill-str">str</a>
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
       
     </div>
     <small>Required</small><small><span
@@ -1163,7 +1181,10 @@ contains this key, the value is updated.</p>
   <div class="additional-info">
     <div>
       
-      <a href="/docs/reference/types/any" class="pill pill-obj">any</a>
+        
+        
+          <span class="pill pill-obj">any</span>
+        
       
     </div>
     
@@ -1182,7 +1203,7 @@ contains this key, the value is updated.</p>
 <p>Returns the keys of the dictionary as an array in insertion order.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">keys</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+    class="typ-func">keys</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1196,7 +1217,7 @@ contains this key, the value is updated.</p>
 <p>Returns the values of the dictionary as an array in insertion order.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">values</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+    class="typ-func">values</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
@@ -1211,7 +1232,7 @@ contains this key, the value is updated.</p>
 pair is represented as an array of length two.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">pairs</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/types/array" class="pill pill-obj">array</a></div>
+    class="typ-func">pairs</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
 
