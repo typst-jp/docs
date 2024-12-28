@@ -2,9 +2,27 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "gen: typst-jp documentation",
+      "label": "generate-docs",
       "type": "shell",
       "command": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && echo reload or open http://localhost:8000",
+      "problemMatcher": []
+    },
+    {
+      "label": "textlint-md",
+      "type": "shell",
+      "command": "bun run textlint-md",
+      "problemMatcher": []
+    },
+    {
+      "label": "textlint-md:fix",
+      "type": "shell",
+      "command": "bun run textlint-md:fix",
+      "problemMatcher": []
+    },
+    {
+      "label": "textlint-html",
+      "type": "shell",
+      "command": "bun run textlint-html",
       "problemMatcher": []
     }
   ]
