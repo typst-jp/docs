@@ -7,6 +7,6 @@
   "remoteUser": "typst-jp",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
-  "postStartCommand": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && python3 -m http.server -d dist",
+  "postStartCommand": "bun install --frozen-lockfile && cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && python3 -m http.server -d dist",
   "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}"
 }
