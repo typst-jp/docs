@@ -3,14 +3,14 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, Packed, Show, StyleChain};
 use crate::text::{ItalicToggle, TextElem};
 
-/// 斜体への切り替えによるコンテンツの強調。
+/// イタリック体への切り替えによるコンテンツの強調。
 ///
-/// - If the current [text style]($text.style) is `{"normal"}`, this turns it
-///   into `{"italic"}`.
-/// - If it is already `{"italic"}` or `{"oblique"}`, it turns it back to
-///   `{"normal"}`.
+/// - 現在の[テキストスタイル]($text.style)が`{"normal"}`の場合、これを
+///   `{"italic"}`に変更します。
+/// - 現在のテキストスタイルが既に`{"italic"}`あるいは`{"oblique"}`の場合、
+///   `{"normal"}`に戻します。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This is _emphasized._ \
 /// This is #emph[too.]
@@ -22,13 +22,13 @@ use crate::text::{ItalicToggle, TextElem};
 /// This is _emphasized_ differently.
 /// ```
 ///
-/// # Syntax
-/// This function also has dedicated syntax: To emphasize content, simply
-/// enclose it in underscores (`_`). Note that this only works at word
-/// boundaries. To emphasize part of a word, you have to use the function.
+/// # 構文
+/// この関数には専用の構文もあります。
+/// コンテンツを強調するには、単にアンダースコア(`_`)で囲みます。ただし、これは単語の区切りにおいてのみ機能します。
+/// 単語の一部を強調する場合は、この関数を使用する必要があります。
 #[elem(title = "Emphasis", keywords = ["italic"], Show)]
 pub struct EmphElem {
-    /// The content to emphasize.
+    /// 強調するコンテンツ。
     #[required]
     pub body: Content,
 }
