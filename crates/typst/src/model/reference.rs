@@ -14,7 +14,7 @@ use crate::model::{
 };
 use crate::text::TextElem;
 
-/// A reference to a label or bibliography.
+/// ラベルや参考文献への参照。
 ///
 /// Produces a textual reference to a label. For example, a reference to a
 /// heading will yield an appropriate string such as "Section 1" for a reference
