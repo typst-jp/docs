@@ -9,23 +9,28 @@
 </div>
 {% endmacro %}
 
-{% macro function_definition_display(function, type2class, gen_path, prefix='') %}
+{% macro function_definition_display(function, type2href, type2class, gen_path, prefix='') %}
 <div class="code code-definition {{ 'single-arg' if function['params'].__len__() <= 1 else '' }}">{% if function['self'] %}self.{% else %}{{ gen_path(function) }}{% endif %}<span
     class="typ-func">{{ function['name'] }}</span>(<div class="arguments">{% for param in function['params'] %}<span
       class="overview-param">{% if not param['positional'] %}<a href="#parameters-{{ param['name'] }}">{{ param['name']
         }}<!-- -->: </a>{% endif %}{%
-      for t in param['types'] %}<a href="/docs/reference/types/{{ t }}" class="pill {{ type2class(t) }}">{{ t }}</a>{% endfor %}{{',' if
+      for t in param['types'] %}{% set href = type2href(t) %}{% if href %}<a href="/docs/reference/{{ type2href(t) }}" class="pill {{ type2class(t) }}">{{ t }}</a>{% else %}<span class="pill {{ type2class(t) }}">{{ t }}</span>{% endif %}{% endfor %}{{',' if
       function['params'].__len__() > 1 else '' }} </span>{% endfor %}</div>) {% if function['returns'] %}<!-- -->-&gt; {% for ret in function['returns']
-  %}<a href="/docs/reference/types/{{ ret }}" class="pill {{ type2class(ret) }}">{{ ret }}</a>{% endfor %}{% endif %}</div>
+  %}{% set href = type2href(ret) %}{% if href %}<a href="/docs/reference/{{ type2href(ret) }}" class="pill {{ type2class(ret) }}">{{ ret }}</a>{% else %}<span class="pill {{ type2class(ret) }}">{{ ret }}</span>{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</div>
 {% endmacro %}
 
-{% macro function_params_display(function, type2class, gen_path, prefix='') %}
+{% macro function_params_display(function, type2href, type2class, gen_path, prefix='') %}
 {% for param in function['params'] %}
 <h4 id="{{ prefix }}-{{ function['name'] }}-parameters-{{ param['name'] }}"><code>{{ param['name'] }}</code>
   <div class="additional-info">
     <div>
       {% for t in param['types'] %}
-      <a href="/docs/reference/types/{{ t }}" class="pill {{ type2class(t) }}">{{ t }}</a>
+        {% set href = type2href(t) %}
+        {% if href %}
+          <a href="/docs/reference/{{ href }}" class="pill {{ type2class(t) }}">{{ t }}</a>
+        {% else %}
+          <span class="pill {{ type2class(t) }}">{{ t }}</span>
+        {% endif %}
       {% endfor %}
     </div>
     {% if param['required'] %}<small>Required</small>{% endif %}{% if param['positional'] %}<small><span
@@ -92,9 +97,9 @@
 {% endfor %}
 {% endmacro %}
 
-{% macro function_display(function, type2class, gen_path, prefix='', is_example_folding=true) %}
+{% macro function_display(function, type2href, type2class, gen_path, prefix='', is_example_folding=true) %}
 {{ function['details'] | safe }}
-{{ function_definition_display(function, type2class, gen_path, prefix) }}
+{{ function_definition_display(function, type2href, type2class, gen_path, prefix) }}
 {% if function['example'] and is_example_folding %}
   <details class="folding-example">
     <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
@@ -106,5 +111,5 @@
 {% if function['example'] and not is_example_folding %}
   {{ function['example'] | safe }}
 {% endif %}
-{{ function_params_display(function, type2class, gen_path, prefix) }}
+{{ function_params_display(function, type2href, type2class, gen_path, prefix) }}
 {% endmacro %}

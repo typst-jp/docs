@@ -36,8 +36,74 @@ class PageDict(TypedDict):
     children: list["PageDict"]
 
 
+def type2href(parameter_type: str) -> str | None:
+    """型名からリンクを取得する"""
+    foundation_set = set(
+        (
+            "arguments",
+            "array",
+            "auto",
+            "bool",
+            "bytes",
+            "content",
+            "datetime",
+            "decimal",
+            "dictionary",
+            "duration",
+            "float",
+            "function",
+            "int",
+            "label",
+            "module",
+            "none",
+            "plugin",
+            "regex",
+            "selector",
+            "str",
+            "type",
+            "version",
+        )
+    )
+    layout_set = set(
+        (
+            "alignment",
+            "angle",
+            "direction",
+            "fraction",
+            "length",
+            "ratio",
+            "relative",
+        )
+    )
+    visualize_set = set(
+        (
+            "color",
+            "gradient",
+            "pattern",
+            "stroke",
+        )
+    )
+    introspection_set = set(
+        (
+            "counter",
+            "location",
+            "state",
+        )
+    )
+    if parameter_type in foundation_set:
+        return f"foundations/{parameter_type}"
+    elif parameter_type in layout_set:
+        return f"layout/{parameter_type}"
+    elif parameter_type in visualize_set:
+        return f"visualize/{parameter_type}"
+    elif parameter_type in introspection_set:
+        return f"introspection/{parameter_type}"
+    else:
+        return None
+
+
 def type2class(parameter_type: str) -> str:
-    """関数の引数の型名からCSSのクラス名を取得する"""
+    """型名からCSSのクラス名を取得する"""
     type2class_map: dict[str, str] = {
         "none": "pill-kw",
         "auto": "pill-kw",
@@ -155,6 +221,7 @@ if __name__ == "__main__":
                     path=path,
                     prev=previous_page,
                     next=next_page,
+                    type2href=type2href,
                     type2class=type2class,
                     gen_path=gen_path,
                     **page,

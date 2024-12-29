@@ -8,7 +8,7 @@
 <h2 id="functions">Calculation</h2>
 {% for method in body['content']['functions'] %}
   <h3 id="{{ prefix }}-{{ method['name'] }}" class="method-head"><span><code>{{ method['name'] }}</code></span></h3>
-  {{ macros.function_display(method, type2class, gen_path, prefix='definitions-' + method['name'], is_example_folding=false) }}
+  {{ macros.function_display(method, type2href, type2class, gen_path, prefix='definitions-' + method['name'], is_example_folding=false) }}
 {% endfor %}
 
 {% endblock %}
