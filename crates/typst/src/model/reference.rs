@@ -16,21 +16,21 @@ use crate::text::TextElem;
 
 /// ラベルや参考文献への参照。
 ///
-/// Produces a textual reference to a label. For example, a reference to a
-/// heading will yield an appropriate string such as "Section 1" for a reference
-/// to the first heading. The references are also links to the respective
-/// element. Reference syntax can also be used to [cite] from a bibliography.
+/// ラベルに対するテキストの参照を生成します。
+/// 例えば、見出しに対する参照は、最初の見出しに対して"Section 1"のような適切な文字列を生成します。
+/// 参照は、それぞれの要素へのリンクでもあります。
+/// 参照の構文は参考文献からの[引用]($cite)にも使用できます。
 ///
-/// Referenceable elements include [headings]($heading), [figures]($figure),
-/// [equations]($math.equation), and [footnotes]($footnote). To create a custom
-/// referenceable element like a theorem, you can create a figure of a custom
-/// [`kind`]($figure.kind) and write a show rule for it. In the future, there
-/// might be a more direct way to define a custom referenceable element.
+/// 参照可能な要素には[見出し]($heading)、[図表]($figure)、[数式]($math.equation)、[脚注]($footnote)が含まれます。
+/// 定理のようなカスタムの参照可能な要素を作成するには、
+/// カスタムの[`種類`]($figure.kind)の図表を作成し、
+/// それに対するshowルールを書きます。
+/// 将来的には、カスタムの参照可能な要素を定義するためのより直接的な方法が提供されるかもしれません。
 ///
-/// If you just want to link to a labelled element and not get an automatic
-/// textual reference, consider using the [`link`] function instead.
+/// ラベルのついた要素にリンクを行いたいだけで、
+/// 自動的なテキストの参照が必要ない場合は、代わりに[`link`]関数の使用を検討してください。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set heading(numbering: "1.")
 /// #set math.equation(numbering: "(1)")
@@ -54,19 +54,19 @@ use crate::text::TextElem;
 /// #bibliography("works.bib")
 /// ```
 ///
-/// # Syntax
-/// This function also has dedicated syntax: A reference to a label can be
-/// created by typing an `@` followed by the name of the label (e.g.
-/// `[= Introduction <intro>]` can be referenced by typing `[@intro]`).
+/// # 構文
+/// この関数には専用の構文もあります。
+/// ラベルへの参照は、@の後にラベル名を入力することで作成できます
+/// （例：`[= Introduction <intro>]`は`[@intro]`と入力することで参照できます）。
 ///
-/// To customize the supplement, add content in square brackets after the
-/// reference: `[@intro[Chapter]]`.
+/// 補足をカスタマイズするには、
+/// `[@intro[Chapter]]`のように、参照の後に角括弧でコンテンツを追加します。
 ///
-/// # Customization
-/// If you write a show rule for references, you can access the referenced
-/// element through the `element` field of the reference. The `element` may
-/// be `{none}` even if it exists if Typst hasn't discovered it yet, so you
-/// always need to handle that case in your code.
+/// # カスタム
+/// 参照のshowルールを書く場合、
+/// 参照の`element`フィールドを通じて参照先の要素にアクセスできます。
+/// ただし、Typstがまだそれを発見していない場合、`element`は存在していても`{none}`になる可能性があるため、
+/// 常にコード内でそのケースを処理する必要があります。   
 ///
 /// ```example
 /// #set heading(numbering: "1.")
@@ -93,20 +93,20 @@ use crate::text::TextElem;
 /// ```
 #[elem(title = "Reference", Synthesize, Locatable, Show)]
 pub struct RefElem {
-    /// The target label that should be referenced.
+    /// 参照されるべき対象ラベル。
     ///
-    /// Can be a label that is defined in the document or an entry from the
-    /// [`bibliography`].
+    /// これは、ドキュメント内で定義されたラベルや、
+    /// [`参考文献リスト`]($bibliography)のエントリである場合があります。
     #[required]
     pub target: Label,
 
-    /// A supplement for the reference.
+    /// 参照の補足。
     ///
-    /// For references to headings or figures, this is added before the
-    /// referenced number. For citations, this can be used to add a page number.
+    /// 見出しや図表への参照の場合、参照される番号の前に追加されます。
+    /// 引用の場合、ページ番号を追加するために使用できます。
     ///
-    /// If a function is specified, it is passed the referenced element and
-    /// should return content.
+    /// 関数が指定されている場合、それに参照先の要素が渡され、
+    /// 関数はコンテンツを返す必要があります。
     ///
     /// ```example
     /// #set heading(numbering: "1.")
