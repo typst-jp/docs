@@ -96,7 +96,7 @@ pub struct RefElem {
     /// 参照されるべき対象ラベル。
     ///
     /// これは、ドキュメント内で定義されたラベルや、
-    /// [`参考文献リスト`]($bibliography)のエントリである場合があります。
+    /// [`参考文献リスト`]($bibliography)の参照キーである場合があります。
     #[required]
     pub target: Label,
 
