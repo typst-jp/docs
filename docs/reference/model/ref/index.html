@@ -878,19 +878,19 @@
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
 </small></h1>
-<p>A reference to a label or bibliography.</p>
-<p>Produces a textual reference to a label. For example, a reference to a
-heading will yield an appropriate string such as &quot;Section 1&quot; for a reference
-to the first heading. The references are also links to the respective
-element. Reference syntax can also be used to <a href="/docs/reference/model/cite/" title="cite">cite</a> from a bibliography.</p>
-<p>Referenceable elements include <a href="/docs/reference/model/heading/">headings</a>, <a href="/docs/reference/model/figure/">figures</a>,
-<a href="/docs/reference/math/equation/">equations</a>, and <a href="/docs/reference/model/footnote/">footnotes</a>. To create a custom
-referenceable element like a theorem, you can create a figure of a custom
-<a href="/docs/reference/model/figure/#parameters-kind"><code>kind</code></a> and write a show rule for it. In the future, there
-might be a more direct way to define a custom referenceable element.</p>
-<p>If you just want to link to a labelled element and not get an automatic
-textual reference, consider using the <a href="/docs/reference/model/link/" title="`link`"><code>link</code></a> function instead.</p>
-<h2 id="example">Example</h2>
+<p>ラベルや参考文献への参照。</p>
+<p>ラベルに対するテキストの参照を生成します。
+例えば、見出しに対する参照は、最初の見出しに対して&quot;Section 1&quot;のような適切な文字列を生成します。
+参照は、それぞれの要素へのリンクでもあります。
+参照の構文は参考文献からの<a href="/docs/reference/model/cite/">引用</a>にも使用できます。</p>
+<p>参照可能な要素には<a href="/docs/reference/model/heading/">見出し</a>、<a href="/docs/reference/model/figure/">図表</a>、<a href="/docs/reference/math/equation/">数式</a>、<a href="/docs/reference/model/footnote/">脚注</a>が含まれます。
+定理のようなカスタムの参照可能な要素を作成するには、
+カスタムの<a href="/docs/reference/model/figure/#parameters-kind"><code>種類</code></a>の図表を作成し、
+それに対するshowルールを書きます。
+将来的には、カスタムの参照可能な要素を定義するためのより直接的な方法が提供されるかもしれません。</p>
+<p>ラベルのついた要素にリンクを行いたいだけで、
+自動的なテキストの参照が必要ない場合は、代わりに<a href="/docs/reference/model/link/" title="`link`"><code>link</code></a>関数の使用を検討してください。</p>
+<h2 id="例">例</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">)</span>
 
@@ -912,17 +912,17 @@ software looks like.
 
 <span class="typ-func">#</span><span class="typ-func">bibliography</span><span class="typ-punct">(</span><span class="typ-str">&quot;works.bib&quot;</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/c3f3d948c90c3d086d0ba15c70b636af.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="syntax">Syntax</h2>
-<p>This function also has dedicated syntax: A reference to a label can be
-created by typing an <code>@</code> followed by the name of the label (e.g.
-<code><span class="typ-heading">= Introduction</span> <span class="typ-label">&lt;intro&gt;</span></code> can be referenced by typing <code><span class="typ-ref">@intro</span></code>).</p>
-<p>To customize the supplement, add content in square brackets after the
-reference: <code><span class="typ-ref">@intro<span class="typ-punct">[</span>Chapter<span class="typ-punct">]</span></span></code>.</p>
-<h2 id="customization">Customization</h2>
-<p>If you write a show rule for references, you can access the referenced
-element through the <code>element</code> field of the reference. The <code>element</code> may
-be <code><span class="typ-key">none</span></code> even if it exists if Typst hasn't discovered it yet, so you
-always need to handle that case in your code.</p>
+<h2 id="構文">構文</h2>
+<p>この関数には専用の構文もあります。
+ラベルへの参照は、@の後にラベル名を入力することで作成できます
+（例：<code><span class="typ-heading">= Introduction</span> <span class="typ-label">&lt;intro&gt;</span></code>は<code><span class="typ-ref">@intro</span></code>と入力することで参照できます）。</p>
+<p>補足をカスタマイズするには、
+<code><span class="typ-ref">@intro<span class="typ-punct">[</span>Chapter<span class="typ-punct">]</span></span></code>のように、参照の後に角括弧でコンテンツを追加します。</p>
+<h2 id="カスタム">カスタム</h2>
+<p>参照のshowルールを書く場合、
+参照の<code>element</code>フィールドを通じて参照先の要素にアクセスできます。
+ただし、Typstがまだそれを発見していない場合、<code>element</code>は存在していても<code><span class="typ-key">none</span></code>になる可能性があるため、
+常にコード内でそのケースを処理する必要があります。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">)</span>
 
@@ -990,9 +990,9 @@ In <span class="typ-ref">@beginning</span> we prove <span class="typ-ref">@pytha
     </small>
   </div>
 </h4>
-<p>The target label that should be referenced.</p>
-<p>Can be a label that is defined in the document or an entry from the
-<a href="/docs/reference/model/bibliography/" title="`bibliography`"><code>bibliography</code></a>.</p>
+<p>参照されるべき対象ラベル。</p>
+<p>これは、ドキュメント内で定義されたラベルや、
+<a href="/docs/reference/model/bibliography/"><code>参考文献リスト</code></a>の参照キーである場合があります。</p>
 
 
 
@@ -1035,11 +1035,11 @@ In <span class="typ-ref">@beginning</span> we prove <span class="typ-ref">@pytha
     </small>
   </div>
 </h4>
-<p>A supplement for the reference.</p>
-<p>For references to headings or figures, this is added before the
-referenced number. For citations, this can be used to add a page number.</p>
-<p>If a function is specified, it is passed the referenced element and
-should return content.</p>
+<p>参照の補足。</p>
+<p>見出しや図表への参照の場合、参照される番号の前に追加されます。
+引用の場合、ページ番号を追加するために使用できます。</p>
+<p>関数が指定されている場合、それに参照先の要素が渡され、
+関数はコンテンツを返す必要があります。</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>
@@ -1093,15 +1093,15 @@ manually.
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="例"><a href="#例">例</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="syntax"><a href="#syntax">Syntax</a>
+        <li data-assoc="構文"><a href="#構文">構文</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="customization"><a href="#customization">Customization</a>
+        <li data-assoc="カスタム"><a href="#カスタム">カスタム</a>
           <ul></ul>
         </li>
         
