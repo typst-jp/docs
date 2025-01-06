@@ -17,11 +17,11 @@ use crate::layout::{
 use crate::model::{ListItemLike, ListLike, Numbering, NumberingPattern, ParElem};
 use crate::text::TextElem;
 
-/// A numbered list.
+/// 番号付きリスト。
 ///
-/// Displays a sequence of items vertically and numbers them consecutively.
+/// 一連の項目を縦に並べて表示し、それぞれに連番を付けます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// Automatically numbered:
 /// + Preparations
