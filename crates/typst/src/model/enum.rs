@@ -42,8 +42,8 @@ use crate::text::TextElem;
 /// #enum[First][Second]
 /// ```
 ///
-/// You can easily switch all your enumerations to a different numbering style
-/// with a set rule.
+/// setルールを用いることで、
+/// すべてのリストを異なるナンバリングスタイルに簡単に切り替えることができます。
 /// ```example
 /// #set enum(numbering: "a)")
 ///
@@ -51,8 +51,8 @@ use crate::text::TextElem;
 /// + Don't forget step two
 /// ```
 ///
-/// You can also use [`enum.item`]($enum.item) to programmatically customize the
-/// number of each item in the enumeration:
+/// また、[`enum.item`]($enum.item)を使用して、
+/// リストの各項目の番号を自由にカスタマイズすることもできます。
 ///
 /// ```example
 /// #enum(
@@ -62,30 +62,30 @@ use crate::text::TextElem;
 /// )
 /// ```
 ///
-/// # Syntax
-/// This functions also has dedicated syntax:
+/// # 構文
+/// この関数には専用の構文もあります。
 ///
-/// - Starting a line with a plus sign creates an automatically numbered
-///   enumeration item.
-/// - Starting a line with a number followed by a dot creates an explicitly
-///   numbered enumeration item.
+/// - 行の先頭にプラス記号をつけると、
+///   自動的にナンバリングされたリスト項目が作成されます。
+/// - 行の先頭に数字とピリオドを付けると、
+///   明示的に番号を指定したリスト項目が作成されます。
 ///
-/// Enumeration items can contain multiple paragraphs and other block-level
-/// content. All content that is indented more than an item's marker becomes
-/// part of that item.
+/// リストの項目には、複数の段落やその他のブロックレベルのコンテンツを含めることができます。
+/// 項目のマーカーよりもインデントが深いコンテンツはすべて、
+/// その項目の一部となります。
 #[elem(scope, title = "Numbered List", Show)]
 pub struct EnumElem {
-    /// Defines the default [spacing]($enum.spacing) of the enumeration. If it
-    /// is `{false}`, the items are spaced apart with
-    /// [paragraph spacing]($par.spacing). If it is `{true}`, they use
-    /// [paragraph leading]($par.leading) instead. This makes the list more
-    /// compact, which can look better if the items are short.
+    /// リストのデフォルトの[spacing]($enum.spacing)を定義します。
+    /// これが`{false}`の場合、
+    /// 項目の間隔は[paragraph spacing]($par.spacing)によって決まります。
+    /// `{true}`の場合、代わりに[paragraph leading]($par.leading)が使用されます。
+    /// これにより、項目が短い場合に見栄えが良くなるように、リストがコンパクトになります。
     ///
-    /// In markup mode, the value of this parameter is determined based on
-    /// whether items are separated with a blank line. If items directly follow
-    /// each other, this is set to `{true}`; if items are separated by a blank
-    /// line, this is set to `{false}`. The markup-defined tightness cannot be
-    /// overridden with set rules.
+    /// マークアップモードでは、
+    /// この引数の値は項目が空行で区切られているかどうかに基づいて決定されます。
+    /// 項目が直接連続している場合、この値は`{true}`に設定されますが、
+    /// 項目が空行で区切られている場合は`{false}`に設定されます。
+    /// マークアップで定義された間隔はsetルールで上書きすることは出来ません。
     ///
     /// ```example
     /// + If an enum has a lot of text, and
@@ -99,12 +99,12 @@ pub struct EnumElem {
     #[default(true)]
     pub tight: bool,
 
-    /// How to number the enumeration. Accepts a
-    /// [numbering pattern or function]($numbering).
+    /// リストをどのようにナンバリングするかを指定します。
+    /// [ナンバリングパターンまたは関数]($numbering)を受け付けます。
     ///
-    /// If the numbering pattern contains multiple counting symbols, they apply
-    /// to nested enums. If given a function, the function receives one argument
-    /// if `full` is `{false}` and multiple arguments if `full` is `{true}`.
+    /// ナンバリングのパターンに複数のカウント記号が含まれている場合、
+    /// それらはネストされたリストに適用されます。
+    /// 関数が指定された場合、`full`が`{false}`の場合は1つの引数を受け取り、`{true}`の場合は複数の引数を受け取ります。
     ///
     /// ```example
     /// #set enum(numbering: "1.a)")
@@ -122,7 +122,7 @@ pub struct EnumElem {
     #[borrowed]
     pub numbering: Numbering,
 
-    /// Which number to start the enumeration with.
+    /// リストの開始番号を指定します。
     ///
     /// ```example
     /// #enum(
@@ -134,8 +134,8 @@ pub struct EnumElem {
     #[default(1)]
     pub start: usize,
 
-    /// Whether to display the full numbering, including the numbers of
-    /// all parent enumerations.
+    /// 親リストの番号も含めて、
+    /// 完全なナンバリングを表示するかどうかを指定します。
     ///
     ///
     /// ```example
@@ -148,33 +148,33 @@ pub struct EnumElem {
     #[default(false)]
     pub full: bool,
 
-    /// The indentation of each item.
+    /// 各項目のインデント。
     #[resolve]
     pub indent: Length,
 
-    /// The space between the numbering and the body of each item.
+    /// 各項目のナンバリングと本文の間隔を指定します。
     #[resolve]
     #[default(Em::new(0.5).into())]
     pub body_indent: Length,
 
-    /// The spacing between the items of the enumeration.
+    /// リストの項目同士の間隔を指定します。
     ///
-    /// If set to `{auto}`, uses paragraph [`leading`]($par.leading) for tight
-    /// enumerations and paragraph [`spacing`]($par.spacing) for wide
-    /// (non-tight) enumerations.
+    /// `{auto}`に設定すると、
+    /// コンパクトなリストの場合は段落の[leading]($par.leading)を、
+    /// 幅のある（コンパクトでない）リストの場合は段落の[spacing]($par.spacing)を使用します。
     pub spacing: Smart<Length>,
 
-    /// The alignment that enum numbers should have.
+    /// リストの番号の配置を指定します。
     ///
-    /// By default, this is set to `{end + top}`, which aligns enum numbers
-    /// towards end of the current text direction (in left-to-right script,
-    /// for example, this is the same as `{right}`) and at the top of the line.
-    /// The choice of `{end}` for horizontal alignment of enum numbers is
-    /// usually preferred over `{start}`, as numbers then grow away from the
-    /// text instead of towards it, avoiding certain visual issues. This option
-    /// lets you override this behaviour, however. (Also to note is that the
-    /// [unordered list]($list) uses a different method for this, by giving the
-    /// `marker` content an alignment directly.).
+    /// デフォルトでは、この値は`{end + top}`に設定されており、これはリストの番号を
+    /// 現在のテキスト方向の終端（例えば、左から右へ書く文書では、これは`{right}`と同じ）と、
+    /// 行の上部に揃えます。
+    /// 一般的に、水平方向の番号の配置には`{start}`よりも`{end}`を選択することが推奨されます。
+    /// なぜなら、番号がテキストに向かってではなくテキストから離れる方向に伸びることによって、
+    /// 特定の視覚的な問題を回避できるからです。
+    /// しかし、このオプションを使用することで、この動作を上書きすることができます。
+    /// （また、[unordered list]($list)は異なる方法を用いており、直接`marker`コンテンツに配置を指定することで、
+    /// これを行っていることに注意してください）
     ///
     /// ````example
     /// #set enum(number-align: start + bottom)
@@ -190,10 +190,10 @@ pub struct EnumElem {
     #[default(HAlignment::End + VAlignment::Top)]
     pub number_align: Alignment,
 
-    /// The numbered list's items.
+    /// 番号付きリストの項目。
     ///
-    /// When using the enum syntax, adjacent items are automatically collected
-    /// into enumerations, even through constructs like for loops.
+    /// enum構文を使用する場合、forループのような構造を挟んでも、
+    /// 隣接する項目は自動的にリストとしてまとめられます。
     ///
     /// ```example
     /// #for phase in (
@@ -316,14 +316,14 @@ fn layout_enum(
     layouter.layout(engine)
 }
 
-/// An enumeration item.
+/// 番号付きリストの項目。
 #[elem(name = "item", title = "Numbered List Item")]
 pub struct EnumItem {
-    /// The item's number.
+    /// 項目の番号。
     #[positional]
     pub number: Option<usize>,
 
-    /// The item's body.
+    /// 項目の本文。
     #[required]
     pub body: Content,
 }
