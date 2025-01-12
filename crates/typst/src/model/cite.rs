@@ -10,7 +10,7 @@ use crate::text::{Lang, Region, TextElem};
 
 /// 参考文献の引用。
 ///
-/// 引用を始める前に、文書のどこかで [bibliography] を追加しておく必要があります。
+/// 引用を始める前に、文書のどこかで[bibliography]を追加しておく必要があります。
 ///
 /// # 例
 /// ```example
