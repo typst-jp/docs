@@ -8,12 +8,11 @@ use crate::model::bibliography::Works;
 use crate::model::CslStyle;
 use crate::text::{Lang, Region, TextElem};
 
-/// Cite a work from the bibliography.
+/// 参考文献の引用。
 ///
-/// Before you starting citing, you need to add a [bibliography] somewhere in
-/// your document.
+/// 引用を始める前に、文書のどこかで [bibliography] を追加しておく必要があります。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This was already noted by
 /// pirates long ago. @arrgh
@@ -27,8 +26,7 @@ use crate::text::{Lang, Region, TextElem};
 /// #bibliography("works.bib")
 /// ```
 ///
-/// If your source name contains certain characters such as slashes, which are
-/// not recognized by the `<>` syntax, you can explicitly call `label` instead.
+/// ソース名にスラッシュなど`<>`構文では認識されない文字が含まれている場合は、代わりにlabelを明示的に呼び出すことで参照できます。
 ///
 /// ```typ
 /// Computer Modern is an example of a modernist serif typeface.
@@ -36,14 +34,13 @@ use crate::text::{Lang, Region, TextElem};
 /// >>> #bibliography("works.bib")
 /// ```
 ///
-/// # Syntax
-/// This function indirectly has dedicated syntax. [References]($ref) can be
-/// used to cite works from the bibliography. The label then corresponds to the
-/// citation key.
+/// # 構文
+/// この関数は間接的に専用の構文を持っています。
+/// [References]($ref)は参考文献を引用するために使用可能です。
+/// ラベルは参照キーに対応します。
 #[elem(Synthesize)]
 pub struct CiteElem {
-    /// The citation key that identifies the entry in the bibliography that
-    /// shall be cited, as a label.
+    /// 引用する文献を特定するラベルである参照キー。
     ///
     /// ```example
     /// // All the same
@@ -56,9 +53,9 @@ pub struct CiteElem {
     #[required]
     pub key: Label,
 
-    /// A supplement for the citation such as page or chapter number.
+    /// ページ番号や章番号などの引用の補足。
     ///
-    /// In reference syntax, the supplement can be added in square brackets:
+    /// [References]($ref)の構文では、角括弧で囲むことで補足を追加できます。
     ///
     /// ```example
     /// This has been proven. @distress[p.~7]
@@ -67,13 +64,10 @@ pub struct CiteElem {
     /// ```
     pub supplement: Option<Content>,
 
-    /// The kind of citation to produce. Different forms are useful in different
-    /// scenarios: A normal citation is useful as a source at the end of a
-    /// sentence, while a "prose" citation is more suitable for inclusion in the
-    /// flow of text.
+    /// 作成する引用の種類。異なる形式は異なるシナリオで有用です。
+    /// 通常の引用は文末に置くソースとして有用ですが、"prose"引用は文章の途中に置くのに適しています。
     ///
-    /// If set to `{none}`, the cited work is included in the bibliography, but
-    /// nothing will be displayed.
+    /// もし`{none}`と設定すると、引用文献は参考文献リストに含まれますが、文章内には表示されません。
     ///
     /// ```example
     /// #cite(<netwok>, form: "prose")
@@ -84,16 +78,13 @@ pub struct CiteElem {
     /// ```
     #[default(Some(CitationForm::Normal))]
     pub form: Option<CitationForm>,
-
-    /// The citation style.
+    /// 引用スタイル。
     ///
-    /// Should be either `{auto}`, one of the built-in styles (see below) or a
-    /// path to a [CSL file](https://citationstyles.org/). Some of the styles
-    /// listed below appear twice, once with their full name and once with a
-    /// short alias.
+    /// `{auto}`か、組み込みスタイル（下記参照）、[CSLファイル](https://citationstyles.org/)へのパス、のいずれかを指定してください。
+    /// 下記のスタイルの中には、2回表示されるものがあり、1回はフルネームで、もう1回は略名で表示されています。
     ///
-    /// When set to `{auto}`, automatically use the
-    /// [bibliography's style]($bibliography.style) for the citations.
+    /// `{auto}`に設定すると、[bibliography関数のstyleパラメーター]($bibliography.style)で設定したスタイルが自動的に使用されます。
+    ///
     #[parse(CslStyle::parse_smart(engine, args)?)]
     pub style: Smart<CslStyle>,
 
@@ -125,16 +116,16 @@ cast! {
 /// The form of the citation.
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum CitationForm {
-    /// Display in the standard way for the active style.
+    /// 現在設定しているスタイルの標準的な方法で表示する。
     #[default]
     Normal,
-    /// Produces a citation that is suitable for inclusion in a sentence.
+    /// 文章に含めるのに適した引用を作成する。
     Prose,
-    /// Mimics a bibliography entry, with full information about the cited work.
+    /// 参考文献リストと同じく、引用された文献の完全な情報を表示する。
     Full,
-    /// Shows only the cited work's author(s).
+    /// 引用文献の著者らのみを表示する。
     Author,
-    /// Shows only the cited work's year.
+    /// 引用文献の発行年のみを表示する。
     Year,
 }
 
