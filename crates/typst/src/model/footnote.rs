@@ -14,7 +14,7 @@ use crate::text::{SuperElem, TextElem, TextSize};
 use crate::utils::NonZeroExt;
 use crate::visualize::{LineElem, Stroke};
 
-/// A footnote.
+/// 脚注。
 ///
 /// Includes additional remarks and references on the same page with footnotes.
 /// A footnote will insert a superscript number that links to the note at the
