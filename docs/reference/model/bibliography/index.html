@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -878,29 +932,35 @@
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
 </small></h1>
-<p>参考文献 / 引用文献リスト。</p>
-<p>次の2つの形式のどちらかの参考文献ファイルへのパスを指定してこの関数を呼び出すと、新しい引用文献リストを作成できます。</p>
+<p>A bibliography / reference listing.</p>
+<p>You can create a new bibliography by calling this function with a path
+to a bibliography file in either one of two formats:</p>
 <ul>
-<li>Hayagriva <code>.yml</code> ファイル。
-HayagrivaはTypstで使用するためにデザインされた新しい書誌ファイルフォーマットです。
-詳しくは<a href="https://github.com/typst/hayagriva/blob/main/docs/file-format.md">ドキュメント</a>をご覧ください。</li>
-<li>BibLaTeX <code>.bib</code> ファイル。</li>
+<li>A Hayagriva <code>.yml</code> file. Hayagriva is a new bibliography file format
+designed for use with Typst. Visit its
+<a href="https://github.com/typst/hayagriva/blob/main/docs/file-format.md">documentation</a>
+for more details.</li>
+<li>A BibLaTeX <code>.bib</code> file.</li>
 </ul>
-<p>文書内に参考文献を追加すると、参照構文（<code><span class="typ-ref">@key</span></code>）や引用関数の明示的な呼び出し（<code><span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;key&gt;</span><span class="typ-punct">)</span></code>）を使って<a href="/docs/reference/model/cite/">引用</a>を始めることができます。
-参考文献リストには、文書内で参照された作品の文献だけが表示されます。</p>
-<h2 id="スタイル">スタイル</h2>
-<p>Typstは、内蔵の<a href="/docs/reference/model/bibliography/#parameters-style">引用と文献スタイル</a>を幅広く取り揃えています。
-さらに、独自の<a href="https://citationstyles.org/">CSL</a>（Citation Style Language）ファイルを追加して使用することもできます。
-どのスタイルを使えばいいか迷う方のために、分野ごとによく使われるスタイルを以下の表にまとめています。</p>
-<table><thead><tr><th>分野</th><th>Typical Styles</th></tr></thead><tbody>
-<tr><td>工学、IT</td><td><code><span class="typ-str">&quot;ieee&quot;</span></code></td></tr>
-<tr><td>心理学、ライフサイエンス</td><td><code><span class="typ-str">&quot;apa&quot;</span></code></td></tr>
-<tr><td>社会科学</td><td><code><span class="typ-str">&quot;chicago-author-date&quot;</span></code></td></tr>
-<tr><td>人文学</td><td><code><span class="typ-str">&quot;mla&quot;</span></code>, <code><span class="typ-str">&quot;chicago-notes&quot;</span></code>, <code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
-<tr><td>経済学</td><td><code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
-<tr><td>物理学</td><td><code><span class="typ-str">&quot;american-physics-society&quot;</span></code></td></tr>
+<p>As soon as you add a bibliography somewhere in your document, you can start
+citing things with reference syntax (<code><span class="typ-ref">@key</span></code>) or explicit calls to the
+<a href="/docs/reference/model/cite/">citation</a> function (<code><span class="typ-func">#</span><span class="typ-func">cite</span><span class="typ-punct">(</span><span class="typ-label">&lt;key&gt;</span><span class="typ-punct">)</span></code>). The bibliography will only
+show entries for works that were referenced in the document.</p>
+<h2 id="styles">Styles</h2>
+<p>Typst offers a wide selection of built-in
+<a href="/docs/reference/model/bibliography/#parameters-style">citation and bibliography styles</a>. Beyond those, you
+can add and use custom <a href="https://citationstyles.org/">CSL</a> (Citation Style
+Language) files. Wondering which style to use? Here are some good defaults
+based on what discipline you're working in:</p>
+<table><thead><tr><th>Fields</th><th>Typical Styles</th></tr></thead><tbody>
+<tr><td>Engineering, IT</td><td><code><span class="typ-str">&quot;ieee&quot;</span></code></td></tr>
+<tr><td>Psychology, Life Sciences</td><td><code><span class="typ-str">&quot;apa&quot;</span></code></td></tr>
+<tr><td>Social sciences</td><td><code><span class="typ-str">&quot;chicago-author-date&quot;</span></code></td></tr>
+<tr><td>Humanities</td><td><code><span class="typ-str">&quot;mla&quot;</span></code>, <code><span class="typ-str">&quot;chicago-notes&quot;</span></code>, <code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
+<tr><td>Economics</td><td><code><span class="typ-str">&quot;harvard-cite-them-right&quot;</span></code></td></tr>
+<tr><td>Physics</td><td><code><span class="typ-str">&quot;american-physics-society&quot;</span></code></td></tr>
 </tbody></table>
-<h2 id="例">例</h2>
+<h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code>This was already noted by
 pirates long ago. <span class="typ-ref">@arrgh</span>
 
@@ -924,15 +984,15 @@ Multiple sources say <span class="typ-escape">...</span>
 
 <div class="code code-definition "><span
     class="typ-func">bibliography</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
       class="overview-param"><a href="#parameters-title">title<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-full">full<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span><span
-      class="overview-param"><a href="#parameters-style">style<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+      class="overview-param"><a href="#parameters-style">style<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
 
 
-<h4 id="bibliography-bibliography-parameters-path"><code>path</code>
+<h4 id="bibliography-bibliography-parameters-sources"><code>sources</code>
   <div class="additional-info">
     <div>
       
@@ -943,25 +1003,38 @@ Multiple sources say <span class="typ-escape">...</span>
       
         
         
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
+        
+      
+        
+        
           <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
         
       
     </div>
     <small>Required</small><small><span
-        aria-describedby="bibliography-bibliography-parameters-path-positional-tooltip">Positional</span>
+        aria-describedby="bibliography-bibliography-parameters-sources-positional-tooltip">Positional</span>
       <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="bibliography-bibliography-parameters-path-positional-tooltip-qm-label">
-          <title id="bibliography-bibliography-parameters-path-positional-tooltip-qm-label">
+          aria-labelledby="bibliography-bibliography-parameters-sources-positional-tooltip-qm-label">
+          <title id="bibliography-bibliography-parameters-sources-positional-tooltip-qm-label">
             Positional parameters are specified in order, without names.</title>
           <use href="/assets/icons/12-tooltip.svg#icon"></use>
         </svg>
-        <div role="tooltip" id="bibliography-bibliography-parameters-path-positional-tooltip"
+        <div role="tooltip" id="bibliography-bibliography-parameters-sources-positional-tooltip"
           tabindex="-1">Positional parameters are specified in order, without names.</div>
       </div>
     </small>
   </div>
 </h4>
-<p>Hayagriva <code>.yml</code>やBibLaTeX <code>.bib</code>などのファイルパス。</p>
+<p>One or multiple paths to or raw bytes for Hayagriva <code>.yml</code> and/or
+BibLaTeX <code>.bib</code> files.</p>
+<p>This can be a:</p>
+<ul>
+<li>A path string to load a bibliography file from the given path. For
+more details about paths, see the <a href="/docs/reference/syntax/#paths">Paths section</a>.</li>
+<li>Raw bytes from which the bibliography should be decoded.</li>
+<li>An array where each item is one the above.</li>
+</ul>
 
 
 
@@ -999,13 +1072,15 @@ Multiple sources say <span class="typ-escape">...</span>
     </small>
   </div>
 </h4>
-<p>参考文献のタイトル。</p>
+<p>The title of the bibliography.</p>
 <ul>
-<li><code><span class="typ-key">auto</span></code>に設定すると、<a href="/docs/reference/text/text/#parameters-lang">テキストの言語</a>に適したタイトルが表示されます。これがデフォルトです。</li>
-<li><code><span class="typ-key">none</span></code>に設定すると、参考文献のタイトルは何も表示されません。</li>
-<li>独自のタイトルはコンテンツで渡します。</li>
+<li>When set to <code><span class="typ-key">auto</span></code>, an appropriate title for the
+<a href="/docs/reference/text/text/#parameters-lang">text language</a> will be used. This is the default.</li>
+<li>When set to <code><span class="typ-key">none</span></code>, the bibliography will not have a title.</li>
+<li>A custom title can be set by passing content.</li>
 </ul>
-<p>参考文献の見出しはデフォルトでは番号が振られませんが、show-setルールで強制的に見出し番号をつけることも可能です。
+<p>The bibliography's heading will not be numbered by default, but you can
+force it to be with a show-set rule:
 <code><span class="typ-key">show</span> <span class="typ-func">bibliography</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span></code></p>
 
 
@@ -1036,8 +1111,10 @@ Multiple sources say <span class="typ-escape">...</span>
     </small>
   </div>
 </h4>
-<p>文書内で引用されていないものも含めて、参考文献ファイルにあるすべての文献を出力するかどうか。</p>
-<p>個々の引用文献を表示させずに追加するには、 <a href="/docs/reference/model/cite/#parameters-form"><code>form</code></a> を <code><span class="typ-key">none</span></code>として <a href="/docs/reference/model/cite/"><code>cite</code></a> 関数を使用します。</p>
+<p>Whether to include all works from the given bibliography files, even
+those that weren't cited in the document.</p>
+<p>To selectively add individual cited works without showing them, you can
+also use the <code>cite</code> function with <a href="/docs/reference/model/cite/#parameters-form"><code>form</code></a> set to <code><span class="typ-key">none</span></code>.</p>
 
 
 <p>Default:<code><span class="typ-key">false</span></code></p>
@@ -1051,6 +1128,11 @@ Multiple sources say <span class="typ-escape">...</span>
         
         
           <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
         
       
     </div>
@@ -1067,9 +1149,16 @@ Multiple sources say <span class="typ-escape">...</span>
     </small>
   </div>
 </h4>
-<p>参考文献スタイル。</p>
-<p>下記にある内蔵スタイルや <a href="https://citationstyles.org/">CSL ファイル</a>へのパスを指定します。
-以下に挙げるスタイルのいくつかは、フルネームと短いエイリアスの2回表示されています。</p>
+<p>The bibliography style.</p>
+<p>This can be:</p>
+<ul>
+<li>A string with the name of one of the built-in styles (see below). Some
+of the styles listed below appear twice, once with their full name and
+once with a short alias.</li>
+<li>A path string to a <a href="https://citationstyles.org/">CSL file</a>. For more
+details about paths, see the <a href="/docs/reference/syntax/#paths">Paths section</a>.</li>
+<li>Raw bytes from which a CSL style should be decoded.</li>
+</ul>
 
 <ul class="type-args">
   
@@ -1835,11 +1924,11 @@ Multiple sources say <span class="typ-escape">...</span>
           <ul></ul>
         </li>
         
-        <li data-assoc="スタイル"><a href="#スタイル">スタイル</a>
+        <li data-assoc="styles"><a href="#styles">Styles</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="例"><a href="#例">例</a>
+        <li data-assoc="example"><a href="#example">Example</a>
           <ul></ul>
         </li>
         

@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1005,9 +1059,9 @@ precedence over regular cell strokes.</p>
       class="overview-param"><a href="#parameters-gutter">gutter<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
       class="overview-param"><a href="#parameters-column-gutter">column-gutter<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
       class="overview-param"><a href="#parameters-row-gutter">row-gutter<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="#parameters-align">align<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="#parameters-inset">inset<!-- -->: </a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
@@ -1300,7 +1354,7 @@ value.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -1438,7 +1492,7 @@ zero. If set to <code><span class="typ-key">auto</span></code>, the outer alignm
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -1484,68 +1538,68 @@ your grid cells.</p>
     <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">13em</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">26em</span><span class="typ-punct">)</span>
 
 <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">cv</span><span class="typ-punct">(</span><span class="typ-op">..</span>jobs<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">grid</span><span class="typ-punct">(</span>
-    columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
-    inset<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span>
-    stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-key">if</span> x <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-key">and</span> y <span class="typ-op">&gt;</span> <span class="typ-num">0</span> <span class="typ-punct">{</span>
-      <span class="typ-punct">(</span>right<span class="typ-punct">:</span> <span class="typ-punct">(</span>
-        paint<span class="typ-punct">:</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">180</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-        thickness<span class="typ-punct">:</span> <span class="typ-num">1.5pt</span><span class="typ-punct">,</span>
-        dash<span class="typ-punct">:</span> <span class="typ-str">&quot;dotted&quot;</span>
-      <span class="typ-punct">)</span><span class="typ-punct">)</span>
-    <span class="typ-punct">}</span><span class="typ-punct">,</span>
-    grid<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>colspan<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
-      <span class="typ-strong">*Professional Experience*</span>
-      <span class="typ-func">#</span><span class="typ-func">box</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">180</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-    <span class="typ-punct">]</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-    <span class="typ-op">..</span><span class="typ-punct">{</span>
-      <span class="typ-key">let</span> last <span class="typ-op">=</span> <span class="typ-key">none</span>
-      <span class="typ-key">for</span> job <span class="typ-key">in</span> jobs<span class="typ-punct">.</span><span class="typ-func">pos</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-punct">{</span>
-        <span class="typ-punct">(</span>
-          <span class="typ-key">if</span> job<span class="typ-punct">.</span>year <span class="typ-op">!=</span> last <span class="typ-punct">[</span><span class="typ-strong">*<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">year</span>*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
-          <span class="typ-punct">[</span>
-            <span class="typ-strong">*<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">company</span>*</span> - <span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">role</span> <span class="typ-emph">_(<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">timeframe</span>)_</span> <span class="typ-escape">\</span>
-            <span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">details</span>
-          <span class="typ-punct">]</span>
-        <span class="typ-punct">)</span>
-        last <span class="typ-op">=</span> job<span class="typ-punct">.</span>year
-      <span class="typ-punct">}</span>
+  columns<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span>
+  inset<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span>
+  stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span> <span class="typ-op">=&gt;</span> <span class="typ-key">if</span> x <span class="typ-op">==</span> <span class="typ-num">0</span> <span class="typ-key">and</span> y <span class="typ-op">&gt;</span> <span class="typ-num">0</span> <span class="typ-punct">{</span>
+    <span class="typ-punct">(</span>right<span class="typ-punct">:</span> <span class="typ-punct">(</span>
+      paint<span class="typ-punct">:</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">180</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+      thickness<span class="typ-punct">:</span> <span class="typ-num">1.5pt</span><span class="typ-punct">,</span>
+      dash<span class="typ-punct">:</span> <span class="typ-str">&quot;dotted&quot;</span>
+    <span class="typ-punct">)</span><span class="typ-punct">)</span>
+  <span class="typ-punct">}</span><span class="typ-punct">,</span>
+  grid<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">(</span>grid<span class="typ-punct">.</span><span class="typ-func">cell</span><span class="typ-punct">(</span>colspan<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+    <span class="typ-strong">*Professional Experience*</span>
+    <span class="typ-func">#</span><span class="typ-func">box</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span> <span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-func">luma</span><span class="typ-punct">(</span><span class="typ-num">180</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+  <span class="typ-punct">]</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-op">..</span><span class="typ-punct">{</span>
+    <span class="typ-key">let</span> last <span class="typ-op">=</span> <span class="typ-key">none</span>
+    <span class="typ-key">for</span> job <span class="typ-key">in</span> jobs<span class="typ-punct">.</span><span class="typ-func">pos</span><span class="typ-punct">(</span><span class="typ-punct">)</span> <span class="typ-punct">{</span>
+      <span class="typ-punct">(</span>
+        <span class="typ-key">if</span> job<span class="typ-punct">.</span>year <span class="typ-op">!=</span> last <span class="typ-punct">[</span><span class="typ-strong">*<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">year</span>*</span><span class="typ-punct">]</span><span class="typ-punct">,</span>
+        <span class="typ-punct">[</span>
+          <span class="typ-strong">*<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">company</span>*</span> - <span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">role</span> <span class="typ-emph">_(<span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">timeframe</span>)_</span> <span class="typ-escape">\</span>
+          <span class="typ-pol">#</span><span class="typ-pol">job</span><span class="typ-punct">.</span><span class="typ-pol">details</span>
+        <span class="typ-punct">]</span>
+      <span class="typ-punct">)</span>
+      last <span class="typ-op">=</span> job<span class="typ-punct">.</span>year
     <span class="typ-punct">}</span>
-  <span class="typ-punct">)</span>
+  <span class="typ-punct">}</span>
+<span class="typ-punct">)</span>
 
-  <span class="typ-func">#</span><span class="typ-func">cv</span><span class="typ-punct">(</span>
-    <span class="typ-punct">(</span>
-      year<span class="typ-punct">:</span> <span class="typ-num">2012</span><span class="typ-punct">,</span>
-      company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Pear Seed &amp; Co.<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      role<span class="typ-punct">:</span> <span class="typ-punct">[</span>Lead Engineer<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jul - Dec<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      details<span class="typ-punct">:</span> <span class="typ-punct">[</span>
-        <span class="typ-marker">-</span> Raised engineers from 3x to 10x
-        <span class="typ-marker">-</span> Did a great job
-      <span class="typ-punct">]</span><span class="typ-punct">,</span>
-    <span class="typ-punct">)</span><span class="typ-punct">,</span>
-    <span class="typ-punct">(</span>
-      year<span class="typ-punct">:</span> <span class="typ-num">2012</span><span class="typ-punct">,</span>
-      company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Mega Corp.<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      role<span class="typ-punct">:</span> <span class="typ-punct">[</span>VP of Sales<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Mar - Jun<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Closed tons of customers<span class="typ-punct">]</span><span class="typ-punct">,</span>
-    <span class="typ-punct">)</span><span class="typ-punct">,</span>
-    <span class="typ-punct">(</span>
-      year<span class="typ-punct">:</span> <span class="typ-num">2013</span><span class="typ-punct">,</span>
-      company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Tiny Co.<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      role<span class="typ-punct">:</span> <span class="typ-punct">[</span>CEO<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jan - Dec<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Delivered 4x more shareholder value<span class="typ-punct">]</span><span class="typ-punct">,</span>
-    <span class="typ-punct">)</span><span class="typ-punct">,</span>
-    <span class="typ-punct">(</span>
-      year<span class="typ-punct">:</span> <span class="typ-num">2014</span><span class="typ-punct">,</span>
-      company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Glorbocorp Ltd<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      role<span class="typ-punct">:</span> <span class="typ-punct">[</span>CTO<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jan - Mar<span class="typ-punct">]</span><span class="typ-punct">,</span>
-      details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Drove containerization forward<span class="typ-punct">]</span><span class="typ-punct">,</span>
-    <span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/e9464720efad510c8c513110d40d323a.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-func">#</span><span class="typ-func">cv</span><span class="typ-punct">(</span>
+  <span class="typ-punct">(</span>
+    year<span class="typ-punct">:</span> <span class="typ-num">2012</span><span class="typ-punct">,</span>
+    company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Pear Seed &amp; Co.<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    role<span class="typ-punct">:</span> <span class="typ-punct">[</span>Lead Engineer<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jul - Dec<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    details<span class="typ-punct">:</span> <span class="typ-punct">[</span>
+      <span class="typ-marker">-</span> Raised engineers from 3x to 10x
+      <span class="typ-marker">-</span> Did a great job
+    <span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span>
+    year<span class="typ-punct">:</span> <span class="typ-num">2012</span><span class="typ-punct">,</span>
+    company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Mega Corp.<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    role<span class="typ-punct">:</span> <span class="typ-punct">[</span>VP of Sales<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Mar - Jun<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Closed tons of customers<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span>
+    year<span class="typ-punct">:</span> <span class="typ-num">2013</span><span class="typ-punct">,</span>
+    company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Tiny Co.<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    role<span class="typ-punct">:</span> <span class="typ-punct">[</span>CEO<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jan - Dec<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Delivered 4x more shareholder value<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span>
+    year<span class="typ-punct">:</span> <span class="typ-num">2014</span><span class="typ-punct">,</span>
+    company<span class="typ-punct">:</span> <span class="typ-punct">[</span>Glorbocorp Ltd<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    role<span class="typ-punct">:</span> <span class="typ-punct">[</span>CTO<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    timeframe<span class="typ-punct">:</span> <span class="typ-punct">[</span>Jan - Mar<span class="typ-punct">]</span><span class="typ-punct">,</span>
+    details<span class="typ-punct">:</span> <span class="typ-punct">[</span><span class="typ-marker">-</span> Drove containerization forward<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/c24ea45831e7be73c1c5ac4128224c33.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 
@@ -1673,10 +1727,10 @@ to apply certain styles to multiple cells at once.</p>
       class="overview-param"><a href="#parameters-y">y<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-colspan">colspan<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-rowspan">rowspan<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><span class="pill pill-obj">tiling</span>, </span><span
       class="overview-param"><a href="#parameters-align">align<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a>, </span><span
       class="overview-param"><a href="#parameters-inset">inset<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-breakable">breakable<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
@@ -1964,7 +2018,7 @@ columns in the chosen row are already occupied, an error is raised.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
     </div>
@@ -2094,7 +2148,7 @@ columns in the chosen row are already occupied, an error is raised.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -2178,7 +2232,7 @@ breakable.</p>
       class="overview-param"><a href="#parameters-y">y<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-end">end<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-position">position<!-- -->: </a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
@@ -2331,7 +2385,7 @@ extend all the way towards the end of the grid.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -2412,7 +2466,7 @@ the grid's <code>row-gutter</code> option.</p>
       class="overview-param"><a href="#parameters-x">x<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-end">end<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-position">position<!-- -->: </a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
@@ -2567,7 +2621,7 @@ all the way towards the bottom of the grid.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         

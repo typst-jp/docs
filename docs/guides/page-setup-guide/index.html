@@ -255,10 +255,13 @@ Typst. Learn how to create appealing and clear layouts and get there quickly.
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -472,9 +475,6 @@ Typst. Learn how to create appealing and clear layouts and get there quickly.
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -588,6 +588,9 @@ Typst. Learn how to create appealing and clear layouts and get there quickly.
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -603,9 +606,6 @@ Typst. Learn how to create appealing and clear layouts and get there quickly.
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -616,6 +616,9 @@ Typst. Learn how to create appealing and clear layouts and get there quickly.
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -685,6 +688,51 @@ Typst. Learn how to create appealing and clear layouts and get there quickly.
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -724,6 +772,12 @@ Typst. Learn how to create appealing and clear layouts and get there quickly.
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1203,7 +1257,7 @@ frequently used for <a href="/docs/reference/model/figure/#parameters-placement"
 <h3 id="columns-anywhere">Use columns anywhere in your document</h3>
 <p>To create columns within a nested layout, e.g. within a rectangle, you can use
 the <a href="/docs/reference/layout/columns/"><code>columns</code> function</a> directly. However, it really should only be
-used within nested layouts. At the page-level, the page set rule is preferrable
+used within nested layouts. At the page-level, the page set rule is preferable
 because it has better interactions with things like page-level floats,
 footnotes, and line numbers.</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>

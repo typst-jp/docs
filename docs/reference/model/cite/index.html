@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -918,7 +972,7 @@ explicitly. <span class="typ-func">#</span><span class="typ-func">cite</span><sp
       class="overview-param"><a href="/docs/reference/foundations/label" class="pill pill-obj">label</a>, </span><span
       class="overview-param"><a href="#parameters-supplement">supplement<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span><span
       class="overview-param"><a href="#parameters-form">form<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="#parameters-style">style<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+      class="overview-param"><a href="#parameters-style">style<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
 
@@ -1119,6 +1173,11 @@ pirate life on the human psyche.
           <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
         
       
+        
+        
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
+        
+      
     </div>
     <small><span
         aria-describedby="cite-cite-parameters-style-settable-tooltip">Settable</span>
@@ -1134,9 +1193,17 @@ pirate life on the human psyche.
   </div>
 </h4>
 <p>引用スタイル。</p>
-<p><code><span class="typ-key">auto</span></code>か、組み込みスタイル（下記参照）、<a href="https://citationstyles.org/">CSLファイル</a>へのパス、のいずれかを指定してください。
-下記のスタイルの中には、2回表示されるものがあり、1回はフルネームで、もう1回は略名で表示されています。</p>
-<p><code><span class="typ-key">auto</span></code>に設定すると、<a href="/docs/reference/model/bibliography/#parameters-style">bibliography関数のstyleパラメーター</a>で設定したスタイルが自動的に使用されます。</p>
+<p>This can be:</p>
+<ul>
+<li><code><span class="typ-key">auto</span></code> to automatically use the
+<a href="/docs/reference/model/bibliography/#parameters-style">bibliography's style</a> for citations.</li>
+<li>A string with the name of one of the built-in styles (see below). Some
+of the styles listed below appear twice, once with their full name and
+once with a short alias.</li>
+<li>A path string to a <a href="https://citationstyles.org/">CSL file</a>. For more
+details about paths, see the <a href="/docs/reference/syntax/#paths">Paths section</a>.</li>
+<li>Raw bytes from which a CSL style should be decoded.</li>
+</ul>
 
 <ul class="type-args">
   

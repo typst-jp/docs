@@ -5,21 +5,21 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Pattern – Typstドキュメント日本語版</title>
-  <meta name="description" content="Documentation for the Pattern type.">
+  <title>Symbol – Typstドキュメント日本語版</title>
+  <meta name="description" content="Documentation for the Symbol type.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
-  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/visualize/pattern/">
-  <meta property="og:title" content="Pattern – Typstドキュメント日本語版">
+  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/foundations/symbol/">
+  <meta property="og:title" content="Symbol – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Documentation for the Pattern type.">
+  <meta property="og:description" content="Documentation for the Symbol type.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-jp.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:site" content="@typstapp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/visualize/pattern/">
+  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/foundations/symbol/">
   <meta name="twitter:image:alt"
     content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/"  aria-current="page" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/"  aria-current="page" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -859,87 +913,39 @@
         <li><a href="/docs/reference/">リファレンス</a></li>
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/visualize/">視覚化</a></li>
+        <li><a href="/docs/reference/foundations/">基礎</a></li>
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/visualize/pattern/">Pattern</a></li>
+        <li><a href="/docs/reference/foundations/symbol/">Symbol</a></li>
         
       </ul>
 
       
 
-<h1 id="summary"><span class="pill pill-obj">pattern</span></h1>
-<p>A repeating pattern fill.</p>
-<p>Typst supports the most common pattern type of tiled patterns, where a
-pattern is repeated in a grid-like fashion, covering the entire area of an
-element that is filled or stroked. The pattern is defined by a tile size and
-a body defining the content of each cell. You can also add horizontal or
-vertical spacing between the cells of the pattern.</p>
-<h2 id="examples">Examples</h2>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> pat <span class="typ-op">=</span> <span class="typ-func">pattern</span><span class="typ-punct">(</span>size<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">30pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
-  <span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span><span class="typ-func">line</span><span class="typ-punct">(</span>start<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">0%</span><span class="typ-punct">,</span> <span class="typ-num">0%</span><span class="typ-punct">)</span><span class="typ-punct">,</span> end<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">100%</span><span class="typ-punct">,</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-  <span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span><span class="typ-func">line</span><span class="typ-punct">(</span>start<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">0%</span><span class="typ-punct">,</span> <span class="typ-num">100%</span><span class="typ-punct">)</span><span class="typ-punct">,</span> end<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">100%</span><span class="typ-punct">,</span> <span class="typ-num">0%</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-<span class="typ-punct">]</span>
-
-<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> pat<span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">60pt</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-num">1pt</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/31b00da0a7ca87bdb01513869482280f.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Patterns are also supported on text, but only when setting the
-<a href="/docs/reference/visualize/pattern/#parameters-relative">relativeness</a> to either <code><span class="typ-key">auto</span></code> (the default value) or
-<code><span class="typ-str">&quot;parent&quot;</span></code>. To create word-by-word or glyph-by-glyph patterns, you can
-wrap the words or characters of your text in <a href="/docs/reference/layout/box/">boxes</a> manually or
-through a <a href="/docs/reference/styling/#show-rules">show rule</a>.</p>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> pat <span class="typ-op">=</span> <span class="typ-func">pattern</span><span class="typ-punct">(</span>
-  size<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">30pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  relative<span class="typ-punct">:</span> <span class="typ-str">&quot;parent&quot;</span><span class="typ-punct">,</span>
-  <span class="typ-func">square</span><span class="typ-punct">(</span>
-    size<span class="typ-punct">:</span> <span class="typ-num">30pt</span><span class="typ-punct">,</span>
-    fill<span class="typ-punct">:</span> gradient
-      <span class="typ-punct">.</span><span class="typ-func">conic</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>rainbow<span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-punct">)</span>
-<span class="typ-punct">)</span>
-
-<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> pat<span class="typ-punct">)</span>
-<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/755713c6f7355129aa98b79448d379c5.png" alt="Preview" width="480" height="190"/></div></div>
-<p>You can also space the elements further or closer apart using the
-<a href="/docs/reference/visualize/pattern/#parameters-spacing"><code>spacing</code></a> feature of the pattern. If the spacing
-is lower than the size of the pattern, the pattern will overlap.
-If it is higher, the pattern will have gaps of the same color as the
-background of the pattern.</p>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> pat <span class="typ-op">=</span> <span class="typ-func">pattern</span><span class="typ-punct">(</span>
-  size<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">30pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  spacing<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  relative<span class="typ-punct">:</span> <span class="typ-str">&quot;parent&quot;</span><span class="typ-punct">,</span>
-  <span class="typ-func">square</span><span class="typ-punct">(</span>
-    size<span class="typ-punct">:</span> <span class="typ-num">30pt</span><span class="typ-punct">,</span>
-    fill<span class="typ-punct">:</span> gradient
-     <span class="typ-punct">.</span><span class="typ-func">conic</span><span class="typ-punct">(</span><span class="typ-op">..</span>color<span class="typ-punct">.</span>map<span class="typ-punct">.</span>rainbow<span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-punct">)</span><span class="typ-punct">,</span>
-<span class="typ-punct">)</span>
-
-<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>
-  width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span>
-  height<span class="typ-punct">:</span> <span class="typ-num">60pt</span><span class="typ-punct">,</span>
-  fill<span class="typ-punct">:</span> pat<span class="typ-punct">,</span>
-<span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/1ee101eed6536bf52a5d6f0ad58569ae.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="relativeness">Relativeness</h2>
-<p>The location of the starting point of the pattern is dependent on the
-dimensions of a container. This container can either be the shape that it is
-being painted on, or the closest surrounding container. This is controlled
-by the <code>relative</code> argument of a pattern constructor. By default, patterns
-are relative to the shape they are being painted on, unless the pattern is
-applied on text, in which case they are relative to the closest ancestor
-container.</p>
-<p>Typst determines the ancestor container as follows:</p>
+<h1 id="summary"><span class="pill pill-obj">symbol</span></h1>
+<p>A Unicode symbol.</p>
+<p>Typst defines common symbols so that they can easily be written with
+standard keyboards. The symbols are defined in modules, from which they can
+be accessed using <a href="/docs/reference/scripting/#fields">field access notation</a>:</p>
 <ul>
-<li>For shapes that are placed at the root/top level of the document, the
-closest ancestor is the page itself.</li>
-<li>For other shapes, the ancestor is the innermost <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a> or <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> that
-contains the shape. This includes the boxes and blocks that are implicitly
-created by show rules and elements. For example, a <a href="/docs/reference/layout/rotate/" title="`rotate`"><code>rotate</code></a> will not
-affect the parent of a gradient, but a <a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a> will.</li>
+<li>General symbols are defined in the <a href="/docs/reference/symbols/sym/"><code>sym</code> module</a></li>
+<li>Emoji are defined in the <a href="/docs/reference/symbols/emoji/"><code>emoji</code> module</a></li>
 </ul>
+<p>Moreover, you can define custom symbols with this type's constructor
+function.</p>
+<div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">sym</span><span class="typ-punct">.</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">r</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">sym</span><span class="typ-punct">.</span><span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span> <span class="typ-escape">\</span>
+<span class="typ-math-delim">$</span><span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">emoji</span><span class="typ-punct">.</span><span class="typ-pol">face</span><span class="typ-punct">.</span><span class="typ-pol">halo</span>
+</code></pre><div class="preview"><img src="/assets/docs/bb68a65e391fa7ac5366cd6743423ecb.png" alt="Preview" width="480" height="190"/></div></div>
+<p>Many symbols have different variants, which can be selected by appending the
+modifiers with dot notation. The order of the modifiers is not relevant.
+Visit the documentation pages of the symbol modules and click on a symbol to
+see its available variants.</p>
+<div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">l</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
+<span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">r</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
+<span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">t</span><span class="typ-punct">.</span><span class="typ-pol">quad</span><span class="typ-math-delim">$</span>
+</code></pre><div class="preview"><img src="/assets/docs/08c9505e3725dc389cb54be7b067baff.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 <h2 id="constructor">
@@ -955,156 +961,77 @@ affect the parent of a gradient, but a <a href="/docs/reference/layout/grid/" ti
 
 </h2>
 
-<p>Construct a new pattern.</p>
+<p>Create a custom symbol with modifiers.</p>
 
-<div class="code code-definition "><span
-    class="typ-func">pattern</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-size">size<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
-      class="overview-param"><a href="#parameters-spacing">spacing<!-- -->: </a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
-      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a></div>
+<div class="code code-definition single-arg"><span
+    class="typ-func">symbol</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">symbol</span></div>
 
 
 
-  <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> pat <span class="typ-op">=</span> <span class="typ-func">pattern</span><span class="typ-punct">(</span>
-  size<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-num">20pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  relative<span class="typ-punct">:</span> <span class="typ-str">&quot;parent&quot;</span><span class="typ-punct">,</span>
-  <span class="typ-func">place</span><span class="typ-punct">(</span>
-    dx<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span>
-    dy<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span>
-    <span class="typ-func">rotate</span><span class="typ-punct">(</span><span class="typ-num">45deg</span><span class="typ-punct">,</span> <span class="typ-func">square</span><span class="typ-punct">(</span>
-      size<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span>
-      fill<span class="typ-punct">:</span> black<span class="typ-punct">,</span>
-    <span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> envelope <span class="typ-op">=</span> <span class="typ-func">symbol</span><span class="typ-punct">(</span>
+  <span class="typ-str">&quot;🖂&quot;</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-str">&quot;stamped&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖃&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-str">&quot;stamped.pen&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖆&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-str">&quot;lightning&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖄&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span><span class="typ-str">&quot;fly&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖅&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 
-<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">60pt</span><span class="typ-punct">,</span> fill<span class="typ-punct">:</span> pat<span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/e7be6b2d0fa9595d1adf361c557387aa.png" alt="Preview" width="480" height="190"/></div></div>
+<span class="typ-pol">#</span><span class="typ-pol">envelope</span>
+<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">stamped</span>
+<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">stamped</span><span class="typ-punct">.</span><span class="typ-pol">pen</span>
+<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">lightning</span>
+<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">fly</span>
+</code></pre><div class="preview"><img src="/assets/docs/ab5c4a1b2fedea0f8e7ef305b0f686ad.png" alt="Preview" width="480" height="190"/></div></div>
 
 
 
-<h4 id="constructor-pattern-parameters-size"><code>size</code>
+<h4 id="constructor-symbol-parameters-variants"><code>variants</code>
   <div class="additional-info">
     <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
-        
-      
-    </div>
-    
-  </div>
-</h4>
-<p>The bounding box of each cell of the pattern.</p>
-
-
-<p>Default:<code><span class="typ-key">auto</span></code></p>
-
-
-
-<h4 id="constructor-pattern-parameters-spacing"><code>spacing</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
-        
-      
-    </div>
-    
-  </div>
-</h4>
-<p>The spacing between cells of the pattern.</p>
-
-
-<p>Default:<code><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span></code></p>
-
-
-
-<h4 id="constructor-pattern-parameters-relative"><code>relative</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
-        
       
         
         
           <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
         
       
-    </div>
-    
-  </div>
-</h4>
-<p>The <a href="#relativeness">relative placement</a> of the pattern.</p>
-<p>For an element placed at the root/top level of the document, the
-parent is the page itself. For other elements, the parent is the
-innermost block, box, column, grid, or stack that contains the
-element.</p>
-
-<ul class="type-args">
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->self<!-- -->&quot;</code></div>
-      <div>
-        <p>The gradient is relative to itself (its own bounding box).</p>
-      </div>
-    </div>
-  </li>
-  
-  <li>
-    <div class="break-box">
-      <div><code class="typ-str">&quot;<!-- -->parent<!-- -->&quot;</code></div>
-      <div>
-        <p>The gradient is relative to its parent (the parent's bounding box).</p>
-      </div>
-    </div>
-  </li>
-  
-</ul>
-
-
-<p>Default:<code><span class="typ-key">auto</span></code></p>
-
-
-
-<h4 id="constructor-pattern-parameters-body"><code>body</code>
-  <div class="additional-info">
-    <div>
-      
         
         
-          <a href="/docs/reference/foundations/content" class="pill pill-con">content</a>
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
         
       
     </div>
     <small>Required</small><small><span
-        aria-describedby="constructor-pattern-parameters-body-positional-tooltip">Positional</span>
+        aria-describedby="constructor-symbol-parameters-variants-positional-tooltip">Positional</span>
       <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="constructor-pattern-parameters-body-positional-tooltip-qm-label">
-          <title id="constructor-pattern-parameters-body-positional-tooltip-qm-label">
+          aria-labelledby="constructor-symbol-parameters-variants-positional-tooltip-qm-label">
+          <title id="constructor-symbol-parameters-variants-positional-tooltip-qm-label">
             Positional parameters are specified in order, without names.</title>
           <use href="/assets/icons/12-tooltip.svg#icon"></use>
         </svg>
-        <div role="tooltip" id="constructor-pattern-parameters-body-positional-tooltip"
+        <div role="tooltip" id="constructor-symbol-parameters-variants-positional-tooltip"
           tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="constructor-symbol-parameters-variants-variadic-tooltip">Variadic</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="constructor-symbol-parameters-variants-variadic-tooltip-qm-label">
+          <title id="constructor-symbol-parameters-variants-variadic-tooltip-qm-label">Variadic parameters can be specified multiple times.
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="constructor-symbol-parameters-variants-variadic-tooltip"
+          tabindex="-1">Variadic parameters can be specified multiple times.</div>
       </div>
     </small>
   </div>
 </h4>
-<p>The content of each cell of the pattern.</p>
+<p>The variants of the symbol.</p>
+<p>Can be a just a string consisting of a single character for the
+modifierless variant or an array with two strings specifying the modifiers
+and the symbol. Individual modifiers should be separated by dots. When
+displaying a symbol, Typst selects the first from the variants that have
+all attached modifiers and the minimum number of other modifiers.</p>
 
 
 
@@ -1120,11 +1047,11 @@ element.</p>
 
 
       
-      <div class="page-end-buttons"><a href="/docs/reference/visualize/path/" class="previous"><img
+      <div class="page-end-buttons"><a href="/docs/reference/foundations/str/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">Path</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/visualize/polygon/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">Polygon</span><span class="hint">次に進む</span></div>
+          <div><span class="page-title">String</span><span class="hint">前に戻る</span></div>
+        </a><a href="/docs/reference/foundations/sys" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">System</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>
@@ -1134,14 +1061,6 @@ element.</p>
       <ul>
         
         <li data-assoc="summary"><a href="#summary">概要</a>
-          <ul></ul>
-        </li>
-        
-        <li data-assoc="examples"><a href="#examples">Examples</a>
-          <ul></ul>
-        </li>
-        
-        <li data-assoc="relativeness"><a href="#relativeness">Relativeness</a>
           <ul></ul>
         </li>
         

@@ -6,13 +6,13 @@
 <head>
   <meta charset="utf-8">
   <title>Plugin – Typstドキュメント日本語版</title>
-  <meta name="description" content="Documentation for the Plugin type.">
+  <meta name="description" content="Documentation for the `plugin` function.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
   <meta property="og:url" content="https://typst-jp.github.io/docs/reference/foundations/plugin/">
   <meta property="og:title" content="Plugin – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Documentation for the Plugin type.">
+  <meta property="og:description" content="Documentation for the `plugin` function.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-jp.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -868,33 +922,18 @@
 
       
 
-<h1 id="summary"><span class="pill pill-obj">plugin</span></h1>
-<p>A WebAssembly plugin.</p>
-<p>Typst is capable of interfacing with plugins compiled to WebAssembly. Plugin
-functions may accept multiple <a href="/docs/reference/foundations/bytes/">byte buffers</a> as arguments and return
-a single byte buffer. They should typically be wrapped in idiomatic Typst
-functions that perform the necessary conversions between native Typst types
-and bytes.</p>
-<p>Plugins run in isolation from your system, which means that printing,
-reading files, or anything like that will not be supported for security
-reasons. To run as a plugin, a program needs to be compiled to a 32-bit
-shared WebAssembly library. Many compilers will use the
-<a href="https://wasi.dev/">WASI ABI</a> by default or as their only option (e.g.
-emscripten), which allows printing, reading files, etc. This ABI will not
-directly work with Typst. You will either need to compile to a different
-target or <a href="https://github.com/astrale-sharp/wasm-minimal-protocol/blob/master/wasi-stub">stub all functions</a>.</p>
-<h2 id="plugins-and-packages">Plugins and Packages</h2>
-<p>Plugins are distributed as packages. A package can make use of a plugin
-simply by including a WebAssembly file and loading it. Because the
-byte-based plugin interface is quite low-level, plugins are typically
-exposed through wrapper functions, that also live in the same package.</p>
-<h2 id="purity">Purity</h2>
-<p>Plugin functions must be pure: Given the same arguments, they must always
-return the same value. The reason for this is that Typst functions must be
-pure (which is quite fundamental to the language design) and, since Typst
-function can call plugin functions, this requirement is inherited. In
-particular, if a plugin function is called twice with the same arguments,
-Typst might cache the results and call your function only once.</p>
+<h1 id="summary"><code>plugin</code><small></small></h1>
+<p>Loads a WebAssembly module.</p>
+<p>The resulting <a href="/docs/reference/foundations/module/" title="module">module</a> will contain one Typst <a href="/docs/reference/foundations/function/" title="function">function</a> for each function
+export of the loaded WebAssembly module.</p>
+<p>Typst WebAssembly plugins need to follow a specific
+<a href="/docs/reference/foundations/plugin/#protocol">protocol</a>. To run as a plugin, a program needs to be
+compiled to a 32-bit shared WebAssembly library. Plugin functions may accept
+multiple <a href="/docs/reference/foundations/bytes/">byte buffers</a> as arguments and return a single byte
+buffer. They should typically be wrapped in idiomatic Typst functions that
+perform the necessary conversions between native Typst types and bytes.</p>
+<p>For security reasons, plugins run in isolation from your system. This means
+that printing, reading files, or similar things are not supported.</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> myplugin <span class="typ-op">=</span> <span class="typ-func">plugin</span><span class="typ-punct">(</span><span class="typ-str">&quot;hello.wasm&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">concat</span><span class="typ-punct">(</span>a<span class="typ-punct">,</span> b<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">str</span><span class="typ-punct">(</span>
@@ -906,6 +945,42 @@ Typst might cache the results and call your function only once.</p>
 
 <span class="typ-func">#</span><span class="typ-func">concat</span><span class="typ-punct">(</span><span class="typ-str">&quot;hello&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;world&quot;</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/adb0cb4385a108f0fa953ac5ab68fc90.png" alt="Preview" width="480" height="190"/></div></div>
+<p>Since the plugin function returns a module, it can be used with import
+syntax:</p>
+<pre><code><span class="typ-key">#</span><span class="typ-key">import</span> <span class="typ-func">plugin</span><span class="typ-punct">(</span><span class="typ-str">&quot;hello.wasm&quot;</span><span class="typ-punct">)</span><span class="typ-punct">:</span> concatenate
+</code></pre>
+<h2 id="purity">Purity</h2>
+<p>Plugin functions <strong>must be pure:</strong> A plugin function call most not have any
+observable side effects on future plugin calls and given the same arguments,
+it must always return the same value.</p>
+<p>The reason for this is that Typst functions must be pure (which is quite
+fundamental to the language design) and, since Typst function can call
+plugin functions, this requirement is inherited. In particular, if a plugin
+function is called twice with the same arguments, Typst might cache the
+results and call your function only once. Moreover, Typst may run multiple
+instances of your plugin in multiple threads, with no state shared between
+them.</p>
+<p>Typst does not enforce plugin function purity (for efficiency reasons), but
+calling an impure function will lead to unpredictable and irreproducible
+results and must be avoided.</p>
+<p>That said, mutable operations <em>can be</em> useful for plugins that require
+costly runtime initialization. Due to the purity requirement, such
+initialization cannot be performed through a normal function call. Instead,
+Typst exposes a <a href="/docs/reference/foundations/plugin/#definitions-transition">plugin transition API</a>, which executes
+a function call and then creates a derived module with new functions which
+will observe the side effects produced by the transition call. The original
+plugin remains unaffected.</p>
+<h2 id="plugins-and-packages">Plugins and Packages</h2>
+<p>Any Typst code can make use of a plugin simply by including a WebAssembly
+file and loading it. However, because the byte-based plugin interface is
+quite low-level, plugins are typically exposed through a package containing
+the plugin and idiomatic wrapper functions.</p>
+<h2 id="wasi">WASI</h2>
+<p>Many compilers will use the <a href="https://wasi.dev/">WASI ABI</a> by default or as
+their only option (e.g. emscripten), which allows printing, reading files,
+etc. This ABI will not directly work with Typst. You will either need to
+compile to a different target or <a href="https://github.com/astrale-sharp/wasm-minimal-protocol/tree/master/crates/wasi-stub">stub all
+functions</a>.</p>
 <h2 id="protocol">Protocol</h2>
 <p>To be used as a plugin, a WebAssembly module must conform to the following
 protocol:</p>
@@ -919,8 +994,7 @@ lengths, so <code>usize/size_t</code> may be preferable), and return one 32-bit
 integer.</p>
 </li>
 <li>
-<p>The function should first allocate a buffer <code>buf</code> of length
-<code>a_1 + a_2 + ... + a_n</code>, and then call
+<p>The function should first allocate a buffer <code>buf</code> of length <code>a_1 + a_2 + ... + a_n</code>, and then call
 <code>wasm_minimal_protocol_write_args_to_buffer(buf.ptr)</code>.</p>
 </li>
 <li>
@@ -942,17 +1016,17 @@ then interpreted as an UTF-8 encoded error message.</p>
 </li>
 </ul>
 <h3 id="imports">Imports</h3>
-<p>Plugin modules need to import two functions that are provided by the runtime.
-(Types and functions are described using WAT syntax.)</p>
+<p>Plugin modules need to import two functions that are provided by the
+runtime. (Types and functions are described using WAT syntax.)</p>
 <ul>
 <li>
 <p><code>(import &quot;typst_env&quot; &quot;wasm_minimal_protocol_write_args_to_buffer&quot; (func (param i32)))</code></p>
 <p>Writes the arguments for the current function into a plugin-allocated
-buffer. When a plugin function is called, it
-<a href="#exports">receives the lengths</a> of its input buffers as arguments. It
-should then allocate a buffer whose capacity is at least the sum of these
-lengths. It should then call this function with a <code>ptr</code> to the buffer to
-fill it with the arguments, one after another.</p>
+buffer. When a plugin function is called, it <a href="#exports">receives the
+lengths</a> of its input buffers as arguments. It should then
+allocate a buffer whose capacity is at least the sum of these lengths. It
+should then call this function with a <code>ptr</code> to the buffer to fill it with
+the arguments, one after another.</p>
 </li>
 <li>
 <p><code>(import &quot;typst_env&quot; &quot;wasm_minimal_protocol_send_result_to_host&quot; (func (param i32 i32)))</code></p>
@@ -964,9 +1038,9 @@ interpreted as an error message, it should be encoded as UTF-8.</p>
 </li>
 </ul>
 <h2 id="resources">Resources</h2>
-<p>For more resources, check out the
-<a href="https://github.com/astrale-sharp/wasm-minimal-protocol">wasm-minimal-protocol repository</a>.
-It contains:</p>
+<p>For more resources, check out the <a href="https://github.com/astrale-sharp/wasm-minimal-protocol">wasm-minimal-protocol
+repository</a>. It
+contains:</p>
 <ul>
 <li>A list of example plugin implementations and a test runner for these
 examples</li>
@@ -974,32 +1048,27 @@ examples</li>
 development)</li>
 <li>A stubber for WASI</li>
 </ul>
-
-
-<h2 id="constructor">
+<h2 id="parameters">
   
-<span aria-describedby="constructor-tooltip">コンストラクタ</span>
+<span aria-describedby="parameters-tooltip">引数</span>
 <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-    aria-labelledby="constructor-tooltip-qm-label">
-    <title id="constructor-tooltip-qm-label">If a type has a constructor, you can call it like a function to create a new value of the type.</title>
+    aria-labelledby="parameters-tooltip-qm-label">
+    <title id="parameters-tooltip-qm-label">Parameters are the inputs to a function. They are specified in parentheses after the function name.</title>
     <use href="/assets/icons/12-tooltip.svg#icon"></use>
   </svg>
-  <div role="tooltip" id="constructor-tooltip" tabindex="-1">If a type has a constructor, you can call it like a function to create a new value of the type.</div>
+  <div role="tooltip" id="parameters-tooltip" tabindex="-1">Parameters are the inputs to a function. They are specified in parentheses after the function name.</div>
 </div>
 
 </h2>
 
-<p>Creates a new plugin from a WebAssembly file.</p>
-
 <div class="code code-definition single-arg"><span
     class="typ-func">plugin</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/plugin" class="pill pill-obj">plugin</a></div>
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/module" class="pill pill-obj">module</a></div>
 
 
 
 
-
-<h4 id="constructor-plugin-parameters-path"><code>path</code>
+<h4 id="plugin-plugin-parameters-source"><code>source</code>
   <div class="additional-info">
     <div>
       
@@ -1008,27 +1077,158 @@ development)</li>
           <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
         
       
+        
+        
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
+        
+      
     </div>
     <small>Required</small><small><span
-        aria-describedby="constructor-plugin-parameters-path-positional-tooltip">Positional</span>
+        aria-describedby="plugin-plugin-parameters-source-positional-tooltip">Positional</span>
       <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="constructor-plugin-parameters-path-positional-tooltip-qm-label">
-          <title id="constructor-plugin-parameters-path-positional-tooltip-qm-label">
+          aria-labelledby="plugin-plugin-parameters-source-positional-tooltip-qm-label">
+          <title id="plugin-plugin-parameters-source-positional-tooltip-qm-label">
             Positional parameters are specified in order, without names.</title>
           <use href="/assets/icons/12-tooltip.svg#icon"></use>
         </svg>
-        <div role="tooltip" id="constructor-plugin-parameters-path-positional-tooltip"
+        <div role="tooltip" id="plugin-plugin-parameters-source-positional-tooltip"
           tabindex="-1">Positional parameters are specified in order, without names.</div>
       </div>
     </small>
   </div>
 </h4>
-<p>Path to a WebAssembly file.</p>
-<p>For more details, see the <a href="/docs/reference/syntax/#paths">Paths section</a>.</p>
+<p>A <a href="/docs/reference/syntax/#paths">path</a> to a WebAssembly file or raw WebAssembly bytes.</p>
 
 
 
 
+
+
+
+
+<h2 id="definitions">
+  
+<span aria-describedby="definitions-tooltip">定義</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="definitions-tooltip-qm-label">
+    <title id="definitions-tooltip-qm-label">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="definitions-tooltip" tabindex="-1">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</div>
+</div>
+
+</h2>
+
+
+  <h3 id="-transition" class="method-head"><span><code>transition</code></span></h3>
+  
+<p>Calls a plugin function that has side effects and returns a new module
+with plugin functions that are guaranteed to have observed the results
+of the mutable call.</p>
+<p>Note that calling an impure function through a normal function call
+(without use of the transition API) is forbidden and leads to
+unpredictable behaviour. Read the <a href="/docs/reference/foundations/plugin/#purity">section on purity</a>
+for more details.</p>
+<p>In the example below, we load the plugin <code>hello-mut.wasm</code> which exports
+two functions: The <code>get()</code> function retrieves a global array as a
+string. The <code>add(value)</code> function adds a value to the global array.</p>
+<p>We call <code>add</code> via the transition API. The call <code>mutated.get()</code> on the
+derived module will observe the addition. Meanwhile the original module
+remains untouched as demonstrated by the <code>base.get()</code> call.</p>
+<p><em>Note:</em> Due to limitations in the internal WebAssembly implementation,
+the transition API can only guarantee to reflect changes in the plugin's
+memory, not in WebAssembly globals. If your plugin relies on changes to
+globals being visible after transition, you might want to avoid use of
+the transition API for now. We hope to lift this limitation in the
+future.</p>
+
+<div class="code code-definition ">plugin.<span
+    class="typ-func">transition</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/module" class="pill pill-obj">module</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <pre><code><span class="typ-key">#</span><span class="typ-key">let</span> base <span class="typ-op">=</span> <span class="typ-func">plugin</span><span class="typ-punct">(</span><span class="typ-str">&quot;hello-mut.wasm&quot;</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">assert</span><span class="typ-punct">.</span><span class="typ-func">eq</span><span class="typ-punct">(</span>base<span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-str">&quot;[]&quot;</span><span class="typ-punct">)</span>
+
+<span class="typ-key">#</span><span class="typ-key">let</span> mutated <span class="typ-op">=</span> plugin<span class="typ-punct">.</span><span class="typ-func">transition</span><span class="typ-punct">(</span>base<span class="typ-punct">.</span>add<span class="typ-punct">,</span> <span class="typ-str">&quot;hello&quot;</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">assert</span><span class="typ-punct">.</span><span class="typ-func">eq</span><span class="typ-punct">(</span>base<span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-str">&quot;[]&quot;</span><span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">assert</span><span class="typ-punct">.</span><span class="typ-func">eq</span><span class="typ-punct">(</span>mutated<span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-str">&quot;[hello]&quot;</span><span class="typ-punct">)</span>
+</code></pre>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-transition-transition-parameters-func"><code>func</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-transition-transition-parameters-func-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-transition-transition-parameters-func-positional-tooltip-qm-label">
+          <title id="definitions-transition-transition-parameters-func-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-transition-transition-parameters-func-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The plugin function to call.</p>
+
+
+
+
+<h4 id="definitions-transition-transition-parameters-arguments"><code>arguments</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-transition-transition-parameters-arguments-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-transition-transition-parameters-arguments-positional-tooltip-qm-label">
+          <title id="definitions-transition-transition-parameters-arguments-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-transition-transition-parameters-arguments-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-transition-transition-parameters-arguments-variadic-tooltip">Variadic</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-transition-transition-parameters-arguments-variadic-tooltip-qm-label">
+          <title id="definitions-transition-transition-parameters-arguments-variadic-tooltip-qm-label">Variadic parameters can be specified multiple times.
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-transition-transition-parameters-arguments-variadic-tooltip"
+          tabindex="-1">Variadic parameters can be specified multiple times.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The byte buffers to call the function with.</p>
 
 
 
@@ -1057,7 +1257,7 @@ development)</li>
           <ul></ul>
         </li>
         
-        <li data-assoc="plugins-and-packages"><a href="#plugins-and-packages">Plugins And Packages</a>
+        <li data-assoc="example"><a href="#example">Example</a>
           <ul></ul>
         </li>
         
@@ -1065,7 +1265,11 @@ development)</li>
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="plugins-and-packages"><a href="#plugins-and-packages">Plugins And Packages</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="wasi"><a href="#wasi">Wasi</a>
           <ul></ul>
         </li>
         
@@ -1077,7 +1281,11 @@ development)</li>
           <ul></ul>
         </li>
         
-        <li data-assoc="constructor"><a href="#constructor">コンストラクタ</a>
+        <li data-assoc="parameters"><a href="#parameters">引数</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="definitions"><a href="#definitions">定義</a>
           <ul></ul>
         </li>
         

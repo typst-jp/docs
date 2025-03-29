@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -869,13 +923,20 @@
       
 
 <h1 id="summary"><span class="pill pill-obj">module</span></h1>
-<p>An evaluated module, either built-in or resulting from a file.</p>
-<p>You can access definitions from the module using
-<a href="/docs/reference/scripting/#fields">field access notation</a> and interact with it using the
-<a href="/docs/reference/scripting/#modules">import and include syntaxes</a>. Alternatively, it is
-possible to convert a module to a dictionary, and therefore access its
-contents dynamically, using the
-<a href="/docs/reference/foundations/dictionary/#constructor">dictionary constructor</a>.</p>
+<p>An module of definitions.</p>
+<p>A module</p>
+<ul>
+<li>be built-in</li>
+<li>stem from a <a href="/docs/reference/scripting/#modules">file import</a></li>
+<li>stem from a <a href="/docs/reference/scripting/#packages">package import</a> (and thus indirectly
+its entrypoint file)</li>
+<li>result from a call to the <a href="/docs/reference/foundations/plugin/">plugin</a> function</li>
+</ul>
+<p>You can access definitions from the module using <a href="/docs/reference/scripting/#fields">field access
+notation</a> and interact with it using the <a href="/docs/reference/scripting/#modules">import and
+include syntaxes</a>. Alternatively, it is possible to
+convert a module to a dictionary, and therefore access its contents
+dynamically, using the <a href="/docs/reference/foundations/dictionary/#constructor">dictionary constructor</a>.</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">import</span> <span class="typ-str">&quot;utils.typ&quot;</span>
 <span class="typ-pol">#</span><span class="typ-pol">utils</span><span class="typ-punct">.</span><span class="typ-func">add</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">)</span>

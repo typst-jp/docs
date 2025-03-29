@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1132,9 +1186,6 @@ that the result converges.</p>
 <p>The <code>selector</code> must match exactly one element in the document. The most
 useful kinds of selectors for this are <a href="/docs/reference/foundations/label/">labels</a> and
 <a href="/docs/reference/introspection/location/">locations</a>.</p>
-<p><em>Compatibility:</em> For compatibility with Typst 0.10 and lower, this
-function also works without a known context if the <code>selector</code> is a
-location. This behaviour will be removed in a future release.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">at</span>(<div class="arguments"><span
@@ -1196,48 +1247,9 @@ location. This behaviour will be removed in a future release.</p>
 <p>Retrieves the value of the state at the end of the document.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">final</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/introspection/location" class="pill pill-obj">location</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
+    class="typ-func">final</span>(<div class="arguments"></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
-
-
-
-<h4 id="definitions-final-final-parameters-location"><code>location</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
-        
-      
-        
-        
-          <a href="/docs/reference/introspection/location" class="pill pill-obj">location</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="definitions-final-final-parameters-location-positional-tooltip">Positional</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="definitions-final-final-parameters-location-positional-tooltip-qm-label">
-          <title id="definitions-final-final-parameters-location-positional-tooltip-qm-label">
-            Positional parameters are specified in order, without names.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="definitions-final-final-parameters-location-positional-tooltip"
-          tabindex="-1">Positional parameters are specified in order, without names.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p><em>Compatibility:</em> This argument is deprecated. It only exists for
-compatibility with Typst 0.10 and lower and shouldn't be used
-anymore.</p>
-
-
-<p>Default:<code><span class="typ-key">none</span></code></p>
 
 
 
@@ -1295,60 +1307,6 @@ update the state.</p>
 given a function, that function receives the previous state and has
 to return the new state.</p>
 
-
-
-
-
-
-
-  <h3 id="-display" class="method-head"><span><code>display</code></span></h3>
-  
-<p>Displays the current value of the state.</p>
-<p><strong>Deprecation planned:</strong> Use <a href="/docs/reference/introspection/state/#definitions-get"><code>get</code></a> instead.</p>
-
-<div class="code code-definition single-arg">self.<span
-    class="typ-func">display</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
-
-
-
-
-
-<h4 id="definitions-display-display-parameters-func"><code>func</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="definitions-display-display-parameters-func-positional-tooltip">Positional</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="definitions-display-display-parameters-func-positional-tooltip-qm-label">
-          <title id="definitions-display-display-parameters-func-positional-tooltip-qm-label">
-            Positional parameters are specified in order, without names.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="definitions-display-display-parameters-func-positional-tooltip"
-          tabindex="-1">Positional parameters are specified in order, without names.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>A function which receives the value of the state and can return
-arbitrary content which is then displayed. If this is omitted, the
-value is directly displayed.</p>
-
-
-<p>Default:<code><span class="typ-key">none</span></code></p>
 
 
 

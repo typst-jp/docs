@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/"  aria-current="page" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -905,9 +959,9 @@
 
 <div class="code code-definition "><span
     class="typ-func">polygon</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><span class="pill pill-obj">tiling</span>, </span><span
       class="overview-param"><a href="#parameters-fill-rule">fill-rule<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
@@ -934,7 +988,7 @@
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
     </div>
@@ -984,7 +1038,7 @@ rectangle with both fill and stroke, you have to configure both.</p>
   </div>
 </h4>
 <p>The drawing rule used to fill the polygon.</p>
-<p>See the <a href="/docs/reference/visualize/path/#parameters-fill-rule">path documentation</a> for an example.</p>
+<p>See the <a href="/docs/reference/visualize/curve/#parameters-fill-rule">curve documentation</a> for an example.</p>
 
 <ul class="type-args">
   
@@ -1049,7 +1103,7 @@ rectangle with both fill and stroke, you have to configure both.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -1145,8 +1199,8 @@ stroke of <code><span class="typ-num">1pt</span></code> black if and if only if 
 
 <div class="code code-definition ">polygon.<span
     class="typ-func">regular</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><span class="pill pill-obj">tiling</span>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-size">size<!-- -->: </a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-vertices">vertices<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
@@ -1188,7 +1242,7 @@ stroke of <code><span class="typ-num">1pt</span></code> black if and if only if 
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
     </div>
@@ -1237,7 +1291,7 @@ stroke of <code><span class="typ-num">1pt</span></code> black if and if only if 
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -1303,9 +1357,9 @@ of the regular polygon.</p>
 
 
       
-      <div class="page-end-buttons"><a href="/docs/reference/visualize/pattern/" class="previous"><img
+      <div class="page-end-buttons"><a href="/docs/reference/visualize/path/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">Pattern</span><span class="hint">前に戻る</span></div>
+          <div><span class="page-title">Path</span><span class="hint">前に戻る</span></div>
         </a><a href="/docs/reference/visualize/rect/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
           <div><span class="page-title">Rectangle</span><span class="hint">次に進む</span></div>
         </a></div>

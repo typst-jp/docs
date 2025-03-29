@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>PNG – Typstドキュメント日本語版</title>
+  <meta name="description" content="Documentation for functions related to PNG in Typst.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#239dad">
+  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/png/">
+  <meta property="og:title" content="PNG – Typstドキュメント日本語版">
+  <meta property="og:site_name" content="Typst">
+  <meta property="og:description" content="Documentation for functions related to PNG in Typst.">
+  <meta property="og:type">
+  <meta property="og:image" content="https://typst-jp.github.io/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:site" content="@typstapp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/png/">
+  <meta name="twitter:image:alt"
+    content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#239dad">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="/styles/default.css?bust=20230913?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs.css?bust=20230915?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/custom.css">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Regular.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Bold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-SemiBold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/CascadiaMono-Regular-Sub.woff2" as="font">
+  <link rel="preload" href="/assets/images/blur.webp" as="image">
+  
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js"), document.addEventListener("DOMContentLoaded", (() => { const e = document.cookie.split("; ").find((e => e.startsWith("INSECURE_SIGNED_IN=")))?.split("=")[1].toLowerCase(); if ("1" === e || "true" === e || "yes" === e) { document.documentElement.classList.add("signed-in"); const e = document.querySelector("header nav a.nav-btn"), t = document.querySelector("header nav a.sign-in"); e && (e.innerHTML = "Go to app", e.setAttribute("href", "/app/")), t && (t.innerHTML = "Sign out", t.setAttribute("href", "https://api.typst.app/v1/auth/logout")) } }))</script>
+</head>
+
+<body class="no-js docs has-outline">
+  <div class="alert">
+    <div class="alert-content">
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.12.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <br />
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.12.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+    </div>
+    <button id="closeAlertButton" class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+  </div>
+  <header class="boring">
+    <div><a href="/docs" class="logo-box"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label">
+          <title id="logo-label">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>ドキュメント日本語版</span></a><button class="hamburger"><img alt="Open navigation"
+          src="/assets/icons/16-hamburger-dark.svg" width="16" height="16"></button>
+      <nav>
+        <ul>
+          <li class="social"><a href="https://x.com/mkpoli/status/1802227029447725538" title="関連ツイート"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-twitter-label">
+                <title id="svg-twitter-label">Twitter</title>
+                <use href="/assets/icons/social.svg#twitter"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://discord.gg/9xF7k4aAuH" title="「くみはんクラブ」Discordサーバー"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-discord-label">
+                <title id="svg-discord-label">Discord</title>
+                <use href="/assets/icons/social.svg#discord"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://github.com/typst-jp/typst-jp.github.io" title="本プロジェクトのGitHubレポジトリ"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-github-label">
+                <title id="svg-github-label">GitHub</title>
+                <use href="/assets/icons/social.svg#github"></use>
+              </svg></a></li>
+          <li class="secondary"><a href="https://typst.app/">Typst公式サイト</a></li>
+          <li class="secondary"><a href="https://typst.app/docs/">Typst公式ドキュメント</a></li>
+          <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
+          <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main-grid">
+    <nav class="folding"><a href="/docs" class="title-row"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label-nav">
+          <title id="logo-label-nav">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>ドキュメント日本語版</span></a>
+      <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+      <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
+          type="search" placeholder="検索" id="docs-search"></div>
+      <ul class="search-results hidden" id="search-results"></ul>
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/" >Typstについて</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/tutorial/" >チュートリアル</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/tutorial/writing-in-typst/" >Typstで執筆するには</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/formatting/" >書式を設定する</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/advanced-styling/" >高度なスタイリング</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/making-a-template/" >テンプレートを作成する</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/reference/" >リファレンス</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li class="category">Language</li>
+            
+            <li>
+              <a href="/docs/reference/syntax/" >構文</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/styling/" >スタイル設定</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/scripting/" >スクリプト記述</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/context/" >コンテキスト</a>
+              
+            </li>
+            
+            
+            <li class="category">Library</li>
+            
+            <li>
+              <a href="/docs/reference/foundations/" >基礎</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/foundations/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/auto/" >Auto</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bool/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bytes/" >Bytes</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/calc" >Calculation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/duration/" >Duration</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/eval/" >Evaluate</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/int/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/label/" >Label</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/module/" >Module</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/none/" >None</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/plugin/" >Plugin</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/regex/" >Regex</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/repr/" >Representation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/str/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/type/" >Type</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/version/" >Version</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/model/" >モデル</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/model/bibliography/" >Bibliography</a></li>
+                
+                
+                <li><a href="/docs/reference/model/list/" >Bullet List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/cite/" >Cite</a></li>
+                
+                
+                <li><a href="/docs/reference/model/document/" >Document</a></li>
+                
+                
+                <li><a href="/docs/reference/model/emph/" >Emphasis</a></li>
+                
+                
+                <li><a href="/docs/reference/model/figure/" >Figure</a></li>
+                
+                
+                <li><a href="/docs/reference/model/footnote/" >Footnote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/heading/" >Heading</a></li>
+                
+                
+                <li><a href="/docs/reference/model/link/" >Link</a></li>
+                
+                
+                <li><a href="/docs/reference/model/enum/" >Numbered List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/numbering/" >Numbering</a></li>
+                
+                
+                <li><a href="/docs/reference/model/outline/" >Outline</a></li>
+                
+                
+                <li><a href="/docs/reference/model/par/" >Paragraph</a></li>
+                
+                
+                <li><a href="/docs/reference/model/parbreak/" >Paragraph Break</a></li>
+                
+                
+                <li><a href="/docs/reference/model/quote/" >Quote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/ref/" >Reference</a></li>
+                
+                
+                <li><a href="/docs/reference/model/strong/" >Strong Emphasis</a></li>
+                
+                
+                <li><a href="/docs/reference/model/table/" >Table</a></li>
+                
+                
+                <li><a href="/docs/reference/model/terms/" >Term List</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/text/" >文章</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/text/highlight/" >Highlight</a></li>
+                
+                
+                <li><a href="/docs/reference/text/linebreak/" >Line Break</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lorem/" >Lorem</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lower/" >Lowercase</a></li>
+                
+                
+                <li><a href="/docs/reference/text/overline/" >Overline</a></li>
+                
+                
+                <li><a href="/docs/reference/text/raw/" >Raw Text / Code</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smallcaps/" >Small Capitals</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smartquote/" >Smartquote</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strike/" >Strikethrough</a></li>
+                
+                
+                <li><a href="/docs/reference/text/sub/" >Subscript</a></li>
+                
+                
+                <li><a href="/docs/reference/text/super/" >Superscript</a></li>
+                
+                
+                <li><a href="/docs/reference/text/text/" >Text</a></li>
+                
+                
+                <li><a href="/docs/reference/text/underline/" >Underline</a></li>
+                
+                
+                <li><a href="/docs/reference/text/upper/" >Uppercase</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/math/" >数式</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/math/accent/" >Accent</a></li>
+                
+                
+                <li><a href="/docs/reference/math/attach" >Attach</a></li>
+                
+                
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cases/" >Cases</a></li>
+                
+                
+                <li><a href="/docs/reference/math/class/" >Class</a></li>
+                
+                
+                <li><a href="/docs/reference/math/equation/" >Equation</a></li>
+                
+                
+                <li><a href="/docs/reference/math/frac/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/math/lr" >Left/Right</a></li>
+                
+                
+                <li><a href="/docs/reference/math/mat/" >Matrix</a></li>
+                
+                
+                <li><a href="/docs/reference/math/primes/" >Primes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/roots" >Roots</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles" >Styles</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >Text Operator</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover" >Under/Over</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants" >Variants</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >Vector</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/symbols/" >記号</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/symbols/sym/" >General</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/layout/" >レイアウト</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/layout/align/" >Align</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/alignment/" >Alignment</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/block/" >Block</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/box/" >Box</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/colbreak/" >Column Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/columns/" >Columns</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/direction/" >Direction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/grid/" >Grid</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/hide/" >Hide</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/layout/" >Layout</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/measure/" >Measure</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/move/" >Move</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pad/" >Padding</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/page/" >Page</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pagebreak/" >Page Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/place/" >Place</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/relative/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/repeat/" >Repeat</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/rotate/" >Rotate</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/v/" >Spacing (V)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/stack/" >Stack</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/visualize/" >視覚化</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/visualize/circle/" >Circle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/gradient/" >Gradient</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/image/" >Image</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/line/" >Line</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/path/" >Path</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/square/" >Square</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/introspection/" >内省</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/introspection/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/here/" >Here</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/locate/" >Locate</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/location/" >Location</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/metadata/" >Metadata</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/query/" >Query</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/state/" >State</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/data-loading/" >データの読み込み</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/data-loading/cbor/" >CBOR</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/csv/" >CSV</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/json/" >JSON</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/read/" >Read</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/toml/" >TOML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/xml/" >XML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/yaml/" >YAML</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/"  aria-current="page" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/guides/" >ガイド</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/guides/guide-for-latex-users/" >Guide for LaTeX users</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/page-setup-guide/" >Page setup guide</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/table-guide/" >Table guide</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/changelog/" >変更履歴</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.12.0/" >0.12.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.1/" >0.11.1</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.0/" >0.11.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.10.0/" >0.10.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.9.0/" >0.9.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.8.0/" >0.8.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.7.0/" >0.7.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.6.0/" >0.6.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.5.0/" >0.5.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.4.0/" >0.4.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.3.0/" >0.3.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.2.0/" >0.2.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.1.0/" >0.1.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/earlier/" >Earlier</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/japanese/" >日本語組版情報</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/japanese/templates/" >日本語テンプレート</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/japanese/packages/" >日本語向けパッケージ</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/japanese/articles/" >日本語記事</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/glossary/" >用語集</a>
+          
+        </li>
+        
+      </ul>
+
+    </nav>
+    <main>
+      <ul class="breadcrumbs" aria-label="Breadcrumbs">
+        <li class="root"><a href="/docs/"><img src="/assets/icons/16-docs-dark.svg" alt="Docs" width="16"
+              height="16"></a></li>
+
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/">リファレンス</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/png/">PNG</a></li>
+        
+      </ul>
+
+      
+
+<h1 id="summary">png</h1>
+<p>Instead of creating a PDF, Typst can also directly render pages to PNG raster
+graphics. PNGs are losslessly compressed images that can contain one page at a
+time. When exporting a multi-page document, Typst will emit multiple PNGs. PNGs
+are a good choice when you want to use Typst's output in an image editing
+software or when you can use none of Typst's other export formats.</p>
+<p>In contrast to Typst's other export formats, PNGs are bound to a specific
+resolution. When exporting to PNG, you can configure the resolution as pixels
+per inch (PPI). If the medium you view the PNG on has a finer resolution than
+the PNG you exported, you will notice a loss of quality. Typst calculates the
+resolution of your PNGs based on each page's physical dimensions and the PPI. If
+you need guidance for choosing a PPI value, consider the following:</p>
+<ul>
+<li>A value of 300 or 600 is typical for desktop printing.</li>
+<li>Professional prints of detailed graphics can go up to 1200 PPI.</li>
+<li>If your document is only viewed at a distance, e.g. a poster, you may choose a
+smaller value than 300.</li>
+<li>If your document is viewed on screens, a typical PPI value for a smartphone is
+400-500.</li>
+</ul>
+<p>Because PNGs only contain a pixel raster, the text within cannot be extracted
+automatically (without OCR), for example by copy/paste or a screen reader. If
+you need the text to be accessible, export a PDF or HTML file instead.</p>
+<p>PNGs can have transparent backgrounds. By default, Typst will output a PNG with
+an opaque white background. You can make the background transparent using
+<code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">)</span></code>. Learn more on the
+<a href="/docs/reference/layout/page/#parameters-fill"><code>page</code> function's reference page</a>.</p>
+<h2 id="exporting-as-png">Exporting as PNG</h2>
+<h3 id="command-line">Command Line</h3>
+<p>Pass <code>--format png</code> to the <code>compile</code> or <code>watch</code> subcommand or provide an output
+file name that ends with <code>.png</code>.</p>
+<p>If your document has more than one page, Typst will create multiple image files.
+The output file name must then be a template string containing at least one of</p>
+<ul>
+<li><code>{p}</code>, which will be replaced by the page number</li>
+<li><code>{0p}</code>, which will be replaced by the zero-padded page number (so that all
+numbers have the same length)</li>
+<li><code>{t}</code>, which will be replaced by the total number of pages</li>
+</ul>
+<p>When exporting to PNG, you have the following configuration options:</p>
+<ul>
+<li>
+<p>Which resolution to render at by specifying <code>--ppi</code> followed by a number of
+pixels per inch. The default is <code>144</code>.</p>
+</li>
+<li>
+<p>Which pages to export by specifying <code>--pages</code> followed by a comma-separated
+list of numbers or dash-separated number ranges. Ranges can be half-open.
+Example: <code>2,3,7-9,11-</code>.</p>
+</li>
+</ul>
+<h3 id="web-app">Web App</h3>
+<p>Click &quot;File&quot; &gt; &quot;Export as&quot; &gt; &quot;PNG&quot; or click the downwards-facing arrow next to
+the quick download button and select &quot;Export as PNG&quot;. When exporting to PNG, you
+have the following configuration options:</p>
+<ul>
+<li>
+<p>The resolution at which the pages should be rendered, as a number of pixels
+per inch. The default is <code>144</code>.</p>
+</li>
+<li>
+<p>Which pages to export. Valid options are &quot;All pages&quot;, &quot;Current page&quot;, and
+&quot;Custom ranges&quot;. Custom ranges are a comma-separated list of numbers or
+dash-separated number ranges. Ranges can be half-open. Example: <code>2,3,7-9,11-</code>.</p>
+</li>
+</ul>
+<h2 id="definitions">定義</h2>
+<ul class="subgridded">
+  
+</ul>
+
+
+
+      
+      <div class="page-end-buttons"><a href="/docs/reference/html/frame/" class="previous"><img
+            src="/assets/icons/16-arrow-right.svg" alt="←">
+          <div><span class="page-title">Frame</span><span class="hint">前に戻る</span></div>
+        </a><a href="/docs/reference/svg/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">SVG</span><span class="hint">次に進む</span></div>
+        </a></div>
+      
+    </main>
+
+    
+    <nav id="page-overview"><strong>目次</strong>
+      <ul>
+        
+        <li data-assoc="summary"><a href="#summary">概要</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="exporting-as-png"><a href="#exporting-as-png">Exporting As Png</a>
+          <ul></ul>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  <footer>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/">（公式）ホームページ</a></li>
+        <li><a href="https://typst.app/docs/">（公式）ドキュメント（英語）</a></li>
+        <li><a href="https://typst.app/universe/">（公式）拡張パッケージ・テンプレートの宇宙</a></li>
+        <li><a href="https://typst.app/about/">（公式）Typstについて</a></li>
+        <li><a href="https://typst.app/contact/">（公式）連絡先</a></li>
+        <li><a href="https://typst.app/privacy/">（公式）プライバシーポリシー</a></li>
+        <li><a href="https://typst.app/terms/">（公式）サービス規約</a></li>
+        <li><a href="https://typst.app/legal/">（公式）免責事項</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/tools/">（公式）ツール</a></li>
+        <li><a href="https://typst.app/blog/">（公式）ブログ</a></li>
+        <li><a href="https://twitter.com/typstapp/">（公式）Twitter</a></li>
+        <li><a href="https://discord.gg/2uDybryKPe">（公式）Discord</a></li>
+        <li><a rel="me" href="https://mastodon.social/@typst">（公式）Mastodon</a></li>
+        <li><a href="https://www.linkedin.com/company/typst/">（公式）LinkedIn</a></li>
+        <li><a href="https://instagram.com/typstapp/">（公式）Instagram</a></li>
+        <li><a href="https://github.com/typst/">（公式）GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Made in Berlin</p>
+      <p>Translated by <a href="https://github.com/typst-jp">Typst Japan Community</a></p>
+    </div>
+  </footer>
+  <script src="/scripts/fuse.basic.min.js"></script>
+  <script src="/scripts/docs.js?bust=20230913"></script>
+  <script src="/scripts/analytics.js" defer></script>
+</body>
+
+</html>

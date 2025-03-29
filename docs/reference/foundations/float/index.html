@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1081,7 +1135,7 @@ function returns <code><span class="typ-key">true</span></code> if the float is 
 
   <h3 id="-from-bytes" class="method-head"><span><code>from-bytes</code></span></h3>
   
-<p>Converts bytes to a float.</p>
+<p>Interprets bytes as a float.</p>
 
 <div class="code code-definition ">float.<span
     class="typ-func">from-bytes</span>(<div class="arguments"><span
@@ -1126,8 +1180,10 @@ function returns <code><span class="typ-key">true</span></code> if the float is 
   </div>
 </h4>
 <p>The bytes that should be converted to a float.</p>
-<p>Must be of length exactly 8 so that the result fits into a 64-bit
-float.</p>
+<p>Must have a length of either 4 or 8. The bytes are then
+interpreted in <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754</a>'s
+binary32 (single-precision) or binary64 (double-precision) format
+depending on the length of the bytes.</p>
 
 
 
@@ -1183,9 +1239,10 @@ the bytes.</p>
   
 <p>Converts a float to bytes.</p>
 
-<div class="code code-definition single-arg">self.<span
+<div class="code code-definition ">self.<span
     class="typ-func">to-bytes</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a></div>
+      class="overview-param"><a href="#parameters-endian">endian<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-size">size<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a></div>
 
 
   <details class="folding-example">
@@ -1241,6 +1298,31 @@ the bytes.</p>
 
 
 <p>Default:<code><span class="typ-str">&quot;little&quot;</span></code></p>
+
+
+
+<h4 id="definitions-to-bytes-to-bytes-parameters-size"><code>size</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
+        
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The size of the resulting bytes.</p>
+<p>This must be either 4 or 8. The call will return the
+representation of this float in either
+<a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754</a>'s binary32
+(single-precision) or binary64 (double-precision) format
+depending on the provided size.</p>
+
+
+<p>Default:<code><span class="typ-num">8</span></code></p>
 
 
 

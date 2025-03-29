@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/"  aria-current="page" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -920,6 +974,8 @@ zero-based and negative indices wrap around to the end of the string.</p>
 <li>Integers are formatted in base 10. This can be overridden with the
 optional <code>base</code> parameter.</li>
 <li>Floats are formatted in base 10 and never in exponential notation.</li>
+<li>Negative integers and floats are formatted with the Unicode minus sign
+(&quot;−&quot; U+2212) instead of the ASCII minus sign (&quot;-&quot; U+002D).</li>
 <li>From labels the name is extracted.</li>
 <li>Bytes are decoded as UTF-8.</li>
 </ul>
@@ -1967,6 +2023,11 @@ Defaults to <code><span class="typ-key">true</span></code>.</p>
   
 <p>Splits a string at matches of a specified pattern and returns an array
 of the resulting parts.</p>
+<p>When the empty string is used as a separator, it separates every
+character (i.e., Unicode code point) in the string, along with the
+beginning and end of the string. In practice, this means that the
+resulting list of parts will contain the empty string at the start
+and end of the list.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">split</span>(<div class="arguments"><span
@@ -2041,8 +2102,8 @@ of the resulting parts.</p>
       <div class="page-end-buttons"><a href="/docs/reference/foundations/selector/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
           <div><span class="page-title">Selector</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/foundations/style/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">Style</span><span class="hint">次に進む</span></div>
+        </a><a href="/docs/reference/foundations/symbol/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Symbol</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>

@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -879,7 +933,7 @@
 </div>
 </small></h1>
 <p>Links to a URL or a location in the document.</p>
-<p>By default, links are not styled any different from normal text. However,
+<p>By default, links do not look any different from normal text. However,
 you can easily apply a style of your choice with a show rule.</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">link</span><span class="typ-punct">:</span> <span class="typ-func">underline</span>
@@ -891,6 +945,10 @@ you can easily apply a style of your choice with a show rule.</p>
   See example.com
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/c4a5c2cf3deb1cac7c49fc85bceebd64.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="hyphenation">Hyphenation</h2>
+<p>If you enable hyphenation or justification, by default, it will not apply to
+links to prevent unwanted hyphenation in URLs. You can opt out of this
+default via <code><span class="typ-key">show</span> <span class="typ-func">link</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>hyphenate<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span></code>.</p>
 <h2 id="syntax">Syntax</h2>
 <p>This function also has dedicated syntax: Text that starts with <code>http://</code> or
 <code>https://</code> is automatically turned into a link.</p>
@@ -1058,6 +1116,10 @@ the URL will be shown as the link.</p>
         </li>
         
         <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="hyphenation"><a href="#hyphenation">Hyphenation</a>
           <ul></ul>
         </li>
         

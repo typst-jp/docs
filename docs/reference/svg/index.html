@@ -1,25 +1,23 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
   <meta charset="utf-8">
-  <title>Style – Typstドキュメント日本語版</title>
-  <meta name="description" content="Documentation for the `style` function.">
+  <title>SVG – Typstドキュメント日本語版</title>
+  <meta name="description" content="Documentation for functions related to SVG in Typst.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
-  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/foundations/style/">
-  <meta property="og:title" content="Style – Typstドキュメント日本語版">
+  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/svg/">
+  <meta property="og:title" content="SVG – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Documentation for the `style` function.">
+  <meta property="og:description" content="Documentation for functions related to SVG in Typst.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-jp.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:site" content="@typstapp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/foundations/style/">
+  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/svg/">
   <meta name="twitter:image:alt"
     content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
@@ -253,10 +251,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/"  aria-current="page" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +471,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +584,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +602,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +612,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +684,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/"  aria-current="page" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +768,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -859,93 +911,72 @@
         <li><a href="/docs/reference/">リファレンス</a></li>
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/foundations/">基礎</a></li>
-        
-        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/foundations/style/">Style</a></li>
+        <li><a href="/docs/reference/svg/">SVG</a></li>
         
       </ul>
 
       
 
-<h1 id="summary"><code>style</code><small></small></h1>
-<p>Provides access to active styles.</p>
-<p><strong>Deprecation planned.</strong> Use <a href="/docs/reference/context/" title="context">context</a> instead.</p>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">thing</span><span class="typ-punct">(</span>body<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">style</span><span class="typ-punct">(</span>styles <span class="typ-op">=&gt;</span> <span class="typ-punct">{</span>
-  <span class="typ-key">let</span> size <span class="typ-op">=</span> <span class="typ-func">measure</span><span class="typ-punct">(</span>body<span class="typ-punct">,</span> styles<span class="typ-punct">)</span>
-  <span class="typ-punct">[</span>Width of &quot;<span class="typ-pol">#</span><span class="typ-pol">body</span>&quot; is <span class="typ-pol">#</span><span class="typ-pol">size</span><span class="typ-punct">.</span><span class="typ-pol">width</span><span class="typ-punct">]</span>
-<span class="typ-punct">}</span><span class="typ-punct">)</span>
-
-<span class="typ-func">#</span><span class="typ-func">thing</span><span class="typ-punct">[</span>Hey<span class="typ-punct">]</span> <span class="typ-escape">\</span>
-<span class="typ-func">#</span><span class="typ-func">thing</span><span class="typ-punct">[</span>Welcome<span class="typ-punct">]</span>
-</code></pre><div class="preview"><img src="/assets/docs/83a224c4e09a77e16796d6bccb0b41fd.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="parameters">
+<h1 id="summary">svg</h1>
+<p>Instead of creating a PDF, Typst can also directly render pages to scalable
+vector graphics (SVGs), which are the preferred format for embedding vector
+graphics in web pages. Like PDF files, SVGs display your document exactly how
+you have laid it out in Typst. Likewise, they share the benefit of not being
+bound to a specific resolution. Hence, you can print or view SVG files on any
+device without incurring a loss of quality. (Note that font printing quality may
+be better with a PDF.) In contrast to a PDF, an SVG cannot contain multiple
+pages. When exporting a multi-page document, Typst will emit multiple SVGs.</p>
+<p>SVGs can represent text in two ways: By embedding the text itself and rendering
+it with the fonts available on the viewer's computer or by embedding the shapes
+of each glyph in the font used to create the document. To ensure that the SVG
+file looks the same across all devices it is viewed on, Typst chooses the latter
+method. This means that the text in the SVG cannot be extracted automatically,
+for example by copy/paste or a screen reader. If you need the text to be
+accessible, export a PDF or HTML file instead.</p>
+<p>SVGs can have transparent backgrounds. By default, Typst will output an SVG with
+an opaque white background. You can make the background transparent using
+<code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">)</span></code>. Learn more on the
+<a href="/docs/reference/layout/page/#parameters-fill"><code>page</code> function's reference page</a>.</p>
+<h2 id="exporting-as-svg">Exporting as SVG</h2>
+<h3 id="command-line">Command Line</h3>
+<p>Pass <code>--format svg</code> to the <code>compile</code> or <code>watch</code> subcommand or provide an output
+file name that ends with <code>.svg</code>.</p>
+<p>If your document has more than one page, Typst will create multiple image files.
+The output file name must then be a template string containing at least one of</p>
+<ul>
+<li><code>{p}</code>, which will be replaced by the page number</li>
+<li><code>{0p}</code>, which will be replaced by the zero-padded page number (so that all
+numbers have the same length)</li>
+<li><code>{t}</code>, which will be replaced by the total number of pages</li>
+</ul>
+<p>When exporting to SVG, you have the following configuration options:</p>
+<ul>
+<li>Which pages to export by specifying <code>--pages</code> followed by a comma-separated
+list of numbers or dash-separated number ranges. Ranges can be half-open.
+Example: <code>2,3,7-9,11-</code>.</li>
+</ul>
+<h3 id="web-app">Web App</h3>
+<p>Click &quot;File&quot; &gt; &quot;Export as&quot; &gt; &quot;SVG&quot; or click the downwards-facing arrow next to
+the quick download button and select &quot;Export as SVG&quot;. When exporting to SVG, you
+have the following configuration options:</p>
+<ul>
+<li>Which pages to export. Valid options are &quot;All pages&quot;, &quot;Current page&quot;, and
+&quot;Custom ranges&quot;. Custom ranges are a comma-separated list of numbers or
+dash-separated number ranges. Ranges can be half-open. Example: <code>2,3,7-9,11-</code>.</li>
+</ul>
+<h2 id="definitions">定義</h2>
+<ul class="subgridded">
   
-<span aria-describedby="parameters-tooltip">引数</span>
-<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-    aria-labelledby="parameters-tooltip-qm-label">
-    <title id="parameters-tooltip-qm-label">Parameters are the inputs to a function. They are specified in parentheses after the function name.</title>
-    <use href="/assets/icons/12-tooltip.svg#icon"></use>
-  </svg>
-  <div role="tooltip" id="parameters-tooltip" tabindex="-1">Parameters are the inputs to a function. They are specified in parentheses after the function name.</div>
-</div>
-
-</h2>
-
-<div class="code code-definition single-arg"><span
-    class="typ-func">style</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
-
-
-
-
-<h4 id="style-style-parameters-func"><code>func</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>
-        
-      
-    </div>
-    <small>Required</small><small><span
-        aria-describedby="style-style-parameters-func-positional-tooltip">Positional</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="style-style-parameters-func-positional-tooltip-qm-label">
-          <title id="style-style-parameters-func-positional-tooltip-qm-label">
-            Positional parameters are specified in order, without names.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="style-style-parameters-func-positional-tooltip"
-          tabindex="-1">Positional parameters are specified in order, without names.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>A function to call with the styles. Its return value is displayed
-in the document.</p>
-<p>This function is called once for each time the content returned by
-<code>style</code> appears in the document. That makes it possible to generate
-content that depends on the style context it appears in.</p>
-
-
-
-
-
-
-
-
-
+</ul>
 
 
 
       
-      <div class="page-end-buttons"><a href="/docs/reference/foundations/str/" class="previous"><img
+      <div class="page-end-buttons"><a href="/docs/reference/png/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">String</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/foundations/sys" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">System</span><span class="hint">次に進む</span></div>
+          <div><span class="page-title">PNG</span><span class="hint">前に戻る</span></div>
+        </a><a href="/docs/guides/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">ガイド</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>
@@ -958,7 +989,7 @@ content that depends on the style context it appears in.</p>
           <ul></ul>
         </li>
         
-        <li data-assoc="parameters"><a href="#parameters">引数</a>
+        <li data-assoc="exporting-as-svg"><a href="#exporting-as-svg">Exporting As Svg</a>
           <ul></ul>
         </li>
         

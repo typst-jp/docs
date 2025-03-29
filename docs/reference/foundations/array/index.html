@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -2421,11 +2475,27 @@ contains less than <code>chunk-size</code> elements.</p>
 function. The sorting algorithm used is stable.</p>
 <p>Returns an error if two values could not be compared or if the key
 function (if given) yields an error.</p>
+<p>To sort according to multiple criteria at once, e.g. in case of equality
+between some criteria, the key function can return an array. The results
+are in lexicographic order.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">sorted</span>(<div class="arguments"><span
       class="overview-param"><a href="#parameters-key">key<!-- -->: </a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> array <span class="typ-op">=</span> <span class="typ-punct">(</span>
+  <span class="typ-punct">(</span>a<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span>a<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-punct">(</span>a<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">,</span> b<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+<span class="typ-pol">#</span><span class="typ-pol">array</span><span class="typ-punct">.</span><span class="typ-func">sorted</span><span class="typ-punct">(</span>key<span class="typ-punct">:</span> it <span class="typ-op">=&gt;</span> <span class="typ-punct">(</span>it<span class="typ-punct">.</span>a<span class="typ-punct">,</span> it<span class="typ-punct">.</span>b<span class="typ-punct">)</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/839cbfe4a7bad2651bc83ccfdc7b4683.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
 
 
 

@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -893,12 +947,12 @@ floating point numbers, which may result in an approximative value.</p>
 
 <div class="code code-definition single-arg"><span
     class="typ-func">cbor</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
+      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">any</span></div>
 
 
 
 
-<h4 id="cbor-cbor-parameters-path"><code>path</code>
+<h4 id="cbor-cbor-parameters-source"><code>source</code>
   <div class="additional-info">
     <div>
       
@@ -907,23 +961,27 @@ floating point numbers, which may result in an approximative value.</p>
           <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
         
       
+        
+        
+          <a href="/docs/reference/foundations/bytes" class="pill pill-obj">bytes</a>
+        
+      
     </div>
     <small>Required</small><small><span
-        aria-describedby="cbor-cbor-parameters-path-positional-tooltip">Positional</span>
+        aria-describedby="cbor-cbor-parameters-source-positional-tooltip">Positional</span>
       <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="cbor-cbor-parameters-path-positional-tooltip-qm-label">
-          <title id="cbor-cbor-parameters-path-positional-tooltip-qm-label">
+          aria-labelledby="cbor-cbor-parameters-source-positional-tooltip-qm-label">
+          <title id="cbor-cbor-parameters-source-positional-tooltip-qm-label">
             Positional parameters are specified in order, without names.</title>
           <use href="/assets/icons/12-tooltip.svg#icon"></use>
         </svg>
-        <div role="tooltip" id="cbor-cbor-parameters-path-positional-tooltip"
+        <div role="tooltip" id="cbor-cbor-parameters-source-positional-tooltip"
           tabindex="-1">Positional parameters are specified in order, without names.</div>
       </div>
     </small>
   </div>
 </h4>
-<p>Path to a CBOR file.</p>
-<p>For more details, see the <a href="/docs/reference/syntax/#paths">Paths section</a>.</p>
+<p>A <a href="/docs/reference/syntax/#paths">path</a> to a CBOR file or raw CBOR bytes.</p>
 
 
 
@@ -982,7 +1040,7 @@ floating point numbers, which may result in an approximative value.</p>
     </small>
   </div>
 </h4>
-<p>cbor data.</p>
+<p>CBOR data.</p>
 
 
 

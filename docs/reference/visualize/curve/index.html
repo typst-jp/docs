@@ -1,0 +1,1986 @@
+
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>Curve – Typstドキュメント日本語版</title>
+  <meta name="description" content="Documentation for the `curve` function.">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#239dad">
+  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/visualize/curve/">
+  <meta property="og:title" content="Curve – Typstドキュメント日本語版">
+  <meta property="og:site_name" content="Typst">
+  <meta property="og:description" content="Documentation for the `curve` function.">
+  <meta property="og:type">
+  <meta property="og:image" content="https://typst-jp.github.io/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:site" content="@typstapp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/visualize/curve/">
+  <meta name="twitter:image:alt"
+    content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon.ico"> -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#239dad">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="stylesheet" href="/styles/default.css?bust=20230913?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/docs.css?bust=20230915?d=2023-09-16">
+  <link rel="stylesheet" href="/styles/custom.css">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Regular.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-Bold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/HKGrotesk-SemiBold.woff2" as="font">
+  <link rel="preload" href="/assets/fonts/CascadiaMono-Regular-Sub.woff2" as="font">
+  <link rel="preload" href="/assets/images/blur.webp" as="image">
+  
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js"), document.addEventListener("DOMContentLoaded", (() => { const e = document.cookie.split("; ").find((e => e.startsWith("INSECURE_SIGNED_IN=")))?.split("=")[1].toLowerCase(); if ("1" === e || "true" === e || "yes" === e) { document.documentElement.classList.add("signed-in"); const e = document.querySelector("header nav a.nav-btn"), t = document.querySelector("header nav a.sign-in"); e && (e.innerHTML = "Go to app", e.setAttribute("href", "/app/")), t && (t.innerHTML = "Sign out", t.setAttribute("href", "https://api.typst.app/v1/auth/logout")) } }))</script>
+</head>
+
+<body class="no-js docs has-outline">
+  <div class="alert">
+    <div class="alert-content">
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.12.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <br />
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.12.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+    </div>
+    <button id="closeAlertButton" class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+  </div>
+  <header class="boring">
+    <div><a href="/docs" class="logo-box"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label">
+          <title id="logo-label">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>ドキュメント日本語版</span></a><button class="hamburger"><img alt="Open navigation"
+          src="/assets/icons/16-hamburger-dark.svg" width="16" height="16"></button>
+      <nav>
+        <ul>
+          <li class="social"><a href="https://x.com/mkpoli/status/1802227029447725538" title="関連ツイート"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-twitter-label">
+                <title id="svg-twitter-label">Twitter</title>
+                <use href="/assets/icons/social.svg#twitter"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://discord.gg/9xF7k4aAuH" title="「くみはんクラブ」Discordサーバー"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-discord-label">
+                <title id="svg-discord-label">Discord</title>
+                <use href="/assets/icons/social.svg#discord"></use>
+              </svg></a></li>
+          <li class="social"><a href="https://github.com/typst-jp/typst-jp.github.io" title="本プロジェクトのGitHubレポジトリ"><svg width="16" height="16" role="img"
+                aria-labelledby="svg-github-label">
+                <title id="svg-github-label">GitHub</title>
+                <use href="/assets/icons/social.svg#github"></use>
+              </svg></a></li>
+          <li class="secondary"><a href="https://typst.app/">Typst公式サイト</a></li>
+          <li class="secondary"><a href="https://typst.app/docs/">Typst公式ドキュメント</a></li>
+          <!-- <li class="secondary"><a href="/signin/" class="sign-in">Sign in</a></li>
+          <li><a href="/signup" id="header-btn" class="nav-btn btn">Sign up</a></li> -->
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="main-grid">
+    <nav class="folding"><a href="/docs" class="title-row"><svg width="91" height="35" viewBox="0 0 91 35" role="img"
+          aria-labelledby="logo-label-nav">
+          <title id="logo-label-nav">Typst</title>
+          <use href="/assets/images/typst.svg#logo"></use>
+        </svg><span>ドキュメント日本語版</span></a>
+      <button class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
+          width="16" height="16"></button>
+      <div class="search"><img src="/assets/icons/16-search-gray.svg" alt="Search" width="16" height="16"><input
+          type="search" placeholder="検索" id="docs-search"></div>
+      <ul class="search-results hidden" id="search-results"></ul>
+      <ul>
+        
+        
+        <li>
+          <a href="/docs/" >Typstについて</a>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/tutorial/" >チュートリアル</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/tutorial/writing-in-typst/" >Typstで執筆するには</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/formatting/" >書式を設定する</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/advanced-styling/" >高度なスタイリング</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/tutorial/making-a-template/" >テンプレートを作成する</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/reference/" >リファレンス</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li class="category">Language</li>
+            
+            <li>
+              <a href="/docs/reference/syntax/" >構文</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/styling/" >スタイル設定</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/scripting/" >スクリプト記述</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/context/" >コンテキスト</a>
+              
+            </li>
+            
+            
+            <li class="category">Library</li>
+            
+            <li>
+              <a href="/docs/reference/foundations/" >基礎</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/foundations/arguments/" >Arguments</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/array/" >Array</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/assert/" >Assert</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/auto/" >Auto</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bool/" >Boolean</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/bytes/" >Bytes</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/calc" >Calculation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/content/" >Content</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/datetime/" >Datetime</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/decimal/" >Decimal</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/dictionary/" >Dictionary</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/duration/" >Duration</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/eval/" >Evaluate</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/float/" >Float</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/function/" >Function</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/int/" >Integer</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/label/" >Label</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/module/" >Module</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/none/" >None</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/panic/" >Panic</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/plugin/" >Plugin</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/regex/" >Regex</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/repr/" >Representation</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/selector/" >Selector</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/str/" >String</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/type/" >Type</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/version/" >Version</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/model/" >モデル</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/model/bibliography/" >Bibliography</a></li>
+                
+                
+                <li><a href="/docs/reference/model/list/" >Bullet List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/cite/" >Cite</a></li>
+                
+                
+                <li><a href="/docs/reference/model/document/" >Document</a></li>
+                
+                
+                <li><a href="/docs/reference/model/emph/" >Emphasis</a></li>
+                
+                
+                <li><a href="/docs/reference/model/figure/" >Figure</a></li>
+                
+                
+                <li><a href="/docs/reference/model/footnote/" >Footnote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/heading/" >Heading</a></li>
+                
+                
+                <li><a href="/docs/reference/model/link/" >Link</a></li>
+                
+                
+                <li><a href="/docs/reference/model/enum/" >Numbered List</a></li>
+                
+                
+                <li><a href="/docs/reference/model/numbering/" >Numbering</a></li>
+                
+                
+                <li><a href="/docs/reference/model/outline/" >Outline</a></li>
+                
+                
+                <li><a href="/docs/reference/model/par/" >Paragraph</a></li>
+                
+                
+                <li><a href="/docs/reference/model/parbreak/" >Paragraph Break</a></li>
+                
+                
+                <li><a href="/docs/reference/model/quote/" >Quote</a></li>
+                
+                
+                <li><a href="/docs/reference/model/ref/" >Reference</a></li>
+                
+                
+                <li><a href="/docs/reference/model/strong/" >Strong Emphasis</a></li>
+                
+                
+                <li><a href="/docs/reference/model/table/" >Table</a></li>
+                
+                
+                <li><a href="/docs/reference/model/terms/" >Term List</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/text/" >文章</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/text/highlight/" >Highlight</a></li>
+                
+                
+                <li><a href="/docs/reference/text/linebreak/" >Line Break</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lorem/" >Lorem</a></li>
+                
+                
+                <li><a href="/docs/reference/text/lower/" >Lowercase</a></li>
+                
+                
+                <li><a href="/docs/reference/text/overline/" >Overline</a></li>
+                
+                
+                <li><a href="/docs/reference/text/raw/" >Raw Text / Code</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smallcaps/" >Small Capitals</a></li>
+                
+                
+                <li><a href="/docs/reference/text/smartquote/" >Smartquote</a></li>
+                
+                
+                <li><a href="/docs/reference/text/strike/" >Strikethrough</a></li>
+                
+                
+                <li><a href="/docs/reference/text/sub/" >Subscript</a></li>
+                
+                
+                <li><a href="/docs/reference/text/super/" >Superscript</a></li>
+                
+                
+                <li><a href="/docs/reference/text/text/" >Text</a></li>
+                
+                
+                <li><a href="/docs/reference/text/underline/" >Underline</a></li>
+                
+                
+                <li><a href="/docs/reference/text/upper/" >Uppercase</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/math/" >数式</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/math/accent/" >Accent</a></li>
+                
+                
+                <li><a href="/docs/reference/math/attach" >Attach</a></li>
+                
+                
+                <li><a href="/docs/reference/math/binom/" >Binomial</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cancel/" >Cancel</a></li>
+                
+                
+                <li><a href="/docs/reference/math/cases/" >Cases</a></li>
+                
+                
+                <li><a href="/docs/reference/math/class/" >Class</a></li>
+                
+                
+                <li><a href="/docs/reference/math/equation/" >Equation</a></li>
+                
+                
+                <li><a href="/docs/reference/math/frac/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/math/lr" >Left/Right</a></li>
+                
+                
+                <li><a href="/docs/reference/math/mat/" >Matrix</a></li>
+                
+                
+                <li><a href="/docs/reference/math/primes/" >Primes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/roots" >Roots</a></li>
+                
+                
+                <li><a href="/docs/reference/math/sizes" >Sizes</a></li>
+                
+                
+                <li><a href="/docs/reference/math/stretch/" >Stretch</a></li>
+                
+                
+                <li><a href="/docs/reference/math/styles" >Styles</a></li>
+                
+                
+                <li><a href="/docs/reference/math/op/" >Text Operator</a></li>
+                
+                
+                <li><a href="/docs/reference/math/underover" >Under/Over</a></li>
+                
+                
+                <li><a href="/docs/reference/math/variants" >Variants</a></li>
+                
+                
+                <li><a href="/docs/reference/math/vec/" >Vector</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/symbols/" >記号</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/symbols/sym/" >General</a></li>
+                
+                
+                <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/layout/" >レイアウト</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/layout/align/" >Align</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/alignment/" >Alignment</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/angle/" >Angle</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/block/" >Block</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/box/" >Box</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/colbreak/" >Column Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/columns/" >Columns</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/direction/" >Direction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/fraction/" >Fraction</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/grid/" >Grid</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/hide/" >Hide</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/layout/" >Layout</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/length/" >Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/measure/" >Measure</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/move/" >Move</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pad/" >Padding</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/page/" >Page</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/pagebreak/" >Page Break</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/place/" >Place</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/ratio/" >Ratio</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/relative/" >Relative Length</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/repeat/" >Repeat</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/rotate/" >Rotate</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/scale/" >Scale</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/skew/" >Skew</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/h/" >Spacing (H)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/v/" >Spacing (V)</a></li>
+                
+                
+                <li><a href="/docs/reference/layout/stack/" >Stack</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/visualize/" >視覚化</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/visualize/circle/" >Circle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/color/" >Color</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/curve/"  aria-current="page" >Curve</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/gradient/" >Gradient</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/image/" >Image</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/line/" >Line</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/path/" >Path</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/square/" >Square</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/introspection/" >内省</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/introspection/counter/" >Counter</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/here/" >Here</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/locate/" >Locate</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/location/" >Location</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/metadata/" >Metadata</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/query/" >Query</a></li>
+                
+                
+                <li><a href="/docs/reference/introspection/state/" >State</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/data-loading/" >データの読み込み</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/data-loading/cbor/" >CBOR</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/csv/" >CSV</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/json/" >JSON</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/read/" >Read</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/toml/" >TOML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/xml/" >XML</a></li>
+                
+                
+                <li><a href="/docs/reference/data-loading/yaml/" >YAML</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/guides/" >ガイド</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/guides/guide-for-latex-users/" >Guide for LaTeX users</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/page-setup-guide/" >Page setup guide</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/guides/table-guide/" >Table guide</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/changelog/" >変更履歴</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.12.0/" >0.12.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.1/" >0.11.1</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.11.0/" >0.11.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.10.0/" >0.10.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.9.0/" >0.9.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.8.0/" >0.8.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.7.0/" >0.7.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.6.0/" >0.6.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.5.0/" >0.5.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.4.0/" >0.4.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.3.0/" >0.3.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.2.0/" >0.2.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.1.0/" >0.1.0</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/changelog/earlier/" >Earlier</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/japanese/" >日本語組版情報</a>
+          
+          <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+          <ul>
+            
+            
+            <li>
+              <a href="/docs/japanese/templates/" >日本語テンプレート</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/japanese/packages/" >日本語向けパッケージ</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/japanese/articles/" >日本語記事</a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        
+        <li>
+          <a href="/docs/glossary/" >用語集</a>
+          
+        </li>
+        
+      </ul>
+
+    </nav>
+    <main>
+      <ul class="breadcrumbs" aria-label="Breadcrumbs">
+        <li class="root"><a href="/docs/"><img src="/assets/icons/16-docs-dark.svg" alt="Docs" width="16"
+              height="16"></a></li>
+
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/">リファレンス</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/visualize/">視覚化</a></li>
+        
+        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
+        <li><a href="/docs/reference/visualize/curve/">Curve</a></li>
+        
+      </ul>
+
+      
+
+<h1 id="summary"><code>curve</code><small>
+<span aria-describedby="-tooltip">Element</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="-tooltip-qm-label">
+    <title id="-tooltip-qm-label">Element functions can be customized with <code>set</code> and <code>show</code> rules.</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
+</div>
+</small></h1>
+<p>A curve consisting of movements, lines, and Bézier segments.</p>
+<p>At any point in time, there is a conceptual pen or cursor.</p>
+<ul>
+<li>Move elements move the cursor without drawing.</li>
+<li>Line/Quadratic/Cubic elements draw a segment from the cursor to a new
+position, potentially with control point for a Bézier curve.</li>
+<li>Close elements draw a straight or smooth line back to the start of the
+curve or the latest preceding move segment.</li>
+</ul>
+<p>For layout purposes, the bounding box of the curve is a tight rectangle
+containing all segments as well as the point <code><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span></code>.</p>
+<p>Positions may be specified absolutely (i.e. relatively to <code><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span></code>),
+or relative to the current pen/cursor position, that is, the position where
+the previous segment ended.</p>
+<p>Bézier curve control points can be skipped by passing <code><span class="typ-key">none</span></code> or
+automatically mirrored from the preceding segment by passing <code><span class="typ-key">auto</span></code>.</p>
+<h2 id="example">Example</h2>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  fill<span class="typ-punct">:</span> blue<span class="typ-punct">.</span><span class="typ-func">lighten</span><span class="typ-punct">(</span><span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">90pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">close</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/d4dcae32a6c4bc1aab4dec6ba3e58d75.png" alt="Preview" width="480" height="190"/></div></div>
+<h2 id="parameters">
+  
+<span aria-describedby="parameters-tooltip">引数</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="parameters-tooltip-qm-label">
+    <title id="parameters-tooltip-qm-label">Parameters are the inputs to a function. They are specified in parentheses after the function name.</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="parameters-tooltip" tabindex="-1">Parameters are the inputs to a function. They are specified in parentheses after the function name.</div>
+</div>
+
+</h2>
+
+<div class="code code-definition "><span
+    class="typ-func">curve</span>(<div class="arguments"><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><span class="pill pill-obj">tiling</span>, </span><span
+      class="overview-param"><a href="#parameters-fill-rule">fill-rule<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+
+
+
+
+<h4 id="curve-curve-parameters-fill"><code>fill</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
+      
+        
+        
+          <a href="/docs/reference/visualize/color" class="pill pill-col">color</a>
+        
+      
+        
+        
+          <a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a>
+        
+      
+        
+        
+          <span class="pill pill-obj">tiling</span>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="curve-curve-parameters-fill-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="curve-curve-parameters-fill-settable-tooltip-qm-label">
+          <title id="curve-curve-parameters-fill-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="curve-curve-parameters-fill-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>How to fill the curve.</p>
+<p>When setting a fill, the default stroke disappears. To create a
+rectangle with both fill and stroke, you have to configure both.</p>
+
+
+<p>Default:<code><span class="typ-key">none</span></code></p>
+
+
+
+<h4 id="curve-curve-parameters-fill-rule"><code>fill-rule</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="curve-curve-parameters-fill-rule-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="curve-curve-parameters-fill-rule-settable-tooltip-qm-label">
+          <title id="curve-curve-parameters-fill-rule-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="curve-curve-parameters-fill-rule-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The drawing rule used to fill the curve.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->non-zero<!-- -->&quot;</code></div>
+      <div>
+        <p>Specifies that &quot;inside&quot; is computed by a non-zero sum of signed edge crossings.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->even-odd<!-- -->&quot;</code></div>
+      <div>
+        <p>Specifies that &quot;inside&quot; is computed by an odd number of edge crossings.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;non-zero&quot;</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-comment">// We use `.with` to get a new</span>
+<span class="typ-comment">// function that has the common</span>
+<span class="typ-comment">// arguments pre-applied.</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> star <span class="typ-op">=</span> curve<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span>
+  fill<span class="typ-punct">:</span> red<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">25pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">close</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">star</span><span class="typ-punct">(</span>fill-rule<span class="typ-punct">:</span> <span class="typ-str">&quot;non-zero&quot;</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">star</span><span class="typ-punct">(</span>fill-rule<span class="typ-punct">:</span> <span class="typ-str">&quot;even-odd&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/a64e91dcadf0c9c2449a11c5f0129209.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="curve-curve-parameters-stroke"><code>stroke</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
+        
+      
+        
+        
+          <a href="/docs/reference/layout/length" class="pill pill-num">length</a>
+        
+      
+        
+        
+          <a href="/docs/reference/visualize/color" class="pill pill-col">color</a>
+        
+      
+        
+        
+          <a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a>
+        
+      
+        
+        
+          <a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a>
+        
+      
+        
+        
+          <span class="pill pill-obj">tiling</span>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="curve-curve-parameters-stroke-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="curve-curve-parameters-stroke-settable-tooltip-qm-label">
+          <title id="curve-curve-parameters-stroke-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="curve-curve-parameters-stroke-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>How to <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a> the curve. This can be:</p>
+<p>Can be set to <code><span class="typ-key">none</span></code> to disable the stroke or to <code><span class="typ-key">auto</span></code> for a
+stroke of <code><span class="typ-num">1pt</span></code> black if and if only if no fill is given.</p>
+
+
+<p>Default:<code><span class="typ-key">auto</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> down <span class="typ-op">=</span> curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-num">40pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> up <span class="typ-op">=</span> curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">40pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> <span class="typ-num">4pt</span> <span class="typ-op">+</span> gradient<span class="typ-punct">.</span><span class="typ-func">linear</span><span class="typ-punct">(</span>red<span class="typ-punct">,</span> blue<span class="typ-punct">)</span><span class="typ-punct">,</span>
+  down<span class="typ-punct">,</span> up<span class="typ-punct">,</span> down<span class="typ-punct">,</span> up<span class="typ-punct">,</span> down<span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/4f7cf56eb5a2c18d25e186771a26b4fb.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="curve-curve-parameters-components"><code>components</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/content" class="pill pill-con">content</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="curve-curve-parameters-components-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="curve-curve-parameters-components-positional-tooltip-qm-label">
+          <title id="curve-curve-parameters-components-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="curve-curve-parameters-components-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="curve-curve-parameters-components-variadic-tooltip">Variadic</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="curve-curve-parameters-components-variadic-tooltip-qm-label">
+          <title id="curve-curve-parameters-components-variadic-tooltip-qm-label">Variadic parameters can be specified multiple times.
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="curve-curve-parameters-components-variadic-tooltip"
+          tabindex="-1">Variadic parameters can be specified multiple times.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The components of the curve, in the form of moves, line and Bézier
+segment, and closes.</p>
+
+
+
+
+
+
+
+
+<h2 id="definitions">
+  
+<span aria-describedby="definitions-tooltip">定義</span>
+<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+    aria-labelledby="definitions-tooltip-qm-label">
+    <title id="definitions-tooltip-qm-label">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</title>
+    <use href="/assets/icons/12-tooltip.svg#icon"></use>
+  </svg>
+  <div role="tooltip" id="definitions-tooltip" tabindex="-1">Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name.</div>
+</div>
+
+</h2>
+
+
+  <h3 id="-move" class="method-head"><span><code>move</code></span></h3>
+  
+<p>Starts a new curve component.</p>
+<p>If no <code>curve.move</code> element is passed, the curve will start at
+<code><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span></code>.</p>
+
+<div class="code code-definition ">curve.<span
+    class="typ-func">move</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  fill<span class="typ-punct">:</span> blue<span class="typ-punct">.</span><span class="typ-func">lighten</span><span class="typ-punct">(</span><span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  fill-rule<span class="typ-punct">:</span> <span class="typ-str">&quot;even-odd&quot;</span><span class="typ-punct">,</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">close</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-num">40pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">40pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">close</span><span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/7bdde34cfdf61681a5a8a9e49e3a3875.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-move-move-parameters-start"><code>start</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-move-move-parameters-start-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-move-move-parameters-start-positional-tooltip-qm-label">
+          <title id="definitions-move-move-parameters-start-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-move-move-parameters-start-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The starting point for the new component.</p>
+
+
+
+
+<h4 id="definitions-move-move-parameters-relative"><code>relative</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-move-move-parameters-relative-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-move-move-parameters-relative-settable-tooltip-qm-label">
+          <title id="definitions-move-move-parameters-relative-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-move-move-parameters-relative-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Whether the coordinates are relative to the previous point.</p>
+
+
+<p>Default:<code><span class="typ-key">false</span></code></p>
+
+
+
+
+
+
+  <h3 id="-line" class="method-head"><span><code>line</code></span></h3>
+  
+<p>Adds a straight line from the current point to a following one.</p>
+
+<div class="code code-definition ">curve.<span
+    class="typ-func">line</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">150pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/2f091352a2656bde890bb236042e4a32.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-line-line-parameters-end"><code>end</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-line-line-parameters-end-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-line-line-parameters-end-positional-tooltip-qm-label">
+          <title id="definitions-line-line-parameters-end-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-line-line-parameters-end-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The point at which the line shall end.</p>
+
+
+
+
+<h4 id="definitions-line-line-parameters-relative"><code>relative</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-line-line-parameters-relative-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-line-line-parameters-relative-settable-tooltip-qm-label">
+          <title id="definitions-line-line-parameters-relative-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-line-line-parameters-relative-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Whether the coordinates are relative to the previous point.</p>
+
+
+<p>Default:<code><span class="typ-key">false</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/ed948e9f14ee958576a41237e1ffc75b.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+
+
+
+  <h3 id="-quad" class="method-head"><span><code>quad</code></span></h3>
+  
+<p>Adds a quadratic Bézier curve segment from the last point to <code>end</code>, using
+<code>control</code> as the control point.</p>
+
+<div class="code code-definition ">curve.<span
+    class="typ-func">quad</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-comment">// Function to illustrate where the control point is.</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">mark</span><span class="typ-punct">(</span><span class="typ-punct">(</span>x<span class="typ-punct">,</span> y<span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">place</span><span class="typ-punct">(</span>
+  dx<span class="typ-punct">:</span> x <span class="typ-op">-</span> <span class="typ-num">1pt</span><span class="typ-punct">,</span> dy<span class="typ-punct">:</span> y <span class="typ-op">-</span> <span class="typ-num">1pt</span><span class="typ-punct">,</span>
+  <span class="typ-func">circle</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> aqua<span class="typ-punct">,</span> radius<span class="typ-punct">:</span> <span class="typ-num">2pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">mark</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">20pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">100pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">quad</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">20pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/2903e37eff8634271664e5d8964bf288.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-quad-quad-parameters-control"><code>control</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-quad-quad-parameters-control-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-quad-quad-parameters-control-positional-tooltip-qm-label">
+          <title id="definitions-quad-quad-parameters-control-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-quad-quad-parameters-control-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The control point of the quadratic Bézier curve.</p>
+<ul>
+<li>If <code><span class="typ-key">auto</span></code> and this segment follows another quadratic Bézier curve,
+the previous control point will be mirrored.</li>
+<li>If <code><span class="typ-key">none</span></code>, the control point defaults to <code>end</code>, and the curve will
+be a straight line.</li>
+</ul>
+
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> <span class="typ-num">2pt</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">quad</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">20pt</span><span class="typ-punct">,</span> <span class="typ-num">40pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-num">40pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">quad</span><span class="typ-punct">(</span><span class="typ-key">auto</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">40pt</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">40pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> relative<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/f9dc33459483b55a527639226d209704.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="definitions-quad-quad-parameters-end"><code>end</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-quad-quad-parameters-end-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-quad-quad-parameters-end-positional-tooltip-qm-label">
+          <title id="definitions-quad-quad-parameters-end-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-quad-quad-parameters-end-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The point at which the segment shall end.</p>
+
+
+
+
+<h4 id="definitions-quad-quad-parameters-relative"><code>relative</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-quad-quad-parameters-relative-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-quad-quad-parameters-relative-settable-tooltip-qm-label">
+          <title id="definitions-quad-quad-parameters-relative-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-quad-quad-parameters-relative-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Whether the <code>control</code> and <code>end</code> coordinates are relative to the previous
+point.</p>
+
+
+<p>Default:<code><span class="typ-key">false</span></code></p>
+
+
+
+
+
+
+  <h3 id="-cubic" class="method-head"><span><code>cubic</code></span></h3>
+  
+<p>Adds a cubic Bézier curve segment from the last point to <code>end</code>, using
+<code>control-start</code> and <code>control-end</code> as the control points.</p>
+
+<div class="code code-definition ">curve.<span
+    class="typ-func">cubic</span>(<div class="arguments"><span
+      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
+      class="overview-param"><a href="#parameters-relative">relative<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-comment">// Function to illustrate where the control points are.</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">handle</span><span class="typ-punct">(</span>start<span class="typ-punct">,</span> end<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">place</span><span class="typ-punct">(</span>
+  <span class="typ-func">line</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> red<span class="typ-punct">,</span> start<span class="typ-punct">:</span> start<span class="typ-punct">,</span> end<span class="typ-punct">:</span> end<span class="typ-punct">)</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">handle</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">80pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">handle</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">90pt</span><span class="typ-punct">,</span> <span class="typ-num">60pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">80pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">90pt</span><span class="typ-punct">,</span> <span class="typ-num">60pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/d5ba4899b421c08d8cf796b7af8c74c7.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-cubic-cubic-parameters-control-start"><code>control-start</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-cubic-cubic-parameters-control-start-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-cubic-cubic-parameters-control-start-positional-tooltip-qm-label">
+          <title id="definitions-cubic-cubic-parameters-control-start-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-cubic-cubic-parameters-control-start-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The control point going out from the start of the curve segment.</p>
+<ul>
+<li>
+<p>If <code><span class="typ-key">auto</span></code> and this element follows another <code>curve.cubic</code> element,
+the last control point will be mirrored. In SVG terms, this makes
+<code>curve.cubic</code> behave like the <code>S</code> operator instead of the <code>C</code> operator.</p>
+</li>
+<li>
+<p>If <code><span class="typ-key">none</span></code>, the curve has no first control point, or equivalently,
+the control point defaults to the curve's starting point.</p>
+</li>
+</ul>
+
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-comment">// - No start control point</span>
+  <span class="typ-comment">// - End control point at `(20pt, 0pt)`</span>
+  <span class="typ-comment">// - End point at `(50pt, 0pt)`</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">20pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-comment">// - No start control point</span>
+  <span class="typ-comment">// - No end control point</span>
+  <span class="typ-comment">// - End point at `(50pt, 0pt)`</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">20pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-comment">// Passing `auto` instead of `none` means the start control point</span>
+  <span class="typ-comment">// mirrors the end control point of the previous curve. Mirror of</span>
+  <span class="typ-comment">// `(20pt, 0pt)` w.r.t `(50pt, 0pt)` is `(80pt, 0pt)`.</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-key">auto</span><span class="typ-punct">,</span> <span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">curve</span><span class="typ-punct">(</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">20pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-comment">// `(80pt, 0pt)` is the same as `auto` in this case.</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">80pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-key">none</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/055e942a4591425f9c834cd8b355f208.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="definitions-cubic-cubic-parameters-control-end"><code>control-end</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
+        
+      
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-cubic-cubic-parameters-control-end-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-cubic-cubic-parameters-control-end-positional-tooltip-qm-label">
+          <title id="definitions-cubic-cubic-parameters-control-end-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-cubic-cubic-parameters-control-end-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The control point going into the end point of the curve segment.</p>
+<p>If set to <code><span class="typ-key">none</span></code>, the curve has no end control point, or equivalently,
+the control point defaults to the curve's end point.</p>
+
+
+
+
+<h4 id="definitions-cubic-cubic-parameters-end"><code>end</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-cubic-cubic-parameters-end-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-cubic-cubic-parameters-end-positional-tooltip-qm-label">
+          <title id="definitions-cubic-cubic-parameters-end-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-cubic-cubic-parameters-end-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The point at which the curve segment shall end.</p>
+
+
+
+
+<h4 id="definitions-cubic-cubic-parameters-relative"><code>relative</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-cubic-cubic-parameters-relative-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-cubic-cubic-parameters-relative-settable-tooltip-qm-label">
+          <title id="definitions-cubic-cubic-parameters-relative-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-cubic-cubic-parameters-relative-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Whether the <code>control-start</code>, <code>control-end</code>, and <code>end</code> coordinates are
+relative to the previous point.</p>
+
+
+<p>Default:<code><span class="typ-key">false</span></code></p>
+
+
+
+
+
+
+  <h3 id="-close" class="method-head"><span><code>close</code></span></h3>
+  
+<p>Closes the curve by adding a segment from the last point to the start of the
+curve (or the last preceding <code>curve.move</code> point).</p>
+
+<div class="code code-definition single-arg">curve.<span
+    class="typ-func">close</span>(<div class="arguments"><span
+      class="overview-param"><a href="#parameters-mode">mode<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
+
+
+  <details class="folding-example">
+    <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+    <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-comment">// We define a function to show the same shape with</span>
+<span class="typ-comment">// both closing modes.</span>
+<span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">shape</span><span class="typ-punct">(</span>mode<span class="typ-punct">:</span> <span class="typ-str">&quot;smooth&quot;</span><span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">curve</span><span class="typ-punct">(</span>
+  fill<span class="typ-punct">:</span> blue<span class="typ-punct">.</span><span class="typ-func">lighten</span><span class="typ-punct">(</span><span class="typ-num">80%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  stroke<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">100pt</span><span class="typ-punct">,</span> <span class="typ-num">50pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">cubic</span><span class="typ-punct">(</span><span class="typ-key">auto</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">90pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">50pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">close</span><span class="typ-punct">(</span>mode<span class="typ-punct">:</span> mode<span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">shape</span><span class="typ-punct">(</span>mode<span class="typ-punct">:</span> <span class="typ-str">&quot;smooth&quot;</span><span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">shape</span><span class="typ-punct">(</span>mode<span class="typ-punct">:</span> <span class="typ-str">&quot;straight&quot;</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/a62820164cacbd05265e82b3a02a3a38.png" alt="Preview" width="480" height="190"/></div></div>
+    </div>
+  </details>
+
+
+
+
+<h4 id="definitions-close-close-parameters-mode"><code>mode</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="definitions-close-close-parameters-mode-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-close-close-parameters-mode-settable-tooltip-qm-label">
+          <title id="definitions-close-close-parameters-mode-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-close-close-parameters-mode-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>How to close the curve.</p>
+
+<ul class="type-args">
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->smooth<!-- -->&quot;</code></div>
+      <div>
+        <p>Closes the curve with a smooth segment that takes into account the
+control point opposite the start point.</p>
+      </div>
+    </div>
+  </li>
+  
+  <li>
+    <div class="break-box">
+      <div><code class="typ-str">&quot;<!-- -->straight<!-- -->&quot;</code></div>
+      <div>
+        <p>Closes the curve with a straight line.</p>
+      </div>
+    </div>
+  </li>
+  
+</ul>
+
+
+<p>Default:<code><span class="typ-str">&quot;smooth&quot;</span></code></p>
+
+
+
+
+
+
+
+
+
+      
+      <div class="page-end-buttons"><a href="/docs/reference/visualize/color/" class="previous"><img
+            src="/assets/icons/16-arrow-right.svg" alt="←">
+          <div><span class="page-title">Color</span><span class="hint">前に戻る</span></div>
+        </a><a href="/docs/reference/visualize/ellipse/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Ellipse</span><span class="hint">次に進む</span></div>
+        </a></div>
+      
+    </main>
+
+    
+    <nav id="page-overview"><strong>目次</strong>
+      <ul>
+        
+        <li data-assoc="summary"><a href="#summary">概要</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="example"><a href="#example">Example</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="parameters"><a href="#parameters">引数</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="definitions"><a href="#definitions">定義</a>
+          <ul></ul>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  </div>
+  <footer>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/">（公式）ホームページ</a></li>
+        <li><a href="https://typst.app/docs/">（公式）ドキュメント（英語）</a></li>
+        <li><a href="https://typst.app/universe/">（公式）拡張パッケージ・テンプレートの宇宙</a></li>
+        <li><a href="https://typst.app/about/">（公式）Typstについて</a></li>
+        <li><a href="https://typst.app/contact/">（公式）連絡先</a></li>
+        <li><a href="https://typst.app/privacy/">（公式）プライバシーポリシー</a></li>
+        <li><a href="https://typst.app/terms/">（公式）サービス規約</a></li>
+        <li><a href="https://typst.app/legal/">（公式）免責事項</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="https://typst.app/tools/">（公式）ツール</a></li>
+        <li><a href="https://typst.app/blog/">（公式）ブログ</a></li>
+        <li><a href="https://twitter.com/typstapp/">（公式）Twitter</a></li>
+        <li><a href="https://discord.gg/2uDybryKPe">（公式）Discord</a></li>
+        <li><a rel="me" href="https://mastodon.social/@typst">（公式）Mastodon</a></li>
+        <li><a href="https://www.linkedin.com/company/typst/">（公式）LinkedIn</a></li>
+        <li><a href="https://instagram.com/typstapp/">（公式）Instagram</a></li>
+        <li><a href="https://github.com/typst/">（公式）GitHub</a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Made in Berlin</p>
+      <p>Translated by <a href="https://github.com/typst-jp">Typst Japan Community</a></p>
+    </div>
+  </footer>
+  <script src="/scripts/fuse.basic.min.js"></script>
+  <script src="/scripts/docs.js?bust=20230913"></script>
+  <script src="/scripts/analytics.js" defer></script>
+</body>
+
+</html>

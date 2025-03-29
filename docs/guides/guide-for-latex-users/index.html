@@ -255,10 +255,13 @@ similarities between Typst and LaTeX so you can get started quickly.
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -472,9 +475,6 @@ similarities between Typst and LaTeX so you can get started quickly.
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -588,6 +588,9 @@ similarities between Typst and LaTeX so you can get started quickly.
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -603,9 +606,6 @@ similarities between Typst and LaTeX so you can get started quickly.
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -616,6 +616,9 @@ similarities between Typst and LaTeX so you can get started quickly.
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -685,6 +688,51 @@ similarities between Typst and LaTeX so you can get started quickly.
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -724,6 +772,12 @@ similarities between Typst and LaTeX so you can get started quickly.
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1244,7 +1298,7 @@ their name. Some symbols are additionally available through shorthands, such as
 If a symbol is missing, you can also access it through a
 <a href="/docs/reference/syntax/#escapes">Unicode escape sequence</a>.</p>
 <p>Alternate and related forms of symbols can often be selected by
-<a href="/docs/reference/symbols/symbol/">appending a modifier</a> after a period. For example,
+<a href="/docs/reference/foundations/symbol/">appending a modifier</a> after a period. For example,
 <code>arrow.l.squiggly</code> inserts a squiggly left-pointing arrow. If you want to insert
 multiletter text in your expression instead, enclose it in double quotes:</p>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">delta</span> <span class="typ-str">&quot;if&quot;</span> x <span class="typ-escape">&lt;=</span> 5 <span class="typ-math-delim">$</span>
@@ -1349,7 +1403,8 @@ applicable, contains possible workarounds.</p>
 <p><strong>Well-established plotting ecosystem.</strong> LaTeX users often create elaborate
 charts along with their documents in PGF/TikZ. The Typst ecosystem does not
 yet offer the same breadth of available options, but the ecosystem around the
-<a href="https://github.com/cetz-package/cetz"><code>cetz</code></a> package is catching up quickly.</p>
+<a href="https://typst.app/universe/package/cetz"><code>cetz</code> package</a> is catching up
+quickly.</p>
 </li>
 <li>
 <p><strong>Change page margins without a pagebreak.</strong> In LaTeX, margins can always be
@@ -1364,7 +1419,9 @@ graphics as PDF or EPS files. Typst supports neither format as an image
 format, but you can easily convert both into SVG files with <a href="https://cloudconvert.com/pdf-to-svg">online
 tools</a> or
 <a href="https://inkscape.org/">Inkscape</a>. The web app will automatically convert PDF
-files to SVG files upon uploading them.</p>
+files to SVG files upon uploading them. You can also use the
+community-provided <a href="https://typst.app/universe/package/muchpdf"><code>muchpdf</code> package</a>
+to embed PDFs. It internally converts PDFs to SVGs on-the-fly.</p>
 </li>
 </ul>
 

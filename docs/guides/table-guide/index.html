@@ -255,10 +255,13 @@ explains all you need to know about tables in Typst.
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -472,9 +475,6 @@ explains all you need to know about tables in Typst.
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -588,6 +588,9 @@ explains all you need to know about tables in Typst.
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -603,9 +606,6 @@ explains all you need to know about tables in Typst.
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -616,6 +616,9 @@ explains all you need to know about tables in Typst.
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -685,6 +688,51 @@ explains all you need to know about tables in Typst.
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -724,6 +772,12 @@ explains all you need to know about tables in Typst.
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1044,7 +1098,7 @@ applications, while academic applications tend to use strokes instead.</p>
 <p>To add zebra stripes to a table, we use the <code>table</code> function's <code>fill</code> argument.
 It can take three kinds of arguments:</p>
 <ul>
-<li>A single color (this can also be a gradient or a pattern) to fill all cells
+<li>A single color (this can also be a gradient or a tiling) to fill all cells
 with. Because we want some cells to have another color, this is not useful if
 we want to build zebra tables.</li>
 <li>An array with colors which Typst cycles through for each column. We can use an
@@ -1440,7 +1494,7 @@ first two rows with the <code>top</code> key, suppressing all other top lines. T
 line appears because there is no <code>top</code> line that could suppress it.</p>
 <h3 id="double-stroke">How to achieve a double line?</h3>
 <p>Typst does not yet have a native way to draw double strokes, but there are
-multiple ways to emulate them, for example with <a href="/docs/reference/visualize/pattern/">patterns</a>. We will
+multiple ways to emulate them, for example with <a href="/docs/reference/visualize/tiling/">tilings</a>. We will
 show a different workaround in this section: Table gutters.</p>
 <p>Tables can space their cells apart using the <code>gutter</code> argument. When a gutter is
 applied, a stroke is drawn on each of the now separated cells. We can
@@ -1489,13 +1543,13 @@ everything else by providing an array in the <code>align</code> argument:</p>
   stroke<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">,</span>
 
   table<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">[</span>Day<span class="typ-punct">]</span><span class="typ-punct">[</span>Location<span class="typ-punct">]</span><span class="typ-punct">[</span>Hotel or Apartment<span class="typ-punct">]</span><span class="typ-punct">[</span>Activities<span class="typ-punct">]</span><span class="typ-punct">,</span>
-  <span class="typ-punct">[</span>1<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hotel de L&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Arrival, Evening River Cruise<span class="typ-punct">]</span><span class="typ-punct">,</span>
-  <span class="typ-punct">[</span>2<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hotel de L&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Louvre Museum, Eiffel Tower<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">[</span>1<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hôtel de l&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Arrival, Evening River Cruise<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">[</span>2<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hôtel de l&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Louvre Museum, Eiffel Tower<span class="typ-punct">]</span><span class="typ-punct">,</span>
   <span class="typ-punct">[</span>3<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Lyon, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Lyon City Hotel<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>City Tour, Local Cuisine Tasting<span class="typ-punct">]</span><span class="typ-punct">,</span>
   <span class="typ-punct">[</span>4<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Geneva, Switzerland<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Lakeview Inn<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Lake Geneva, Red Cross Museum<span class="typ-punct">]</span><span class="typ-punct">,</span>
   <span class="typ-punct">[</span>5<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Zermatt, Switzerland<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Alpine Lodge<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Visit Matterhorn, Skiing<span class="typ-punct">]</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/11de2f40224879a511b7adadfa0243dc.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/fb96cd8f7c1a08cc45828810027d2415.png" alt="Preview" width="480" height="190"/></div></div>
 <p>However, this example does not yet look perfect — the header cells should be
 bottom-aligned. Let's use a function instead to do so:</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;IBM Plex Sans&quot;</span><span class="typ-punct">)</span>
@@ -1510,11 +1564,11 @@ bottom-aligned. Let's use a function instead to do so:</p>
   stroke<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">,</span>
 
   table<span class="typ-punct">.</span><span class="typ-func">header</span><span class="typ-punct">[</span>Day<span class="typ-punct">]</span><span class="typ-punct">[</span>Location<span class="typ-punct">]</span><span class="typ-punct">[</span>Hotel or Apartment<span class="typ-punct">]</span><span class="typ-punct">[</span>Activities<span class="typ-punct">]</span><span class="typ-punct">,</span>
-  <span class="typ-punct">[</span>1<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hotel de L&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Arrival, Evening River Cruise<span class="typ-punct">]</span><span class="typ-punct">,</span>
-  <span class="typ-punct">[</span>2<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hotel de L&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Louvre Museum, Eiffel Tower<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">[</span>1<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hôtel de l&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Arrival, Evening River Cruise<span class="typ-punct">]</span><span class="typ-punct">,</span>
+  <span class="typ-punct">[</span>2<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Paris, France<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Hôtel de l&#39;Europe<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Louvre Museum, Eiffel Tower<span class="typ-punct">]</span><span class="typ-punct">,</span>
  <span class="typ-comment">// ... remaining days omitted</span>
 <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/1ebdedadada03dd85a498a27f0b1759c.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/e5cffa03a3c9365ff2488f21e0873a17.png" alt="Preview" width="480" height="190"/></div></div>
 <p>In the function, we calculate a horizontal and vertical alignment based on
 whether we are in the first column (<code>x <span class="typ-op">==</span> <span class="typ-num">0</span></code>) or the first row (<code>y <span class="typ-op">==</span> <span class="typ-num">0</span></code>).
 We then make use of the fact that we can add horizontal and vertical alignments

@@ -251,10 +251,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -468,9 +471,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -584,6 +584,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -599,9 +602,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -612,6 +612,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -681,6 +684,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -720,6 +768,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -866,13 +920,13 @@
 <h1 id="summary">math</h1>
 <p>Typst has special <a href="/docs/reference/syntax/#math">syntax</a> and library functions to typeset
 mathematical formulas. Math formulas can be displayed inline with text or as
-separate blocks. They will be typeset into their own block if they start and
-end with at least one space (e.g. <code><span class="typ-math-delim">$</span> x<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span></code>).</p>
+separate blocks. They will be typeset into their own block if they start and end
+with at least one space (e.g. <code><span class="typ-math-delim">$</span> x<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span></code>).</p>
 <h2 id="variables">Variables</h2>
-<p>In math, single letters are always displayed as is. Multiple letters,
-however, are interpreted as variables and functions. To display multiple
-letters verbatim, you can place them into quotes and to access single letter
-variables, you can use the <a href="/docs/reference/scripting/#expressions">hash syntax</a>.</p>
+<p>In math, single letters are always displayed as is. Multiple letters, however,
+are interpreted as variables and functions. To display multiple letters
+verbatim, you can place them into quotes and to access single letter variables,
+you can use the <a href="/docs/reference/scripting/#expressions">hash syntax</a>.</p>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> A = <span class="typ-pol">pi</span> r<span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
 <span class="typ-math-delim">$</span> <span class="typ-str">&quot;area&quot;</span> = <span class="typ-pol">pi</span> <span class="typ-pol">dot</span> <span class="typ-str">&quot;radius&quot;</span><span class="typ-math-op">^</span>2 <span class="typ-math-delim">$</span>
 <span class="typ-math-delim">$</span> <span class="typ-func">cal</span><span class="typ-punct">(</span>A<span class="typ-punct">)</span> <span class="typ-escape">:=</span>
@@ -881,12 +935,12 @@ variables, you can use the <a href="/docs/reference/scripting/#expressions">hash
 <span class="typ-math-delim">$</span> <span class="typ-pol">#</span><span class="typ-pol">x</span> &lt; 17 <span class="typ-math-delim">$</span>
 </code></pre><div class="preview"><img src="/assets/docs/99ab9a9118b0d502ef5040b0a7d667c1.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="symbols">Symbols</h2>
-<p>Math mode makes a wide selection of <a href="/docs/reference/symbols/sym/">symbols</a> like
-<code>pi</code>, <code>dot</code>, or <code>RR</code> available. Many mathematical symbols are available in
-different variants. You can select between different variants by applying
-<a href="/docs/reference/symbols/symbol/">modifiers</a> to the symbol. Typst further recognizes a number of
-shorthand sequences like <code>=&gt;</code> that approximate a symbol. When such a
-shorthand exists, the symbol's documentation lists it.</p>
+<p>Math mode makes a wide selection of <a href="/docs/reference/symbols/sym/">symbols</a> like <code>pi</code>,
+<code>dot</code>, or <code>RR</code> available. Many mathematical symbols are available in different
+variants. You can select between different variants by applying
+<a href="/docs/reference/foundations/symbol/">modifiers</a> to the symbol. Typst further recognizes a number of
+shorthand sequences like <code>=&gt;</code> that approximate a symbol. When such a shorthand
+exists, the symbol's documentation lists it.</p>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> x &lt; y <span class="typ-escape">=&gt;</span> x <span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span> y <span class="typ-math-delim">$</span>
 </code></pre><div class="preview"><img src="/assets/docs/4fd47496c7c8dda5da33f250f15f7fde.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="line-breaks">Line Breaks</h2>
@@ -900,36 +954,35 @@ shorthand exists, the symbol's documentation lists it.</p>
 <p>Math mode supports special function calls without the hash prefix. In these
 &quot;math calls&quot;, the argument list works a little differently than in code:</p>
 <ul>
-<li>Within them, Typst is still in &quot;math mode&quot;. Thus, you can write math
-directly into them, but need to use hash syntax to pass code expressions
-(except for strings, which are available in the math syntax).</li>
-<li>They support positional and named arguments, but don't support trailing
-content blocks and argument spreading.</li>
-<li>They provide additional syntax for 2-dimensional argument lists. The
-semicolon (<code>;</code>) merges preceding arguments separated by commas into an
-array argument.</li>
+<li>Within them, Typst is still in &quot;math mode&quot;. Thus, you can write math directly
+into them, but need to use hash syntax to pass code expressions (except for
+strings, which are available in the math syntax).</li>
+<li>They support positional and named arguments, as well as argument spreading.</li>
+<li>They don't support trailing content blocks.</li>
+<li>They provide additional syntax for 2-dimensional argument lists. The semicolon
+(<code>;</code>) merges preceding arguments separated by commas into an array argument.</li>
 </ul>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-func">frac</span><span class="typ-punct">(</span>a<span class="typ-math-op">^</span>2<span class="typ-punct">,</span> 2<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
 <span class="typ-math-delim">$</span> <span class="typ-func">vec</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">,</span> delim<span class="typ-punct">:</span> <span class="typ-str">&quot;[&quot;</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
 <span class="typ-math-delim">$</span> <span class="typ-func">mat</span><span class="typ-punct">(</span>1<span class="typ-punct">,</span> 2<span class="typ-punct">;</span> 3<span class="typ-punct">,</span> 4<span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
+<span class="typ-math-delim">$</span> <span class="typ-func">mat</span><span class="typ-punct">(</span><span class="typ-op">..</span><span class="typ-func">#</span><span class="typ-func">range</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">chunks</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span><span class="typ-punct">)</span> <span class="typ-math-delim">$</span>
 <span class="typ-math-delim">$</span> <span class="typ-pol">lim</span><span class="typ-math-op">_</span>x =
     <span class="typ-func">op</span><span class="typ-punct">(</span><span class="typ-str">&quot;lim&quot;</span><span class="typ-punct">,</span> limits<span class="typ-punct">:</span> <span class="typ-key">#</span><span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-math-op">_</span>x <span class="typ-math-delim">$</span>
-</code></pre><div class="preview"><img src="/assets/docs/06124e14b0283641c7181ff875ad0b74.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/4790ef53f6e55ab7a805523c28a045bb.png" alt="Preview" width="480" height="190"/></div></div>
 <p>To write a verbatim comma or semicolon in a math call, escape it with a
-backslash. The colon on the other hand is only recognized in a special way
-if directly preceded by an identifier, so to display it verbatim in those
-cases, you can just insert a space before it.</p>
+backslash. The colon on the other hand is only recognized in a special way if
+directly preceded by an identifier, so to display it verbatim in those cases,
+you can just insert a space before it.</p>
 <p>Functions calls preceded by a hash are normal code function calls and not
 affected by these rules.</p>
 <h2 id="alignment">Alignment</h2>
-<p>When equations include multiple <em>alignment points</em> (<code>&amp;</code>), this creates
-blocks of alternatingly right- and left-aligned columns. In the example
-below, the expression <code>(3x + y) / 7</code> is right-aligned and <code>= 9</code> is
-left-aligned. The word &quot;given&quot; is also left-aligned because <code>&amp;&amp;</code> creates two
-alignment points in a row, alternating the alignment twice. <code>&amp; &amp;</code> and <code>&amp;&amp;</code>
-behave exactly the same way. Meanwhile, &quot;multiply by 7&quot; is right-aligned
-because just one <code>&amp;</code> precedes it. Each alignment point simply alternates
-between right-aligned/left-aligned.</p>
+<p>When equations include multiple <em>alignment points</em> (<code>&amp;</code>), this creates blocks of
+alternatingly right- and left-aligned columns. In the example below, the
+expression <code>(3x + y) / 7</code> is right-aligned and <code>= 9</code> is left-aligned. The word
+&quot;given&quot; is also left-aligned because <code>&amp;&amp;</code> creates two alignment points in a row,
+alternating the alignment twice. <code>&amp; &amp;</code> and <code>&amp;&amp;</code> behave exactly the same way.
+Meanwhile, &quot;multiply by 7&quot; is right-aligned because just one <code>&amp;</code> precedes it.
+Each alignment point simply alternates between right-aligned/left-aligned.</p>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-punct">(</span>3x + y<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 7 <span class="typ-math-op">&amp;</span>= 9 <span class="typ-math-op">&amp;</span><span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;given&quot;</span> <span class="typ-escape">\</span>
   3x + y <span class="typ-math-op">&amp;</span>= 63 <span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;multiply by 7&quot;</span> <span class="typ-escape">\</span>
   3x <span class="typ-math-op">&amp;</span>= 63 <span class="typ-escape">-</span> y <span class="typ-math-op">&amp;</span><span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;subtract y&quot;</span> <span class="typ-escape">\</span>
@@ -937,15 +990,15 @@ between right-aligned/left-aligned.</p>
 </code></pre><div class="preview"><img src="/assets/docs/11a200e0bedd9e7f64485b10781b8c9f.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="math-fonts">Math fonts</h2>
 <p>You can set the math font by with a <a href="/docs/reference/styling/#show-rules">show-set rule</a> as
-demonstrated below. Note that only special OpenType math fonts are suitable
-for typesetting maths.</p>
+demonstrated below. Note that only special OpenType math fonts are suitable for
+typesetting maths.</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Fira Math&quot;</span><span class="typ-punct">)</span>
 <span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>i <span class="typ-pol">in</span> <span class="typ-pol">NN</span><span class="typ-punct">)</span> 1 + i <span class="typ-math-delim">$</span>
 </code></pre><div class="preview"><img src="/assets/docs/319069eb903742474e4fe798c5482b0c.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="math-module">Math module</h2>
-<p>All math functions are part of the <code>math</code> <a href="/docs/reference/scripting/#modules">module</a>,
-which is available by default in equations. Outside of equations, they can
-be accessed with the <code>math.</code> prefix.</p>
+<p>All math functions are part of the <code>math</code> <a href="/docs/reference/scripting/#modules">module</a>, which
+is available by default in equations. Outside of equations, they can be accessed
+with the <code>math.</code> prefix.</p>
 <h2 id="definitions">定義</h2>
 <ul class="subgridded">
   

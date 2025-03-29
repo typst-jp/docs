@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1148,10 +1202,6 @@ returns an array of integers, even if the counter has just one number.</p>
   
 <p>Displays the current value of the counter with a numbering and returns
 the formatted output.</p>
-<p><em>Compatibility:</em> For compatibility with Typst 0.10 and lower, this
-function also works without an established context. Then, it will create
-opaque contextual content rather than directly returning the output of
-the numbering. This behaviour will be removed in a future release.</p>
 
 <div class="code code-definition ">self.<span
     class="typ-func">display</span>(<div class="arguments"><span
@@ -1243,9 +1293,6 @@ an array of integers, even if the counter has just one number.</p>
 <p>The <code>selector</code> must match exactly one element in the document. The most
 useful kinds of selectors for this are <a href="/docs/reference/foundations/label/">labels</a> and
 <a href="/docs/reference/introspection/location/">locations</a>.</p>
-<p><em>Compatibility:</em> For compatibility with Typst 0.10 and lower, this
-function also works without a known context if the <code>selector</code> is a
-location. This behaviour will be removed in a future release.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">at</span>(<div class="arguments"><span
@@ -1308,48 +1355,9 @@ location. This behaviour will be removed in a future release.</p>
 returns an array of integers, even if the counter has just one number.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">final</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/introspection/location" class="pill pill-obj">location</a> </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
+    class="typ-func">final</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
 
 
-
-
-
-<h4 id="definitions-final-final-parameters-location"><code>location</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
-        
-      
-        
-        
-          <a href="/docs/reference/introspection/location" class="pill pill-obj">location</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="definitions-final-final-parameters-location-positional-tooltip">Positional</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="definitions-final-final-parameters-location-positional-tooltip-qm-label">
-          <title id="definitions-final-final-parameters-location-positional-tooltip-qm-label">
-            Positional parameters are specified in order, without names.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="definitions-final-final-parameters-location-positional-tooltip"
-          tabindex="-1">Positional parameters are specified in order, without names.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p><em>Compatibility:</em> This argument is deprecated. It only exists for
-compatibility with Typst 0.10 and lower and shouldn't be used
-anymore.</p>
-
-
-<p>Default:<code><span class="typ-key">none</span></code></p>
 
 
 

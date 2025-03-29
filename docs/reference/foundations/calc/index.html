@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -3418,6 +3472,87 @@ error if the resulting <a href="/docs/reference/foundations/float/" title="`floa
   </div>
 </h4>
 <p>The divisor of the quotient.</p>
+
+
+
+
+
+
+
+  <h3 id="-norm" class="method-head"><span><code>norm</code></span></h3>
+  
+<p>Calculates the p-norm of a sequence of values.</p>
+
+<div class="code code-definition ">calc.<span
+    class="typ-func">norm</span>(<div class="arguments"><span
+      class="overview-param"><a href="#parameters-p">p<!-- -->: </a><a href="/docs/reference/foundations/float" class="pill pill-num">float</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/float" class="pill pill-num">float</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/float" class="pill pill-num">float</a></div>
+
+
+
+  <div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">norm</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-op">-</span><span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">0.5</span><span class="typ-punct">)</span> <span class="typ-escape">\</span>
+<span class="typ-pol">#</span><span class="typ-pol">calc</span><span class="typ-punct">.</span><span class="typ-func">norm</span><span class="typ-punct">(</span>p<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span> <span class="typ-num">1</span><span class="typ-punct">,</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/1f4490bb317feae7e07bd893a6b914ea.png" alt="Preview" width="480" height="190"/></div></div>
+
+
+
+<h4 id="definitions-norm-norm-parameters-p"><code>p</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/float" class="pill pill-num">float</a>
+        
+      
+    </div>
+    
+  </div>
+</h4>
+<p>The p value to calculate the p-norm of.</p>
+
+
+<p>Default:<code><span class="typ-num">2.0</span></code></p>
+
+
+
+<h4 id="definitions-norm-norm-parameters-values"><code>values</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/float" class="pill pill-num">float</a>
+        
+      
+    </div>
+    <small>Required</small><small><span
+        aria-describedby="definitions-norm-norm-parameters-values-positional-tooltip">Positional</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-norm-norm-parameters-values-positional-tooltip-qm-label">
+          <title id="definitions-norm-norm-parameters-values-positional-tooltip-qm-label">
+            Positional parameters are specified in order, without names.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-norm-norm-parameters-values-positional-tooltip"
+          tabindex="-1">Positional parameters are specified in order, without names.</div>
+      </div>
+    </small><small><span
+        aria-describedby="definitions-norm-norm-parameters-values-variadic-tooltip">Variadic</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="definitions-norm-norm-parameters-values-variadic-tooltip-qm-label">
+          <title id="definitions-norm-norm-parameters-values-variadic-tooltip-qm-label">Variadic parameters can be specified multiple times.
+          </title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="definitions-norm-norm-parameters-values-variadic-tooltip"
+          tabindex="-1">Variadic parameters can be specified multiple times.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>The sequence of values from which to calculate the p-norm.
+Returns <code>0.0</code> if empty.</p>
 
 
 

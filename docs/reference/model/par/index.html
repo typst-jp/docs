@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -878,10 +932,69 @@
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
 </small></h1>
-<p>Arranges text, spacing and inline-level elements into a paragraph.</p>
-<p>Although this function is primarily used in set rules to affect paragraph
-properties, it can also be used to explicitly render its argument onto a
-paragraph of its own.</p>
+<p>A logical subdivison of textual content.</p>
+<p>Typst automatically collects <em>inline-level</em> elements into paragraphs.
+Inline-level elements include <a href="/docs/reference/text/text/" title="text">text</a>, <a href="/docs/reference/layout/h/">horizontal spacing</a>,
+<a href="/docs/reference/layout/box/">boxes</a>, and <a href="/docs/reference/math/equation/">inline equations</a>.</p>
+<p>To separate paragraphs, use a blank line (or an explicit <a href="/docs/reference/model/parbreak/" title="`parbreak`"><code>parbreak</code></a>).
+Paragraphs are also automatically interrupted by any block-level element
+(like <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a>, <a href="/docs/reference/layout/place/" title="`place`"><code>place</code></a>, or anything that shows itself as one of these).</p>
+<p>The <code>par</code> element is primarily used in set rules to affect paragraph
+properties, but it can also be used to explicitly display its argument as a
+paragraph of its own. Then, the paragraph's body may not contain any
+block-level content.</p>
+<h2 id="boxes-and-blocks">Boxes and blocks</h2>
+<p>As explained above, usually paragraphs only contain inline-level content.
+However, you can integrate any kind of block-level content into a paragraph
+by wrapping it in a <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a>.</p>
+<p>Conversely, you can separate inline-level content from a paragraph by
+wrapping it in a <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a>. In this case, it will not become part of any
+paragraph at all. Read the following section for an explanation of why that
+matters and how it differs from just adding paragraph breaks around the
+content.</p>
+<h2 id="what-becomes-a-paragraph">What becomes a paragraph?</h2>
+<p>When you add inline-level content to your document, Typst will automatically
+wrap it in paragraphs. However, a typical document also contains some text
+that is not semantically part of a paragraph, for example in a heading or
+caption.</p>
+<p>The rules for when Typst wraps inline-level content in a paragraph are as
+follows:</p>
+<ul>
+<li>
+<p>All text at the root of a document is wrapped in paragraphs.</p>
+</li>
+<li>
+<p>Text in a container (like a <code>block</code>) is only wrapped in a paragraph if the
+container holds any block-level content. If all of the contents are
+inline-level, no paragraph is created.</p>
+</li>
+</ul>
+<p>In the laid-out document, it's not immediately visible whether text became
+part of a paragraph. However, it is still important for various reasons:</p>
+<ul>
+<li>
+<p>Certain paragraph styling like <code>first-line-indent</code> will only apply to
+proper paragraphs, not any text. Similarly, <code>par</code> show rules of course
+only trigger on paragraphs.</p>
+</li>
+<li>
+<p>A proper distinction between paragraphs and other text helps people who
+rely on assistive technologies (such as screen readers) navigate and
+understand the document properly. Currently, this only applies to HTML
+export since Typst does not yet output accessible PDFs, but support for
+this is planned for the near future.</p>
+</li>
+<li>
+<p>HTML export will generate a <code>&lt;p&gt;</code> tag only for paragraphs.</p>
+</li>
+</ul>
+<p>When creating custom reusable components, you can and should take charge
+over whether Typst creates paragraphs. By wrapping text in a <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a>
+instead of just adding paragraph breaks around it, you can force the absence
+of a paragraph. Conversely, by adding a <a href="/docs/reference/model/parbreak/" title="`parbreak`"><code>parbreak</code></a> after some content in a
+container, you can force it to become a paragraph even if it's just one
+word. This is, for example, what <a href="/docs/reference/model/list/#parameters-tight">non-<code>tight</code></a> lists do to
+force their items to become paragraphs.</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>
   first-line-indent<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">,</span>
@@ -919,7 +1032,7 @@ three integers. Then, we <span class="typ-escape">...</span>
       class="overview-param"><a href="#parameters-spacing">spacing<!-- -->: </a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-justify">justify<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-linebreaks">linebreaks<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
-      class="overview-param"><a href="#parameters-first-line-indent">first-line-indent<!-- -->: </a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
+      class="overview-param"><a href="#parameters-first-line-indent">first-line-indent<!-- -->: </a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-hanging-indent">hanging-indent<!-- -->: </a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
@@ -1130,6 +1243,11 @@ pleasing way.
           <a href="/docs/reference/layout/length" class="pill pill-num">length</a>
         
       
+        
+        
+          <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>
+        
+      
     </div>
     <small><span
         aria-describedby="par-par-parameters-first-line-indent-settable-tooltip">Settable</span>
@@ -1145,16 +1263,55 @@ pleasing way.
   </div>
 </h4>
 <p>The indent the first line of a paragraph should have.</p>
-<p>Only the first line of a consecutive paragraph will be indented (not
-the first one in a block or on the page).</p>
+<p>By default, only the first line of a consecutive paragraph will be
+indented (not the first one in the document or container, and not
+paragraphs immediately following other block-level elements).</p>
+<p>If you want to indent all paragraphs instead, you can pass a dictionary
+containing the <code>amount</code> of indent as a length and the pair
+<code>all: <span class="typ-key">true</span></code>. When <code>all</code> is omitted from the dictionary, it defaults to
+<code><span class="typ-key">false</span></code>.</p>
 <p>By typographic convention, paragraph breaks are indicated either by some
-space between paragraphs or by indented first lines. Consider reducing
-the <a href="/docs/reference/layout/block/#parameters-spacing">paragraph spacing</a> to the <a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a>
-when using this property (e.g. using <code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">)</span></code>).</p>
+space between paragraphs or by indented first lines. Consider</p>
+<ul>
+<li>reducing the <a href="/docs/reference/model/par/#parameters-spacing">paragraph <code>spacing</code></a> to the
+<a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a> using <code><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">)</span></code></li>
+<li>increasing the <a href="/docs/reference/layout/block/#parameters-spacing">block <code>spacing</code></a> (which inherits the
+paragraph spacing by default) to the original paragraph spacing using
+<code><span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">1.2em</span><span class="typ-punct">)</span></code></li>
+</ul>
 
 
-<p>Default:<code><span class="typ-num">0pt</span></code></p>
+<p>Default:<code><span class="typ-punct">(</span>amount<span class="typ-punct">:</span> <span class="typ-num">0pt</span><span class="typ-punct">,</span> all<span class="typ-punct">:</span> <span class="typ-key">false</span><span class="typ-punct">)</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">block</span><span class="typ-punct">(</span>spacing<span class="typ-punct">:</span> <span class="typ-num">1.2em</span><span class="typ-punct">)</span>
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>
+  first-line-indent<span class="typ-punct">:</span> <span class="typ-num">1.5em</span><span class="typ-punct">,</span>
+  spacing<span class="typ-punct">:</span> <span class="typ-num">0.65em</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+
+The first paragraph is not affected
+by the indent.
+
+But the second paragraph is.
+
+<span class="typ-func">#</span><span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">100%</span><span class="typ-punct">)</span>
+
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>first-line-indent<span class="typ-punct">:</span> <span class="typ-punct">(</span>
+  amount<span class="typ-punct">:</span> <span class="typ-num">1.5em</span><span class="typ-punct">,</span>
+  all<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span><span class="typ-punct">)</span>
+
+Now all paragraphs are affected
+by the first line indent.
+
+Even the first one.
+</code></pre><div class="preview"><img src="/assets/docs/7cdaa65805944219f8ff6ee08d380d90.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="par-par-parameters-hanging-indent"><code>hanging-indent</code>
@@ -1180,11 +1337,21 @@ when using this property (e.g. using <code><span class="typ-key">#</span><span c
     </small>
   </div>
 </h4>
-<p>The indent all but the first line of a paragraph should have.</p>
+<p>The indent that all but the first line of a paragraph should have.</p>
 
 
 <p>Default:<code><span class="typ-num">0pt</span></code></p>
 
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>hanging-indent<span class="typ-punct">:</span> <span class="typ-num">1em</span><span class="typ-punct">)</span>
+
+<span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">15</span><span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/0c1ed8a6c982e96f186d187126d20517.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
 
 
 <h4 id="par-par-parameters-body"><code>body</code>
@@ -1541,8 +1708,8 @@ page content, typically at the very start of the document.</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->document<!-- -->&quot;</code></div>
       <div>
-        <p>Indicates the line number counter spans the whole document, that is,
-is never automatically reset.</p>
+        <p>Indicates that the line number counter spans the whole document, i.e.,
+it's never automatically reset.</p>
       </div>
     </div>
   </li>
@@ -1551,8 +1718,8 @@ is never automatically reset.</p>
     <div class="break-box">
       <div><code class="typ-str">&quot;<!-- -->page<!-- -->&quot;</code></div>
       <div>
-        <p>Indicates the line number counter should be reset at the start of every
-new page.</p>
+        <p>Indicates that the line number counter should be reset at the start of
+every new page.</p>
       </div>
     </div>
   </li>
@@ -1602,6 +1769,14 @@ Second line again
       <ul>
         
         <li data-assoc="summary"><a href="#summary">概要</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="boxes-and-blocks"><a href="#boxes-and-blocks">Boxes And Blocks</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="what-becomes-a-paragraph"><a href="#what-becomes-a-paragraph">What Becomes A Paragraph</a>
           <ul></ul>
         </li>
         

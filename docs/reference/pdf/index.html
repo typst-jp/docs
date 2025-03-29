@@ -1,25 +1,23 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
   <meta charset="utf-8">
-  <title>Symbol – Typstドキュメント日本語版</title>
-  <meta name="description" content="Documentation for the Symbol type.">
+  <title>PDF – Typstドキュメント日本語版</title>
+  <meta name="description" content="Documentation for functions related to PDF in Typst.">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
-  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/symbols/symbol/">
-  <meta property="og:title" content="Symbol – Typstドキュメント日本語版">
+  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/pdf/">
+  <meta property="og:title" content="PDF – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Documentation for the Symbol type.">
+  <meta property="og:description" content="Documentation for functions related to PDF in Typst.">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-jp.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:site" content="@typstapp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/symbols/symbol/">
+  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/pdf/">
   <meta name="twitter:image:alt"
     content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
@@ -253,10 +251,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +471,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/"  aria-current="page" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +584,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +602,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +612,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +684,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/"  aria-current="page" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +768,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -859,145 +911,107 @@
         <li><a href="/docs/reference/">リファレンス</a></li>
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/symbols/">記号</a></li>
-        
-        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/symbols/symbol/">Symbol</a></li>
+        <li><a href="/docs/reference/pdf/">PDF</a></li>
         
       </ul>
 
       
 
-<h1 id="summary"><span class="pill pill-obj">symbol</span></h1>
-<p>A Unicode symbol.</p>
-<p>Typst defines common symbols so that they can easily be written with
-standard keyboards. The symbols are defined in modules, from which they can
-be accessed using <a href="/docs/reference/scripting/#fields">field access notation</a>:</p>
+<h1 id="summary">pdf</h1>
+<p>PDF files focus on accurately describing documents visually, but also have
+facilities for annotating their structure. This hybrid approach makes
+them a good fit for document exchange: They render exactly the same on every
+device, but also support extraction of a document's content and structure (at
+least to an extent). Unlike PNG files, PDFs are not bound to a specific
+resolution. Hence, you can view them at any size without incurring a loss of
+quality.</p>
+<h2 id="pdf-standards">PDF standards</h2>
+<p>The International Standards Organization (ISO) has published the base PDF
+standard and various standards that extend it to make PDFs more suitable for
+specific use-cases. By default, Typst exports PDF 1.7 files. Adobe Acrobat 8 and
+later as well as all other commonly used PDF viewers are compatible with this
+PDF version.</p>
+<h3 id="pdf-a">PDF/A</h3>
+<p>Typst optionally supports emitting PDF/A-conformant files. PDF/A files are
+geared towards maximum compatibility with current and future PDF tooling. They
+do not rely on difficult-to-implement or proprietary features and contain
+exhaustive metadata. This makes them suitable for long-term archival.</p>
+<p>The PDF/A Standard has multiple versions (<em>parts</em> in ISO terminology) and most
+parts have multiple profiles that indicate the file's conformance level.
+Currently, Typst supports these PDF/A output profiles:</p>
 <ul>
-<li>General symbols are defined in the <a href="/docs/reference/symbols/sym/"><code>sym</code> module</a></li>
-<li>Emoji are defined in the <a href="/docs/reference/symbols/emoji/"><code>emoji</code> module</a></li>
+<li>
+<p>PDF/A-2b: The basic conformance level of ISO 19005-2. This version of PDF/A is
+based on PDF 1.7 and results in self-contained, archivable PDF files.</p>
+</li>
+<li>
+<p>PDF/A-3b: The basic conformance level of ISO 19005-3. This version of PDF/A is
+based on PDF 1.7 and results in archivable PDF files that can contain
+arbitrary other related files as <a href="/docs/reference/pdf/embed/">attachments</a>. The only
+difference between it and PDF/A-2b is the capability to embed
+non-PDF/A-conformant files within.</p>
+</li>
 </ul>
-<p>Moreover, you can define custom symbols with this type's constructor
-function.</p>
-<div class="previewed-code"><pre><code><span class="typ-pol">#</span><span class="typ-pol">sym</span><span class="typ-punct">.</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">r</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">sym</span><span class="typ-punct">.</span><span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span> <span class="typ-escape">\</span>
-<span class="typ-math-delim">$</span><span class="typ-pol">gt</span><span class="typ-punct">.</span><span class="typ-pol">eq</span><span class="typ-punct">.</span><span class="typ-pol">not</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
-<span class="typ-pol">#</span><span class="typ-pol">emoji</span><span class="typ-punct">.</span><span class="typ-pol">face</span><span class="typ-punct">.</span><span class="typ-pol">halo</span>
-</code></pre><div class="preview"><img src="/assets/docs/bb68a65e391fa7ac5366cd6743423ecb.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Many symbols have different variants, which can be selected by appending the
-modifiers with dot notation. The order of the modifiers is not relevant.
-Visit the documentation pages of the symbol modules and click on a symbol to
-see its available variants.</p>
-<div class="previewed-code"><pre><code><span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">l</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
-<span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">r</span><span class="typ-math-delim">$</span> <span class="typ-escape">\</span>
-<span class="typ-math-delim">$</span><span class="typ-pol">arrow</span><span class="typ-punct">.</span><span class="typ-pol">t</span><span class="typ-punct">.</span><span class="typ-pol">quad</span><span class="typ-math-delim">$</span>
-</code></pre><div class="preview"><img src="/assets/docs/08c9505e3725dc389cb54be7b067baff.png" alt="Preview" width="480" height="190"/></div></div>
-
-
-<h2 id="constructor">
+<p>When choosing between exporting PDF/A and regular PDF, keep in mind that PDF/A
+files contain additional metadata, and that some readers will prevent the user
+from modifying a PDF/A file. Some features of Typst may be disabled depending on
+the PDF standard you choose.</p>
+<h2 id="exporting-as-pdf">Exporting as PDF</h2>
+<h3 id="command-line">Command Line</h3>
+<p>PDF is Typst's default export format. Running the <code>compile</code> or <code>watch</code>
+subcommand without specifying a format will create a PDF. When exporting to PDF,
+you have the following configuration options:</p>
+<ul>
+<li>
+<p>Which PDF standards Typst should enforce conformance with by specifying
+<code>--pdf-standard</code> followed by one or multiple comma-separated standards. Valid
+standards are <code>1.7</code>, <code>a-2b</code>, and <code>a-3b</code>. By default, Typst outputs
+PDF-1.7-compliant files.</p>
+</li>
+<li>
+<p>Which pages to export by specifying <code>--pages</code> followed by a comma-separated
+list of numbers or dash-separated number ranges. Ranges can be half-open.
+Example: <code>2,3,7-9,11-</code>.</p>
+</li>
+</ul>
+<h3 id="web-app">Web App</h3>
+<p>Click the quick download button at the top right to export a PDF with default
+settings. For further configuration, click &quot;File&quot; &gt; &quot;Export as&quot; &gt; &quot;PDF&quot; or click
+the downwards-facing arrow next to the quick download button and select &quot;Export
+as PDF&quot;. When exporting to PDF, you have the following configuration options:</p>
+<ul>
+<li>
+<p>Which PDF standards Typst should enforce conformance with. By default, Typst
+outputs PDF-1.7-compliant files. Valid additional standards are <code>A-2b</code> and
+<code>A-3b</code>.</p>
+</li>
+<li>
+<p>Which pages to export. Valid options are &quot;All pages&quot;, &quot;Current page&quot;, and
+&quot;Custom ranges&quot;. Custom ranges are a comma-separated list of numbers or
+dash-separated number ranges. Ranges can be half-open. Example: <code>2,3,7-9,11-</code>.</p>
+</li>
+</ul>
+<h2 id="pdf-specific-functionality">PDF-specific functionality</h2>
+<p>Typst exposes PDF-specific functionality in the global <code>pdf</code> module. See below
+for the definitions it contains.</p>
+<h2 id="definitions">定義</h2>
+<ul class="subgridded">
   
-<span aria-describedby="constructor-tooltip">コンストラクタ</span>
-<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-    aria-labelledby="constructor-tooltip-qm-label">
-    <title id="constructor-tooltip-qm-label">If a type has a constructor, you can call it like a function to create a new value of the type.</title>
-    <use href="/assets/icons/12-tooltip.svg#icon"></use>
-  </svg>
-  <div role="tooltip" id="constructor-tooltip" tabindex="-1">If a type has a constructor, you can call it like a function to create a new value of the type.</div>
-</div>
-
-</h2>
-
-<p>Create a custom symbol with modifiers.</p>
-
-<div class="code code-definition single-arg"><span
-    class="typ-func">symbol</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a> </span></div>) <!-- -->-&gt; <span class="pill pill-obj">symbol</span></div>
-
-
-
-  <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> envelope <span class="typ-op">=</span> <span class="typ-func">symbol</span><span class="typ-punct">(</span>
-  <span class="typ-str">&quot;🖂&quot;</span><span class="typ-punct">,</span>
-  <span class="typ-punct">(</span><span class="typ-str">&quot;stamped&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖃&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-punct">(</span><span class="typ-str">&quot;stamped.pen&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖆&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-punct">(</span><span class="typ-str">&quot;lightning&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖄&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-punct">(</span><span class="typ-str">&quot;fly&quot;</span><span class="typ-punct">,</span> <span class="typ-str">&quot;🖅&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-<span class="typ-punct">)</span>
-
-<span class="typ-pol">#</span><span class="typ-pol">envelope</span>
-<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">stamped</span>
-<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">stamped</span><span class="typ-punct">.</span><span class="typ-pol">pen</span>
-<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">lightning</span>
-<span class="typ-pol">#</span><span class="typ-pol">envelope</span><span class="typ-punct">.</span><span class="typ-pol">fly</span>
-</code></pre><div class="preview"><img src="/assets/docs/ab5c4a1b2fedea0f8e7ef305b0f686ad.png" alt="Preview" width="480" height="190"/></div></div>
-
-
-
-<h4 id="constructor-symbol-parameters-variants"><code>variants</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/str" class="pill pill-str">str</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>
-        
-      
-    </div>
-    <small>Required</small><small><span
-        aria-describedby="constructor-symbol-parameters-variants-positional-tooltip">Positional</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="constructor-symbol-parameters-variants-positional-tooltip-qm-label">
-          <title id="constructor-symbol-parameters-variants-positional-tooltip-qm-label">
-            Positional parameters are specified in order, without names.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="constructor-symbol-parameters-variants-positional-tooltip"
-          tabindex="-1">Positional parameters are specified in order, without names.</div>
-      </div>
-    </small><small><span
-        aria-describedby="constructor-symbol-parameters-variants-variadic-tooltip">Variadic</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="constructor-symbol-parameters-variants-variadic-tooltip-qm-label">
-          <title id="constructor-symbol-parameters-variants-variadic-tooltip-qm-label">Variadic parameters can be specified multiple times.
-          </title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="constructor-symbol-parameters-variants-variadic-tooltip"
-          tabindex="-1">Variadic parameters can be specified multiple times.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>The variants of the symbol.</p>
-<p>Can be a just a string consisting of a single character for the
-modifierless variant or an array with two strings specifying the modifiers
-and the symbol. Individual modifiers should be separated by dots. When
-displaying a symbol, Typst selects the first from the variants that have
-all attached modifiers and the minimum number of other modifiers.</p>
-
-
-
-
-
-
-
-
-
-
-
+  
+  <li><a href="/docs/reference/pdf/embed/"><code>embed</code></a><span>A file that will be embedded into the output PDF.</span>
+  </li>
+  
+  
+</ul>
 
 
 
       
-      <div class="page-end-buttons"><a href="/docs/reference/symbols/emoji/" class="previous"><img
+      <div class="page-end-buttons"><a href="/docs/reference/data-loading/yaml/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">Emoji</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/layout/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">レイアウト</span><span class="hint">次に進む</span></div>
+          <div><span class="page-title">YAML</span><span class="hint">前に戻る</span></div>
+        </a><a href="/docs/reference/pdf/embed/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Embed</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>
@@ -1010,7 +1024,19 @@ all attached modifiers and the minimum number of other modifiers.</p>
           <ul></ul>
         </li>
         
-        <li data-assoc="constructor"><a href="#constructor">コンストラクタ</a>
+        <li data-assoc="pdf-standards"><a href="#pdf-standards">Pdf Standards</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="exporting-as-pdf"><a href="#exporting-as-pdf">Exporting As Pdf</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="pdf-specific-functionality"><a href="#pdf-specific-functionality">Pdf Specific Functionality</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="definitions"><a href="#definitions">定義</a>
           <ul></ul>
         </li>
         

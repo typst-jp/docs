@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -982,9 +1036,9 @@ the appearance and the position of each cell.</p>
       class="overview-param"><a href="#parameters-gutter">gutter<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
       class="overview-param"><a href="#parameters-column-gutter">column-gutter<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
       class="overview-param"><a href="#parameters-row-gutter">row-gutter<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a>, </span><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="#parameters-align">align<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="#parameters-inset">inset<!-- -->: </a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/foundations/array" class="pill pill-obj">array</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
       class="overview-param"><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
@@ -1273,7 +1327,7 @@ documentation</a> for more information on gutters.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -1424,7 +1478,7 @@ zero. If set to <code><span class="typ-key">auto</span></code>, the outer alignm
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -1609,10 +1663,10 @@ multiple columns and/or rows with the <code>colspan</code> and <code>rowspan</co
       class="overview-param"><a href="#parameters-y">y<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-colspan">colspan<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-rowspan">rowspan<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>, </span><span
+      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><span class="pill pill-obj">tiling</span>, </span><span
       class="overview-param"><a href="#parameters-align">align<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a>, </span><span
       class="overview-param"><a href="#parameters-inset">inset<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-breakable">breakable<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
@@ -1878,7 +1932,7 @@ Functions identically to the <code>y</code> field in <a href="/docs/reference/la
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
     </div>
@@ -2008,7 +2062,7 @@ Functions identically to the <code>y</code> field in <a href="/docs/reference/la
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -2095,7 +2149,7 @@ part of all your tables' designs.</p>
       class="overview-param"><a href="#parameters-y">y<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-end">end<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-position">position<!-- -->: </a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
@@ -2260,7 +2314,7 @@ exclusive).</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         
@@ -2347,7 +2401,7 @@ part of all your tables' designs.</p>
       class="overview-param"><a href="#parameters-x">x<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-end">end<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
+      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
       class="overview-param"><a href="#parameters-position">position<!-- -->: </a><a href="/docs/reference/layout/alignment" class="pill pill-obj">alignment</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
 
 
@@ -2487,7 +2541,7 @@ exclusive).</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
         

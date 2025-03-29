@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -942,8 +996,9 @@ part of that item.</p>
     class="typ-func">enum</span>(<div class="arguments"><span
       class="overview-param"><a href="#parameters-tight">tight<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-numbering">numbering<!-- -->: </a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a><a href="/docs/reference/foundations/function" class="pill pill-fn">function</a>, </span><span
-      class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
+      class="overview-param"><a href="#parameters-start">start<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/int" class="pill pill-num">int</a>, </span><span
       class="overview-param"><a href="#parameters-full">full<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span><span
+      class="overview-param"><a href="#parameters-reversed">reversed<!-- -->: </a><a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>, </span><span
       class="overview-param"><a href="#parameters-indent">indent<!-- -->: </a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-body-indent">body-indent<!-- -->: </a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="#parameters-spacing">spacing<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
@@ -1068,6 +1123,11 @@ if <code>full</code> is <code><span class="typ-key">false</span></code> and mult
       
         
         
+          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
+        
+      
+        
+        
           <a href="/docs/reference/foundations/int" class="pill pill-num">int</a>
         
       
@@ -1088,7 +1148,7 @@ if <code>full</code> is <code><span class="typ-key">false</span></code> and mult
 <p>Which number to start the enumeration with.</p>
 
 
-<p>Default:<code><span class="typ-num">1</span></code></p>
+<p>Default:<code><span class="typ-key">auto</span></code></p>
 
 
 <details class="folding-example">
@@ -1143,6 +1203,47 @@ all parent enumerations.</p>
   <span class="typ-marker">+</span> Add ingredients
 <span class="typ-marker">+</span> Eat
 </code></pre><div class="preview"><img src="/assets/docs/89c476c711867e248b6d6605baa6c445.png" alt="Preview" width="480" height="190"/></div></div>
+  </div>
+</details>
+
+
+<h4 id="enum-enum-parameters-reversed"><code>reversed</code>
+  <div class="additional-info">
+    <div>
+      
+        
+        
+          <a href="/docs/reference/foundations/bool" class="pill pill-bool">bool</a>
+        
+      
+    </div>
+    <small><span
+        aria-describedby="enum-enum-parameters-reversed-settable-tooltip">Settable</span>
+      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
+          aria-labelledby="enum-enum-parameters-reversed-settable-tooltip-qm-label">
+          <title id="enum-enum-parameters-reversed-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
+          <use href="/assets/icons/12-tooltip.svg#icon"></use>
+        </svg>
+        <div role="tooltip" id="enum-enum-parameters-reversed-settable-tooltip"
+          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
+      </div>
+    </small>
+  </div>
+</h4>
+<p>Whether to reverse the numbering for this enumeration.</p>
+
+
+<p>Default:<code><span class="typ-key">false</span></code></p>
+
+
+<details class="folding-example">
+  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
+  <div class="folding">
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">enum</span><span class="typ-punct">(</span>reversed<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+<span class="typ-marker">+</span> Coffee
+<span class="typ-marker">+</span> Tea
+<span class="typ-marker">+</span> Milk
+</code></pre><div class="preview"><img src="/assets/docs/58e9add96ed60692f951819e2d64f4a3.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 

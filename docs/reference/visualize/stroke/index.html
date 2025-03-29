@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/"  aria-current="page" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -927,7 +981,7 @@ stroke.</p>
 
 <div class="code code-definition "><span
     class="typ-func">stroke</span>(<div class="arguments"><span
-      class="overview-param"><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>, </span><span
+      class="overview-param"><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><span class="pill pill-obj">tiling</span>, </span><span
       class="overview-param"><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a>, </span><span
       class="overview-param"><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
       class="overview-param"><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/foundations/str" class="pill pill-str">str</a>, </span><span
@@ -968,7 +1022,7 @@ stroke.</p>
       
         
         
-          <a href="/docs/reference/visualize/pattern" class="pill pill-obj">pattern</a>
+          <span class="pill pill-obj">tiling</span>
         
       
     </div>
@@ -1383,16 +1437,22 @@ corner's protrusion length and the stroke's thickness.</p>
 <details class="folding-example">
   <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
   <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> points <span class="typ-op">=</span> <span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">15pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">30pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span>
-<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">path</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">6pt</span> <span class="typ-op">+</span> blue<span class="typ-punct">)</span>
-<span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
-    dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
-    spacing<span class="typ-punct">:</span> <span class="typ-num">1cm</span><span class="typ-punct">,</span>
-    <span class="typ-func">path</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>miter-limit<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-op">..</span>points<span class="typ-punct">)</span><span class="typ-punct">,</span>
-    <span class="typ-func">path</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>miter-limit<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-op">..</span>points<span class="typ-punct">)</span><span class="typ-punct">,</span>
-    <span class="typ-func">path</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>miter-limit<span class="typ-punct">:</span> <span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-op">..</span>points<span class="typ-punct">)</span><span class="typ-punct">,</span>
+    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> items <span class="typ-op">=</span> <span class="typ-punct">(</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">move</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">15pt</span><span class="typ-punct">,</span> <span class="typ-num">0pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">0pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">30pt</span><span class="typ-punct">,</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
+  curve<span class="typ-punct">.</span><span class="typ-func">line</span><span class="typ-punct">(</span><span class="typ-punct">(</span><span class="typ-num">10pt</span><span class="typ-punct">,</span> <span class="typ-num">20pt</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/eec8732f7d326e70f4c24fb50a0a74ce.png" alt="Preview" width="480" height="190"/></div></div>
+
+<span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">curve</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">6pt</span> <span class="typ-op">+</span> blue<span class="typ-punct">)</span>
+<span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
+  dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
+  spacing<span class="typ-punct">:</span> <span class="typ-num">1cm</span><span class="typ-punct">,</span>
+  <span class="typ-func">curve</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>miter-limit<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-op">..</span>items<span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">curve</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>miter-limit<span class="typ-punct">:</span> <span class="typ-num">4</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-op">..</span>items<span class="typ-punct">)</span><span class="typ-punct">,</span>
+  <span class="typ-func">curve</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>miter-limit<span class="typ-punct">:</span> <span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-op">..</span>items<span class="typ-punct">)</span><span class="typ-punct">,</span>
+<span class="typ-punct">)</span>
+</code></pre><div class="preview"><img src="/assets/docs/1adb509ba399800a88632e98c42e176a.png" alt="Preview" width="480" height="190"/></div></div>
   </div>
 </details>
 
@@ -1411,8 +1471,8 @@ corner's protrusion length and the stroke's thickness.</p>
       <div class="page-end-buttons"><a href="/docs/reference/visualize/square/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
           <div><span class="page-title">Square</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/introspection/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">内省</span><span class="hint">次に進む</span></div>
+        </a><a href="/docs/reference/visualize/tiling/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">Tiling</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>

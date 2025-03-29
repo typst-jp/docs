@@ -253,10 +253,13 @@
                 <li><a href="/docs/reference/foundations/str/" >String</a></li>
                 
                 
-                <li><a href="/docs/reference/foundations/style/" >Style</a></li>
+                <li><a href="/docs/reference/foundations/symbol/" >Symbol</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/sys" >System</a></li>
+                
+                
+                <li><a href="/docs/reference/foundations/target/" >Target</a></li>
                 
                 
                 <li><a href="/docs/reference/foundations/type/" >Type</a></li>
@@ -470,9 +473,6 @@
                 
                 <li><a href="/docs/reference/symbols/emoji/" >Emoji</a></li>
                 
-                
-                <li><a href="/docs/reference/symbols/symbol/" >Symbol</a></li>
-                
               </ul>
               
             </li>
@@ -586,6 +586,9 @@
                 <li><a href="/docs/reference/visualize/color/" >Color</a></li>
                 
                 
+                <li><a href="/docs/reference/visualize/curve/" >Curve</a></li>
+                
+                
                 <li><a href="/docs/reference/visualize/ellipse/" >Ellipse</a></li>
                 
                 
@@ -601,9 +604,6 @@
                 <li><a href="/docs/reference/visualize/path/" >Path</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/pattern/" >Pattern</a></li>
-                
-                
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
@@ -614,6 +614,9 @@
                 
                 
                 <li><a href="/docs/reference/visualize/stroke/" >Stroke</a></li>
+                
+                
+                <li><a href="/docs/reference/visualize/tiling/" >Tiling</a></li>
                 
               </ul>
               
@@ -683,6 +686,51 @@
               
             </li>
             
+            
+            <li class="category">Export</li>
+            
+            <li>
+              <a href="/docs/reference/pdf/" >PDF</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/pdf/embed/" >Embed</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/html/" >HTML</a>
+              
+              <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
+              <ul>
+                
+                
+                <li><a href="/docs/reference/html/elem/" >Elem</a></li>
+                
+                
+                <li><a href="/docs/reference/html/frame/" >Frame</a></li>
+                
+              </ul>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/png/" >PNG</a>
+              
+            </li>
+            
+            
+            <li>
+              <a href="/docs/reference/svg/" >SVG</a>
+              
+            </li>
+            
           </ul>
           
         </li>
@@ -722,6 +770,12 @@
           
           <button><img alt="Expand" src="/assets/icons/16-arrow-right.svg" width="16" height="16"></button>
           <ul>
+            
+            
+            <li>
+              <a href="/docs/changelog/0.13.0/" >0.13.0</a>
+              
+            </li>
             
             
             <li>
@@ -1885,7 +1939,7 @@ at each repetition.</p>
 <p>Returns the relative placement of this gradient.</p>
 
 <div class="code code-definition single-arg">self.<span
-    class="typ-func">relative</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a></div>
+    class="typ-func">relative</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>, <a href="/docs/reference/foundations/str" class="pill pill-str">str</a></div>
 
 
 
@@ -1897,9 +1951,70 @@ at each repetition.</p>
   <h3 id="-angle" class="method-head"><span><code>angle</code></span></h3>
   
 <p>Returns the angle of this gradient.</p>
+<p>Returns <code><span class="typ-key">none</span></code> if the gradient is neither linear nor conic.</p>
 
 <div class="code code-definition single-arg">self.<span
     class="typ-func">angle</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>, <a href="/docs/reference/layout/angle" class="pill pill-num">angle</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-center" class="method-head"><span><code>center</code></span></h3>
+  
+<p>Returns the center of this gradient.</p>
+<p>Returns <code><span class="typ-key">none</span></code> if the gradient is neither radial nor conic.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">center</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>, <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-radius" class="method-head"><span><code>radius</code></span></h3>
+  
+<p>Returns the radius of this gradient.</p>
+<p>Returns <code><span class="typ-key">none</span></code> if the gradient is not radial.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">radius</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>, <a href="/docs/reference/layout/ratio" class="pill pill-num">ratio</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-focal-center" class="method-head"><span><code>focal-center</code></span></h3>
+  
+<p>Returns the focal-center of this gradient.</p>
+<p>Returns <code><span class="typ-key">none</span></code> if the gradient is not radial.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">focal-center</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>, <a href="/docs/reference/foundations/array" class="pill pill-obj">array</a></div>
+
+
+
+
+
+
+
+
+  <h3 id="-focal-radius" class="method-head"><span><code>focal-radius</code></span></h3>
+  
+<p>Returns the focal-radius of this gradient.</p>
+<p>Returns <code><span class="typ-key">none</span></code> if the gradient is not radial.</p>
+
+<div class="code code-definition single-arg">self.<span
+    class="typ-func">focal-radius</span>(<div class="arguments"></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>, <a href="/docs/reference/layout/ratio" class="pill pill-num">ratio</a></div>
 
 
 
