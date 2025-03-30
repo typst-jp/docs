@@ -108,7 +108,7 @@ pub fn cast(stream: TokenStream) -> Result<TokenStream> {
     let from_value = (!input.from_value.is_empty() || input.dynamic).then(|| {
         quote! {
             impl #foundations::FromValue for #ty {
-                fn from_value(value: #foundations::Value) -> ::typst::diag::HintedStrResult<Self> {
+                fn from_value(value: #foundations::Value) -> ::typst_library::diag::HintedStrResult<Self> {
                     #from_value_body
                 }
             }
@@ -273,7 +273,7 @@ fn create_output_body(input: &CastInput) -> TokenStream {
     if input.dynamic {
         quote! { #foundations::CastInfo::Type(#foundations::Type::of::<Self>()) }
     } else {
-        quote! { Self::input() }
+        quote! { <Self as #foundations::Reflect>::input() }
     }
 }
 

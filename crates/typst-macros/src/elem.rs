@@ -63,6 +63,11 @@ impl Elem {
         self.real_fields().filter(|field| !field.ghost)
     }
 
+    /// Fields that get accessor, with, and push methods.
+    fn accessor_fields(&self) -> impl Iterator<Item = &Field> + Clone {
+        self.struct_fields().filter(|field| !field.required)
+    }
+
     /// Fields that are relevant for equality.
     ///
     /// Synthesized fields are excluded to ensure equality before and after
@@ -314,6 +319,7 @@ fn create(element: &Elem) -> Result<TokenStream> {
     let fields_impl = create_fields_impl(element);
     let repr_impl = element.cannot("Repr").then(|| create_repr_impl(element));
     let locatable_impl = element.can("Locatable").then(|| create_locatable_impl(element));
+    let mathy_impl = element.can("Mathy").then(|| create_mathy_impl(element));
     let into_value_impl = create_into_value_impl(element);
 
     // We use a const block to create an anonymous scope, as to not leak any
@@ -333,6 +339,7 @@ fn create(element: &Elem) -> Result<TokenStream> {
             #partial_eq_impl
             #repr_impl
             #locatable_impl
+            #mathy_impl
             #into_value_impl
         };
     })
@@ -430,8 +437,8 @@ fn create_default_static(field: &Field) -> TokenStream {
     };
 
     quote! {
-        static #const_ident: ::once_cell::sync::Lazy<#ty> =
-            ::once_cell::sync::Lazy::new(#init);
+        static #const_ident: ::std::sync::LazyLock<#ty> =
+            ::std::sync::LazyLock::new(#init);
     }
 }
 
@@ -440,9 +447,9 @@ fn create_inherent_impl(element: &Elem) -> TokenStream {
     let Elem { ident, .. } = element;
 
     let new_func = create_new_func(element);
-    let with_field_methods = element.struct_fields().map(create_with_field_method);
-    let push_field_methods = element.struct_fields().map(create_push_field_method);
-    let field_methods = element.struct_fields().map(create_field_method);
+    let with_field_methods = element.accessor_fields().map(create_with_field_method);
+    let push_field_methods = element.accessor_fields().map(create_push_field_method);
+    let field_methods = element.accessor_fields().map(create_field_method);
     let field_in_methods = element.style_fields().map(create_field_in_method);
     let set_field_methods = element.style_fields().map(create_set_field_method);
 
@@ -632,7 +639,7 @@ fn create_native_elem_impl(element: &Elem) -> TokenStream {
     let Elem { name, ident, title, scope, keywords, docs, .. } = element;
 
     let local_name = if element.can("LocalName") {
-        quote! { Some(<#foundations::Packed<#ident> as ::typst::text::LocalName>::local_name) }
+        quote! { Some(<#foundations::Packed<#ident> as ::typst_library::text::LocalName>::local_name) }
     } else {
         quote! { None }
     };
@@ -658,8 +665,8 @@ fn create_native_elem_impl(element: &Elem) -> TokenStream {
             field_name: |id| id.try_into().ok().map(Fields::to_str),
             field_from_styles: <#ident as #foundations::Fields>::field_from_styles,
             local_name: #local_name,
-            scope: #foundations::Lazy::new(|| #scope),
-            params: #foundations::Lazy::new(|| ::std::vec![#(#params),*])
+            scope: ::std::sync::LazyLock::new(|| #scope),
+            params: ::std::sync::LazyLock::new(|| ::std::vec![#(#params),*])
         }
     };
 
@@ -761,9 +768,9 @@ fn create_construct_impl(element: &Elem) -> TokenStream {
     quote! {
         impl #foundations::Construct for #ident {
             fn construct(
-                engine: &mut ::typst::engine::Engine,
+                engine: &mut ::typst_library::engine::Engine,
                 args: &mut #foundations::Args,
-            ) -> ::typst::diag::SourceResult<#foundations::Content> {
+            ) -> ::typst_library::diag::SourceResult<#foundations::Content> {
                 #(#setup)*
                 Ok(#foundations::Content::new(Self { #(#fields),* }))
             }
@@ -788,9 +795,9 @@ fn create_set_impl(element: &Elem) -> TokenStream {
     quote! {
         impl #foundations::Set for #ident {
             fn set(
-                engine: &mut ::typst::engine::Engine,
+                engine: &mut ::typst_library::engine::Engine,
                 args: &mut #foundations::Args,
-            ) -> ::typst::diag::SourceResult<#foundations::Styles> {
+            ) -> ::typst_library::diag::SourceResult<#foundations::Styles> {
                 let mut styles = #foundations::Styles::new();
                 #(#handlers)*
                 Ok(styles)
@@ -837,7 +844,7 @@ fn create_capable_impl(element: &Elem) -> TokenStream {
                 // Safety: The vtable function doesn't require initialized
                 // data, so it's fine to use a dangling pointer.
                 return Some(unsafe {
-                    ::typst::utils::fat::vtable(dangling as *const dyn #capability)
+                    ::typst_utils::fat::vtable(dangling as *const dyn #capability)
                 });
             }
         }
@@ -1047,7 +1054,13 @@ fn create_repr_impl(element: &Elem) -> TokenStream {
 /// Creates the element's `Locatable` implementation.
 fn create_locatable_impl(element: &Elem) -> TokenStream {
     let ident = &element.ident;
-    quote! { impl ::typst::introspection::Locatable for #foundations::Packed<#ident> {} }
+    quote! { impl ::typst_library::introspection::Locatable for #foundations::Packed<#ident> {} }
+}
+
+/// Creates the element's `Mathy` implementation.
+fn create_mathy_impl(element: &Elem) -> TokenStream {
+    let ident = &element.ident;
+    quote! { impl ::typst_library::math::Mathy for #foundations::Packed<#ident> {} }
 }
 
 /// Creates the element's `IntoValue` implementation.

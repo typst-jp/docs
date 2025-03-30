@@ -35,6 +35,15 @@ Empty \
 +Nope \
 a + 0.
 
+--- enum-syntax-number-length ---
+// Ensure that indentation works from the beginning of a number, not the end.
+
+10. a
+   11. b
+ 12. c // same level as b
+  13. d // indented past c
+14. e
+
 --- enum-number-override ---
 // Test item number overriding.
 1. first
@@ -62,6 +71,23 @@ a + 0.
 + First
   + Nested
 
+--- enum-numbering-reversed ---
+// Test reverse numbering.
+#set enum(reversed: true)
++ Coffee
++ Tea
++ Milk
+
+--- enum-numbering-reversed-overriden ---
+// Test reverse numbering with overriden numbers.
+#set enum(reversed: true)
++ A
++ B
++ C
+9. D
++ E
++ F
+
 --- enum-numbering-closure ---
 // Test numbering with closure.
 #enum(
@@ -73,6 +99,13 @@ a + 0.
     numbering("A", n),
   ),
   [Red], [Green], [Blue], [Red],
+)
+
+--- enum-start html ---
+#enum(
+  start: 3,
+  [Skipping],
+  [Ahead],
 )
 
 --- enum-numbering-closure-nested ---
@@ -150,7 +183,51 @@ a + 0.
 #set enum(number-align: horizon)
 #set enum(number-align: bottom)
 
+--- enum-par render html ---
+// Check whether the contents of enum items become paragraphs.
+#show par: it => if target() != "html" { highlight(it) } else { it }
+
+// No paragraphs.
+#block[
+  + Hello
+  + World
+]
+
+#block[
+  + Hello // Paragraphs
+
+    From
+  + World // No paragraph because it's a tight enum
+]
+
+#block[
+  + Hello // Paragraphs
+
+    From
+
+    The
+
+  + World // Paragraph because it's a wide enum
+]
+
 --- issue-2530-enum-item-panic ---
 // Enum item (pre-emptive)
 #enum.item(none)[Hello]
 #enum.item(17)[Hello]
+
+--- issue-5503-enum-in-align ---
+// `align` is block-level and should interrupt an enum.
++ a
++ b
+#align(right)[+ c]
++ d
+
+--- issue-5719-enum-nested ---
+// Enums can be immediately nested.
+1. A
+2. 1. B
+   2. C
++ + D
+  + E
++ = F
+  G

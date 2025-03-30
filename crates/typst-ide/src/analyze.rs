@@ -1,16 +1,15 @@
 use comemo::Track;
 use ecow::{eco_vec, EcoString, EcoVec};
-use typst::engine::{Engine, Route, Sink, Traced};
-use typst::eval::Vm;
-use typst::foundations::{Context, Label, Scopes, Styles, Value};
-use typst::introspection::Introspector;
-use typst::model::{BibliographyElem, Document};
-use typst::syntax::{ast, LinkedNode, Span, SyntaxKind};
-use typst::World;
+use typst::foundations::{Label, Styles, Value};
+use typst::layout::PagedDocument;
+use typst::model::BibliographyElem;
+use typst::syntax::{ast, LinkedNode, SyntaxKind};
+
+use crate::IdeWorld;
 
 /// Try to determine a set of possible values for an expression.
 pub fn analyze_expr(
-    world: &dyn World,
+    world: &dyn IdeWorld,
     node: &LinkedNode,
 ) -> EcoVec<(Value, Option<Styles>)> {
     let Some(expr) = node.cast::<ast::Expr>() else {
@@ -38,15 +37,15 @@ pub fn analyze_expr(
                 }
             }
 
-            return typst::trace(world, node.span());
+            return typst::trace::<PagedDocument>(world.upcast(), node.span());
         }
     };
 
     eco_vec![(val, None)]
 }
 
-/// Try to load a module from the current source file.
-pub fn analyze_import(world: &dyn World, source: &LinkedNode) -> Option<Value> {
+/// Tries to load a module from the given `source` node.
+pub fn analyze_import(world: &dyn IdeWorld, source: &LinkedNode) -> Option<Value> {
     // Use span in the node for resolving imports with relative paths.
     let source_span = source.span();
     let (source, _) = analyze_expr(world, source).into_iter().next()?;
@@ -54,28 +53,11 @@ pub fn analyze_import(world: &dyn World, source: &LinkedNode) -> Option<Value> {
         return Some(source);
     }
 
-    let introspector = Introspector::default();
-    let traced = Traced::default();
-    let mut sink = Sink::new();
-    let engine = Engine {
-        world: world.track(),
-        introspector: introspector.track(),
-        traced: traced.track(),
-        sink: sink.track_mut(),
-        route: Route::default(),
-    };
+    let Value::Str(path) = source else { return None };
 
-    let context = Context::none();
-    let mut vm = Vm::new(
-        engine,
-        context.track(),
-        Scopes::new(Some(world.library())),
-        Span::detached(),
-    );
-
-    typst::eval::import(&mut vm, source, source_span, true)
-        .ok()
-        .map(Value::Module)
+    crate::utils::with_engine(world, |engine| {
+        typst_eval::import(engine, &path, source_span).ok().map(Value::Module)
+    })
 }
 
 /// Find all labels and details for them.
@@ -84,7 +66,9 @@ pub fn analyze_import(world: &dyn World, source: &LinkedNode) -> Option<Value> {
 /// - All labels and descriptions for them, if available
 /// - A split offset: All labels before this offset belong to nodes, all after
 ///   belong to a bibliography.
-pub fn analyze_labels(document: &Document) -> (Vec<(Label, Option<EcoString>)>, usize) {
+pub fn analyze_labels(
+    document: &PagedDocument,
+) -> (Vec<(Label, Option<EcoString>)>, usize) {
     let mut output = vec![];
 
     // Labels in the document.
@@ -107,9 +91,7 @@ pub fn analyze_labels(document: &Document) -> (Vec<(Label, Option<EcoString>)>, 
     let split = output.len();
 
     // Bibliography keys.
-    for (key, detail) in BibliographyElem::keys(document.introspector.track()) {
-        output.push((Label::new(key.as_str()), detail));
-    }
+    output.extend(BibliographyElem::keys(document.introspector.track()));
 
     (output, split)
 }

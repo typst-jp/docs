@@ -32,6 +32,7 @@ struct Repr {
 impl Source {
     /// Create a new source file.
     pub fn new(id: FileId, text: String) -> Self {
+        let _scope = typst_timing::TimingScope::new("create source");
         let mut root = parse(&text);
         root.numberize(id, Span::FULL).unwrap();
         Self(Arc::new(Repr {
@@ -75,6 +76,7 @@ impl Source {
     ///
     /// Returns the range in the new source that was ultimately reparsed.
     pub fn replace(&mut self, new: &str) -> Range<usize> {
+        let _scope = typst_timing::TimingScope::new("replace source");
         let old = self.text();
 
         let mut prefix =
@@ -164,6 +166,8 @@ impl Source {
     /// Get the byte range for the given span in this file.
     ///
     /// Returns `None` if the span does not point into this source file.
+    ///
+    /// Typically, it's easier to use `WorldExt::range` instead.
     pub fn range(&self, span: Span) -> Option<Range<usize>> {
         Some(self.find(span)?.range())
     }

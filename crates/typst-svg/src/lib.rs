@@ -10,15 +10,15 @@ use std::fmt::{self, Display, Formatter, Write};
 
 use ecow::EcoString;
 use ttf_parser::OutlineBuilder;
-use typst::layout::{
-    Abs, Frame, FrameItem, FrameKind, GroupItem, Page, Point, Ratio, Size, Transform,
+use typst_library::layout::{
+    Abs, Frame, FrameItem, FrameKind, GroupItem, Page, PagedDocument, Point, Ratio, Size,
+    Transform,
 };
-use typst::model::Document;
-use typst::utils::hash128;
-use typst::visualize::{Geometry, Gradient, Pattern};
+use typst_library::visualize::{Geometry, Gradient, Tiling};
+use typst_utils::hash128;
 use xmlwriter::XmlWriter;
 
-use crate::paint::{GradientRef, PatternRef, SVGSubGradient};
+use crate::paint::{GradientRef, SVGSubGradient, TilingRef};
 use crate::text::RenderedGlyph;
 
 /// Export a frame into a SVG file.
@@ -32,10 +32,21 @@ pub fn svg(page: &Page) -> String {
     renderer.finalize()
 }
 
+/// Export a frame into a SVG file.
+#[typst_macros::time(name = "svg frame")]
+pub fn svg_frame(frame: &Frame) -> String {
+    let mut renderer = SVGRenderer::new();
+    renderer.write_header(frame.size());
+
+    let state = State::new(frame.size(), Transform::identity());
+    renderer.render_frame(state, Transform::identity(), frame);
+    renderer.finalize()
+}
+
 /// Export a document with potentially multiple pages into a single SVG file.
 ///
 /// The padding will be added around and between the individual frames.
-pub fn svg_merged(document: &Document, padding: Abs) -> String {
+pub fn svg_merged(document: &PagedDocument, padding: Abs) -> String {
     let width = 2.0 * padding
         + document
             .pages
@@ -81,12 +92,12 @@ struct SVGRenderer {
     /// different transforms. Therefore this allows us to reuse the same gradient
     /// multiple times.
     gradient_refs: Deduplicator<GradientRef>,
-    /// Deduplicated patterns with transform matrices. They use a reference
-    /// (`href`) to a "source" pattern instead of being defined inline.
-    /// This saves a lot of space since patterns are often reused but with
+    /// Deduplicated tilings with transform matrices. They use a reference
+    /// (`href`) to a "source" tiling instead of being defined inline.
+    /// This saves a lot of space since tilings are often reused but with
     /// different transforms. Therefore this allows us to reuse the same gradient
     /// multiple times.
-    pattern_refs: Deduplicator<PatternRef>,
+    tiling_refs: Deduplicator<TilingRef>,
     /// These are the actual gradients being written in the SVG file.
     /// These gradients are deduplicated because they do not contain the transform
     /// matrix, allowing them to be reused across multiple invocations.
@@ -94,12 +105,12 @@ struct SVGRenderer {
     /// The `Ratio` is the aspect ratio of the gradient, this is used to correct
     /// the angle of the gradient.
     gradients: Deduplicator<(Gradient, Ratio)>,
-    /// These are the actual patterns being written in the SVG file.
-    /// These patterns are deduplicated because they do not contain the transform
+    /// These are the actual tilings being written in the SVG file.
+    /// These tilings are deduplicated because they do not contain the transform
     /// matrix, allowing them to be reused across multiple invocations.
     ///
-    /// The `String` is the rendered pattern frame.
-    patterns: Deduplicator<Pattern>,
+    /// The `String` is the rendered tiling frame.
+    tilings: Deduplicator<Tiling>,
     /// These are the gradients that compose a conic gradient.
     conic_subgradients: Deduplicator<SVGSubGradient>,
 }
@@ -152,8 +163,8 @@ impl SVGRenderer {
             gradient_refs: Deduplicator::new('g'),
             gradients: Deduplicator::new('f'),
             conic_subgradients: Deduplicator::new('s'),
-            pattern_refs: Deduplicator::new('p'),
-            patterns: Deduplicator::new('t'),
+            tiling_refs: Deduplicator::new('p'),
+            tilings: Deduplicator::new('t'),
         }
     }
 
@@ -241,12 +252,13 @@ impl SVGRenderer {
         self.xml.write_attribute("class", "typst-group");
 
         if let Some(label) = group.label {
-            self.xml.write_attribute("data-typst-label", label.as_str());
+            self.xml.write_attribute("data-typst-label", &label.resolve());
         }
 
-        if let Some(clip_path) = &group.clip_path {
+        if let Some(clip_curve) = &group.clip {
             let hash = hash128(&group);
-            let id = self.clip_paths.insert_with(hash, || shape::convert_path(clip_path));
+            let id =
+                self.clip_paths.insert_with(hash, || shape::convert_curve(clip_curve));
             self.xml.write_attribute_fmt("clip-path", format_args!("url(#{id})"));
         }
 
@@ -261,8 +273,8 @@ impl SVGRenderer {
         self.write_gradients();
         self.write_gradient_refs();
         self.write_subgradients();
-        self.write_patterns();
-        self.write_pattern_refs();
+        self.write_tilings();
+        self.write_tiling_refs();
         self.xml.end_document()
     }
 

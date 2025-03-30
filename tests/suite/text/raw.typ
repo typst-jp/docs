@@ -282,10 +282,40 @@ int main() {
 
 --- raw-blocky ---
 // Test various raw parsing edge cases.
+
 #let empty = (
   name: "empty",
   input: ``,
   text: "",
+  block: false,
+)
+
+#let empty-spaces = (
+  name: "empty-spaces",
+  input: ```   ```,
+  text: "",
+  block: false,
+)
+
+#let empty-newlines = (
+  name: "empty-newlines",
+  input: ```
+
+
+```,
+  text: "\n",
+  block: true,
+)
+
+#let newlines-backtick = (
+  name: "newlines-backtick",
+  input: ```
+
+`
+
+```,
+  text: "\n`\n",
+  block: true,
 )
 
 #let backtick = (
@@ -423,8 +453,18 @@ test
   block: true,
 )
 
+#let extra-first-line-ws = (
+  name: "extra-first-line-ws",
+  input: eval("```   \n```"),
+  text: "",
+  block: true,
+)
+
 #let cases = (
   empty,
+  empty-spaces,
+  empty-newlines,
+  newlines-backtick,
   backtick,
   lang-backtick,
   lang-space,
@@ -438,10 +478,11 @@ test
   blocky-dedent-lastline2,
   blocky-tab,
   blocky-tab-dedent,
+  extra-first-line-ws,
 )
 
 #for c in cases {
-  let block = c.at("block", default: false)
+  let block = c.block
   assert.eq(c.text, c.input.text, message: "in point " + c.name + ", expect " + repr(c.text) + ", got " + repr(c.input.text) + "")
   assert.eq(block, c.input.block, message: "in point " + c.name + ", expect " + repr(block) + ", got " + repr(c.input.block) + "")
 }
@@ -558,6 +599,18 @@ print(y)
 ```typ
 ```
 
+--- raw-empty-lines ---
+// Test raw with multiple empty lines.
+
+#show raw: block.with(width: 100%, fill: gray)
+
+```
+
+
+
+
+```
+
 --- issue-3841-tabs-in-raw-type-code ---
 // Tab chars were not rendered in raw blocks with lang: "typ(c)"
 #raw("#if true {\n\tf()\t// typ\n}", lang: "typ")
@@ -594,23 +647,16 @@ fn main() {
 }
 ```
 
---- issue-3191-raw-indent-shrink ---
-// Spaces in raw blocks should not be shrunk as it would mess up the indentation
-// of code.
-#set par(justify: true)
+--- issue-3191-raw-justify ---
+// Raw blocks should not be justified by default.
+```
+a b c --------------------
+```
 
-#show raw.where(block: true): block.with(
-  fill: luma(240),
-  inset: 10pt,
-)
-
-#block(
-  width: 60%,
-  ```py
-  for x in xs:
-      print("x=",x)
-  ```
-)
+#show raw: set par(justify: true)
+```
+a b c --------------------
+```
 
 --- issue-3191-raw-normal-paragraphs-still-shrink ---
 // In normal paragraphs, spaces should still be shrunk.
@@ -629,6 +675,17 @@ fn main() {
   ```typ
   `code`
   ```
+
+--- issue-5760-disable-cjk-latin-spacing-in-raw ---
+
+```typ
+#let hi = "你好world"
+```
+
+#show raw: set text(cjk-latin-spacing: auto)
+```typ
+#let hi = "你好world"
+```
 
 --- raw-theme-set-to-auto ---
 ```typ

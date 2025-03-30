@@ -180,6 +180,17 @@ We can clearly see that @fig-cylinder and
   caption: [Underlined],
 )
 
+--- figure-par ---
+// Ensure that a figure body is considered a paragraph.
+#show par: highlight
+
+#figure[Text]
+
+#figure(
+  [Text],
+  caption: [A caption]
+)
+
 --- figure-and-caption-show ---
 // Test creating custom figure and custom caption
 
@@ -244,9 +255,9 @@ We can clearly see that @fig-cylinder and
     caption: [Пятиугольник],
 )
 
---- figure-localization-gr ---
+--- figure-localization-el ---
 // Test Greek
-#set text(lang: "gr")
+#set text(lang: "el")
 #figure(
   circle(),
   caption: [Ένας κύκλος.],

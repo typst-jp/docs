@@ -1,9 +1,9 @@
 use std::num::NonZeroUsize;
 
 use pdf_writer::{Finish, Pdf, Ref, TextStr};
-use typst::foundations::{NativeElement, Packed, StyleChain};
-use typst::layout::Abs;
-use typst::model::HeadingElem;
+use typst_library::foundations::{NativeElement, Packed, StyleChain};
+use typst_library::layout::Abs;
+use typst_library::model::HeadingElem;
 
 use crate::{AbsExt, TextStrExt, WithEverything};
 
@@ -184,8 +184,7 @@ fn write_outline_item(
         outline.count(-(node.children.len() as i32));
     }
 
-    let body = node.element.body();
-    outline.title(TextStr::trimmed(body.plain_text().trim()));
+    outline.title(TextStr::trimmed(node.element.body.plain_text().trim()));
 
     let loc = node.element.location().unwrap();
     let pos = ctx.document.introspector.position(loc);

@@ -35,6 +35,12 @@ $stretch(arrow.t)^"map"$
 $stretch(arrow.t, size: #2em)^"map"$
 $stretch(arrow.t, size: #200%)^"map"$
 
+--- math-stretch-vertical-scripts ---
+// Test vertical stretch interactions with script attachments.
+#let big = $stretch(|, size: #4em)$
+$ big_0^1 stretch(|, size: #1.5em)_0^1
+  stretch(big, size: #1em)_0^1 |_0^1 $
+
 --- math-stretch-horizontal ---
 // Test stretching along horizontal axis.
 #let ext(sym) = math.stretch(sym, size: 2em)
@@ -57,8 +63,8 @@ $ ext(bar.v) quad ext(bar.v.double) quad
 // Test stretch when base is given with shorthand.
 $stretch(||, size: #2em)$
 $stretch(\(, size: #2em)$
-$stretch("⟧", size: #2em)$
-$stretch("|", size: #2em)$
+$stretch(⟧, size: #2em)$
+$stretch(|, size: #2em)$
 $stretch(->, size: #2em)$
 $stretch(↣, size: #2em)$
 
@@ -77,3 +83,11 @@ $ stretch(base, size: #50%) $
 // Test stretching with attachments when nested in an equation.
 #let body = $stretch(=)$
 $ body^"text" $
+
+#{
+  let body = $stretch(=)$
+  for i in range(24) {
+    body = $body$
+  }
+  $body^"long text"$
+}

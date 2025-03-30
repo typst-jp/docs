@@ -6,11 +6,11 @@ mod shape;
 mod text;
 
 use tiny_skia as sk;
-use typst::layout::{
-    Abs, Axes, Frame, FrameItem, FrameKind, GroupItem, Page, Point, Size, Transform,
+use typst_library::layout::{
+    Abs, Axes, Frame, FrameItem, FrameKind, GroupItem, Page, PagedDocument, Point, Size,
+    Transform,
 };
-use typst::model::Document;
-use typst::visualize::{Color, Geometry, Paint};
+use typst_library::visualize::{Color, Geometry, Paint};
 
 /// Export a page into a raster image.
 ///
@@ -43,7 +43,7 @@ pub fn render(page: &Page, pixel_per_pt: f32) -> sk::Pixmap {
 
 /// Export a document with potentially multiple pages into a single raster image.
 pub fn render_merged(
-    document: &Document,
+    document: &PagedDocument,
     pixel_per_pt: f32,
     gap: Abs,
     fill: Option<Color>,
@@ -93,7 +93,7 @@ struct State<'a> {
     size: Size,
 }
 
-impl<'a> State<'a> {
+impl State<'_> {
     fn new(size: Size, transform: sk::Transform, pixel_per_pt: f32) -> Self {
         Self {
             size,
@@ -193,8 +193,8 @@ fn render_group(canvas: &mut sk::Pixmap, state: State, pos: Point, group: &Group
 
     let mut mask = state.mask;
     let storage;
-    if let Some(clip_path) = group.clip_path.as_ref() {
-        if let Some(path) = shape::convert_path(clip_path)
+    if let Some(clip_curve) = group.clip.as_ref() {
+        if let Some(path) = shape::convert_curve(clip_curve)
             .and_then(|path| path.transform(state.transform))
         {
             if let Some(mask) = mask {

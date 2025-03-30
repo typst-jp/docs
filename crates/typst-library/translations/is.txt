@@ -1,0 +1,8 @@
+figure = Mynd
+table = Tafla
+equation = Jafna
+bibliography = Heimildaskrá
+heading = Kafli
+outline = Efnisyfirlit
+raw = Sýnishorn
+page = blaðsíða
