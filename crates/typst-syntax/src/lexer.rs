@@ -4,20 +4,18 @@ use unicode_script::{Script, UnicodeScript};
 use unicode_segmentation::UnicodeSegmentation;
 use unscanny::Scanner;
 
-use crate::{SyntaxError, SyntaxKind};
+use crate::{SyntaxError, SyntaxKind, SyntaxNode};
 
-/// Splits up a string of source code into tokens.
+/// An iterator over a source code string which returns tokens.
 #[derive(Clone)]
 pub(super) struct Lexer<'s> {
-    /// The underlying scanner.
+    /// The scanner: contains the underlying string and location as a "cursor".
     s: Scanner<'s>,
     /// The mode the lexer is in. This determines which kinds of tokens it
     /// produces.
     mode: LexMode,
     /// Whether the last token contained a newline.
     newline: bool,
-    /// The state held by raw line lexing.
-    raw: Vec<(SyntaxKind, usize)>,
     /// An error for the last token.
     error: Option<SyntaxError>,
 }
@@ -31,8 +29,6 @@ pub(super) enum LexMode {
     Math,
     /// Keywords, literals and operators.
     Code,
-    /// The contents of a raw block.
-    Raw,
 }
 
 impl<'s> Lexer<'s> {
@@ -44,7 +40,6 @@ impl<'s> Lexer<'s> {
             mode,
             newline: false,
             error: None,
-            raw: Vec::new(),
         }
     }
 
@@ -74,9 +69,11 @@ impl<'s> Lexer<'s> {
         self.newline
     }
 
-    /// Take out the last error, if any.
-    pub fn take_error(&mut self) -> Option<SyntaxError> {
-        self.error.take()
+    /// The number of characters until the most recent newline from an index.
+    pub fn column(&self, index: usize) -> usize {
+        let mut s = self.s; // Make a new temporary scanner (cheap).
+        s.jump(index);
+        s.before().chars().rev().take_while(|&c| !is_newline(c)).count()
     }
 }
 
@@ -97,22 +94,16 @@ impl Lexer<'_> {
 
 /// Shared methods with all [`LexMode`].
 impl Lexer<'_> {
-    /// Proceed to the next token and return its [`SyntaxKind`]. Note the
-    /// token could be a [trivia](SyntaxKind::is_trivia).
-    pub fn next(&mut self) -> SyntaxKind {
-        if self.mode == LexMode::Raw {
-            let Some((kind, end)) = self.raw.pop() else {
-                return SyntaxKind::End;
-            };
-            self.s.jump(end);
-            return kind;
-        }
+    /// Return the next token in our text. Returns both the [`SyntaxNode`]
+    /// and the raw [`SyntaxKind`] to make it more ergonomic to check the kind
+    pub fn next(&mut self) -> (SyntaxKind, SyntaxNode) {
+        debug_assert!(self.error.is_none());
+        let start = self.s.cursor();
 
         self.newline = false;
-        self.error = None;
-        let start = self.s.cursor();
-        match self.s.eat() {
+        let kind = match self.s.eat() {
             Some(c) if is_space(c, self.mode) => self.whitespace(start, c),
+            Some('#') if start == 0 && self.s.eat_if('!') => self.shebang(),
             Some('/') if self.s.eat_if('/') => self.line_comment(),
             Some('/') if self.s.eat_if('*') => self.block_comment(),
             Some('*') if self.s.eat_if('/') => {
@@ -123,22 +114,32 @@ impl Lexer<'_> {
                 );
                 kind
             }
-
+            Some('`') if self.mode != LexMode::Math => return self.raw(),
             Some(c) => match self.mode {
                 LexMode::Markup => self.markup(start, c),
-                LexMode::Math => self.math(start, c),
+                LexMode::Math => match self.math(start, c) {
+                    (kind, None) => kind,
+                    (kind, Some(node)) => return (kind, node),
+                },
                 LexMode::Code => self.code(start, c),
-                LexMode::Raw => unreachable!(),
             },
 
             None => SyntaxKind::End,
-        }
+        };
+
+        let text = self.s.from(start);
+        let node = match self.error.take() {
+            Some(error) => SyntaxNode::error(error, text),
+            None => SyntaxNode::leaf(kind, text),
+        };
+        (kind, node)
     }
 
     /// Eat whitespace characters greedily.
     fn whitespace(&mut self, start: usize, c: char) -> SyntaxKind {
         let more = self.s.eat_while(|c| is_space(c, self.mode));
         let newlines = match c {
+            // Optimize eating a single space.
             ' ' if more.is_empty() => 0,
             _ => count_newlines(self.s.from(start)),
         };
@@ -149,6 +150,11 @@ impl Lexer<'_> {
         } else {
             SyntaxKind::Space
         }
+    }
+
+    fn shebang(&mut self) -> SyntaxKind {
+        self.s.eat_until(is_newline);
+        SyntaxKind::Shebang
     }
 
     fn line_comment(&mut self) -> SyntaxKind {
@@ -187,7 +193,6 @@ impl Lexer<'_> {
     fn markup(&mut self, start: usize, c: char) -> SyntaxKind {
         match c {
             '\\' => self.backslash(),
-            '`' => self.raw(),
             'h' if self.s.eat_if("ttp://") => self.link(),
             'h' if self.s.eat_if("ttps://") => self.link(),
             '<' if self.s.at(is_id_continue) => self.label(),
@@ -252,9 +257,11 @@ impl Lexer<'_> {
         }
     }
 
-    fn raw(&mut self) -> SyntaxKind {
+    /// We parse entire raw segments in the lexer as a convenience to avoid
+    /// going to and from the parser for each raw section. See comments in
+    /// [`Self::blocky_raw`] and [`Self::inline_raw`] for specific details.
+    fn raw(&mut self) -> (SyntaxKind, SyntaxNode) {
         let start = self.s.cursor() - 1;
-        self.raw.clear();
 
         // Determine number of opening backticks.
         let mut backticks = 1;
@@ -264,9 +271,11 @@ impl Lexer<'_> {
 
         // Special case for ``.
         if backticks == 2 {
-            self.push_raw(SyntaxKind::RawDelim);
-            self.s.jump(start + 1);
-            return SyntaxKind::RawDelim;
+            let nodes = vec![
+                SyntaxNode::leaf(SyntaxKind::RawDelim, "`"),
+                SyntaxNode::leaf(SyntaxKind::RawDelim, "`"),
+            ];
+            return (SyntaxKind::Raw, SyntaxNode::inner(SyntaxKind::Raw, nodes));
         }
 
         // Find end of raw text.
@@ -275,46 +284,85 @@ impl Lexer<'_> {
             match self.s.eat() {
                 Some('`') => found += 1,
                 Some(_) => found = 0,
-                None => break,
+                None => {
+                    let msg = SyntaxError::new("unclosed raw text");
+                    let error = SyntaxNode::error(msg, self.s.from(start));
+                    return (SyntaxKind::Error, error);
+                }
             }
         }
-
-        if found != backticks {
-            return self.error("unclosed raw text");
-        }
-
         let end = self.s.cursor();
-        if backticks >= 3 {
-            self.blocky_raw(start, end, backticks);
-        } else {
-            self.inline_raw(start, end, backticks);
-        }
 
-        // Closing delimiter.
-        self.push_raw(SyntaxKind::RawDelim);
+        let mut nodes = Vec::with_capacity(3); // Will have at least 3.
 
-        // The saved tokens will be removed in reverse.
-        self.raw.reverse();
+        // A closure for pushing a node onto our raw vector. Assumes the caller
+        // will move the scanner to the next location at each step.
+        let mut prev_start = start;
+        let mut push_raw = |kind, s: &Scanner| {
+            nodes.push(SyntaxNode::leaf(kind, s.from(prev_start)));
+            prev_start = s.cursor();
+        };
 
         // Opening delimiter.
         self.s.jump(start + backticks);
-        SyntaxKind::RawDelim
-    }
+        push_raw(SyntaxKind::RawDelim, &self.s);
 
-    fn blocky_raw(&mut self, start: usize, end: usize, backticks: usize) {
-        // Language tag.
-        self.s.jump(start + backticks);
-        if self.s.eat_if(is_id_start) {
-            self.s.eat_while(is_id_continue);
-            self.push_raw(SyntaxKind::RawLang);
+        if backticks >= 3 {
+            self.blocky_raw(end - backticks, &mut push_raw);
+        } else {
+            self.inline_raw(end - backticks, &mut push_raw);
         }
 
-        // Determine inner content between backticks.
-        self.s.eat_if(' ');
-        let inner = self.s.to(end - backticks);
+        // Closing delimiter.
+        self.s.jump(end);
+        push_raw(SyntaxKind::RawDelim, &self.s);
+
+        (SyntaxKind::Raw, SyntaxNode::inner(SyntaxKind::Raw, nodes))
+    }
+
+    /// Raw blocks parse a language tag, have smart behavior for trimming
+    /// whitespace in the start/end lines, and trim common leading whitespace
+    /// from all other lines as the "dedent". The exact behavior is described
+    /// below.
+    ///
+    /// ### The initial line:
+    /// - A valid Typst identifier immediately following the opening delimiter
+    ///   is parsed as the language tag.
+    /// - We check the rest of the line and if all characters are whitespace,
+    ///   trim it. Otherwise we trim a single leading space if present.
+    ///   - If more trimmed characters follow on future lines, they will be
+    ///     merged into the same trimmed element.
+    /// - If we didn't trim the entire line, the rest is kept as text.
+    ///
+    /// ### Inner lines:
+    /// - We determine the "dedent" by iterating over the lines. The dedent is
+    ///   the minimum number of leading whitespace characters (not bytes) before
+    ///   each line that has any non-whitespace characters.
+    ///   - The opening delimiter's line does not contribute to the dedent, but
+    ///     the closing delimiter's line does (even if that line is entirely
+    ///     whitespace up to the delimiter).
+    /// - We then trim the newline and dedent characters of each line, and add a
+    ///   (potentially empty) text element of all remaining characters.
+    ///
+    /// ### The final line:
+    /// - If the last line is entirely whitespace, it is trimmed.
+    /// - Otherwise its text is kept like an inner line. However, if the last
+    ///   non-whitespace character of the final line is a backtick, then one
+    ///   ascii space (if present) is trimmed from the end.
+    fn blocky_raw<F>(&mut self, inner_end: usize, mut push_raw: F)
+    where
+        F: FnMut(SyntaxKind, &Scanner),
+    {
+        // Language tag.
+        if self.s.eat_if(is_id_start) {
+            self.s.eat_while(is_id_continue);
+            push_raw(SyntaxKind::RawLang, &self.s);
+        }
+
+        // The rest of the function operates on the lines between the backticks.
+        let mut lines = split_newlines(self.s.to(inner_end));
 
         // Determine dedent level.
-        let mut lines = split_newlines(inner);
         let dedent = lines
             .iter()
             .skip(1)
@@ -325,73 +373,93 @@ impl Lexer<'_> {
             .min()
             .unwrap_or(0);
 
-        // Trim single space in last line if text ends with a backtick. The last
-        // line is the one directly before the closing backticks and if it is
-        // just whitespace, it will be completely trimmed below.
-        if inner.trim_end().ends_with('`') {
-            if let Some(last) = lines.last_mut() {
+        // Trim whitespace from the last line. Will be added as a `RawTrimmed`
+        // kind by the check for `self.s.cursor() != inner_end` below.
+        if lines.last().is_some_and(|last| last.chars().all(char::is_whitespace)) {
+            lines.pop();
+        } else if let Some(last) = lines.last_mut() {
+            // If last line ends in a backtick, try to trim a single space. This
+            // check must happen before we add the first line since the last and
+            // first lines might be the same.
+            if last.trim_end().ends_with('`') {
                 *last = last.strip_suffix(' ').unwrap_or(last);
             }
         }
 
-        let is_whitespace = |line: &&str| line.chars().all(char::is_whitespace);
-        let starts_whitespace = lines.first().is_some_and(is_whitespace);
-        let ends_whitespace = lines.last().is_some_and(is_whitespace);
-
         let mut lines = lines.into_iter();
-        let mut skipped = false;
 
-        // Trim whitespace + newline at start.
-        if starts_whitespace {
-            self.s.advance(lines.next().unwrap().len());
-            skipped = true;
-        }
-        // Trim whitespace + newline at end.
-        if ends_whitespace {
-            lines.next_back();
+        // Handle the first line: trim if all whitespace, or trim a single space
+        // at the start. Note that the first line does not affect the dedent
+        // value.
+        if let Some(first_line) = lines.next() {
+            if first_line.chars().all(char::is_whitespace) {
+                self.s.advance(first_line.len());
+                // This is the only spot we advance the scanner, but don't
+                // immediately call `push_raw`. But the rest of the function
+                // ensures we will always add this text to a `RawTrimmed` later.
+                debug_assert!(self.s.cursor() != inner_end);
+                // A proof by cases follows:
+                // # First case: The loop runs
+                // If the loop runs, there must be a newline following, so
+                // `cursor != inner_end`. And if the loop runs, the first thing
+                // it does is add a trimmed element.
+                // # Second case: The final if-statement runs.
+                // To _not_ reach the loop from here, we must have only one or
+                // two lines:
+                // 1. If one line, we cannot be here, because the first and last
+                //    lines are the same, so this line will have been removed by
+                //    the check for the last line being all whitespace.
+                // 2. If two lines, the loop will run unless the last is fully
+                //    whitespace, but if it is, it will have been popped, then
+                //    the final if-statement will run because the text removed
+                //    by the last line must include at least a newline, so
+                //    `cursor != inner_end` here.
+            } else {
+                let line_end = self.s.cursor() + first_line.len();
+                if self.s.eat_if(' ') {
+                    // Trim a single space after the lang tag on the first line.
+                    push_raw(SyntaxKind::RawTrimmed, &self.s);
+                }
+                // We know here that the rest of the line is non-empty.
+                self.s.jump(line_end);
+                push_raw(SyntaxKind::Text, &self.s);
+            }
         }
 
         // Add lines.
-        for (i, line) in lines.enumerate() {
-            let dedent = if i == 0 && !skipped { 0 } else { dedent };
+        for line in lines {
             let offset: usize = line.chars().take(dedent).map(char::len_utf8).sum();
             self.s.eat_newline();
             self.s.advance(offset);
-            self.push_raw(SyntaxKind::RawTrimmed);
+            push_raw(SyntaxKind::RawTrimmed, &self.s);
             self.s.advance(line.len() - offset);
-            self.push_raw(SyntaxKind::Text);
+            push_raw(SyntaxKind::Text, &self.s);
         }
 
         // Add final trimmed.
-        if self.s.cursor() < end - backticks {
-            self.s.jump(end - backticks);
-            self.push_raw(SyntaxKind::RawTrimmed);
+        if self.s.cursor() < inner_end {
+            self.s.jump(inner_end);
+            push_raw(SyntaxKind::RawTrimmed, &self.s);
         }
-        self.s.jump(end);
     }
 
-    fn inline_raw(&mut self, start: usize, end: usize, backticks: usize) {
-        self.s.jump(start + backticks);
-
-        while self.s.cursor() < end - backticks {
+    /// Inline raw text is split on lines with non-newlines as `Text` kinds and
+    /// newlines as `RawTrimmed`. Inline raw text does not dedent the text, all
+    /// non-newline whitespace is kept.
+    fn inline_raw<F>(&mut self, inner_end: usize, mut push_raw: F)
+    where
+        F: FnMut(SyntaxKind, &Scanner),
+    {
+        while self.s.cursor() < inner_end {
             if self.s.at(is_newline) {
-                self.push_raw(SyntaxKind::Text);
+                push_raw(SyntaxKind::Text, &self.s);
                 self.s.eat_newline();
-                self.push_raw(SyntaxKind::RawTrimmed);
+                push_raw(SyntaxKind::RawTrimmed, &self.s);
                 continue;
             }
             self.s.eat();
         }
-        self.push_raw(SyntaxKind::Text);
-
-        self.s.jump(end);
-    }
-
-    /// Push the current cursor that marks the end of a raw segment of
-    /// the given `kind`.
-    fn push_raw(&mut self, kind: SyntaxKind) {
-        let end = self.s.cursor();
-        self.raw.push((kind, end));
+        push_raw(SyntaxKind::Text, &self.s);
     }
 
     fn link(&mut self) -> SyntaxKind {
@@ -512,8 +580,8 @@ impl Lexer<'_> {
 
 /// Math.
 impl Lexer<'_> {
-    fn math(&mut self, start: usize, c: char) -> SyntaxKind {
-        match c {
+    fn math(&mut self, start: usize, c: char) -> (SyntaxKind, Option<SyntaxNode>) {
+        let kind = match c {
             '\\' => self.backslash(),
             '"' => self.string(),
 
@@ -554,6 +622,11 @@ impl Lexer<'_> {
             '~' if self.s.eat_if('>') => SyntaxKind::MathShorthand,
             '*' | '-' | '~' => SyntaxKind::MathShorthand,
 
+            '.' => SyntaxKind::Dot,
+            ',' => SyntaxKind::Comma,
+            ';' => SyntaxKind::Semicolon,
+            ')' => SyntaxKind::RightParen,
+
             '#' => SyntaxKind::Hash,
             '_' => SyntaxKind::Underscore,
             '$' => SyntaxKind::Dollar,
@@ -566,11 +639,41 @@ impl Lexer<'_> {
             // Identifiers.
             c if is_math_id_start(c) && self.s.at(is_math_id_continue) => {
                 self.s.eat_while(is_math_id_continue);
-                SyntaxKind::MathIdent
+                let (kind, node) = self.math_ident_or_field(start);
+                return (kind, Some(node));
             }
 
             // Other math atoms.
             _ => self.math_text(start, c),
+        };
+        (kind, None)
+    }
+
+    /// Parse a single `MathIdent` or an entire `FieldAccess`.
+    fn math_ident_or_field(&mut self, start: usize) -> (SyntaxKind, SyntaxNode) {
+        let mut kind = SyntaxKind::MathIdent;
+        let mut node = SyntaxNode::leaf(kind, self.s.from(start));
+        while let Some(ident) = self.maybe_dot_ident() {
+            kind = SyntaxKind::FieldAccess;
+            let field_children = vec![
+                node,
+                SyntaxNode::leaf(SyntaxKind::Dot, '.'),
+                SyntaxNode::leaf(SyntaxKind::Ident, ident),
+            ];
+            node = SyntaxNode::inner(kind, field_children);
+        }
+        (kind, node)
+    }
+
+    /// If at a dot and a math identifier, eat and return the identifier.
+    fn maybe_dot_ident(&mut self) -> Option<&str> {
+        if self.s.scout(1).is_some_and(is_math_id_start) && self.s.eat_if('.') {
+            let ident_start = self.s.cursor();
+            self.s.eat();
+            self.s.eat_while(is_math_id_continue);
+            Some(self.s.from(ident_start))
+        } else {
+            None
         }
     }
 
@@ -582,6 +685,7 @@ impl Lexer<'_> {
             if s.eat_if('.') && !s.eat_while(char::is_numeric).is_empty() {
                 self.s = s;
             }
+            SyntaxKind::MathText
         } else {
             let len = self
                 .s
@@ -590,8 +694,53 @@ impl Lexer<'_> {
                 .next()
                 .map_or(0, str::len);
             self.s.jump(start + len);
+            if len > c.len_utf8() {
+                // Grapheme clusters are treated as normal text and stay grouped
+                // This may need to change in the future.
+                SyntaxKind::Text
+            } else {
+                SyntaxKind::MathText
+            }
         }
-        SyntaxKind::Text
+    }
+
+    /// Handle named arguments in math function call.
+    pub fn maybe_math_named_arg(&mut self, start: usize) -> Option<SyntaxNode> {
+        let cursor = self.s.cursor();
+        self.s.jump(start);
+        if self.s.eat_if(is_id_start) {
+            self.s.eat_while(is_id_continue);
+            // Check that a colon directly follows the identifier, and not the
+            // `:=` or `::=` math shorthands.
+            if self.s.at(':') && !self.s.at(":=") && !self.s.at("::=") {
+                // Check that the identifier is not just `_`.
+                let node = if self.s.from(start) != "_" {
+                    SyntaxNode::leaf(SyntaxKind::Ident, self.s.from(start))
+                } else {
+                    let msg = SyntaxError::new("expected identifier, found underscore");
+                    SyntaxNode::error(msg, self.s.from(start))
+                };
+                return Some(node);
+            }
+        }
+        self.s.jump(cursor);
+        None
+    }
+
+    /// Handle spread arguments in math function call.
+    pub fn maybe_math_spread_arg(&mut self, start: usize) -> Option<SyntaxNode> {
+        let cursor = self.s.cursor();
+        self.s.jump(start);
+        if self.s.eat_if("..") {
+            // Check that neither a space nor a dot follows the spread syntax.
+            // A dot would clash with the `...` math shorthand.
+            if !self.space_or_end() && !self.s.at('.') {
+                let node = SyntaxNode::leaf(SyntaxKind::Dots, self.s.from(start));
+                return Some(node);
+            }
+        }
+        self.s.jump(cursor);
+        None
     }
 }
 
@@ -599,7 +748,6 @@ impl Lexer<'_> {
 impl Lexer<'_> {
     fn code(&mut self, start: usize, c: char) -> SyntaxKind {
         match c {
-            '`' => self.raw(),
             '<' if self.s.at(is_id_continue) => self.label(),
             '0'..='9' => self.number(start, c),
             '.' if self.s.at(char::is_ascii_digit) => self.number(start, c),
@@ -730,6 +878,12 @@ impl Lexer<'_> {
             "pt" | "mm" | "cm" | "in" | "deg" | "rad" | "em" | "fr" | "%"
         ) {
             return self.error(eco_format!("invalid number suffix: {}", suffix));
+        }
+
+        if base != 10 {
+            let kind = self.error(eco_format!("invalid base-{base} prefix"));
+            self.hint("numbers with a unit cannot have a base prefix");
+            return kind;
         }
 
         SyntaxKind::Numeric

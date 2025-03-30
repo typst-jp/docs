@@ -4,11 +4,14 @@
 
 use std::num::NonZeroUsize;
 use std::ops::Deref;
+use std::path::Path;
+use std::str::FromStr;
 
 use ecow::EcoString;
 use unscanny::Scanner;
 
-use crate::{is_newline, Span, SyntaxKind, SyntaxNode};
+use crate::package::PackageSpec;
+use crate::{is_ident, is_newline, Span, SyntaxKind, SyntaxNode};
 
 /// A typed AST node.
 pub trait AstNode<'a>: Sized {
@@ -123,6 +126,8 @@ pub enum Expr<'a> {
     Equation(Equation<'a>),
     /// The contents of a mathematical equation: `x^2 + 1`.
     Math(Math<'a>),
+    /// A lone text fragment in math: `x`, `25`, `3.1415`, `=`, `[`.
+    MathText(MathText<'a>),
     /// An identifier in math: `pi`.
     MathIdent(MathIdent<'a>),
     /// A shorthand for a unicode codepoint in math: `a <= b`.
@@ -163,7 +168,7 @@ pub enum Expr<'a> {
     Parenthesized(Parenthesized<'a>),
     /// An array: `(1, "hi", 12cm)`.
     Array(Array<'a>),
-    /// A dictionary: `(thickness: 3pt, pattern: dashed)`.
+    /// A dictionary: `(thickness: 3pt, dash: "solid")`.
     Dict(Dict<'a>),
     /// A unary operation: `-x`.
     Unary(Unary<'a>),
@@ -233,6 +238,7 @@ impl<'a> AstNode<'a> for Expr<'a> {
             SyntaxKind::TermItem => node.cast().map(Self::Term),
             SyntaxKind::Equation => node.cast().map(Self::Equation),
             SyntaxKind::Math => node.cast().map(Self::Math),
+            SyntaxKind::MathText => node.cast().map(Self::MathText),
             SyntaxKind::MathIdent => node.cast().map(Self::MathIdent),
             SyntaxKind::MathShorthand => node.cast().map(Self::MathShorthand),
             SyntaxKind::MathAlignPoint => node.cast().map(Self::MathAlignPoint),
@@ -297,6 +303,7 @@ impl<'a> AstNode<'a> for Expr<'a> {
             Self::Term(v) => v.to_untyped(),
             Self::Equation(v) => v.to_untyped(),
             Self::Math(v) => v.to_untyped(),
+            Self::MathText(v) => v.to_untyped(),
             Self::MathIdent(v) => v.to_untyped(),
             Self::MathShorthand(v) => v.to_untyped(),
             Self::MathAlignPoint(v) => v.to_untyped(),
@@ -707,6 +714,34 @@ impl<'a> Math<'a> {
 }
 
 node! {
+    /// A lone text fragment in math: `x`, `25`, `3.1415`, `=`, `[`.
+    MathText
+}
+
+/// The underlying text kind.
+pub enum MathTextKind<'a> {
+    Character(char),
+    Number(&'a EcoString),
+}
+
+impl<'a> MathText<'a> {
+    /// Return the underlying text.
+    pub fn get(self) -> MathTextKind<'a> {
+        let text = self.0.text();
+        let mut chars = text.chars();
+        let c = chars.next().unwrap();
+        if c.is_numeric() {
+            // Numbers are potentially grouped as multiple characters. This is
+            // done in `Lexer::math_text()`.
+            MathTextKind::Number(text)
+        } else {
+            assert!(chars.next().is_none());
+            MathTextKind::Character(c)
+        }
+    }
+}
+
+node! {
     /// An identifier in math: `pi`.
     MathIdent
 }
@@ -743,7 +778,6 @@ impl MathShorthand<'_> {
     pub const LIST: &'static [(&'static str, char)] = &[
         ("...", '…'),
         ("-", '−'),
-        ("'", '′'),
         ("*", '∗'),
         ("~", '∼'),
         ("!=", '≠'),
@@ -1195,7 +1229,7 @@ impl<'a> AstNode<'a> for ArrayItem<'a> {
 }
 
 node! {
-    /// A dictionary: `(thickness: 3pt, pattern: dashed)`.
+    /// A dictionary: `(thickness: 3pt, dash: "solid")`.
     Dict
 }
 
@@ -2033,6 +2067,41 @@ impl<'a> ModuleImport<'a> {
         })
     }
 
+    /// The name that will be bound for a bare import. This name must be
+    /// statically known. It can come from:
+    /// - an identifier
+    /// - a field access
+    /// - a string that is a valid file path where the file stem is a valid
+    ///   identifier
+    /// - a string that is a valid package spec
+    pub fn bare_name(self) -> Result<EcoString, BareImportError> {
+        match self.source() {
+            Expr::Ident(ident) => Ok(ident.get().clone()),
+            Expr::FieldAccess(access) => Ok(access.field().get().clone()),
+            Expr::Str(string) => {
+                let string = string.get();
+                let name = if string.starts_with('@') {
+                    PackageSpec::from_str(&string)
+                        .map_err(|_| BareImportError::PackageInvalid)?
+                        .name
+                } else {
+                    Path::new(string.as_str())
+                        .file_stem()
+                        .and_then(|path| path.to_str())
+                        .ok_or(BareImportError::PathInvalid)?
+                        .into()
+                };
+
+                if !is_ident(&name) {
+                    return Err(BareImportError::PathInvalid);
+                }
+
+                Ok(name)
+            }
+            _ => Err(BareImportError::Dynamic),
+        }
+    }
+
     /// The name this module was assigned to, if it was renamed with `as`
     /// (`renamed` in `import "..." as renamed`).
     pub fn new_name(self) -> Option<Ident<'a>> {
@@ -2041,6 +2110,18 @@ impl<'a> ModuleImport<'a> {
             .skip_while(|child| child.kind() != SyntaxKind::As)
             .find_map(SyntaxNode::cast)
     }
+}
+
+/// Reasons why a bare name cannot be determined for an import source.
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
+pub enum BareImportError {
+    /// There is no statically resolvable binding name.
+    Dynamic,
+    /// The import source is not a valid path or the path stem not a valid
+    /// identifier.
+    PathInvalid,
+    /// The import source is not a valid package spec.
+    PackageInvalid,
 }
 
 /// The items that ought to be imported from a file.

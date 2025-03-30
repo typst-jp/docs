@@ -4,6 +4,7 @@ mod catalog;
 mod color;
 mod color_font;
 mod content;
+mod embed;
 mod extg;
 mod font;
 mod gradient;
@@ -11,45 +12,46 @@ mod image;
 mod named_destination;
 mod outline;
 mod page;
-mod pattern;
 mod resources;
+mod tiling;
 
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 use std::fmt::{self, Debug, Formatter};
 use std::hash::Hash;
 use std::ops::{Deref, DerefMut};
 
 use base64::Engine;
+use ecow::EcoString;
 use pdf_writer::{Chunk, Name, Pdf, Ref, Str, TextStr};
 use serde::{Deserialize, Serialize};
-use typst::diag::{bail, SourceResult, StrResult};
-use typst::foundations::{Datetime, Smart};
-use typst::layout::{Abs, Em, PageRanges, Transform};
-use typst::model::Document;
-use typst::syntax::Span;
-use typst::text::Font;
-use typst::utils::Deferred;
-use typst::visualize::Image;
+use typst_library::diag::{bail, SourceResult, StrResult};
+use typst_library::foundations::{Datetime, Smart};
+use typst_library::layout::{Abs, Em, PageRanges, PagedDocument, Transform};
+use typst_library::text::Font;
+use typst_library::visualize::Image;
+use typst_syntax::Span;
+use typst_utils::Deferred;
 
 use crate::catalog::write_catalog;
 use crate::color::{alloc_color_functions_refs, ColorFunctionRefs};
 use crate::color_font::{write_color_fonts, ColorFontSlice};
+use crate::embed::write_embedded_files;
 use crate::extg::{write_graphic_states, ExtGState};
 use crate::font::write_fonts;
 use crate::gradient::{write_gradients, PdfGradient};
 use crate::image::write_images;
 use crate::named_destination::{write_named_destinations, NamedDestinations};
 use crate::page::{alloc_page_refs, traverse_pages, write_page_tree, EncodedPage};
-use crate::pattern::{write_patterns, PdfPattern};
 use crate::resources::{
     alloc_resources_refs, write_resource_dictionaries, Resources, ResourcesRefs,
 };
+use crate::tiling::{write_tilings, PdfTiling};
 
 /// Export a document into a PDF file.
 ///
 /// Returns the raw bytes making up the PDF file.
 #[typst_macros::time(name = "pdf")]
-pub fn pdf(document: &Document, options: &PdfOptions) -> SourceResult<Vec<u8>> {
+pub fn pdf(document: &PagedDocument, options: &PdfOptions) -> SourceResult<Vec<u8>> {
     PdfBuilder::new(document, options)
         .phase(|builder| builder.run(traverse_pages))?
         .phase(|builder| {
@@ -66,8 +68,9 @@ pub fn pdf(document: &Document, options: &PdfOptions) -> SourceResult<Vec<u8>> {
                 color_fonts: builder.run(write_color_fonts)?,
                 images: builder.run(write_images)?,
                 gradients: builder.run(write_gradients)?,
-                patterns: builder.run(write_patterns)?,
+                tilings: builder.run(write_tilings)?,
                 ext_gs: builder.run(write_graphic_states)?,
+                embedded_files: builder.run(write_embedded_files)?,
             })
         })?
         .phase(|builder| builder.run(write_page_tree))?
@@ -90,9 +93,9 @@ pub struct PdfOptions<'a> {
     /// `Auto`, a hash of the document's title and author is used instead (which
     /// is reasonably unique and stable).
     pub ident: Smart<&'a str>,
-    /// If not `None`, shall be the creation date of the document as a UTC
-    /// datetime. It will only be used if `set document(date: ..)` is `auto`.
-    pub timestamp: Option<Datetime>,
+    /// If not `None`, shall be the creation timestamp of the document. It will
+    /// only be used if `set document(date: ..)` is `auto`.
+    pub timestamp: Option<Timestamp>,
     /// Specifies which ranges of pages should be exported in the PDF. When
     /// `None`, all pages should be exported.
     pub page_ranges: Option<PageRanges>,
@@ -100,19 +103,82 @@ pub struct PdfOptions<'a> {
     pub standards: PdfStandards,
 }
 
+/// A timestamp with timezone information.
+#[derive(Debug, Clone, Copy)]
+pub struct Timestamp {
+    /// The datetime of the timestamp.
+    pub(crate) datetime: Datetime,
+    /// The timezone of the timestamp.
+    pub(crate) timezone: Timezone,
+}
+
+impl Timestamp {
+    /// Create a new timestamp with a given datetime and UTC suffix.
+    pub fn new_utc(datetime: Datetime) -> Self {
+        Self { datetime, timezone: Timezone::UTC }
+    }
+
+    /// Create a new timestamp with a given datetime, and a local timezone offset.
+    pub fn new_local(datetime: Datetime, whole_minute_offset: i32) -> Option<Self> {
+        let hour_offset = (whole_minute_offset / 60).try_into().ok()?;
+        // Note: the `%` operator in Rust is the remainder operator, not the
+        // modulo operator. The remainder operator can return negative results.
+        // We can simply apply `abs` here because we assume the `minute_offset`
+        // will have the same sign as `hour_offset`.
+        let minute_offset = (whole_minute_offset % 60).abs().try_into().ok()?;
+        match (hour_offset, minute_offset) {
+            // Only accept valid timezone offsets with `-23 <= hours <= 23`,
+            // and `0 <= minutes <= 59`.
+            (-23..=23, 0..=59) => Some(Self {
+                datetime,
+                timezone: Timezone::Local { hour_offset, minute_offset },
+            }),
+            _ => None,
+        }
+    }
+}
+
+/// A timezone.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Timezone {
+    /// The UTC timezone.
+    UTC,
+    /// The local timezone offset from UTC. And the `minute_offset` will have
+    /// same sign as `hour_offset`.
+    Local { hour_offset: i8, minute_offset: u8 },
+}
+
 /// Encapsulates a list of compatible PDF standards.
 #[derive(Clone)]
 pub struct PdfStandards {
-    /// For now, we simplify to just PDF/A, since we only support PDF/A-2b. But
-    /// it can be more fine-grained in the future.
+    /// For now, we simplify to just PDF/A. But it can be more fine-grained in
+    /// the future.
     pub(crate) pdfa: bool,
+    /// Whether the standard allows for embedding any kind of file into the PDF.
+    /// We disallow this for PDF/A-2, since it only allows embedding
+    /// PDF/A-1 and PDF/A-2 documents.
+    pub(crate) embedded_files: bool,
+    /// Part of the PDF/A standard.
+    pub(crate) pdfa_part: Option<(i32, &'static str)>,
 }
 
 impl PdfStandards {
     /// Validates a list of PDF standards for compatibility and returns their
     /// encapsulated representation.
     pub fn new(list: &[PdfStandard]) -> StrResult<Self> {
-        Ok(Self { pdfa: list.contains(&PdfStandard::A_2b) })
+        let a2b = list.contains(&PdfStandard::A_2b);
+        let a3b = list.contains(&PdfStandard::A_3b);
+
+        if a2b && a3b {
+            bail!("PDF cannot conform to A-2B and A-3B at the same time")
+        }
+
+        let pdfa = a2b || a3b;
+        Ok(Self {
+            pdfa,
+            embedded_files: !a2b,
+            pdfa_part: pdfa.then_some((if a2b { 2 } else { 3 }, "B")),
+        })
     }
 }
 
@@ -122,10 +188,9 @@ impl Debug for PdfStandards {
     }
 }
 
-#[allow(clippy::derivable_impls)]
 impl Default for PdfStandards {
     fn default() -> Self {
-        Self { pdfa: false }
+        Self { pdfa: false, embedded_files: true, pdfa_part: None }
     }
 }
 
@@ -142,6 +207,9 @@ pub enum PdfStandard {
     /// PDF/A-2b.
     #[serde(rename = "a-2b")]
     A_2b,
+    /// PDF/A-3b.
+    #[serde(rename = "a-3b")]
+    A_3b,
 }
 
 /// A struct to build a PDF following a fixed succession of phases.
@@ -176,7 +244,7 @@ struct PdfBuilder<S> {
 /// this phase.
 struct WithDocument<'a> {
     /// The Typst document that is exported.
-    document: &'a Document,
+    document: &'a PagedDocument,
     /// Settings for PDF export.
     options: &'a PdfOptions<'a>,
 }
@@ -186,7 +254,7 @@ struct WithDocument<'a> {
 ///
 /// This phase allocates some global references.
 struct WithResources<'a> {
-    document: &'a Document,
+    document: &'a PagedDocument,
     options: &'a PdfOptions<'a>,
     /// The content of the pages encoded as PDF content streams.
     ///
@@ -235,7 +303,7 @@ impl<'a> From<(WithDocument<'a>, (Vec<Option<EncodedPage>>, Resources<()>))>
 /// We are now writing objects corresponding to resources, and giving them references,
 /// that will be collected in [`References`].
 struct WithGlobalRefs<'a> {
-    document: &'a Document,
+    document: &'a PagedDocument,
     options: &'a PdfOptions<'a>,
     pages: Vec<Option<EncodedPage>>,
     /// Resources are the same as in previous phases, but each dictionary now has a reference.
@@ -268,17 +336,19 @@ struct References {
     images: HashMap<Image, Ref>,
     /// The IDs of written gradients.
     gradients: HashMap<PdfGradient, Ref>,
-    /// The IDs of written patterns.
-    patterns: HashMap<PdfPattern, Ref>,
+    /// The IDs of written tilings.
+    tilings: HashMap<PdfTiling, Ref>,
     /// The IDs of written external graphics states.
     ext_gs: HashMap<ExtGState, Ref>,
+    /// The names and references for embedded files.
+    embedded_files: BTreeMap<EcoString, Ref>,
 }
 
 /// At this point, the references have been assigned to all resources. The page
 /// tree is going to be written, and given a reference. It is also at this point that
 /// the page contents is actually written.
 struct WithRefs<'a> {
-    document: &'a Document,
+    document: &'a PagedDocument,
     options: &'a PdfOptions<'a>,
     globals: GlobalRefs,
     pages: Vec<Option<EncodedPage>>,
@@ -304,7 +374,7 @@ impl<'a> From<(WithGlobalRefs<'a>, References)> for WithRefs<'a> {
 ///
 /// Each sub-resource gets its own isolated resource dictionary.
 struct WithEverything<'a> {
-    document: &'a Document,
+    document: &'a PagedDocument,
     options: &'a PdfOptions<'a>,
     globals: GlobalRefs,
     pages: Vec<Option<EncodedPage>>,
@@ -336,7 +406,7 @@ impl<'a> From<(WithRefs<'a>, Ref)> for WithEverything<'a> {
 
 impl<'a> PdfBuilder<WithDocument<'a>> {
     /// Start building a PDF for a Typst document.
-    fn new(document: &'a Document, options: &'a PdfOptions<'a>) -> Self {
+    fn new(document: &'a PagedDocument, options: &'a PdfOptions<'a>) -> Self {
         Self {
             alloc: Ref::new(1),
             pdf: Pdf::new(),
@@ -437,6 +507,14 @@ impl<T: Eq + Hash, R: Renumber> Renumber for HashMap<T, R> {
     }
 }
 
+impl<T: Ord, R: Renumber> Renumber for BTreeMap<T, R> {
+    fn renumber(&mut self, offset: i32) {
+        for v in self.values_mut() {
+            v.renumber(offset);
+        }
+    }
+}
+
 impl<R: Renumber> Renumber for Option<R> {
     fn renumber(&mut self, offset: i32) {
         if let Some(r) = self {
@@ -518,7 +596,7 @@ fn deflate_deferred(content: Vec<u8>) -> Deferred<Vec<u8>> {
 /// Create a base64-encoded hash of the value.
 fn hash_base64<T: Hash>(value: &T) -> String {
     base64::engine::general_purpose::STANDARD
-        .encode(typst::utils::hash128(value).to_be_bytes())
+        .encode(typst_utils::hash128(value).to_be_bytes())
 }
 
 /// Additional methods for [`Abs`].
@@ -612,4 +690,42 @@ fn transform_to_array(ts: Transform) -> [f32; 6] {
         ts.tx.to_f32(),
         ts.ty.to_f32(),
     ]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_timestamp_new_local() {
+        let dummy_datetime = Datetime::from_ymd_hms(2024, 12, 17, 10, 10, 10).unwrap();
+        let test = |whole_minute_offset, expect_timezone| {
+            assert_eq!(
+                Timestamp::new_local(dummy_datetime, whole_minute_offset)
+                    .unwrap()
+                    .timezone,
+                expect_timezone
+            );
+        };
+
+        // Valid timezone offsets
+        test(0, Timezone::Local { hour_offset: 0, minute_offset: 0 });
+        test(480, Timezone::Local { hour_offset: 8, minute_offset: 0 });
+        test(-480, Timezone::Local { hour_offset: -8, minute_offset: 0 });
+        test(330, Timezone::Local { hour_offset: 5, minute_offset: 30 });
+        test(-210, Timezone::Local { hour_offset: -3, minute_offset: 30 });
+        test(-720, Timezone::Local { hour_offset: -12, minute_offset: 0 }); // AoE
+
+        // Corner cases
+        test(315, Timezone::Local { hour_offset: 5, minute_offset: 15 });
+        test(-225, Timezone::Local { hour_offset: -3, minute_offset: 45 });
+        test(1439, Timezone::Local { hour_offset: 23, minute_offset: 59 });
+        test(-1439, Timezone::Local { hour_offset: -23, minute_offset: 59 });
+
+        // Invalid timezone offsets
+        assert!(Timestamp::new_local(dummy_datetime, 1440).is_none());
+        assert!(Timestamp::new_local(dummy_datetime, -1440).is_none());
+        assert!(Timestamp::new_local(dummy_datetime, i32::MAX).is_none());
+        assert!(Timestamp::new_local(dummy_datetime, i32::MIN).is_none());
+    }
 }

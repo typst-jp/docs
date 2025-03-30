@@ -226,7 +226,7 @@ applications, while academic applications tend to use strokes instead.
 To add zebra stripes to a table, we use the `table` function's `fill` argument.
 It can take three kinds of arguments:
 
-- A single color (this can also be a gradient or a pattern) to fill all cells
+- A single color (this can also be a gradient or a tiling) to fill all cells
   with. Because we want some cells to have another color, this is not useful if
   we want to build zebra tables.
 - An array with colors which Typst cycles through for each column. We can use an
@@ -828,7 +828,7 @@ line appears because there is no `top` line that could suppress it.
 
 ### How to achieve a double line? { #double-stroke }
 Typst does not yet have a native way to draw double strokes, but there are
-multiple ways to emulate them, for example with [patterns]($pattern). We will
+multiple ways to emulate them, for example with [tilings]($tiling). We will
 show a different workaround in this section: Table gutters.
 
 Tables can space their cells apart using the `gutter` argument. When a gutter is
@@ -886,8 +886,8 @@ everything else by providing an array in the `align` argument:
   stroke: none,
 
   table.header[Day][Location][Hotel or Apartment][Activities],
-  [1], [Paris, France], [Hotel de L'Europe], [Arrival, Evening River Cruise],
-  [2], [Paris, France], [Hotel de L'Europe], [Louvre Museum, Eiffel Tower],
+  [1], [Paris, France], [Hôtel de l'Europe], [Arrival, Evening River Cruise],
+  [2], [Paris, France], [Hôtel de l'Europe], [Louvre Museum, Eiffel Tower],
   [3], [Lyon, France], [Lyon City Hotel], [City Tour, Local Cuisine Tasting],
   [4], [Geneva, Switzerland], [Lakeview Inn], [Lake Geneva, Red Cross Museum],
   [5], [Zermatt, Switzerland], [Alpine Lodge], [Visit Matterhorn, Skiing],
@@ -911,8 +911,8 @@ bottom-aligned. Let's use a function instead to do so:
   stroke: none,
 
   table.header[Day][Location][Hotel or Apartment][Activities],
-  [1], [Paris, France], [Hotel de L'Europe], [Arrival, Evening River Cruise],
-  [2], [Paris, France], [Hotel de L'Europe], [Louvre Museum, Eiffel Tower],
+  [1], [Paris, France], [Hôtel de l'Europe], [Arrival, Evening River Cruise],
+  [2], [Paris, France], [Hôtel de l'Europe], [Louvre Museum, Eiffel Tower],
 <<<  // ... remaining days omitted
 >>>  [3], [Lyon, France], [Lyon City Hotel], [City Tour, Local Cuisine Tasting],
 >>>  [4], [Geneva, Switzerland], [Lakeview Inn], [Lake Geneva, Red Cross Museum],

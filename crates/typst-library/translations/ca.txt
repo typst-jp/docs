@@ -1,0 +1,8 @@
+figure = Figura
+table = Taula
+equation = Equació
+bibliography = Bibliografia
+heading = Secció
+outline = Índex
+raw = Llistat
+page = pàgina

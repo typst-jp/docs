@@ -2,15 +2,28 @@
 
 --- math-style-italic-default ---
 // Test italic defaults.
-$a, A, delta, ϵ, diff, Delta, ϴ$
+$a, A, delta, ϵ, partial, Delta, ϴ$
 
 --- math-style ---
 // Test forcing a specific style.
 $A, italic(A), upright(A), bold(A), bold(upright(A)), \
  serif(A), sans(A), cal(A), frak(A), mono(A), bb(A), \
- italic(diff), upright(diff), \
+ italic(partial), upright(partial), \
  bb("hello") + bold(cal("world")), \
  mono("SQRT")(x) wreath mono(123 + 456)$
+
+--- math-style-dotless ---
+// Test styling dotless i and j.
+$ dotless.i dotless.j,
+  upright(dotless.i) upright(dotless.j),
+  sans(dotless.i) sans(dotless.j),
+  bold(dotless.i) bold(dotless.j),
+  bb(dotless.i) bb(dotless.j),
+  cal(dotless.i) cal(dotless.j),
+  frak(dotless.i) frak(dotless.j),
+  mono(dotless.i) mono(dotless.j), 
+  bold(frak(dotless.i)) upright(sans(dotless.j)),
+  italic(bb(dotless.i)) frak(sans(dotless.j)) $
 
 --- math-style-exceptions ---
 // Test a few style exceptions.

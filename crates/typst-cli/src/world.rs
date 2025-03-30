@@ -1,12 +1,11 @@
 use std::collections::HashMap;
 use std::io::Read;
 use std::path::{Path, PathBuf};
-use std::sync::OnceLock;
+use std::sync::{LazyLock, OnceLock};
 use std::{fmt, fs, io, mem};
 
 use chrono::{DateTime, Datelike, FixedOffset, Local, Utc};
 use ecow::{eco_format, EcoString};
-use once_cell::sync::Lazy;
 use parking_lot::Mutex;
 use typst::diag::{FileError, FileResult};
 use typst::foundations::{Bytes, Datetime, Dict, IntoValue};
@@ -16,17 +15,16 @@ use typst::utils::LazyHash;
 use typst::{Library, World};
 use typst_kit::fonts::{FontSlot, Fonts};
 use typst_kit::package::PackageStorage;
-use typst_timing::{timed, TimingScope};
+use typst_timing::timed;
 
-use crate::args::{Input, SharedArgs};
-use crate::compile::ExportCache;
+use crate::args::{Feature, Input, ProcessArgs, WorldArgs};
 use crate::download::PrintDownload;
 use crate::package;
 
 /// Static `FileId` allocated for stdin.
 /// This is to ensure that a file is read in the correct way.
-static STDIN_ID: Lazy<FileId> =
-    Lazy::new(|| FileId::new_fake(VirtualPath::new("<stdin>")));
+static STDIN_ID: LazyLock<FileId> =
+    LazyLock::new(|| FileId::new_fake(VirtualPath::new("<stdin>")));
 
 /// A world that provides access to the operating system.
 pub struct SystemWorld {
@@ -50,16 +48,17 @@ pub struct SystemWorld {
     /// always the same within one compilation.
     /// Reset between compilations if not [`Now::Fixed`].
     now: Now,
-    /// The export cache, used for caching output files in `typst watch`
-    /// sessions.
-    export_cache: ExportCache,
 }
 
 impl SystemWorld {
     /// Create a new system world.
-    pub fn new(command: &SharedArgs) -> Result<Self, WorldCreationError> {
+    pub fn new(
+        input: &Input,
+        world_args: &WorldArgs,
+        process_args: &ProcessArgs,
+    ) -> Result<Self, WorldCreationError> {
         // Set up the thread pool.
-        if let Some(jobs) = command.jobs {
+        if let Some(jobs) = process_args.jobs {
             rayon::ThreadPoolBuilder::new()
                 .num_threads(jobs)
                 .use_current_thread()
@@ -68,7 +67,7 @@ impl SystemWorld {
         }
 
         // Resolve the system-global input path.
-        let input = match &command.input {
+        let input = match input {
             Input::Stdin => None,
             Input::Path(path) => {
                 Some(path.canonicalize().map_err(|err| match err.kind() {
@@ -82,7 +81,7 @@ impl SystemWorld {
 
         // Resolve the system-global root directory.
         let root = {
-            let path = command
+            let path = world_args
                 .root
                 .as_deref()
                 .or_else(|| input.as_deref().and_then(|i| i.parent()))
@@ -107,20 +106,28 @@ impl SystemWorld {
 
         let library = {
             // Convert the input pairs to a dictionary.
-            let inputs: Dict = command
+            let inputs: Dict = world_args
                 .inputs
                 .iter()
                 .map(|(k, v)| (k.as_str().into(), v.as_str().into_value()))
                 .collect();
 
-            Library::builder().with_inputs(inputs).build()
+            let features = process_args
+                .features
+                .iter()
+                .map(|&feature| match feature {
+                    Feature::Html => typst::Feature::Html,
+                })
+                .collect();
+
+            Library::builder().with_inputs(inputs).with_features(features).build()
         };
 
         let fonts = Fonts::searcher()
-            .include_system_fonts(!command.font_args.ignore_system_fonts)
-            .search_with(&command.font_args.font_paths);
+            .include_system_fonts(!world_args.font.ignore_system_fonts)
+            .search_with(&world_args.font.font_paths);
 
-        let now = match command.creation_timestamp {
+        let now = match world_args.creation_timestamp {
             Some(time) => Now::Fixed(time),
             None => Now::System(OnceLock::new()),
         };
@@ -133,9 +140,8 @@ impl SystemWorld {
             book: LazyHash::new(fonts.book),
             fonts: fonts.fonts,
             slots: Mutex::new(HashMap::new()),
-            package_storage: package::storage(&command.package_storage_args),
+            package_storage: package::storage(&world_args.package),
             now,
-            export_cache: ExportCache::new(),
         })
     }
 
@@ -179,11 +185,6 @@ impl SystemWorld {
     #[track_caller]
     pub fn lookup(&self, id: FileId) -> Source {
         self.source(id).expect("file id does not point to any source file")
-    }
-
-    /// Gets access to the export cache.
-    pub fn export_cache(&self) -> &ExportCache {
-        &self.export_cache
     }
 }
 
@@ -285,8 +286,6 @@ impl FileSlot {
         self.source.get_or_init(
             || read(self.id, project_root, package_storage),
             |data, prev| {
-                let name = if prev.is_some() { "reparsing file" } else { "parsing file" };
-                let _scope = TimingScope::new(name, None);
                 let text = decode_utf8(&data)?;
                 if let Some(mut prev) = prev {
                     prev.replace(text);
@@ -306,7 +305,7 @@ impl FileSlot {
     ) -> FileResult<Bytes> {
         self.file.get_or_init(
             || read(self.id, project_root, package_storage),
-            |data, _| Ok(data.into()),
+            |data, _| Ok(Bytes::new(data)),
         )
     }
 }

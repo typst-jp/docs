@@ -390,7 +390,7 @@
 --- gradient-text-bad-relative ---
 // Make sure they don't work when `relative: "self"`.
 // Hint: 17-61 make sure to set `relative: auto` on your text fill
-// Error: 17-61 gradients and patterns on text must be relative to the parent
+// Error: 17-61 gradients and tilings on text must be relative to the parent
 #set text(fill: gradient.linear(red, blue, relative: "self"))
 
 --- gradient-text-global ---
@@ -658,3 +658,11 @@ $ A = mat(
   height: 10pt,
   fill: gradient.linear(violet, blue, space: cmyk)
 )
+
+--- issue-5819-gradient-repeat ---
+// Ensure the gradient constructor generates monotonic stops which can be fed
+// back into the gradient constructor itself.
+#let my-gradient = gradient.linear(red, blue).repeat(5)
+#let _ = gradient.linear(..my-gradient.stops())
+#let my-gradient2 = gradient.linear(red, blue).repeat(5, mirror: true)
+#let _ = gradient.linear(..my-gradient2.stops())

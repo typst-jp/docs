@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use typed_arena::Arena;
 use typst::diag::{FileError, FileResult, StrResult};
 use typst::foundations::{Bytes, Datetime};
-use typst::layout::{Abs, Point, Size};
+use typst::layout::{Abs, PagedDocument, Point, Size};
 use typst::syntax::{FileId, Source, VirtualPath};
 use typst::text::{Font, FontBook};
 use typst::utils::LazyHash;
@@ -301,7 +301,10 @@ impl<'a> Handler<'a> {
             return;
         }
 
-        let default = self.peeked.as_ref().map(|text| text.to_kebab_case());
+        let body = self.peeked.as_ref();
+        let default = body.map(|text| text.to_kebab_case());
+        let has_id = id_slot.is_some();
+
         let id: &'a str = match (&id_slot, default) {
             (Some(id), default) => {
                 if Some(*id) == default.as_deref() {
@@ -322,10 +325,14 @@ impl<'a> Handler<'a> {
         } else if title.iter().all(|c| c.is_ascii()) {
             id.to_title_case().into()
         } else {
-            self.ids
-                .alloc(title.expect("heading should always have a title"))
-                .as_str()
-                .into()
+            match &body {
+                Some(body_value) if !has_id => body_value.as_ref().into(),
+                _ => self
+                    .ids
+                    .alloc(title.expect("heading should always have a title"))
+                    .as_str()
+                    .into(),
+            }
         };
 
         let mut children = &mut self.outline;
@@ -425,7 +432,7 @@ fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
     let source = Source::new(id, compile);
     let world = DocWorld(source);
 
-    let mut document = match typst::compile(&world).output {
+    let mut document = match typst::compile::<PagedDocument>(&world).output {
         Ok(doc) => doc,
         Err(err) => {
             let msg = &err[0].message;
@@ -492,7 +499,7 @@ impl World for DocWorld {
 
     fn file(&self, id: FileId) -> FileResult<Bytes> {
         assert!(id.package().is_none());
-        Ok(Bytes::from_static(
+        Ok(Bytes::new(
             typst_dev_assets::get_by_name(
                 &id.vpath().as_rootless_path().to_string_lossy(),
             )

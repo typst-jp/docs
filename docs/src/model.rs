@@ -49,6 +49,7 @@ impl OutlineItem {
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(tag = "kind", content = "content")]
+#[allow(clippy::large_enum_variant)]
 pub enum BodyModel {
     Html(Html),
     Category(CategoryModel),
@@ -63,7 +64,7 @@ pub enum BodyModel {
 #[derive(Debug, Serialize)]
 pub struct CategoryModel {
     pub name: &'static str,
-    pub title: &'static str,
+    pub title: EcoString,
     pub details: Html,
     pub items: Vec<CategoryItem>,
     pub shorthands: Option<ShorthandsModel>,
@@ -88,6 +89,7 @@ pub struct FuncModel {
     pub oneliner: &'static str,
     pub element: bool,
     pub contextual: bool,
+    pub deprecation: Option<&'static str>,
     pub details: Html,
     /// This example is only for nested function models. Others can have
     /// their example directly in their details.
@@ -162,6 +164,8 @@ pub struct SymbolModel {
     pub alternates: Vec<EcoString>,
     pub markup_shorthand: Option<&'static str>,
     pub math_shorthand: Option<&'static str>,
+    pub math_class: Option<&'static str>,
+    pub deprecation: Option<&'static str>,
 }
 
 /// Shorthands listed on a category page.

@@ -1,4 +1,4 @@
-FROM rust:1.77-slim
+FROM rust:1.81-slim
 
 ARG USER_NAME=typst-jp
 ARG USER_UID=1000

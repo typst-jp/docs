@@ -22,8 +22,8 @@ impl Timer {
     /// record timings for a specific function invocation.
     pub fn new(args: &CliArguments) -> Timer {
         let record = match &args.command {
-            Command::Compile(command) => command.timings.clone(),
-            Command::Watch(command) => command.timings.clone(),
+            Command::Compile(command) => command.args.timings.clone(),
+            Command::Watch(command) => command.args.timings.clone(),
             _ => None,
         };
 
@@ -72,7 +72,8 @@ impl Timer {
         let writer = BufWriter::with_capacity(1 << 20, file);
 
         typst_timing::export_json(writer, |span| {
-            resolve_span(world, span).unwrap_or_else(|| ("unknown".to_string(), 0))
+            resolve_span(world, Span::from_raw(span))
+                .unwrap_or_else(|| ("unknown".to_string(), 0))
         })?;
 
         Ok(output)

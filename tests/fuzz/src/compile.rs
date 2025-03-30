@@ -3,6 +3,7 @@
 use libfuzzer_sys::fuzz_target;
 use typst::diag::{FileError, FileResult};
 use typst::foundations::{Bytes, Datetime};
+use typst::layout::PagedDocument;
 use typst::syntax::{FileId, Source};
 use typst::text::{Font, FontBook};
 use typst::utils::LazyHash;
@@ -18,7 +19,7 @@ struct FuzzWorld {
 impl FuzzWorld {
     fn new(text: &str) -> Self {
         let data = typst_assets::fonts().next().unwrap();
-        let font = Font::new(Bytes::from_static(data), 0).unwrap();
+        let font = Font::new(Bytes::new(data), 0).unwrap();
         let book = FontBook::from_fonts([&font]);
         Self {
             library: LazyHash::new(Library::default()),
@@ -65,7 +66,7 @@ impl World for FuzzWorld {
 
 fuzz_target!(|text: &str| {
     let world = FuzzWorld::new(text);
-    if let Ok(document) = typst::compile(&world).output {
+    if let Ok(document) = typst::compile::<PagedDocument>(&world).output {
         if let Some(page) = document.pages.first() {
             std::hint::black_box(typst_render::render(page, 1.0));
         }

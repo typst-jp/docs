@@ -1,5 +1,5 @@
 {
-  "name": "typst-jp-domumentation",
+  "name": "typst-jp-documentation",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
