@@ -145,7 +145,7 @@ pub struct EnumElem {
     #[default(false)]
     pub full: bool,
 
-    /// Whether to reverse the numbering for this enumeration.
+    /// このリストのナンバリングを逆順にするかどうかを指定します。
     ///
     /// ```example
     /// #set enum(reversed: true)
