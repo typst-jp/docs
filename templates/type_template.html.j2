@@ -20,7 +20,17 @@
 </h2>
 {% endif %}
 {% for method in body['content']['scope'] %}
-  <h3 id="{{ prefix }}-{{ method['name'] }}" class="method-head"><span><code>{{ method['name'] }}</code></span></h3>
+  <h3 id="definitions-{{ method['name'] }}" class="method-head">
+    <code>{{ method['name'] }}</code>
+    <small>
+      {% if method['element'] %}
+        {{ macros.tooltip_display('Element', 'Element functions can be customized with <code>set</code> and <code>show</code> rules.') }}
+      {% endif %}
+      {% if method['contextual'] %}
+        {{ macros.tooltip_display('Contextual', 'Contextual functions can only be used when the context is known') }}
+      {% endif %}
+    </small>
+  </h3>
   {{ macros.function_display(method, type2href, type2class, gen_path, prefix='definitions-' + method['name']) }}
 {% endfor %}
 

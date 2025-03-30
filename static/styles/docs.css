@@ -528,6 +528,15 @@ h1 .pill {
   margin-bottom: -3px
 }
 
+.deprecation {
+  align-items: baseline;
+}
+
+.deprecation svg {
+  margin-bottom: -4px;
+  padding: 0;
+}
+
 .tooltip-context {
   position: relative
 }
