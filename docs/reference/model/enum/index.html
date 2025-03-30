@@ -932,9 +932,9 @@
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
 </small></h1>
-<p>A numbered list.</p>
-<p>Displays a sequence of items vertically and numbers them consecutively.</p>
-<h2 id="example">Example</h2>
+<p>番号付きリスト。</p>
+<p>一連の項目を縦に並べて表示し、それぞれに連番を付けます。</p>
+<h2 id="例">例</h2>
 <div class="previewed-code"><pre><code>Automatically numbered:
 <span class="typ-marker">+</span> Preparations
 <span class="typ-marker">+</span> Analysis
@@ -953,32 +953,32 @@ Multiple lines:
 Function call.
 <span class="typ-func">#</span><span class="typ-func">enum</span><span class="typ-punct">[</span>First<span class="typ-punct">]</span><span class="typ-punct">[</span>Second<span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/7f1849410764a429269845fbfbe70e06.png" alt="Preview" width="480" height="190"/></div></div>
-<p>You can easily switch all your enumerations to a different numbering style
-with a set rule.</p>
+<p>setルールを用いることで、
+すべてのリストを異なるナンバリングスタイルに簡単に切り替えることができます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">enum</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;a)&quot;</span><span class="typ-punct">)</span>
 
 <span class="typ-marker">+</span> Starting off <span class="typ-escape">...</span>
 <span class="typ-marker">+</span> Don&#39;t forget step two
 </code></pre><div class="preview"><img src="/assets/docs/e99fd30bf2771e1086e84995cb06129f.png" alt="Preview" width="480" height="190"/></div></div>
-<p>You can also use <a href="/docs/reference/model/enum/#definitions-item"><code>enum.item</code></a> to programmatically customize the
-number of each item in the enumeration:</p>
+<p>また、<a href="/docs/reference/model/enum/#definitions-item"><code>enum.item</code></a>を使用して、
+リストの各項目の番号を自由にカスタマイズすることもできます。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">enum</span><span class="typ-punct">(</span>
   enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span><span class="typ-punct">[</span>First step<span class="typ-punct">]</span><span class="typ-punct">,</span>
   enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">5</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Fifth step<span class="typ-punct">]</span><span class="typ-punct">,</span>
   enum<span class="typ-punct">.</span><span class="typ-func">item</span><span class="typ-punct">(</span><span class="typ-num">10</span><span class="typ-punct">)</span><span class="typ-punct">[</span>Tenth step<span class="typ-punct">]</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/4ef4c95adffafce967eed5d6682bc04a.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="syntax">Syntax</h2>
-<p>This functions also has dedicated syntax:</p>
+<h2 id="構文">構文</h2>
+<p>この関数には専用の構文もあります。</p>
 <ul>
-<li>Starting a line with a plus sign creates an automatically numbered
-enumeration item.</li>
-<li>Starting a line with a number followed by a dot creates an explicitly
-numbered enumeration item.</li>
+<li>行の先頭にプラス記号をつけると、
+自動的にナンバリングされたリスト項目が作成されます。</li>
+<li>行の先頭に数字とピリオドを付けると、
+明示的に番号を指定したリスト項目が作成されます。</li>
 </ul>
-<p>Enumeration items can contain multiple paragraphs and other block-level
-content. All content that is indented more than an item's marker becomes
-part of that item.</p>
+<p>リストの項目には、複数の段落やその他のブロックレベルのコンテンツを含めることができます。
+項目のマーカーよりもインデントが深いコンテンツはすべて、
+その項目の一部となります。</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">引数</span>
@@ -1031,16 +1031,16 @@ part of that item.</p>
     </small>
   </div>
 </h4>
-<p>Defines the default <a href="/docs/reference/model/enum/#parameters-spacing">spacing</a> of the enumeration. If it
-is <code><span class="typ-key">false</span></code>, the items are spaced apart with
-<a href="/docs/reference/model/par/#parameters-spacing">paragraph spacing</a>. If it is <code><span class="typ-key">true</span></code>, they use
-<a href="/docs/reference/model/par/#parameters-leading">paragraph leading</a> instead. This makes the list more
-compact, which can look better if the items are short.</p>
-<p>In markup mode, the value of this parameter is determined based on
-whether items are separated with a blank line. If items directly follow
-each other, this is set to <code><span class="typ-key">true</span></code>; if items are separated by a blank
-line, this is set to <code><span class="typ-key">false</span></code>. The markup-defined tightness cannot be
-overridden with set rules.</p>
+<p>リストのデフォルトの<a href="/docs/reference/model/enum/#parameters-spacing">spacing</a>を定義します。
+これが<code><span class="typ-key">false</span></code>の場合、
+項目の間隔は<a href="/docs/reference/model/par/#parameters-spacing">paragraph spacing</a>によって決まります。
+<code><span class="typ-key">true</span></code>の場合、代わりに<a href="/docs/reference/model/par/#parameters-leading">paragraph leading</a>が使用されます。
+これによりリストがよりコンパクトになり、各項目が短い場合に見栄えが良くなります。</p>
+<p>マークアップモードでは、
+この引数の値は項目が空行で区切られているかどうかに基づいて決定されます。
+項目間に空行がなく連続している場合、この値は<code><span class="typ-key">true</span></code>に設定されますが、
+項目間が空行で区切られている場合は<code><span class="typ-key">false</span></code>に設定されます。
+マークアップで定義された間隔はsetルールで上書きすることは出来ません。</p>
 
 
 <p>Default:<code><span class="typ-key">true</span></code></p>
@@ -1089,11 +1089,11 @@ overridden with set rules.</p>
     </small>
   </div>
 </h4>
-<p>How to number the enumeration. Accepts a
-<a href="/docs/reference/model/numbering/">numbering pattern or function</a>.</p>
-<p>If the numbering pattern contains multiple counting symbols, they apply
-to nested enums. If given a function, the function receives one argument
-if <code>full</code> is <code><span class="typ-key">false</span></code> and multiple arguments if <code>full</code> is <code><span class="typ-key">true</span></code>.</p>
+<p>リストをどのようにナンバリングするかを指定します。
+<a href="/docs/reference/model/numbering/">ナンバリングパターンまたは関数</a>を受け付けます。</p>
+<p>ナンバリングのパターンに複数のカウント記号が含まれている場合、
+それらはネストされたリストに適用されます。
+関数が指定された場合、<code>full</code>が<code><span class="typ-key">false</span></code>の場合は1つの引数を受け取り、<code><span class="typ-key">true</span></code>の場合は複数の引数を受け取ります。</p>
 
 
 <p>Default:<code><span class="typ-str">&quot;1.&quot;</span></code></p>
@@ -1145,7 +1145,7 @@ if <code>full</code> is <code><span class="typ-key">false</span></code> and mult
     </small>
   </div>
 </h4>
-<p>Which number to start the enumeration with.</p>
+<p>リストの開始番号を指定します。</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>
@@ -1187,8 +1187,8 @@ if <code>full</code> is <code><span class="typ-key">false</span></code> and mult
     </small>
   </div>
 </h4>
-<p>Whether to display the full numbering, including the numbers of
-all parent enumerations.</p>
+<p>親リストの番号も含めて、
+完全なナンバリングを表示するかどうかを指定します。</p>
 
 
 <p>Default:<code><span class="typ-key">false</span></code></p>
@@ -1230,7 +1230,7 @@ all parent enumerations.</p>
     </small>
   </div>
 </h4>
-<p>Whether to reverse the numbering for this enumeration.</p>
+<p>このリストのナンバリングを逆順にするかどうかを指定します。</p>
 
 
 <p>Default:<code><span class="typ-key">false</span></code></p>
@@ -1271,7 +1271,7 @@ all parent enumerations.</p>
     </small>
   </div>
 </h4>
-<p>The indentation of each item.</p>
+<p>各項目のインデント。</p>
 
 
 <p>Default:<code><span class="typ-num">0pt</span></code></p>
@@ -1301,7 +1301,7 @@ all parent enumerations.</p>
     </small>
   </div>
 </h4>
-<p>The space between the numbering and the body of each item.</p>
+<p>各項目のナンバリングと本文の間隔を指定します。</p>
 
 
 <p>Default:<code><span class="typ-num">0.5em</span></code></p>
@@ -1336,10 +1336,10 @@ all parent enumerations.</p>
     </small>
   </div>
 </h4>
-<p>The spacing between the items of the enumeration.</p>
-<p>If set to <code><span class="typ-key">auto</span></code>, uses paragraph <a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a> for tight
-enumerations and paragraph <a href="/docs/reference/model/par/#parameters-spacing"><code>spacing</code></a> for wide
-(non-tight) enumerations.</p>
+<p>リストの項目同士の間隔を指定します。</p>
+<p><code><span class="typ-key">auto</span></code>に設定すると、
+コンパクトなリストの場合は段落の<a href="/docs/reference/model/par/#parameters-leading">leading</a>を、
+幅のある（コンパクトでない）リストの場合は段落の<a href="/docs/reference/model/par/#parameters-spacing">spacing</a>を使用します。</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>
@@ -1369,16 +1369,16 @@ enumerations and paragraph <a href="/docs/reference/model/par/#parameters-spacin
     </small>
   </div>
 </h4>
-<p>The alignment that enum numbers should have.</p>
-<p>By default, this is set to <code>end <span class="typ-op">+</span> top</code>, which aligns enum numbers
-towards end of the current text direction (in left-to-right script,
-for example, this is the same as <code>right</code>) and at the top of the line.
-The choice of <code>end</code> for horizontal alignment of enum numbers is
-usually preferred over <code>start</code>, as numbers then grow away from the
-text instead of towards it, avoiding certain visual issues. This option
-lets you override this behaviour, however. (Also to note is that the
-<a href="/docs/reference/model/list/">unordered list</a> uses a different method for this, by giving the
-<code>marker</code> content an alignment directly.).</p>
+<p>リストの番号の配置を指定します。</p>
+<p>デフォルトでは、この値は<code>end <span class="typ-op">+</span> top</code>に設定されており、これはリストの番号を
+現在のテキスト方向の終端（例えば、左から右へ書く文書では、これは<code>right</code>と同じ）と、
+行の上部に揃えます。
+一般的に、水平方向の番号の配置には<code>start</code>よりも<code>end</code>を選択することが推奨されます。
+なぜなら、番号がテキストに向かってではなくテキストから離れる方向に伸びることによって、
+特定の視覚的な問題を回避できるからです。
+しかし、このオプションを使用することで、この動作を上書きすることができます。
+（また、<a href="/docs/reference/model/list/">unordered list</a>は異なる方法を用いており、直接<code>marker</code>コンテンツに配置を指定することで、
+これを行っていることに注意してください）</p>
 
 
 <p>Default:<code>end <span class="typ-op">+</span> top</code></p>
@@ -1441,9 +1441,9 @@ Here are some powers of two:
     </small>
   </div>
 </h4>
-<p>The numbered list's items.</p>
-<p>When using the enum syntax, adjacent items are automatically collected
-into enumerations, even through constructs like for loops.</p>
+<p>番号付きリストの項目。</p>
+<p>enum構文を使用する場合、forループのような構造を挟んでも、
+隣接する項目は自動的にリストとしてまとめられます。</p>
 
 
 
@@ -1480,7 +1480,7 @@ into enumerations, even through constructs like for loops.</p>
 
   <h3 id="-item" class="method-head"><span><code>item</code></span></h3>
   
-<p>An enumeration item.</p>
+<p>番号付きリストの項目。</p>
 
 <div class="code code-definition ">enum.<span
     class="typ-func">item</span>(<div class="arguments"><span
@@ -1530,7 +1530,7 @@ into enumerations, even through constructs like for loops.</p>
     </small>
   </div>
 </h4>
-<p>The item's number.</p>
+<p>項目の番号。</p>
 
 
 <p>Default:<code><span class="typ-key">none</span></code></p>
@@ -1561,7 +1561,7 @@ into enumerations, even through constructs like for loops.</p>
     </small>
   </div>
 </h4>
-<p>The item's body.</p>
+<p>項目の本文。</p>
 
 
 
@@ -1590,11 +1590,11 @@ into enumerations, even through constructs like for loops.</p>
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="例"><a href="#例">例</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="syntax"><a href="#syntax">Syntax</a>
+        <li data-assoc="構文"><a href="#構文">構文</a>
           <ul></ul>
         </li>
         
