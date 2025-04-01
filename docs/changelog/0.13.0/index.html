@@ -40,9 +40,9 @@
 <body class="no-js docs has-outline">
   <div class="alert">
     <div class="alert-content">
-      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.12.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.13.1 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
       <br />
-      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.12.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.13.1 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
     </div>
     <button id="closeAlertButton" class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
           width="16" height="16"></button>
@@ -771,6 +771,12 @@
             
             
             <li>
+              <a href="/docs/changelog/0.13.1/" >0.13.1</a>
+              
+            </li>
+            
+            
+            <li>
               <a href="/docs/changelog/0.13.0/"  aria-current="page" >0.13.0</a>
               
             </li>
@@ -924,20 +930,20 @@
 inline-level content. This is important for future work on accessibility and
 means that <a href="/docs/reference/model/par/#parameters-first-line-indent">first line indent</a> can now be enabled for
 all paragraphs instead of just consecutive ones.</li>
-<li>The <a href="/docs/reference/model/outline/" title="`outline`"><code>outline</code></a> has a better out-of-the-box look and is more customizable</li>
-<li>The new <a href="/docs/reference/visualize/curve/" title="`curve`"><code>curve</code></a> function (that supersedes the <code>path</code> function) provides a
+<li>The <a href="/docs/reference/model/outline/"><code>outline</code></a> has a better out-of-the-box look and is more customizable</li>
+<li>The new <a href="/docs/reference/visualize/curve/"><code>curve</code></a> function (that supersedes the <code>path</code> function) provides a
 simpler and more flexible interface for creating Bézier curves</li>
 <li>The <code>image</code> function now supports raw <a href="/docs/reference/visualize/image/#parameters-format">pixel raster formats</a>
 for generating images from within Typst</li>
 <li>Functions that accept <a href="/docs/reference/syntax/#paths">file paths</a> now also accept raw
-<a href="/docs/reference/foundations/bytes/" title="bytes">bytes</a>, for full flexibility</li>
+<a href="/docs/reference/foundations/bytes/">bytes</a>, for full flexibility</li>
 <li>WebAssembly <a href="/docs/reference/foundations/plugin/">plugins</a> are more flexible and automatically run
 multi-threaded</li>
 <li>Fixed a long-standing bug where single-letter strings in math (<code><span class="typ-math-delim">$</span><span class="typ-str">&quot;a&quot;</span><span class="typ-math-delim">$</span></code>)
 would be displayed in italics</li>
 <li>You can now specify which charset should be <a href="/docs/reference/text/text/#parameters-font">covered</a> by which
 font family</li>
-<li>The <a href="/docs/reference/pdf/embed/" title="`pdf.embed`"><code>pdf.embed</code></a> function lets you embed arbitrary files in the exported
+<li>The <a href="/docs/reference/pdf/embed/"><code>pdf.embed</code></a> function lets you embed arbitrary files in the exported
 PDF</li>
 <li>HTML export is currently under active development. The feature is still <em>very</em>
 incomplete, but already available for experimentation behind a feature flag.</li>
@@ -961,10 +967,10 @@ proper paragraphs</li>
 result in a warning</li>
 <li>The default show rules of various built-in elements like lists, quotes, etc.
 were adjusted to ensure they produce/don't produce paragraphs as appropriate</li>
-<li>Removed support for booleans and content in <a href="/docs/reference/model/outline/#parameters-indent" title="`outline.indent`"><code>outline.indent</code></a></li>
+<li>Removed support for booleans and content in <a href="/docs/reference/model/outline/#parameters-indent"><code>outline.indent</code></a></li>
 </ul>
 </li>
-<li>The <a href="/docs/reference/model/outline/" title="`outline`"><code>outline</code></a> function was fully reworked to improve its out-of-the-box
+<li>The <a href="/docs/reference/model/outline/"><code>outline</code></a> function was fully reworked to improve its out-of-the-box
 behavior <strong>(Breaking change)</strong>
 <ul>
 <li><a href="/docs/reference/model/outline/#definitions-entry">Outline entries</a> are now <a href="/docs/reference/layout/block/">blocks</a> and are thus
@@ -983,19 +989,19 @@ for a grid-like look</li>
 entries to simplify writing of show rules</li>
 </ul>
 </li>
-<li>Added configuration to <a href="/docs/reference/model/par/#parameters-first-line-indent" title="`par.first-line-indent`"><code>par.first-line-indent</code></a> for indenting all paragraphs
+<li>Added configuration to <a href="/docs/reference/model/par/#parameters-first-line-indent"><code>par.first-line-indent</code></a> for indenting all paragraphs
 instead of just consecutive ones</li>
 <li>Added <a href="/docs/reference/model/ref/#parameters-form"><code>form</code></a> parameter to <code>ref</code> function. Setting the form to
 <code><span class="typ-str">&quot;page&quot;</span></code> will produce a page reference instead of a textual one.</li>
-<li>Added <a href="/docs/reference/model/document/#parameters-description" title="`document.description`"><code>document.description</code></a> field, which results in corresponding PDF and
+<li>Added <a href="/docs/reference/model/document/#parameters-description"><code>document.description</code></a> field, which results in corresponding PDF and
 HTML metadata</li>
-<li>Added <a href="/docs/reference/model/enum/#parameters-reversed" title="`enum.reversed`"><code>enum.reversed</code></a> parameter</li>
-<li>Added support for Greek <a href="/docs/reference/model/numbering/" title="numbering">numbering</a></li>
-<li>When the <a href="/docs/reference/model/link/" title="`link`"><code>link</code></a> function wraps around a container like a <a href="/docs/reference/layout/block/" title="block">block</a>, it will
+<li>Added <a href="/docs/reference/model/enum/#parameters-reversed"><code>enum.reversed</code></a> parameter</li>
+<li>Added support for Greek <a href="/docs/reference/model/numbering/">numbering</a></li>
+<li>When the <a href="/docs/reference/model/link/"><code>link</code></a> function wraps around a container like a <a href="/docs/reference/layout/block/">block</a>, it will
 now generate only one link for the whole block instead of individual links for
 all the visible leaf elements. This significantly reduces PDF file sizes when
-combining <code>link</code> and <a href="/docs/reference/layout/repeat/" title="`repeat`"><code>repeat</code></a>.</li>
-<li>The <a href="/docs/reference/model/link/" title="`link`"><code>link</code></a> function will now only strip one prefix (like <code>mailto:</code> or
+combining <code>link</code> and <a href="/docs/reference/layout/repeat/"><code>repeat</code></a>.</li>
+<li>The <a href="/docs/reference/model/link/"><code>link</code></a> function will now only strip one prefix (like <code>mailto:</code> or
 <code>tel:</code>) instead of multiple</li>
 <li>The link function now suppresses hyphenation via a built-in show-set rule
 rather than through its default show rule</li>
@@ -1004,67 +1010,67 @@ page numbering into account</li>
 </ul>
 <h2 id="visualization">Visualization</h2>
 <ul>
-<li>Added new <a href="/docs/reference/visualize/curve/" title="`curve`"><code>curve</code></a> function that supersedes the <a href="/docs/reference/visualize/path/" title="`path`"><code>path</code></a> function and
+<li>Added new <a href="/docs/reference/visualize/curve/"><code>curve</code></a> function that supersedes the <a href="/docs/reference/visualize/path/"><code>path</code></a> function and
 provides a simpler and more flexible interface. The <code>path</code> function is now
 deprecated.</li>
 <li>The <code>image</code> function now supports raw <a href="/docs/reference/visualize/image/#parameters-format">pixel raster formats</a>.
 This can be used to generate images from within Typst without the need for
 encoding in an image exchange format.</li>
-<li>Added <a href="/docs/reference/visualize/image/#parameters-scaling" title="`image.scaling`"><code>image.scaling</code></a> parameter for configuring how an image is scaled by
+<li>Added <a href="/docs/reference/visualize/image/#parameters-scaling"><code>image.scaling</code></a> parameter for configuring how an image is scaled by
 PNG export and PDF viewers (smooth or pixelated)</li>
-<li>Added <a href="/docs/reference/visualize/image/#parameters-icc" title="`image.icc`"><code>image.icc</code></a> parameter for providing or overriding the ICC profile of
+<li>Added <a href="/docs/reference/visualize/image/#parameters-icc"><code>image.icc</code></a> parameter for providing or overriding the ICC profile of
 an image</li>
-<li>Renamed <code>pattern</code> to <a href="/docs/reference/visualize/tiling/" title="`tiling`"><code>tiling</code></a>. The name <code>pattern</code> remains as a deprecated
+<li>Renamed <code>pattern</code> to <a href="/docs/reference/visualize/tiling/"><code>tiling</code></a>. The name <code>pattern</code> remains as a deprecated
 alias.</li>
-<li>Added <a href="/docs/reference/visualize/gradient/#definitions-center" title="`gradient.center`"><code>gradient.center</code></a>, <a href="/docs/reference/visualize/gradient/#definitions-radius" title="`gradient.radius`"><code>gradient.radius</code></a>, <a href="/docs/reference/visualize/gradient/#definitions-focal-center" title="`gradient.focal-center`"><code>gradient.focal-center</code></a>, and
-<a href="/docs/reference/visualize/gradient/#definitions-focal-radius" title="`gradient.focal-radius`"><code>gradient.focal-radius</code></a> methods</li>
-<li>Fixed interaction of clipping and outset on <a href="/docs/reference/layout/box/" title="`box`"><code>box</code></a> and <a href="/docs/reference/layout/block/" title="`block`"><code>block</code></a></li>
-<li>Fixed panic with <a href="/docs/reference/visualize/path/" title="`path`"><code>path</code></a> of infinite length</li>
+<li>Added <a href="/docs/reference/visualize/gradient/#definitions-center"><code>gradient.center</code></a>, <a href="/docs/reference/visualize/gradient/#definitions-radius"><code>gradient.radius</code></a>, <a href="/docs/reference/visualize/gradient/#definitions-focal-center"><code>gradient.focal-center</code></a>, and
+<a href="/docs/reference/visualize/gradient/#definitions-focal-radius"><code>gradient.focal-radius</code></a> methods</li>
+<li>Fixed interaction of clipping and outset on <a href="/docs/reference/layout/box/"><code>box</code></a> and <a href="/docs/reference/layout/block/"><code>block</code></a></li>
+<li>Fixed panic with <a href="/docs/reference/visualize/path/"><code>path</code></a> of infinite length</li>
 <li>Fixed non-solid (e.g. tiling) text fills in clipped blocks</li>
 <li>Fixed a crash for images with a DPI value of zero</li>
-<li>Fixed floating-point error in <a href="/docs/reference/visualize/gradient/#definitions-repeat" title="`gradient.repeat`"><code>gradient.repeat</code></a></li>
+<li>Fixed floating-point error in <a href="/docs/reference/visualize/gradient/#definitions-repeat"><code>gradient.repeat</code></a></li>
 <li>Auto-detection of image formats from a raw buffer now has support for SVGs</li>
 </ul>
 <h2 id="scripting">Scripting</h2>
 <ul>
 <li>Functions that accept <a href="/docs/reference/syntax/#paths">file paths</a> now also accept raw
-<a href="/docs/reference/foundations/bytes/" title="bytes">bytes</a>
+<a href="/docs/reference/foundations/bytes/">bytes</a>
 <ul>
-<li><a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a>, <a href="/docs/reference/data-loading/cbor/" title="`cbor`"><code>cbor</code></a>, <a href="/docs/reference/data-loading/csv/" title="`csv`"><code>csv</code></a>, <a href="/docs/reference/data-loading/json/" title="`json`"><code>json</code></a>, <a href="/docs/reference/data-loading/toml/" title="`toml`"><code>toml</code></a>, <a href="/docs/reference/data-loading/xml/" title="`xml`"><code>xml</code></a>, and <a href="/docs/reference/data-loading/yaml/" title="`yaml`"><code>yaml</code></a> now
+<li><a href="/docs/reference/visualize/image/"><code>image</code></a>, <a href="/docs/reference/data-loading/cbor/"><code>cbor</code></a>, <a href="/docs/reference/data-loading/csv/"><code>csv</code></a>, <a href="/docs/reference/data-loading/json/"><code>json</code></a>, <a href="/docs/reference/data-loading/toml/"><code>toml</code></a>, <a href="/docs/reference/data-loading/xml/"><code>xml</code></a>, and <a href="/docs/reference/data-loading/yaml/"><code>yaml</code></a> now
 support a path string or bytes and their <code>.decode</code> variants are deprecated</li>
-<li><a href="/docs/reference/foundations/plugin/" title="`plugin`"><code>plugin</code></a>, <a href="/docs/reference/model/bibliography/" title="`bibliography`"><code>bibliography</code></a>, <a href="/docs/reference/model/bibliography/#parameters-style" title="`bibliography.style`"><code>bibliography.style</code></a>, <a href="/docs/reference/model/cite/#parameters-style" title="`cite.style`"><code>cite.style</code></a>,
-<a href="/docs/reference/text/raw/#parameters-theme" title="`raw.theme`"><code>raw.theme</code></a>, and <a href="/docs/reference/text/raw/#parameters-syntaxes" title="`raw.syntaxes`"><code>raw.syntaxes</code></a> now accept bytes in addition to path
+<li><a href="/docs/reference/foundations/plugin/"><code>plugin</code></a>, <a href="/docs/reference/model/bibliography/"><code>bibliography</code></a>, <a href="/docs/reference/model/bibliography/#parameters-style"><code>bibliography.style</code></a>, <a href="/docs/reference/model/cite/#parameters-style"><code>cite.style</code></a>,
+<a href="/docs/reference/text/raw/#parameters-theme"><code>raw.theme</code></a>, and <a href="/docs/reference/text/raw/#parameters-syntaxes"><code>raw.syntaxes</code></a> now accept bytes in addition to path
 strings. These did not have <code>.decode</code> variants, so this adds new
 flexibility.</li>
-<li>The <code>path</code> argument/field of <a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a> and <a href="/docs/reference/model/bibliography/" title="`bibliography`"><code>bibliography</code></a> was renamed to
+<li>The <code>path</code> argument/field of <a href="/docs/reference/visualize/image/"><code>image</code></a> and <a href="/docs/reference/model/bibliography/"><code>bibliography</code></a> was renamed to
 <code>source</code> and <code>sources</code>, respectively <strong>(Minor breaking change)</strong></li>
 </ul>
 </li>
 <li>Improved WebAssembly <a href="/docs/reference/foundations/plugin/">plugins</a>
 <ul>
 <li>The <code>plugin</code> type is replaced by a <a href="/docs/reference/foundations/plugin/"><code>plugin</code> function</a> that returns
-a <a href="/docs/reference/foundations/module/" title="module">module</a> containing normal Typst functions. This module can be used with
+a <a href="/docs/reference/foundations/module/">module</a> containing normal Typst functions. This module can be used with
 import syntax. <strong>(Breaking change)</strong></li>
 <li>Plugins now automatically run in multiple threads without any changes by
 plugin authors</li>
-<li>A new <a href="/docs/reference/foundations/plugin/#definitions-transition" title="`plugin.transition`"><code>plugin.transition</code></a> API is introduced which allows plugins to run
+<li>A new <a href="/docs/reference/foundations/plugin/#definitions-transition"><code>plugin.transition</code></a> API is introduced which allows plugins to run
 impure initialization in a way that doesn't break Typst's purity guarantees</li>
 </ul>
 </li>
 <li>The variable name bound by a bare import (no renaming, no import list) is now
 determined statically and dynamic imports without <code>as</code> renaming (e.g.
 <code><span class="typ-key">import</span> <span class="typ-str">&quot;ot&quot;</span> <span class="typ-op">+</span> <span class="typ-str">&quot;her.typ&quot;</span></code>) are a hard error <strong>(Breaking change)</strong></li>
-<li>Values of the <a href="/docs/reference/foundations/arguments/" title="`arguments`"><code>arguments</code></a> type can now be added with <code>+</code> and
+<li>Values of the <a href="/docs/reference/foundations/arguments/"><code>arguments</code></a> type can now be added with <code>+</code> and
 <a href="/docs/reference/scripting/#blocks">joined</a> in curly-braced code blocks</li>
 <li>Functions in an element function's scope can now be called with method syntax,
 bringing elements and types closer (in anticipation of a future full
-unification of the two). Currently, this is only useful for <a href="/docs/reference/model/outline/#definitions-entry" title="`outline.entry`"><code>outline.entry</code></a>
+unification of the two). Currently, this is only useful for <a href="/docs/reference/model/outline/#definitions-entry"><code>outline.entry</code></a>
 as no other element function defines methods.</li>
-<li>Added <a href="/docs/reference/foundations/calc/#functions-norm" title="`calc.norm`"><code>calc.norm</code></a> function</li>
-<li>Added support for 32-bit floats in <a href="/docs/reference/foundations/float/#definitions-from-bytes" title="`float.from-bytes`"><code>float.from-bytes</code></a> and <a href="/docs/reference/foundations/float/#definitions-to-bytes" title="`float.to-bytes`"><code>float.to-bytes</code></a></li>
-<li>The <a href="/docs/reference/foundations/decimal/" title="`decimal`"><code>decimal</code></a> constructor now also accepts decimal values</li>
-<li>Improved <code>repr</code> of <a href="/docs/reference/foundations/symbol/">symbols</a>, <a href="/docs/reference/foundations/arguments/" title="arguments">arguments</a>, and <a href="/docs/reference/foundations/type/">types</a></li>
-<li>Duplicate <a href="/docs/reference/foundations/symbol/" title="symbol">symbol</a> variants and modifiers are now a hard error
+<li>Added <a href="/docs/reference/foundations/calc/#functions-norm"><code>calc.norm</code></a> function</li>
+<li>Added support for 32-bit floats in <a href="/docs/reference/foundations/float/#definitions-from-bytes"><code>float.from-bytes</code></a> and <a href="/docs/reference/foundations/float/#definitions-to-bytes"><code>float.to-bytes</code></a></li>
+<li>The <a href="/docs/reference/foundations/decimal/"><code>decimal</code></a> constructor now also accepts decimal values</li>
+<li>Improved <code>repr</code> of <a href="/docs/reference/foundations/symbol/">symbols</a>, <a href="/docs/reference/foundations/arguments/">arguments</a>, and <a href="/docs/reference/foundations/type/">types</a></li>
+<li>Duplicate <a href="/docs/reference/foundations/symbol/">symbol</a> variants and modifiers are now a hard error
 <strong>(Breaking change)</strong></li>
 </ul>
 <h2 id="math">Math</h2>
@@ -1080,7 +1086,7 @@ Forms) and <code>dtls</code> (Dotless Forms) OpenType features</li>
 <li>The <a href="/docs/reference/math/styles/#functions-italic"><code>italic</code></a> function now works with ħ</li>
 <li>Fixed a bug where the extent of a math equation was wrongly affected by
 internal metadata</li>
-<li>Fixed interaction of <a href="/docs/reference/math/lr/#functions-lr"><code>lr</code></a> and <a href="/docs/reference/context/" title="context">context</a> expressions</li>
+<li>Fixed interaction of <a href="/docs/reference/math/lr/#functions-lr"><code>lr</code></a> and <a href="/docs/reference/context/">context</a> expressions</li>
 <li>Fixed weak spacing being unconditionally ignored in <a href="/docs/reference/math/lr/#functions-lr"><code>lr</code></a></li>
 <li>Fixed sub/superscripts sometimes being in the wrong position with
 <a href="/docs/reference/math/lr/#functions-lr"><code>lr</code></a></li>
@@ -1116,13 +1122,13 @@ which font family</li>
 <li>Added <a href="/docs/reference/text/smallcaps/#parameters-all"><code>all</code></a> parameter to <code>smallcaps</code> function that also
 enables small capitals on uppercase letters</li>
 <li>Added basic i18n for Basque and Bulgarian</li>
-<li><a href="/docs/reference/model/par/#parameters-justify">Justification</a> does not affect <a href="/docs/reference/text/raw/" title="raw">raw</a> blocks anymore</li>
-<li><a href="/docs/reference/text/text/#parameters-cjk-latin-spacing">CJK-Latin-spacing</a> does not affect <a href="/docs/reference/text/raw/" title="raw">raw</a> text
+<li><a href="/docs/reference/model/par/#parameters-justify">Justification</a> does not affect <a href="/docs/reference/text/raw/">raw</a> blocks anymore</li>
+<li><a href="/docs/reference/text/text/#parameters-cjk-latin-spacing">CJK-Latin-spacing</a> does not affect <a href="/docs/reference/text/raw/">raw</a> text
 anymore</li>
 <li>Fixed wrong language codes being used for Greek and Ukrainian</li>
 <li>Fixed default quotes for Croatian and Bulgarian</li>
 <li>Fixed crash in RTL text handling</li>
-<li>Added support for <a href="/docs/reference/text/raw/" title="`raw`"><code>raw</code></a> syntax highlighting for a few new languages: CFML,
+<li>Added support for <a href="/docs/reference/text/raw/"><code>raw</code></a> syntax highlighting for a few new languages: CFML,
 NSIS, and WGSL</li>
 <li>New font metadata exception for New Computer Modern Sans Math</li>
 <li>Updated bundled New Computer Modern fonts to version 7.0.1</li>
@@ -1137,13 +1143,13 @@ another footnote</li>
 <li>Fixed crash with overlarge footnotes within a floating placement</li>
 </ul>
 </li>
-<li>Fixed sizing of quadratic shapes (<a href="/docs/reference/visualize/square/" title="`square`"><code>square</code></a> and <a href="/docs/reference/visualize/circle/" title="`circle`"><code>circle</code></a>)</li>
-<li>Fixed <a href="/docs/reference/layout/block/#parameters-sticky" title="`block.sticky`"><code>block.sticky</code></a> not working properly at the top of a container</li>
+<li>Fixed sizing of quadratic shapes (<a href="/docs/reference/visualize/square/"><code>square</code></a> and <a href="/docs/reference/visualize/circle/"><code>circle</code></a>)</li>
+<li>Fixed <a href="/docs/reference/layout/block/#parameters-sticky"><code>block.sticky</code></a> not working properly at the top of a container</li>
 <li>Fixed crash due to consecutive weak spacing</li>
-<li>Fixed crash when a <a href="/docs/reference/layout/block/" title="block">block</a> or text have negative sizes</li>
+<li>Fixed crash when a <a href="/docs/reference/layout/block/">block</a> or text have negative sizes</li>
 <li>Fixed unnecessary hyphenations occurring in rare scenarios due to a bad
 interaction between padding and paragraph optimization</li>
-<li>Fixed lone <a href="/docs/reference/model/cite/">citations</a> in <a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a> not becoming their own paragraph</li>
+<li>Fixed lone <a href="/docs/reference/model/cite/">citations</a> in <a href="/docs/reference/layout/align/"><code>align</code></a> not becoming their own paragraph</li>
 </ul>
 <h2 id="syntax">Syntax</h2>
 <ul>
@@ -1172,7 +1178,7 @@ also appear at the start of a list item</li>
 </ul>
 <h2 id="pdf-export">PDF export</h2>
 <ul>
-<li>Added <a href="/docs/reference/pdf/embed/" title="`pdf.embed`"><code>pdf.embed</code></a> function for embedding arbitrary files in the exported PDF</li>
+<li>Added <a href="/docs/reference/pdf/embed/"><code>pdf.embed</code></a> function for embedding arbitrary files in the exported PDF</li>
 <li>Added support for PDF/A-3b export</li>
 <li>The PDF timestamp will now contain the timezone by default</li>
 </ul>
@@ -1182,10 +1188,10 @@ still <em>very</em> incomplete, but already available for experimentation behind
 feature flag.</p>
 <ul>
 <li>Added HTML output support for some (but not all) of the built-in elements</li>
-<li>Added <a href="/docs/reference/html/elem/" title="`html.elem`"><code>html.elem</code></a> function for outputting an arbitrary HTML element</li>
-<li>Added <a href="/docs/reference/html/frame/" title="`html.frame`"><code>html.frame</code></a> function for integrating content that requires layout
+<li>Added <a href="/docs/reference/html/elem/"><code>html.elem</code></a> function for outputting an arbitrary HTML element</li>
+<li>Added <a href="/docs/reference/html/frame/"><code>html.frame</code></a> function for integrating content that requires layout
 into HTML (by embedding an SVG)</li>
-<li>Added <a href="/docs/reference/foundations/target/" title="`target`"><code>target</code></a> function which returns either <code><span class="typ-str">&quot;paged&quot;</span></code> or <code><span class="typ-str">&quot;html&quot;</span></code>
+<li>Added <a href="/docs/reference/foundations/target/"><code>target</code></a> function which returns either <code><span class="typ-str">&quot;paged&quot;</span></code> or <code><span class="typ-str">&quot;html&quot;</span></code>
 depending on the export target</li>
 </ul>
 <h2 id="tooling-and-diagnostics">Tooling and Diagnostics</h2>
@@ -1242,15 +1248,14 @@ opting into experimental features. The only feature so far is <code>html</code>.
 <code>errorbar.diamond.stroked</code>, <code>errorbar.diamond.filled</code>,
 <code>errorbar.circle.stroked</code>, <code>errorbar.circle.filled</code></li>
 <li><code>numero</code></li>
-<li><code>Omega.inv</code></li>
 </ul>
 </li>
-<li>Renamed
+<li>Renamed <strong>(Breaking change)</strong>
 <ul>
 <li><code>ohm.inv</code> to <code>Omega.inv</code></li>
 </ul>
 </li>
-<li>Changed codepoint
+<li>Changed codepoint <strong>(Breaking change)</strong>
 <ul>
 <li><code>angle.l.double</code> from <code>《</code> to <code>⟪</code></li>
 <li><code>angle.r.double</code> from <code>》</code> to <code>⟫</code></li>
@@ -1263,20 +1268,21 @@ opting into experimental features. The only feature so far is <code>html</code>.
 <li><code>integral.sect</code> in favor of <code>integral.inter</code></li>
 </ul>
 </li>
-<li>Removed
+<li>Removed <strong>(Breaking change)</strong>
 <ul>
 <li><code>degree.c</code> in favor of <code>°C</code> (<code><span class="typ-math-delim">$</span><span class="typ-func">upright</span><span class="typ-punct">(</span>°C<span class="typ-punct">)</span><span class="typ-math-delim">$</span></code> or <code><span class="typ-math-delim">$</span><span class="typ-func">upright</span><span class="typ-punct">(</span><span class="typ-pol">degree</span> C<span class="typ-punct">)</span><span class="typ-math-delim">$</span></code> in math)</li>
 <li><code>degree.f</code> in favor of <code>°F</code> (<code><span class="typ-math-delim">$</span><span class="typ-func">upright</span><span class="typ-punct">(</span>°F<span class="typ-punct">)</span><span class="typ-math-delim">$</span></code> or <code><span class="typ-math-delim">$</span><span class="typ-func">upright</span><span class="typ-punct">(</span><span class="typ-pol">degree</span> F<span class="typ-punct">)</span><span class="typ-math-delim">$</span></code> in math)</li>
 <li><code>kelvin</code> in favor of just K (<code><span class="typ-math-delim">$</span><span class="typ-func">upright</span><span class="typ-punct">(</span>K<span class="typ-punct">)</span><span class="typ-math-delim">$</span></code> in math)</li>
+<li><code>ohm</code> in favor of <code>Omega</code></li>
 </ul>
 </li>
 </ul>
 <h2 id="deprecations">Deprecations</h2>
 <ul>
-<li>The <a href="/docs/reference/visualize/path/" title="`path`"><code>path</code></a> function in favor of the <a href="/docs/reference/visualize/curve/" title="`curve`"><code>curve</code></a> function</li>
-<li>The name <code>pattern</code> for tiling patterns in favor of the new name <a href="/docs/reference/visualize/tiling/" title="`tiling`"><code>tiling</code></a></li>
-<li><a href="/docs/reference/visualize/image/#definitions-decode" title="`image.decode`"><code>image.decode</code></a>, <a href="/docs/reference/data-loading/cbor/#definitions-decode" title="`cbor.decode`"><code>cbor.decode</code></a>, <a href="/docs/reference/data-loading/csv/#definitions-decode" title="`csv.decode`"><code>csv.decode</code></a>, <a href="/docs/reference/data-loading/json/#definitions-decode" title="`json.decode`"><code>json.decode</code></a>,
-<a href="/docs/reference/data-loading/toml/#definitions-decode" title="`toml.decode`"><code>toml.decode</code></a>, <a href="/docs/reference/data-loading/xml/#definitions-decode" title="`xml.decode`"><code>xml.decode</code></a>, <a href="/docs/reference/data-loading/yaml/#definitions-decode" title="`yaml.decode`"><code>yaml.decode</code></a> in favor of the top-level
+<li>The <a href="/docs/reference/visualize/path/"><code>path</code></a> function in favor of the <a href="/docs/reference/visualize/curve/"><code>curve</code></a> function</li>
+<li>The name <code>pattern</code> for tiling patterns in favor of the new name <a href="/docs/reference/visualize/tiling/"><code>tiling</code></a></li>
+<li><a href="/docs/reference/visualize/image/#definitions-decode"><code>image.decode</code></a>, <a href="/docs/reference/data-loading/cbor/#definitions-decode"><code>cbor.decode</code></a>, <a href="/docs/reference/data-loading/csv/#definitions-decode"><code>csv.decode</code></a>, <a href="/docs/reference/data-loading/json/#definitions-decode"><code>json.decode</code></a>,
+<a href="/docs/reference/data-loading/toml/#definitions-decode"><code>toml.decode</code></a>, <a href="/docs/reference/data-loading/xml/#definitions-decode"><code>xml.decode</code></a>, <a href="/docs/reference/data-loading/yaml/#definitions-decode"><code>yaml.decode</code></a> in favor of the top-level
 functions directly accepting both paths and bytes</li>
 <li>The <code>sect</code> and its variants in favor of <code>inter</code>, and <code>integral.sect</code> in favor
 of <code>integral.inter</code></li>
@@ -1286,15 +1292,15 @@ removed in Typst 0.14.</li>
 </ul>
 <h2 id="removals">Removals</h2>
 <ul>
-<li>Removed <code>style</code> function and <code>styles</code> argument of <a href="/docs/reference/layout/measure/" title="`measure`"><code>measure</code></a>, use a <a href="/docs/reference/context/" title="context">context</a>
+<li>Removed <code>style</code> function and <code>styles</code> argument of <a href="/docs/reference/layout/measure/"><code>measure</code></a>, use a <a href="/docs/reference/context/">context</a>
 expression instead <strong>(Breaking change)</strong></li>
-<li>Removed <code>state.display</code> function, use <a href="/docs/reference/introspection/state/#definitions-get" title="`state.get`"><code>state.get</code></a> instead
+<li>Removed <code>state.display</code> function, use <a href="/docs/reference/introspection/state/#definitions-get"><code>state.get</code></a> instead
 <strong>(Breaking change)</strong></li>
-<li>Removed <code>location</code> argument of <a href="/docs/reference/introspection/state/#definitions-at" title="`state.at`"><code>state.at</code></a>, <a href="/docs/reference/introspection/counter/#definitions-at" title="`counter.at`"><code>counter.at</code></a>, and <a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a>
+<li>Removed <code>location</code> argument of <a href="/docs/reference/introspection/state/#definitions-at"><code>state.at</code></a>, <a href="/docs/reference/introspection/counter/#definitions-at"><code>counter.at</code></a>, and <a href="/docs/reference/introspection/query/"><code>query</code></a>
 <strong>(Breaking change)</strong></li>
-<li>Removed compatibility behavior where <a href="/docs/reference/introspection/counter/#definitions-display" title="`counter.display`"><code>counter.display</code></a> worked without
-<a href="/docs/reference/context/" title="context">context</a> <strong>(Breaking change)</strong></li>
-<li>Removed compatibility behavior of <a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a> <strong>(Breaking change)</strong></li>
+<li>Removed compatibility behavior where <a href="/docs/reference/introspection/counter/#definitions-display"><code>counter.display</code></a> worked without
+<a href="/docs/reference/context/">context</a> <strong>(Breaking change)</strong></li>
+<li>Removed compatibility behavior of <a href="/docs/reference/introspection/locate/"><code>locate</code></a> <strong>(Breaking change)</strong></li>
 </ul>
 <h2 id="development">Development</h2>
 <ul>
@@ -1310,9 +1316,9 @@ feature is enabled</li>
 
 
       
-      <div class="page-end-buttons"><a href="/docs/changelog/" class="previous"><img
+      <div class="page-end-buttons"><a href="/docs/changelog/0.13.1/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">変更履歴</span><span class="hint">前に戻る</span></div>
+          <div><span class="page-title">0.13.1</span><span class="hint">前に戻る</span></div>
         </a><a href="/docs/changelog/0.12.0/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
           <div><span class="page-title">0.12.0</span><span class="hint">次に進む</span></div>
         </a></div>

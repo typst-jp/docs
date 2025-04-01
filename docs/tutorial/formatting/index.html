@@ -40,9 +40,9 @@
 <body class="no-js docs has-outline">
   <div class="alert">
     <div class="alert-content">
-      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.12.0 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
+      <span>⚠ <b>注意</b>  当サイトは、<a href="https://typst.app/docs/">Typst v0.13.1 公式ドキュメント</a>を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、<a href="https://typst.app/docs/">公式ドキュメント</a> との併用を推奨します。このサイトの内容に誤りを発見された方は、<a href="https://github.com/typst-jp/typst-jp.github.io">GitHubリポジトリまでご報告を頂けましたら幸いです</a>。我々のコミュニティにご興味のある方は、ぜひ<a href="https://discord.gg/9xF7k4aAuH">非公式Discordサーバー「くみはんクラブ」</a>にご参加ください。</span>
       <br />
-      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.12.0 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
+      <span>⚠ <b>Warning:</b>   This site provides an unofficial translation of the <a href="https://typst.app/docs/">Typst v0.13.1 documentation</a> by the Japanese Community. Please note that there may be some inaccuracies, untranslated sections or outdated information. We highly recommend referring to <a href="https://typst.app/docs/">the latest official documentation</a> as well. If you find any errors in the content, <a href="https://github.com/typst-jp/typst-jp.github.io">please let us know through our GitHub repository.</a> If you are interested in our community, feel free to join <a href="https://discord.gg/9xF7k4aAuH">our unofficial Discord server, “Kumihan Club.”</a></span>
     </div>
     <button id="closeAlertButton" class="close"><img alt="Close" src="/assets/icons/16-close-dark.svg"
           width="16" height="16"></button>
@@ -771,6 +771,12 @@
             
             
             <li>
+              <a href="/docs/changelog/0.13.1/" >0.13.1</a>
+              
+            </li>
+            
+            
+            <li>
               <a href="/docs/changelog/0.13.0/" >0.13.0</a>
               
             </li>
@@ -923,10 +929,9 @@
 ティーチングアシスタントはあなたが新しい組版システムを使っていることをまだ知らず、あなたは自身のレポートを他の学生の提出物に合わせたいと思うでしょう。
 この章では、Typstの組版システムを使ってレポートの体裁を整える方法を示します。</p>
 <h2 id="set-rule">setルール</h2>
-<p>前章で見たように、Typstにはコンテンツを挿入する関数（例：<a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a>関数）と、引数として受け取ったコンテンツを操作する関数（例：<a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a>関数）があります。
-あなたが所望する書式設定をしたいとき最初に思いつくことは、それを行う関数を探して、その関数で文書全体を囲うことでしょう。
-たとえば、レポートを両端揃えにしたい場合には以下のように記述します。</p>
-<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
+<p>前章で見たように、Typstにはコンテンツを_挿入する_関数（例：<a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a>関数）と、引数として受け取ったコンテンツを<em>操作する</em>関数（例：<a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a>関数）があります。
+たとえば、フォントを変更したいとき、最初に思いつくことは、それを行う関数を探して、その関数で文書全体を囲むことでしょう。</p>
+<div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;New Computer Modern&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
   <span class="typ-heading">= Background</span>
   In the case of glaciers, fluid
   dynamics principles can be used
@@ -937,17 +942,18 @@
   presence of other fluids (such as
   water).
 <span class="typ-punct">]</span>
-</code></pre><div class="preview"><img src="/assets/docs/16928393d537b3d5aad61eae79e2ce36.png" alt="Preview" width="480" height="190"/></div></div>
+</code></pre><div class="preview"><img src="/assets/docs/d8aee50b36a5bf2c8a8561c0e3741eda.png" alt="Preview" width="480" height="190"/></div></div>
 <p>ここで、関数のすべての引数は括弧の中で指定されるべきではないか？と思うでしょう。
 なぜ括弧の <em>後</em> にコンテンツを記述する2つ目の角括弧があるのでしょうか？
 答えは、関数にコンテンツを渡すことはTypstではよくあるため、特別な構文があるからです。
 コンテンツを引数リストの中に入れる代わりに、通常の引数の後に角括弧内でコンテンツを直接書くことが可能であり、これによりカンマ区切りを減らすことができます。</p>
-<p>上で見たように、これは正しく動作し、<a href="/docs/reference/model/par/" title="`par`"><code>par</code></a>関数はその段落のすべて文章を両端揃えにします。
-しかし、無数の関数で文書を囲み、選択的に各場所でスタイル適用をしようとするとすぐ面倒になります。</p>
+<p>上で見たように、これは正しく動作します。<a href="/docs/reference/text/text/" title="`text`"><code>text</code></a>関数を使えば、その範囲内のすべてのテキストのフォントを調整できます。しかし、無数の関数で文書を囲み、選択的に各場所でスタイルを適用しようとするとすぐに面倒になります。</p>
 <p>幸いなことに、Typstにはもっと簡潔な記法があります。
 <em>setルール</em> を使えば、以後現れるすべてのコンテンツに対してスタイル設定を適用可能です。
 <code><span class="typ-key">set</span></code>キーワードを入力し、その後に設定したい関数の名前と引数のリストを括弧で囲んでsetルールを記述します。</p>
-<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">par</span><span class="typ-punct">(</span>justify<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span>
+<div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>
+  font<span class="typ-punct">:</span> <span class="typ-str">&quot;New Computer Modern&quot;</span>
+<span class="typ-punct">)</span>
 
 <span class="typ-heading">= Background</span>
 In the case of glaciers, fluid
@@ -958,7 +964,7 @@ influenced by factors such as
 temperature, pressure, and the
 presence of other fluids (such as
 water).
-</code></pre><div class="preview"><img src="/assets/docs/5efe9b7aefaf2e05de169f57a3e460a1.png" alt="Preview" width="480" height="190"/></div></div><div class="info-box">
+</code></pre><div class="preview"><img src="/assets/docs/3c2d4c8695ec9500a99dcf827c8a8dca.png" alt="Preview" width="480" height="190"/></div></div><div class="info-box">
 <p>ここで起こっていることをより専門的な用語で説明すると、
 setルールでは、ある関数のパラメーターに、それ以降にその関数を使うときのデフォルト値を設定しています。</p>
 </div>

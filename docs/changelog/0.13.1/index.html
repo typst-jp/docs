@@ -1,25 +1,23 @@
-
-
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
   <meta charset="utf-8">
-  <title>Rectangle – Typstドキュメント日本語版</title>
-  <meta name="description" content="Documentation for the `rect` function.">
+  <title>0.13.1 – Typstドキュメント日本語版</title>
+  <meta name="description" content="Changes in Typst 0.13.1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#239dad">
-  <meta property="og:url" content="https://typst-jp.github.io/docs/reference/visualize/rect/">
-  <meta property="og:title" content="Rectangle – Typstドキュメント日本語版">
+  <meta property="og:url" content="https://typst-jp.github.io/docs/changelog/0.13.1/">
+  <meta property="og:title" content="0.13.1 – Typstドキュメント日本語版">
   <meta property="og:site_name" content="Typst">
-  <meta property="og:description" content="Documentation for the `rect` function.">
+  <meta property="og:description" content="Changes in Typst 0.13.1">
   <meta property="og:type">
   <meta property="og:image" content="https://typst-jp.github.io/assets/social.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:site" content="@typstapp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://typst-jp.github.io/docs/reference/visualize/rect/">
+  <link rel="canonical" href="https://typst-jp.github.io/docs/changelog/0.13.1/">
   <meta name="twitter:image:alt"
     content="The left side of a text editor with colorful cursors, as well as the text &#x27;Compose papers faster, Typst&#x27;">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon.ico">
@@ -607,7 +605,7 @@
                 <li><a href="/docs/reference/visualize/polygon/" >Polygon</a></li>
                 
                 
-                <li><a href="/docs/reference/visualize/rect/"  aria-current="page" >Rectangle</a></li>
+                <li><a href="/docs/reference/visualize/rect/" >Rectangle</a></li>
                 
                 
                 <li><a href="/docs/reference/visualize/square/" >Square</a></li>
@@ -773,7 +771,7 @@
             
             
             <li>
-              <a href="/docs/changelog/0.13.1/" >0.13.1</a>
+              <a href="/docs/changelog/0.13.1/"  aria-current="page" >0.13.1</a>
               
             </li>
             
@@ -916,504 +914,51 @@
 
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/">リファレンス</a></li>
+        <li><a href="/docs/changelog/">変更履歴</a></li>
         
         <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/visualize/">視覚化</a></li>
-        
-        <li aria-hidden="true"><img src="/assets/icons/16-arrow-right.svg" width="16" height="16" alt=""></li>
-        <li><a href="/docs/reference/visualize/rect/">Rectangle</a></li>
+        <li><a href="/docs/changelog/0.13.1/">0.13.1</a></li>
         
       </ul>
 
       
 
-<h1 id="summary"><code>rect</code><small>
-<span aria-describedby="-tooltip">Element</span>
-<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-    aria-labelledby="-tooltip-qm-label">
-    <title id="-tooltip-qm-label">Element functions can be customized with <code>set</code> and <code>show</code> rules.</title>
-    <use href="/assets/icons/12-tooltip.svg#icon"></use>
-  </svg>
-  <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
-</div>
-</small></h1>
-<p>A rectangle with optional content.</p>
-<h2 id="example">Example</h2>
-<div class="previewed-code"><pre><code><span class="typ-comment">// Without content.</span>
-<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>width<span class="typ-punct">:</span> <span class="typ-num">35%</span><span class="typ-punct">,</span> height<span class="typ-punct">:</span> <span class="typ-num">30pt</span><span class="typ-punct">)</span>
-
-<span class="typ-comment">// With content.</span>
-<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">[</span>
-  Automatically sized <span class="typ-escape">\</span>
-  to fit the content.
-<span class="typ-punct">]</span>
-</code></pre><div class="preview"><img src="/assets/docs/4a86cfbd13c58784b86f6b8511d05eee.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="parameters">
-  
-<span aria-describedby="parameters-tooltip">引数</span>
-<div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-    aria-labelledby="parameters-tooltip-qm-label">
-    <title id="parameters-tooltip-qm-label">Parameters are the inputs to a function. They are specified in parentheses after the function name.</title>
-    <use href="/assets/icons/12-tooltip.svg#icon"></use>
-  </svg>
-  <div role="tooltip" id="parameters-tooltip" tabindex="-1">Parameters are the inputs to a function. They are specified in parentheses after the function name.</div>
-</div>
-
-</h2>
-
-<div class="code code-definition "><span
-    class="typ-func">rect</span>(<div class="arguments"><span
-      class="overview-param"><a href="#parameters-width">width<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a>, </span><span
-      class="overview-param"><a href="#parameters-height">height<!-- -->: </a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a>, </span><span
-      class="overview-param"><a href="#parameters-fill">fill<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><span class="pill pill-obj">tiling</span>, </span><span
-      class="overview-param"><a href="#parameters-stroke">stroke<!-- -->: </a><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a><a href="/docs/reference/layout/length" class="pill pill-num">length</a><a href="/docs/reference/visualize/color" class="pill pill-col">color</a><a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a><a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a><span class="pill pill-obj">tiling</span><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
-      class="overview-param"><a href="#parameters-radius">radius<!-- -->: </a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
-      class="overview-param"><a href="#parameters-inset">inset<!-- -->: </a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
-      class="overview-param"><a href="#parameters-outset">outset<!-- -->: </a><a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a><a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>, </span><span
-      class="overview-param"><a href="/docs/reference/foundations/none" class="pill pill-kw">none</a><a href="/docs/reference/foundations/content" class="pill pill-con">content</a>, </span></div>) <!-- -->-&gt; <a href="/docs/reference/foundations/content" class="pill pill-con">content</a></div>
-
-
-
-
-<h4 id="rect-rect-parameters-width"><code>width</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
-        
-      
-        
-        
-          <a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-width-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-width-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-width-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-width-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>The rectangle's width, relative to its parent container.</p>
-
-
-<p>Default:<code><span class="typ-key">auto</span></code></p>
-
-
-
-<h4 id="rect-rect-parameters-height"><code>height</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
-        
-      
-        
-        
-          <a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a>
-        
-      
-        
-        
-          <a href="/docs/reference/layout/fraction" class="pill pill-num">fraction</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-height-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-height-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-height-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-height-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>The rectangle's height, relative to its parent container.</p>
-
-
-<p>Default:<code><span class="typ-key">auto</span></code></p>
-
-
-
-<h4 id="rect-rect-parameters-fill"><code>fill</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
-        
-      
-        
-        
-          <a href="/docs/reference/visualize/color" class="pill pill-col">color</a>
-        
-      
-        
-        
-          <a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a>
-        
-      
-        
-        
-          <span class="pill pill-obj">tiling</span>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-fill-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-fill-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-fill-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-fill-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>How to fill the rectangle.</p>
-<p>When setting a fill, the default stroke disappears. To create a
-rectangle with both fill and stroke, you have to configure both.</p>
-
-
-<p>Default:<code><span class="typ-key">none</span></code></p>
-
-
-<details class="folding-example">
-  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
-  <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>fill<span class="typ-punct">:</span> blue<span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/5c2925fdd2384537d4a253052ea8f30c.png" alt="Preview" width="480" height="190"/></div></div>
-  </div>
-</details>
-
-
-<h4 id="rect-rect-parameters-stroke"><code>stroke</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/auto" class="pill pill-kw">auto</a>
-        
-      
-        
-        
-          <a href="/docs/reference/layout/length" class="pill pill-num">length</a>
-        
-      
-        
-        
-          <a href="/docs/reference/visualize/color" class="pill pill-col">color</a>
-        
-      
-        
-        
-          <a href="/docs/reference/visualize/gradient" class="pill pill-obj">gradient</a>
-        
-      
-        
-        
-          <a href="/docs/reference/visualize/stroke" class="pill pill-obj">stroke</a>
-        
-      
-        
-        
-          <span class="pill pill-obj">tiling</span>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-stroke-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-stroke-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-stroke-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-stroke-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>How to stroke the rectangle. This can be:</p>
+<h1>Version 0.13.1 (March 7, 2025)</h1>
+<h2 id="command-line-interface">Command Line Interface</h2>
 <ul>
-<li><code><span class="typ-key">none</span></code> to disable stroking</li>
-<li><code><span class="typ-key">auto</span></code> for a stroke of <code><span class="typ-num">1pt</span> <span class="typ-op">+</span> black</code> if and if only if no fill is
-given.</li>
-<li>Any kind of <a href="/docs/reference/visualize/stroke/" title="stroke">stroke</a></li>
-<li>A dictionary describing the stroke for each side individually. The
-dictionary can contain the following keys in order of precedence:
+<li>Fixed high CPU usage for <code>typst watch</code> on Linux. Depending on the project
+size, CPU usage would spike for varying amounts of time. This bug appeared
+with 0.13.0 due to a behavioral change in the inotify file watching backend.</li>
+</ul>
+<h2 id="html-export">HTML export</h2>
 <ul>
-<li><code>top</code>: The top stroke.</li>
-<li><code>right</code>: The right stroke.</li>
-<li><code>bottom</code>: The bottom stroke.</li>
-<li><code>left</code>: The left stroke.</li>
-<li><code>x</code>: The horizontal stroke.</li>
-<li><code>y</code>: The vertical stroke.</li>
-<li><code>rest</code>: The stroke on all sides except those for which the
-dictionary explicitly sets a size.</li>
+<li>Fixed export of tables with <a href="/docs/reference/model/table/#parameters-gutter">gutters</a></li>
+<li>Fixed usage of <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code> element within <a href="/docs/reference/context/">context</a></li>
+<li>Fixed querying of <a href="/docs/reference/introspection/metadata/">metadata</a> next to <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code> element</li>
 </ul>
-</li>
-</ul>
-
-
-<p>Default:<code><span class="typ-key">auto</span></code></p>
-
-
-<details class="folding-example">
-  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
-  <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">stack</span><span class="typ-punct">(</span>
-  dir<span class="typ-punct">:</span> ltr<span class="typ-punct">,</span>
-  spacing<span class="typ-punct">:</span> <span class="typ-num">1fr</span><span class="typ-punct">,</span>
-  <span class="typ-func">rect</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> red<span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-func">rect</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">2pt</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
-  <span class="typ-func">rect</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">2pt</span> <span class="typ-op">+</span> red<span class="typ-punct">)</span><span class="typ-punct">,</span>
-<span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/f3dbe7392dc36e82f2577d24d9989ff4.png" alt="Preview" width="480" height="190"/></div></div>
-  </div>
-</details>
-
-
-<h4 id="rect-rect-parameters-radius"><code>radius</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-radius-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-radius-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-radius-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-radius-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>How much to round the rectangle's corners, relative to the minimum of
-the width and height divided by two. This can be:</p>
+<h2 id="visualization">Visualization</h2>
 <ul>
-<li>A relative length for a uniform corner radius.</li>
-<li>A dictionary: With a dictionary, the stroke for each side can be set
-individually. The dictionary can contain the following keys in order
-of precedence:
+<li>Fixed <a href="/docs/reference/visualize/curve/">curves</a> with multiple non-closed components</li>
+</ul>
+<h2 id="introspection">Introspection</h2>
 <ul>
-<li><code>top-left</code>: The top-left corner radius.</li>
-<li><code>top-right</code>: The top-right corner radius.</li>
-<li><code>bottom-right</code>: The bottom-right corner radius.</li>
-<li><code>bottom-left</code>: The bottom-left corner radius.</li>
-<li><code>left</code>: The top-left and bottom-left corner radii.</li>
-<li><code>top</code>: The top-left and top-right corner radii.</li>
-<li><code>right</code>: The top-right and bottom-right corner radii.</li>
-<li><code>bottom</code>: The bottom-left and bottom-right corner radii.</li>
-<li><code>rest</code>: The radii for all corners except those for which the
-dictionary explicitly sets a size.</li>
+<li>Fixed a regression where labelled <a href="/docs/reference/foundations/symbol/">symbols</a> could not be
+<a href="/docs/reference/introspection/query/">queried</a> by label</li>
 </ul>
-</li>
+<h2 id="deprecations">Deprecations</h2>
+<ul>
+<li>Fixed false positives in deprecation warnings for type/str comparisons</li>
 </ul>
-
-
-<p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">:</span><span class="typ-punct">)</span></code></p>
-
-
-<details class="folding-example">
-  <summary><img src="/assets/icons/16-arrow-right.svg" alt="" width="16" height="16">View example</summary>
-  <div class="folding">
-    <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">rect</span><span class="typ-punct">(</span>stroke<span class="typ-punct">:</span> <span class="typ-num">4pt</span><span class="typ-punct">)</span>
-<span class="typ-func">#</span><span class="typ-func">rect</span><span class="typ-punct">(</span>
-  radius<span class="typ-punct">:</span> <span class="typ-punct">(</span>
-    left<span class="typ-punct">:</span> <span class="typ-num">5pt</span><span class="typ-punct">,</span>
-    top-right<span class="typ-punct">:</span> <span class="typ-num">20pt</span><span class="typ-punct">,</span>
-    bottom-right<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">,</span>
-  <span class="typ-punct">)</span><span class="typ-punct">,</span>
-  stroke<span class="typ-punct">:</span> <span class="typ-punct">(</span>
-    left<span class="typ-punct">:</span> red<span class="typ-punct">,</span>
-    top<span class="typ-punct">:</span> yellow<span class="typ-punct">,</span>
-    right<span class="typ-punct">:</span> green<span class="typ-punct">,</span>
-    bottom<span class="typ-punct">:</span> blue<span class="typ-punct">,</span>
-  <span class="typ-punct">)</span><span class="typ-punct">,</span>
-<span class="typ-punct">)</span>
-</code></pre><div class="preview"><img src="/assets/docs/847a9bfaa5533d94e5893bbb5ed30ec6.png" alt="Preview" width="480" height="190"/></div></div>
-  </div>
-</details>
-
-
-<h4 id="rect-rect-parameters-inset"><code>inset</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-inset-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-inset-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-inset-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-inset-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>How much to pad the rectangle's content.
-See the <a href="/docs/reference/layout/box/#parameters-outset">box's documentation</a> for more details.</p>
-
-
-<p>Default:<code><span class="typ-num">0%</span> <span class="typ-op">+</span> <span class="typ-num">5pt</span></code></p>
-
-
-
-<h4 id="rect-rect-parameters-outset"><code>outset</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/layout/relative" class="pill pill-obj">relative</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/dictionary" class="pill pill-obj">dictionary</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-outset-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-outset-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-outset-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-outset-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>How much to expand the rectangle's size without affecting the layout.
-See the <a href="/docs/reference/layout/box/#parameters-outset">box's documentation</a> for more details.</p>
-
-
-<p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">:</span><span class="typ-punct">)</span></code></p>
-
-
-
-<h4 id="rect-rect-parameters-body"><code>body</code>
-  <div class="additional-info">
-    <div>
-      
-        
-        
-          <a href="/docs/reference/foundations/none" class="pill pill-kw">none</a>
-        
-      
-        
-        
-          <a href="/docs/reference/foundations/content" class="pill pill-con">content</a>
-        
-      
-    </div>
-    <small><span
-        aria-describedby="rect-rect-parameters-body-positional-tooltip">Positional</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-body-positional-tooltip-qm-label">
-          <title id="rect-rect-parameters-body-positional-tooltip-qm-label">
-            Positional parameters are specified in order, without names.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-body-positional-tooltip"
-          tabindex="-1">Positional parameters are specified in order, without names.</div>
-      </div>
-    </small><small><span
-        aria-describedby="rect-rect-parameters-body-settable-tooltip">Settable</span>
-      <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
-          aria-labelledby="rect-rect-parameters-body-settable-tooltip-qm-label">
-          <title id="rect-rect-parameters-body-settable-tooltip-qm-label">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</title>
-          <use href="/assets/icons/12-tooltip.svg#icon"></use>
-        </svg>
-        <div role="tooltip" id="rect-rect-parameters-body-settable-tooltip"
-          tabindex="-1">Settable parameters can be customized for all following uses of the function with a <code>set</code> rule.</div>
-      </div>
-    </small>
-  </div>
-</h4>
-<p>The content to place into the rectangle.</p>
-<p>When this is omitted, the rectangle takes on a default size of at most
-<code><span class="typ-num">45pt</span></code> by <code><span class="typ-num">30pt</span></code>.</p>
-
-
-<p>Default:<code><span class="typ-key">none</span></code></p>
-
-
-
-
-
-
-
-
+<h2 id="contributors">Contributors</h2>
 
 
 
       
-      <div class="page-end-buttons"><a href="/docs/reference/visualize/polygon/" class="previous"><img
+      <div class="page-end-buttons"><a href="/docs/changelog/" class="previous"><img
             src="/assets/icons/16-arrow-right.svg" alt="←">
-          <div><span class="page-title">Polygon</span><span class="hint">前に戻る</span></div>
-        </a><a href="/docs/reference/visualize/square/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
-          <div><span class="page-title">Square</span><span class="hint">次に進む</span></div>
+          <div><span class="page-title">変更履歴</span><span class="hint">前に戻る</span></div>
+        </a><a href="/docs/changelog/0.13.0/" class="next"><img src="/assets/icons/16-arrow-right.svg" alt="→">
+          <div><span class="page-title">0.13.0</span><span class="hint">次に進む</span></div>
         </a></div>
       
     </main>
@@ -1422,15 +967,27 @@ See the <a href="/docs/reference/layout/box/#parameters-outset">box's documentat
     <nav id="page-overview"><strong>目次</strong>
       <ul>
         
-        <li data-assoc="summary"><a href="#summary">概要</a>
+        <li data-assoc="command-line-interface"><a href="#command-line-interface">Command Line Interface</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="html-export"><a href="#html-export">Html Export</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="parameters"><a href="#parameters">引数</a>
+        <li data-assoc="visualization"><a href="#visualization">Visualization</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="introspection"><a href="#introspection">Introspection</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="deprecations"><a href="#deprecations">Deprecations</a>
+          <ul></ul>
+        </li>
+        
+        <li data-assoc="contributors"><a href="#contributors">Contributors</a>
           <ul></ul>
         </li>
         
