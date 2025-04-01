@@ -938,31 +938,31 @@
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
 </small></h1>
-<p>A footnote.</p>
-<p>Includes additional remarks and references on the same page with footnotes.
-A footnote will insert a superscript number that links to the note at the
-bottom of the page. Notes are numbered sequentially throughout your document
-and can break across multiple pages.</p>
-<p>To customize the appearance of the entry in the footnote listing, see
-<a href="/docs/reference/model/footnote/#definitions-entry"><code>footnote.entry</code></a>. The footnote itself is realized as a
-normal superscript, so you can use a set rule on the <a href="/docs/reference/text/super/" title="`super`"><code>super</code></a> function to
-customize it. You can also apply a show rule to customize only the footnote
-marker (superscript number) in the running text.</p>
-<h2 id="example">Example</h2>
+<p>脚注。</p>
+<p>脚注を用いて追加のコメントや参考文献を同じページに記述します。
+脚注は、ページ下部の注釈にリンクする上付きの番号を挿入します。
+注釈は文書全体で連続して番号付けされ、
+複数のページにまたがることができます。</p>
+<p>脚注リストの項目の外観をカスタマイズするには、
+<a href="/docs/reference/model/footnote/#definitions-entry"><code>footnote.entry</code></a>を参照してください。
+脚注自体は通常の上付き文字として実現されているため、
+<a href="/docs/reference/text/super/" title="`super`"><code>super</code></a>関数に対してsetルールを適用してカスタマイズできます。
+また、showルールを適用して、本文中の脚注マーカー（上付き番号）のみをカスタマイズすることもできます。</p>
+<h2 id="例">例</h2>
 <div class="previewed-code"><pre><code>Check the docs for more details.
 <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span><span class="typ-link">https://typst.app/docs</span><span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/3ab6fa6cbda0e8fa90daddf32fd1d8ae.png" alt="Preview" width="480" height="190"/></div></div>
-<p>The footnote automatically attaches itself to the preceding word, even if
-there is a space before it in the markup. To force space, you can use the
-string <code><span class="typ-str">#</span><span class="typ-str">&quot; &quot;</span></code> or explicit <a href="/docs/reference/layout/h/">horizontal spacing</a>.</p>
-<p>By giving a label to a footnote, you can have multiple references to it.</p>
+<p>脚注は、マークアップにおいて前の単語との間にスペースがあったとしても、
+自動的にその単語に付加されます。
+スペースを強制するには、文字列の<code><span class="typ-str">#</span><span class="typ-str">&quot; &quot;</span></code>や明示的な<a href="/docs/reference/layout/h/">horizontal spacing</a>を使用できます。</p>
+<p>脚注にラベルをつけることにより、脚注に対して複数の参照を持つことができます。</p>
 <div class="previewed-code"><pre><code>You can edit Typst documents online.
 <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span><span class="typ-link">https://typst.app/app</span><span class="typ-punct">]</span> <span class="typ-label">&lt;fn&gt;</span>
 Checkout Typst&#39;s website. <span class="typ-ref">@fn</span>
 And the online app. <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">(</span><span class="typ-label">&lt;fn&gt;</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/25e0276b874a5d2e1dc361db32f6adc9.png" alt="Preview" width="480" height="190"/></div></div>
-<p><em>Note:</em> Set and show rules in the scope where <code>footnote</code> is called may not
-apply to the footnote's content. See <a href="https://github.com/typst/typst/issues/1467#issuecomment-1588799440">here</a> for more information.</p>
+<p><em>注意:</em> <code>footnote</code>が呼び出されるスコープ内でのsetルールやshowルールは、脚注の内容に適用されない場合があります。
+詳細については<a href="https://github.com/typst/typst/issues/1467#issuecomment-1588799440">こちら</a>を参照してください。</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">引数</span>
@@ -1012,11 +1012,11 @@ apply to the footnote's content. See <a href="https://github.com/typst/typst/iss
     </small>
   </div>
 </h4>
-<p>How to number footnotes.</p>
-<p>By default, the footnote numbering continues throughout your document.
-If you prefer per-page footnote numbering, you can reset the footnote
-<a href="/docs/reference/introspection/counter/" title="counter">counter</a> in the page <a href="/docs/reference/layout/page/#parameters-header">header</a>. In the future, there might
-be a simpler way to achieve this.</p>
+<p>脚注の番号付け方法。</p>
+<p>デフォルトでは、脚注の番号付けは文書全体で連続します。
+ページごとに脚注の番号付けを行いたい場合は、
+ページの<a href="/docs/reference/layout/page/#parameters-header">header</a>で脚注の<a href="/docs/reference/introspection/counter/" title="counter">counter</a>をリセットできます。
+将来的には、これを簡単に実現する方法が提供されるかもしれません。</p>
 
 
 <p>Default:<code><span class="typ-str">&quot;1&quot;</span></code></p>
@@ -1064,8 +1064,8 @@ Footnotes:
     </small>
   </div>
 </h4>
-<p>The content to put into the footnote. Can also be the label of another
-footnote this one should point to.</p>
+<p>脚注に挿入するコンテンツ。
+この脚注が参照すべき他の脚注のラベルを指定することもできます。</p>
 
 
 
@@ -1090,9 +1090,9 @@ footnote this one should point to.</p>
 
   <h3 id="-entry" class="method-head"><span><code>entry</code></span></h3>
   
-<p>An entry in a footnote list.</p>
-<p>This function is not intended to be called directly. Instead, it is used in
-set and show rules to customize footnote listings.</p>
+<p>脚注リストの項目。</p>
+<p>この関数は直接呼び出されることを意図されていません。
+代わりに、setルールやshowルールで脚注リストをカスタマイズするために使用されます。</p>
 
 <div class="code code-definition ">footnote.<span
     class="typ-func">entry</span>(<div class="arguments"><span
@@ -1112,10 +1112,10 @@ My footnote listing
 <span class="typ-func">#</span><span class="typ-func">footnote</span><span class="typ-punct">[</span>It&#39;s down here<span class="typ-punct">]</span>
 has red text!
 </code></pre><div class="preview"><img src="/assets/docs/e07bed06d522a25126bd74abd9d30066.png" alt="Preview" width="480" height="190"/></div></div>
-<p><em>Note:</em> Footnote entry properties must be uniform across each page run (a
-page run is a sequence of pages without an explicit pagebreak in between).
-For this reason, set and show rules for footnote entries should be defined
-before any page content, typically at the very start of the document.</p>
+<p><em>注意:</em> 脚注項目のプロパティは、
+各ページラン（ページ間に明示的な改ページがないページ群）全体で一貫している必要があります。
+このため、脚注項目に対するsetルールやshowルールは通常はドキュメントの最初の部分など、
+ページコンテンツの前に定義される必要があります。</p>
     </div>
   </details>
 
@@ -1146,8 +1146,8 @@ before any page content, typically at the very start of the document.</p>
     </small>
   </div>
 </h4>
-<p>The footnote for this entry. Its location can be used to determine
-the footnote counter state.</p>
+<p>この項目の脚注。
+その位置を指定して、脚注カウンターの状態を決定する事ができます。</p>
 
 
 
@@ -1193,7 +1193,7 @@ listing <span class="typ-func">#</span><span class="typ-func">footnote</span><sp
     </small>
   </div>
 </h4>
-<p>The separator between the document body and the footnote listing.</p>
+<p>文書の本文と脚注リストの間の区切り記号。</p>
 
 
 <p>Default:<code><span class="typ-func">line</span><span class="typ-punct">(</span>length<span class="typ-punct">:</span> <span class="typ-num">30%</span> <span class="typ-op">+</span> <span class="typ-num">0pt</span><span class="typ-punct">,</span> stroke<span class="typ-punct">:</span> <span class="typ-num">0.5pt</span><span class="typ-punct">)</span></code></p>
@@ -1239,7 +1239,7 @@ Testing a different separator.
     </small>
   </div>
 </h4>
-<p>The amount of clearance between the document body and the separator.</p>
+<p>文書の本文と区切り記号の間の余白の量。</p>
 
 
 <p>Default:<code><span class="typ-num">1em</span></code></p>
@@ -1282,7 +1282,7 @@ Footnotes also need <span class="typ-escape">...</span>
     </small>
   </div>
 </h4>
-<p>The gap between footnote entries.</p>
+<p>脚注項目同士の間隔。</p>
 
 
 <p>Default:<code><span class="typ-num">0.5em</span></code></p>
@@ -1324,7 +1324,7 @@ Footnotes:
     </small>
   </div>
 </h4>
-<p>The indent of each footnote entry.</p>
+<p>各脚注項目の字下げ。</p>
 
 
 <p>Default:<code><span class="typ-num">1em</span></code></p>
@@ -1367,7 +1367,7 @@ Footnotes:
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="例"><a href="#例">例</a>
           <ul></ul>
         </li>
         
