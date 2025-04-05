@@ -15,7 +15,7 @@
 
 ## 翻訳に参加するには
 
-[翻訳ガイドライン (CONTRIBUTING.md)](CONTRIBUTING.md) をご覧の上、[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls) を作成してください。[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)での質問や議論も歓迎します。
+[貢献ガイドライン (CONTRIBUTING.md)](CONTRIBUTING.md) をご覧の上、[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls) を作成してください。[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)での質問や議論も歓迎します。
 
 ご質問などがある場合は、[「くみはんクラブ」のDiscordサーバー](https://discord.gg/9xF7k4aAuH)に参加してご連絡ください。
 
