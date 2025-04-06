@@ -928,7 +928,11 @@
 
       
 
-<h1 id="summary"><code>image</code><small>
+<h1 id="summary">
+  <code>image</code>
+  <small>
+    
+      
 <span aria-describedby="-tooltip">Element</span>
 <div class="tooltip-context"><svg width="12" height="12" viewBox="0 0 12 12" tabindex="0" role="img"
     aria-labelledby="-tooltip-qm-label">
@@ -937,7 +941,11 @@
   </svg>
   <div role="tooltip" id="-tooltip" tabindex="-1">Element functions can be customized with <code>set</code> and <code>show</code> rules.</div>
 </div>
-</small></h1>
+
+    
+    
+  </small>
+</h1>
 <p>A raster or vector graphic.</p>
 <p>You can wrap the image in a <a href="/docs/reference/model/figure/" title="`figure`"><code>figure</code></a> to give it a number and caption.</p>
 <p>Like most elements, images are <em>block-level</em> by default and thus do not
@@ -1473,7 +1481,30 @@ to <code><span class="typ-key">auto</span></code>, Typst will try to extract an 
 </h2>
 
 
-  <h3 id="-decode" class="method-head"><span><code>decode</code></span></h3>
+  <h3 id="definitions-decode" class="method-head">
+    <code style="text-decoration: line-through;">decode</code>
+
+    <small>
+      
+      
+    </small>
+    
+      <small class="deprecation">
+        <div class="tooltip-context">
+          <svg width="16" height="16" viewBox="0 0 16 16" tabindex="0" role="img"
+              aria-labelledby="definitions-decode-deprecation-tooltip">
+            <title id="definitions-decode-deprecation-tooltip">
+              Warning
+            </title>
+            <use href="/assets/icons/16-warn.svg#icon"></use>
+          </svg>
+        </div>
+        <span>
+          <span>`image.decode` is deprecated, directly pass bytes to `image` instead</span>
+        </span>
+      </small>
+    
+  </h3>
   
 <p>Decode a raster or vector graphic from bytes or a string.</p>
 

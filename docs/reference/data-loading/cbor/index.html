@@ -928,7 +928,13 @@
 
       
 
-<h1 id="summary"><code>cbor</code><small></small></h1>
+<h1 id="summary">
+  <code>cbor</code>
+  <small>
+    
+    
+  </small>
+</h1>
 <p>Reads structured data from a CBOR file.</p>
 <p>The file must contain a valid CBOR serialization. Mappings will be
 converted into Typst dictionaries, and sequences will be converted into
@@ -1010,7 +1016,30 @@ floating point numbers, which may result in an approximative value.</p>
 </h2>
 
 
-  <h3 id="-decode" class="method-head"><span><code>decode</code></span></h3>
+  <h3 id="definitions-decode" class="method-head">
+    <code style="text-decoration: line-through;">decode</code>
+
+    <small>
+      
+      
+    </small>
+    
+      <small class="deprecation">
+        <div class="tooltip-context">
+          <svg width="16" height="16" viewBox="0 0 16 16" tabindex="0" role="img"
+              aria-labelledby="definitions-decode-deprecation-tooltip">
+            <title id="definitions-decode-deprecation-tooltip">
+              Warning
+            </title>
+            <use href="/assets/icons/16-warn.svg#icon"></use>
+          </svg>
+        </div>
+        <span>
+          <span>`cbor.decode` is deprecated, directly pass bytes to `cbor` instead</span>
+        </span>
+      </small>
+    
+  </h3>
   
 <p>Reads structured data from CBOR bytes.</p>
 
@@ -1054,7 +1083,15 @@ floating point numbers, which may result in an approximative value.</p>
 
 
 
-  <h3 id="-encode" class="method-head"><span><code>encode</code></span></h3>
+  <h3 id="definitions-encode" class="method-head">
+    <code>encode</code>
+
+    <small>
+      
+      
+    </small>
+    
+  </h3>
   
 <p>Encode structured data into CBOR bytes.</p>
 

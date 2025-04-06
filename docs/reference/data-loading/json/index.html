@@ -928,7 +928,13 @@
 
       
 
-<h1 id="summary"><code>json</code><small></small></h1>
+<h1 id="summary">
+  <code>json</code>
+  <small>
+    
+    
+  </small>
+</h1>
 <p>Reads structured data from a JSON file.</p>
 <p>The file must contain a valid JSON value, such as object or array. JSON
 objects will be converted into Typst dictionaries, and JSON arrays will be
@@ -1037,7 +1043,30 @@ another JSON data type.</p>
 </h2>
 
 
-  <h3 id="-decode" class="method-head"><span><code>decode</code></span></h3>
+  <h3 id="definitions-decode" class="method-head">
+    <code style="text-decoration: line-through;">decode</code>
+
+    <small>
+      
+      
+    </small>
+    
+      <small class="deprecation">
+        <div class="tooltip-context">
+          <svg width="16" height="16" viewBox="0 0 16 16" tabindex="0" role="img"
+              aria-labelledby="definitions-decode-deprecation-tooltip">
+            <title id="definitions-decode-deprecation-tooltip">
+              Warning
+            </title>
+            <use href="/assets/icons/16-warn.svg#icon"></use>
+          </svg>
+        </div>
+        <span>
+          <span>`json.decode` is deprecated, directly pass bytes to `json` instead</span>
+        </span>
+      </small>
+    
+  </h3>
   
 <p>Reads structured data from a JSON string/bytes.</p>
 
@@ -1086,7 +1115,15 @@ another JSON data type.</p>
 
 
 
-  <h3 id="-encode" class="method-head"><span><code>encode</code></span></h3>
+  <h3 id="definitions-encode" class="method-head">
+    <code>encode</code>
+
+    <small>
+      
+      
+    </small>
+    
+  </h3>
   
 <p>Encodes structured data into a JSON string.</p>
 

@@ -928,7 +928,13 @@
 
       
 
-<h1 id="summary"><code>yaml</code><small></small></h1>
+<h1 id="summary">
+  <code>yaml</code>
+  <small>
+    
+    
+  </small>
+</h1>
 <p>Reads structured data from a YAML file.</p>
 <p>The file must contain a valid YAML object or array. YAML mappings will be
 converted into Typst dictionaries, and YAML sequences will be converted into
@@ -1028,7 +1034,30 @@ each with a sequence of their own submapping with the keys
 </h2>
 
 
-  <h3 id="-decode" class="method-head"><span><code>decode</code></span></h3>
+  <h3 id="definitions-decode" class="method-head">
+    <code style="text-decoration: line-through;">decode</code>
+
+    <small>
+      
+      
+    </small>
+    
+      <small class="deprecation">
+        <div class="tooltip-context">
+          <svg width="16" height="16" viewBox="0 0 16 16" tabindex="0" role="img"
+              aria-labelledby="definitions-decode-deprecation-tooltip">
+            <title id="definitions-decode-deprecation-tooltip">
+              Warning
+            </title>
+            <use href="/assets/icons/16-warn.svg#icon"></use>
+          </svg>
+        </div>
+        <span>
+          <span>`yaml.decode` is deprecated, directly pass bytes to `yaml` instead</span>
+        </span>
+      </small>
+    
+  </h3>
   
 <p>Reads structured data from a YAML string/bytes.</p>
 
@@ -1077,7 +1106,15 @@ each with a sequence of their own submapping with the keys
 
 
 
-  <h3 id="-encode" class="method-head"><span><code>encode</code></span></h3>
+  <h3 id="definitions-encode" class="method-head">
+    <code>encode</code>
+
+    <small>
+      
+      
+    </small>
+    
+  </h3>
   
 <p>Encode structured data into a YAML string.</p>
 
