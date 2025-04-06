@@ -313,4 +313,4 @@ It's going great so far!
 
 私たちはまだ非常に若いプロジェクトであり、フィードバックを求めています。質問、提案、またはバグを発見した場合は、[フォーラム](https://forum.typst.app/)、[Discordサーバー](https://discord.gg/2uDybryKPe)、[GitHub](https://github.com/typst/typst/)、またはウェブアプリのフィードバックフォーム（ヘルプメニューからいつでも利用可能）でお知らせください。
 
-何を待っているのですか？[サインアップ](https://typst.app)して、何か書いてみましょう！
+さっそく[サインアップ](https://typst.app)して何か書いてみましょう！
