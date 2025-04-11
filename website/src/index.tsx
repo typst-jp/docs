@@ -1,32 +1,58 @@
 import { Hono } from "hono";
-import type { FC } from "hono/jsx";
+import {
+  CategoryTemplate,
+  HtmlTemplate,
+  FuncTemplate,
+  GroupTemplate,
+  TypeTemplate,
+  SymbolsTemplate,
+} from "./components/templates";
+import type { Page, Body } from "./types/model";
+import { flattenDocs } from "./utils/flattenDocs";
+import { isPageOfKind } from "./utils/isPageOfKind";
+
+// typst-docsが生成したドキュメント
+import docsJson from "../../assets/docs.json";
+const docs = docsJson as unknown as Page[];
+
+const [flattenedPages, pagePaths] = flattenDocs(docs);
 
 const app = new Hono();
 
-const Layout: FC = (props) => {
-  return (
-    <html>
-      <body>{props.children}</body>
-    </html>
-  );
-};
+flattenedPages.forEach((page, pageIndex) => {
+  const path = pagePaths[pageIndex];
 
-const Top: FC<{ messages: string[] }> = (props: { messages: string[] }) => {
-  return (
-    <Layout>
-      <h1>Hello Hono!</h1>
-      <ul>
-        {props.messages.map((message) => {
-          return <li>{message}!!</li>;
-        })}
-      </ul>
-    </Layout>
-  );
-};
+  const previousPage: Page | null =
+    pageIndex > 0 ? flattenedPages[pageIndex - 1] : null;
+  const nextPage: Page | null =
+    pageIndex < flattenedPages.length - 1
+      ? flattenedPages[pageIndex + 1]
+      : null;
 
-app.get("/", (c) => {
-  const messages = ["Good Morning", "Good Evening", "Good Night"];
-  return c.html(<Top messages={messages} />);
+  const commonProps = {
+    docs,
+    path,
+    previousPage: previousPage || undefined,
+    nextPage: nextPage || undefined,
+  };
+
+  app.get(page.route, (c) => {
+    if (isPageOfKind(page, "html")) {
+      return c.html(<HtmlTemplate page={page} {...commonProps} />);
+    } else if (isPageOfKind(page, "category")) {
+      return c.html(<CategoryTemplate page={page} {...commonProps} />);
+    } else if (isPageOfKind(page, "func")) {
+      return c.html(<FuncTemplate page={page} {...commonProps} />);
+    } else if (isPageOfKind(page, "group")) {
+      return c.html(<GroupTemplate page={page} {...commonProps} />);
+    } else if (isPageOfKind(page, "type")) {
+      return c.html(<TypeTemplate page={page} {...commonProps} />);
+    } else if (isPageOfKind(page, "symbols")) {
+      return c.html(<SymbolsTemplate page={page} {...commonProps} />);
+    } else {
+      return c.notFound();
+    }
+  });
 });
 
 export default app;
