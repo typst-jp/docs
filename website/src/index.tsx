@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { appendTrailingSlash, trimTrailingSlash } from "hono/trailing-slash";
 import {
   CategoryTemplate,
   HtmlTemplate,
@@ -18,6 +19,11 @@ const docs = docsJson as unknown as Page[];
 const [flattenedPages, pagePaths] = flattenDocs(docs);
 
 const app = new Hono();
+app.use(appendTrailingSlash());
+app.use(trimTrailingSlash());
+app.get("/", (c) => {
+  return c.redirect("/docs");
+});
 
 flattenedPages.forEach((page, pageIndex) => {
   const path = pagePaths[pageIndex];
