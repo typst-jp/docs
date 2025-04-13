@@ -924,29 +924,15 @@
       
 
 <h1>テンプレートを作成する</h1>
-<p>In the previous three chapters of this tutorial, you have learned how to write a
-document in Typst, apply basic styles, and customize its appearance in-depth to
-comply with a publisher's style guide. Because the paper you wrote in the
-previous chapter was a tremendous success, you have been asked to write a
-follow-up article for the same conference. This time, you want to take the style
-you created in the previous chapter and turn it into a reusable template. In
-this chapter you will learn how to create a template that you and your team can
-use with just one show rule. Let's get started!</p>
-<h2 id="toy-template">A toy template</h2>
-<p>In Typst, templates are functions in which you can wrap your whole document. To
-learn how to do that, let's first review how to write your very own functions.
-They can do anything you want them to, so why not go a bit crazy?</p>
+<p>このチュートリアルの前回の3つの章では、Typstでドキュメントを書く方法、基本的なスタイルを適用する方法、そして出版社のスタイルガイドに準拠するために外観を詳細にカスタマイズする方法を学びました。前章で作成した論文が大成功を収めたため、同じ会議のための続報論文を書くよう依頼されました。今回は、前章で作成したスタイルを再利用可能なテンプレートに変換したいと思います。この章では、あなたとあなたのチームが単一のshowルールで使用できるテンプレートの作成方法を学びます。始めましょう！</p>
+<h2 id="toy-template">おもちゃのテンプレート</h2>
+<p>Typstでは、テンプレートは文書全体をラップできる関数です。その方法を学ぶために、まずは独自の関数の書き方を復習しましょう。関数は何でもできるので、少し奇抜なものを作ってみませんか？</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">amazed</span><span class="typ-punct">(</span>term<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">box</span><span class="typ-punct">[</span>✨ <span class="typ-pol">#</span><span class="typ-pol">term</span> ✨<span class="typ-punct">]</span>
 
 You are <span class="typ-func">#</span><span class="typ-func">amazed</span><span class="typ-punct">[</span>beautiful<span class="typ-punct">]</span>!
 </code></pre><div class="preview"><img src="/assets/docs/f55a5389282e58c6cefb7ae2329cc761.png" alt="Preview" width="480" height="190"/></div></div>
-<p>This function takes a single argument, <code>term</code>, and returns a content block with
-the <code>term</code> surrounded by sparkles. We also put the whole thing in a box so that
-the term we are amazed by cannot be separated from its sparkles by a line break.</p>
-<p>Many functions that come with Typst have optional named parameters. Our
-functions can also have them. Let's add a parameter to our function that lets us
-choose the color of the text. We need to provide a default color in case the
-parameter isn't given.</p>
+<p>この関数は単一の引数<code>term</code>を取り、<code>term</code>を✨で囲んだコンテンツブロックを返します。また、amazed対象の語が改行で✨と分離されないように、全体をボックスに入れています。</p>
+<p>Typstに組み込まれている多くの関数には、オプションの名前付きパラメータがあります。私たちの関数にも名前付きパラメータを追加できます。テキストの色を選択できるパラメータを追加してみましょう。パラメータが指定されない場合のデフォルトの色を提供する必要があります。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">amazed</span><span class="typ-punct">(</span>term<span class="typ-punct">,</span> color<span class="typ-punct">:</span> blue<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
   <span class="typ-func">text</span><span class="typ-punct">(</span>color<span class="typ-punct">,</span> <span class="typ-func">box</span><span class="typ-punct">[</span>✨ <span class="typ-pol">#</span><span class="typ-pol">term</span> ✨<span class="typ-punct">]</span><span class="typ-punct">)</span>
 <span class="typ-punct">}</span>
@@ -954,28 +940,16 @@ parameter isn't given.</p>
 You are <span class="typ-func">#</span><span class="typ-func">amazed</span><span class="typ-punct">[</span>beautiful<span class="typ-punct">]</span>!
 I am <span class="typ-func">#</span><span class="typ-func">amazed</span><span class="typ-punct">(</span>color<span class="typ-punct">:</span> purple<span class="typ-punct">)</span><span class="typ-punct">[</span>amazed<span class="typ-punct">]</span>!
 </code></pre><div class="preview"><img src="/assets/docs/c9ce0a0f4a0e86c783e77271ca2f92a9.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Templates now work by wrapping our whole document in a custom function like
-<code>amazed</code>. But wrapping a whole document in a giant function call would be
-cumbersome! Instead, we can use an &quot;everything&quot; show rule to achieve the same
-with cleaner code. To write such a show rule, put a colon directly behind the
-show keyword and then provide a function. This function is given the rest of the
-document as a parameter. The function can then do anything with this content.
-Since the <code>amazed</code> function can be called with a single content argument, we can
-just pass it by name to the show rule. Let's try it:</p>
+<p>テンプレートは<code>amazed</code>のようなカスタム関数でドキュメント全体をラップすることで機能します。しかし、文書全体を巨大な関数呼び出しでラップするのは面倒でしょう！代わりに、「everything」showルールを使用して、より洗練されたコードで同じことを実現できます。そのようなshowルールを書くには、showキーワードの直後にコロンを置き、関数を提供します。この関数にはドキュメントの残りの部分がパラメータとして渡されます。関数はこのコンテンツに対して何でも行うことができます。<code>amazed</code>関数は単一のコンテンツ引数で呼び出せるので、showルールに名前で渡すだけで良いのです。試してみましょう。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span><span class="typ-punct">:</span> <span class="typ-func">amazed</span>
 I choose to focus on the good
 in my life and let go of any
 negative thoughts or beliefs.
 In fact, I am amazing!
 </code></pre><div class="preview"><img src="/assets/docs/6e34fb6913212950a231d345d81c51f0.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Our whole document will now be passed to the <code>amazed</code> function, as if we wrapped
-it around it. Of course, this is not especially useful with this particular
-function, but when combined with set rules and named arguments, it can be very
-powerful.</p>
-<h2 id="set-and-show-rules">Embedding set and show rules</h2>
-<p>To apply some set and show rules to our template, we can use <code>set</code> and <code>show</code>
-within a content block in our function and then insert the document into
-that content block.</p>
+<p>これで文書全体が<code>amazed</code>関数に渡され、文書をその関数でラップしたかのように機能します。もちろん、この特定の関数ではあまり有用ではありませんが、setルールと名前付き引数と組み合わせると、非常に強力になります。</p>
+<h2 id="set-and-show-rules">setルールとshowルールの埋め込み</h2>
+<p>テンプレートにいくつかのsetルールとshowルールを適用するには、関数内のコンテンツブロックで<code>set</code>と<code>show</code>を使用し、そのコンテンツブロックにドキュメントを挿入します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">template</span><span class="typ-punct">(</span>doc<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">[</span>
   <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;Inria Serif&quot;</span><span class="typ-punct">)</span>
   <span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-str">&quot;something cool&quot;</span><span class="typ-punct">:</span> <span class="typ-punct">[</span>Typst<span class="typ-punct">]</span>
@@ -986,12 +960,7 @@ that content block.</p>
 I am learning something cool today.
 It&#39;s going great so far!
 </code></pre><div class="preview"><img src="/assets/docs/6e9bfdb0ecedf2ac3a531b167f29927f.png" alt="Preview" width="480" height="190"/></div></div>
-<p>Just like we already discovered in the previous chapter, set rules will apply to
-everything within their content block. Since the everything show rule passes our
-whole document to the <code>template</code> function, the text set rule and string show
-rule in our template will apply to the whole document. Let's use this knowledge
-to create a template that reproduces the body style of the paper we wrote in the
-previous chapter.</p>
+<p>前章で発見したように、setルールはそのコンテンツブロック内のすべてに適用されます。everythingのshowルールが文書全体を<code>template</code>関数に渡すため、テンプレート内のテキストのsetルールと文字列のshowルールが文書全体に適用されます。この知識を使って、前章で作成した論文の本文スタイルを再現するテンプレートを作成しましょう。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">conf</span><span class="typ-punct">(</span>title<span class="typ-punct">,</span> doc<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
   <span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>
     paper<span class="typ-punct">:</span> <span class="typ-str">&quot;us-letter&quot;</span><span class="typ-punct">,</span>
@@ -1024,33 +993,18 @@ previous chapter.</p>
 
 <span class="typ-escape">...</span>
 </code></pre><div class="preview"><img src="/assets/docs/13df4f0eef432cb9dec67b26b1056464.png" alt="Preview" width="480" height="190"/></div></div>
-<p>We copy-pasted most of that code from the previous chapter. The two differences
-are this:</p>
+<p>コードの大部分は前章からコピーペーストしました。2つの違いがあります。</p>
 <ol>
 <li>
-<p>We wrapped everything in the function <code>conf</code> using an everything show rule.
-The function applies a few set and show rules and echoes the content it has
-been passed at the end.</p>
+<p>everythingのshowルールを使用して、すべてを<code>conf</code>関数でラップしました。この関数はいくつかのsetルールとshowルールを適用し、最後に渡されたコンテンツをそのまま出力します。</p>
 </li>
 <li>
-<p>Moreover, we used a curly-braced code block instead of a content block. This
-way, we don't need to prefix all set rules and function calls with a <code>#</code>. In
-exchange, we cannot write markup directly in the code block anymore.</p>
+<p>さらに、コンテンツブロックの代わりに中括弧で囲まれたコードブロックを使用しました。この方法では、すべてのsetルールや関数呼び出しの前に<code>#</code>を付ける必要がなくなります。代わりに、コードブロック内に直接マークアップを書くことはできなくなります。</p>
 </li>
 </ol>
-<p>Also note where the title comes from: We previously had it inside of a variable.
-Now, we are receiving it as the first parameter of the template function. To do
-so, we passed a closure (that's a function without a name that is used right
-away) to the everything show rule. We did that because the <code>conf</code> function
-expects two positional arguments, the title and the body, but the show rule will
-only pass the body. Therefore, we add a new function definition that allows us
-to set a paper title and use the single parameter from the show rule.</p>
-<h2 id="named-arguments">Templates with named arguments</h2>
-<p>Our paper in the previous chapter had a title and an author list. Let's add
-these things to our template. In addition to the title, we want our template to
-accept a list of authors with their affiliations and the paper's abstract. To
-keep things readable, we'll add those as named arguments. In the end, we want it
-to work like this:</p>
+<p>また、タイトルがどこから来ているかに注目してください。以前は変数に格納しましたが、今はテンプレート関数の最初のパラメータとして受け取っています。そのために、everythingのshowルールにクロージャー（その場で使用される名前のない関数）を渡しました。<code>conf</code>関数は2つの引数（タイトルと本文）を期待しますが、showルールは本文のみを渡すからです。したがって、論文のタイトルを設定し、showルールからの単一パラメータを使用できる新しい関数定義を追加します。</p>
+<h2 id="named-arguments">名前付き引数を持つテンプレート</h2>
+<p>前章の論文にはタイトルと著者リストがありました。これらの要素をテンプレートに追加しましょう。タイトルに加えて、所属機関を含む著者リストと論文の要約をテンプレートに受け付けるようにします。可読性を保つために、これらを名前付き引数として追加します。最終的には、次のように機能させたいと思います。</p>
 <pre><code><span class="typ-key">#</span><span class="typ-key">show</span><span class="typ-punct">:</span> doc <span class="typ-op">=&gt;</span> <span class="typ-func">conf</span><span class="typ-punct">(</span>
   title<span class="typ-punct">:</span> <span class="typ-punct">[</span>Towards Improved Modelling<span class="typ-punct">]</span><span class="typ-punct">,</span>
   authors<span class="typ-punct">:</span> <span class="typ-punct">(</span>
@@ -1071,32 +1025,10 @@ to work like this:</p>
 
 <span class="typ-escape">...</span>
 </code></pre>
-<p>Let's build this new template function. First, we add a default value to the
-<code>title</code> argument. This way, we can call the template without specifying a title.
-We also add the named <code>authors</code> and <code>abstract</code> parameters with empty defaults.
-Next, we copy the code that generates title, abstract and authors from the
-previous chapter into the template, replacing the fixed details with the
-parameters.</p>
-<p>The new <code>authors</code> parameter expects an <a href="/docs/reference/foundations/array/">array</a> of <a href="/docs/reference/foundations/dictionary/">dictionaries</a>
-with the keys <code>name</code>, <code>affiliation</code> and <code>email</code>. Because we can have an
-arbitrary number of authors, we dynamically determine if we need one, two or
-three columns for the author list. First, we determine the number of authors
-using the <a href="/docs/reference/foundations/array/#definitions-len"><code>.len()</code></a> method on the <code>authors</code> array. Then, we set the
-number of columns as the minimum of this count and three, so that we never
-create more than three columns. If there are more than three authors, a new row
-will be inserted instead. For this purpose, we have also added a <code>row-gutter</code>
-parameter to the <code>grid</code> function. Otherwise, the rows would be too close
-together. To extract the details about the authors from the dictionary, we use
-the <a href="/docs/reference/scripting/#fields">field access syntax</a>.</p>
-<p>We still have to provide an argument to the grid for each author: Here is where
-the array's <a href="/docs/reference/foundations/array/#definitions-map"><code>map</code> method</a> comes in handy. It takes a function as an
-argument that gets called with each item of the array. We pass it a function
-that formats the details for each author and returns a new array containing
-content values. We've now got one array of values that we'd like to use as
-multiple arguments for the grid. We can do that by using the
-<a href="/docs/reference/foundations/arguments/"><code>spread</code> operator</a>. It takes an array and applies each of its items
-as a separate argument to the function.</p>
-<p>The resulting template function looks like this:</p>
+<p>この新しいテンプレート関数を構築しましょう。まず、<code>title</code>引数にデフォルト値を追加します。これにより、タイトルを指定せずにテンプレートを呼び出すことができます。また、空のデフォルト値を持つ名前付き引数として<code>authors</code>および<code>abstract</code>パラメータを追加します。次に、前章からタイトル、要約、著者を生成するコードをテンプレートにコピーし、固定の詳細をパラメータに置き換えます。</p>
+<p>新しい<code>authors</code>パラメータは、<code>name</code>、<code>affiliation</code>、<code>email</code>というキーを持つ<a href="/docs/reference/foundations/dictionary/">辞書</a>の<a href="/docs/reference/foundations/array/">配列</a>を想定しています。任意の数の著者を持つことができるため、著者リストに1列、2列、または3列が必要かどうかを動的に決定します。まず、<code>authors</code>配列の<a href="/docs/reference/foundations/array/#definitions-len"><code>.len()</code></a>メソッドを使用して著者の数を決定します。次に、列数を著者数と3の最小値に設定し、3列以上作成しないようにします。3人以上の著者がいる場合は、代わりに新しい行が挿入されます。この目的のために、<code>grid</code>関数に<code>row-gutter</code>パラメータも追加しました。そうしないと、行同士が近すぎてしまいます。辞書から著者の詳細を抽出するには、<a href="/docs/reference/scripting/#fields">フィールドアクセス構文</a>を使用します。</p>
+<p>各著者についてグリッドに引数を提供する必要があります。ここで配列の<a href="/docs/reference/foundations/array/#definitions-map"><code>map</code>メソッド</a>が便利です。これは引数として関数を取り、その関数が配列の各アイテムで呼び出されます。各著者の詳細をフォーマットし、コンテンツ値を含む新しい配列を返す関数を渡します。これで、グリッドの複数の引数として使用したい値の配列ができました。<a href="/docs/reference/foundations/arguments/"><code>spread</code>演算子</a>を使用してこれを実現できます。これは配列を取り、その各アイテムを関数の個別の引数として適用します。</p>
+<p>結果のテンプレート関数は次のようになります。</p>
 <pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">conf</span><span class="typ-punct">(</span>
   title<span class="typ-punct">:</span> <span class="typ-key">none</span><span class="typ-punct">,</span>
   authors<span class="typ-punct">:</span> <span class="typ-punct">(</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
@@ -1130,20 +1062,9 @@ as a separate argument to the function.</p>
   doc
 <span class="typ-punct">}</span>
 </code></pre>
-<h2 id="separate-file">A separate file</h2>
-<p>Most of the time, a template is specified in a different file and then imported
-into the document. This way, the main file you write in is kept clutter free and
-your template is easily reused. Create a new text file in the file panel by
-clicking the plus button and name it <code>conf.typ</code>. Move the <code>conf</code> function
-definition inside of that new file. Now you can access it from your main file by
-adding an import before the show rule. Specify the path of the file between the
-<code><span class="typ-key">import</span></code> keyword and a colon, then name the function that you want to import.</p>
-<p>Another thing that you can do to make applying templates just a bit more elegant
-is to use the <a href="/docs/reference/foundations/function/#definitions-with"><code>.with</code></a> method on functions to pre-populate all
-the named arguments. This way, you can avoid spelling out a closure and
-appending the content argument at the bottom of your template list. Templates on
-<a href="https://typst.app/universe/">Typst Universe</a> are designed to work with this style of function
-call.</p>
+<h2 id="separate-file">別ファイル</h2>
+<p>多くの場合、テンプレートは別のファイルで指定され、それからドキュメントにインポートされます。この方法では、メインファイルはすっきりとし、テンプレートを簡単に再利用できます。ファイルパネルでプラスボタンをクリックして新しいテキストファイルを作成し、<code>conf.typ</code>という名前を付けます。<code>conf</code>関数定義をその新しいファイルに移動します。これで、showルールの前にインポートを追加することで、メインファイルからアクセスできます。<code><span class="typ-key">import</span></code>キーワードとコロンの間にファイルのパスを指定し、インポートしたい関数に名前を付けます。</p>
+<p>テンプレートの適用をより洗練させるためにできるもう1つのことは、関数の<a href="/docs/reference/foundations/function/#definitions-with"><code>.with</code></a>メソッドを使用して、すべての名前付き引数を事前に設定することです。これにより、クロージャーを記述してテンプレートリストの最後にコンテンツ引数を追加する必要がなくなります。<a href="https://typst.app/universe/">Typst Universe</a>のテンプレートは、この関数呼び出しのスタイルで動作するように設計されています。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">import</span> <span class="typ-str">&quot;conf.typ&quot;</span><span class="typ-punct">:</span> conf
 <span class="typ-key">#</span><span class="typ-key">show</span><span class="typ-punct">:</span> conf<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span>
   title<span class="typ-punct">:</span> <span class="typ-punct">[</span>
@@ -1176,22 +1097,11 @@ call.</p>
 <span class="typ-heading">= Related Work</span>
 <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">200</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/30e6422b2124e660979f19312c8e3691.png" alt="Preview" width="480" height="190"/></div></div>
-<p>We have now converted the conference paper into a reusable template for that
-conference! Why not share it in the <a href="https://forum.typst.app/">Forum</a> or on
-<a href="https://discord.gg/2uDybryKPe">Typst's Discord server</a> so that others can use
-it too?</p>
-<h2 id="review">Review</h2>
-<p>Congratulations, you have completed Typst's Tutorial! In this section, you have
-learned how to define your own functions and how to create and apply templates
-that define reusable document styles. You've made it far and learned a lot. You
-can now use Typst to write your own documents and share them with others.</p>
-<p>We are still a super young project and are looking for feedback. If you have any
-questions, suggestions or you found a bug, please let us know
-in the <a href="https://forum.typst.app/">Forum</a>,
-on our <a href="https://discord.gg/2uDybryKPe">Discord server</a>,
-on <a href="https://github.com/typst/typst/">GitHub</a>,
-or via the web app's feedback form (always available in the Help menu).</p>
-<p>So what are you waiting for? <a href="https://typst.app">Sign up</a> and write something!</p>
+<p>これで会議論文を、その会議用の再利用可能なテンプレートに変換しました！<a href="https://forum.typst.app/">フォーラム</a>や<a href="https://discord.gg/2uDybryKPe">TypstのDiscordサーバー</a>で共有して、他の人も使えるようにしてみてはいかがでしょうか？</p>
+<h2 id="review">まとめ</h2>
+<p>おめでとうございます！Typstのチュートリアルを完了しました。このセクションでは、独自の関数を定義する方法と、再利用可能なドキュメントスタイルを定義するテンプレートを作成・適用する方法を学びました。あなたは多くを学び、ここまで来ました。これでTypstを使用して独自の文書を作成し、他の人と共有することができます。</p>
+<p>私たちはまだ非常に若いプロジェクトであり、フィードバックを求めています。質問、提案、またはバグを発見した場合は、<a href="https://forum.typst.app/">フォーラム</a>、<a href="https://discord.gg/2uDybryKPe">Discordサーバー</a>、<a href="https://github.com/typst/typst/">GitHub</a>、またはウェブアプリのフィードバックフォーム（ヘルプメニューからいつでも利用可能）でお知らせください。</p>
+<p>さっそく<a href="https://typst.app">サインアップ</a>して何か書いてみましょう！</p>
 
 
 
@@ -1209,23 +1119,23 @@ or via the web app's feedback form (always available in the Help menu).</p>
     <nav id="page-overview"><strong>目次</strong>
       <ul>
         
-        <li data-assoc="toy-template"><a href="#toy-template">Toy Template</a>
+        <li data-assoc="toy-template"><a href="#toy-template">おもちゃのテンプレート</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="set-and-show-rules"><a href="#set-and-show-rules">Set And Show Rules</a>
+        <li data-assoc="set-and-show-rules"><a href="#set-and-show-rules">setルールとshowルールの埋め込み</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="named-arguments"><a href="#named-arguments">Named Arguments</a>
+        <li data-assoc="named-arguments"><a href="#named-arguments">名前付き引数を持つテンプレート</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="separate-file"><a href="#separate-file">Separate File</a>
+        <li data-assoc="separate-file"><a href="#separate-file">別ファイル</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="review"><a href="#review">Review</a>
+        <li data-assoc="review"><a href="#review">まとめ</a>
           <ul></ul>
         </li>
         
