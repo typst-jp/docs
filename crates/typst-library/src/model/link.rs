@@ -13,7 +13,7 @@ use crate::introspection::Location;
 use crate::layout::Position;
 use crate::text::TextElem;
 
-/// Links to a URL or a location in the document.
+/// URLや文書中の位置へのリンク。
 ///
 /// By default, links do not look any different from normal text. However,
 /// you can easily apply a style of your choice with a show rule.
