@@ -15,10 +15,10 @@ use crate::text::TextElem;
 
 /// URLや文書中の位置へのリンク。
 ///
-/// By default, links do not look any different from normal text. However,
-/// you can easily apply a style of your choice with a show rule.
+/// デフォルトでは、リンクの外見は通常のテキストと変わりません。
+/// しかし、showルールを使うことで、簡単に任意のスタイルを適用できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #show link: underline
 ///
@@ -30,14 +30,14 @@ use crate::text::TextElem;
 /// ]
 /// ```
 ///
-/// # Hyphenation
-/// If you enable hyphenation or justification, by default, it will not apply to
-/// links to prevent unwanted hyphenation in URLs. You can opt out of this
-/// default via `{show link: set text(hyphenate: true)}`.
+/// # ハイフネーション
+/// ハイフネーションや両端揃えを有効にしていても、意図しないURL中のハイフネーションを防ぐため、
+/// デフォルトではリンクには適用されません。
+/// これを無効化するには、`{show link: set text(hyphenate: true)}`を使用します。
 ///
-/// # Syntax
-/// This function also has dedicated syntax: Text that starts with `http://` or
-/// `https://` is automatically turned into a link.
+/// # 構文
+/// この関数には専用の構文もあります。
+/// `http://`や`https://`で始まるテキストは、自動的にリンクに変換されます。
 #[elem(Show)]
 pub struct LinkElem {
     /// The destination the link points to.
