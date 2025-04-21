@@ -40,25 +40,25 @@ use crate::text::TextElem;
 /// `http://`や`https://`で始まるテキストは、自動的にリンクに変換されます。
 #[elem(Show)]
 pub struct LinkElem {
-    /// The destination the link points to.
+    /// リンクの遷移先。
     ///
-    /// - To link to web pages, `dest` should be a valid URL string. If the URL
-    ///   is in the `mailto:` or `tel:` scheme and the `body` parameter is
-    ///   omitted, the email address or phone number will be the link's body,
-    ///   without the scheme.
+    /// - Webページにリンクする場合、`dest`は有効なURL文字列である必要があります。
+    ///   `mailto:`または `tel:`スキームを含むURLが指定され、
+    ///   かつ`body`パラメータが省略された場合、
+    ///   スキームを除いたメールアドレスまたは電話番号がリンクの本文になります。
     ///
-    /// - To link to another part of the document, `dest` can take one of three
-    ///   forms:
-    ///   - A [label] attached to an element. If you also want automatic text
-    ///     for the link based on the element, consider using a
-    ///     [reference]($ref) instead.
+    /// - 文書中の別の部分にリンクする場合、
+    /// 　`dest`には次の3つのうちいずれかの形式を用いることができます。
+    ///   - 要素に付与された[label]。
+    ///     要素に基づいて自動的にリンクの本文を生成したい場合は、
+    ///     [reference]($ref)を使用することを検討してください。
     ///
-    ///   - A [`location`] (typically retrieved from [`here`], [`locate`] or
-    ///     [`query`]).
+    ///   - [`location`] (通常は`here`]や[`locate`]、
+    ///     [`query`]から取得される)。
     ///
-    ///   - A dictionary with a `page` key of type [integer]($int) and `x` and
-    ///     `y` coordinates of type [length]. Pages are counted from one, and
-    ///     the coordinates are relative to the page's top left corner.
+    ///   - [integer]($int)型の`page`キーと[length]型の`x`座標、`y`座標を持つ辞書。
+    ///     ページは1から数えられ、
+    ///     座標はページの左上隅からの相対位置です。
     ///
     /// ```example
     /// = Introduction <intro>
@@ -75,10 +75,10 @@ pub struct LinkElem {
     )]
     pub dest: LinkTarget,
 
-    /// The content that should become a link.
+    /// リンクとして表示する内容。
     ///
-    /// If `dest` is an URL string, the parameter can be omitted. In this case,
-    /// the URL will be shown as the link.
+    /// `dest`がURL文字列の場合、このパラメーターは省略可能です。
+    /// この場合、URLがリンクとして表示されます。
     #[required]
     #[parse(match &dest {
         LinkTarget::Dest(Destination::Url(url)) => match args.eat()? {
