@@ -53,8 +53,8 @@ pub struct LinkElem {
     ///     要素に基づいて自動的にリンクの本文を生成したい場合は、
     ///     [reference]($ref)を使用することを検討してください。
     ///
-    ///   - [`location`] (通常は`here`]や[`locate`]、
-    ///     [`query`]から取得される)。
+    ///   - [`location`]（通常は`here`]や[`locate`]、
+    ///     [`query`]から取得される）。
     ///
     ///   - [integer]($int)型の`page`キーと[length]型の`x`座標、`y`座標を持つ辞書。
     ///     ページは1から数えられ、
