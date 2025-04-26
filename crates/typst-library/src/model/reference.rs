@@ -14,7 +14,7 @@ use crate::model::{
 };
 use crate::text::TextElem;
 
-/// A reference to a label or bibliography.
+/// ラベルや参考文献への参照。
 ///
 /// Takes a label and cross-references it. There are two kind of references,
 /// determined by its [`form`]($ref.form): `{"normal"}` and `{"page"}`.
@@ -33,16 +33,7 @@ use crate::text::TextElem;
 /// write a show rule for it. In the future, there might be a more direct way
 /// to define a custom referenceable element.
 ///
-/// If you just want to link to a labelled element and not get an automatic
-/// textual reference, consider using the [`link`] function instead.
-///
-/// A `{"page"}` reference produces a page reference to a label, displaying the
-/// page number at its location. You can use the
-/// [page's supplement]($page.supplement) to modify the text before the page
-/// number. Unlike a `{"normal"}` reference, the label can be attached to any
-/// element.
-///
-/// # Example
+/// # 例
 /// ```example
 /// #set page(numbering: "1")
 /// #set heading(numbering: "1.")
@@ -74,14 +65,14 @@ use crate::text::TextElem;
 /// label can be created by typing an `@` followed by the name of the label
 /// (e.g. `[= Introduction <intro>]` can be referenced by typing `[@intro]`).
 ///
-/// To customize the supplement, add content in square brackets after the
-/// reference: `[@intro[Chapter]]`.
+/// 補足をカスタマイズするには、
+/// `[@intro[Chapter]]`のように、参照の後に角括弧でコンテンツを追加します。
 ///
-/// # Customization
-/// If you write a show rule for references, you can access the referenced
-/// element through the `element` field of the reference. The `element` may
-/// be `{none}` even if it exists if Typst hasn't discovered it yet, so you
-/// always need to handle that case in your code.
+/// # カスタム
+/// 参照のshowルールを書く場合、
+/// 参照の`element`フィールドを通じて参照先の要素にアクセスできます。
+/// ただし、Typstがまだそれを発見していない場合、`element`は存在していても`{none}`になる可能性があるため、
+/// 常にコード内でそのケースを処理する必要があります。   
 ///
 /// ```example
 /// #set heading(numbering: "1.")
@@ -108,15 +99,14 @@ use crate::text::TextElem;
 /// ```
 #[elem(title = "Reference", Synthesize, Locatable, Show)]
 pub struct RefElem {
-    /// The target label that should be referenced.
+    /// 参照されるべき対象ラベル。
     ///
-    /// Can be a label that is defined in the document or, if the
-    /// [`form`]($ref.form) is set to `["normal"]`, an entry from the
-    /// [`bibliography`].
+    /// これは、ドキュメント内で定義されたラベルや、
+    /// [`参考文献リスト`]($bibliography)の参照キーである場合があります。
     #[required]
     pub target: Label,
 
-    /// A supplement for the reference.
+    /// 参照の補足。
     ///
     /// If the [`form`]($ref.form) is set to `{"normal"}`:
     /// - For references to headings or figures, this is added before the

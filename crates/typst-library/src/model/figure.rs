@@ -25,14 +25,13 @@ use crate::model::{
 use crate::text::{Lang, Region, TextElem};
 use crate::visualize::ImageElem;
 
-/// A figure with an optional caption.
+/// 任意でキャプションを持つ図表。
 ///
-/// Automatically detects its kind to select the correct counting track. For
-/// example, figures containing images will be numbered separately from figures
-/// containing tables.
+/// 自動的にその種類を検出し、それぞれに応じて番号付けします。
+/// 例えば、画像を含む図表は表を含む図表とは別々に番号が付けられます。
 ///
-/// # Examples
-/// The example below shows a basic figure with an image:
+/// # 例
+/// 以下の例は、画像を含む基本的な図表を示しています。
 /// ```example
 /// @glacier shows a glacier. Glaciers
 /// are complex systems.
@@ -43,8 +42,8 @@ use crate::visualize::ImageElem;
 /// ) <glacier>
 /// ```
 ///
-/// You can also insert [tables]($table) into figures to give them a caption.
-/// The figure will detect this and automatically use a separate counter.
+/// 図表に [tables]($table) を挿入してキャプションを付けることもできます。
+/// 図表は表を含むこと検出し、自動的に別のカウンターを使用します。
 ///
 /// ```example
 /// #figure(
@@ -57,28 +56,23 @@ use crate::visualize::ImageElem;
 /// )
 /// ```
 ///
-/// This behaviour can be overridden by explicitly specifying the figure's
-/// `kind`. All figures of the same kind share a common counter.
+/// この動作は、図表の種類である `kind` を明示的に指定することで上書き可能です。
+/// 同じ種類の図表はすべて共通のカウンターを共有します。
 ///
-/// # Figure behaviour
-/// By default, figures are placed within the flow of content. To make them
-/// float to the top or bottom of the page, you can use the
-/// [`placement`]($figure.placement) argument.
+/// # 図表の動作
+/// デフォルトでは、図表はコンテンツの流れの中に配置されます。
+/// 図表をページの上部または下部に配置するには、[`placement`]($figure.placement)引数を使用します。
 ///
-/// If your figure is too large and its contents are breakable across pages
-/// (e.g. if it contains a large table), then you can make the figure itself
-/// breakable across pages as well with this show rule:
+/// 図表が大きすぎてその内容がページをまたいで分割可能な場合（例えば大きな表が含まれている場合）、このshowルールで図表自体もページをまたいで分割可能です。
 /// ```typ
 /// #show figure: set block(breakable: true)
 /// ```
 ///
-/// See the [block]($block.breakable) documentation for more information about
-/// breakable and non-breakable blocks.
+/// 分割できるブロックと分割できないブロックの詳細については、[block]($block.breakable)のドキュメントを参照してください。
 ///
-/// # Caption customization
-/// You can modify the appearance of the figure's caption with its associated
-/// [`caption`]($figure.caption) function. In the example below, we emphasize
-/// all captions:
+/// # キャプションの改変
+/// 図表のキャプションの外観は、関連するキャプション機能で改変できます。
+/// 以下の例では、すべてのキャプションを斜体で強調しています。
 ///
 /// ```example
 /// #show figure.caption: emph
@@ -89,10 +83,8 @@ use crate::visualize::ImageElem;
 /// )
 /// ```
 ///
-/// By using a [`where`]($function.where) selector, we can scope such rules to
-/// specific kinds of figures. For example, to position the caption above
-/// tables, but keep it below for all other kinds of figures, we could write the
-/// following show-set rule:
+/// [`where`]($function.where)セレクターを使うことで、このようなルールを特定の種類の図表に適用可能です。
+/// 例えば、図表の種類が表の場合はキャプションを表の上に配置し、他の種類ではキャプションを下に配置するには、次のようなshow-setルールを記述します。
 ///
 /// ```example
 /// #show figure.where(
@@ -110,18 +102,14 @@ pub struct FigureElem {
     #[required]
     pub body: Content,
 
-    /// The figure's placement on the page.
+    /// ページ上における図表の配置。
     ///
-    /// - `{none}`: The figure stays in-flow exactly where it was specified
-    ///   like other content.
-    /// - `{auto}`: The figure picks `{top}` or `{bottom}` depending on which
-    ///   is closer.
-    /// - `{top}`: The figure floats to the top of the page.
-    /// - `{bottom}`: The figure floats to the bottom of the page.
+    /// - `{none}`: 他のコンテンツと同様に書かれた場所に置かれる。
+    /// - `{auto}`: `{top}` か `{bottom}` の近い方に置かれる。
+    /// - `{top}`: ページの上部に置かれる。
+    /// - `{bottom}`: ページの下部に置かれる。
     ///
-    /// The gap between the main flow content and the floating figure is
-    /// controlled by the [`clearance`]($place.clearance) argument on the
-    /// `place` function.
+    /// 本文のコンテンツと図表の間隔は`place`関数の [`clearance`]($place.clearance) 引数によって制御します。
     ///
     /// ```example
     /// #set page(height: 200pt)
@@ -136,12 +124,11 @@ pub struct FigureElem {
     /// ```
     pub placement: Option<Smart<VAlignment>>,
 
-    /// Relative to which containing scope the figure is placed.
+    /// どの包含スコープに対して図を配置するか。
     ///
-    /// Set this to `{"parent"}` to create a full-width figure in a two-column
-    /// document.
+    /// これを`{"parent"}`に設定すると、段組みをまたいで、ページの幅をすべて使用した図表を作成します。
     ///
-    /// Has no effect if `placement` is `{none}`.
+    /// もし`placement`を`{none}`とした場合には、何の効果もありません。
     ///
     /// ```example
     /// #set page(height: 250pt, columns: 2)
@@ -157,30 +144,25 @@ pub struct FigureElem {
     /// ```
     pub scope: PlacementScope,
 
-    /// The figure's caption.
+    /// 図表のキャプション。
     #[borrowed]
     pub caption: Option<Packed<FigureCaption>>,
 
-    /// The kind of figure this is.
+    /// 図表の種類。
     ///
-    /// All figures of the same kind share a common counter.
+    /// 同じ種類のすべての図表は共通のカウンターを共有します。
     ///
-    /// If set to `{auto}`, the figure will try to automatically determine its
-    /// kind based on the type of its body. Automatically detected kinds are
-    /// [tables]($table) and [code]($raw). In other cases, the inferred kind is
-    /// that of an [image].
+    /// `{auto}` に設定された場合、図形はその中で記述されているものの種類に基づいて、自動的にその種類の決定を試みます。
+    /// 自動的に検出される種類は、[table]($table)と[code]($raw)です。
+    /// それ以外の場合は[image]と推測されます。
     ///
-    /// Setting this to something other than `{auto}` will override the
-    /// automatic detection. This can be useful if
-    /// - you wish to create a custom figure type that is not an
-    ///   [image], a [table] or [code]($raw),
-    /// - you want to force the figure to use a specific counter regardless of
-    ///   its content.
+    /// これを `{auto}` 以外に設定すると、自動検出が上書きされます。
+    /// 以下のような場合に便利です。
+    /// - [image]や[table]、[code]($raw)以外のカスタム図表を作りたい場合
+    /// - コンテンツに関わらず特定のカウンターを強制的に使用したい場合
     ///
-    /// You can set the kind to be an element function or a string. If you set
-    /// it to an element function other than [`{table}`]($table), [`{raw}`](raw)
-    /// or [`{image}`](image), you will need to manually specify the figure's
-    /// supplement.
+    /// 種類は、エレメント関数または文字列に設定できます。
+    /// [`{table}`]($table)、[`{raw}`](raw)、[`{image}`](image)以外のエレメント関数に設定した場合は、図表の補足（supplement）を手動で指定する必要があります。
     ///
     /// ```example
     /// #figure(
@@ -192,16 +174,12 @@ pub struct FigureElem {
     /// ```
     pub kind: Smart<FigureKind>,
 
-    /// The figure's supplement.
+    /// 図表の補足。
     ///
-    /// If set to `{auto}`, the figure will try to automatically determine the
-    /// correct supplement based on the `kind` and the active
-    /// [text language]($text.lang). If you are using a custom figure type, you
-    /// will need to manually specify the supplement.
+    /// `{auto}` に設定すると、図表は、種類や[テキスト言語]($text.lang)に基づいて、正しい補足を自動的に決定しようとします。
+    /// 独自の図表タイプを使用している場合は、補足を手動で指定する必要があります。
     ///
-    /// If a function is specified, it is passed the first descendant of the
-    /// specified `kind` (typically, the figure's body) and should return
-    /// content.
+    /// 関数が指定された場合、その関数は指定された種類の最初の子孫要素（通常は図の本体）に渡され、内容を返す必要があります。
     ///
     /// ```example
     /// #figure(
@@ -214,29 +192,27 @@ pub struct FigureElem {
     #[borrowed]
     pub supplement: Smart<Option<Supplement>>,
 
-    /// How to number the figure. Accepts a
-    /// [numbering pattern or function]($numbering).
+    /// 番号の付け方。[番号付けのパターンや関数]($numbering)を受け付けます。
     #[default(Some(NumberingPattern::from_str("1").unwrap().into()))]
     #[borrowed]
     pub numbering: Option<Numbering>,
 
-    /// The vertical gap between the body and caption.
+    /// 本文とキャプションの間の垂直方向の隙間。
     #[default(Em::new(0.65).into())]
     pub gap: Length,
 
-    /// Whether the figure should appear in an [`outline`] of figures.
+    /// 図表を[`outline`]に表示するかどうか。
     #[default(true)]
     pub outlined: bool,
 
-    /// Convenience field to get access to the counter for this figure.
+    /// この図表のカウンターにアクセスするための便利なフィールド。
     ///
-    /// The counter only depends on the `kind`:
-    /// - For (tables)[@table]: `{counter(figure.where(kind: table))}`
-    /// - For (images)[@image]: `{counter(figure.where(kind: image))}`
-    /// - For a custom kind: `{counter(figure.where(kind: kind))}`
+    /// カウンターは図表の種類 `kind` にのみ依存します。
+    /// - (table)[@table]に対して: `{counter(figure.where(kind: table))}`
+    /// - (image)[@image]に対して: `{counter(figure.where(kind: image))}`
+    /// - 独自の図表kindに対して: `{counter(figure.where(kind: kind))}`
     ///
-    /// These are the counters you'll need to modify if you want to skip a
-    /// number or reset the counter.
+    /// 数字をスキップしたり、カウンターをリセットしたい場合は、これらのカウンターを修正する必要があります。
     #[synthesized]
     pub counter: Option<Counter>,
 }
@@ -453,14 +429,12 @@ impl Outlinable for Packed<FigureElem> {
     }
 }
 
-/// The caption of a figure. This element can be used in set and show rules to
-/// customize the appearance of captions for all figures or figures of a
-/// specific kind.
+/// 図のキャプション。
+/// この要素は、すべての図や特定の種類の図のキャプションの外観を改変するために、
+/// setルールやshowルールで使用可能です。
 ///
-/// In addition to its `pos` and `body`, the `caption` also provides the
-/// figure's `kind`, `supplement`, `counter`, and `numbering` as fields. These
-/// parts can be used in [`where`]($function.where) selectors and show rules to
-/// build a completely custom caption.
+/// キャプションは、`pos`と`body`に加えて、図の`kind`や`supplement`、`counter`、`numbering`もフィールドとして提供します。
+/// これらの要素を[`where`]($function.where)セレクターやshowルールで使用することで、独自のキャプションを構築できます。
 ///
 /// ```example
 /// #show figure.caption: emph
@@ -472,7 +446,7 @@ impl Outlinable for Packed<FigureElem> {
 /// ```
 #[elem(name = "caption", Synthesize, Show)]
 pub struct FigureCaption {
-    /// The caption's position in the figure. Either `{top}` or `{bottom}`.
+    /// 図表の仲のキャプションの位置。`{top}`や`{bottom}`を入力してください。
     ///
     /// ```example
     /// #show figure.where(
@@ -500,10 +474,10 @@ pub struct FigureCaption {
     #[default(OuterVAlignment::Bottom)]
     pub position: OuterVAlignment,
 
-    /// The separator which will appear between the number and body.
+    /// 番号とキャプション名の間に表示する区切り文字。
     ///
-    /// If set to `{auto}`, the separator will be adapted to the current
-    /// [language]($text.lang) and [region]($text.region).
+    /// `{auto}`に設定すると、区切り文字は
+    /// [language]($text.lang)と[region]($text.region)に応じて決まります。
     ///
     /// ```example
     /// #set figure.caption(separator: [ --- ])
@@ -515,10 +489,10 @@ pub struct FigureCaption {
     /// ```
     pub separator: Smart<Content>,
 
-    /// The caption's body.
+    /// キャプション名。
     ///
-    /// Can be used alongside `kind`, `supplement`, `counter`, `numbering`, and
-    /// `location` to completely customize the caption.
+    /// 独自のキャプションに改変するために
+    /// `kind`、`supplement`、`counter`、`numbering`、`location`が同時に使えます。
     ///
     /// ```example
     /// #show figure.caption: it => [
