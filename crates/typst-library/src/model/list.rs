@@ -11,7 +11,7 @@ use crate::layout::{BlockElem, Em, Length, VElem};
 use crate::model::{ParElem, ParbreakElem};
 use crate::text::TextElem;
 
-/// A bullet list.
+/// 箇条書きリスト。
 ///
 /// Displays a sequence of items vertically, with each item introduced by a
 /// marker.
