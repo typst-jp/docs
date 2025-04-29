@@ -23,7 +23,6 @@ Typst文書では、マークアップモードがデフォルトであり、数
 | 数式         | 式を`[$..$]`で囲む           | `[$-x$ is the opposite of $x$]` |
 | マークアップ | マークアップを`[[..]]`で囲む | `{let name = [*Typst!*]}`       |
 
-
 一度`#`でコードモードに入ると、途中でマークアップモードや数式モードに切り替えない限り、さらにハッシュを使う必要はありません。
 
 ## マークアップ { #markup }
@@ -171,47 +170,47 @@ I got an ice cream for
 ```
 
 ## パス { #paths }
-Typst has various features that require a file path to reference external
-resources such as images, Typst files, or data files. Paths are represented as
-[strings]($str). There are two kinds of paths: Relative and absolute.
 
-- A **relative path** searches from the location of the Typst file where the
-  feature is invoked. It is the default:
+Typstは、画像、Typstファイル、データファイルなどの他ファイル（リソース）を参照するためにファイルパスを必要とするさまざまな機能を持ちます。
+パスは[文字列]($str)で指定して、相対パスと絶対パスの2種類あります。
+
+- **相対パス**は、その関数を使用するTypstファイルの場所からの場所を指定します。デフォルトではこれです。
+
   ```typ
   #image("images/logo.png")
   ```
 
-- An **absolute path** searches from the _root_ of the project. It starts with a
-  leading `/`:
+- **絶対パス**はプロジェクトの _ルート_ から指定します。先頭を`/`から始めます。
+
   ```typ
   #image("/assets/logo.png")
   ```
 
-### Project root
-By default, the project root is the parent directory of the main Typst file.
-For security reasons, you cannot read any files outside of the root directory.
+### プロジェクトルート
 
-If you want to set a specific folder as the root of your project, you can use
-the CLI's `--root` flag. Make sure that the main file is contained in the
-folder's subtree!
+デフォルトでは、プロジェクトのルートディレクトリはメインのTypstファイルの親ディレクトリです。
+セキュリティ上の理由により、ルートディレクトリの外にあるファイルは読み取れません。
+
+プロジェクトのルートとして特定のフォルダーを設定したい場合は、CLIの`--root`フラグを使用できます。
+メインファイルがそのフォルダーのサブディレクトリ内に含まれていることを確認してください。
+
 ```bash
 typst compile --root .. file.typ
 ```
 
-In the web app, the project itself is the root directory. You can always read
-all files within it, no matter which one is previewed (via the eye toggle next
-to each Typst file in the file panel).
+Webアプリでは、プロジェクト自体がルートディレクトリとして扱われます。
+どのファイルをプレビューしていても（プレビューはファイルパネル内の各Typstファイルの横にある目のアイコンで切り替え可能）、
+その中にあるすべてのファイルを常に読み取れます。
 
-### Paths and packages
-A package can only load files from its own directory. Within it, absolute paths
-point to the package root, rather than the project root. For this reason, it
-cannot directly load files from the project directory. If a package needs
-resources from the project (such as a logo image), you must pass the already
-loaded image, e.g. as a named parameter `{logo: image("mylogo.svg")}`. Note that
-you can then still customize the image's appearance with a set rule within the
-package.
+### パスとパッケージ
 
-In the future, paths might become a
-[distinct type from strings](https://github.com/typst/typst/issues/971), so that
-they can retain knowledge of where they were constructed. This way, resources
-could be loaded from a different root.
+パッケージは、それ自身のディレクトリ内にあるファイルしか読み込むことができません。
+その中では、絶対パスはプロジェクトのルートディレクトリではなく、パッケージのルートを指します。
+このため、パッケージはプロジェクトディレクトリ内のファイルを直接読み込むことができません。
+パッケージがプロジェクトのリソース（たとえばロゴ画像など）を必要とする場合は、
+あらかじめ読み込んだ画像を`{logo: image("mylogo.svg")}`のように名前付きパラメーターとして渡す必要があります。
+その後でも、パッケージ内でルールを設定することで画像の見た目をカスタマイズすることは可能です。
+
+将来的には、パスが[文字列とは異なる独立した型](https://github.com/typst/typst/issues/971)になるかもしれません。
+そうすることで、そのパスがどこで生成されたかという情報が保持できるようになります。
+これにより、異なるルートからリソースを読み込むことも可能になるでしょう。
