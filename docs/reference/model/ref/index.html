@@ -946,7 +946,7 @@
     
   </small>
 </h1>
-<p>A reference to a label or bibliography.</p>
+<p>ラベルや参考文献への参照。</p>
 <p>Takes a label and cross-references it. There are two kind of references,
 determined by its <a href="/docs/reference/model/ref/#parameters-form"><code>form</code></a>: <code><span class="typ-str">&quot;normal&quot;</span></code> and <code><span class="typ-str">&quot;page&quot;</span></code>.</p>
 <p>The default, a <code><span class="typ-str">&quot;normal&quot;</span></code> reference, produces a textual reference to a
@@ -961,14 +961,7 @@ attached to a <em>referenceable element</em>. Referenceable elements include
 theorem, you can create a figure of a custom <a href="/docs/reference/model/figure/#parameters-kind"><code>kind</code></a> and
 write a show rule for it. In the future, there might be a more direct way
 to define a custom referenceable element.</p>
-<p>If you just want to link to a labelled element and not get an automatic
-textual reference, consider using the <a href="/docs/reference/model/link/" title="`link`"><code>link</code></a> function instead.</p>
-<p>A <code><span class="typ-str">&quot;page&quot;</span></code> reference produces a page reference to a label, displaying the
-page number at its location. You can use the
-<a href="/docs/reference/layout/page/#parameters-supplement">page's supplement</a> to modify the text before the page
-number. Unlike a <code><span class="typ-str">&quot;normal&quot;</span></code> reference, the label can be attached to any
-element.</p>
-<h2 id="example">Example</h2>
+<h2 id="例">例</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">)</span>
@@ -997,13 +990,13 @@ software looks like.
 <p>This function also has dedicated syntax: A <code><span class="typ-str">&quot;normal&quot;</span></code> reference to a
 label can be created by typing an <code>@</code> followed by the name of the label
 (e.g. <code><span class="typ-heading">= Introduction</span> <span class="typ-label">&lt;intro&gt;</span></code> can be referenced by typing <code><span class="typ-ref">@intro</span></code>).</p>
-<p>To customize the supplement, add content in square brackets after the
-reference: <code><span class="typ-ref">@intro<span class="typ-punct">[</span>Chapter<span class="typ-punct">]</span></span></code>.</p>
-<h2 id="customization">Customization</h2>
-<p>If you write a show rule for references, you can access the referenced
-element through the <code>element</code> field of the reference. The <code>element</code> may
-be <code><span class="typ-key">none</span></code> even if it exists if Typst hasn't discovered it yet, so you
-always need to handle that case in your code.</p>
+<p>補足をカスタマイズするには、
+<code><span class="typ-ref">@intro<span class="typ-punct">[</span>Chapter<span class="typ-punct">]</span></span></code>のように、参照の後に角括弧でコンテンツを追加します。</p>
+<h2 id="カスタム">カスタム</h2>
+<p>参照のshowルールを書く場合、
+参照の<code>element</code>フィールドを通じて参照先の要素にアクセスできます。
+ただし、Typstがまだそれを発見していない場合、<code>element</code>は存在していても<code><span class="typ-key">none</span></code>になる可能性があるため、
+常にコード内でそのケースを処理する必要があります。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">set</span> math<span class="typ-punct">.</span><span class="typ-func">equation</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(1)&quot;</span><span class="typ-punct">)</span>
 
@@ -1072,10 +1065,9 @@ In <span class="typ-ref">@beginning</span> we prove <span class="typ-ref">@pytha
     </small>
   </div>
 </h4>
-<p>The target label that should be referenced.</p>
-<p>Can be a label that is defined in the document or, if the
-<a href="/docs/reference/model/ref/#parameters-form"><code>form</code></a> is set to <code>&quot;normal&quot;</code>, an entry from the
-<a href="/docs/reference/model/bibliography/" title="`bibliography`"><code>bibliography</code></a>.</p>
+<p>参照されるべき対象ラベル。</p>
+<p>これは、ドキュメント内で定義されたラベルや、
+<a href="/docs/reference/model/bibliography/"><code>参考文献リスト</code></a>の参照キーである場合があります。</p>
 
 
 
@@ -1118,7 +1110,7 @@ In <span class="typ-ref">@beginning</span> we prove <span class="typ-ref">@pytha
     </small>
   </div>
 </h4>
-<p>A supplement for the reference.</p>
+<p>参照の補足。</p>
 <p>If the <a href="/docs/reference/model/ref/#parameters-form"><code>form</code></a> is set to <code><span class="typ-str">&quot;normal&quot;</span></code>:</p>
 <ul>
 <li>For references to headings or figures, this is added before the
@@ -1247,7 +1239,7 @@ Here <span class="typ-label">&lt;here&gt;</span> we are on
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="例"><a href="#例">例</a>
           <ul></ul>
         </li>
         
@@ -1255,7 +1247,7 @@ Here <span class="typ-label">&lt;here&gt;</span> we are on
           <ul></ul>
         </li>
         
-        <li data-assoc="customization"><a href="#customization">Customization</a>
+        <li data-assoc="カスタム"><a href="#カスタム">カスタム</a>
           <ul></ul>
         </li>
         
