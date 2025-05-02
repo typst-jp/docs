@@ -946,10 +946,10 @@
     
   </small>
 </h1>
-<p>Links to a URL or a location in the document.</p>
-<p>By default, links do not look any different from normal text. However,
-you can easily apply a style of your choice with a show rule.</p>
-<h2 id="example">Example</h2>
+<p>URLや文書中の位置へのリンク。</p>
+<p>デフォルトでは、リンクの外見は通常のテキストと変わりません。
+しかし、showルールを使うことで、簡単に任意のスタイルを適用できます。</p>
+<h2 id="例">例</h2>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span> <span class="typ-func">link</span><span class="typ-punct">:</span> <span class="typ-func">underline</span>
 
 <span class="typ-link">https://example.com</span> <span class="typ-escape">\</span>
@@ -959,13 +959,13 @@ you can easily apply a style of your choice with a show rule.</p>
   See example.com
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/c4a5c2cf3deb1cac7c49fc85bceebd64.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="hyphenation">Hyphenation</h2>
-<p>If you enable hyphenation or justification, by default, it will not apply to
-links to prevent unwanted hyphenation in URLs. You can opt out of this
-default via <code><span class="typ-key">show</span> <span class="typ-func">link</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>hyphenate<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span></code>.</p>
-<h2 id="syntax">Syntax</h2>
-<p>This function also has dedicated syntax: Text that starts with <code>http://</code> or
-<code>https://</code> is automatically turned into a link.</p>
+<h2 id="ハイフネーション">ハイフネーション</h2>
+<p>ハイフネーションや両端揃えを有効にしていても、意図しないURL中のハイフネーションを防ぐため、
+デフォルトではリンクには適用されません。
+これを無効化するには、<code><span class="typ-key">show</span> <span class="typ-func">link</span><span class="typ-punct">:</span> <span class="typ-key">set</span> <span class="typ-func">text</span><span class="typ-punct">(</span>hyphenate<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">)</span></code>を使用します。</p>
+<h2 id="構文">構文</h2>
+<p>この関数には専用の構文もあります。
+<code>http://</code>や<code>https://</code>で始まるテキストは、自動的にリンクに変換されます。</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">引数</span>
@@ -1026,31 +1026,31 @@ default via <code><span class="typ-key">show</span> <span class="typ-func">link<
     </small>
   </div>
 </h4>
-<p>The destination the link points to.</p>
+<p>リンクの遷移先。</p>
 <ul>
 <li>
-<p>To link to web pages, <code>dest</code> should be a valid URL string. If the URL
-is in the <code>mailto:</code> or <code>tel:</code> scheme and the <code>body</code> parameter is
-omitted, the email address or phone number will be the link's body,
-without the scheme.</p>
+<p>Webページにリンクする場合、<code>dest</code>は有効なURL文字列である必要があります。
+<code>mailto:</code>や<code>tel:</code>のURLスキームを含むURLが指定され、
+かつ<code>body</code>パラメーターが省略された場合、
+URLスキームを除いたメールアドレスまたは電話番号がリンクの本文になります。</p>
 </li>
 <li>
-<p>To link to another part of the document, <code>dest</code> can take one of three
-forms:</p>
+<p>文書中の別の部分にリンクする場合、
+<code>dest</code>には次の3つのうちいずれかの形式を用いることができます。</p>
 <ul>
 <li>
-<p>A <a href="/docs/reference/foundations/label/" title="label">label</a> attached to an element. If you also want automatic text
-for the link based on the element, consider using a
-<a href="/docs/reference/model/ref/">reference</a> instead.</p>
+<p>要素に付与された<a href="/docs/reference/foundations/label/" title="label">label</a>。
+要素に基づいて自動的にリンクの本文を生成したい場合は、
+<a href="/docs/reference/model/ref/">reference</a>の使用を検討してください。</p>
 </li>
 <li>
-<p>A <a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a> (typically retrieved from <a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a>, <a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a> or
-<a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a>).</p>
+<p><a href="/docs/reference/introspection/location/" title="`location`"><code>location</code></a>（通常は<a href="/docs/reference/introspection/here/" title="`here`"><code>here</code></a>や<a href="/docs/reference/introspection/locate/" title="`locate`"><code>locate</code></a>、
+<a href="/docs/reference/introspection/query/" title="`query`"><code>query</code></a>から取得される）。</p>
 </li>
 <li>
-<p>A dictionary with a <code>page</code> key of type <a href="/docs/reference/foundations/int/">integer</a> and <code>x</code> and
-<code>y</code> coordinates of type <a href="/docs/reference/layout/length/" title="length">length</a>. Pages are counted from one, and
-the coordinates are relative to the page's top left corner.</p>
+<p><a href="/docs/reference/foundations/int/">integer</a>型の<code>page</code>キーと<a href="/docs/reference/layout/length/" title="length">length</a>型の<code>x</code>座標、<code>y</code>座標を持つ辞書。
+ページ番号は1から始まり、
+座標はページの左上隅からの相対位置です。</p>
 </li>
 </ul>
 </li>
@@ -1096,9 +1096,9 @@ the coordinates are relative to the page's top left corner.</p>
     </small>
   </div>
 </h4>
-<p>The content that should become a link.</p>
-<p>If <code>dest</code> is an URL string, the parameter can be omitted. In this case,
-the URL will be shown as the link.</p>
+<p>リンクとして表示する内容。</p>
+<p><code>dest</code>がURL文字列の場合、このパラメーターは省略可能です。
+この場合、URLがリンクとして表示されます。</p>
 
 
 
@@ -1129,15 +1129,15 @@ the URL will be shown as the link.</p>
           <ul></ul>
         </li>
         
-        <li data-assoc="example"><a href="#example">Example</a>
+        <li data-assoc="例"><a href="#例">例</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="hyphenation"><a href="#hyphenation">Hyphenation</a>
+        <li data-assoc="ハイフネーション"><a href="#ハイフネーション">ハイフネーション</a>
           <ul></ul>
         </li>
         
-        <li data-assoc="syntax"><a href="#syntax">Syntax</a>
+        <li data-assoc="構文"><a href="#構文">構文</a>
           <ul></ul>
         </li>
         
