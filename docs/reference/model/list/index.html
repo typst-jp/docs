@@ -946,9 +946,9 @@
     
   </small>
 </h1>
-<p>A bullet list.</p>
-<p>Displays a sequence of items vertically, with each item introduced by a
-marker.</p>
+<p>箇条書きリスト。</p>
+<p>各項目の先頭にマーカーを付け、
+一連の項目を縦に並べて表示します。</p>
 <h2 id="example">Example</h2>
 <div class="previewed-code"><pre><code>Normal list.
 <span class="typ-marker">-</span> Text
@@ -968,11 +968,11 @@ Function call.
   <span class="typ-punct">[</span>Data Loading<span class="typ-punct">]</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/assets/docs/44d94f354be4a94abad08aaaf05b8bf6.png" alt="Preview" width="480" height="190"/></div></div>
-<h2 id="syntax">Syntax</h2>
-<p>This functions also has dedicated syntax: Start a line with a hyphen,
-followed by a space to create a list item. A list item can contain multiple
-paragraphs and other block-level content. All content that is indented
-more than an item's marker becomes part of that item.</p>
+<h2 id="構文">構文</h2>
+<p>この関数には専用の構文もあります。
+行頭にハイフンとスペースを置くことでリスト項目を作成します。
+リスト項目には複数の段落や、他のブロックレベルコンテンツを含めることができます。
+リスト項目の記号よりも深く字下げされた全てのコンテンツは、そのリスト項目の一部になります。</p>
 <h2 id="parameters">
   
 <span aria-describedby="parameters-tooltip">引数</span>
@@ -1021,16 +1021,16 @@ more than an item's marker becomes part of that item.</p>
     </small>
   </div>
 </h4>
-<p>Defines the default <a href="/docs/reference/model/list/#parameters-spacing">spacing</a> of the list. If it is
-<code><span class="typ-key">false</span></code>, the items are spaced apart with
-<a href="/docs/reference/model/par/#parameters-spacing">paragraph spacing</a>. If it is <code><span class="typ-key">true</span></code>, they use
-<a href="/docs/reference/model/par/#parameters-leading">paragraph leading</a> instead. This makes the list more
-compact, which can look better if the items are short.</p>
-<p>In markup mode, the value of this parameter is determined based on
-whether items are separated with a blank line. If items directly follow
-each other, this is set to <code><span class="typ-key">true</span></code>; if items are separated by a blank
-line, this is set to <code><span class="typ-key">false</span></code>. The markup-defined tightness cannot be
-overridden with set rules.</p>
+<p>リストのデフォルトの<a href="/docs/reference/model/list/#parameters-spacing">spacing</a>を定義します。
+これが<code><span class="typ-key">false</span></code>の場合、 項目の間隔は<a href="/docs/reference/model/par/#parameters-spacing">paragraph spacing</a>によって決まります。
+<code><span class="typ-key">true</span></code>の場合、代わりに<a href="/docs/reference/model/par/#parameters-leading">paragraph leading</a>が使用されます。
+これによりリストがよりコンパクトになり、
+各項目が短い場合に見栄えが良くなります。</p>
+<p>マークアップモードでは、
+この引数の値は項目が空行で区切られているかどうかに基づいて決定されます。
+項目間に空行がなく連続している場合、この値は<code><span class="typ-key">true</span></code>に設定されますが、
+項目間が空行で区切られている場合は<code><span class="typ-key">false</span></code>に設定されます。
+マークアップで定義された間隔はsetルールで上書きすることはできません。</p>
 
 
 <p>Default:<code><span class="typ-key">true</span></code></p>
@@ -1083,12 +1083,12 @@ overridden with set rules.</p>
     </small>
   </div>
 </h4>
-<p>The marker which introduces each item.</p>
-<p>Instead of plain content, you can also pass an array with multiple
-markers that should be used for nested lists. If the list nesting depth
-exceeds the number of markers, the markers are cycled. For total
-control, you may pass a function that maps the list's nesting depth
-(starting from <code><span class="typ-num">0</span></code>) to a desired marker.</p>
+<p>各項目の先頭に付けるマーカー。</p>
+<p>単純なコンテンツの代わりに、ネストされたリストに使用する、
+複数のマーカーを持つ配列を渡すこともできます。
+リストのネストの深さがマーカーの数を超えた場合、使用されるマーカーは循環します。
+完全に制御したい場合は、
+リストのネストの深さ（<code><span class="typ-num">0</span></code>から開始する）に応じて、使用するマーカーを決める関数を渡すこともできます。</p>
 
 
 <p>Default:<code><span class="typ-punct">(</span><span class="typ-punct">[</span>•<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>‣<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>–<span class="typ-punct">]</span><span class="typ-punct">)</span></code></p>
@@ -1134,7 +1134,7 @@ control, you may pass a function that maps the list's nesting depth
     </small>
   </div>
 </h4>
-<p>The indent of each item.</p>
+<p>各項目のインデント。</p>
 
 
 <p>Default:<code><span class="typ-num">0pt</span></code></p>
@@ -1164,7 +1164,7 @@ control, you may pass a function that maps the list's nesting depth
     </small>
   </div>
 </h4>
-<p>The spacing between the marker and the body of each item.</p>
+<p>各項目のマーカーと本文の間隔を指定します。</p>
 
 
 <p>Default:<code><span class="typ-num">0.5em</span></code></p>
@@ -1199,10 +1199,10 @@ control, you may pass a function that maps the list's nesting depth
     </small>
   </div>
 </h4>
-<p>The spacing between the items of the list.</p>
-<p>If set to <code><span class="typ-key">auto</span></code>, uses paragraph <a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a> for tight
-lists and paragraph <a href="/docs/reference/model/par/#parameters-spacing"><code>spacing</code></a> for wide (non-tight)
-lists.</p>
+<p>リストの項目同士の間隔を指定します。</p>
+<p><code><span class="typ-key">auto</span></code>に設定すると、
+コンパクトなリストの場合は<a href="/docs/reference/model/par/#parameters-leading"><code>leading</code></a>を、
+幅のある（コンパクトでない）リストの場合は段落の<a href="/docs/reference/model/par/#parameters-spacing"><code>spacing</code></a>を使用します。</p>
 
 
 <p>Default:<code><span class="typ-key">auto</span></code></p>
@@ -1244,9 +1244,9 @@ lists.</p>
     </small>
   </div>
 </h4>
-<p>The bullet list's children.</p>
-<p>When using the list syntax, adjacent items are automatically collected
-into lists, even through constructs like for loops.</p>
+<p>箇条書きリストの項目。</p>
+<p>list構文を使用する場合、forループのような構造を挟んでも、 
+隣接する項目は自動的にリストとしてまとめられます。</p>
 
 
 
@@ -1300,7 +1300,7 @@ into lists, even through constructs like for loops.</p>
     
   </h3>
   
-<p>A bullet list item.</p>
+<p>箇条書きリストの項目。</p>
 
 <div class="code code-definition single-arg">list.<span
     class="typ-func">item</span>(<div class="arguments"><span
@@ -1334,7 +1334,7 @@ into lists, even through constructs like for loops.</p>
     </small>
   </div>
 </h4>
-<p>The item's body.</p>
+<p>項目の本文。</p>
 
 
 
@@ -1367,7 +1367,7 @@ into lists, even through constructs like for loops.</p>
           <ul></ul>
         </li>
         
-        <li data-assoc="syntax"><a href="#syntax">Syntax</a>
+        <li data-assoc="構文"><a href="#構文">構文</a>
           <ul></ul>
         </li>
         
