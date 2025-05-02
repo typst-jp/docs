@@ -125,6 +125,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
         `,
           }}
         />
+        <link href="/src/styles.css" rel="stylesheet"></link>
       </head>
 
       <body class="no-js docs has-outline">

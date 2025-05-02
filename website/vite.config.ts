@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import tailwindcss from '@tailwindcss/vite'
 import ssg from "@hono/vite-ssg";
 import { defaultOptions } from "@hono/vite-dev-server";
 import devServer from "@hono/vite-dev-server";
@@ -14,6 +15,7 @@ symlinkSync(assetsDocsPath, publicAssetsDocsPath, "dir");
 
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     ssg(),
     devServer({
       entry: "src/index.tsx",
