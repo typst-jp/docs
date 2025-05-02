@@ -126,6 +126,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           }}
         />
         <link href="/src/styles.css" rel="stylesheet"></link>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
       </head>
 
       <body class="no-js docs has-outline">
