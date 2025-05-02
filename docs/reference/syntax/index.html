@@ -1065,45 +1065,39 @@ significant.
 <span class="typ-escape">\$</span>1.50! <span class="typ-escape">\u{1f600}</span>
 </code></pre><div class="preview"><img src="/assets/docs/093d70b807a0ffa7c2eb88da90861f97.png" alt="Preview" width="480" height="190"/></div></div>
 <h2 id="paths">パス</h2>
-<p>Typst has various features that require a file path to reference external
-resources such as images, Typst files, or data files. Paths are represented as
-<a href="/docs/reference/foundations/str/">strings</a>. There are two kinds of paths: Relative and absolute.</p>
+<p>Typstは、画像、Typstファイル、データファイルなどのリソース（他ファイル）を参照するためにファイルパスを必要とするさまざまな機能を持ちます。
+パスは<a href="/docs/reference/foundations/str/">文字列型</a>で指定し、相対パスと絶対パスの2種類があります。</p>
 <ul>
 <li>
-<p>A <strong>relative path</strong> searches from the location of the Typst file where the
-feature is invoked. It is the default:</p>
+<p><strong>相対パス</strong>は、その機能を呼び出すTypstファイルの場所からのパスを指定します。デフォルトはこれです。</p>
 <pre><code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;images/logo.png&quot;</span><span class="typ-punct">)</span>
 </code></pre></li>
 <li>
-<p>An <strong>absolute path</strong> searches from the <em>root</em> of the project. It starts with a
-leading <code>/</code>:</p>
+<p><strong>絶対パス</strong>はプロジェクトの <em>ルートディレクトリ</em> からのパスを指定します。先頭を<code>/</code>から始めます。</p>
 <pre><code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;/assets/logo.png&quot;</span><span class="typ-punct">)</span>
 </code></pre></li>
 </ul>
-<h3 id="project-root">Project root</h3>
-<p>By default, the project root is the parent directory of the main Typst file.
-For security reasons, you cannot read any files outside of the root directory.</p>
-<p>If you want to set a specific folder as the root of your project, you can use
-the CLI's <code>--root</code> flag. Make sure that the main file is contained in the
-folder's subtree!</p>
+<h3 id="プロジェクトのルートディレクトリ">プロジェクトのルートディレクトリ</h3>
+<p>デフォルトでは、プロジェクトのルートディレクトリはメインのTypstファイルの親ディレクトリです。
+セキュリティ上の理由により、ルートディレクトリの外にあるファイルは読み取れません。</p>
+<p>プロジェクトのルートディレクトリとして特定のフォルダーを設定したい場合は、CLIの<code>--root</code>フラグを使用できます。
+対象のファイルがそのフォルダーのサブディレクトリ内に含まれていることを確認してください。</p>
 <pre style="background-color:#ffffff;">
 <span style="color:#4b69c6;">typst</span><span style="color:#000000;"> compile --root .. file.typ
 </span></pre>
-<p>In the web app, the project itself is the root directory. You can always read
-all files within it, no matter which one is previewed (via the eye toggle next
-to each Typst file in the file panel).</p>
-<h3 id="paths-and-packages">Paths and packages</h3>
-<p>A package can only load files from its own directory. Within it, absolute paths
-point to the package root, rather than the project root. For this reason, it
-cannot directly load files from the project directory. If a package needs
-resources from the project (such as a logo image), you must pass the already
-loaded image, e.g. as a named parameter <code>logo: <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;mylogo.svg&quot;</span><span class="typ-punct">)</span></code>. Note that
-you can then still customize the image's appearance with a set rule within the
-package.</p>
-<p>In the future, paths might become a
-<a href="https://github.com/typst/typst/issues/971">distinct type from strings</a>, so that
-they can retain knowledge of where they were constructed. This way, resources
-could be loaded from a different root.</p>
+<p>Webアプリでは、プロジェクト自体がルートディレクトリとして扱われます。
+どのファイルをプレビューしていても（プレビューはファイルパネル内の各Typstファイルの横にある目のアイコンで切り替え可能）、
+その中にあるすべてのファイルを常に読み取れます。</p>
+<h3 id="パスとパッケージ">パスとパッケージ</h3>
+<p>パッケージは、それ自身のディレクトリ内にあるファイルしか読み込むことができません。
+その中では、絶対パスはプロジェクトのルートディレクトリではなく、パッケージのルートディレクトリを指します。
+このため、パッケージはプロジェクトディレクトリ内のファイルを直接読み込むことができません。
+パッケージがプロジェクトのリソース（たとえばロゴ画像など）を必要とする場合は、
+あらかじめ読み込んだ画像を<code>logo: <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;mylogo.svg&quot;</span><span class="typ-punct">)</span></code>のように名前付きパラメーターとして渡す必要があります。
+その後でも、パッケージ内でsetルールを記述することで画像の見た目をカスタマイズすることも可能です。</p>
+<p>将来的には、パスが<a href="https://github.com/typst/typst/issues/971">文字列とは異なるパス専用の型</a>になるかもしれません。
+そうすることで、そのパスがどこで生成されたかという情報を保持できるようになります。
+これにより、異なるルートからリソースを読み込むことも可能になるでしょう。</p>
 
 
 
