@@ -49,13 +49,11 @@ setルールを使用すると、文書の一部または全体の書式のプ�
 
 重要なのは、作成時に `value` は中身を覗くことができない不透明な [content]($content) になることです。それはどこかに配置されたときにのみ解決されます。なぜなら、そのときに初めてコンテキストが認識されるからです。コンテキスト式の本体は、それが配置される場所の数に応じて、0回、1回、または複数回評価される可能性があります。
 
-## Location context
-Context can not only give us access to set rule values. It can also let us know
-_where_ in the document we currently are, relative to other elements, and
-absolutely on the pages. We can use this information to create very flexible
-interactions between different document parts. This underpins features like
-heading numbering, the table of contents, or page headers dependant on section
-headings.
+## 位置コンテキスト
+コンテキストでアクセスできるのはsetルールの値だけではありません。
+そのコンテキストが現在の文書内の _どこにあるのか_ を、他の要素との相対位置やページの絶対位置として知ることも可能です。
+こうした情報を活用することで、文書内のさまざまなパーツ同士を柔軟に連携させることができます。
+位置コンテキストは、見出し番号や目次、章ごとに変わるページヘッダーを扱う機能の基盤となります。
 
 [`counter.get`]($counter.get)のようないくつかの関数は、暗黙的に現在の位置にアクセスします。
 以下の例では、見出しカウンターの値を取得したいとします。
