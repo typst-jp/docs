@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
 import type { Page } from "../../types/model";
+import { SiteNoticeBanner } from "../ui/common/";
 
 export type BaseTemplateProps = PropsWithChildren<{
   page: Page;
@@ -126,60 +127,14 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           }}
         />
         <link href="/src/styles.css" rel="stylesheet"></link>
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+        <script
+          defer
+          src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
+        ></script>
       </head>
 
       <body class="no-js docs has-outline">
-        <div class="alert">
-          <div class="alert-content">
-            <span>
-              ⚠ <b>注意</b> 当サイトは、
-              <a href="https://typst.app/docs/">
-                Typst v0.13.1 公式ドキュメント
-              </a>
-              を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、
-              <a href="https://typst.app/docs/">公式ドキュメント</a>{" "}
-              との併用を推奨します。このサイトの内容に誤りを発見された方は、
-              <a href="https://github.com/typst-jp/typst-jp.github.io">
-                GitHubリポジトリまでご報告を頂けましたら幸いです
-              </a>
-              。我々のコミュニティにご興味のある方は、ぜひ
-              <a href="https://discord.gg/9xF7k4aAuH">
-                非公式Discordサーバー「くみはんクラブ」
-              </a>
-              にご参加ください。
-            </span>
-            <br />
-            <span>
-              ⚠ <b>Warning:</b> This site provides an unofficial translation of
-              the{" "}
-              <a href="https://typst.app/docs/">Typst v0.13.1 documentation</a>{" "}
-              by the Japanese Community. Please note that there may be some
-              inaccuracies, untranslated sections or outdated information. We
-              highly recommend referring to{" "}
-              <a href="https://typst.app/docs/">
-                the latest official documentation
-              </a>{" "}
-              as well. If you find any errors in the content,{" "}
-              <a href="https://github.com/typst-jp/typst-jp.github.io">
-                please let us know through our GitHub repository.
-              </a>{" "}
-              If you are interested in our community, feel free to join{" "}
-              <a href="https://discord.gg/9xF7k4aAuH">
-                our unofficial Discord server, "Kumihan Club."
-              </a>
-            </span>
-          </div>
-          <button id="closeAlertButton" class="close">
-            <img
-              alt="Close"
-              src="/assets/icons/16-close-dark.svg"
-              width="16"
-              height="16"
-            />
-          </button>
-        </div>
-
+        <SiteNoticeBanner />
         <header class="boring">
           <div>
             <a href="/docs" class="logo-box">
