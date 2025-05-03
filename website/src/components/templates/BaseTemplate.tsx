@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
 import type { Page } from "../../types/model";
-import { SiteNoticeBanner } from "../ui/common/";
+import { SiteNoticeBanner, Footer } from "../ui/common/";
 
 export type BaseTemplateProps = PropsWithChildren<{
   page: Page;
@@ -440,81 +440,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           )}
         </div>
 
-        <footer>
-          <div>
-            <ul>
-              <li>
-                <a href="https://typst.app/">（公式）ホームページ</a>
-              </li>
-              <li>
-                <a href="https://typst.app/docs/">
-                  （公式）ドキュメント（英語）
-                </a>
-              </li>
-              <li>
-                <a href="https://typst.app/universe/">
-                  （公式）拡張パッケージ・テンプレートの宇宙
-                </a>
-              </li>
-              <li>
-                <a href="https://typst.app/about/">（公式）Typstについて</a>
-              </li>
-              <li>
-                <a href="https://typst.app/contact/">（公式）連絡先</a>
-              </li>
-              <li>
-                <a href="https://typst.app/privacy/">
-                  （公式）プライバシーポリシー
-                </a>
-              </li>
-              <li>
-                <a href="https://typst.app/terms/">（公式）サービス規約</a>
-              </li>
-              <li>
-                <a href="https://typst.app/legal/">（公式）免責事項</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-              <li>
-                <a href="https://typst.app/tools/">（公式）ツール</a>
-              </li>
-              <li>
-                <a href="https://typst.app/blog/">（公式）ブログ</a>
-              </li>
-              <li>
-                <a href="https://twitter.com/typstapp/">（公式）Twitter</a>
-              </li>
-              <li>
-                <a href="https://discord.gg/2uDybryKPe">（公式）Discord</a>
-              </li>
-              <li>
-                <a rel="me" href="https://mastodon.social/@typst">
-                  （公式）Mastodon
-                </a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/company/typst/">
-                  （公式）LinkedIn
-                </a>
-              </li>
-              <li>
-                <a href="https://instagram.com/typstapp/">（公式）Instagram</a>
-              </li>
-              <li>
-                <a href="https://github.com/typst/">（公式）GitHub</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <p>Made in Berlin</p>
-            <p>
-              Translated by{" "}
-              <a href="https://github.com/typst-jp">Typst Japan Community</a>
-            </p>
-          </div>
-        </footer>
+        <Footer />
 
         <script src="/scripts/fuse.basic.min.js"></script>
         <script src="/scripts/docs.js?bust=20230913"></script>
