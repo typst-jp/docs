@@ -1,3 +1,9 @@
+import {
+  discordServerUrl,
+  githubRepositoryUrl,
+  typstOfficialDocsUrl,
+} from "../../../metadata";
+
 export const SiteNoticeBanner = () => {
   return (
     <div
@@ -58,33 +64,31 @@ export const SiteNoticeBanner = () => {
           </span>
           <span class="block flex-1 pt-1 pb-2 leading-normal sm:inline sm:pt-0 sm:pb-0">
             当サイトは、
-            <a href="https://typst.app/docs/">Typst v0.13.1 公式ドキュメント</a>
+            <a href={typstOfficialDocsUrl}>Typst v0.13.1 公式ドキュメント</a>
             を、日本語コミュニティが非公式に翻訳したものです。誤訳・未訳・古い情報が含まれている可能性があるため、
-            <a href="https://typst.app/docs/">公式ドキュメント</a>
+            <a href={typstOfficialDocsUrl}>公式ドキュメント</a>
             との併用を推奨します。このサイトの内容に誤りを発見された方は、
-            <a href="https://github.com/typst-jp/typst-jp.github.io">
+            <a href={githubRepositoryUrl}>
               GitHubリポジトリまでご報告を頂けましたら幸いです
             </a>
             。我々のコミュニティにご興味のある方は、ぜひ
-            <a href="https://discord.gg/9xF7k4aAuH">
+            <a href={discordServerUrl}>
               非公式Discordサーバー「くみはんクラブ」
             </a>
             にご参加ください。
             <br />
             This site provides an unofficial translation of the
-            <a href="https://typst.app/docs/">Typst v0.13.1 documentation</a>
+            <a href={typstOfficialDocsUrl}>Typst v0.13.1 documentation</a>
             by the Japanese Community. Please note that there may be some
             inaccuracies, untranslated sections or outdated information. We
             highly recommend referring to
-            <a href="https://typst.app/docs/">
-              the latest official documentation
-            </a>
+            <a href={typstOfficialDocsUrl}>the latest official documentation</a>
             as well. If you find any errors in the content,
-            <a href="https://github.com/typst-jp/typst-jp.github.io">
+            <a href={githubRepositoryUrl}>
               please let us know through our GitHub repository.
             </a>
             If you are interested in our community, feel free to join
-            <a href="https://discord.gg/9xF7k4aAuH">
+            <a href={discordServerUrl}>
               our unofficial Discord server, "Kumihan Club."
             </a>
           </span>
