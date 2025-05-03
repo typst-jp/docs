@@ -961,13 +961,11 @@
 <span class="typ-pol">#</span><span class="typ-pol">value</span>
 </code></pre><div class="preview"><img src="/assets/docs/b2174be05e2199048bd2ca7a851707a2.png" alt="Preview" width="480" height="190"/></div></div>
 <p>重要なのは、作成時に <code>value</code> は中身を覗くことができない不透明な <a href="/docs/reference/foundations/content/">content</a> になることです。それはどこかに配置されたときにのみ解決されます。なぜなら、そのときに初めてコンテキストが認識されるからです。コンテキスト式の本体は、それが配置される場所の数に応じて、0回、1回、または複数回評価される可能性があります。</p>
-<h2 id="location-context">Location context</h2>
-<p>Context can not only give us access to set rule values. It can also let us know
-<em>where</em> in the document we currently are, relative to other elements, and
-absolutely on the pages. We can use this information to create very flexible
-interactions between different document parts. This underpins features like
-heading numbering, the table of contents, or page headers dependant on section
-headings.</p>
+<h2 id="位置コンテキスト">位置コンテキスト</h2>
+<p>コンテキストでアクセスできるのはsetルールの値だけではありません。
+そのコンテキストが現在の文書内の <em>どこにあるのか</em> を、他の要素との相対位置やページの絶対位置として知ることも可能です。
+この情報を活用することで、文書内のさまざまなパーツ同士を柔軟に連携させることができます。
+位置コンテキストは、見出し番号や目次、章ごとに変わるページヘッダーを扱う機能の基盤となります。</p>
 <p><a href="/docs/reference/introspection/counter/#definitions-get"><code>counter.get</code></a>のようないくつかの関数は、暗黙的に現在の位置にアクセスします。
 以下の例では、見出しカウンターの値を取得したいとします。
 これは文書全体で変化するため、まずコンテキスト式に入る必要があります。
@@ -1099,7 +1097,7 @@ Typstが5回の試行ですべてを解決できない場合、警告 &quot;layo
           <ul></ul>
         </li>
         
-        <li data-assoc="location-context"><a href="#location-context">Location Context</a>
+        <li data-assoc="位置コンテキスト"><a href="#位置コンテキスト">位置コンテキスト</a>
           <ul></ul>
         </li>
         
