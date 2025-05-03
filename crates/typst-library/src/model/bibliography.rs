@@ -81,14 +81,13 @@ use crate::World;
 /// ```
 #[elem(Locatable, Synthesize, Show, ShowSet, LocalName)]
 pub struct BibliographyElem {
-    /// One or multiple paths to or raw bytes for Hayagriva `.yml` and/or
-    /// BibLaTeX `.bib` files.
+    /// 1つまたは複数のHayagriva`.yml`やBibLaTeX`.bib`ファイルへのパスや生バイト。
     ///
-    /// This can be a:
-    /// - A path string to load a bibliography file from the given path. For
-    ///   more details about paths, see the [Paths section]($syntax/#paths).
-    /// - Raw bytes from which the bibliography should be decoded.
-    /// - An array where each item is one the above.
+    /// 以下の形式で指定できます。
+    /// - 読み込む参考文献ファイルのパス。
+    ///   パスに関する詳細は[パスの章]($syntax/#paths)をご参照ください。
+    /// - 参考文献情報がデコードできる生バイト。
+    /// - 上記を要素とする配列。
     #[required]
     #[parse(
         let sources = args.expect("sources")?;
