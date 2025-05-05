@@ -177,10 +177,10 @@ impl PlaceElem {
 /// Relative to which containing scope something shall be placed.
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum PlacementScope {
-    /// Place into the current column.
+    /// 現在の列に配置する。
     #[default]
     Column,
-    /// Place relative to the parent, letting the content span over all columns.
+    /// 親要素に対して相対的な位置に配置され、コンテンツがすべての列にまたがって表示されます。
     Parent,
 }
 

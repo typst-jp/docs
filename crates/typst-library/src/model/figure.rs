@@ -98,7 +98,7 @@ use crate::visualize::ImageElem;
 /// ```
 #[elem(scope, Locatable, Synthesize, Count, Show, ShowSet, Refable, Outlinable)]
 pub struct FigureElem {
-    /// The content of the figure. Often, an [image].
+    /// 図表の内容。多くの場合、 [image] が使われます。
     #[required]
     pub body: Content,
 
