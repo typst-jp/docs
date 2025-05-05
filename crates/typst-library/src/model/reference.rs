@@ -16,22 +16,20 @@ use crate::text::TextElem;
 
 /// ラベルや参考文献への参照。
 ///
-/// Takes a label and cross-references it. There are two kind of references,
-/// determined by its [`form`]($ref.form): `{"normal"}` and `{"page"}`.
+/// ラベルを指定して、その参照を生成します。
+/// 参照の[`form`]($ref.form)には`{"normal"}`と`{"page"}`の2種類があります。
 ///
-/// The default, a `{"normal"}` reference, produces a textual reference to a
-/// label. For example, a reference to a heading will yield an appropriate
-/// string such as "Section 1" for a reference to the first heading. The
-/// references are also links to the respective element. Reference syntax can
-/// also be used to [cite] from a bibliography.
+/// デフォルトの`{"normal"}`参照では、ラベルに対するテキスト形式の参照が作られます。
+/// たとえば見出しへの参照なら、「Section 1」（[`lang`]($text.lang)を`{"ja"}`にしていると「節1」）などのような適切な文字列が表示されます。
+/// この参照は、該当する要素へのリンクとしても機能します。
+/// また、参照の構文は文献リストからの引用を行う[cite]にも使うことができます。
 ///
-/// As the default form requires a supplement and numbering, the label must be
-/// attached to a _referenceable element_. Referenceable elements include
-/// [headings]($heading), [figures]($figure), [equations]($math.equation), and
-/// [footnotes]($footnote). To create a custom referenceable element like a
-/// theorem, you can create a figure of a custom [`kind`]($figure.kind) and
-/// write a show rule for it. In the future, there might be a more direct way
-/// to define a custom referenceable element.
+/// このデフォルト形式では補足語（たとえば「節1」では「節」）と番号が必要なため、ラベルは _参照可能な要素_ に付ける必要があります。
+/// 参照可能な要素としては、
+/// [headings]($heading)、[figures]($figure)、[equations]($math.equation)、[footnotes]($footnote)
+/// などがあります。
+/// 定理（theorem）などのカスタム参照可能要素を作成したい場合は、カスタム[`kind`]($figure.kind)の図表として作成し、それに対応するshowルールを書くことで作成可能です。
+/// 将来的には、カスタム参照可能要素をもっと直接的に定義する方法が導入されるかもしれません。
 ///
 /// # 例
 /// ```example
@@ -61,11 +59,11 @@ use crate::text::TextElem;
 /// ```
 ///
 /// # Syntax
-/// This function also has dedicated syntax: A `{"normal"}` reference to a
-/// label can be created by typing an `@` followed by the name of the label
-/// (e.g. `[= Introduction <intro>]` can be referenced by typing `[@intro]`).
+/// この機能には専用の記法も用意されています。
+/// `{"normal"}` の参照を作成するためには`@`に続けてラベル名を入力します。
+/// （たとえば`[= Introduction <intro>]`というラベルを参照するには`[@intro]`と入力します。）
 ///
-/// 補足をカスタマイズするには、
+/// 補足語をカスタマイズするには、
 /// `[@intro[Chapter]]`のように、参照の後に角括弧でコンテンツを追加します。
 ///
 /// # カスタム
@@ -106,18 +104,16 @@ pub struct RefElem {
     #[required]
     pub target: Label,
 
-    /// 参照の補足。
+    /// 参照の補足語。
     ///
-    /// If the [`form`]($ref.form) is set to `{"normal"}`:
-    /// - For references to headings or figures, this is added before the
-    ///   referenced number.
-    /// - For citations, this can be used to add a page number.
+    /// [`form`]($ref.form)が`{"normal"}`で設定されている場合は以下のとおりです。
+    /// - 見出しや図への参照では、この値が参照番号の前に追加されます。
+    /// - 文献引用の場合は、ページ番号などを追記するのに使えます。
     ///
-    /// If the [`form`]($ref.form) is set to `{"page"}`, then this is added
-    /// before the page number of the label referenced.
+    /// もし[`form`]($ref.form)が`{"page"}`に設定されている場合には、
+    /// 参照先ラベルのページ番号の前にこの値が追加されます。
     ///
-    /// If a function is specified, it is passed the referenced element and
-    /// should return content.
+    /// また、関数が指定されている場合は、それに参照先の要素が渡され、戻り値のコンテンツが補足語となります。
     ///
     /// ```example
     /// #set heading(numbering: "1.")
@@ -140,7 +136,7 @@ pub struct RefElem {
     #[borrowed]
     pub supplement: Smart<Option<Supplement>>,
 
-    /// The kind of reference to produce.
+    /// 生成する参照の種類
     ///
     /// ```example
     /// #set page(numbering: "1")
@@ -360,10 +356,10 @@ cast! {
 /// The form of the reference.
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum RefForm {
-    /// Produces a textual reference to a label.
+    /// ラベルに対して文字列での参照を生成します。
     #[default]
     Normal,
-    /// Produces a page reference to a label.
+    /// ラベルに対してページ番号での参照を生成します。
     Page,
 }
 

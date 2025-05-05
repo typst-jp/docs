@@ -56,9 +56,9 @@ pub struct CiteElem {
     #[required]
     pub key: Label,
 
-    /// ページ番号や章番号などの引用の補足。
+    /// ページ番号や章番号などの引用の補足語。
     ///
-    /// [References]($ref)の構文では、角括弧で囲むことで補足を追加できます。
+    /// [References]($ref)の構文では、角括弧で囲むことで補足語を追加できます。
     ///
     /// ```example
     /// This has been proven. @distress[p.~7]
