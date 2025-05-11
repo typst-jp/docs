@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
 import type { Page } from "../../types/model";
-import { SiteNoticeBanner, Footer } from "../ui/common/";
+import { SiteNoticeBanner, Footer, Breadcrumbs } from "../ui/common/";
 
 export type BaseTemplateProps = PropsWithChildren<{
   page: Page;
@@ -345,35 +345,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           </nav>
 
           <main>
-            <ul class="breadcrumbs" aria-label="Breadcrumbs">
-              <li class="root">
-                <a href="/docs/">
-                  <img
-                    src="/assets/icons/16-docs-dark.svg"
-                    alt="Docs"
-                    width="16"
-                    height="16"
-                  />
-                </a>
-              </li>
-
-              {path &&
-                path.map((item, idx) => (
-                  <>
-                    <li aria-hidden="true">
-                      <img
-                        src="/assets/icons/16-arrow-right.svg"
-                        width="16"
-                        height="16"
-                        alt=""
-                      />
-                    </li>
-                    <li>
-                      <a href={item.route}>{item.title}</a>
-                    </li>
-                  </>
-                ))}
-            </ul>
+            <Breadcrumbs path={path} />
 
             {children}
 
