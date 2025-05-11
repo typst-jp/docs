@@ -15,7 +15,6 @@ export const SideNavigation = ({
 }: SideNavigationProps) => {
   return (
     <nav class="folding flex-none w-full bg-white border border-neutral-200/60 rounded-md sticky top-[60px] mt-4 mb-8 h-[calc(100vh-60px-1rem)] overflow-auto px-3.5 py-3">
-      <SiteTitle />
       <ul class="space-y-1 text-xs text-neutral-700">
         {docs &&
           docs.map((firstLevel, idx) => (
