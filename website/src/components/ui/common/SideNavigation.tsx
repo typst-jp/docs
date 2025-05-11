@@ -14,7 +14,7 @@ export const SideNavigation = ({
   currentPath,
 }: SideNavigationProps) => {
   return (
-    <nav class="folding flex-none w-full md:w-64 lg:w-72 bg-white border border-neutral-200/60 rounded-md mr-3.5 sticky top-0 h-screen overflow-auto px-3.5 py-3">
+    <nav class="folding flex-none w-full bg-white border border-neutral-200/60 rounded-md sticky top-[60px] mt-4 mb-8 h-[calc(100vh-60px-1rem)] overflow-auto px-3.5 py-3">
       <SiteTitle />
       <ul class="space-y-1 text-xs text-neutral-700">
         {docs &&
