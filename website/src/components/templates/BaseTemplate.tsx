@@ -5,6 +5,7 @@ import {
   Footer,
   Breadcrumbs,
   TableOfContents,
+  SideNavigation,
 } from "../ui/common/";
 
 export type BaseTemplateProps = PropsWithChildren<{
@@ -224,132 +225,10 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           </div>
         </header>
 
-        <div class="main-grid">
-          <nav class="folding">
-            <a href="/docs" class="title-row">
-              <svg
-                width="91"
-                height="35"
-                viewBox="0 0 91 35"
-                role="img"
-                aria-labelledby="logo-label-nav"
-              >
-                <title id="logo-label-nav">Typst</title>
-                <use href="/assets/images/typst.svg#logo"></use>
-              </svg>
-              <span>ドキュメント日本語版</span>
-            </a>
-            <button class="close">
-              <img
-                alt="Close"
-                src="/assets/icons/16-close-dark.svg"
-                width="16"
-                height="16"
-              />
-            </button>
-            <div class="search">
-              <img
-                src="/assets/icons/16-search-gray.svg"
-                alt="Search"
-                width="16"
-                height="16"
-              />
-              <input type="search" placeholder="検索" id="docs-search" />
-            </div>
-            <ul class="search-results hidden" id="search-results"></ul>
-            <ul>
-              {docs &&
-                docs.map((firstLevel, idx) => (
-                  <>
-                    {firstLevel.part && (
-                      <li class="category">{firstLevel.part}</li>
-                    )}
-                    <li>
-                      <a
-                        href={firstLevel.route}
-                        aria-current={
-                          firstLevel.route === route ? "page" : undefined
-                        }
-                      >
-                        {firstLevel.title}
-                      </a>
-                      {firstLevel.children?.length > 0 && (
-                        <>
-                          <button>
-                            <img
-                              alt="Expand"
-                              src="/assets/icons/16-arrow-right.svg"
-                              width="16"
-                              height="16"
-                            />
-                          </button>
-                          <ul>
-                            {firstLevel.children.map((secondLevel, idx2) => (
-                              <>
-                                {secondLevel.part && (
-                                  <li class="category">{secondLevel.part}</li>
-                                )}
-                                <li>
-                                  <a
-                                    href={secondLevel.route}
-                                    aria-current={
-                                      secondLevel.route === route
-                                        ? "page"
-                                        : undefined
-                                    }
-                                  >
-                                    {secondLevel.title}
-                                  </a>
-                                  {secondLevel.children?.length > 0 && (
-                                    <>
-                                      <button>
-                                        <img
-                                          alt="Expand"
-                                          src="/assets/icons/16-arrow-right.svg"
-                                          width="16"
-                                          height="16"
-                                        />
-                                      </button>
-                                      <ul>
-                                        {secondLevel.children.map(
-                                          (thirdLevel, idx3) => (
-                                            <>
-                                              {thirdLevel.part && (
-                                                <li class="category">
-                                                  {thirdLevel.part}
-                                                </li>
-                                              )}
-                                              <li>
-                                                <a
-                                                  href={thirdLevel.route}
-                                                  aria-current={
-                                                    thirdLevel.route === route
-                                                      ? "page"
-                                                      : undefined
-                                                  }
-                                                >
-                                                  {thirdLevel.title}
-                                                </a>
-                                              </li>
-                                            </>
-                                          ),
-                                        )}
-                                      </ul>
-                                    </>
-                                  )}
-                                </li>
-                              </>
-                            ))}
-                          </ul>
-                        </>
-                      )}
-                    </li>
-                  </>
-                ))}
-            </ul>
-          </nav>
+        <div class="main-grid flex-1 flex bg-gray-50">
+          <SideNavigation docs={docs} currentRoute={route} currentPath={path} />
 
-          <main>
+          <main class="flex-1 px-3.5 py-4">
             <Breadcrumbs path={path} />
 
             {children}

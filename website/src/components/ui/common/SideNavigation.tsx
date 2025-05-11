@@ -1,0 +1,173 @@
+import { ChevronRightIcon } from "../../icons";
+import type { Page } from "../../../types/model";
+
+export type SideNavigationProps = {
+  docs: Page[];
+  currentRoute: string;
+  currentPath: Page[];
+};
+
+export const SideNavigation = ({
+  docs,
+  currentRoute,
+  currentPath,
+}: SideNavigationProps) => {
+  return (
+    <nav class="folding flex-none w-full md:w-64 lg:w-72 bg-white border border-neutral-200/60 rounded-md mr-3.5 sticky top-0 h-screen overflow-auto px-3.5 py-3">
+      <a
+        href="/docs"
+        class="title-row flex items-center p-2 border-b border-gray-100 mb-3"
+      >
+        <div class="flex items-baseline">
+          <span class="text-base font-bold text-teal-600">Typst</span>
+          <span class="text-base font-medium text-gray-500 ml-1">
+            ドキュメント
+          </span>
+          <span class="text-xs text-gray-500  ml-1">日本語版</span>
+        </div>
+      </a>
+      <ul class="space-y-1 text-xs text-neutral-700">
+        {docs &&
+          docs.map((firstLevel, idx) => (
+            <>
+              {firstLevel.part && (
+                <li
+                  key={`part-${idx}`}
+                  class="category py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                >
+                  {firstLevel.part}
+                </li>
+              )}
+              <li
+                key={`first-${idx}`}
+                class="relative"
+                x-data={`{ open: ${
+                  firstLevel.route === currentRoute ||
+                  currentPath.some((p) => p.route === firstLevel.route)
+                } }`}
+              >
+                <a
+                  href={firstLevel.route}
+                  class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors"
+                  aria-current={
+                    firstLevel.route === currentRoute ? "page" : undefined
+                  }
+                >
+                  {firstLevel.title}
+                </a>
+                {firstLevel.children?.length > 0 && (
+                  <>
+                    <button
+                      class="absolute right-2 top-0 h-6 w-6 flex items-center justify-center p-1 rounded-full hover:bg-gray-100"
+                      x-on:click="open = !open"
+                    >
+                      <div
+                        class="w-4 h-4 text-gray-400 transition-transform duration-200"
+                        x-bind:class="open ? 'rotate-90 transform' : ''"
+                      >
+                        <ChevronRightIcon />
+                      </div>
+                    </button>
+                    <ul
+                      class="pl-4 border-l border-gray-100 ml-4 mt-1 space-y-1"
+                      x-show="open"
+                      x-transition:enter="transition ease-out duration-200"
+                      x-transition:enter-start="opacity-0 transform -translate-y-2"
+                      x-transition:enter-end="opacity-100 transform translate-y-0"
+                    >
+                      {firstLevel.children.map((secondLevel, idx2) => (
+                        <>
+                          {secondLevel.part && (
+                            <li
+                              key={`second-part-${idx}-${idx2}`}
+                              class="category py-1 text-xs font-semibold text-gray-500 tracking-wide"
+                            >
+                              {secondLevel.part}
+                            </li>
+                          )}
+                          <li
+                            key={`second-${idx}-${idx2}`}
+                            class="relative"
+                            x-data={`{ open: ${
+                              secondLevel.route === currentRoute ||
+                              currentPath.some(
+                                (p) => p.route === secondLevel.route,
+                              )
+                            } }`}
+                          >
+                            <a
+                              href={secondLevel.route}
+                              class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors"
+                              aria-current={
+                                secondLevel.route === currentRoute
+                                  ? "page"
+                                  : undefined
+                              }
+                            >
+                              {secondLevel.title}
+                            </a>
+                            {secondLevel.children?.length > 0 && (
+                              <>
+                                <button
+                                  class="absolute right-2 top-0 h-6 w-6 flex items-center justify-center p-1 rounded-full hover:bg-gray-100 z-10"
+                                  x-on:click="open = !open"
+                                >
+                                  <div
+                                    class="w-4 h-4 text-gray-400 transition-transform duration-200"
+                                    x-bind:class="open ? 'rotate-90 transform' : ''"
+                                  >
+                                    <ChevronRightIcon />
+                                  </div>
+                                </button>
+                                <ul
+                                  class="pl-4 border-l border-gray-100 ml-4 mt-1 space-y-1"
+                                  x-show="open"
+                                  x-transition:enter="transition ease-out duration-200"
+                                  x-transition:enter-start="opacity-0 transform -translate-y-2"
+                                  x-transition:enter-end="opacity-100 transform translate-y-0"
+                                >
+                                  {secondLevel.children.map(
+                                    (thirdLevel, idx3) => (
+                                      <>
+                                        {thirdLevel.part && (
+                                          <li
+                                            key={`third-part-${idx}-${idx2}-${idx3}`}
+                                            class="category"
+                                          >
+                                            {thirdLevel.part}
+                                          </li>
+                                        )}
+                                        <li
+                                          key={`third-${idx}-${idx2}-${idx3}`}
+                                        >
+                                          <a
+                                            href={thirdLevel.route}
+                                            class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors"
+                                            aria-current={
+                                              thirdLevel.route === currentRoute
+                                                ? "page"
+                                                : undefined
+                                            }
+                                          >
+                                            {thirdLevel.title}
+                                          </a>
+                                        </li>
+                                      </>
+                                    ),
+                                  )}
+                                </ul>
+                              </>
+                            )}
+                          </li>
+                        </>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </li>
+            </>
+          ))}
+      </ul>
+    </nav>
+  );
+};
