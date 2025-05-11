@@ -1,6 +1,11 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
 import type { Page } from "../../types/model";
-import { SiteNoticeBanner, Footer, Breadcrumbs } from "../ui/common/";
+import {
+  SiteNoticeBanner,
+  Footer,
+  Breadcrumbs,
+  TableOfContents,
+} from "../ui/common/";
 
 export type BaseTemplateProps = PropsWithChildren<{
   page: Page;
@@ -397,19 +402,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
             )}
           </main>
 
-          {outline.length > 0 && (
-            <nav id="page-overview">
-              <strong>目次</strong>
-              <ul>
-                {outline.map((item, idx) => (
-                  <li data-assoc={item.id}>
-                    <a href={`#${item.id}`}>{item.name}</a>
-                    <ul></ul>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
+          <TableOfContents outline={outline} />
         </div>
 
         <Footer />
