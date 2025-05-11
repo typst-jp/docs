@@ -21,7 +21,7 @@ export const SiteNoticeBanner = () => {
       x-init="
         setTimeout(()=>{ bannerVisible = true }, bannerVisibleAfter);
       "
-      class="fixed top-0 left-0 w-full h-auto py-2 duration-300 ease-out bg-white shadow-sm sm:py-4"
+      class="fixed z-50 top-0 left-0 w-full h-auto py-2 duration-300 ease-out bg-white shadow-sm sm:py-4"
       x-cloak
     >
       <div class="prose relative flex flex-col sm:flex-row items-start w-full px-3 sm:px-12 mx-auto max-w-7xl flex-wrap">
