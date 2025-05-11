@@ -8,6 +8,12 @@ import {
   SideNavigation,
   Header,
 } from "../ui/common/";
+import {
+  CaretRightCircleIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  InfoCircleIcon,
+} from "../icons";
 
 export type BaseTemplateProps = PropsWithChildren<{
   page: Page;
@@ -79,15 +85,6 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
         />
         <link rel="manifest" href="/assets/site.webmanifest" />
         <link
-          rel="stylesheet"
-          href="/styles/default.css?bust=20230913?d=2023-09-16"
-        />
-        <link
-          rel="stylesheet"
-          href="/styles/docs.css?bust=20230915?d=2023-09-16"
-        />
-        <link rel="stylesheet" href="/styles/custom.css" />
-        <link
           rel="preload"
           href="/assets/fonts/HKGrotesk-Regular.woff2"
           as="font"
@@ -140,74 +137,106 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
         ></script>
       </head>
 
-      <body class="no-js docs has-outline">
+      <body class="no-js docs has-outline min-h-screen flex flex-col">
         <SiteNoticeBanner />
         <Header />
 
-        <div class="main-grid flex-1 flex bg-gray-50">
-          <SideNavigation docs={docs} currentRoute={route} currentPath={path} />
+        <div class="main-grid flex-1 flex bg-white">
+          <div class="container mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 flex">
+            <div class="flex flex-col w-full md:w-64 lg:w-72 mr-4">
+              <SideNavigation
+                docs={docs}
+                currentRoute={route}
+                currentPath={path}
+              />
+            </div>
 
-          <main class="flex-1 px-3.5 py-4">
-            <Breadcrumbs path={path} />
+            <main class="flex-1 flex flex-col px-3.5 py-4 mb-8">
+              <Breadcrumbs path={path} />
 
-            {children}
-
-            {route === "/docs/" ? (
-              <div class="doc-categories">
-                <a class="doc-category" href="/docs/tutorial">
-                  <img
-                    src="/assets/icons/32-tutorial-c.svg"
-                    width="32"
-                    height="32"
-                    alt="Circled play Icon"
-                  />
-                  <strong>チュートリアル</strong>
-                  <p>一歩一歩、Typstの使い方を学びましょう。</p>
-                </a>
-                <a class="doc-category" href="/docs/reference">
-                  <img
-                    src="/assets/icons/32-reference-c.svg"
-                    width="32"
-                    height="32"
-                    alt="Circled information icon"
-                  />
-                  <strong>リファレンス</strong>
-                  <p>
-                    Typstのあらゆる構文、概念、型、関数についての詳細なリファレンスです。
-                  </p>
-                </a>
+              <div class="prose max-w-none w-full mt-6 flex-grow">
+                {children}
               </div>
-            ) : (
-              previousPage &&
-              nextPage && (
-                <div class="page-end-buttons">
-                  <a href={previousPage.route} class="previous">
-                    <img src="/assets/icons/16-arrow-right.svg" alt="←" />
-                    <div>
-                      <span class="page-title">{previousPage.title}</span>
-                      <span class="hint">前に戻る</span>
+
+              {route === "/docs/" ? (
+                <div class="doc-categories grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                  <a
+                    class="doc-category flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"
+                    href="/docs/tutorial"
+                  >
+                    <div class="flex items-center mb-3">
+                      <div class="w-6 h-6 text-gray-800 mr-2">
+                        <CaretRightCircleIcon />
+                      </div>
+                      <strong class="text-base font-semibold text-gray-800">
+                        チュートリアル
+                      </strong>
                     </div>
+                    <p class="text-sm text-gray-600">
+                      一歩一歩、Typstの使い方を学びましょう。
+                    </p>
                   </a>
-                  <a href={nextPage.route} class="next">
-                    <img src="/assets/icons/16-arrow-right.svg" alt="→" />
-                    <div>
-                      <span class="page-title">{nextPage.title}</span>
-                      <span class="hint">次に進む</span>
+                  <a
+                    class="doc-category flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"
+                    href="/docs/reference"
+                  >
+                    <div class="flex items-center mb-3">
+                      <div class="w-6 h-6 text-gray-800 mr-2">
+                        <InfoCircleIcon />
+                      </div>
+                      <strong class="text-base font-semibold text-gray-800">
+                        リファレンス
+                      </strong>
                     </div>
+                    <p class="text-sm text-gray-600">
+                      Typstのあらゆる構文、概念、型、関数についての詳細なリファレンスです。
+                    </p>
                   </a>
                 </div>
-              )
-            )}
-          </main>
+              ) : (
+                previousPage &&
+                nextPage && (
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                    <a
+                      href={previousPage.route}
+                      class="flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"
+                    >
+                      <div class="flex items-center mb-3">
+                        <div class="w-6 h-6 text-gray-400 mr-2">
+                          <ChevronLeftIcon />
+                        </div>
+                        <strong class="text-base font-semibold text-gray-800">
+                          前のページ
+                        </strong>
+                      </div>
+                      <p class="text-sm text-gray-600">{previousPage.title}</p>
+                    </a>
+                    <a
+                      href={nextPage.route}
+                      class="flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"
+                    >
+                      <div class="flex items-center mb-3 justify-between">
+                        <strong class="text-base font-semibold text-gray-800">
+                          次のページ
+                        </strong>
+                        <div class="w-6 h-6 text-gray-400">
+                          <ChevronRightIcon />
+                        </div>
+                      </div>
+                      <p class="text-sm text-gray-600">{nextPage.title}</p>
+                    </a>
+                  </div>
+                )
+              )}
+            </main>
 
-          <TableOfContents outline={outline} />
+            <div class="flex flex-col w-full md:w-60 lg:w-72 ml-4">
+              <TableOfContents outline={outline} />
+            </div>
+          </div>
         </div>
 
         <Footer />
-
-        <script src="/scripts/fuse.basic.min.js"></script>
-        <script src="/scripts/docs.js?bust=20230913"></script>
-        <script src="/scripts/analytics.js" defer></script>
       </body>
     </html>
   );
