@@ -10,7 +10,21 @@ export const SiteNoticeBanner = () => {
       x-data="{
         bannerVisible: false,
         bannerVisibleAfter: 300,
+        checkBannerStatus() {
+          const isBannerHidden = localStorage.getItem('typst-jp-banner-hidden') === 'true';
+          if (!isBannerHidden) {
+            setTimeout(() => {
+              this.bannerVisible = true;
+              this.$el.classList.remove('-translate-y-full');
+            }, this.bannerVisibleAfter);
+          }
+        },
+        hideBanner() {
+          this.bannerVisible = false;
+          localStorage.setItem('typst-jp-banner-hidden', 'true');
+        }
       }"
+      x-init="checkBannerStatus()"
       x-show="bannerVisible"
       x-transition:enter="transition ease-out duration-500"
       x-transition:enter-start="-translate-y-full"
@@ -18,11 +32,7 @@ export const SiteNoticeBanner = () => {
       x-transition:leave="transition ease-in duration-300"
       x-transition:leave-start="translate-y-0"
       x-transition:leave-end="-translate-y-full"
-      x-init="
-        setTimeout(()=>{ bannerVisible = true }, bannerVisibleAfter);
-      "
-      class="fixed z-50 top-0 left-0 w-full h-auto py-2 duration-300 ease-out bg-white shadow-sm sm:py-4"
-      x-cloak
+      class="fixed z-50 top-0 left-0 w-full h-auto py-2 duration-300 ease-out bg-white shadow-sm sm:py-4 -translate-y-full"
     >
       <div class="prose relative flex flex-col sm:flex-row items-start w-full px-3 sm:px-12 mx-auto max-w-7xl flex-wrap">
         <div class="flex flex-col sm:flex-row w-full text-xs leading-6 text-black duration-150 ease-out opacity-80 hover:opacity-100 gap-3">
@@ -95,7 +105,7 @@ export const SiteNoticeBanner = () => {
         </div>
       </div>
       <button
-        x-on:click="bannerVisible=false;"
+        x-on:click="hideBanner()"
         class="absolute top-2 right-4 flex items-center flex-shrink-0 translate-x-1 ease-out duration-150 justify-center w-6 h-6 p-1.5 text-black rounded-full hover:bg-neutral-100"
       >
         <svg
