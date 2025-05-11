@@ -6,6 +6,7 @@ import {
   Breadcrumbs,
   TableOfContents,
   SideNavigation,
+  Header,
 } from "../ui/common/";
 
 export type BaseTemplateProps = PropsWithChildren<{
@@ -141,89 +142,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 
       <body class="no-js docs has-outline">
         <SiteNoticeBanner />
-        <header class="boring">
-          <div>
-            <a href="/docs" class="logo-box">
-              <svg
-                width="91"
-                height="35"
-                viewBox="0 0 91 35"
-                role="img"
-                aria-labelledby="logo-label"
-              >
-                <title id="logo-label">Typst</title>
-                <use href="/assets/images/typst.svg#logo"></use>
-              </svg>
-              <span>ドキュメント日本語版</span>
-            </a>
-            <button class="hamburger">
-              <img
-                alt="Open navigation"
-                src="/assets/icons/16-hamburger-dark.svg"
-                width="16"
-                height="16"
-              />
-            </button>
-            <nav>
-              <ul>
-                <li class="social">
-                  <a
-                    href="https://x.com/mkpoli/status/1802227029447725538"
-                    title="関連ツイート"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      role="img"
-                      aria-labelledby="svg-twitter-label"
-                    >
-                      <title id="svg-twitter-label">Twitter</title>
-                      <use href="/assets/icons/social.svg#twitter"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li class="social">
-                  <a
-                    href="https://discord.gg/9xF7k4aAuH"
-                    title="「くみはんクラブ」Discordサーバー"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      role="img"
-                      aria-labelledby="svg-discord-label"
-                    >
-                      <title id="svg-discord-label">Discord</title>
-                      <use href="/assets/icons/social.svg#discord"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li class="social">
-                  <a
-                    href="https://github.com/typst-jp/typst-jp.github.io"
-                    title="本プロジェクトのGitHubレポジトリ"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      role="img"
-                      aria-labelledby="svg-github-label"
-                    >
-                      <title id="svg-github-label">GitHub</title>
-                      <use href="/assets/icons/social.svg#github"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li class="secondary">
-                  <a href="https://typst.app/">Typst公式サイト</a>
-                </li>
-                <li class="secondary">
-                  <a href="https://typst.app/docs/">Typst公式ドキュメント</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </header>
+        <Header />
 
         <div class="main-grid flex-1 flex bg-gray-50">
           <SideNavigation docs={docs} currentRoute={route} currentPath={path} />

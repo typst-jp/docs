@@ -1,3 +1,4 @@
+export const typstOfficialUrl = "https://typst.app";
 export const typstOfficialDocsUrl = "https://typst.app/docs";
 export const githubOrganizationUrl = "https://github.com/typst-jp";
 export const githubRepositoryUrl =

@@ -1,5 +1,6 @@
 import { ChevronRightIcon } from "../../icons";
 import type { Page } from "../../../types/model";
+import { SiteTitle } from "./SiteTitle";
 
 export type SideNavigationProps = {
   docs: Page[];
@@ -14,18 +15,7 @@ export const SideNavigation = ({
 }: SideNavigationProps) => {
   return (
     <nav class="folding flex-none w-full md:w-64 lg:w-72 bg-white border border-neutral-200/60 rounded-md mr-3.5 sticky top-0 h-screen overflow-auto px-3.5 py-3">
-      <a
-        href="/docs"
-        class="title-row flex items-center p-2 border-b border-gray-100 mb-3"
-      >
-        <div class="flex items-baseline">
-          <span class="text-base font-bold text-teal-600">Typst</span>
-          <span class="text-base font-medium text-gray-500 ml-1">
-            ドキュメント
-          </span>
-          <span class="text-xs text-gray-500  ml-1">日本語版</span>
-        </div>
-      </a>
+      <SiteTitle />
       <ul class="space-y-1 text-xs text-neutral-700">
         {docs &&
           docs.map((firstLevel, idx) => (
