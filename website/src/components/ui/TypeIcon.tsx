@@ -3,6 +3,7 @@ import { FC } from "hono/jsx";
 type TypeIconProps = {
   type: string;
   href?: string;
+  isHeading?: boolean;
 };
 
 const getTypeStyles = (
@@ -51,9 +52,18 @@ const getTypeStyles = (
   );
 };
 
-export const TypeIcon: FC<TypeIconProps> = ({ type, href }) => {
+export const TypeIcon: FC<TypeIconProps> = ({
+  type,
+  href,
+  isHeading = false,
+}) => {
   const styles = getTypeStyles(type);
-  const baseClasses = `pill ${styles.bgColor} ${styles.textColor} rounded-md px-1.5 py-0.5 text-sm font-mono whitespace-nowrap inline-flex items-center mx-0.5`;
+
+  const sizeClasses = isHeading
+    ? "text-3xl px-3 py-1.5"
+    : "text-sm px-1.5 py-0.5";
+
+  const baseClasses = `pill ${styles.bgColor} ${styles.textColor} rounded-md ${sizeClasses} font-mono whitespace-nowrap inline-flex items-center mx-0.5`;
 
   if (href) {
     return (
