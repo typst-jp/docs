@@ -67,7 +67,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/assets/favicon.ico"
+          href="/assets/favicon.png"
         />
         <link
           rel="preload"
