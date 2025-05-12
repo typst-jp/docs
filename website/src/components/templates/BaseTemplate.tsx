@@ -54,6 +54,10 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
         <meta property="og:site_name" content="Typst" />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="" />
+        <meta
+          property="og:image"
+          content="https://typst-jp.github.io/assets/favicon.png"
+        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:site" content="@typstapp" />
