@@ -29,10 +29,12 @@ export const CategoryTemplate: FC<CategoryTemplateProps> = ({
       <ul class="subgridded">
         {page.body.content.items.map((item) => (
           <li>
-            <a href={item.route}>
-              {item.code ? <code>{item.name}</code> : item.name}
-            </a>
-            <span>{item.oneliner}</span>
+            <div>
+              <a href={item.route}>
+                {item.code ? <code>{item.name}</code> : item.name}
+              </a>
+            </div>
+            <div class="pl-4">{item.oneliner}</div>
           </li>
         ))}
       </ul>
