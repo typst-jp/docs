@@ -73,21 +73,29 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           rel="preload"
           href="/assets/fonts/HKGrotesk-Regular.woff2"
           as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/assets/fonts/HKGrotesk-Bold.woff2"
           as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/assets/fonts/HKGrotesk-SemiBold.woff2"
           as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/assets/fonts/CascadiaMono-Regular-Sub.woff2"
           as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
         <link href="/src/styles.css" rel="stylesheet"></link>
         <script
