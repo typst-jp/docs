@@ -54,10 +54,6 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
         <meta property="og:site_name" content="Typst" />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="" />
-        <meta
-          property="og:image"
-          content="https://typst-jp.github.io/assets/social.png"
-        />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:site" content="@typstapp" />
@@ -73,17 +69,6 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           sizes="32x32"
           href="/assets/favicon.ico"
         />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/assets/apple-touch-icon.png"
-        />
-        <link
-          rel="mask-icon"
-          href="/assets/safari-pinned-tab.svg"
-          color="#239dad"
-        />
-        <link rel="manifest" href="/assets/site.webmanifest" />
         <link
           rel="preload"
           href="/assets/fonts/HKGrotesk-Regular.woff2"
@@ -103,32 +88,6 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
           rel="preload"
           href="/assets/fonts/CascadiaMono-Regular-Sub.woff2"
           as="font"
-        />
-        <link rel="preload" href="/assets/images/blur.webp" as="image" />
-        {route === "/docs/packages/" && (
-          <link
-            rel="preload"
-            href="https://packages.typst.org/preview/index.json"
-            as="fetch"
-            crossOrigin="anonymous"
-          />
-        )}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-          document.documentElement.className = document.documentElement.className.replace("no-js", "js");
-          document.addEventListener("DOMContentLoaded", (() => {
-            const e = document.cookie.split("; ").find((e => e.startsWith("INSECURE_SIGNED_IN=")))?.split("=")[1].toLowerCase();
-            if ("1" === e || "true" === e || "yes" === e) {
-              document.documentElement.classList.add("signed-in");
-              const e = document.querySelector("header nav a.nav-btn"),
-                    t = document.querySelector("header nav a.sign-in");
-              e && (e.innerHTML = "Go to app", e.setAttribute("href", "/app/")),
-              t && (t.innerHTML = "Sign out", t.setAttribute("href", "https://api.typst.app/v1/auth/logout"))
-            }
-          }))
-        `,
-          }}
         />
         <link href="/src/styles.css" rel="stylesheet"></link>
         <script
