@@ -2,6 +2,7 @@ import { FC } from "hono/jsx";
 import type { Func } from "../../types/model";
 import { FunctionDefinition } from "./FunctionDefinition";
 import { FunctionParameters } from "./FunctionParameters";
+import { ChevronRightIcon } from "../icons";
 
 type FunctionDisplayProps = {
   func: Func;
@@ -26,15 +27,11 @@ export const FunctionDisplay: FC<FunctionDisplayProps> = ({
       </div>
 
       {func.example && isExampleFolding && (
-        <details class="my-4 folding-example">
+        <details class="my-4 folding-example group">
           <summary class="flex items-center gap-1 text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-800">
-            <img
-              src="/assets/icons/16-arrow-right.svg"
-              alt=""
-              width="16"
-              height="16"
-              class="transform transition-transform duration-200 group-open:rotate-90"
-            />
+            <div class="w-4 h-4 text-gray-400 transform transition-transform duration-200 group-open:rotate-90">
+              <ChevronRightIcon />
+            </div>
             例を表示
           </summary>
           <div
