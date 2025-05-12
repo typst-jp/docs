@@ -4,7 +4,9 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"check": "biome check .",
+		"check:write": "biome check --write ."
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
