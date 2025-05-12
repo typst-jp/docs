@@ -3,65 +3,66 @@
 
 /* Global font family */
 @font-face {
-  font-family: "HK Grotesk";
-  src: url("/assets/fonts/HKGrotesk-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+	font-family: "HK Grotesk";
+	src: url("/assets/fonts/HKGrotesk-Regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: "HK Grotesk";
-  src: url("/assets/fonts/HKGrotesk-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
+	font-family: "HK Grotesk";
+	src: url("/assets/fonts/HKGrotesk-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: "HK Grotesk";
-  src: url("/assets/fonts/HKGrotesk-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+	font-family: "HK Grotesk";
+	src: url("/assets/fonts/HKGrotesk-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: "Cascadia Mono";
-  src: url("/assets/fonts/CascadiaMono-Regular-Sub.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+	font-family: "Cascadia Mono";
+	src: url("/assets/fonts/CascadiaMono-Regular-Sub.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
 body {
-  font-family: "HK Grotesk", Inter, "BIZ UDGothic", "BIZ UDPGothic", system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	font-family:
+		"HK Grotesk", Inter, "BIZ UDGothic", "BIZ UDPGothic", system-ui,
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+		Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 code,
 pre,
 kbd,
 samp {
-  font-family: "Cascadia Mono", SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+	font-family: "Cascadia Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
 }
 
 /* Information box */
 .info-box {
-  @apply my-8 rounded-md border border-cyan-200 bg-cyan-50 overflow-hidden relative;
+	@apply my-8 rounded-md border border-cyan-200 bg-cyan-50 overflow-hidden relative;
 }
 
 .info-box > * {
-  @apply px-6;
+	@apply px-6;
 }
 
 .info-box::before {
-  content: "情報";
-  @apply absolute top-0 left-0 bg-cyan-200 text-cyan-800 text-xs font-bold py-1 px-3 rounded-br;
+	content: "情報";
+	@apply absolute top-0 left-0 bg-cyan-200 text-cyan-800 text-xs font-bold py-1 px-3 rounded-br;
 }
 
 .info-box > *:first-child {
-  @apply pt-4;
+	@apply pt-4;
 }

@@ -1,4 +1,4 @@
-import { Func } from "../../types/model";
+import type { Func } from "../../types/model";
 
 /**
  * pathを連結する
@@ -7,5 +7,5 @@ import { Func } from "../../types/model";
  * @returns - 連結されたpath
  */
 export const genPath = (item: Func): string => {
-  return item.path.map((s) => s + ".").join("");
+	return item.path.map((s) => s + ".").join("");
 };

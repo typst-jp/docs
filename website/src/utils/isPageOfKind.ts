@@ -8,7 +8,7 @@ import type { Body, Page } from "../types/model";
  * @returns - ページが指定された種類であるかどうか
  **/
 export const isPageOfKind = <K extends Body["kind"]>(
-  page: Page,
-  kind: K,
+	page: Page,
+	kind: K,
 ): page is Page & { body: Extract<Body, { kind: K }> } =>
-  page.body.kind === kind;
+	page.body.kind === kind;
