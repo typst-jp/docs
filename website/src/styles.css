@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Global font family */
 @font-face {
   font-family: "HK Grotesk";
   src: url("/assets/fonts/HKGrotesk-Regular.woff2") format("woff2");
@@ -45,4 +46,22 @@ kbd,
 samp {
   font-family: "Cascadia Mono", SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+}
+
+/* Information box */
+.info-box {
+  @apply my-8 rounded-md border border-cyan-200 bg-cyan-50 overflow-hidden relative;
+}
+
+.info-box > * {
+  @apply px-6;
+}
+
+.info-box::before {
+  content: "情報";
+  @apply absolute top-0 left-0 bg-cyan-200 text-cyan-800 text-xs font-bold py-1 px-3 rounded-br;
+}
+
+.info-box > *:first-child {
+  @apply pt-4;
 }
