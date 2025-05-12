@@ -7,6 +7,7 @@ import {
   FunctionDefinition,
   FunctionParameters,
 } from "../ui";
+import { DeprecationWarning } from "../ui/DeprecationWarning";
 
 export type FuncTemplateProps = Omit<BaseTemplateProps, "page"> & {
   page: Omit<Page, "body"> & {
@@ -31,78 +32,60 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
       previousPage={previousPage}
       nextPage={nextPage}
     >
-      <h1 id="summary">
+      <h1 id="summary" class="flex items-center gap-2 mb-6">
         <code>{content.name}</code>
-        <small>
-          {content.element && (
-            <Tooltip
-              name="Element"
-              desc="Element functions can be customized with <code>set</code> and <code>show</code> rules."
-            />
-          )}
-          {content.contextual && (
-            <Tooltip
-              name="Contextual"
-              desc="Contextual functions can only be used when the context is known"
-            />
-          )}
+        <small class="flex items-center gap-1">
+          {content.element && <Tooltip kind="element" />}
+          {content.contextual && <Tooltip kind="contextual" />}
         </small>
-        {content.deprecation && (
-          <small class="deprecation">
-            <div class="tooltip-context">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                tabIndex={0}
-                role="img"
-                aria-labelledby={`${content.name}-deprecation-tooltip`}
-              >
-                <title id={`${content.name}-deprecation-tooltip`}>
-                  Warning
-                </title>
-                <use href="/assets/icons/16-warn.svg#icon"></use>
-              </svg>
-            </div>
-            <span>
-              <span>{content.deprecation}</span>
-            </span>
-          </small>
-        )}
       </h1>
 
-      <div dangerouslySetInnerHTML={{ __html: content.details }} />
-
-      <h2 id="parameters">
-        <Tooltip
-          name="引数"
-          desc="Parameters are the inputs to a function. They are specified in parentheses after the function name."
-          prefix="parameters"
-        />
-      </h2>
-
-      <FunctionDefinition func={content} prefix={content.name} />
-
-      {content.example && (
-        <div dangerouslySetInnerHTML={{ __html: content.example }} />
+      {content.deprecation && (
+        <div className="mt-2">
+          <DeprecationWarning message={content.deprecation} />
+        </div>
       )}
 
-      <FunctionParameters func={content} prefix={content.name} />
+      <div
+        class="my-4 text-gray-700 [&_img]:mx-auto [&_img]:block [&_img]:max-w-full"
+        dangerouslySetInnerHTML={{ __html: content.details }}
+      />
+
+      <h2 id="parameters" class="flex items-baseline gap-1">
+        引数
+        <Tooltip kind="parameters" />
+      </h2>
+
+      <div class="mb-6">
+        <FunctionDefinition func={content} prefix={content.name} />
+      </div>
+
+      {content.example && (
+        <div
+          class="my-6 bg-gray-50 p-4 rounded-md border border-gray-200"
+          dangerouslySetInnerHTML={{ __html: content.example }}
+        />
+      )}
+
+      <div class="my-6">
+        <FunctionParameters func={content} prefix={content.name} />
+      </div>
 
       {content.scope.length > 0 && (
-        <>
-          <h2 id="definitions">
-            <Tooltip
-              name="定義"
-              desc="Functions and types and can have associated definitions. These are accessed by specifying the function or type, followed by a period, and then the definition's name."
-              prefix="definitions"
-            />
+        <div class="mt-8">
+          <h2 id="definitions" class="flex items-baseline gap-1">
+            定義
+            <Tooltip kind="definitions" />
           </h2>
 
           {content.scope.map((method, index) => (
-            <div>
-              <h3 id={`definitions-${method.name}`} class="method-head">
+            <div class="mb-8 pb-6 border-b border-gray-100 last:border-0">
+              <h3
+                id={`definitions-${method.name}`}
+                class="method-head mb-3 flex items-center gap-2"
+              >
                 <code
+                  class="text-base font-medium"
                   style={
                     method.deprecation
                       ? { textDecoration: "line-through" }
@@ -112,55 +95,27 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
                   {method.name}
                 </code>
 
-                <small>
-                  {method.element && (
-                    <Tooltip
-                      name="Element"
-                      desc="Element functions can be customized with <code>set</code> and <code>show</code> rules."
-                    />
-                  )}
-                  {method.contextual && (
-                    <Tooltip
-                      name="Contextual"
-                      desc="Contextual functions can only be used when the context is known"
-                    />
-                  )}
+                <small class="flex items-center">
+                  {method.element && <Tooltip kind="element" />}
+                  {method.contextual && <Tooltip kind="contextual" />}
                 </small>
-
-                {/* 非推奨表示 */}
-                {method.deprecation && (
-                  <small class="deprecation">
-                    <div class="tooltip-context">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        tabIndex={0}
-                        role="img"
-                        aria-labelledby={`definitions-${method.name}-deprecation-tooltip`}
-                      >
-                        <title
-                          id={`definitions-${method.name}-deprecation-tooltip`}
-                        >
-                          Warning
-                        </title>
-                        <use href="/assets/icons/16-warn.svg#icon"></use>
-                      </svg>
-                    </div>
-                    <span>
-                      <span>{method.deprecation}</span>
-                    </span>
-                  </small>
-                )}
               </h3>
 
-              <FunctionDisplay
-                func={method}
-                prefix={`definitions-${method.name}`}
-              />
+              {method.deprecation && (
+                <div className="mt-1">
+                  <DeprecationWarning message={method.deprecation} />
+                </div>
+              )}
+
+              <div class="pl-2">
+                <FunctionDisplay
+                  func={method}
+                  prefix={`definitions-${method.name}`}
+                />
+              </div>
             </div>
           ))}
-        </>
+        </div>
       )}
     </BaseTemplate>
   );

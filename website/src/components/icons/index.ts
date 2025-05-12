@@ -3,8 +3,10 @@
 export { HomeIcon } from "./HomeIcon";
 export { CaretRightCircleIcon } from "./CaretRightCircleIcon";
 export { InfoCircleIcon } from "./InfoCircleIcon";
+export { HelpCircleIcon } from "./HelpCircleIcon";
 export { ChevronLeftIcon } from "./ChevronLeftIcon";
 export { ChevronRightIcon } from "./ChevronRightIcon";
+export { AlertTriangleIcon } from "./AlertTriangleIcon";
 
 // Simple Icons
 // https://simpleicons.org/
