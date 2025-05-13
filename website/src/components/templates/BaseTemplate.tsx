@@ -102,7 +102,12 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
-				<link href="/src/styles.css" rel="stylesheet" />
+				<link
+					href={
+						import.meta.env.DEV ? "/src/globals.css" : "/assets/globals.css"
+					}
+					rel="stylesheet"
+				/>
 				<script
 					defer
 					src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"

@@ -28,4 +28,12 @@ export default defineConfig({
 			],
 		}),
 	],
+	build: {
+		rollupOptions: {
+			input: ["src/globals.css"],
+			output: {
+				assetFileNames: "assets/[name].[ext]",
+			},
+		},
+	},
 });
