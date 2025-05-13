@@ -1,3 +1,6 @@
+import { version } from "../package.json";
+
+export { version };
 export const typstOfficialUrl = "https://typst.app";
 export const typstOfficialDocsUrl = "https://typst.app/docs";
 export const githubOrganizationUrl = "https://github.com/typst-jp";
