@@ -4,6 +4,7 @@ import {
 	CaretRightCircleIcon,
 	ChevronLeftIcon,
 	ChevronRightIcon,
+	CloseIcon,
 	InfoCircleIcon,
 } from "../icons";
 import {
@@ -108,13 +109,52 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				/>
 			</head>
 
-			<body class="no-js docs has-outline min-h-screen flex flex-col">
+			<body
+				class="no-js docs has-outline min-h-screen flex flex-col"
+				x-data="{ sidebarOpen: false }"
+			>
 				<SiteNoticeBanner />
 				<Header />
 
-				<div class="main-grid flex-1 flex bg-white">
-					<div class="container mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 flex">
-						<div class="flex flex-col w-full md:w-64 lg:w-72 mr-4">
+				<div class="main-grid flex-1 flex bg-white relative">
+					<div
+						class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-opacity duration-300"
+						x-show="sidebarOpen"
+						x-cloak
+						x-transition:enter="ease-out duration-300"
+						x-transition:enter-start="opacity-0"
+						x-transition:enter-end="opacity-100"
+						x-transition:leave="ease-in duration-200"
+						x-transition:leave-start="opacity-100"
+						x-transition:leave-end="opacity-0"
+						x-on:click="sidebarOpen = false"
+					/>
+					<div class="container mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 flex relative">
+						<div
+							x-cloak
+							class="fixed inset-y-0 left-0 w-64 bg-white shadow-xl z-30 transform transition-transform duration-300 ease-in-out lg:hidden"
+							x-bind:class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+						>
+							<div class="flex justify-end p-4 lg:hidden">
+								<button
+									type="button"
+									class="text-gray-600"
+									x-on:click="sidebarOpen = false"
+									aria-label="メニューを閉じる"
+								>
+									<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
+										<CloseIcon />
+									</div>
+								</button>
+							</div>
+							<SideNavigation
+								docs={docs}
+								currentRoute={route}
+								currentPath={path}
+							/>
+						</div>
+
+						<div class="hidden lg:flex lg:flex-col lg:w-64 lg:mr-4">
 							<SideNavigation
 								docs={docs}
 								currentRoute={route}
@@ -201,7 +241,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 							)}
 						</main>
 
-						<div class="flex flex-col w-full md:w-60 lg:w-72 ml-4">
+						<div class="flex-col w-full md:w-60 lg:w-72 ml-4 hidden xl:block">
 							<TableOfContents outline={outline} />
 						</div>
 					</div>

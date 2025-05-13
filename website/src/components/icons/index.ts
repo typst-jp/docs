@@ -7,6 +7,8 @@ export { HelpCircleIcon } from "./HelpCircleIcon";
 export { ChevronLeftIcon } from "./ChevronLeftIcon";
 export { ChevronRightIcon } from "./ChevronRightIcon";
 export { AlertTriangleIcon } from "./AlertTriangleIcon";
+export { MenuIcon } from "./MenuIcon";
+export { CloseIcon } from "./CloseIcon";
 
 // Simple Icons
 // https://simpleicons.org/
