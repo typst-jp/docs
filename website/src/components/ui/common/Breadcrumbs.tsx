@@ -8,7 +8,7 @@ export type BreadcrumbsProps = {
 export const Breadcrumbs = ({ path }: BreadcrumbsProps) => {
 	return (
 		<nav class="flex justify-between px-3.5 py-1 border border-neutral-200/60 rounded-md">
-			<ol class="inline-flex items-center mb-3 space-x-1 text-sm text-gray-600 sm:mb-0">
+			<ol class="inline-flex flex-wrap items-center space-x-1 text-sm text-gray-600">
 				<li class="flex items-center h-full">
 					<a href="/docs/" class="py-1 hover:text-gray-800 transition-colors">
 						<div class="w-4 h-4">
