@@ -10,6 +10,7 @@ export const ChevronLeftIcon = () => {
 			stroke-linejoin="round"
 			class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
 		>
+			<title>左矢印アイコン</title>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path d="M15 6l-6 6l6 6" />
 		</svg>

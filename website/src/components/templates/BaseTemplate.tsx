@@ -101,11 +101,11 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
-				<link href="/src/styles.css" rel="stylesheet"></link>
+				<link href="/src/styles.css" rel="stylesheet" />
 				<script
 					defer
 					src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
-				></script>
+				/>
 			</head>
 
 			<body class="no-js docs has-outline min-h-screen flex flex-col">

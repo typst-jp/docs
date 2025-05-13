@@ -17,7 +17,10 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 	return (
 		<div class="space-y-6">
 			{func.params.map((param, index) => (
-				<div class="bg-gray-50 rounded-md p-4 border border-gray-100">
+				<div
+					key={param.name}
+					class="bg-gray-50 rounded-md p-4 border border-gray-100"
+				>
 					<h4
 						id={`${prefix}-${func.name}-parameters-${param.name}`}
 						class="flex flex-wrap items-center gap-2 mb-3"
@@ -29,6 +32,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 									const href = type2href(t);
 									return (
 										<TypeIcon
+											key={t}
 											type={t}
 											href={href ? `/docs/reference/${href}` : undefined}
 										/>
@@ -55,7 +59,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 							</h5>
 							<ul class="type-args space-y-2 pl-4">
 								{param.strings.map((string) => (
-									<li>
+									<li key={string.string}>
 										<div class="break-box">
 											<div class="mb-1">
 												<code class="text-gray-800">{string.string}</code>

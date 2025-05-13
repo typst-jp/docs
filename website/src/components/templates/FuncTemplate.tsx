@@ -79,7 +79,10 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 					</h2>
 
 					{content.scope.map((method, index) => (
-						<div class="mb-8 pb-6 border-b border-gray-100 last:border-0">
+						<div
+							key={method.name}
+							class="mb-8 pb-6 border-b border-gray-100 last:border-0"
+						>
 							<h3
 								id={`definitions-${method.name}`}
 								class="method-head mb-3 flex items-center gap-2"

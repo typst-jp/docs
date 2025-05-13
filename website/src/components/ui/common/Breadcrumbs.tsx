@@ -17,7 +17,7 @@ export const Breadcrumbs = ({ path }: BreadcrumbsProps) => {
 					</a>
 				</li>
 				{path.map((item, idx) => (
-					<>
+					<div key={item.route}>
 						<div class="w-4 h-4 text-gray-400">
 							<ChevronRightIcon />
 						</div>
@@ -35,7 +35,7 @@ export const Breadcrumbs = ({ path }: BreadcrumbsProps) => {
 								</a>
 							)}
 						</li>
-					</>
+					</div>
 				))}
 			</ol>
 		</nav>

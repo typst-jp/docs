@@ -28,7 +28,7 @@ export const CategoryTemplate: FC<CategoryTemplateProps> = ({
 			<h2 id="definitions">定義</h2>
 			<ul class="subgridded">
 				{page.body.content.items.map((item) => (
-					<li>
+					<li key={item.route}>
 						<div>
 							<a href={item.route}>
 								{item.code ? <code>{item.name}</code> : item.name}

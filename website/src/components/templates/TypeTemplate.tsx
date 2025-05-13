@@ -57,7 +57,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 					</h2>
 
 					{content.scope.map((method, index) => (
-						<div>
+						<div key={method.name}>
 							<h3
 								id={`definitions-${method.name}`}
 								class="method-head flex items-center gap-2 mb-3"

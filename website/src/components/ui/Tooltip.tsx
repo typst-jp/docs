@@ -106,22 +106,21 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 				</div>
 			</div>
 		);
-	} else {
-		return (
-			<div class="tooltip-context relative group inline-flex">
-				<div class="w-4 h-4">
-					<HelpCircleIcon />
-				</div>
-				<div
-					role="tooltip"
-					tabIndex={-1}
-					class="absolute invisible opacity-0 group-hover:visible group-hover:opacity-100
+	}
+	return (
+		<div class="tooltip-context relative group inline-flex">
+			<div class="w-4 h-4">
+				<HelpCircleIcon />
+			</div>
+			<div
+				role="tooltip"
+				tabIndex={-1}
+				class="absolute invisible opacity-0 group-hover:visible group-hover:opacity-100
                 transition-opacity duration-200 bg-gray-900 text-white p-2 rounded shadow-lg
                 text-xs z-50 top-full mt-1 -left-4 w-64"
-				>
-					<div dangerouslySetInnerHTML={{ __html: content.desc }} />
-				</div>
+			>
+				<div dangerouslySetInnerHTML={{ __html: content.desc }} />
 			</div>
-		);
-	}
+		</div>
+	);
 };

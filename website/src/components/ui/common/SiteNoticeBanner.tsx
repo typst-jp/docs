@@ -43,6 +43,7 @@ export const SiteNoticeBanner = () => {
 							fill="none"
 							stroke="currentColor"
 						>
+							<title>Warning</title>
 							<path
 								d="M12 3L2 21h20L12 3z"
 								stroke="currentColor"
@@ -70,7 +71,7 @@ export const SiteNoticeBanner = () => {
 						<strong>注意 / Warning</strong>
 					</span>
 					<span class="hidden sm:flex items-center">
-						<span class="inline-block w-px h-12 bg-neutral-200 mx-3"></span>
+						<span class="inline-block w-px h-12 bg-neutral-200 mx-3" />
 					</span>
 					<span class="block flex-1 pt-1 pb-2 leading-normal sm:inline sm:pt-0 sm:pb-0">
 						当サイトは、
@@ -105,6 +106,7 @@ export const SiteNoticeBanner = () => {
 				</div>
 			</div>
 			<button
+				type="button"
 				x-on:click="hideBanner()"
 				class="absolute top-2 right-4 flex items-center flex-shrink-0 translate-x-1 ease-out duration-150 justify-center w-6 h-6 p-1.5 text-black rounded-full hover:bg-neutral-100"
 			>
@@ -116,6 +118,7 @@ export const SiteNoticeBanner = () => {
 					stroke="currentColor"
 					class="w-full h-full"
 				>
+					<title>Close</title>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"

@@ -45,19 +45,24 @@ flattenedPages.forEach((page, pageIndex) => {
 	app.get(page.route, (c) => {
 		if (isPageOfKind(page, "html")) {
 			return c.html(<HtmlTemplate page={page} {...commonProps} />);
-		} else if (isPageOfKind(page, "category")) {
-			return c.html(<CategoryTemplate page={page} {...commonProps} />);
-		} else if (isPageOfKind(page, "func")) {
-			return c.html(<FuncTemplate page={page} {...commonProps} />);
-		} else if (isPageOfKind(page, "group")) {
-			return c.html(<GroupTemplate page={page} {...commonProps} />);
-		} else if (isPageOfKind(page, "type")) {
-			return c.html(<TypeTemplate page={page} {...commonProps} />);
-		} else if (isPageOfKind(page, "symbols")) {
-			return c.html(<SymbolsTemplate page={page} {...commonProps} />);
-		} else {
-			return c.notFound();
 		}
+		if (isPageOfKind(page, "category")) {
+			return c.html(<CategoryTemplate page={page} {...commonProps} />);
+		}
+		if (isPageOfKind(page, "func")) {
+			return c.html(<FuncTemplate page={page} {...commonProps} />);
+		}
+		if (isPageOfKind(page, "group")) {
+			return c.html(<GroupTemplate page={page} {...commonProps} />);
+		}
+		if (isPageOfKind(page, "type")) {
+			return c.html(<TypeTemplate page={page} {...commonProps} />);
+		}
+		if (isPageOfKind(page, "symbols")) {
+			return c.html(<SymbolsTemplate page={page} {...commonProps} />);
+		}
+
+		return c.notFound();
 	});
 });
 

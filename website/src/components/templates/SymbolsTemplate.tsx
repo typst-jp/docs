@@ -12,7 +12,7 @@ export const SymbolsTemplate: FC<SymbolsTemplateProps> = ({ page }) => {
 	const redirectUrl = `https://typst.app${page.route}`;
 
 	return (
-		<html>
+		<html lang="ja">
 			<head>
 				<meta httpEquiv="refresh" content={`0;url=${redirectUrl}`} />
 			</head>

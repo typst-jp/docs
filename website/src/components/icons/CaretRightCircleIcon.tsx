@@ -10,6 +10,7 @@ export const CaretRightCircleIcon = () => {
 			stroke-linejoin="round"
 			class="icon icon-tabler icons-tabler-outline icon-tabler-circle-caret-right"
 		>
+			<title>再生アイコン</title>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path d="M15 12l-4 -4v8z" />
 			<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />

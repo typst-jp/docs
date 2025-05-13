@@ -21,7 +21,10 @@ export const FunctionDefinition: FC<FunctionDefinitionProps> = ({
 				<span class="text-gray-700">(</span>
 				<div class="arguments pl-4 md:pl-6 flex flex-col">
 					{func.params.map((param, index) => (
-						<div class="overview-param flex flex-row items-center py-0.5">
+						<div
+							key={param.name}
+							class="overview-param flex flex-row items-center py-0.5"
+						>
 							{!param.positional && (
 								<div class="flex-shrink-0">
 									<a
@@ -38,6 +41,7 @@ export const FunctionDefinition: FC<FunctionDefinitionProps> = ({
 									const href = type2href(t);
 									return (
 										<TypeIcon
+											key={t}
 											type={t}
 											href={href ? `/docs/reference/${href}` : undefined}
 										/>
@@ -61,6 +65,7 @@ export const FunctionDefinition: FC<FunctionDefinitionProps> = ({
 								return (
 									<>
 										<TypeIcon
+											key={ret}
 											type={ret}
 											href={href ? `/docs/reference/${href}` : undefined}
 										/>

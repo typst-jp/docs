@@ -46,13 +46,15 @@ export const type2href = (parameterType: string): string | null => {
 
 	if (foundationSet.has(parameterType)) {
 		return `foundations/${parameterType}`;
-	} else if (layoutSet.has(parameterType)) {
-		return `layout/${parameterType}`;
-	} else if (visualizeSet.has(parameterType)) {
-		return `visualize/${parameterType}`;
-	} else if (introspectionSet.has(parameterType)) {
-		return `introspection/${parameterType}`;
-	} else {
-		return null;
 	}
+	if (layoutSet.has(parameterType)) {
+		return `layout/${parameterType}`;
+	}
+	if (visualizeSet.has(parameterType)) {
+		return `visualize/${parameterType}`;
+	}
+	if (introspectionSet.has(parameterType)) {
+		return `introspection/${parameterType}`;
+	}
+	return null;
 };
