@@ -19,13 +19,7 @@ export default defineConfig({
 		ssg(),
 		devServer({
 			entry: "src/index.tsx",
-			exclude: [
-				...defaultOptions.exclude,
-				/^\/assets\/.+/,
-				/^\/scripts\/.+/,
-				/^\/styles\/.+/,
-				/^\/index\.html$/,
-			],
+			exclude: [...defaultOptions.exclude, /^\/assets\/.+/, /^\/index\.html$/],
 		}),
 	],
 	build: {
