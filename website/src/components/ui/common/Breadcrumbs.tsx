@@ -17,25 +17,23 @@ export const Breadcrumbs = ({ path }: BreadcrumbsProps) => {
 					</a>
 				</li>
 				{path.map((item, idx) => (
-					<div key={item.route}>
+					<li key={item.route} class="flex items-center">
 						<div class="w-4 h-4 text-gray-400">
 							<ChevronRightIcon />
 						</div>
-						<li>
-							{idx === path.length - 1 ? (
-								<span class="inline-flex items-center py-1 font-semibold text-gray-800 cursor-default">
-									{item.title}
-								</span>
-							) : (
-								<a
-									href={item.route}
-									class="inline-flex items-center py-1 hover:text-gray-800 transition-colors focus:outline-none"
-								>
-									{item.title}
-								</a>
-							)}
-						</li>
-					</div>
+						{idx === path.length - 1 ? (
+							<span class="inline-flex items-center py-1 font-semibold text-gray-800 cursor-default">
+								{item.title}
+							</span>
+						) : (
+							<a
+								href={item.route}
+								class="inline-flex items-center py-1 hover:text-gray-800 transition-colors focus:outline-none"
+							>
+								{item.title}
+							</a>
+						)}
+					</li>
 				))}
 			</ol>
 		</nav>
