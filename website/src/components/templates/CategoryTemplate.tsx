@@ -1,5 +1,6 @@
 import type { FC } from "hono/jsx";
 import type { CategoryBody, Page } from "../../types/model";
+import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
 
 export type CategoryTemplateProps = Omit<BaseTemplateProps, "page"> & {
@@ -24,7 +25,7 @@ export const CategoryTemplate: FC<CategoryTemplateProps> = ({
 			nextPage={nextPage}
 		>
 			<h1 id="summary">{page.body.content.name}</h1>
-			<div dangerouslySetInnerHTML={{ __html: page.body.content.details }} />
+			<HtmlContent html={page.body.content.details} />
 			<h2 id="definitions">定義</h2>
 			<ul class="subgridded">
 				{page.body.content.items.map((item) => (

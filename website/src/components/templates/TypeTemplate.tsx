@@ -1,6 +1,7 @@
 import type { FC } from "hono/jsx";
 import type { Page, TypeBody } from "../../types/model";
 import { FunctionDisplay, Tooltip } from "../ui";
+import { HtmlContent } from "../ui/HtmlContent";
 import { TypeIcon } from "../ui/TypeIcon";
 import { type2href } from "../ui/type2href";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
@@ -32,7 +33,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 				<TypeIcon type={content.name} isHeading={true} />
 			</h1>
 
-			<div dangerouslySetInnerHTML={{ __html: content.details }} />
+			<HtmlContent html={content.details} />
 
 			{content.constructor && (
 				<>

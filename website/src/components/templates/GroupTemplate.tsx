@@ -6,6 +6,7 @@ import {
 	FunctionParameters,
 	Tooltip,
 } from "../ui";
+import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
 
 export type GroupTemplateProps = Omit<BaseTemplateProps, "page"> & {
@@ -32,7 +33,7 @@ export const GroupTemplate: FC<GroupTemplateProps> = ({
 			nextPage={nextPage}
 		>
 			<h1 id="summary">{content.title}</h1>
-			<div dangerouslySetInnerHTML={{ __html: content.details }} />
+			<HtmlContent html={content.details} />
 
 			{content.functions.length > 0 && (
 				<>

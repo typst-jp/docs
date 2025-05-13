@@ -1,5 +1,6 @@
 import type { FC } from "hono/jsx";
 import { HelpCircleIcon } from "../icons";
+import { HtmlContent } from "./HtmlContent";
 
 type TooltipProps = {
 	kind:
@@ -101,7 +102,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
                   transition-opacity duration-200 bg-gray-900 text-white p-2 rounded shadow-lg
                   text-xs z-50 top-full mt-1 -left-4 w-64"
 					>
-						<div dangerouslySetInnerHTML={{ __html: content.desc }} />
+						<HtmlContent html={content.desc} />
 					</div>
 				</div>
 			</div>
@@ -119,7 +120,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
                 transition-opacity duration-200 bg-gray-900 text-white p-2 rounded shadow-lg
                 text-xs z-50 top-full mt-1 -left-4 w-64"
 			>
-				<div dangerouslySetInnerHTML={{ __html: content.desc }} />
+				<HtmlContent html={content.desc} />
 			</div>
 		</div>
 	);

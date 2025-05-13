@@ -7,6 +7,7 @@ import {
 	Tooltip,
 } from "../ui";
 import { DeprecationWarning } from "../ui/DeprecationWarning";
+import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
 
 export type FuncTemplateProps = Omit<BaseTemplateProps, "page"> & {
@@ -46,10 +47,9 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 				</div>
 			)}
 
-			<div
-				class="my-4 text-gray-700 [&_img]:mx-auto [&_img]:block [&_img]:max-w-full"
-				dangerouslySetInnerHTML={{ __html: content.details }}
-			/>
+			<div class="my-4 text-gray-700">
+				<HtmlContent html={content.details} />
+			</div>
 
 			<h2 id="parameters" class="flex items-baseline gap-1">
 				引数
@@ -61,10 +61,9 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 			</div>
 
 			{content.example && (
-				<div
-					class="my-6 bg-gray-50 p-4 rounded-md border border-gray-200"
-					dangerouslySetInnerHTML={{ __html: content.example }}
-				/>
+				<div class="my-6 bg-gray-50 p-4 rounded-md border border-gray-200">
+					<HtmlContent html={content.example} />
+				</div>
 			)}
 
 			<div class="my-6">

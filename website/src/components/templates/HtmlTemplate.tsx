@@ -1,5 +1,6 @@
 import type { FC } from "hono/jsx";
 import type { HtmlBody, Page } from "../../types/model";
+import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
 
 export type HtmlTemplateProps = Omit<BaseTemplateProps, "page"> & {
@@ -23,7 +24,7 @@ export const HtmlTemplate: FC<HtmlTemplateProps> = ({
 			previousPage={previousPage}
 			nextPage={nextPage}
 		>
-			<div dangerouslySetInnerHTML={{ __html: page.body.content as string }} />
+			<HtmlContent html={page.body.content} />
 		</BaseTemplate>
 	);
 };

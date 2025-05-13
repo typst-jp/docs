@@ -3,6 +3,7 @@ import type { Func } from "../../types/model";
 import { ChevronRightIcon } from "../icons";
 import { FunctionDefinition } from "./FunctionDefinition";
 import { FunctionParameters } from "./FunctionParameters";
+import { HtmlContent } from "./HtmlContent";
 
 type FunctionDisplayProps = {
 	func: Func;
@@ -17,10 +18,7 @@ export const FunctionDisplay: FC<FunctionDisplayProps> = ({
 }) => {
 	return (
 		<>
-			<div
-				class="[&_img]:mx-auto [&_img]:block [&_img]:max-w-full"
-				dangerouslySetInnerHTML={{ __html: func.details }}
-			/>
+			<HtmlContent html={func.details} />
 
 			<div class="my-4">
 				<FunctionDefinition func={func} prefix={prefix} />
@@ -34,18 +32,16 @@ export const FunctionDisplay: FC<FunctionDisplayProps> = ({
 						</div>
 						例を表示
 					</summary>
-					<div
-						class="mt-2 bg-white p-3 rounded-md border border-gray-200 text-sm [&_img]:mx-auto [&_img]:block [&_img]:max-w-full"
-						dangerouslySetInnerHTML={{ __html: func.example }}
-					/>
+					<div class="mt-2 bg-white p-3 rounded-md border border-gray-200 text-sm">
+						<HtmlContent html={func.example} />
+					</div>
 				</details>
 			)}
 
 			{func.example && !isExampleFolding && (
-				<div
-					class="my-6 bg-gray-50 p-4 rounded-md border border-gray-200 [&_img]:mx-auto [&_img]:block [&_img]:max-w-full"
-					dangerouslySetInnerHTML={{ __html: func.example }}
-				/>
+				<div class="my-6 bg-gray-50 p-4 rounded-md border border-gray-200">
+					<HtmlContent html={func.example} />
+				</div>
 			)}
 
 			<div class="my-4">

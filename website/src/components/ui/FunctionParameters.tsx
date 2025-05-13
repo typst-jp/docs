@@ -1,6 +1,7 @@
 import type { FC } from "hono/jsx";
 import type { Func } from "../../types/model";
 import { ChevronRightIcon } from "../icons";
+import { HtmlContent } from "./HtmlContent";
 import { Tooltip } from "./Tooltip";
 import { TypeIcon } from "./TypeIcon";
 import { type2href } from "./type2href";
@@ -47,10 +48,9 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 						</div>
 					</h4>
 
-					<div
-						class="mb-3 text-gray-700"
-						dangerouslySetInnerHTML={{ __html: param.details }}
-					/>
+					<div class="mb-3 text-gray-700">
+						<HtmlContent html={param.details} />
+					</div>
 
 					{param.strings.length > 0 && (
 						<div class="mt-3">
@@ -64,10 +64,9 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 											<div class="mb-1">
 												<code class="text-gray-800">{string.string}</code>
 											</div>
-											<div
-												class="text-sm text-gray-700"
-												dangerouslySetInnerHTML={{ __html: string.details }}
-											/>
+											<div class="text-sm text-gray-700">
+												<HtmlContent html={string.details} />
+											</div>
 										</div>
 									</li>
 								))}
@@ -78,10 +77,9 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 					{param.default && (
 						<p class="mt-3 text-sm">
 							<span class="font-medium">デフォルト値:</span>{" "}
-							<span
-								class="text-gray-700"
-								dangerouslySetInnerHTML={{ __html: param.default }}
-							/>
+							<span class="text-gray-700">
+								<HtmlContent html={param.default} />
+							</span>
 						</p>
 					)}
 
@@ -93,10 +91,9 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 								</div>
 								例を表示
 							</summary>
-							<div
-								class="mt-2 bg-white p-3 rounded-md border border-gray-200 text-sm [&_img]:mx-auto [&_img]:block [&_img]:max-w-full"
-								dangerouslySetInnerHTML={{ __html: param.example }}
-							/>
+							<div class="mt-2 bg-white p-3 rounded-md border border-gray-200 text-sm">
+								<HtmlContent html={param.example} />
+							</div>
 						</details>
 					)}
 				</div>
