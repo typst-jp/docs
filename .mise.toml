@@ -9,6 +9,7 @@ _.python.venv = { path = ".venv", create = true }
 
 [settings]
 yes = true
+idiomatic_version_file_enable_tools = []
 
 [tasks.generate-docs]
 run = "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture"
