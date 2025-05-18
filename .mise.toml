@@ -14,7 +14,8 @@ yes = true
 run = "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture"
 
 [tasks.generate-web]
-run = "uv run gen.py"
+run = "bun run build"
+dir = "./website"
 
 [tasks.generate]
 run = [
@@ -22,5 +23,10 @@ run = [
     "mise run generate-web"
 ]
 
+[tasks.dev]
+run = "bun run dev"
+dir = "./website"
+
 [tasks.preview]
-run = "uv run -m http.server -d dist"
+run = "bun run preview"
+dir = "./website"
