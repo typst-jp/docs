@@ -45,11 +45,11 @@ use crate::text::LocalName;
 /// ```
 #[elem(scope, Show, LocalName, Figurable)]
 pub struct ImageElem {
-    /// A [path]($syntax/#paths) to an image file or raw bytes making up an
-    /// image in one of the supported [formats]($image.format).
+    /// 画像ファイルへの[path]($syntax/#paths)、
+    /// あるいはサポートされている[format]($image.format)のいずれかで構成された画像を表す生のバイト列。
     ///
-    /// Bytes can be used to specify raw pixel data in a row-major,
-    /// left-to-right, top-to-bottom format.
+    /// バイト列は、行優先（row-major）かつ左から右、
+    /// 上から下に並んだ生のピクセルデータを指定するために使用できます。
     ///
     /// ```example
     /// #let original = read("diagram.svg")
@@ -71,26 +71,26 @@ pub struct ImageElem {
 
     /// 画像のフォーマット。
     ///
-    /// By default, the format is detected automatically. Typically, you thus
-    /// only need to specify this when providing raw bytes as the
-    /// [`source`]($image.source) (even then, Typst will try to figure out the
-    /// format automatically, but that's not always possible).
+    /// デフォルトでは、フォーマットは自動的に検出されます。
+    /// そのため、通常は生のバイト列を[`source`]($image.source) として提供する場合にのみこの指定が必要です
+    /// （それでもTypstは自動でフォーマットを判別しようとしますが、
+    /// 必ずしも成功するとは限りません）。
     ///
     /// 生のピクセルデータと同様にサポートされている拡張子は`{"png"}`、`{"jpg"}`、`{"gif"}`、`{"svg"}`です。
     /// [PDFの画像はまだサポートされていません。](https://github.com/typst/typst/issues/145)
     ///
-    /// When providing raw pixel data as the `source`, you must specify a
-    /// dictionary with the following keys as the `format`:
-    /// - `encoding` ([str]): The encoding of the pixel data. One of:
-    ///   - `{"rgb8"}` (three 8-bit channels: red, green, blue)
-    ///   - `{"rgba8"}` (four 8-bit channels: red, green, blue, alpha)
-    ///   - `{"luma8"}` (one 8-bit channel)
-    ///   - `{"lumaa8"}` (two 8-bit channels: luma and alpha)
-    /// - `width` ([int]): The pixel width of the image.
-    /// - `height` ([int]): The pixel height of the image.
+    /// 生のピクセルデータを`source`として提供する場合、
+    /// `format`には次のキーを持つ辞書を指定する必要があります。
+    /// - `encoding` ([str]): ピクセルデータのエンコーディング。以下のいずれかを指定します。
+    ///   - `{"rgb8"}` （3つの8ビットチャンネル: 赤 （red）、緑 （green）、青 （blue））
+    ///   - `{"rgba8"}` （4つの8ビットチャンネル: 赤 （red）、緑 （green）、青 （blue）、透明度 （alpha））
+    ///   - `{"luma8"}` （1つの8ビットチャンネル）
+    ///   - `{"lumaa8"}` （2つの8ビットチャンネル: 輝度（luma）と 透明度（alpha））
+    /// - `width` ([int]): 画像の幅のピクセル数。
+    /// - `height` ([int]): 画像の高さのピクセル数。
     ///
-    /// The pixel width multiplied by the height multiplied by the channel count
-    /// for the specified encoding must then match the `source` data.
+    /// 幅のピクセル数、高さのピクセル数、指定したエンコーディングにおけるチャンネル数をかけ合わせたものが
+    /// `source`のデータと一致しなければなりません。
     ///
     /// ```example
     /// #image(
@@ -136,19 +136,19 @@ pub struct ImageElem {
     #[default(ImageFit::Cover)]
     pub fit: ImageFit,
 
-    /// A hint to viewers how they should scale the image.
+    /// ビューアーに対して、画像をどのように拡大縮小すべきかを示すヒント。
     ///
-    /// When set to `{auto}`, the default is left up to the viewer. For PNG
-    /// export, Typst will default to smooth scaling, like most PDF and SVG
-    /// viewers.
+    /// `{auto}`に設定した場合、デフォルトの動作はビューアーに委ねられます。
+    /// PNGエクスポートの場合、TypstはほとんどのPDFビューアーやSVGビューアーと同様に、
+    /// スムーズな拡大縮小をデフォルトとして設定します。
     ///
-    /// _Note:_ The exact look may differ across PDF viewers.
+    /// _注意:_ PDFビューアーによっては正確な見た目が異なる場合があります。
     pub scaling: Smart<ImageScaling>,
 
-    /// An ICC profile for the image.
+    /// 画像用のICCプロファイル。
     ///
-    /// ICC profiles define how to interpret the colors in an image. When set
-    /// to `{auto}`, Typst will try to extract an ICC profile from the image.
+    /// ICCプロファイルは、画像の色をどのように解釈するかを定義するものです。
+    /// `{auto}`に設定した場合、Typstは画像からICCプロファイルを抽出しようとします。
     #[parse(match args.named::<Spanned<Smart<DataSource>>>("icc")? {
         Some(Spanned { v: Smart::Custom(source), span }) => Some(Smart::Custom({
             let data = Spanned::new(&source, span).load(engine.world)?;
@@ -164,9 +164,9 @@ pub struct ImageElem {
 #[scope]
 #[allow(clippy::too_many_arguments)]
 impl ImageElem {
-    /// Decode a raster or vector graphic from bytes or a string.
+    /// バイト列または文字列からラスター画像またはベクター画像をデコードする。
     #[func(title = "Decode Image")]
-    #[deprecated = "`image.decode` is deprecated, directly pass bytes to `image` instead"]
+    #[deprecated = "`image.decode`は非推奨です。代わりにバイト列を直接`image`に渡してください。"]
     pub fn decode(
         span: Span,
         /// 画像としてデコードするデータ。SVGの場合は文字列です。
@@ -186,7 +186,7 @@ impl ImageElem {
         /// 与えられた領域に対して、画像をどのように調整するか。
         #[named]
         fit: Option<ImageFit>,
-        /// A hint to viewers how they should scale the image.
+        /// ビューアーがどのように拡大縮小すべきかを示すヒント。
         #[named]
         scaling: Option<Smart<ImageScaling>>,
     ) -> StrResult<Content> {
@@ -451,9 +451,9 @@ cast! {
 /// The image scaling algorithm a viewer should use.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum ImageScaling {
-    /// Scale with a smoothing algorithm such as bilinear interpolation.
+    /// バイリニア補間などの平滑化アルゴリズムを用いて拡大縮小します。
     Smooth,
-    /// Scale with nearest neighbor or a similar algorithm to preserve the
-    /// pixelated look of the image.
+    /// 最近傍補間などのアルゴリズムで拡大縮小し、
+    /// ピクセルで構成された画像の見た目を保ちます。
     Pixelated,
 }
