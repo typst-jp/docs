@@ -32,7 +32,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # The folder the action should deploy.
+          folder: website/dist # The folder the action should deploy.
 
   textlint-md:
     runs-on: ubuntu-24.04
