@@ -67,7 +67,7 @@ mise run preview
 #### miseによる開発環境のセットアップ
 
 > [!NOTE]
-> 以下の内容はmise v2024.11.5に基づいています。内容の不備を発見した場合は、Issueを立ててください。
+> 以下の内容はmise v2025.5.5に基づいています。内容の不備を発見した場合は、Issueを立ててください。
 
 miseが導入されている環境で初めて当プロジェクトのルートディレクトリに移動すると、以下のように構成ファイルを信頼することを求められます。
 
@@ -81,16 +81,6 @@ mise ERROR Run with --verbose or MISE_VERBOSE=1 for more information
 
 ```sh
 mise trust
-```
-
-miseの設定ファイルでPythonのvirtualenvの自動アクティベートを有効にしていますが、この時点では`.venv/`ディレクトリが作成されていないため、WARNが発生するはずです。
-
-```plaintext
-mise trusted /path/to/typst-jp.github.io/.mise.toml
-mise WARN  no venv found at: /path/to/typst-jp.github.io/.venv
-
-To create a virtualenv manually, run:
-python -m venv /path/to/typst-jp.github.io/.venv
 ```
 
 次に、`mise install`を実行して、miseで管理されているツールをインストールおよびアクティベートします。
@@ -111,9 +101,9 @@ mise run generate-docs
 
 #### ドキュメントデータのJSONファイルからWebサイトを生成する
 
-Webサイトの生成にはPythonとJinja2を使用しています。また、パッケージ管理にuvを使用しています。
+Webサイトの生成にはNode.jsとViteとHonoを使用しています。また、パッケージ管理にBunを使用しています。
 
-`mise run generate-web`を実行すると、`assets/docs.json`を基にWebサイトのデータが`dist/`に生成されます。
+`mise run generate-web`を実行すると、`assets/docs.json`を基にWebサイトのデータが`website/dist/`に生成されます。
 
 ```sh
 mise run generate-web
