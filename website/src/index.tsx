@@ -11,12 +11,17 @@ import {
 import type { Body, Page } from "./types/model";
 import { flattenDocs } from "./utils/flattenDocs";
 import { isPageOfKind } from "./utils/isPageOfKind";
+import { registerRoutes } from "./utils/translationStatus";
 
 // typst-docsが生成したドキュメント
 import docsJson from "../../assets/docs.json";
 const docs = docsJson as unknown as Page[];
 
 const [flattenedPages, pagePaths] = flattenDocs(docs);
+
+// 未知のページを未翻訳として登録する
+const allRoutes = flattenedPages.map((page) => page.route);
+registerRoutes(allRoutes);
 
 const app = new Hono();
 app.use(appendTrailingSlash());
