@@ -1,9 +1,0 @@
-[project]
-name = "typst-jp-github-io"
-version = "0.1.0"
-description = "Typst documents japanese translation project"
-readme = "README.md"
-requires-python = ">=3.12.7"
-dependencies = [
-    "jinja2>=3.1.4",
-]

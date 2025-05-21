@@ -1,11 +1,6 @@
 [tools]
-# python is managed by .python-version
-uv = "0.5.1"
 node = "22.11.0"
 bun = "1.1.37"
-
-[env]
-_.python.venv = { path = ".venv", create = true }
 
 [settings]
 yes = true
