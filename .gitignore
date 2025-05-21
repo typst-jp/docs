@@ -30,7 +30,3 @@ package-lock.json
 # Documentation
 /assets/docs
 /assets/docs.json
-/dist
-
-# Python
-.venv
