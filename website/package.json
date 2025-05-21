@@ -17,6 +17,7 @@
 		"@tailwindcss/vite": "^4.1.5",
 		"@types/bun": "latest",
 		"hono": "^4.6.13",
+		"tailwind-merge": "^3.3.0",
 		"tailwindcss": "^4.1.5",
 		"vite": "^6.2.5"
 	}
