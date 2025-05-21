@@ -20,7 +20,6 @@ jobs:
           toolchain: "1.81"
       - uses: Swatinem/rust-cache@v2
       - uses: jdx/mise-action@v2
-      - run: uv sync --locked
       - run: mise run generate-docs
       - run: mise run generate-web
       - name: Upload build artifacts
