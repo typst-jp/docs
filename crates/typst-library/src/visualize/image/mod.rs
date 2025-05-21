@@ -46,7 +46,7 @@ use crate::text::LocalName;
 #[elem(scope, Show, LocalName, Figurable)]
 pub struct ImageElem {
     /// 画像ファイルへの[path]($syntax/#paths)、
-    /// あるいはサポートされている[format]($image.format)のいずれかで構成された画像を表す生のバイト列。
+    /// またはサポートされている[format]($image.format)の画像データの生バイト。
     ///
     /// バイト列を使う場合は、生のピクセルデータを左から右へ、上から下へと並べた
     /// 行優先（row-major）形式で指定します。
