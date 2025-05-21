@@ -89,4 +89,16 @@ ${routes
 	});
 });
 
+app.get("/robots.txt", (c) => {
+	const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: https://typst-jp.github.io/sitemap.xml
+`;
+
+	return c.text(robotsTxt, 200, {
+		"Content-Type": "text/plain",
+	});
+});
+
 export default app;
