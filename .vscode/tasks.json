@@ -2,9 +2,9 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "generate-docs",
+      "label": "generate",
       "type": "shell",
-      "command": "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture && python3 ./gen.py && echo reload or open http://localhost:8000",
+      "command": "mise run generate",
       "problemMatcher": [],
       "group": {
         "kind": "build",
