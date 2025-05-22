@@ -13,21 +13,27 @@ const publicAssetsDocsPath = resolve(__dirname, "./public/assets/docs/");
 rmSync(publicAssetsDocsPath, { recursive: true, force: true });
 symlinkSync(assetsDocsPath, publicAssetsDocsPath, "dir");
 
-export default defineConfig({
-	plugins: [
-		tailwindcss(),
-		ssg(),
-		devServer({
-			entry: "src/index.tsx",
-			exclude: [...defaultOptions.exclude, /^\/assets\/.+/, /^\/index\.html$/],
-		}),
-	],
-	build: {
-		rollupOptions: {
-			input: ["src/globals.css"],
-			output: {
-				assetFileNames: "assets/[name].[ext]",
+export default defineConfig(() => {
+	const isDev = process.env.IS_DEV === 'true';
+	return {
+		plugins: [
+			tailwindcss(),
+			ssg(),
+			devServer({
+				entry: "src/index.tsx",
+				exclude: [...defaultOptions.exclude, /^\/assets\/.+/, /^\/index\.html$/],
+			}),
+		],
+		build: {
+			rollupOptions: {
+				input: ["src/globals.css"],
+				output: {
+					assetFileNames: "assets/[name].[ext]",
+				},
 			},
 		},
-	},
+		server: {
+			host: isDev ? '0.0.0.0' : 'localhost'
+		},
+	};
 });
