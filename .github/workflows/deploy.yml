@@ -15,10 +15,6 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: "1.81"
-      - uses: Swatinem/rust-cache@v2
       - uses: jdx/mise-action@v2
       - run: mise run generate-docs
       - run: mise run generate-web
