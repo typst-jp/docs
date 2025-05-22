@@ -3,16 +3,26 @@ import {
 	githubRepositoryUrl,
 	typstOfficialDocsUrl,
 	typstOfficialUrl,
+	version,
 } from "../../../metadata";
 import { DiscordIcon, GitHubIcon, MenuIcon } from "../../icons";
 import { SiteTitle } from "./SiteTitle";
+
+const VersionBadge = () => (
+	<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-200 text-gray-600 ml-2">
+		v{version}
+	</span>
+);
 
 export const Header = () => {
 	return (
 		<>
 			<header class="boring sticky top-0 z-40 bg-white border-b border-gray-200 hidden lg:block">
 				<div class="flex justify-between items-center py-3 px-6">
-					<SiteTitle />
+					<div class="flex items-center">
+						<SiteTitle />
+						<VersionBadge />
+					</div>
 					<nav class="ml-auto">
 						<ul class="flex items-center gap-4">
 							<li class="social">
@@ -58,7 +68,10 @@ export const Header = () => {
 
 			<header class="sticky top-0 z-30 bg-white border-b border-gray-200 flex lg:hidden items-center justify-between px-4">
 				<div class="flex justify-between items-center py-3 w-full">
-					<SiteTitle />
+					<div class="flex items-center">
+						<SiteTitle />
+						<VersionBadge />
+					</div>
 					<button
 						type="button"
 						class="p-1 bg-white rounded-md border border-gray-200"
