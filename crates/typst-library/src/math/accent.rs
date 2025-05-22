@@ -3,7 +3,7 @@ use crate::foundations::{cast, elem, func, Content, NativeElement, SymbolElem};
 use crate::layout::{Length, Rel};
 use crate::math::Mathy;
 
-/// Attaches an accent to a base.
+/// 基底文字にアクセントを付ける。
 ///
 /// # Example
 /// ```example
