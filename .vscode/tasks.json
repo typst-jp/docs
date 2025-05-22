@@ -14,19 +14,19 @@
     {
       "label": "textlint-md",
       "type": "shell",
-      "command": "bun run textlint-md",
+      "command": "mise run textlint-md",
       "problemMatcher": []
     },
     {
       "label": "textlint-md:fix",
       "type": "shell",
-      "command": "bun run textlint-md:fix",
+      "command": "mise run textlint-md:fix",
       "problemMatcher": []
     },
     {
       "label": "textlint-html",
       "type": "shell",
-      "command": "bun run textlint-html",
+      "command": "mise run textlint-html",
       "problemMatcher": []
     }
   ]
