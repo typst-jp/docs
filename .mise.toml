@@ -1,7 +1,7 @@
 [tools]
+rust = "1.83.0"
 node = "22.11.0"
 bun = "1.1.37"
-rust = "1.81.0"
 
 [settings]
 yes = true
