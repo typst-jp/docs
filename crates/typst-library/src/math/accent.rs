@@ -3,9 +3,9 @@ use crate::foundations::{cast, elem, func, Content, NativeElement, SymbolElem};
 use crate::layout::{Length, Rel};
 use crate::math::Mathy;
 
-/// 基底要素にアクセントを付ける。
+/// 基底要素にアクセント記号を付ける。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// $grave(a) = accent(a, `)$ \
 /// $arrow(a) = accent(a, arrow)$ \
@@ -13,8 +13,8 @@ use crate::math::Mathy;
 /// ```
 #[elem(Mathy)]
 pub struct AccentElem {
-    /// The base to which the accent is applied.
-    /// May consist of multiple letters.
+    /// アクセント記号が適用される基底要素。
+    /// 複数の文字から構成される場合もあります。
     ///
     /// ```example
     /// $arrow(A B C)$
@@ -22,35 +22,35 @@ pub struct AccentElem {
     #[required]
     pub base: Content,
 
-    /// The accent to apply to the base.
+    /// 基底要素に適用するアクセント記号。
     ///
-    /// Supported accents include:
+    /// サポートされているアクセント記号には以下のものがあります。
     ///
-    /// | Accent        | Name            | Codepoint |
-    /// | ------------- | --------------- | --------- |
-    /// | Grave         | `grave`         | <code>&DiacriticalGrave;</code> |
-    /// | Acute         | `acute`         | `´`       |
-    /// | Circumflex    | `hat`           | `^`       |
-    /// | Tilde         | `tilde`         | `~`       |
-    /// | Macron        | `macron`        | `¯`       |
-    /// | Dash          | `dash`          | `‾`       |
-    /// | Breve         | `breve`         | `˘`       |
-    /// | Dot           | `dot`           | `.`       |
-    /// | Double dot, Diaeresis | `dot.double`, `diaer` | `¨` |
-    /// | Triple dot    | `dot.triple`    | <code>&tdot;</code> |
-    /// | Quadruple dot | `dot.quad`      | <code>&DotDot;</code> |
-    /// | Circle        | `circle`        | `∘`       |
-    /// | Double acute  | `acute.double`  | `˝`       |
-    /// | Caron         | `caron`         | `ˇ`       |
-    /// | Right arrow   | `arrow`, `->`   | `→`       |
-    /// | Left arrow    | `arrow.l`, `<-` | `←`       |
-    /// | Left/Right arrow | `arrow.l.r`  | `↔`       |
-    /// | Right harpoon | `harpoon`       | `⇀`       |
-    /// | Left harpoon  | `harpoon.lt`    | `↼`       |
+    /// | アクセント記号           | 名称                  | コードポイント                  |
+    /// | ------------------------ | --------------------- | ------------------------------- |
+    /// | グレイブ                 | `grave`               | <code>&DiacriticalGrave;</code> |
+    /// | アキュート               | `acute`               | `´`                             |
+    /// | サーカムフレックス       | `hat`                 | `^`                             |
+    /// | チルダ                   | `tilde`               | `~`                             |
+    /// | マクロン                 | `macron`              | `¯`                             |
+    /// | ダッシュ                 | `dash`                | `‾`                             |
+    /// | ブレーヴェ               | `breve`               | `˘`                             |
+    /// | ドット                   | `dot`                 | `.`                             |
+    /// | 2点ドット、 ダイエリシス | `dot.double`, `diaer` | `¨`                             |
+    /// | 3点ドット                | `dot.triple`          | <code>&tdot;</code>             |
+    /// | 4点ドット                | `dot.quad`            | <code>&DotDot;</code>           |
+    /// | 丸                       | `circle`              | `∘`                             |
+    /// | ダブルアキュート         | `acute.double`        | `˝`                             |
+    /// | キャロン                 | `caron`               | `ˇ`                             |
+    /// | 右向き矢印               | `arrow`, `->`         | `→`                             |
+    /// | 左向き矢印               | `arrow.l`, `<-`       | `←`                             |
+    /// | 左右矢印                 | `arrow.l.r`           | `↔`                             |
+    /// | 右向きハープーン         | `harpoon`             | `⇀`                             |
+    /// | 左向きハープーン         | `harpoon.lt`          | `↼`                             |
     #[required]
     pub accent: Accent,
 
-    /// The size of the accent, relative to the width of the base.
+    /// 基底要素の幅に対するアクセント記号の相対的な大きさ。
     #[resolve]
     #[default(Rel::one())]
     pub size: Rel<Length>,
