@@ -40,7 +40,6 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Lint Markdown using textlint
         run: bun run --bun textlint-md
-        continue-on-error: true
 
   textlint-html:
     runs-on: ubuntu-24.04
@@ -58,4 +57,3 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Lint HTML using textlint
         run: bun run --bun textlint-html
-        continue-on-error: true
