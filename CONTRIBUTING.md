@@ -125,7 +125,7 @@ mise run preview
 mise run generate
 ```
 
-#### Dev Containerを用いた方法
+#### Dev Containerによる開発環境のセットアップ
 
 [Docker](https://docs.docker.com/)を用いてWebページの仕上がりを確認できます。
 以下の操作はDockerがインストール済み、かつDockerデーモンを起動していることが前提となります。
@@ -134,7 +134,7 @@ Visual Studio Codeにおける操作フロー例は以下の通りです。
 
 1. Ctrl+Shift+Pを押してから`> Dev Containers: Reopen in Container`を実行します。
 2. Webサーバーが起動したらブラウザで http://localhost:5173 にアクセスします。
-3. 翻訳したファイルの変更を反映させるためにはCtrl+Shift+Bでビルドを実行します。
+3. 翻訳したファイルの変更を反映させるためにはCtrl+Shift+Bで再ビルドしてください。
 4. 体裁を確認したい場合、Ctrl+Shift+Pを押してから`> Tasks: Run task`を実行し以下のいずれかを選択します。
     - `textlint-md` : Markdownファイルを翻訳した場合
     - `textlint-html` : Rustソースコードを翻訳した場合
