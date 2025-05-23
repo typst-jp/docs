@@ -5,11 +5,11 @@
 
 Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ちいただき、どうもありがとうございます。
 
-このプロジェクトは、[Typst GmbH](https://typst.app/legal/)の許諾を得て、最新の[公式のドキュメント](https://typst.app/docs/)より翻訳を行うことで、非公式な日本語ドキュメントを提供することを目的としています。まさに、あなたのようなボランティアの皆様のご協力の元、成り立っています。当ガイドラインをご一読の上、翻訳・校正・提案及びその他の作業にご参加いただければ幸いです。
+このプロジェクトは、[Typst GmbH](https://typst.app/legal/)の許諾を得て、最新の[公式のドキュメント](https://typst.app/docs/)より翻訳を行うことで、非公式な日本語ドキュメントを提供することを目的としています。まさに、あなたのようなボランティアの皆様のご協力の元、成り立っています。当ガイドラインをご一読の上、翻訳・校正・提案およびその他の作業にご参加いただければ幸いです。
 
 ## 翻訳の進め方
 
-翻訳は[GitHub上の当リポジトリ](https://github.com/typst-jp/typst-jp.github.io)を中心に行います。実際の翻訳作業やそれに対する議論や提案などは、主にGitHubの[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)や[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls)機能を通じて行います。また、[Discordサーバー「くみはんクラブ」](https://discord.gg/9xF7k4aAuH)の`#typst-翻訳`チャンネルでも、質問の対応や合意の形成などを行うことがあります。
+翻訳は[GitHub上の当リポジトリ](https://github.com/typst-jp/typst-jp.github.io)を中心に行います。実際の翻訳作業やそれに対する議論や提案などは、主にGitHubの[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)や[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls)機能を通じて行います。また、[Discordサーバー「くみはんクラブ」](https://discord.gg/9xF7k4aAuH)の`#typst-翻訳`チャンネルでも、質問の対応などが可能です。
 
 ### 翻訳提案の手順
 
@@ -23,7 +23,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
         - 例2：[Reference > Foundations > Arguments](https://typst.app/docs/reference/foundations/arguments/)を翻訳する際は、`./crates/typst-library/src/foundations/args.rs`のコメントを編集してください。
     2. `./docs`内のMarkdownファイル群は、Typstのチュートリアルや入門ガイドなど、言語リファレンス以外のページの本体です。**既存のMarkdownファイルを直接書き換えて翻訳してください**。
 3. 翻訳の際の文体や表記は[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)を参照してください。ドキュメントの最新バージョンへの追従は管理者が一括で行っているため、日本語ドキュメントと公式ドキュメントのバージョンが異なる場合でも、日本語ドキュメントで管理されている原文を優先してください。
-4. 翻訳作業の途中でも、Draft Pull Requestを作成して、翻訳の進捗状況を共有することができます。
+4. 翻訳作業の途中でも、Draft Pull Requestを作成して、翻訳の進捗状況を共有することもできます。
 5. 翻訳作業が終わったら、Pull Requestを作成し、送信してください。
 
 ご質問などがある場合は、[「くみはんクラブ」のDiscordサーバー](https://discord.gg/9xF7k4aAuH)に参加してご連絡ください。
@@ -36,11 +36,9 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 ### ローカル環境でWebページを生成する
 
-当プロジェクトは[typst/typst](https://github.com/typst/typst/)の派生リポジトリであり、Webページを生成するためにはRustが必要です。導入していない場合は、[Install Rust - Rust Programming Language](https://www.rust-lang.org/tools/install)に従ってインストールしてください。
+当プロジェクトの開発ツールおよびコマンドは[mise](https://mise.jdx.dev/)で一元管理しています。導入していない場合は、[Getting Started | mise-en-place](https://mise.jdx.dev/getting-started.html)に従ってインストールしてください。
 
-また、当プロジェクトが独自に導入しているRustを除く開発ツールおよびコマンドは[mise](https://mise.jdx.dev/)で一元管理しています。導入していない場合は、[Getting Started | mise-en-place](https://mise.jdx.dev/getting-started.html)に従ってインストールしてください。
-
-Dockerで作業したい方へ向けて、[Dev Containerの環境](#dev-containerを用いた方法)もご用意しております。
+Dockerで作業したい方へ向けて、[Dev Containerの環境](#dev-containerによる開発環境のセットアップ)もご用意しております。
 
 #### TL;DR
 
