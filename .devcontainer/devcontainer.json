@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/devcontainers-extra/features/mise:1": {}
   },
-  "postStartCommand": "mise trust && mise run dev",
+  "postStartCommand": "mise trust && mise run generate && mise run dev",
   "remoteEnv": {
     "VITE_LISTEN_ALL_ADDRESSES": "true"  // See /website/.env.example
   }
