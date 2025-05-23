@@ -40,6 +40,8 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 また、当プロジェクトが独自に導入しているRustを除く開発ツールおよびコマンドは[mise](https://mise.jdx.dev/)で一元管理しています。導入していない場合は、[Getting Started | mise-en-place](https://mise.jdx.dev/getting-started.html)に従ってインストールしてください。
 
+Dockerで作業したい方へ向けて、[Dev Containerの環境](#dev-containerを用いた方法)もご用意しております。
+
 #### TL;DR
 
 > [!NOTE]
@@ -123,9 +125,21 @@ mise run preview
 mise run generate
 ```
 
-#### Dev Containerについて
+#### Dev Containerを用いた方法
 
-> [!WARNING]
-> Dev Containerは現在miseに対応していません。そのため、Dev Containerを使用する場合は、`.mise.toml`を参考に手動で上記の手順を実行してください。
+[Docker](https://docs.docker.com/)を用いてWebページの仕上がりを確認できます。
+以下の操作はDockerがインストール済み、かつDockerデーモンを起動していることが前提となります。
+[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)を使用します。
+Visual Studio Codeにおける操作フロー例は以下の通りです。
 
-上記のローカル環境を構築するDockerfileも整備しております。詳細は[.devcontainer/README.md](.devcontainer/README.md)をご参照ください。
+1. Ctrl+Shift+Pを押してから`> Dev Containers: Reopen in Container`を実行します。
+2. Webサーバーが起動したらブラウザで http://localhost:5173 にアクセスします。
+3. 翻訳したファイルの変更を反映させるためにはCtrl+Shift+Bでビルドを実行します。
+4. 体裁を確認したい場合、Ctrl+Shift+Pを押してから`> Tasks: Run task`を実行し以下のいずれかを選択します。
+    - `textlint-md` : Markdownファイルを翻訳した場合
+    - `textlint-html` : Rustソースコードを翻訳した場合
+5. 自動修正を実施したい場合も同様に以下から選択します。
+    - `textlint-md:fix` : Markdownファイルを自動修正します。
+    - Rustコードの自動修正は対応していなため、該当箇所を手動で修正してください。
+
+`> Tasks: Run task`はDocker環境でなく、miseで環境構築した際にも使用できます。
