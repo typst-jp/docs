@@ -37,3 +37,18 @@ dir = "./website"
 depends = ["install-website"]
 run = "bun run preview"
 dir = "./website"
+
+[tasks.install-textlint]
+run = "bun install --frozen-lockfile"
+
+[tasks.textlint-md]
+depends = ["install-textlint"]
+run = "bun run textlint-md"
+
+[tasks.textlint-md-fix]
+depends = ["install-textlint"]
+run = "bun run textlint-md:fix"
+
+[tasks.textlint-html]
+depends = ["install-textlint"]
+run = "bun run textlint-html"
