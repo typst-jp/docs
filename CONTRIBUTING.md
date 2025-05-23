@@ -129,7 +129,7 @@ mise run generate
 
 [Docker](https://docs.docker.com/)コンテナー上に上記と同一の環境を構築して作業することも可能です。
 以下の操作はDockerがインストール済み、かつDockerデーモンを起動していることが前提となります。
-[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)もご使用いただけます。
+このプロジェクトでは[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)もご使用いただけます。
 Visual Studio Codeにおける操作フロー例は以下の通りです。
 
 1. Ctrl+Shift+Pを押してから`> Dev Containers: Reopen in Container`を実行します。
