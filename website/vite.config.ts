@@ -31,6 +31,6 @@ export default defineConfig({
 		},
 	},
 	server: {
-		host: process.env.IS_DEV === 'true'
+		host: process.env.VITE_LISTEN_ALL_ADDRESSES === 'true'
 	},
 });

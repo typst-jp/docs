@@ -6,6 +6,6 @@
   },
   "postStartCommand": "mise trust && mise run dev",
   "remoteEnv": {
-    "IS_DEV": "true"
+    "VITE_LISTEN_ALL_ADDRESSES": "true"  // See /website/.env.example
   }
 }
