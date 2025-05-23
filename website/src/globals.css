@@ -4,7 +4,8 @@
 /* Global font family */
 @font-face {
 	font-family: "HK Grotesk";
-	src: url("/assets/fonts/hanken-grotesk/HKGrotesk-Regular.woff2") format("woff2");
+	src: url("/assets/fonts/hanken-grotesk/HKGrotesk-Regular.woff2")
+		format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
@@ -12,7 +13,8 @@
 
 @font-face {
 	font-family: "HK Grotesk";
-	src: url("/assets/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2") format("woff2");
+	src: url("/assets/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2")
+		format("woff2");
 	font-weight: 600;
 	font-style: normal;
 	font-display: swap;
@@ -28,7 +30,8 @@
 
 @font-face {
 	font-family: "Cascadia Mono";
-	src: url("/assets/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2") format("woff2");
+	src: url("/assets/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2")
+		format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
@@ -71,4 +74,21 @@ samp {
 [x-cloak] {
 	display: none !important;
 	visibility: hidden;
+}
+
+/* Inline codeのスタイルをGitHub風にする */
+.prose :not(pre) > code {
+	background-color: rgba(175, 184, 193, 0.2);
+	font-size: 0.875em;
+	font-weight: 400;
+	padding: 0.125rem 0.25rem;
+	border-radius: 6px;
+	border: 1px solid rgba(175, 184, 193, 0.25);
+}
+
+.prose code {
+	&::before,
+	&::after {
+		content: none;
+	}
 }
