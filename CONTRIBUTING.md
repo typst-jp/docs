@@ -41,7 +41,8 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 コマンドラインでの操作を避けたい方や[Docker](https://docs.docker.com/)で作業したい方へ向けて、[Dev Containerの環境](#dev-containerによる開発環境のセットアップ)もご用意しております。
 
 > [!NOTE]
-> Windowsのネイティブ環境で実行する場合には、[開発者モード](https://learn.microsoft.com/ja-jp/windows/apps/get-started/enable-your-device-for-development)に設定する必要があります。Windowsの場合には、[WSL](https://learn.microsoft.com/ja-jp/windows/wsl/install)やDev Containerの使用を推奨します。
+> Windowsのネイティブ環境で実行する場合には、[開発者モード](https://learn.microsoft.com/ja-jp/windows/apps/get-started/enable-your-device-for-development)に設定する必要があります。
+> その他潜在的なトラブルの回避の観点から、Windowsユーザーは、[WSL](https://learn.microsoft.com/ja-jp/windows/wsl/install)やDev Containerの使用を推奨します。
 
 #### TL;DR
 
