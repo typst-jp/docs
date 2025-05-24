@@ -11,6 +11,7 @@ import {
 	Breadcrumbs,
 	Footer,
 	Header,
+	SearchWindow,
 	SideNavigation,
 	SiteNoticeBanner,
 	TableOfContents,
@@ -118,7 +119,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 
 			<body
 				class="no-js docs has-outline min-h-screen flex flex-col"
-				x-data="{ sidebarOpen: false }"
+				x-data="{ sidebarOpen: false, searchOpen: false }"
 			>
 				<SiteNoticeBanner />
 				<Header />
@@ -251,6 +252,32 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 						<div class="flex-col w-full md:w-60 lg:w-72 ml-4 hidden xl:block">
 							<TableOfContents outline={outline} />
 						</div>
+					</div>
+				</div>
+
+				<div
+					class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-16"
+					x-show="searchOpen"
+					x-cloak
+					x-transition:enter="ease-out duration-300"
+					x-transition:enter-start="opacity-0"
+					x-transition:enter-end="opacity-100"
+					x-transition:leave="ease-in duration-200"
+					x-transition:leave-start="opacity-100"
+					x-transition:leave-end="opacity-0"
+					x-on:click="searchOpen = false"
+				>
+					<div
+						class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4"
+						x-on:click="$event.stopPropagation()"
+						x-transition:enter="ease-out duration-300"
+						x-transition:enter-start="opacity-0 scale-95"
+						x-transition:enter-end="opacity-100 scale-100"
+						x-transition:leave="ease-in duration-200"
+						x-transition:leave-start="opacity-100 scale-100"
+						x-transition:leave-end="opacity-0 scale-95"
+					>
+						<SearchWindow />
 					</div>
 				</div>
 

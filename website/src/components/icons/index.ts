@@ -9,6 +9,7 @@ export { ChevronRightIcon } from "./ChevronRightIcon";
 export { AlertTriangleIcon } from "./AlertTriangleIcon";
 export { MenuIcon } from "./MenuIcon";
 export { CloseIcon } from "./CloseIcon";
+export { SearchIcon } from "./SearchIcon";
 
 // Simple Icons
 // https://simpleicons.org/

@@ -5,7 +5,7 @@ import {
 	typstOfficialUrl,
 	version,
 } from "../../../metadata";
-import { DiscordIcon, GitHubIcon, MenuIcon } from "../../icons";
+import { DiscordIcon, GitHubIcon, MenuIcon, SearchIcon } from "../../icons";
 import { SiteTitle } from "./SiteTitle";
 
 const VersionBadge = () => (
@@ -19,9 +19,21 @@ export const Header = () => {
 		<>
 			<header class="boring sticky top-0 z-40 bg-white border-b border-gray-200 hidden lg:block">
 				<div class="flex justify-between items-center py-3 px-6">
-					<div class="flex items-center">
-						<SiteTitle />
-						<VersionBadge />
+					<div class="flex items-center gap-4">
+						<div class="flex items-center">
+							<SiteTitle />
+							<VersionBadge />
+						</div>
+						<button
+							type="button"
+							class="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 border border-gray-200 rounded-md hover:border-gray-300 transition-colors w-48"
+							x-on:click="searchOpen = true"
+						>
+							<div class="w-4 h-4 text-gray-600">
+								<SearchIcon />
+							</div>
+							<span class="text-left flex-1">検索...</span>
+						</button>
 					</div>
 					<nav class="ml-auto">
 						<ul class="flex items-center gap-4">
@@ -72,16 +84,28 @@ export const Header = () => {
 						<SiteTitle />
 						<VersionBadge />
 					</div>
-					<button
-						type="button"
-						class="p-1 bg-white rounded-md border border-gray-200"
-						x-on:click="sidebarOpen = !sidebarOpen"
-						aria-label="メニューを開く"
-					>
-						<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
-							<MenuIcon />
-						</div>
-					</button>
+					<div class="flex items-center gap-2">
+						<button
+							type="button"
+							class="p-2 text-gray-600 hover:text-gray-800 transition-colors"
+							x-on:click="searchOpen = true"
+							aria-label="検索を開く"
+						>
+							<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
+								<SearchIcon />
+							</div>
+						</button>
+						<button
+							type="button"
+							class="p-1 bg-white rounded-md border border-gray-200"
+							x-on:click="sidebarOpen = !sidebarOpen"
+							aria-label="メニューを開く"
+						>
+							<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
+								<MenuIcon />
+							</div>
+						</button>
+					</div>
 				</div>
 			</header>
 		</>
