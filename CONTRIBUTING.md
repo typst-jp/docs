@@ -38,7 +38,10 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 当プロジェクトの開発ツールおよびコマンドは[mise](https://mise.jdx.dev/)で一元管理しています。導入していない場合は、[Getting Started | mise-en-place](https://mise.jdx.dev/getting-started.html)に従ってインストールしてください。
 
-Dockerで作業したい方へ向けて、[Dev Containerの環境](#dev-containerによる開発環境のセットアップ)もご用意しております。
+コマンドラインでの操作を避けたい方や[Docker](https://docs.docker.com/)で作業したい方へ向けて、[Dev Containerの環境](#dev-containerによる開発環境のセットアップ)もご用意しております。
+
+> [!NOTE]
+> Windows のネイティブ環境で実行する場合には、[開発者モード](https://learn.microsoft.com/ja-jp/windows/apps/get-started/enable-your-device-for-development)に設定する必要があります。Windowsの場合には、[WSL](https://learn.microsoft.com/ja-jp/windows/wsl/install)やDev Containerの使用を推奨します。
 
 #### TL;DR
 
@@ -125,7 +128,7 @@ mise run generate
 
 #### Dev Containerによる開発環境のセットアップ
 
-[Docker](https://docs.docker.com/)コンテナー上に上記と同一の環境を構築して作業することも可能です。
+Dockerコンテナー上に上記と同一の環境を構築して作業することも可能です。
 以下の操作はDockerがインストール済み、かつDockerデーモンを起動していることが前提となります。
 このプロジェクトでは[Dev Container](https://code.visualstudio.com/docs/devcontainers/containers)もご使用いただけます。
 Visual Studio Codeにおける操作フロー例は以下の通りです。
