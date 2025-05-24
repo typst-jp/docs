@@ -42,7 +42,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 > [!NOTE]
 > Windowsのネイティブ環境で実行する場合には、[開発者モード](https://learn.microsoft.com/ja-jp/windows/apps/get-started/enable-your-device-for-development)に設定する必要があります。
-> その他潜在的なトラブルの回避の観点から、Windowsユーザーは、[WSL](https://learn.microsoft.com/ja-jp/windows/wsl/install)やDev Containerの使用を推奨します。
+> その他Windowsに起因する潜在的なトラブルを回避するため、Windowsユーザーには[WSL](https://learn.microsoft.com/ja-jp/windows/wsl/install)やDev Containerの使用を推奨します。
 
 #### TL;DR
 
