@@ -33,7 +33,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 ### 技術的な詳細
 
-[中国語版](https://github.com/typst-doc-cn/typst-doc-cn.github.io?tab=readme-ov-file#%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82)を参照してください。
+[`./website/`のREADME](https://github.com/typst-jp/typst-jp.github.io/blob/main/website/README.md)を参照してください。
 
 ### ローカル環境でWebページを生成する
 
