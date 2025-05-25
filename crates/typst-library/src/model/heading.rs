@@ -17,7 +17,7 @@ use crate::layout::{Abs, Axes, BlockBody, BlockElem, Em, HElem, Length, Region, 
 use crate::model::{Numbering, Outlinable, Refable, Supplement};
 use crate::text::{FontWeight, LocalName, SpaceElem, TextElem, TextSize};
 
-/// A section heading.
+/// 節の見出し。
 ///
 /// With headings, you can structure your document into sections. Each heading
 /// has a _level,_ which starts at one and is unbounded upwards. This level
