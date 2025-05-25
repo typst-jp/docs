@@ -19,21 +19,20 @@ use crate::text::{FontWeight, LocalName, SpaceElem, TextElem, TextSize};
 
 /// 節の見出し。
 ///
-/// With headings, you can structure your document into sections. Each heading
-/// has a _level,_ which starts at one and is unbounded upwards. This level
-/// indicates the logical role of the following content (section, subsection,
-/// etc.) A top-level heading indicates a top-level section of the document
-/// (not the document's title).
+/// 見出しを使うことで、文書を節として構造化できます。
+/// 各見出しには1から始まる_レベル_があり、上限はありません。
+/// このレベルは、以下に続く内容の論理的な役割（節、小節など）を示します。
+/// 最上位のレベルの見出しは、文書の最上位のレベルの節を示します（文書のタイトルではありません）。
 ///
-/// Typst can automatically number your headings for you. To enable numbering,
-/// specify how you want your headings to be numbered with a
-/// [numbering pattern or function]($numbering).
+/// Typstでは、見出しに自動的に番号をつけることができます。
+/// 番号付けを有効にするには、
+/// 見出しにどのような[番号付けパターンまたは関数]($numbering)を用いて番号付けを行うかを指定してください。
 ///
-/// Independently of the numbering, Typst can also automatically generate an
-/// [outline] of all headings for you. To exclude one or more headings from this
-/// outline, you can set the `outlined` parameter to `{false}`.
+/// 番号付けとは別に、Typstはすべての見出しの[目次]($outline)を自動的に生成することもできます。
+/// 1つ以上の見出しをこの目次から除外するには、
+/// `outlined`パラメーターを`{false}`に設定してください。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set heading(numbering: "1.a)")
 ///
@@ -44,19 +43,19 @@ use crate::text::{FontWeight, LocalName, SpaceElem, TextElem, TextSize};
 /// To start, ...
 /// ```
 ///
-/// # Syntax
-/// Headings have dedicated syntax: They can be created by starting a line with
-/// one or multiple equals signs, followed by a space. The number of equals
-/// signs determines the heading's logical nesting depth. The `{offset}` field
-/// can be set to configure the starting depth.
+/// # 構文
+/// 見出しには専用の構文があります。
+/// 行の先頭に等号を1つ以上入力し、その後にスペースを入力することで見出しを作成できます。
+/// 等号の数は、見出しの論理的なネストの深さを決定します。
+/// `{offset}`フィールドを設定すると、見出しの最初の深さを設定できます。
 #[elem(Locatable, Synthesize, Count, Show, ShowSet, LocalName, Refable, Outlinable)]
 pub struct HeadingElem {
-    /// The absolute nesting depth of the heading, starting from one. If set
-    /// to `{auto}`, it is computed from `{offset + depth}`.
+    /// 1から始まる、見出しの絶対的なネストの深さ。
+    /// `{auto}`に設定した場合は、`{offset + depth}`から計算されます。
     ///
-    /// This is primarily useful for usage in [show rules]($styling/#show-rules)
-    /// (either with [`where`]($function.where) selectors or by accessing the
-    /// level directly on a shown heading).
+    /// これは主に[showルール]($styling/#show-rules)で利用する際に役立ちます
+    /// （[`where`]($function.where)セレクターを使う場合や
+    /// 表示された見出しのレベルに直接アクセスする場合など）。
     ///
     /// ```example
     /// #show heading.where(level: 2): set text(red)
@@ -70,18 +69,18 @@ pub struct HeadingElem {
     /// ```
     pub level: Smart<NonZeroUsize>,
 
-    /// The relative nesting depth of the heading, starting from one. This is
-    /// combined with `{offset}` to compute the actual `{level}`.
+    /// 1から始まる、見出しの相対的なネストの深さ。
+    /// この値は`{offset}`と組み合わせて、実際の`{level}`を計算するのに用いられます。
     ///
-    /// This is set by the heading syntax, such that `[== Heading]` creates a
-    /// heading with logical depth of 2, but actual level `{offset + 2}`. If you
-    /// construct a heading manually, you should typically prefer this over
-    /// setting the absolute level.
+    /// これは見出し構文によって設定され、例えば`[== Heading]`は論理的な深さが2の見出しを作成しますが、
+    /// 実際のレベルは`{offset + 2}`になります。
+    /// 見出しを手動で作成する場合、
+    /// 通常は絶対レベルを設定するよりもこちらを使用することをお勧めします。
     #[default(NonZeroUsize::ONE)]
     pub depth: NonZeroUsize,
 
-    /// The starting offset of each heading's `{level}`, used to turn its
-    /// relative `{depth}` into its absolute `{level}`.
+    /// 各見出しの`{level}`の開始オフセットであり、
+    /// 相対的な`{depth}`を絶対的な`{level}`に変換するために使用されます。
     ///
     /// ```example
     /// = Level 1
@@ -96,8 +95,8 @@ pub struct HeadingElem {
     #[default(0)]
     pub offset: usize,
 
-    /// How to number the heading. Accepts a
-    /// [numbering pattern or function]($numbering).
+    /// 見出しを番号付けする方法。
+    /// [番号付けパターンまたは関数]($numbering)を指定できます。
     ///
     /// ```example
     /// #set heading(numbering: "1.a.")
@@ -109,12 +108,12 @@ pub struct HeadingElem {
     #[borrowed]
     pub numbering: Option<Numbering>,
 
-    /// A supplement for the heading.
+    /// 見出しに用いる補足語。
     ///
-    /// For references to headings, this is added before the referenced number.
+    /// 見出しを参照する際、補足語が参照番号の前に追加されます。
     ///
-    /// If a function is specified, it is passed the referenced heading and
-    /// should return content.
+    /// 関数を指定した場合、参照された見出しが引数として渡され、
+    /// その関数は表示されるコンテンツを返す必要があります。
     ///
     /// ```example
     /// #set heading(numbering: "1.", supplement: [Chapter])
@@ -127,11 +126,11 @@ pub struct HeadingElem {
     /// ```
     pub supplement: Smart<Option<Supplement>>,
 
-    /// Whether the heading should appear in the [outline].
+    /// 見出しを[目次]($outline)に表示するかどうか。
     ///
-    /// Note that this property, if set to `{true}`, ensures the heading is also
-    /// shown as a bookmark in the exported PDF's outline (when exporting to
-    /// PDF). To change that behavior, use the `bookmarked` property.
+    /// なお、このプロパティを`{true}`に設定すると、
+    /// PDFへのエクスポート時に、見出しがPDFの目次にしおりとしても表示されます。
+    /// この動作を変更するには、`bookmarked`プロパティを使用してください。
     ///
     /// ```example
     /// #outline()
@@ -146,14 +145,14 @@ pub struct HeadingElem {
     #[default(true)]
     pub outlined: bool,
 
-    /// Whether the heading should appear as a bookmark in the exported PDF's
-    /// outline. Doesn't affect other export formats, such as PNG.
+    /// エクスポートされたPDFの目次に見出しをしおりとして表示するかどうか。
+    /// PNGなどの他のエクスポート形式には影響しません。
     ///
-    /// The default value of `{auto}` indicates that the heading will only
-    /// appear in the exported PDF's outline if its `outlined` property is set
-    /// to `{true}`, that is, if it would also be listed in Typst's [outline].
-    /// Setting this property to either `{true}` (bookmark) or `{false}` (don't
-    /// bookmark) bypasses that behavior.
+    /// デフォルト値の`{auto}`は、`outlined`プロパティが`{true}`に設定されている見出し、
+    /// すなわちTypstの[目次]($outline)にも記載される見出しのみが、
+    /// PDFエクスポート時の目次に表示されることを示します。
+    /// このプロパティを`{true}`（しおりあり）または`{false}`（しおりなし）に設定すると、
+    /// この動作を無視します。
     ///
     /// ```example
     /// #heading[Normal heading]
@@ -168,10 +167,10 @@ pub struct HeadingElem {
     #[default(Smart::Auto)]
     pub bookmarked: Smart<bool>,
 
-    /// The indent all but the first line of a heading should have.
+    /// 見出しの最初の行を除くすべての行に適用されるインデント。
     ///
-    /// The default value of `{auto}` indicates that the subsequent heading
-    /// lines will be indented based on the width of the numbering.
+    /// デフォルト値の`{auto}`では、
+    /// 見出しの先頭行に続く行が番号の幅に合わせてインデントされます。
     ///
     /// ```example
     /// #set heading(numbering: "1.")
@@ -180,7 +179,7 @@ pub struct HeadingElem {
     #[default(Smart::Auto)]
     pub hanging_indent: Smart<Length>,
 
-    /// The heading's title.
+    /// 見出しのタイトル。
     #[required]
     pub body: Content,
 }
