@@ -22,6 +22,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
         - 例1：[Reference > Foundations](https://typst.app/docs/reference/foundations/)を翻訳する際は、`./crates/typst-library/src/foundations/mod.rs`のコメントを編集してください。
         - 例2：[Reference > Foundations > Arguments](https://typst.app/docs/reference/foundations/arguments/)を翻訳する際は、`./crates/typst-library/src/foundations/args.rs`のコメントを編集してください。
     2. `./docs`内のMarkdownファイル群は、Typstのチュートリアルや入門ガイドなど、言語リファレンス以外のページの本体です。**既存のMarkdownファイルを直接書き換えて翻訳してください**。
+    3. [website/translation-status.json](/website/translation-status.json)の該当箇所を`"translated"`に変更してください。
 3. 翻訳の際の文体や表記は[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)を参照してください。ドキュメントの最新バージョンへの追従は管理者が一括で行っているため、日本語ドキュメントと公式ドキュメントのバージョンが異なる場合でも、日本語ドキュメントで管理されている原文を優先してください。
 4. 翻訳作業の途中でも、Draft Pull Requestを作成して、翻訳の進捗状況を共有することもできます。
 5. 翻訳作業が終わったら、Pull Requestを作成し、送信してください。
