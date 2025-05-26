@@ -101,7 +101,7 @@ pub struct EquationElem {
     /// ```
     pub supplement: Smart<Option<Supplement>>,
 
-    /// 方程式の内容。
+    /// 数式の内容。
     #[required]
     pub body: Content,
 
