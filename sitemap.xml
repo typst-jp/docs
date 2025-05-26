@@ -2,774 +2,774 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://typst-jp.github.io/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/tutorial/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/tutorial/writing-in-typst/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/tutorial/formatting/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/tutorial/advanced-styling/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/tutorial/making-a-template/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/syntax/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/styling/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/scripting/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/context/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/arguments/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/array/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/assert/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/auto/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/bool/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/bytes/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/calc</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/content/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/datetime/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/decimal/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/dictionary/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/duration/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/eval/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/float/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/function/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/int/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/label/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/module/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/none/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/panic/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/plugin/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/regex/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/repr/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/selector/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/str/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/symbol/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/sys</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/target/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/type/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/foundations/version/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/bibliography/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/list/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/cite/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/document/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/emph/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/figure/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/footnote/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/heading/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/link/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/enum/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/numbering/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/outline/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/par/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/parbreak/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/quote/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/ref/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/strong/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/table/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/model/terms/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/highlight/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/linebreak/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/lorem/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/lower/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/overline/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/raw/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/smallcaps/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/smartquote/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/strike/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/sub/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/super/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/text/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/underline/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/text/upper/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/accent/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/attach</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/binom/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/cancel/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/cases/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/class/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/equation/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/frac/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/lr</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/mat/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/primes/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/roots</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/sizes</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/stretch/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/styles</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/op/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/underover</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/variants</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/math/vec/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/symbols/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/symbols/sym/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/symbols/emoji/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/align/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/alignment/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/angle/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/block/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/box/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/colbreak/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/columns/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/direction/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/fraction/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/grid/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/hide/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/layout/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/length/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/measure/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/move/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/pad/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/page/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/pagebreak/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/place/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/ratio/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/relative/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/repeat/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/rotate/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/scale/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/skew/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/h/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/v/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/layout/stack/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/circle/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/color/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/curve/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/ellipse/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/gradient/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/image/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/line/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/path/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/polygon/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/rect/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/square/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/stroke/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/visualize/tiling/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/counter/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/here/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/locate/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/location/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/metadata/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/query/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/introspection/state/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/cbor/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/csv/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/json/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/read/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/toml/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/xml/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/data-loading/yaml/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/pdf/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/pdf/embed/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/html/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/html/elem/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/html/frame/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/png/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/reference/svg/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/guides/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/guides/guide-for-latex-users/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/guides/page-setup-guide/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/guides/table-guide/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.13.1/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.13.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.12.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.11.1/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.11.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.10.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.9.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.8.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.7.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.6.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.5.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.4.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.3.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.2.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/0.1.0/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/changelog/earlier/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/japanese/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/japanese/templates/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/japanese/packages/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/japanese/articles/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 	<url>
 		<loc>https://typst-jp.github.io/docs/glossary/</loc>
-		<lastmod>2025-05-25</lastmod>
+		<lastmod>2025-05-26</lastmod>
 	</url>
 </urlset>
