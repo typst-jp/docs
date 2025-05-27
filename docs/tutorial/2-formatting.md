@@ -153,7 +153,6 @@ text関数の引数リストにいるとき、補完パネルで利用可能な�
 垂直配置と水平配置を `{+}` 演算子で組み合わせることで2次元配置を指定できます。
 
 ## 洗練のヒント { #sophistication }
-can do this by setting the `numbering` parameter of the [`heading`]($heading) function. -->
 文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
 これを行うには、[`heading`]関数の`numbering`パラメーターを設定します。
 
