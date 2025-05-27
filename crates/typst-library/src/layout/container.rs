@@ -11,14 +11,13 @@ use crate::layout::{
 };
 use crate::visualize::{Paint, Stroke};
 
-/// An inline-level container that sizes content.
+/// コンテンツの大きさを持つインラインレベルのコンテナ。
 ///
-/// All elements except inline math, text, and boxes are block-level and cannot
-/// occur inside of a [paragraph]($par). The box function can be used to
-/// integrate such elements into a paragraph. Boxes take the size of their
-/// contents by default but can also be sized explicitly.
+/// インライン数式、テキスト、ボックスを除く全ての要素はブロックレベルであり、[段落]($par)の中に含めることはできません。
+/// box関数を用いることで、そのような要素を段落にまとめることができます。
+/// ボックスはデフォルトで、受け取ったコンテンツに合わせた大きさになりますが、明示的に大きさを指定することもできます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// Refer to the docs
 /// #box(
@@ -29,24 +28,22 @@ use crate::visualize::{Paint, Stroke};
 /// ```
 #[elem]
 pub struct BoxElem {
-    /// The width of the box.
+    /// ボックスの幅。
     ///
-    /// Boxes can have [fractional]($fraction) widths, as the example below
-    /// demonstrates.
+    /// ボックスは以下の例で示すように、[比率]($fraction)を用いて幅を指定できます。
     ///
-    /// _Note:_ Currently, only boxes and only their widths might be fractionally
-    /// sized within paragraphs. Support for fractionally sized images, shapes,
-    /// and more might be added in the future.
+    /// _注意:_ 現在、パラグラフ内で比率指定が可能なのはボックスおよびその幅のみです。
+    /// 比率で指定した大きさを持つ画像や図形などは今後サポートされる可能性があります。
     ///
     /// ```example
     /// Line in #box(width: 1fr, line(length: 100%)) between.
     /// ```
     pub width: Sizing,
 
-    /// The height of the box.
+    /// ボックスの高さ。
     pub height: Smart<Rel<Length>>,
 
-    /// An amount to shift the box's baseline by.
+    /// ボックスのベースラインをシフトさせる量。
     ///
     /// ```example
     /// Image: #box(baseline: 40%, image("tiger.jpg", width: 2cm)).
@@ -54,26 +51,25 @@ pub struct BoxElem {
     #[resolve]
     pub baseline: Rel<Length>,
 
-    /// The box's background color. See the
-    /// [rectangle's documentation]($rect.fill) for more details.
+    /// ボックスの背景色。
+    /// 詳細は[rectangleのドキュメント]($rect.fill)を参照してください。
     pub fill: Option<Paint>,
 
-    /// The box's border color. See the
-    /// [rectangle's documentation]($rect.stroke) for more details.
+    /// ボックスの境界線の色。
+    /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
     #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Stroke>>>,
 
-    /// How much to round the box's corners. See the
-    /// [rectangle's documentation]($rect.radius) for more details.
+    /// ボックスの角の丸めの大きさ。
+    /// 詳細は[rectangleのドキュメント]($rect.radius)を参照してください。
     #[resolve]
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
-    /// How much to pad the box's content.
+    /// ボックスのコンテンツのパディング量
     ///
-    /// _Note:_ When the box contains text, its exact size depends on the
-    /// current [text edges]($text.top-edge).
+    /// _注意:_ ボックスがテキストを含むとき、その正確な大きさは現在の[テキストの端]($text.top-edge)に依存します。
     ///
     /// ```example
     /// #rect(inset: 0pt)[Tight]
@@ -82,11 +78,10 @@ pub struct BoxElem {
     #[fold]
     pub inset: Sides<Option<Rel<Length>>>,
 
-    /// How much to expand the box's size without affecting the layout.
+    /// レイアウトに影響を与えずにボックスの大きさを拡大する量。
     ///
-    /// This is useful to prevent padding from affecting line layout. For a
-    /// generalized version of the example below, see the documentation for the
-    /// [raw text's block parameter]($raw.block).
+    /// これはパディングが行のレイアウトに影響を与えるのを防ぐために便利です。
+    /// 以下の例より一般的な場合については、[未加工テキストのblockパラメーター]($raw.block)のドキュメントを参照してください。
     ///
     /// ```example
     /// An inline
@@ -101,10 +96,8 @@ pub struct BoxElem {
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
-    /// Whether to clip the content inside the box.
-    ///
-    /// Clipping is useful when the box's content is larger than the box itself,
-    /// as any content that exceeds the box's bounds will be hidden.
+    /// ボックスの内側のコンテンツのクリッピングを行うか否か。
+    /// クリッピングは、ボックスの境界を超えたコンテンツを隠すため、ボックスのコンテンツがボックス本体よりも大きい場合に便利です。
     ///
     /// ```example
     /// #box(
@@ -117,7 +110,7 @@ pub struct BoxElem {
     #[default(false)]
     pub clip: bool,
 
-    /// The contents of the box.
+    /// ボックスの内容。
     #[positional]
     #[borrowed]
     pub body: Option<Content>,
