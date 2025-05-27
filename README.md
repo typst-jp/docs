@@ -35,10 +35,6 @@
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/zr-tex8r"><img src="https://github.com/zr-tex8r.png" width="100px" alt="Takayuki YATO"/><br /><sub><b>Takayuki YATO</b></sub></a><br/><code>zr-tex8r</code><br/>アドバイザー</td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/m1sk9"><img src="https://github.com/m1sk9.png" width="100px" alt="Sho Sakuma"/><br /><sub><b>Sho Sakuma</b></sub></a><br/><code>m1sk9</code><br/>校正者</td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ultimatile"><img src="https://github.com/ultimatile.png" width="100px" alt="ultimatile"/><br /><sub><b>ultimatile</b></sub></a><br/><code>ultimatile</code><br/>翻訳者<br/>保守者</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
     </tr>
   </tbody>
 </table>
