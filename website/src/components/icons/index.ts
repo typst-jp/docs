@@ -10,6 +10,7 @@ export { AlertTriangleIcon } from "./AlertTriangleIcon";
 export { MenuIcon } from "./MenuIcon";
 export { CloseIcon } from "./CloseIcon";
 export { SearchIcon } from "./SearchIcon";
+export { LanguageIcon } from "./LanguageIcon";
 
 // Simple Icons
 // https://simpleicons.org/
