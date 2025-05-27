@@ -10,71 +10,71 @@ use crate::introspection::{Count, CounterUpdate, Locatable};
 use crate::layout::{Em, HAlignment, Length, OuterHAlignment};
 use crate::model::Numbering;
 
-/// A logical subdivison of textual content.
+/// テキストコンテンツの論理的な区分。
 ///
-/// Typst automatically collects _inline-level_ elements into paragraphs.
-/// Inline-level elements include [text], [horizontal spacing]($h),
-/// [boxes]($box), and [inline equations]($math.equation).
+/// Typstは _インラインレベル_ の要素を自動的に段落にまとめます。
+/// インラインレベルの要素には、[テキスト]($text)、 [水平方向の空白]($h)、
+/// [ボックス]($box)、[インライン数式]($math.equation)が含まれます。
 ///
-/// To separate paragraphs, use a blank line (or an explicit [`parbreak`]).
-/// Paragraphs are also automatically interrupted by any block-level element
-/// (like [`block`], [`place`], or anything that shows itself as one of these).
+/// 段落を区切るには、空行（または明示的な[`parbreak`]）を使用します。
+/// 段落は、任意のブロックレベルの要素
+/// （[`block`]、[`place`]、またはこれらのいずれかとして表示されるもの）によっても自動的に区切られます。
 ///
-/// The `par` element is primarily used in set rules to affect paragraph
-/// properties, but it can also be used to explicitly display its argument as a
-/// paragraph of its own. Then, the paragraph's body may not contain any
-/// block-level content.
+/// `par`要素は主にsetルールにおいて段落のプロパティに影響を与えるために使用されますが、
+/// その引数を明示的に独立した段落として表示するためにも使用できます。
+/// その場合、
+/// その段落の本文にはブロックレベルのコンテンツを含めることはできません。
 ///
-/// # Boxes and blocks
-/// As explained above, usually paragraphs only contain inline-level content.
-/// However, you can integrate any kind of block-level content into a paragraph
-/// by wrapping it in a [`box`].
+/// # ボックスとブロック
+/// 上記の通り、通常、段落はインラインレベルのコンテンツのみを含みます。
+/// しかし、[`box`]でラップすることで、
+/// あらゆる種類のブロックレベルのコンテンツを段落に組み込むことができます。
 ///
-/// Conversely, you can separate inline-level content from a paragraph by
-/// wrapping it in a [`block`]. In this case, it will not become part of any
-/// paragraph at all. Read the following section for an explanation of why that
-/// matters and how it differs from just adding paragraph breaks around the
-/// content.
+/// 逆に、インラインレベルのコンテンツを[`block`]でラップすることにより、
+/// コンテンツを段落から分離できます。
+/// この場合、そのコンテンツはどの段落にも属さなくなります。
+/// なぜこれが重要なのか、また単にコンテンツの前後に段落区切りを追加することとどう異なるのかについては、
+/// 次のセクションをお読みください。
 ///
-/// # What becomes a paragraph?
-/// When you add inline-level content to your document, Typst will automatically
-/// wrap it in paragraphs. However, a typical document also contains some text
-/// that is not semantically part of a paragraph, for example in a heading or
-/// caption.
+/// # 何が段落になるのか？
+/// インラインレベルのコンテンツをドキュメントに追加すると、
+/// Typstは自動的にそれを段落としてラップします。
+/// しかし、一般的なドキュメントには、見出しやキャプションなど、
+/// 意味的に段落の一部ではないテキストも含まれます。
 ///
-/// The rules for when Typst wraps inline-level content in a paragraph are as
-/// follows:
+/// Typstがインラインレベルのコンテンツを
+/// 段落としてラップするルールは次の通りです。
 ///
-/// - All text at the root of a document is wrapped in paragraphs.
+/// - ドキュメントのルート(最上位)にある全てのテキストは段落としてラップされます。
 ///
-/// - Text in a container (like a `block`) is only wrapped in a paragraph if the
-///   container holds any block-level content. If all of the contents are
-///   inline-level, no paragraph is created.
+/// - コンテナ（`block`など）内のテキストは、
+///   そのコンテナにブロックレベルの要素が含まれている場合にのみ段落としてラップされます。
+///   コンテナの内容が全てインラインレベル要素である場合は、段落は作成されません。
 ///
-/// In the laid-out document, it's not immediately visible whether text became
-/// part of a paragraph. However, it is still important for various reasons:
+/// 組版された文書では、テキストが段落の一部になったかどうかはすぐにはわかりません。
+/// しかし、いくつかの理由からこれは依然として重要です。
 ///
-/// - Certain paragraph styling like `first-line-indent` will only apply to
-///   proper paragraphs, not any text. Similarly, `par` show rules of course
-///   only trigger on paragraphs.
+/// - `first-line-indent`などの特定の段落スタイルは正しい段落に対してのみ適用され、
+/// 任意のテキストには適用されません。
+///    同様に、`par`に対するshowルールももちろん段落に対してのみ適用されます。
 ///
-/// - A proper distinction between paragraphs and other text helps people who
-///   rely on assistive technologies (such as screen readers) navigate and
-///   understand the document properly. Currently, this only applies to HTML
-///   export since Typst does not yet output accessible PDFs, but support for
-///   this is planned for the near future.
+/// - 段落とその他のテキストを適切に区別することは、
+/// スクリーンリーダーなどの支援技術を利用する人々が文書を正しく読み解き、理解するのに役立ちます。
+/// 現在はTypstがアクセシブルなPDFをまだ出力しないため、
+/// この仕組みはHTMLエクスポートにのみ適用されますが、
+/// 近い将来PDFへのサポートも計画されています。
 ///
-/// - HTML export will generate a `<p>` tag only for paragraphs.
+/// - HTMLエクスポートでは、段落に対してのみ`<p>`タグが生成されます。
 ///
-/// When creating custom reusable components, you can and should take charge
-/// over whether Typst creates paragraphs. By wrapping text in a [`block`]
-/// instead of just adding paragraph breaks around it, you can force the absence
-/// of a paragraph. Conversely, by adding a [`parbreak`] after some content in a
-/// container, you can force it to become a paragraph even if it's just one
-/// word. This is, for example, what [non-`tight`]($list.tight) lists do to
-/// force their items to become paragraphs.
+/// 独自の再利用可能なコンポーネントを作成する際には、
+/// Typstが段落を作成するかどうかを自分で制御できますし、制御すべきです。
+/// テキストを単に段落区切りで囲むのではなく、
+/// `block`で囲むことで段落を作成させないようにできます。
+/// 逆に、コンテナ内のコンテンツの後に`parbreak`を追加することで、
+/// たとえ1つの単語であっても段落にすることができます。
+/// これは、[非タイト]($list.tight)リストがその項目を段落にするために行う手法の例です。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set par(
 ///   first-line-indent: 1em,
