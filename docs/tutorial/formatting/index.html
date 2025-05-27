@@ -20,7 +20,7 @@
 ティーチングアシスタントはあなたが新しい組版システムを使っていることをまだ知らず、あなたは自身のレポートを他の学生の提出物に合わせたいと思うでしょう。
 この章では、Typstの組版システムを使ってレポートの体裁を整える方法を示します。</p>
 <h2 id="set-rule">setルール</h2>
-<p>前章で見たように、Typstにはコンテンツを_挿入する_関数（例：<a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a>関数）と、引数として受け取ったコンテンツを<em>操作する</em>関数（例：<a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a>関数）があります。
+<p>前章で見たように、Typstにはコンテンツを <em>挿入する</em> 関数（例：<a href="/docs/reference/visualize/image/" title="`image`"><code>image</code></a>関数）と、引数として受け取ったコンテンツを<em>操作する</em>関数（例：<a href="/docs/reference/layout/align/" title="`align`"><code>align</code></a>関数）があります。
 たとえば、フォントを変更したいとき、最初に思いつくことは、それを行う関数を探して、その関数で文書全体を囲むことでしょう。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">text</span><span class="typ-punct">(</span>font<span class="typ-punct">:</span> <span class="typ-str">&quot;New Computer Modern&quot;</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
   <span class="typ-heading">= Background</span>
@@ -131,8 +131,7 @@ text関数の引数リストにいるとき、補完パネルで利用可能な�
 <p>最後に、中央揃えに垂直配置を追加して、画像をページの下部に配置しました。
 垂直配置と水平配置を <code><span class="typ-op">+</span></code> 演算子で組み合わせることで2次元配置を指定できます。</p>
 <h2 id="sophistication">洗練のヒント</h2>
-<p>can do this by setting the <code>numbering</code> parameter of the <a href="/docs/reference/model/heading/"><code>heading</code></a> function. --&gt;
-文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
+<p>文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
 これを行うには、<a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a>関数の<code>numbering</code>パラメーターを設定します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 
