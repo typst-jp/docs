@@ -29,7 +29,7 @@
       <td align="center" valign="top" width="16.28%"><a href="https://github.com/stepney141"><img src="https://github.com/stepney141.png" width="100px" alt="stepney141"/><br /><sub><b>stepney141</b></sub></a><br/><code>stepney141</code><br/>インフラ整備<br/>保守者</td>
       <td align="center" valign="top" width="16.28%"><a href="https://github.com/gomazarashi"><img src="https://github.com/gomazarashi.png" width="100px" alt="gomazarashi"/><br /><sub><b>gomazarashi</b></sub></a><br/><code>gomazarashi</code><br/>翻訳者<br/>保守者</td>
       <td align="center" valign="top" width="16.28%"><a href="https://github.com/monaqa"><img src="https://github.com/monaqa.png" width="100px" alt="monaqa"/><br /><sub><b>monaqa</b></sub></a><br/><code>monaqa</code><br/>翻訳者<br/>保守者</td>
-      <td align="center" valign="top" width="16.28%"><a href="https://github.com/kimushun1101"><img src="https://github.com/kimushun1101.png" width="100px" alt="Shunsuke KIMURA"/><br /><sub><b>Shunsuke KIMURA</b></sub></a><br/><code>kimshun1101</code><br/>翻訳者<br/>保守者</td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kimushun1101"><img src="https://github.com/kimushun1101.png" width="100px" alt="Shunsuke KIMURA"/><br /><sub><b>Shunsuke KIMURA</b></sub></a><br/><code>kimshun1101</code><br/>翻訳者<br/>保守者</td>
     </tr>
     <tr>
       <td align="center" valign="top" width="16.28%"><a href="https://github.com/zr-tex8r"><img src="https://github.com/zr-tex8r.png" width="100px" alt="Takayuki YATO"/><br /><sub><b>Takayuki YATO</b></sub></a><br/><code>zr-tex8r</code><br/>アドバイザー</td>
