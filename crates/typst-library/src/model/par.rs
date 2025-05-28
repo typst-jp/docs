@@ -95,55 +95,55 @@ use crate::model::Numbering;
 /// ```
 #[elem(scope, title = "Paragraph")]
 pub struct ParElem {
-    /// The spacing between lines.
+    /// 行間。
     ///
-    /// Leading defines the spacing between the [bottom edge]($text.bottom-edge)
-    /// of one line and the [top edge]($text.top-edge) of the following line. By
-    /// default, these two properties are up to the font, but they can also be
-    /// configured manually with a text set rule.
+    /// leadingは、
+    /// ある行の[下端]($text.bottom-edge)と次の行の[上端]($text.top-edge)との間隔を定義します。
+    /// デフォルトではこれら2つのプロパティはフォントによって決まりますが、
+    /// テキストのsetルールを使用して手動で設定することもできます。
     ///
-    /// By setting top edge, bottom edge, and leading, you can also configure a
-    /// consistent baseline-to-baseline distance. You could, for instance, set
-    /// the leading to `{1em}`, the top-edge to `{0.8em}`, and the bottom-edge
-    /// to `{-0.2em}` to get a baseline gap of exactly `{2em}`. The exact
-    /// distribution of the top- and bottom-edge values affects the bounds of
-    /// the first and last line.
+    /// top-edge、bottom-edge、およびleadingを設定することで、
+    /// ベースライン間の距離を一定に揃えることも可能です。
+    /// たとえば、leadingを `{1em}`、top-edgeを`{0.8em}`、
+    /// bottom-edgeを'{-0.2em}'に設定すると、
+    /// ちょうど`{2em}`のベースライン間隔になります。
+    /// top-edgeとbottom-edgeの値の正確な配分が最初の行と最後の行の境界に影響を与えます。
     #[resolve]
     #[default(Em::new(0.65).into())]
     pub leading: Length,
 
-    /// The spacing between paragraphs.
+    /// 段落間の間隔。
     ///
-    /// Just like leading, this defines the spacing between the bottom edge of a
-    /// paragraph's last line and the top edge of the next paragraph's first
-    /// line.
+    /// leadingと同様に、
+    /// このプロパティはある段落の最終行の下端と、
+    /// 次の段落の最初の行の上端との間隔を定義します。
     ///
-    /// When a paragraph is adjacent to a [`block`] that is not a paragraph,
-    /// that block's [`above`]($block.above) or [`below`]($block.below) property
-    /// takes precedence over the paragraph spacing. Headings, for instance,
-    /// reduce the spacing below them by default for a better look.
+    /// 段落が、段落ではない[`block`]に隣接している場合、
+    /// そのブロックの[`above`]($block.above)または[`below`]($block.below)プロパティが段落間の間隔よりも優先されます。
+    /// 例えば、
+    /// 見出しはより良い外観のためにデフォルトで下側の間隔を狭くしています。
     #[resolve]
     #[default(Em::new(1.2).into())]
     pub spacing: Length,
 
-    /// Whether to justify text in its line.
+    /// 行内でテキストを両端揃えするかどうか。
     ///
-    /// Hyphenation will be enabled for justified paragraphs if the
-    /// [text function's `hyphenate` property]($text.hyphenate) is set to
-    /// `{auto}` and the current language is known.
+    /// [text関数の`hyphenate`プロパティ]($text.hyphenate)が`{auto}`に設定され、
+    /// かつ現在の言語が認識されている場合、
+    /// 両端揃えが行われた段落ではハイフネーションが有効になります。
     ///
-    /// Note that the current [alignment]($align.alignment) still has an effect
-    /// on the placement of the last line except if it ends with a
-    /// [justified line break]($linebreak.justify).
+    /// 最後の行が[両端揃えされた改行]($linebreak.justify)で終わらない限り、
+    /// 現在の[alignment]($align.alignment)は依然として
+    /// 最終行の配置に影響を与えることに注意してください。
     #[default(false)]
     pub justify: bool,
 
-    /// How to determine line breaks.
+    /// 改行位置の決定方法
     ///
-    /// When this property is set to `{auto}`, its default value, optimized line
-    /// breaks will be used for justified paragraphs. Enabling optimized line
-    /// breaks for ragged paragraphs may also be worthwhile to improve the
-    /// appearance of the text.
+    /// このプロパティがデフォルトの`{auto}`に設定されている場合、
+    /// 両端揃えされた段落に対して最適化された改行が行われます。
+    /// また、段落が不揃いであっても最適化された改行を有効にすることで、
+    /// テキストの見栄えが向上することがあります。
     ///
     /// ```example
     /// #set page(width: 207pt)
@@ -161,24 +161,24 @@ pub struct ParElem {
     /// ```
     pub linebreaks: Smart<Linebreaks>,
 
-    /// The indent the first line of a paragraph should have.
+    /// 段落の最初の行のインデント。
     ///
-    /// By default, only the first line of a consecutive paragraph will be
-    /// indented (not the first one in the document or container, and not
-    /// paragraphs immediately following other block-level elements).
+    /// デフォルトでは、
+    /// 連続する段落のうち最初の行のみがインデントされます
+    /// （文書やコンテナの先頭の段落、あるいは他のブロックレベル要素に続く段落はインデントされません）。
     ///
-    /// If you want to indent all paragraphs instead, you can pass a dictionary
-    /// containing the `amount` of indent as a length and the pair
-    /// `{all: true}`. When `all` is omitted from the dictionary, it defaults to
-    /// `{false}`.
+    /// 全ての段落をインデントしたい場合は、
+    /// インデントの`amount`（長さ）と`{all: true}`を含む辞書を渡してください。
+    /// `all`が辞書から省略された場合、
+    /// デフォルトでは`{false}`になります。
     ///
-    /// By typographic convention, paragraph breaks are indicated either by some
-    /// space between paragraphs or by indented first lines. Consider
-    /// - reducing the [paragraph `spacing`]($par.spacing) to the
-    ///   [`leading`]($par.leading) using `{set par(spacing: 0.65em)}`
-    /// - increasing the [block `spacing`]($block.spacing) (which inherits the
-    ///   paragraph spacing by default) to the original paragraph spacing using
-    ///   `{set block(spacing: 1.2em)}`
+    /// タイポグラフィの慣例として、段落の区切りは段落間の空白か最初の行のインデントのどちらかで示されます。
+    /// 次の設定を検討してみてください。
+    /// - [段落の`spacing`]($par.spacing)を
+    ///   `{set par(spacing: 0.65em)}`を使用して[`leading`]($par.leading)と同じ長さまで減らす
+    /// - [ブロックの`spacing`]($block.spacing)
+    ///   デフォルトでは段落の間隔を継承します）を`{set block(spacing: 1.2em)}`を使用して
+    ///   元の段落間隔と同じ長さまで増やす
     ///
     /// ```example
     /// #set block(spacing: 1.2em)
@@ -206,7 +206,7 @@ pub struct ParElem {
     /// ```
     pub first_line_indent: FirstLineIndent,
 
-    /// The indent that all but the first line of a paragraph should have.
+    /// 段落の最初の行以外全ての行のインデント。
     ///
     /// ```example
     /// #set par(hanging-indent: 1em)
@@ -216,7 +216,7 @@ pub struct ParElem {
     #[resolve]
     pub hanging_indent: Length,
 
-    /// The contents of the paragraph.
+    /// 段落の内容。
     #[required]
     pub body: Content,
 }
@@ -230,12 +230,12 @@ impl ParElem {
 /// How to determine line breaks in a paragraph.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum Linebreaks {
-    /// Determine the line breaks in a simple first-fit style.
+    /// シンプルなファーストフィット方式で改行位置を決定します。
     Simple,
-    /// Optimize the line breaks for the whole paragraph.
+    /// 段落全体の改行位置を最適化します。
     ///
-    /// Typst will try to produce more evenly filled lines of text by
-    /// considering the whole paragraph when calculating line breaks.
+    /// Typstは改行を計算する際に段落全体を考慮し、
+    /// より均等に埋まった行を生成しようとします。
     Optimized,
 }
 
