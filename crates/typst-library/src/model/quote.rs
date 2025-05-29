@@ -12,7 +12,7 @@ use crate::layout::{
 use crate::model::{CitationForm, CiteElem, Destination, LinkElem, LinkTarget};
 use crate::text::{SmartQuoteElem, SmartQuotes, SpaceElem, TextElem};
 
-/// 引用文を表示し、オプションとして帰属を併記する。
+/// 引用文を表示し、オプションとして帰属情報を併記する。
 ///
 /// # 例
 /// ```example
