@@ -6,3 +6,4 @@ export { Breadcrumbs, type BreadcrumbsProps } from "./Breadcrumbs";
 export { TableOfContents, type TableOfContentsProps } from "./TableOfContents";
 export { Footer } from "./Footer";
 export { SearchWindow } from "./SearchWindow";
+export { TranslationStatusAlert } from "./TranslationStatusAlert";

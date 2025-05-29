@@ -1,5 +1,6 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
 import type { Page } from "../../types/model";
+import { getTranslationStatus } from "../../utils/translationStatus";
 import {
 	CaretRightCircleIcon,
 	ChevronLeftIcon,
@@ -15,6 +16,7 @@ import {
 	SideNavigation,
 	SiteNoticeBanner,
 	TableOfContents,
+	TranslationStatusAlert,
 } from "../ui/common/";
 
 export type BaseTemplateProps = PropsWithChildren<{
@@ -37,6 +39,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 	const description = page.description;
 	const route = page.route;
 	const outline = page.outline;
+	const translationStatus = getTranslationStatus(route);
 	return (
 		<html lang="ja">
 			<head>
@@ -172,6 +175,10 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 
 						<main class="flex-1 flex flex-col px-3.5 py-4 mb-8">
 							<Breadcrumbs path={path} />
+
+							<div class="mt-4">
+								<TranslationStatusAlert status={translationStatus} />
+							</div>
 
 							<div class="prose max-w-none w-full mt-6 flex-grow">
 								{children}

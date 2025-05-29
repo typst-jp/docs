@@ -18,13 +18,13 @@ use crate::math::{MathSize, MathVariant};
 use crate::model::{Numbering, Outlinable, ParLine, Refable, Supplement};
 use crate::text::{FontFamily, FontList, FontWeight, LocalName, TextElem};
 
-/// A mathematical equation.
+/// 数式。
 ///
-/// Can be displayed inline with text or as a separate block. An equation
-/// becomes block-level through the presence of at least one space after the
-/// opening dollar sign and one space before the closing dollar sign.
+/// 数式は、テキスト内にインラインで表示することも、独立したブロックとして表示することもできます。
+/// 数式をブロックレベルにするには、
+/// 開始ドル記号の直後と終了ドル記号の直前に少なくとも1つのスペースを挿入してください。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set text(font: "New Computer Modern")
 ///
@@ -37,22 +37,22 @@ use crate::text::{FontFamily, FontList, FontWeight, LocalName, TextElem};
 /// $ sum_(k=1)^n k = (n(n+1)) / 2 $
 /// ```
 ///
-/// By default, block-level equations will not break across pages. This can be
-/// changed through `{show math.equation: set block(breakable: true)}`.
+/// デフォルトでは、ブロックレベルの数式はページをまたいで分割されません。
+/// これは`{show math.equation: set block(breakable: true)}`を使用して変更できます。
 ///
-/// # Syntax
-/// This function also has dedicated syntax: Write mathematical markup within
-/// dollar signs to create an equation. Starting and ending the equation with at
-/// least one space lifts it into a separate block that is centered
-/// horizontally. For more details about math syntax, see the
-/// [main math page]($category/math).
+/// # 構文
+/// この関数には専用の構文もあります。
+/// 数式のマークアップをドル記号で囲むことで、数式を作成します。
+/// 式の先頭と末尾にそれぞれ少なくとも1つのスペースを挿入すると、
+/// 数式は独立したブロックとして扱われ、水平中央に配置されます。
+/// 数式の構文の詳細については、[数式のメインページ]($category/math)を参照してください。
 #[elem(Locatable, Synthesize, Show, ShowSet, Count, LocalName, Refable, Outlinable)]
 pub struct EquationElem {
-    /// Whether the equation is displayed as a separate block.
+    /// 数式が独立したブロックとして表示されるかどうか。
     #[default(false)]
     pub block: bool,
 
-    /// How to [number]($numbering) block-level equations.
+    /// ブロックレベル数式への[番号付け]($numbering)方法。
     ///
     /// ```example
     /// #set math.equation(numbering: "(1)")
@@ -66,12 +66,12 @@ pub struct EquationElem {
     #[borrowed]
     pub numbering: Option<Numbering>,
 
-    /// The alignment of the equation numbering.
+    /// 数式番号の配置。
     ///
-    /// By default, the alignment is `{end + horizon}`. For the horizontal
-    /// component, you can use `{right}`, `{left}`, or `{start}` and `{end}`
-    /// of the text direction; for the vertical component, you can use
-    /// `{top}`, `{horizon}`, or `{bottom}`.
+    /// デフォルトでは、数式の配置は`{end + horizon}`です。
+    /// 水平方向の成分には`{right}`、`{left}`、
+    /// またはテキスト方向の`{start}`と`{end}`を使用できます。
+    /// 垂直方向の成分には、`{top}`、`{horizon}`、または`{bottom}`を使用できます。
     ///
     /// ```example
     /// #set math.equation(numbering: "(1)", number-align: bottom)
@@ -83,12 +83,12 @@ pub struct EquationElem {
     #[default(SpecificAlignment::Both(OuterHAlignment::End, VAlignment::Horizon))]
     pub number_align: SpecificAlignment<OuterHAlignment, VAlignment>,
 
-    /// A supplement for the equation.
+    /// 数式に用いる補足語。
     ///
-    /// For references to equations, this is added before the referenced number.
+    /// 見出しを参照する際、補足語が参照番号の前に追加されます。
     ///
-    /// If a function is specified, it is passed the referenced equation and
-    /// should return content.
+    /// 関数を指定した場合、参照された数式が引数として渡され、
+    /// その関数は表示されるコンテンツを返す必要があります。
     ///
     /// ```example
     /// #set math.equation(numbering: "(1)", supplement: [Eq.])
@@ -101,7 +101,7 @@ pub struct EquationElem {
     /// ```
     pub supplement: Smart<Option<Supplement>>,
 
-    /// The contents of the equation.
+    /// 数式の内容。
     #[required]
     pub body: Content,
 

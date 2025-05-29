@@ -90,3 +90,17 @@ export const calculateTranslationProgressRate = (): number => {
 
 	return translationScore / routes.length;
 };
+
+let translationStatusCache: TranslationStatusMap | null = null;
+
+/**
+ * 指定されたルートの翻訳状態を取得する。
+ * @param route 翻訳状態を取得するページのルート
+ * @returns 翻訳状態。存在しない場合は"untranslated"を返す。
+ */
+export const getTranslationStatus = (route: string): TranslationStatus => {
+	if (translationStatusCache === null) {
+		translationStatusCache = loadTranslationStatus();
+	}
+	return translationStatusCache[route] || "untranslated";
+};
