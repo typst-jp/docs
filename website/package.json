@@ -8,7 +8,8 @@
 		"preview": "vite preview",
 		"update-search-index": "pagefind --site ./dist/ --glob \"docs/**/*.html\"",
 		"check": "biome check .",
-		"check:write": "biome check --write ."
+		"check:write": "biome check --write .",
+		"test": "vitest"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
