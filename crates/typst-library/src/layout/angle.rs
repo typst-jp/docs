@@ -8,7 +8,7 @@ use typst_utils::{Numeric, Scalar};
 
 use crate::foundations::{func, repr, scope, ty, Repr};
 
-/// 回転を記述する角度。
+/// 回転を表す角度。
 ///
 /// Typstは以下の角度の単位をサポートしています。
 ///
