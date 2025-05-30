@@ -1,4 +1,4 @@
-name: CI/CD for Documentation
+name: CI/CD for website
 
 on:
   push:
