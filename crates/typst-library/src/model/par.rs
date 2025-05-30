@@ -269,13 +269,13 @@ impl From<FirstLineIndent> for Dict {
     }
 }
 
-/// A paragraph break.
+/// 段落区切り。
 ///
-/// This starts a new paragraph. Especially useful when used within code like
-/// [for loops]($scripting/#loops). Multiple consecutive
-/// paragraph breaks collapse into a single one.
+/// 新しい段落を開始します。
+/// 特に[forループ]($scripting/#loops)などのコード内で使用する場合に便利です。
+/// 複数の連続した段落区切りは、単一の段落区切りにまとめられます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #for i in range(3) {
 ///   [Blind text #i: ]
@@ -284,9 +284,9 @@ impl From<FirstLineIndent> for Dict {
 /// }
 /// ```
 ///
-/// # Syntax
-/// Instead of calling this function, you can insert a blank line into your
-/// markup to create a paragraph break.
+/// # 構文
+/// 関数を呼び出す代わりに、
+/// マークアップ内に空行を挿入することで段落区切りを作成できます。
 #[elem(title = "Paragraph Break", Unlabellable)]
 pub struct ParbreakElem {}
 
@@ -299,13 +299,13 @@ impl ParbreakElem {
 
 impl Unlabellable for Packed<ParbreakElem> {}
 
-/// A paragraph line.
+/// 段落の行。
 ///
-/// This element is exclusively used for line number configuration through set
-/// rules and cannot be placed.
+/// この要素はsetルールを用いた行番号の設定にのみ使用され、
+/// 直接配置することはできません。
 ///
-/// The [`numbering`]($par.line.numbering) option is used to enable line
-/// numbers by specifying a numbering format.
+/// [`numbering`]($par.line.numbering)オプションは、
+/// 番号付け形式を指定して行番号を有効化するために使用されます。
 ///
 /// ```example
 /// >>> #set page(margin: (left: 3em))
@@ -316,10 +316,10 @@ impl Unlabellable for Packed<ParbreakElem> {}
 /// Typst is there for you.
 /// ```
 ///
-/// The `numbering` option takes either a predefined
-/// [numbering pattern]($numbering) or a function returning styled content. You
-/// can disable line numbers for text inside certain elements by setting the
-/// numbering to `{none}` using show-set rules.
+/// `numbering`オプションには、予め定義された[番号付けパターン]($numbering)か、
+/// スタイル付きコンテンツを返す関数のいずれかを指定します。
+/// set-showルールを用いてnumberingを`{none}`に設定することで、
+/// 特定要素内のテキストの行番号を無効にすることができます。
 ///
 /// ```example
 /// >>> #set page(margin: (left: 3em))
@@ -347,15 +347,15 @@ impl Unlabellable for Packed<ParbreakElem> {}
 /// originating from distant times.
 /// ```
 ///
-/// This element exposes further options which may be used to control other
-/// aspects of line numbering, such as its [alignment]($par.line.number-align)
-/// or [margin]($par.line.number-margin). In addition, you can control whether
-/// the numbering is reset on each page through the
-/// [`numbering-scope`]($par.line.numbering-scope) option.
+/// この要素は、行番号の[alignment]($par.line.number-align)[margin]($par.line.number-margin)など、
+/// 行の番号付けの様々な設定を制御できる追加オプションを提供します。
+/// さらに、
+/// [`numbering-scope`]($par.line.numbering-scope)オプションを使用すると、
+/// ページごとに番号をリセットするかどうかの制御が可能です。
 #[elem(name = "line", title = "Paragraph Line", keywords = ["line numbering"], Construct, Locatable)]
 pub struct ParLine {
-    /// How to number each line. Accepts a
-    /// [numbering pattern or function]($numbering).
+    /// 各行を番号付けする方法。
+    /// [番号付けパターンまたは関数]($numbering)を指定できます。
     ///
     /// ```example
     /// >>> #set page(margin: (left: 3em))
@@ -368,11 +368,11 @@ pub struct ParLine {
     #[ghost]
     pub numbering: Option<Numbering>,
 
-    /// The alignment of line numbers associated with each line.
+    /// 各行に付随する行番号の配置。
     ///
-    /// The default of `{auto}` indicates a smart default where numbers grow
-    /// horizontally away from the text, considering the margin they're in and
-    /// the current text direction.
+    /// デフォルトの`{auto}`は、
+    /// 行番号が余白や現在のテキストの方向を考慮しつつ、
+    /// テキストから離れる方向へ水平に伸びるスマートな設定を示します。
     ///
     /// ```example
     /// >>> #set page(margin: (left: 3em))
@@ -388,13 +388,13 @@ pub struct ParLine {
     #[ghost]
     pub number_align: Smart<HAlignment>,
 
-    /// The margin at which line numbers appear.
+    /// 行番号を表示する位置の余白。
     ///
-    /// _Note:_ In a multi-column document, the line numbers for paragraphs
-    /// inside the last column will always appear on the `{end}` margin (right
-    /// margin for left-to-right text and left margin for right-to-left),
-    /// regardless of this configuration. That behavior cannot be changed at
-    /// this moment.
+    /// _注意_: 複数段組みの文書では、
+    /// この設定に関わらず最後の段の段落につく行番号が常に`{end}`の余白（左から右のテキストでは右の余白、
+    /// 右から左のテキストでは左の余白）に表示されます。
+    /// 現時点では、
+    /// この挙動を変更することはできません。
     ///
     /// ```example
     /// >>> #set page(margin: (right: 3em))
@@ -411,10 +411,10 @@ pub struct ParLine {
     #[default(OuterHAlignment::Start)]
     pub number_margin: OuterHAlignment,
 
-    /// The distance between line numbers and text.
+    /// 行番号とテキストの間隔。
     ///
-    /// The default value of `{auto}` results in a clearance that is adaptive to
-    /// the page width and yields reasonable results in most cases.
+    /// デフォルトの値である `{auto}` では、ページ幅に応じて間隔が自動調整され、
+    /// ほとんどの場合において適切な間隔が得られます。
     ///
     /// ```example
     /// >>> #set page(margin: (left: 3em))
@@ -431,12 +431,12 @@ pub struct ParLine {
     #[default]
     pub number_clearance: Smart<Length>,
 
-    /// Controls when to reset line numbering.
+    /// 行番号をリセットするタイミングを制御する。
     ///
-    /// _Note:_ The line numbering scope must be uniform across each page run (a
-    /// page run is a sequence of pages without an explicit pagebreak in
-    /// between). For this reason, set rules for it should be defined before any
-    /// page content, typically at the very start of the document.
+    /// _注意:_ 行番号のスコープは、
+    /// ページラン（改ページが明示的に挿入されていない連続したページ）内で統一されている必要があります。
+    /// そのため、setルールによる設定は、
+    /// ページコンテンツの前、通常は文書の最初などで定義する必要があります。
     ///
     /// ```example
     /// >>> #set page(margin: (left: 3em))
@@ -469,11 +469,11 @@ impl Construct for ParLine {
 /// supported.
 #[derive(Debug, Cast, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum LineNumberingScope {
-    /// Indicates that the line number counter spans the whole document, i.e.,
-    /// it's never automatically reset.
+    /// 行番号カウンターが文書全体にまたがり、
+    /// 決して自動的にリセットされないことを示します。
     Document,
-    /// Indicates that the line number counter should be reset at the start of
-    /// every new page.
+    /// 行番号カウンターが各新規ページの
+    /// 先頭でリセットされることを示します。
     Page,
 }
 
