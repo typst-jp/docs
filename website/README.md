@@ -25,3 +25,19 @@ bun run build
 ```sh
 bun run preview
 ```
+
+### Check
+
+```sh
+# コードスタイルをチェックする
+bun run check
+
+# 自動修正を行う
+bun run check:write
+```
+
+### Test
+
+```sh
+bun run test
+```
