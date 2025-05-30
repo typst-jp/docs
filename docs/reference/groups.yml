@@ -63,9 +63,9 @@
   path: ["math"]
   filter: ["root", "sqrt"]
   details: |
-    Square and non-square roots.
+    平方根とその他の累乗根。
 
-    # Example
+    # 例
     ```example
     $ sqrt(3 - 2 sqrt(2)) = sqrt(2) - 1 $
     $ root(3, x) $
