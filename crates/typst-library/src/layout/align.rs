@@ -11,10 +11,10 @@ use crate::foundations::{
 use crate::layout::{Abs, Axes, Axis, Dir, Side};
 use crate::text::TextElem;
 
-/// Aligns content horizontally and vertically.
+/// コンテンツを水平方向・垂直方向に配置。
 ///
-/// # Example
-/// Let's start with centering our content horizontally:
+/// # 例
+/// コンテンツを水平方向に中央揃えにすることから始めましょう。
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(center)
@@ -25,7 +25,7 @@ use crate::text::TextElem;
 /// A work of art, a visual throne
 /// ```
 ///
-/// To center something vertically, use _horizon_ alignment:
+/// 垂直方向に中央揃えにするには _horizon_ 配置を使用します。
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(horizon)
@@ -35,10 +35,9 @@ use crate::text::TextElem;
 /// a new paragraph.
 /// ```
 ///
-/// # Combining alignments
-/// You can combine two alignments with the `+` operator. Let's also only apply
-/// this to one piece of content by using the function form instead of a set
-/// rule:
+/// # 配置の組み合わせ
+/// `+`演算子を用いて2種類の配置を組み合わせることができます。
+/// setルールの代わりに関数形式を用いて1つのコンテンツのみに適用してみましょう。
 /// ```example
 /// #set page(height: 120pt)
 /// Though left in the beginning ...
@@ -50,9 +49,9 @@ use crate::text::TextElem;
 /// ]
 /// ```
 ///
-/// # Nested alignment
-/// You can use varying alignments for layout containers and the elements within
-/// them. This way, you can create intricate layouts:
+/// # 配置のネスト
+/// レイアウトコンテナおよびその内部要素に様々な配置設定を適用できます。
+/// このようにすることで複雑なレイアウトを作成できます。
 ///
 /// ```example
 /// #align(center, block[
@@ -65,17 +64,16 @@ use crate::text::TextElem;
 /// ])
 /// ```
 ///
-/// # Alignment within the same line
-/// The `align` function performs block-level alignment and thus always
-/// interrupts the current paragraph. To have different alignment for parts
-/// of the same line, you should use [fractional spacing]($h) instead:
+/// # 同一行での配置設定
+/// `align` 関数はブロックレベルで配置を実行するため、常に現在のパラグラフを中断します。
+/// 同じ行の一部を異なる配置にするためには、代わりに[比率間隔]($h)を使用しなければなりません。
 ///
 /// ```example
 /// Start #h(1fr) End
 /// ```
 #[elem(Show)]
 pub struct AlignElem {
-    /// The [alignment] along both axes.
+    /// 両方の軸に沿った[alignment]。
     ///
     /// ```example
     /// #set page(height: 6cm)
@@ -92,7 +90,7 @@ pub struct AlignElem {
     #[default]
     pub alignment: Alignment,
 
-    /// The content to align.
+    /// 配置するコンテンツ。
     #[required]
     pub body: Content,
 }
