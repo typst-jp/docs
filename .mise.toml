@@ -2,6 +2,7 @@
 rust = "1.83.0"
 node = "22.11.0"
 bun = "1.1.37"
+pinact = "3.1.1"
 
 [settings]
 yes = true
