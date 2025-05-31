@@ -104,7 +104,7 @@ pub struct ParElem {
     ///
     /// top-edge、bottom-edge、およびleadingを設定することで、
     /// ベースライン間の距離を一定に揃えることも可能です。
-    /// たとえば、leadingを `{1em}`、top-edgeを`{0.8em}`、
+    /// 例えば、leadingを `{1em}`、top-edgeを`{0.8em}`、
     /// bottom-edgeを `{-0.2em}` に設定すると、
     /// ちょうど`{2em}`のベースライン間隔になります。
     /// top-edgeとbottom-edgeの値の正確な配分が最初の行と最後の行の境界に影響を与えます。
