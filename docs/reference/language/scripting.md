@@ -307,10 +307,10 @@ Typstをローカルで使用している場合、独自のシステムローカ
 
 ## 演算子 { #operators }
 
-以下の表は、使用可能なすべての単項および二項演算子の効果、引数の個数（単項あるいは二項）、および優先度（高いほど強く結合）を示しています。Some
-operations, such as [modulus]($calc.rem-euclid), do not have a special syntax
-and can be achieved using functions from the
-[`calc`]($category/foundations/calc) module.
+以下の表は、使用可能なすべての単項および二項演算子の効果、引数の個数（単項あるいは二項）、および優先度（高いほど強く結合）を示しています。
+[剰余]($calc.rem-euclid)
+などの一部の演算は特別な構文を持たず、
+[`calc`]($category/foundations/calc)モジュールの関数を用いて実現できます。
 
 |   演算子   | 効果                                 | 引数の個数 | 優先度 |
 | :--------: | ------------------------------------ | :--------: | :----: |
