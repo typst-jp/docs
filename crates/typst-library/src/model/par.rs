@@ -177,7 +177,7 @@ pub struct ParElem {
     /// - [段落の`spacing`]($par.spacing)を
     ///   `{set par(spacing: 0.65em)}`を使用して[`leading`]($par.leading)と同じ長さまで減らす
     /// - [ブロックの`spacing`]($block.spacing)
-    ///   デフォルトでは段落の間隔を継承します）を`{set block(spacing: 1.2em)}`を使用して
+    ///   （デフォルトでは段落の間隔を継承します）を`{set block(spacing: 1.2em)}`を使用して
     ///   元の段落間隔と同じ長さまで増やす
     ///
     /// ```example
