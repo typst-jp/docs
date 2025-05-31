@@ -24,7 +24,7 @@ pub fn sqrt(
 /// ```
 #[elem(Mathy)]
 pub struct RootElem {
-    /// 被開平数の何乗根を取るか。
+    /// 被開方数の何乗根を取るか。
     #[positional]
     pub index: Option<Content>,
 
