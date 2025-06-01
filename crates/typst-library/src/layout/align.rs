@@ -102,41 +102,38 @@ impl Show for Packed<AlignElem> {
     }
 }
 
-/// Where to [align] something along an axis.
+/// 軸に沿って何かを[配置]($align)する位置。
 ///
-/// Possible values are:
-/// - `start`: Aligns at the [start]($direction.start) of the [text
-///   direction]($text.dir).
-/// - `end`: Aligns at the [end]($direction.end) of the [text
-///   direction]($text.dir).
-/// - `left`: Align at the left.
-/// - `center`: Aligns in the middle, horizontally.
-/// - `right`: Aligns at the right.
-/// - `top`: Aligns at the top.
-/// - `horizon`: Aligns in the middle, vertically.
-/// - `bottom`: Align at the bottom.
+/// 取りうる値は
+/// - `start`: [テキストの向き]($text.dir)の[始点]($direction.start)に配置。
+/// - `end`: [テキストの向き]($text.dir)の[終点]($direction.end)に配置。
+/// - `left`: 左側に配置。
+/// - `center`: 水平方向の中央に配置。
+/// - `right`: 右側に配置。
+/// - `top`: 上側に配置。
+/// - `horizon`: 垂直方法の中央に配置。
+/// - `bottom`: 下側に配置。
 ///
-/// These values are available globally and also in the alignment type's scope,
-/// so you can write either of the following two:
+/// これらの値はグローバルスコープでも、alignment型のスコープでも用いることができます。
+/// したがって、以下の2つのどちらでも書くことができます。
 ///
 /// ```example
 /// #align(center)[Hi]
 /// #align(alignment.center)[Hi]
 /// ```
 ///
-/// # 2D alignments
-/// To align along both axes at the same time, add the two alignments using the
-/// `+` operator. For example, `top + right` aligns the content to the top right
-/// corner.
+/// # 2次元配置
+/// 両方の軸に沿った配置を同時に行うには、`+`演算子を用いて2種類の配置を足し合わせます。
+/// 例えば、`top + right`はコンテンツを右上隅に配置します。
 ///
 /// ```example
 /// #set page(height: 3cm)
 /// #align(center + bottom)[Hi]
 /// ```
 ///
-/// # Fields
-/// The `x` and `y` fields hold the alignment's horizontal and vertical
-/// components, respectively (as yet another `alignment`). They may be `{none}`.
+/// # フィールド
+/// `x`、`y`フィールドには、それぞれ配置の水平成分と垂直成分が（別の`alignment`として）保持されます。
+/// これらは`{none}`になる可能性があります。
 ///
 /// ```example
 /// #(top + right).x \
@@ -188,10 +185,10 @@ impl Alignment {
     pub const HORIZON: Self = Alignment::V(VAlignment::Horizon);
     pub const BOTTOM: Self = Alignment::V(VAlignment::Bottom);
 
-    /// The axis this alignment belongs to.
-    /// - `{"horizontal"}` for `start`, `left`, `center`, `right`, and `end`
-    /// - `{"vertical"}` for `top`, `horizon`, and `bottom`
-    /// - `{none}` for 2-dimensional alignments
+    /// 与えられた配置が属する軸。
+    /// -  `start`、`left`、`center`、`right`および`end`の場合は`{"horizontal"}`
+    /// - `top`、`horizon`および`bottom`の場合は`{"vertical"}`
+    /// - 2次元配置の場合は`{none}`
     ///
     /// ```example
     /// #left.axis() \
@@ -206,7 +203,7 @@ impl Alignment {
         }
     }
 
-    /// The inverse alignment.
+    /// 逆の配置。
     ///
     /// ```example
     /// #top.inv() \
