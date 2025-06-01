@@ -67,7 +67,7 @@ pub struct BoxElem {
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
-    /// ボックスのコンテンツのパディング量
+    /// ボックスのコンテンツのパディング量。
     ///
     /// _注意:_ ボックスがテキストを含むとき、その正確な大きさは現在の[テキストの端]($text.top-edge)に依存します。
     ///
