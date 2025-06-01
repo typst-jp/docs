@@ -318,7 +318,7 @@ impl Unlabellable for Packed<ParbreakElem> {}
 ///
 /// `numbering`オプションには、予め定義された[番号付けパターン]($numbering)か、
 /// スタイル付きコンテンツを返す関数のいずれかを指定します。
-/// set-showルールを用いてnumberingを`{none}`に設定することで、
+/// show-setルールを用いてnumberingを`{none}`に設定することで、
 /// 特定要素内のテキストの行番号を無効にすることができます。
 ///
 /// ```example
