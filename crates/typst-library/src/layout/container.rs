@@ -280,7 +280,7 @@ pub struct BlockElem {
     /// これは`above`と`below`を同じ値に設定するための短縮記法にすぎないことに注意してください。
     /// `above`と`below`の値は異なる可能性があるため、[context]ブロックでは`{block.above}`と `{block.below}`にのみアクセスでき、`{block.spacing}`に直接アクセスすることはできません。
     ///
-    /// このプロパティはshow ruleと組み合わせて使用することで、 任意のブロックレベル要素の周りの間隔を調整できます。
+    /// このプロパティはshow ruleと組み合わせて使用することで、任意のブロックレベル要素の周りの間隔を調整できます。
     ///
     /// ```example
     /// #set align(center)
