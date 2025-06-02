@@ -145,7 +145,8 @@ mise run textlint-html
 ```
 
 現状Rustコードを直接textlintできません。
-そのため、lintエラーが出た該当箇所のRustコードを手動で修正してください。
+そのため、textlintの警告が出た該当箇所のRustコードを手動で修正して、再度`mise run generate`を実行してください。
+textlintの警告内容が不適当であると思われる場合にはIssueやPull Requestにてご報告お願いいたします。
 
 Markdownファイルを翻訳した場合には、`mise run textlint-md`を実行します。
 
