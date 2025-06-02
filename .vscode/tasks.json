@@ -12,6 +12,12 @@
       }
     },
     {
+      "label": "textlint-html",
+      "type": "shell",
+      "command": "mise run textlint-html",
+      "problemMatcher": []
+    },
+    {
       "label": "textlint-md",
       "type": "shell",
       "command": "mise run textlint-md",
@@ -20,13 +26,7 @@
     {
       "label": "textlint-md:fix",
       "type": "shell",
-      "command": "mise run textlint-md:fix",
-      "problemMatcher": []
-    },
-    {
-      "label": "textlint-html",
-      "type": "shell",
-      "command": "mise run textlint-html",
+      "command": "mise run textlint-md-fix",
       "problemMatcher": []
     }
   ]
