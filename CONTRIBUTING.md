@@ -35,7 +35,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 [`./website/`のREADME](https://github.com/typst-jp/typst-jp.github.io/blob/main/website/README.md)を参照してください。
 
-### ローカル環境でWebページを生成する
+### ローカル環境でWebページを生成
 
 当プロジェクトの開発ツールおよびコマンドは[mise](https://mise.jdx.dev/)で一元管理しています。導入していない場合は、[Getting Started | mise-en-place](https://mise.jdx.dev/getting-started.html)に従ってインストールしてください。
 
@@ -73,7 +73,7 @@ mise run preview
 
 ```sh
 mise run textlint-html  # Rustソースコードを翻訳した場合
-mise run textlint-md  # Markdownファイルを翻訳した場合
+mise run textlint-md    # Markdownファイルを翻訳した場合
 ```
 
 #### miseによる開発環境のセットアップ
@@ -101,7 +101,7 @@ mise trust
 mise install
 ```
 
-#### TypstのソースコードからドキュメントデータのJSONファイルを生成する
+#### TypstのソースコードからドキュメントデータのJSONファイルを生成
 
 ドキュメントデータのJSONファイルは、typst-docsによりTypstのソースコード内のコメントおよび`docs/`にあるMarkdownファイル群から生成されます。
 
@@ -111,7 +111,7 @@ mise install
 mise run generate-docs
 ```
 
-#### ドキュメントデータのJSONファイルからWebサイトを生成する
+#### ドキュメントデータのJSONファイルからWebサイトを生成
 
 Webサイトの生成にはNode.jsとViteとHonoを使用しています。また、パッケージ管理にBunを使用しています。
 
@@ -127,7 +127,7 @@ mise run generate-web
 mise run preview
 ```
 
-#### Webサイトの生成までを一括で行う
+#### Webサイトの生成までを一括実行
 
 `mise run generate`を実行すると、`generate-docs`および`generate-web`を一括で実行します。
 
@@ -135,7 +135,7 @@ mise run preview
 mise run generate
 ```
 
-#### textlintを行う
+#### 文章校正
 
 [翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)に沿った体裁となっているかを確認するためのtextlintを用意しております。
 `mise run textlint-html`を実行すると、生成されたWebサイトのHTMLコードをtextlintします。
