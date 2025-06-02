@@ -55,7 +55,7 @@ pub struct BoxElem {
     /// 詳細は[rectangleのドキュメント]($rect.fill)を参照してください。
     pub fill: Option<Paint>,
 
-    /// ボックスの境界線の色。
+    /// ボックスの枠線の色。
     /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
     #[resolve]
     #[fold]
@@ -248,7 +248,7 @@ pub struct BlockElem {
     /// 詳細は[rectangleのドキュメント]($rect.fill)を参照してください。
     pub fill: Option<Paint>,
 
-    /// ブロックの境界線の色。
+    /// ブロックの枠線の色。
     /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
     #[resolve]
     #[fold]
