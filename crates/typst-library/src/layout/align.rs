@@ -104,7 +104,7 @@ impl Show for Packed<AlignElem> {
 
 /// 軸に沿って何かを[配置]($align)する位置。
 ///
-/// 取りうる値は
+/// 取りうる値は以下の通りです。
 /// - `start`: [テキストの向き]($text.dir)の[始点]($direction.start)に配置。
 /// - `end`: [テキストの向き]($text.dir)の[終点]($direction.end)に配置。
 /// - `left`: 左側に配置。
