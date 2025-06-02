@@ -69,6 +69,13 @@ Webサイトをローカルサーバーでプレビューするには、以下�
 mise run preview
 ```
 
+体裁を確認する場合には、以下のコマンドを実行します。
+
+```sh
+mise run textlint-html  # Rustソースコードを翻訳した場合
+mise run textlint-md  # Markdownファイルを翻訳した場合
+```
+
 #### miseによる開発環境のセットアップ
 
 > [!NOTE]
@@ -128,6 +135,30 @@ mise run preview
 mise run generate
 ```
 
+#### textlintを行う
+
+[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)に沿った体裁となっているかを確認するためのtextlintを用意しております。
+`mise run textlint-html`を実行すると、生成されたWebサイトのHTMLコードをtextlintします。
+
+```sh
+mise run textlint-html
+```
+
+現状Rustコードを直接textlintできません。
+そのため、lintエラーが出た該当箇所のRustコードを手動で修正してください。
+
+Markdownファイルを翻訳した場合には、`mise run textlint-md`を実行します。
+
+```sh
+mise run textlint-md
+```
+
+直接textlintするMarkdownファイルに関しては、`mise run textlint-md-fix`を実行することで、自動修正も可能です。
+
+```sh
+mise run textlint-md-fix
+```
+
 #### Dev Containerによる開発環境のセットアップ
 
 Dockerコンテナー上に上記と同一の環境を構築して作業することも可能です。
@@ -139,8 +170,8 @@ Visual Studio Codeにおける操作フロー例は以下の通りです。
 2. Webサーバーが起動したらブラウザで http://localhost:5173 にアクセスします。
 3. 翻訳したファイルの変更を反映させるためにはCtrl+Shift+Bで再ビルドしてください。
 4. 体裁を確認したい場合、Ctrl+Shift+Pを押してから`> Tasks: Run task`を実行し以下のいずれかを選択します。
-    - `textlint-md` : Markdownファイルを翻訳した場合
     - `textlint-html` : Rustソースコードを翻訳した場合
+    - `textlint-md` : Markdownファイルを翻訳した場合
 5. 自動修正を実施したい場合も同様に以下から選択します。
     - `textlint-md:fix` : Markdownファイルを自動修正します。
     - Rustコードの自動修正は対応していなため、該当箇所を手動で修正してください。
