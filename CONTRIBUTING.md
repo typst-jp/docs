@@ -154,6 +154,7 @@ mise run textlint-md
 ```
 
 直接textlintするMarkdownファイルに関しては、`mise run textlint-md-fix`を実行することで、自動修正も可能です。
+ファイルを上書きするため、Gitで現状を記録した状態で実施することを推奨します。
 
 ```sh
 mise run textlint-md-fix
