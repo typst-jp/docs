@@ -111,7 +111,7 @@ impl Show for Packed<AlignElem> {
 /// - `center`: 水平方向の中央に配置。
 /// - `right`: 右側に配置。
 /// - `top`: 上側に配置。
-/// - `horizon`: 垂直方法の中央に配置。
+/// - `horizon`: 垂直方向の中央に配置。
 /// - `bottom`: 下側に配置。
 ///
 /// これらの値はグローバルスコープでも、alignment型のスコープでも用いることができます。
