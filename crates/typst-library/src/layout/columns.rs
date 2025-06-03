@@ -5,27 +5,21 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, NativeElement, Packed, Show, StyleChain};
 use crate::layout::{BlockElem, Length, Ratio, Rel};
 
-/// Separates a region into multiple equally sized columns.
+/// 複数の同じ大きさを持つカラムへの領域の分割。
 ///
-/// The `column` function lets you separate the interior of any container into
-/// multiple columns. It will currently not balance the height of the columns.
-/// Instead, the columns will take up the height of their container or the
-/// remaining height on the page. Support for balanced columns is planned for
-/// the future.
+/// `column`関数を用いることで、あらゆるコンテナの内部を複数のカラムに分割することができます。
+/// 現在、カラムの高さのバランスは取れません。
+/// その代わり、カラムはコンテナの高さかページの残りの高さを占めます。
+/// バランスを取ったカラムは将来的にサポートされる予定です。
 ///
-/// # Page-level columns { #page-level }
-/// If you need to insert columns across your whole document, use the `{page}`
-/// function's [`columns` parameter]($page.columns) instead. This will create
-/// the columns directly at the page-level rather than wrapping all of your
-/// content in a layout container. As a result, things like
-/// [pagebreaks]($pagebreak), [footnotes]($footnote), and [line
-/// numbers]($par.line) will continue to work as expected. For more information,
-/// also read the [relevant part of the page setup
-/// guide]($guides/page-setup-guide/#columns).
+/// # ページレベルのカラム { #page-level }
+/// ドキュメント全体を渡るカラムを挿入する必要がある場合は、代わりに`{page}`関数の[`columns`パラメーター]($page.columns)を使用してください。
+/// これは、レイアウトコンテナ内のコンテンツ全てをラップするのではなく、ページレベルのカラムを直接作成します。
+/// 結果として[ページ区切り]($pagebreak)、[脚注]($footnote)および[行番号]($par.line)のようなものが期待通りの動作をし続けます。
+/// より詳しくは[ページのセットアップガイドの関連する項目]($guides/page-setup-guide/#columns)をご覧ください。
 ///
-/// # Breaking out of columns { #breaking-out }
-/// To temporarily break out of columns (e.g. for a paper's title), use
-/// parent-scoped floating placement:
+/// # カラムの中断 { #breaking-out }
+/// （例えば、論文のタイトルのように）カラムを一時的に中断する場合は、親スコープでのフロート配置を使用してください。
 ///
 /// ```example:single
 /// #set page(columns: 2, height: 150pt)
@@ -43,17 +37,17 @@ use crate::layout::{BlockElem, Length, Ratio, Rel};
 /// ```
 #[elem(Show)]
 pub struct ColumnsElem {
-    /// The number of columns.
+    /// カラムの数。
     #[positional]
     #[default(NonZeroUsize::new(2).unwrap())]
     pub count: NonZeroUsize,
 
-    /// The size of the gutter space between each column.
+    /// 各カラム間の段間の大きさ。
     #[resolve]
     #[default(Ratio::new(0.04).into())]
     pub gutter: Rel<Length>,
 
-    /// The content that should be layouted into the columns.
+    ///カラム内にレイアウトされるべき内容。
     #[required]
     pub body: Content,
 }
@@ -66,13 +60,11 @@ impl Show for Packed<ColumnsElem> {
     }
 }
 
-/// Forces a column break.
+/// 強制的なカラムの区切り。
 ///
-/// The function will behave like a [page break]($pagebreak) when used in a
-/// single column layout or the last column on a page. Otherwise, content after
-/// the column break will be placed in the next column.
+/// この関数は、一段組かページ中の最後のカラムで使用されると、[ページ区切り]($pagebreak)と同じように振る舞います。それ以外の場合、カラム区切りの後のコンテンツは次のカラムに配置されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set page(columns: 2)
 /// Preliminary findings from our
@@ -91,8 +83,7 @@ impl Show for Packed<ColumnsElem> {
 /// ```
 #[elem(title = "Column Break")]
 pub struct ColbreakElem {
-    /// If `{true}`, the column break is skipped if the current column is
-    /// already empty.
+    /// `{true}`の場合、現在のカラムがすでに空のとき、カラム区切りが実行されません。
     #[default(false)]
     pub weak: bool,
 }
