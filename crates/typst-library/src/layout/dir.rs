@@ -3,17 +3,16 @@ use ecow::EcoString;
 use crate::foundations::{func, scope, ty, Repr};
 use crate::layout::{Axis, Side};
 
-/// The four directions into which content can be laid out.
+/// コンテンツをレイアウトできる4つの向き。
 ///
-///  Possible values are:
-/// - `{ltr}`: Left to right.
-/// - `{rtl}`: Right to left.
-/// - `{ttb}`: Top to bottom.
-/// - `{btt}`: Bottom to top.
+///  取りうる値は以下の通りです。
+/// - `{ltr}`: 左から右。
+/// - `{rtl}`: 右から左。
+/// - `{ttb}`: 上から下。
+/// - `{btt}`: 下から上。
 ///
-/// These values are available globally and
-/// also in the direction type's scope, so you can write either of the following
-/// two:
+/// これらの値はグローバルスコープでも、direction型のスコープでも用いることができます。
+/// したがって、以下の2つのどちらでも書くことができます。
 /// ```example
 /// #stack(dir: rtl)[A][B][C]
 /// #stack(dir: direction.rtl)[A][B][C]
@@ -50,8 +49,7 @@ impl Dir {
     pub const TTB: Self = Self::TTB;
     pub const BTT: Self = Self::BTT;
 
-    /// The axis this direction belongs to, either `{"horizontal"}` or
-    /// `{"vertical"}`.
+    /// このdirectionが属する軸。`{"horizontal"}`か`{"vertical"}`のいずれかになります。
     ///
     /// ```example
     /// #ltr.axis() \
@@ -65,7 +63,7 @@ impl Dir {
         }
     }
 
-    /// The start point of this direction, as an alignment.
+    /// このdirectionの始点をalignmentとして返します。
     ///
     /// ```example
     /// #ltr.start() \
@@ -83,7 +81,7 @@ impl Dir {
         }
     }
 
-    /// The end point of this direction, as an alignment.
+    /// このdirectionの終点をalignmentとして返します。
     ///
     /// ```example
     /// #ltr.end() \
@@ -101,7 +99,7 @@ impl Dir {
         }
     }
 
-    /// The inverse direction.
+    /// 逆の向き。
     ///
     /// ```example
     /// #ltr.inv() \
