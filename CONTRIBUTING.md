@@ -137,7 +137,7 @@ mise run generate
 
 #### 文章校正
 
-[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)に沿った体裁となっているかを確認するためのtextlintを用意しております。
+[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)に従った体裁へと校正するための補助ツールとしてtextlintの設定も整備しております。
 `mise run textlint-html`を実行すると、生成されたWebサイトのHTMLコードをtextlintします。
 
 ```sh
