@@ -185,7 +185,7 @@ impl Alignment {
     pub const HORIZON: Self = Alignment::V(VAlignment::Horizon);
     pub const BOTTOM: Self = Alignment::V(VAlignment::Bottom);
 
-    /// 与えられた配置が属する軸。
+    /// このalignmentが属する軸。
     /// -  `start`、`left`、`center`、`right`および`end`の場合は`{"horizontal"}`
     /// - `top`、`horizon`および`bottom`の場合は`{"vertical"}`
     /// - 2次元配置の場合は`{none}`
