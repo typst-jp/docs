@@ -47,7 +47,7 @@ pub struct ColumnsElem {
     #[default(Ratio::new(0.04).into())]
     pub gutter: Rel<Length>,
 
-    ///カラム内にレイアウトされるべき内容。
+    /// カラム内にレイアウトされるべき内容。
     #[required]
     pub body: Content,
 }
