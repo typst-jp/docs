@@ -144,7 +144,7 @@ mise run generate
 mise run textlint-html
 ```
 
-現状Rustコードを直接textlintできません。
+現在、Rustのソースコードを直接textlintで解析することはできません。これは、Rustのrustdocに対応したtextlintプラグインがまだ存在しないためです。そのため、当面の対応として、出力されたHTMLファイルをtextlintで解析しています。
 そのため、textlintの警告が出た該当箇所のRustコードを手動で修正して、再度`mise run generate`を実行してください。
 textlintの警告内容が不適当であると思われる場合にはIssueやPull Requestにてご報告お願いいたします。
 
