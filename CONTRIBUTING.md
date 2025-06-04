@@ -156,7 +156,7 @@ Markdownファイルを翻訳した場合には、`mise run textlint-md`を実�
 mise run textlint-md
 ```
 
-直接textlintするMarkdownファイルに関しては、`mise run textlint-md-fix`を実行することで、自動修正も可能です。
+直接textlintで校正するMarkdownファイルに関しては、`mise run textlint-md-fix`を実行することで、自動修正も可能です。
 ファイルを上書きするため、Gitで現状を記録した状態で実施することを推奨します。
 
 ```sh
