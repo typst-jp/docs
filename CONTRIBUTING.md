@@ -140,7 +140,7 @@ mise run generate
 #### 文章校正
 
 [翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)に従った体裁へと校正するための補助ツールとしてtextlintの設定も整備しております。
-`mise run textlint-html`を実行すると、生成されたWebサイトのHTMLコードをtextlintします。
+`mise run textlint-html`を実行すると、生成されたWebサイトのHTMLコードをtextlintで校正します。
 
 ```sh
 mise run textlint-html
