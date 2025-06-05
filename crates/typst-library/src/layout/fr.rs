@@ -8,15 +8,13 @@ use typst_utils::{Numeric, Scalar};
 use crate::foundations::{repr, ty, Repr};
 use crate::layout::Abs;
 
-/// Defines how the remaining space in a layout is distributed.
+/// レイアウトに残されたスペースをどう分配するかを定義。
 ///
-/// Each fractionally sized element gets space based on the ratio of its
-/// fraction to the sum of all fractions.
+/// 比率の大きさを持つ各要素に割り当てられるスペースは、全ての比率の和に対する割合に基づいて決まります。
 ///
-/// For more details, also see the [h] and [v] functions and the
-/// [grid function]($grid).
+/// 詳細は[h]関数、[v]関数および[grid関数]($grid)も参照してください。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// Left #h(1fr) Left-ish #h(2fr) Right
 /// ```
