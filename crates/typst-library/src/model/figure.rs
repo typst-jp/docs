@@ -63,7 +63,7 @@ use crate::visualize::ImageElem;
 /// デフォルトでは、図表はコンテンツの流れの中に配置されます。
 /// 図表をページの上部または下部に配置するには、[`placement`]($figure.placement)引数を使用します。
 ///
-/// 図表が大きすぎてその内容がページをまたいで分割可能な場合（例えば大きな表が含まれている場合）、このshowルールで図表自体もページをまたいで分割可能です。
+/// 図表が大きすぎてそのコンテンツがページをまたいで分割可能な場合（例えば大きな表が含まれている場合）、このshowルールで図表自体もページをまたいで分割可能です。
 /// ```typ
 /// #show figure: set block(breakable: true)
 /// ```
@@ -98,7 +98,7 @@ use crate::visualize::ImageElem;
 /// ```
 #[elem(scope, Locatable, Synthesize, Count, Show, ShowSet, Refable, Outlinable)]
 pub struct FigureElem {
-    /// 図表の内容。多くの場合、 [image] が使われます。
+    /// 図表のコンテンツ。多くの場合、 [image] が使われます。
     #[required]
     pub body: Content,
 
@@ -179,7 +179,7 @@ pub struct FigureElem {
     /// `{auto}` に設定すると、図表は、種類や[テキスト言語]($text.lang)に基づいて、正しい補足語を自動的に決定しようとします。
     /// 独自の図表タイプを使用している場合は、補足語を手動で指定する必要があります。
     ///
-    /// 関数が指定された場合、その関数は指定された種類の最初の子孫要素（通常は図の本体）に渡され、内容を返す必要があります。
+    /// 関数が指定された場合、その関数は指定された種類の最初の子孫要素（通常は図の本体）に渡され、コンテンツを返す必要があります。
     ///
     /// ```example
     /// #figure(

@@ -47,7 +47,7 @@ use crate::visualize::{LineElem, Stroke};
 /// And the online app. #footnote(<fn>)
 /// ```
 ///
-/// _注意:_ `footnote`が呼び出されるスコープ内でのsetルールやshowルールは、脚注の内容に適用されない場合があります。
+/// _注意:_ `footnote`が呼び出されるスコープ内でのsetルールやshowルールは、脚注のコンテンツに適用されない場合があります。
 /// 詳細については[こちら][issue]を参照してください。
 ///
 /// [issue]: https://github.com/typst/typst/issues/1467#issuecomment-1588799440

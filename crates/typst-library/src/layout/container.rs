@@ -110,7 +110,7 @@ pub struct BoxElem {
     #[default(false)]
     pub clip: bool,
 
-    /// ボックスの内容。
+    /// ボックスのコンテンツ。
     #[positional]
     #[borrowed]
     pub body: Option<Content>,
@@ -336,7 +336,7 @@ pub struct BlockElem {
     #[default(false)]
     pub sticky: bool,
 
-    /// ブロックの内容。
+    /// ブロックのコンテンツ。
     #[positional]
     #[borrowed]
     pub body: Option<BlockBody>,

@@ -216,7 +216,7 @@ pub struct ParElem {
     #[resolve]
     pub hanging_indent: Length,
 
-    /// 段落の内容。
+    /// 段落のコンテンツ。
     #[required]
     pub body: Content,
 }
