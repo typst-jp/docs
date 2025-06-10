@@ -187,9 +187,9 @@
 	"/docs/changelog/0.2.0/": "untranslated",
 	"/docs/changelog/0.1.0/": "untranslated",
 	"/docs/changelog/earlier/": "untranslated",
-	"/docs/japanese/": "translated",
-	"/docs/japanese/templates/": "translated",
-	"/docs/japanese/packages/": "translated",
-	"/docs/japanese/articles/": "translated",
-	"/docs/glossary/": "translated"
+	"/docs/japanese/": "original",
+	"/docs/japanese/templates/": "original",
+	"/docs/japanese/packages/": "original",
+	"/docs/japanese/articles/": "original",
+	"/docs/glossary/": "original"
 }

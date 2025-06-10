@@ -151,6 +151,46 @@ describe("translationStatus", () => {
 			expect(result).toBe(0.625);
 		});
 
+		it("originalページは計算から除外される", async () => {
+			const { calculateTranslationProgressRate } = await import(
+				"./translationStatus"
+			);
+
+			const status = {
+				$schema: "./translation-status.schema.json",
+				"/docs/page1/": "translated", // 1.0
+				"/docs/page2/": "partially_translated", // 0.5
+				"/docs/original1/": "original", // 除外
+				"/docs/original2/": "original", // 除外
+				"/docs/page3/": "untranslated", // 0.0
+			};
+
+			mockFs.readFileSync.mockReturnValue(JSON.stringify(status));
+
+			const result = calculateTranslationProgressRate();
+
+			// (1.0 + 0.5 + 0.0) / 3 = 0.5
+			expect(result).toBe(0.5);
+		});
+
+		it("全てoriginalページの場合は0を返す", async () => {
+			const { calculateTranslationProgressRate } = await import(
+				"./translationStatus"
+			);
+
+			const status = {
+				$schema: "./translation-status.schema.json",
+				"/docs/original1/": "original",
+				"/docs/original2/": "original",
+			};
+
+			mockFs.readFileSync.mockReturnValue(JSON.stringify(status));
+
+			const result = calculateTranslationProgressRate();
+
+			expect(result).toBe(0);
+		});
+
 		it("ページが存在しない場合は0を返す", async () => {
 			const { calculateTranslationProgressRate } = await import(
 				"./translationStatus"

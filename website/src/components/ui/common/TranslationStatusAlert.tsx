@@ -43,6 +43,16 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				message:
 					"このページはまだ翻訳されていません。原文の内容が表示されています。",
 			};
+		case "original":
+			return {
+				bgColor: "bg-cyan-50",
+				borderColor: "border-cyan-200",
+				textColor: "text-cyan-800",
+				iconColor: "text-cyan-600",
+				label: "日本語版オリジナル",
+				message:
+					"このページの内容は公式ドキュメントには含まれておらず、日本語コミュニティが独自に追加したものです。",
+			};
 	}
 };
 

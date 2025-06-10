@@ -11,7 +11,7 @@
 	},
 	"additionalProperties": {
 		"type": "string",
-		"enum": ["translated", "partially_translated", "untranslated"],
+		"enum": ["translated", "partially_translated", "untranslated", "original"],
 		"description": "ページの翻訳状態"
 	}
 }

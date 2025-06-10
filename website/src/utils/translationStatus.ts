@@ -4,7 +4,8 @@ import path from "node:path";
 export type TranslationStatus =
 	| "translated"
 	| "partially_translated"
-	| "untranslated";
+	| "untranslated"
+	| "original";
 
 export type TranslationStatusMap = {
 	[route: string]: TranslationStatus;
@@ -67,19 +68,23 @@ export const registerRoutes = (routes: string[]): void => {
 /**
  * 翻訳の進捗率を計算する。
  * `translated`は1.0、`partially_translated`は0.5の重みを持つ。
+ * `original`は翻訳対象外のため計算から除外される。
  * @returns [0.0, 1.0]の範囲で表される翻訳率
  */
 export const calculateTranslationProgressRate = (): number => {
 	const status = loadTranslationStatus();
 	const routes = Object.keys(status).filter((key) => key !== "$schema");
+	const translationTargetRoutes = routes.filter(
+		(route) => status[route] !== "original",
+	);
 
-	if (routes.length === 0) {
+	if (translationTargetRoutes.length === 0) {
 		return 0;
 	}
 
 	let translationScore = 0;
 
-	for (const route of routes) {
+	for (const route of translationTargetRoutes) {
 		const currentStatus = status[route];
 		if (currentStatus === "translated") {
 			translationScore += 1;
@@ -88,7 +93,7 @@ export const calculateTranslationProgressRate = (): number => {
 		}
 	}
 
-	return translationScore / routes.length;
+	return translationScore / translationTargetRoutes.length;
 };
 
 let translationStatusCache: TranslationStatusMap | null = null;
