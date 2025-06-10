@@ -5,10 +5,6 @@ description: |
 
 # 日本語テンプレート
 
-<div class="info-box">
-  <p>このページの内容は公式ドキュメントには含まれておらず、日本語コミュニティによって独自に追加されたものです。</p>
-</div>
-
 ## 一般
 
 - [typst-jp-template](https://github.com/satshi/typst-jp-template) - pLaTeXでのjarticle風のとりあえず日本語で書き始めるためのテンプレート

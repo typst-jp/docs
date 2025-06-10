@@ -5,10 +5,6 @@ description: |
 
 # 日本語記事
 
-<div class="info-box">
-  <p>このページの内容は公式ドキュメントには含まれておらず、日本語コミュニティによって独自に追加されたものです。</p>
-</div>
-
 Typstに関する日本語の記事は[Zenn](https://zenn.dev/)や[Qiita](https://qiita.com/)に沢山掲載されています。以下のリンクからその一覧が見られます。
 
 - [Typstの記事一覧 | Zenn](https://zenn.dev/topics/typst) - ZennのTypstトピック
