@@ -5,7 +5,7 @@ export type TranslationStatus =
 	| "translated"
 	| "partially_translated"
 	| "untranslated"
-	| "original";
+	| "community";
 
 export type TranslationStatusMap = {
 	[route: string]: TranslationStatus;
@@ -75,7 +75,7 @@ export const calculateTranslationProgressRate = (): number => {
 	const status = loadTranslationStatus();
 	const routes = Object.keys(status).filter((key) => key !== "$schema");
 	const translationTargetRoutes = routes.filter(
-		(route) => status[route] !== "original",
+		(route) => status[route] !== "community",
 	);
 
 	if (translationTargetRoutes.length === 0) {

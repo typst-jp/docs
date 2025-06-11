@@ -43,7 +43,7 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				message:
 					"このページはまだ翻訳されていません。原文の内容が表示されています。",
 			};
-		case "original":
+		case "community":
 			return {
 				bgColor: "bg-cyan-50",
 				borderColor: "border-cyan-200",

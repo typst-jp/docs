@@ -160,8 +160,8 @@ describe("translationStatus", () => {
 				$schema: "./translation-status.schema.json",
 				"/docs/page1/": "translated", // 1.0
 				"/docs/page2/": "partially_translated", // 0.5
-				"/docs/original1/": "original", // 除外
-				"/docs/original2/": "original", // 除外
+				"/docs/original1/": "community", // 除外
+				"/docs/original2/": "community", // 除外
 				"/docs/page3/": "untranslated", // 0.0
 			};
 
@@ -180,8 +180,8 @@ describe("translationStatus", () => {
 
 			const status = {
 				$schema: "./translation-status.schema.json",
-				"/docs/original1/": "original",
-				"/docs/original2/": "original",
+				"/docs/original1/": "community",
+				"/docs/original2/": "community",
 			};
 
 			mockFs.readFileSync.mockReturnValue(JSON.stringify(status));
