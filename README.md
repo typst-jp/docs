@@ -1,7 +1,6 @@
 # Typst 日本語ドキュメント (非公式)
 
 [![CI/CD for website](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/website.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/website.yml)
-[![翻訳進捗](https://img.shields.io/badge/Translation%20Progress%20%2f%20翻訳進捗-28%25-orange.svg)](https://github.com/typst-jp/typst-jp.github.io/issues/44)
 
 > [!NOTE]
 > For English version, please refer to [README.en.md](README.en.md).
