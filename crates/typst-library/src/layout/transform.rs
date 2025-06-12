@@ -7,13 +7,12 @@ use crate::layout::{
     Abs, Alignment, Angle, BlockElem, HAlignment, Length, Ratio, Rel, VAlignment,
 };
 
-/// Moves content without affecting layout.
+/// レイアウトに影響を与えないコンテンツの移動。
 ///
-/// The `move` function allows you to move content while the layout still 'sees'
-/// it at the original positions. Containers will still be sized as if the
-/// content was not moved.
+/// `move`関数を用いると、コンテンツの元々の位置をレイアウトに「認識」させながら、そのコンテンツを移動させることができます。
+/// コンテナの大きさは、コンテンツが移動されていないかのように決定されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #rect(inset: 0pt, move(
 ///   dx: 6pt, dy: 6pt,
@@ -27,13 +26,13 @@ use crate::layout::{
 /// ```
 #[elem(Show)]
 pub struct MoveElem {
-    /// The horizontal displacement of the content.
+    /// コンテンツの水平方向の変位。
     pub dx: Rel<Length>,
 
-    /// The vertical displacement of the content.
+    /// コンテンツの垂直方向の変位。
     pub dy: Rel<Length>,
 
-    /// The content to move.
+    /// 移動させたいコンテンツ。
     #[required]
     pub body: Content,
 }
