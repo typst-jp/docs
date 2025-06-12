@@ -45,12 +45,12 @@ impl Show for Packed<MoveElem> {
     }
 }
 
-/// Rotates content without affecting layout.
+/// レイアウトに影響を与えないコンテンツの回転。
 ///
-/// Rotates an element by a given angle. The layout will act as if the element
-/// was not rotated unless you specify `{reflow: true}`.
+/// 要素を指定された角度だけ回転させます。
+/// `{reflow: true}`を指定しない限り、レイアウトは、その要素が回転していないかのように振る舞います。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #stack(
 ///   dir: ltr,
@@ -61,7 +61,7 @@ impl Show for Packed<MoveElem> {
 /// ```
 #[elem(Show)]
 pub struct RotateElem {
-    /// The amount of rotation.
+    /// 回転させる量。
     ///
     /// ```example
     /// #rotate(-1.571rad)[Space!]
@@ -70,11 +70,9 @@ pub struct RotateElem {
     #[positional]
     pub angle: Angle,
 
-    /// The origin of the rotation.
+    /// 回転の中心点。
     ///
-    /// If, for instance, you wanted the bottom left corner of the rotated
-    /// element to stay aligned with the baseline, you would set it to `bottom +
-    /// left` instead.
+    /// 例えば、回転した要素の左下隅をベースラインに揃えたままにしたい場合、代わりに`bottom + left`を指定します。
     ///
     /// ```example
     /// #set text(spacing: 8pt)
@@ -89,11 +87,10 @@ pub struct RotateElem {
     #[default(HAlignment::Center + VAlignment::Horizon)]
     pub origin: Alignment,
 
-    /// Whether the rotation impacts the layout.
+    /// 回転がレイアウトに影響を与えるかどうか。
     ///
-    /// If set to `{false}`, the rotated content will retain the bounding box of
-    /// the original content. If set to `{true}`, the bounding box will take the
-    /// rotation of the content into account and adjust the layout accordingly.
+    /// `{false}`に設定された場合、回転したコンテンツは元々のコンテンツのバウンディングボックスに留まります。
+    /// `{true}`に設定された場合、バウンディングボックスはコンテンツの回転を考慮してレイアウトを調整します。
     ///
     /// ```example
     /// Hello #rotate(90deg, reflow: true)[World]!
@@ -101,7 +98,7 @@ pub struct RotateElem {
     #[default(false)]
     pub reflow: bool,
 
-    /// The content to rotate.
+    /// 回転させるコンテンツ。
     #[required]
     pub body: Content,
 }
