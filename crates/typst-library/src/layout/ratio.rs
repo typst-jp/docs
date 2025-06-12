@@ -6,11 +6,11 @@ use typst_utils::{Numeric, Scalar};
 
 use crate::foundations::{repr, ty, Repr};
 
-/// A ratio of a whole.
+/// 百分率。
 ///
-/// Written as a number, followed by a percent sign.
+/// 数値の後にパーセント記号を付けて表記します。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set align(center)
 /// #scale(x: 150%)[
