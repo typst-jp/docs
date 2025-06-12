@@ -948,14 +948,8 @@ mod tests {
     fn test_docs() {
         // remove all files in ../assets/docs
         let _ = std::fs::remove_dir_all("../assets/docs");
-        // copy all files from ../assets/files to ../assets/docs
-        std::fs::create_dir("../assets/docs").unwrap();
-        for entry in std::fs::read_dir("../assets/files").unwrap() {
-            let entry = entry.unwrap();
-            let path = entry.path();
-            let name = String::from(path.file_name().unwrap().to_str().unwrap());
-            std::fs::copy(path, format!("../assets/docs/{}", name)).unwrap();
-        }
+        // create ../assets/docs directory
+        let _ = std::fs::create_dir_all("../assets/docs");
         // convert all pages to html and generate example images to ../assets/docs
         let pages = provide(&TestResolver);
         // convert pages to JSON and save to ../assets/docs.json
@@ -998,7 +992,18 @@ mod tests {
             }
         }
 
-        fn image(&self, filename: &str, _: &[u8]) -> String {
+        fn image(&self, filename: &str, data: &[u8]) -> String {
+            // Set the output path
+            let output_path = Path::new("../assets/docs").join(filename);
+
+            // Create parent directories if they don't exist
+            if let Some(parent) = output_path.parent() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+
+            // Write the file
+            std::fs::write(&output_path, data).ok();
+
             // return /assets/docs/<filename>
             format!("/assets/docs/{}", filename)
         }
