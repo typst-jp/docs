@@ -41,7 +41,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 	const outline = page.outline;
 	const translationStatus = getTranslationStatus(route);
 	return (
-		<html lang="ja">
+		<html lang="ja" class="scroll-pt-24">
 			<head>
 				<meta charSet="utf-8" />
 				<title>{title} – Typstドキュメント日本語版</title>
