@@ -12,7 +12,7 @@ export const TableOfContents = ({ outline }: TableOfContentsProps) => {
 	return (
 		<nav
 			id="page-overview"
-			class="flex-none w-full px-3.5 py-3 border border-neutral-200/60 rounded-md bg-white sticky top-[60px] mt-4 mb-8 h-[calc(100vh-60px-1rem)] overflow-auto"
+			class="flex-none w-full px-3.5 py-3 border border-neutral-200/60 rounded-md bg-white sticky top-[80px] mt-4 mb-8 h-[calc(100vh-80px-1rem)] overflow-auto"
 		>
 			<strong class="block mb-2 text-xs text-neutral-500 font-semibold tracking-wide">
 				目次
