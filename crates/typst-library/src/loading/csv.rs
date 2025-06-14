@@ -13,7 +13,7 @@ use crate::loading::{DataSource, Load, Readable};
 /// すべての行が単一の配列にまとめられます。
 /// ヘッダー行は削除されません。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let results = csv("example.csv")
 ///
