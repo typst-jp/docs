@@ -104,10 +104,10 @@
 これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御することができます。
 <code>columns</code>引数には、<a href="/docs/reference/layout/relative/">相対長さ</a>または<a href="/docs/reference/layout/fraction/">割合</a>の配列を渡します。
 この場合、2つの等しい割合のサイズを渡し、使用可能なスペースを2つの等しい列に分割するように指示します。
-次に、grid関数に2つの内容引数を渡しました。
+次に、grid関数に2つのコンテンツ引数を渡しました。
 ひとつは主著者であるあなたの情報で、もうひとつは指導教員の情報です。
 ここでも <code>align</code> 関数を使用して、コンテンツを列の中央に配置しています。
-grid関数はセルを指定するcontent引数を任意の数で受け取れます。
+grid関数はセルを指定するコンテンツ引数を任意の数で受け取れます。
 行は自動的に追加されますが、<code>rows</code>引数で手動でサイズを指定することも可能です。</p>
 <p>それでは、アブストラクトを追加しましょう。
 学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。</p>
@@ -119,7 +119,7 @@ grid関数はセルを指定するcontent引数を任意の数で受け取れま
   <span class="typ-func">#</span><span class="typ-func">lorem</span><span class="typ-punct">(</span><span class="typ-num">80</span><span class="typ-punct">)</span>
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/assets/docs/6d4166f4cf839d52d60ede1a8e32dfb2.png" alt="Preview" width="480" height="190"/></div></div>
-<p>できました！特筆すべき点は、<code>align</code>のcontent引数の中にあるsetルールを使って、アブストラクトの両端揃えをオフにしたことです。
+<p>できました！特筆すべき点は、<code>align</code>のコンテンツ引数の中にあるsetルールを使って、アブストラクトの両端揃えをオフにしたことです。
 これは、最初のsetルールの後に指定されたにもかかわらず、文書の残りの部分には影響しません。
 コンテンツ・ブロック内で設定されたものは、そのブロック内のコンテンツにのみ影響します。</p>
 <p>ヘッダーとタイトルの2回入力する必要がないように、論文タイトルを変数に保存することも可能です。

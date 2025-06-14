@@ -71,7 +71,7 @@ But this stays black.
 しかし、組み合わせられるプロパティはTypstであらかじめ定義されているものに限定されます。
 最大限の柔軟性を得るには、エレメントをゼロからフォーマットする方法を定義するshowルールを書くことができます。
 このようなshowルールを書くには、コロンの後のsetルールを任意の<a href="/docs/reference/foundations/function/">関数</a>に置き換えてください。
-この関数は対象のエレメントを受け取り、任意の内容を返すことができます。
+この関数は対象のエレメントを受け取り、任意のコンテンツを返すことができます。
 関数に渡されたエレメントで利用可能な<a href="/docs/reference/scripting/#fields">フィールド</a>は、それぞれのelement関数のパラメーターと一致します。
 以下は、ファンタジー百科事典の見出しをフォーマットするshowルールを定義する例です。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;(I)&quot;</span><span class="typ-punct">)</span>
