@@ -154,7 +154,7 @@
 	"/docs/reference/data-loading/": "untranslated",
 	"/docs/reference/data-loading/cbor/": "untranslated",
 	"/docs/reference/data-loading/csv/": "untranslated",
-	"/docs/reference/data-loading/json/": "untranslated",
+	"/docs/reference/data-loading/json/": "translated",
 	"/docs/reference/data-loading/read/": "untranslated",
 	"/docs/reference/data-loading/toml/": "untranslated",
 	"/docs/reference/data-loading/xml/": "untranslated",
