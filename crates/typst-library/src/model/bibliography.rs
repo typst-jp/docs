@@ -87,7 +87,7 @@ pub struct BibliographyElem {
     /// - 読み込む参考文献ファイルのパス。
     ///   パスに関する詳細は[パスの章]($syntax/#paths)をご参照ください。
     /// - 参考文献情報がデコードできる生バイト。
-    /// - 上記を要素とする配列。
+    /// - 上記をエレメントとする配列。
     #[required]
     #[parse(
         let sources = args.expect("sources")?;

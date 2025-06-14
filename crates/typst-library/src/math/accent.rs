@@ -3,7 +3,7 @@ use crate::foundations::{cast, elem, func, Content, NativeElement, SymbolElem};
 use crate::layout::{Length, Rel};
 use crate::math::Mathy;
 
-/// 対象の要素にアクセント記号を付ける。
+/// 対象のエレメントにアクセント記号を付ける。
 ///
 /// # 例
 /// ```example
@@ -13,7 +13,7 @@ use crate::math::Mathy;
 /// ```
 #[elem(Mathy)]
 pub struct AccentElem {
-    /// アクセント記号が適用される対象の要素。
+    /// アクセント記号が適用される対象のエレメント。
     /// 複数の文字から構成される場合もあります。
     ///
     /// ```example
@@ -22,7 +22,7 @@ pub struct AccentElem {
     #[required]
     pub base: Content,
 
-    /// 対象の要素に適用するアクセント記号。
+    /// 対象のエレメントに適用するアクセント記号。
     ///
     /// サポートされているアクセント記号には以下のものがあります。
     ///
@@ -50,7 +50,7 @@ pub struct AccentElem {
     #[required]
     pub accent: Accent,
 
-    /// 対象の要素の幅に対するアクセント記号の相対的な大きさ。
+    /// 対象のエレメントの幅に対するアクセント記号の相対的な大きさ。
     #[resolve]
     #[default(Rel::one())]
     pub size: Rel<Length>,

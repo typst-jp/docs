@@ -13,6 +13,7 @@ description: |
 | typesetting | 組版 | Typstの主要機能 |
 | documentation | ドキュメント |   |
 | content | コンテンツ | 型の一種で、マークアップによって表される |
+| element | エレメント | [エレメント関数](https://typst-jp.github.io/docs/reference/foundations/function/#element-functions)で作成できる要素 |
 | styling | スタイル設定 |   |
 | set rule | setルール | [スタイル設定]($styling)に出てきます |
 | show rule | showルール | [スタイル設定]($styling)に出てきます |
