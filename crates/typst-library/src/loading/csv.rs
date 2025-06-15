@@ -6,14 +6,14 @@ use crate::engine::Engine;
 use crate::foundations::{cast, func, scope, Array, Dict, IntoValue, Type, Value};
 use crate::loading::{DataSource, Load, Readable};
 
-/// Reads structured data from a CSV file.
+/// CSVファイルから構造化データを読み込む。
 ///
-/// The CSV file will be read and parsed into a 2-dimensional array of strings:
-/// Each row in the CSV file will be represented as an array of strings, and all
-/// rows will be collected into a single array. Header rows will not be
-/// stripped.
+/// CSVファイルは読み込まれ、文字列からなる2次元配列にパースされます。
+/// 具体的には、CSVファイルの各行が文字列の配列として表現され、
+/// すべての行が単一の配列にまとめられます。
+/// ヘッダー行は削除されません。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let results = csv("example.csv")
 ///
@@ -26,20 +26,20 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "CSV")]
 pub fn csv(
     engine: &mut Engine,
-    /// A [path]($syntax/#paths) to a CSV file or raw CSV bytes.
+    /// CSVファイルへの[パス]($syntax/#paths)、または生のCSVバイト列。
     source: Spanned<DataSource>,
-    /// The delimiter that separates columns in the CSV file.
-    /// Must be a single ASCII character.
+    /// CSVファイルの列を区切る区切り文字。
+    /// 単一のASCII文字でなければなりません。
     #[named]
     #[default]
     delimiter: Delimiter,
-    /// How to represent the file's rows.
+    /// ファイルの各行の表現方法。
     ///
-    /// - If set to `array`, each row is represented as a plain array of
-    ///   strings.
-    /// - If set to `dictionary`, each row is represented as a dictionary
-    ///   mapping from header keys to strings. This option only makes sense when
-    ///   a header row is present in the CSV file.
+    /// - `array`に設定すると、
+    ///   各行は単純な文字列の配列として表現されます。
+    /// - `dictionary`に設定すると、
+    ///   各行はヘッダーのキーと文字列を対応付けた辞書として表現されます。
+    ///   このオプションは、CSVファイルにヘッダー行が存在する場合にのみ意味があります。
     #[named]
     #[default(RowType::Array)]
     row_type: RowType,
@@ -93,25 +93,25 @@ pub fn csv(
 
 #[scope]
 impl csv {
-    /// Reads structured data from a CSV string/bytes.
+    /// CSVの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode CSV")]
-    #[deprecated = "`csv.decode` is deprecated, directly pass bytes to `csv` instead"]
+    #[deprecated = "`csv.decode`は非推奨です。代わりにバイト列を直接`csv`に渡してください。"]
     pub fn decode(
         engine: &mut Engine,
-        /// CSV data.
+        /// CSVデータ。
         data: Spanned<Readable>,
-        /// The delimiter that separates columns in the CSV file.
-        /// Must be a single ASCII character.
+        /// CSVファイルの列を区切る区切り文字。
+        /// 単一のASCII文字でなければなりません。
         #[named]
         #[default]
         delimiter: Delimiter,
-        /// How to represent the file's rows.
+        /// ファイルの各行の表現方法。
         ///
-        /// - If set to `array`, each row is represented as a plain array of
-        ///   strings.
-        /// - If set to `dictionary`, each row is represented as a dictionary
-        ///   mapping from header keys to strings. This option only makes sense
-        ///   when a header row is present in the CSV file.
+        /// - `array`に設定すると、
+        ///   各行は単純な文字列の配列として表現されます。
+        /// - `dictionary`に設定すると、
+        ///   各行はヘッダーのキーと文字列を対応付けた辞書として表現されます。
+        ///   このオプションは、CSVファイルにヘッダー行が存在する場合にのみ意味があります。
         #[named]
         #[default(RowType::Array)]
         row_type: RowType,
