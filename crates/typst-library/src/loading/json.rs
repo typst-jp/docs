@@ -6,25 +6,25 @@ use crate::engine::Engine;
 use crate::foundations::{func, scope, Str, Value};
 use crate::loading::{DataSource, Load, Readable};
 
-/// Reads structured data from a JSON file.
+/// JSONファイルから構造化データを読み込む。
 ///
-/// The file must contain a valid JSON value, such as object or array. JSON
-/// objects will be converted into Typst dictionaries, and JSON arrays will be
-/// converted into Typst arrays. Strings and booleans will be converted into the
-/// Typst equivalents, `null` will be converted into `{none}`, and numbers will
-/// be converted to floats or integers depending on whether they are whole
-/// numbers.
+/// ファイルにはオブジェクトや配列などの有効なJSON値が含まれていなければなりません。
+/// JSONオブジェクトはTypstの辞書に変換され、
+/// JSON配列はTypstの配列に変換されます。
+/// 文字列やブール値はTypstの対応する値に変換され、`null`は`{none}`に、
+/// 数値は整数であれば整数に、
+/// そうでなければ浮動小数点数に変換されます。
 ///
-/// Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
-/// floating point numbers, which may result in an approximative value.
+/// 2<sup>63</sup>-1より大きな整数は浮動小数点数に変換されるため、
+/// 近似値になる可能性があることに留意してください。
 ///
-/// The function returns a dictionary, an array or, depending on the JSON file,
-/// another JSON data type.
+/// この関数は、辞書、配列、
+/// あるいはJSONファイルの内容に応じてその他のJSONデータ型を返します。
 ///
-/// The JSON files in the example contain objects with the keys `temperature`,
-/// `unit`, and `weather`.
+/// この例におけるJSONファイルは、
+/// `temperature`、`unit`、および`weather`というキーを持つオブジェクトを含んでいます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let forecast(day) = block[
 ///   #box(square(
@@ -51,7 +51,7 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "JSON")]
 pub fn json(
     engine: &mut Engine,
-    /// A [path]($syntax/#paths) to a JSON file or raw JSON bytes.
+    /// JSONファイルへの[パス]($syntax/#paths)、または生のJSONバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;
@@ -62,23 +62,23 @@ pub fn json(
 
 #[scope]
 impl json {
-    /// Reads structured data from a JSON string/bytes.
+    /// JSONの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode JSON")]
-    #[deprecated = "`json.decode` is deprecated, directly pass bytes to `json` instead"]
+    #[deprecated = "`json.decode`は非推奨です。代わりにバイト列を直接`json`に渡してください。"]
     pub fn decode(
         engine: &mut Engine,
-        /// JSON data.
+        /// JSONデータ。
         data: Spanned<Readable>,
     ) -> SourceResult<Value> {
         json(engine, data.map(Readable::into_source))
     }
 
-    /// Encodes structured data into a JSON string.
+    /// 構造化データをJSON文字列にエンコードする。
     #[func(title = "Encode JSON")]
     pub fn encode(
-        /// Value to be encoded.
+        /// エンコード対象の値。
         value: Spanned<Value>,
-        /// Whether to pretty print the JSON with newlines and indentation.
+        /// JSONを改行およびインデント付きで整形表示するかどうか。
         #[named]
         #[default(true)]
         pretty: bool,
