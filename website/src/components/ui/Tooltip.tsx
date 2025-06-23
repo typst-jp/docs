@@ -26,7 +26,7 @@ const tooltipContent: Record<
 > = {
 	element: {
 		label: "要素",
-		desc: "要素関数は<code>set</code>ルールや<code>show</code>ルールとともに使用することで、その要素を設定できます。",
+		desc: "要素関数は<code>set</code>ルールや<code>show</code>ルールでカスタマイズできます。",
 		isShowLabel: true,
 		bgColor: "bg-blue-50",
 		textColor: "text-blue-700",
