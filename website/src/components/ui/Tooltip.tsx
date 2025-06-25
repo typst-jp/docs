@@ -25,14 +25,14 @@ const tooltipContent: Record<
 	}
 > = {
 	element: {
-		label: "要素",
+		label: "要素関数",
 		desc: "要素関数は<code>set</code>ルールや<code>show</code>ルールでカスタマイズできます。",
 		isShowLabel: true,
 		bgColor: "bg-blue-50",
 		textColor: "text-blue-700",
 	},
 	contextual: {
-		label: "コンテキスト",
+		label: "コンテキスト関数",
 		desc: "コンテキスト関数は、コンテキストが既知の場合にのみ使用できます。",
 		isShowLabel: true,
 		bgColor: "bg-indigo-50",
@@ -53,28 +53,28 @@ const tooltipContent: Record<
 		textColor: "text-gray-700",
 	},
 	variadic: {
-		label: "可変長",
+		label: "可変長引数",
 		desc: "可変長引数は複数回指定することができます。",
 		isShowLabel: true,
 		bgColor: "bg-green-50",
 		textColor: "text-green-700",
 	},
 	settable: {
-		label: "設定可能",
+		label: "設定可能引数",
 		desc: "設定可能引数は、<code>set</code>ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。",
 		isShowLabel: true,
 		bgColor: "bg-amber-50",
 		textColor: "text-amber-700",
 	},
 	positional: {
-		label: "位置",
+		label: "位置引数",
 		desc: "位置引数は順序通りに指定することで、引数名を省略して設定できます。",
 		isShowLabel: true,
 		bgColor: "bg-purple-50",
 		textColor: "text-purple-700",
 	},
 	required: {
-		label: "必須",
+		label: "必須引数",
 		desc: "必須引数は、関数を呼び出す際に必ず指定しなければなりません。",
 		isShowLabel: true,
 		bgColor: "bg-rose-50",
