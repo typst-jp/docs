@@ -60,8 +60,8 @@ const tooltipContent: Record<
 		textColor: "text-green-700",
 	},
 	settable: {
-		label: "set可能",
-		desc: "set可能引数は、<code>set</code>ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。",
+		label: "設定可能",
+		desc: "設定可能引数は、<code>set</code>ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。",
 		isShowLabel: true,
 		bgColor: "bg-amber-50",
 		textColor: "text-amber-700",
