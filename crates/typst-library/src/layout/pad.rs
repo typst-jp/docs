@@ -50,7 +50,7 @@ pub struct PadElem {
     #[external]
     pub rest: Rel<Length>,
 
-    /// 4辺にパディングを追加するコンテンツ。
+    /// パディングを追加するコンテンツ。
     #[required]
     pub body: Content,
 }
