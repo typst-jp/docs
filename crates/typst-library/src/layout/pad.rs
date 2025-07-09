@@ -3,7 +3,7 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, NativeElement, Packed, Show, StyleChain};
 use crate::layout::{BlockElem, Length, Rel};
 
-/// コンテンツの前後に空白を追加。
+/// コンテンツの周囲に空白を追加。
 ///
 /// 空白は各辺を独立に指定するか、位置変数を用いて全辺を一括指定することができます。
 ///
