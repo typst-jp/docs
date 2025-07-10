@@ -38,7 +38,7 @@ pub struct StackElem {
     /// 明示的に間隔が与えられなかった場合にアイテム間に挿入される間隔。
     pub spacing: Option<Spacing>,
 
-    /// 軸に沿って積み重ねる子。
+    /// 軸に沿って積み重ねる子要素。
     #[variadic]
     pub children: Vec<StackChild>,
 }
