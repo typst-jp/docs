@@ -92,3 +92,68 @@ samp {
 		content: none;
 	}
 }
+
+/* Code blockをMonokai風にする */
+pre code span.typ-comment {
+	color: #88846f;
+}
+pre code span.typ-escape {
+	color: #f92672;
+}
+pre code span.typ-strong {
+	color: #66d9ef;
+	font-weight: bold;
+}
+pre code span.typ-emph {
+	color: #66d9ef;
+	font-style: italic;
+}
+pre code span.typ-link {
+	color: #e6db74;
+	text-decoration: underline;
+}
+pre code span.typ-raw {
+	color: #fd971f;
+}
+pre code span.typ-label {
+	color: #a6e22e;
+}
+pre code span.typ-ref {
+	color: #a6e22e;
+}
+pre code span.typ-heading {
+	color: #a6e22e;
+	font-weight: bold;
+	text-decoration: underline;
+}
+pre code span.typ-marker {
+	color: #ae81ff;
+}
+pre code span.typ-term {
+	color: #66d9ef;
+	font-weight: bold;
+}
+pre code span.typ-math-delim {
+	color: #f92672;
+}
+pre code span.typ-math-op {
+	color: #66d9ef;
+}
+pre code span.typ-key {
+	color: #f92672;
+}
+pre code span.typ-num {
+	color: #ae81ff;
+}
+pre code span.typ-str {
+	color: #e6db74;
+}
+pre code span.typ-func {
+	color: #a6e22e;
+}
+pre code span.typ-pol {
+	color: #ae81ff;
+}
+pre {
+	background: #272822;
+}
