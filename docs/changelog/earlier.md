@@ -1,9 +1,9 @@
 ---
-title: Earlier
-description: Changes in early, unversioned Typst
+title: 初期バージョン
+description: Typstの初期バージョンにおける変更点
 ---
 
-# Changes in early, unversioned Typst
+# Typstの初期バージョンにおける変更点
 
 ## March 28, 2023
 - **Breaking changes:**
