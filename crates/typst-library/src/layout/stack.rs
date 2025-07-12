@@ -28,7 +28,7 @@ pub struct StackElem {
     /// - `{btt}`: 下から上。
     ///
     /// `alignment`と同様に、向きの始点と終点を（それぞれ）取得するために、`start`と`end`メソッドを使用できます。
-    /// 方向が`{"horizontal"}` or `{"vertical"}`のどちらかを決定するために`axis`メソッドも使用できます。
+    /// 方向を`{"horizontal"}`か`{"vertical"}`のどちらかを決定するために`axis`メソッドも使用できます。
     /// `inv`メソッドは逆の向きを返します。
     ///
     /// 例えば、`{ttb.start()}`は`top`、`{ttb.end()}`は`bottom`、`{ttb.axis()}`は`{"vertical"}`となり、`{ttb.inv()}`は`btt`に等しくなります。
