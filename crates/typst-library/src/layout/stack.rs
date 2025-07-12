@@ -5,7 +5,7 @@ use crate::engine::Engine;
 use crate::foundations::{cast, elem, Content, NativeElement, Packed, Show, StyleChain};
 use crate::layout::{BlockElem, Dir, Spacing};
 
-/// コンテンツと間隔を垂直方向または水平方向に配置。
+/// コンテンツと間隔を垂直または水平方向に配置。
 ///
 /// スタックは、ある軸に沿ってアイテムのリストを配置し、各アイテム間に任意の間隔を設定します。
 ///
