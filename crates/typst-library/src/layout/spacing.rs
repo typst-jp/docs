@@ -63,13 +63,12 @@ impl HElem {
     }
 }
 
-/// Inserts vertical spacing into a flow of blocks.
+/// ブロックの流れに垂直方向の間隔を挿入。
 ///
-/// The spacing can be absolute, relative, or fractional. In the last case,
-/// the remaining space on the page is distributed among all fractional spacings
-/// according to their relative fractions.
+/// 間隔の大きさは絶対的な値、相対的な値、または比率で指定できます。
+/// 比率指定の場合は、比率指定されたそれぞれの間隔に、ページの残りの間隔がその相対比率に応じて配分されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #grid(
 ///   rows: 3cm,
@@ -85,14 +84,13 @@ impl HElem {
 /// ```
 #[elem(title = "Spacing (V)")]
 pub struct VElem {
-    /// How much spacing to insert.
+    /// 挿入する間隔の大きさ。
     #[required]
     pub amount: Spacing,
 
-    /// If `{true}`, the spacing collapses at the start or end of a flow.
-    /// Moreover, from multiple adjacent weak spacings all but the largest one
-    /// collapse. Weak spacings will always collapse adjacent paragraph spacing,
-    /// even if the paragraph spacing is larger.
+    /// `{true}`の場合、流れの始まりと終わりの空白は削除されます。
+    /// さらに、弱い間隔が隣接していると最大のもの以外は削除されます。
+    /// たとえ段落間隔の方が大きかったとしても、弱い間隔に隣接する段落間隔は常に削除されます。
     ///
     /// ```example
     /// The following theorem is
