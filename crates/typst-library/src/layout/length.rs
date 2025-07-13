@@ -106,7 +106,7 @@ impl Length {
 
     /// この長さをミリメートルに変換します。
     ///
-    /// この長さが`em`以外の単位で非ゼロの値を持っているとエラーが発生して失敗します。
+    /// この長さが`em`単位で非ゼロの値を持っているとエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
     #[func(name = "mm", title = "Millimeters")]
     pub fn to_mm(&self, span: Span) -> SourceResult<f64> {
