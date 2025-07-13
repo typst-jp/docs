@@ -96,7 +96,7 @@ impl Length {
 impl Length {
     /// この長さをポイントに変換します。
     ///
-    /// この長さが（単に`2pt`ではなく`5em + 2pt`のように）`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
+    /// この長さの`em`単位の値が（単に`2pt`ではなく`5em + 2pt`のように）非ゼロの場合にエラーが発生して失敗します。
     /// 長さの`em`成分を無視するために（`(5em + 2pt).abs.pt()`のように）`abs`フィールドを使用してください（したがって数値部分のみが変換されます）。
     #[func(name = "pt", title = "Points")]
     pub fn to_pt(&self, span: Span) -> SourceResult<f64> {
@@ -106,7 +106,7 @@ impl Length {
 
     /// この長さをミリメートルに変換します。
     ///
-    /// この長さが`em`単位で非ゼロの値を持っているとエラーが発生して失敗します。
+    /// この長さの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
     #[func(name = "mm", title = "Millimeters")]
     pub fn to_mm(&self, span: Span) -> SourceResult<f64> {
@@ -116,7 +116,7 @@ impl Length {
 
     /// この長さをセンチメートルに変換します。
     ///
-    /// この長さが`em`以外の単位で非ゼロの値を持っているとエラーが発生して失敗します。
+    /// この長さの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
     #[func(name = "cm", title = "Centimeters")]
     pub fn to_cm(&self, span: Span) -> SourceResult<f64> {
@@ -126,7 +126,7 @@ impl Length {
 
     /// この長さをインチに変換します。
     ///
-    /// この長さが`em`以外の単位で非ゼロの値を持っているとエラーが発生して失敗します。
+    /// この長さの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
     #[func(name = "inches")]
     pub fn to_inches(&self, span: Span) -> SourceResult<f64> {
