@@ -53,7 +53,7 @@ pub fn layout(
     /// コンテナの大きさは`width`と`height`のキーを持つ[dictionary]として与えられます。
     ///
     /// この関数は、`layout` によって返されるコンテンツが文書中に現れるたびに呼び出されます。
-    /// これによりそのコンテナの寸法に依存するコンテンツを生成することが可能になります。
+    /// これによりそのコンテナの寸法に依存するコンテンツの生成が可能になります。
     func: Func,
 ) -> Content {
     LayoutElem::new(func).pack().spanned(span)
