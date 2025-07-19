@@ -9,7 +9,7 @@ use crate::foundations::{
 use crate::introspection::Locatable;
 use crate::layout::{BlockElem, Size};
 
-/// 外側のコンテナ（存在しなければページ）の寸法（幅と高さ）へのアクセスを提供します。
+/// 現在の外側のコンテナ（存在しなければページ）の寸法（幅と高さ）へのアクセスを提供します。
 ///
 /// `width`と`height`という[`length`]型のキーを持つ辞書を単一の引数として受け取る関数を受け付けます。
 /// 関数には[context]が渡されるため、`context`キーワードと組み合わせて使用する必要はありません。
