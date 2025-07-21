@@ -373,11 +373,11 @@ impl LocalName for PageElem {
     const KEY: &'static str = "page";
 }
 
-/// A manual page break.
+/// 手動の改ページ。
 ///
-/// Must not be used inside any containers.
+/// いかなるコンテナ内でも使用してはいけません。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// The next page contains
 /// more details on compound theory.
@@ -388,13 +388,11 @@ impl LocalName for PageElem {
 /// ```
 #[elem(title = "Page Break")]
 pub struct PagebreakElem {
-    /// If `{true}`, the page break is skipped if the current page is already
-    /// empty.
+    /// `{true}`の場合、現在のページが既に空のとき改ページは行われません。
     #[default(false)]
     pub weak: bool,
 
-    /// If given, ensures that the next page will be an even/odd page, with an
-    /// empty page in between if necessary.
+    /// 設定された場合、必要に応じて空ページを追加して次のページが偶数/奇数ページになるようにします。
     ///
     /// ```example
     /// #set page(height: 30pt)
@@ -703,9 +701,9 @@ impl PageRanges {
 /// Whether something should be even or odd.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum Parity {
-    /// Next page will be an even page.
+    /// 次のページが偶数ページになります。
     Even,
-    /// Next page will be an odd page.
+    /// 次のページが奇数ページになります。
     Odd,
 }
 
