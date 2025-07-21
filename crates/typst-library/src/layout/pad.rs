@@ -3,12 +3,11 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, NativeElement, Packed, Show, StyleChain};
 use crate::layout::{BlockElem, Length, Rel};
 
-/// Adds spacing around content.
+/// コンテンツの周囲に空白を追加。
 ///
-/// The spacing can be specified for each side individually, or for all sides at
-/// once by specifying a positional argument.
+/// 空白は各辺を独立に指定するか、位置変数を用いて全辺を一括指定できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set align(center)
 ///
@@ -18,7 +17,7 @@ use crate::layout::{BlockElem, Length, Rel};
 /// ```
 #[elem(title = "Padding", Show)]
 pub struct PadElem {
-    /// The padding at the left side.
+    /// 左辺のパディング。
     #[parse(
         let all = args.named("rest")?.or(args.find()?);
         let x = args.named("x")?.or(all);
@@ -27,31 +26,31 @@ pub struct PadElem {
     )]
     pub left: Rel<Length>,
 
-    /// The padding at the top side.
+    /// 上辺のパディング。
     #[parse(args.named("top")?.or(y))]
     pub top: Rel<Length>,
 
-    /// The padding at the right side.
+    /// 右辺のパディング。
     #[parse(args.named("right")?.or(x))]
     pub right: Rel<Length>,
 
-    /// The padding at the bottom side.
+    /// 下辺のパディング。
     #[parse(args.named("bottom")?.or(y))]
     pub bottom: Rel<Length>,
 
-    /// A shorthand to set `left` and `right` to the same value.
+    /// `left`と`right`を同じ値で設定するための省略記法。
     #[external]
     pub x: Rel<Length>,
 
-    /// A shorthand to set `top` and `bottom` to the same value.
+    /// `top`と`bottom`を同じ値で設定するための省略記法。
     #[external]
     pub y: Rel<Length>,
 
-    /// A shorthand to set all four sides to the same value.
+    /// 四辺すべてを同じ値で設定するための省略記法。
     #[external]
     pub rest: Rel<Length>,
 
-    /// The content to pad at the sides.
+    /// パディングを追加するコンテンツ。
     #[required]
     pub body: Content,
 }

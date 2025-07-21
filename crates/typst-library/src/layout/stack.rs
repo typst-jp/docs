@@ -5,12 +5,11 @@ use crate::engine::Engine;
 use crate::foundations::{cast, elem, Content, NativeElement, Packed, Show, StyleChain};
 use crate::layout::{BlockElem, Dir, Spacing};
 
-/// Arranges content and spacing horizontally or vertically.
+/// コンテンツと間隔を垂直または水平方向に配置。
 ///
-/// The stack places a list of items along an axis, with optional spacing
-/// between each item.
+/// スタックは、ある軸に沿ってアイテムのリストを配置し、各アイテム間に任意の間隔を設定します。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #stack(
 ///   dir: ttb,
@@ -21,28 +20,25 @@ use crate::layout::{BlockElem, Dir, Spacing};
 /// ```
 #[elem(Show)]
 pub struct StackElem {
-    /// The direction along which the items are stacked. Possible values are:
+    /// アイテムを積み重ねる向き。可能な値は以下の通りです。
     ///
-    /// - `{ltr}`: Left to right.
-    /// - `{rtl}`: Right to left.
-    /// - `{ttb}`: Top to bottom.
-    /// - `{btt}`: Bottom to top.
+    /// - `{ltr}`: 左から右。
+    /// - `{rtl}`: 右から左。
+    /// - `{ttb}`: 上から下。
+    /// - `{btt}`: 下から上。
     ///
-    /// You can use the `start` and `end` methods to obtain the initial and
-    /// final points (respectively) of a direction, as `alignment`. You can also
-    /// use the `axis` method to determine whether a direction is
-    /// `{"horizontal"}` or `{"vertical"}`. The `inv` method returns a
-    /// direction's inverse direction.
+    /// `alignment`と同様に、向きの始点と終点を（それぞれ）取得するために、`start`と`end`メソッドを使用できます。
+    /// 向きが`{"horizontal"}`か`{"vertical"}`のどちらに属するかを決定するために`axis`メソッドも使用できます。
+    /// `inv`メソッドは逆の向きを返します。
     ///
-    /// For example, `{ttb.start()}` is `top`, `{ttb.end()}` is `bottom`,
-    /// `{ttb.axis()}` is `{"vertical"}` and `{ttb.inv()}` is equal to `btt`.
+    /// 例えば、`{ttb.start()}`は`top`、`{ttb.end()}`は`bottom`、`{ttb.axis()}`は`{"vertical"}`となり、`{ttb.inv()}`は`btt`に等しくなります。
     #[default(Dir::TTB)]
     pub dir: Dir,
 
-    /// Spacing to insert between items where no explicit spacing was provided.
+    /// 明示的に間隔が与えられなかった場合にアイテム間に挿入される間隔。
     pub spacing: Option<Spacing>,
 
-    /// The children to stack along the axis.
+    /// 軸に沿って積み重ねる子要素。
     #[variadic]
     pub children: Vec<StackChild>,
 }

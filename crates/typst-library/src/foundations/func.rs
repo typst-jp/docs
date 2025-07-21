@@ -16,20 +16,18 @@ use crate::foundations::{
     PluginFunc, Scope, Selector, Type, Value,
 };
 
-/// A mapping from argument values to a return value.
+/// 引数値から戻り値への写像。
 ///
-/// You can call a function by writing a comma-separated list of function
-/// _arguments_ enclosed in parentheses directly after the function name.
-/// Additionally, you can pass any number of trailing content blocks arguments
-/// to a function _after_ the normal argument list. If the normal argument list
-/// would become empty, it can be omitted. Typst supports positional and named
-/// arguments. The former are identified by position and type, while the latter
-/// are written as `name: value`.
+/// 関数名の直後に括弧で囲まれたカンマ区切りの関数の _引数_ のリストを書くことにより関数を呼び出すことができます。
+/// 加えて、通常の引数リストの後に任意の数のコンテンツブロック引数を関数に渡すこともできます。
+/// 通常の引数リストが空の場合は省略が可能です。
+/// Typstは位置引数とキーワード引数をサポートしています。
+/// 前者は位置と型によって識別され、後者は`name: value`のように書きます。
 ///
-/// Within math mode, function calls have special behaviour. See the
-/// [math documentation]($category/math) for more details.
+/// 数式モードでは、関数呼び出しは特殊な振る舞いをします。
+/// 詳細は[数式のドキュメント]($category/math)を参照して下さい。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// // Call a function.
 /// #list([A], [B])
@@ -42,47 +40,35 @@ use crate::foundations::{
 /// #list[A][B]
 /// ```
 ///
-/// Functions are a fundamental building block of Typst. Typst provides
-/// functions for a variety of typesetting tasks. Moreover, the markup you write
-/// is backed by functions and all styling happens through functions. This
-/// reference lists all available functions and how you can use them. Please
-/// also refer to the documentation about [set]($styling/#set-rules) and
-/// [show]($styling/#show-rules) rules to learn about additional ways you can
-/// work with functions in Typst.
+/// 関数はTypstにおいて基礎となる構成要素です。
+/// Typstは様々な組版タスクに応じた関数を提供しています。
+/// さらには、作成されるマークアップの裏側では関数が用いられており、すべてのスタイル設定は関数を介して行われます。
+/// このリファレンスでは利用可能なすべての関数とその使い方を示します。
+/// Typstで関数をさらに活用する方法については、[setルール]($styling/#set-rules)および[showルール]($styling/#show-rules)のドキュメントも参照して下さい。
 ///
-/// # Element functions
-/// Some functions are associated with _elements_ like [headings]($heading) or
-/// [tables]($table). When called, these create an element of their respective
-/// kind. In contrast to normal functions, they can further be used in [set
-/// rules]($styling/#set-rules), [show rules]($styling/#show-rules), and
-/// [selectors]($selector).
+/// # 要素関数
+/// [見出し]($heading)や[表]($table)のような、いくつかの関数は _要素_ と結びついており、呼び出すとその種類に応じた要素を作成します。
+/// さらに、通常の関数とは異なり、要素関数は[setルール]($styling/#set-rules)、[showルール]($styling/#show-rules)および [セレクター]($selector)で使用可能です。
 ///
-/// # Function scopes
-/// Functions can hold related definitions in their own scope, similar to a
-/// [module]($scripting/#modules). Examples of this are
-/// [`assert.eq`]($assert.eq) or [`list.item`]($list.item). However, this
-/// feature is currently only available for built-in functions.
+/// # 関数スコープ
+/// 関数は、[モジュール]($scripting/#modules)と同様に自身のスコープ内に関連する定義を保持できます。
+/// この例は[`assert.eq`]($assert.eq)や[`list.item`]($list.item)です。
+/// しかし、現在この機能が利用可能なのは組み込み関数のみです。
 ///
-/// # Defining functions
-/// You can define your own function with a [let binding]($scripting/#bindings)
-/// that has a parameter list after the binding's name. The parameter list can
-/// contain mandatory positional parameters, named parameters with default
-/// values and [argument sinks]($arguments).
+/// # ユーザー定義関数
+/// [letバインディング]($scripting/#bindings)を用いることで、バインディング名の後に引数リストを持ったユーザー定義関数を定義することができます。
+/// 引数リストには必須の位置引数、デフォルト値を持つキーワード引数および[可変長引数]($arguments)を用いることができます。
 ///
-/// The right-hand side of a function binding is the function body, which can be
-/// a block or any other expression. It defines the function's return value and
-/// can depend on the parameters. If the function body is a [code
-/// block]($scripting/#blocks), the return value is the result of joining the
-/// values of each expression in the block.
+/// 関数バインディングの右辺は関数本体で、ブロックか任意の式です。
+/// 関数の戻り値を定義し、引数に依存させることができます。
+/// 関数本体が[コードブロック]($scripting/#blocks)の場合、戻り値はブロック内のすべての式を連結させた結果になります。
 ///
-/// Within a function body, the `return` keyword can be used to exit early and
-/// optionally specify a return value. If no explicit return value is given, the
-/// body evaluates to the result of joining all expressions preceding the
-/// `return`.
+/// 関数本体内では、`return`キーワードを用いて処理を途中で抜け出したり、必要に応じて戻り値を指定して返したりできます。
+/// 戻り値が明示的に与えられない場合、本体は`return`の前の式すべてを連結した結果として評価されます。
 ///
-/// Functions that don't return any meaningful value return [`none`] instead.
-/// The return type of such functions is not explicitly specified in the
-/// documentation. (An example of this is [`array.push`]).
+/// 意味のある値を何も返さない関数は、代わりに[`none`]を返します。
+/// このような関数の戻り値の型はドキュメント中では明示的に指定されていません
+/// （この例としては[`array.push`]が該当します）。
 ///
 /// ```example
 /// #let alert(body, fill: red) = {
@@ -105,33 +91,28 @@ use crate::foundations::{
 /// ]
 /// ```
 ///
-/// # Importing functions
-/// Functions can be imported from one file ([`module`]($scripting/#modules)) into
-/// another using `{import}`. For example, assume that we have defined the `alert`
-/// function from the previous example in a file called `foo.typ`. We can import
-/// it into another file by writing `{import "foo.typ": alert}`.
+/// # 関数のインポート
+/// 関数は、`{import}`を用いてあるファイル（[`module`]($scripting/#modules)）から別のファイルにインポートすることができます。
+/// 例えば、上記の例にある`alert`関数を`foo.typ`というファイルに定義したとします。
+/// この場合、`{import "foo.typ": alert}`と書くことで別のファイルにインポートできます。
 ///
-/// # Unnamed functions { #unnamed }
-/// You can also created an unnamed function without creating a binding by
-/// specifying a parameter list followed by `=>` and the function body. If your
-/// function has just one parameter, the parentheses around the parameter list
-/// are optional. Unnamed functions are mainly useful for show rules, but also
-/// for settable properties that take functions like the page function's
-/// [`footer`]($page.footer) property.
+/// # 無名関数 { #unnamed }
+/// 引数リストに続けて `=>` と関数本体を指定することで、バインディングを作らずに無名関数も作成できます。
+/// もし関数の引数が1つだけならば、引数リストの周りの括弧は必須ではありません。
+/// 無名関数は主にshowルールで用いると便利ですが、page関数の[`footer`]($page.footer)プロパティのような、関数を引数に取る設定可能プロパティにも便利です。
 ///
 /// ```example
 /// #show "once?": it => [#it #it]
 /// once?
 /// ```
 ///
-/// # Note on function purity
-/// In Typst, all functions are _pure._ This means that for the same
-/// arguments, they always return the same result. They cannot "remember" things to
-/// produce another value when they are called a second time.
+/// # 関数の純粋性に関する注意
+/// Typstにおいて関数はすべて _純粋_ です。
+/// これは同じ引数からは常に同じ結果が返ってくることを意味します。
+/// 純粋関数は2回目の呼び出し時に別の値を生成するために何かを「記憶」することはできません。
 ///
-/// The only exception are built-in methods like
-/// [`array.push(value)`]($array.push). These can modify the values they are
-/// called on.
+/// 唯一の例外は[`array.push(value)`]($array.push)のような組み込みメソッドです。
+/// これらは呼び出された対象を変更できます。
 #[ty(scope, cast, name = "function")]
 #[derive(Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
@@ -357,12 +338,12 @@ impl Func {
 
 #[scope]
 impl Func {
-    /// Returns a new function that has the given arguments pre-applied.
+    /// 指定した引数を事前に適用した新しい関数を返します。
     #[func]
     pub fn with(
         self,
         args: &mut Args,
-        /// The arguments to apply to the function.
+        /// 関数に適用する引数。
         #[external]
         #[variadic]
         arguments: Vec<Value>,
@@ -374,8 +355,7 @@ impl Func {
         }
     }
 
-    /// Returns a selector that filters for elements belonging to this function
-    /// whose fields have the values of the given arguments.
+    /// この関数に属する要素のうち、与えられた引数と同じ値のフィールドを持つものを絞り込むセレクターを返します。
     ///
     /// ```example
     /// #show heading.where(level: 2): set text(blue)
@@ -387,7 +367,7 @@ impl Func {
     pub fn where_(
         self,
         args: &mut Args,
-        /// The fields to filter for.
+        /// 絞り込むフィールド。
         #[variadic]
         #[external]
         fields: Vec<Value>,

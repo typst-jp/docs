@@ -8,13 +8,13 @@ use typst_utils::Numeric;
 use crate::foundations::{cast, ty, Fold, Repr, Resolve, StyleChain};
 use crate::layout::{Abs, Em, Length, Ratio};
 
-/// A length in relation to some known length.
+/// 既知の長さに対する相対的な長さ。
 ///
-/// This type is a combination of a [length] with a [ratio]. It results from
-/// addition and subtraction of a length and a ratio. Wherever a relative length
-/// is expected, you can also use a bare length or ratio.
+/// この型は[length]と[ratio]の組み合わせです。
+/// これは長さと百分率の加減算の結果になります。
+/// 相対長さが想定されているあらゆる箇所で長さまたは百分率を単体でも指定可能です。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #rect(width: 100% - 50pt)
 ///
@@ -22,9 +22,9 @@ use crate::layout::{Abs, Em, Length, Ratio};
 /// #(100% - 50pt).ratio
 /// ```
 ///
-/// A relative length has the following fields:
-/// - `length`: Its length component.
-/// - `ratio`: Its ratio component.
+/// 相対長さは以下のフィールドを持ちます。
+/// - `length`: 長さ成分。
+/// - `ratio`: 百分率成分。
 #[ty(cast, name = "relative", title = "Relative Length")]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Rel<T: Numeric = Length> {

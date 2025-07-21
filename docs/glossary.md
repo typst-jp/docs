@@ -13,6 +13,8 @@ description: |
 | typesetting | 組版 | Typstの主要機能 |
 | documentation | ドキュメント |   |
 | content | コンテンツ | 型の一種で、マークアップによって表される |
+| element | 要素 | 見出し、数式、テーブルなどの文書を構成する要素 |
+| element function | 要素関数 | [要素関数]($function/#element-functions)を参照 |
 | styling | スタイル設定 |   |
 | set rule | setルール | [スタイル設定]($styling)に出てきます |
 | show rule | showルール | [スタイル設定]($styling)に出てきます |
