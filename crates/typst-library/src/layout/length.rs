@@ -37,7 +37,7 @@ use crate::layout::{Abs, Em};
 ///
 /// # フィールド
 /// - `abs`: 現在の長さの単なる数値部分（すなわち`em`部分を除いたもの）。
-/// - `em`: [float]としての、この長さでの`em`単位の大きさ。
+/// - `em`: [float]としての、このlengthでの`em`単位の大きさ。
 #[ty(scope, cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Length {
@@ -94,9 +94,9 @@ impl Length {
 
 #[scope]
 impl Length {
-    /// この長さをポイントに変換します。
+    /// このlengthをポイントに変換します。
     ///
-    /// この長さの`em`単位の値が（単に`2pt`ではなく`5em + 2pt`のように）非ゼロの場合にエラーが発生して失敗します。
+    /// このlengthの`em`単位の値が（単に`2pt`ではなく`5em + 2pt`のように）非ゼロの場合にエラーが発生して失敗します。
     /// 長さの`em`成分を無視するために（`(5em + 2pt).abs.pt()`のように）`abs`フィールドを使用してください（したがって数値部分のみが変換されます）。
     #[func(name = "pt", title = "Points")]
     pub fn to_pt(&self, span: Span) -> SourceResult<f64> {
@@ -104,9 +104,9 @@ impl Length {
         Ok(self.abs.to_pt())
     }
 
-    /// この長さをミリメートルに変換します。
+    /// このlengthをミリメートルに変換します。
     ///
-    /// この長さの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
+    /// このlengthの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
     #[func(name = "mm", title = "Millimeters")]
     pub fn to_mm(&self, span: Span) -> SourceResult<f64> {
@@ -114,9 +114,9 @@ impl Length {
         Ok(self.abs.to_mm())
     }
 
-    /// この長さをセンチメートルに変換します。
+    /// このlengthをセンチメートルに変換します。
     ///
-    /// この長さの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
+    /// このlengthの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
     #[func(name = "cm", title = "Centimeters")]
     pub fn to_cm(&self, span: Span) -> SourceResult<f64> {
@@ -124,9 +124,9 @@ impl Length {
         Ok(self.abs.to_cm())
     }
 
-    /// この長さをインチに変換します。
+    /// このlengthをインチに変換します。
     ///
-    /// この長さの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
+    /// このlengthの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
     #[func(name = "inches")]
     pub fn to_inches(&self, span: Span) -> SourceResult<f64> {
@@ -134,7 +134,7 @@ impl Length {
         Ok(self.abs.to_inches())
     }
 
-    /// この長さを絶対的な長さに変換します。
+    /// このlengthを絶対的な長さに変換します。
     ///
     /// ```example
     /// #set text(size: 12pt)
