@@ -190,7 +190,7 @@ pub struct PageElem {
 
     /// ページ[番号]($numbering)の付け方。
     ///
-    /// 明示的に`footer`（もしくは上部配置番号付けの場合は`header`）が明示的に与えられた場合、numberingは無視されます。
+    /// `footer`（もしくは上部配置番号付けの場合は`header`）が明示的に与えられた場合、numberingは無視されます。
     ///
     /// ```example
     /// #set page(
