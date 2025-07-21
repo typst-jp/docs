@@ -3,22 +3,20 @@ use typst_utils::Numeric;
 use crate::foundations::{cast, elem, Content};
 use crate::layout::{Abs, Em, Fr, Length, Ratio, Rel};
 
-/// Inserts horizontal spacing into a paragraph.
+/// パラグラフに水平方向の間隔を挿入。
 ///
-/// The spacing can be absolute, relative, or fractional. In the last case, the
-/// remaining space on the line is distributed among all fractional spacings
-/// according to their relative fractions.
+/// 間隔の大きさは絶対的な値、相対的な値、または比率で指定できます。
+/// 比率指定の場合は、比率指定されたそれぞれの間隔に、行の残りの間隔がその相対比率に応じて配分されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// First #h(1cm) Second \
 /// First #h(30%) Second
 /// ```
 ///
-/// # Fractional spacing
-/// With fractional spacing, you can align things within a line without forcing
-/// a paragraph break (like [`align`] would). Each fractionally sized element
-/// gets space based on the ratio of its fraction to the sum of all fractions.
+/// # 比率指定の間隔
+/// 比率指定の間隔を用いると、（[`align`]のように）段落区切りを強制することなく行内の配置が可能です。
+/// 要素の大きさが比率で指定された場合、それぞれの要素には、比率の総和に対する自身の比率の割合に応じた間隔が割り当てられます。
 ///
 /// ```example
 /// First #h(1fr) Second \
@@ -26,27 +24,20 @@ use crate::layout::{Abs, Em, Fr, Length, Ratio, Rel};
 /// First #h(2fr) Second #h(1fr) Third
 /// ```
 ///
-/// # Mathematical Spacing { #math-spacing }
-/// In [mathematical formulas]($category/math), you can additionally use these
-/// constants to add spacing between elements: `thin` (1/6 em), `med` (2/9 em),
-/// `thick` (5/18 em), `quad` (1 em), `wide` (2 em).
+/// # 数式用の間隔 { #math-spacing }
+/// [数式]($category/math)中では、要素間に間隔を挿入するための定数として、`thin`（1/6 em）、`med`（2/9 em）、`thick`（5/18 em）、`quad`（1 em）および`wide`（2 em）も利用可能です。
 #[elem(title = "Spacing (H)")]
 pub struct HElem {
-    /// How much spacing to insert.
+    /// 挿入する間隔の大きさ。
     #[required]
     pub amount: Spacing,
 
-    /// If `{true}`, the spacing collapses at the start or end of a paragraph.
-    /// Moreover, from multiple adjacent weak spacings all but the largest one
-    /// collapse.
+    /// `{true}`の場合、段落の始まりと終わりの空白は削除されます。
+    /// さらに、弱い間隔が隣接していると最大のもの以外は削除されます。
     ///
-    /// Weak spacing in markup also causes all adjacent markup spaces to be
-    /// removed, regardless of the amount of spacing inserted. To force a space
-    /// next to weak spacing, you can explicitly write `[#" "]` (for a normal
-    /// space) or `[~]` (for a non-breaking space). The latter can be useful to
-    /// create a construct that always attaches to the preceding word with one
-    /// non-breaking space, independently of whether a markup space existed in
-    /// front or not.
+    /// マークアップ中に弱い間隔があると、挿入された間隔の総量によらず、全ての隣接するマークアップの間隔が削除されます。
+    /// 明示的に（通常の間隔の場合は）`[#" "]`と書くか、（改行しない間隔の場合は）`[~]`と書くことで弱い間隔の隣に間隔を強制することができます。
+    /// 後者は、マークアップで直前に間隔があったかどうかに関係なく、直前の単語に改行しない間隔を常に1つ追加する構造を作成する際に便利かもしれません。
     ///
     /// ```example
     /// #h(1cm, weak: true)
@@ -72,13 +63,12 @@ impl HElem {
     }
 }
 
-/// Inserts vertical spacing into a flow of blocks.
+/// ブロックの流れに垂直方向の間隔を挿入。
 ///
-/// The spacing can be absolute, relative, or fractional. In the last case,
-/// the remaining space on the page is distributed among all fractional spacings
-/// according to their relative fractions.
+/// 間隔の大きさは絶対的な値、相対的な値、または比率で指定できます。
+/// 比率指定の場合は、比率指定されたそれぞれの間隔に、ページの残りの間隔がその相対比率に応じて配分されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #grid(
 ///   rows: 3cm,
@@ -94,14 +84,13 @@ impl HElem {
 /// ```
 #[elem(title = "Spacing (V)")]
 pub struct VElem {
-    /// How much spacing to insert.
+    /// 挿入する間隔の大きさ。
     #[required]
     pub amount: Spacing,
 
-    /// If `{true}`, the spacing collapses at the start or end of a flow.
-    /// Moreover, from multiple adjacent weak spacings all but the largest one
-    /// collapse. Weak spacings will always collapse adjacent paragraph spacing,
-    /// even if the paragraph spacing is larger.
+    /// `{true}`の場合、流れの始まりと終わりの空白は削除されます。
+    /// さらに、弱い間隔が隣接していると最大のもの以外は削除されます。
+    /// たとえ段落間隔の方が大きかったとしても、弱い間隔に隣接する段落間隔は常に削除されます。
     ///
     /// ```example
     /// The following theorem is
