@@ -120,7 +120,7 @@ pub struct PageElem {
     ///   - `y`: 垂直方向の余白。
     ///   - `rest`: 明示的に指定されていない残り全ての余白。
     ///
-    /// `left`と`right`の値は`inside`と`outside`の値と相互排他です。
+    /// `left`と`right`の値は`inside`と`outside`の値と同時に指定できません。
     ///
     /// ```example
     /// #set page(
