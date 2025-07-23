@@ -124,7 +124,7 @@ impl Show for Packed<RotateElem> {
 #[elem(Show)]
 pub struct ScaleElem {
     /// 位置引数として両方の軸の拡大縮小率を設定します。
-    /// これは`x`と`y`を同じ値で設定する単なる省略記法です。
+    /// これは`x`と`y`を同じ値で設定する省略記法です。
     #[external]
     #[positional]
     #[default(Smart::Custom(ScaleAmount::Ratio(Ratio::one())))]
