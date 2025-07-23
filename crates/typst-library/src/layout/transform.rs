@@ -111,11 +111,11 @@ impl Show for Packed<RotateElem> {
     }
 }
 
-/// Scales content without affecting layout.
+/// レイアウトに影響を与えないコンテンツの拡大縮小。
 ///
-/// Lets you mirror content by specifying a negative scale on a single axis.
+/// 単一の軸で負のスケールを指定することで、コンテンツを反転表示できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set align(center)
 /// #scale(x: -100%)[This is mirrored.]
@@ -123,17 +123,16 @@ impl Show for Packed<RotateElem> {
 /// ```
 #[elem(Show)]
 pub struct ScaleElem {
-    /// The scaling factor for both axes, as a positional argument. This is just
-    /// an optional shorthand notation for setting `x` and `y` to the same
-    /// value.
+    /// 位置引数として両方の軸の拡大縮小率を設定します。
+    /// これは`x`と`y`を同じ値で設定する単なる省略記法です。
     #[external]
     #[positional]
     #[default(Smart::Custom(ScaleAmount::Ratio(Ratio::one())))]
     pub factor: Smart<ScaleAmount>,
 
-    /// The horizontal scaling factor.
+    /// 水平方向の拡大縮小率。
     ///
-    /// The body will be mirrored horizontally if the parameter is negative.
+    /// 負の値が指定された場合は本文が水平方向に反転します。
     #[parse(
         let all = args.find()?;
         args.named("x")?.or(all)
@@ -141,14 +140,14 @@ pub struct ScaleElem {
     #[default(Smart::Custom(ScaleAmount::Ratio(Ratio::one())))]
     pub x: Smart<ScaleAmount>,
 
-    /// The vertical scaling factor.
+    /// 垂直方向の拡大縮小率。
     ///
-    /// The body will be mirrored vertically if the parameter is negative.
+    /// 負の値が指定された場合は本文が垂直方向に反転します。
     #[parse(args.named("y")?.or(all))]
     #[default(Smart::Custom(ScaleAmount::Ratio(Ratio::one())))]
     pub y: Smart<ScaleAmount>,
 
-    /// The origin of the transformation.
+    /// 変換の原点。
     ///
     /// ```example
     /// A#box(scale(75%)[A])A \
@@ -158,11 +157,10 @@ pub struct ScaleElem {
     #[default(HAlignment::Center + VAlignment::Horizon)]
     pub origin: Alignment,
 
-    /// Whether the scaling impacts the layout.
+    /// 拡大縮小がレイアウトに影響を与えるかどうか。
     ///
-    /// If set to `{false}`, the scaled content will be allowed to overlap
-    /// other content. If set to `{true}`, it will compute the new size of
-    /// the scaled content and adjust the layout accordingly.
+    /// `{false}`の場合、拡大縮小したコンテンツが他のコンテンツと重なることを許可します。
+    /// `{true}`の場合、拡大縮小したコンテンツの新しい大きさを計算し、それに応じてレイアウトを調整します。
     ///
     /// ```example
     /// Hello #scale(x: 20%, y: 40%, reflow: true)[World]!
@@ -170,7 +168,7 @@ pub struct ScaleElem {
     #[default(false)]
     pub reflow: bool,
 
-    /// The content to scale.
+    /// 拡大縮小するコンテンツ。
     #[required]
     pub body: Content,
 }
