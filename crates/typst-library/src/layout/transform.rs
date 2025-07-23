@@ -198,12 +198,12 @@ cast! {
     length: Length => ScaleAmount::Length(length),
 }
 
-/// Skews content.
+/// コンテンツのせん断変形。
 ///
-/// Skews an element in horizontal and/or vertical direction. The layout will
-/// act as if the element was not skewed unless you specify `{reflow: true}`.
+/// 水平方向または垂直方向、あるいは両方向に要素をせん断変形します。
+/// `{reflow: true}`を指定しない限り、レイアウトは要素がせん断変形を受けていないかのように振る舞います。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #skew(ax: -12deg)[
 ///   This is some fake italic text.
@@ -211,7 +211,7 @@ cast! {
 /// ```
 #[elem(Show)]
 pub struct SkewElem {
-    /// The horizontal skewing angle.
+    /// 水平方向のせん断角。
     ///
     /// ```example
     /// #skew(ax: 30deg)[Skewed]
@@ -220,7 +220,7 @@ pub struct SkewElem {
     #[default(Angle::zero())]
     pub ax: Angle,
 
-    /// The vertical skewing angle.
+    /// 垂直方向のせん断角。
     ///
     /// ```example
     /// #skew(ay: 30deg)[Skewed]
@@ -229,9 +229,9 @@ pub struct SkewElem {
     #[default(Angle::zero())]
     pub ay: Angle,
 
-    /// The origin of the skew transformation.
+    /// せん断変形の原点。
     ///
-    /// The origin will stay fixed during the operation.
+    /// 操作中は原点が固定されます。
     ///
     /// ```example
     /// X #box(skew(ax: -30deg, origin: center + horizon)[X]) X \
@@ -242,11 +242,10 @@ pub struct SkewElem {
     #[default(HAlignment::Center + VAlignment::Horizon)]
     pub origin: Alignment,
 
-    /// Whether the skew transformation impacts the layout.
+    /// せん断変形がレイアウトに影響を与えるかどうか。
     ///
-    /// If set to `{false}`, the skewed content will retain the bounding box of
-    /// the original content. If set to `{true}`, the bounding box will take the
-    /// transformation of the content into account and adjust the layout accordingly.
+    /// `{false}`の場合、せん断変形されたコンテンツは元々のコンテンツのバウンディングボックスに留まります。
+    /// `{true}`の場合、バウンディングボックスはコンテンツの変形を考慮してレイアウトを調整します。
     ///
     /// ```example
     /// Hello #skew(ay: 30deg, reflow: true, "World")!
@@ -254,7 +253,7 @@ pub struct SkewElem {
     #[default(false)]
     pub reflow: bool,
 
-    /// The content to skew.
+    /// せん断変形するコンテンツ。
     #[required]
     pub body: Content,
 }
