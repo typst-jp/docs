@@ -216,11 +216,11 @@ pub struct MatElem {
     pub rows: Vec<Vec<Content>>,
 }
 
-/// A case distinction.
+/// 場合分け。
 ///
-/// Content across different branches can be aligned with the `&` symbol.
+/// `&`記号を用いると異なる分岐に属するコンテンツを整列できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// $ f(x, y) := cases(
 ///   1 "if" (x dot y)/2 <= 0,
@@ -231,11 +231,10 @@ pub struct MatElem {
 /// ```
 #[elem(Mathy)]
 pub struct CasesElem {
-    /// The delimiter to use.
+    /// 使用する区切り文字。
     ///
-    /// Can be a single character specifying the left delimiter, in which case
-    /// the right delimiter is inferred. Otherwise, can be an array containing a
-    /// left and a right delimiter.
+    /// 一文字の場合は、右区切り文字を推論可能な左区切り文字を指定できます。
+    /// それ以外の場合は、左右の区切り文字を有する配列が指定可能です。
     ///
     /// ```example
     /// #set math.cases(delim: "[")
@@ -244,7 +243,7 @@ pub struct CasesElem {
     #[default(DelimiterPair::BRACE)]
     pub delim: DelimiterPair,
 
-    /// Whether the direction of cases should be reversed.
+    /// 場合分けの向きを反転させるかどうか。
     ///
     /// ```example
     /// #set math.cases(reverse: true)
@@ -253,7 +252,7 @@ pub struct CasesElem {
     #[default(false)]
     pub reverse: bool,
 
-    /// The gap between branches.
+    /// 分岐間の間隔。
     ///
     /// ```example
     /// #set math.cases(gap: 1em)
@@ -263,7 +262,7 @@ pub struct CasesElem {
     #[default(DEFAULT_ROW_GAP.into())]
     pub gap: Rel<Length>,
 
-    /// The branches of the case distinction.
+    /// 場合分けで分岐させる子要素。
     #[variadic]
     pub children: Vec<Content>,
 }
