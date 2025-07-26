@@ -67,7 +67,7 @@ export const TranslationStatusAlert: FC<TranslationStatusAlertProps> = ({
 	return (
 		<div
 			class={twMerge(
-				"border rounded-md p-4 mb-6",
+				"border rounded-md p-4",
 				config.bgColor,
 				config.borderColor,
 				config.textColor,

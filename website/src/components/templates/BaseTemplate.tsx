@@ -177,9 +177,25 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 						<main class="flex-1 flex flex-col px-3.5 py-4 mb-8">
 							<Breadcrumbs path={path} />
 
-							<div class="mt-4 flex flex-col gap-2">
+							<div class="flex flex-col gap-2 my-4">
 								<TranslationStatusAlert status={translationStatus} />
 							</div>
+
+							{translationStatus !== "community" && (
+								<div class="flex">
+									<a
+										href={`https://typst.app${route}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="inline-flex items-center text-sm  underline text-gray-400 hover:text-gray-600 transition-colors"
+									>
+										<div class="w-4 h-4 mr-1 ">
+											<WorldIcon />
+										</div>
+										原文（英語）を開く
+									</a>
+								</div>
+							)}
 
 							<div class="prose max-w-none w-full my-6 flex-grow">
 								{children}
