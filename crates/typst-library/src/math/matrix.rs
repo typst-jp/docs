@@ -262,7 +262,7 @@ pub struct CasesElem {
     #[default(DEFAULT_ROW_GAP.into())]
     pub gap: Rel<Length>,
 
-    /// 場合分けで分岐させる子要素。
+    /// 場合分けの各分岐を表す子要素。
     #[variadic]
     pub children: Vec<Content>,
 }
