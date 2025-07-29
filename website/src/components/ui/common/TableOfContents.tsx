@@ -9,7 +9,7 @@ const PlainTableOfContents = ({
 	topLevel = false,
 }: TableOfContentsProps & { topLevel?: boolean }) => {
 	return (
-		// Indent for succedding levels
+		// Indent for succeeding levels
 		<ol class={`space-y-1 ${!topLevel && "pl-4"} text-sm text-neutral-700`}>
 			{outline.map((item) => (
 				<li key={item.id} data-assoc={item.id}>
