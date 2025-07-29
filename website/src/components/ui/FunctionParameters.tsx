@@ -4,16 +4,21 @@ import { ChevronRightIcon } from "../icons";
 import { HtmlContent } from "./HtmlContent";
 import { Tooltip } from "./Tooltip";
 import { TypeIcon } from "./TypeIcon";
-import { type2href } from "./type2href";
+import { buildParamId, type2href } from "./type2href";
 
 type FunctionParametersProps = {
 	func: Func;
-	prefix?: string;
+	/**
+	 * The prefix for IDs
+	 *
+	 * See `buildParamId`.
+	 */
+	prefix?: string | undefined;
 };
 
 export const FunctionParameters: FC<FunctionParametersProps> = ({
 	func,
-	prefix = "",
+	prefix = undefined,
 }) => {
 	return (
 		<div class="space-y-6">
@@ -23,7 +28,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 					class="bg-gray-50 rounded-md p-4 border border-gray-100"
 				>
 					<h4
-						id={`${prefix}-${func.name}-parameters-${param.name}`}
+						id={buildParamId(param.name, prefix)}
 						class="flex flex-wrap items-center gap-2 mb-3"
 					>
 						<code class="text-base font-medium">{param.name}</code>

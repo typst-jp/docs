@@ -58,3 +58,28 @@ export const type2href = (parameterType: string): string | null => {
 	}
 	return null;
 };
+
+/**
+ * Build the ID of a parameter with prefix
+ *
+ * If the parameter belongs to a top-level function on a page, leave `prefix` empty;
+ * Otherwise, set it to an appropriate prefix.
+ *
+ * ## Example values of `prefix`
+ *
+ * | Page (kind)         | Function         | Parameter  | `prefix`                |
+ * | ------------------- | ---------------- | ---------- | ----------------------- |
+ * | `figure` (function) | `figure`         | `body`     | `undefined`             |
+ * | `figure` (function) | `figure.caption` | `body`     | `"definitions-caption"` |
+ * | `calc` (group)      | `calc.abs`       | `value`    | `"functions-abs"`       |
+ * | `array` (type)      | `array.at`       | `index`    | `"definitions-at"`      |
+ * | `array` (type)      | Constructor      | `value`    | `"constructor"`      |
+ */
+export function buildParamId(
+	parameterName: string,
+	prefix: string | undefined,
+): string {
+	return prefix === undefined
+		? `parameters-${parameterName}`
+		: `${prefix}-${parameterName}`;
+}

@@ -57,7 +57,7 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 			</h2>
 
 			<div class="mb-6">
-				<FunctionDefinition func={content} prefix={content.name} />
+				<FunctionDefinition func={content} />
 			</div>
 
 			{content.example && (
@@ -67,7 +67,7 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 			)}
 
 			<div class="my-6">
-				<FunctionParameters func={content} prefix={content.name} />
+				<FunctionParameters func={content} />
 			</div>
 
 			{content.scope.length > 0 && (
