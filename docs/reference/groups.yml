@@ -39,18 +39,19 @@
   title: Under/Over
   category: math
   path: ["math"]
-  filter: [
-    "underline",
-    "overline",
-    "underbrace",
-    "overbrace",
-    "underbracket",
-    "overbracket",
-    "underparen",
-    "overparen",
-    "undershell",
-    "overshell",
-  ]
+  filter:
+    [
+      "underline",
+      "overline",
+      "underbrace",
+      "overbrace",
+      "underbracket",
+      "overbracket",
+      "underparen",
+      "overparen",
+      "undershell",
+      "overshell",
+    ]
   details: |
     Delimiters above or below parts of an equation.
 
@@ -103,16 +104,12 @@
   path: ["math"]
   filter: ["lr", "mid", "abs", "norm", "floor", "ceil", "round"]
   details: |
-    Delimiter matching.
+    区切り文字の対応
 
-    The `lr` function allows you to match two delimiters and scale them with the
-    content they contain. While this also happens automatically for delimiters
-    that match syntactically, `lr` allows you to match two arbitrary delimiters
-    and control their size exactly. Apart from the `lr` function, Typst provides
-    a few more functions that create delimiter pairings for absolute, ceiled,
-    and floored values as well as norms.
-
-    # Example
+    `lr`関数を用いると、2つの区切り文字を対応させ、内部のコンテンツに合わせた大きさに拡大縮小できます。
+    これは構文的に対応が取れる区切り文字においては自動的に行われますが、`lr`を用いることで2つの任意の区切り文字を対応させ、その大きさを正確に制御することができます。
+    `lr`関数以外にも、Typstは、絶対値、切り捨て値、切り上げ値、ノルムを表す区切り文字ペアを生成する関数をさらにいくつか提供しています。
+    # 例
     ```example
     $ [a, b/2] $
     $ lr(]sum_(x=1)^n], size: #50%) x $
