@@ -1,9 +1,9 @@
 ---
 description: |
-  テーブルの罫線の変更方法がわからない？テーブルを回転したい？このガイドでは、Typstでテーブルを扱うために必要な知識をすべて解説します。
+  表の罫線の変更方法がわからない？表を回転したい？このガイドでは、Typstで表を扱うために必要な知識をすべて解説します。
 ---
 
-# テーブルガイド
+# 表ガイド
 Tables are a great way to present data to your readers in an easily readable,
 compact, and organized manner. They are not only used for numerical values, but
 also survey responses, task planning, schedules, and more. Because of this wide

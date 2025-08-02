@@ -838,7 +838,7 @@ pub fn urlify(title: &str) -> EcoString {
         "ガイド" => "guides".into(),
         "LaTeXユーザー向けガイド" => "guide-for-latex-users".into(),
         "ページ設定ガイド" => "page-setup-guide".into(),
-        "テーブルガイド" => "table-guide".into(),
+        "表ガイド" => "table-guide".into(),
         "更新日志" => "changelog".into(),
         "路线图" => "roadmap".into(),
         "社区" => "community".into(),

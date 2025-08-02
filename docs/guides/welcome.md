@@ -8,4 +8,4 @@ description: Typstのガイドです。
 ## ガイド一覧
 - [LaTeXユーザー向けガイド]($guides/guide-for-latex-users)
 - [ページ設定ガイド]($guides/page-setup-guide)
-- [テーブルガイド]($guides/table-guide)
+- [表ガイド]($guides/table-guide)
