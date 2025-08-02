@@ -65,19 +65,15 @@ pub struct VecElem {
     pub children: Vec<Content>,
 }
 
-/// A matrix.
+/// 行列。
 ///
-/// The elements of a row should be separated by commas, while the rows
-/// themselves should be separated by semicolons. The semicolon syntax merges
-/// preceding arguments separated by commas into an array. You can also use this
-/// special syntax of math function calls to define custom functions that take
-/// 2D data.
+/// 行内の要素はカンマで区切り、行自身はセミコロンで区切らなければなりません。
+/// セミコロン構文は、直前にあるカンマ区切りの引数を配列にマージします。
+/// 数式関数呼び出しに関するこの特殊な構文は、2次元データを引数に取るカスタム関数の定義に使用できます。
 ///
-/// Content in cells can be aligned with the [`align`]($math.mat.align)
-/// parameter, or content in cells that are in the same row can be aligned with
-/// the `&` symbol.
+/// セル内のコンテンツは[`align`]($math.mat.align)パラメーターを用いて配置できます。 また、同じ行にあるコンテンツは`&`記号を用いて配置できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// $ mat(
 ///   1, 2, ..., 10;
@@ -88,11 +84,10 @@ pub struct VecElem {
 /// ```
 #[elem(title = "Matrix", Mathy)]
 pub struct MatElem {
-    /// The delimiter to use.
+    /// 用いる区切り文字。
     ///
-    /// Can be a single character specifying the left delimiter, in which case
-    /// the right delimiter is inferred. Otherwise, can be an array containing a
-    /// left and a right delimiter.
+    /// 単一の文字で左区切り文字を指定する場合、右区切り文字は自動的に推論されます。
+    /// それ以外の場合は、左区切り文字と右区切り文字を含む配列を指定します。
     ///
     /// ```example
     /// #set math.mat(delim: "[")
@@ -101,7 +96,7 @@ pub struct MatElem {
     #[default(DelimiterPair::PAREN)]
     pub delim: DelimiterPair,
 
-    /// The horizontal alignment that each cell should have.
+    /// 各セルの水平方向の配置。
     ///
     /// ```example
     /// #set math.mat(align: right)
@@ -111,26 +106,23 @@ pub struct MatElem {
     #[default(HAlignment::Center)]
     pub align: HAlignment,
 
-    /// Draws augmentation lines in a matrix.
+    /// 行列内に補助線を描画。
     ///
-    /// - `{none}`: No lines are drawn.
-    /// - A single number: A vertical augmentation line is drawn
-    ///   after the specified column number. Negative numbers start from the end.
-    /// - A dictionary: With a dictionary, multiple augmentation lines can be
-    ///   drawn both horizontally and vertically. Additionally, the style of the
-    ///   lines can be set. The dictionary can contain the following keys:
-    ///   - `hline`: The offsets at which horizontal lines should be drawn.
-    ///     For example, an offset of `2` would result in a horizontal line
-    ///     being drawn after the second row of the matrix. Accepts either an
-    ///     integer for a single line, or an array of integers
-    ///     for multiple lines. Like for a single number, negative numbers start from the end.
-    ///   - `vline`: The offsets at which vertical lines should be drawn.
-    ///     For example, an offset of `2` would result in a vertical line being
-    ///     drawn after the second column of the matrix. Accepts either an
-    ///     integer for a single line, or an array of integers
-    ///     for multiple lines. Like for a single number, negative numbers start from the end.
-    ///   - `stroke`: How to [stroke]($stroke) the line. If set to `{auto}`,
-    ///     takes on a thickness of 0.05em and square line caps.
+    /// - `{none}`: 線は描画されません。
+    /// - 単一の数値: 指定された列番号の後に垂直方向の線を描画します。
+    /// 負数の場合は最後の列から数え始めます。
+    /// - 単一の辞書: 水平方向および垂直方向の両方で複数の補助線を描画できます。
+    /// 加えて線のスタイルを設定可能です。
+    /// 辞書には以下のキーを含めることができます。
+    ///   - `hline`: 水平方向の線を描画するオフセット。
+    ///     例えば、オフセットを`2`とすると行列の2行目の後に水平方向の線が描かれます。
+    ///     単一の線を描く場合は整数を、複数の線の場合は整数の配列を受け取ります。
+    ///     単一の数値を指定する場合と同様に、負数の場合は末尾から数え始めます。
+    ///   - `vline`: 垂直方向の線を描画するオフセット。
+    ///     例えば、オフセットを`2`とすると行列の2列目の後に垂直方向の線が描かれます。
+    ///     単一の線を描く場合は整数を、複数の線の場合は整数の配列を受け取ります。
+    ///   - `stroke`: 線の[ストローク]($stroke)。
+    ///     `{auto}`が指定された場合、0.05emの太さで四角い線端になります。
     ///
     /// ```example
     /// $ mat(1, 0, 1; 0, 1, 2; augment: #2) $
@@ -145,9 +137,9 @@ pub struct MatElem {
     #[fold]
     pub augment: Option<Augment>,
 
-    /// The gap between rows and columns.
+    /// 行間と列間の間隔
     ///
-    /// This is a shorthand to set `row-gap` and `column-gap` to the same value.
+    /// これは`row-gap`と`column-gap`を同じ値で設定する省略記法です。
     ///
     /// ```example
     /// #set math.mat(gap: 1em)
@@ -156,7 +148,7 @@ pub struct MatElem {
     #[external]
     pub gap: Rel<Length>,
 
-    /// The gap between rows.
+    /// 行間の間隔。
     ///
     /// ```example
     /// #set math.mat(row-gap: 1em)
@@ -170,7 +162,7 @@ pub struct MatElem {
     #[default(DEFAULT_ROW_GAP.into())]
     pub row_gap: Rel<Length>,
 
-    /// The gap between columns.
+    /// 列間の間隔。
     ///
     /// ```example
     /// #set math.mat(column-gap: 1em)
@@ -181,7 +173,7 @@ pub struct MatElem {
     #[default(DEFAULT_COL_GAP.into())]
     pub column_gap: Rel<Length>,
 
-    /// An array of arrays with the rows of the matrix.
+    /// 行列の各行を要素とする配列の配列。
     ///
     /// ```example
     /// #let data = ((1, 2, 3), (4, 5, 6))
