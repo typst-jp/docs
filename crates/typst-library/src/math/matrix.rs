@@ -137,7 +137,7 @@ pub struct MatElem {
     #[fold]
     pub augment: Option<Augment>,
 
-    /// 行間と列間の間隔
+    /// 行間と列間の間隔。
     ///
     /// これは`row-gap`と`column-gap`を同じ値で設定する省略記法です。
     ///
