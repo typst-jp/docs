@@ -29,28 +29,27 @@
   path: ["math"]
   filter: ["display", "inline", "script", "sscript"]
   details: |
-    Forced size styles for expressions within formulas.
+    数式中の式に大きさに関するスタイルを強制します。
 
-    These functions allow manual configuration of the size of equation elements
-    to make them look as in a display/inline equation or as if used in a root or
-    sub/superscripts.
+    これらの関数を用いると、数式要素の大きさを、ブロック/インライン数式中や、根号、下付き文字、上付き文字の中で使われているかのようなものに手動で設定できます。
 
 - name: underover
   title: Under/Over
   category: math
   path: ["math"]
-  filter: [
-    "underline",
-    "overline",
-    "underbrace",
-    "overbrace",
-    "underbracket",
-    "overbracket",
-    "underparen",
-    "overparen",
-    "undershell",
-    "overshell",
-  ]
+  filter:
+    [
+      "underline",
+      "overline",
+      "underbrace",
+      "overbrace",
+      "underbracket",
+      "overbracket",
+      "underparen",
+      "overparen",
+      "undershell",
+      "overshell",
+    ]
   details: |
     Delimiters above or below parts of an equation.
 
