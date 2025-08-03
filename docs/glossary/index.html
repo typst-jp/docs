@@ -23,7 +23,7 @@
 <tr><td>typesetting</td><td>組版</td><td>Typstの主要機能</td></tr>
 <tr><td>documentation</td><td>ドキュメント</td><td></td></tr>
 <tr><td>content</td><td>コンテンツ</td><td>型の一種で、マークアップによって表される</td></tr>
-<tr><td>element</td><td>要素</td><td>見出し、数式、テーブルなどの文書を構成する要素</td></tr>
+<tr><td>element</td><td>要素</td><td>見出し、数式、表などの文書を構成する要素</td></tr>
 <tr><td>element function</td><td>要素関数</td><td><a href="/docs/reference/foundations/function/#element-functions">要素関数</a>を参照</td></tr>
 <tr><td>styling</td><td>スタイル設定</td><td></td></tr>
 <tr><td>set rule</td><td>setルール</td><td><a href="/docs/reference/styling/">スタイル設定</a>に出てきます</td></tr>
@@ -31,6 +31,7 @@
 <tr><td>markup</td><td>マークアップ</td><td>Typstのデフォルトモード</td></tr>
 <tr><td>script</td><td>スクリプト</td><td>Typstのスクリプトモード、「#」で始まる行</td></tr>
 <tr><td>figure</td><td>図表</td><td>キャプション付きの図表、<code>image</code>ではない</td></tr>
+<tr><td>table</td><td>表</td><td>データや情報を整理して表示する要素</td></tr>
 <tr><td>supplement</td><td>補足語</td><td><a href="/docs/reference/model/ref/">参照</a>されるものの種類を指す文字列、「図1」の「図」など</td></tr>
 </tbody></table></div></div></main><div class="flex-col w-full md:w-60 lg:w-72 ml-4 hidden xl:block"></div></div></div><div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-16" x-show="searchOpen" x-cloak="true" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-on:click="searchOpen = false"><div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4" x-on:click="$event.stopPropagation()" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"><div class="flex flex-col max-h-[80vh]"><link href="/pagefind/pagefind-ui.css" rel="stylesheet"/><script src="/pagefind/pagefind-ui.js"></script><div class="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0"><h2 class="text-lg font-semibold">検索</h2><button type="button" class="text-gray-400 hover:text-gray-600" x-on:click="searchOpen = false" aria-label="検索を閉じる"><div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x"><title>閉じるアイコン</title><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M18 6l-12 12"></path><path d="M6 6l12 12"></path></svg></div></button></div><div class="p-4 overflow-y-auto flex-1"><div id="search"></div></div><script>window.addEventListener('DOMContentLoaded', (event) => {
 	new PagefindUI({ element: "#search", showSubResults: true });
