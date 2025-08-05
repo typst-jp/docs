@@ -7,18 +7,15 @@ use crate::foundations::{dict, func, Content, Context, Dict, Resolve, Smart};
 use crate::introspection::{Locator, LocatorLink};
 use crate::layout::{Abs, Axes, Length, Region, Size};
 
-/// Measures the layouted size of content.
+/// レイアウトされたコンテンツの測定。
 ///
-/// The `measure` function lets you determine the layouted size of content.
-/// By default an infinite space is assumed, so the measured dimensions may
-/// not necessarily match the final dimensions of the content.
-/// If you want to measure in the current layout dimensions, you can combine
-/// `measure` and [`layout`].
+/// `measure`関数を用いるとレイアウトされたコンテンツの大きさを測定できます。
+/// デフォルトでは無限のスペースが想定されているため、測定された寸法は必ずしもコンテンツの最終的な寸法に一致するとは限りません。
+/// 現在のレイアウトの寸法が測定したい場合は、`measure`と[`layout`]を組み合わせることができます。
 ///
-/// # Example
-/// The same content can have a different size depending on the [context] that
-/// it is placed into. In the example below, the `[#content]` is of course
-/// bigger when we increase the font size.
+/// # 例
+/// 同じコンテンツでも置く場所の[context]によって異なる大きさになることがあります。
+/// 以下の例では、フォントサイズを大きくすると`[#content]`は必然的に大きくなります。
 ///
 /// ```example
 /// #let content = [Hello!]
@@ -27,7 +24,7 @@ use crate::layout::{Abs, Axes, Length, Region, Size};
 /// #content
 /// ```
 ///
-/// For this reason, you can only measure when context is available.
+/// この理由から、測定が可能なのはコンテキストが利用可能な場合に限ります。
 ///
 /// ```example
 /// #let thing(body) = context {
@@ -39,21 +36,18 @@ use crate::layout::{Abs, Axes, Length, Region, Size};
 /// #thing[Welcome]
 /// ```
 ///
-/// The measure function returns a dictionary with the entries `width` and
-/// `height`, both of type [`length`].
+/// measure関数はキーが`width`と`height`で、その値がいずれも[`length`]型の辞書を返します。
 #[func(contextual)]
 pub fn measure(
     engine: &mut Engine,
     context: Tracked<Context>,
     span: Span,
-    /// The width available to layout the content.
+    /// コンテンツをレイアウトするのに利用可能な幅。
     ///
-    /// Setting this to `{auto}` indicates infinite available width.
+    /// これを`{auto}`に設定すると無限大の幅が利用可能であると見なされます。
     ///
-    /// Note that using the `width` and `height` parameters of this function is
-    /// different from measuring a sized [`block`] containing the content. In
-    /// the following example, the former will get the dimensions of the inner
-    /// content instead of the dimensions of the block.
+    /// この関数の`width`および`height`パラメーターを用いることは、大きさを持ち、コンテンツを有する[`block`]を測定することとは異なることに注意してください。
+    /// 以下の例では、前者はブロックの寸法ではなく、内側のコンテンツの寸法を取得します。
     ///
     /// ```example
     /// #context measure(lorem(100), width: 400pt)
@@ -63,13 +57,13 @@ pub fn measure(
     #[named]
     #[default(Smart::Auto)]
     width: Smart<Length>,
-    /// The height available to layout the content.
+    /// コンテンツをレイアウトするのに利用可能な高さ。
     ///
-    /// Setting this to `{auto}` indicates infinite available height.
+    /// これを`{auto}`に設定すると無限大の高さが利用可能であると見なされます。
     #[named]
     #[default(Smart::Auto)]
     height: Smart<Length>,
-    /// The content whose size to measure.
+    /// 大きさを測定するコンテンツ。
     content: Content,
 ) -> SourceResult<Dict> {
     // Create a pod region with the available space.

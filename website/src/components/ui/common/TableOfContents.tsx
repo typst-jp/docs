@@ -4,6 +4,30 @@ export type TableOfContentsProps = {
 	outline: OutlineItem[];
 };
 
+const PlainTableOfContents = ({
+	outline,
+	topLevel = false,
+}: TableOfContentsProps & { topLevel?: boolean }) => {
+	return (
+		// Indent for succeeding levels
+		<ol class={`space-y-1 ${!topLevel && "pl-4"} text-sm text-neutral-700`}>
+			{outline.map((item) => (
+				<li key={item.id} data-assoc={item.id}>
+					<a
+						href={`#${item.id}`}
+						class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors"
+					>
+						{item.name}
+					</a>
+					{item.children.length > 0 && (
+						<PlainTableOfContents outline={item.children} />
+					)}
+				</li>
+			))}
+		</ol>
+	);
+};
+
 export const TableOfContents = ({ outline }: TableOfContentsProps) => {
 	if (outline.length === 0) {
 		return null;
@@ -17,18 +41,7 @@ export const TableOfContents = ({ outline }: TableOfContentsProps) => {
 			<strong class="block mb-2 text-sm text-neutral-500 font-semibold tracking-wide">
 				目次
 			</strong>
-			<ol class="space-y-1 text-sm text-neutral-700">
-				{outline.map((item) => (
-					<li key={item.id} data-assoc={item.id}>
-						<a
-							href={`#${item.id}`}
-							class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors"
-						>
-							{item.name}
-						</a>
-					</li>
-				))}
-			</ol>
+			<PlainTableOfContents outline={outline} topLevel={true} />
 		</nav>
 	);
 };

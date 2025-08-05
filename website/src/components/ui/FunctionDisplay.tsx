@@ -7,13 +7,18 @@ import { HtmlContent } from "./HtmlContent";
 
 type FunctionDisplayProps = {
 	func: Func;
-	prefix?: string;
+	/**
+	 * The prefix for IDs of function parameters
+	 *
+	 * See `buildParamId`.
+	 */
+	prefix?: string | undefined;
 	isExampleFolding?: boolean;
 };
 
 export const FunctionDisplay: FC<FunctionDisplayProps> = ({
 	func,
-	prefix = "",
+	prefix = undefined,
 	isExampleFolding = true,
 }) => {
 	return (

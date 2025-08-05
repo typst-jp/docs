@@ -21,19 +21,16 @@ use crate::model::{DocumentInfo, Numbering};
 use crate::text::LocalName;
 use crate::visualize::{Color, Paint};
 
-/// Layouts its child onto one or multiple pages.
+/// その子要素を単一ページか複数ページにレイアウト。
 ///
-/// Although this function is primarily used in set rules to affect page
-/// properties, it can also be used to explicitly render its argument onto
-/// a set of pages of its own.
+/// この関数は主にsetルールでページのプロパティに影響を与えるために使用されますが、引数を独自のページセットに明示的にレンダリングするためにも使用できます。
 ///
-/// Pages can be set to use `{auto}` as their width or height. In this case, the
-/// pages will grow to fit their content on the respective axis.
+/// ページでは幅と高さに`{auto}`が設定可能です。
+/// この場合、ページは各軸方向においてコンテンツに合わせて大きくなります。
 ///
-/// The [Guide for Page Setup]($guides/page-setup-guide) explains how to use
-/// this and related functions to set up a document with many examples.
+/// [ページセットアップガイド]($guides/page-setup-guide)では多くの例とともにこの関数と関連する関数を用いてどのように文書をセットアップするかを説明しています。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// >>> #set page(margin: auto)
 /// #set page("us-letter")
@@ -42,15 +39,14 @@ use crate::visualize::{Color, Paint};
 /// ```
 #[elem(Construct)]
 pub struct PageElem {
-    /// A standard paper size to set width and height.
+    /// 幅と高さを設定するための標準的な紙の大きさ。
     ///
-    /// This is just a shorthand for setting `width` and `height` and, as such,
-    /// cannot be retrieved in a context expression.
+    /// これは`width`と`height`を設定するための単なる省略記法であり、その性質上コンテキスト式からは取得できません。
     #[external]
     #[default(Paper::A4)]
     pub paper: Paper,
 
-    /// The width of the page.
+    /// ページの幅。
     ///
     /// ```example
     /// #set page(
@@ -72,12 +68,10 @@ pub struct PageElem {
     #[ghost]
     pub width: Smart<Length>,
 
-    /// The height of the page.
+    /// ページの高さ。
     ///
-    /// If this is set to `{auto}`, page breaks can only be triggered manually
-    /// by inserting a [page break]($pagebreak). Most examples throughout this
-    /// documentation use `{auto}` for the height of the page to dynamically
-    /// grow and shrink to fit their content.
+    /// これが`{auto}`に設定された場合、[改ページ]($pagebreak)は手動で挿入したときのみ発火させることができます。
+    /// このドキュメントのほとんどの例では、ページの高さに `{auto}` を指定しており、コンテンツに合わせて動的に伸縮するようにしています。
     #[resolve]
     #[parse(
         args.named("height")?
@@ -87,7 +81,7 @@ pub struct PageElem {
     #[ghost]
     pub height: Smart<Length>,
 
-    /// Whether the page is flipped into landscape orientation.
+    /// ページを90度回転させるかどうか。
     ///
     /// ```example
     /// #set page(
@@ -109,28 +103,24 @@ pub struct PageElem {
     #[ghost]
     pub flipped: bool,
 
-    /// The page's margins.
+    /// ページの余白。
     ///
-    /// - `{auto}`: The margins are set automatically to 2.5/21 times the smaller
-    ///   dimension of the page. This results in 2.5cm margins for an A4 page.
-    /// - A single length: The same margin on all sides.
-    /// - A dictionary: With a dictionary, the margins can be set individually.
-    ///   The dictionary can contain the following keys in order of precedence:
-    ///   - `top`: The top margin.
-    ///   - `right`: The right margin.
-    ///   - `bottom`: The bottom margin.
-    ///   - `left`: The left margin.
-    ///   - `inside`: The margin at the inner side of the page (where the
-    ///     [binding]($page.binding) is).
-    ///   - `outside`: The margin at the outer side of the page (opposite to the
-    ///     [binding]($page.binding)).
-    ///   - `x`: The horizontal margins.
-    ///   - `y`: The vertical margins.
-    ///   - `rest`: The margins on all sides except those for which the
-    ///     dictionary explicitly sets a size.
+    /// - `{auto}`: 余白が自動的に短辺の2.5/21倍の大きさに設定されます。
+    /// A4のページでは2.5cmの余白になります。
+    /// - 単一の長さ指定: 全ての辺に同じ大きさの余白を適用します。
+    /// - 辞書指定: 辞書を用いることで余白を個々に設定可能です。
+    ///  この辞書に含められるキーは以下のとおりです。リストは優先順位の順に並んでいます。
+    ///   - `top`: 上部の余白。
+    ///   - `right`: 右側の余白。
+    ///   - `bottom`: 下部の余白。
+    ///   - `left`: 左側の余白。
+    ///   - `inside`: ページの内側の余白([綴じ]($page.binding)側).
+    ///   - `outside`: ページの外側の余白([綴じ]($page.binding)の反対側).
+    ///   - `x`: 水平方向の余白。
+    ///   - `y`: 垂直方向の余白。
+    ///   - `rest`: 明示的に指定されていない残り全ての余白。
     ///
-    /// The values for `left` and `right` are mutually exclusive with
-    /// the values for `inside` and `outside`.
+    /// `left`と`right`の値は`inside`と`outside`の値と同時に指定できません。
     ///
     /// ```example
     /// #set page(
@@ -149,22 +139,19 @@ pub struct PageElem {
     #[ghost]
     pub margin: Margin,
 
-    /// On which side the pages will be bound.
+    /// ページのどちら側を綴じるか。
     ///
-    /// - `{auto}`: Equivalent to `left` if the [text direction]($text.dir)
-    ///   is left-to-right and `right` if it is right-to-left.
-    /// - `left`: Bound on the left side.
-    /// - `right`: Bound on the right side.
+    /// - `{auto}`: [テキストの向き]($text.dir)が左から右なら`left`と等価となり、右から左なら`right`と等価となります。
+    /// - `left`: 左側を綴じます。
+    /// - `right`: 右側を綴じます。
     ///
-    /// This affects the meaning of the `inside` and `outside` options for
-    /// margins.
+    /// これは余白の`inside`および`outside`オプションの意味に影響します。
     #[ghost]
     pub binding: Smart<Binding>,
 
-    /// How many columns the page has.
+    /// ぺージの段数。
     ///
-    /// If you need to insert columns into a page or other container, you can
-    /// also use the [`columns` function]($columns).
+    /// ページや他のコンテナに段を挿入したい場合は[`columns`関数]($columns)も使用できます。
     ///
     /// ```example:single
     /// #set page(columns: 2, height: 4.8cm)
@@ -182,20 +169,15 @@ pub struct PageElem {
     #[ghost]
     pub columns: NonZeroUsize,
 
-    /// The page's background fill.
+    /// ページ背景の塗り潰し。
     ///
-    /// Setting this to something non-transparent instructs the printer to color
-    /// the complete page. If you are considering larger production runs, it may
-    /// be more environmentally friendly and cost-effective to source pre-dyed
-    /// pages and not set this property.
+    /// これを非透明なものに設定すると、プリンターにページ全体を着色するよう指示します。
+    /// 印刷規模が大きい場合は、このプロパティを設定せず、あらかじめ染色された用紙を調達したほうが環境にも優しくコスト削減もできるでしょう。
     ///
-    /// When set to `{none}`, the background becomes transparent. Note that PDF
-    /// pages will still appear with a (usually white) background in viewers,
-    /// but they are actually transparent. (If you print them, no color is used
-    /// for the background.)
+    /// `{none}`に設定すると背景は透明になります。
+    /// ビューワーではPDFのページに（通常は白色の）背景があるように見えますが、実際は透明であることに注意してください（印刷時には背景に色が使用されません）。
     ///
-    /// The default of `{auto}` results in `{none}` for PDF output, and
-    /// `{white}` for PNG and SVG.
+    /// デフォルト値の`{auto}`は、PDF出力の場合は`{none}`となり、PNGおよびSVG出力の場合は`{white}`になります。
     ///
     /// ```example
     /// #set page(fill: rgb("444352"))
@@ -206,10 +188,9 @@ pub struct PageElem {
     #[ghost]
     pub fill: Smart<Option<Paint>>,
 
-    /// How to [number]($numbering) the pages.
+    /// ページ[番号]($numbering)の付け方。
     ///
-    /// If an explicit `footer` (or `header` for top-aligned numbering) is
-    /// given, the numbering is ignored.
+    /// `footer`（もしくは上部配置番号付けの場合は`header`）が明示的に与えられた場合、numberingは無視されます。
     ///
     /// ```example
     /// #set page(
@@ -224,9 +205,9 @@ pub struct PageElem {
     #[ghost]
     pub numbering: Option<Numbering>,
 
-    /// A supplement for the pages.
+    /// ページの補足語。
     ///
-    /// For page references, this is added before the page number.
+    /// ページ参照では、これはページ番号の前に追加されます。
     ///
     /// ```example
     /// #set page(numbering: "1.", supplement: [p.])
@@ -237,12 +218,11 @@ pub struct PageElem {
     #[ghost]
     pub supplement: Smart<Option<Content>>,
 
-    /// The alignment of the page numbering.
+    /// ページ番号の配置。
     ///
-    /// If the vertical component is `top`, the numbering is placed into the
-    /// header and if it is `bottom`, it is placed in the footer. Horizon
-    /// alignment is forbidden. If an explicit matching `header` or `footer` is
-    /// given, the numbering is ignored.
+    /// 垂直成分が`top`の場合は、番号はヘッダー内に配置され、`bottom`の場合はフッター内に配置されます。
+    /// 水平方向には配置できません。
+    /// 対応する`header`や`footer`が明示的に与えられた場合、numberingは無視されます。
     ///
     /// ```example
     /// #set page(
@@ -257,12 +237,12 @@ pub struct PageElem {
     #[ghost]
     pub number_align: SpecificAlignment<HAlignment, OuterVAlignment>,
 
-    /// The page's header. Fills the top margin of each page.
+    /// ページのヘッダー。
+    /// ページの上部余白を埋めます。
     ///
-    /// - Content: Shows the content as the header.
-    /// - `{auto}`: Shows the page number if a `numbering` is set and
-    ///   `number-align` is `top`.
-    /// - `{none}`: Suppresses the header.
+    /// - コンテンツが与えられた場合: ヘッダーとしてコンテンツを表示します。
+    /// - `{auto}`: `numbering`が設定されており、`number-align`が`top`の場合ページ番号を表示します。
+    /// - `{none}`: ヘッダーを表示しません。
     ///
     /// ```example
     /// #set par(justify: true)
@@ -281,22 +261,21 @@ pub struct PageElem {
     #[ghost]
     pub header: Smart<Option<Content>>,
 
-    /// The amount the header is raised into the top margin.
+    /// 上部余白方向のヘッダーの上昇量。
     #[resolve]
     #[default(Ratio::new(0.3).into())]
     #[ghost]
     pub header_ascent: Rel<Length>,
 
-    /// The page's footer. Fills the bottom margin of each page.
+    /// ページのフッター。
+    /// ページの下部余白を埋めます。
     ///
-    /// - Content: Shows the content as the footer.
-    /// - `{auto}`: Shows the page number if a `numbering` is set and
-    ///   `number-align` is `bottom`.
-    /// - `{none}`: Suppresses the footer.
+    /// - コンテンツが与えられた場合: フッターとしてコンテンツを表示します。
+    /// - `{auto}`: `numbering`が設定されており、`number-align`が`bottom`の場合ページ番号を表示します。
+    /// - `{none}`: フッターを表示しません。
     ///
-    /// For just a page number, the `numbering` property typically suffices. If
-    /// you want to create a custom footer but still display the page number,
-    /// you can directly access the [page counter]($counter).
+    /// 単純なページ番号を使用する場合は、一般的に`numbering`プロパティで十分です。
+    /// カスタムフッターを作成したい場合でページ番号を表示したいときは、[ページカウンター]($counter)に直接アクセスできます。
     ///
     /// ```example
     /// #set par(justify: true)
@@ -319,16 +298,16 @@ pub struct PageElem {
     #[ghost]
     pub footer: Smart<Option<Content>>,
 
-    /// The amount the footer is lowered into the bottom margin.
+    /// 下部余白方向のフッターの下降量。
     #[resolve]
     #[default(Ratio::new(0.3).into())]
     #[ghost]
     pub footer_descent: Rel<Length>,
 
-    /// Content in the page's background.
+    /// ページ背景のコンテンツ。
     ///
-    /// This content will be placed behind the page's body. It can be
-    /// used to place a background image or a watermark.
+    /// このコンテンツはページ本文の背後に配置されます。
+    /// これは背景画像や透かしに使用できます。
     ///
     /// ```example
     /// #set page(background: rotate(24deg,
@@ -345,9 +324,9 @@ pub struct PageElem {
     #[ghost]
     pub background: Option<Content>,
 
-    /// Content in the page's foreground.
+    /// ページ前景のコンテンツ。
     ///
-    /// This content will overlay the page's body.
+    /// このコンテンツはページ本文の上に重なって表示されます。
     ///
     /// ```example
     /// #set page(foreground: text(24pt)[🥸])
@@ -360,11 +339,10 @@ pub struct PageElem {
     #[ghost]
     pub foreground: Option<Content>,
 
-    /// The contents of the page(s).
+    /// ページの本文。
     ///
-    /// Multiple pages will be created if the content does not fit on a single
-    /// page. A new page with the page properties prior to the function invocation
-    /// will be created after the body has been typeset.
+    /// コンテンツが単一ページに収まらなかった場合は複数ページが作成されます。
+    /// 関数呼び出し前に設定されていたページプロパティを適用した新しいページが本文組版後に作成されます。
     #[external]
     #[required]
     pub body: Content,
@@ -395,11 +373,11 @@ impl LocalName for PageElem {
     const KEY: &'static str = "page";
 }
 
-/// A manual page break.
+/// 手動の改ページ。
 ///
-/// Must not be used inside any containers.
+/// いかなるコンテナ内でも使用してはいけません。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// The next page contains
 /// more details on compound theory.
@@ -410,13 +388,11 @@ impl LocalName for PageElem {
 /// ```
 #[elem(title = "Page Break")]
 pub struct PagebreakElem {
-    /// If `{true}`, the page break is skipped if the current page is already
-    /// empty.
+    /// `{true}`の場合、現在のページが既に空のとき改ページは行われません。
     #[default(false)]
     pub weak: bool,
 
-    /// If given, ensures that the next page will be an even/odd page, with an
-    /// empty page in between if necessary.
+    /// 設定された場合、必要に応じて空ページを追加して次のページが偶数/奇数ページになるようにします。
     ///
     /// ```example
     /// #set page(height: 30pt)
@@ -725,9 +701,9 @@ impl PageRanges {
 /// Whether something should be even or odd.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum Parity {
-    /// Next page will be an even page.
+    /// 次のページが偶数ページになります。
     Even,
-    /// Next page will be an odd page.
+    /// 次のページが奇数ページになります。
     Odd,
 }
 
@@ -793,7 +769,7 @@ macro_rules! papers {
             Paper,
             self => self.name.into_value(),
             $(
-                /// Produces a paper of the respective size.
+                /// 指定された大きさの用紙を生成。
                 $name => Self::$var,
             )*
         }

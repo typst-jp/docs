@@ -2,16 +2,21 @@ import type { FC } from "hono/jsx";
 import type { Func } from "../../types/model";
 import { TypeIcon } from "./TypeIcon";
 import { genPath } from "./genPath";
-import { type2href } from "./type2href";
+import { buildParamId, type2href } from "./type2href";
 
 type FunctionDefinitionProps = {
 	func: Func;
-	prefix?: string;
+	/**
+	 * The prefix for parameter IDs
+	 *
+	 * See `buildParamId`.
+	 */
+	prefix?: string | undefined;
 };
 
 export const FunctionDefinition: FC<FunctionDefinitionProps> = ({
 	func,
-	prefix = "",
+	prefix = undefined,
 }) => {
 	return (
 		<div class="bg-gray-50 p-4 rounded-md border border-gray-100 overflow-x-auto">
@@ -28,7 +33,7 @@ export const FunctionDefinition: FC<FunctionDefinitionProps> = ({
 							{!param.positional && (
 								<div class="flex-shrink-0">
 									<a
-										href={`#${prefix}-${func.name}-parameters-${param.name}`}
+										href={`#${buildParamId(param.name, prefix)}`}
 										class="text-gray-800 hover:text-blue-500 transition-colors mr-1"
 									>
 										<span class="font-medium">{param.name}</span>

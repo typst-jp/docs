@@ -7,6 +7,7 @@ import {
 	ChevronRightIcon,
 	CloseIcon,
 	InfoCircleIcon,
+	WorldIcon,
 } from "../icons";
 import {
 	Breadcrumbs,
@@ -176,13 +177,48 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 						<main class="flex-1 flex flex-col px-3.5 py-4 mb-8">
 							<Breadcrumbs path={path} />
 
-							<div class="mt-4">
+							<div class="flex flex-col gap-2 my-4">
 								<TranslationStatusAlert status={translationStatus} />
 							</div>
 
-							<div class="prose max-w-none w-full mt-6 flex-grow">
+							{translationStatus !== "community" && (
+								<div class="flex">
+									<a
+										href={`https://typst.app${route}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="inline-flex items-center text-sm  underline text-gray-400 hover:text-gray-600 transition-colors"
+									>
+										<div class="w-4 h-4 mr-1 ">
+											<WorldIcon />
+										</div>
+										原文（英語）を開く
+									</a>
+								</div>
+							)}
+
+							<div class="prose max-w-none w-full my-6 flex-grow">
 								{children}
 							</div>
+
+							{translationStatus !== "community" && (
+								<a
+									href={`https://typst.app${route}`}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="group inline-flex items-center px-3 py-2 rounded-md border border-gray-200 bg-white hover:border-gray-500 hover:bg-gray-50 transition-all duration-200 w-fit"
+								>
+									<div class="w-4 h-4 mr-2 text-gray-600 transition-colors">
+										<WorldIcon />
+									</div>
+									<span class="text-sm font-medium text-gray-800 group-hover:text-gray-900 transition-colors">
+										原文（英語）を開く
+									</span>
+									<div class="w-4 h-4 ml-2 text-gray-400 transition-colors">
+										<ChevronRightIcon />
+									</div>
+								</a>
+							)}
 
 							{route === "/docs/" ? (
 								<div class="doc-categories grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">

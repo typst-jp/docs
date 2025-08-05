@@ -208,7 +208,14 @@ fn changelog_pages(resolver: &dyn Resolver) -> PageModel {
         md_page(resolver, &base, load!("changelog/0.2.0.md")),
         md_page(resolver, &base, load!("changelog/0.1.0.md")),
         md_page(resolver, &base, load!("changelog/earlier.md")),
-    ];
+    ]
+    .into_iter()
+    .map(|child| {
+        let route = eco_format!("{base}{}/", urlify(child.title.as_str()));
+        PageModel { route, ..child }
+    })
+    .collect();
+
     page
 }
 
@@ -828,12 +835,15 @@ pub fn urlify(title: &str) -> EcoString {
         "スタイル設定" => "styling".into(),
         "スクリプト記述" => "scripting".into(),
         "コンテキスト" => "context".into(),
-        "指南" => "guides".into(),
-        "LaTeX 用户指南" => "guide-for-latex-users".into(),
-        "页面设置指南" => "page-setup".into(),
+        "ガイド" => "guides".into(),
+        "LaTeXユーザー向けガイド" => "guide-for-latex-users".into(),
+        "ページ設定ガイド" => "page-setup-guide".into(),
+        "表ガイド" => "table-guide".into(),
         "更新日志" => "changelog".into(),
         "路线图" => "roadmap".into(),
         "社区" => "community".into(),
+        "変更履歴" => "changelog".into(),
+        "初期バージョン" => "earlier".into(),
         "日本語組版情報" => "japanese".into(),
         "日本語テンプレート" => "templates".into(),
         "日本語向けパッケージ" => "packages".into(),

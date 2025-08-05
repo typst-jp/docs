@@ -1,14 +1,11 @@
 ---
-description: Guides for Typst.
+description: Typstのガイドです。
 ---
 
-# Guides
-Welcome to the Guides section! Here, you'll find helpful material for specific
-user groups or use cases. Currently, two guides are available: An introduction
-to Typst for LaTeX users, and a detailed look at page setup. Feel free to
-propose other topics for guides!
+# ガイド
+ガイドセクションへようこそ！ここでは、特定のユーザー層やユースケース向けの役立つ資料を掲載しています。現在、LaTeXユーザー向けの入門ガイドと、ページ設定に関する詳細なガイドが利用可能です。その他のトピックについても、ぜひ提案してください！
 
-## List of Guides
-- [Guide for LaTeX users]($guides/guide-for-latex-users)
-- [Page setup guide]($guides/page-setup-guide)
-- [Table guide]($guides/table-guide)
+## ガイド一覧
+- [LaTeXユーザー向けガイド]($guides/guide-for-latex-users)
+- [ページ設定ガイド]($guides/page-setup-guide)
+- [表ガイド]($guides/table-guide)

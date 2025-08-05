@@ -11,6 +11,7 @@ export { MenuIcon } from "./MenuIcon";
 export { CloseIcon } from "./CloseIcon";
 export { SearchIcon } from "./SearchIcon";
 export { LanguageIcon } from "./LanguageIcon";
+export { WorldIcon } from "./WorldIcon";
 
 // Simple Icons
 // https://simpleicons.org/
