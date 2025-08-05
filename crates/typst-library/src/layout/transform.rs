@@ -198,10 +198,10 @@ cast! {
     length: Length => ScaleAmount::Length(length),
 }
 
-/// コンテンツのせん断変形。
+/// コンテンツのスキュー変形。
 ///
-/// 水平方向または垂直方向、あるいは両方向に要素をせん断変形します。
-/// `{reflow: true}`を指定しない限り、レイアウトは要素がせん断変形を受けていないかのように振る舞います。
+/// 水平方向または垂直方向、あるいは両方向に要素をスキュー（シアー）変形します。
+/// `{reflow: true}`を指定しない限り、レイアウトは要素がスキュー変形を受けていないかのように振る舞います。
 ///
 /// # 例
 /// ```example
@@ -211,7 +211,7 @@ cast! {
 /// ```
 #[elem(Show)]
 pub struct SkewElem {
-    /// 水平方向のせん断角。
+    /// 水平方向のスキュー角。
     ///
     /// ```example
     /// #skew(ax: 30deg)[Skewed]
@@ -220,7 +220,7 @@ pub struct SkewElem {
     #[default(Angle::zero())]
     pub ax: Angle,
 
-    /// 垂直方向のせん断角。
+    /// 垂直方向のスキュー角。
     ///
     /// ```example
     /// #skew(ay: 30deg)[Skewed]
@@ -229,7 +229,7 @@ pub struct SkewElem {
     #[default(Angle::zero())]
     pub ay: Angle,
 
-    /// せん断変形の原点。
+    /// スキュー変形の原点。
     ///
     /// 操作中は原点が固定されます。
     ///
@@ -242,9 +242,9 @@ pub struct SkewElem {
     #[default(HAlignment::Center + VAlignment::Horizon)]
     pub origin: Alignment,
 
-    /// せん断変形がレイアウトに影響を与えるかどうか。
+    /// スキュー変形がレイアウトに影響を与えるかどうか。
     ///
-    /// `{false}`の場合、せん断変形されたコンテンツは元々のコンテンツのバウンディングボックスに留まります。
+    /// `{false}`の場合、スキュー変形されたコンテンツは元々のコンテンツのバウンディングボックスに留まります。
     /// `{true}`の場合、バウンディングボックスはコンテンツの変形を考慮してレイアウトを調整します。
     ///
     /// ```example
@@ -253,7 +253,7 @@ pub struct SkewElem {
     #[default(false)]
     pub reflow: bool,
 
-    /// せん断変形するコンテンツ。
+    /// スキュー変形するコンテンツ。
     #[required]
     pub body: Content,
 }
