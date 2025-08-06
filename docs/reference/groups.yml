@@ -18,10 +18,9 @@
   path: ["math"]
   filter: ["upright", "italic", "bold"]
   details: |
-    Alternate letterforms within formulas.
+    数式中の別字体。
 
-    These functions are distinct from the [`text`] function because math fonts
-    contain multiple variants of each letter.
+    数式フォントは各文字に対して複数の異体字を備えているため、これらの関数は[`text`]関数とは異なります。
 
 - name: sizes
   title: Sizes

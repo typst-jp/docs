@@ -1,38 +1,38 @@
 use crate::foundations::{func, Cast, Content, Smart};
 use crate::math::EquationElem;
 
-/// Bold font style in math.
+/// 数式中の太字フォントスタイル。
 ///
 /// ```example
 /// $ bold(A) := B^+ $
 /// ```
 #[func(keywords = ["mathbf"])]
 pub fn bold(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_bold(true))
 }
 
-/// Upright (non-italic) font style in math.
+/// 数式中の立体（非斜体）フォントスタイル。
 ///
 /// ```example
 /// $ upright(A) != A $
 /// ```
 #[func(keywords = ["mathup"])]
 pub fn upright(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_italic(Smart::Custom(false)))
 }
 
-/// Italic font style in math.
+/// 数式中の斜体フォントスタイル。
 ///
-/// For roman letters and greek lowercase letters, this is already the default.
+/// これがローマ字とギリシャ文字の小文字のデフォルトです。
 #[func(keywords = ["mathit"])]
 pub fn italic(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_italic(Smart::Custom(true)))
