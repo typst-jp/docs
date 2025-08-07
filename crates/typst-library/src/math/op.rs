@@ -15,7 +15,7 @@ use crate::text::TextElem;
 /// ```
 ///
 /// # 定義済み演算子 { #predefined }
-/// Typstが事前に定義してある演算子は以下の通りです。
+/// Typstではあらかじめ以下の演算子が定義されています。
 /// `arccos`、`arcsin`、`arctan`、`arg`、`cos`、`cosh`、`cot`、`coth`、`csc`、`csch`、`ctg`、`deg`、`det`、`dim`、`exp`、`gcd`、`lcm`、`hom`、`id`、`im`、`inf`、`ker`、`lg`、`lim`、`liminf`、`limsup`、`ln`、`log`、`max`、`min`、`mod`、`Pr`、`sec`、`sech`、`sin`、`sinc`、`sinh`、`sup`、`tan`、`tanh`、`tg`、`tr`。
 #[elem(title = "Text Operator", Mathy)]
 pub struct OpElem {
