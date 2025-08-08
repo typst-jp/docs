@@ -49,10 +49,9 @@
       "overshell",
     ]
   details: |
-    Delimiters above or below parts of an equation.
+    数式の一部の上部または下部の区切り文字。
 
-    The braces and brackets further allow you to add an optional annotation
-    below or above themselves.
+    波括弧や角括弧を用いると、それら自身の上部または下部にオプションの注釈を追加できます。
 
 - name: roots
   title: Roots

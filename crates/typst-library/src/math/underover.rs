@@ -1,156 +1,154 @@
 use crate::foundations::{elem, Content};
 use crate::math::Mathy;
 
-/// A horizontal line under content.
+/// コンテンツの下にある水平方向の線。
 ///
 /// ```example
 /// $ underline(1 + 2 + ... + 5) $
 /// ```
 #[elem(Mathy)]
 pub struct UnderlineElem {
-    /// The content above the line.
+    /// 線の上にあるコンテンツ。
     #[required]
     pub body: Content,
 }
 
-/// A horizontal line over content.
+/// コンテンツの上にある水平方向の線。
 ///
 /// ```example
 /// $ overline(1 + 2 + ... + 5) $
 /// ```
 #[elem(Mathy)]
 pub struct OverlineElem {
-    /// The content below the line.
+    /// 線の下にあるコンテンツ。
     #[required]
     pub body: Content,
 }
 
-/// A horizontal brace under content, with an optional annotation below.
+/// コンテンツの下にある水平方向の波括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
 /// $ underbrace(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UnderbraceElem {
-    /// The content above the brace.
+    /// 波括弧の上にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content below the brace.
+    /// 波括弧の下にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
 
-/// A horizontal brace over content, with an optional annotation above.
+/// コンテンツの上にある水平方向の波括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
 /// $ overbrace(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OverbraceElem {
-    /// The content below the brace.
+    /// 波括弧の下にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content above the brace.
+    /// 波括弧の上にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
 
-/// A horizontal bracket under content, with an optional annotation below.
+/// コンテンツの下にある水平方向の角括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
 /// $ underbracket(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UnderbracketElem {
-    /// The content above the bracket.
+    /// 角括弧の上にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content below the bracket.
+    /// 角括弧の下にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
 
-/// A horizontal bracket over content, with an optional annotation above.
+/// コンテンツの上にある水平方向の角括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
 /// $ overbracket(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OverbracketElem {
-    /// The content below the bracket.
+    /// 角括弧の下にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content above the bracket.
+    /// 角括弧の上にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
 
-/// A horizontal parenthesis under content, with an optional annotation below.
+/// コンテンツの下にある水平方向の丸括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
 /// $ underparen(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UnderparenElem {
-    /// The content above the parenthesis.
+    /// 丸括弧の上にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content below the parenthesis.
+    /// 丸括弧の下にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
 
-/// A horizontal parenthesis over content, with an optional annotation above.
+/// コンテンツの上にある水平方向の丸括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
 /// $ overparen(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OverparenElem {
-    /// The content below the parenthesis.
+    /// 丸括弧の下にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content above the parenthesis.
+    /// 丸括弧の上にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
 
-/// A horizontal tortoise shell bracket under content, with an optional
-/// annotation below.
+/// コンテンツの下にある水平方向の亀甲括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
 /// $ undershell(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UndershellElem {
-    /// The content above the tortoise shell bracket.
+    /// 亀甲括弧の上にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content below the tortoise shell bracket.
+    /// 亀甲括弧の下にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
 
-/// A horizontal tortoise shell bracket over content, with an optional
-/// annotation above.
+/// コンテンツの上にある水平方向の亀甲括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
 /// $ overshell(1 + 2 + ... + 5, "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OvershellElem {
-    /// The content below the tortoise shell bracket.
+    /// 亀甲括弧の下にあるコンテンツ。
     #[required]
     pub body: Content,
 
-    /// The optional content above the tortoise shell bracket.
+    /// 亀甲括弧の上にあるオプションのコンテンツ。
     #[positional]
     pub annotation: Option<Content>,
 }
