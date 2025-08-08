@@ -7,10 +7,9 @@
   path: ["math"]
   filter: ["serif", "sans", "frak", "mono", "bb", "cal"]
   details: |
-    Alternate typefaces within formulas.
+    数式中の別書体。
 
-    These functions are distinct from the [`text`] function because math fonts
-    contain multiple variants of each letter.
+    数式フォントは各文字に対して複数の異体字を備えているため、これらの関数は[`text`]関数とは異なります。
 
 - name: styles
   title: Styles

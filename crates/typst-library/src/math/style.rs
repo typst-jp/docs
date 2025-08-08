@@ -38,44 +38,42 @@ pub fn italic(
     body.styled(EquationElem::set_italic(Smart::Custom(true)))
 }
 
-/// Serif (roman) font style in math.
+/// 数式中のセリフ（ローマン）フォントスタイル。
 ///
-/// This is already the default.
+/// これがデフォルトです。
 #[func(keywords = ["mathrm"])]
 pub fn serif(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_variant(MathVariant::Serif))
 }
 
-/// Sans-serif font style in math.
+/// 数式中のサンセリフフォントスタイル。
 ///
 /// ```example
 /// $ sans(A B C) $
 /// ```
 #[func(title = "Sans Serif", keywords = ["mathsf"])]
 pub fn sans(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_variant(MathVariant::Sans))
 }
 
-/// Calligraphic font style in math.
+/// 数式中のカリグラフィーフォントスタイル。
 ///
 /// ```example
 /// Let $cal(P)$ be the set of ...
 /// ```
 ///
-/// This corresponds both to LaTeX's `\mathcal` and `\mathscr` as both of these
-/// styles share the same Unicode codepoints. Switching between the styles is
-/// thus only possible if supported by the font via
-/// [font features]($text.features).
+/// このスタイルはLaTeXの`\mathcal`と`\mathscr`の両方に対応します。
+/// これは両スタイルが同じUnicodeのコードポイントを共有しているためです。
+/// このため、スタイル間の切り替えは[フォントフィーチャー]($text.features)を用いてサポートされているフォントでのみ可能です。
 ///
-/// For the default math font, the roundhand style is available through the
-/// `ss01` feature. Therefore, you could define your own version of `\mathscr`
-/// like this:
+/// デフォルトの数式フォントでは、ラウンドハンドスタイルが`ss01`フィーチャーとして利用可能です。
+/// したがって、以下のように自分専用の`\mathscr`が定義できます。
 ///
 /// ```example
 /// #let scr(it) = text(
@@ -86,46 +84,44 @@ pub fn sans(
 /// We establish $cal(P) != scr(P)$.
 /// ```
 ///
-/// (The box is not conceptually necessary, but unfortunately currently needed
-/// due to limitations in Typst's text style handling in math.)
+/// （ボックスは本来必要ありませんが、Typstの数式中におけるテキストスタイルの取り扱いに関する制約のため、現時点では残念ながら必要です。）
 #[func(title = "Calligraphic", keywords = ["mathcal", "mathscr"])]
 pub fn cal(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_variant(MathVariant::Cal))
 }
 
-/// Fraktur font style in math.
+/// 数式中のフラクトゥールフォントスタイル。
 ///
 /// ```example
 /// $ frak(P) $
 /// ```
 #[func(title = "Fraktur", keywords = ["mathfrak"])]
 pub fn frak(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_variant(MathVariant::Frak))
 }
 
-/// Monospace font style in math.
+/// 数式中の等幅フォントスタイル。
 ///
 /// ```example
 /// $ mono(x + y = z) $
 /// ```
 #[func(title = "Monospace", keywords = ["mathtt"])]
 pub fn mono(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_variant(MathVariant::Mono))
 }
 
-/// Blackboard bold (double-struck) font style in math.
+/// 数式中の黒板太字（double-struck）フォントスタイル。
 ///
-/// For uppercase latin letters, blackboard bold is additionally available
-/// through [symbols]($category/symbols/sym) of the form `NN` and `RR`.
+/// 大文字のラテン文字では、黒板太字は、[symbols]($category/symbols/sym)にあるように、`NN`や`RR`のような形式でも使用できます。
 ///
 /// ```example
 /// $ bb(b) $
@@ -134,7 +130,7 @@ pub fn mono(
 /// ```
 #[func(title = "Blackboard Bold", keywords = ["mathbb"])]
 pub fn bb(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.styled(EquationElem::set_variant(MathVariant::Bb))
