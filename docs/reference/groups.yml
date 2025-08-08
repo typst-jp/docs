@@ -77,25 +77,21 @@
   path: ["math"]
   filter: ["attach", "scripts", "limits"]
   details: |
-    Subscript, superscripts, and limits.
+    下付き文字、上付き文字、limits。
 
-    Attachments can be displayed either as sub/superscripts, or limits. Typst
-    automatically decides which is more suitable depending on the base, but you
-    can also control this manually with the `scripts` and `limits` functions.
+    アタッチメントは下付き文字、上付き文字、limitsのいずれかで表示することができます。
+    Typstはベースに応じてどれがよりふさわしいかを自動的に決定しますが、`scripts`および`limits`関数を用いて手動で制御もできます。
 
-    If you want the base to stretch to fit long top and bottom attachments (for
-    example, an arrow with text above it), use the [`stretch`]($math.stretch)
-    function.
+    上部と下部の長いアタッチメント（例えば上部に文字がある矢印）に合うようにベースを伸縮させたい場合は[`stretch`]($math.stretch)関数を使用してください。
 
-    # Example
+    # 例
     ```example
     $ sum_(i=0)^n a_i = 2^(1+i) $
     ```
 
-    # Syntax
-    This function also has dedicated syntax for attachments after the base: Use
-    the underscore (`_`) to indicate a subscript i.e. bottom attachment and the
-    hat (`^`) to indicate a superscript i.e. top attachment.
+    # 構文
+    この関数にはベースの後ろのアタッチメントのための専用の構文があります。
+    下付き文字、すなわち下部のアタッチメントにはアンダースコア（`_`）を、上付き文字、すなわち上部のアタッチメントにはサーカムフレックス（`^`）を使用してください。
 
 - name: lr
   title: Left/Right

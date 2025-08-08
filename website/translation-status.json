@@ -79,7 +79,7 @@
 	"/docs/reference/text/upper/": "untranslated",
 	"/docs/reference/math/": "untranslated",
 	"/docs/reference/math/accent/": "translated",
-	"/docs/reference/math/attach/": "untranslated",
+	"/docs/reference/math/attach/": "translated",
 	"/docs/reference/math/binom/": "untranslated",
 	"/docs/reference/math/cancel/": "untranslated",
 	"/docs/reference/math/cases/": "translated",
