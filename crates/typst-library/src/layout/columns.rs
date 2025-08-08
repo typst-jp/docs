@@ -15,7 +15,7 @@ use crate::layout::{BlockElem, Length, Ratio, Rel};
 /// # ページレベルの段組 { #page-level }
 /// ドキュメント全体に渡る段組を挿入する必要がある場合は、代わりに`{page}`関数の[`columns`パラメーター]($page.columns)を使用してください。
 /// これは、レイアウトコンテナ内のコンテンツ全てをラップするのではなく、ページレベルの段組を直接作成します。
-/// 結果として[ページ区切り]($pagebreak)、[脚注]($footnote)および[行番号]($par.line)のようなものが期待通りの動作をし続けます。
+/// 結果として[改ページ]($pagebreak)、[脚注]($footnote)および[行番号]($par.line)のようなものが期待通りの動作をし続けます。
 /// より詳しくは[ページのセットアップガイドの関連する項目]($guides/page-setup-guide/#columns)をご覧ください。
 ///
 /// # 段組の中断 { #breaking-out }
