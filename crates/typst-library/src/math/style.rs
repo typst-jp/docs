@@ -84,7 +84,7 @@ pub fn sans(
 /// We establish $cal(P) != scr(P)$.
 /// ```
 ///
-/// （ボックスは概念的には不要ですが、現在のTypstの数式テキストスタイル処理の制約により必要です。）
+/// （ボックスは概念的には不要ですが、現在のTypstの数式テキストスタイル処理の制約により必要です）
 #[func(title = "Calligraphic", keywords = ["mathcal", "mathscr"])]
 pub fn cal(
     /// スタイルを適用するコンテンツ。
