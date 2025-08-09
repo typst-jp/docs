@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import type { FuncBody, Page } from "../../types/model";
+import type { Func, FuncBody, Page } from "../../types/model";
 import {
 	FunctionDefinition,
 	FunctionDisplay,
@@ -70,57 +70,88 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 				<FunctionParameters func={content} />
 			</div>
 
-			{content.scope.length > 0 && (
-				<div class="mt-8">
-					<h2 id="definitions" class="flex items-baseline gap-1">
-						定義
-						<Tooltip kind="definitions" />
-					</h2>
-
-					{content.scope.map((method, index) => (
-						<div
-							key={method.name}
-							class="mb-8 pb-6 border-b border-gray-100 last:border-0"
-						>
-							<h3
-								id={`definitions-${method.name}`}
-								class="method-head mb-3 flex items-center gap-2"
-							>
-								<code
-									class="text-base font-medium"
-									style={
-										method.deprecation
-											? { textDecoration: "line-through" }
-											: undefined
-									}
-								>
-									{method.name}
-								</code>
-
-								<small class="flex items-center">
-									{method.element && <Tooltip kind="element" />}
-									{method.contextual && <Tooltip kind="contextual" />}
-								</small>
-							</h3>
-
-							{method.deprecation && (
-								<div className="mt-1">
-									<DeprecationWarning message={method.deprecation} />
-								</div>
-							)}
-
-							<div class="pl-2">
-								<FunctionDisplay
-									func={method}
-									prefix={`definitions-${method.name}`}
-								/>
-							</div>
-						</div>
-					))}
-				</div>
-			)}
+			<ScopedDefinitions scope={content.scope} />
 		</BaseTemplate>
 	);
 };
+
+/**
+ * If the definitions in `scope` are associated with the top scope on this page, then `parent` should be `undefined`.
+ * Otherwise, `parent` should describe the parent of these definitions.
+ */
+function ScopedDefinitions({
+	scope,
+	parent,
+}: { scope: Func[]; parent?: { name: string; id: string } | undefined }) {
+	if (scope.length === 0) {
+		return null;
+	}
+
+	/** `parent?.id` as a string */
+	const parentId = parent ? `${parent.id}-` : "";
+
+	// To be consistent with the official typst.app/docs,
+	// the following heading levels will _not_ increase with the scope level.
+	return (
+		<div class="mt-8">
+			<h2 id={`${parentId}definitions`} class="flex items-baseline gap-1">
+				{parent ? (
+					// Currently, the scope has at most two levels.
+					// Therefore, it is sufficient to only annotate the direct `parent`.
+					<>
+						<code>{parent.name}</code>の定義
+					</>
+				) : (
+					"定義"
+				)}
+				<Tooltip kind="definitions" />
+			</h2>
+
+			{scope.map((method, index) => {
+				const methodId = `${parentId}definitions-${method.name}`;
+
+				return (
+					<div
+						key={method.name}
+						class="mb-8 pb-6 border-b border-gray-100 last:border-0"
+					>
+						<h3 id={methodId} class="method-head mb-3 flex items-center gap-2">
+							<code
+								class="text-base font-medium"
+								style={
+									method.deprecation
+										? { textDecoration: "line-through" }
+										: undefined
+								}
+							>
+								{method.name}
+							</code>
+
+							<small class="flex items-center">
+								{method.element && <Tooltip kind="element" />}
+								{method.contextual && <Tooltip kind="contextual" />}
+							</small>
+						</h3>
+
+						{method.deprecation && (
+							<div className="mt-1">
+								<DeprecationWarning message={method.deprecation} />
+							</div>
+						)}
+
+						<div class="pl-2">
+							<FunctionDisplay func={method} prefix={methodId} />
+						</div>
+
+						<ScopedDefinitions
+							scope={method.scope}
+							parent={{ name: method.name, id: methodId }}
+						/>
+					</div>
+				);
+			})}
+		</div>
+	);
+}
 
 export default FuncTemplate;

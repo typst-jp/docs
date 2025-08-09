@@ -7,13 +7,12 @@ use crate::layout::{
     Abs, Alignment, Angle, BlockElem, HAlignment, Length, Ratio, Rel, VAlignment,
 };
 
-/// Moves content without affecting layout.
+/// レイアウトに影響を与えないコンテンツの移動。
 ///
-/// The `move` function allows you to move content while the layout still 'sees'
-/// it at the original positions. Containers will still be sized as if the
-/// content was not moved.
+/// `move`関数を用いると、コンテンツの元々の位置をレイアウトに「認識」させながら、そのコンテンツを移動させることができます。
+/// コンテナの大きさは、コンテンツが移動されていないかのように決定されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #rect(inset: 0pt, move(
 ///   dx: 6pt, dy: 6pt,
@@ -27,13 +26,13 @@ use crate::layout::{
 /// ```
 #[elem(Show)]
 pub struct MoveElem {
-    /// The horizontal displacement of the content.
+    /// コンテンツの水平方向の変位。
     pub dx: Rel<Length>,
 
-    /// The vertical displacement of the content.
+    /// コンテンツの垂直方向の変位。
     pub dy: Rel<Length>,
 
-    /// The content to move.
+    /// 移動させたいコンテンツ。
     #[required]
     pub body: Content,
 }
@@ -46,12 +45,12 @@ impl Show for Packed<MoveElem> {
     }
 }
 
-/// Rotates content without affecting layout.
+/// レイアウトに影響を与えないコンテンツの回転。
 ///
-/// Rotates an element by a given angle. The layout will act as if the element
-/// was not rotated unless you specify `{reflow: true}`.
+/// 要素を指定された角度だけ回転させます。
+/// `{reflow: true}`を指定しない限り、レイアウトは、その要素が回転していないかのように振る舞います。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #stack(
 ///   dir: ltr,
@@ -62,7 +61,7 @@ impl Show for Packed<MoveElem> {
 /// ```
 #[elem(Show)]
 pub struct RotateElem {
-    /// The amount of rotation.
+    /// 回転させる量。
     ///
     /// ```example
     /// #rotate(-1.571rad)[Space!]
@@ -71,11 +70,9 @@ pub struct RotateElem {
     #[positional]
     pub angle: Angle,
 
-    /// The origin of the rotation.
+    /// 回転の中心点。
     ///
-    /// If, for instance, you wanted the bottom left corner of the rotated
-    /// element to stay aligned with the baseline, you would set it to `bottom +
-    /// left` instead.
+    /// 例えば、回転した要素の左下隅をベースラインに揃えたままにしたい場合、代わりに`bottom + left`を指定します。
     ///
     /// ```example
     /// #set text(spacing: 8pt)
@@ -90,11 +87,10 @@ pub struct RotateElem {
     #[default(HAlignment::Center + VAlignment::Horizon)]
     pub origin: Alignment,
 
-    /// Whether the rotation impacts the layout.
+    /// 回転がレイアウトに影響を与えるかどうか。
     ///
-    /// If set to `{false}`, the rotated content will retain the bounding box of
-    /// the original content. If set to `{true}`, the bounding box will take the
-    /// rotation of the content into account and adjust the layout accordingly.
+    /// `{false}`に設定された場合、回転したコンテンツは元々のコンテンツのバウンディングボックスに留まります。
+    /// `{true}`に設定された場合、バウンディングボックスはコンテンツの回転を考慮してレイアウトを調整します。
     ///
     /// ```example
     /// Hello #rotate(90deg, reflow: true)[World]!
@@ -102,7 +98,7 @@ pub struct RotateElem {
     #[default(false)]
     pub reflow: bool,
 
-    /// The content to rotate.
+    /// 回転させるコンテンツ。
     #[required]
     pub body: Content,
 }
@@ -115,11 +111,11 @@ impl Show for Packed<RotateElem> {
     }
 }
 
-/// Scales content without affecting layout.
+/// レイアウトに影響を与えないコンテンツの拡大縮小。
 ///
-/// Lets you mirror content by specifying a negative scale on a single axis.
+/// 単一の軸で負のスケールを指定することで、コンテンツを反転表示できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #set align(center)
 /// #scale(x: -100%)[This is mirrored.]
@@ -127,17 +123,16 @@ impl Show for Packed<RotateElem> {
 /// ```
 #[elem(Show)]
 pub struct ScaleElem {
-    /// The scaling factor for both axes, as a positional argument. This is just
-    /// an optional shorthand notation for setting `x` and `y` to the same
-    /// value.
+    /// 位置引数として両方の軸の拡大縮小率を設定します。
+    /// これは`x`と`y`を同じ値で設定する省略記法です。
     #[external]
     #[positional]
     #[default(Smart::Custom(ScaleAmount::Ratio(Ratio::one())))]
     pub factor: Smart<ScaleAmount>,
 
-    /// The horizontal scaling factor.
+    /// 水平方向の拡大縮小率。
     ///
-    /// The body will be mirrored horizontally if the parameter is negative.
+    /// 負の値が指定された場合は本文が水平方向に反転します。
     #[parse(
         let all = args.find()?;
         args.named("x")?.or(all)
@@ -145,14 +140,14 @@ pub struct ScaleElem {
     #[default(Smart::Custom(ScaleAmount::Ratio(Ratio::one())))]
     pub x: Smart<ScaleAmount>,
 
-    /// The vertical scaling factor.
+    /// 垂直方向の拡大縮小率。
     ///
-    /// The body will be mirrored vertically if the parameter is negative.
+    /// 負の値が指定された場合は本文が垂直方向に反転します。
     #[parse(args.named("y")?.or(all))]
     #[default(Smart::Custom(ScaleAmount::Ratio(Ratio::one())))]
     pub y: Smart<ScaleAmount>,
 
-    /// The origin of the transformation.
+    /// 変換の原点。
     ///
     /// ```example
     /// A#box(scale(75%)[A])A \
@@ -162,11 +157,10 @@ pub struct ScaleElem {
     #[default(HAlignment::Center + VAlignment::Horizon)]
     pub origin: Alignment,
 
-    /// Whether the scaling impacts the layout.
+    /// 拡大縮小がレイアウトに影響を与えるかどうか。
     ///
-    /// If set to `{false}`, the scaled content will be allowed to overlap
-    /// other content. If set to `{true}`, it will compute the new size of
-    /// the scaled content and adjust the layout accordingly.
+    /// `{false}`の場合、拡大縮小したコンテンツが他のコンテンツと重なることを許可します。
+    /// `{true}`の場合、拡大縮小したコンテンツの新しい大きさを計算し、それに応じてレイアウトを調整します。
     ///
     /// ```example
     /// Hello #scale(x: 20%, y: 40%, reflow: true)[World]!
@@ -174,7 +168,7 @@ pub struct ScaleElem {
     #[default(false)]
     pub reflow: bool,
 
-    /// The content to scale.
+    /// 拡大縮小するコンテンツ。
     #[required]
     pub body: Content,
 }
@@ -204,12 +198,12 @@ cast! {
     length: Length => ScaleAmount::Length(length),
 }
 
-/// Skews content.
+/// コンテンツのスキュー変形。
 ///
-/// Skews an element in horizontal and/or vertical direction. The layout will
-/// act as if the element was not skewed unless you specify `{reflow: true}`.
+/// 水平方向または垂直方向、あるいは両方向に要素をスキュー（シアー）変形します。
+/// `{reflow: true}`を指定しない限り、レイアウトは要素がスキュー変形を受けていないかのように振る舞います。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #skew(ax: -12deg)[
 ///   This is some fake italic text.
@@ -217,7 +211,7 @@ cast! {
 /// ```
 #[elem(Show)]
 pub struct SkewElem {
-    /// The horizontal skewing angle.
+    /// 水平方向のスキュー角。
     ///
     /// ```example
     /// #skew(ax: 30deg)[Skewed]
@@ -226,7 +220,7 @@ pub struct SkewElem {
     #[default(Angle::zero())]
     pub ax: Angle,
 
-    /// The vertical skewing angle.
+    /// 垂直方向のスキュー角。
     ///
     /// ```example
     /// #skew(ay: 30deg)[Skewed]
@@ -235,9 +229,9 @@ pub struct SkewElem {
     #[default(Angle::zero())]
     pub ay: Angle,
 
-    /// The origin of the skew transformation.
+    /// スキュー変形の原点。
     ///
-    /// The origin will stay fixed during the operation.
+    /// 操作中は原点が固定されます。
     ///
     /// ```example
     /// X #box(skew(ax: -30deg, origin: center + horizon)[X]) X \
@@ -248,11 +242,10 @@ pub struct SkewElem {
     #[default(HAlignment::Center + VAlignment::Horizon)]
     pub origin: Alignment,
 
-    /// Whether the skew transformation impacts the layout.
+    /// スキュー変形がレイアウトに影響を与えるかどうか。
     ///
-    /// If set to `{false}`, the skewed content will retain the bounding box of
-    /// the original content. If set to `{true}`, the bounding box will take the
-    /// transformation of the content into account and adjust the layout accordingly.
+    /// `{false}`の場合、スキュー変形されたコンテンツは元々のコンテンツのバウンディングボックスに留まります。
+    /// `{true}`の場合、バウンディングボックスはコンテンツの変形を考慮してレイアウトを調整します。
     ///
     /// ```example
     /// Hello #skew(ay: 30deg, reflow: true, "World")!
@@ -260,7 +253,7 @@ pub struct SkewElem {
     #[default(false)]
     pub reflow: bool,
 
-    /// The content to skew.
+    /// スキュー変形するコンテンツ。
     #[required]
     pub body: Content,
 }
