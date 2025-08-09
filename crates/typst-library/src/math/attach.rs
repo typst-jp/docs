@@ -81,19 +81,18 @@ impl Packed<AttachElem> {
     }
 }
 
-/// Grouped primes.
+/// グループ化されたプライム記号。
 ///
 /// ```example
 /// $ a'''_b = a^'''_b $
 /// ```
 ///
-/// # Syntax
-/// This function has dedicated syntax: use apostrophes instead of primes. They
-/// will automatically attach to the previous element, moving superscripts to
-/// the next level.
+/// # 構文
+/// この関数には専用の構文があり、primes関数の代わりにアポストロフィー記号を使います。
+/// これらは自動的に前の要素に付加され、次の上付き文字のレベルに移動します。
 #[elem(Mathy)]
 pub struct PrimesElem {
-    /// The number of grouped primes.
+    /// グループ化するプライム記号の数。
     #[required]
     pub count: usize,
 }

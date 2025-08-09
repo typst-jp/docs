@@ -13,7 +13,7 @@ description: |
 | typesetting | 組版 | Typstの主要機能 |
 | documentation | ドキュメント |   |
 | content | コンテンツ | 型の一種で、マークアップによって表される |
-| element | 要素 | 見出し、数式、テーブルなどの文書を構成する要素 |
+| element | 要素 | 見出し、数式、表などの文書を構成する要素 |
 | element function | 要素関数 | [要素関数]($function/#element-functions)を参照 |
 | styling | スタイル設定 |   |
 | set rule | setルール | [スタイル設定]($styling)に出てきます |
@@ -21,4 +21,5 @@ description: |
 | markup | マークアップ | Typstのデフォルトモード |
 | script | スクリプト | Typstのスクリプトモード、「#」で始まる行 |
 | figure | 図表 | キャプション付きの図表、`image`ではない |
+| table | 表 | データや情報を整理して表示する要素 |
 | supplement | 補足語 | [参照]($ref)されるものの種類を指す文字列、「図1」の「図」など |
