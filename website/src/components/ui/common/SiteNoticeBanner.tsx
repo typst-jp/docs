@@ -50,7 +50,7 @@ export const SiteNoticeBanner = () => {
 					</span>
 					<span class="block flex-1 pt-1 pb-2 leading-normal sm:inline sm:pt-0 sm:pb-0">
 						当サイトは、Typst GmbHの許諾を得て、日本語コミュニティ「
-						<a href={githubOrganizationUrl}>Typst Japan Community</a>」が
+						<a href={githubOrganizationUrl}>Typst Japanese Community</a>」が
 						<a href={typstOfficialDocsUrl}>
 							Typst v{version}の公式ドキュメント
 						</a>
@@ -65,7 +65,7 @@ export const SiteNoticeBanner = () => {
 						This site provides a Japanese translation of the{" "}
 						<a href={typstOfficialDocsUrl}>Typst v{version} documentation</a>{" "}
 						maintained by the "
-						<a href={githubOrganizationUrl}>Typst Japan Community</a>" with
+						<a href={githubOrganizationUrl}>Typst Japanese Community</a>" with
 						permission from Typst GmbH. We recommend using this alongside the{" "}
 						<a href={typstOfficialDocsUrl}>official documentation</a>. We
 						welcome contributions through Issues and Pull Requests on{" "}
