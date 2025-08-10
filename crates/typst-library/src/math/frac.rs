@@ -37,11 +37,11 @@ pub struct FracElem {
 /// ```
 #[elem(title = "Binomial", Mathy)]
 pub struct BinomElem {
-    /// 二項係数の上側の指数。
+    /// 二項係数の上側の数。
     #[required]
     pub upper: Content,
 
-    /// 二項係数の下側の指数。
+    /// 二項係数の下側の数。
     #[required]
     #[variadic]
     #[parse(
