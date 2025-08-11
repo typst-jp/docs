@@ -17,9 +17,9 @@ pub fn lower(
     case(text, Case::Lower)
 }
 
-/// Converts a string or content to uppercase.
+/// 文字列かコンテンツの大文字への変換。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #upper("abc") \
 /// #upper[*my text*] \
@@ -27,7 +27,7 @@ pub fn lower(
 /// ```
 #[func(title = "Uppercase")]
 pub fn upper(
-    /// The text to convert to uppercase.
+    /// 大文字に変換するテキスト。
     text: Caseable,
 ) -> Caseable {
     case(text, Case::Upper)
