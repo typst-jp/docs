@@ -7,18 +7,17 @@ use crate::layout::{Abs, Corners, Length, Rel, Sides};
 use crate::text::{BottomEdge, BottomEdgeMetric, TextElem, TopEdge, TopEdgeMetric};
 use crate::visualize::{Color, FixedStroke, Paint, Stroke};
 
-/// Underlines text.
+/// テキスト下部に線を追加。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This is #underline[important].
 /// ```
 #[elem(Show)]
 pub struct UnderlineElem {
-    /// How to [stroke] the line.
+    /// 線の[stroke]をどうするか。
     ///
-    /// If set to `{auto}`, takes on the text's color and a thickness defined in
-    /// the current font.
+    /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
     ///
     /// ```example
     /// Take #underline(
@@ -31,8 +30,8 @@ pub struct UnderlineElem {
     #[fold]
     pub stroke: Smart<Stroke>,
 
-    /// The position of the line relative to the baseline, read from the font
-    /// tables if `{auto}`.
+    /// ベースラインを基準とする線の位置。
+    /// `{auto}`の場合、フォントテーブルから読まれます。
     ///
     /// ```example
     /// #underline(offset: 5pt)[
@@ -42,8 +41,7 @@ pub struct UnderlineElem {
     #[resolve]
     pub offset: Smart<Length>,
 
-    /// The amount by which to extend the line beyond (or within if negative)
-    /// the content.
+    /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
     ///
     /// ```example
     /// #align(center,
@@ -53,8 +51,7 @@ pub struct UnderlineElem {
     #[resolve]
     pub extent: Length,
 
-    /// Whether the line skips sections in which it would collide with the
-    /// glyphs.
+    /// 字形と衝突する線の部分を省略するかどうか。
     ///
     /// ```example
     /// This #underline(evade: true)[is great].
@@ -63,7 +60,7 @@ pub struct UnderlineElem {
     #[default(true)]
     pub evade: bool,
 
-    /// Whether the line is placed behind the content it underlines.
+    /// 線をコンテンツの背後に置くかどうか。
     ///
     /// ```example
     /// #set underline(stroke: (thickness: 1em, paint: maroon, cap: "round"))
@@ -73,7 +70,7 @@ pub struct UnderlineElem {
     #[default(false)]
     pub background: bool,
 
-    /// The content to underline.
+    /// 下部に線を置くコンテンツ。
     #[required]
     pub body: Content,
 }
