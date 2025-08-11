@@ -6,21 +6,21 @@ use crate::engine::Engine;
 use crate::foundations::{func, scope, Bytes, Value};
 use crate::loading::{DataSource, Load};
 
-/// Reads structured data from a CBOR file.
+/// CBORファイルから構造化データを読み込む。
 ///
-/// The file must contain a valid CBOR serialization. Mappings will be
-/// converted into Typst dictionaries, and sequences will be converted into
-/// Typst arrays. Strings and booleans will be converted into the Typst
-/// equivalents, null-values (`null`, `~` or empty ``) will be converted into
-/// `{none}`, and numbers will be converted to floats or integers depending on
-/// whether they are whole numbers.
+/// 読み込むファイルには有効なCBORによるシリアル化データが含まれていなければなりません。
+/// マッピングはTypstの辞書に変換され、シーケンスはTypstの配列に変換されます。
+/// 文字列やブール値はTypstの対応する値に変換され、
+/// ヌル値（`null`、`~`、または空の``）は`{none}`に、
+/// 数値は整数値であれば整数型に、
+/// そうでなければ浮動小数点数型に変換されます。
 ///
-/// Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
-/// floating point numbers, which may result in an approximative value.
+/// 2<sup>63</sup>-1より大きな整数は浮動小数点数に変換されるため、
+/// 近似値になる可能性があることに留意してください。
 #[func(scope, title = "CBOR")]
 pub fn cbor(
     engine: &mut Engine,
-    /// A [path]($syntax/#paths) to a CBOR file or raw CBOR bytes.
+    /// CBORファイルへの[パス]($syntax/#paths)、または生のCBORバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;
@@ -31,21 +31,21 @@ pub fn cbor(
 
 #[scope]
 impl cbor {
-    /// Reads structured data from CBOR bytes.
+    /// CBORバイト列から構造化データを読み込む。
     #[func(title = "Decode CBOR")]
-    #[deprecated = "`cbor.decode` is deprecated, directly pass bytes to `cbor` instead"]
+    #[deprecated = "`cbor.decode`は非推奨です。代わりにバイト列を直接`cbor`に渡してください。"]
     pub fn decode(
         engine: &mut Engine,
-        /// CBOR data.
+        /// CBORデータ。
         data: Spanned<Bytes>,
     ) -> SourceResult<Value> {
         cbor(engine, data.map(DataSource::Bytes))
     }
 
-    /// Encode structured data into CBOR bytes.
+    /// 構造化データをCBORバイト列にエンコードする。
     #[func(title = "Encode CBOR")]
     pub fn encode(
-        /// Value to be encoded.
+        /// エンコード対象の値。
         value: Spanned<Value>,
     ) -> SourceResult<Bytes> {
         let Spanned { v: value, span } = value;
