@@ -2,7 +2,7 @@ use crate::foundations::{elem, Content, Packed};
 use crate::layout::{Length, Rel};
 use crate::math::{EquationElem, Mathy};
 
-/// A base with optional attachments.
+/// オプションのアタッチメントを持つベースとなる関数。
 ///
 /// ```example
 /// $ attach(
@@ -12,33 +12,30 @@ use crate::math::{EquationElem, Mathy};
 /// ```
 #[elem(Mathy)]
 pub struct AttachElem {
-    /// The base to which things are attached.
+    /// アタッチメントを取り付けるベース。
     #[required]
     pub base: Content,
 
-    /// The top attachment, smartly positioned at top-right or above the base.
+    /// 右上かベースの上にスマート配置された上部アタッチメント。
     ///
-    /// You can wrap the base in `{limits()}` or `{scripts()}` to override the
-    /// smart positioning.
+    /// ベースを`{limits()}`か`{scripts()}`でラップするとスマート配置を上書きできます。
     pub t: Option<Content>,
 
-    /// The bottom attachment, smartly positioned at the bottom-right or below
-    /// the base.
+    /// 右下かベースの下にスマート配置された下部アタッチメント。
     ///
-    /// You can wrap the base in `{limits()}` or `{scripts()}` to override the
-    /// smart positioning.
+    /// ベースを`{limits()}`か`{scripts()}`でラップするとスマート配置を上書きできます。
     pub b: Option<Content>,
 
-    /// The top-left attachment (before the base).
+    /// 左上のアタッチメント（ベースの前）。
     pub tl: Option<Content>,
 
-    /// The bottom-left attachment (before base).
+    /// 左下のアタッチメント（ベースの前）。
     pub bl: Option<Content>,
 
-    /// The top-right attachment (after the base).
+    /// 右上のアタッチメント（ベースの後）。
     pub tr: Option<Content>,
 
-    /// The bottom-right attachment (after the base).
+    /// 右下のアタッチメント（ベースの後）。
     pub br: Option<Content>,
 }
 
@@ -97,33 +94,32 @@ pub struct PrimesElem {
     pub count: usize,
 }
 
-/// Forces a base to display attachments as scripts.
+/// アタッチメントを添え字として表示することをベースに強制。
 ///
 /// ```example
 /// $ scripts(sum)_1^2 != sum_1^2 $
 /// ```
 #[elem(Mathy)]
 pub struct ScriptsElem {
-    /// The base to attach the scripts to.
+    /// 添え字を取り付けるベース。
     #[required]
     pub body: Content,
 }
 
-/// Forces a base to display attachments as limits.
+/// アタッチメントをlimitsとして表示することをベースに強制。
 ///
 /// ```example
 /// $ limits(A)_1^2 != A_1^2 $
 /// ```
 #[elem(Mathy)]
 pub struct LimitsElem {
-    /// The base to attach the limits to.
+    /// limitsを取り付けるベース。
     #[required]
     pub body: Content,
 
-    /// Whether to also force limits in inline equations.
+    /// インライン数式でもlimits表示を強制するかどうか。
     ///
-    /// When applying limits globally (e.g., through a show rule), it is
-    /// typically a good idea to disable this.
+    /// （例えばshowルールを用いて）limitsをグローバルに適用する場合、通常は無効にすることをおすすめします。
     #[default(true)]
     pub inline: bool,
 }

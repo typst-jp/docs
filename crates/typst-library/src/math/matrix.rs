@@ -15,23 +15,21 @@ use crate::visualize::Stroke;
 const DEFAULT_ROW_GAP: Em = Em::new(0.2);
 const DEFAULT_COL_GAP: Em = Em::new(0.5);
 
-/// A column vector.
+/// 列ベクトル。
 ///
-/// Content in the vector's elements can be aligned with the
-/// [`align`]($math.vec.align) parameter, or the `&` symbol.
+/// ベクトルの要素内のコンテンツは[`align`]($math.vec.align)パラメーターか`&`記号を用いて配置できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// $ vec(a, b, c) dot vec(1, 2, 3)
 ///     = a + 2b + 3c $
 /// ```
 #[elem(title = "Vector", Mathy)]
 pub struct VecElem {
-    /// The delimiter to use.
+    /// 用いる区切り文字。
     ///
-    /// Can be a single character specifying the left delimiter, in which case
-    /// the right delimiter is inferred. Otherwise, can be an array containing a
-    /// left and a right delimiter.
+    /// 単一の文字で左区切り文字を指定する場合、右区切り文字は自動的に推論されます。
+    /// それ以外の場合は、左区切り文字と右区切り文字を含む配列を指定します。
     ///
     /// ```example
     /// #set math.vec(delim: "[")
@@ -40,7 +38,7 @@ pub struct VecElem {
     #[default(DelimiterPair::PAREN)]
     pub delim: DelimiterPair,
 
-    /// The horizontal alignment that each element should have.
+    /// 各要素の水平方向の配置。
     ///
     /// ```example
     /// #set math.vec(align: right)
@@ -50,7 +48,7 @@ pub struct VecElem {
     #[default(HAlignment::Center)]
     pub align: HAlignment,
 
-    /// The gap between elements.
+    /// 要素間の間隔。
     ///
     /// ```example
     /// #set math.vec(gap: 1em)
@@ -60,7 +58,7 @@ pub struct VecElem {
     #[default(DEFAULT_ROW_GAP.into())]
     pub gap: Rel<Length>,
 
-    /// The elements of the vector.
+    /// ベクトルの要素。
     #[variadic]
     pub children: Vec<Content>,
 }

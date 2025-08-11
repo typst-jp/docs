@@ -11,17 +11,15 @@ use crate::engine::Engine;
 use crate::foundations::{cast, func, Context, Func, Str, Value};
 use crate::text::Case;
 
-/// Applies a numbering to a sequence of numbers.
+/// 順序に応じた番号付け。
 ///
-/// A numbering defines how a sequence of numbers should be displayed as
-/// content. It is defined either through a pattern string or an arbitrary
-/// function.
+/// 番号付けは、一連の数値をコンテンツとしてどのように表示するかを定義します。
+/// これはパターン文字列または任意の関数によって指定されます。
 ///
-/// A numbering pattern consists of counting symbols, for which the actual
-/// number is substituted, their prefixes, and one suffix. The prefixes and the
-/// suffix are repeated as-is.
+/// 番号付けパターンは、数値を置き換えるためのカウント記号、それらに付けるプレフィックス、そして1つのサフィックスから構成されます。
+/// プレフィックスとサフィックスは、そのままの形で繰り返し使用されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #numbering("1.1)", 1, 2, 3) \
 /// #numbering("1.a.i", 1, 2) \
@@ -35,15 +33,12 @@ use crate::text::Case;
 /// )
 /// ```
 ///
-/// # Numbering patterns and numbering functions
-/// There are multiple instances where you can provide a numbering pattern or
-/// function in Typst. For example, when defining how to number
-/// [headings]($heading) or [figures]($figure). Every time, the expected format
-/// is the same as the one described below for the
-/// [`numbering`]($numbering.numbering) parameter.
+/// # 番号付けのパターン指定と関数指定
+/// Typstではパターン指定または関数指定で番号付けを定義できる場面がいくつかあります。
+/// たとえば、[見出し]($heading)や[図表]($figure)などに番号を付ける際に使用します。
+/// いずれの場合も、指定の形式は後述する[`numbering`]($numbering.numbering)パラメーターと同じです。
 ///
-/// The following example illustrates that a numbering function is just a
-/// regular [function] that accepts numbers and returns [`content`].
+/// 次の例は、番号付け用の関数が、単に数値を受け取って[`content`]を返す通常の[function]であることを示しています。
 /// ```example
 /// #let unary(.., last) = "|" * last
 /// #set heading(numbering: unary)
@@ -55,35 +50,27 @@ use crate::text::Case;
 pub fn numbering(
     engine: &mut Engine,
     context: Tracked<Context>,
-    /// Defines how the numbering works.
+    /// 番号付けの表示形式を定義します。
     ///
-    /// **Counting symbols** are `1`, `a`, `A`, `i`, `I`, `α`, `Α`, `一`, `壹`,
-    /// `あ`, `い`, `ア`, `イ`, `א`, `가`, `ㄱ`, `*`, `١`, `۱`, `१`, `১`, `ক`,
-    /// `①`, and `⓵`. They are replaced by the number in the sequence,
-    /// preserving the original case.
+    /// **カウント記号** として使用できるパターン文字は `1`, `a`, `A`, `i`, `I`, `α`, `Α`, `一`, `壹`, `あ`, `い`, `ア`, `イ`, `א`, `가`, `ㄱ`, `*`, `١`, `۱`, `१`, `১`, `ক`, `①`, `⓵`があります。
+    /// これらの文字は、大文字・小文字を維持したまま、対応する順序の番号文字に置き換えられます。
     ///
-    /// The `*` character means that symbols should be used to count, in the
-    /// order of `*`, `†`, `‡`, `§`, `¶`, `‖`. If there are more than six
-    /// items, the number is represented using repeated symbols.
+    /// 記号`*`は `*`, `†`, `‡`, `§`, `¶`, `‖`の順序で番号付けすることを意味します。
+    /// 項目が6つ以上ある場合は、記号を繰り返し使用して番号を表現します。
     ///
-    /// **Suffixes** are all characters after the last counting symbol. They are
-    /// repeated as-is at the end of any rendered number.
+    /// **サフィックス** とは、最後のカウント記号の後ろに置く文字列です。
+    /// これらは、生成された番号文字の末尾に、そのままの形で繰り返し表示されます。
     ///
-    /// **Prefixes** are all characters that are neither counting symbols nor
-    /// suffixes. They are repeated as-is at in front of their rendered
-    /// equivalent of their counting symbol.
+    /// **プレフィックス** は、カウント記号でもサフィックスでもない文字列です。
+    /// それぞれのカウント記号の前に、そのままの形で繰り返し表示されます。
     ///
-    /// This parameter can also be an arbitrary function that gets each number
-    /// as an individual argument. When given a function, the `numbering`
-    /// function just forwards the arguments to that function. While this is not
-    /// particularly useful in itself, it means that you can just give arbitrary
-    /// numberings to the `numbering` function without caring whether they are
-    /// defined as a pattern or function.
+    /// このパラメータには、数値を個別の引数として受け取る任意の関数も指定できます。
+    /// 関数が与えられた場合、`numbering`関数はその引数をそのまま関数に渡します。
+    /// これ自体は特に便利というわけではありませんが、番号付けがパターン指定であっても関数指定であっても、番号付けの定義を`numbering`関数に適用できるという意味を持ちます。
     numbering: Numbering,
-    /// The numbers to apply the numbering to. Must be positive.
-    ///
-    /// If `numbering` is a pattern and more numbers than counting symbols are
-    /// given, the last counting symbol with its prefix is repeated.
+    /// 番号付けを適用する対象の数値。正の数で与えてください。
+    /// 
+    /// 番号付けがパターン指定であり、カウント記号よりも多くの数値が指定された場合、最後のカウント記号とそのプレフィックスが繰り返されます。
     #[variadic]
     numbers: Vec<usize>,
 ) -> SourceResult<Value> {
