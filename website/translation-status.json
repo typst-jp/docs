@@ -152,7 +152,7 @@
 	"/docs/reference/introspection/query/": "untranslated",
 	"/docs/reference/introspection/state/": "untranslated",
 	"/docs/reference/data-loading/": "untranslated",
-	"/docs/reference/data-loading/cbor/": "untranslated",
+	"/docs/reference/data-loading/cbor/": "translated",
 	"/docs/reference/data-loading/csv/": "translated",
 	"/docs/reference/data-loading/json/": "translated",
 	"/docs/reference/data-loading/read/": "untranslated",
