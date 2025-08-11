@@ -179,21 +179,19 @@ impl Show for Packed<OverlineElem> {
     }
 }
 
-/// Strikes through text.
+/// テキストの打ち消し。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This is #strike[not] relevant.
 /// ```
 #[elem(title = "Strikethrough", Show)]
 pub struct StrikeElem {
-    /// How to [stroke] the line.
+    /// 線の[stroke]をどうするか。
     ///
-    /// If set to `{auto}`, takes on the text's color and a thickness defined in
-    /// the current font.
+    /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
     ///
-    /// _Note:_ Please don't use this for real redaction as you can still copy
-    /// paste the text.
+    /// _注意:_ テキストのコピー・ペーストは依然として可能なため、実際の黒塗りには使用しないでください。
     ///
     /// ```example
     /// This is #strike(stroke: 1.5pt + red)[very stricken through]. \
@@ -203,10 +201,10 @@ pub struct StrikeElem {
     #[fold]
     pub stroke: Smart<Stroke>,
 
-    /// The position of the line relative to the baseline. Read from the font
-    /// tables if `{auto}`.
+    /// ベースラインを基準とする線の位置。
+    /// `{auto}`の場合、フォントテーブルから読まれます。
     ///
-    /// This is useful if you are unhappy with the offset your font provides.
+    /// これはフォントが提供するオフセットに不満がある場合に便利です。
     ///
     /// ```example
     /// #set text(font: "Inria Serif")
@@ -216,8 +214,7 @@ pub struct StrikeElem {
     #[resolve]
     pub offset: Smart<Length>,
 
-    /// The amount by which to extend the line beyond (or within if negative)
-    /// the content.
+    /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
     ///
     /// ```example
     /// This #strike(extent: -2pt)[skips] parts of the word.
@@ -226,7 +223,7 @@ pub struct StrikeElem {
     #[resolve]
     pub extent: Length,
 
-    /// Whether the line is placed behind the content.
+    /// 線をコンテンツの背後に置くかどうか。
     ///
     /// ```example
     /// #set strike(stroke: red)
@@ -236,7 +233,7 @@ pub struct StrikeElem {
     #[default(false)]
     pub background: bool,
 
-    /// The content to strike through.
+    /// 打ち消すコンテンツ。
     #[required]
     pub body: Content,
 }
