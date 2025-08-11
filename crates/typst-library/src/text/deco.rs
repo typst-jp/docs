@@ -93,18 +93,17 @@ impl Show for Packed<UnderlineElem> {
     }
 }
 
-/// Adds a line over text.
+/// テキスト上部に線を追加。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #overline[A line over text.]
 /// ```
 #[elem(Show)]
 pub struct OverlineElem {
-    /// How to [stroke] the line.
+    /// 線の[stroke]をどうするか。
     ///
-    /// If set to `{auto}`, takes on the text's color and a thickness defined in
-    /// the current font.
+    /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
     ///
     /// ```example
     /// #set text(fill: olive)
@@ -118,8 +117,8 @@ pub struct OverlineElem {
     #[fold]
     pub stroke: Smart<Stroke>,
 
-    /// The position of the line relative to the baseline. Read from the font
-    /// tables if `{auto}`.
+    /// ベースラインを基準とする線の位置。
+    /// `{auto}`の場合、フォントテーブルから読まれます。
     ///
     /// ```example
     /// #overline(offset: -1.2em)[
@@ -129,8 +128,7 @@ pub struct OverlineElem {
     #[resolve]
     pub offset: Smart<Length>,
 
-    /// The amount by which to extend the line beyond (or within if negative)
-    /// the content.
+    /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
     ///
     /// ```example
     /// #set overline(extent: 4pt)
@@ -140,8 +138,7 @@ pub struct OverlineElem {
     #[resolve]
     pub extent: Length,
 
-    /// Whether the line skips sections in which it would collide with the
-    /// glyphs.
+    /// 字形と衝突する線の部分を省略するかどうか。
     ///
     /// ```example
     /// #overline(
@@ -155,7 +152,7 @@ pub struct OverlineElem {
     #[default(true)]
     pub evade: bool,
 
-    /// Whether the line is placed behind the content it overlines.
+    /// 線をコンテンツの背後に置くかどうか。
     ///
     /// ```example
     /// #set overline(stroke: (thickness: 1em, paint: maroon, cap: "round"))
@@ -165,7 +162,7 @@ pub struct OverlineElem {
     #[default(false)]
     pub background: bool,
 
-    /// The content to add a line over.
+    /// 上部に線を置くコンテンツ。
     #[required]
     pub body: Content,
 }
