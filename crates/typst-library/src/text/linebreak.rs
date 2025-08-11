@@ -22,7 +22,7 @@ use crate::foundations::{elem, Content, NativeElement};
 pub struct LinebreakElem {
     /// 改行の前の行を両端揃えするかどうか。
     ///
-    /// これは、Typstが両端揃え行ったテキストよりも良い改行位置が見つかった場合に便利です。
+    /// これは、Typstが両端揃えを行ったテキストよりも良い改行位置が見つかった場合に便利です。
     ///
     /// ```example
     /// #set par(justify: true)
