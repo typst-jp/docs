@@ -262,15 +262,15 @@ impl Show for Packed<StrikeElem> {
     }
 }
 
-/// Highlights text with a background color.
+/// 背景色によるテキストハイライト。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This is #highlight[important].
 /// ```
 #[elem(Show)]
 pub struct HighlightElem {
-    /// The color to highlight the text with.
+    /// テキストをハイライトする色。
     ///
     /// ```example
     /// This is #highlight(
@@ -280,8 +280,8 @@ pub struct HighlightElem {
     #[default(Some(Color::from_u8(0xFF, 0xFD, 0x11, 0xA1).into()))]
     pub fill: Option<Paint>,
 
-    /// The highlight's border color. See the
-    /// [rectangle's documentation]($rect.stroke) for more details.
+    /// ハイライトの枠線の色。
+    /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
     ///
     /// ```example
     /// This is a #highlight(
@@ -292,7 +292,7 @@ pub struct HighlightElem {
     #[fold]
     pub stroke: Sides<Option<Option<Stroke>>>,
 
-    /// The top end of the background rectangle.
+    /// 背景の長方形の上端。
     ///
     /// ```example
     /// #set highlight(top-edge: "ascender")
@@ -304,7 +304,7 @@ pub struct HighlightElem {
     #[default(TopEdge::Metric(TopEdgeMetric::Ascender))]
     pub top_edge: TopEdge,
 
-    /// The bottom end of the background rectangle.
+    /// 背景の長方形の下端。
     ///
     /// ```example
     /// #set highlight(bottom-edge: "descender")
@@ -316,8 +316,7 @@ pub struct HighlightElem {
     #[default(BottomEdge::Metric(BottomEdgeMetric::Descender))]
     pub bottom_edge: BottomEdge,
 
-    /// The amount by which to extend the background to the sides beyond
-    /// (or within if negative) the content.
+    /// コンテンツの外側に（負の値のときは内側に）背景を左右に拡張する量。
     ///
     /// ```example
     /// A long #highlight(extent: 4pt)[background].
@@ -325,8 +324,8 @@ pub struct HighlightElem {
     #[resolve]
     pub extent: Length,
 
-    /// How much to round the highlight's corners. See the
-    /// [rectangle's documentation]($rect.radius) for more details.
+    /// 背景の角を丸める量。
+    /// 詳細は[rectangleのドキュメント]($rect.radius)を参照してください。
     ///
     /// ```example
     /// Listen #highlight(
@@ -337,7 +336,7 @@ pub struct HighlightElem {
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
-    /// The content that should be highlighted.
+    /// ハイライトされるべきコンテンツ。
     #[required]
     pub body: Content,
 }
