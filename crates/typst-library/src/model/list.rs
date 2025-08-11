@@ -16,7 +16,7 @@ use crate::text::TextElem;
 /// 各項目の先頭にマーカーを付け、
 /// 一連の項目を縦に並べて表示します。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// Normal list.
 /// - Text
