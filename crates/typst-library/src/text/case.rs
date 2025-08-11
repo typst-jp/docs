@@ -1,9 +1,9 @@
 use crate::foundations::{cast, func, Cast, Content, Str};
 use crate::text::TextElem;
 
-/// Converts a string or content to lowercase.
+/// 文字列かコンテンツの小文字への変換。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #lower("ABC") \
 /// #lower[*My Text*] \
@@ -11,7 +11,7 @@ use crate::text::TextElem;
 /// ```
 #[func(title = "Lowercase")]
 pub fn lower(
-    /// The text to convert to lowercase.
+    /// 小文字に変換するテキスト。
     text: Caseable,
 ) -> Caseable {
     case(text, Case::Lower)
