@@ -420,7 +420,7 @@ impl OutlineEntry {
         ///
         /// デフォルトのshowルールでは`it.prefix()`ですが、自由にカスタマイズできます。
         prefix: Option<Content>,
-        /// 項目のフォーマットされた内部コンテンツ
+        /// 項目のフォーマットされた内部コンテンツ。
         ///
         /// デフォルトのshowルールでは`it.inner()`ですが、自由にカスタマイズできます。
         inner: Content,
