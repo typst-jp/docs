@@ -416,7 +416,7 @@ impl OutlineEntry {
         engine: &mut Engine,
         context: Tracked<Context>,
         span: Span,
-        /// `prefix`は、レベルが1段低い項目の`inner`コンテンツと整列されます。
+        /// `prefix`は、レベルが1段低い項目の`inner`コンテンツと揃うように配置されます。
         ///
         /// デフォルトのshowルールでは`it.prefix()`ですが、自由にカスタマイズできます。
         prefix: Option<Content>,
