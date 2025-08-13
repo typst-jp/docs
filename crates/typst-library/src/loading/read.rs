@@ -27,7 +27,7 @@ pub fn read(
     engine: &mut Engine,
     /// ファイルへのパス。
     ///
-    /// 詳細については、[パス セクション]($syntax/#paths)を参照してください。
+    /// 詳細については、[パスのセクション]($syntax/#paths)を参照してください。
     path: Spanned<EcoString>,
     /// ファイルを読み込む際に使用するエンコーディング。
     ///
