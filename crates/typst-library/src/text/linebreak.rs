@@ -2,29 +2,27 @@ use typst_utils::singleton;
 
 use crate::foundations::{elem, Content, NativeElement};
 
-/// Inserts a line break.
+/// 改行の挿入。
 ///
-/// Advances the paragraph to the next line. A single trailing line break at the
-/// end of a paragraph is ignored, but more than one creates additional empty
-/// lines.
+/// 段落を次の行へ進めます。
+/// 段落の終わりにある単一の改行は無視されますが、それより多くある場合は空行が作成されます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// *Date:* 26.12.2022 \
 /// *Topic:* Infrastructure Test \
 /// *Severity:* High \
 /// ```
 ///
-/// # Syntax
-/// This function also has dedicated syntax: To insert a line break, simply write
-/// a backslash followed by whitespace. This always creates an unjustified
-/// break.
+/// # 構文
+/// この関数は専用の構文も持っています。
+/// 改行を挿入するには、単にバックスラッシュと空白を書いてください。
+/// これは常に両端揃えではない改行を作成します。
 #[elem(title = "Line Break")]
 pub struct LinebreakElem {
-    /// Whether to justify the line before the break.
+    /// 改行の前の行を両端揃えするかどうか。
     ///
-    /// This is useful if you found a better line break opportunity in your
-    /// justified text than Typst did.
+    /// これは、Typstが両端揃えを行ったテキストよりも良い改行位置が見つかった場合に便利です。
     ///
     /// ```example
     /// #set par(justify: true)

@@ -71,39 +71,4 @@ flattenedPages.forEach((page, pageIndex) => {
 	});
 });
 
-app.get("/sitemap.xml", (c) => {
-	const routes = ["/", ...flattenedPages.map((page) => page.route)];
-	const today = new Date();
-	const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-
-	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes
-	.map(
-		(route) => `	<url>
-		<loc>https://typst-jp.github.io${route}</loc>
-		<lastmod>${formattedDate}</lastmod>
-	</url>`,
-	)
-	.join("\n")}
-</urlset>
-`;
-
-	return c.text(sitemap, 200, {
-		"Content-Type": "application/xml",
-	});
-});
-
-app.get("/robots.txt", (c) => {
-	const robotsTxt = `User-agent: *
-Allow: /
-
-Sitemap: https://typst-jp.github.io/sitemap.xml
-`;
-
-	return c.text(robotsTxt, 200, {
-		"Content-Type": "text/plain",
-	});
-});
-
 export default app;
