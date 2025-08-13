@@ -345,11 +345,26 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         items.sort_by_cached_key(|item| item.name.clone());
     }
 
-    let title = EcoString::from(match category {
+    let _title = EcoString::from(match category {
         Category::Pdf | Category::Html | Category::Png | Category::Svg => {
             category.name().to_uppercase()
         }
         _ => category.name().to_title_case(),
+    });
+    let translated_title = EcoString::from(match category {
+        Category::Foundations => "基礎",
+        Category::Model => "モデル",
+        Category::Text => "文章",
+        Category::Math => "数式",
+        Category::Symbols => "記号",
+        Category::Layout => "レイアウト",
+        Category::Visualize => "視覚化",
+        Category::Introspection => "内省",
+        Category::DataLoading => "データの読み込み",
+        Category::Pdf => "PDF",
+        Category::Html => "HTML",
+        Category::Svg => "SVG",
+        Category::Png => "PNG",
     });
     let details = Html::markdown(resolver, docs, Some(1));
     let mut outline = vec![OutlineItem {
@@ -369,30 +384,17 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         outline.push(OutlineItem::from_name("Shorthands"));
     }
 
-    let translated_title = match title.as_str() {
-        "Foundations" => "基礎".into(),
-        "Model" => "モデル".into(),
-        "Text" => "文章".into(),
-        "Math" => "数式".into(),
-        "Symbols" => "記号".into(),
-        "Layout" => "レイアウト".into(),
-        "Visualize" => "視覚化".into(),
-        "Introspection" => "内省".into(),
-        "Data Loading" => "データの読み込み".into(),
-        _ => title.clone(),
-    };
-
     PageModel {
         route,
-        title: translated_title.into(),
+        title: translated_title.clone().into(),
         description: eco_format!(
-            "Documentation for functions related to {title} in Typst."
+            "Typstにおける{translated_title}に関連する関数のドキュメント"
         ),
         part: None,
         outline,
         body: BodyModel::Category(CategoryModel {
             name: category.name(),
-            title: title.clone(),
+            title: translated_title,
             details,
             items,
             shorthands,
