@@ -1,7 +1,7 @@
 use crate::foundations::{cast, func, Cast, Content, Str};
 use crate::text::TextElem;
 
-/// 文字列かコンテンツの小文字への変換。
+/// 文字列やコンテンツを小文字に変換。
 ///
 /// # 例
 /// ```example
@@ -17,7 +17,7 @@ pub fn lower(
     case(text, Case::Lower)
 }
 
-/// 文字列かコンテンツの大文字への変換。
+///  文字列やコンテンツを大文字に変換。
 ///
 /// # 例
 /// ```example
