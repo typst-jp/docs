@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && bun run update-search-index",
+		"build": "vite build && npm run update-search-index",
 		"preview": "vite preview",
 		"update-search-index": "pagefind --site ./dist/ --glob \"docs/**/*.html\"",
 		"check": "biome check .",
