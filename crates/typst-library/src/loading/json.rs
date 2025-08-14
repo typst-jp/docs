@@ -51,7 +51,7 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "JSON")]
 pub fn json(
     engine: &mut Engine,
-    /// JSONファイルへの[パス]($syntax/#paths)、または生のJSONバイト列。
+    /// JSONファイルの[パス]($syntax/#paths)、または生のJSONバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;
