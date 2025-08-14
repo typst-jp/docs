@@ -25,7 +25,7 @@ use crate::World;
 #[func]
 pub fn read(
     engine: &mut Engine,
-    /// ファイルへのパス。
+    /// ファイルのパス。
     ///
     /// 詳細については、[パスのセクション]($syntax/#paths)を参照してください。
     path: Spanned<EcoString>,
