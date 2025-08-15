@@ -11,7 +11,7 @@ use crate::loading::{DataSource, Load, Readable};
 /// 読み込むファイルにはオブジェクトや配列などの有効なJSON値が含まれていなければなりません。
 /// JSONオブジェクトはTypstの辞書に変換され、
 /// JSON配列はTypstの配列に変換されます。
-/// 文字列やブール値はTypstの対応する値に変換され、`null`は`{none}`に、
+/// 文字列やブール値はTypstの対応する型に変換され、`null`は`{none}`に、
 /// 数値は整数値であれば整数型に、
 /// そうでなければ浮動小数点数型に変換されます。
 ///
@@ -51,7 +51,7 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "JSON")]
 pub fn json(
     engine: &mut Engine,
-    /// JSONファイルへの[パス]($syntax/#paths)、または生のJSONバイト列。
+    /// JSONファイルの[パス]($syntax/#paths)、または生のJSONバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;

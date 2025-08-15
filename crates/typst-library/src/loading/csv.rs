@@ -26,7 +26,7 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "CSV")]
 pub fn csv(
     engine: &mut Engine,
-    /// CSVファイルへの[パス]($syntax/#paths)、または生のCSVバイト列。
+    /// CSVファイルの[パス]($syntax/#paths)、または生のCSVバイト列。
     source: Spanned<DataSource>,
     /// CSVファイルの列を区切る区切り文字。
     /// 単一のASCII文字でなければなりません。

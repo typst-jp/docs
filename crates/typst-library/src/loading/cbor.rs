@@ -10,7 +10,7 @@ use crate::loading::{DataSource, Load};
 ///
 /// 読み込むファイルには有効なCBORによるシリアル化データが含まれていなければなりません。
 /// マッピングはTypstの辞書に変換され、シーケンスはTypstの配列に変換されます。
-/// 文字列やブール値はTypstの対応する値に変換され、
+/// 文字列やブール値はTypstの対応する型に変換され、
 /// ヌル値（`null`、`~`、または空の``）は`{none}`に、
 /// 数値は整数値であれば整数型に、
 /// そうでなければ浮動小数点数型に変換されます。
@@ -20,7 +20,7 @@ use crate::loading::{DataSource, Load};
 #[func(scope, title = "CBOR")]
 pub fn cbor(
     engine: &mut Engine,
-    /// CBORファイルへの[パス]($syntax/#paths)、または生のCBORバイト列。
+    /// CBORファイルの[パス]($syntax/#paths)、または生のCBORバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;
