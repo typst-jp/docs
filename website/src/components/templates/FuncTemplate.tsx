@@ -1,4 +1,5 @@
 import type { FC } from "hono/jsx";
+import { menuTranslations } from "../../translations";
 import type { Func, FuncBody, Page } from "../../types/model";
 import {
 	FunctionDefinition,
@@ -9,7 +10,6 @@ import {
 import { DeprecationWarning } from "../ui/DeprecationWarning";
 import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
-import { menuTranslations } from "../../translations";
 
 export type FuncTemplateProps = Omit<BaseTemplateProps, "page"> & {
 	page: Omit<Page, "body"> & {
@@ -100,7 +100,8 @@ function ScopedDefinitions({
 					// Currently, the scope has at most two levels.
 					// Therefore, it is sufficient to only annotate the direct `parent`.
 					<>
-						<code>{parent.name}</code>{menuTranslations.definitionOf}
+						<code>{parent.name}</code>
+						{menuTranslations.definitionOf}
 					</>
 				) : (
 					menuTranslations.definition

@@ -51,14 +51,17 @@ export const SiteNoticeBanner = () => {
 					</span>
 					<span class="block flex-1 pt-1 pb-2 leading-normal sm:inline sm:pt-0 sm:pb-0">
 						{menuTranslations.operatedBy}
-						<a href={githubOrganizationUrl}>{menuTranslations.communityName}</a>{menuTranslations.but}
+						<a href={githubOrganizationUrl}>{menuTranslations.communityName}</a>
+						{menuTranslations.but}
 						<a href={typstOfficialDocsUrl}>
-							Typst v{version}{menuTranslations.officialDocumentation}
+							Typst v{version}
+							{menuTranslations.officialDocumentation}
 						</a>
 						{menuTranslations.translationInfo}
 						<a href={typstOfficialDocsUrl}>{menuTranslations.officialDoc}</a>
 						{menuTranslations.recommendUsing}
-						<a href={githubRepositoryUrl}>GitHub</a>{menuTranslations.issueAndPullRequest}
+						<a href={githubRepositoryUrl}>GitHub</a>
+						{menuTranslations.issueAndPullRequest}
 						{menuTranslations.requestWelcome}
 						<a href={discordServerUrl}>{menuTranslations.discordServer}</a>
 						{menuTranslations.joinUs}

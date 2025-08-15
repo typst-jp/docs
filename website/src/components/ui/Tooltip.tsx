@@ -1,7 +1,7 @@
 import type { FC } from "hono/jsx";
+import { menuTranslations } from "../../translations";
 import { CloseIcon, HelpCircleIcon } from "../icons";
 import { HtmlContent } from "./HtmlContent";
-import { menuTranslations } from "../../translations";
 
 type TooltipProps = {
 	kind:

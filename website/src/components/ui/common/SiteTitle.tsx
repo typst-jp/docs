@@ -8,7 +8,9 @@ export const SiteTitle = () => {
 				<span class="text-base font-medium text-gray-600 ml-1">
 					{menuTranslations.document}
 				</span>
-				<span class="text-xs text-gray-600 ml-1">{menuTranslations.langVersion}</span>
+				<span class="text-xs text-gray-600 ml-1">
+					{menuTranslations.langVersion}
+				</span>
 			</div>
 		</a>
 	);

@@ -1,11 +1,11 @@
 import type { FC } from "hono/jsx";
+import { menuTranslations } from "../../translations";
 import type { Func } from "../../types/model";
 import { ChevronRightIcon } from "../icons";
 import { HtmlContent } from "./HtmlContent";
 import { Tooltip } from "./Tooltip";
 import { TypeIcon } from "./TypeIcon";
 import { buildParamId, type2href } from "./type2href";
-import { menuTranslations } from "../../translations";
 
 type FunctionParametersProps = {
 	func: Func;

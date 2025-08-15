@@ -1,4 +1,5 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
+import { menuTranslations } from "../../translations";
 import type { Page } from "../../types/model";
 import { getTranslationStatus } from "../../utils/translationStatus";
 import {
@@ -19,7 +20,6 @@ import {
 	TableOfContents,
 	TranslationStatusAlert,
 } from "../ui/common/";
-import { menuTranslations } from "../../translations";
 
 export type BaseTemplateProps = PropsWithChildren<{
 	page: Page;
@@ -46,7 +46,9 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 		<html lang={menuTranslations.lang} class="scroll-pt-24">
 			<head>
 				<meta charSet="utf-8" />
-				<title>{title} – {menuTranslations.documentationTitle}</title>
+				<title>
+					{title} – {menuTranslations.documentationTitle}
+				</title>
 				<meta name="description" content={description} />
 				<meta name="viewport" content="width=device-width,initial-scale=1" />
 				<meta name="theme-color" content="#239dad" />

@@ -1,8 +1,8 @@
 import type { FC } from "hono/jsx";
+import { menuTranslations } from "../../translations";
 import type { CategoryBody, Page } from "../../types/model";
 import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
-import { menuTranslations } from "../../translations";
 
 export type CategoryTemplateProps = Omit<BaseTemplateProps, "page"> & {
 	page: Omit<Page, "body"> & {

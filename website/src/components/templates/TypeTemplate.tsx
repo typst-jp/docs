@@ -1,11 +1,11 @@
 import type { FC } from "hono/jsx";
+import { menuTranslations } from "../../translations";
 import type { Page, TypeBody } from "../../types/model";
 import { FunctionDisplay, Tooltip } from "../ui";
 import { HtmlContent } from "../ui/HtmlContent";
 import { TypeIcon } from "../ui/TypeIcon";
 import { type2href } from "../ui/type2href";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
-import { menuTranslations } from "../../translations";
 
 export type TypeTemplateProps = Omit<BaseTemplateProps, "page"> & {
 	page: Omit<Page, "body"> & {

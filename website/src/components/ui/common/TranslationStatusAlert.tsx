@@ -1,8 +1,8 @@
 import type { FC } from "hono/jsx";
 import { twMerge } from "tailwind-merge";
+import { menuTranslations } from "../../../translations";
 import type { TranslationStatus } from "../../../utils/translationStatus";
 import { LanguageIcon } from "../../icons";
-import { menuTranslations } from "../../../translations";
 
 type StatusConfig = {
 	bgColor: string;
@@ -31,8 +31,7 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				textColor: "text-yellow-800",
 				iconColor: "text-yellow-600",
 				label: menuTranslations.partiallyTranslated,
-				message: menuTranslations.partiallyTranslatedMessage
-					,
+				message: menuTranslations.partiallyTranslatedMessage,
 			};
 		case "untranslated":
 			return {
@@ -69,7 +68,7 @@ export const TranslationStatusAlert: FC<TranslationStatusAlertProps> = ({
 				"border rounded-md p-4",
 				config.bgColor,
 				config.borderColor,
-				config.textColor
+				config.textColor,
 			)}
 		>
 			<div class="flex items-start">

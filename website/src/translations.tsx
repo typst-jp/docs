@@ -56,9 +56,11 @@ export const menuTranslations = {
 	variadic: "可変長引数",
 	variadicDesc: "可変長引数は複数回指定することができます。",
 	settable: "設定可能引数",
-	settableDesc: "設定可能引数は、<code>set</code>ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。",
+	settableDesc:
+		"設定可能引数は、<code>set</code>ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。",
 	positional: "位置引数",
-	positionalDesc: "位置引数は順序通りに指定することで、引数名を省略して設定できます。",
+	positionalDesc:
+		"位置引数は順序通りに指定することで、引数名を省略して設定できます。",
 	required: "必須引数",
 	requiredDesc: "必須引数は、関数を呼び出す際に必ず指定しなければなりません。",
 	showInformation: "の詳細情報を表示",
@@ -68,12 +70,14 @@ export const menuTranslations = {
 	communityName: "Typst Japanese Community",
 	but: "」が",
 	officialDocumentation: "の公式ドキュメント",
-	translationInfo: "を翻訳したものです。誤訳や古い情報が含まれている可能性があるため、",
+	translationInfo:
+		"を翻訳したものです。誤訳や古い情報が含まれている可能性があるため、",
 	joinUs: "にぜひご参加ください。",
 	discordServer: "Discordサーバー「くみはんクラブ」",
 	requestWelcome: "Requestを歓迎します。コミュニティにご興味のある方は",
 	issueAndPullRequest: "でのIssueやPull",
-	recommendUsing: "との併用を推奨します。翻訳の改善やサイトの機能向上について、",
+	recommendUsing:
+		"との併用を推奨します。翻訳の改善やサイトの機能向上について、",
 	officialDoc: "公式ドキュメント",
 	openSearch: "検索を開く",
 	closeSearch: "検索を閉じる",

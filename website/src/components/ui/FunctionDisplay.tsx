@@ -1,10 +1,10 @@
 import type { FC } from "hono/jsx";
+import { menuTranslations } from "../../translations";
 import type { Func } from "../../types/model";
 import { ChevronRightIcon } from "../icons";
 import { FunctionDefinition } from "./FunctionDefinition";
 import { FunctionParameters } from "./FunctionParameters";
 import { HtmlContent } from "./HtmlContent";
-import { menuTranslations } from "../../translations";
 
 type FunctionDisplayProps = {
 	func: Func;

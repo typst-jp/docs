@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
-import { CloseIcon } from "../../icons";
 import { menuTranslations } from "../../../translations";
+import { CloseIcon } from "../../icons";
 
 export const SearchWindow: FC = () => {
 	return (

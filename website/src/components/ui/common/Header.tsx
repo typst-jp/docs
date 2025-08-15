@@ -30,7 +30,9 @@ const TranslationCoverageBadge = () => {
 				<div class="w-4 h-4 text-gray-600">
 					<LanguageIcon />
 				</div>
-				<span class="text-xs text-gray-600 font-medium">{menuTranslations.translationRate}</span>
+				<span class="text-xs text-gray-600 font-medium">
+					{menuTranslations.translationRate}
+				</span>
 			</div>
 			<div class="flex items-center gap-1">
 				<div class="w-12 h-1.5 bg-gray-200 rounded-full overflow-hidden">
