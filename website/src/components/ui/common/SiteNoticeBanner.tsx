@@ -5,6 +5,7 @@ import {
 	typstOfficialDocsUrl,
 	version,
 } from "../../../metadata";
+import { menuTranslations } from "../../../translations";
 import { InfoCircleIcon } from "../../icons";
 
 export const SiteNoticeBanner = () => {
@@ -43,24 +44,24 @@ export const SiteNoticeBanner = () => {
 						<div class="w-4 h-4">
 							<InfoCircleIcon />
 						</div>
-						<strong>情報 / Info</strong>
+						<strong>{menuTranslations.information} / Info</strong>
 					</span>
 					<span class="hidden sm:flex items-center">
 						<span class="inline-block w-px h-12 bg-neutral-200 mx-3" />
 					</span>
 					<span class="block flex-1 pt-1 pb-2 leading-normal sm:inline sm:pt-0 sm:pb-0">
-						当サイトは、Typst GmbHの許諾を得て、日本語コミュニティ「
-						<a href={githubOrganizationUrl}>Typst Japanese Community</a>」が
+						{menuTranslations.operatedBy}
+						<a href={githubOrganizationUrl}>{menuTranslations.communityName}</a>{menuTranslations.but}
 						<a href={typstOfficialDocsUrl}>
-							Typst v{version}の公式ドキュメント
+							Typst v{version}{menuTranslations.officialDocumentation}
 						</a>
-						を翻訳したものです。誤訳や古い情報が含まれている可能性があるため、
-						<a href={typstOfficialDocsUrl}>公式ドキュメント</a>
-						との併用を推奨します。翻訳の改善やサイトの機能向上について、
-						<a href={githubRepositoryUrl}>GitHub</a>でのIssueやPull
-						Requestを歓迎します。コミュニティにご興味のある方は
-						<a href={discordServerUrl}>Discordサーバー「くみはんクラブ」</a>
-						にぜひご参加ください。
+						{menuTranslations.translationInfo}
+						<a href={typstOfficialDocsUrl}>{menuTranslations.officialDoc}</a>
+						{menuTranslations.recommendUsing}
+						<a href={githubRepositoryUrl}>GitHub</a>{menuTranslations.issueAndPullRequest}
+						{menuTranslations.requestWelcome}
+						<a href={discordServerUrl}>{menuTranslations.discordServer}</a>
+						{menuTranslations.joinUs}
 						<br />
 						This site provides a Japanese translation of the{" "}
 						<a href={typstOfficialDocsUrl}>Typst v{version} documentation</a>{" "}

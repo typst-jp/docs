@@ -2,6 +2,7 @@ import type { FC } from "hono/jsx";
 import type { CategoryBody, Page } from "../../types/model";
 import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
+import { menuTranslations } from "../../translations";
 
 export type CategoryTemplateProps = Omit<BaseTemplateProps, "page"> & {
 	page: Omit<Page, "body"> & {
@@ -26,7 +27,7 @@ export const CategoryTemplate: FC<CategoryTemplateProps> = ({
 		>
 			<h1 id="summary">{page.body.content.title}</h1>
 			<HtmlContent html={page.body.content.details} />
-			<h2 id="definitions">定義</h2>
+			<h2 id="definitions">{menuTranslations.definition}</h2>
 			<ul class="subgridded">
 				{page.body.content.items.map((item) => (
 					<li key={item.route}>

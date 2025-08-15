@@ -4,6 +4,7 @@ import { ChevronRightIcon } from "../icons";
 import { FunctionDefinition } from "./FunctionDefinition";
 import { FunctionParameters } from "./FunctionParameters";
 import { HtmlContent } from "./HtmlContent";
+import { menuTranslations } from "../../translations";
 
 type FunctionDisplayProps = {
 	func: Func;
@@ -35,7 +36,7 @@ export const FunctionDisplay: FC<FunctionDisplayProps> = ({
 						<div class="w-4 h-4 text-gray-400 transform transition-transform duration-200 group-open:rotate-90">
 							<ChevronRightIcon />
 						</div>
-						例を表示
+						{menuTranslations.showExample}
 					</summary>
 					<div class="mt-2 bg-white p-3 rounded-md border border-gray-200 text-sm">
 						<HtmlContent html={func.example} />

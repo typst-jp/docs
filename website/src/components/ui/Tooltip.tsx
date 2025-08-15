@@ -1,6 +1,7 @@
 import type { FC } from "hono/jsx";
 import { CloseIcon, HelpCircleIcon } from "../icons";
 import { HtmlContent } from "./HtmlContent";
+import { menuTranslations } from "../../translations";
 
 type TooltipProps = {
 	kind:
@@ -25,57 +26,57 @@ const tooltipContent: Record<
 	}
 > = {
 	element: {
-		label: "要素関数",
-		desc: "要素関数は<code>set</code>ルールや<code>show</code>ルールでカスタマイズできます。",
+		label: menuTranslations.elementFunction,
+		desc: menuTranslations.elementFunctionDesc,
 		isShowLabel: true,
 		bgColor: "bg-blue-50",
 		textColor: "text-blue-700",
 	},
 	contextual: {
-		label: "コンテキスト関数",
-		desc: "コンテキスト関数は、コンテキストが既知の場合にのみ使用できます。",
+		label: menuTranslations.contextFunction,
+		desc: menuTranslations.contextFunctionDesc,
 		isShowLabel: true,
 		bgColor: "bg-indigo-50",
 		textColor: "text-indigo-700",
 	},
 	definitions: {
-		label: "定義",
-		desc: "これらの関数や型には、関連する定義を持たせることができます。定義にアクセスするには、対象の関数や型の名前を指定した後に、ピリオド区切りで定義名を記述します。",
+		label: menuTranslations.definitionTooltip,
+		desc: menuTranslations.definitionTooltipDesc,
 		isShowLabel: false,
 		bgColor: "bg-gray-100",
 		textColor: "text-gray-700",
 	},
 	parameters: {
-		label: "引数",
-		desc: "引数は関数への入力値です。関数名の後に括弧で囲んで指定します。",
+		label: menuTranslations.argument,
+		desc: menuTranslations.argumentDesc,
 		isShowLabel: false,
 		bgColor: "bg-gray-100",
 		textColor: "text-gray-700",
 	},
 	variadic: {
-		label: "可変長引数",
-		desc: "可変長引数は複数回指定することができます。",
+		label: menuTranslations.variadic,
+		desc: menuTranslations.variadicDesc,
 		isShowLabel: true,
 		bgColor: "bg-green-50",
 		textColor: "text-green-700",
 	},
 	settable: {
-		label: "設定可能引数",
-		desc: "設定可能引数は、<code>set</code>ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。",
+		label: menuTranslations.settable,
+		desc: menuTranslations.settableDesc,
 		isShowLabel: true,
 		bgColor: "bg-amber-50",
 		textColor: "text-amber-700",
 	},
 	positional: {
-		label: "位置引数",
-		desc: "位置引数は順序通りに指定することで、引数名を省略して設定できます。",
+		label: menuTranslations.positional,
+		desc: menuTranslations.positionalDesc,
 		isShowLabel: true,
 		bgColor: "bg-purple-50",
 		textColor: "text-purple-700",
 	},
 	required: {
-		label: "必須引数",
-		desc: "必須引数は、関数を呼び出す際に必ず指定しなければなりません。",
+		label: menuTranslations.required,
+		desc: menuTranslations.requiredDesc,
 		isShowLabel: true,
 		bgColor: "bg-rose-50",
 		textColor: "text-rose-700",
@@ -101,7 +102,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 			<button
 				type="button"
 				class="w-4 h-4 hover:bg-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-				aria-label={`${content.label}の詳細情報を表示`}
+				aria-label={`${content.label}${menuTranslations.showInformation}`}
 				tabindex={0}
 				{...{ "x-on:click": "helpOpen = true" }}
 				{...{ "x-on:keydown.enter": "helpOpen = true" }}
@@ -146,7 +147,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 							{...{ "x-on:click": "helpOpen = false" }}
 							{...{ "x-on:keydown.enter": "helpOpen = false" }}
 							{...{ "x-on:keydown.space": "helpOpen = false" }}
-							aria-label="閉じる"
+							aria-label={menuTranslations.close}
 						>
 							<div class="w-6 h-6">
 								<CloseIcon />

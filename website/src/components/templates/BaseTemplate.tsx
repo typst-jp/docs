@@ -19,6 +19,7 @@ import {
 	TableOfContents,
 	TranslationStatusAlert,
 } from "../ui/common/";
+import { menuTranslations } from "../../translations";
 
 export type BaseTemplateProps = PropsWithChildren<{
 	page: Page;
@@ -42,10 +43,10 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 	const outline = page.outline;
 	const translationStatus = getTranslationStatus(route);
 	return (
-		<html lang="ja" class="scroll-pt-24">
+		<html lang={menuTranslations.lang} class="scroll-pt-24">
 			<head>
 				<meta charSet="utf-8" />
-				<title>{title} – Typstドキュメント日本語版</title>
+				<title>{title} – {menuTranslations.documentationTitle}</title>
 				<meta name="description" content={description} />
 				<meta name="viewport" content="width=device-width,initial-scale=1" />
 				<meta name="theme-color" content="#239dad" />
@@ -55,7 +56,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				/>
 				<meta
 					property="og:title"
-					content={`${title} – Typstドキュメント日本語版`}
+					content={`${title} – ${menuTranslations.documentationTitle}`}
 				/>
 				<meta property="og:site_name" content="Typst" />
 				<meta property="og:description" content={description} />
@@ -152,7 +153,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 									type="button"
 									class="text-gray-600"
 									x-on:click="sidebarOpen = false"
-									aria-label="メニューを閉じる"
+									aria-label={menuTranslations.closeMenu}
 								>
 									<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 										<CloseIcon />
@@ -192,7 +193,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										<div class="w-4 h-4 mr-1 ">
 											<WorldIcon />
 										</div>
-										原文（英語）を開く
+										{menuTranslations.originalArticle}
 									</a>
 								</div>
 							)}
@@ -212,7 +213,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										<WorldIcon />
 									</div>
 									<span class="text-sm font-medium text-gray-800 group-hover:text-gray-900 transition-colors">
-										原文（英語）を開く
+										{menuTranslations.originalArticle}
 									</span>
 									<div class="w-4 h-4 ml-2 text-gray-400 transition-colors">
 										<ChevronRightIcon />
@@ -231,11 +232,11 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 												<CaretRightCircleIcon />
 											</div>
 											<strong class="text-base font-semibold text-gray-800">
-												チュートリアル
+												{menuTranslations.tutorial}
 											</strong>
 										</div>
 										<p class="text-sm text-gray-600">
-											一歩一歩、Typstの使い方を学びましょう。
+											{menuTranslations.learnTypst}
 										</p>
 									</a>
 									<a
@@ -247,11 +248,11 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 												<InfoCircleIcon />
 											</div>
 											<strong class="text-base font-semibold text-gray-800">
-												リファレンス
+												{menuTranslations.referenceTo}
 											</strong>
 										</div>
 										<p class="text-sm text-gray-600">
-											Typstのあらゆる構文、概念、型、関数についての詳細なリファレンスです。
+											{menuTranslations.reference}
 										</p>
 									</a>
 								</div>
@@ -268,7 +269,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 													<ChevronLeftIcon />
 												</div>
 												<strong class="text-base font-semibold text-gray-800">
-													前のページ
+													{menuTranslations.previousPage}
 												</strong>
 											</div>
 											<p class="text-sm text-gray-600">{previousPage.title}</p>
@@ -279,7 +280,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										>
 											<div class="flex items-center mb-3 justify-between">
 												<strong class="text-base font-semibold text-gray-800">
-													次のページ
+													{menuTranslations.nextPage}
 												</strong>
 												<div class="w-6 h-6 text-gray-400">
 													<ChevronRightIcon />

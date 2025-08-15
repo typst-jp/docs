@@ -9,6 +9,7 @@ import {
 import { DeprecationWarning } from "../ui/DeprecationWarning";
 import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
+import { menuTranslations } from "../../translations";
 
 export type FuncTemplateProps = Omit<BaseTemplateProps, "page"> & {
 	page: Omit<Page, "body"> & {
@@ -52,7 +53,7 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 			</div>
 
 			<h2 id="parameters" class="flex items-baseline gap-1">
-				引数
+				{menuTranslations.argument}
 				<Tooltip kind="parameters" />
 			</h2>
 
@@ -99,10 +100,10 @@ function ScopedDefinitions({
 					// Currently, the scope has at most two levels.
 					// Therefore, it is sufficient to only annotate the direct `parent`.
 					<>
-						<code>{parent.name}</code>の定義
+						<code>{parent.name}</code>{menuTranslations.definitionOf}
 					</>
 				) : (
-					"定義"
+					menuTranslations.definition
 				)}
 				<Tooltip kind="definitions" />
 			</h2>

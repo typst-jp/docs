@@ -5,6 +5,7 @@ import { HtmlContent } from "../ui/HtmlContent";
 import { TypeIcon } from "../ui/TypeIcon";
 import { type2href } from "../ui/type2href";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
+import { menuTranslations } from "../../translations";
 
 export type TypeTemplateProps = Omit<BaseTemplateProps, "page"> & {
 	page: Omit<Page, "body"> & {
@@ -38,7 +39,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 			{content.constructor && (
 				<>
 					<h2 id="constructor" class="flex items-center gap-1">
-						コンストラクタ
+						{menuTranslations.constructor}
 						<Tooltip kind="parameters" />
 					</h2>
 
@@ -53,7 +54,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 			{content.scope.length > 0 && (
 				<>
 					<h2 id="definitions" class="flex items-center gap-1">
-						定義
+						{menuTranslations.definition}
 						<Tooltip kind="definitions" />
 					</h2>
 
