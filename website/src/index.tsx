@@ -26,9 +26,6 @@ registerRoutes(allRoutes);
 const app = new Hono();
 app.use(appendTrailingSlash());
 app.use(trimTrailingSlash());
-app.get("/", (c) => {
-	return c.redirect("/docs");
-});
 
 flattenedPages.forEach((page, pageIndex) => {
 	const path = pagePaths[pageIndex];

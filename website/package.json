@@ -6,7 +6,7 @@
 		"dev": "vite dev",
 		"build": "vite build && npm run update-search-index",
 		"preview": "vite preview",
-		"update-search-index": "pagefind --site ./dist/ --glob \"docs/**/*.html\"",
+		"update-search-index": "pagefind --site ./dist/ --glob \"**/*.html\"",
 		"check": "biome check .",
 		"check:write": "biome check --write .",
 		"test": "vitest"
