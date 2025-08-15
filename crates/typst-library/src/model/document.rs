@@ -51,7 +51,7 @@ pub struct DocumentElem {
     ///
     /// PDFに埋め込むためには、yearの値が0以上でなくてはなりません。
     ///
-    /// 完全にバイト単位で同一のPDFを繰り返し出力したい場合には、`{auto}`以外の値を設定してください。
+    /// バイト単位で同一に再現できるPDFを出力したい場合には、`{auto}`以外の値を設定してください。
     #[ghost]
     pub date: Smart<Option<Datetime>>,
 }
