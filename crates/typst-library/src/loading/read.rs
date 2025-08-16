@@ -7,13 +7,13 @@ use crate::foundations::{func, Cast};
 use crate::loading::Readable;
 use crate::World;
 
-/// Reads plain text or data from a file.
+/// ファイルからプレーンテキストやデータを読み込む。
 ///
-/// By default, the file will be read as UTF-8 and returned as a [string]($str).
+/// デフォルトでは、ファイルはUTF-8として読み込まれ、[文字列]($str)として返されます。
 ///
-/// If you specify `{encoding: none}`, this returns raw [bytes] instead.
+/// `{encoding: none}`を指定した場合、この関数は代わりに生の[bytes]を返します。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// An example for a HTML file: \
 /// #let text = read("example.html")
@@ -25,13 +25,13 @@ use crate::World;
 #[func]
 pub fn read(
     engine: &mut Engine,
-    /// Path to a file.
+    /// ファイルのパス。
     ///
-    /// For more details, see the [Paths section]($syntax/#paths).
+    /// 詳細については、[パスのセクション]($syntax/#paths)を参照してください。
     path: Spanned<EcoString>,
-    /// The encoding to read the file with.
+    /// ファイルを読み込む際に使用するエンコーディング。
     ///
-    /// If set to `{none}`, this function returns raw bytes.
+    /// `{none}`に設定すると、この関数は生のバイトを返します。
     #[named]
     #[default(Some(Encoding::Utf8))]
     encoding: Option<Encoding>,
@@ -47,9 +47,9 @@ pub fn read(
     })
 }
 
-/// An encoding of a file.
+/// ファイルのエンコーディング。
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum Encoding {
-    /// The Unicode UTF-8 encoding.
+    /// Unicode UTF-8エンコーディング。
     Utf8,
 }

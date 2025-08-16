@@ -6,18 +6,18 @@ use crate::engine::Engine;
 use crate::foundations::{func, scope, Str, Value};
 use crate::loading::{DataSource, Load, Readable};
 
-/// Reads structured data from a TOML file.
+/// TOMLファイルから構造化データを読み込む。
 ///
-/// The file must contain a valid TOML table. TOML tables will be converted into
-/// Typst dictionaries, and TOML arrays will be converted into Typst arrays.
-/// Strings, booleans and datetimes will be converted into the Typst equivalents
-/// and numbers will be converted to floats or integers depending on whether
-/// they are whole numbers.
+/// 読み込むファイルには有効なTOMLテーブルが含まれていなければなりません。
+/// TOMLテーブルはTypstの辞書に変換され、
+/// TOML配列はTypstの配列に変換されます。
+/// 文字列、ブール値、日時はTypstの対応する型に変換され、
+/// 数値は整数値であれば整数型に、そうでなければ浮動小数点数型に変換されます。
 ///
-/// The TOML file in the example consists of a table with the keys `title`,
-/// `version`, and `authors`.
+/// この例におけるTOMLファイルは、
+/// `title`、`version`、および`authors`のキーを持つテーブルで構成されています。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let details = toml("details.toml")
 ///
@@ -29,7 +29,7 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "TOML")]
 pub fn toml(
     engine: &mut Engine,
-    /// A [path]($syntax/#paths) to a TOML file or raw TOML bytes.
+    /// TOMLファイルの[パス]($syntax/#paths)、または生のTOMLバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;
@@ -41,23 +41,23 @@ pub fn toml(
 
 #[scope]
 impl toml {
-    /// Reads structured data from a TOML string/bytes.
+    /// TOMLの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode TOML")]
-    #[deprecated = "`toml.decode` is deprecated, directly pass bytes to `toml` instead"]
+    #[deprecated = "`toml.decode`は非推奨です。代わりにバイト列を直接`toml`に渡してください。"]
     pub fn decode(
         engine: &mut Engine,
-        /// TOML data.
+        /// TOMLデータ。
         data: Spanned<Readable>,
     ) -> SourceResult<Value> {
         toml(engine, data.map(Readable::into_source))
     }
 
-    /// Encodes structured data into a TOML string.
+    /// 構造化データをTOML文字列にエンコードする。
     #[func(title = "Encode TOML")]
     pub fn encode(
-        /// Value to be encoded.
+        /// エンコード対象の値。
         value: Spanned<Value>,
-        /// Whether to pretty-print the resulting TOML.
+        /// TOMLを整形表示するかどうか。
         #[named]
         #[default(true)]
         pretty: bool,
