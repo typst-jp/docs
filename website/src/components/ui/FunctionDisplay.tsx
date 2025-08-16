@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { menuTranslations } from "../../translations";
+import { t } from "../../translations";
 import type { Func } from "../../types/model";
 import { ChevronRightIcon } from "../icons";
 import { FunctionDefinition } from "./FunctionDefinition";
@@ -36,7 +36,7 @@ export const FunctionDisplay: FC<FunctionDisplayProps> = ({
 						<div class="w-4 h-4 text-gray-400 transform transition-transform duration-200 group-open:rotate-90">
 							<ChevronRightIcon />
 						</div>
-						{menuTranslations.showExample}
+						{t("showExample")}
 					</summary>
 					<div class="mt-2 bg-white p-3 rounded-md border border-gray-200 text-sm">
 						<HtmlContent html={func.example} />

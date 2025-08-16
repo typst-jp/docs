@@ -1,4 +1,11 @@
 import type { JSX } from "hono/jsx";
+import {
+	discordServerUrl,
+	githubOrganizationUrl,
+	githubRepositoryUrl,
+	typstOfficialDocsUrl,
+	version,
+} from "./metadata";
 
 type MyMap = {
 	[key: string]: string | (() => JSX.Element);
@@ -70,23 +77,26 @@ export const menuTranslations: MyMap = {
 	showInformation: "の詳細情報を表示",
 	close: "閉じる",
 	information: "情報",
-	operatedBy: "当サイトは、Typst GmbHの許諾を得て、日本語コミュニティ「",
-	communityName: "Typst Japanese Community",
-	but: "」が",
-	officialDocumentation: "の公式ドキュメント",
-	translationInfo:
-		"を翻訳したものです。誤訳や古い情報が含まれている可能性があるため、",
-	joinUs: "にぜひご参加ください。",
-	discordServer: "Discordサーバー「くみはんクラブ」",
-	requestWelcome: "Requestを歓迎します。コミュニティにご興味のある方は",
-	issueAndPullRequest: "でのIssueやPull",
-	recommendUsing:
-		"との併用を推奨します。翻訳の改善やサイトの機能向上について、",
-	officialDoc: "公式ドキュメント",
 	openSearch: "検索を開く",
 	closeSearch: "検索を閉じる",
 	openMenu: "メニューを開く",
 	closeMenu: "メニューを閉じる",
+	banner: () => {
+		return (
+			<>
+				当サイトは、Typst GmbHの許諾を得て、日本語コミュニティ「
+				<a href={githubOrganizationUrl}>Typst Japanese Community</a>」が
+				<a href={typstOfficialDocsUrl}>Typst v{version}の公式ドキュメント</a>
+				を翻訳したものです。誤訳や古い情報が含まれている可能性があるため、
+				<a href={typstOfficialDocsUrl}>公式ドキュメント</a>
+				との併用を推奨します。翻訳の改善やサイトの機能向上について、
+				<a href={githubRepositoryUrl}>GitHub</a>
+				でのIssueやPull Requestを歓迎します。コミュニティにご興味のある方は
+				<a href={discordServerUrl}>Discordサーバー「くみはんクラブ」</a>
+				にぜひご参加ください。
+			</>
+		);
+	},
 };
 
 export const t = (key: string) => {

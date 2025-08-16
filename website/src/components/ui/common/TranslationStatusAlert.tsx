@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { twMerge } from "tailwind-merge";
-import { menuTranslations } from "../../../translations";
+import { t } from "../../../translations";
 import type { TranslationStatus } from "../../../utils/translationStatus";
 import { LanguageIcon } from "../../icons";
 
@@ -21,8 +21,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-green-200",
 				textColor: "text-green-800",
 				iconColor: "text-green-600",
-				label: menuTranslations.translated,
-				message: menuTranslations.translatedMessage,
+				label: t("translated"),
+				message: t("translatedMessage"),
 			};
 		case "partially_translated":
 			return {
@@ -30,8 +30,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-yellow-200",
 				textColor: "text-yellow-800",
 				iconColor: "text-yellow-600",
-				label: menuTranslations.partiallyTranslated,
-				message: menuTranslations.partiallyTranslatedMessage,
+				label: t("partiallyTranslated"),
+				message: t("partiallyTranslatedMessage"),
 			};
 		case "untranslated":
 			return {
@@ -39,8 +39,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-red-200",
 				textColor: "text-red-800",
 				iconColor: "text-red-600",
-				label: menuTranslations.untranslated,
-				message: menuTranslations.untranslatedMessage,
+				label: t("untranslated"),
+				message: t("untranslatedMessage"),
 			};
 		case "community":
 			return {
@@ -48,8 +48,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-cyan-200",
 				textColor: "text-cyan-800",
 				iconColor: "text-cyan-600",
-				label: menuTranslations.originalVersion,
-				message: menuTranslations.contentAddedByCommunity,
+				label: t("originalVersion"),
+				message: t("contentAddedByCommunity"),
 			};
 	}
 };

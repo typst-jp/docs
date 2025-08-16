@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { menuTranslations } from "../../translations";
+import { t } from "../../translations";
 import { CloseIcon, HelpCircleIcon } from "../icons";
 import { HtmlContent } from "./HtmlContent";
 
@@ -26,57 +26,57 @@ const tooltipContent: Record<
 	}
 > = {
 	element: {
-		label: menuTranslations.elementFunction,
-		desc: menuTranslations.elementFunctionDesc,
+		label: t("elementFunction"),
+		desc: t("elementFunctionDesc"),
 		isShowLabel: true,
 		bgColor: "bg-blue-50",
 		textColor: "text-blue-700",
 	},
 	contextual: {
-		label: menuTranslations.contextFunction,
-		desc: menuTranslations.contextFunctionDesc,
+		label: t("contextFunction"),
+		desc: t("contextFunctionDesc"),
 		isShowLabel: true,
 		bgColor: "bg-indigo-50",
 		textColor: "text-indigo-700",
 	},
 	definitions: {
-		label: menuTranslations.definitionTooltip,
-		desc: menuTranslations.definitionTooltipDesc,
+		label: t("definitionTooltip"),
+		desc: t("definitionTooltipDesc"),
 		isShowLabel: false,
 		bgColor: "bg-gray-100",
 		textColor: "text-gray-700",
 	},
 	parameters: {
-		label: menuTranslations.argument,
-		desc: menuTranslations.argumentDesc,
+		label: t("argument"),
+		desc: t("argumentDesc"),
 		isShowLabel: false,
 		bgColor: "bg-gray-100",
 		textColor: "text-gray-700",
 	},
 	variadic: {
-		label: menuTranslations.variadic,
-		desc: menuTranslations.variadicDesc,
+		label: t("variadic"),
+		desc: t("variadicDesc"),
 		isShowLabel: true,
 		bgColor: "bg-green-50",
 		textColor: "text-green-700",
 	},
 	settable: {
-		label: menuTranslations.settable,
-		desc: menuTranslations.settableDesc,
+		label: t("settable"),
+		desc: t("settableDesc"),
 		isShowLabel: true,
 		bgColor: "bg-amber-50",
 		textColor: "text-amber-700",
 	},
 	positional: {
-		label: menuTranslations.positional,
-		desc: menuTranslations.positionalDesc,
+		label: t("positional"),
+		desc: t("positionalDesc"),
 		isShowLabel: true,
 		bgColor: "bg-purple-50",
 		textColor: "text-purple-700",
 	},
 	required: {
-		label: menuTranslations.required,
-		desc: menuTranslations.requiredDesc,
+		label: t("required"),
+		desc: t("requiredDesc"),
 		isShowLabel: true,
 		bgColor: "bg-rose-50",
 		textColor: "text-rose-700",
@@ -102,7 +102,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 			<button
 				type="button"
 				class="w-4 h-4 hover:bg-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-				aria-label={`${content.label}${menuTranslations.showInformation}`}
+				aria-label={`${content.label}${t("showInformation")}`}
 				tabindex={0}
 				{...{ "x-on:click": "helpOpen = true" }}
 				{...{ "x-on:keydown.enter": "helpOpen = true" }}
@@ -147,7 +147,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 							{...{ "x-on:click": "helpOpen = false" }}
 							{...{ "x-on:keydown.enter": "helpOpen = false" }}
 							{...{ "x-on:keydown.space": "helpOpen = false" }}
-							aria-label={menuTranslations.close}
+							aria-label={t("close")}
 						>
 							<div class="w-6 h-6">
 								<CloseIcon />
@@ -155,9 +155,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 						</button>
 					</div>
 					<div class="p-4">
-						<div class="text-sm font-normal text-gray-700">
-							<HtmlContent html={content.desc} />
-						</div>
+						<div class="text-sm font-normal text-gray-700">{content.desc}</div>
 					</div>
 				</div>
 			</div>

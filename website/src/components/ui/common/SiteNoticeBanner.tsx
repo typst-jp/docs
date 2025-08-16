@@ -5,7 +5,7 @@ import {
 	typstOfficialDocsUrl,
 	version,
 } from "../../../metadata";
-import { menuTranslations } from "../../../translations";
+import { t } from "../../../translations";
 import { InfoCircleIcon } from "../../icons";
 
 export const SiteNoticeBanner = () => {
@@ -44,27 +44,13 @@ export const SiteNoticeBanner = () => {
 						<div class="w-4 h-4">
 							<InfoCircleIcon />
 						</div>
-						<strong>{menuTranslations.information} / Info</strong>
+						<strong>{t("information")} / Info</strong>
 					</span>
 					<span class="hidden sm:flex items-center">
 						<span class="inline-block w-px h-12 bg-neutral-200 mx-3" />
 					</span>
 					<span class="block flex-1 pt-1 pb-2 leading-normal sm:inline sm:pt-0 sm:pb-0">
-						{menuTranslations.operatedBy}
-						<a href={githubOrganizationUrl}>{menuTranslations.communityName}</a>
-						{menuTranslations.but}
-						<a href={typstOfficialDocsUrl}>
-							Typst v{version}
-							{menuTranslations.officialDocumentation}
-						</a>
-						{menuTranslations.translationInfo}
-						<a href={typstOfficialDocsUrl}>{menuTranslations.officialDoc}</a>
-						{menuTranslations.recommendUsing}
-						<a href={githubRepositoryUrl}>GitHub</a>
-						{menuTranslations.issueAndPullRequest}
-						{menuTranslations.requestWelcome}
-						<a href={discordServerUrl}>{menuTranslations.discordServer}</a>
-						{menuTranslations.joinUs}
+						{t("banner")}
 						<br />
 						This site provides a Japanese translation of the{" "}
 						<a href={typstOfficialDocsUrl}>Typst v{version} documentation</a>{" "}

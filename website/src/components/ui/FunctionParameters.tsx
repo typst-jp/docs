@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { menuTranslations } from "../../translations";
+import { t } from "../../translations";
 import type { Func } from "../../types/model";
 import { ChevronRightIcon } from "../icons";
 import { HtmlContent } from "./HtmlContent";
@@ -61,7 +61,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 					{param.strings.length > 0 && (
 						<div class="mt-3">
 							<h5 class="text-sm font-medium text-gray-700 mb-2">
-								{menuTranslations.stringValues}:
+								{t("stringValues")}:
 							</h5>
 							<ul class="type-args space-y-2 pl-4">
 								{param.strings.map((string) => (
@@ -82,7 +82,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 
 					{param.default && (
 						<p class="mt-3 text-sm">
-							<span class="font-medium">{menuTranslations.defaultValue}:</span>{" "}
+							<span class="font-medium">{t("defaultValue")}:</span>{" "}
 							<span class="text-gray-700">
 								<HtmlContent html={param.default} />
 							</span>
@@ -95,7 +95,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 								<div class="w-4 h-4 text-gray-400 transform transition-transform duration-200 group-open:rotate-90">
 									<ChevronRightIcon />
 								</div>
-								{menuTranslations.showExample}
+								{t("showExample")}
 							</summary>
 							<div class="mt-2 bg-white p-3 rounded-md border border-gray-200 text-sm">
 								<HtmlContent html={param.example} />

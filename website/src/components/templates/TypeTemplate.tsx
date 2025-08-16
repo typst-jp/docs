@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { menuTranslations } from "../../translations";
+import { t } from "../../translations";
 import type { Page, TypeBody } from "../../types/model";
 import { FunctionDisplay, Tooltip } from "../ui";
 import { HtmlContent } from "../ui/HtmlContent";
@@ -39,7 +39,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 			{content.constructor && (
 				<>
 					<h2 id="constructor" class="flex items-center gap-1">
-						{menuTranslations.constructor}
+						{t("constructor")}
 						<Tooltip kind="parameters" />
 					</h2>
 
@@ -54,7 +54,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 			{content.scope.length > 0 && (
 				<>
 					<h2 id="definitions" class="flex items-center gap-1">
-						{menuTranslations.definition}
+						{t("definition")}
 						<Tooltip kind="definitions" />
 					</h2>
 
