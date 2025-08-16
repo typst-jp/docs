@@ -1,5 +1,3 @@
-import { menuTranslations } from "../../translations";
-
 export const InfoCircleIcon = () => {
 	return (
 		<svg
@@ -11,8 +9,8 @@ export const InfoCircleIcon = () => {
 			stroke-linecap="round"
 			stroke-linejoin="round"
 			class="icon icon-tabler icons-tabler-outline icon-tabler-info-circle"
+			role="graphics-symbol"
 		>
-			<title>{menuTranslations.iconInformation}</title>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
 			<path d="M12 9h.01" />

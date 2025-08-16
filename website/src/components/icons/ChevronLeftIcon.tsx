@@ -1,5 +1,3 @@
-import { menuTranslations } from "../../translations";
-
 export const ChevronLeftIcon = () => {
 	return (
 		<svg
@@ -11,8 +9,8 @@ export const ChevronLeftIcon = () => {
 			stroke-linecap="round"
 			stroke-linejoin="round"
 			class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+			role="graphics-symbol"
 		>
-			<title>{menuTranslations.iconLeftArrow}</title>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path d="M15 6l-6 6l6 6" />
 		</svg>

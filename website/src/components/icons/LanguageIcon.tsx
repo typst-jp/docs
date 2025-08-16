@@ -1,5 +1,3 @@
-import { menuTranslations } from "../../translations";
-
 export const LanguageIcon = () => {
 	return (
 		<svg
@@ -10,8 +8,8 @@ export const LanguageIcon = () => {
 			stroke-linecap="round"
 			stroke-linejoin="round"
 			class="icon icon-tabler icons-tabler-outline icon-tabler-language-hiragana"
+			role="graphics-symbol"
 		>
-			<title>{menuTranslations.iconLang}</title>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path d="M4 5h7" />
 			<path d="M7 4c0 4.846 0 7 .5 8" />

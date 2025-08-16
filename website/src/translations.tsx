@@ -1,13 +1,11 @@
-export const menuTranslations = {
+import type { JSX } from "hono/jsx";
+
+type MyMap = {
+	[key: string]: string | (() => JSX.Element);
+};
+
+export const menuTranslations: MyMap = {
 	lang: "ja",
-	iconAlert: "警告アイコン",
-	iconRead: "再生アイコン",
-	iconLeftArrow: "左矢印アイコン",
-	iconRightArrow: "右矢印アイコン",
-	iconClose: "閉じるアイコン",
-	iconSearch: "検索アイコン",
-	iconLang: "言語アイコン",
-	iconInformation: "情報アイコン",
 	langVersion: "日本語版",
 	definition: "定義",
 	document: "ドキュメント",
@@ -56,8 +54,14 @@ export const menuTranslations = {
 	variadic: "可変長引数",
 	variadicDesc: "可変長引数は複数回指定することができます。",
 	settable: "設定可能引数",
-	settableDesc:
-		"設定可能引数は、<code>set</code>ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。",
+	settableDesc: () => {
+		return (
+			<>
+				設定可能引数は、<code>set</code>
+				ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。,
+			</>
+		);
+	},
 	positional: "位置引数",
 	positionalDesc:
 		"位置引数は順序通りに指定することで、引数名を省略して設定できます。",
@@ -83,4 +87,11 @@ export const menuTranslations = {
 	closeSearch: "検索を閉じる",
 	openMenu: "メニューを開く",
 	closeMenu: "メニューを閉じる",
+};
+
+export const t = (key: string) => {
+	if (typeof menuTranslations[key] === "string") {
+		return menuTranslations[key];
+	}
+	return menuTranslations[key]();
 };
