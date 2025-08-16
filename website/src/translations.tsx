@@ -103,5 +103,8 @@ export const t = (key: string) => {
 	if (typeof menuTranslations[key] === "string") {
 		return menuTranslations[key];
 	}
-	return menuTranslations[key]();
+	if (Object.hasOwn(menuTranslations, key)) {
+		return menuTranslations[key]();
+	}
+	throw new Error(`Not translation found for ${key}`);
 };
