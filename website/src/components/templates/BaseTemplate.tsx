@@ -114,7 +114,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				<link
 					href={
 						import.meta.env.DEV
-							? "/src/globals.css"
+							? `${basePath.replace(/\/$/, "")}/src/globals.css`
 							: `${basePath.replace(/\/$/, "")}/globals.css`
 					}
 					rel="stylesheet"

@@ -47,7 +47,7 @@ flattenedPages.forEach((page, pageIndex) => {
 
 	// Remove basePath from the route if it starts with basePath.
 	let route = page.route;
-	if (route.startsWith(basePath)) {
+	if (import.meta.env.PROD && route.startsWith(basePath)) {
 		route = route.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0));
 	}
 	app.get(route, (c) => {
