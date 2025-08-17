@@ -1,4 +1,4 @@
-import type { FC, JSX } from "hono/jsx";
+import type { FC, JSXNode } from "hono/jsx";
 import { twMerge } from "tailwind-merge";
 import { Translation } from "../../../translations";
 import type { TranslationStatus } from "../../../utils/translationStatus";
@@ -9,7 +9,7 @@ type StatusConfig = {
 	borderColor: string;
 	textColor: string;
 	iconColor: string;
-	label: JSX.Element;
+	label: JSXNode;
 	message: string;
 };
 

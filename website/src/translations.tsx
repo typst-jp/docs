@@ -4,7 +4,6 @@ import {
 	githubOrganizationUrl,
 	githubRepositoryUrl,
 	typstOfficialDocsUrl,
-	version,
 } from "./metadata";
 
 type MyMap = {
@@ -15,7 +14,7 @@ export const menuTranslations: MyMap = {
 	lang: "ja",
 	ariaCloseMenu: "メニューを閉じる",
 	documentationTitle: "Typstドキュメント日本語版",
-	showInformation: "の詳細情報を表示",
+	ariaShowInformation: "の詳細情報を表示",
 	ariaClose: "閉じる",
 	ariaOpenSearch: "検索を開く",
 	ariaOpenMenu: "メニューを開く",
@@ -81,7 +80,7 @@ type TranslationKey =
 
 export type TranslationProps =
 	| { translationKey: TranslationKey }
-	| PropsWithChildren<{ translationKey: "banner" }>;
+	| PropsWithChildren<{ translationKey: "banner"; version: string }>;
 
 /*
 This is inferred as the following type:
@@ -226,7 +225,9 @@ export const Translation: FC<TranslationProps> = (props) => {
 				<>
 					当サイトは、Typst GmbHの許諾を得て、日本語コミュニティ「
 					<a href={githubOrganizationUrl}>Typst Japanese Community</a>」が
-					<a href={typstOfficialDocsUrl}>Typst v{version}の公式ドキュメント</a>
+					<a href={typstOfficialDocsUrl}>
+						Typst v{props.version}の公式ドキュメント
+					</a>
 					を翻訳したものです。誤訳や古い情報が含まれている可能性があるため、
 					<a href={typstOfficialDocsUrl}>公式ドキュメント</a>
 					との併用を推奨します。翻訳の改善やサイトの機能向上について、

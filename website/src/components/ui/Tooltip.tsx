@@ -101,7 +101,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 			<button
 				type="button"
 				class="w-4 h-4 hover:bg-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
-				aria-label={`${content.label}${t("showInformation")}`}
+				aria-label={`${content.label}${t("ariaShowInformation")}`}
 				tabindex={0}
 				{...{ "x-on:click": "helpOpen = true" }}
 				{...{ "x-on:keydown.enter": "helpOpen = true" }}
