@@ -233,7 +233,7 @@ pub struct RawElem {
     pub theme: Smart<Option<Derived<DataSource, RawTheme>>>,
 
     /// スペースで測ったタブ幅。
-    ///タブは、次のタブ幅の整数倍位置までのスペースで置き換えられます。
+    /// タブは、次のタブ幅の整数倍位置までのスペースで置き換えられます。
     ///
     /// ````example
     /// #set raw(tab-size: 8)
