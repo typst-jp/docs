@@ -8,6 +8,7 @@ import {
 	SymbolsTemplate,
 	TypeTemplate,
 } from "./components/templates";
+import { basePath } from "./metadata";
 import type { Body, Page } from "./types/model";
 import { flattenDocs } from "./utils/flattenDocs";
 import { isPageOfKind } from "./utils/isPageOfKind";
@@ -44,7 +45,12 @@ flattenedPages.forEach((page, pageIndex) => {
 		nextPage: nextPage || undefined,
 	};
 
-	app.get(page.route, (c) => {
+	// Remove basePath from the route if it starts with basePath.
+	let route = page.route;
+	if (route.startsWith(basePath)) {
+		route = route.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0));
+	}
+	app.get(route, (c) => {
 		if (isPageOfKind(page, "html")) {
 			return c.html(<HtmlTemplate page={page} {...commonProps} />);
 		}

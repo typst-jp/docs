@@ -1,4 +1,6 @@
+import { Style, css } from "hono/css";
 import type { FC, PropsWithChildren } from "hono/jsx";
+import { basePath } from "../../metadata";
 import type { Page } from "../../types/model";
 import { getTranslationStatus } from "../../utils/translationStatus";
 import {
@@ -83,35 +85,37 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				/>
 				<link
 					rel="preload"
-					href="/assets/fonts/hanken-grotesk/HKGrotesk-Regular.woff2"
+					href={`${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Regular.woff2`}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
 				<link
 					rel="preload"
-					href="/assets/fonts/hanken-grotesk/HKGrotesk-Bold.woff2"
+					href={`${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Bold.woff2`}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
 				<link
 					rel="preload"
-					href="/assets/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2"
+					href={`${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2`}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
 				<link
 					rel="preload"
-					href="/assets/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2"
+					href={`${basePath.replace(/\/$/, "")}/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2`}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
 				<link
 					href={
-						import.meta.env.DEV ? "/src/globals.css" : "/assets/globals.css"
+						import.meta.env.DEV
+							? "/src/globals.css"
+							: `${basePath.replace(/\/$/, "")}/globals.css`
 					}
 					rel="stylesheet"
 				/>
@@ -119,6 +123,58 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 					defer
 					src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
 				/>
+				<Style>{css`
+/* Global font family */
+@font-face {
+	font-family: "HK Grotesk";
+	src: url("${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Regular.woff2")
+		format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "HK Grotesk";
+	src: url("${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2")
+		format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "HK Grotesk";
+	src: url("${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Bold.woff2") format("woff2");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Cascadia Mono";
+	src: url("${basePath.replace(/\/$/, "")}/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2")
+		format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+body {
+	font-family:
+		"HK Grotesk", Inter, "BIZ UDGothic", "BIZ UDPGothic", system-ui,
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+		Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+code,
+pre,
+kbd,
+samp {
+	font-family: "Cascadia Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+		"Liberation Mono", "Courier New", monospace;
+}
+`}</Style>
 			</head>
 
 			<body

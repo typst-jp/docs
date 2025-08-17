@@ -7,15 +7,17 @@ import devServer from "@hono/vite-dev-server";
 import ssg from "@hono/vite-ssg";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
+import { basePath } from "./src/metadata";
 
-// typst-docsが生成したドキュメントのアセットをassets/docsにシンボリックリンクする
+// typst-docsが生成したドキュメントのアセットをassets/にシンボリックリンクする
 const assetsDocsPath = resolve(__dirname, "../assets/docs/");
-const publicAssetsDocsPath = resolve(__dirname, "./public/assets/docs/");
+const publicAssetsDocsPath = resolve(__dirname, "./public/assets/");
 
 rmSync(publicAssetsDocsPath, { recursive: true, force: true });
 symlinkSync(assetsDocsPath, publicAssetsDocsPath, "dir");
 
 export default defineConfig({
+	base: basePath,
 	plugins: [
 		tailwindcss(),
 		ssg({
@@ -38,7 +40,7 @@ export default defineConfig({
 		rollupOptions: {
 			input: ["src/globals.css"],
 			output: {
-				assetFileNames: "assets/[name].[ext]",
+				assetFileNames: "[name].[ext]",
 			},
 		},
 	},

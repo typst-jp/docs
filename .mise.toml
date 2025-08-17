@@ -9,7 +9,7 @@ yes = true
 idiomatic_version_file_enable_tools = []
 
 [tasks.generate-docs]
-run = "cargo run --package typst-docs -- --assets-dir assets/docs --out-file assets/docs.json --base /"
+run = "cargo run --package typst-docs -- --assets-dir assets/docs --out-file assets/docs.json --base /docs/"
 
 [tasks.generate-web]
 depends = ["install-website"]
