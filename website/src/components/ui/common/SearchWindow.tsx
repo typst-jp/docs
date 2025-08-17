@@ -17,10 +17,7 @@ export const SearchWindow: FC = () => {
 				</>
 			)}
 			<div class="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0">
-				<h2 class="text-lg font-semibold">
-					検索
-					{import.meta.env.DEV && <span> - Search disabled on DEV</span>}
-				</h2>
+				<h2 class="text-lg font-semibold">検索</h2>
 				<button
 					type="button"
 					class="text-gray-400 hover:text-gray-600"
@@ -33,6 +30,9 @@ export const SearchWindow: FC = () => {
 				</button>
 			</div>
 			<div class="p-4 overflow-y-auto flex-1">
+				{import.meta.env.DEV && (
+					<p>Search is disabled in the development environment.</p>
+				)}
 				<div id="search" />
 			</div>
 			<script

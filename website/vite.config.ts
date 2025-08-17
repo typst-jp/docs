@@ -17,7 +17,7 @@ rmSync(publicAssetsDocsPath, { recursive: true, force: true });
 symlinkSync(assetsDocsPath, publicAssetsDocsPath, "dir");
 
 const ssgPlugins =
-	(basePath as string) === "/"
+	basePath === "/"
 		? [
 				sitemapPlugin({
 					baseUrl: "https://typst-jp.github.io/",
