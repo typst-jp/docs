@@ -1,5 +1,5 @@
-import type { FC } from "hono/jsx";
-import { t } from "../../translations";
+import type { FC, JSX, JSXNode } from "hono/jsx";
+import { t, Translation, TranslationProps } from "../../translations";
 import { CloseIcon, HelpCircleIcon } from "../icons";
 
 type TooltipProps = {
@@ -17,65 +17,65 @@ type TooltipProps = {
 const tooltipContent: Record<
 	TooltipProps["kind"],
 	{
-		label: string;
-		desc: string;
+		label: JSXNode;
+		desc: JSXNode;
 		isShowLabel: boolean;
 		bgColor: string;
 		textColor: string;
 	}
 > = {
 	element: {
-		label: t("elementFunction"),
-		desc: t("elementFunctionDesc"),
+		label: <Translation translationKey="elementFunction" />,
+		desc: <Translation translationKey="elementFunctionDesc" />,
 		isShowLabel: true,
 		bgColor: "bg-blue-50",
 		textColor: "text-blue-700",
 	},
 	contextual: {
-		label: t("contextFunction"),
-		desc: t("contextFunctionDesc"),
+		label: <Translation translationKey="contextFunction" />,
+		desc: <Translation translationKey="contextFunctionDesc" />,
 		isShowLabel: true,
 		bgColor: "bg-indigo-50",
 		textColor: "text-indigo-700",
 	},
 	definitions: {
-		label: t("definitionTooltip"),
-		desc: t("definitionTooltipDesc"),
+		label: <Translation translationKey="definitionTooltip" />,
+		desc: <Translation translationKey="definitionTooltipDesc" />,
 		isShowLabel: false,
 		bgColor: "bg-gray-100",
 		textColor: "text-gray-700",
 	},
 	parameters: {
-		label: t("argument"),
-		desc: t("argumentDesc"),
+		label: <Translation translationKey="argument" />,
+		desc: <Translation translationKey="argumentDesc" />,
 		isShowLabel: false,
 		bgColor: "bg-gray-100",
 		textColor: "text-gray-700",
 	},
 	variadic: {
-		label: t("variadic"),
-		desc: t("variadicDesc"),
+		label: <Translation translationKey="variadic" />,
+		desc: <Translation translationKey="variadicDesc" />,
 		isShowLabel: true,
 		bgColor: "bg-green-50",
 		textColor: "text-green-700",
 	},
 	settable: {
-		label: t("settable"),
-		desc: t("settableDesc"),
+		label: <Translation translationKey="settable" />,
+		desc: <Translation translationKey="settableDesc" />,
 		isShowLabel: true,
 		bgColor: "bg-amber-50",
 		textColor: "text-amber-700",
 	},
 	positional: {
-		label: t("positional"),
-		desc: t("positionalDesc"),
+		label: <Translation translationKey="positional" />,
+		desc: <Translation translationKey="positionalDesc" />,
 		isShowLabel: true,
 		bgColor: "bg-purple-50",
 		textColor: "text-purple-700",
 	},
 	required: {
-		label: t("required"),
-		desc: t("requiredDesc"),
+		label: <Translation translationKey="required" />,
+		desc: <Translation translationKey="requiredDesc" />,
 		isShowLabel: true,
 		bgColor: "bg-rose-50",
 		textColor: "text-rose-700",
@@ -146,7 +146,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 							{...{ "x-on:click": "helpOpen = false" }}
 							{...{ "x-on:keydown.enter": "helpOpen = false" }}
 							{...{ "x-on:keydown.space": "helpOpen = false" }}
-							aria-label={t("close")}
+							aria-label={t("ariaClose")}
 						>
 							<div class="w-6 h-6">
 								<CloseIcon />

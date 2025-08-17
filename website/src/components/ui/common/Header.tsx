@@ -5,7 +5,7 @@ import {
 	typstOfficialUrl,
 	version,
 } from "../../../metadata";
-import { t } from "../../../translations";
+import { t, Translation } from "../../../translations";
 import { calculateTranslationProgressRate } from "../../../utils/translationStatus";
 import {
 	DiscordIcon,
@@ -31,7 +31,7 @@ const TranslationCoverageBadge = () => {
 					<LanguageIcon />
 				</div>
 				<span class="text-xs text-gray-600 font-medium">
-					{t("translationRate")}
+					<Translation translationKey="translationRate" />
 				</span>
 			</div>
 			<div class="flex items-center gap-1">
@@ -69,7 +69,10 @@ export const Header = () => {
 							<div class="w-4 h-4 text-gray-600">
 								<SearchIcon />
 							</div>
-							<span class="text-left flex-1">{t("search")}...</span>
+							<span class="text-left flex-1">
+								<Translation translationKey="search" />
+								...
+							</span>
 						</button>
 					</div>
 
@@ -101,7 +104,7 @@ export const Header = () => {
 										href={typstOfficialUrl}
 										class="text-sm text-gray-600 hover:text-gray-800 transition-colors"
 									>
-										{t("typstOfficialWebsite")}
+										<Translation translationKey="typstOfficialWebsite" />
 									</a>
 								</li>
 								<li class="secondary">
@@ -109,7 +112,7 @@ export const Header = () => {
 										href={typstOfficialDocsUrl}
 										class="text-sm text-gray-600 hover:text-gray-800 transition-colors"
 									>
-										{t("typstOfficialDoc")}
+										<Translation translationKey="typstOfficialDoc" />
 									</a>
 								</li>
 							</ul>
@@ -134,7 +137,7 @@ export const Header = () => {
 							type="button"
 							class="p-2 text-gray-600 hover:text-gray-800 transition-colors"
 							x-on:click="searchOpen = true"
-							aria-label={t("openSearch")}
+							aria-label={t("ariaOpenSearch")}
 						>
 							<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 								<SearchIcon />
@@ -144,7 +147,7 @@ export const Header = () => {
 							type="button"
 							class="p-1 bg-white rounded-md border border-gray-200"
 							x-on:click="sidebarOpen = !sidebarOpen"
-							aria-label={t("openMenu")}
+							aria-label={t("ariaOpenMenu")}
 						>
 							<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 								<MenuIcon />

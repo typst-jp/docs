@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { t } from "../../translations";
+import { t, Translation } from "../../translations";
 import type { Func, FuncBody, Page } from "../../types/model";
 import {
 	FunctionDefinition,
@@ -53,7 +53,7 @@ export const FuncTemplate: FC<FuncTemplateProps> = ({
 			</div>
 
 			<h2 id="parameters" class="flex items-baseline gap-1">
-				{t("argument")}
+				<Translation translationKey="argument" />
 				<Tooltip kind="parameters" />
 			</h2>
 
@@ -104,10 +104,10 @@ function ScopedDefinitions({
 					// Therefore, it is sufficient to only annotate the direct `parent`.
 					<>
 						<code>{parent.name}</code>
-						{t("definitionOf")}
+						<Translation translationKey="definitionOf" />
 					</>
 				) : (
-					t("definition")
+					<Translation translationKey="definition" />
 				)}
 				<Tooltip kind="definitions" />
 			</h2>

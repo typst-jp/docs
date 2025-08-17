@@ -1,4 +1,4 @@
-import { t } from "../../../translations";
+import { Translation } from "../../../translations";
 
 export const SiteTitle = () => {
 	return (
@@ -6,9 +6,11 @@ export const SiteTitle = () => {
 			<div class="flex items-baseline">
 				<span class="text-base font-bold text-teal-600">Typst</span>
 				<span class="text-base font-medium text-gray-600 ml-1">
-					{t("document")}
+					<Translation translationKey="document" />
 				</span>
-				<span class="text-xs text-gray-600 ml-1">{t("langVersion")}</span>
+				<span class="text-xs text-gray-600 ml-1">
+					<Translation translationKey="langVersion" />
+				</span>
 			</div>
 		</a>
 	);

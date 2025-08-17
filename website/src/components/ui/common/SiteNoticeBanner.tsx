@@ -5,7 +5,7 @@ import {
 	typstOfficialDocsUrl,
 	version,
 } from "../../../metadata";
-import { t } from "../../../translations";
+import { Translation } from "../../../translations";
 import { InfoCircleIcon } from "../../icons";
 
 export const SiteNoticeBanner = () => {
@@ -44,16 +44,20 @@ export const SiteNoticeBanner = () => {
 						<div class="w-4 h-4">
 							<InfoCircleIcon />
 						</div>
-						<strong>{t("information")} / Info</strong>
+						<strong>
+							<Translation translationKey="information" /> / Info
+						</strong>
 					</span>
 					<span class="hidden sm:flex items-center">
 						<span class="inline-block w-px h-12 bg-neutral-200 mx-3" />
 					</span>
 					<span class="block flex-1 pt-1 pb-2 leading-normal sm:inline sm:pt-0 sm:pb-0">
-						{t("banner")}
+						<Translation translationKey="banner" />
 						<br />
 						This site provides a Japanese translation of the{" "}
-						<a href={typstOfficialDocsUrl}>Typst v{version} documentation</a>{" "}
+						<a href={typstOfficialDocsUrl}>
+							Typst v{version} documentation
+						</a>{" "}
 						maintained by the "
 						<a href={githubOrganizationUrl}>Typst Japanese Community</a>" with
 						permission from Typst GmbH. We recommend using this alongside the{" "}

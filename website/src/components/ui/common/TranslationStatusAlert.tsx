@@ -1,6 +1,6 @@
-import type { FC } from "hono/jsx";
+import type { FC, JSX } from "hono/jsx";
 import { twMerge } from "tailwind-merge";
-import { t } from "../../../translations";
+import { Translation } from "../../../translations";
 import type { TranslationStatus } from "../../../utils/translationStatus";
 import { LanguageIcon } from "../../icons";
 
@@ -9,7 +9,7 @@ type StatusConfig = {
 	borderColor: string;
 	textColor: string;
 	iconColor: string;
-	label: string;
+	label: JSX.Element;
 	message: string;
 };
 
@@ -21,8 +21,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-green-200",
 				textColor: "text-green-800",
 				iconColor: "text-green-600",
-				label: t("translated"),
-				message: t("translatedMessage"),
+				label: <Translation translationKey="translated" />,
+				message: <Translation translationKey="translatedMessage" />,
 			};
 		case "partially_translated":
 			return {
@@ -30,8 +30,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-yellow-200",
 				textColor: "text-yellow-800",
 				iconColor: "text-yellow-600",
-				label: t("partiallyTranslated"),
-				message: t("partiallyTranslatedMessage"),
+				label: <Translation translationKey="partiallyTranslated" />,
+				message: <Translation translationKey="partiallyTranslatedMessage" />,
 			};
 		case "untranslated":
 			return {
@@ -39,8 +39,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-red-200",
 				textColor: "text-red-800",
 				iconColor: "text-red-600",
-				label: t("untranslated"),
-				message: t("untranslatedMessage"),
+				label: <Translation translationKey="untranslated" />,
+				message: <Translation translationKey="untranslatedMessage" />,
 			};
 		case "community":
 			return {
@@ -48,8 +48,8 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-cyan-200",
 				textColor: "text-cyan-800",
 				iconColor: "text-cyan-600",
-				label: t("originalVersion"),
-				message: t("contentAddedByCommunity"),
+				label: <Translation translationKey="originalVersion" />,
+				message: <Translation translationKey="contentAddedByCommunity" />,
 			};
 	}
 };
@@ -68,7 +68,7 @@ export const TranslationStatusAlert: FC<TranslationStatusAlertProps> = ({
 				"border rounded-md p-4",
 				config.bgColor,
 				config.borderColor,
-				config.textColor,
+				config.textColor
 			)}
 		>
 			<div class="flex items-start">

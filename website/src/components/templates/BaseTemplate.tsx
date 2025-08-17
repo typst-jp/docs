@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
-import { t } from "../../translations";
+import { t, Translation } from "../../translations";
 import type { Page } from "../../types/model";
 import { getTranslationStatus } from "../../utils/translationStatus";
 import {
@@ -155,7 +155,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 									type="button"
 									class="text-gray-600"
 									x-on:click="sidebarOpen = false"
-									aria-label={t("closeMenu")}
+									aria-label={t("ariaCloseMenu")}
 								>
 									<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 										<CloseIcon />
@@ -195,7 +195,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										<div class="w-4 h-4 mr-1 ">
 											<WorldIcon />
 										</div>
-										{t("originalArticle")}
+										<Translation translationKey="originalArticle" />
 									</a>
 								</div>
 							)}
@@ -215,7 +215,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										<WorldIcon />
 									</div>
 									<span class="text-sm font-medium text-gray-800 group-hover:text-gray-900 transition-colors">
-										{t("originalArticle")}
+										<Translation translationKey="originalArticle" />
 									</span>
 									<div class="w-4 h-4 ml-2 text-gray-400 transition-colors">
 										<ChevronRightIcon />
@@ -234,10 +234,12 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 												<CaretRightCircleIcon />
 											</div>
 											<strong class="text-base font-semibold text-gray-800">
-												{t("tutorial")}
+												<Translation translationKey="tutorial" />
 											</strong>
 										</div>
-										<p class="text-sm text-gray-600">{t("learnTypst")}</p>
+										<p class="text-sm text-gray-600">
+											<Translation translationKey="learnTypst" />
+										</p>
 									</a>
 									<a
 										class="doc-category flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"
@@ -248,10 +250,12 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 												<InfoCircleIcon />
 											</div>
 											<strong class="text-base font-semibold text-gray-800">
-												{t("referenceTo")}
+												<Translation translationKey="referenceTo" />
 											</strong>
 										</div>
-										<p class="text-sm text-gray-600">{t("reference")}</p>
+										<p class="text-sm text-gray-600">
+											<Translation translationKey="reference" />
+										</p>
 									</a>
 								</div>
 							) : (
@@ -267,7 +271,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 													<ChevronLeftIcon />
 												</div>
 												<strong class="text-base font-semibold text-gray-800">
-													{t("previousPage")}
+													<Translation translationKey="previousPage" />
 												</strong>
 											</div>
 											<p class="text-sm text-gray-600">{previousPage.title}</p>
@@ -278,7 +282,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										>
 											<div class="flex items-center mb-3 justify-between">
 												<strong class="text-base font-semibold text-gray-800">
-													{t("nextPage")}
+													<Translation translationKey="nextPage" />
 												</strong>
 												<div class="w-6 h-6 text-gray-400">
 													<ChevronRightIcon />

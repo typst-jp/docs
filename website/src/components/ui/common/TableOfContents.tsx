@@ -1,4 +1,4 @@
-import { t } from "../../../translations";
+import { Translation } from "../../../translations";
 import type { OutlineItem } from "../../../types/model";
 
 export type TableOfContentsProps = {
@@ -40,7 +40,7 @@ export const TableOfContents = ({ outline }: TableOfContentsProps) => {
 			class="flex-none w-full px-3.5 py-3 border border-neutral-200/60 rounded-md bg-white sticky top-[80px] mt-4 mb-8 h-[calc(100vh-80px-1rem)] overflow-auto"
 		>
 			<strong class="block mb-2 text-sm text-neutral-500 font-semibold tracking-wide">
-				{t("tableOfContents")}
+				<Translation translationKey="tableOfContents" />
 			</strong>
 			<PlainTableOfContents outline={outline} topLevel={true} />
 		</nav>
