@@ -1,11 +1,12 @@
 import type { FC } from "hono/jsx";
 import { CloseIcon } from "../../icons";
+import { basePath } from "../../../metadata";
 
 export const SearchWindow: FC = () => {
 	return (
 		<div class="flex flex-col max-h-[80vh]">
-			<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-			<script src="/pagefind/pagefind-ui.js" />
+			<link href={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.css`} rel="stylesheet" />
+			<script src={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.js`} />
 			<div class="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0">
 				<h2 class="text-lg font-semibold">検索</h2>
 				<button
