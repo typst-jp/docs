@@ -16,12 +16,9 @@ const publicAssetsDocsPath = resolve(__dirname, "./public/assets/");
 rmSync(publicAssetsDocsPath, { recursive: true, force: true });
 symlinkSync(assetsDocsPath, publicAssetsDocsPath, "dir");
 
-export default defineConfig({
-	base: basePath,
-	plugins: [
-		tailwindcss(),
-		ssg({
-			plugins: [
+const ssgPlugins =
+	(basePath as string) === "/"
+		? [
 				sitemapPlugin({
 					baseUrl: "https://typst-jp.github.io/",
 				}),
@@ -29,7 +26,15 @@ export default defineConfig({
 					rules: [{ userAgent: "*", allow: ["/"] }],
 					sitemapUrl: "https://typst-jp.github.io/sitemap.xml",
 				}),
-			],
+		  ]
+		: [];
+
+export default defineConfig({
+	base: basePath,
+	plugins: [
+		tailwindcss(),
+		ssg({
+			plugins: ssgPlugins,
 		}),
 		devServer({
 			entry: "src/index.tsx",
