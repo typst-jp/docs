@@ -140,19 +140,18 @@ pub fn bb(
     body.styled(EquationElem::set_variant(MathVariant::Bb))
 }
 
-/// Forced display style in math.
+/// 数式中でディスプレイスタイルを強制します。
 ///
-/// This is the normal size for block equations.
-///
+/// これはブロック数式における標準サイズです。
+
 /// ```example
 /// $sum_i x_i/2 = display(sum_i x_i/2)$
 /// ```
 #[func(title = "Display Size", keywords = ["displaystyle"])]
 pub fn display(
-    /// The content to size.
+    /// 大きさを指定したいコンテンツ。
     body: Content,
-    /// Whether to impose a height restriction for exponents, like regular sub-
-    /// and superscripts do.
+    /// 通常の下付き文字や上付き文字のように、指数に高さ制限を課すかどうか。
     #[named]
     #[default(false)]
     cramped: bool,
@@ -161,9 +160,9 @@ pub fn display(
         .styled(EquationElem::set_cramped(cramped))
 }
 
-/// Forced inline (text) style in math.
+/// 数式中でインライン（テキスト）スタイルを強制します。
 ///
-/// This is the normal size for inline equations.
+/// これはインライン数式における標準サイズです。
 ///
 /// ```example
 /// $ sum_i x_i/2
@@ -171,10 +170,9 @@ pub fn display(
 /// ```
 #[func(title = "Inline Size", keywords = ["textstyle"])]
 pub fn inline(
-    /// The content to size.
+    /// 大きさを指定したいコンテンツ。
     body: Content,
-    /// Whether to impose a height restriction for exponents, like regular sub-
-    /// and superscripts do.
+    /// 通常の下付き文字や上付き文字のように、指数に高さ制限を課すかどうか。
     #[named]
     #[default(false)]
     cramped: bool,
@@ -183,19 +181,18 @@ pub fn inline(
         .styled(EquationElem::set_cramped(cramped))
 }
 
-/// Forced script style in math.
+/// 数式中でスクリプトスタイルを強制します。
 ///
-/// This is the smaller size used in powers or sub- or superscripts.
+/// これは、冪乗、下付き文字、上付き文字で使用される小さいサイズです。
 ///
 /// ```example
 /// $sum_i x_i/2 = script(sum_i x_i/2)$
 /// ```
 #[func(title = "Script Size", keywords = ["scriptstyle"])]
 pub fn script(
-    /// The content to size.
+    /// 大きさを指定したいコンテンツ。
     body: Content,
-    /// Whether to impose a height restriction for exponents, like regular sub-
-    /// and superscripts do.
+    /// 通常の下付き文字や上付き文字のように、指数に高さ制限を課すかどうか。
     #[named]
     #[default(true)]
     cramped: bool,
@@ -204,20 +201,18 @@ pub fn script(
         .styled(EquationElem::set_cramped(cramped))
 }
 
-/// Forced second script style in math.
+/// 数式中で第2スクリプトスタイルを強制します。
 ///
-/// This is the smallest size, used in second-level sub- and superscripts
-/// (script of the script).
+/// これは、第2レベルの下付き文字や上付き文字（添え字の添え字）で使用される最も小さいサイズです。
 ///
 /// ```example
 /// $sum_i x_i/2 = sscript(sum_i x_i/2)$
 /// ```
 #[func(title = "Script-Script Size", keywords = ["scriptscriptstyle"])]
 pub fn sscript(
-    /// The content to size.
+    /// 大きさを指定したいコンテンツ。
     body: Content,
-    /// Whether to impose a height restriction for exponents, like regular sub-
-    /// and superscripts do.
+    /// 通常の下付き文字や上付き文字のように、指数に高さ制限を課すかどうか。
     #[named]
     #[default(true)]
     cramped: bool,

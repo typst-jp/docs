@@ -7,18 +7,17 @@ use crate::layout::{Abs, Corners, Length, Rel, Sides};
 use crate::text::{BottomEdge, BottomEdgeMetric, TextElem, TopEdge, TopEdgeMetric};
 use crate::visualize::{Color, FixedStroke, Paint, Stroke};
 
-/// Underlines text.
+/// テキスト下部に線を追加。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This is #underline[important].
 /// ```
 #[elem(Show)]
 pub struct UnderlineElem {
-    /// How to [stroke] the line.
+    /// 線の[stroke]をどうするか。
     ///
-    /// If set to `{auto}`, takes on the text's color and a thickness defined in
-    /// the current font.
+    /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
     ///
     /// ```example
     /// Take #underline(
@@ -31,8 +30,8 @@ pub struct UnderlineElem {
     #[fold]
     pub stroke: Smart<Stroke>,
 
-    /// The position of the line relative to the baseline, read from the font
-    /// tables if `{auto}`.
+    /// ベースラインを基準とする線の位置。
+    /// `{auto}`の場合、フォントテーブルから読まれます。
     ///
     /// ```example
     /// #underline(offset: 5pt)[
@@ -42,8 +41,7 @@ pub struct UnderlineElem {
     #[resolve]
     pub offset: Smart<Length>,
 
-    /// The amount by which to extend the line beyond (or within if negative)
-    /// the content.
+    /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
     ///
     /// ```example
     /// #align(center,
@@ -53,8 +51,7 @@ pub struct UnderlineElem {
     #[resolve]
     pub extent: Length,
 
-    /// Whether the line skips sections in which it would collide with the
-    /// glyphs.
+    /// 字形と衝突する線の部分を省略するかどうか。
     ///
     /// ```example
     /// This #underline(evade: true)[is great].
@@ -63,7 +60,7 @@ pub struct UnderlineElem {
     #[default(true)]
     pub evade: bool,
 
-    /// Whether the line is placed behind the content it underlines.
+    /// 線をコンテンツの背後に置くかどうか。
     ///
     /// ```example
     /// #set underline(stroke: (thickness: 1em, paint: maroon, cap: "round"))
@@ -73,7 +70,7 @@ pub struct UnderlineElem {
     #[default(false)]
     pub background: bool,
 
-    /// The content to underline.
+    /// 下部に線を置くコンテンツ。
     #[required]
     pub body: Content,
 }
@@ -93,18 +90,17 @@ impl Show for Packed<UnderlineElem> {
     }
 }
 
-/// Adds a line over text.
+/// テキスト上部に線を追加。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #overline[A line over text.]
 /// ```
 #[elem(Show)]
 pub struct OverlineElem {
-    /// How to [stroke] the line.
+    /// 線の[stroke]をどうするか。
     ///
-    /// If set to `{auto}`, takes on the text's color and a thickness defined in
-    /// the current font.
+    /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
     ///
     /// ```example
     /// #set text(fill: olive)
@@ -118,8 +114,8 @@ pub struct OverlineElem {
     #[fold]
     pub stroke: Smart<Stroke>,
 
-    /// The position of the line relative to the baseline. Read from the font
-    /// tables if `{auto}`.
+    /// ベースラインを基準とする線の位置。
+    /// `{auto}`の場合、フォントテーブルから読まれます。
     ///
     /// ```example
     /// #overline(offset: -1.2em)[
@@ -129,8 +125,7 @@ pub struct OverlineElem {
     #[resolve]
     pub offset: Smart<Length>,
 
-    /// The amount by which to extend the line beyond (or within if negative)
-    /// the content.
+    /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
     ///
     /// ```example
     /// #set overline(extent: 4pt)
@@ -140,8 +135,7 @@ pub struct OverlineElem {
     #[resolve]
     pub extent: Length,
 
-    /// Whether the line skips sections in which it would collide with the
-    /// glyphs.
+    /// 字形と衝突する線の部分を省略するかどうか。
     ///
     /// ```example
     /// #overline(
@@ -155,7 +149,7 @@ pub struct OverlineElem {
     #[default(true)]
     pub evade: bool,
 
-    /// Whether the line is placed behind the content it overlines.
+    /// 線をコンテンツの背後に置くかどうか。
     ///
     /// ```example
     /// #set overline(stroke: (thickness: 1em, paint: maroon, cap: "round"))
@@ -165,7 +159,7 @@ pub struct OverlineElem {
     #[default(false)]
     pub background: bool,
 
-    /// The content to add a line over.
+    /// 上部に線を置くコンテンツ。
     #[required]
     pub body: Content,
 }
@@ -185,21 +179,19 @@ impl Show for Packed<OverlineElem> {
     }
 }
 
-/// Strikes through text.
+/// テキストの打ち消し。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This is #strike[not] relevant.
 /// ```
 #[elem(title = "Strikethrough", Show)]
 pub struct StrikeElem {
-    /// How to [stroke] the line.
+    /// 線の[stroke]をどうするか。
     ///
-    /// If set to `{auto}`, takes on the text's color and a thickness defined in
-    /// the current font.
+    /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
     ///
-    /// _Note:_ Please don't use this for real redaction as you can still copy
-    /// paste the text.
+    /// _注意:_ テキストのコピー・ペーストは依然として可能なため、実際の黒塗りには使用しないでください。
     ///
     /// ```example
     /// This is #strike(stroke: 1.5pt + red)[very stricken through]. \
@@ -209,10 +201,10 @@ pub struct StrikeElem {
     #[fold]
     pub stroke: Smart<Stroke>,
 
-    /// The position of the line relative to the baseline. Read from the font
-    /// tables if `{auto}`.
+    /// ベースラインを基準とする線の位置。
+    /// `{auto}`の場合、フォントテーブルから読まれます。
     ///
-    /// This is useful if you are unhappy with the offset your font provides.
+    /// これはフォントが提供するオフセットに不満がある場合に便利です。
     ///
     /// ```example
     /// #set text(font: "Inria Serif")
@@ -222,8 +214,7 @@ pub struct StrikeElem {
     #[resolve]
     pub offset: Smart<Length>,
 
-    /// The amount by which to extend the line beyond (or within if negative)
-    /// the content.
+    /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
     ///
     /// ```example
     /// This #strike(extent: -2pt)[skips] parts of the word.
@@ -232,7 +223,7 @@ pub struct StrikeElem {
     #[resolve]
     pub extent: Length,
 
-    /// Whether the line is placed behind the content.
+    /// 線をコンテンツの背後に置くかどうか。
     ///
     /// ```example
     /// #set strike(stroke: red)
@@ -242,7 +233,7 @@ pub struct StrikeElem {
     #[default(false)]
     pub background: bool,
 
-    /// The content to strike through.
+    /// 打ち消すコンテンツ。
     #[required]
     pub body: Content,
 }
@@ -262,15 +253,15 @@ impl Show for Packed<StrikeElem> {
     }
 }
 
-/// Highlights text with a background color.
+/// 背景色によるテキストハイライト。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// This is #highlight[important].
 /// ```
 #[elem(Show)]
 pub struct HighlightElem {
-    /// The color to highlight the text with.
+    /// テキストをハイライトする色。
     ///
     /// ```example
     /// This is #highlight(
@@ -280,8 +271,8 @@ pub struct HighlightElem {
     #[default(Some(Color::from_u8(0xFF, 0xFD, 0x11, 0xA1).into()))]
     pub fill: Option<Paint>,
 
-    /// The highlight's border color. See the
-    /// [rectangle's documentation]($rect.stroke) for more details.
+    /// ハイライトの枠線の色。
+    /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
     ///
     /// ```example
     /// This is a #highlight(
@@ -292,7 +283,7 @@ pub struct HighlightElem {
     #[fold]
     pub stroke: Sides<Option<Option<Stroke>>>,
 
-    /// The top end of the background rectangle.
+    /// 背景の長方形の上端。
     ///
     /// ```example
     /// #set highlight(top-edge: "ascender")
@@ -304,7 +295,7 @@ pub struct HighlightElem {
     #[default(TopEdge::Metric(TopEdgeMetric::Ascender))]
     pub top_edge: TopEdge,
 
-    /// The bottom end of the background rectangle.
+    /// 背景の長方形の下端。
     ///
     /// ```example
     /// #set highlight(bottom-edge: "descender")
@@ -316,8 +307,7 @@ pub struct HighlightElem {
     #[default(BottomEdge::Metric(BottomEdgeMetric::Descender))]
     pub bottom_edge: BottomEdge,
 
-    /// The amount by which to extend the background to the sides beyond
-    /// (or within if negative) the content.
+    /// コンテンツの外側に（負の値のときは内側に）背景を左右に拡張する量。
     ///
     /// ```example
     /// A long #highlight(extent: 4pt)[background].
@@ -325,8 +315,8 @@ pub struct HighlightElem {
     #[resolve]
     pub extent: Length,
 
-    /// How much to round the highlight's corners. See the
-    /// [rectangle's documentation]($rect.radius) for more details.
+    /// 背景の角を丸める量。
+    /// 詳細は[rectangleのドキュメント]($rect.radius)を参照してください。
     ///
     /// ```example
     /// Listen #highlight(
@@ -337,7 +327,7 @@ pub struct HighlightElem {
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
-    /// The content that should be highlighted.
+    /// ハイライトされるべきコンテンツ。
     #[required]
     pub body: Content,
 }

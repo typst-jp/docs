@@ -37,7 +37,7 @@ export const Footer = () => {
 							href={githubOrganizationUrl}
 							class="text-gray-600 hover:text-gray-800 transition-colors"
 						>
-							Typst Japan Community
+							Typst Japanese Community
 						</a>
 					</p>
 				</div>

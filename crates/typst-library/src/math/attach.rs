@@ -2,7 +2,7 @@ use crate::foundations::{elem, Content, Packed};
 use crate::layout::{Length, Rel};
 use crate::math::{EquationElem, Mathy};
 
-/// A base with optional attachments.
+/// オプションのアタッチメントを持つベースとなる関数。
 ///
 /// ```example
 /// $ attach(
@@ -12,33 +12,30 @@ use crate::math::{EquationElem, Mathy};
 /// ```
 #[elem(Mathy)]
 pub struct AttachElem {
-    /// The base to which things are attached.
+    /// アタッチメントを取り付けるベース。
     #[required]
     pub base: Content,
 
-    /// The top attachment, smartly positioned at top-right or above the base.
+    /// 右上かベースの上にスマート配置された上部アタッチメント。
     ///
-    /// You can wrap the base in `{limits()}` or `{scripts()}` to override the
-    /// smart positioning.
+    /// ベースを`{limits()}`か`{scripts()}`でラップするとスマート配置を上書きできます。
     pub t: Option<Content>,
 
-    /// The bottom attachment, smartly positioned at the bottom-right or below
-    /// the base.
+    /// 右下かベースの下にスマート配置された下部アタッチメント。
     ///
-    /// You can wrap the base in `{limits()}` or `{scripts()}` to override the
-    /// smart positioning.
+    /// ベースを`{limits()}`か`{scripts()}`でラップするとスマート配置を上書きできます。
     pub b: Option<Content>,
 
-    /// The top-left attachment (before the base).
+    /// 左上のアタッチメント（ベースの前）。
     pub tl: Option<Content>,
 
-    /// The bottom-left attachment (before base).
+    /// 左下のアタッチメント（ベースの前）。
     pub bl: Option<Content>,
 
-    /// The top-right attachment (after the base).
+    /// 右上のアタッチメント（ベースの後）。
     pub tr: Option<Content>,
 
-    /// The bottom-right attachment (after the base).
+    /// 右下のアタッチメント（ベースの後）。
     pub br: Option<Content>,
 }
 
@@ -81,62 +78,58 @@ impl Packed<AttachElem> {
     }
 }
 
-/// Grouped primes.
+/// グループ化されたプライム記号。
 ///
 /// ```example
 /// $ a'''_b = a^'''_b $
 /// ```
 ///
-/// # Syntax
-/// This function has dedicated syntax: use apostrophes instead of primes. They
-/// will automatically attach to the previous element, moving superscripts to
-/// the next level.
+/// # 構文
+/// この関数には専用の構文があり、primes関数の代わりにアポストロフィー記号を使います。
+/// これらは自動的に前の要素に付加され、次の上付き文字のレベルに移動します。
 #[elem(Mathy)]
 pub struct PrimesElem {
-    /// The number of grouped primes.
+    /// グループ化するプライム記号の数。
     #[required]
     pub count: usize,
 }
 
-/// Forces a base to display attachments as scripts.
+/// アタッチメントを添え字として表示することをベースに強制。
 ///
 /// ```example
 /// $ scripts(sum)_1^2 != sum_1^2 $
 /// ```
 #[elem(Mathy)]
 pub struct ScriptsElem {
-    /// The base to attach the scripts to.
+    /// 添え字を取り付けるベース。
     #[required]
     pub body: Content,
 }
 
-/// Forces a base to display attachments as limits.
+/// アタッチメントをlimitsとして表示することをベースに強制。
 ///
 /// ```example
 /// $ limits(A)_1^2 != A_1^2 $
 /// ```
 #[elem(Mathy)]
 pub struct LimitsElem {
-    /// The base to attach the limits to.
+    /// limitsを取り付けるベース。
     #[required]
     pub body: Content,
 
-    /// Whether to also force limits in inline equations.
+    /// インライン数式でもlimits表示を強制するかどうか。
     ///
-    /// When applying limits globally (e.g., through a show rule), it is
-    /// typically a good idea to disable this.
+    /// （例えばshowルールを用いて）limitsをグローバルに適用する場合、通常は無効にすることをおすすめします。
     #[default(true)]
     pub inline: bool,
 }
 
-/// Stretches a glyph.
+/// 字形を伸縮します。
 ///
-/// This function can also be used to automatically stretch the base of an
-/// attachment, so that it fits the top and bottom attachments.
+/// この関数は、上部及び下部アタッチメントがフィットするように、自動的にアタッチメントのベースを伸縮させることにも使えます。
 ///
-/// Note that only some glyphs can be stretched, and which ones can depend on
-/// the math font being used. However, most math fonts are the same in this
-/// regard.
+/// 伸縮可能な字形は限られており、どの字形が伸縮可能かは使用する数式フォントに依存することに注意してください。
+/// ただし、この点に関して多くの数式フォントで違いはありません。
 ///
 /// ```example
 /// $ H stretch(=)^"define" U + p V $
@@ -146,12 +139,11 @@ pub struct LimitsElem {
 /// ```
 #[elem(Mathy)]
 pub struct StretchElem {
-    /// The glyph to stretch.
+    /// 伸縮させる字形。
     #[required]
     pub body: Content,
 
-    /// The size to stretch to, relative to the maximum size of the glyph and
-    /// its attachments.
+    /// 字形およびそのアタッチメントを基準とした伸縮の大きさ。
     #[resolve]
     #[default(Rel::one())]
     pub size: Rel<Length>,

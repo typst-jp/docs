@@ -5,28 +5,25 @@ use crate::layout::HElem;
 use crate::math::{upright, Mathy, THIN};
 use crate::text::TextElem;
 
-/// A text operator in an equation.
+/// 数式中のテキスト演算子。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// $ tan x = (sin x)/(cos x) $
 /// $ op("custom",
 ///      limits: #true)_(n->oo) n $
 /// ```
 ///
-/// # Predefined Operators { #predefined }
-/// Typst predefines the operators `arccos`, `arcsin`, `arctan`, `arg`, `cos`,
-/// `cosh`, `cot`, `coth`, `csc`, `csch`, `ctg`, `deg`, `det`, `dim`, `exp`,
-/// `gcd`, `lcm`, `hom`, `id`, `im`, `inf`, `ker`, `lg`, `lim`, `liminf`,
-/// `limsup`, `ln`, `log`, `max`, `min`, `mod`, `Pr`, `sec`, `sech`, `sin`,
-/// `sinc`, `sinh`, `sup`, `tan`, `tanh`, `tg` and `tr`.
+/// # 定義済み演算子 { #predefined }
+/// Typstではあらかじめ以下の演算子が定義されています。
+/// `arccos`、`arcsin`、`arctan`、`arg`、`cos`、`cosh`、`cot`、`coth`、`csc`、`csch`、`ctg`、`deg`、`det`、`dim`、`exp`、`gcd`、`lcm`、`hom`、`id`、`im`、`inf`、`ker`、`lg`、`lim`、`liminf`、`limsup`、`ln`、`log`、`max`、`min`、`mod`、`Pr`、`sec`、`sech`、`sin`、`sinc`、`sinh`、`sup`、`tan`、`tanh`、`tg`、`tr`。
 #[elem(title = "Text Operator", Mathy)]
 pub struct OpElem {
-    /// The operator's text.
+    /// 演算子のテキスト。
     #[required]
     pub text: Content,
 
-    /// Whether the operator should show attachments as limits in display mode.
+    /// ディスプレイモードのときに演算子のアタッチメントをlimitsのように表示するかどうか。
     #[default(false)]
     pub limits: bool,
 }

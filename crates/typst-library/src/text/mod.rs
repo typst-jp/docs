@@ -1014,15 +1014,15 @@ cast! {
 /// Metrics that describe the top edge of text.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum TopEdgeMetric {
-    /// The font's ascender, which typically exceeds the height of all glyphs.
+    /// フォントアセンダー。通常、これは全ての字形の高さを超えます。
     Ascender,
-    /// The approximate height of uppercase letters.
+    /// 大文字の高さの近似値。
     CapHeight,
-    /// The approximate height of non-ascending lowercase letters.
+    /// アセンダーを持たない小文字の高さの近似値。
     XHeight,
-    /// The baseline on which the letters rest.
+    /// 文字が置かれるベースライン。
     Baseline,
-    /// The top edge of the glyph's bounding box.
+    /// 字形が持つバウンディングボックスの上端。
     Bounds,
 }
 
@@ -1062,11 +1062,11 @@ cast! {
 /// Metrics that describe the bottom edge of text.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum BottomEdgeMetric {
-    /// The baseline on which the letters rest.
+    /// 文字が置かれるベースライン。
     Baseline,
-    /// The font's descender, which typically exceeds the depth of all glyphs.
+    /// フォントディセンダー。通常、これは全ての字形の深さを超えます。
     Descender,
-    /// The bottom edge of the glyph's bounding box.
+    /// 字形が持つバウンディングボックスの下端。
     Bounds,
 }
 
