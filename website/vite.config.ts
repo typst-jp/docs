@@ -26,7 +26,7 @@ const ssgPlugins =
 					rules: [{ userAgent: "*", allow: ["/"] }],
 					sitemapUrl: "https://typst-jp.github.io/sitemap.xml",
 				}),
-		  ]
+			]
 		: [];
 
 export default defineConfig({
