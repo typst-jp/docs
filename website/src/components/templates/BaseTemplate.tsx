@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from "hono/jsx";
-import { t, Translation } from "../../translations";
+import { Translation, t } from "../../translations";
 import type { Page } from "../../types/model";
 import { getTranslationStatus } from "../../utils/translationStatus";
 import {

@@ -240,6 +240,6 @@ export const Translation: FC<TranslationProps> = (props) => {
 		case "information":
 			return <>情報</>;
 		default:
-			throw new Error(`No translationKey found for Translation Element`);
+			throw new Error("No translationKey found for Translation Element");
 	}
 };

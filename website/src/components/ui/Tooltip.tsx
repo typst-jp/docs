@@ -1,5 +1,5 @@
 import type { FC, JSX, JSXNode } from "hono/jsx";
-import { t, Translation, TranslationProps } from "../../translations";
+import { Translation, TranslationProps, t } from "../../translations";
 import { CloseIcon, HelpCircleIcon } from "../icons";
 
 type TooltipProps = {

@@ -68,7 +68,7 @@ export const TranslationStatusAlert: FC<TranslationStatusAlertProps> = ({
 				"border rounded-md p-4",
 				config.bgColor,
 				config.borderColor,
-				config.textColor
+				config.textColor,
 			)}
 		>
 			<div class="flex items-start">
