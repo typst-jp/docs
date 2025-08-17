@@ -72,7 +72,6 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				<meta name="twitter:card" content="summary_large_image" />
 				<link rel="canonical" href={`https://typst-jp.github.io${route}`} />
 				<meta name="robots" content="index, follow" />
-				<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 				<meta
 					name="twitter:image:alt"
 					content="The left side of a text editor with colorful cursors, as well as the text 'Compose papers faster, Typst'"
