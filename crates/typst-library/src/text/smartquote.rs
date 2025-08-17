@@ -9,12 +9,11 @@ use crate::foundations::{
 use crate::layout::Dir;
 use crate::text::{Lang, Region};
 
-/// A language-aware quote that reacts to its context.
+/// 言語を認識し、コンテキストに反応する引用符。
 ///
-/// Automatically turns into an appropriate opening or closing quote based on
-/// the active [text language]($text.lang).
+/// アクティブな[テキストの言語設定]($text.lang)に基づいて適切な開き引用符か閉じ引用符に自動的に変更します。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// "This is in quotes."
 ///
@@ -25,19 +24,19 @@ use crate::text::{Lang, Region};
 /// "C'est entre guillemets."
 /// ```
 ///
-/// # Syntax
-/// This function also has dedicated syntax: The normal quote characters
-/// (`'` and `"`). Typst automatically makes your quotes smart.
+/// # 構文
+/// この関数は専用の構文もあります。．
+/// 通常の引用記号（`'`と`"`）です。
+/// Typstはそれらを自動的にスマートクォートとして扱います。
 #[elem(name = "smartquote", PlainText)]
 pub struct SmartQuoteElem {
-    /// Whether this should be a double quote.
+    /// 二重引用符にすべきかどうか。
     #[default(true)]
     pub double: bool,
 
-    /// Whether smart quotes are enabled.
+    /// スマートクォートを有効化するかどうか。
     ///
-    /// To disable smartness for a single quote, you can also escape it with a
-    /// backslash.
+    /// 単一引用符の場合は、バックスラッシュでエスケープしても無効化できます。
     ///
     /// ```example
     /// #set smartquote(enabled: false)
@@ -47,10 +46,9 @@ pub struct SmartQuoteElem {
     #[default(true)]
     pub enabled: bool,
 
-    /// Whether to use alternative quotes.
+    /// 代替引用符を使用するかどうか。
     ///
-    /// Does nothing for languages that don't have alternative quotes, or if
-    /// explicit quotes were set.
+    /// 代替引用符を持たない言語に対してや、明示的に引用符が設定されている場合には、何もしません。
     ///
     /// ```example
     /// #set text(lang: "de")
@@ -61,17 +59,13 @@ pub struct SmartQuoteElem {
     #[default(false)]
     pub alternative: bool,
 
-    /// The quotes to use.
+    /// 使用する引用符。
     ///
-    /// - When set to `{auto}`, the appropriate single quotes for the
-    ///   [text language]($text.lang) will be used. This is the default.
-    /// - Custom quotes can be passed as a string, array, or dictionary of either
-    ///   - [string]($str): a string consisting of two characters containing the
-    ///     opening and closing double quotes (characters here refer to Unicode
-    ///     grapheme clusters)
-    ///   - [array]: an array containing the opening and closing double quotes
-    ///   - [dictionary]: an array containing the double and single quotes, each
-    ///     specified as either `{auto}`, string, or array
+    /// - `{auto}`に設定された場合、[テキストの言語]($text.lang)に対して適切な単一引用符が使用されます。これがデフォルトです。
+    /// - カスタム引用符として文字列、配列、辞書のいずれかを渡せます。
+    ///   - [文字列]($str): 開き二重引用符と閉じ二重引用符の2文字からなる文字列（ここの文字はUnicodeグラフェムクラスターを指します）
+    ///   - [配列]($array): 開き二重引用符と閉じ二重引用符を持つ配列
+    ///   - [辞書]($dictionary): doubleやsingleをキーとして引用符を指定する辞書。その値は`{auto}`、文字列、配列のいずれかで指定します。
     ///
     /// ```example
     /// #set text(lang: "de")
