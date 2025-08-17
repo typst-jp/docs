@@ -28,20 +28,20 @@ pub struct FracElem {
     pub denom: Content,
 }
 
-/// A binomial expression.
+/// 二項係数。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// $ binom(n, k) $
 /// $ binom(n, k_1, k_2, k_3, ..., k_m) $
 /// ```
 #[elem(title = "Binomial", Mathy)]
 pub struct BinomElem {
-    /// The binomial's upper index.
+    /// 二項係数の上側の数。
     #[required]
     pub upper: Content,
 
-    /// The binomial's lower index.
+    /// 二項係数の下側の数。
     #[required]
     #[variadic]
     #[parse(

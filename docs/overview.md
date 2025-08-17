@@ -7,11 +7,11 @@ description: |
 
 <div class="info-box">
 
-**はじめに: Typst Japan Communityより**
+**はじめに: Typst Japanese Communityより**
 
 日本語版Typstのドキュメントへようこそ！ [Typst](https://typst.app/) はアカデミック・ライティング用途を念頭に開発された、TeXなどの今までのシステムを覆しうる革新的で多機能な組版エンジンです。もちろん、学術論文に限らず、雑誌や書籍の組版にも適しています。
 
-このWebサイトは、[Typst GmbH](https://typst.app/legal/) の許諾を得て、非公式日本語コミュニティ「[Typst Japan Community](https://github.com/typst-jp/)」のボランティアたちが[公式ドキュメント](https://typst.app/docs/)を翻訳したものです。まだ翻訳途上ですので、翻訳されていない部分や誤訳などがたくさんあり、また情報が古くなる可能性もあるため、ご了承ください。最新の情報は[公式ドキュメント](https://typst.app/docs/)をご覧ください。ただし、本Webサイトには、公式ドキュメントにはない日本語の組版に特化した情報やコンテンツも掲載される予定です。
+このWebサイトは、[Typst GmbH](https://typst.app/legal/) の許諾を得て、非公式日本語コミュニティ「[Typst Japanese Community](https://github.com/typst-jp/)」のボランティアたちが[公式ドキュメント](https://typst.app/docs/)を翻訳したものです。まだ翻訳途上ですので、翻訳されていない部分や誤訳などがたくさんあり、また情報が古くなる可能性もあるため、ご了承ください。最新の情報は[公式ドキュメント](https://typst.app/docs/)をご覧ください。ただし、本Webサイトには、公式ドキュメントにはない日本語の組版に特化した情報やコンテンツも掲載される予定です。
 
 皆様がTypstをご利用になる上で、本サイトの情報が一助になれば幸いです。
 

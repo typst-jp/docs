@@ -124,14 +124,12 @@ pub struct LimitsElem {
     pub inline: bool,
 }
 
-/// Stretches a glyph.
+/// 字形を伸縮します。
 ///
-/// This function can also be used to automatically stretch the base of an
-/// attachment, so that it fits the top and bottom attachments.
+/// この関数は、上部及び下部アタッチメントがフィットするように、自動的にアタッチメントのベースを伸縮させることにも使えます。
 ///
-/// Note that only some glyphs can be stretched, and which ones can depend on
-/// the math font being used. However, most math fonts are the same in this
-/// regard.
+/// 伸縮可能な字形は限られており、どの字形が伸縮可能かは使用する数式フォントに依存することに注意してください。
+/// ただし、この点に関して多くの数式フォントで違いはありません。
 ///
 /// ```example
 /// $ H stretch(=)^"define" U + p V $
@@ -141,12 +139,11 @@ pub struct LimitsElem {
 /// ```
 #[elem(Mathy)]
 pub struct StretchElem {
-    /// The glyph to stretch.
+    /// 伸縮させる字形。
     #[required]
     pub body: Content,
 
-    /// The size to stretch to, relative to the maximum size of the glyph and
-    /// its attachments.
+    /// 字形およびそのアタッチメントを基準とした伸縮の大きさ。
     #[resolve]
     #[default(Rel::one())]
     pub size: Rel<Length>,

@@ -24,7 +24,7 @@ export const CategoryTemplate: FC<CategoryTemplateProps> = ({
 			previousPage={previousPage}
 			nextPage={nextPage}
 		>
-			<h1 id="summary">{page.body.content.name}</h1>
+			<h1 id="summary">{page.body.content.title}</h1>
 			<HtmlContent html={page.body.content.details} />
 			<h2 id="definitions">定義</h2>
 			<ul class="subgridded">
