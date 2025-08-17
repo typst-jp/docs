@@ -25,7 +25,7 @@ const [flattenedPages, pagePaths] = flattenDocs(docs);
 const allRoutes = flattenedPages.map((page) => page.route);
 registerRoutes(allRoutes);
 
-const app = new Hono().basePath(import.meta.env.DEV ? "/docs" : "/");
+const app = new Hono().basePath(import.meta.env.DEV ? basePath : "/");
 app.use(appendTrailingSlash());
 app.use(trimTrailingSlash());
 
