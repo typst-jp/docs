@@ -5,13 +5,22 @@ import { CloseIcon } from "../../icons";
 export const SearchWindow: FC = () => {
 	return (
 		<div class="flex flex-col max-h-[80vh]">
-			<link
-				href={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.css`}
-				rel="stylesheet"
-			/>
-			<script src={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.js`} />
+			{import.meta.env.PROD && (
+				<>
+					<link
+						href={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.css`}
+						rel="stylesheet"
+					/>
+					<script
+						src={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.js`}
+					/>
+				</>
+			)}
 			<div class="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0">
-				<h2 class="text-lg font-semibold">検索</h2>
+				<h2 class="text-lg font-semibold">
+					検索
+					{import.meta.env.DEV && <span> - Search disabled on DEV</span>}
+				</h2>
 				<button
 					type="button"
 					class="text-gray-400 hover:text-gray-600"

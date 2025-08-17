@@ -1,3 +1,4 @@
+import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { appendTrailingSlash, trimTrailingSlash } from "hono/trailing-slash";
 import {
@@ -24,7 +25,7 @@ const [flattenedPages, pagePaths] = flattenDocs(docs);
 const allRoutes = flattenedPages.map((page) => page.route);
 registerRoutes(allRoutes);
 
-const app = new Hono();
+const app = new Hono().basePath(import.meta.env.DEV ? "/docs" : "/");
 app.use(appendTrailingSlash());
 app.use(trimTrailingSlash());
 
@@ -47,7 +48,7 @@ flattenedPages.forEach((page, pageIndex) => {
 
 	// Remove basePath from the route if it starts with basePath.
 	let route = page.route;
-	if (import.meta.env.PROD && route.startsWith(basePath)) {
+	if (route.startsWith(basePath)) {
 		route = route.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0));
 	}
 	app.get(route, (c) => {
@@ -73,5 +74,20 @@ flattenedPages.forEach((page, pageIndex) => {
 		return c.notFound();
 	});
 });
+
+if (import.meta.env.DEV) {
+	app.use(
+		"*",
+		serveStatic({
+			root: "./public",
+			rewriteRequestPath: (path) => {
+				return path.slice(basePath.length);
+			},
+			onNotFound: (path, c) => {
+				console.log(`${path} is not found, request to ${c.req.path}`);
+			},
+		}),
+	);
+}
 
 export default app;

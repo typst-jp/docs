@@ -81,7 +81,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 					rel="icon"
 					type="image/png"
 					sizes="32x32"
-					href="/assets/favicon.png"
+					href={`${basePath.replace(/\/$/, "")}/favicon.png`}
 				/>
 				<link
 					rel="preload"
