@@ -16,7 +16,7 @@ import { isPageOfKind } from "./utils/isPageOfKind";
 import { registerRoutes } from "./utils/translationStatus";
 
 // typst-docsが生成したドキュメント
-import docsJson from "../../assets/docs.json";
+import docsJson from "../../docs.json";
 const docs = docsJson as unknown as Page[];
 
 const [flattenedPages, pagePaths] = flattenDocs(docs);
