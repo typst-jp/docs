@@ -478,7 +478,7 @@ cast! {
         MathClass::Vary => "vary",
         MathClass::Special => "special",
     }),
-    /// 特別なことがないデフォルトのクラス。
+    /// 特別でない要素のデフォルトクラス。
     "normal" => MathClass::Normal,
     /// カンマなどの句読点。
     "punctuation" => MathClass::Punctuation,
