@@ -7,7 +7,7 @@ import devServer from "@hono/vite-dev-server";
 import ssg from "@hono/vite-ssg";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
-import { basePath } from "./src/metadata";
+import { basePath, originUrl } from "./src/metadata";
 
 // typst-docsが生成したドキュメントのアセットをassets/にシンボリックリンクする
 const assetsDocsPath = resolve(__dirname, "../assets/docs/");
@@ -20,11 +20,11 @@ const ssgPlugins =
 	basePath === "/"
 		? [
 				sitemapPlugin({
-					baseUrl: "https://typst-jp.github.io/",
+					baseUrl: originUrl,
 				}),
 				robotsTxtPlugin({
 					rules: [{ userAgent: "*", allow: ["/"] }],
-					sitemapUrl: "https://typst-jp.github.io/sitemap.xml",
+					sitemapUrl: new URL("sitemap.xml", originUrl).href,
 				}),
 			]
 		: [];

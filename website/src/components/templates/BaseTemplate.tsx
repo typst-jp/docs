@@ -1,7 +1,7 @@
 import { Style, css } from "hono/css";
 import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
-import { basePath } from "../../metadata";
+import { basePath, originUrl, typstOfficialUrl } from "../../metadata";
 import type { Page } from "../../types/model";
 import { getTranslationStatus } from "../../utils/translationStatus";
 import {
@@ -44,6 +44,9 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 	const route = page.route;
 	const outline = page.outline;
 	const translationStatus = getTranslationStatus(route);
+	const absoluteRouteUrl = new URL(route, originUrl).toString();
+	const faviconUrl = new URL(`${basePath}/favicon.png`, originUrl).toString();
+	const typstOfficialRouteUrl = new URL(route, typstOfficialUrl).toString();
 	return (
 		<html lang="ja" class="scroll-pt-24">
 			<head>
@@ -52,10 +55,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				<meta name="description" content={description} />
 				<meta name="viewport" content="width=device-width,initial-scale=1" />
 				<meta name="theme-color" content="#239dad" />
-				<meta
-					property="og:url"
-					content={`https://typst-jp.github.io${route}`}
-				/>
+				<meta property="og:url" content={absoluteRouteUrl} />
 				<meta
 					property="og:title"
 					content={`${title} – Typstドキュメント日本語版`}
@@ -63,15 +63,12 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				<meta property="og:site_name" content="Typst" />
 				<meta property="og:description" content={description} />
 				<meta property="og:type" content="" />
-				<meta
-					property="og:image"
-					content="https://typst-jp.github.io/assets/favicon.png"
-				/>
+				<meta property="og:image" content={faviconUrl} />
 				<meta property="og:image:width" content="1200" />
 				<meta property="og:image:height" content="630" />
 				<meta name="twitter:site" content="@typstapp" />
 				<meta name="twitter:card" content="summary_large_image" />
-				<link rel="canonical" href={`https://typst-jp.github.io${route}`} />
+				<link rel="canonical" href={absoluteRouteUrl} />
 				<meta name="robots" content="index, follow" />
 				<meta
 					name="twitter:image:alt"
@@ -247,7 +244,7 @@ samp {
 							{translationStatus !== "community" && (
 								<div class="flex">
 									<a
-										href={`https://typst.app${route}`}
+										href={typstOfficialRouteUrl}
 										target="_blank"
 										rel="noopener noreferrer"
 										class="inline-flex items-center text-sm  underline text-gray-400 hover:text-gray-600 transition-colors"
@@ -266,7 +263,7 @@ samp {
 
 							{translationStatus !== "community" && (
 								<a
-									href={`https://typst.app${route}`}
+									href={typstOfficialRouteUrl}
 									target="_blank"
 									rel="noopener noreferrer"
 									class="group inline-flex items-center px-3 py-2 rounded-md border border-gray-200 bg-white hover:border-gray-500 hover:bg-gray-50 transition-all duration-200 w-fit"
