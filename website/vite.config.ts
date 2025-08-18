@@ -38,7 +38,14 @@ export default defineConfig({
 		}),
 		devServer({
 			entry: "src/index.tsx",
-			exclude: [...defaultOptions.exclude, /^\/assets\/.+/, /^\/index\.html$/],
+			exclude: [
+				...defaultOptions.exclude,
+				/^\/assets\/.+/,
+				/^\/index\.html$/,
+				// NOTE: @hono/vite-dev-server does not respect the base setting in the Vite configuration.
+				new RegExp(`^${basePath.replace(/\/$/, "")}/@.+`),
+				new RegExp(`^${basePath.replace(/\/$/, "")}/node_modules(?:/|$)`),
+			],
 		}),
 	],
 	build: {

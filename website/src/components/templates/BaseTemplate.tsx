@@ -1,4 +1,5 @@
 import { Style, css } from "hono/css";
+import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
 import { basePath } from "../../metadata";
 import type { Page } from "../../types/model";
@@ -174,6 +175,13 @@ samp {
 		"Liberation Mono", "Courier New", monospace;
 }
 `}</Style>
+				{/* NOTE: @hono/vite-dev-server does not respect the base setting in the Vite configuration. */}
+				{import.meta.env.DEV &&
+					html`
+          <script>
+            import("${basePath.replace(/\/$/, "")}/@vite/client")
+          </script>
+        `}
 			</head>
 
 			<body
