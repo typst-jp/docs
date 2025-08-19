@@ -1,11 +1,20 @@
 import { version } from "../package.json";
 
+// TODO: The metadata will be configurable via a JSON configuration file.
+/** The version of the documentation. */
 export { version };
+/** The official Typst website URL. */
 export const typstOfficialUrl = "https://typst.app";
+/** The official Typst documentation base URL. */
 export const typstOfficialDocsUrl = "https://typst.app/docs";
+/** The GitHub organization URL. */
 export const githubOrganizationUrl = "https://github.com/typst-jp";
+/** The GitHub repository URL. */
 export const githubRepositoryUrl =
 	"https://github.com/typst-jp/typst-jp.github.io";
+/** The Discord server invite URL. */
 export const discordServerUrl = "https://discord.gg/9xF7k4aAuH";
+/** The origin URL of the deployed site. */
 export const originUrl = "https://typst-jp.github.io/";
+/** The base public path for deployment. This must match the value used in typst-docs. */
 export const basePath: string = "/docs/";
