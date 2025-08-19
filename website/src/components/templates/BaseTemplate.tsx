@@ -3,6 +3,7 @@ import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
 import { basePath, originUrl, typstOfficialUrl } from "../../metadata";
 import type { Page } from "../../types/model";
+import { joinPath } from "../../utils/path";
 import { getTranslationStatus } from "../../utils/translationStatus";
 import {
 	CaretRightCircleIcon,
@@ -78,32 +79,44 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 					rel="icon"
 					type="image/png"
 					sizes="32x32"
-					href={`${basePath.replace(/\/$/, "")}/favicon.png`}
+					href={joinPath(basePath, "/favicon.png")}
 				/>
 				<link
 					rel="preload"
-					href={`${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Regular.woff2`}
+					href={joinPath(
+						basePath,
+						"/fonts/hanken-grotesk/HKGrotesk-Regular.woff2",
+					)}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
 				<link
 					rel="preload"
-					href={`${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Bold.woff2`}
+					href={joinPath(
+						basePath,
+						"/fonts/hanken-grotesk/HKGrotesk-Bold.woff2",
+					)}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
 				<link
 					rel="preload"
-					href={`${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2`}
+					href={joinPath(
+						basePath,
+						"/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2",
+					)}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
 				/>
 				<link
 					rel="preload"
-					href={`${basePath.replace(/\/$/, "")}/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2`}
+					href={joinPath(
+						basePath,
+						"/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2",
+					)}
 					as="font"
 					type="font/woff2"
 					crossOrigin="anonymous"
@@ -111,8 +124,8 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				<link
 					href={
 						import.meta.env.DEV
-							? `${basePath.replace(/\/$/, "")}/src/globals.css`
-							: `${basePath.replace(/\/$/, "")}/globals.css`
+							? joinPath(basePath, "/src/globals.css")
+							: joinPath(basePath, "/globals.css")
 					}
 					rel="stylesheet"
 				/>
@@ -124,7 +137,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 /* Global font family */
 @font-face {
 	font-family: "HK Grotesk";
-	src: url("${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Regular.woff2")
+	src: url("${joinPath(basePath, "/fonts/hanken-grotesk/HKGrotesk-Regular.woff2")}")
 		format("woff2");
 	font-weight: 400;
 	font-style: normal;
@@ -133,7 +146,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 
 @font-face {
 	font-family: "HK Grotesk";
-	src: url("${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2")
+	src: url("${joinPath(basePath, "/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2")}")
 		format("woff2");
 	font-weight: 600;
 	font-style: normal;
@@ -142,7 +155,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 
 @font-face {
 	font-family: "HK Grotesk";
-	src: url("${basePath.replace(/\/$/, "")}/fonts/hanken-grotesk/HKGrotesk-Bold.woff2") format("woff2");
+	src: url("${joinPath(basePath, "/fonts/hanken-grotesk/HKGrotesk-Bold.woff2")}") format("woff2");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
@@ -150,7 +163,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 
 @font-face {
 	font-family: "Cascadia Mono";
-	src: url("${basePath.replace(/\/$/, "")}/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2")
+	src: url("${joinPath(basePath, "/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2")}")
 		format("woff2");
 	font-weight: 400;
 	font-style: normal;
@@ -176,7 +189,7 @@ samp {
 				{import.meta.env.DEV &&
 					html`
           <script>
-            import("${basePath.replace(/\/$/, "")}/@vite/client")
+			import("${joinPath(basePath, "/@vite/client")}")
           </script>
         `}
 			</head>

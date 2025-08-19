@@ -1,5 +1,6 @@
 import type { FC } from "hono/jsx";
 import { basePath } from "../../../metadata";
+import { joinPath } from "../../../utils/path";
 import { CloseIcon } from "../../icons";
 
 export const SearchWindow: FC = () => {
@@ -8,12 +9,10 @@ export const SearchWindow: FC = () => {
 			{import.meta.env.PROD && (
 				<>
 					<link
-						href={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.css`}
+						href={joinPath(basePath, "/pagefind/pagefind-ui.css")}
 						rel="stylesheet"
 					/>
-					<script
-						src={`${basePath.replace(/\/$/, "")}/pagefind/pagefind-ui.js`}
-					/>
+					<script src={joinPath(basePath, "/pagefind/pagefind-ui.js")} />
 				</>
 			)}
 			<div class="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0">
