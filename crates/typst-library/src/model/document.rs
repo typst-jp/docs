@@ -44,7 +44,7 @@ pub struct DocumentElem {
     #[ghost]
     pub keywords: OneOrMultiple<EcoString>,
 
-    /// ドキュメントの作成日。
+    /// 文書の作成日。
     ///
     /// これを`{auto}`（デフォルト設定）とすると、Typstは現在の日時を使用します。
     /// `{none}`とすると、PDFメタデータに作成日時を埋め込まなくなります。
