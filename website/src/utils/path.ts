@@ -46,3 +46,22 @@ export const applyBasePath = (basePath: string, path: string): string => {
 	const isRelative = !path.startsWith("/");
 	return isRelative ? path : joinPath(basePath, path);
 };
+
+/**
+ * Removes the basePath prefix from a route string.
+ *
+ * @param basePath - The base path to remove.
+ * @param route - The route string to process.
+ * @returns The route string with basePath removed from the start.
+ *
+ * @example
+ * ```ts
+ * removeBasePath("/docs/", "/docs/foo/bar") -> "/foo/bar"
+ * removeBasePath("/docs", "/docs/foo/bar") -> "/foo/bar"
+ * ```
+ */
+export const removeBasePath = (basePath: string, route: string): string => {
+	if (!route.startsWith(basePath)) return route;
+	const offset = basePath.length - (basePath.endsWith("/") ? 1 : 0);
+	return route.slice(offset);
+};

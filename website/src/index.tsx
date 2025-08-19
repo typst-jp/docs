@@ -13,6 +13,7 @@ import { basePath } from "./metadata";
 import type { Body, Page } from "./types/model";
 import { flattenDocs } from "./utils/flattenDocs";
 import { isPageOfKind } from "./utils/isPageOfKind";
+import { removeBasePath } from "./utils/path";
 import { registerRoutes } from "./utils/translationStatus";
 
 // typst-docsが生成したドキュメント
@@ -55,7 +56,7 @@ The 'basePath' must match the 'base' value used in typst-docs.
 Please ensure both this site and typst-docs are configured with the same base path.`,
 		);
 	}
-	route = route.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0));
+	route = removeBasePath(basePath, route);
 	app.get(route, (c) => {
 		if (isPageOfKind(page, "html")) {
 			return c.html(<HtmlTemplate page={page} {...commonProps} />);

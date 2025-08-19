@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applyBasePath, joinPath } from "./path";
+import { applyBasePath, joinPath, removeBasePath } from "./path";
 
 describe("joinPath", () => {
 	it("should join base and path with single slash", () => {
@@ -43,5 +43,26 @@ describe("applyBasePath", () => {
 
 	it("should handle empty basePath", () => {
 		expect(applyBasePath("", "/foo")).toBe("/foo");
+	});
+});
+
+describe("removeBasePath", () => {
+	it("should remove basePath with trailing slash", () => {
+		expect(removeBasePath("/docs/", "/docs/foo/bar")).toBe("/foo/bar");
+		expect(removeBasePath("/base/", "/base/foo")).toBe("/foo");
+	});
+	it("should remove basePath without trailing slash", () => {
+		expect(removeBasePath("/docs", "/docs/foo/bar")).toBe("/foo/bar");
+		expect(removeBasePath("/base", "/base/foo")).toBe("/foo");
+	});
+	it("should return route unchanged if it does not start with basePath", () => {
+		expect(removeBasePath("/docs", "/other/foo")).toBe("/other/foo");
+		expect(removeBasePath("/base", "/docs/foo")).toBe("/docs/foo");
+	});
+	it("should handle root basePath", () => {
+		expect(removeBasePath("/", "/foo/bar")).toBe("/foo/bar");
+	});
+	it("should handle empty basePath", () => {
+		expect(removeBasePath("", "/foo/bar")).toBe("/foo/bar");
 	});
 });
