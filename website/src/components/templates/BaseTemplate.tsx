@@ -1,6 +1,6 @@
 import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
-import { basePath, originUrl, typstOfficialUrl } from "../../metadata";
+import { basePath, originUrl, typstOfficialDocsUrl } from "../../metadata";
 import type { Page } from "../../types/model";
 import { joinPath } from "../../utils/path";
 import { getTranslationStatus } from "../../utils/translationStatus";
@@ -46,7 +46,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 	const translationStatus = getTranslationStatus(route);
 	const absoluteRouteUrl = new URL(route, originUrl).toString();
 	const faviconUrl = new URL(`${basePath}/favicon.png`, originUrl).toString();
-	const typstOfficialRouteUrl = new URL(route, typstOfficialUrl).toString();
+	const typstOfficialRouteUrl = joinPath(typstOfficialDocsUrl, route.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0)));
 	return (
 		<html lang="ja" class="scroll-pt-24">
 			<head>
