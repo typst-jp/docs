@@ -48,9 +48,14 @@ flattenedPages.forEach((page, pageIndex) => {
 
 	// Remove basePath from the route if it starts with basePath.
 	let route = page.route;
-	if (route.startsWith(basePath)) {
-		route = route.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0));
+	if (!route.startsWith(basePath)) {
+		throw new Error(
+			`'route' does not start with 'basePath': route='${route}', basePath='${basePath}'.
+The 'basePath' must match the 'base' value used in typst-docs.
+Please ensure both this site and typst-docs are configured with the same base path.`,
+		);
 	}
+	route = route.slice(basePath.length - (basePath.endsWith("/") ? 1 : 0));
 	app.get(route, (c) => {
 		if (isPageOfKind(page, "html")) {
 			return c.html(<HtmlTemplate page={page} {...commonProps} />);
