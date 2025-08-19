@@ -1,4 +1,3 @@
-import { Style, css } from "hono/css";
 import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
 import { basePath, originUrl, typstOfficialUrl } from "../../metadata";
@@ -133,58 +132,6 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 					defer
 					src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
 				/>
-				<Style>{css`
-/* Global font family */
-@font-face {
-	font-family: "HK Grotesk";
-	src: url("${joinPath(basePath, "/fonts/hanken-grotesk/HKGrotesk-Regular.woff2")}")
-		format("woff2");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "HK Grotesk";
-	src: url("${joinPath(basePath, "/fonts/hanken-grotesk/HKGrotesk-SemiBold.woff2")}")
-		format("woff2");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "HK Grotesk";
-	src: url("${joinPath(basePath, "/fonts/hanken-grotesk/HKGrotesk-Bold.woff2")}") format("woff2");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Cascadia Mono";
-	src: url("${joinPath(basePath, "/fonts/cascadia-code/CascadiaMono-Regular-Sub.woff2")}")
-		format("woff2");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-body {
-	font-family:
-		"HK Grotesk", Inter, "BIZ UDGothic", "BIZ UDPGothic", system-ui,
-		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-		Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-}
-
-code,
-pre,
-kbd,
-samp {
-	font-family: "Cascadia Mono", SFMono-Regular, Menlo, Monaco, Consolas,
-		"Liberation Mono", "Courier New", monospace;
-}
-`}</Style>
 				{/* NOTE: @hono/vite-dev-server does not respect the base setting in the Vite configuration. */}
 				{import.meta.env.DEV &&
 					html`
