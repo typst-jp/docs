@@ -14,7 +14,7 @@ export const githubRepositoryUrl =
 	"https://github.com/typst-jp/typst-jp.github.io";
 /** The Discord server invite URL. */
 export const discordServerUrl = "https://discord.gg/9xF7k4aAuH";
-/** The origin URL of the deployed site. */
+/** The origin URL of the deployed site, used for metadata. Note that the base path should not be included. */
 export const originUrl = "https://typst-jp.github.io/";
 /** The base public path for deployment. This must match the value used in typst-docs. */
 export const basePath: string = "/docs/";
