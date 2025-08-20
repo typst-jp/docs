@@ -90,7 +90,9 @@ if (import.meta.env.DEV) {
 				return path.slice(basePath.length);
 			},
 			onNotFound: (path, c) => {
-				console.log(`${path} is not found while trying to serve a static asset`);
+				console.log(
+					`${path} is not found while trying to serve a static asset`,
+				);
 			},
 		}),
 	);
