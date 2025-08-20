@@ -1,7 +1,7 @@
 import { version } from "../package.json";
 
 // TODO: The metadata will be configurable via a JSON configuration file.
-/** The version of the documentation. */
+/** The version of the documentation, without a leading `v`. */
 export { version };
 /** The official Typst website URL. */
 export const typstOfficialUrl = "https://typst.app";
