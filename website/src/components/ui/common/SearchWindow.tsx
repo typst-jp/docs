@@ -34,15 +34,17 @@ export const SearchWindow: FC = () => {
 				)}
 				<div id="search" />
 			</div>
-			<script
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: pagefindで生成されたスクリプトを実行する
-				dangerouslySetInnerHTML={{
-					__html: `window.addEventListener('DOMContentLoaded', (event) => {
+			{!import.meta.env.DEV && (
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: pagefindで生成されたスクリプトを実行する
+					dangerouslySetInnerHTML={{
+						__html: `window.addEventListener('DOMContentLoaded', (event) => {
 	new PagefindUI({ element: "#search", showSubResults: true });
 });
 `,
-				}}
-			/>
+					}}
+				/>
+			)}
 		</div>
 	);
 };
