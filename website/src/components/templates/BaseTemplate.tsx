@@ -45,7 +45,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 	const outline = page.outline;
 	const translationStatus = getTranslationStatus(route);
 	const absoluteRouteUrl = new URL(route, originUrl).toString();
-	const faviconUrl = new URL(`${basePath}/favicon.png`, originUrl).toString();
+	const faviconUrl = new URL(joinPath(basePath, "/favicon.png"), originUrl).toString();
 	const typstOfficialRouteUrl = joinPath(
 		typstOfficialDocsUrl,
 		removeBasePath(basePath, route),
