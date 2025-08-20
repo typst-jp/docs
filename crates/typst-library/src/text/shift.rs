@@ -30,12 +30,12 @@ pub struct SubElem {
     pub typographic: bool,
 
     /// 下付き文字の合成に用いるベースラインのシフト。
-    /// `typographic`がtrueかつフォントが与えられた`body`に対して下付き文字のコードポイントを持っている場合は使用しないでください。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが下付き文字のコードポイントを持っている場合は適用されません。
     #[default(Em::new(0.2).into())]
     pub baseline: Length,
 
     /// 下付き文字の合成に用いるフォントの大きさ。
-    /// `typographic`がtrueかつフォントが与えられた`body`に対して下付き文字のコードポイントを持っている場合は使用しないでください。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが下付き文字のコードポイントを持っている場合は適用されません。
     #[default(TextSize(Em::new(0.6).into()))]
     pub size: TextSize,
 
@@ -86,12 +86,12 @@ pub struct SuperElem {
     pub typographic: bool,
 
     /// 上付き文字の合成に用いるベースラインのシフト。
-    /// `typographic`がtrueかつフォントが与えられた`body`に対して上付き文字のコードポイントを持っている場合は使用しないでください。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが上付き文字のコードポイントを持っている場合は適用されません。
     #[default(Em::new(-0.5).into())]
     pub baseline: Length,
 
     /// 上付き文字の合成に用いるフォントの大きさ。
-    /// `typographic`がtrueかつフォントが与えられた`body`に対して上付き文字のコードポイントを持っている場合は使用しないでください。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが上付き文字のコードポイントを持っている場合は適用されません。
     #[default(TextSize(Em::new(0.6).into()))]
     pub size: TextSize,
 
