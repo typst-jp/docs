@@ -10,7 +10,7 @@ use crate::foundations::{
 use crate::introspection::Locatable;
 use crate::World;
 
-/// A file that will be embedded into the output PDF.
+/// 出力されるPDFに埋め込まれるファイル。
 ///
 /// This can be used to distribute additional files that are related to the PDF
 /// within it. PDF readers will display the files in a file listing.

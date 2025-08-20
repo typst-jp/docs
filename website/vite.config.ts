@@ -7,6 +7,7 @@ import devServer from "@hono/vite-dev-server";
 import ssg from "@hono/vite-ssg";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
+import { baseUrl } from "./src/metadata";
 
 // typst-docsが生成したドキュメントのアセットをassets/docsにシンボリックリンクする
 const assetsDocsPath = resolve(__dirname, "../assets/docs/");
@@ -15,17 +16,19 @@ const publicAssetsDocsPath = resolve(__dirname, "./public/assets/docs/");
 rmSync(publicAssetsDocsPath, { recursive: true, force: true });
 symlinkSync(assetsDocsPath, publicAssetsDocsPath, "dir");
 
+const sitemapUrl = new URL("/sitemap.xml", baseUrl).href;
+
 export default defineConfig({
 	plugins: [
 		tailwindcss(),
 		ssg({
 			plugins: [
 				sitemapPlugin({
-					baseUrl: "https://typst-jp.github.io/",
+					baseUrl,
 				}),
 				robotsTxtPlugin({
 					rules: [{ userAgent: "*", allow: ["/"] }],
-					sitemapUrl: "https://typst-jp.github.io/sitemap.xml",
+					sitemapUrl,
 				}),
 			],
 		}),
