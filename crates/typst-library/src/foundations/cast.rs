@@ -490,7 +490,7 @@ cast! {
     "fence" => MathClass::Fence,
     /// `sum`のような大型演算子。
     "large" => MathClass::Large,
-    /// `=`や`prec`のような関係。
+    /// `=`や`prec`のような関係記号。
     "relation" => MathClass::Relation,
     /// `not`のような単項演算子。
     "unary" => MathClass::Unary,
