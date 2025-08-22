@@ -1,5 +1,7 @@
 import type { FC } from "hono/jsx";
+import { basePath } from "../../metadata";
 import type { Func } from "../../types/model";
+import { joinPath } from "../../utils/path";
 import { TypeIcon } from "./TypeIcon";
 import { genPath } from "./genPath";
 import { buildParamId, type2href } from "./type2href";
@@ -48,7 +50,9 @@ export const FunctionDefinition: FC<FunctionDefinitionProps> = ({
 										<TypeIcon
 											key={t}
 											type={t}
-											href={href ? `/docs/reference/${href}` : undefined}
+											href={
+												href ? joinPath(basePath, "reference", href) : undefined
+											}
 										/>
 									);
 								})}
@@ -72,7 +76,9 @@ export const FunctionDefinition: FC<FunctionDefinitionProps> = ({
 										<TypeIcon
 											key={ret}
 											type={ret}
-											href={href ? `/docs/reference/${href}` : undefined}
+											href={
+												href ? joinPath(basePath, "reference", href) : undefined
+											}
 										/>
 										{i < func.returns.length - 1 && (
 											<span class="text-gray-500 mx-1">,</span>

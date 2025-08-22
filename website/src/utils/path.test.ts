@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applyBasePath, joinPath, removeBasePath } from "./path";
+import { joinPath, removeBasePath } from "./path";
 
 describe("joinPath", () => {
 	it("should join base and path with single slash", () => {
@@ -24,25 +24,58 @@ describe("joinPath", () => {
 		expect(joinPath("", "/foo")).toBe("/foo");
 		expect(joinPath("", "foo")).toBe("/foo");
 	});
-});
 
-describe("applyBasePath", () => {
-	it("should apply basePath to absolute path", () => {
-		expect(applyBasePath("/base", "/foo")).toBe("/base/foo");
-		expect(applyBasePath("/foo", "/bar/baz")).toBe("/foo/bar/baz");
+	it("should join multiple parts", () => {
+		expect(joinPath("/base", "foo", "bar")).toBe("/base/foo/bar");
+		expect(joinPath("/", "foo", "bar")).toBe("/foo/bar");
+		expect(joinPath("", "foo", "bar")).toBe("/foo/bar");
+		expect(joinPath("/base/", "/foo/", "/bar/")).toBe("/base/foo/bar/");
 	});
 
-	it("should not apply basePath to relative path", () => {
-		expect(applyBasePath("/base", "./index.html")).toBe("./index.html");
-		expect(applyBasePath("/foo/bar", "baz/qux")).toBe("baz/qux");
+	it("should handle parts with trailing and leading slashes", () => {
+		expect(joinPath("/base/", "/foo/", "/bar/")).toBe("/base/foo/bar/");
+		expect(joinPath("/base/", "foo/", "/bar")).toBe("/base/foo/bar");
+		expect(joinPath("/base", "foo/", "bar/")).toBe("/base/foo/bar/");
 	});
 
-	it("should handle root basePath", () => {
-		expect(applyBasePath("/", "/foo")).toBe("/foo");
+	it("should handle parts with only slashes", () => {
+		expect(joinPath("/", "/", "/")).toBe("/");
+		expect(joinPath("/", "", "/foo")).toBe("/foo");
 	});
 
-	it("should handle empty basePath", () => {
-		expect(applyBasePath("", "/foo")).toBe("/foo");
+	it("should preserve trailing slash if last part has it", () => {
+		expect(joinPath("/base", "foo/", "bar/")).toBe("/base/foo/bar/");
+		expect(joinPath("/base", "foo", "bar/")).toBe("/base/foo/bar/");
+	});
+
+	it("should handle special paths with leading slash", () => {
+		expect(joinPath("/base", "/@")).toBe("/base/@");
+		expect(joinPath("/base", "/node_modules")).toBe("/base/node_modules");
+	});
+
+	it("should remove duplicate slashes safely", () => {
+		expect(joinPath("/base//", "/foo//bar/")).toBe("/base/foo/bar/");
+		expect(joinPath("//", "/foo//", "/bar//baz//")).toBe("/foo/bar/baz/");
+		expect(joinPath("/", "/", "/foo//bar//baz/")).toBe("/foo/bar/baz/");
+		expect(joinPath("/base//", "//foo//", "//bar//")).toBe("/base/foo/bar/");
+		expect(joinPath("base//", "/foo//bar/")).toBe("base/foo/bar/");
+		expect(joinPath("base//", "foo//bar/")).toBe("base/foo/bar/");
+		expect(joinPath("/base//", "foo//bar")).toBe("/base/foo/bar");
+		expect(joinPath("base//", "foo//bar")).toBe("base/foo/bar");
+	});
+
+	it("should handle only slash and empty", () => {
+		expect(joinPath("/")).toBe("/");
+		expect(joinPath("", "/")).toBe("/");
+		expect(joinPath("", "")).toBe("");
+	});
+
+	it("should handle mix of empty, slash, and normal parts", () => {
+		expect(joinPath("", "/", "foo")).toBe("/foo");
+		expect(joinPath("", "foo", "")).toBe("/foo/");
+		expect(joinPath("", "foo", "/")).toBe("/foo/");
+		expect(joinPath("/", "", "foo")).toBe("/foo");
+		expect(joinPath("/", "foo", "")).toBe("/foo/");
 	});
 });
 

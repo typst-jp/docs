@@ -1,5 +1,7 @@
 import type { FC } from "hono/jsx";
+import { basePath } from "../../metadata";
 import type { Func } from "../../types/model";
+import { joinPath } from "../../utils/path";
 import { ChevronRightIcon } from "../icons";
 import { HtmlContent } from "./HtmlContent";
 import { Tooltip } from "./Tooltip";
@@ -40,7 +42,9 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 										<TypeIcon
 											key={t}
 											type={t}
-											href={href ? `/docs/reference/${href}` : undefined}
+											href={
+												href ? joinPath(basePath, "reference", href) : undefined
+											}
 										/>
 									);
 								})}

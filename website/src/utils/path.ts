@@ -1,8 +1,7 @@
 /**
- * Joins two paths by resolving any slash collisions between them.
+ * Join multiple URL path segments safely.
  *
- * @param basePath - The base path to join.
- * @param path - The path to append to the basePath.
+ * @param parts - The path segments to join.
  * @returns The joined path with redundant slashes resolved.
  *
  * @example
@@ -12,39 +11,34 @@
  * joinPath("/base", "/foo/bar") -> "/base/foo/bar"
  * joinPath("/foo/bar/", "/baz/qux") -> "/foo/bar/baz/qux"
  * joinPath("/foo/bar", "baz/qux") -> "/foo/bar/baz/qux"
+ * joinPath("/base", "foo", "bar") -> "/base/foo/bar"
+ * joinPath("/", "foo", "bar") -> "/foo/bar"
  * ```
  */
-export const joinPath = (basePath: string, path: string): string => {
-	// Remove trailing slash from base.
-	const baseClean = basePath !== "/" ? basePath.replace(/\/+$/, "") : basePath;
-	// Remove leading slash from path.
-	const pathClean = path.replace(/^\/+/, "");
-	// Special case: if base is '/', avoid double slash
-	if (baseClean === "/") {
-		return `/${pathClean}`;
-	}
-	return `${baseClean}/${pathClean}`;
-};
+export const joinPath = (...parts: string[]): string => {
+	if (parts.length === 0) return "";
+	if (parts.length === 1) return parts[0];
+	if (parts.every((p) => !p)) return "";
 
-/**
- * Applies a base path to internal non-relative URLs (starting with `/`).
- * If the path is relative, it is returned as-is.
- *
- * @param basePath - The base path to apply.
- * @param path - The original path to modify.
- * @returns The modified path with the basePath applied if it was an absolute path.
- *
- * @example
- * ```ts
- * applyBasePath("/base", "/foo") -> "/base/foo"
- * applyBasePath("/base", "./index.html") -> "./index.html"
- * applyBasePath("/foo", "/bar/baz") -> "/foo/bar/baz"
- * applyBasePath("/foo/bar", "baz/qux") -> "baz/qux"
- * ```
- */
-export const applyBasePath = (basePath: string, path: string): string => {
-	const isRelative = !path.startsWith("/");
-	return isRelative ? path : joinPath(basePath, path);
+	let needsLeadingSlash = false;
+	const firstNonEmpty = parts.find((p) => p !== "") || "";
+	if (parts[0].startsWith("/")) {
+		needsLeadingSlash = true;
+	} else if (parts[0] === "") {
+		if (firstNonEmpty?.startsWith("/")) needsLeadingSlash = true;
+	}
+	let needsTrailingSlash = false;
+	if (parts[parts.length - 1].endsWith("/")) needsTrailingSlash = true;
+	const cleaned = parts.map((p, i) => {
+		if (i === 0) return p.replace(/\/+$/, "");
+		if (i === parts.length - 1) return p.replace(/^\/+/, "");
+		return p.replace(/^\/+|\/+$/g, "");
+	});
+	let joined = cleaned.filter((v, i) => v !== "" || parts[i] === "").join("/");
+	if (needsLeadingSlash && !joined.startsWith("/")) joined = `/${joined}`;
+	if (needsTrailingSlash && !joined.endsWith("/")) joined = `${joined}/`;
+	joined = joined.replace(/\/+/g, "/");
+	return joined;
 };
 
 /**

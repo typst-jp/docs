@@ -243,11 +243,11 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 								</a>
 							)}
 
-							{route === "/docs/" ? (
+							{route === basePath ? (
 								<div class="doc-categories grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
 									<a
 										class="doc-category flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"
-										href="/docs/tutorial"
+										href={joinPath(basePath, "/tutorial/")}
 									>
 										<div class="flex items-center mb-3">
 											<div class="w-6 h-6 text-gray-800 mr-2">
@@ -263,7 +263,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 									</a>
 									<a
 										class="doc-category flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"
-										href="/docs/reference"
+										href={joinPath(basePath, "/reference/")}
 									>
 										<div class="flex items-center mb-3">
 											<div class="w-6 h-6 text-gray-800 mr-2">
