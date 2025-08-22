@@ -5,7 +5,7 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, NativeElement, Packed, Show, StyleChain};
 use crate::layout::{BlockElem, Length, Ratio, Rel};
 
-/// 複数の同じ大きさを持つ段への領域の分割。
+/// 領域を等幅の複数段に分割。
 ///
 /// `column`関数を用いることで、あらゆるコンテナの内部を複数の段に分割することができます。
 /// 現在、段の高さのバランスは取れません。
@@ -42,7 +42,7 @@ pub struct ColumnsElem {
     #[default(NonZeroUsize::new(2).unwrap())]
     pub count: NonZeroUsize,
 
-    /// 各段の間の大きさ。
+    /// 段間。
     #[resolve]
     #[default(Ratio::new(0.04).into())]
     pub gutter: Rel<Length>,
