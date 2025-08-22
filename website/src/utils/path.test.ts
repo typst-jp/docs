@@ -77,6 +77,26 @@ describe("joinPath", () => {
 		expect(joinPath("/", "", "foo")).toBe("/foo");
 		expect(joinPath("/", "foo", "")).toBe("/foo/");
 	});
+
+	it("should join when first part is http(s):// URL", () => {
+		const paths = [
+			"http://typst.app/docs",
+			"http://typst.app/docs/",
+			"https://typst.app/docs",
+			"https://typst.app/docs/",
+		];
+		for (const base of paths) {
+			const b = base.replace(/\/$/, "");
+			expect(joinPath(base, "foo")).toBe(`${b}/foo`);
+			expect(joinPath(base, "foo/")).toBe(`${b}/foo/`);
+			expect(joinPath(base, "/foo")).toBe(`${b}/foo`);
+			expect(joinPath(base, "/foo/")).toBe(`${b}/foo/`);
+			expect(joinPath(base, "foo/bar")).toBe(`${b}/foo/bar`);
+			expect(joinPath(base, "foo/bar/")).toBe(`${b}/foo/bar/`);
+			expect(joinPath(base, "/foo/bar")).toBe(`${b}/foo/bar`);
+			expect(joinPath(base, "/foo/bar/")).toBe(`${b}/foo/bar/`);
+		}
+	});
 });
 
 describe("removeBasePath", () => {

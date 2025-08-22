@@ -20,25 +20,33 @@ export const joinPath = (...parts: string[]): string => {
 	if (parts.length === 1) return parts[0];
 	if (parts.every((p) => !p)) return "";
 
-	let needsLeadingSlash = false;
-	const firstNonEmpty = parts.find((p) => p !== "") || "";
-	if (parts[0].startsWith("/")) {
-		needsLeadingSlash = true;
-	} else if (parts[0] === "") {
-		if (firstNonEmpty?.startsWith("/")) needsLeadingSlash = true;
+	const schemeMatch = parts[0].match(/^(https?:\/\/)(.*)$/);
+	let joined: string;
+	if (schemeMatch) {
+		const scheme = schemeMatch[1];
+		const rest = schemeMatch[2];
+		joined = joinPath(rest, ...parts.slice(1));
+		joined = scheme + joined;
+	} else {
+		let needsLeadingSlash = false;
+		const firstNonEmpty = parts.find((p) => p !== "") || "";
+		if (parts[0].startsWith("/")) {
+			needsLeadingSlash = true;
+		} else if (parts[0] === "") {
+			if (firstNonEmpty.startsWith("/")) needsLeadingSlash = true;
+		}
+		let needsTrailingSlash = false;
+		if (parts[parts.length - 1].endsWith("/")) needsTrailingSlash = true;
+		const cleaned = parts.map((p, i) => {
+			if (i === 0) return p.replace(/\/+$/, "");
+			if (i === parts.length - 1) return p.replace(/^\/+/, "");
+			return p.replace(/^\/+|\/+$/g, "");
+		});
+		joined = cleaned.filter((v, i) => v !== "" || parts[i] === "").join("/");
+		if (needsLeadingSlash && !joined.startsWith("/")) joined = `/${joined}`;
+		if (needsTrailingSlash && !joined.endsWith("/")) joined = `${joined}/`;
 	}
-	let needsTrailingSlash = false;
-	if (parts[parts.length - 1].endsWith("/")) needsTrailingSlash = true;
-	const cleaned = parts.map((p, i) => {
-		if (i === 0) return p.replace(/\/+$/, "");
-		if (i === parts.length - 1) return p.replace(/^\/+/, "");
-		return p.replace(/^\/+|\/+$/g, "");
-	});
-	let joined = cleaned.filter((v, i) => v !== "" || parts[i] === "").join("/");
-	if (needsLeadingSlash && !joined.startsWith("/")) joined = `/${joined}`;
-	if (needsTrailingSlash && !joined.endsWith("/")) joined = `${joined}/`;
-	joined = joined.replace(/\/+/g, "/");
-	return joined;
+	return joined.replace(/([^:])\/+/g, "$1/");
 };
 
 /**
