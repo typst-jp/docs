@@ -478,25 +478,25 @@ cast! {
         MathClass::Vary => "vary",
         MathClass::Special => "special",
     }),
-    /// The default class for non-special things.
+    /// 特別でない要素のデフォルトクラス。
     "normal" => MathClass::Normal,
-    /// Punctuation, e.g. a comma.
+    /// カンマなどの句読点。
     "punctuation" => MathClass::Punctuation,
-    /// An opening delimiter, e.g. `(`.
+    /// `(`などの開き区切り文字。
     "opening" => MathClass::Opening,
-    /// A closing delimiter, e.g. `)`.
+    /// `)`などの閉じ区切り文字。
     "closing" => MathClass::Closing,
-    /// A delimiter that is the same on both sides, e.g. `|`.
+    /// `|`などの両側が同じ区切り文字。
     "fence" => MathClass::Fence,
-    /// A large operator like `sum`.
+    /// `sum`のような大型演算子。
     "large" => MathClass::Large,
-    /// A relation like `=` or `prec`.
+    /// `=`や`prec`のような関係記号。
     "relation" => MathClass::Relation,
-    /// A unary operator like `not`.
+    /// `not`のような単項演算子。
     "unary" => MathClass::Unary,
-    /// A binary operator like `times`.
+    /// `times`のような二項演算子。
     "binary" => MathClass::Binary,
-    /// An operator that can be both unary or binary like `+`.
+    /// `+`のような単項にも二項にもなる演算子。
     "vary" => MathClass::Vary,
 }
 

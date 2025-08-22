@@ -11,7 +11,8 @@ description: |
 | --- | --- | --- |
 | Typst | Typst | 翻訳対象のプロジェクト名、訳しません |
 | typesetting | 組版 | Typstの主要機能 |
-| documentation | ドキュメント |   |
+| documentation | ドキュメント | [公式ドキュメント](https://typst.app/docs)、[日本語ドキュメント](https://typst-jp.github.io/docs/)など |
+| document | 文書 | [文書]($document)を参照 |
 | content | コンテンツ | 型の一種で、マークアップによって表される |
 | element | 要素 | 見出し、数式、表などの文書を構成する要素 |
 | element function | 要素関数 | [要素関数]($function/#element-functions)を参照 |

@@ -1,71 +1,71 @@
-PDF files focus on accurately describing documents visually, but also have
-facilities for annotating their structure. This hybrid approach makes
-them a good fit for document exchange: They render exactly the same on every
-device, but also support extraction of a document's content and structure (at
-least to an extent). Unlike PNG files, PDFs are not bound to a specific
-resolution. Hence, you can view them at any size without incurring a loss of
-quality.
+PDFファイルは文書を視覚的に正確に記述することに重点を置いていますが、文書構造に注釈をつける機能も備えています。
+このハイブリッドなアプローチにより、
+PDFファイルは文書交換に適した形式となっています。
+どの端末でもまったく同じ見た目で表示される一方、
+内容や構造を（少なくともある程度は）抽出することも可能であるためです。
+PNGファイルとは異なり、PDFファイルは特定の解像度に縛られません。
+これによって、品質を損なうことなく任意のサイズでファイルを閲覧することができます。
 
-# PDF standards
-The International Standards Organization (ISO) has published the base PDF
-standard and various standards that extend it to make PDFs more suitable for
-specific use-cases. By default, Typst exports PDF 1.7 files. Adobe Acrobat 8 and
-later as well as all other commonly used PDF viewers are compatible with this
-PDF version.
+# PDF規格
+国際標準化機構（ISO）は、基本となるPDF規格に加え、
+特定の用途により適した形でPDFを利用できるようにする各種拡張規格を公開しています。
+TypstはデフォルトでPDF 1.7形式のファイルをエクスポートします。
+Adobe Acrobat 8以降および一般的に使用されているほとんどのPDFビューアーは
+このPDFバージョンとの互換性があります。
 
 ## PDF/A
-Typst optionally supports emitting PDF/A-conformant files. PDF/A files are
-geared towards maximum compatibility with current and future PDF tooling. They
-do not rely on difficult-to-implement or proprietary features and contain
-exhaustive metadata. This makes them suitable for long-term archival.
+TypstはオプションでPDF/A準拠ファイルの出力をサポートしています。
+PDF/Aファイルは、現在および将来のPDF用ツールとの最大限の互換性を目的として設計された形式です。
+この形式は実装が困難な機能や独自仕様に依存せず、網羅的なメタデータを含みます。
+これにより、長期的なアーカイブに適した形式となっています。
 
-The PDF/A Standard has multiple versions (_parts_ in ISO terminology) and most
-parts have multiple profiles that indicate the file's conformance level.
-Currently, Typst supports these PDF/A output profiles:
+PDF/A規格には複数のバージョン（ISOにおける用語では _パート_）があり、
+ほとんどのパートにはファイルの適合レベルを示す複数のプロファイルが存在します。
+現在、Typstは以下のPDF/A出力プロファイルをサポートしています。
 
-- PDF/A-2b: The basic conformance level of ISO 19005-2. This version of PDF/A is
-  based on PDF 1.7 and results in self-contained, archivable PDF files.
+- PDF/A-2b: ISO 19005-2における基本適合レベル。
+  このPDF/AバージョンはPDF 1.7を基盤としており、自己完結型でアーカイブ可能なPDFファイルを生成します。
 
-- PDF/A-3b: The basic conformance level of ISO 19005-3. This version of PDF/A is
-  based on PDF 1.7 and results in archivable PDF files that can contain
-  arbitrary other related files as [attachments]($pdf.embed). The only
-  difference between it and PDF/A-2b is the capability to embed
-  non-PDF/A-conformant files within.
+- PDF/A-3b: ISO 19005-3における基本適合レベル。
+  このPDF/AバージョンはPDF 1.7を基盤としており、
+  任意の関連ファイルを[添付ファイル]($pdf.embed)として含むことができるアーカイブ可能なPDFファイルを生成します。
+  PDF/A-2bとの違いは、
+  PDF/A非準拠のファイルを埋め込む機能がある点のみです。
 
-When choosing between exporting PDF/A and regular PDF, keep in mind that PDF/A
-files contain additional metadata, and that some readers will prevent the user
-from modifying a PDF/A file. Some features of Typst may be disabled depending on
-the PDF standard you choose.
+PDF/Aと通常のPDFのどちらをエクスポートするかを選択する際には、
+PDF/Aファイルには追加のメタデータが含まれ、
+また一部のリーダーはユーザーによるPDF/Aファイルの修正を阻止することに留意してください。
+一部のTypstの機能は、選択したPDF規格によっては無効化される場合があります。
 
-# Exporting as PDF
-## Command Line
-PDF is Typst's default export format. Running the `compile` or `watch`
-subcommand without specifying a format will create a PDF. When exporting to PDF,
-you have the following configuration options:
+# PDF形式でのエクスポート
+## コマンドライン
+PDFはTypstのデフォルトのエクスポート形式です。
+`compile`または`watch`サブコマンドをフォーマットを指定せずに実行すると、PDFが作成されます。
+PDF形式でエクスポートする際には、以下の設定オプションが指定可能です。
 
-- Which PDF standards Typst should enforce conformance with by specifying
-  `--pdf-standard` followed by one or multiple comma-separated standards. Valid
-  standards are `1.7`, `a-2b`, and `a-3b`. By default, Typst outputs
-  PDF-1.7-compliant files.
+- `--pdf-standard`の後に1つまたは複数のカンマ区切りの規格を指定することで、
+  Typstが準拠を強制するPDF規格を指定します。
+  指定可能な規格は`1.7`、`a-2b`、`a-3b`です。
+  デフォルトではPDF 1.7に準拠したファイルが出力されます。
 
-- Which pages to export by specifying `--pages` followed by a comma-separated
-  list of numbers or dash-separated number ranges. Ranges can be half-open.
-  Example: `2,3,7-9,11-`.
+- `--pages` の後に、カンマ区切りのページ番号またはダッシュによる番号範囲を指定することで、エクスポートするページを指定します。
+  範囲指定は半開区間にすることもできます。
+  例：`2,3,7-9,11-`。
 
-## Web App
-Click the quick download button at the top right to export a PDF with default
-settings. For further configuration, click "File" > "Export as" > "PDF" or click
-the downwards-facing arrow next to the quick download button and select "Export
-as PDF". When exporting to PDF, you have the following configuration options:
+## Webアプリ
+右上のクイックダウンロードボタンをクリックすると、デフォルト設定でPDFがエクスポートされます。
+さらに設定を行う場合は、「File」>「Export as」>「PDF」を選択するか、
+クイックダウンロードボタンの横にある下向き矢印をクリックして「Export as PDF」を選択します。
+PDF形式でエクスポートする際には、以下の設定項目を指定できます。
 
-- Which PDF standards Typst should enforce conformance with. By default, Typst
-  outputs PDF-1.7-compliant files. Valid additional standards are `A-2b` and
-  `A-3b`.
+- Typstが準拠を強制するPDF規格。
+  デフォルトではPDF 1.7準拠のファイルが出力されます。
+  指定可能な追加規格は`A-2b`と`A-3b`です。
 
-- Which pages to export. Valid options are "All pages", "Current page", and
-  "Custom ranges". Custom ranges are a comma-separated list of numbers or
-  dash-separated number ranges. Ranges can be half-open. Example: `2,3,7-9,11-`.
+- エクスポートするページ。有効なオプションは「All pages（全てのページ）」、「Current page（現在のページ）」、および「Custom ranges（カスタム範囲）」です。
+  カスタム範囲は、カンマ区切りの番号リストまたはダッシュで区切られた番号範囲です。
+  範囲は半開区間にすることもできます。例：`2,3,7-9,11-`。
 
-# PDF-specific functionality
-Typst exposes PDF-specific functionality in the global `pdf` module. See below
-for the definitions it contains.
+# PDF固有の機能
+Typstでは、グローバルな`pdf`モジュールを通じてPDFに特化した機能を提供しています。
+そのモジュールに含まれる定義については、以下を参照してください。
