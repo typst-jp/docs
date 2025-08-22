@@ -6,7 +6,8 @@ export { version };
 /** The official Typst website URL. */
 export const typstOfficialUrl = "https://typst.app";
 /** The official Typst documentation base URL. */
-export const typstOfficialDocsUrl: `http://${string}/` | `https://${string}/` = "https://typst.app/docs/";
+export const typstOfficialDocsUrl: `http://${string}/` | `https://${string}/` =
+	"https://typst.app/docs/";
 /** The GitHub organization URL. */
 export const githubOrganizationUrl = "https://github.com/typst-jp";
 /** The GitHub repository URL. */
