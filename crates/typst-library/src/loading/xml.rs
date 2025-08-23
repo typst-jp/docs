@@ -7,22 +7,22 @@ use crate::engine::Engine;
 use crate::foundations::{dict, func, scope, Array, Dict, IntoValue, Str, Value};
 use crate::loading::{DataSource, Load, Readable};
 
-/// Reads structured data from an XML file.
+/// XMLファイルから構造化データを読み込む。
 ///
-/// The XML file is parsed into an array of dictionaries and strings. XML nodes
-/// can be elements or strings. Elements are represented as dictionaries with
-/// the following keys:
+/// XMLファイルは辞書と文字列からなる配列にパースされます。
+/// XMLノードは要素または文字列になり得ます。
+/// 要素は以下のキーを持つ辞書として表現されます。
 ///
-/// - `tag`: The name of the element as a string.
-/// - `attrs`: A dictionary of the element's attributes as strings.
-/// - `children`: An array of the element's child nodes.
+/// - `tag`: 要素の名称を表す文字列。
+/// - `attrs`: 要素の属性を表す文字列からなる辞書。
+/// - `children`: 要素の子ノードからなる配列。
 ///
-/// The XML file in the example contains a root `news` tag with multiple
-/// `article` tags. Each article has a `title`, `author`, and `content` tag. The
-/// `content` tag contains one or more paragraphs, which are represented as `p`
-/// tags.
+/// この例におけるXMLファイルは、ルート要素である`news`タグと複数の`article`タグを含んでいます。
+/// それぞれのarticleは`title`、`author`、および`content`タグを持っています。
+/// `content`タグは1つ以上の段落を含んでおり、
+/// これらは`p`タグとして表現されています。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let find-child(elem, tag) = {
 ///   elem.children
@@ -58,7 +58,7 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "XML")]
 pub fn xml(
     engine: &mut Engine,
-    /// A [path]($syntax/#paths) to an XML file or raw XML bytes.
+    /// XMLファイルの[パス]($syntax/#paths)または生のXMLバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;
@@ -74,12 +74,12 @@ pub fn xml(
 
 #[scope]
 impl xml {
-    /// Reads structured data from an XML string/bytes.
+    /// XMLの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode XML")]
-    #[deprecated = "`xml.decode` is deprecated, directly pass bytes to `xml` instead"]
+    #[deprecated = "`xml.decode`は非推奨です。代わりにバイト列を直接`xml`に渡してください。"]
     pub fn decode(
         engine: &mut Engine,
-        /// XML data.
+        /// XMLデータ。
         data: Spanned<Readable>,
     ) -> SourceResult<Value> {
         xml(engine, data.map(Readable::into_source))
