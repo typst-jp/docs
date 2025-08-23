@@ -9,12 +9,12 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 ## 翻訳の進め方
 
-翻訳は[GitHub上の当リポジトリ](https://github.com/typst-jp/typst-jp.github.io)を中心に行います。実際の翻訳作業やそれに対する議論や提案などは、主にGitHubの[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)や[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls)機能を通じて行います。また、[Discordサーバー「くみはんクラブ」](https://discord.gg/9xF7k4aAuH)の`#typst-翻訳`チャンネルでも、質問の対応などが可能です。
+翻訳は[GitHub上の当リポジトリ](https://github.com/typst-jp/docs)を中心に行います。実際の翻訳作業やそれに対する議論や提案などは、主にGitHubの[Issue](https://github.com/typst-jp/docs/issues)や[Pull Request](https://github.com/typst-jp/docs/pulls)機能を通じて行います。また、[Discordサーバー「くみはんクラブ」](https://discord.gg/9xF7k4aAuH)の`#typst-翻訳`チャンネルでも、質問の対応などが可能です。
 
 ### 翻訳提案の手順
 
 > [!WARNING]
-> ここに記載されている内容は改訂中です。現在の手順は最新の[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen)を参照してください。
+> ここに記載されている内容は改訂中です。現在の手順は最新の[Pull Request](https://github.com/typst-jp/docs/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen)を参照してください。
 
 1. このGitHubリポジトリをフォークします。
 2. ドキュメントの実体は、主にMarkdownファイルおよびコンパイラのソースコード内のコメントの2種類から構成されています。それぞれ、下記の注意書きに従って翻訳作業をお願いします。
@@ -35,7 +35,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 ### 技術的な詳細
 
-[`./website/`のREADME](https://github.com/typst-jp/typst-jp.github.io/blob/main/website/README.md)を参照してください。
+[`./website/`のREADME](https://github.com/typst-jp/docs/blob/main/website/README.md)を参照してください。
 
 ### ローカル環境でWebページを生成
 
