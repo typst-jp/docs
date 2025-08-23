@@ -119,15 +119,13 @@ impl AlignPointElem {
     }
 }
 
-/// Forced use of a certain math class.
+/// 特定の数式クラスを強制的に適用。
 ///
-/// This is useful to treat certain symbols as if they were of a different
-/// class, e.g. to make a symbol behave like a relation. The class of a symbol
-/// defines the way it is laid out, including spacing around it, and how its
-/// scripts are attached by default. Note that the latter can always be
-/// overridden using [`{limits}`](math.limits) and [`{scripts}`](math.scripts).
+/// これは、特定の記号を異なるクラスのように扱うのに便利です。例えば、ある記号を関係のように振る舞わせることができます。
+/// 記号のクラスは、レイアウトのされ方、周囲の空白の入れ方、添え字がデフォルトでどのように取り付けられるかを定義します。
+/// 添え字の取り付け方は[`{limits}`](math.limits)や[`{scripts}`](math.scripts)を使って常に上書きできることに注意してください。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let loves = math.class(
 ///   "relation",
@@ -138,11 +136,11 @@ impl AlignPointElem {
 /// ```
 #[elem(Mathy)]
 pub struct ClassElem {
-    /// The class to apply to the content.
+    /// コンテンツに適用するクラス。
     #[required]
     pub class: MathClass,
 
-    /// The content to which the class is applied.
+    /// クラスを適用するコンテンツ。
     #[required]
     pub body: Content,
 }

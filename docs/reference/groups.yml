@@ -7,10 +7,9 @@
   path: ["math"]
   filter: ["serif", "sans", "frak", "mono", "bb", "cal"]
   details: |
-    Alternate typefaces within formulas.
+    数式中の別書体。
 
-    These functions are distinct from the [`text`] function because math fonts
-    contain multiple variants of each letter.
+    数式フォントは各文字に対して複数の異体字を備えているため、これらの関数は[`text`]関数とは異なります。
 
 - name: styles
   title: Styles
@@ -18,10 +17,9 @@
   path: ["math"]
   filter: ["upright", "italic", "bold"]
   details: |
-    Alternate letterforms within formulas.
+    数式中の別字体。
 
-    These functions are distinct from the [`text`] function because math fonts
-    contain multiple variants of each letter.
+    数式フォントは各文字に対して複数の異体字を持つため、これらの関数は[`text`]関数とは異なります。
 
 - name: sizes
   title: Sizes
@@ -51,10 +49,9 @@
       "overshell",
     ]
   details: |
-    Delimiters above or below parts of an equation.
+    数式の一部の上部または下部の区切り文字。
 
-    The braces and brackets further allow you to add an optional annotation
-    below or above themselves.
+    波括弧や角括弧を用いると、それら自身の上部または下部にオプションの注釈を追加できます。
 
 - name: roots
   title: Roots

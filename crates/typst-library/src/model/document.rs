@@ -7,12 +7,12 @@ use crate::foundations::{
     StyleChain, Styles, Value,
 };
 
-/// The root element of a document and its metadata.
+/// 文書とそのメタデータのルート要素。
 ///
-/// All documents are automatically wrapped in a `document` element. You cannot
-/// create a document element yourself. This function is only used with
-/// [set rules]($styling/#set-rules) to specify document metadata. Such a set
-/// rule must not occur inside of any layout container.
+/// すべての文書は、自動的に`document`（文書）要素でラップされます。
+/// この文書要素は自分で作成することはできません。
+/// この関数は、[setルール]($styling/#set-rules)と組み合わせて文書のメタデータを指定する場合にのみ使用されます。
+/// setルールは、レイアウトコンテナの内部に置いてはいけません。
 ///
 /// ```example
 /// #set document(title: [Hello])
@@ -21,41 +21,37 @@ use crate::foundations::{
 /// embeds metadata into the PDF!
 /// ```
 ///
-/// Note that metadata set with this function is not rendered within the
-/// document. Instead, it is embedded in the compiled PDF file.
+/// この関数で設定したメタデータは、文書内には表示されません。
+/// 代わりに、コンパイルされたPDFファイル内に埋め込まれます。
 #[elem(Construct)]
 pub struct DocumentElem {
-    /// The document's title. This is often rendered as the title of the
-    /// PDF viewer window.
+    /// 文書のタイトル。
+    /// これはPDFビューアーのウィンドウタイトルとして表示されることが多いです。
     ///
-    /// While this can be arbitrary content, PDF viewers only support plain text
-    /// titles, so the conversion might be lossy.
+    /// これはコンテンツで指定可能ですが、PDFビューアーがプレーンテキストのタイトルしかサポートしないために、変換時に情報が失われる可能性があります。
     #[ghost]
     pub title: Option<Content>,
 
-    /// The document's authors.
+    /// 文書の著者。
     #[ghost]
     pub author: OneOrMultiple<EcoString>,
 
-    /// The document's description.
+    /// 文書の説明。
     #[ghost]
     pub description: Option<Content>,
 
-    /// The document's keywords.
+    /// 文書のキーワード。
     #[ghost]
     pub keywords: OneOrMultiple<EcoString>,
 
-    /// The document's creation date.
+    /// 文書の作成日。
     ///
-    /// If this is `{auto}` (default), Typst uses the current date and time.
-    /// Setting it to `{none}` prevents Typst from embedding any creation date
-    /// into the PDF metadata.
+    /// これを`{auto}`（デフォルト設定）とすると、Typstは現在の日時を使用します。
+    /// `{none}`とすると、PDFメタデータに作成日時を埋め込まなくなります。
     ///
-    /// The year component must be at least zero in order to be embedded into a
-    /// PDF.
+    /// PDFに埋め込むためには、yearの値が0以上でなくてはなりません。
     ///
-    /// If you want to create byte-by-byte reproducible PDFs, set this to
-    /// something other than `{auto}`.
+    /// バイト単位で同一に再現できるPDFを出力したい場合には、`{auto}`以外の値を設定してください。
     #[ghost]
     pub date: Smart<Option<Datetime>>,
 }

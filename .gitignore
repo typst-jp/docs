@@ -27,6 +27,6 @@ package-lock.json
 /result
 .direnv/
 
-# Documentation
-/assets/docs
-/assets/docs.json
+# Generated documentation
+/assets
+/docs.json

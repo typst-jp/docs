@@ -45,16 +45,16 @@ export const type2href = (parameterType: string): string | null => {
 	const introspectionSet = new Set(["counter", "location", "state"]);
 
 	if (foundationSet.has(parameterType)) {
-		return `foundations/${parameterType}`;
+		return `foundations/${parameterType}/`;
 	}
 	if (layoutSet.has(parameterType)) {
-		return `layout/${parameterType}`;
+		return `layout/${parameterType}/`;
 	}
 	if (visualizeSet.has(parameterType)) {
-		return `visualize/${parameterType}`;
+		return `visualize/${parameterType}/`;
 	}
 	if (introspectionSet.has(parameterType)) {
-		return `introspection/${parameterType}`;
+		return `introspection/${parameterType}/`;
 	}
 	return null;
 };

@@ -3,32 +3,30 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, Packed, Show, StyleChain};
 use crate::text::TextElem;
 
-/// Displays text in small capitals.
+/// スモールキャピタルでテキストを表示。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// Hello \
 /// #smallcaps[Hello]
 /// ```
 ///
-/// # Smallcaps fonts
-/// By default, this uses the `smcp` and `c2sc` OpenType features on the font.
-/// Not all fonts support these features. Sometimes, smallcaps are part of a
-/// dedicated font. This is, for example, the case for the _Latin Modern_ family
-/// of fonts. In those cases, you can use a show-set rule to customize the
-/// appearance of the text in smallcaps:
+/// # スモールキャピタルのフォント
+/// デフォルトでは、この関数はフォントのOpenTypeフィーチャーの`smcp`および`c2sc`を使用します。
+/// すべてのフォントがこれらのフィーチャーをサポートしているわけではありません。
+/// スモールキャピタルは専用のフォントとして提供されることがあります。
+/// この例として _Latin Modern_ フォントファミリーが該当します。
+/// この場合、show-setルールを用いてスモールキャピタルでのテキストの見た目がカスタマイズできます。
 ///
 /// ```typ
 /// #show smallcaps: set text(font: "Latin Modern Roman Caps")
 /// ```
 ///
-/// In the future, this function will support synthesizing smallcaps from normal
-/// letters, but this is not yet implemented.
+/// 将来的に、この関数は標準サイズの文字からスモールキャピタルの文字を合成することをサポートする予定ですが、まだ実装されていません。
 ///
-/// # Smallcaps headings
-/// You can use a [show rule]($styling/#show-rules) to apply smallcaps
-/// formatting to all your headings. In the example below, we also center-align
-/// our headings and disable the standard bold font.
+/// # スモールキャピタルの見出し
+/// [showルール]($styling/#show-rules)を用いて見出しすべてにスモールキャピタルを適用できます。
+/// 以下の例では、見出しを中央揃えにし、通常の太字フォントの無効化も行っています。
 ///
 /// ```example
 /// #set par(justify: true)
@@ -45,10 +43,9 @@ use crate::text::TextElem;
 /// ```
 #[elem(title = "Small Capitals", Show)]
 pub struct SmallcapsElem {
-    /// Whether to turn uppercase letters into small capitals as well.
+    /// 大文字も同様にスモールキャピタルに変更するかどうか。
     ///
-    /// Unless overridden by a show rule, this enables the `c2sc` OpenType
-    /// feature.
+    /// showルールで上書きされない限り、これはOpenTypeフィーチャーの`c2sc`を有効化します。
     ///
     /// ```example
     /// #smallcaps(all: true)[UNICEF] is an
@@ -56,7 +53,7 @@ pub struct SmallcapsElem {
     /// ```
     #[default(false)]
     pub all: bool,
-    /// The content to display in small capitals.
+    /// スモールキャピタルで表示するコンテンツ。
     #[required]
     pub body: Content,
 }

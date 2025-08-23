@@ -9,14 +9,11 @@ yes = true
 idiomatic_version_file_enable_tools = []
 
 [tasks.generate-docs]
-run = "cargo test --package typst-docs --lib -- tests::test_docs --exact --nocapture"
+run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base /docs/"
 
 [tasks.generate-web]
 depends = ["install-website"]
-run = [
-    "bun install --frozen-lockfile",
-    "bun run build",
-]
+run = ["bun run build"]
 dir = "./website"
 
 [tasks.generate]

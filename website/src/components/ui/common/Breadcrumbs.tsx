@@ -1,3 +1,4 @@
+import { basePath } from "../../../metadata";
 import type { Page } from "../../../types/model";
 import { ChevronRightIcon, HomeIcon } from "../../icons";
 
@@ -10,7 +11,7 @@ export const Breadcrumbs = ({ path }: BreadcrumbsProps) => {
 		<nav class="flex justify-between px-3.5 py-1 border border-neutral-200/60 rounded-md">
 			<ol class="inline-flex flex-wrap items-center space-x-1 text-sm text-gray-600">
 				<li class="flex items-center h-full">
-					<a href="/docs/" class="py-1 hover:text-gray-800 transition-colors">
+					<a href={basePath} class="py-1 hover:text-gray-800 transition-colors">
 						<div class="w-4 h-4">
 							<HomeIcon />
 						</div>
