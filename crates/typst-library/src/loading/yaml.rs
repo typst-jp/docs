@@ -6,24 +6,24 @@ use crate::engine::Engine;
 use crate::foundations::{func, scope, Str, Value};
 use crate::loading::{DataSource, Load, Readable};
 
-/// Reads structured data from a YAML file.
+/// YAMLファイルから構造化データを読み込む。
 ///
-/// The file must contain a valid YAML object or array. YAML mappings will be
-/// converted into Typst dictionaries, and YAML sequences will be converted into
-/// Typst arrays. Strings and booleans will be converted into the Typst
-/// equivalents, null-values (`null`, `~` or empty ``) will be converted into
-/// `{none}`, and numbers will be converted to floats or integers depending on
-/// whether they are whole numbers. Custom YAML tags are ignored, though the
-/// loaded value will still be present.
+/// 読み込むファイルには有効なYAMLオブジェクトまたは配列が含まれていなければなりません。
+/// YAMLのマッピングはTypstの辞書に、
+/// YAMLのシーケンスはTypstの配列に変換されます。
+/// 文字列やブール値はTypstの対応する型に変換され、
+/// ヌル値（`null`、`~`、または空の``）は`{none}`に、
+/// 数値は整数値であれば整数型に、そうでなければ浮動小数点数型に変換されます。
+/// カスタムYAMLタグは無視されますが、読み込まれた値はそのまま保持されます。
 ///
-/// Be aware that integers larger than 2<sup>63</sup>-1 will be converted to
-/// floating point numbers, which may give an approximative value.
+/// 2<sup>63</sup>-1より大きな整数は浮動小数点数に変換されるため、
+/// 近似値になる可能性があることに留意してください。
 ///
-/// The YAML files in the example contain objects with authors as keys,
-/// each with a sequence of their own submapping with the keys
-/// "title" and "published"
+/// この例におけるYAMLファイルには著者名をキーとするオブジェクトが含まれており、
+/// それぞれの著者には`title`と`published`というキーを持つ
+/// サブマッピングのシーケンスが含まれています。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let bookshelf(contents) = {
 ///   for (author, works) in contents {
@@ -41,7 +41,7 @@ use crate::loading::{DataSource, Load, Readable};
 #[func(scope, title = "YAML")]
 pub fn yaml(
     engine: &mut Engine,
-    /// A [path]($syntax/#paths) to a YAML file or raw YAML bytes.
+    /// YAMLファイルの[パス]($syntax/#paths)、または生のYAMLバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
     let data = source.load(engine.world)?;
@@ -52,21 +52,21 @@ pub fn yaml(
 
 #[scope]
 impl yaml {
-    /// Reads structured data from a YAML string/bytes.
+    /// YAMLの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode YAML")]
-    #[deprecated = "`yaml.decode` is deprecated, directly pass bytes to `yaml` instead"]
+    #[deprecated = "`yaml.decode`は非推奨です。代わりにバイト列を直接`yaml`に渡してください。"]
     pub fn decode(
         engine: &mut Engine,
-        /// YAML data.
+        /// YAMLデータ。
         data: Spanned<Readable>,
     ) -> SourceResult<Value> {
         yaml(engine, data.map(Readable::into_source))
     }
 
-    /// Encode structured data into a YAML string.
+    /// 構造化データをYAML文字列にエンコードする。
     #[func(title = "Encode YAML")]
     pub fn encode(
-        /// Value to be encoded.
+        /// エンコード対象の値。
         value: Spanned<Value>,
     ) -> SourceResult<Str> {
         let Spanned { v: value, span } = value;
