@@ -1,4 +1,4 @@
-Data loading from external files.
+外部ファイルからのデータの読み込み。
 
-These functions help you with loading and embedding data, for example from the
-results of an experiment.
+これらの関数は、
+例えば実験結果のようなデータの読み込みと埋め込みを支援します。

@@ -6,7 +6,7 @@ labels:
 body:
   - type: markdown
     attributes:
-      value: 翻訳ドキュメントの新規追加をご提案いただきありがとうございます。[Issueを作成する前に同様のIssueが既に存在しないかを確認してください。](https://github.com/typst-jp/typst-jp.github.io/issues?q=is%3Aopen)
+      value: 翻訳ドキュメントの新規追加をご提案いただきありがとうございます。[Issueを作成する前に同様のIssueが既に存在しないかを確認してください。](https://github.com/typst-jp/docs/issues?q=is%3Aopen)
   - type: textarea
     attributes:
       label: 対象ドキュメント

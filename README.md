@@ -1,6 +1,6 @@
 # Typst 日本語ドキュメント (非公式)
 
-[![CI/CD for website](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/website.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/typst-jp.github.io/actions/workflows/website.yml)
+[![CI/CD for website](https://github.com/typst-jp/docs/actions/workflows/website.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/docs/actions/workflows/website.yml)
 
 > [!NOTE]
 > For English version, please refer to [README.en.md](README.en.md).
@@ -14,7 +14,7 @@
 
 ## 翻訳に参加するには
 
-[貢献ガイドライン (CONTRIBUTING.md)](CONTRIBUTING.md) をご覧の上、[Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls) を作成してください。[Issue](https://github.com/typst-jp/typst-jp.github.io/issues)での質問や議論も歓迎します。
+[貢献ガイドライン (CONTRIBUTING.md)](CONTRIBUTING.md) をご覧の上、[Pull Request](https://github.com/typst-jp/docs/pulls) を作成してください。[Issue](https://github.com/typst-jp/docs/issues)での質問や議論も歓迎します。
 
 ご質問などがある場合は、[「くみはんクラブ」のDiscordサーバー](https://discord.gg/9xF7k4aAuH)に参加してご連絡ください。
 

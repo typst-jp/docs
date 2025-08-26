@@ -11,8 +11,7 @@ export const typstOfficialDocsUrl: `http://${string}/` | `https://${string}/` =
 /** The GitHub organization URL. */
 export const githubOrganizationUrl = "https://github.com/typst-jp";
 /** The GitHub repository URL. */
-export const githubRepositoryUrl =
-	"https://github.com/typst-jp/typst-jp.github.io";
+export const githubRepositoryUrl = "https://github.com/typst-jp/docs";
 /** The Discord server invite URL. */
 export const discordServerUrl = "https://discord.gg/9xF7k4aAuH";
 /** The origin URL of the deployed site, used for metadata. Note that the base path should not be included. */

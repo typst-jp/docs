@@ -105,18 +105,18 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 | コードブロック             | `{{ let x = 1; x + 2 }}`      | [Scripting]($scripting/#blocks)       |
 | コンテンツブロック         | `{[*Hello*]}`                 | [Scripting]($scripting/#blocks)       |
 | 括弧付き式                 | `{(1 + 2)}`                   | [Scripting]($scripting/#blocks)       |
-| 配列                       | `{(1, 2, 3)}`                 | [Array]($type/$array)                 |
-| 辞書                       | `{(a: "hi", b: 2)}`           | [Dictionary]($type/$dictionary)       |
+| 配列                       | `{(1, 2, 3)}`                 | [Array]($array)                 |
+| 辞書                       | `{(a: "hi", b: 2)}`           | [Dictionary]($dictionary)       |
 | 単項演算子                 | `{-x}`                        | [Scripting]($scripting/#operators)    |
 | 二項演算子                 | `{x + y}`                     | [Scripting]($scripting/#operators)    |
 | 代入                       | `{x = 1}`                     | [Scripting]($scripting/#operators)    |
 | フィールドアクセス         | `{x.y}`                       | [Scripting]($scripting/#fields)       |
 | メソッド呼び出し           | `{x.flatten()}`               | [Scripting]($scripting/#methods)      |
-| 関数呼び出し               | `{min(x, y)}`                 | [Function]($type/$function)           |
-| 引数展開                   | `{min(..nums)}`               | [Arguments]($type/$arguments)         |
-| 無名関数                   | `{(x, y) => x + y}`           | [Function]($type/$function)           |
+| 関数呼び出し               | `{min(x, y)}`                 | [Function]($function)           |
+| 引数展開                   | `{min(..nums)}`               | [Arguments]($arguments)         |
+| 無名関数                   | `{(x, y) => x + y}`           | [Function]($function)           |
 | letバインディング          | `{let x = 1}`                 | [Scripting]($scripting/#bindings)     |
-| 名前付き関数               | `{let f(x) = 2 * x}`          | [Function]($type/$function)           |
+| 名前付き関数               | `{let f(x) = 2 * x}`          | [Function]($function)           |
 | setルール                  | `{set text(14pt)}`            | [Styling]($styling/#set-rules)        |
 | set-ifルール               | `{set text(..) if .. }`       | [Styling]($styling/#set-rules)        |
 | show-setルール             | `{show heading: set block(..)}` | [Styling]($styling/#show-rules)     |
@@ -127,7 +127,7 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 | forループ                  | `{for x in (1, 2, 3) {..}}`   | [Scripting]($scripting/#loops)        |
 | whileループ                | `{while x < 10 {..}}`         | [Scripting]($scripting/#loops)        |
 | ループ制御フロー           | `{break, continue}`           | [Scripting]($scripting/#loops)        |
-| 関数からのリターン         | `{return x}`                  | [Function]($type/$function)           |
+| 関数からのリターン         | `{return x}`                  | [Function]($function)           |
 | モジュールをインクルード   | `{include "bar.typ"}`         | [Scripting]($scripting/#modules)      |
 | モジュールをインポート     | `{import "bar.typ"}`          | [Scripting]($scripting/#modules)      |
 | モジュールからのインポート | `{import "bar.typ": a, b, c}` | [Scripting]($scripting/#modules)      |

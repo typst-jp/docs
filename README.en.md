@@ -12,6 +12,6 @@ The actual working web version can be viewed at the following URL.
 
 ## How to participate in translation
 
-Please refer to the [Translation Guidelines (CONTRIBUTING.md)](CONTRIBUTING.md) and create a [Pull Request](https://github.com/typst-jp/typst-jp.github.io/pulls). Questions and discussions are also welcome in [Issues](https://github.com/typst-jp/typst-jp.github.io/issues).
+Please refer to the [Translation Guidelines (CONTRIBUTING.md)](CONTRIBUTING.md) and create a [Pull Request](https://github.com/typst-jp/docs/pulls). Questions and discussions are also welcome in [Issues](https://github.com/typst-jp/docs/issues).
 
 Also, feel free to join our Discord server [Kumihan Club](https://discord.gg/9xF7k4aAuH) to get in touch with us directly.

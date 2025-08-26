@@ -7,21 +7,20 @@ use crate::layout::{Em, Length};
 use crate::text::{variant, SpaceElem, TextElem, TextSize};
 use crate::World;
 
-/// Renders text in subscript.
+/// テキストを下付き文字でレンダリング。
 ///
-/// The text is rendered smaller and its baseline is lowered.
+/// テキストは小さくレンダリングされ、ベースラインは低くなります。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// Revenue#sub[yearly]
 /// ```
 #[elem(title = "Subscript", Show)]
 pub struct SubElem {
-    /// Whether to prefer the dedicated subscript characters of the font.
+    /// フォントの下付き文字専用の字形を優先するかどうか。
     ///
-    /// If this is enabled, Typst first tries to transform the text to subscript
-    /// codepoints. If that fails, it falls back to rendering lowered and shrunk
-    /// normal letters.
+    /// 有効化された場合、Typstは最初にテキストを下付き文字のコードポイントに変換できるか試します。
+    /// 失敗した場合は、通常の文字を縮小し、位置を下げる挙動にフォールバックします。
     ///
     /// ```example
     /// N#sub(typographic: true)[1]
@@ -30,19 +29,17 @@ pub struct SubElem {
     #[default(true)]
     pub typographic: bool,
 
-    /// The baseline shift for synthetic subscripts. Does not apply if
-    /// `typographic` is true and the font has subscript codepoints for the
-    /// given `body`.
+    /// 下付き文字の合成に用いるベースラインのシフト。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが下付き文字のコードポイントを持っている場合は適用されません。
     #[default(Em::new(0.2).into())]
     pub baseline: Length,
 
-    /// The font size for synthetic subscripts. Does not apply if
-    /// `typographic` is true and the font has subscript codepoints for the
-    /// given `body`.
+    /// 下付き文字の合成に用いるフォントの大きさ。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが下付き文字のコードポイントを持っている場合は適用されません。
     #[default(TextSize(Em::new(0.6).into()))]
     pub size: TextSize,
 
-    /// The text to display in subscript.
+    /// 下付き文字で表示するテキスト。
     #[required]
     pub body: Content,
 }
@@ -66,21 +63,20 @@ impl Show for Packed<SubElem> {
     }
 }
 
-/// Renders text in superscript.
+/// テキストを上付き文字でレンダリング。
 ///
-/// The text is rendered smaller and its baseline is raised.
+/// テキストは小さくレンダリングされ、ベースラインは高くなります。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// 1#super[st] try!
 /// ```
 #[elem(title = "Superscript", Show)]
 pub struct SuperElem {
-    /// Whether to prefer the dedicated superscript characters of the font.
+    /// フォントの上付き文字専用の字形を優先するかどうか。
     ///
-    /// If this is enabled, Typst first tries to transform the text to
-    /// superscript codepoints. If that fails, it falls back to rendering
-    /// raised and shrunk normal letters.
+    /// 有効化された場合、Typstは最初にテキストを上付き文字のコードポイントに変換できるか試します。
+    /// 失敗した場合は、通常の文字を縮小し、位置を上げる挙動にフォールバックします。
     ///
     /// ```example
     /// N#super(typographic: true)[1]
@@ -89,19 +85,17 @@ pub struct SuperElem {
     #[default(true)]
     pub typographic: bool,
 
-    /// The baseline shift for synthetic superscripts. Does not apply if
-    /// `typographic` is true and the font has superscript codepoints for the
-    /// given `body`.
+    /// 上付き文字の合成に用いるベースラインのシフト。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが上付き文字のコードポイントを持っている場合は適用されません。
     #[default(Em::new(-0.5).into())]
     pub baseline: Length,
 
-    /// The font size for synthetic superscripts. Does not apply if
-    /// `typographic` is true and the font has superscript codepoints for the
-    /// given `body`.
+    /// 上付き文字の合成に用いるフォントの大きさ。
+    /// `typographic`がtrueかつ与えられた`body`に対してフォントが上付き文字のコードポイントを持っている場合は適用されません。
     #[default(TextSize(Em::new(0.6).into()))]
     pub size: TextSize,
 
-    /// The text to display in superscript.
+    /// 上付き文字で表示するテキスト。
     #[required]
     pub body: Content,
 }

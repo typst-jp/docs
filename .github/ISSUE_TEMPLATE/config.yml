@@ -4,5 +4,5 @@ contact_links:
     url: https://github.com/typst/typst
     about: 原文やTypst本体に対しての提案は公式のリポジトリにお問い合わせください。
   - name: その他の提案
-    url: https://github.com/typst-jp/typst-jp.github.io/issues/new
+    url: https://github.com/typst-jp/docs/issues/new
     about: 当てはまるものがない場合は、テンプレートを使用せずにIssueを作成できます。
