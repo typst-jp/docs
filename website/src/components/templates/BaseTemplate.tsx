@@ -1,7 +1,7 @@
 import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
 import { basePath, originUrl, typstOfficialDocsUrl } from "../../metadata";
-import { Translation, t } from "../../translations";
+import { Translation, translation } from "../../translation";
 import type { Page } from "../../types/model";
 import { joinPath, removeBasePath } from "../../utils/path";
 import { getTranslationStatus } from "../../utils/translationStatus";
@@ -55,11 +55,11 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 		removeBasePath(basePath, route),
 	);
 	return (
-		<html lang={t("lang")} class="scroll-pt-24">
+		<html lang={translation.htmlLang()} class="scroll-pt-24">
 			<head>
 				<meta charSet="utf-8" />
 				<title>
-					{title} – {t("documentationTitle")}
+					{title} – {translation.documentationTitle()}
 				</title>
 				<meta name="description" content={description} />
 				<meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -67,7 +67,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 				<meta property="og:url" content={absoluteRouteUrl} />
 				<meta
 					property="og:title"
-					content={`${title} – ${t("documentationTitle")}`}
+					content={`${title} – ${translation.documentationTitle()}`}
 				/>
 				<meta property="og:site_name" content="Typst" />
 				<meta property="og:description" content={description} />
@@ -181,7 +181,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 									type="button"
 									class="text-gray-600"
 									x-on:click="sidebarOpen = false"
-									aria-label={t("ariaCloseMenu")}
+									aria-label={translation.closeMenu()}
 								>
 									<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 										<CloseIcon />
@@ -221,7 +221,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										<div class="w-4 h-4 mr-1 ">
 											<WorldIcon />
 										</div>
-										<Translation translationKey="originalArticle" />
+										<Translation translationKey="openOfficialDocs" />
 									</a>
 								</div>
 							)}
@@ -241,7 +241,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 										<WorldIcon />
 									</div>
 									<span class="text-sm font-medium text-gray-800 group-hover:text-gray-900 transition-colors">
-										<Translation translationKey="originalArticle" />
+										<Translation translationKey="openOfficialDocs" />
 									</span>
 									<div class="w-4 h-4 ml-2 text-gray-400 transition-colors">
 										<ChevronRightIcon />
@@ -264,7 +264,7 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 											</strong>
 										</div>
 										<p class="text-sm text-gray-600">
-											<Translation translationKey="learnTypst" />
+											<Translation translationKey="tutorialDescription" />
 										</p>
 									</a>
 									<a
@@ -276,11 +276,11 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 												<InfoCircleIcon />
 											</div>
 											<strong class="text-base font-semibold text-gray-800">
-												<Translation translationKey="referenceTo" />
+												<Translation translationKey="reference" />
 											</strong>
 										</div>
 										<p class="text-sm text-gray-600">
-											<Translation translationKey="reference" />
+											<Translation translationKey="referenceDescription" />
 										</p>
 									</a>
 								</div>

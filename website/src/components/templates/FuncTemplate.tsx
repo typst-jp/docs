@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { Translation, t } from "../../translations";
+import { Translation } from "../../translation";
 import type { Func, FuncBody, Page } from "../../types/model";
 import {
 	FunctionDefinition,
@@ -104,7 +104,7 @@ function ScopedDefinitions({
 					// Therefore, it is sufficient to only annotate the direct `parent`.
 					<>
 						<code>{parent.name}</code>
-						<Translation translationKey="definitionOf" />
+						<Translation translationKey="definitionOf" name={parent.name} />
 					</>
 				) : (
 					<Translation translationKey="definition" />

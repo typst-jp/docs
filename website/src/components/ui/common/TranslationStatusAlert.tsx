@@ -1,6 +1,6 @@
 import type { FC, JSXNode } from "hono/jsx";
 import { twMerge } from "tailwind-merge";
-import { Translation } from "../../../translations";
+import { Translation } from "../../../translation";
 import type { TranslationStatus } from "../../../utils/translationStatus";
 import { LanguageIcon } from "../../icons";
 
@@ -9,8 +9,8 @@ type StatusConfig = {
 	borderColor: string;
 	textColor: string;
 	iconColor: string;
-	label: JSXNode;
-	message: string;
+	label: ReturnType<typeof Translation>;
+	message: ReturnType<typeof Translation>;
 };
 
 const getStatusConfig = (status: TranslationStatus): StatusConfig => {
@@ -48,7 +48,7 @@ const getStatusConfig = (status: TranslationStatus): StatusConfig => {
 				borderColor: "border-cyan-200",
 				textColor: "text-cyan-800",
 				iconColor: "text-cyan-600",
-				label: <Translation translationKey="originalVersion" />,
+				label: <Translation translationKey="communityContent" />,
 				message: <Translation translationKey="contentAddedByCommunity" />,
 			};
 	}

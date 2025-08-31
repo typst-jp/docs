@@ -1,5 +1,5 @@
 import { basePath } from "../../../metadata";
-import { Translation } from "../../../translations";
+import { Translation } from "../../../translation";
 
 export const SiteTitle = () => {
 	return (

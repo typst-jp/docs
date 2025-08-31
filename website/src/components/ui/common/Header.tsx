@@ -5,7 +5,7 @@ import {
 	typstOfficialUrl,
 	version,
 } from "../../../metadata";
-import { Translation, t } from "../../../translations";
+import { Translation, translation } from "../../../translation";
 import { calculateTranslationProgressRate } from "../../../utils/translationStatus";
 import {
 	DiscordIcon,
@@ -112,7 +112,7 @@ export const Header = () => {
 										href={typstOfficialDocsUrl}
 										class="text-sm text-gray-600 hover:text-gray-800 transition-colors"
 									>
-										<Translation translationKey="typstOfficialDoc" />
+										<Translation translationKey="typstOfficialDocs" />
 									</a>
 								</li>
 							</ul>
@@ -137,7 +137,7 @@ export const Header = () => {
 							type="button"
 							class="p-2 text-gray-600 hover:text-gray-800 transition-colors"
 							x-on:click="searchOpen = true"
-							aria-label={t("ariaOpenSearch")}
+							aria-label={translation.openSearch()}
 						>
 							<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 								<SearchIcon />
@@ -147,7 +147,7 @@ export const Header = () => {
 							type="button"
 							class="p-1 bg-white rounded-md border border-gray-200"
 							x-on:click="sidebarOpen = !sidebarOpen"
-							aria-label={t("ariaOpenMenu")}
+							aria-label={translation.openMenu()}
 						>
 							<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 								<MenuIcon />

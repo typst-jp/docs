@@ -1,4 +1,4 @@
-import type { FC, JSX, PropsWithChildren } from "hono/jsx";
+import type { FC } from "hono/jsx";
 import {
 	discordServerUrl,
 	githubOrganizationUrl,
@@ -6,31 +6,28 @@ import {
 	typstOfficialDocsUrl,
 } from "./metadata";
 
-type MyMap = {
-	[key: string]: string;
-};
-
-export const menuTranslations: MyMap = {
-	lang: "ja",
-	ariaCloseMenu: "メニューを閉じる",
-	documentationTitle: "Typstドキュメント日本語版",
-	ariaShowInformation: "の詳細情報を表示",
-	ariaClose: "閉じる",
-	ariaOpenSearch: "検索を開く",
-	ariaOpenMenu: "メニューを開く",
-	ariaCloseSearch: "検索を閉じる",
-};
-
-export const t = (key: keyof MyMap) => {
-	if (typeof menuTranslations[key] === "string") {
-		return menuTranslations[key];
-	}
-	throw new Error(`Not translation found for ${key}`);
-};
+/**
+ * Translation dictionary for UI attributes and aria labels.
+ *
+ * @example
+ * translation.closeMenu()
+ * translation.showInformation({ name: "foo" })
+ */
+export const translation = {
+	htmlLang: () => "ja",
+	documentationTitle: () => "Typstドキュメント日本語版",
+	close: () => "閉じる",
+	closeMenu: () => "メニューを閉じる",
+	closeSearch: () => "検索を閉じる",
+	openMenu: () => "メニューを開く",
+	openSearch: () => "検索を開く",
+	showInformation: (props: {
+		name: string;
+	}) => `${props.name}の詳細情報を表示`,
+} as const;
 
 type TranslationKey =
 	| "definition"
-	| "definitionOf"
 	| "constructor"
 	| "tableOfContents"
 	| "untranslated"
@@ -40,61 +37,56 @@ type TranslationKey =
 	| "document"
 	| "langVersion"
 	| "elementFunction"
-	| "elementFunctionDesc"
+	| "elementFunctionDescription"
 	| "contextFunction"
-	| "contextFunctionDesc"
+	| "contextFunctionDescription"
 	| "definitionTooltip"
-	| "definitionTooltipDesc"
+	| "definitionTooltipDescription"
 	| "variadic"
 	| "translationRate"
-	| "variadicDesc"
-	| "typstOfficialDoc"
+	| "variadicDescription"
+	| "typstOfficialDocs"
 	| "typstOfficialWebsite"
-	| "originalVersion"
+	| "communityContent"
 	| "contentAddedByCommunity"
 	| "partiallyTranslated"
 	| "partiallyTranslatedMessage"
 	| "translated"
 	| "translatedMessage"
-	| "contextFunctionDesc"
-	| "information"
+	| "contextFunctionDescription"
+	| "siteNoticeBannerTitle"
 	| "tutorial"
-	| "learnTypst"
+	| "tutorialDescription"
+	| "referenceDescription"
 	| "reference"
-	| "referenceTo"
-	| "originalArticle"
+	| "openOfficialDocs"
 	| "search"
 	| "argument"
-	| "argumentDesc"
+	| "argumentDescription"
 	| "required"
-	| "requiredDesc"
+	| "requiredDescription"
 	| "positional"
-	| "positionalDesc"
+	| "positionalDescription"
 	| "defaultValue"
 	| "stringValues"
 	| "showExample"
 	| "settable"
-	| "settableDesc"
+	| "settableDescription"
 	| "previousPage"
 	| "nextPage";
 
 export type TranslationProps =
 	| { translationKey: TranslationKey }
-	| PropsWithChildren<{ translationKey: "banner"; version: string }>;
+	| { translationKey: "definitionOf"; name: string }
+	| { translationKey: "siteNoticeBannerDescription"; version: string };
 
-/*
-This is inferred as the following type:
-
-type TranslationProps = {
-    translationKey: "lang";
-} |
-	...
-| {
-    translationKey: "banner";
-    children?: string | number | boolean | Promise<string> | JSXNode | Child[] | null;
-}
-*/
-
+/**
+ * Translation component for UI text, descriptions, and other content to be embedded as JSX.
+ *
+ * @example
+ * <Translation translationKey="definition" />
+ * <Translation translationKey="siteNoticeBannerDescription" version="1.0.0" />
+ */
 export const Translation: FC<TranslationProps> = (props) => {
 	switch (props.translationKey) {
 		case "definition":
@@ -102,7 +94,11 @@ export const Translation: FC<TranslationProps> = (props) => {
 		case "constructor":
 			return <>コンストラクタ</>;
 		case "definitionOf":
-			return <>の定義</>;
+			return (
+				<>
+					<code>{props.name}</code>の定義
+				</>
+			);
 		case "search":
 			return <>検索</>;
 		case "defaultValue":
@@ -117,21 +113,21 @@ export const Translation: FC<TranslationProps> = (props) => {
 			return <>次のページ</>;
 		case "previousPage":
 			return <>前のページ</>;
-		case "reference":
+		case "referenceDescription":
 			return (
 				<>
 					Typstのあらゆる構文、概念、型、関数についての詳細なリファレンスです。
 				</>
 			);
-		case "learnTypst":
+		case "tutorialDescription":
 			return <>一歩一歩、Typstの使い方を学びましょう。</>;
 		case "tutorial":
 			return <>チュートリアル</>;
-		case "originalArticle":
+		case "openOfficialDocs":
 			return <>原文（英語）を開く</>;
-		case "referenceTo":
+		case "reference":
 			return <>リファレンス</>;
-		case "typstOfficialDoc":
+		case "typstOfficialDocs":
 			return <>Typst公式ドキュメント</>;
 		case "typstOfficialWebsite":
 			return <>Typst公式サイト</>;
@@ -141,7 +137,7 @@ export const Translation: FC<TranslationProps> = (props) => {
 			return (
 				<>このページはまだ翻訳されていません。原文の内容が表示されています。</>
 			);
-		case "originalVersion":
+		case "communityContent":
 			return <>日本語版オリジナル</>;
 		case "contentAddedByCommunity":
 			return (
@@ -163,7 +159,7 @@ export const Translation: FC<TranslationProps> = (props) => {
 			return <>このページは日本語に翻訳済みです。</>;
 		case "elementFunction":
 			return <>要素関数</>;
-		case "elementFunctionDesc":
+		case "elementFunctionDescription":
 			return (
 				<>
 					要素関数は<code>set</code>ルールや<code>show</code>
@@ -172,13 +168,13 @@ export const Translation: FC<TranslationProps> = (props) => {
 			);
 		case "contextFunction":
 			return <>コンテキスト関数</>;
-		case "contextFunctionDesc":
+		case "contextFunctionDescription":
 			return (
 				<>コンテキスト関数は、コンテキストが既知の場合にのみ使用できます。</>
 			);
 		case "definitionTooltip":
 			return <>定義</>;
-		case "definitionTooltipDesc":
+		case "definitionTooltipDescription":
 			return (
 				<>
 					これらの関数や型には、関連する定義を持たせることができます。定義にアクセスするには、対象の関数や型の名前を指定した後に、ピリオド区切りで定義名を記述します。
@@ -186,24 +182,24 @@ export const Translation: FC<TranslationProps> = (props) => {
 			);
 		case "argument":
 			return <>引数</>;
-		case "argumentDesc":
+		case "argumentDescription":
 			return (
 				<>引数は関数への入力値です。関数名の後に括弧で囲んで指定します。</>
 			);
 		case "variadic":
 			return <>可変長引数</>;
-		case "variadicDesc":
+		case "variadicDescription":
 			return <>可変長引数は複数回指定することができます。</>;
 
 		case "positional":
 			return <>位置引数</>;
-		case "positionalDesc":
+		case "positionalDescription":
 			return (
 				<>位置引数は順序通りに指定することで、引数名を省略して設定できます。</>
 			);
 		case "required":
 			return <>必須引数</>;
-		case "requiredDesc":
+		case "requiredDescription":
 			return <>必須引数は、関数を呼び出す際に必ず指定しなければなりません。</>;
 		case "document":
 			return <>ドキュメント</>;
@@ -213,14 +209,16 @@ export const Translation: FC<TranslationProps> = (props) => {
 			return <>翻訳率</>;
 		case "settable":
 			return <>設定可能引数</>;
-		case "settableDesc":
+		case "settableDescription":
 			return (
 				<>
 					設定可能引数は、<code>set</code>
 					ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。,
 				</>
 			);
-		case "banner":
+		case "siteNoticeBannerTitle":
+			return <>情報 / Info</>;
+		case "siteNoticeBannerDescription":
 			return (
 				<>
 					当サイトは、Typst GmbHの許諾を得て、日本語コミュニティ「
@@ -235,11 +233,22 @@ export const Translation: FC<TranslationProps> = (props) => {
 					でのIssueやPull Requestを歓迎します。コミュニティにご興味のある方は
 					<a href={discordServerUrl}>Discordサーバー「くみはんクラブ」</a>
 					にぜひご参加ください。
+					<br />
+					This site provides a Japanese translation of the{" "}
+					<a href={typstOfficialDocsUrl}>
+						Typst v{props.version} documentation
+					</a>{" "}
+					maintained by the "
+					<a href={githubOrganizationUrl}>Typst Japanese Community</a>" with
+					permission from Typst GmbH. We recommend using this alongside the{" "}
+					<a href={typstOfficialDocsUrl}>official documentation</a>. We welcome
+					contributions through Issues and Pull Requests on{" "}
+					<a href={githubRepositoryUrl}>our GitHub repository</a> for both
+					translation improvements and website enhancements. Feel free to join{" "}
+					<a href={discordServerUrl}>our Discord server "Kumihan Club"</a>.
 				</>
 			);
-		case "information":
-			return <>情報</>;
 		default:
-			throw new Error("No translationKey found for Translation Element");
+			return null;
 	}
 };

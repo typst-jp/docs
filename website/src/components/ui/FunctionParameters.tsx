@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { basePath } from "../../metadata";
-import { Translation } from "../../translations";
+import { Translation } from "../../translation";
 import type { Func } from "../../types/model";
 import { joinPath } from "../../utils/path";
 import { ChevronRightIcon } from "../icons";

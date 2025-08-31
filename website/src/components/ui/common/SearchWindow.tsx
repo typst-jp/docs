@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { basePath } from "../../../metadata";
-import { Translation, t } from "../../../translations";
+import { Translation, translation } from "../../../translation";
 import { joinPath } from "../../../utils/path";
 import { CloseIcon } from "../../icons";
 
@@ -24,7 +24,7 @@ export const SearchWindow: FC = () => {
 					type="button"
 					class="text-gray-400 hover:text-gray-600"
 					x-on:click="searchOpen = false"
-					aria-label={t("ariaCloseSearch")}
+					aria-label={translation.closeSearch()}
 				>
 					<div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors">
 						<CloseIcon />
