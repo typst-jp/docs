@@ -1,4 +1,5 @@
 import type { FC } from "hono/jsx";
+import type { TooltipProps } from "./components/ui/Tooltip";
 import {
 	discordServerUrl,
 	githubOrganizationUrl,
@@ -21,9 +22,29 @@ export const translation = {
 	closeSearch: () => "検索を閉じる",
 	openMenu: () => "メニューを開く",
 	openSearch: () => "検索を開く",
-	showInformation: (props: {
-		name: string;
-	}) => `${props.name}の詳細情報を表示`,
+	showInformation: (props: { name: string }) => `${props.name}の詳細情報を表示`,
+	tooltipKind: (props: { kind: TooltipProps["kind"] }) => {
+		switch (props.kind) {
+			case "element":
+				return "要素関数";
+			case "contextual":
+				return "コンテキスト関数";
+			case "definitions":
+				return "定義";
+			case "parameters":
+				return "引数";
+			case "variadic":
+				return "可変長引数";
+			case "settable":
+				return "設定可能引数";
+			case "positional":
+				return "位置引数";
+			case "required":
+				return "必須引数";
+			default:
+				return props.kind;
+		}
+	},
 } as const;
 
 type TranslationKey =

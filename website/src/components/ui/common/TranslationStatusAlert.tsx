@@ -1,4 +1,4 @@
-import type { FC, JSXNode } from "hono/jsx";
+import type { FC } from "hono/jsx";
 import { twMerge } from "tailwind-merge";
 import { Translation } from "../../../translation";
 import type { TranslationStatus } from "../../../utils/translationStatus";

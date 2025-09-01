@@ -1,8 +1,8 @@
-import type { FC, JSX, JSXNode } from "hono/jsx";
-import { Translation, TranslationProps, translation } from "../../translation";
+import type { FC } from "hono/jsx";
+import { Translation, translation } from "../../translation";
 import { CloseIcon, HelpCircleIcon } from "../icons";
 
-type TooltipProps = {
+export type TooltipProps = {
 	kind:
 		| "element"
 		| "contextual"
@@ -102,7 +102,7 @@ export const Tooltip: FC<TooltipProps> = ({ kind }) => {
 				type="button"
 				class="w-4 h-4 hover:bg-black/10 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
 				aria-label={translation.showInformation({
-					name: String(content.label),
+					name: translation.tooltipKind({ kind }),
 				})}
 				tabindex={0}
 				{...{ "x-on:click": "helpOpen = true" }}
