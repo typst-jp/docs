@@ -65,7 +65,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 					{param.strings.length > 0 && (
 						<div class="mt-3">
 							<h5 class="text-sm font-medium text-gray-700 mb-2">
-								<Translation translationKey="stringValues" />:
+								<Translation translationKey="stringValues" />
 							</h5>
 							<ul class="type-args space-y-2 pl-4">
 								{param.strings.map((string) => (
@@ -87,7 +87,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 					{param.default && (
 						<p class="mt-3 text-sm">
 							<span class="font-medium">
-								<Translation translationKey="defaultValue" />:
+								<Translation translationKey="defaultValue" />
 							</span>{" "}
 							<span class="text-gray-700">
 								<HtmlContent html={param.default} />

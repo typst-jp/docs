@@ -5,6 +5,7 @@ import {
 	githubOrganizationUrl,
 	githubRepositoryUrl,
 	typstOfficialDocsUrl,
+	version,
 } from "./metadata";
 
 /**
@@ -73,6 +74,7 @@ type TranslationKey =
 	| "translated"
 	| "translatedMessage"
 	| "siteNoticeBannerTitle"
+	| "siteNoticeBannerDescription"
 	| "tutorial"
 	| "tutorialDescription"
 	| "referenceDescription"
@@ -95,15 +97,13 @@ type TranslationKey =
 
 export type TranslationProps =
 	| { translationKey: TranslationKey }
-	| { translationKey: "definitionOf"; name: string }
-	| { translationKey: "siteNoticeBannerDescription"; version: string };
+	| { translationKey: "definitionOf"; name: string };
 
 /**
  * Translation component for UI text, descriptions, and other content to be embedded as JSX.
  *
  * @example
  * <Translation translationKey="definition" />
- * <Translation translationKey="siteNoticeBannerDescription" version="1.0.0" />
  */
 export const Translation: FC<TranslationProps> = (props) => {
 	switch (props.translationKey) {
@@ -120,9 +120,9 @@ export const Translation: FC<TranslationProps> = (props) => {
 		case "search":
 			return <>検索</>;
 		case "defaultValue":
-			return <>デフォルト値</>;
+			return <>デフォルト値：</>;
 		case "stringValues":
-			return <>使用可能な文字列値</>;
+			return <>使用可能な文字列値：</>;
 		case "showExample":
 			return <>例を表示</>;
 		case "tableOfContents":
@@ -241,9 +241,7 @@ export const Translation: FC<TranslationProps> = (props) => {
 				<>
 					当サイトは、Typst GmbHの許諾を得て、日本語コミュニティ「
 					<a href={githubOrganizationUrl}>Typst Japanese Community</a>」が
-					<a href={typstOfficialDocsUrl}>
-						Typst v{props.version}の公式ドキュメント
-					</a>
+					<a href={typstOfficialDocsUrl}>Typst v{version}の公式ドキュメント</a>
 					を翻訳したものです。誤訳や古い情報が含まれている可能性があるため、
 					<a href={typstOfficialDocsUrl}>公式ドキュメント</a>
 					との併用を推奨します。翻訳の改善やサイトの機能向上について、
@@ -253,9 +251,7 @@ export const Translation: FC<TranslationProps> = (props) => {
 					にぜひご参加ください。
 					<br />
 					This site provides a Japanese translation of the{" "}
-					<a href={typstOfficialDocsUrl}>
-						Typst v{props.version} documentation
-					</a>{" "}
+					<a href={typstOfficialDocsUrl}>Typst v{version} documentation</a>{" "}
 					maintained by the "
 					<a href={githubOrganizationUrl}>Typst Japanese Community</a>" with
 					permission from Typst GmbH. We recommend using this alongside the{" "}

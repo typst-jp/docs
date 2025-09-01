@@ -60,7 +60,7 @@ samp {
 }
 
 .info-box::before {
-	content: "情報";
+	content: "💡";
 	@apply absolute top-0 left-0 bg-cyan-200 text-cyan-800 text-xs font-bold py-1 px-3 rounded-br;
 }
 
