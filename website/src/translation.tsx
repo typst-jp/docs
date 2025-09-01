@@ -32,8 +32,6 @@ type TranslationKey =
 	| "tableOfContents"
 	| "untranslated"
 	| "untranslatedMessage"
-	| "tableOfContents"
-	| "tableOfContents"
 	| "document"
 	| "langVersion"
 	| "elementFunction"
@@ -53,7 +51,6 @@ type TranslationKey =
 	| "partiallyTranslatedMessage"
 	| "translated"
 	| "translatedMessage"
-	| "contextFunctionDescription"
 	| "siteNoticeBannerTitle"
 	| "tutorial"
 	| "tutorialDescription"
@@ -213,7 +210,7 @@ export const Translation: FC<TranslationProps> = (props) => {
 			return (
 				<>
 					設定可能引数は、<code>set</code>
-					ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。,
+					ルールを用いて設定でき、それ以降で使用するデフォルト値を変更できます。
 				</>
 			);
 		case "siteNoticeBannerTitle":

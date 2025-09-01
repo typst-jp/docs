@@ -103,7 +103,6 @@ function ScopedDefinitions({
 					// Currently, the scope has at most two levels.
 					// Therefore, it is sufficient to only annotate the direct `parent`.
 					<>
-						<code>{parent.name}</code>
 						<Translation translationKey="definitionOf" name={parent.name} />
 					</>
 				) : (
