@@ -1,8 +1,8 @@
 /**
- * 型名からリンクを取得する
+ * Retrieve a link from a type name.
  *
- * @param parameterType 型名
- * @returns リンク
+ * @param parameterType The type name.
+ * @returns The link.
  */
 export const type2href = (parameterType: string): string | null => {
 	const foundationSet = new Set([

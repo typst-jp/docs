@@ -1,15 +1,17 @@
 import type { Page } from "../types/model";
 
 /**
- * ドキュメントの階層構造を平坦化する
- * パンくずリストと前後のページ情報を取得するために使用する
+ * Flattens the hierarchical structure of documents.
+ * Used to retrieve breadcrumb navigation and previous/next page information.
  *
- * @param docs ページ情報の配列
- * @returns [平坦化されたページ情報のリスト, ページ情報のパス情報]
+ * @param docs An array of page objects containing document information.
+ * @returns A tuple containing:
+ *          - A flattened list of page objects
+ *          - An array of arrays representing the path information for each page object
  */
 export const flattenDocs = (docs: Page[]): [Page[], Page[][]] => {
-	const flattenedPages: Page[] = []; // 平坦化されたページ情報のリスト
-	const pagePaths: Page[][] = []; // ページ情報[i]のパス情報
+	const flattenedPages: Page[] = []; // List to store flattened page objects.
+	const pagePaths: Page[][] = []; // Path information for each page object [i].
 
 	const _flattenDocs = (page: Page, pagePath: Page[]): void => {
 		flattenedPages.push(page);

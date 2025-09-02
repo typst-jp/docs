@@ -1,8 +1,8 @@
-// docs.jsonの型
-// cf. docs/src/model.rs
+// Type definitions for `docs.json`.
+// Reference: `docs/src/model.rs`
 
 /**
- * ページ情報
+ * Page information.
  */
 export type Page = {
 	route: string;
@@ -15,7 +15,7 @@ export type Page = {
 };
 
 /**
- * アウトライン情報
+ * Outline information.
  */
 export type OutlineItem = {
 	id: string;
@@ -24,7 +24,7 @@ export type OutlineItem = {
 };
 
 /**
- * 本文情報
+ * Body content information.
  */
 export type Body =
 	| HtmlBody

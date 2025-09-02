@@ -1,11 +1,11 @@
 import type { Body, Page } from "../types/model";
 
 /**
- * ページの種類を判定するための型ガード関数
+ * Type guard function to determine if a page belongs to a specific kind.
  *
- * @param page - 判定するページ
- * @param kind - 判定する種類
- * @returns - ページが指定された種類であるかどうか
+ * @param page - The page to check.
+ * @param kind - The kind to check against.
+ * @returns - A type predicate indicating whether the page is of the specified kind.
  **/
 export const isPageOfKind = <K extends Body["kind"]>(
 	page: Page,

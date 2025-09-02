@@ -1,17 +1,17 @@
 {
 	"$schema": "http://json-schema.org/draft-07/schema#",
-	"title": "ページの翻訳状態",
-	"description": "各ページの翻訳状態を管理するためのJSONファイル",
+	"title": "Page Translation Status",
+	"description": "A JSON file for managing the translation status of each page",
 	"type": "object",
 	"properties": {
 		"$schema": {
 			"type": "string",
-			"description": "このJSONファイルで使用されるJSONスキーマへの参照"
+			"description": "Reference to the JSON schema used in this file"
 		}
 	},
 	"additionalProperties": {
 		"type": "string",
 		"enum": ["translated", "partially_translated", "untranslated", "community"],
-		"description": "ページの翻訳状態"
+		"description": "The translation status of the page"
 	}
 }

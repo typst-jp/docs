@@ -27,7 +27,7 @@ describe("translationStatus", () => {
 	});
 
 	describe("loadTranslationStatus", () => {
-		it("ファイルが存在する場合にJSONを読み込んで返す", async () => {
+		it("should read and return JSON when the file exists", async () => {
 			const { loadTranslationStatus } = await import("./translationStatus");
 
 			const mockData = {
@@ -45,7 +45,7 @@ describe("translationStatus", () => {
 			expect(result).toEqual(mockData);
 		});
 
-		it("ファイルが存在しない場合に空のオブジェクトを返す", async () => {
+		it("should return an empty object when the file does not exist", async () => {
 			const { loadTranslationStatus } = await import("./translationStatus");
 
 			mockFs.existsSync.mockReturnValue(false);
@@ -59,7 +59,7 @@ describe("translationStatus", () => {
 	});
 
 	describe("saveTranslationStatus", () => {
-		it("翻訳状態をJSONファイルに保存する", async () => {
+		it("should save translation status to a JSON file", async () => {
 			const { saveTranslationStatus } = await import("./translationStatus");
 
 			const status: TranslationStatusMap = {
@@ -87,7 +87,7 @@ describe("translationStatus", () => {
 			mockFs.existsSync.mockReturnValue(true);
 		});
 
-		it("新しいルートを未翻訳として登録する", async () => {
+		it("should register new routes as untranslated", async () => {
 			const { registerRoutes } = await import("./translationStatus");
 
 			const existingStatus = {
@@ -108,7 +108,7 @@ describe("translationStatus", () => {
 			expect(savedData["/docs/new-page/"]).toBe("untranslated");
 		});
 
-		it("既存のルートは変更しない", async () => {
+		it("should not modify existing routes", async () => {
 			const { registerRoutes } = await import("./translationStatus");
 
 			const existingStatus = {
@@ -130,7 +130,7 @@ describe("translationStatus", () => {
 			mockFs.existsSync.mockReturnValue(true);
 		});
 
-		it("翻訳進捗率を正しく計算する", async () => {
+		it("correctly calculates the translation progress rate", async () => {
 			const { calculateTranslationProgressRate } = await import(
 				"./translationStatus"
 			);
@@ -151,7 +151,7 @@ describe("translationStatus", () => {
 			expect(result).toBe(0.625);
 		});
 
-		it("originalページは計算から除外される", async () => {
+		it("original pages are excluded from calculation", async () => {
 			const { calculateTranslationProgressRate } = await import(
 				"./translationStatus"
 			);
@@ -160,8 +160,8 @@ describe("translationStatus", () => {
 				$schema: "./translation-status.schema.json",
 				"/docs/page1/": "translated", // 1.0
 				"/docs/page2/": "partially_translated", // 0.5
-				"/docs/original1/": "community", // 除外
-				"/docs/original2/": "community", // 除外
+				"/docs/original1/": "community", // Excluded
+				"/docs/original2/": "community", // Excluded
 				"/docs/page3/": "untranslated", // 0.0
 			};
 
@@ -173,7 +173,7 @@ describe("translationStatus", () => {
 			expect(result).toBe(0.5);
 		});
 
-		it("全てoriginalページの場合は0を返す", async () => {
+		it("returns 0 when all pages are original", async () => {
 			const { calculateTranslationProgressRate } = await import(
 				"./translationStatus"
 			);
@@ -191,7 +191,7 @@ describe("translationStatus", () => {
 			expect(result).toBe(0);
 		});
 
-		it("ページが存在しない場合は0を返す", async () => {
+		it("returns 0 when a page does not exist", async () => {
 			const { calculateTranslationProgressRate } = await import(
 				"./translationStatus"
 			);
@@ -207,7 +207,7 @@ describe("translationStatus", () => {
 			expect(result).toBe(0);
 		});
 
-		it("$schemaキーは計算から除外する", async () => {
+		it("excludes the $schema key from calculation", async () => {
 			const { calculateTranslationProgressRate } = await import(
 				"./translationStatus"
 			);
@@ -226,7 +226,7 @@ describe("translationStatus", () => {
 	});
 
 	describe("getTranslationStatus", () => {
-		it("指定されたルートの翻訳状態を返す", async () => {
+		it("returns the translation status of the specified route", async () => {
 			const { getTranslationStatus } = await import("./translationStatus");
 
 			const status = {
@@ -243,7 +243,7 @@ describe("translationStatus", () => {
 			);
 		});
 
-		it('存在しないルートの場合は"untranslated"を返す', async () => {
+		it('returns "untranslated" for a non-existent route', async () => {
 			const { getTranslationStatus } = await import("./translationStatus");
 
 			const status = {
@@ -256,7 +256,7 @@ describe("translationStatus", () => {
 			expect(getTranslationStatus("/docs/nonexistent/")).toBe("untranslated");
 		});
 
-		it("2回目の呼び出しではキャッシュを使用する", async () => {
+		it("uses cache for the second and subsequent calls", async () => {
 			vi.resetModules();
 			const { getTranslationStatus: freshGetTranslationStatus } = await import(
 				"./translationStatus"

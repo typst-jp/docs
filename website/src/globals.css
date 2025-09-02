@@ -68,13 +68,13 @@ samp {
 	@apply pt-4;
 }
 
-/* Alpine.jsのx-cloak属性を持つ要素を非表示にする */
+/* Hide elements with the x-cloak attribute from Alpine.js */
 [x-cloak] {
 	display: none !important;
 	visibility: hidden;
 }
 
-/* Inline codeのスタイルをGitHub風にする */
+/* Style inline code blocks with GitHub-style appearance */
 .prose :not(pre) > code {
 	background-color: rgba(175, 184, 193, 0.2);
 	font-size: 0.875em;
@@ -91,7 +91,7 @@ samp {
 	}
 }
 
-/* Code blockをMonokai風にする */
+/* Style code blocks with Monokai theme */
 pre code span.typ-comment {
 	color: #88846f;
 }

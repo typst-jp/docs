@@ -17,8 +17,8 @@ const TRANSLATION_STATUS_FILE = path.resolve(
 );
 
 /**
- * ページの翻訳状態を管理しているJSONファイルを読み込む。ファイルが存在しない場合は空のオブジェクトを返す。
- * @returns ページの翻訳状態を示すオブジェクト。
+ * Loads the JSON file managing translation status for a page. If the file does not exist, returns an empty object.
+ * @returns An object representing the translation status of the page.
  */
 export const loadTranslationStatus = (): TranslationStatusMap => {
 	if (fs.existsSync(TRANSLATION_STATUS_FILE)) {
@@ -30,8 +30,8 @@ export const loadTranslationStatus = (): TranslationStatusMap => {
 };
 
 /**
- * ページの翻訳状態を管理しているJSONファイルに書き込む。
- * @param status ページの翻訳状態を示すオブジェクト。
+ * Writes the page's translation status to the JSON file.
+ * @param status An object representing the translation status of the page.
  */
 export const saveTranslationStatus = (status: TranslationStatusMap): void => {
 	const json = {
@@ -46,8 +46,8 @@ export const saveTranslationStatus = (status: TranslationStatusMap): void => {
 };
 
 /**
- * 新規ページのルートを未翻訳として登録する。既に登録されているルートは無視される。
- * @param routes 登録するページのルートの配列。
+ * Registers new page routes as untranslated. Existing routes are ignored.
+ * @param routes An array of page route paths to register.
  */
 export const registerRoutes = (routes: string[]): void => {
 	const status = loadTranslationStatus();
@@ -66,10 +66,10 @@ export const registerRoutes = (routes: string[]): void => {
 };
 
 /**
- * 翻訳の進捗率を計算する。
- * `translated`は1.0、`partially_translated`は0.5の重みを持つ。
- * `original`は翻訳対象外のため計算から除外される。
- * @returns [0.0, 1.0]の範囲で表される翻訳率
+ * Calculates the translation progress rate.
+ * `translated` has a weight of 1.0, `partially_translated` has a weight of 0.5.
+ * `original` routes are excluded from calculation as they are not translatable.
+ * @returns A translation rate between 0.0 and 1.0.
  */
 export const calculateTranslationProgressRate = (): number => {
 	const status = loadTranslationStatus();
@@ -99,9 +99,9 @@ export const calculateTranslationProgressRate = (): number => {
 let translationStatusCache: TranslationStatusMap | null = null;
 
 /**
- * 指定されたルートの翻訳状態を取得する。
- * @param route 翻訳状態を取得するページのルート
- * @returns 翻訳状態。存在しない場合は"untranslated"を返す。
+ * Retrieves the translation status for a specified route.
+ * @param route The page route for which to retrieve the translation status.
+ * @returns The translation status, or "untranslated" if the route does not exist.
  */
 export const getTranslationStatus = (route: string): TranslationStatus => {
 	if (translationStatusCache === null) {

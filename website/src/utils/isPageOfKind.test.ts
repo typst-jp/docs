@@ -12,7 +12,7 @@ describe("isPageOfKind", () => {
 		children: [],
 	});
 
-	it("htmlページを正しく判定する", () => {
+	it("correctly identifies HTML pages", () => {
 		const htmlPage: Page = {
 			...createBasePage(),
 			body: {
@@ -29,7 +29,7 @@ describe("isPageOfKind", () => {
 		expect(isPageOfKind(htmlPage, "symbols")).toBe(false);
 	});
 
-	it("funcページを正しく判定する", () => {
+	it("correctly identifies func pages", () => {
 		const funcPage: Page = {
 			...createBasePage(),
 			body: {
@@ -61,7 +61,7 @@ describe("isPageOfKind", () => {
 		expect(isPageOfKind(funcPage, "symbols")).toBe(false);
 	});
 
-	it("categoryページを正しく判定する", () => {
+	it("correctly identifies category pages", () => {
 		const categoryPage: Page = {
 			...createBasePage(),
 			body: {
@@ -84,7 +84,7 @@ describe("isPageOfKind", () => {
 		expect(isPageOfKind(categoryPage, "symbols")).toBe(false);
 	});
 
-	it("groupページを正しく判定する", () => {
+	it("correctly identifies group pages", () => {
 		const groupPage: Page = {
 			...createBasePage(),
 			body: {
@@ -106,7 +106,7 @@ describe("isPageOfKind", () => {
 		expect(isPageOfKind(groupPage, "symbols")).toBe(false);
 	});
 
-	it("typeページを正しく判定する", () => {
+	it("correctly identifies type pages", () => {
 		const typePage: Page = {
 			...createBasePage(),
 			body: {
@@ -131,7 +131,7 @@ describe("isPageOfKind", () => {
 		expect(isPageOfKind(typePage, "symbols")).toBe(false);
 	});
 
-	it("symbolsページを正しく判定する", () => {
+	it("correctly identifies symbols pages", () => {
 		const symbolsPage: Page = {
 			...createBasePage(),
 			body: {
@@ -153,7 +153,7 @@ describe("isPageOfKind", () => {
 		expect(isPageOfKind(symbolsPage, "type")).toBe(false);
 	});
 
-	it("型ガードとして正しく動作する", () => {
+	it("functions correctly as a type guard", () => {
 		const htmlPage: Page = {
 			...createBasePage(),
 			body: {
@@ -194,11 +194,11 @@ describe("isPageOfKind", () => {
 		}
 
 		if (isPageOfKind(htmlPage, "func")) {
-			expect.fail("この分岐は実行されるべきではない");
+			expect.fail("This branch should never be executed");
 		}
 	});
 
-	it("複数のページタイプを配列で処理する", () => {
+	it("handles multiple page types in an array", () => {
 		const pages: Page[] = [
 			{
 				...createBasePage(),

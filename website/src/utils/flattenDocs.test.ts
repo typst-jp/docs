@@ -20,14 +20,14 @@ describe("flattenDocs", () => {
 		children,
 	});
 
-	it("空の配列を渡すと空の結果を返す", () => {
+	it("should return an empty result when given an empty array", () => {
 		const [flattenedPages, pagePaths] = flattenDocs([]);
 
 		expect(flattenedPages).toEqual([]);
 		expect(pagePaths).toEqual([]);
 	});
 
-	it("子を持たない単一ページを平坦化する", () => {
+	it("should flatten a single page with no children", () => {
 		const page = createMockPage("/docs/", "Documentation");
 		const [flattenedPages, pagePaths] = flattenDocs([page]);
 
@@ -35,7 +35,7 @@ describe("flattenDocs", () => {
 		expect(pagePaths).toEqual([[page]]);
 	});
 
-	it("複数の子を持たないページを平坦化する", () => {
+	it("should flatten multiple pages with no children", () => {
 		const page1 = createMockPage("/docs/", "Documentation");
 		const page2 = createMockPage("/tutorial/", "Tutorial");
 		const [flattenedPages, pagePaths] = flattenDocs([page1, page2]);
@@ -44,7 +44,7 @@ describe("flattenDocs", () => {
 		expect(pagePaths).toEqual([[page1], [page2]]);
 	});
 
-	it("子を持つページを平坦化する", () => {
+	it("should flatten a page with children", () => {
 		const childPage = createMockPage("/docs/tutorial/", "Tutorial");
 		const parentPage = createMockPage("/docs/", "Documentation", [childPage]);
 		const [flattenedPages, pagePaths] = flattenDocs([parentPage]);
@@ -53,7 +53,7 @@ describe("flattenDocs", () => {
 		expect(pagePaths).toEqual([[parentPage], [parentPage, childPage]]);
 	});
 
-	it("複数階層のページを平坦化する", () => {
+	it("should flatten pages with multiple levels of children", () => {
 		const grandChildPage = createMockPage("/docs/tutorial/basics/", "Basics");
 		const childPage = createMockPage("/docs/tutorial/", "Tutorial", [
 			grandChildPage,
@@ -69,7 +69,7 @@ describe("flattenDocs", () => {
 		]);
 	});
 
-	it("複数の子を持つページを平坦化する", () => {
+	it("should flatten a page with multiple children", () => {
 		const child1 = createMockPage("/docs/tutorial/", "Tutorial");
 		const child2 = createMockPage("/docs/reference/", "Reference");
 		const parentPage = createMockPage("/docs/", "Documentation", [
@@ -86,7 +86,7 @@ describe("flattenDocs", () => {
 		]);
 	});
 
-	it("複雑な階層構造を平坦化する", () => {
+	it("should flatten a complex hierarchical structure", () => {
 		// docs/
 		//   ├── tutorial/
 		//   │   ├── basics/
@@ -130,7 +130,7 @@ describe("flattenDocs", () => {
 		]);
 	});
 
-	it("複数のルートページを持つ階層構造を平坦化する", () => {
+	it("should flatten a hierarchical structure with multiple root pages", () => {
 		const tutorialChild = createMockPage("/tutorial/basics/", "Basics");
 		const tutorial = createMockPage("/tutorial/", "Tutorial", [tutorialChild]);
 
@@ -148,7 +148,7 @@ describe("flattenDocs", () => {
 		]);
 	});
 
-	it("パス情報が正しく設定される", () => {
+	it("should correctly set path information", () => {
 		const grandChild = createMockPage("/a/b/c/", "C");
 		const child = createMockPage("/a/b/", "B", [grandChild]);
 		const parent = createMockPage("/a/", "A", [child]);
