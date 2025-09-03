@@ -100,7 +100,7 @@ pub fn pow(
     span: Span,
     /// べき乗の底（てい）。
     ///
-    /// 値が[`10進小数`]の場合、指数は[整数]($int)でなければなりません。
+    /// 値が[`decimal`]の場合、指数は[整数]($int)でなければなりません。
     base: DecNum,
     /// べき乗の指数。
     exponent: Spanned<Num>,
