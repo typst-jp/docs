@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { Translation } from "../../translation";
+import { Translation } from "../../translation/";
 import type { Page, TypeBody } from "../../types/model";
 import { FunctionDisplay, Tooltip } from "../ui";
 import { HtmlContent } from "../ui/HtmlContent";

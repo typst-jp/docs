@@ -1,4 +1,4 @@
-import { Translation } from "../../../translation";
+import { Translation } from "../../../translation/";
 import type { OutlineItem } from "../../../types/model";
 
 export type TableOfContentsProps = {

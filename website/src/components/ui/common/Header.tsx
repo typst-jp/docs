@@ -5,7 +5,7 @@ import {
 	typstOfficialUrl,
 	version,
 } from "../../../metadata";
-import { Translation, translation } from "../../../translation";
+import { Translation, translation } from "../../../translation/";
 import { calculateTranslationProgressRate } from "../../../utils/translationStatus";
 import {
 	DiscordIcon,

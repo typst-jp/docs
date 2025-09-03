@@ -1,7 +1,7 @@
 import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
 import { basePath, originUrl, typstOfficialDocsUrl } from "../../metadata";
-import { Translation, translation } from "../../translation";
+import { Translation, translation } from "../../translation/";
 import type { Page } from "../../types/model";
 import { joinPath, removeBasePath } from "../../utils/path";
 import { getTranslationStatus } from "../../utils/translationStatus";

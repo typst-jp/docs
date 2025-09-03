@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { basePath } from "../../../metadata";
-import { Translation, translation } from "../../../translation";
+import { Translation, translation } from "../../../translation/";
 import { joinPath } from "../../../utils/path";
 import { CloseIcon } from "../../icons";
 

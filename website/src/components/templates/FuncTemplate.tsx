@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { Translation } from "../../translation";
+import { Translation } from "../../translation/";
 import type { Func, FuncBody, Page } from "../../types/model";
 import {
 	FunctionDefinition,
