@@ -56,7 +56,7 @@ export const Translation: TranslationComponent = (props) => {
 		case "showExample":
 			return <>Show example</>;
 		case "tableOfContents":
-			return <>Table of contents</>;
+			return <>On this page</>;
 		case "nextPage":
 			return <>Next page</>;
 		case "previousPage":
