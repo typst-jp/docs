@@ -180,7 +180,7 @@ export const Translation: TranslationComponent = (props) => {
 		case "siteNoticeBannerDescription":
 			return (
 				<>
-					This site is generated using the sitatic site generator developed by
+					This site is generated using the static site generator developed by
 					the <a href="https://github.com/typst-community">Typst Community</a>.
 					Please adjust the text content of this banner according to your usage
 					requirements. At Typst GmbH's request, when publishing documentation,
