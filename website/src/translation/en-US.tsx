@@ -17,7 +17,7 @@ export const translation: TranslationObject = {
 			case "element":
 				return "Element";
 			case "contextual":
-				return "Context";
+				return "Contextual";
 			case "definitions":
 				return "Definition";
 			case "parameters":
