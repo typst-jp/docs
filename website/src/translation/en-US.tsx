@@ -14,7 +14,7 @@ export const translation: TranslationObject = {
 	tooltipKind: (props: { kind: TooltipProps["kind"] }) => {
 		switch (props.kind) {
 			case "element":
-				return "Element function";
+				return "Element";
 			case "contextual":
 				return "Context function";
 			case "definitions":
