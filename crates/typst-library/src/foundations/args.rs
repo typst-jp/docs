@@ -78,7 +78,7 @@ impl Args {
         self.items.iter().filter(|slot| slot.name.is_none()).count()
     }
 
-    /// 指定したインデックスに一引数を挿入します。
+    /// 指定したインデックスに位置引数を挿入します。
     pub fn insert(&mut self, index: usize, span: Span, value: Value) {
         self.items.insert(
             index,
