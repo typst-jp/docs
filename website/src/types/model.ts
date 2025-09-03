@@ -2,7 +2,7 @@
 // Reference: `docs/src/model.rs`
 
 /**
- * Page information.
+ * Details about a documentation page and its children.
  */
 export type Page = {
 	route: string;
