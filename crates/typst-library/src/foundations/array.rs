@@ -217,7 +217,7 @@ impl Array {
         self.0.push(value);
     }
 
-    /// 配列末尾の項目を削除して返します。配列が空の場合はエラーになります。
+    /// 配列末尾の要素を削除して返します。配列が空の場合はエラーになります。
     #[func]
     pub fn pop(&mut self) -> StrResult<Value> {
         self.0.pop().ok_or_else(array_is_empty)
@@ -296,7 +296,7 @@ impl Array {
         self.contains_impl(&value, &mut (engine, span))
     }
 
-    /// 指定した関数が`{true}`を返す項目を検索し、最初に見つかった項目を返します。
+    /// 指定した関数が`{true}`を返す要素を検索し、最初に見つかった要素を返します。
     /// 一致するものがなければ`{none}`を返します。
     #[func]
     pub fn find(
@@ -318,7 +318,7 @@ impl Array {
         Ok(None)
     }
 
-    /// 指定した関数が`{true}`を返す項目を検索し、最初に見つかった項目の
+    /// 指定した関数が`{true}`を返す要素を検索し、最初に見つかった要素の
     /// インデックスを返します。一致するものがなければ`{none}`を返します。
     #[func]
     pub fn position(
