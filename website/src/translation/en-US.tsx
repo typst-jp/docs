@@ -3,7 +3,7 @@ import type { TranslationComponent, TranslationObject } from "./";
 
 export const translation: TranslationObject = {
 	htmlLang: () => "en",
-	documentationTitle: () => "Typst Documentation (English Version)",
+	documentationTitle: () => "Typst Documentation (English)",
 	close: () => "Close",
 	closeMenu: () => "Close menu",
 	closeSearch: () => "Close search",
@@ -16,19 +16,19 @@ export const translation: TranslationObject = {
 			case "element":
 				return "Element";
 			case "contextual":
-				return "Context function";
+				return "Context";
 			case "definitions":
 				return "Definition";
 			case "parameters":
 				return "Parameter";
 			case "variadic":
-				return "Variadic parameter";
+				return "Variadic";
 			case "settable":
-				return "Settable parameter";
+				return "Settable";
 			case "positional":
-				return "Positional parameter";
+				return "Positional";
 			case "required":
-				return "Required parameter";
+				return "Required";
 			default:
 				return props.kind;
 		}
@@ -93,8 +93,8 @@ export const Translation: TranslationComponent = (props) => {
 		case "contentAddedByCommunity":
 			return (
 				<>
-					This page contains content that is not part of the official documentation,
-					added independently by the community.
+					This page contains content that is not part of the official
+					documentation, added independently by the community.
 				</>
 			);
 		case "partiallyTranslated":
@@ -110,7 +110,7 @@ export const Translation: TranslationComponent = (props) => {
 		case "translatedMessage":
 			return <>This page has been translated into English.</>;
 		case "elementFunction":
-			return <>Element function</>;
+			return <>Element</>;
 		case "elementFunctionDescription":
 			return (
 				<>
@@ -119,7 +119,7 @@ export const Translation: TranslationComponent = (props) => {
 				</>
 			);
 		case "contextFunction":
-			return <>Context function</>;
+			return <>Context</>;
 		case "contextFunctionDescription":
 			return <>Context functions can only be used when the context is known.</>;
 		case "definitionTooltip":
@@ -142,11 +142,11 @@ export const Translation: TranslationComponent = (props) => {
 				</>
 			);
 		case "variadic":
-			return <>Variadic parameter</>;
+			return <>Variadic</>;
 		case "variadicDescription":
 			return <>Variadic parameters can be specified multiple times.</>;
 		case "positional":
-			return <>Positional parameter</>;
+			return <>Positional</>;
 		case "positionalDescription":
 			return (
 				<>
@@ -155,7 +155,7 @@ export const Translation: TranslationComponent = (props) => {
 				</>
 			);
 		case "required":
-			return <>Required parameter</>;
+			return <>Required</>;
 		case "requiredDescription":
 			return (
 				<>Required parameters must be specified when calling the function.</>
@@ -163,11 +163,11 @@ export const Translation: TranslationComponent = (props) => {
 		case "document":
 			return <>Document</>;
 		case "langVersion":
-			return <>English Version</>;
+			return <>English</>;
 		case "translationRate":
-			return <>Translation rate</>;
+			return <>Translated</>;
 		case "settable":
-			return <>Settable parameter</>;
+			return <>Settable</>;
 		case "settableDescription":
 			return (
 				<>
