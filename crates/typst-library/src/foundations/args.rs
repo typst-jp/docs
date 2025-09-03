@@ -136,7 +136,7 @@ impl Args {
 
     /// 最初の位置引数を取り出してキャストする。
     ///
-    /// 位置変数が残っていなければ、`missing argument: {what}`エラーを返します。
+    /// 位置引数が残っていなければ、`missing argument: {what}`エラーを返します。
     pub fn expect<T>(&mut self, what: &str) -> SourceResult<T>
     where
         T: FromValue<Spanned<Value>>,
