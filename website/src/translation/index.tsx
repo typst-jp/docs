@@ -65,7 +65,8 @@ type TranslationComponentKey =
 	| "settable"
 	| "settableDescription"
 	| "previousPage"
-	| "nextPage";
+	| "nextPage"
+	| "footer";
 
 export type TranslationComponentProps =
 	| { translationKey: TranslationComponentKey }

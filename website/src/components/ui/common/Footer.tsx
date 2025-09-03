@@ -3,6 +3,7 @@ import {
 	githubOrganizationUrl,
 	githubRepositoryUrl,
 } from "../../../metadata";
+import { Translation } from "../../../translation/";
 import { DiscordIcon, GitHubIcon } from "../../icons";
 
 export const Footer = () => {
@@ -32,13 +33,7 @@ export const Footer = () => {
 						</a>
 					</div>
 					<p class="mt-8 text-sm leading-6 text-center text-gray-600">
-						Translated by{" "}
-						<a
-							href={githubOrganizationUrl}
-							class="text-gray-600 hover:text-gray-800 transition-colors"
-						>
-							Typst Japanese Community
-						</a>
+						<Translation translationKey="footer" />
 					</p>
 				</div>
 			</section>

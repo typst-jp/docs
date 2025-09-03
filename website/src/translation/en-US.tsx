@@ -1,4 +1,5 @@
 import type { TooltipProps } from "../components/ui/Tooltip";
+import { githubOrganizationUrl } from "../metadata";
 import type { TranslationComponent, TranslationObject } from "./";
 
 export const translation: TranslationObject = {
@@ -190,6 +191,12 @@ export const Translation: TranslationComponent = (props) => {
 						Issue #874 on typst/typst
 					</a>
 					.
+				</>
+			);
+		case "footer":
+			return (
+				<>
+					Translated by <a href={githubOrganizationUrl}>Typst Community</a>
 				</>
 			);
 		default:

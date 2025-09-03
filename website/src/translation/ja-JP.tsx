@@ -198,6 +198,13 @@ export const Translation: TranslationComponent = (props) => {
 					<a href={discordServerUrl}>our Discord server "Kumihan Club"</a>.
 				</>
 			);
+		case "footer":
+			return (
+				<>
+					Translated by{" "}
+					<a href={githubOrganizationUrl}>Typst Japanese Community</a>
+				</>
+			);
 		default:
 			return null;
 	}
