@@ -15,7 +15,7 @@ export type Page = {
 };
 
 /**
- * Outline information.
+ * An element in the outline.
  */
 export type OutlineItem = {
 	id: string;
