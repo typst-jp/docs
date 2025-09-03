@@ -32,7 +32,7 @@ export const SiteNoticeBanner = () => {
 			class="fixed z-50 top-0 left-0 w-full h-auto py-2 duration-300 ease-out bg-white shadow-sm sm:py-4 -translate-y-full"
 		>
 			<div class="prose relative flex flex-col sm:flex-row items-start w-full px-3 sm:px-12 mx-auto max-w-7xl flex-wrap">
-				<div class="flex flex-col sm:flex-row w-full text-xs leading-6 text-black duration-150 ease-out opacity-80 hover:opacity-100 gap-3">
+				<div class="flex flex-col sm:flex-row w-full text-xs leading-6 text-black duration-150 ease-out opacity-80 gap-3">
 					<span class="flex items-center flex-shrink-0 gap-2">
 						<div class="w-4 h-4">
 							<InfoCircleIcon />
