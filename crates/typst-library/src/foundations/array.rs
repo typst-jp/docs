@@ -39,22 +39,19 @@ macro_rules! __array {
 #[doc(inline)]
 pub use crate::__array as array;
 
-/// A sequence of values.
+/// 複数の値からなるシーケンスです。
 ///
-/// You can construct an array by enclosing a comma-separated sequence of values
-/// in parentheses. The values do not have to be of the same type.
+/// コンマで区切った値の並びを括弧で囲むことで配列を作成できます。値の型が同じである必要はありません。
 ///
-/// You can access and update array items with the `.at()` method. Indices are
-/// zero-based and negative indices wrap around to the end of the array. You can
-/// iterate over an array using a [for loop]($scripting/#loops). Arrays can be
-/// added together with the `+` operator, [joined together]($scripting/#blocks)
-/// and multiplied with integers.
+/// 配列要素には`.at()`メソッドでアクセスしたり、更新したりできます。インデックスは0から始まり、
+/// 負の値のインデックスは配列末尾から数えられます。配列の反復処理には[forループ]($scripting/#loops)
+/// が使用できます。配列は`+`演算子で結合したり、[連結]($scripting/#blocks)したり、
+/// 整数値と掛け合わせたりできます。
 ///
-/// **Note:** An array of length one needs a trailing comma, as in `{(1,)}`.
-/// This is to disambiguate from a simple parenthesized expressions like `{(1 +
-/// 2) * 3}`. An empty array is written as `{()}`.
+/// **注：** 要素が1つしかない配列には,`{(1,)}`のように末尾にコンマが必要です。これは、
+/// `{(1 + 2) * 3}`のような括弧で囲まれた式と区別するためです。空の配列は`{()}`と表記します。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let values = (1, 7, 4, -3, 2)
 ///
@@ -154,11 +151,11 @@ impl Array {
 
 #[scope]
 impl Array {
-    /// Converts a value to an array.
+    /// 値を配列に変換します。
     ///
-    /// Note that this function is only intended for conversion of a collection-like
-    /// value to an array, not for creation of an array from individual items. Use
-    /// the array syntax `(1, 2, 3)` (or `(1,)` for a single-element array) instead.
+    /// この関数は、個々の要素から配列を作成するためのものではなく、コレクションのような値を配列に変換する
+    /// ことのみを目的としています。個々の要素から配列を作成する場合は、配列の構文である (1, 2, 3)
+    ///  (または、単一要素の配列の場合は (1,)) を使用してください。
     ///
     /// ```example
     /// #let hi = "Hello 😃"
@@ -166,43 +163,41 @@ impl Array {
     /// ```
     #[func(constructor)]
     pub fn construct(
-        /// The value that should be converted to an array.
+        /// 配列に変換したい値。
         value: ToArray,
     ) -> Array {
         value.0
     }
 
-    /// The number of values in the array.
+    /// 配列要素の個数を返します。
     #[func(title = "Length")]
     pub fn len(&self) -> usize {
         self.0.len()
     }
 
-    /// Returns the first item in the array. May be used on the left-hand side
-    /// of an assignment. Fails with an error if the array is empty.
+    /// 配列の先頭の要素を返します。代入文の左辺でも使用可能です。配列が空の場合はエラーに
+    /// なります。
     #[func]
     pub fn first(&self) -> StrResult<Value> {
         self.0.first().cloned().ok_or_else(array_is_empty)
     }
 
-    /// Returns the last item in the array. May be used on the left-hand side of
-    /// an assignment. Fails with an error if the array is empty.
+    /// 配列の末尾の要素を返します。代入文の左辺でも使用可能です。配列が空の場合はエラーに
+    /// なります。
     #[func]
     pub fn last(&self) -> StrResult<Value> {
         self.0.last().cloned().ok_or_else(array_is_empty)
     }
 
-    /// Returns the item at the specified index in the array. May be used on the
-    /// left-hand side of an assignment. Returns the default value if the index
-    /// is out of bounds or fails with an error if no default value was
-    /// specified.
+    /// 指定されたインデックスにある配列要素を返します。代入文の左辺でも使用可能です。
+    /// インデックスが範囲外である場合、デフォルト値が指定されていればそれの値が返されますが、
+    /// 指定されていなければエラーになります。
     #[func]
     pub fn at(
         &self,
-        /// The index at which to retrieve the item. If negative, indexes from
-        /// the back.
+        /// 要素を取得するインデックス。負の値を指定すると、配列末尾から数えます。
         index: i64,
-        /// A default value to return if the index is out of bounds.
+        /// インデックスが範囲外の場合に返されるデフォルト値。
         #[named]
         default: Option<Value>,
     ) -> StrResult<Value> {
@@ -212,35 +207,32 @@ impl Array {
             .ok_or_else(|| out_of_bounds_no_default(index, self.len()))
     }
 
-    /// Adds a value to the end of the array.
+    /// 配列の末尾に値を追加します。
     #[func]
     pub fn push(
         &mut self,
-        /// The value to insert at the end of the array.
+        /// 配列の末尾に挿入する値。
         value: Value,
     ) {
         self.0.push(value);
     }
 
-    /// Removes the last item from the array and returns it. Fails with an error
-    /// if the array is empty.
+    /// 配列末尾の項目を削除して返します。配列が空の場合はエラーになります。
     #[func]
     pub fn pop(&mut self) -> StrResult<Value> {
         self.0.pop().ok_or_else(array_is_empty)
     }
 
-    /// Inserts a value into the array at the specified index, shifting all
-    /// subsequent elements to the right. Fails with an error if the index is
-    /// out of bounds.
+    /// 指定されたインデックスに値を挿入し、それ以降の要素をすべて右にずらします。
+    /// インデックスが範囲外の場合はエラーになります。
     ///
-    /// To replace an element of an array, use [`at`]($array.at).
+    /// 配列の要素を置き換えるには[`at`]($array.at)メソッドを使用してください。
     #[func]
     pub fn insert(
         &mut self,
-        /// The index at which to insert the item. If negative, indexes from
-        /// the back.
+        /// 要素を挿入するインデックス。負の値を指定すると後ろから数えます。
         index: i64,
-        /// The value to insert into the array.
+        /// 配列に挿入する値。
         value: Value,
     ) -> StrResult<()> {
         let i = self.locate(index, true)?;
@@ -248,14 +240,13 @@ impl Array {
         Ok(())
     }
 
-    /// Removes the value at the specified index from the array and return it.
+    /// 指定されたインデックスにある値を配列から削除して返します。
     #[func]
     pub fn remove(
         &mut self,
-        /// The index at which to remove the item. If negative, indexes from
-        /// the back.
+        /// 要素を削除するインデックス。負の値を指定すると後ろから数えます。
         index: i64,
-        /// A default value to return if the index is out of bounds.
+        /// インデックスが範囲外の場合に返されるデフォルト値。
         #[named]
         default: Option<Value>,
     ) -> StrResult<Value> {
@@ -265,19 +256,19 @@ impl Array {
             .ok_or_else(|| out_of_bounds_no_default(index, self.len()))
     }
 
-    /// Extracts a subslice of the array. Fails with an error if the start or end
-    /// index is out of bounds.
+    /// 配列の一部を抽出します。開始インデックスまたは終了インデックスが範囲外の場合は
+    /// エラーになります。
     #[func]
     pub fn slice(
         &self,
-        /// The start index (inclusive). If negative, indexes from the back.
+        /// 開始インデックス（ここから）。負の値を指定すると、後ろから数えます。
         start: i64,
-        /// The end index (exclusive). If omitted, the whole slice until the end
-        /// of the array is extracted. If negative, indexes from the back.
+        /// 終了インデックス（この手前まで）。省略された場合、配列の最後までが抽出されます。
+        /// 負の値を指定した場合、後ろから数えます。
         #[default]
         end: Option<i64>,
-        /// The number of items to extract. This is equivalent to passing
-        /// `start + count` as the `end` position. Mutually exclusive with `end`.
+        /// 抽出する要素の個数。`start + count`を`end`位置として渡すのと同等です。
+        /// `end`と同時に使用することはできません。
         #[named]
         count: Option<i64>,
     ) -> StrResult<Array> {
@@ -290,29 +281,29 @@ impl Array {
         Ok(self.0[start..end].into())
     }
 
-    /// Whether the array contains the specified value.
+    /// 配列に指定された値が含まれているかどうかを調べます。
     ///
-    /// This method also has dedicated syntax: You can write `{2 in (1, 2, 3)}`
-    /// instead of `{(1, 2, 3).contains(2)}`.
+    /// このメソッドには専用の構文もあり、`{(1, 2, 3).contains(2)}`の代わりに
+    /// `{2 in (1, 2, 3)}`と書くこともできます。
     #[func]
     pub fn contains(
         &self,
         engine: &mut Engine,
         span: Span,
-        /// The value to search for.
+        /// 検索する値。
         value: Value,
     ) -> bool {
         self.contains_impl(&value, &mut (engine, span))
     }
 
-    /// Searches for an item for which the given function returns `{true}` and
-    /// returns the first match or `{none}` if there is no match.
+    /// 指定した関数が`{true}`を返す項目を検索し、最初に見つかった項目を返します。
+    /// 一致するものがなければ`{none}`を返します。
     #[func]
     pub fn find(
         &self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The function to apply to each item. Must return a boolean.
+        /// 各要素に適用する関数。戻り値は論理型でなくてはなりません。
         searcher: Func,
     ) -> SourceResult<Option<Value>> {
         for item in self.iter() {
@@ -327,14 +318,14 @@ impl Array {
         Ok(None)
     }
 
-    /// Searches for an item for which the given function returns `{true}` and
-    /// returns the index of the first match or `{none}` if there is no match.
+    /// 指定した関数が`{true}`を返す項目を検索し、最初に見つかった項目の
+    /// インデックスを返します。一致するものがなければ`{none}`を返します。
     #[func]
     pub fn position(
         &self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The function to apply to each item. Must return a boolean.
+        /// 各要素に適用する関数。戻り値は論理型でなくてはなりません。
         searcher: Func,
     ) -> SourceResult<Option<i64>> {
         for (i, item) in self.iter().enumerate() {
@@ -350,14 +341,10 @@ impl Array {
         Ok(None)
     }
 
-    /// Create an array consisting of a sequence of numbers.
-    ///
-    /// If you pass just one positional parameter, it is interpreted as the
-    /// `end` of the range. If you pass two, they describe the `start` and `end`
-    /// of the range.
-    ///
-    /// This function is available both in the array function's scope and
-    /// globally.
+    /// 数列で構成される配列を作成します。
+    /// 位置引数を1つだけ渡した場合、それは範囲の`終了`位置と解釈されます。
+    /// 2つ渡した場合は、範囲の`開始`と`終了`位置を示します。
+    /// この関数は、配列のスコープとグローバル・スコープの両方で利用可能です。
     ///
     /// ```example
     /// #range(5) \
@@ -369,14 +356,14 @@ impl Array {
     #[func]
     pub fn range(
         args: &mut Args,
-        /// The start of the range (inclusive).
+        /// 範囲の開始位置(ここから)。
         #[external]
         #[default]
         start: i64,
-        /// The end of the range (exclusive).
+        /// 範囲の終了位置（この手前まで）。
         #[external]
         end: i64,
-        /// The distance between the generated numbers.
+        /// 生成される数値間の距離。
         #[named]
         #[default(NonZeroI64::new(1).unwrap())]
         step: NonZeroI64,
@@ -400,14 +387,14 @@ impl Array {
         Ok(array)
     }
 
-    /// Produces a new array with only the items from the original one for which
-    /// the given function returns true.
+    /// 元の配列のうち、指定された関数が`true`を返す要素のみで構成される
+    /// 新たな配列を生成します。
     #[func]
     pub fn filter(
         &self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The function to apply to each item. Must return a boolean.
+        /// 各要素に適用する関数。戻り値は論理型でなくてはなりません。
         test: Func,
     ) -> SourceResult<Array> {
         let mut kept = EcoVec::new();
@@ -423,14 +410,13 @@ impl Array {
         Ok(kept.into())
     }
 
-    /// Produces a new array in which all items from the original one were
-    /// transformed with the given function.
+    /// 元の配列の各要素を指定した関数で変換した値で構成される、新たな配列を生成します。
     #[func]
     pub fn map(
         self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The function to apply to each item.
+        /// 各要素に適用する関数。
         mapper: Func,
     ) -> SourceResult<Array> {
         self.into_iter()
@@ -438,15 +424,14 @@ impl Array {
             .collect()
     }
 
-    /// Returns a new array with the values alongside their indices.
+    /// インデックスと値をペアにした新しい配列を返します。
     ///
-    /// The returned array consists of `(index, value)` pairs in the form of
-    /// length-2 arrays. These can be [destructured]($scripting/#bindings) with
-    /// a let binding or for loop.
+    /// 返される配列は、`(index, value)`ペアを要素とする、長さ2の配列で構成されます。
+    /// これらは、`let`バインディングや`for`ループで[分割]($scripting/#bindings)できます。
     #[func]
     pub fn enumerate(
         self,
-        /// The index returned for the first pair of the returned list.
+        /// リストの最初のペアに対応するインデックス。
         #[named]
         #[default(0)]
         start: i64,
@@ -465,29 +450,25 @@ impl Array {
             .collect()
     }
 
-    /// Zips the array with other arrays.
+    /// 配列を他の配列と一括り（zip）にします。
     ///
-    /// Returns an array of arrays, where the `i`th inner array contains all the
-    /// `i`th elements from each original array.
-    ///
-    /// If the arrays to be zipped have different lengths, they are zipped up to
-    /// the last element of the shortest array and all remaining elements are
-    /// ignored.
-    ///
-    /// This function is variadic, meaning that you can zip multiple arrays
-    /// together at once: `{(1, 2).zip(("A", "B"), (10, 20))}` yields
-    /// `{((1, "A", 10), (2, "B", 20))}`.
+    /// このメソッドは、配列の配列を返します。その`i`番目の内部配列には、元の各配列の`i`番目の
+    /// 要素がすべて含まれます。
+    /// zipされる配列の長さが異なる場合、最も短い配列の最後の要素までが処理され、残りの要素は
+    /// すべて無視されます。
+    /// この関数は可変長引数に対応しており、複数の配列を一度にzip可能です。例えば、
+    /// `{(1, 2).zip(("A", "B"), (10, 20))}`は`{((1, "A", 10), (2, "B", 20))}`を
+    /// 生成します。
     #[func]
     pub fn zip(
         self,
         args: &mut Args,
-        /// Whether all arrays have to have the same length.
-        /// For example, `{(1, 2).zip((1, 2, 3), exact: true)}` produces an
-        /// error.
+        /// すべての配列が同じ長さである必要があるかどうか。
+        /// 例えば、`{(1, 2).zip((1, 2, 3), exact: true)}`はエラーになります。
         #[named]
         #[default(false)]
         exact: bool,
-        /// The arrays to zip with.
+        /// zipする他の配列。
         #[external]
         #[variadic]
         others: Vec<Array>,
@@ -562,16 +543,15 @@ impl Array {
         Ok(out)
     }
 
-    /// Folds all items into a single value using an accumulator function.
+    /// 累算関数を使って、配列のすべての要素を1つの値に畳み込みます。
     #[func]
     pub fn fold(
         self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The initial value to start with.
+        /// 累算値の初期値。
         init: Value,
-        /// The folding function. Must have two parameters: One for the
-        /// accumulated value and one for an item.
+        /// 畳み込むための関数。この関数は、累算値と要素の2つの引数を取る必要があります。
         folder: Func,
     ) -> SourceResult<Value> {
         let mut acc = init;
@@ -581,14 +561,14 @@ impl Array {
         Ok(acc)
     }
 
-    /// Sums all items (works for all types that can be added).
+    /// すべての配列要素を合計します（加算可能なすべての型で動作します）。
     #[func]
     pub fn sum(
         self,
         engine: &mut Engine,
         span: Span,
-        /// What to return if the array is empty. Must be set if the array can
-        /// be empty.
+        /// 配列が空の場合に返される値。配列が空である可能性がある場合、
+        /// この値を設定する必要があります。
         #[named]
         default: Option<Value>,
     ) -> HintedStrResult<Value> {
@@ -603,13 +583,12 @@ impl Array {
         Ok(acc)
     }
 
-    /// Calculates the product all items (works for all types that can be
-    /// multiplied).
+    /// すべての配列要素の積を計算します（乗算可能なすべての型で動作します）。
     #[func]
     pub fn product(
         self,
-        /// What to return if the array is empty. Must be set if the array can
-        /// be empty.
+        /// 配列が空の場合に返される値。配列が空である可能性がある場合、
+        /// この値を設定する必要があります。
         #[named]
         default: Option<Value>,
     ) -> HintedStrResult<Value> {
@@ -624,13 +603,13 @@ impl Array {
         Ok(acc)
     }
 
-    /// Whether the given function returns `{true}` for any item in the array.
+    /// 指定した関数が配列内のいずれかの要素に対して`{true}`を返すかどうか。
     #[func]
     pub fn any(
         self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The function to apply to each item. Must return a boolean.
+        /// 各要素に適用する関数。戻り値は論理型でなくてはなりません。
         test: Func,
     ) -> SourceResult<bool> {
         for item in self {
@@ -642,13 +621,13 @@ impl Array {
         Ok(false)
     }
 
-    /// Whether the given function returns `{true}` for all items in the array.
+    /// 指定した関数が配列内のすべての要素に対して`{true}`を返すかどうか。
     #[func]
     pub fn all(
         self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The function to apply to each item. Must return a boolean.
+        /// 各要素に適用する関数。戻り値は論理型でなくてはなりません。
         test: Func,
     ) -> SourceResult<bool> {
         for item in self {
@@ -660,7 +639,7 @@ impl Array {
         Ok(true)
     }
 
-    /// Combine all nested arrays into a single flat one.
+    /// ネストされたすべての配列を、1つのフラットな配列に結合します。
     #[func]
     pub fn flatten(self) -> Array {
         let mut flat = EcoVec::with_capacity(self.0.len());
@@ -674,17 +653,17 @@ impl Array {
         flat.into()
     }
 
-    /// Return a new array with the same items, but in reverse order.
+    /// 元の配列と同じ要素を逆順に含む新しい配列を返します。
     #[func(title = "Reverse")]
     pub fn rev(self) -> Array {
         self.into_iter().rev().collect()
     }
 
-    /// Split the array at occurrences of the specified value.
+    /// 指定した値が出現する箇所で配列を分割します。
     #[func]
     pub fn split(
         &self,
-        /// The value to split at.
+        /// 分割する値。
         at: Value,
     ) -> Array {
         self.as_slice()
@@ -693,16 +672,16 @@ impl Array {
             .collect()
     }
 
-    /// Combine all items in the array into one.
+    /// 配列内のすべての要素を1つに結合します。
     #[func]
     pub fn join(
         self,
         engine: &mut Engine,
         span: Span,
-        /// A value to insert between each item of the array.
+        /// 配列の各要素の間に挿入する値。
         #[default]
         separator: Option<Value>,
-        /// An alternative separator between the last two items.
+        /// 最後の2つの要素の間に挿入する、代替の区切り文字。
         #[named]
         last: Option<Value>,
     ) -> StrResult<Value> {
@@ -731,12 +710,11 @@ impl Array {
         Ok(result)
     }
 
-    /// Returns an array with a copy of the separator value placed between
-    /// adjacent elements.
+    /// 隣接する要素の間に区切り文字のコピーを配置した新しい配列を返します。
     #[func]
     pub fn intersperse(
         self,
-        /// The value that will be placed between each adjacent element.
+        /// 隣接する各要素の間に配置される値。
         separator: Value,
     ) -> Array {
         // TODO: Use once stabilized:
@@ -760,12 +738,11 @@ impl Array {
         Array(vec)
     }
 
-    /// Splits an array into non-overlapping chunks, starting at the beginning,
-    /// ending with a single remainder chunk.
+    /// 配列を、重なり合わない複数のチャンク（塊）に分割します。
+    /// 配列の先頭から順に分割し、余りの要素は配列の末尾に1つのチャンクにまとめます。
     ///
-    /// All chunks but the last have `chunk-size` elements.
-    /// If `exact` is set to `{true}`, the remainder is dropped if it
-    /// contains less than `chunk-size` elements.
+    /// 最後のチャンク以外はすべて、`chunk-size`で指定された要素数になります。
+    /// `exact`を`{true}`に設定した場合、`chunk-size`より少ない余りの要素は破棄されます。
     ///
     /// ```example
     /// #let array = (1, 2, 3, 4, 5, 6, 7, 8)
@@ -775,9 +752,9 @@ impl Array {
     #[func]
     pub fn chunks(
         self,
-        /// How many elements each chunk may at most contain.
+        /// 各チャンクが含むことのできる最大要素数。
         chunk_size: NonZeroUsize,
-        /// Whether to keep the remainder if its size is less than `chunk-size`.
+        /// 余りの要素が`chunk-size`より少なかった場合、それをチャンクとして保持するかどうか。
         #[named]
         #[default(false)]
         exact: bool,
@@ -790,9 +767,10 @@ impl Array {
         }
     }
 
-    /// Returns sliding windows of `window-size` elements over an array.
+    /// ウィンドウ（指定幅の枠）を少しずつずらしながら、`window-size`で指定した数の配列要素を
+    /// ひとまとまりにした配列を要素として含む配列を作成して返します。
     ///
-    /// If the array length is less than `window-size`, this will return an empty array.
+    /// 配列の長さが`window-size`より短い場合、空の配列が返されます。
     ///
     /// ```example
     /// #let array = (1, 2, 3, 4, 5, 6, 7, 8)
@@ -810,15 +788,15 @@ impl Array {
             .collect()
     }
 
-    /// Return a sorted version of this array, optionally by a given key
-    /// function. The sorting algorithm used is stable.
+    /// 配列のソート（並び替え）されたバージョンを返します。オプションとして、キー関数による
+    /// ソートも可能です。使用されるソートアルゴリズムでは、同順位要素の前後関係は
+    /// 変化しません（安定）。
     ///
-    /// Returns an error if two values could not be compared or if the key
-    /// function (if given) yields an error.
+    /// 2つの値を比較できなかった場合、または（キー関数が与えられている場合で）キー関数がエラー
+    /// を返した場合、エラーが返されます。
     ///
-    /// To sort according to multiple criteria at once, e.g. in case of equality
-    /// between some criteria, the key function can return an array. The results
-    /// are in lexicographic order.
+    /// 複数の基準で同時にソートする場合、例えば、ある基準間で同順位になった場合などには、キー
+    /// 関数が配列を返すことができます。結果は辞書式順序で並べられます。
     ///
     /// ```example
     /// #let array = (
@@ -867,10 +845,10 @@ impl Array {
         result.map(|_| vec.into())
     }
 
-    /// Deduplicates all items in the array.
+    /// 配列内の要素の重複を解消します。
     ///
-    /// Returns a new array with all duplicate items removed. Only the first
-    /// element of each duplicate is kept.
+    /// 要素の重複をすべて解消した新しい配列を返します。重複があった要素は、そのうち最初の
+    /// ものだけが保持されます。
     ///
     /// ```example
     /// #(1, 1, 2, 3, 1).dedup()
@@ -881,8 +859,7 @@ impl Array {
         engine: &mut Engine,
         context: Tracked<Context>,
         span: Span,
-        /// If given, applies this function to the elements in the array to
-        /// determine the keys to deduplicate by.
+        /// 指定がある場合、この関数を配列の要素に適用し、重複を判定するためのキーを決定します。
         #[named]
         key: Option<Func>,
     ) -> SourceResult<Array> {
@@ -920,10 +897,9 @@ impl Array {
         Ok(Self(out))
     }
 
-    /// Converts an array of pairs into a dictionary.
-    /// The first value of each pair is the key, the second the value.
+    /// ペアの配列を辞書に変換します。各ペアの最初の値がキー、2番目の値が値になります。
     ///
-    /// If the same key occurs multiple times, the last value is selected.
+    /// 同じキーが複数回出現した場合、最後の値が優先されます。
     ///
     /// ```example
     /// #(
@@ -952,25 +928,19 @@ impl Array {
             .collect()
     }
 
-    /// Reduces the elements to a single one, by repeatedly applying a reducing
-    /// operation.
+    /// すべての要素に繰り返し集約操作を適用することで、要素を1つに集約します。
     ///
-    /// If the array is empty, returns `{none}`, otherwise, returns the result
-    /// of the reduction.
+    /// 配列が空の場合は`{none}`を返し、そうでない場合は集約結果を返します。
+    /// 集約関数は、2つの引数（"累算値"と要素）を取る関数です。
     ///
-    /// The reducing function is a closure with two arguments: an "accumulator",
-    /// and an element.
-    ///
-    /// For arrays with at least one element, this is the same as [`array.fold`]
-    /// with the first element of the array as the initial accumulator value,
-    /// folding every subsequent element into it.
+    /// 1つ以上の要素を持つ配列の場合、これは`[array.fold]`と同じです。このとき、配列の最初の
+    /// 要素が累算値の開始値として用いられ、それに続くすべての要素が畳み込まれます。
     #[func]
     pub fn reduce(
         self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        /// The reducing function. Must have two parameters: One for the
-        /// accumulated value and one for an item.
+        /// 集約関数。この関数は、累算値と要素の2つの引数を取る必要があります。
         reducer: Func,
     ) -> SourceResult<Value> {
         let mut iter = self.into_iter();
