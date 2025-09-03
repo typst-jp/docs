@@ -589,11 +589,11 @@ impl Content {
         dict
     }
 
-    /// コンテンツの位置情報です。これは、[クエリ]によって返されたコンテンツ、
-    /// または[show ルール]($reference/styling/#show-rules)によって提供
+    /// コンテンツの位置情報です。これは、[query]によって返されたコンテンツ、
+    /// または[showルール]($reference/styling/#show-rules)によって提供
     /// されたコンテンツに対してのみ利用できます。それ以外のコンテンツでは、
-    /// {none} になります。取得された位置情報は、[カウンタ]($counter)、
-    /// [ステート]、[クエリ]($query)と一緒に使用できます。
+    /// {none} になります。取得された位置情報は、[counter]($counter)、
+    /// [state]、[query]($query)と一緒に使用できます。
     #[func]
     pub fn location(&self) -> Option<Location> {
         self.inner.location
