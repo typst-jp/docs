@@ -9,13 +9,14 @@ use crate::foundations::{
     cast, func, repr, scope, ty, Array, Dict, FromValue, IntoValue, Repr, Str, Value,
 };
 
-/// Captured arguments to a function.
+/// 関数に渡される引数。
 ///
-/// # Argument Sinks
-/// Like built-in functions, custom functions can also take a variable number of
-/// arguments. You can specify an _argument sink_ which collects all excess
-/// arguments as `..sink`. The resulting `sink` value is of the `arguments`
-/// type. It exposes methods to access the positional and named arguments.
+/// # 引数シンク
+/// 組み込み関数と同様に、カスタム関数も可変個の引数を受け取れます。
+/// 余分にある引数をすべてまとめて受け取る_引数シンク_（キッチンシンクのようにさまざまなも
+/// のが流れ込む先） は、`..sink`の形で指定できます。このとき生成される`sink`の値は
+/// `arguments`型になります。この型は、位置引数と名前付き引数の両方にアクセスするための
+/// メソッドを提供しています。
 ///
 /// ```example
 /// #let format(title, ..authors) = {
@@ -29,9 +30,9 @@ use crate::foundations::{
 /// #format("ArtosFlow", "Jane", "Joe")
 /// ```
 ///
-/// # Spreading
-/// Inversely to an argument sink, you can _spread_ arguments, arrays and
-/// dictionaries into a function call with the `..spread` operator:
+/// # 引数の展開
+/// 引数シンクとは逆に、`..spread`演算子を使うと、を関数呼び出しにおいて引数や配列、
+/// 辞書を展開して渡すことができます。
 ///
 /// ```example
 /// #let array = (2, 3, 5)
@@ -43,15 +44,15 @@ use crate::foundations::{
 #[derive(Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
 pub struct Args {
-    /// The callsite span for the function. This is not the span of the argument
-    /// list itself, but of the whole function call.
+    /// 関数呼び出し箇所のスパン。これは引数リスト自体のスパンではなく、
+    /// 関数呼び出し全体のものです。
     pub span: Span,
     /// The positional and named arguments.
     pub items: EcoVec<Arg>,
 }
 
 impl Args {
-    /// Create positional arguments from a span and values.
+    /// スパンと値から位置引数を作成します。
     pub fn new<T: IntoValue>(span: Span, values: impl IntoIterator<Item = T>) -> Self {
         let items = values
             .into_iter()
@@ -64,7 +65,7 @@ impl Args {
         Self { span, items }
     }
 
-    /// Attach a span to these arguments if they don't already have one.
+    /// 引数にスパンがアタッチされていない場合はアタッチします。
     pub fn spanned(mut self, span: Span) -> Self {
         if self.span.is_detached() {
             self.span = span;
@@ -72,12 +73,12 @@ impl Args {
         self
     }
 
-    /// Returns the number of remaining positional arguments.
+    /// 残りの位置引数の個数を返します。
     pub fn remaining(&self) -> usize {
         self.items.iter().filter(|slot| slot.name.is_none()).count()
     }
 
-    /// Insert a positional argument at a specific index.
+    /// 指定したインデックスに一引数を挿入します。
     pub fn insert(&mut self, index: usize, span: Span, value: Value) {
         self.items.insert(
             index,
@@ -89,7 +90,7 @@ impl Args {
         )
     }
 
-    /// Push a positional argument.
+    /// 位置引数をプッシュします。
     pub fn push(&mut self, span: Span, value: Value) {
         self.items.push(Arg {
             span: self.span,
@@ -98,7 +99,7 @@ impl Args {
         })
     }
 
-    /// Consume and cast the first positional argument if there is one.
+    /// 最初の位置引数がある場合、それを取り出してキャストします。
     pub fn eat<T>(&mut self) -> SourceResult<Option<T>>
     where
         T: FromValue<Spanned<Value>>,
@@ -113,7 +114,7 @@ impl Args {
         Ok(None)
     }
 
-    /// Consume n positional arguments if possible.
+    /// 可能ならn個数の位置引数を取り出します。
     pub fn consume(&mut self, n: usize) -> SourceResult<Vec<Arg>> {
         let mut list = vec![];
 
@@ -133,10 +134,9 @@ impl Args {
         Ok(list)
     }
 
-    /// Consume and cast the first positional argument.
+    /// 最初の位置引数を取り出してキャストする。
     ///
-    /// Returns a `missing argument: {what}` error if no positional argument is
-    /// left.
+    /// 位置変数が残っていなければ、`missing argument: {what}`エラーを返します。
     pub fn expect<T>(&mut self, what: &str) -> SourceResult<T>
     where
         T: FromValue<Spanned<Value>>,
@@ -147,7 +147,7 @@ impl Args {
         }
     }
 
-    /// The error message for missing arguments.
+    /// 引数が足りない場合のエラーメッセージ。
     fn missing_argument(&self, what: &str) -> SourceDiagnostic {
         for item in &self.items {
             let Some(name) = item.name.as_deref() else { continue };
@@ -295,9 +295,9 @@ impl Args {
 
 #[scope]
 impl Args {
-    /// Construct spreadable arguments in place.
+    /// 展開可能な引数をその場で生成します。
     ///
-    /// This function behaves like `{let args(..sink) = sink}`.
+    /// この関数は、`{let args(..sink) = sink}`のように動作します。
     ///
     /// ```example
     /// #let args = arguments(stroke: red, inset: 1em, [Body])
@@ -306,7 +306,7 @@ impl Args {
     #[func(constructor)]
     pub fn construct(
         args: &mut Args,
-        /// The arguments to construct.
+        /// 作成する引数。
         #[external]
         #[variadic]
         arguments: Vec<Value>,
@@ -314,19 +314,18 @@ impl Args {
         args.take()
     }
 
-    /// Returns the positional argument at the specified index, or the named
-    /// argument with the specified name.
+    /// 指定したインデックスの位置引数、または指定した名前の名前つき引数を返します。
     ///
-    /// If the key is an [integer]($int), this is equivalent to first calling
-    /// [`pos`]($arguments.pos) and then [`array.at`]. If it is a [string]($str),
-    /// this is equivalent to first calling [`named`]($arguments.named) and then
-    /// [`dictionary.at`].
+    /// キーが[整数型]($int)の場合、それはまず[`pos`]($arguments.pos)メソッドを呼んでから、
+    /// 次に[`array.at`]を呼ぶのと同等です。キーが[文字列型]($str)である場合、
+    /// まず[`named`]($arguments.named)メソッドを呼び、次に[`dictionary.at`]を
+    /// 呼ぶのと同等です。
     #[func]
     pub fn at(
         &self,
-        /// The index or name of the argument to get.
+        /// 取得する引数のインデックスまたは名前。
         key: ArgumentKey,
-        /// A default value to return if the key is invalid.
+        /// キーが無効な場合に返すデフォルト値。
         #[named]
         default: Option<Value>,
     ) -> StrResult<Value> {
@@ -336,7 +335,7 @@ impl Args {
             .ok_or_else(|| missing_key_no_default(key))
     }
 
-    /// Returns the captured positional arguments as an array.
+    /// 受け取った位置引数を配列の形で返します。
     #[func(name = "pos", title = "Positional")]
     pub fn to_pos(&self) -> Array {
         self.items
@@ -346,7 +345,7 @@ impl Args {
             .collect()
     }
 
-    /// Returns the captured named arguments as a dictionary.
+    /// 受け取った名前つき引数を辞書の形で返します。
     #[func(name = "named")]
     pub fn to_named(&self) -> Dict {
         self.items
