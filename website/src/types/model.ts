@@ -24,7 +24,7 @@ export type OutlineItem = {
 };
 
 /**
- * Body content information.
+ * Details about the body of a documentation page.
  */
 export type Body =
 	| HtmlBody
