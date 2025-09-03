@@ -93,7 +93,7 @@ export const Translation: TranslationComponent = (props) => {
 		case "contentAddedByCommunity":
 			return (
 				<>
-					This page contains content not found in the official documentation,
+					This page contains content that is not part of the official documentation,
 					added independently by the community.
 				</>
 			);
