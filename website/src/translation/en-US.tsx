@@ -1,3 +1,4 @@
+import { Fragment } from "hono/jsx/jsx-runtime";
 import type { TooltipProps } from "../components/ui/Tooltip";
 import { githubOrganizationUrl } from "../metadata";
 import type { TranslationComponent, TranslationObject } from "./";
@@ -39,148 +40,158 @@ export const translation: TranslationObject = {
 export const Translation: TranslationComponent = (props) => {
 	switch (props.translationKey) {
 		case "definition":
-			return <>Definition</>;
+			return <Fragment>Definition</Fragment>;
 		case "constructor":
-			return <>Constructor</>;
+			return <Fragment>Constructor</Fragment>;
 		case "definitionOf":
 			return (
-				<>
+				<Fragment>
 					<code>{props.name}</code> Definition
-				</>
+				</Fragment>
 			);
 		case "search":
-			return <>Search</>;
+			return <Fragment>Search</Fragment>;
 		case "defaultValue":
-			return <>Default value:</>;
+			return <Fragment>Default value:</Fragment>;
 		case "stringValues":
-			return <>Available string values:</>;
+			return <Fragment>Available string values:</Fragment>;
 		case "showExample":
-			return <>Show example</>;
+			return <Fragment>Show example</Fragment>;
 		case "tableOfContents":
-			return <>On this page</>;
+			return <Fragment>On this page</Fragment>;
 		case "nextPage":
-			return <>Next page</>;
+			return <Fragment>Next page</Fragment>;
 		case "previousPage":
-			return <>Previous page</>;
+			return <Fragment>Previous page</Fragment>;
 		case "referenceDescription":
 			return (
-				<>
+				<Fragment>
 					Detailed reference for all Typst syntax, concepts, types, and
 					functions.
-				</>
+				</Fragment>
 			);
 		case "tutorialDescription":
-			return <>Learn how to use Typst step by step.</>;
+			return <Fragment>Learn how to use Typst step by step.</Fragment>;
 		case "tutorial":
-			return <>Tutorial</>;
+			return <Fragment>Tutorial</Fragment>;
 		case "openOfficialDocs":
-			return <>Open official docs</>;
+			return <Fragment>Open official docs</Fragment>;
 		case "reference":
-			return <>Reference</>;
+			return <Fragment>Reference</Fragment>;
 		case "typstOfficialDocs":
-			return <>Typst official docs</>;
+			return <Fragment>Typst official docs</Fragment>;
 		case "typstOfficialWebsite":
-			return <>Typst official website</>;
+			return <Fragment>Typst official website</Fragment>;
 		case "untranslated":
-			return <>Untranslated</>;
+			return <Fragment>Untranslated</Fragment>;
 		case "untranslatedMessage":
 			return (
-				<>
+				<Fragment>
 					This page has not been translated yet. The original content is shown.
-				</>
+				</Fragment>
 			);
 		case "communityContent":
-			return <>Community original content</>;
+			return <Fragment>Community original content</Fragment>;
 		case "contentAddedByCommunity":
 			return (
-				<>
+				<Fragment>
 					This page contains content that is not part of the official
 					documentation, added independently by the community.
-				</>
+				</Fragment>
 			);
 		case "partiallyTranslated":
-			return <>Partially translated</>;
+			return <Fragment>Partially translated</Fragment>;
 		case "partiallyTranslatedMessage":
 			return (
-				<>
+				<Fragment>
 					This page is partially translated. Some original content is included.
-				</>
+				</Fragment>
 			);
 		case "translated":
-			return <>Translated</>;
+			return <Fragment>Translated</Fragment>;
 		case "translatedMessage":
-			return <>This page has been translated into English.</>;
+			return <Fragment>This page has been translated into English.</Fragment>;
 		case "elementFunction":
-			return <>Element</>;
+			return <Fragment>Element</Fragment>;
 		case "elementFunctionDescription":
 			return (
-				<>
+				<Fragment>
 					Element functions can be customized with <code>set</code> and{" "}
 					<code>show</code> rules.
-				</>
+				</Fragment>
 			);
 		case "contextFunction":
-			return <>Context</>;
+			return <Fragment>Context</Fragment>;
 		case "contextFunctionDescription":
-			return <>Context functions can only be used when the context is known.</>;
+			return (
+				<Fragment>
+					Context functions can only be used when the context is known.
+				</Fragment>
+			);
 		case "definitionTooltip":
-			return <>Definition</>;
+			return <Fragment>Definition</Fragment>;
 		case "definitionTooltipDescription":
 			return (
-				<>
+				<Fragment>
 					These functions and types can have related definitions. To access a
 					definition, specify the name of the function or type, followed by the
 					definition name separated by a period.
-				</>
+				</Fragment>
 			);
 		case "argument":
-			return <>Parameter</>;
+			return <Fragment>Parameter</Fragment>;
 		case "argumentDescription":
 			return (
-				<>
+				<Fragment>
 					Parameters are input values for functions. Specify them in parentheses
 					after the function name.
-				</>
+				</Fragment>
 			);
 		case "variadic":
-			return <>Variadic</>;
+			return <Fragment>Variadic</Fragment>;
 		case "variadicDescription":
-			return <>Variadic parameters can be specified multiple times.</>;
+			return (
+				<Fragment>
+					Variadic parameters can be specified multiple times.
+				</Fragment>
+			);
 		case "positional":
-			return <>Positional</>;
+			return <Fragment>Positional</Fragment>;
 		case "positionalDescription":
 			return (
-				<>
+				<Fragment>
 					Positional parameters can be set by specifying them in order, omitting
 					the parameter name.
-				</>
+				</Fragment>
 			);
 		case "required":
-			return <>Required</>;
+			return <Fragment>Required</Fragment>;
 		case "requiredDescription":
 			return (
-				<>Required parameters must be specified when calling the function.</>
+				<Fragment>
+					Required parameters must be specified when calling the function.
+				</Fragment>
 			);
 		case "document":
-			return <>Document</>;
+			return <Fragment>Document</Fragment>;
 		case "langVersion":
-			return <>English</>;
+			return <Fragment>English</Fragment>;
 		case "translationRate":
-			return <>Translated</>;
+			return <Fragment>Translated</Fragment>;
 		case "settable":
-			return <>Settable</>;
+			return <Fragment>Settable</Fragment>;
 		case "settableDescription":
 			return (
-				<>
+				<Fragment>
 					Settable parameters can be set using the <code>set</code> rule,
 					changing the default value used thereafter.
-				</>
+				</Fragment>
 			);
 		case "siteNoticeBannerTitle":
-			return <>Info</>;
+			return <Fragment>Info</Fragment>;
 		case "siteNoticeBannerDescription":
 			return (
-				<>
+				<Fragment>
 					This site is generated using the static site generator developed by
 					the <a href="https://github.com/typst-community">Typst Community</a>.
 					Please adjust the text content of this banner according to your usage
@@ -191,13 +202,13 @@ export const Translation: TranslationComponent = (props) => {
 						Issue #874 on typst/typst
 					</a>
 					.
-				</>
+				</Fragment>
 			);
 		case "footer":
 			return (
-				<>
+				<Fragment>
 					Translated by <a href={githubOrganizationUrl}>Typst Community</a>
-				</>
+				</Fragment>
 			);
 		default:
 			return null;

@@ -102,16 +102,14 @@ function ScopedDefinitions({
 				{parent ? (
 					// Currently, the scope has at most two levels.
 					// Therefore, it is sufficient to only annotate the direct `parent`.
-					<>
-						<Translation translationKey="definitionOf" name={parent.name} />
-					</>
+					<Translation translationKey="definitionOf" name={parent.name} />
 				) : (
 					<Translation translationKey="definition" />
 				)}
 				<Tooltip kind="definitions" />
 			</h2>
 
-			{scope.map((method, index) => {
+			{scope.map((method, _index) => {
 				const methodId = `${parentId}definitions-${method.name}`;
 
 				return (

@@ -15,7 +15,7 @@ export const SideNavigation = ({
 	return (
 		<nav class="folding flex-none w-full bg-white border border-neutral-200/60 rounded-md sticky top-[80px] mt-4 mb-8 h-[calc(100vh-80px-1rem)] overflow-auto px-3.5 py-3">
 			<ul class="space-y-1 text-sm text-neutral-700">
-				{docs?.map((firstLevel, idx) => (
+				{docs?.map((firstLevel, _idx) => (
 					<>
 						{firstLevel.part && (
 							<li
@@ -63,7 +63,7 @@ export const SideNavigation = ({
 										x-transition:enter-start="opacity-0 transform -translate-y-2"
 										x-transition:enter-end="opacity-100 transform translate-y-0"
 									>
-										{firstLevel.children.map((secondLevel, idx2) => (
+										{firstLevel.children.map((secondLevel, _idx2) => (
 											<div key={secondLevel.route}>
 												{secondLevel.part && (
 													<li class="category py-1 text-sm font-semibold text-gray-500 tracking-wide">
@@ -112,7 +112,7 @@ export const SideNavigation = ({
 																x-transition:enter-end="opacity-100 transform translate-y-0"
 															>
 																{secondLevel.children.map(
-																	(thirdLevel, idx3) => (
+																	(thirdLevel, _idx3) => (
 																		<div key={thirdLevel.route}>
 																			{thirdLevel.part && (
 																				<li class="category">

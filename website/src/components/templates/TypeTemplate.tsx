@@ -57,7 +57,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 						<Tooltip kind="definitions" />
 					</h2>
 
-					{content.scope.map((method, index) => (
+					{content.scope.map((method, _index) => (
 						<div key={method.name}>
 							<h3
 								id={`definitions-${method.name}`}

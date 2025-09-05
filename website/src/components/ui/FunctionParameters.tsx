@@ -25,7 +25,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 }) => {
 	return (
 		<div class="space-y-6">
-			{func.params.map((param, index) => (
+			{func.params.map((param, _index) => (
 				<div
 					key={param.name}
 					class="bg-gray-50 rounded-md p-4 border border-gray-100"

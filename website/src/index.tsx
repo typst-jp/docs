@@ -89,7 +89,7 @@ if (import.meta.env.DEV) {
 			rewriteRequestPath: (path) => {
 				return path.slice(basePath.length);
 			},
-			onNotFound: (path, c) => {
+			onNotFound: (path, _c) => {
 				console.log(
 					`${path} is not found while trying to serve a static asset`,
 				);

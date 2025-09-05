@@ -34,7 +34,7 @@ export const GroupTemplate: FC<GroupTemplateProps> = ({
 				<>
 					<h2 id="functions">Function</h2>
 
-					{content.functions.map((method, index) => (
+					{content.functions.map((method, _index) => (
 						<div key={method.name}>
 							<h3 id={`functions-${method.name}`} class="method-head">
 								<code class="text-base font-medium">{method.name}</code>

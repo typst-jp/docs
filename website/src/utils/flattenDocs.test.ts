@@ -153,7 +153,7 @@ describe("flattenDocs", () => {
 		const child = createMockPage("/a/b/", "B", [grandChild]);
 		const parent = createMockPage("/a/", "A", [child]);
 
-		const [flattenedPages, pagePaths] = flattenDocs([parent]);
+		const [_flattenedPages, pagePaths] = flattenDocs([parent]);
 
 		expect(pagePaths[0]).toEqual([parent]);
 		expect(pagePaths[1]).toEqual([parent, child]);
