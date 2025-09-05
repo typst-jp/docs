@@ -1,6 +1,5 @@
 import type { Page } from "../../../types/model";
 import { ChevronRightIcon } from "../../icons";
-import { SiteTitle } from "./SiteTitle";
 
 export type SideNavigationProps = {
 	docs: Page[];

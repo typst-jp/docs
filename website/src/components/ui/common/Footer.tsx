@@ -1,8 +1,4 @@
-import {
-	discordServerUrl,
-	githubOrganizationUrl,
-	githubRepositoryUrl,
-} from "../../../metadata";
+import { discordServerUrl, githubRepositoryUrl } from "../../../metadata";
 import { Translation } from "../../../translation/";
 import { DiscordIcon, GitHubIcon } from "../../icons";
 

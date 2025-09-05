@@ -1,11 +1,6 @@
 import type { FC } from "hono/jsx";
 import type { GroupBody, Page } from "../../types/model";
-import {
-	FunctionDefinition,
-	FunctionDisplay,
-	FunctionParameters,
-	Tooltip,
-} from "../ui";
+import { FunctionDisplay, Tooltip } from "../ui";
 import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
 

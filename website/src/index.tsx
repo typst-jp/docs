@@ -10,7 +10,7 @@ import {
 	TypeTemplate,
 } from "./components/templates";
 import { basePath } from "./metadata";
-import type { Body, Page } from "./types/model";
+import type { Page } from "./types/model";
 import { flattenDocs } from "./utils/flattenDocs";
 import { isPageOfKind } from "./utils/isPageOfKind";
 import { removeBasePath } from "./utils/path";
