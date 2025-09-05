@@ -11,7 +11,7 @@
     "textlint": "^15.2.2",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-plugin-html": "^1.0.1",
-    "textlint-rule-preset-jtf-style": "^2.3.14"
+    "textlint-rule-preset-jtf-style": "^3.0.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
