@@ -46,8 +46,9 @@ code,
 pre,
 kbd,
 samp {
-	font-family: "Cascadia Mono", SFMono-Regular, Menlo, Monaco, Consolas,
-		"Liberation Mono", "Courier New", monospace;
+	font-family:
+		"Cascadia Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
 }
 
 /* Information box */

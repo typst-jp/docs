@@ -83,4 +83,4 @@ export type TranslationComponent = FC<TranslationComponentProps>;
 /**
  * Switch translation language here.
  */
-export { translation, Translation } from "./ja-JP";
+export { Translation, translation } from "./ja-JP";
