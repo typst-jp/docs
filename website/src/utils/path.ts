@@ -67,3 +67,22 @@ export const removeBasePath = (basePath: string, route: string): string => {
 	const offset = basePath.length - (basePath.endsWith("/") ? 1 : 0);
 	return route.slice(offset);
 };
+
+/**
+ * Replace the oldBasePath in a page route with a newBaseUrl.
+ *
+ * @param route - The route string to process.
+ * @param oldBasePath - The old base path to be removed from the route.
+ * @param newBaseUrl - The new base URL (may include origin) to be prepended to the route.
+ * @returns The route string with its base replaced.
+ *
+ * @example
+ * ```ts
+ * shiftBase("/base/foo/bar/", "/base/", "https://typst.app/docs/") // -> "https://typst.app/docs/foo/bar/"
+ * ```
+ */
+export const shiftBase = (
+	route: string,
+	oldBasePath: string,
+	newBaseUrl: string,
+): string => joinPath(newBaseUrl, removeBasePath(oldBasePath, route));
