@@ -5,6 +5,9 @@ module.exports = {
   plugins: ["html"],
   filters: {
     comments: true,
+    allowlist: {
+      allow: ["/<(code|pre)[^>]*>[\\s\\S]*?</(code|pre)>/"],
+    },
   },
   rules: {
     "preset-jtf-style": {
