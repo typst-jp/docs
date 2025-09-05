@@ -1,0 +1,20 @@
+version: 1
+
+rules:
+  - expected: Typst
+    pattern: /(?<![-#])\b[Tt][Yy][Pp][Ss][Tt]\b(?!-)/
+    specs:
+      - from: typst
+        to: Typst
+      - from: typst is a new markup-based typesetting system that is designed to be as powerful as LaTeX while being much easier to learn and use.
+        to: Typst is a new markup-based typesetting system that is designed to be as powerful as LaTeX while being much easier to learn and use.
+      - from: typstは、学術用途のために新たに生まれたマークアップベースの組版システムです。
+        to: Typstは、学術用途のために新たに生まれたマークアップベースの組版システムです。
+      - from: ttypstt
+        to: ttypstt
+      - from: "{#typst}"
+        to: "{#typst}"
+      - from: "{#when-typst}"
+        to: "{#when-typst}"
+      - from: typst-jp
+        to: typst-jp
