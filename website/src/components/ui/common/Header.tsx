@@ -1,5 +1,6 @@
 import {
 	discordServerUrl,
+	displayTranslationStatus,
 	githubRepositoryUrl,
 	typstOfficialDocsUrl,
 	typstOfficialUrl,
@@ -57,7 +58,7 @@ export const Header = () => {
 					<div class="flex items-center gap-2 flex-shrink-0">
 						<SiteTitle />
 						<VersionBadge />
-						<TranslationCoverageBadge />
+						{displayTranslationStatus && <TranslationCoverageBadge />}
 					</div>
 
 					<div class="xl:absolute xl:left-1/2 xl:transform xl:-translate-x-1/2">
@@ -128,9 +129,11 @@ export const Header = () => {
 							<SiteTitle />
 							<VersionBadge />
 						</div>
-						<div>
-							<TranslationCoverageBadge />
-						</div>
+						{displayTranslationStatus && (
+							<div>
+								<TranslationCoverageBadge />
+							</div>
+						)}
 					</div>
 					<div class="flex items-center gap-2 flex-shrink-0 self-center">
 						<button
