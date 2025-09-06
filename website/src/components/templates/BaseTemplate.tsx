@@ -1,6 +1,11 @@
 import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
-import { basePath, originUrl, typstOfficialDocsUrl } from "../../metadata";
+import {
+	basePath,
+	displayTranslationStatus,
+	originUrl,
+	typstOfficialDocsUrl,
+} from "../../metadata";
 import { Translation, translation } from "../../translation/";
 import type { Page } from "../../types/model";
 import { joinPath, shiftBase } from "../../utils/path";
@@ -208,7 +213,10 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 							<Breadcrumbs path={path} />
 
 							<div class="flex flex-col gap-2 my-4">
-								<TranslationStatusAlert status={translationStatus} />
+								{(displayTranslationStatus ||
+									translationStatus === "community") && (
+									<TranslationStatusAlert status={translationStatus} />
+								)}
 							</div>
 
 							{translationStatus !== "community" && (
