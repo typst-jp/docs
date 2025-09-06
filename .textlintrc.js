@@ -5,11 +5,23 @@ module.exports = {
   plugins: ["html"],
   filters: {
     comments: true,
+    allowlist: {
+      allow: ["/<(code|pre)[^>]*>[\\s\\S]*?</(code|pre)>/"],
+    },
   },
   rules: {
     "preset-jtf-style": {
       // 階層構造を表現する記号としての>の使用例があるため
       "4.3.7.山かっこ<>": false,
+    },
+    prh: {
+      rulePaths: ["./prh.yaml"],
+      checkLink: false,
+      checkBlockQuote: false,
+      checkEmphasis: true,
+      checkHeader: true,
+      checkParagraph: true,
+      checkCodeComment: [],
     },
   },
 };
