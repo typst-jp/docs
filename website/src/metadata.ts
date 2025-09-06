@@ -18,3 +18,5 @@ export const discordServerUrl = "https://discord.gg/9xF7k4aAuH";
 export const originUrl = "https://typst-jp.github.io/";
 /** The base public path for deployment. This must match the value used in typst-docs. */
 export const basePath: "/" | `/${string}/` = "/docs/";
+/** Indicates whether to display the translation status on the site. Community content is always displayed. */
+export const displayTranslationStatus: boolean = true;
