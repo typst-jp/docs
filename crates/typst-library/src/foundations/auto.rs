@@ -8,14 +8,14 @@ use crate::foundations::{
     Value,
 };
 
-/// A value that indicates a smart default.
+/// スマートなデフォルト値であることを示す値です。
 ///
-/// The auto type has exactly one value: `{auto}`.
+/// `auto`型には`{auto}`という値が1つだけしかありません。
 ///
-/// Parameters that support the `{auto}` value have some smart default or
-/// contextual behaviour. A good example is the [text direction]($text.dir)
-/// parameter. Setting it to `{auto}` lets Typst automatically determine the
-/// direction from the [text language]($text.lang).
+/// `{auto}`という値をサポートするパラメータは、何らかのスマートなデフォルト値や文脈に
+/// 応じた動作を持ちます。その良い例は`[文章方向]($text.dir)`のパラメータです。
+/// これを`{auto}`に設定すると、Typstは[文書の言語]($text.lang)から自動的に
+/// 向きを判断します。
 #[ty(cast, name = "auto")]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct AutoValue;
@@ -61,7 +61,7 @@ impl Repr for AutoValue {
     }
 }
 
-/// A value that can be automatically determined.
+/// 自動的に判断される値。
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub enum Smart<T> {
     /// The value should be determined smartly based on the circumstances.
