@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { basePath } from "../../metadata";
-import { Translation } from "../../translation";
+import { Translation } from "../../translation/";
 import type { Func } from "../../types/model";
 import { joinPath } from "../../utils/path";
 import { ChevronRightIcon } from "../icons";
@@ -25,7 +25,7 @@ export const FunctionParameters: FC<FunctionParametersProps> = ({
 }) => {
 	return (
 		<div class="space-y-6">
-			{func.params.map((param, index) => (
+			{func.params.map((param, _index) => (
 				<div
 					key={param.name}
 					class="bg-gray-50 rounded-md p-4 border border-gray-100"

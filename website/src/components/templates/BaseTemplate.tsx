@@ -1,9 +1,14 @@
 import { html } from "hono/html";
 import type { FC, PropsWithChildren } from "hono/jsx";
-import { basePath, originUrl, typstOfficialDocsUrl } from "../../metadata";
-import { Translation, translation } from "../../translation";
+import {
+	basePath,
+	displayTranslationStatus,
+	originUrl,
+	typstOfficialDocsUrl,
+} from "../../metadata";
+import { Translation, translation } from "../../translation/";
 import type { Page } from "../../types/model";
-import { joinPath, removeBasePath } from "../../utils/path";
+import { joinPath, shiftBase } from "../../utils/path";
 import { getTranslationStatus } from "../../utils/translationStatus";
 import {
 	CaretRightCircleIcon,
@@ -50,9 +55,10 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 		joinPath(basePath, "/favicon.png"),
 		originUrl,
 	).toString();
-	const typstOfficialRouteUrl = joinPath(
+	const typstOfficialRouteUrl = shiftBase(
+		route,
+		basePath,
 		typstOfficialDocsUrl,
-		removeBasePath(basePath, route),
 	);
 	return (
 		<html lang={translation.htmlLang()} class="scroll-pt-24">
@@ -207,7 +213,10 @@ export const BaseTemplate: FC<BaseTemplateProps> = ({
 							<Breadcrumbs path={path} />
 
 							<div class="flex flex-col gap-2 my-4">
-								<TranslationStatusAlert status={translationStatus} />
+								{(displayTranslationStatus ||
+									translationStatus === "community") && (
+									<TranslationStatusAlert status={translationStatus} />
+								)}
 							</div>
 
 							{translationStatus !== "community" && (

@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import { twMerge } from "tailwind-merge";
-import { Translation } from "../../../translation";
+import { Translation } from "../../../translation/";
 import type { TranslationStatus } from "../../../utils/translationStatus";
 import { LanguageIcon } from "../../icons";
 

@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { Translation } from "../../translation";
+import { Translation } from "../../translation/";
 import type { CategoryBody, Page } from "../../types/model";
 import { HtmlContent } from "../ui/HtmlContent";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";

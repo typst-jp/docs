@@ -2,8 +2,8 @@ import type { FC } from "hono/jsx";
 import { basePath } from "../../metadata";
 import type { Func } from "../../types/model";
 import { joinPath } from "../../utils/path";
-import { TypeIcon } from "./TypeIcon";
 import { genPath } from "./genPath";
+import { TypeIcon } from "./TypeIcon";
 import { buildParamId, type2href } from "./type2href";
 
 type FunctionDefinitionProps = {

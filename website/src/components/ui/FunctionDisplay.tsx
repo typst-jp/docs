@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { Translation } from "../../translation";
+import { Translation } from "../../translation/";
 import type { Func } from "../../types/model";
 import { ChevronRightIcon } from "../icons";
 import { FunctionDefinition } from "./FunctionDefinition";

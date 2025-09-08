@@ -12,7 +12,7 @@
 		"test": "vitest"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
+		"@biomejs/biome": "2.0.6",
 		"@hono/ssg-plugins-essential": "^0.1.0",
 		"@hono/vite-dev-server": "^0.20.1",
 		"@hono/vite-ssg": "^0.2.0",

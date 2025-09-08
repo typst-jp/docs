@@ -1,10 +1,9 @@
 import type { FC } from "hono/jsx";
-import { Translation } from "../../translation";
+import { Translation } from "../../translation/";
 import type { Page, TypeBody } from "../../types/model";
 import { FunctionDisplay, Tooltip } from "../ui";
 import { HtmlContent } from "../ui/HtmlContent";
 import { TypeIcon } from "../ui/TypeIcon";
-import { type2href } from "../ui/type2href";
 import BaseTemplate, { type BaseTemplateProps } from "./BaseTemplate";
 
 export type TypeTemplateProps = Omit<BaseTemplateProps, "page"> & {
@@ -58,7 +57,7 @@ export const TypeTemplate: FC<TypeTemplateProps> = ({
 						<Tooltip kind="definitions" />
 					</h2>
 
-					{content.scope.map((method, index) => (
+					{content.scope.map((method, _index) => (
 						<div key={method.name}>
 							<h3
 								id={`definitions-${method.name}`}
