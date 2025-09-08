@@ -49,6 +49,14 @@
 		"displayTranslationStatus": {
 			"type": "boolean",
 			"description": "Indicates whether to display the translation status on the site. Community content is always displayed."
+		},
+		"docsJsonPath": {
+			"type": "string",
+			"description": "The relative path to docs.json from the SSG project root."
+		},
+		"assetsPath": {
+			"type": "string",
+			"description": "The relative path to the assets directory from the SSG project root."
 		}
 	},
 	"required": [
@@ -61,6 +69,8 @@
 		"discordServerUrl",
 		"originUrl",
 		"basePath",
-		"displayTranslationStatus"
+		"displayTranslationStatus",
+		"docsJsonPath",
+		"assetsPath"
 	]
 }
