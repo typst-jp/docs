@@ -23,12 +23,12 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: build-artifacts
-          path: website/dist
+          path: website/typst-docs-web/dist
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
-          folder: website/dist # The folder the action should deploy.
+          folder: website/typst-docs-web/dist # The folder the action should deploy.
 
   textlint-md:
     runs-on: ubuntu-24.04
@@ -52,7 +52,7 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: build-artifacts
-          path: website/dist
+          path: website/typst-docs-web/dist
       - uses: jdx/mise-action@13abe502c30c1559a5c37dff303831bab82c9402 # v2.2.3
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-24.04
     defaults:
       run:
-        working-directory: ./website
+        working-directory: website/typst-docs-web
     strategy:
       fail-fast: false
       matrix:
