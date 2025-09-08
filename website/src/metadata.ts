@@ -13,7 +13,7 @@ type Metadata = {
 	displayTranslationStatus: boolean;
 };
 
-const metadata = metadataJson as unknown as Metadata;
+const metadata = metadataJson as Metadata;
 
 /** The language of the documentation. */
 export const language = metadata.language;

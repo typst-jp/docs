@@ -44,7 +44,7 @@
 		"basePath": {
 			"type": "string",
 			"description": "The base public path for deployment. This must match the value used in typst-docs.",
-			"pattern": "^/$|^/[^/]+/$"
+			"pattern": "^/$|^/([^/]+/)+$"
 		},
 		"displayTranslationStatus": {
 			"type": "boolean",
