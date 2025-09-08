@@ -86,7 +86,7 @@ mise run textlint-md    # Markdownファイルを翻訳した場合
 miseが導入されている環境で初めて当プロジェクトのルートディレクトリに移動すると、以下のように構成ファイルを信頼することを求められます。
 
 ```plaintext
-mise ERROR Config file /path/to/typst-jp.github.io/.mise.toml is not trusted.
+mise ERROR Config file /path/to/typst-jp.github.io/mise.toml is not trusted.
 Trust it with `mise trust`.
 mise ERROR Run with --verbose or MISE_VERBOSE=1 for more information
 ```
