@@ -12,7 +12,7 @@ export type TranslationStatusMap = {
 };
 
 const TRANSLATION_STATUS_FILE = path.resolve(
-	process.cwd(),
+	path.dirname(process.cwd()),
 	"translation-status.json",
 );
 

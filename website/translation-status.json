@@ -1,5 +1,5 @@
 {
-	"$schema": "./translation-status.schema.json",
+	"$schema": "./typst-docs-web/translation-status.schema.json",
 	"/docs/": "translated",
 	"/docs/tutorial/": "translated",
 	"/docs/tutorial/writing-in-typst/": "translated",

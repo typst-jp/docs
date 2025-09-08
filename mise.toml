@@ -17,7 +17,7 @@ run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.jso
 [tasks.generate-web]
 depends = ["install-website"]
 run = ["bun run build"]
-dir = "./website"
+dir = "./website/typst-docs-web"
 
 [tasks.generate]
 run = [
@@ -27,17 +27,17 @@ run = [
 
 [tasks.install-website]
 run = "bun install --frozen-lockfile"
-dir = "./website"
+dir = "./website/typst-docs-web"
 
 [tasks.dev]
 depends = ["install-website"]
 run = "bun run dev"
-dir = "./website"
+dir = "./website/typst-docs-web"
 
 [tasks.preview]
 depends = ["install-website"]
 run = "bun run preview"
-dir = "./website"
+dir = "./website/typst-docs-web"
 
 [tasks.install-textlint]
 run = "bun install --frozen-lockfile"

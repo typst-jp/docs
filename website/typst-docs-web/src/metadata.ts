@@ -1,4 +1,4 @@
-import metadataJson from "../metadata.json";
+import metadataJson from "../../metadata.json";
 
 type Metadata = {
 	language: "ja-JP" | "en-US";
