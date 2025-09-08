@@ -29,24 +29,26 @@ macro_rules! __dict {
 #[doc(inline)]
 pub use crate::__dict as dict;
 
-/// 文字列をキーとする、値のマップです。
+/// A map from string keys to values.
 ///
-/// コンマ区切りの`キー: 値`ペアを括弧で囲むことで辞書を生成できます。
-/// 値は同じ型である必要はありません。空の括弧`()`は空の配列を生成するため、
-/// 空の辞書を作成するには特殊な`(:)`構文を使用する必要があります。
+/// You can construct a dictionary by enclosing comma-separated `key: value`
+/// pairs in parentheses. The values do not have to be of the same type. Since
+/// empty parentheses already yield an empty array, you have to use the special
+/// `(:)` syntax to create an empty dictionary.
 ///
-/// 辞書は概念的に配列と似ていますが、整数でインデックスがつけられる代わりに
-/// 文字列が用いられます。辞書のエントリには`.at()`メソッドでアクセスしたり、
-/// 作成したりできます。キーがあらかじめ分かっている場合は、代わりに
-/// [フィールドアクセス記法]($scripting/#fields) (`.key`)を使って値にアクセス
-/// することもできます。辞書は`+`演算子で加算したり、
-/// [結合したり]($scripting/#blocks)できます。キーが辞書内に存在するか
-/// どうかを確認するには、`in`キーワードを使用してください。
+/// A dictionary is conceptually similar to an array, but it is indexed by
+/// strings instead of integers. You can access and create dictionary entries
+/// with the `.at()` method. If you know the key statically, you can
+/// alternatively use [field access notation]($scripting/#fields) (`.key`) to
+/// access the value. Dictionaries can be added with the `+` operator and
+/// [joined together]($scripting/#blocks). To check whether a key is present in
+/// the dictionary, use the `in` keyword.
 ///
-/// 辞書内のペアを[forループ]($scripting/#loops)を使って反復処理することも
-/// できます。その場合、辞書のエントリは挿入または宣言された順に反復処理されます。
+/// You can iterate over the pairs in a dictionary using a [for
+/// loop]($scripting/#loops). This will iterate in the order the pairs were
+/// inserted / declared.
 ///
-/// # 例
+/// # Example
 /// ```example
 /// #let dict = (
 ///   name: "Typst",
@@ -158,40 +160,40 @@ impl Dict {
 
 #[scope]
 impl Dict {
-    /// 値を辞書に変換します。
+    /// Converts a value into a dictionary.
     ///
-    /// この関数は、辞書形式の値を辞書に変換することのみを目的としており、個々の値ペアから
-    /// 辞書を作成するためのものではありません。個々の値ペアから辞書を作成する場合は、
-    /// 辞書の構文`(キー: 値)`を使用してください。
-
-
+    /// Note that this function is only intended for conversion of a
+    /// dictionary-like value to a dictionary, not for creation of a dictionary
+    /// from individual pairs. Use the dictionary syntax `(key: value)` instead.
     ///
     /// ```example
     /// #dictionary(sys).at("version")
     /// ```
     #[func(constructor)]
     pub fn construct(
-        /// 辞書に変換する値。
+        /// The value that should be converted to a dictionary.
         value: ToDict,
     ) -> Dict {
         value.0
     }
 
-    /// 辞書に含まれるペアの個数。
+    /// The number of pairs in the dictionary.
     #[func(title = "Length")]
     pub fn len(&self) -> usize {
         self.0.len()
     }
 
-    /// 指定されたキーに対応する辞書内の値を返します。キーがすでに辞書内に存在する場合、
-    /// 代入演算子の左辺で使用できます。キーが辞書に存在しない場合、デフォルト値を返し、
-    /// デフォルト値が指定されていない場合はエラーになります。
+    /// Returns the value associated with the specified key in the dictionary.
+    /// May be used on the left-hand side of an assignment if the key is already
+    /// present in the dictionary. Returns the default value if the key is not
+    /// part of the dictionary or fails with an error if no default value was
+    /// specified.
     #[func]
     pub fn at(
         &self,
-        /// 辞書項目を取得するためのキー。
+        /// The key at which to retrieve the item.
         key: Str,
-        /// キーが辞書内にない場合に返されるデフォルト値。
+        /// A default value to return if the key is not part of the dictionary.
         #[named]
         default: Option<Value>,
     ) -> StrResult<Value> {
@@ -202,26 +204,26 @@ impl Dict {
             .ok_or_else(|| missing_key_no_default(&key))
     }
 
-    /// 新しいペアを辞書に挿入します。すでにこのキー辞書にが含まれている場合、
-    /// 値は更新されます。
+    /// Inserts a new pair into the dictionary. If the dictionary already
+    /// contains this key, the value is updated.
     #[func]
     pub fn insert(
         &mut self,
-        /// 挿入するペアのキー。
+        /// The key of the pair that should be inserted.
         key: Str,
-        /// 挿入するペアの値。
+        /// The value of the pair that should be inserted.
         value: Value,
     ) {
         Arc::make_mut(&mut self.0).insert(key, value);
     }
 
-    /// キーを指定して辞書からペアを削除し、その値を返します。
+    /// Removes a pair from the dictionary by key and return the value.
     #[func]
     pub fn remove(
         &mut self,
-        /// 削除するペアのキー。
+        /// The key of the pair to remove.
         key: Str,
-        /// キーが辞書内にない場合に返されるデフォルト値。
+        /// A default value to return if the key does not exist.
         #[named]
         default: Option<Value>,
     ) -> StrResult<Value> {
@@ -231,20 +233,20 @@ impl Dict {
             .ok_or_else(|| missing_key(&key))
     }
 
-    /// 辞書のキーを、挿入された順序で配列として返します。
+    /// Returns the keys of the dictionary as an array in insertion order.
     #[func]
     pub fn keys(&self) -> Array {
         self.0.keys().cloned().map(Value::Str).collect()
     }
 
-    /// 辞書の値を、挿入された順序で配列として返します。
+    /// Returns the values of the dictionary as an array in insertion order.
     #[func]
     pub fn values(&self) -> Array {
         self.0.values().cloned().collect()
     }
 
-    /// 辞書のキーと値を、ペアの配列として返します。各ペアは
-    /// 長さ2の配列として表現されます。
+    /// Returns the keys and values of the dictionary as an array of pairs. Each
+    /// pair is represented as an array of length two.
     #[func]
     pub fn pairs(&self) -> Array {
         self.0
