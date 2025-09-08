@@ -9,14 +9,11 @@ use crate::foundations::{
     cast, func, repr, scope, ty, Array, Dict, FromValue, IntoValue, Repr, Str, Value,
 };
 
-/// 関数に渡される引数。
+/// 関数にキャプチャーされた引数。
 ///
 /// # 引数シンク
 /// 組み込み関数と同様に、カスタム関数も可変個の引数を受け取れます。
-/// 余分にある引数をすべてまとめて受け取る_引数シンク_（キッチンシンクのようにさまざまなも
-/// のが流れ込む先） は、`..sink`の形で指定できます。このとき生成される`sink`の値は
-/// `arguments`型になります。この型は、位置引数と名前付き引数の両方にアクセスするための
-/// メソッドを提供しています。
+/// 余分にある引数をすべてまとめて受け取る _引数シンク_ （キッチンシンクのようにさまざまなものが流れ込む先）は、`..sink`の形で指定できます。このとき生成される`sink`の値は`arguments`型になります。この型は、位置引数と名前付き引数の両方にアクセスするためのメソッドを提供しています。
 ///
 /// ```example
 /// #let format(title, ..authors) = {
@@ -31,8 +28,7 @@ use crate::foundations::{
 /// ```
 ///
 /// # 引数の展開
-/// 引数シンクとは逆に、`..spread`演算子を使うと、関数呼び出しにおいて引数や配列、
-/// 辞書を展開して渡すことができます。
+/// 引数シンクとは逆に、`..spread`演算子を使うと、関数呼び出しにおいて引数や配列、辞書を展開して渡すことができます。
 ///
 /// ```example
 /// #let array = (2, 3, 5)
@@ -44,8 +40,7 @@ use crate::foundations::{
 #[derive(Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
 pub struct Args {
-    /// 関数呼び出し箇所のスパン。これは引数リスト自体のスパンではなく、
-    /// 関数呼び出し全体のものです。
+    /// 関数呼び出し箇所のスパン。これは引数リスト自体のスパンではなく、関数呼び出し全体のものです。
     pub span: Span,
     /// The positional and named arguments.
     pub items: EcoVec<Arg>,
@@ -316,10 +311,7 @@ impl Args {
 
     /// 指定したインデックスの位置引数、または指定した名前の名前つき引数を返します。
     ///
-    /// キーが[整数型]($int)の場合、それはまず[`pos`]($arguments.pos)メソッドを呼んでから、
-    /// 次に[`array.at`]を呼ぶのと同等です。キーが[文字列型]($str)である場合、
-    /// まず[`named`]($arguments.named)メソッドを呼び、次に[`dictionary.at`]を
-    /// 呼ぶのと同等です。
+    /// キーが[整数型]($int)の場合、それはまず[`pos`]($arguments.pos)メソッドを呼んでから、次に[`array.at`]を呼ぶのと同等です。キーが[文字列型]($str)である場合、まず[`named`]($arguments.named)メソッドを呼び、次に[`dictionary.at`]を呼ぶのと同等です。
     #[func]
     pub fn at(
         &self,
@@ -335,7 +327,7 @@ impl Args {
             .ok_or_else(|| missing_key_no_default(key))
     }
 
-    /// 受け取った位置引数を配列の形で返します。
+    /// キャプチャーした位置引数を配列の形で返します。
     #[func(name = "pos", title = "Positional")]
     pub fn to_pos(&self) -> Array {
         self.items
@@ -345,7 +337,7 @@ impl Args {
             .collect()
     }
 
-    /// 受け取った名前つき引数を辞書の形で返します。
+    /// キャプチャーした名前つき引数を辞書の形で返します。
     #[func(name = "named")]
     pub fn to_named(&self) -> Dict {
         self.items
