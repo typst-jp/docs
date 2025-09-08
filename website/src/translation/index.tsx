@@ -1,5 +1,14 @@
 import type { FC } from "hono/jsx";
 import type { TooltipProps } from "../components/ui/Tooltip";
+import { language } from "../metadata";
+import {
+	Translation as EnUSTranslation,
+	translation as enUSTranslation,
+} from "./en-US";
+import {
+	Translation as JaJPTranslation,
+	translation as jaJPTranslation,
+} from "./ja-JP";
 
 /**
  * Translation dictionary for UI attributes and aria labels.
@@ -80,7 +89,20 @@ export type TranslationComponentProps =
  */
 export type TranslationComponent = FC<TranslationComponentProps>;
 
-/**
- * Switch translation language here.
- */
-export { Translation, translation } from "./ja-JP";
+// Switch translation language.
+let Translation: TranslationComponent;
+let translation: TranslationObject;
+
+switch (language) {
+	case "ja-JP":
+		Translation = JaJPTranslation;
+		translation = jaJPTranslation;
+		break;
+	case "en-US":
+		Translation = EnUSTranslation;
+		translation = enUSTranslation;
+		break;
+	default:
+		throw new Error(`Unsupported language: ${language}`);
+}
+export { Translation, translation };
