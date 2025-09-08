@@ -90,19 +90,14 @@ export type TranslationComponentProps =
 export type TranslationComponent = FC<TranslationComponentProps>;
 
 // Switch translation language.
-let Translation: TranslationComponent;
-let translation: TranslationObject;
-
-switch (language) {
-	case "ja-JP":
-		Translation = JaJPTranslation;
-		translation = jaJPTranslation;
-		break;
-	case "en-US":
-		Translation = EnUSTranslation;
-		translation = enUSTranslation;
-		break;
-	default:
-		throw new Error(`Unsupported language: ${language}`);
-}
+const { Translation, translation } = (() => {
+	switch (language) {
+		case "ja-JP":
+			return { Translation: JaJPTranslation, translation: jaJPTranslation };
+		case "en-US":
+			return { Translation: EnUSTranslation, translation: enUSTranslation };
+		default:
+			throw new Error(`Unsupported language: ${language}`);
+	}
+})();
 export { Translation, translation };
