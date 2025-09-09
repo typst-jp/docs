@@ -9,7 +9,5 @@
 	"discordServerUrl": "https://discord.gg/9xF7k4aAuH",
 	"originUrl": "https://typst-jp.github.io/",
 	"basePath": "/docs/",
-	"displayTranslationStatus": true,
-	"docsJsonPath": "../../docs.json",
-	"assetsPath": "../../assets/"
+	"displayTranslationStatus": true
 }

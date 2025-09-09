@@ -1,3 +1,4 @@
+
 [tools]
 rust = "1.83.0"
 node = "22.11.0"
@@ -11,11 +12,19 @@ idiomatic_version_file_enable_tools = []
 [vars]
 _.file = "website/metadata.json"
 
+[tasks.symlink-docs-assets]
+run = [
+    "rm -rf website/typst-docs-web/public/docs.json",
+    "ln -s ../../../docs.json website/typst-docs-web/public/docs.json",
+    "rm -rf website/typst-docs-web/public/assets",
+    "ln -s ../../../assets website/typst-docs-web/public/assets"
+]
+
 [tasks.generate-docs]
 run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base {{vars.basePath}}"
 
 [tasks.generate-web]
-depends = ["install-website"]
+depends = ["install-website", "symlink-docs-assets"]
 run = ["bun run build"]
 dir = "./website/typst-docs-web"
 

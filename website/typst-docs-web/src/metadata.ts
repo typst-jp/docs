@@ -11,8 +11,6 @@ type Metadata = {
 	originUrl: string;
 	basePath: "/" | `/${string}/`;
 	displayTranslationStatus: boolean;
-	docsJsonPath: string;
-	assetsPath: string;
 };
 
 const metadata = metadataJson as Metadata;
@@ -37,7 +35,3 @@ export const originUrl = metadata.originUrl;
 export const basePath = metadata.basePath;
 /** Indicates whether to display the translation status on the site. Community content is always displayed. */
 export const displayTranslationStatus = metadata.displayTranslationStatus;
-/** The relative path to docs.json from the SSG project root. */
-export const docsJsonPath = metadata.docsJsonPath;
-/** The relative path to the assets directory from the SSG project root. */
-export const assetsPath = metadata.assetsPath;
