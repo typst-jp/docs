@@ -64,19 +64,19 @@ impl HtmlElem {
     }
 }
 
-/// An element that lays out its content as an inline SVG.
+/// コンテンツをインラインSVGとしてレイアウトする要素。
 ///
-/// Sometimes, converting Typst content to HTML is not desirable. This can be
-/// the case for plots and other content that relies on positioning and styling
-/// to convey its message.
+/// TypstのコンテンツをHTMLに変換することが望ましくない場合があります。
+/// これは、
+/// メッセージの伝達が位置決めやスタイル指定に依存するプロットおよびその他のコンテンツに当てはまります。
 ///
-/// This function allows you to use the Typst layout engine that would also be
-/// used for PDF, SVG, and PNG export to render a part of your document exactly
-/// how it would appear when exported in one of these formats. It embeds the
-/// content as an inline SVG.
+/// この関数を使用すると、
+/// PDF、SVG、およびPNGエクスポートにも使用されるTypstレイアウトエンジンを使用して、
+/// 文書の一部を、これらの形式のいずれかでエクスポートした場合に表示されるのとまったく同じようにレンダリングできます。
+/// この関数はコンテンツをインラインSVGとして埋め込みます。
 #[elem]
 pub struct FrameElem {
-    /// The content that shall be laid out.
+    ///レイアウト対象のコンテンツ。
     #[positional]
     #[required]
     pub body: Content,
