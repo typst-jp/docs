@@ -20,11 +20,20 @@ run = [
     "ln -s ../../../assets website/typst-docs-web/public/assets"
 ]
 
+[tasks.symlink-web-metadata]
+run = [
+    "rm -rf website/typst-docs-web/public/metadata.json",
+    "ln -s ../../metadata.json website/typst-docs-web/public/metadata.json",
+    "rm -rf website/typst-docs-web/public/translation-status.json",
+    "ln -s ../../translation-status.json website/typst-docs-web/public/translation-status.json"
+]
+
 [tasks.generate-docs]
+depends = ["symlink-docs-assets", "symlink-web-metadata"]
 run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base {{vars.basePath}}"
 
 [tasks.generate-web]
-depends = ["install-website", "symlink-docs-assets"]
+depends = ["install-website", "symlink-docs-assets", "symlink-web-metadata"]
 run = ["bun run build"]
 dir = "./website/typst-docs-web"
 
