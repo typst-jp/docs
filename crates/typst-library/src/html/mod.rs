@@ -17,21 +17,21 @@ pub fn module() -> Module {
     Module::new("html", html)
 }
 
-/// An HTML element that can contain Typst content.
+/// Typstのコンテンツを含むことができるHTML要素。
 ///
-/// Typst's HTML export automatically generates the appropriate tags for most
-/// elements. However, sometimes, it is desirable to retain more control. For
-/// example, when using Typst to generate your blog, you could use this function
-/// to wrap each article in an `<article>` tag.
+/// TypstのHTMLエクスポートは、ほとんどの要素に対して適切なタグを自動的に生成します。
+/// ただし、場合によっては、より強いコントロールを手元に残しておくことが望ましい場合があります。
+/// 例えば、Typstを使ってブログを生成する場合、
+/// それぞれの記事を`<article>`タグでラップするためにこの関数を使用できます。
 ///
-/// Typst is aware of what is valid HTML. A tag and its attributes must form
-/// syntactically valid HTML. Some tags, like `meta` do not accept content.
-/// Hence, you must not provide a body for them. We may add more checks in the
-/// future, so be sure that you are generating valid HTML when using this
-/// function.
+/// Typstは有効なHTMLが何であるかを認識しています。
+/// タグとその属性は、構文的に有効なHTMLを構成していなければなりません。
+/// `meta`のようないくつかのタグはコンテンツを受け付けません。
+/// したがって、それらに対して本文を提供してはいけません。
+/// 将来的に、この機能に対して更に多くのチェックを追加する可能性があるため、この関数を使用する際は有効なHTMLを生成していることを確認してください。
 ///
-/// Normally, Typst will generate `html`, `head`, and `body` tags for you. If
-/// you instead create them with this function, Typst will omit its own tags.
+/// 通常、Typstは`html`、`head`、および`body`タグを生成します。
+/// 代わりにこの関数でそれらを作成した場合、Typstは自身の生成するタグを省略します。
 ///
 /// ```typ
 /// #html.elem("div", attrs: (style: "background: aqua"))[
@@ -40,17 +40,17 @@ pub fn module() -> Module {
 /// ```
 #[elem(name = "elem")]
 pub struct HtmlElem {
-    /// The element's tag.
+    /// 要素のタグ。
     #[required]
     pub tag: HtmlTag,
 
-    /// The element's HTML attributes.
+    /// 要素のHTML属性。
     #[borrowed]
     pub attrs: HtmlAttrs,
 
-    /// The contents of the HTML element.
+    /// HTML要素の内容。
     ///
-    /// The body can be arbitrary Typst content.
+    /// 本文には任意のTypstコンテンツを指定できます。
     #[positional]
     #[borrowed]
     pub body: Option<Content>,
