@@ -530,7 +530,7 @@ fn fact_impl(start: u64, end: u64) -> Option<i64> {
 pub fn binom(
     /// 全体の数。0または正の値である必要があります。
     n: u64,
-    /// The lower coefficient. Must be non-negative.
+    /// 下側の係数。0または正の値である必要があります。
     k: u64,
 ) -> StrResult<i64> {
     Ok(binom_impl(n, k).ok_or_else(too_large)?)
