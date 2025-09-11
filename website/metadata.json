@@ -1,5 +1,5 @@
 {
-	"$schema": "./metadata.schema.json",
+	"$schema": "./typst-docs-web/metadata.schema.json",
 	"language": "ja-JP",
 	"version": "0.13.1",
 	"typstOfficialUrl": "https://typst.app",

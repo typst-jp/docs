@@ -1,4 +1,7 @@
-import metadataJson from "../metadata.json";
+import fs from "node:fs";
+import path from "node:path";
+
+const METADATA_FILE = path.resolve(process.cwd(), "./public/metadata.json");
 
 type Metadata = {
 	language: "ja-JP" | "en-US";
@@ -13,7 +16,25 @@ type Metadata = {
 	displayTranslationStatus: boolean;
 };
 
-const metadata = metadataJson as Metadata;
+const metadata: Metadata = (() => {
+	if (fs.existsSync(METADATA_FILE)) {
+		const content = fs.readFileSync(METADATA_FILE, "utf-8");
+		return JSON.parse(content);
+	}
+	// If metadata JSON file does not exist, fallback for test environments
+	return {
+		language: "en-US",
+		version: "0.0.0",
+		typstOfficialUrl: "https://typst.app/",
+		typstOfficialDocsUrl: "https://typst.app/docs/",
+		githubOrganizationUrl: "https://github.com/typst",
+		githubRepositoryUrl: "https://github.com/typst/typst",
+		discordServerUrl: "https://discord.gg/dummy",
+		originUrl: "https://example.com/",
+		basePath: "/docs/",
+		displayTranslationStatus: true,
+	} satisfies Metadata;
+})();
 
 /** The language of the documentation. */
 export const language = metadata.language;
