@@ -19,51 +19,38 @@ use crate::layout::{
 use crate::model::{TableCell, TableFooter, TableHLine, TableHeader, TableVLine};
 use crate::visualize::{Paint, Stroke};
 
-/// Arranges content in a grid.
+/// グリッド状にコンテンツを配置。
 ///
-/// The grid element allows you to arrange content in a grid. You can define the
-/// number of rows and columns, as well as the size of the gutters between them.
-/// There are multiple sizing modes for columns and rows that can be used to
-/// create complex layouts.
+/// グリッド要素を用いるとコンテンツをグリッド状に配置することができます。
+/// 行と列の数に加えて、それらの間隔を定義することができます。
+/// 複雑なレイアウトが作成できるような、列と行の大きさに関するモードが複数あります。
 ///
-/// While the grid and table elements work very similarly, they are intended for
-/// different use cases and carry different semantics. The grid element is
-/// intended for presentational and layout purposes, while the
-/// [`{table}`]($table) element is intended for, in broad terms, presenting
-/// multiple related data points. In the future, Typst will annotate its output
-/// such that screenreaders will announce content in `table` as tabular while a
-/// grid's content will be announced no different than multiple content blocks
-/// in the document flow. Set and show rules on one of these elements do not
-/// affect the other.
+/// グリッド要素とテーブル要素はとてもよく似た挙動をする一方で、これらは異なるユースケースが想定されており、異なる意味論が提供されています。
+/// グリッド要素はプレゼンテーションおよびレイアウトに使われることが想定されている一方で、[`{table}`]($table)要素は複数の関係データ点を表す広い用途が想定されています。
+/// 将来的にTypst will annotate 出力 such that スクリーンリーダー will announce コンテンツ in `table` as tabular while a グリッドのコンテンツ will be announced no different than multiple コンテンツブロック in the 文書の流れ
+/// これらの要素に対するsetルールとshowルールは、互いに影響しません。
 ///
-/// A grid's sizing is determined by the track sizes specified in the arguments.
-/// Because each of the sizing parameters accepts the same values, we will
-/// explain them just once, here. Each sizing argument accepts an array of
-/// individual track sizes. A track size is either:
+/// グリッドの大きさは引数に指定されたトラックサイズによって決定されます。
+/// 大きさを設定する各パラメーターは同じ値を受け入れるため、ここでまとめて説明します。
+/// 各sizing引数は個々のトラックサイズの配列を受け入れます。
+/// トラックサイズは以下のいずれかです。
 ///
-/// - `{auto}`: The track will be sized to fit its contents. It will be at most
-///   as large as the remaining space. If there is more than one `{auto}` track
-///   width, and together they claim more than the available space, the `{auto}`
-///   tracks will fairly distribute the available space among themselves.
+/// - `{auto}`: トラックはコンテンツに合わせた大きさになります。
+/// It will be at most as large as the remaining space.
+/// If there is more than one `{auto}` track width, and together they claim more than the available space, the `{auto}` tracks will fairly distribute the available space among themselves.
 ///
-/// - A fixed or relative length (e.g. `{10pt}` or `{20% - 1cm}`): The track
-///   will be exactly of this size.
+/// - A fixed or relative length (e.g. `{10pt}` or `{20% - 1cm}`): The track will be exactly of this size.
 ///
-/// - A fractional length (e.g. `{1fr}`): Once all other tracks have been sized,
-///   the remaining space will be divided among the fractional tracks according
-///   to their fractions. For example, if there are two fractional tracks, each
-///   with a fraction of `{1fr}`, they will each take up half of the remaining
-///   space.
+/// - A fractional length (e.g. `{1fr}`): Once all other tracks have been sized, the remaining space will be divided among the fractional tracks according to their fractions.
+/// For example, if there are two fractional tracks, each with a fraction of `{1fr}`, they will each take up half of the remaining space.
 ///
-/// To specify a single track, the array can be omitted in favor of a single
-/// value. To specify multiple `{auto}` tracks, enter the number of tracks
-/// instead of an array. For example, `columns:` `{3}` is equivalent to
-/// `columns:` `{(auto, auto, auto)}`.
+/// 単一のトラックを指定する場合は、配列を省略して単一の値を指定できます。
+/// 複数の`{auto}`のトラックを指定する場合は、配列の代わりにトラックの数を入力して下さい。
+/// 例えば、`columns:` `{3}`は`columns:` `{(auto, auto, auto)}`と同じ意味になります。
 ///
-/// # Examples
-/// The example below demonstrates the different track sizing options. It also
-/// shows how you can use [`grid.cell`]($grid.cell) to make an individual cell
-/// span two grid tracks.
+/// # 例
+/// The example below demonstrates the different track sizing options.以下の例は異なるトラックサイズオプションの実演です。
+/// また、1つのセルをグリッドの2つのトラックに跨がせるために[`grid.cell`]($grid.cell)をどう使うのかも示しています。
 ///
 /// ```example
 /// // We use `rect` to emphasize the
@@ -89,8 +76,7 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// You can also [spread]($arguments/#spreading) an array of strings or content
-/// into a grid to populate its cells.
+/// You can also [spread]($arguments/#spreading) an array of strings or content into a grid to populate its cells.
 ///
 /// ```example
 /// #grid(
@@ -100,71 +86,53 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// # Styling the grid
-/// The grid's appearance can be customized through different parameters. These
-/// are the most important ones:
+/// # グリッドのスタイル設定
+/// グリッドの外観は様々なパラメーターでカスタマイズできます。
+/// 以下のものが最も重要です。
 ///
-/// - [`fill`]($grid.fill) to give all cells a background
-/// - [`align`]($grid.align) to change how cells are aligned
+/// - [`fill`]($grid.fill)は全てのセルに背景を設定します。
+/// - [`align`]($grid.align)はセルの配置方法を変更します。
 /// - [`inset`]($grid.inset) to optionally add internal padding to each cell
-/// - [`stroke`]($grid.stroke) to optionally enable grid lines with a certain
-///   stroke
+/// - [`stroke`]($grid.stroke)は特定のストロークでグリッドの線をオプションで有効化します。
 ///
-/// If you need to override one of the above options for a single cell, you can
-/// use the [`grid.cell`]($grid.cell) element. Likewise, you can override
-/// individual grid lines with the [`grid.hline`]($grid.hline) and
-/// [`grid.vline`]($grid.vline) elements.
+/// もし単一セルに対して上記のオプションの1つを上書きしなければならない場合は、[`grid.cell`]($grid.cell)要素が使用できます。
+/// 同様に、個々のグリッドの線も[`grid.hline`]($grid.hline)要素や[`grid.vline`]($grid.vline)要素を用いて上書きできます。
 ///
-/// Alternatively, if you need the appearance options to depend on a cell's
-/// position (column and row), you may specify a function to `fill` or `align`
-/// of the form `(column, row) => value`. You may also use a show rule on
-/// [`grid.cell`]($grid.cell) - see that element's examples or the examples
-/// below for more information.
+/// Alternatively, if you need the appearance options to depend on a cell's position (column and row), you may specify a function to `fill` or `align` of the form `(column, row) => value`.
+/// You may also use a showルール on [`grid.cell`]($grid.cell) - see that element's examples or the examples below for more information.
 ///
-/// Locating most of your styling in set and show rules is recommended, as it
-/// keeps the grid's or table's actual usages clean and easy to read. It also
-/// allows you to easily change the grid's appearance in one place.
+/// Locating most of your styling in set and show rules is recommended, as it keeps the grid's or table's actual usages clean and easy to read.
+/// It also allows you to easily change the grid's appearance in one place.
 ///
 /// ## Stroke styling precedence
-/// There are three ways to set the stroke of a grid cell: through
-/// [`{grid.cell}`'s `stroke` field]($grid.cell.stroke), by using
-/// [`{grid.hline}`]($grid.hline) and [`{grid.vline}`]($grid.vline), or by
-/// setting the [`{grid}`'s `stroke` field]($grid.stroke). When multiple of
-/// these settings are present and conflict, the `hline` and `vline` settings
-/// take the highest precedence, followed by the `cell` settings, and finally
-/// the `grid` settings.
+/// There are three ways to set the stroke of a grid cell: through [`{grid.cell}`'s `stroke` field]($grid.cell.stroke), by using [`{grid.hline}`]($grid.hline) and [`{grid.vline}`]($grid.vline), or by setting the [`{grid}`'s `stroke` field]($grid.stroke).
+/// When multiple of these settings are present and conflict, the `hline` and `vline` settings take the highest precedence, followed by the `cell` settings, and finally the `grid` settings.
 ///
-/// Furthermore, strokes of a repeated grid header or footer will take
-/// precedence over regular cell strokes.
+/// Furthermore, strokes of a repeated grid header or footer will take precedence over regular cell strokes.
 #[elem(scope, Show)]
 pub struct GridElem {
     /// The column sizes.
     ///
-    /// Either specify a track size array or provide an integer to create a grid
-    /// with that many `{auto}`-sized columns. Note that opposed to rows and
-    /// gutters, providing a single track size will only ever create a single
-    /// column.
+    /// Either specify a track size array or provide an integer to create a grid with that many `{auto}`-sized columns.
+    /// Note that opposed to rows and gutters, providing a single track size will only ever create a single column.
     #[borrowed]
     pub columns: TrackSizings,
 
     /// The row sizes.
     ///
-    /// If there are more cells than fit the defined rows, the last row is
-    /// repeated until there are no more cells.
+    /// If there are more cells than fit the defined rows, the last row is repeated until there are no more cells.
     #[borrowed]
     pub rows: TrackSizings,
 
-    /// The gaps between rows and columns.
+    /// 行間と列間の間隔。
     ///
-    /// If there are more gutters than defined sizes, the last gutter is
-    /// repeated.
+    /// If there are more gutters than defined sizes, the last gutter is repeated.
     ///
-    /// This is a shorthand to set `column-gutter` and `row-gutter` to the same
-    /// value.
+    /// これは`column-gutter`と`row-gutter`を同じ値で設定する省略記法です。
     #[external]
     pub gutter: TrackSizings,
 
-    /// The gaps between columns.
+    /// 列間の間隔。
     #[parse(
         let gutter = args.named("gutter")?;
         args.named("column-gutter")?.or_else(|| gutter.clone())
@@ -172,16 +140,16 @@ pub struct GridElem {
     #[borrowed]
     pub column_gutter: TrackSizings,
 
-    /// The gaps between rows.
+    /// 行間の間隔。
     #[parse(args.named("row-gutter")?.or_else(|| gutter.clone()))]
     #[borrowed]
     pub row_gutter: TrackSizings,
 
-    /// How to fill the cells.
+    /// セルの塗り潰し方。
     ///
-    /// This can be a color or a function that returns a color. The function
-    /// receives the cells' column and row indices, starting from zero. This can
-    /// be used to implement striped grids.
+    /// これはcolorかcolorを返す関数が使用可能です。
+    /// 関数は0始まりの列番号と行番号を受け取ります。
+    /// これは縞模様のグリッドの実装に使えます。
     ///
     /// ```example
     /// #grid(
@@ -200,28 +168,21 @@ pub struct GridElem {
     #[borrowed]
     pub fill: Celled<Option<Paint>>,
 
-    /// How to align the cells' content.
+    /// セルのコンテンツをどう配置するか。
     ///
-    /// This can either be a single alignment, an array of alignments
-    /// (corresponding to each column) or a function that returns an alignment.
-    /// The function receives the cells' column and row indices, starting from
-    /// zero. If set to `{auto}`, the outer alignment is used.
+    /// 単一の配置、（各列に対応する）配置の配列、配置を返す関数のいずれかが使用可能です。
+    /// The function receives the cells' column and row indices, starting from zero.
+    /// `{auto}`に設定された場合外側の配置が使用されます。
     ///
-    /// You can find an example for this argument at the
-    /// [`table.align`]($table.align) parameter.
+    /// You can find an example for this argument at the [`table.align`]($table.align) parameter.
     #[borrowed]
     pub align: Celled<Smart<Alignment>>,
 
     /// How to [stroke]($stroke) the cells.
     ///
-    /// Grids have no strokes by default, which can be changed by setting this
-    /// option to the desired stroke.
+    /// デフォルトではグリッドにストロークはありませんが、このオプションを所望のストロークに設定すれば変更できます。
     ///
-    /// If it is necessary to place lines which can cross spacing between cells
-    /// produced by the `gutter` option, or to override the stroke between
-    /// multiple specific cells, consider specifying one or more of
-    /// [`grid.hline`]($grid.hline) and [`grid.vline`]($grid.vline) alongside
-    /// your grid cells.
+    /// If it is necessary to place lines which can cross spacing between cells produced by the `gutter` option, or to override the stroke between multiple specific cells, consider specifying one or more of [`grid.hline`]($grid.hline) and [`grid.vline`]($grid.vline) alongside your grid cells.
     ///
     /// ```example
     /// #set page(height: 13em, width: 26em)
@@ -295,14 +256,11 @@ pub struct GridElem {
 
     /// How much to pad the cells' content.
     ///
-    /// You can find an example for this argument at the
-    /// [`table.inset`]($table.inset) parameter.
+    /// You can find an example for this argument at the [`table.inset`]($table.inset) parameter.
     #[fold]
     pub inset: Celled<Sides<Option<Rel<Length>>>>,
 
-    /// The contents of the grid cells, plus any extra grid lines specified
-    /// with the [`grid.hline`]($grid.hline) and [`grid.vline`]($grid.vline)
-    /// elements.
+    /// The contents of the grid cells, plus any extra grid lines specified with the [`grid.hline`]($grid.hline) and [`grid.vline`]($grid.vline) elements.
     ///
     /// The cells are populated in row-major order.
     #[variadic]
