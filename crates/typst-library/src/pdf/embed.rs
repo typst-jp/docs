@@ -12,14 +12,14 @@ use crate::World;
 
 /// 出力されるPDFに埋め込まれるファイル。
 ///
-/// This can be used to distribute additional files that are related to the PDF
-/// within it. PDF readers will display the files in a file listing.
+/// この関数は、PDFに関連する追加のファイルをPDF内に埋め込んで配布するために使用できます。
+/// PDFリーダーはファイルリストにファイルを表示します。
 ///
-/// Some international standards use this mechanism to embed machine-readable
-/// data (e.g., ZUGFeRD/Factur-X for invoices) that mirrors the visual content
-/// of the PDF.
+/// 一部の国際規格では、
+/// この仕組みを使用して、
+/// PDFの視覚的な内容を反映した機械可読データ（例：請求書のZUGFeRD/Factur-X）を埋め込んでいます。
 ///
-/// # Example
+/// # 例
 /// ```typ
 /// #pdf.embed(
 ///   "experiment.csv",
@@ -29,16 +29,16 @@ use crate::World;
 /// )
 /// ```
 ///
-/// # Notes
-/// - This element is ignored if exporting to a format other than PDF.
-/// - File embeddings are not currently supported for PDF/A-2, even if the
-///   embedded file conforms to PDF/A-1 or PDF/A-2.
+/// # 注意
+/// - この要素はPDF以外の形式にエクスポートする場合は無視されます。
+/// - PDF/A-2へのエクスポートでは、埋め込みファイルは現在サポートされていません。
+///   たとえ埋め込まれるファイルがPDF/A-1やPDF/A-2に準拠していたとしてもです。
 #[elem(Show, Locatable)]
 pub struct EmbedElem {
-    /// The [path]($syntax/#paths) of the file to be embedded.
+    /// 埋め込まれるファイルの[パス]($syntax/#paths)。
     ///
-    /// Must always be specified, but is only read from if no data is provided
-    /// in the following argument.
+    /// 常に指定する必要がありますが、
+    /// 次の引数でデータが提供されていない場合にのみ読み取られます。
     #[required]
     #[parse(
         let Spanned { v: path, span } =
@@ -51,9 +51,9 @@ pub struct EmbedElem {
     #[borrowed]
     pub path: Derived<EcoString, EcoString>,
 
-    /// Raw file data, optionally.
+    /// 任意で指定する生のファイルデータ。
     ///
-    /// If omitted, the data is read from the specified path.
+    /// この引数が指定されない場合、データは指定されたパスから読み取られます。
     #[positional]
     // Not actually required as an argument, but always present as a field.
     // We can't distinguish between the two at the moment.
@@ -66,16 +66,16 @@ pub struct EmbedElem {
     )]
     pub data: Bytes,
 
-    /// The relationship of the embedded file to the document.
+    /// 埋め込まれるファイルと文書との関係。
     ///
-    /// Ignored if export doesn't target PDF/A-3.
+    /// エクスポート対象がPDF/A-3でない場合は無視されます。
     pub relationship: Option<EmbeddedFileRelationship>,
 
-    /// The MIME type of the embedded file.
+    /// 埋め込まれるファイルのMIMEタイプ。
     #[borrowed]
     pub mime_type: Option<EcoString>,
 
-    /// A description for the embedded file.
+    /// 埋め込まれるファイルの説明。
     #[borrowed]
     pub description: Option<EcoString>,
 }
@@ -94,12 +94,12 @@ impl Show for Packed<EmbedElem> {
 /// The relationship of an embedded file with the document.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum EmbeddedFileRelationship {
-    /// The PDF document was created from the source file.
+    /// PDF文書がそのソースファイルから作成されたことを示す。
     Source,
-    /// The file was used to derive a visual presentation in the PDF.
+    /// ファイルがPDFにおける視覚的表現を得るために使われたことを示す。
     Data,
-    /// An alternative representation of the document.
+    /// 文書の代替的な表現であることを示す。
     Alternative,
-    /// Additional resources for the document.
+    /// 文書への追加のリソースであることを示す。
     Supplement,
 }
