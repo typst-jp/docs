@@ -3,7 +3,7 @@
 TypstのHTMLエクスポートは現在積極的に開発が行われています。
 この機能はまだ非常に不完全であり、機能フラグを有効にした場合に、実験目的でのみ利用可能です。
 本番環境における利用ではこの機能を使用しないでください。
-CLIでは`--features html`を付けるか環境変数`TYPST_FEATURES`に`html`を設定することでHTMLエクスポートを試すことができます。
+CLIでは`--features html`オプションを指定するか環境変数`TYPST_FEATURES`に`html`を設定することでHTMLエクスポートを試すことができます。
 Webアプリでは、現時点でHTMLエクスポートは利用できません。
 HTMLエクスポートに関する進捗を追跡し、計画されている機能について詳しく知るには、
 [tracking issue](https://github.com/typst/typst/issues/5512)を参照してください。
