@@ -1,0 +1,6 @@
+node_modules/
+dist/
+public/assets
+public/docs.json
+public/metadata.json
+public/translation-status.json

@@ -4,7 +4,7 @@
   "scripts": {
     "textlint-md": "textlint ./docs/",
     "textlint-md:fix": "textlint --fix ./docs/",
-    "textlint-html": "textlint ./website/dist/"
+    "textlint-html": "textlint ./website/typst-docs-web/dist/"
   },
   "devDependencies": {
     "@types/bun": "latest",
