@@ -111,3 +111,5 @@ bun run test
 ## License
 
 This project is derived from [typst/typst](https://github.com/typst/typst) and is licensed under the Apache-2.0 license.
+
+Non-OSS assets distributed by the Typst web app are not included in this project.
