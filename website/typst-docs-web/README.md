@@ -59,6 +59,8 @@ Create `/public/metadata.json` and describe the metadata for the documentation w
 
 `/public/translation-status.json` is used to manage the translation progress and the classification of original content. This file is automatically updated when running the SSG, so manual editing is not necessary.
 
+The image provided in `public/favicon.png` is used as the favicon for the documentation website. Currently, this image is also used as the OGP `og:image`, so please provide it in PNG format.
+
 ## Commands
 
 After installing dependencies with Bun, the following commands are available:

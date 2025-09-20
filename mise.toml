@@ -22,6 +22,8 @@ run = [
 
 [tasks.symlink-web-metadata]
 run = [
+    "rm -rf website/typst-docs-web/public/favicon.png",
+    "ln -s ../../favicon.png website/typst-docs-web/public/favicon.png",
     "rm -rf website/typst-docs-web/public/metadata.json",
     "ln -s ../../metadata.json website/typst-docs-web/public/metadata.json",
     "rm -rf website/typst-docs-web/public/translation-status.json",
