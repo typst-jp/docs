@@ -2,7 +2,7 @@
 
 このディレクトリでは、ドキュメントのWebサイトの構築に必要なメタデータを管理しています。
 
-また、SSG（静的サイトジェネレーター）の本体は、Git submoduleとして別リポジトリの[typst-docs-web](https://github.com/typst-jp/typst-docs-web)で管理されています。
+また、SSG（静的サイトジェネレーター）の本体は、Git submoduleとして別リポジトリの[typst-docs-web](https://github.com/typst-community/typst-docs-web)で管理されています。
 
 ## Git submoduleの初期化について
 
