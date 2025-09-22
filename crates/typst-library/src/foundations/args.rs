@@ -9,10 +9,10 @@ use crate::foundations::{
     cast, func, repr, scope, ty, Array, Dict, FromValue, IntoValue, Repr, Str, Value,
 };
 
-/// 関数にキャプチャーされた引数。
+/// 関数に渡された引数。
 ///
 /// # 引数シンク
-/// 組み込み関数と同様に、カスタム関数も可変個の引数を受け取れます。
+/// 組み込み関数と同様に、カスタム関数も可変長引数を受け取れます。
 /// 余分にある引数をすべてまとめて受け取る _引数シンク_（キッチンシンクのようにさまざまなものが流れ込む先）は、`..sink`の形で指定できます。このとき生成される`sink`の値は`arguments`型になります。この型は、位置引数と名前付き引数の両方にアクセスするためのメソッドを提供しています。
 ///
 /// ```example
@@ -109,7 +109,7 @@ impl Args {
         Ok(None)
     }
 
-    /// 可能ならn個数の位置引数を取り出します。
+    /// 可能ならn個の位置引数を取り出します。 
     pub fn consume(&mut self, n: usize) -> SourceResult<Vec<Arg>> {
         let mut list = vec![];
 
@@ -129,7 +129,7 @@ impl Args {
         Ok(list)
     }
 
-    /// 最初の位置引数を取り出してキャストする。
+    /// 最初の位置引数を取り出してキャストします。
     ///
     /// 位置引数が残っていなければ、`missing argument: {what}`エラーを返します。
     pub fn expect<T>(&mut self, what: &str) -> SourceResult<T>
@@ -327,7 +327,7 @@ impl Args {
             .ok_or_else(|| missing_key_no_default(key))
     }
 
-    /// キャプチャーした位置引数を配列の形で返します。
+    /// 渡された位置引数を配列の形で返します。
     #[func(name = "pos", title = "Positional")]
     pub fn to_pos(&self) -> Array {
         self.items
@@ -337,7 +337,7 @@ impl Args {
             .collect()
     }
 
-    /// キャプチャーした名前付き引数を辞書の形で返します。
+    /// 渡された名前付き引数を辞書の形で返します。
     #[func(name = "named")]
     pub fn to_named(&self) -> Dict {
         self.items
