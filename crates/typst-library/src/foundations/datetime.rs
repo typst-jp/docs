@@ -88,7 +88,7 @@ use crate::World;
 ///   - `repr`: 曜日名（`long`）、曜日名の略称（`short`）、日曜（`sunday`）、月曜（`monday`）のいずれかを指定できます。
 ///     `long`と`short`では、対応する曜日名が英語で表示されます。
 ///     （月名と同様に、他言語での表示はまだサポートされていません）。
-///     `sunday`と`monday`では、日曜または月曜から数えた日数が数値で表示されます
+///     `sunday`と`monday`では、日曜または月曜から数えた日数が数値で表示されます。
 ///   - `one_indexed`: `true`または`false`を指定できます。これは、曜日の数値表示の際、開始日を0とするか1とするかを指定します。
 /// - `hour`: `date`の時を表示します。
 ///   - `padding`: 時表示のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
@@ -201,14 +201,14 @@ impl Datetime {
 
 #[scope]
 impl Datetime {
-    /// 新しい datetime を作成。
+    /// 新しいdatetimeを作成。
     ///
     /// 年、月、日、時、分、秒を指定して[datetime]を作成します。
     ///
     /// _注_：指定する`datetime`の要素によって、Typstが保持する形式は次の3通りのいずれかになります。
     /// * 年、月、日だけを指定した場合、Typstは日付のみを保持します。
     /// * 時、分、秒だけを指定した場合、Typstは時刻のみを保持します。
-    /// * 年、月、日、時、分、秒すべてを指定した場合、Typst は完全な日時を保持します。
+    /// * 年、月、日、時、分、秒すべてを指定した場合、Typstは完全な日時を保持します。
     ///
     /// 保持形式に応じて、[`display`]($datetime.display)メソッドはデフォルトで異なるフォーマットを選択します。
     ///
@@ -221,22 +221,22 @@ impl Datetime {
     /// ```
     #[func(constructor)]
     pub fn construct(
-        /// `datetime`の年
+        /// `datetime`の年。
         #[named]
         year: Option<i32>,
-        /// `datetime`の月
+        /// `datetime`の月。
         #[named]
         month: Option<Month>,
-        /// `datetime`の日
+        /// `datetime`の日。
         #[named]
         day: Option<u8>,
-        /// `datetime`の時
+        /// `datetime`の時。
         #[named]
         hour: Option<u8>,
-        /// `datetime`の分
+        /// `datetime`の分。
         #[named]
         minute: Option<u8>,
-        /// `datetime`の秒
+        /// `datetime`の秒。
         #[named]
         second: Option<u8>,
     ) -> StrResult<Datetime> {
