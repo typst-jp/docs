@@ -1,0 +1,66 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"language": {
+			"type": "string",
+			"description": "The language of the documentation.",
+			"enum": ["ja-JP", "en-US"]
+		},
+		"version": {
+			"type": "string",
+			"description": "The version of the documentation, without a leading 'v'."
+		},
+		"typstOfficialUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "The official Typst website URL."
+		},
+		"typstOfficialDocsUrl": {
+			"type": "string",
+			"description": "The official Typst documentation base URL.",
+			"pattern": "^https?://.+/$"
+		},
+		"githubOrganizationUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "The GitHub organization URL."
+		},
+		"githubRepositoryUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "The GitHub repository URL."
+		},
+		"discordServerUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "The Discord server invite URL."
+		},
+		"originUrl": {
+			"type": "string",
+			"format": "uri",
+			"description": "The origin URL of the deployed site, used for metadata. Note that the base path should not be included."
+		},
+		"basePath": {
+			"type": "string",
+			"description": "The base public path for deployment. This must match the value used in typst-docs.",
+			"pattern": "^/([^/]+/)*$"
+		},
+		"displayTranslationStatus": {
+			"type": "boolean",
+			"description": "Indicates whether to display the translation status on the site. Community content is always displayed."
+		}
+	},
+	"required": [
+		"language",
+		"version",
+		"typstOfficialUrl",
+		"typstOfficialDocsUrl",
+		"githubOrganizationUrl",
+		"githubRepositoryUrl",
+		"discordServerUrl",
+		"originUrl",
+		"basePath",
+		"displayTranslationStatus"
+	]
+}

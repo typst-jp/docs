@@ -1,5 +1,5 @@
 {
-	"$schema": "./translation-status.schema.json",
+	"$schema": "./typst-docs-web/translation-status.schema.json",
 	"/docs/": "translated",
 	"/docs/tutorial/": "translated",
 	"/docs/tutorial/writing-in-typst/": "translated",
@@ -160,8 +160,8 @@
 	"/docs/reference/data-loading/xml/": "translated",
 	"/docs/reference/data-loading/yaml/": "translated",
 	"/docs/reference/pdf/": "translated",
-	"/docs/reference/pdf/embed/": "untranslated",
-	"/docs/reference/html/": "untranslated",
+	"/docs/reference/pdf/embed/": "translated",
+	"/docs/reference/html/": "translated",
 	"/docs/reference/html/elem/": "translated",
 	"/docs/reference/html/frame/": "translated",
 	"/docs/reference/png/": "untranslated",
