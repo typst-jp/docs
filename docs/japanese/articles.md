@@ -10,7 +10,7 @@ Typstに関する日本語の記事は[Zenn](https://zenn.dev/)や[Qiita](https:
 - [Typstの記事一覧 | Zenn](https://zenn.dev/topics/typst) - ZennのTypstトピック
 - [Typstとは？開発に役立つ使い方、トレンド記事やtips - Qiita](https://qiita.com/tags/typst) - QiitaのTypstタグ
 
-また、個人ブログ・ウィキサイトなどでもまとめられています。様々なプラットフォームから、いくつかピックアップしたものが以下に整理されています。
+また、個人ブログ・ウィキサイトなどでもまとめられています。さまざまなプラットフォームから、いくつかピックアップしたものが以下に整理されています。
 
 ## 総合入門
 
