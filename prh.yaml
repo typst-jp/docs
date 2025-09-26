@@ -63,6 +63,10 @@ rules:
   - expected: 入れる
     patterns:
       - いれる
+  - expected: $1付き文字
+    patterns:
+      - /(上|下)付き添え字/
+      - /(上|下)付き添字/
   - expected: 受ける
     patterns:
       - うける
@@ -75,6 +79,10 @@ rules:
   - expected: 起こる
     patterns:
       - おこる
+  - expected: おすすめ
+    patterns:
+      - お勧め
+      - オススメ
   - expected: 主な
     patterns:
       - おもな
@@ -135,6 +143,8 @@ rules:
   - expected: 全て
     patterns:
       - すべて
+  - expected: 添え字
+    pattern: 添字
   - expected: その他
     patterns:
       - そのほか
