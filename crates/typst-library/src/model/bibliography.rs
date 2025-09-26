@@ -105,7 +105,7 @@ pub struct BibliographyElem {
     /// `{show bibliography: set heading(numbering: "1.")}`
     pub title: Smart<Option<Content>>,
 
-    /// 文書内で引用されていないものも含めて、参考文献ファイルにあるすべての文献を出力するかどうか。
+    /// 文書内で引用されていないものも含めて、参考文献ファイルにある全ての文献を出力するかどうか。
     ///
     /// 個々の引用文献を表示させずに追加するには、 [`form`]($cite.form) を `{none}`として [`cite`]($cite) 関数を使用します。
     #[default(false)]
