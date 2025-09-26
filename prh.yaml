@@ -130,7 +130,7 @@ rules:
       - 更なる
   - expected: さらに
     patterns:
-      - 更に
+      - /(?<!変)更に/
   - expected: 従って
     patterns:
       - したがって
