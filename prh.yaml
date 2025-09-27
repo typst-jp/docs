@@ -151,6 +151,8 @@ rules:
   - expected: 例えば
     patterns:
       - たとえば
+  - expected: 常に
+    pattern: つねに
   - expected: できる
     patterns:
       - 出来る
@@ -182,6 +184,8 @@ rules:
     patterns:
       - ふるま
       - 振舞
+  - expected: 冪乗
+    pattern: べき乗
   - expected: 用い$1
     pattern: /もちい(る|て|た|られる)/
   - expected: 持つ
