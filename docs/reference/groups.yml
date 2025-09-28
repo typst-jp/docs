@@ -59,7 +59,7 @@
   path: ["math"]
   filter: ["root", "sqrt"]
   details: |
-    平方根とその他の累乗根。
+    平方根とその他の冪根。
 
     # 例
     ```example
