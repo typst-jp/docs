@@ -185,7 +185,15 @@ rules:
       - ふるま
       - 振舞
   - expected: 冪乗
-    pattern: べき乗
+    patterns:
+      - /べき乗(?!根)/
+      - /累乗(?!根)/
+  - expected: 冪根
+    patterns:
+      - 累乗根
+      - べき根
+      - べき乗根
+      - 冪乗根
   - expected: 用い$1
     pattern: /もちい(る|て|た|られる)/
   - expected: 持つ
