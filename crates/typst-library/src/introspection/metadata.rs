@@ -3,17 +3,13 @@ use crate::engine::Engine;
 use crate::foundations::{elem, Content, Packed, Show, StyleChain, Value};
 use crate::introspection::Locatable;
 
-/// Exposes a value to the query system without producing visible content.
+/// 可視コンテンツの生成を伴わないクエリシステムへの値の公開。
 ///
-/// This element can be retrieved with the [`query`] function and from the
-/// command line with
-/// [`typst query`]($reference/introspection/query/#command-line-queries). Its
-/// purpose is to expose an arbitrary value to the introspection system. To
-/// identify a metadata value among others, you can attach a [`label`] to it and
-/// query for that label.
+/// この要素は[`query`]関数や[`typst query`]($reference/introspection/query/#command-line-queries)を用いてコマンドラインから取得できます。
+/// その目的は任意の値を内省システムに公開することです。
+/// メタデータの値を他と識別するために、[`label`]を付けて、それを検索することができます。
 ///
-/// The `metadata` element is especially useful for command line queries because
-/// it allows you to expose arbitrary values to the outside world.
+/// `metadata`要素は、外部に任意の値を公開できるため、特にコマンドラインクエリで便利です。
 ///
 /// ```example
 /// // Put metadata somewhere.
@@ -26,7 +22,7 @@ use crate::introspection::Locatable;
 /// ```
 #[elem(Show, Locatable)]
 pub struct MetadataElem {
-    /// The value to embed into the document.
+    /// 文書に埋め込む値。
     #[required]
     pub value: Value,
 }
