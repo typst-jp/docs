@@ -24,49 +24,31 @@ use crate::layout::{AlignElem, Alignment, Axes, Length, MoveElem, PadElem, Rel, 
 use crate::model::{Destination, EmphElem, LinkElem, StrongElem};
 use crate::text::UnderlineElem;
 
-/// A piece of document content.
+/// 文書のコンテンツ。
 ///
-/// This type is at the heart of Typst. All markup you write and most
-/// [functions]($function) you call produce content values. You can create a
-/// content value by enclosing markup in square brackets. This is also how you
-/// pass content to functions.
+/// この型は、Typstの中心となるものです。Typstのすべてのマークアップやほとんどの[関数]($function)はコンテンツを生成します。コンテンツ値は角括弧でマークアップを囲むことで作成できます。これは、コンテンツを関数に渡す際にも使われる方法です。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// Type of *Hello!* is
 /// #type([*Hello!*])
 /// ```
 ///
-/// Content can be added with the `+` operator,
-/// [joined together]($scripting/#blocks) and multiplied with integers. Wherever
-/// content is expected, you can also pass a [string]($str) or `{none}`.
+/// コンテンツは`+`演算子で追加したり、[結合]($scripting/#blocks)したり、整数と乗算したりすることができます。コンテンツが期待される場所であれば、[文字列]($str)や`{none}`を渡すことも可能です。
+/// 
+/// # 表現
+/// コンテンツはフィールドを持つ要素で構成されます。 _要素関数_ で要素を構築する際は、フィールドを引数として提供します。コンテンツ値がある場合は、[フィールドアクセス構文]($scripting/#field-access)でそのフィールドにアクセスできます。
 ///
-/// # Representation
-/// Content consists of elements with fields. When constructing an element with
-/// its _element function,_ you provide these fields as arguments and when you
-/// have a content value, you can access its fields with [field access
-/// syntax]($scripting/#field-access).
+/// フィールドの中には必須のものがあります。それらは要素を構築する際に提供する必要があるため、その型のコンテンツでは常にフィールドアクセスを通じて利用可能です。
+/// 必須フィールドはドキュメント内でそのようにマークされています。
 ///
-/// Some fields are required: These must be provided when constructing an
-/// element and as a consequence, they are always available through field access
-/// on content of that type. Required fields are marked as such in the
-/// documentation.
+/// ほとんどのフィールドはオプションで、必須フィールドと同様に、単一要素を設定するために要素関数に渡すことができます。しかし、[setルール]($styling/#set-rules)で設定して、スコープ内のすべての要素に適用することも可能です。
+/// オプションのフィールドは、要素関数に明示的に渡された場合にのみフィールドアクセス構文で利用でき、setルールから適用された場合は利用できません。
 ///
-/// Most fields are optional: Like required fields, they can be passed to the
-/// element function to configure them for a single element. However, these can
-/// also be configured with [set rules]($styling/#set-rules) to apply them to
-/// all elements within a scope. Optional fields are only available with field
-/// access syntax when they were explicitly passed to the element function, not
-/// when they result from a set rule.
+/// 各要素にはデフォルトの外観があります。しかし、[showルール]($styling/#show-rules)を使用して、その外観を完全にカスタマイズすることもできます。showルールには要素が渡されます。showルールは要素のフィールドにアクセスし、そこから任意のコンテンツを生成することができます。
 ///
-/// Each element has a default appearance. However, you can also completely
-/// customize its appearance with a [show rule]($styling/#show-rules). The show
-/// rule is passed the element. It can access the element's field and produce
-/// arbitrary content from it.
-///
-/// In the web app, you can hover over a content variable to see exactly which
-/// elements the content is composed of and what fields they have.
-/// Alternatively, you can inspect the output of the [`repr`] function.
+/// ウェブアプリでは、コンテンツ変数にマウスカーソルを合わせると、そのコンテンツが正確にどの要素で構成されているか、そしてどのようなフィールドを持っているかを確認できます。
+/// または、[`repr`]関数の出力を調べることでも確認できます。
 #[ty(scope, cast)]
 #[derive(Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
@@ -532,21 +514,20 @@ impl Content {
 
 #[scope]
 impl Content {
-    /// The content's element function. This function can be used to create the element
-    /// contained in this content. It can be used in set and show rules for the
-    /// element. Can be compared with global functions to check whether you have
-    /// a specific
-    /// kind of element.
+    /// コンテンツの要素関数。
+    /// この関数を用いると、当該コンテンツに含まれる要素を生成できます。
+    /// この関数は、その要素に対するsetルールやshowルール内でも使用できます。
+    /// グローバル関数と比較することで、特定の種類の要素を持っているかを確認できます。
     #[func]
     pub fn func(&self) -> Element {
         self.elem()
     }
 
-    /// Whether the content has the specified field.
+    /// コンテンツが特定のフィールドを持つかどうか。
     #[func]
     pub fn has(
         &self,
-        /// The field to look for.
+        /// 調べるフィールド。
         field: Str,
     ) -> bool {
         if field.as_str() == "label" {
@@ -560,15 +541,13 @@ impl Content {
         self.inner.elem.has(id)
     }
 
-    /// Access the specified field on the content. Returns the default value if
-    /// the field does not exist or fails with an error if no default value was
-    /// specified.
+    /// コンテンツ内の指定されたフィールドにアクセスします。そのフィールドが存在しない場合はデフォルト値が返されますが、デフォルト値が指定されていない場合はエラーになります。
     #[func]
     pub fn at(
         &self,
-        /// The field to access.
+        /// アクセスするフィールド。
         field: Str,
-        /// A default value to return if the field does not exist.
+        /// フィールドが存在しない場合のデフォルト値。
         #[named]
         default: Option<Value>,
     ) -> StrResult<Value> {
@@ -577,7 +556,7 @@ impl Content {
             .map_err(|e| e.message_no_default(self, &field))
     }
 
-    /// Returns the fields of this content.
+    /// このcontentのフィールドを返します。
     ///
     /// ```example
     /// #rect(
@@ -594,10 +573,7 @@ impl Content {
         dict
     }
 
-    /// The location of the content. This is only available on content returned
-    /// by [query] or provided by a [show rule]($reference/styling/#show-rules),
-    /// for other content it will be `{none}`. The resulting location can be
-    /// used with [counters]($counter), [state] and [queries]($query).
+    /// コンテンツの位置。これは、[クエリ]($query)によって返されたコンテンツ、または[showルール]($reference/styling/#show-rules)によって提供されたコンテンツに対してのみ利用できます。それ以外のコンテンツでは、`{none}`になります。取得された位置情報は、[カウンター]($counter)、[状態]($state)、[クエリ]($query)と一緒に使用できます。
     #[func]
     pub fn location(&self) -> Option<Location> {
         self.inner.location
