@@ -556,7 +556,7 @@ impl Content {
             .map_err(|e| e.message_no_default(self, &field))
     }
 
-    /// このコンテンツのフィールドを返す。
+    /// このcontentのフィールドを返します。
     ///
     /// ```example
     /// #rect(
