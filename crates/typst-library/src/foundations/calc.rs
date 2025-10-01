@@ -89,7 +89,7 @@ cast! {
     v: Decimal => Self(Value::Decimal(v.abs()))
 }
 
-/// べき乗。
+/// 冪乗。
 ///
 /// ```example
 /// #calc.pow(2, 3) \
