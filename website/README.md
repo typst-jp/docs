@@ -1,43 +1,15 @@
-# website
+# website metadata
 
-> [!NOTE]
-> このドキュメントは執筆中です。
+このディレクトリでは、ドキュメントのWebサイトの構築に必要なメタデータを管理しています。
 
-## Commands
+また、SSG（静的サイトジェネレーター）の本体は、Git submoduleとして別リポジトリの[typst-docs-web](https://github.com/typst-community/typst-docs-web)で管理されています。
 
-### Develop
+## Git submoduleの初期化について
 
-> [!NOTE]
-> 全文検索のインデックスは[pagefind](https://pagefind.app/)で生成していますが、インデックスの出力先が`dist/`になっているため、現在は開発サーバーで全文検索が機能しません。検索機能関連の開発をする場合は、`bun run build`を実行してから、`bun run preview`でビルド後の状態を確認してください。
+リポジトリを`git clone`する際に`--recursive`オプションを付けていない場合は、以下のコマンドでsubmoduleを初期化・更新できます。
 
 ```sh
-bun run dev
+git submodule update --init --recursive
 ```
 
-### Build
-
-```sh
-bun run build
-```
-
-### Preview
-
-```sh
-bun run preview
-```
-
-### Check
-
-```sh
-# コードスタイルをチェックする
-bun run check
-
-# 自動修正を行う
-bun run check:write
-```
-
-### Test
-
-```sh
-bun run test
-```
+これにより、`typst-docs-web`ディレクトリが正しく取得されます。

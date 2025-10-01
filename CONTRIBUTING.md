@@ -16,7 +16,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 > [!WARNING]
 > ここに記載されている内容は改訂中です。現在の手順は最新の[Pull Request](https://github.com/typst-jp/docs/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen)を参照してください。
 
-1. このGitHubリポジトリをフォークします。
+1. このGitHubリポジトリをフォークします。Git submoduleを含むため、リポジトリを`git clone`する際に`--recursive`オプションを付けてください。
 2. ドキュメントの実体は、主にMarkdownファイルおよびコンパイラのソースコード内のコメントの2種類から構成されています。それぞれ、下記の注意書きに従って翻訳作業をお願いします。
     - `./crates/typst-library/src/`内の`.rs`ファイル群は、Typstのコンパイラのソースコードです。ソースコード内に含まれている、**既存のコメントを直接書き換えて翻訳してください**。
         - 例1：[Reference > Foundations](https://typst.app/docs/reference/foundations/)を翻訳する際は、`./crates/typst-library/src/foundations/mod.rs`のコメントを編集してください。
@@ -86,7 +86,7 @@ mise run textlint-md    # Markdownファイルを翻訳した場合
 miseが導入されている環境で初めて当プロジェクトのルートディレクトリに移動すると、以下のように構成ファイルを信頼することを求められます。
 
 ```plaintext
-mise ERROR Config file /path/to/typst-jp.github.io/.mise.toml is not trusted.
+mise ERROR Config file /path/to/typst-jp.github.io/mise.toml is not trusted.
 Trust it with `mise trust`.
 mise ERROR Run with --verbose or MISE_VERBOSE=1 for more information
 ```

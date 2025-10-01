@@ -1,0 +1,75 @@
+
+[tools]
+rust = "1.83.0"
+node = "22.11.0"
+bun = "1.2.21"
+pinact = "3.1.1"
+
+[settings]
+yes = true
+idiomatic_version_file_enable_tools = []
+
+[vars]
+_.file = "website/metadata.json"
+
+[tasks.symlink-docs-assets]
+run = [
+    "rm -rf website/typst-docs-web/public/docs.json",
+    "ln -s ../../../docs.json website/typst-docs-web/public/docs.json",
+    "rm -rf website/typst-docs-web/public/assets",
+    "ln -s ../../../assets website/typst-docs-web/public/assets"
+]
+
+[tasks.symlink-web-metadata]
+run = [
+    "rm -rf website/typst-docs-web/public/favicon.png",
+    "ln -s ../../favicon.png website/typst-docs-web/public/favicon.png",
+    "rm -rf website/typst-docs-web/public/metadata.json",
+    "ln -s ../../metadata.json website/typst-docs-web/public/metadata.json",
+    "rm -rf website/typst-docs-web/public/translation-status.json",
+    "ln -s ../../translation-status.json website/typst-docs-web/public/translation-status.json"
+]
+
+[tasks.generate-docs]
+depends = ["symlink-docs-assets", "symlink-web-metadata"]
+run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base {{vars.basePath}}"
+
+[tasks.generate-web]
+depends = ["install-website", "symlink-docs-assets", "symlink-web-metadata"]
+run = ["bun run build"]
+dir = "./website/typst-docs-web"
+
+[tasks.generate]
+run = [
+    "mise run generate-docs",
+    "mise run generate-web"
+]
+
+[tasks.install-website]
+run = "bun install --frozen-lockfile"
+dir = "./website/typst-docs-web"
+
+[tasks.dev]
+depends = ["install-website"]
+run = "bun run dev"
+dir = "./website/typst-docs-web"
+
+[tasks.preview]
+depends = ["install-website"]
+run = "bun run preview"
+dir = "./website/typst-docs-web"
+
+[tasks.install-textlint]
+run = "bun install --frozen-lockfile"
+
+[tasks.textlint-md]
+depends = ["install-textlint"]
+run = "bun run textlint-md"
+
+[tasks.textlint-md-fix]
+depends = ["install-textlint"]
+run = "bun run textlint-md:fix"
+
+[tasks.textlint-html]
+depends = ["install-textlint"]
+run = "bun run textlint-html"

@@ -14,13 +14,11 @@ use crate::foundations::{
 };
 use crate::World;
 
-/// Represents a date, a time, or a combination of both.
+/// 日付、時刻、またはその両方を表します。
 ///
-/// Can be created by either specifying a custom datetime using this type's
-/// constructor function or getting the current date with
-/// [`datetime.today`]($datetime.today).
+/// この型のコンストラクタ関数を使ってカスタム日時を指定するか、[`datetime.today`]($datetime.today)を使って現在の日付を取得することで作成できます。
 ///
-/// # Example
+/// # 例
 /// ```example
 /// #let date = datetime(
 ///   year: 2020,
@@ -45,8 +43,8 @@ use crate::World;
 /// )
 /// ```
 ///
-/// # Datetime and Duration
-/// You can get a [duration] by subtracting two datetime:
+/// # DatetimeとDuration
+/// 2つのdatetimeの差を取ることで、[duration]を取得できます。
 /// ```example
 /// #let first-of-march = datetime(day: 1, month: 3, year: 2024)
 /// #let first-of-jan = datetime(day: 1, month: 1, year: 2024)
@@ -54,8 +52,7 @@ use crate::World;
 /// #distance.hours()
 /// ```
 ///
-/// You can also add/subtract a datetime and a duration to retrieve a new,
-/// offset datetime:
+/// datetimeとdurationを加減算することで、新しい日時（オフセットされたdatetime）を取得することもできます。
 /// ```example
 /// #let date = datetime(day: 1, month: 3, year: 2024)
 /// #let two-days = duration(days: 2)
@@ -67,72 +64,43 @@ use crate::World;
 /// #two-days-later.display()
 /// ```
 ///
-/// # Format
-/// You can specify a customized formatting using the
-/// [`display`]($datetime.display) method. The format of a datetime is
-/// specified by providing _components_ with a specified number of _modifiers_.
-/// A component represents a certain part of the datetime that you want to
-/// display, and with the help of modifiers you can define how you want to
-/// display that component. In order to display a component, you wrap the name
-/// of the component in square brackets (e.g. `[[year]]` will display the year).
-/// In order to add modifiers, you add a space after the component name followed
-/// by the name of the modifier, a colon and the value of the modifier (e.g.
-/// `[[month repr:short]]` will display the short representation of the month).
+/// # フォーマット
+/// [`display`]($datetime.display)メソッドを使うことで、日時をカスタマイズして表示するフォーマットを指定できます。日時のフォーマットは、_コンポーネント_ に _修飾子_ を組み合わせることで指定します。
+/// コンポーネントは、日時の中の特定の部分（たとえば年や月など）を表します。そして修飾子を使うことで、そのコンポーネントをどのように表示するかを細かく設定できます。
+/// コンポーネントを表示するには、コンポーネントの名前を角かっこで囲みます（例：`[[year]]`は年を表示します）。修飾子を追加するには、コンポーネント名の後に半角スペースを入れ、修飾子名、コロン（:）、修飾子の値を記述します（例：`[[month repr:short]]`は月名を短縮形で表示します）。
 ///
-/// The possible combination of components and their respective modifiers is as
-/// follows:
+/// 使用可能なコンポーネントと修飾子の組み合わせは以下のとおりです。
 ///
-/// - `year`: Displays the year of the datetime.
-///   - `padding`: Can be either `zero`, `space` or `none`. Specifies how the
-///     year is padded.
-///   - `repr` Can be either `full` in which case the full year is displayed or
-///     `last_two` in which case only the last two digits are displayed.
-///   - `sign`: Can be either `automatic` or `mandatory`. Specifies when the
-///     sign should be displayed.
-/// - `month`: Displays the month of the datetime.
-///   - `padding`: Can be either `zero`, `space` or `none`. Specifies how the
-///     month is padded.
-///   - `repr`: Can be either `numerical`, `long` or `short`. Specifies if the
-///     month should be displayed as a number or a word. Unfortunately, when
-///     choosing the word representation, it can currently only display the
-///     English version. In the future, it is planned to support localization.
-/// - `day`: Displays the day of the datetime.
-///   - `padding`: Can be either `zero`, `space` or `none`. Specifies how the
-///     day is padded.
-/// - `week_number`: Displays the week number of the datetime.
-///   - `padding`: Can be either `zero`, `space` or `none`. Specifies how the
-///     week number is padded.
-///   - `repr`: Can be either `ISO`, `sunday` or `monday`. In the case of `ISO`,
-///      week numbers are between 1 and 53, while the other ones are between 0
-///      and 53.
-/// - `weekday`: Displays the weekday of the date.
-///   - `repr` Can be either `long`, `short`, `sunday` or `monday`. In the case
-///     of `long` and `short`, the corresponding English name will be displayed
-///     (same as for the month, other languages are currently not supported). In
-///     the case of `sunday` and `monday`, the numerical value will be displayed
-///     (assuming Sunday and Monday as the first day of the week, respectively).
-///   - `one_indexed`: Can be either `true` or `false`. Defines whether the
-///     numerical representation of the week starts with 0 or 1.
-/// - `hour`: Displays the hour of the date.
-///   - `padding`: Can be either `zero`, `space` or `none`. Specifies how the
-///     hour is padded.
-///   - `repr`: Can be either `24` or `12`. Changes whether the hour is
-///     displayed in the 24-hour or 12-hour format.
-/// - `period`: The AM/PM part of the hour
-///   - `case`: Can be `lower` to display it in lower case and `upper` to
-///     display it in upper case.
-/// - `minute`: Displays the minute of the date.
-///   - `padding`: Can be either `zero`, `space` or `none`. Specifies how the
-///     minute is padded.
-/// - `second`: Displays the second of the date.
-///   - `padding`: Can be either `zero`, `space` or `none`. Specifies how the
-///     second is padded.
+/// - `year`: `datetime`の年を表示します。
+///   - `padding`: 年表示のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
+///   - `repr`: `full`（4桁表示）`last_two`（2桁表示）を指定できます。
+///   - `sign`: 符号の表示を`automatic`（自動）または`mandatory`（常時）で指定できます。
+/// - `month`: `datetime`の月を表示します
+///   - `padding`: 月表示のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
+///   - `repr`: 月を数値で表示するか（`numerical`）、英語の月名（`long`）、英語の略称（`short`）で表示するかを指定できます。
+///     残念ながら、現在のところ、月名表示は英語のみです。将来的には多言語対応が予定されています。
+/// - `day`: `datetime`の日を表示します。
+///   - `padding`: 日表示のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
+/// - `week_number`: datetimeの週番号を表示します。
+///   - `padding`: 週番号のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
+///   - `repr`: `ISO`、`sunday`（日曜開始）、`monday`（月曜開始）を指定できます。ISOの場合、数字は1〜53、それ以外では0〜53で表されます。
+/// - `weekday`: `date`の曜日を表示します。
+///   - `repr`: 曜日名（`long`）、曜日名の略称（`short`）、日曜（`sunday`）、月曜（`monday`）のいずれかを指定できます。
+///     `long`と`short`では、対応する曜日名が英語で表示されます。
+///     （月名と同様に、他言語での表示はまだサポートされていません）。
+///     `sunday`と`monday`では、日曜または月曜から数えた日数が数値で表示されます。
+///   - `one_indexed`: `true`または`false`を指定できます。これは、曜日の数値表示の際、開始日を0とするか1とするかを指定します。
+/// - `hour`: `date`の時を表示します。
+///   - `padding`: 時表示のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
+///   - `repr`: 24時間表示（`24`）または12時間表示（`12`）を指定できます。
+/// - `period`: AM/PM（午前・午後）の表示です。
+///   - `case`: 小文字（`lower`）、大文字（`upper`）を指定できます。
+/// - `minute`: `date`の分を表示します。
+///   - `padding`: 分表示のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
+/// - `second`: `date`の秒を表示します。
+///   - `padding`: 秒表示のパディングは`zero`（ゼロ）、`space`（空白）、`none`（なし）が指定できます。
 ///
-/// Keep in mind that not always all components can be used. For example, if you
-/// create a new datetime with `{datetime(year: 2023, month: 10, day: 13)}`, it
-/// will be stored as a plain date internally, meaning that you cannot use
-/// components such as `hour` or `minute`, which would only work on datetimes
-/// that have a specified time.
+/// すべてのコンポーネントが常に使用できるとは限らない点には注意してください。たとえば、`{datetime(year: 2023, month: 10, day: 13)}`のようにして新しい`datetime`を作成すると、内部的には日付のみが保持されるため、`hour`や`minute`のようなコンポーネントは使用できません。それらは特定の時刻が指定された`datetime`でのみ動作します。
 #[ty(scope, cast)]
 #[derive(Debug, Clone, Copy, PartialEq, Hash)]
 pub enum Datetime {
@@ -233,20 +201,16 @@ impl Datetime {
 
 #[scope]
 impl Datetime {
-    /// Creates a new datetime.
+    /// 新しいdatetimeを作成。
     ///
-    /// You can specify the [datetime] using a year, month, day, hour, minute,
-    /// and second.
+    /// 年、月、日、時、分、秒を指定して[datetime]を作成します。
     ///
-    /// _Note_: Depending on which components of the datetime you specify, Typst
-    /// will store it in one of the following three ways:
-    /// * If you specify year, month and day, Typst will store just a date.
-    /// * If you specify hour, minute and second, Typst will store just a time.
-    /// * If you specify all of year, month, day, hour, minute and second, Typst
-    ///   will store a full datetime.
+    /// _注_：指定する`datetime`の要素によって、Typstが保持する形式は次の3通りのいずれかになります。
+    /// * 年、月、日だけを指定した場合、Typstは日付のみを保持します。
+    /// * 時、分、秒だけを指定した場合、Typstは時刻のみを保持します。
+    /// * 年、月、日、時、分、秒すべてを指定した場合、Typstは完全な日時を保持します。
     ///
-    /// Depending on how it is stored, the [`display`]($datetime.display) method
-    /// will choose a different formatting by default.
+    /// 保持形式に応じて、[`display`]($datetime.display)メソッドはデフォルトで異なるフォーマットを選択します。
     ///
     /// ```example
     /// #datetime(
@@ -257,22 +221,22 @@ impl Datetime {
     /// ```
     #[func(constructor)]
     pub fn construct(
-        /// The year of the datetime.
+        /// `datetime`の年。
         #[named]
         year: Option<i32>,
-        /// The month of the datetime.
+        /// `datetime`の月。
         #[named]
         month: Option<Month>,
-        /// The day of the datetime.
+        /// `datetime`の日。
         #[named]
         day: Option<u8>,
-        /// The hour of the datetime.
+        /// `datetime`の時。
         #[named]
         hour: Option<u8>,
-        /// The minute of the datetime.
+        /// `datetime`の分。
         #[named]
         minute: Option<u8>,
-        /// The second of the datetime.
+        /// `datetime`の秒。
         #[named]
         second: Option<u8>,
     ) -> StrResult<Datetime> {
@@ -310,7 +274,7 @@ impl Datetime {
         })
     }
 
-    /// Returns the current date.
+    /// 現在の日付を取得。
     ///
     /// ```example
     /// Today's date is
@@ -319,8 +283,7 @@ impl Datetime {
     #[func]
     pub fn today(
         engine: &mut Engine,
-        /// An offset to apply to the current UTC date. If set to `{auto}`, the
-        /// offset will be the local offset.
+        /// 現在のUTC日時に適用するオフセットです。`{auto}`に設定した場合は、ローカルのオフセットが適用されます。
         #[named]
         #[default]
         offset: Smart<i64>,
@@ -331,19 +294,17 @@ impl Datetime {
             .ok_or("unable to get the current date")?)
     }
 
-    /// Displays the datetime in a specified format.
+    /// 指定したフォーマットで`datetime`を表示します。
+    /// 日付のみ、時刻のみ、または両方が指定されているかによって、デフォルトのフォーマットは異なります。
+    /// 日付のみ指定されている場合は`[[year]-[month]-[day]]`になります。
+    /// 時刻のみ指定されている場合は`[[hour]:[minute]:[second]]`になります。
+    /// 日時の両方が指定されている場合は`[[year]-[month]-[day] [hour]:[minute]:[second]]`になります。
     ///
-    /// Depending on whether you have defined just a date, a time or both, the
-    /// default format will be different. If you specified a date, it will be
-    /// `[[year]-[month]-[day]]`. If you specified a time, it will be
-    /// `[[hour]:[minute]:[second]]`. In the case of a datetime, it will be
-    /// `[[year]-[month]-[day] [hour]:[minute]:[second]]`.
-    ///
-    /// See the [format syntax]($datetime/#format) for more information.
+    /// 詳細は[フォーマット構文]($datetime/#format)を参照してください。
     #[func]
     pub fn display(
         &self,
-        /// The format used to display the datetime.
+        /// `datetime`を表示する際に使用するフォーマットです。
         #[default]
         pattern: Smart<DisplayPattern>,
     ) -> StrResult<EcoString> {
@@ -366,7 +327,7 @@ impl Datetime {
         result.map(EcoString::from).map_err(format_time_format_error)
     }
 
-    /// The year if it was specified, or `{none}` for times without a date.
+    /// 年を返します。年が指定されていない場合や、日付を持たない時間の場合は`{none}`になります。
     #[func]
     pub fn year(&self) -> Option<i32> {
         match self {
@@ -376,7 +337,7 @@ impl Datetime {
         }
     }
 
-    /// The month if it was specified, or `{none}` for times without a date.
+    /// 月を返します。日付を持たない時間の場合は`{none}`になります。
     #[func]
     pub fn month(&self) -> Option<u8> {
         match self {
@@ -386,7 +347,7 @@ impl Datetime {
         }
     }
 
-    /// The weekday (counting Monday as 1) or `{none}` for times without a date.
+    /// （月曜日を1とする）曜日を返します。日付を持たない時間の場合は`{none}`になります。
     #[func]
     pub fn weekday(&self) -> Option<u8> {
         match self {
@@ -396,7 +357,7 @@ impl Datetime {
         }
     }
 
-    /// The day if it was specified, or `{none}` for times without a date.
+    /// 日を返します。日付を持たない時間の場合は`{none}`になります。
     #[func]
     pub fn day(&self) -> Option<u8> {
         match self {
@@ -406,7 +367,7 @@ impl Datetime {
         }
     }
 
-    /// The hour if it was specified, or `{none}` for dates without a time.
+    /// 時を返します。時刻を持たない日付の場合は`{none}`になります。
     #[func]
     pub fn hour(&self) -> Option<u8> {
         match self {
@@ -416,7 +377,7 @@ impl Datetime {
         }
     }
 
-    /// The minute if it was specified, or `{none}` for dates without a time.
+    /// 分を返します。時刻を持たない日付の場合は`{none}`になります。
     #[func]
     pub fn minute(&self) -> Option<u8> {
         match self {
@@ -426,7 +387,7 @@ impl Datetime {
         }
     }
 
-    /// The second if it was specified, or `{none}` for dates without a time.
+    /// 秒を返します。時刻を持たない日付の場合は`{none}`になります。
     #[func]
     pub fn second(&self) -> Option<u8> {
         match self {
@@ -436,7 +397,8 @@ impl Datetime {
         }
     }
 
-    /// The ordinal (day of the year), or `{none}` for times without a date.
+    /// 年の通算日（1年の中での通し番号）を返します。
+    /// 日付を持たない時刻の場合は `{none}` になります。
     #[func]
     pub fn ordinal(&self) -> Option<u16> {
         match self {
