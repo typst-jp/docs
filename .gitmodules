@@ -1,0 +1,3 @@
+[submodule "website/typst-docs-web"]
+	path = website/typst-docs-web
+	url = ../../typst-community/typst-docs-web.git
