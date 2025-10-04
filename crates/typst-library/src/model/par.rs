@@ -348,7 +348,7 @@ impl Unlabellable for Packed<ParbreakElem> {}
 /// ```
 ///
 /// この要素は、行番号の[alignment]($par.line.number-align)[margin]($par.line.number-margin)など、
-/// 行の番号付けの様々な設定を制御できる追加オプションを提供します。
+/// 行の番号付けのさまざまな設定を制御できる追加オプションを提供します。
 /// さらに、
 /// [`numbering-scope`]($par.line.numbering-scope)オプションを使用すると、
 /// ページごとに番号をリセットするかどうかの制御が可能です。

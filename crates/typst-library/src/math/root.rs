@@ -17,7 +17,7 @@ pub fn sqrt(
     RootElem::new(radicand).pack().spanned(span)
 }
 
-/// 累乗根。
+/// 冪根。
 ///
 /// ```example
 /// $ root(3, x) $
