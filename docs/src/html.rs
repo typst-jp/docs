@@ -229,6 +229,7 @@ impl<'a> Handler<'a> {
                         ty,
                         md::LinkType::Inline
                             | md::LinkType::Reference
+                            | md::LinkType::Shortcut
                             | md::LinkType::ShortcutUnknown
                             | md::LinkType::Autolink
                     ),

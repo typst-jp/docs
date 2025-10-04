@@ -191,5 +191,8 @@
 	"/docs/japanese/templates/": "community",
 	"/docs/japanese/packages/": "community",
 	"/docs/japanese/articles/": "community",
+	"/docs/about/": "community",
+	"/docs/about/contributing/": "community",
+	"/docs/about/translating-guidelines/": "community",
 	"/docs/glossary/": "community"
 }

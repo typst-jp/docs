@@ -49,6 +49,7 @@ fn resolve_known(head: &str, base: &str) -> Option<String> {
         "$guides" => format!("{base}guides"),
         "$changelog" => format!("{base}changelog"),
         "$japanese" => format!("{base}japanese"),
+        "$about" => format!("{base}about"),
         "$universe" => "https://typst.app/universe".into(),
         _ => return None,
     })
