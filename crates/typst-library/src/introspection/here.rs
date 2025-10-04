@@ -4,24 +4,19 @@ use crate::diag::HintedStrResult;
 use crate::foundations::{func, Context};
 use crate::introspection::Location;
 
-/// Provides the current location in the document.
+/// 文書中における現在位置を提供。
 ///
-/// You can think of `here` as a low-level building block that directly extracts
-/// the current location from the active [context]. Some other functions use it
-/// internally: For instance, `{counter.get()}` is equivalent to
-/// `{counter.at(here())}`.
+/// `here`はアクティブな[コンテキスト]($context)から現在位置を直接取得する低レベルな構成要素と考えることができます。
+/// いくつかの他の関数が内部で使用しています。
+/// 例えば、`{counter.get()}`は`{counter.at(here())}`と等価です。
 ///
-/// Within show rules on [locatable]($location/#locatable) elements, `{here()}`
-/// will match the location of the shown element.
+/// [ロケータブル]($location/#locatable)要素に対するshowルールにおいて、`{here()}`は表示する要素の位置にマッチします。
 ///
-/// If you want to display the current page number, refer to the documentation
-/// of the [`counter`] type. While `here` can be used to determine the physical
-/// page number, typically you want the logical page number that may, for
-/// instance, have been reset after a preface.
+/// 現在のページ番号を表示したい場合は、[`counter`]型のドキュメントを参照してください。
+/// `here`は物理的なページ番号を決定できますが、通常は、前書きの後にリセットされるような、論理的なページ番号が必要でしょう。
 ///
-/// # Examples
-/// Determining the current position in the document in combination with the
-/// [`position`]($location.position) method:
+/// # 例
+/// [`position`]($location.position)メソッドと組み合わせて文書中での現在位置を決定します。
 /// ```example
 /// #context [
 ///   I am located at
@@ -29,7 +24,7 @@ use crate::introspection::Location;
 /// ]
 /// ```
 ///
-/// Running a [query] for elements before the current position:
+/// 現在位置より前にある要素に対して[クエリ]($query)を実行します。
 /// ```example
 /// = Introduction
 /// = Background
@@ -42,7 +37,7 @@ use crate::introspection::Location;
 ///
 /// = Conclusion
 /// ```
-/// Refer to the [`selector`] type for more details on before/after selectors.
+/// セレクターのbeforeおよびafterに関する詳細は[`selector`]型のドキュメントを参照してください。
 #[func(contextual)]
 pub fn here(context: Tracked<Context>) -> HintedStrResult<Location> {
     context.location()
