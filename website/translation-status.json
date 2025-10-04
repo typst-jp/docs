@@ -150,7 +150,7 @@
 	"/docs/reference/introspection/location/": "untranslated",
 	"/docs/reference/introspection/metadata/": "untranslated",
 	"/docs/reference/introspection/query/": "untranslated",
-	"/docs/reference/introspection/state/": "untranslated",
+	"/docs/reference/introspection/state/": "translated",
 	"/docs/reference/data-loading/": "translated",
 	"/docs/reference/data-loading/cbor/": "translated",
 	"/docs/reference/data-loading/csv/": "translated",
