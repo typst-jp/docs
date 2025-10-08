@@ -12,7 +12,7 @@ use crate::layout::{Axis, Side};
 /// - `{btt}`: 下から上。
 ///
 /// これらの値はグローバルスコープでも、direction型のスコープでも用いることができます。
-/// 従って、以下の2つのどちらでも書くことができます。
+/// したがって、以下の2つのどちらでも書くことができます。
 /// ```example
 /// #stack(dir: rtl)[A][B][C]
 /// #stack(dir: direction.rtl)[A][B][C]
