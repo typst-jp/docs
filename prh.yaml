@@ -34,9 +34,9 @@ rules:
   - expected: 新たな
     patterns:
       - あらたな
-  - expected: あらわす
+  - expected: 表$1
     patterns:
-      - 表す
+      - /あらわ(さ|し|す|せ|そ)/
   - expected: 現れる
     patterns:
       - あらわれる
@@ -131,9 +131,9 @@ rules:
   - expected: さらに
     patterns:
       - /(?<!変)更に/
-  - expected: 従って
+  - expected: したがって、
     patterns:
-      - したがって
+      - 従って、
   - expected: しだいに
     patterns:
       - 次第に
