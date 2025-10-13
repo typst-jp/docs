@@ -159,7 +159,7 @@ pub fn pow(
 #[func(title = "Exponential")]
 pub fn exp(
     span: Span,
-    /// べき乗の指数。
+    /// 冪乗の指数。
     exponent: Spanned<Num>,
 ) -> SourceResult<f64> {
     match exponent.v {
