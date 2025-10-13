@@ -98,7 +98,7 @@ cast! {
 #[func(title = "Power")]
 pub fn pow(
     span: Span,
-    /// べき乗の底（てい）。
+    /// 冪乗の底（てい）。
     ///
     /// 値が[`decimal`]の場合、指数は[整数]($int)でなければなりません。
     base: DecNum,
