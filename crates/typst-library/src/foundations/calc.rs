@@ -151,7 +151,7 @@ pub fn pow(
     }
 }
 
-/// eのべき乗。
+/// eの冪乗。
 ///
 /// ```example
 /// #calc.exp(1)
