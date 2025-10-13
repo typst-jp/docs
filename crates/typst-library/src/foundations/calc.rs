@@ -102,7 +102,7 @@ pub fn pow(
     ///
     /// 値が[`decimal`]の場合、指数は[整数]($int)でなければなりません。
     base: DecNum,
-    /// べき乗の指数。
+    /// 冪乗の指数。
     exponent: Spanned<Num>,
 ) -> SourceResult<DecNum> {
     match exponent.v {
