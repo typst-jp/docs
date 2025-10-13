@@ -188,7 +188,7 @@ pub fn exp(
 /// ```
 #[func(title = "Square Root")]
 pub fn sqrt(
-    /// 平方根を計算する数値。負の値はとれません。
+    /// 平方根を計算する数値。負の値は取れません。
     value: Spanned<Num>,
 ) -> SourceResult<f64> {
     if value.v.float() < 0.0 {
