@@ -65,8 +65,8 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 | ----------------------- | ----------------------- | ------------------------------------ |
 | インライン数式          | `[$x^2$]`               | [Math]($category/math)               |
 | ブロック数式            | `[$ x^2 $]`             | [Math]($category/math)               |
-| 下付き添え字            | `[$x_1$]`               | [`attach`]($category/math/attach)    |
-| 上付き添え字            | `[$x^2$]`               | [`attach`]($category/math/attach)    |
+| 下付き文字              | `[$x_1$]`               | [`attach`]($category/math/attach)    |
+| 上付き文字              | `[$x^2$]`               | [`attach`]($category/math/attach)    |
 | 分数                    | `[$1 + (a+b)/5$]`       | [`frac`]($math.frac)                 |
 | 改行                    | `[$x \ y$]`             | [`linebreak`]($linebreak)            |
 | 揃え位置                | `[$x &= 2 \ &= 3$]`     | [Math]($category/math)               |
