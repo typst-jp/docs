@@ -21,13 +21,15 @@ use crate::visualize::{Paint, Stroke};
 
 /// グリッド状にコンテンツを配置。
 ///
-/// グリッド要素を用いるとコンテンツをグリッド状に配置することができます。
-/// 行と列の数に加えて、それらの間隔を定義することができます。
+/// グリッド要素を用いるとコンテンツをグリッド状に配置できます。
+/// 行と列の数に加えて、それらの間隔を定義できます。
 /// 複雑なレイアウトが作成できるような、列と行の大きさに関するモードが複数あります。
 ///
 /// グリッド要素とテーブル要素はとてもよく似た挙動をする一方で、これらは異なるユースケースが想定されており、異なる意味論が提供されています。
 /// グリッド要素はプレゼンテーションおよびレイアウトに使われることが想定されている一方で、[`{table}`]($table)要素は複数の関係データ点を表す広い用途が想定されています。
-/// 将来的にTypst will annotate 出力 such that スクリーンリーダー will announce コンテンツ in `table` as tabular while a グリッドのコンテンツ will be announced no different than multiple コンテンツブロック in the 文書の流れ
+/// 将来、Typstは出力に注釈を付与し、スクリーンリーダーが`table`要素の内容を表として読み上げられるようになる予定です。
+/// 一方、グリッドのコンテンツは、文書の流れに沿った複数のコンテンツブロックと同様に読み上げられる予定です。
+
 /// これらの要素に対するsetルールとshowルールは、互いに影響しません。
 ///
 /// グリッドの大きさは引数に指定されたトラックサイズによって決定されます。
@@ -35,21 +37,20 @@ use crate::visualize::{Paint, Stroke};
 /// 各sizing引数は個々のトラックサイズの配列を受け入れます。
 /// トラックサイズは以下のいずれかです。
 ///
-/// - `{auto}`: トラックはコンテンツに合わせた大きさになります。
-/// It will be at most as large as the remaining space.
-/// If there is more than one `{auto}` track width, and together they claim more than the available space, the `{auto}` tracks will fairly distribute the available space among themselves.
+/// - `{auto}`: トラックはコンテンツに合わせた大きさとなり、残りのスペース全体まで大きくなります。
+/// `{auto}`トラック幅が複数指定され、利用可能なスペースより大きなスペースが要求された場合、利用可能なスペースが`{auto}`トラックに等分配されます。
 ///
-/// - A fixed or relative length (e.g. `{10pt}` or `{20% - 1cm}`): The track will be exactly of this size.
+/// - 固定あるいは相対長さ（`{10pt}`や`{20% - 1cm}`など）: トラックは厳密にその大きさになります。
 ///
-/// - A fractional length (e.g. `{1fr}`): Once all other tracks have been sized, the remaining space will be divided among the fractional tracks according to their fractions.
-/// For example, if there are two fractional tracks, each with a fraction of `{1fr}`, they will each take up half of the remaining space.
+/// - 比率長さ（例えば`{1fr}`）: 他のトラック全ての大きさが確定し次第、残りのスペースは比率指定のトラックに指定された比率に応じて分配されます。
+/// 例えば、`{1fr}`で比率指定されたトラックが2つある場合、それぞれ残りのスペースの半分になります。
 ///
 /// 単一のトラックを指定する場合は、配列を省略して単一の値を指定できます。
 /// 複数の`{auto}`のトラックを指定する場合は、配列の代わりにトラックの数を入力して下さい。
 /// 例えば、`columns:` `{3}`は`columns:` `{(auto, auto, auto)}`と同じ意味になります。
 ///
 /// # 例
-/// The example below demonstrates the different track sizing options.以下の例は異なるトラックサイズオプションの実演です。
+/// 以下の例は異なるトラックサイズオプションの実演です。
 /// また、1つのセルをグリッドの2つのトラックに跨がせるために[`grid.cell`]($grid.cell)をどう使うのかも示しています。
 ///
 /// ```example
@@ -76,7 +77,7 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// You can also [spread]($arguments/#spreading) an array of strings or content into a grid to populate its cells.
+/// また、文字列やコンテンツの配列をグリッドに[展開](#arguments/#spreading)して、セルを埋めることもできます。
 ///
 /// ```example
 /// #grid(
@@ -92,41 +93,44 @@ use crate::visualize::{Paint, Stroke};
 ///
 /// - [`fill`]($grid.fill)は全てのセルに背景を設定します。
 /// - [`align`]($grid.align)はセルの配置方法を変更します。
-/// - [`inset`]($grid.inset) to optionally add internal padding to each cell
+/// - [`inset`]($grid.inset)は各セル内に任意のパディングを追加します。
 /// - [`stroke`]($grid.stroke)は特定のストロークでグリッドの線をオプションで有効化します。
 ///
 /// もし単一セルに対して上記のオプションの1つを上書きしなければならない場合は、[`grid.cell`]($grid.cell)要素が使用できます。
 /// 同様に、個々のグリッドの線も[`grid.hline`]($grid.hline)要素や[`grid.vline`]($grid.vline)要素を用いて上書きできます。
 ///
-/// Alternatively, if you need the appearance options to depend on a cell's position (column and row), you may specify a function to `fill` or `align` of the form `(column, row) => value`.
-/// You may also use a showルール on [`grid.cell`]($grid.cell) - see that element's examples or the examples below for more information.
+/// 別の方法として、外観オプションをセルの位置（列と行）に依存させる必要がある場合、`fill`や`align`に`(column, row) => value`という形式の関数を指定できます。
+/// [`grid.cell`]($grid.cell)に対してもshowルールを使用できます。
+/// 詳細はその要素の例や以下の例を参照してください。
 ///
-/// Locating most of your styling in set and show rules is recommended, as it keeps the grid's or table's actual usages clean and easy to read.
-/// It also allows you to easily change the grid's appearance in one place.
+/// グリッドやテーブルの実際の使い方が簡素かつ読みやすくなるため、基本的にスタイル設定にはsetルールとshowルールを用いることを推奨します。
+/// これによって、グリッドの外観を1か所で簡単に変更もできます。
 ///
-/// ## Stroke styling precedence
-/// There are three ways to set the stroke of a grid cell: through [`{grid.cell}`'s `stroke` field]($grid.cell.stroke), by using [`{grid.hline}`]($grid.hline) and [`{grid.vline}`]($grid.vline), or by setting the [`{grid}`'s `stroke` field]($grid.stroke).
-/// When multiple of these settings are present and conflict, the `hline` and `vline` settings take the highest precedence, followed by the `cell` settings, and finally the `grid` settings.
+/// ## ストロークのスタイル設定の優先順位
+/// グリッドセルのストローク指定方法は3種類あります。
+/// [`{grid.cell}`の`stroke`フィールド]($grid.cell.stroke)を用いる方法、[`{grid.hline}`]($grid.hline)と[`{grid.vline}`]($grid.vline)を用いる方法、[`{grid}`の`stroke`フィールド]($grid.stroke)を用いる方法です。
+/// これらの設定が複数存在し、競合する場合、`hline`と`vline`の設定が最優先となり、続いて優先されるのが`cell`の設定で、最後に`grid`の設定が適用されます。
 ///
-/// Furthermore, strokes of a repeated grid header or footer will take precedence over regular cell strokes.
+/// さらに、グリッドの繰り返されたヘッダーおよびフッターのストロークは、通常のセルのストロークよりも優先されます。
 #[elem(scope, Show)]
 pub struct GridElem {
-    /// The column sizes.
+    /// 列の数。
     ///
-    /// Either specify a track size array or provide an integer to create a grid with that many `{auto}`-sized columns.
-    /// Note that opposed to rows and gutters, providing a single track size will only ever create a single column.
+    /// トラックサイズの配列か整数を指定します。
+    /// 整数を渡した場合、その数だけ`auto`サイズ列を持つグリッドが作成されます。
+    /// rowsおよびguttersとは異なり、単一のトラックサイズを指定するとただ一つの列が作成されることに注意してください。
     #[borrowed]
     pub columns: TrackSizings,
 
-    /// The row sizes.
+    /// 行の数。
     ///
-    /// If there are more cells than fit the defined rows, the last row is repeated until there are no more cells.
+    /// 定義した行に収まらないセルがある場合、セルが無くなるまで最後の行が繰り返されます。
     #[borrowed]
     pub rows: TrackSizings,
 
     /// 行間と列間の間隔。
     ///
-    /// If there are more gutters than defined sizes, the last gutter is repeated.
+    /// 定義した数よりも多くgutterがある場合、最後のgutterが繰り返されます。
     ///
     /// これは`column-gutter`と`row-gutter`を同じ値で設定する省略記法です。
     #[external]
@@ -171,18 +175,18 @@ pub struct GridElem {
     /// セルのコンテンツをどう配置するか。
     ///
     /// 単一の配置、（各列に対応する）配置の配列、配置を返す関数のいずれかが使用可能です。
-    /// The function receives the cells' column and row indices, starting from zero.
-    /// `{auto}`に設定された場合外側の配置が使用されます。
+    /// この関数はセルの0始まりの列と行のインデックスを受け取ります。
+    /// `{auto}`に設定された場合は外側の配置が使用されます。
     ///
-    /// You can find an example for this argument at the [`table.align`]($table.align) parameter.
+    /// この引数に関する例は[`table.align`]($table.align)パラメーターにあります。
     #[borrowed]
     pub align: Celled<Smart<Alignment>>,
 
-    /// How to [stroke]($stroke) the cells.
+    /// セルの[ストローク]($stroke)をどうするか。
     ///
     /// デフォルトではグリッドにストロークはありませんが、このオプションを所望のストロークに設定すれば変更できます。
     ///
-    /// If it is necessary to place lines which can cross spacing between cells produced by the `gutter` option, or to override the stroke between multiple specific cells, consider specifying one or more of [`grid.hline`]($grid.hline) and [`grid.vline`]($grid.vline) alongside your grid cells.
+    /// `gutter`オプションによって作成されたセル間の空白を横切る線を配置する必要がある場合や、複数の特定のセル間のストロークを上書きする必要がある場合は、グリッドセルに合わせて[`grid.hline`]($grid.hline)および[`grid.vline`]($grid.vline)のいずれか、または両方を指定することを検討してください。
     ///
     /// ```example
     /// #set page(height: 13em, width: 26em)
@@ -254,15 +258,15 @@ pub struct GridElem {
     #[fold]
     pub stroke: Celled<Sides<Option<Option<Arc<Stroke>>>>>,
 
-    /// How much to pad the cells' content.
+    /// セル内のコンテンツに対するパディングの大きさ。
     ///
-    /// You can find an example for this argument at the [`table.inset`]($table.inset) parameter.
+    /// この引数に関する例は[`table.inset`]($table.inset)パラメーターにあります。
     #[fold]
     pub inset: Celled<Sides<Option<Rel<Length>>>>,
 
-    /// The contents of the grid cells, plus any extra grid lines specified with the [`grid.hline`]($grid.hline) and [`grid.vline`]($grid.vline) elements.
+    /// グリッドセルのコンテンツと、[`grid.hline`]($grid.hline)要素および[`grid.vline`]($grid.vline)要素で指定される任意のグリッド線。
     ///
-    /// The cells are populated in row-major order.
+    /// セルは行優先で埋められます。
     #[variadic]
     pub children: Vec<GridChild>,
 }
@@ -415,161 +419,127 @@ impl TryFrom<Content> for GridItem {
     }
 }
 
-/// A repeatable grid header.
+/// 繰り返し可能なグリッドのヘッダー。
 ///
-/// If `repeat` is set to `true`, the header will be repeated across pages. For
-/// an example, refer to the [`table.header`]($table.header) element and the
-/// [`grid.stroke`]($grid.stroke) parameter.
+/// `repeat`が`true`に設定されている場合、ヘッダーは改ページ毎に繰り返されます。
+/// 例として[`table.header`]($table.header)要素および[`grid.stroke`]($grid.stroke)パラメーターのドキュメントを参照してください。
 #[elem(name = "header", title = "Grid Header")]
 pub struct GridHeader {
-    /// Whether this header should be repeated across pages.
+    /// ページ毎にヘッダーを繰り返すかどうか。
     #[default(true)]
     pub repeat: bool,
 
-    /// The cells and lines within the header.
+    /// ヘッダー内のセルと線。
     #[variadic]
     pub children: Vec<GridItem>,
 }
 
-/// A repeatable grid footer.
+/// 繰り返し可能なグリッドのフッター。
 ///
-/// Just like the [`grid.header`]($grid.header) element, the footer can repeat
-/// itself on every page of the table.
+/// [`grid.header`]($grid.header)要素と同様に各ページで繰り返し可能です。
 ///
-/// No other grid cells may be placed after the footer.
+/// フッターの後に他のグリッドセルを配置できません。
 #[elem(name = "footer", title = "Grid Footer")]
 pub struct GridFooter {
-    /// Whether this footer should be repeated across pages.
+    /// ページ毎にフッターを繰り返すかどうか。
     #[default(true)]
     pub repeat: bool,
 
-    /// The cells and lines within the footer.
+    /// フッター内のセルと線。
     #[variadic]
     pub children: Vec<GridItem>,
 }
 
-/// A horizontal line in the grid.
+/// グリッドの水平方向の線。
 ///
-/// Overrides any per-cell stroke, including stroke specified through the grid's
-/// `stroke` field. Can cross spacing between cells created through the grid's
-/// `column-gutter` option.
+/// グリッドの`stroke`フィールドを用いて指定されたものを含めてセル毎に設定されたストロークを上書きします。
+/// グリッドの`column-gutter`オプションで作成されたセル間の間隔を跨げます。
 ///
-/// An example for this function can be found at the
-/// [`table.hline`]($table.hline) element.
+/// この関数の例は[`table.hline`]($table.hline)要素のドキュメントにあります。
 #[elem(name = "hline", title = "Grid Horizontal Line")]
 pub struct GridHLine {
-    /// The row above which the horizontal line is placed (zero-indexed).
-    /// If the `position` field is set to `{bottom}`, the line is placed below
-    /// the row with the given index instead (see that field's docs for
-    /// details).
+    /// 配置される水平方向の線の上にある行（0始まり）。
+    /// `position`フィールドが`{bottom}`に設定されている場合、指定された番号の行の下に線が配置されます（詳細はフィールドのドキュメントを参照してください）。
     ///
-    /// Specifying `{auto}` causes the line to be placed at the row below the
-    /// last automatically positioned cell (that is, cell without coordinate
-    /// overrides) before the line among the grid's children. If there is no
-    /// such cell before the line, it is placed at the top of the grid (row 0).
-    /// Note that specifying for this option exactly the total amount of rows
-    /// in the grid causes this horizontal line to override the bottom border
-    /// of the grid, while a value of 0 overrides the top border.
+    /// `{auto}`を指定すると、その行が配置されるのは、グリッドの子要素のうち、その行より前にある、最後に自動配置されたセル（すなわち座標が上書きされていないセル）の下の行になります。
+    /// その行の前にそのようなセルが存在しない場合、グリッドの一番上（0行目）に配置されます。
+    /// このオプションをグリッドにある行の数と全く同じ値に設定すると、水平方向の線は一番下の境界線を上書きし、0に設定すると一番上の境界線を上書きすることに注意してください。
     pub y: Smart<usize>,
 
-    /// The column at which the horizontal line starts (zero-indexed, inclusive).
+    /// 水平方向の線を開始する列（0始まりで、指定した列を含む）。
     pub start: usize,
 
-    /// The column before which the horizontal line ends (zero-indexed,
-    /// exclusive).
-    /// Therefore, the horizontal line will be drawn up to and across column
-    /// `end - 1`.
+    /// 水平方向の線が終了する直前の列（0始まりで、指定した列は含まない）。
+    /// したがって、水平方向の線はend - 1`列目まで引かれます。
     ///
-    /// A value equal to `{none}` or to the amount of columns causes it to
-    /// extend all the way towards the end of the grid.
+    /// 値を`{none}`または列の数と同じにすると、線はグリッドの終端まで延びます。
     pub end: Option<NonZeroUsize>,
 
-    /// The line's stroke.
+    /// 線のストローク。
     ///
-    /// Specifying `{none}` removes any lines previously placed across this
-    /// line's range, including hlines or per-cell stroke below it.
+    /// `{none}`を指定すると、水平方向の線の範囲にこれまで配置されたすべての線が削除されます。
+    /// これには水平方向の線の下にあるhlineやセル毎のストロークが含まれます。
     #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
 
-    /// The position at which the line is placed, given its row (`y`) - either
-    /// `{top}` to draw above it or `{bottom}` to draw below it.
+    /// 行（`y`）が与えられた場合の線が配置される位置。
+    /// `{top}`か`{bottom}`のいずれかを指定し、それぞれその行の上または下に描画します。
     ///
-    /// This setting is only relevant when row gutter is enabled (and
-    /// shouldn't be used otherwise - prefer just increasing the `y` field by
-    /// one instead), since then the position below a row becomes different
-    /// from the position above the next row due to the spacing between both.
+    /// この設定は`row-gutter`が設定されている場合にのみ有効です（それ以外の場合は使用せず、単に`y`フィールドの値を1ずつ増やしてください）。
+    /// これは、行の下部の位置と次の行の上部の位置の間に空白が発生し、両者が一致しなくなるためです。
     #[default(OuterVAlignment::Top)]
     pub position: OuterVAlignment,
 }
 
-/// A vertical line in the grid.
+/// グリッドの垂直方向の線。
 ///
-/// Overrides any per-cell stroke, including stroke specified through the
-/// grid's `stroke` field. Can cross spacing between cells created through
-/// the grid's `row-gutter` option.
+/// グリッドのstrokeフィールドを用いて指定されたものを含めてセル毎に設定されたストロークを上書きします。 グリッドの`row-gutter`オプションで作成されたセル間の間隔を跨げます。
 #[elem(name = "vline", title = "Grid Vertical Line")]
 pub struct GridVLine {
-    /// The column before which the horizontal line is placed (zero-indexed).
-    /// If the `position` field is set to `{end}`, the line is placed after the
-    /// column with the given index instead (see that field's docs for
-    /// details).
+    /// 配置される垂直方向の線の前にある列（0始まり）。
+    /// `position`フィールドが`{end}`に設定されている場合、指定された番号の列の後に線が配置されます（詳細はフィールドのドキュメントを参照してください）。
     ///
-    /// Specifying `{auto}` causes the line to be placed at the column after
-    /// the last automatically positioned cell (that is, cell without
-    /// coordinate overrides) before the line among the grid's children. If
-    /// there is no such cell before the line, it is placed before the grid's
-    /// first column (column 0).
-    /// Note that specifying for this option exactly the total amount of
-    /// columns in the grid causes this vertical line to override the end
-    /// border of the grid (right in LTR, left in RTL), while a value of 0
-    /// overrides the start border (left in LTR, right in RTL).
+    /// `{auto}`を指定すると、垂直方向の線が配置されるのは、グリッドの子要素のうち、その線より前にある、最後に自動配置されたセル（すなわち座標が上書きされていないセル）の後の列になります。
+    /// 垂直方向の線の前にそのようなセルが存在しない場合、グリッドの最初の列（0列目）に配置されます。
+    /// このオプションをグリッドにある列の数と全く同じ値に設定すると、垂直方向の線は終端の境界線（LTRでは右端、RTLでは左端）を上書きし、0に設定すると始端の境界線（LTRでは左端、RTLでは右端）を上書きすることに注意してください。
     pub x: Smart<usize>,
 
-    /// The row at which the vertical line starts (zero-indexed, inclusive).
+    /// 垂直方向の線を開始する行（0始まりで、指定した行を含む）。
     pub start: usize,
 
-    /// The row on top of which the vertical line ends (zero-indexed,
-    /// exclusive).
-    /// Therefore, the vertical line will be drawn up to and across row
-    /// `end - 1`.
-    ///
-    /// A value equal to `{none}` or to the amount of rows causes it to extend
-    /// all the way towards the bottom of the grid.
+    /// 垂直方向の線が終了する直前の行（0始まりで、指定した行は含まない）。
+    /// したがって、垂直方向の線はend - 1`行目まで引かれます。
+    /// `{none}`または行数と同じ値を指定すると、線はグリッドの一番下まで延びます。
     pub end: Option<NonZeroUsize>,
 
-    /// The line's stroke.
+    /// 線のストローク。
     ///
-    /// Specifying `{none}` removes any lines previously placed across this
-    /// line's range, including vlines or per-cell stroke below it.
+    /// `{none}`を指定すると、垂直方向の線の範囲にこれまで配置されたすべての線が削除されます。
+    /// これには垂直方向の線の下にあるvlineやセル毎のストロークが含まれます。
     #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
 
-    /// The position at which the line is placed, given its column (`x`) -
-    /// either `{start}` to draw before it or `{end}` to draw after it.
+    /// 行（`x`）が与えられた場合の線が配置される位置。
+    /// `{start}`か`{end}`のいずれかを指定し、それぞれその前またはその後に描画します。
     ///
-    /// The values `{left}` and `{right}` are also accepted, but discouraged as
-    /// they cause your grid to be inconsistent between left-to-right and
-    /// right-to-left documents.
+    /// `{left}`および`{right}`の値も使用可能ですが、左から右に書く文書と右から左に書く文書間でグリッドの挙動が一貫しなくなるため、非推奨です。
     ///
-    /// This setting is only relevant when column gutter is enabled (and
-    /// shouldn't be used otherwise - prefer just increasing the `x` field by
-    /// one instead), since then the position after a column becomes different
-    /// from the position before the next column due to the spacing between
-    /// both.
+    /// この設定は`column-gutter`が設定されている場合にのみ有効です（それ以外の場合は使用せず、単に`x`フィールドの値を1ずつ増やしてください）。
+    /// これは、ある列の直後の位置と次の列の直前の位置の間に空白が発生し、両者が一致しなくなるためです。
+
     #[default(OuterHAlignment::Start)]
     pub position: OuterHAlignment,
 }
 
-/// A cell in the grid. You can use this function in the argument list of a grid
-/// to override grid style properties for an individual cell or manually
-/// positioning it within the grid. You can also use this function in show rules
-/// to apply certain styles to multiple cells at once.
+/// グリッドのセル。
+/// グリッドの引数リストでこの関数を用いると各セルのスタイルプロパティを上書きしたり、グリッド内にセルを手動で配置したりできます。
+/// showルールにこの関数を用いると複数のセルに対して特定のスタイルを一度に適用できます。
 ///
-/// For example, you can override the position and stroke for a single cell:
+/// 例えば、以下のようにある単一セルの位置とストロークを上書きできます。
 ///
 /// ```example
 /// >>> #set page(width: auto)
@@ -600,27 +570,22 @@ pub struct GridVLine {
 /// )
 /// ```
 ///
-/// You may also apply a show rule on `grid.cell` to style all cells at once,
-/// which allows you, for example, to apply styles based on a cell's position.
-/// Refer to the examples of the [`table.cell`]($table.cell) element to learn
-/// more about this.
+/// `grid.cell`に対してshowルールを用いると全てのセルに一括でスタイル設定ができます。
+/// 例えば、セルの位置に基づいてスタイルを適用できます。
+/// より詳しく知りたい場合は[`table.cell`]($table.cell)要素の例を参照してください。
 #[elem(name = "cell", title = "Grid Cell", Show)]
 pub struct GridCell {
-    /// The cell's body.
+    /// セルの本文。
     #[required]
     pub body: Content,
 
-    /// The cell's column (zero-indexed).
-    /// This field may be used in show rules to style a cell depending on its
-    /// column.
+    /// セルの列（0始まり）。
+    /// このフィールドをshowルールで用いるとセルの列に応じたスタイルを適用できます。
     ///
-    /// You may override this field to pick in which column the cell must
-    /// be placed. If no row (`y`) is chosen, the cell will be placed in the
-    /// first row (starting at row 0) with that column available (or a new row
-    /// if none). If both `x` and `y` are chosen, however, the cell will be
-    /// placed in that exact position. An error is raised if that position is
-    /// not available (thus, it is usually wise to specify cells with a custom
-    /// position before cells with automatic positions).
+    /// このフィールドを上書きすることでセルを配置する列を選択できます。
+    /// 行（`y`）が選択されていない場合、セルは（0行目から始まる）使用可能な（存在しなければ新しい）最初の行に配置されます。
+    /// 一方、`x`と`y`の両方が選択された場合は正確にその位置に配置されます。
+    /// その位置が利用できない場合、エラーが発生します（したがって、通常はセルを自動配置する前に、カスタム位置を指定する方が賢明です）。
     ///
     /// ```example
     /// #let circ(c) = circle(
@@ -642,14 +607,12 @@ pub struct GridCell {
     /// ```
     pub x: Smart<usize>,
 
-    /// The cell's row (zero-indexed).
-    /// This field may be used in show rules to style a cell depending on its
-    /// row.
+    /// セルの行（0始まり）。
+    /// このフィールドをshowルールで用いるとセルの行に応じたスタイルを適用できます。
     ///
-    /// You may override this field to pick in which row the cell must be
-    /// placed. If no column (`x`) is chosen, the cell will be placed in the
-    /// first column (starting at column 0) available in the chosen row. If all
-    /// columns in the chosen row are already occupied, an error is raised.
+    /// このフィールドを上書きすることでセルを配置する行を選択できます。
+    /// 行（`x`）が選択されていない場合、セルは（0列目から始まる）使用可能な最初の列に配置されます。
+    /// 選ばれた行にある全ての列が既に埋まっている場合、エラーが発生します。
     ///
     /// ```example
     /// #let tri(c) = polygon.regular(
@@ -671,32 +634,30 @@ pub struct GridCell {
     /// ```
     pub y: Smart<usize>,
 
-    /// The amount of columns spanned by this cell.
+    /// このcellが跨ぐ列の数。
     #[default(NonZeroUsize::ONE)]
     pub colspan: NonZeroUsize,
 
-    /// The amount of rows spanned by this cell.
+    /// このcellが跨ぐ行の数。
     #[default(NonZeroUsize::ONE)]
     pub rowspan: NonZeroUsize,
 
-    /// The cell's [fill]($grid.fill) override.
+    /// セルの[fill]($grid.fill)の上書き。
     pub fill: Smart<Option<Paint>>,
 
-    /// The cell's [alignment]($grid.align) override.
+    /// セルの[alignment]($grid.align)の上書き。
     pub align: Smart<Alignment>,
 
-    /// The cell's [inset]($grid.inset) override.
+    /// セルの[inset]($grid.inset)の上書き。
     pub inset: Smart<Sides<Option<Rel<Length>>>>,
 
-    /// The cell's [stroke]($grid.stroke) override.
+    /// セルの[stroke]($grid.stroke)の上書き。
     #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Arc<Stroke>>>>,
 
-    /// Whether rows spanned by this cell can be placed in different pages.
-    /// When equal to `{auto}`, a cell spanning only fixed-size rows is
-    /// unbreakable, while a cell spanning at least one `{auto}`-sized row is
-    /// breakable.
+    /// このcellが跨ぐ行のページ跨ぎを許すかどうか。
+    /// `{auto}`に設定された場合、固定サイズの行のみを跨ぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
     pub breakable: Smart<bool>,
 }
 

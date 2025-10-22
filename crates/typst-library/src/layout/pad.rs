@@ -46,7 +46,7 @@ pub struct PadElem {
     #[external]
     pub y: Rel<Length>,
 
-    /// 四辺すべてを同じ値で設定するための省略記法。
+    /// 四辺全てを同じ値で設定するための省略記法。
     #[external]
     pub rest: Rel<Length>,
 

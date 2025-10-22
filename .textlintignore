@@ -1,3 +1,3 @@
 # hayagrivaのsrc/csl/archive.rsで管理されている参考文献フォーマット
-website/dist/docs/reference/model/bibliography/index.html
-website/dist/docs/reference/model/cite/index.html
+website/typst-docs-web/dist/reference/model/bibliography/index.html
+website/typst-docs-web/dist/reference/model/cite/index.html

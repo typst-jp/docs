@@ -59,7 +59,7 @@
   path: ["math"]
   filter: ["root", "sqrt"]
   details: |
-    平方根とその他の累乗根。
+    平方根とその他の冪根。
 
     # 例
     ```example
@@ -112,11 +112,11 @@
   category: foundations
   path: ["calc"]
   details: |
-    Module for calculations and processing of numeric values.
+    数値の計算と処理を行うためのモジュール。
 
-    These definitions are part of the `calc` module and not imported by default.
-    In addition to the functions listed below, the `calc` module also defines
-    the constants `pi`, `tau`, `e`, and `inf`.
+    これらの定義は`calc`モジュールの一部であり、デフォルトではインポートされません。
+    以下に挙げる関数のほかに、`calc`モジュールは定数`pi`、`tau`、`e`、および`inf`
+    を定義しています。
 
 - name: sys
   title: System

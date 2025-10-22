@@ -4,14 +4,16 @@
   "scripts": {
     "textlint-md": "textlint ./docs/",
     "textlint-md:fix": "textlint --fix ./docs/",
-    "textlint-html": "textlint ./website/dist/docs/"
+    "textlint-html": "textlint ./website/typst-docs-web/dist/"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "textlint": "^14.3.0",
+    "textlint": "^15.2.2",
+    "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-plugin-html": "^1.0.1",
-    "textlint-rule-preset-jtf-style": "^2.3.14"
+    "textlint-rule-preset-jtf-style": "^3.0.3",
+    "textlint-rule-prh": "^6.1.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
