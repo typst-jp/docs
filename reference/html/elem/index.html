@@ -23,7 +23,7 @@
 タグとその属性は、構文的に有効なHTMLを構成していなければなりません。
 <code>meta</code>のようないくつかのタグはコンテンツを受け付けません。
 したがって、それらに対して本文を提供してはいけません。
-将来的に、この機能に対して更に多くのチェックを追加する可能性があるため、この関数を使用する際は有効なHTMLを生成していることを確認してください。</p>
+将来的に、この機能に対してさらに多くのチェックを追加する可能性があるため、この関数を使用する際は有効なHTMLを生成していることを確認してください。</p>
 <p>通常、Typstは<code>html</code>、<code>head</code>、および<code>body</code>タグを生成します。
 代わりにこの関数でそれらを作成した場合、Typstは自身の生成するタグを省略します。</p>
 <pre><code><span class="typ-pol">#</span><span class="typ-pol">html</span><span class="typ-punct">.</span><span class="typ-func">elem</span><span class="typ-punct">(</span><span class="typ-str">&quot;div&quot;</span><span class="typ-punct">,</span> attrs<span class="typ-punct">:</span> <span class="typ-punct">(</span>style<span class="typ-punct">:</span> <span class="typ-str">&quot;background: aqua&quot;</span><span class="typ-punct">)</span><span class="typ-punct">)</span><span class="typ-punct">[</span>

@@ -51,7 +51,7 @@ In fact, I am amazing!
 I am learning something cool today.
 It&#39;s going great so far!
 </code></pre><div class="preview"><img src="/docs/assets/3e1c39dbdd957964b7524749bf0cfd5.png" alt="Preview"></div></div>
-<p>前章で発見したように、setルールはそのコンテンツブロック内のすべてに適用されます。everythingのshowルールが文書全体を<code>template</code>関数に渡すため、テンプレート内のテキストのsetルールと文字列のshowルールが文書全体に適用されます。この知識を使って、前章で作成した論文の本文スタイルを再現するテンプレートを作成しましょう。</p>
+<p>前章で発見したように、setルールはそのコンテンツブロック内の全てに適用されます。everythingのshowルールが文書全体を<code>template</code>関数に渡すため、テンプレート内のテキストのsetルールと文字列のshowルールが文書全体に適用されます。この知識を使って、前章で作成した論文の本文スタイルを再現するテンプレートを作成しましょう。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">conf</span><span class="typ-punct">(</span>title<span class="typ-punct">,</span> doc<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
   <span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>
     paper<span class="typ-punct">:</span> <span class="typ-str">&quot;us-letter&quot;</span><span class="typ-punct">,</span>
@@ -87,10 +87,10 @@ It&#39;s going great so far!
 <p>コードの大部分は前章からコピーペーストしました。2つの違いがあります。</p>
 <ol>
 <li>
-<p>everythingのshowルールを使用して、すべてを<code>conf</code>関数でラップしました。この関数はいくつかのsetルールとshowルールを適用し、最後に渡されたコンテンツをそのまま出力します。</p>
+<p>everythingのshowルールを使用して、全てを<code>conf</code>関数でラップしました。この関数はいくつかのsetルールとshowルールを適用し、最後に渡されたコンテンツをそのまま出力します。</p>
 </li>
 <li>
-<p>さらに、コンテンツブロックの代わりに中括弧で囲まれたコードブロックを使用しました。この方法では、すべてのsetルールや関数呼び出しの前に<code>#</code>を付ける必要がなくなります。代わりに、コードブロック内に直接マークアップを書くことはできなくなります。</p>
+<p>さらに、コンテンツブロックの代わりに中括弧で囲まれたコードブロックを使用しました。この方法では、全てのsetルールや関数呼び出しの前に<code>#</code>を付ける必要がなくなります。代わりに、コードブロック内に直接マークアップを書くことはできなくなります。</p>
 </li>
 </ol>
 <p>また、タイトルがどこから来ているかに注目してください。以前は変数に格納しましたが、今はテンプレート関数の最初のパラメータとして受け取っています。そのために、everythingのshowルールにクロージャー（その場で使用される名前のない関数）を渡しました。<code>conf</code>関数は2つの引数（タイトルと本文）を期待しますが、showルールは本文のみを渡すからです。したがって、論文のタイトルを設定し、showルールからの単一パラメータを使用できる新しい関数定義を追加します。</p>
@@ -155,7 +155,7 @@ It&#39;s going great so far!
 </code></pre>
 <h2 id="separate-file">別ファイル</h2>
 <p>多くの場合、テンプレートは別のファイルで指定され、それからドキュメントにインポートされます。この方法では、メインファイルはすっきりとし、テンプレートを簡単に再利用できます。ファイルパネルでプラスボタンをクリックして新しいテキストファイルを作成し、<code>conf.typ</code>という名前を付けます。<code>conf</code>関数定義をその新しいファイルに移動します。これで、showルールの前にインポートを追加することで、メインファイルからアクセスできます。<code><span class="typ-key">import</span></code>キーワードとコロンの間にファイルのパスを指定し、インポートしたい関数に名前を付けます。</p>
-<p>テンプレートの適用をより洗練させるためにできるもう1つのことは、関数の<a href="/docs/reference/foundations/function/#definitions-with"><code>.with</code></a>メソッドを使用して、すべての名前付き引数を事前に設定することです。これにより、クロージャーを記述してテンプレートリストの最後にコンテンツ引数を追加する必要がなくなります。<a href="https://typst.app/universe/">Typst Universe</a>のテンプレートは、この関数呼び出しのスタイルで動作するように設計されています。</p>
+<p>テンプレートの適用をより洗練させるためにできるもう1つのことは、関数の<a href="/docs/reference/foundations/function/#definitions-with"><code>.with</code></a>メソッドを使用して、全ての名前付き引数を事前に設定することです。これにより、クロージャーを記述してテンプレートリストの最後にコンテンツ引数を追加する必要がなくなります。<a href="https://typst.app/universe/">Typst Universe</a>のテンプレートは、この関数呼び出しのスタイルで動作するように設計されています。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">import</span> <span class="typ-str">&quot;conf.typ&quot;</span><span class="typ-punct">:</span> conf
 <span class="typ-key">#</span><span class="typ-key">show</span><span class="typ-punct">:</span> conf<span class="typ-punct">.</span><span class="typ-func">with</span><span class="typ-punct">(</span>
   title<span class="typ-punct">:</span> <span class="typ-punct">[</span>

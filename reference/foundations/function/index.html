@@ -34,9 +34,9 @@ Typstは位置引数と名前付き引数をサポートしています。
 <span class="typ-func">#</span><span class="typ-func">list</span><span class="typ-punct">[</span>A<span class="typ-punct">]</span><span class="typ-punct">[</span>B<span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/docs/assets/87cba5b2546c4d8134e4fbb8ab2e42e8.png" alt="Preview"></div></div>
 <p>関数はTypstにおいて基礎となる構成要素です。
-Typstは様々な組版タスクに応じた関数を提供しています。
-さらには、作成されるマークアップの裏側では関数が用いられており、すべてのスタイル設定は関数を介して行われます。
-このリファレンスでは利用可能なすべての関数とその使い方を示します。
+Typstはさまざまな組版タスクに応じた関数を提供しています。
+さらには、作成されるマークアップの裏側では関数が用いられており、全てのスタイル設定は関数を介して行われます。
+このリファレンスでは利用可能な全ての関数とその使い方を示します。
 Typstで関数をさらに活用する方法については、<a href="/docs/reference/styling/#set-rules">setルール</a>および<a href="/docs/reference/styling/#show-rules">showルール</a>のドキュメントも参照して下さい。</p>
 <h2 id="要素関数">要素関数</h2>
 <p><a href="/docs/reference/model/heading/">見出し</a>や<a href="/docs/reference/model/table/">表</a>のような、いくつかの関数は <em>要素</em> と結びついており、呼び出すとその種類に応じた要素を作成します。
@@ -50,9 +50,9 @@ Typstで関数をさらに活用する方法については、<a href="/docs/ref
 引数リストには必須の位置引数、デフォルト値を持つ名前付き引数および<a href="/docs/reference/foundations/arguments/">可変長引数</a>を用いることができます。</p>
 <p>関数バインディングの右辺は関数本体で、ブロックか任意の式です。
 関数の戻り値を定義し、引数に依存させることができます。
-関数本体が<a href="/docs/reference/scripting/#blocks">コードブロック</a>の場合、戻り値はブロック内のすべての式を連結させた結果になります。</p>
+関数本体が<a href="/docs/reference/scripting/#blocks">コードブロック</a>の場合、戻り値はブロック内の全ての式を連結させた結果になります。</p>
 <p>関数本体内では、<code>return</code>キーワードを用いて処理を途中で抜け出したり、必要に応じて戻り値を指定して返したりできます。
-戻り値が明示的に与えられない場合、本体は<code>return</code>の前の式すべてを連結した結果として評価されます。</p>
+戻り値が明示的に与えられない場合、本体は<code>return</code>の前の式全てを連結した結果として評価されます。</p>
 <p>意味のある値を何も返さない関数は、代わりに<a href="/docs/reference/foundations/none/" title="`none`"><code>none</code></a>を返します。
 このような関数の戻り値の型はドキュメント中では明示的に指定されていません
 （この例としては<a href="/docs/reference/foundations/array/#definitions-push" title="`array.push`"><code>array.push</code></a>が該当します）。</p>
@@ -87,7 +87,7 @@ Typstで関数をさらに活用する方法については、<a href="/docs/ref
 once?
 </code></pre><div class="preview"><img src="/docs/assets/c9779efb0fcc717fd4868ec6868bdcf9.png" alt="Preview"></div></div>
 <h2 id="関数の純粋性に関する注意">関数の純粋性に関する注意</h2>
-<p>Typstにおいて関数はすべて <em>純粋</em> です。
+<p>Typstにおいて関数は全て <em>純粋</em> です。
 これは同じ引数からは常に同じ結果が返ってくることを意味します。
 純粋関数は2回目の呼び出し時に別の値を生成するために何かを「記憶」することはできません。</p>
 <p>唯一の例外は<a href="/docs/reference/foundations/array/#definitions-push"><code>array.push(value)</code></a>のような組み込みメソッドです。
