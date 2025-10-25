@@ -1,0 +1,120 @@
+name: Merge upstream changes
+
+on:
+  workflow_dispatch:
+    inputs:
+      upstream_ref:
+        description: "Upstream tag to merge"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge-upstream:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # Set up 'ours' merge driver
+          git config --global merge.ours.driver true
+
+      - name: Create new branch
+        run: |
+          git checkout -b feature/merge-upstream-${{ github.event.inputs.upstream_ref }}
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/typst/typst.git
+          git fetch upstream
+
+      - name: Attempt merge with commit markers
+        run: |
+          # Try to merge but allow conflicts
+          TARGET_COMMIT=$(git rev-parse ${{ github.event.inputs.upstream_ref }})
+          git merge --no-commit --no-ff --allow-unrelated-histories $TARGET_COMMIT || true
+
+          # Remove upstream `.github/` directory
+          git checkout HEAD -- .github/
+          git reset HEAD .github/
+
+          # Commit the merge with conflict markers
+          git commit -a -m "Merge upstream changes from ${{ github.event.inputs.upstream_ref }}"
+
+      - name: Push branch
+        run: |
+          git push --force origin feature/merge-upstream-${{ github.event.inputs.upstream_ref }}
+
+      - name: Create Pull Request
+        id: create-pr
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        env:
+          PR_BODY: |
+            > [!CAUTION]
+            > コンフリクトの解消のため、このPull Requestは必ず**Create a merge commit**でマージしてください。
+
+            このPull Requestでは、[上流リポジトリ](https://github.com/typst/typst)の[`${{ github.event.inputs.upstream_ref }}`](https://github.com/typst/typst/releases/tag/${{ github.event.inputs.upstream_ref }})の変更をマージします。
+
+        with:
+          script: |
+            const pr = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: "feature/merge-upstream-${{ github.event.inputs.upstream_ref }}",
+              base: "main",
+              title: "Merge upstream ${{ github.event.inputs.upstream_ref }}",
+              body: process.env.PR_BODY
+            });
+            core.setOutput("pr_number", pr.data.number);
+
+      - name: Check for conflict markers
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            function findConflictMarkers(dirPath, conflictFiles = []) {
+              const files = fs.readdirSync(dirPath);
+
+              for (const file of files) {
+                const filePath = path.join(dirPath, file);
+                const stat = fs.statSync(filePath);
+
+                if (stat.isDirectory()) {
+                  if (!['.git', 'node_modules', '.github'].includes(file)) {
+                    findConflictMarkers(filePath, conflictFiles);
+                  }
+                } else if (!['.lock', '.lockb'].some(ext => file.endsWith(ext))) {
+                  try {
+                    const content = fs.readFileSync(filePath, 'utf8');
+                    if (/^(<{7}|={7}|>{7})/m.test(content)) {
+                      conflictFiles.push(filePath);
+                    }
+                  } catch (e) {
+                    // Skip binary files
+                  }
+                }
+              }
+
+              return conflictFiles;
+            }
+
+            const conflictFiles = findConflictMarkers('.');
+
+            if (conflictFiles.length > 0) {
+              const fileList = conflictFiles.map(f => `- \`${f}\``).join('\n');
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: ${{ steps.create-pr.outputs.pr_number }},
+                body: `> [!WARNING]\n> コンフリクトマーカーが検出されました。以下のファイルを確認し、コンフリクトを解消してください。\n\n${fileList}`
+              });
+            }
