@@ -75,46 +75,26 @@ jobs:
             core.setOutput("pr_number", pr.data.number);
 
       - name: Check for conflict markers
+        id: check-conflicts
+        run: |
+          CONFLICT_FILES=$(git grep -l "^<<<<<<<\|^=======\|^>>>>>>>" HEAD || echo "")
+          if [ -n "$CONFLICT_FILES" ]; then
+            echo "has_conflicts=true" >> $GITHUB_OUTPUT
+            echo "conflict_files<<EOF" >> $GITHUB_OUTPUT
+            echo "$CONFLICT_FILES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on Pull Request if conflicts found
+        if: steps.check-conflicts.outputs.has_conflicts == 'true'
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           script: |
-            const fs = require('fs');
-            const path = require('path');
-
-            function findConflictMarkers(dirPath, conflictFiles = []) {
-              const files = fs.readdirSync(dirPath);
-
-              for (const file of files) {
-                const filePath = path.join(dirPath, file);
-                const stat = fs.statSync(filePath);
-
-                if (stat.isDirectory()) {
-                  if (!['.git', 'node_modules', '.github'].includes(file)) {
-                    findConflictMarkers(filePath, conflictFiles);
-                  }
-                } else if (!['.lock', '.lockb'].some(ext => file.endsWith(ext))) {
-                  try {
-                    const content = fs.readFileSync(filePath, 'utf8');
-                    if (/^(<{7}|={7}|>{7})/m.test(content)) {
-                      conflictFiles.push(filePath);
-                    }
-                  } catch (e) {
-                    // Skip binary files
-                  }
-                }
-              }
-
-              return conflictFiles;
-            }
-
-            const conflictFiles = findConflictMarkers('.');
-
-            if (conflictFiles.length > 0) {
-              const fileList = conflictFiles.map(f => `- \`${f}\``).join('\n');
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: ${{ steps.create-pr.outputs.pr_number }},
-                body: `> [!WARNING]\n> コンフリクトマーカーが検出されました。以下のファイルを確認し、コンフリクトを解消してください。\n\n${fileList}`
-              });
-            }
+            const files = `${{ steps.check-conflicts.outputs.conflict_files }}`.split('\n').filter(f => f);
+            const fileList = files.map(f => `- \`${f}\``).join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.create-pr.outputs.pr_number }},
+              body: `> [!WARNING]\n> コンフリクトマーカーが検出されました。以下のファイルを確認し、コンフリクトを解消してください。\n\n${fileList}`
+            });
