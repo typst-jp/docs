@@ -58,6 +58,11 @@ impl Html {
             description = document.metadata.description.clone();
         }
 
+        // Apply minimal CJK-friendly preprocessing so emphasis works when
+        // CJK characters are adjacent to `*` or `_` without spaces.
+        let preprocessed = cjk_friendly_preprocess(text);
+        let text = preprocessed.as_str();
+
         let options = md::Options::ENABLE_TABLES
             | md::Options::ENABLE_FOOTNOTES
             | md::Options::ENABLE_STRIKETHROUGH
@@ -97,6 +102,7 @@ impl Html {
 
         let mut raw = String::new();
         md::html::push_html(&mut raw, iter);
+        remove_zwsp_from_html(&mut raw);
         raw.truncate(raw.trim_end().len());
 
         Html {
@@ -154,6 +160,138 @@ impl Debug for Html {
 struct Metadata {
     title: Option<EcoString>,
     description: Option<EcoString>,
+}
+
+fn is_cjk(ch: char) -> bool {
+    let cp = ch as u32;
+    matches!(cp,
+        0x4E00..=0x9FFF | // CJK Unified Ideographs
+        0x3400..=0x4DBF | // CJK Unified Ideographs Extension A
+        0xF900..=0xFAFF | // CJK Compatibility Ideographs
+        0x3040..=0x309F | // Hiragana
+        0x30A0..=0x30FF | // Katakana
+        0xAC00..=0xD7AF | // Hangul Syllables
+        0xFF00..=0xFFEF   // Fullwidth forms
+    )
+}
+
+fn cjk_friendly_preprocess(input: &str) -> String {
+    let mut out = String::with_capacity(input.len());
+    let mut in_fence = false;
+    let mut fence_ticks = 0usize;
+
+    for line in input.lines() {
+        // detect fenced code block boundaries (```...)
+        if !in_fence && line.starts_with("```") {
+            in_fence = true;
+            fence_ticks = line.chars().take_while(|&c| c == '`').count();
+            out.push_str(line);
+            out.push('\n');
+            continue;
+        } else if in_fence && line.starts_with(&"`".repeat(fence_ticks)) {
+            in_fence = false;
+            out.push_str(line);
+            out.push('\n');
+            continue;
+        }
+
+        if in_fence {
+            out.push_str(line);
+            out.push('\n');
+            continue;
+        }
+
+        let chars: Vec<char> = line.chars().collect();
+        let mut i = 0usize;
+        let mut inline_backtick_len: Option<usize> = None;
+
+        while i < chars.len() {
+            let c = chars[i];
+
+            // handle inline code spans using backtick lengths
+            if c == '`' {
+                let mut j = i;
+                while j < chars.len() && chars[j] == '`' {
+                    j += 1;
+                }
+                let n = j - i;
+                // toggle inline span when same length backticks close it
+                if inline_backtick_len.is_none() {
+                    inline_backtick_len = Some(n);
+                } else if inline_backtick_len == Some(n) {
+                    inline_backtick_len = None;
+                }
+                for _ in 0..n {
+                    out.push('`');
+                }
+                i = j;
+                continue;
+            }
+
+            // if inside inline code, copy verbatim
+            if inline_backtick_len.is_some() {
+                out.push(c);
+                i += 1;
+                continue;
+            }
+
+            // emphasis markers
+            if c == '*' || c == '_' {
+                // count run length
+                let marker = c;
+                let mut j = i;
+                while j < chars.len() && chars[j] == marker {
+                    j += 1;
+                }
+                let next_char = chars.get(j).copied();
+
+                // find previous non-newline char from out
+                let prev_char = out.chars().rev().find(|ch| *ch != '\n' && *ch != '\r');
+
+                let prev_is_cjk = prev_char.map(is_cjk).unwrap_or(false);
+                let next_is_cjk = next_char.map(is_cjk).unwrap_or(false);
+
+                if prev_is_cjk && prev_char.map(|ch| !ch.is_whitespace()).unwrap_or(false)
+                {
+                    // Insert a numeric HTML entity for ZWSP so it survives
+                    // Markdown parsing and becomes an invisible character in
+                    // the final HTML.
+                    out.push_str("&#8203;");
+                }
+
+                for _ in 0..(j - i) {
+                    out.push(marker);
+                }
+
+                if next_is_cjk && next_char.map(|ch| !ch.is_whitespace()).unwrap_or(false)
+                {
+                    out.push_str("&#8203;");
+                }
+
+                i = j;
+                continue;
+            }
+
+            out.push(c);
+            i += 1;
+        }
+
+        out.push('\n');
+    }
+
+    out
+}
+
+fn remove_zwsp_from_html(s: &mut String) {
+    if s.contains("&amp;#8203;") {
+        *s = s.replace("&amp;#8203;", "");
+    }
+    if s.contains("&#8203;") {
+        *s = s.replace("&#8203;", "");
+    }
+    if s.contains('\u{200B}') {
+        *s = s.replace('\u{200B}', "");
+    }
 }
 
 struct Handler<'a> {
@@ -513,5 +651,28 @@ impl World for DocWorld {
 
     fn today(&self, _: Option<i64>) -> Option<Datetime> {
         Some(Datetime::from_ymd(1970, 1, 1).unwrap())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn cjk_preprocess_inserts_entity() {
+        let src = "これは**強調**です。";
+        let out = cjk_friendly_preprocess(src);
+        assert!(
+            out.contains("&#8203;"),
+            "preprocessed output did not contain &#8203;: {}",
+            out
+        );
+    }
+
+    #[test]
+    fn remove_zwsp_from_html_cleans() {
+        let mut html = String::from("<p>foo&#8203;bar&amp;#8203;baz\u{200B}</p>");
+        remove_zwsp_from_html(&mut html);
+        assert_eq!(html, "<p>foobarbaz</p>");
     }
 }
