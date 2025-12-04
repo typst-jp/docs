@@ -29,7 +29,7 @@ run = [
 
 [tasks.generate-docs]
 depends = ["symlink-docs-assets", "symlink-web-metadata"]
-run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base $(jq .basePath website/metadata.json)"
+run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base $(jq .basePath website/metadata.json --raw-output)"
 
 [tasks.generate-web]
 depends = ["install-website", "symlink-docs-assets", "symlink-web-metadata"]
