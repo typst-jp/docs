@@ -9,9 +9,6 @@ pinact = "3.1.1"
 yes = true
 idiomatic_version_file_enable_tools = []
 
-[vars]
-_.file = "website/metadata.json"
-
 [tasks.symlink-docs-assets]
 run = [
     "rm -rf website/typst-docs-web/public/docs.json",
@@ -32,7 +29,7 @@ run = [
 
 [tasks.generate-docs]
 depends = ["symlink-docs-assets", "symlink-web-metadata"]
-run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base {{vars.basePath}}"
+run = "cargo run --package typst-docs -- --assets-dir assets --out-file docs.json --base $(jq .basePath website/metadata.json)"
 
 [tasks.generate-web]
 depends = ["install-website", "symlink-docs-assets", "symlink-web-metadata"]
