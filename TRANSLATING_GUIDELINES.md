@@ -1,3 +1,7 @@
+---
+description: |
+  翻訳ガイドライン
+---
 # 翻訳ガイドライン
 
 [JTF日本語標準スタイルガイド 第3.0版]: https://www.jtf.jp/pdf/jtf_style_guide.pdf

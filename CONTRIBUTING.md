@@ -1,7 +1,10 @@
+---
+description: |
+  貢献ガイドライン
+---
 # 貢献ガイドライン
 
-> [!NOTE]
-> 当プロジェクトの[README](./README.md)や「[はじめに：Typst Japanese Communityより](https://typst-jp.github.io/docs/)」、[Typst公式](https://typst.app/)の[ライセンス](https://github.com/typst/typst/blob/main/LICENSE)や[コントリビューション・ガイド](https://github.com/typst/typst/blob/main/CONTRIBUTING.md)も併せてご参照ください。
+**Note:** 当プロジェクトの[README](https://github.com/typst-jp/docs/blob/main/README.md)や「[はじめに：Typst Japanese Communityより](https://typst-jp.github.io/docs/)」、[Typst公式](https://typst.app/)の[ライセンス](https://github.com/typst/typst/blob/main/LICENSE)や[コントリビューション・ガイド](https://github.com/typst/typst/blob/main/CONTRIBUTING.md)も併せてご参照ください。
 
 Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ちいただき、どうもありがとうございます。
 
@@ -13,8 +16,7 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 ### 翻訳提案の手順
 
-> [!WARNING]
-> ここに記載されている内容は改訂中です。現在の手順は最新の[Pull Request](https://github.com/typst-jp/docs/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen)を参照してください。
+**Warning:** ここに記載されている内容は改訂中です。現在の手順は最新の[Pull Request](https://github.com/typst-jp/docs/pulls?q=sort%3Aupdated-desc+is%3Apr+is%3Aopen)を参照してください。
 
 1. このGitHubリポジトリをフォークします。Git submoduleを含むため、リポジトリを`git clone`する際に`--recursive`オプションを付けてください。
 2. ドキュメントの実体は、主にMarkdownファイルおよびコンパイラのソースコード内のコメントの2種類から構成されています。それぞれ、下記の注意書きに従って翻訳作業をお願いします。
@@ -22,8 +24,8 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
         - 例1：[Reference > Foundations](https://typst.app/docs/reference/foundations/)を翻訳する際は、`./crates/typst-library/src/foundations/mod.rs`のコメントを編集してください。
         - 例2：[Reference > Foundations > Arguments](https://typst.app/docs/reference/foundations/arguments/)を翻訳する際は、`./crates/typst-library/src/foundations/args.rs`のコメントを編集してください。
     - `./docs`内のMarkdownファイル群は、Typstのチュートリアルや入門ガイドなど、言語リファレンス以外のページの本体です。**既存のMarkdownファイルを直接書き換えて翻訳してください**。
-    - 上記いずれの場合においても、[website/translation-status.json](/website/translation-status.json)の該当箇所を`"translated"`に変更してください。
-3. 翻訳の際の文体や表記は[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)を参照してください。
+    - 上記いずれの場合においても、[website/translation-status.json](https://github.com/typst-jp/docs/blob/main/website/translation-status.json)の該当箇所を`"translated"`に変更してください。
+3. 翻訳の際の文体や表記は[翻訳ガイドライン](https://github.com/typst-jp/docs/blob/main/TRANSLATING_GUIDELINES.md)を参照してください。
    - 翻訳ガイドラインに最低限沿っているかを確認する補助ツールとしてtextlintを導入しております。Pull Requestが作成されると、GitHub Actionsにてtextlintによる確認が入ります。textlintの処理が警告無く完了するように翻訳文を[文章校正](#文章校正)してください。
    - ドキュメントの最新バージョンへの追従は管理者が一括で行っているため、日本語ドキュメントと公式ドキュメントのバージョンが異なる場合でも、日本語ドキュメントで管理されている原文を優先してください。
 4. 翻訳作業の途中でも、Draft Pull Requestを作成して、翻訳の進捗状況を共有することもできます。
@@ -43,14 +45,11 @@ Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ち
 
 コマンドラインでの操作を避けたい方や[Docker](https://docs.docker.com/)で作業したい方へ向けて、[Dev Containerの環境](#dev-containerによる開発環境のセットアップ)もご用意しております。
 
-> [!NOTE]
-> Windowsのネイティブ環境で実行する場合には、[開発者モード](https://learn.microsoft.com/ja-jp/windows/apps/get-started/enable-your-device-for-development)に設定する必要があります。
-> その他Windowsに起因する潜在的なトラブルを回避するため、Windowsユーザーには[WSL](https://learn.microsoft.com/ja-jp/windows/wsl/install)やDev Containerの使用を推奨します。
+**Note:** Windowsのネイティブ環境で実行する場合には、[開発者モード](https://learn.microsoft.com/ja-jp/windows/apps/get-started/enable-your-device-for-development)に設定する必要があります。その他Windowsに起因する潜在的なトラブルを回避するため、Windowsユーザーには[WSL](https://learn.microsoft.com/ja-jp/windows/wsl/install)やDev Containerの使用を推奨します。
 
 #### TL;DR
 
-> [!NOTE]
-> こちらの説明は要約版です。詳細を知りたい場合は、次以降の見出しを参照してください。
+**Note:** こちらの説明は要約版です。詳細を知りたい場合は、次以降の見出しを参照してください。
 
 当プロジェクトのルートディレクトリに移動し、以下のコマンドを実行します。このコマンドは初回のみ実行する必要があります。
 
@@ -71,7 +70,7 @@ Webサイトをローカルサーバーでプレビューするには、以下�
 mise run preview
 ```
 
-[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)に従った体裁になっているかどうかを確認するには、以下のコマンドを実行します。
+[翻訳ガイドライン](https://github.com/typst-jp/docs/blob/main/TRANSLATING_GUIDELINES.md)に従った体裁になっているかどうかを確認するには、以下のコマンドを実行します。
 
 ```sh
 mise run textlint-html  # Rustソースコードを翻訳した場合
@@ -80,12 +79,11 @@ mise run textlint-md    # Markdownファイルを翻訳した場合
 
 #### miseによる開発環境のセットアップ
 
-> [!NOTE]
-> 以下の内容はmise v2025.5.6に基づいています。内容の不備を発見した場合は、Issueを立ててください。
+**Note:** 以下の内容はmise v2025.5.6に基づいています。内容の不備を発見した場合は、Issueを立ててください。
 
 miseが導入されている環境で初めて当プロジェクトのルートディレクトリに移動すると、以下のように構成ファイルを信頼することを求められます。
 
-```plaintext
+```txt
 mise ERROR Config file /path/to/typst-jp.github.io/mise.toml is not trusted.
 Trust it with `mise trust`.
 mise ERROR Run with --verbose or MISE_VERBOSE=1 for more information
@@ -139,7 +137,7 @@ mise run generate
 
 #### 文章校正
 
-[翻訳ガイドライン](./TRANSLATING_GUIDELINES.md)に従った体裁へと校正するための補助ツールとしてtextlintの設定も整備しております。
+[翻訳ガイドライン](https://github.com/typst-jp/docs/blob/main/TRANSLATING_GUIDELINES.md)に従った体裁へと校正するための補助ツールとしてtextlintの設定も整備しております。
 `mise run textlint-html`を実行すると、生成されたWebサイトのHTMLコードをtextlintで校正します。
 
 ```sh
