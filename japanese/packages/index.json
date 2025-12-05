@@ -1,0 +1,1 @@
+{"route":"/docs/japanese/packages/","title":"日本語向けパッケージ","description":"Typstの日本語向けパッケージのまとめです。\n","part":null,"outline":[],"body":{"kind":"html","content":"<h1>日本語向けパッケージ</h1>\n<ul>\n<li><a href=\"https://typst.app/universe/package/rubby\">rubby</a> - ふりがなを振る</li>\n<li><a href=\"https://typst.app/universe/package/roremu\">roremu</a> - 日本語のダミーテキストを生成する</li>\n</ul>"}}

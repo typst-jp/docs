@@ -5,8 +5,16 @@
 	"typstOfficialUrl": "https://typst.app",
 	"typstOfficialDocsUrl": "https://typst.app/docs/",
 	"githubOrganizationUrl": "https://github.com/typst-jp",
-	"githubRepositoryUrl": "https://github.com/typst-jp/docs",
-	"discordServerUrl": "https://discord.gg/9xF7k4aAuH",
+	"socialLinks": [
+		{
+			"title": "GitHub (typst-jp/docs)",
+			"url": "https://github.com/typst-jp/docs"
+		},
+		{
+			"title": "Discord (くみはんクラブ)",
+			"url": "https://discord.gg/9xF7k4aAuH"
+		}
+	],
 	"originUrl": "https://typst-jp.github.io/",
 	"basePath": "/docs/",
 	"displayTranslationStatus": true
