@@ -25,3 +25,5 @@ description: |
 | table | 表 | データや情報を整理して表示する要素 |
 | supplement | 補足語 | [参照]($ref)されるものの種類を指す文字列、「図1」の「図」など |
 | numbering | 番号付け | [見出し]($heading/#parameters-numbering)や[図表]($figure/#parameters-numbering)、[番号付きリスト]($enum/#parameters-numbering)などの番号の書式を定義する方法 |
+| location | ロケーション | [ロケーション]($location)を参照 |
+| locatable | ロケータブル | [ロケータブル要素]($location/#locatable)を参照 |
