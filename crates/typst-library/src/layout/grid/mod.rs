@@ -524,7 +524,7 @@ pub struct GridVLine {
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
 
-    /// 行（`x`）が与えられた場合の線が配置される位置。
+    /// 列（`x`）が与えられた場合の線が配置される位置。
     /// `{start}`か`{end}`のいずれかを指定し、それぞれその前またはその後に描画します。
     ///
     /// `{left}`および`{right}`の値も使用可能ですが、左から右に書く文書と右から左に書く文書間でグリッドの挙動が一貫しなくなるため、非推奨です。
