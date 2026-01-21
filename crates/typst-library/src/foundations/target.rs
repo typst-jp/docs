@@ -1,10 +1,17 @@
 use comemo::Tracked;
 
 use crate::diag::HintedStrResult;
+<<<<<<< HEAD
 use crate::foundations::{elem, func, Cast, Context};
 
 /// The export target.
 #[derive(Debug, Default, Copy, Clone, PartialEq, Hash, Cast)]
+=======
+use crate::foundations::{Cast, Context, elem, func};
+
+/// The export target.
+#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub enum Target {
     /// The target that is used for paged, fully laid-out content.
     #[default]
@@ -73,5 +80,9 @@ pub struct TargetElem {
 /// ```
 #[func(contextual)]
 pub fn target(context: Tracked<Context>) -> HintedStrResult<Target> {
+<<<<<<< HEAD
     Ok(TargetElem::target_in(context.styles()?))
+=======
+    Ok(context.styles()?.get(TargetElem::target))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

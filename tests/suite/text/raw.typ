@@ -91,6 +91,25 @@ Year	Month	Day
     (* x (factorial (- x 1)))))
 ```
 
+<<<<<<< HEAD
+=======
+--- raw-syntaxes-invalid-sublime-syntax ---
+// Prevent test parser from failing on "^---" line.
+#let sublime-syntax = ```yaml
+%YAML 1.2
+```.text + "\n---\n" + ```yaml
+name: lang
+file_extensions:
+  - a
+scope: source
+contexts:
+  main:
+    - match: '\'
+```.text
+
+// Error: 35-56 failed to parse syntax (Error while compiling regex '/': Parsing error at position 0: Backslash without following character)
+#raw("text", lang: "a", syntaxes: bytes(sublime-syntax))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- raw-theme ---
 // Test code highlighting with custom theme.
@@ -225,6 +244,18 @@ emph(hello.my().world())
 #hello.world()
 #box[]
 ```
+<<<<<<< HEAD
+=======
+
+--- raw-highlight-typm-extra ---
+// Math highlighting for strings, alignments, shorthands, and named args.
+#set page(width: auto)
+```typm
+"string" - + * ::= & \
+|=> & [|define(x: #y, x::= y)|]
+```
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-highlight-rust ---
 #set page(width: auto)
 
@@ -487,6 +518,21 @@ test
   assert.eq(block, c.input.block, message: "in point " + c.name + ", expect " + repr(block) + ", got " + repr(c.input.block) + "")
 }
 
+<<<<<<< HEAD
+=======
+--- raw-html html ---
+This is ```typ *inline*```.
+```typ
+#[
+  #set text(blue)
+  *Hello* _world_!
+]
+```
+
+--- raw-html-inline-spaces html ---
+This has `double  spaces  inside`, which should be kept.
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-line ---
 #set page(width: 200pt)
 
@@ -631,6 +677,23 @@ if true {
 }
 ```
 
+<<<<<<< HEAD
+=======
+--- issue-6961-tab-crlf-raw-indent ---
+#let snippet = (
+  ```
+  A
+    BC
+    D
+  ```
+)
+
+#raw(
+  snippet.text.replace("  ", "\t").replace("\n", "\r\n"),
+  block: true,
+)
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-4662-math-mode-language-for-raw ---
 // Test lang: "typm" syntax highlighting without enclosing dollar signs
 #raw("pi^2", lang: "typm")
@@ -687,6 +750,14 @@ a b c --------------------
 #let hi = "你好world"
 ```
 
+<<<<<<< HEAD
+=======
+--- issue-6559-equality-between-raws ---
+
+#test(`foo`, `foo`)
+#assert.ne(`foo`, `bar`)
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-theme-set-to-auto ---
 ```typ
 #let hi = "Hello World"
@@ -708,6 +779,41 @@ a b c --------------------
 #let foo = "bar"
 ```
 
+<<<<<<< HEAD
+=======
+--- raw-default-json-theme ---
+```json
+{
+  "foo": "bar",
+  "test": [
+    "test",
+    true,
+    42,
+    5.0,
+    null
+  ],
+  "hi": {
+    "this": "is a test!",
+    "What is this?": "This is incredible text!"
+  }
+}
+```
+
+--- raw-default-yaml-theme ---
+```yaml
+foo: bar
+test:
+- test
+- true
+- 42
+- 5
+-
+hi:
+  this: is a test!
+  What is this?: This is incredible text!
+```
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-unclosed ---
 // Test unterminated raw text.
 //

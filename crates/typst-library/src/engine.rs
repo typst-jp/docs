@@ -1,5 +1,6 @@
 //! Definition of the central compilation context.
 
+<<<<<<< HEAD
 use std::collections::HashSet;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -13,6 +14,21 @@ use crate::foundations::{Styles, Value};
 use crate::introspection::Introspector;
 use crate::routines::Routines;
 use crate::World;
+=======
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+use comemo::{Track, Tracked, TrackedMut};
+use ecow::EcoVec;
+use rayon::iter::{IndexedParallelIterator, IntoParallelIterator, ParallelIterator};
+use rustc_hash::FxHashSet;
+use typst_syntax::{FileId, Span};
+
+use crate::World;
+use crate::diag::{HintedStrResult, SourceDiagnostic, SourceResult, StrResult, bail};
+use crate::foundations::{Styles, Value};
+use crate::introspection::Introspector;
+use crate::routines::Routines;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Holds all data needed during compilation.
 pub struct Engine<'a> {
@@ -47,7 +63,15 @@ impl Engine<'_> {
     }
 
     /// Runs tasks on the engine in parallel.
+<<<<<<< HEAD
     pub fn parallelize<P, I, T, U, F>(&mut self, iter: P, f: F) -> impl Iterator<Item = U>
+=======
+    pub fn parallelize<P, I, T, U, F>(
+        &mut self,
+        iter: P,
+        f: F,
+    ) -> impl Iterator<Item = U> + use<P, I, T, U, F>
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     where
         P: IntoIterator<IntoIter = I>,
         I: Iterator<Item = T>,
@@ -111,11 +135,15 @@ impl Traced {
     /// We hide the span if it isn't in the given file so that only results for
     /// the file with the traced span are invalidated.
     pub fn get(&self, id: FileId) -> Option<Span> {
+<<<<<<< HEAD
         if self.0.and_then(Span::id) == Some(id) {
             self.0
         } else {
             None
         }
+=======
+        if self.0.and_then(Span::id) == Some(id) { self.0 } else { None }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -135,7 +163,11 @@ pub struct Sink {
     /// Warnings emitted during iteration.
     warnings: EcoVec<SourceDiagnostic>,
     /// Hashes of all warning's spans and messages for warning deduplication.
+<<<<<<< HEAD
     warnings_set: HashSet<u128>,
+=======
+    warnings_set: FxHashSet<u128>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// A sequence of traced values for a span.
     values: EcoVec<(Value, Option<Styles>)>,
 }
@@ -219,7 +251,11 @@ pub struct Route<'a> {
     // We need to override the constraint's lifetime here so that `Tracked` is
     // covariant over the constraint. If it becomes invariant, we're in for a
     // world of lifetime pain.
+<<<<<<< HEAD
     outer: Option<Tracked<'a, Self, <Route<'static> as Validate>::Constraint>>,
+=======
+    outer: Option<Tracked<'a, Self, <Route<'static> as Track>::Call>>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// This is set if this route segment was inserted through the start of a
     /// module evaluation.
     id: Option<FileId>,
@@ -312,7 +348,12 @@ impl Route<'_> {
         if !self.within(Route::MAX_SHOW_RULE_DEPTH) {
             bail!(
                 "maximum show rule depth exceeded";
+<<<<<<< HEAD
                 hint: "check whether the show rule matches its own output"
+=======
+                hint: "maybe a show rule matches its own output";
+                hint: "maybe there are too deeply nested elements"
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             );
         }
         Ok(())

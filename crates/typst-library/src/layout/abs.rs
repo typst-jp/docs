@@ -5,7 +5,11 @@ use std::ops::{Add, Div, Mul, Neg, Rem};
 use ecow::EcoString;
 use typst_utils::{Numeric, Scalar};
 
+<<<<<<< HEAD
 use crate::foundations::{cast, repr, Fold, Repr, Value};
+=======
+use crate::foundations::{Fold, Repr, Value, cast, repr};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// An absolute length.
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]

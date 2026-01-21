@@ -1,5 +1,6 @@
 use ecow::EcoString;
 
+<<<<<<< HEAD
 use crate::diag::{bail, HintedStrResult, SourceResult};
 use crate::engine::Engine;
 use crate::foundations::{
@@ -13,6 +14,22 @@ use crate::foundations::{
 /// この文書要素は自分で作成することはできません。
 /// この関数は、[setルール]($styling/#set-rules)と組み合わせて文書のメタデータを指定する場合にのみ使用されます。
 /// setルールは、レイアウトコンテナの内部に置いてはいけません。
+=======
+use crate::diag::{HintedStrResult, SourceResult, bail};
+use crate::engine::Engine;
+use crate::foundations::{
+    Args, Array, Construct, Content, Datetime, OneOrMultiple, Smart, StyleChain, Styles,
+    Value, cast, elem,
+};
+use crate::text::{Locale, TextElem};
+
+/// The root element of a document and its metadata.
+///
+/// All documents are automatically wrapped in a `document` element. You cannot
+/// create a document element yourself. This function is only used with
+/// [set rules]($styling/#set-rules) to specify document metadata. Such a set
+/// rule must not occur inside of any layout container.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #set document(title: [Hello])
@@ -21,6 +38,7 @@ use crate::foundations::{
 /// embeds metadata into the PDF!
 /// ```
 ///
+<<<<<<< HEAD
 /// この関数で設定したメタデータは、文書内には表示されません。
 /// 代わりに、コンパイルされたPDFファイル内に埋め込まれます。
 #[elem(Construct)]
@@ -52,6 +70,47 @@ pub struct DocumentElem {
     /// PDFに埋め込むためには、yearの値が0以上でなくてはなりません。
     ///
     /// バイト単位で同一に再現できるPDFを出力したい場合には、`{auto}`以外の値を設定してください。
+=======
+/// Note that metadata set with this function is not rendered within the
+/// document. Instead, it is embedded in the compiled PDF file.
+#[elem(Construct)]
+pub struct DocumentElem {
+    /// The document's title. This is rendered as the title of the PDF viewer
+    /// window or the browser tab of the page.
+    ///
+    /// Adding a title is important for accessibility, as it makes it easier to
+    /// navigate to your document and identify it among other open documents.
+    /// When exporting to PDF/UA, a title is required.
+    ///
+    /// While this can be arbitrary content, PDF viewers only support plain text
+    /// titles, so the conversion might be lossy.
+    #[ghost]
+    pub title: Option<Content>,
+
+    /// The document's authors.
+    #[ghost]
+    pub author: OneOrMultiple<EcoString>,
+
+    /// The document's description.
+    #[ghost]
+    pub description: Option<Content>,
+
+    /// The document's keywords.
+    #[ghost]
+    pub keywords: OneOrMultiple<EcoString>,
+
+    /// The document's creation date.
+    ///
+    /// If this is `{auto}` (default), Typst uses the current date and time.
+    /// Setting it to `{none}` prevents Typst from embedding any creation date
+    /// into the PDF metadata.
+    ///
+    /// The year component must be at least zero in order to be embedded into a
+    /// PDF.
+    ///
+    /// If you want to create byte-by-byte reproducible PDFs, set this to
+    /// something other than `{auto}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub date: Smart<Option<Datetime>>,
 }
@@ -97,6 +156,15 @@ pub struct DocumentInfo {
     pub keywords: Vec<EcoString>,
     /// The document's creation date.
     pub date: Smart<Option<Datetime>>,
+<<<<<<< HEAD
+=======
+    /// The document's language, set from the first top-level set rule, e.g.
+    ///
+    /// ```typc
+    /// set text(lang: "...", region: "...")
+    /// ```
+    pub locale: Smart<Locale>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl DocumentInfo {
@@ -105,6 +173,7 @@ impl DocumentInfo {
     /// Document set rules are a bit special, so we need to do this manually.
     pub fn populate(&mut self, styles: &Styles) {
         let chain = StyleChain::new(styles);
+<<<<<<< HEAD
         let has = |field| styles.has::<DocumentElem>(field as _);
         if has(<DocumentElem as Fields>::Enum::Title) {
             self.title =
@@ -124,4 +193,45 @@ impl DocumentInfo {
             self.date = DocumentElem::date_in(chain);
         }
     }
+=======
+        if styles.has(DocumentElem::title) {
+            self.title = chain
+                .get_ref(DocumentElem::title)
+                .as_ref()
+                .map(|content| content.plain_text());
+        }
+        if styles.has(DocumentElem::author) {
+            self.author = chain.get_cloned(DocumentElem::author).0;
+        }
+        if styles.has(DocumentElem::description) {
+            self.description = chain
+                .get_ref(DocumentElem::description)
+                .as_ref()
+                .map(|content| content.plain_text());
+        }
+        if styles.has(DocumentElem::keywords) {
+            self.keywords = chain.get_cloned(DocumentElem::keywords).0;
+        }
+        if styles.has(DocumentElem::date) {
+            self.date = chain.get(DocumentElem::date);
+        }
+    }
+
+    /// Populate this document info with locale details from the given styles.
+    pub fn populate_locale(&mut self, styles: &Styles) {
+        if self.locale.is_custom() {
+            return;
+        }
+
+        let chain = StyleChain::new(styles);
+        let mut locale: Option<Locale> = None;
+        if styles.has(TextElem::lang) {
+            locale.get_or_insert_default().lang = chain.get(TextElem::lang);
+        }
+        if styles.has(TextElem::region) {
+            locale.get_or_insert_default().region = chain.get(TextElem::region);
+        }
+        self.locale = Smart::from(locale);
+    }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

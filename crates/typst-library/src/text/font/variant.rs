@@ -3,7 +3,11 @@ use std::fmt::{self, Debug, Formatter};
 use ecow::EcoString;
 use serde::{Deserialize, Serialize};
 
+<<<<<<< HEAD
 use crate::foundations::{cast, Cast, IntoValue, Repr};
+=======
+use crate::foundations::{Cast, IntoValue, Repr, cast};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::layout::Ratio;
 
 /// Properties that distinguish a font from other fonts in the same family.
@@ -33,7 +37,11 @@ impl Debug for FontVariant {
 
 /// The style of a font.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
+<<<<<<< HEAD
 #[derive(Serialize, Deserialize, Cast)]
+=======
+#[derive(Cast, Serialize, Deserialize)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[serde(rename_all = "kebab-case")]
 pub enum FontStyle {
     /// The default, typically upright style.

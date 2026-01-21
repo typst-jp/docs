@@ -1,12 +1,21 @@
 use typst::foundations::{Label, Selector, Value};
 use typst::layout::PagedDocument;
+<<<<<<< HEAD
 use typst::syntax::{ast, LinkedNode, Side, Source, Span};
+=======
+use typst::syntax::{LinkedNode, Side, Source, Span, ast};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst::utils::PicoStr;
 
 use crate::utils::globals;
 use crate::{
+<<<<<<< HEAD
     analyze_expr, analyze_import, deref_target, named_items, DerefTarget, IdeWorld,
     NamedItem,
+=======
+    DerefTarget, IdeWorld, NamedItem, analyze_expr, analyze_import, deref_target,
+    named_items,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// A definition of some item.
@@ -72,7 +81,12 @@ pub fn definition(
 
         // Try to jump to the referenced content.
         DerefTarget::Ref(node) => {
+<<<<<<< HEAD
             let label = Label::new(PicoStr::intern(node.cast::<ast::Ref>()?.target()));
+=======
+            let label = Label::new(PicoStr::intern(node.cast::<ast::Ref>()?.target()))
+                .expect("unexpected empty reference");
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             let selector = Selector::Label(label);
             let elem = document?.introspector.query_first(&selector)?;
             return Some(Definition::Span(elem.span()));
@@ -89,11 +103,19 @@ mod tests {
     use std::borrow::Borrow;
     use std::ops::Range;
 
+<<<<<<< HEAD
     use typst::foundations::{IntoValue, NativeElement};
     use typst::syntax::Side;
     use typst::WorldExt;
 
     use super::{definition, Definition};
+=======
+    use typst::WorldExt;
+    use typst::foundations::{IntoValue, NativeElement};
+    use typst::syntax::Side;
+
+    use super::{Definition, definition};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use crate::tests::{FilePos, TestWorld, WorldLike};
 
     type Response = (TestWorld, Option<Definition>);
@@ -186,6 +208,10 @@ mod tests {
 
     #[test]
     fn test_definition_std() {
+<<<<<<< HEAD
         test("#table", 1, Side::After).must_be_value(typst::model::TableElem::elem());
+=======
+        test("#table", 1, Side::After).must_be_value(typst::model::TableElem::ELEM);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }

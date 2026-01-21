@@ -19,6 +19,10 @@ typst-utils = { workspace = true }
 dirs = { workspace = true, optional = true }
 ecow = { workspace = true }
 env_proxy = { workspace = true, optional = true }
+<<<<<<< HEAD
+=======
+fastrand = { workspace = true, optional = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 flate2 = { workspace = true, optional = true }
 fontdb = { workspace = true, optional = true }
 native-tls = { workspace = true, optional = true }
@@ -43,7 +47,11 @@ fonts = ["dep:fontdb", "fontdb/memmap", "fontdb/fontconfig"]
 downloads = ["dep:env_proxy", "dep:native-tls", "dep:ureq", "dep:openssl"]
 
 # Add package downloading utilities, implies `downloads`
+<<<<<<< HEAD
 packages = ["downloads", "dep:dirs", "dep:flate2", "dep:tar"]
+=======
+packages = ["downloads", "dep:dirs", "dep:flate2", "dep:tar", "dep:fastrand"]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 # Embeds some fonts into the binary:
 # - For text: Libertinus Serif, New Computer Modern

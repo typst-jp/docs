@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use typst_utils::{Get, Numeric};
 
 use crate::diag::{bail, SourceResult};
@@ -10,6 +11,15 @@ use crate::html::{tag, HtmlElem};
 use crate::layout::{Em, HElem, Length, Sides, StackChild, StackElem, VElem};
 use crate::model::{ListItemLike, ListLike, ParElem, ParbreakElem};
 use crate::text::TextElem;
+=======
+use crate::diag::bail;
+use crate::foundations::{
+    Array, Content, NativeElement, Packed, Smart, Styles, cast, elem, scope,
+};
+use crate::introspection::{Locatable, Tagged};
+use crate::layout::{Em, HElem, Length};
+use crate::model::{ListItemLike, ListLike};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A list of terms and their descriptions.
 ///
@@ -27,7 +37,11 @@ use crate::text::TextElem;
 /// # Syntax
 /// This function also has dedicated syntax: Starting a line with a slash,
 /// followed by a term, a colon and a description creates a term list item.
+<<<<<<< HEAD
 #[elem(scope, title = "Term List", Show)]
+=======
+#[elem(scope, title = "Term List", Locatable, Tagged)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct TermsElem {
     /// Defines the default [spacing]($terms.spacing) of the term list. If it is
     /// `{false}`, the items are spaced apart with
@@ -66,7 +80,10 @@ pub struct TermsElem {
     /// / Colon: A nice separator symbol.
     /// ```
     #[default(HElem::new(Em::new(0.6).into()).with_weak(true).pack())]
+<<<<<<< HEAD
     #[borrowed]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub separator: Content,
 
     /// The indentation of each item.
@@ -118,6 +135,7 @@ impl TermsElem {
     type TermItem;
 }
 
+<<<<<<< HEAD
 impl Show for Packed<TermsElem> {
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
         let span = self.span();
@@ -204,6 +222,10 @@ impl Show for Packed<TermsElem> {
 
 /// A term list item.
 #[elem(name = "item", title = "Term List Item")]
+=======
+/// A term list item.
+#[elem(name = "item", title = "Term List Item", Tagged)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct TermItem {
     /// The term described by the list item.
     #[required]

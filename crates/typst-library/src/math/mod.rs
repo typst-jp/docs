@@ -27,7 +27,11 @@ pub use self::underover::*;
 use typst_utils::singleton;
 use unicode_math_class::MathClass;
 
+<<<<<<< HEAD
 use crate::foundations::{elem, Content, Module, NativeElement, Scope};
+=======
+use crate::foundations::{Content, Module, NativeElement, Scope, elem};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::layout::{Em, HElem};
 use crate::text::TextElem;
 
@@ -80,6 +84,10 @@ pub fn module() -> Module {
     math.define_func::<italic>();
     math.define_func::<serif>();
     math.define_func::<sans>();
+<<<<<<< HEAD
+=======
+    math.define_func::<scr>();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     math.define_func::<cal>();
     math.define_func::<frak>();
     math.define_func::<mono>();
@@ -119,6 +127,7 @@ impl AlignPointElem {
     }
 }
 
+<<<<<<< HEAD
 /// 特定の数式クラスを強制的に適用。
 ///
 /// これは、特定の記号を異なるクラスのように扱うのに便利です。例えば、ある記号を関係のように振る舞わせることができます。
@@ -126,6 +135,17 @@ impl AlignPointElem {
 /// 添え字の取り付け方は[`{limits}`](math.limits)や[`{scripts}`](math.scripts)を使って常に上書きできることに注意してください。
 ///
 /// # 例
+=======
+/// Forced use of a certain math class.
+///
+/// This is useful to treat certain symbols as if they were of a different
+/// class, e.g. to make a symbol behave like a relation. The class of a symbol
+/// defines the way it is laid out, including spacing around it, and how its
+/// scripts are attached by default. Note that the latter can always be
+/// overridden using [`{limits}`](math.limits) and [`{scripts}`](math.scripts).
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #let loves = math.class(
 ///   "relation",
@@ -136,11 +156,19 @@ impl AlignPointElem {
 /// ```
 #[elem(Mathy)]
 pub struct ClassElem {
+<<<<<<< HEAD
     /// コンテンツに適用するクラス。
     #[required]
     pub class: MathClass,
 
     /// クラスを適用するコンテンツ。
+=======
+    /// The class to apply to the content.
+    #[required]
+    pub class: MathClass,
+
+    /// The content to which the class is applied.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }

@@ -1,21 +1,39 @@
 //! File and package management.
 
+<<<<<<< HEAD
 use std::collections::HashMap;
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::fmt::{self, Debug, Formatter};
 use std::num::NonZeroU16;
 use std::sync::{LazyLock, RwLock};
 
+<<<<<<< HEAD
 use crate::package::PackageSpec;
 use crate::VirtualPath;
 
 /// The global package-path interner.
 static INTERNER: LazyLock<RwLock<Interner>> = LazyLock::new(|| {
     RwLock::new(Interner { to_id: HashMap::new(), from_id: Vec::new() })
+=======
+use rustc_hash::FxHashMap;
+
+use crate::VirtualPath;
+use crate::package::PackageSpec;
+
+/// The global package-path interner.
+static INTERNER: LazyLock<RwLock<Interner>> = LazyLock::new(|| {
+    RwLock::new(Interner { to_id: FxHashMap::default(), from_id: Vec::new() })
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 });
 
 /// A package-path interner.
 struct Interner {
+<<<<<<< HEAD
     to_id: HashMap<Pair, FileId>,
+=======
+    to_id: FxHashMap<Pair, FileId>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     from_id: Vec<Pair>,
 }
 

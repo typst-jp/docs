@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use std::collections::{HashMap, HashSet};
 use std::mem;
 use std::ops::{Index, IndexMut, Range};
@@ -8,11 +9,27 @@ use unicode_math_class::MathClass;
 
 use crate::set::{syntax_set, SyntaxSet};
 use crate::{ast, set, LexMode, Lexer, SyntaxError, SyntaxKind, SyntaxNode};
+=======
+use std::mem;
+use std::ops::{Index, IndexMut, Range};
+
+use ecow::{EcoString, eco_format};
+use rustc_hash::{FxHashMap, FxHashSet};
+use typst_utils::default_math_class;
+use unicode_math_class::MathClass;
+
+use crate::set::{SyntaxSet, syntax_set};
+use crate::{Lexer, SyntaxError, SyntaxKind, SyntaxMode, SyntaxNode, ast, set};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Parses a source file as top-level markup.
 pub fn parse(text: &str) -> SyntaxNode {
     let _scope = typst_timing::TimingScope::new("parse");
+<<<<<<< HEAD
     let mut p = Parser::new(text, 0, LexMode::Markup);
+=======
+    let mut p = Parser::new(text, 0, SyntaxMode::Markup);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     markup_exprs(&mut p, true, syntax_set!(End));
     p.finish_into(SyntaxKind::Markup)
 }
@@ -20,7 +37,11 @@ pub fn parse(text: &str) -> SyntaxNode {
 /// Parses top-level code.
 pub fn parse_code(text: &str) -> SyntaxNode {
     let _scope = typst_timing::TimingScope::new("parse code");
+<<<<<<< HEAD
     let mut p = Parser::new(text, 0, LexMode::Code);
+=======
+    let mut p = Parser::new(text, 0, SyntaxMode::Code);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     code_exprs(&mut p, syntax_set!(End));
     p.finish_into(SyntaxKind::Code)
 }
@@ -28,7 +49,11 @@ pub fn parse_code(text: &str) -> SyntaxNode {
 /// Parses top-level math.
 pub fn parse_math(text: &str) -> SyntaxNode {
     let _scope = typst_timing::TimingScope::new("parse math");
+<<<<<<< HEAD
     let mut p = Parser::new(text, 0, LexMode::Math);
+=======
+    let mut p = Parser::new(text, 0, SyntaxMode::Math);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     math_exprs(&mut p, syntax_set!(End));
     p.finish_into(SyntaxKind::Math)
 }
@@ -63,7 +88,11 @@ pub(super) fn reparse_markup(
     nesting: &mut usize,
     top_level: bool,
 ) -> Option<Vec<SyntaxNode>> {
+<<<<<<< HEAD
     let mut p = Parser::new(text, range.start, LexMode::Markup);
+=======
+    let mut p = Parser::new(text, range.start, SyntaxMode::Markup);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     *at_start |= p.had_newline();
     while !p.end() && p.current_start() < range.end {
         // If not top-level and at a new RightBracket, stop the reparse.
@@ -205,7 +234,11 @@ fn reference(p: &mut Parser) {
 /// Parses a mathematical equation: `$x$`, `$ x^2 $`.
 fn equation(p: &mut Parser) {
     let m = p.marker();
+<<<<<<< HEAD
     p.enter_modes(LexMode::Math, AtNewline::Continue, |p| {
+=======
+    p.enter_modes(SyntaxMode::Math, AtNewline::Continue, |p| {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         p.assert(SyntaxKind::Dollar);
         math(p, syntax_set!(Dollar, End));
         p.expect_closing_delimiter(m, SyntaxKind::Dollar);
@@ -271,10 +304,16 @@ fn math_expr_prec(p: &mut Parser, min_prec: usize, stop: SyntaxKind) {
         }
 
         SyntaxKind::Text | SyntaxKind::MathText | SyntaxKind::MathShorthand => {
+<<<<<<< HEAD
             continuable = matches!(
                 math_class(p.current_text()),
                 None | Some(MathClass::Alphabetic)
             );
+=======
+            // `a(b)/c` parses as `(a(b))/c` if `a` is continuable.
+            continuable = math_class(p.current_text()) == Some(MathClass::Alphabetic)
+                || p.current_text().chars().all(char::is_alphabetic);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             if !maybe_delimited(p) {
                 p.eat();
             }
@@ -443,6 +482,7 @@ fn math_unparen(p: &mut Parser, m: Marker) {
         return;
     }
 
+<<<<<<< HEAD
     if let [first, .., last] = node.children_mut() {
         if first.text() == "(" && last.text() == ")" {
             first.convert_to_kind(SyntaxKind::LeftParen);
@@ -450,6 +490,16 @@ fn math_unparen(p: &mut Parser, m: Marker) {
             // Only convert if we did have regular parens.
             node.convert_to_kind(SyntaxKind::Math);
         }
+=======
+    if let [first, .., last] = node.children_mut()
+        && first.text() == "("
+        && last.text() == ")"
+    {
+        first.convert_to_kind(SyntaxKind::LeftParen);
+        last.convert_to_kind(SyntaxKind::RightParen);
+        // Only convert if we did have regular parens.
+        node.convert_to_kind(SyntaxKind::Math);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -481,7 +531,11 @@ fn math_args(p: &mut Parser) {
     let mut has_arrays = false;
 
     let mut maybe_array_start = p.marker();
+<<<<<<< HEAD
     let mut seen = HashSet::new();
+=======
+    let mut seen = FxHashSet::default();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     while !p.at_set(syntax_set!(End, Dollar, RightParen)) {
         positional = math_arg(p, &mut seen);
 
@@ -522,7 +576,11 @@ fn math_args(p: &mut Parser) {
 /// Parses a single argument in a math argument list.
 ///
 /// Returns whether the parsed argument was positional or not.
+<<<<<<< HEAD
 fn math_arg<'s>(p: &mut Parser<'s>, seen: &mut HashSet<&'s str>) -> bool {
+=======
+fn math_arg<'s>(p: &mut Parser<'s>, seen: &mut FxHashSet<&'s str>) -> bool {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let m = p.marker();
     let start = p.current_start();
 
@@ -531,8 +589,27 @@ fn math_arg<'s>(p: &mut Parser<'s>, seen: &mut HashSet<&'s str>) -> bool {
         if let Some(spread) = p.lexer.maybe_math_spread_arg(start) {
             p.token.node = spread;
             p.eat();
+<<<<<<< HEAD
             math_expr(p);
             p.wrap(m, SyntaxKind::Spread);
+=======
+            let m_arg = p.marker();
+            // TODO: Refactor to combine with the other call to `math_exprs`.
+            let count =
+                math_exprs(p, syntax_set!(End, Dollar, Comma, Semicolon, RightParen));
+            if count == 0 {
+                let dots = vec![
+                    SyntaxNode::leaf(SyntaxKind::MathText, "."),
+                    SyntaxNode::leaf(SyntaxKind::MathText, "."),
+                ];
+                p[m] = SyntaxNode::inner(SyntaxKind::Math, dots);
+            } else {
+                if count > 1 {
+                    p.wrap(m_arg, SyntaxKind::Math);
+                }
+                p.wrap(m, SyntaxKind::Spread);
+            }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             return true;
         }
     }
@@ -616,7 +693,11 @@ fn code_exprs(p: &mut Parser, stop_set: SyntaxSet) {
 
 /// Parses an atomic code expression embedded in markup or math.
 fn embedded_code_expr(p: &mut Parser) {
+<<<<<<< HEAD
     p.enter_modes(LexMode::Code, AtNewline::Stop, |p| {
+=======
+    p.enter_modes(SyntaxMode::Code, AtNewline::Stop, |p| {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         p.assert(SyntaxKind::Hash);
         if p.had_trivia() || p.end() {
             p.expected("expression");
@@ -647,7 +728,11 @@ fn code_expr(p: &mut Parser) {
 }
 
 /// Parses a code expression with at least the given precedence.
+<<<<<<< HEAD
 fn code_expr_prec(p: &mut Parser, atomic: bool, min_prec: usize) {
+=======
+fn code_expr_prec(p: &mut Parser, atomic: bool, min_prec: u8) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let m = p.marker();
     if !atomic && p.at_set(set::UNARY_OP) {
         let op = ast::UnOp::from_kind(p.current()).unwrap();
@@ -778,7 +863,11 @@ fn code_primary(p: &mut Parser, atomic: bool) {
 
 /// Reparses a full content or code block.
 pub(super) fn reparse_block(text: &str, range: Range<usize>) -> Option<SyntaxNode> {
+<<<<<<< HEAD
     let mut p = Parser::new(text, range.start, LexMode::Code);
+=======
+    let mut p = Parser::new(text, range.start, SyntaxMode::Code);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     assert!(p.at(SyntaxKind::LeftBracket) || p.at(SyntaxKind::LeftBrace));
     block(&mut p);
     (p.balanced && p.prev_end() == range.end)
@@ -797,7 +886,11 @@ fn block(p: &mut Parser) {
 /// Parses a code block: `{ let x = 1; x + 2 }`.
 fn code_block(p: &mut Parser) {
     let m = p.marker();
+<<<<<<< HEAD
     p.enter_modes(LexMode::Code, AtNewline::Continue, |p| {
+=======
+    p.enter_modes(SyntaxMode::Code, AtNewline::Continue, |p| {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         p.assert(SyntaxKind::LeftBrace);
         code(p, syntax_set!(RightBrace, RightBracket, RightParen, End));
         p.expect_closing_delimiter(m, SyntaxKind::RightBrace);
@@ -808,7 +901,11 @@ fn code_block(p: &mut Parser) {
 /// Parses a content block: `[*Hi* there!]`.
 fn content_block(p: &mut Parser) {
     let m = p.marker();
+<<<<<<< HEAD
     p.enter_modes(LexMode::Markup, AtNewline::Continue, |p| {
+=======
+    p.enter_modes(SyntaxMode::Markup, AtNewline::Continue, |p| {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         p.assert(SyntaxKind::LeftBracket);
         markup(p, true, true, syntax_set!(RightBracket, End));
         p.expect_closing_delimiter(m, SyntaxKind::RightBracket);
@@ -831,7 +928,11 @@ fn let_binding(p: &mut Parser) {
             closure = true;
         }
     } else {
+<<<<<<< HEAD
         pattern(p, false, &mut HashSet::new(), None);
+=======
+        pattern(p, false, &mut FxHashSet::default(), None);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         other = true;
     }
 
@@ -923,7 +1024,11 @@ fn for_loop(p: &mut Parser) {
     let m = p.marker();
     p.assert(SyntaxKind::For);
 
+<<<<<<< HEAD
     let mut seen = HashSet::new();
+=======
+    let mut seen = FxHashSet::default();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pattern(p, false, &mut seen, None);
 
     if p.at(SyntaxKind::Comma) {
@@ -1084,7 +1189,11 @@ fn expr_with_paren(p: &mut Parser, atomic: bool) {
     } else if p.at(SyntaxKind::Eq) && kind != SyntaxKind::Parenthesized {
         p.restore(checkpoint);
         let m = p.marker();
+<<<<<<< HEAD
         destructuring_or_parenthesized(p, true, &mut HashSet::new());
+=======
+        destructuring_or_parenthesized(p, true, &mut FxHashSet::default());
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         if !p.expect(SyntaxKind::Eq) {
             return;
         }
@@ -1107,7 +1216,11 @@ fn parenthesized_or_array_or_dict(p: &mut Parser) -> SyntaxKind {
         count: 0,
         maybe_just_parens: true,
         kind: None,
+<<<<<<< HEAD
         seen: HashSet::new(),
+=======
+        seen: FxHashSet::default(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     };
 
     // An edge case with parens is whether we can interpret a leading spread
@@ -1169,7 +1282,11 @@ struct GroupState {
     /// The `SyntaxKind` to wrap as (if we've figured it out yet).
     kind: Option<SyntaxKind>,
     /// Store named arguments so we can give an error if they're repeated.
+<<<<<<< HEAD
     seen: HashSet<EcoString>,
+=======
+    seen: FxHashSet<EcoString>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Parses a single item in an array or dictionary.
@@ -1200,10 +1317,16 @@ fn array_or_dict_item(p: &mut Parser, state: &mut GroupState) {
             Some(ast::Expr::Ident(ident)) => Some(ident.get().clone()),
             Some(ast::Expr::Str(s)) => Some(s.get()),
             _ => None,
+<<<<<<< HEAD
         } {
             if !state.seen.insert(key.clone()) {
                 node.convert_to_error(eco_format!("duplicate key: {key}"));
             }
+=======
+        } && !state.seen.insert(key.clone())
+        {
+            node.convert_to_error(eco_format!("duplicate key: {key}"));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         p.wrap(m, pair_kind);
@@ -1239,7 +1362,11 @@ fn args(p: &mut Parser) {
         p.with_nl_mode(AtNewline::Continue, |p| {
             p.assert(SyntaxKind::LeftParen);
 
+<<<<<<< HEAD
             let mut seen = HashSet::new();
+=======
+            let mut seen = FxHashSet::default();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             while !p.current().is_terminator() {
                 if !p.at_set(set::ARG) {
                     p.unexpected();
@@ -1265,7 +1392,11 @@ fn args(p: &mut Parser) {
 }
 
 /// Parses a single argument in an argument list.
+<<<<<<< HEAD
 fn arg<'s>(p: &mut Parser<'s>, seen: &mut HashSet<&'s str>) {
+=======
+fn arg<'s>(p: &mut Parser<'s>, seen: &mut FxHashSet<&'s str>) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let m = p.marker();
 
     // Parses a spread argument: `..args`.
@@ -1302,7 +1433,11 @@ fn params(p: &mut Parser) {
     p.with_nl_mode(AtNewline::Continue, |p| {
         p.assert(SyntaxKind::LeftParen);
 
+<<<<<<< HEAD
         let mut seen = HashSet::new();
+=======
+        let mut seen = FxHashSet::default();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let mut sink = false;
 
         while !p.current().is_terminator() {
@@ -1324,7 +1459,11 @@ fn params(p: &mut Parser) {
 }
 
 /// Parses a single parameter in a parameter list.
+<<<<<<< HEAD
 fn param<'s>(p: &mut Parser<'s>, seen: &mut HashSet<&'s str>, sink: &mut bool) {
+=======
+fn param<'s>(p: &mut Parser<'s>, seen: &mut FxHashSet<&'s str>, sink: &mut bool) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let m = p.marker();
 
     // Parses argument sink: `..sink`.
@@ -1359,7 +1498,11 @@ fn param<'s>(p: &mut Parser<'s>, seen: &mut HashSet<&'s str>, sink: &mut bool) {
 fn pattern<'s>(
     p: &mut Parser<'s>,
     reassignment: bool,
+<<<<<<< HEAD
     seen: &mut HashSet<&'s str>,
+=======
+    seen: &mut FxHashSet<&'s str>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     dupe: Option<&'s str>,
 ) {
     match p.current() {
@@ -1373,7 +1516,11 @@ fn pattern<'s>(
 fn destructuring_or_parenthesized<'s>(
     p: &mut Parser<'s>,
     reassignment: bool,
+<<<<<<< HEAD
     seen: &mut HashSet<&'s str>,
+=======
+    seen: &mut FxHashSet<&'s str>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ) {
     let mut sink = false;
     let mut count = 0;
@@ -1411,7 +1558,11 @@ fn destructuring_or_parenthesized<'s>(
 fn destructuring_item<'s>(
     p: &mut Parser<'s>,
     reassignment: bool,
+<<<<<<< HEAD
     seen: &mut HashSet<&'s str>,
+=======
+    seen: &mut FxHashSet<&'s str>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     maybe_just_parens: &mut bool,
     sink: &mut bool,
 ) {
@@ -1458,7 +1609,11 @@ fn destructuring_item<'s>(
 fn pattern_leaf<'s>(
     p: &mut Parser<'s>,
     reassignment: bool,
+<<<<<<< HEAD
     seen: &mut HashSet<&'s str>,
+=======
+    seen: &mut FxHashSet<&'s str>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     dupe: Option<&'s str>,
 ) {
     if p.current().is_keyword() {
@@ -1517,10 +1672,17 @@ fn pattern_leaf<'s>(
 /// ### Modes
 ///
 /// The parser manages the transitions between the three modes of Typst through
+<<<<<<< HEAD
 /// [lexer modes](`LexMode`) and [newline modes](`AtNewline`).
 ///
 /// The lexer modes map to the three Typst modes and are stored in the lexer,
 /// changing which`SyntaxKind`s it will generate.
+=======
+/// [syntax modes](`SyntaxMode`) and [newline modes](`AtNewline`).
+///
+/// The syntax modes map to the three Typst modes and are stored in the lexer,
+/// changing which `SyntaxKind`s it will generate.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// The newline mode is used to determine whether a newline should end the
 /// current expression. If so, the parser temporarily changes `token`'s kind to
@@ -1530,7 +1692,11 @@ struct Parser<'s> {
     /// The source text shared with the lexer.
     text: &'s str,
     /// A lexer over the source text with multiple modes. Defines the boundaries
+<<<<<<< HEAD
     /// of tokens and determines their [`SyntaxKind`]. Contains the [`LexMode`]
+=======
+    /// of tokens and determines their [`SyntaxKind`]. Contains the [`SyntaxMode`]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// defining our current Typst mode.
     lexer: Lexer<'s>,
     /// The newline mode: whether to insert a temporary end at newlines.
@@ -1572,23 +1738,38 @@ struct Token {
     prev_end: usize,
 }
 
+<<<<<<< HEAD
 /// Information about a newline if present (currently only relevant in Markup).
 #[derive(Debug, Clone, Copy)]
 struct Newline {
     /// The column of the start of our token in its line.
+=======
+/// Information about newlines in a group of trivia.
+#[derive(Debug, Copy, Clone)]
+struct Newline {
+    /// The column of the start of the next token in its line.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     column: Option<usize>,
     /// Whether any of our newlines were paragraph breaks.
     parbreak: bool,
 }
 
 /// How to proceed with parsing when at a newline.
+<<<<<<< HEAD
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+=======
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 enum AtNewline {
     /// Continue at newlines.
     Continue,
     /// Stop at any newline.
     Stop,
+<<<<<<< HEAD
     /// Continue only if there is no continuation with `else` or `.` (Code only).
+=======
+    /// Continue only if there is a continuation with `else` or `.` (Code only).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ContextualContinue,
     /// Stop only at a parbreak, not normal newlines (Markup only).
     StopParBreak,
@@ -1611,9 +1792,16 @@ impl AtNewline {
             },
             AtNewline::StopParBreak => parbreak,
             AtNewline::RequireColumn(min_col) => {
+<<<<<<< HEAD
                 // Don't stop if this newline doesn't start a column (this may
                 // be checked on the boundary of lexer modes, since we only
                 // report a column in Markup).
+=======
+                // When the column is `None`, the newline doesn't start a
+                // column, and we continue parsing. This may happen on the
+                // boundary of syntax modes, since we only report a column in
+                // Markup.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 column.is_some_and(|column| column <= min_col)
             }
         }
@@ -1643,8 +1831,13 @@ impl IndexMut<Marker> for Parser<'_> {
 
 /// Creating/Consuming the parser and getting info about the current token.
 impl<'s> Parser<'s> {
+<<<<<<< HEAD
     /// Create a new parser starting from the given text offset and lexer mode.
     fn new(text: &'s str, offset: usize, mode: LexMode) -> Self {
+=======
+    /// Create a new parser starting from the given text offset and syntax mode.
+    fn new(text: &'s str, offset: usize, mode: SyntaxMode) -> Self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let mut lexer = Lexer::new(text, mode);
         lexer.jump(offset);
         let nl_mode = AtNewline::Continue;
@@ -1825,13 +2018,21 @@ impl<'s> Parser<'s> {
         self.nodes.insert(from, SyntaxNode::inner(kind, children));
     }
 
+<<<<<<< HEAD
     /// Parse within the [`LexMode`] for subsequent tokens (does not change the
+=======
+    /// Parse within the [`SyntaxMode`] for subsequent tokens (does not change the
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// current token). This may re-lex the final token on exit.
     ///
     /// This function effectively repurposes the call stack as a stack of modes.
     fn enter_modes(
         &mut self,
+<<<<<<< HEAD
         mode: LexMode,
+=======
+        mode: SyntaxMode,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         stop: AtNewline,
         func: impl FnOnce(&mut Parser<'s>),
     ) {
@@ -1855,6 +2056,7 @@ impl<'s> Parser<'s> {
         self.nl_mode = mode;
         func(self);
         self.nl_mode = previous;
+<<<<<<< HEAD
         if let Some(newline) = self.token.newline {
             if mode != previous {
                 // Restore our actual token's kind or insert a fake end.
@@ -1864,6 +2066,17 @@ impl<'s> Parser<'s> {
                 } else {
                     self.token.kind = actual_kind;
                 }
+=======
+        if let Some(newline) = self.token.newline
+            && mode != previous
+        {
+            // Restore our actual token's kind or insert a fake end.
+            let actual_kind = self.token.node.kind();
+            if self.nl_mode.stop_at(newline, actual_kind) {
+                self.token.kind = SyntaxKind::End;
+            } else {
+                self.token.kind = actual_kind;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         }
     }
@@ -1891,7 +2104,12 @@ impl<'s> Parser<'s> {
         }
 
         let newline = if had_newline {
+<<<<<<< HEAD
             let column = (lexer.mode() == LexMode::Markup).then(|| lexer.column(start));
+=======
+            let column =
+                (lexer.mode() == SyntaxMode::Markup).then(|| lexer.column(start));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             let newline = Newline { column, parbreak };
             if nl_mode.stop_at(newline, kind) {
                 // Insert a temporary `SyntaxKind::End` to halt the parser.
@@ -1919,7 +2137,11 @@ struct MemoArena {
     /// A map from the parser's current position to a range of previously parsed
     /// nodes in the arena and a checkpoint of the parser's state. These allow
     /// us to reset the parser to avoid parsing the same location again.
+<<<<<<< HEAD
     memo_map: HashMap<MemoKey, (Range<usize>, PartialState)>,
+=======
+    memo_map: FxHashMap<MemoKey, (Range<usize>, PartialState)>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// A type alias for the memo key so it doesn't get confused with other usizes.
@@ -1938,7 +2160,11 @@ struct Checkpoint {
 #[derive(Clone)]
 struct PartialState {
     cursor: usize,
+<<<<<<< HEAD
     lex_mode: LexMode,
+=======
+    lex_mode: SyntaxMode,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     token: Token,
 }
 

@@ -44,18 +44,33 @@
 --- recursion-via-include-in-layout ---
 // Test cyclic imports during layout.
 // Error: 2-38 maximum show rule depth exceeded
+<<<<<<< HEAD
 // Hint: 2-38 check whether the show rule matches its own output
+=======
+// Hint: 2-38 maybe a show rule matches its own output
+// Hint: 2-38 maybe there are too deeply nested elements
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #layout(_ => include "recursion.typ")
 
 --- recursion-show-math ---
 // Test recursive show rules.
 // Error: 22-25 maximum show rule depth exceeded
+<<<<<<< HEAD
 // Hint: 22-25 check whether the show rule matches its own output
+=======
+// Hint: 22-25 maybe a show rule matches its own output
+// Hint: 22-25 maybe there are too deeply nested elements
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #show math.equation: $x$
 $ x $
 
 --- recursion-show-math-realize ---
 // Error: 22-33 maximum show rule depth exceeded
+<<<<<<< HEAD
 // Hint: 22-33 check whether the show rule matches its own output
+=======
+// Hint: 22-33 maybe a show rule matches its own output
+// Hint: 22-33 maybe there are too deeply nested elements
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #show heading: it => heading[it]
 $ #heading[hi] $

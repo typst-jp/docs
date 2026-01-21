@@ -4,5 +4,13 @@ equation = Egyenlet
 bibliography = Irodalomjegyzék
 heading = Fejezet
 outline = Tartalomjegyzék
+<<<<<<< HEAD
 # raw = 
 page = oldal
+=======
+# raw =
+page = oldal
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

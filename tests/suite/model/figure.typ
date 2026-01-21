@@ -1,6 +1,10 @@
 // Test figures.
 
+<<<<<<< HEAD
 --- figure-basic ---
+=======
+--- figure-basic render pdftags ---
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set page(width: 150pt)
 #set figure(numbering: "I")
 
@@ -13,7 +17,11 @@ We can clearly see that @fig-cylinder and
 ) <tab-basic>
 
 #figure(
+<<<<<<< HEAD
   pad(y: -6pt, image("/assets/images/cylinder.svg", height: 2cm)),
+=======
+  pad(y: -6pt, image(alt: "Sketch of white standing cylinder", "/assets/images/cylinder.svg", height: 2cm)),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   caption: [The basic shapes.],
   numbering: "I",
 ) <fig-cylinder>

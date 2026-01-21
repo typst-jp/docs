@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 use crate::foundations::{cast, func, Cast, Content, Str};
 use crate::text::TextElem;
 
 /// 文字列やコンテンツを小文字に変換。
 ///
 /// # 例
+=======
+use crate::foundations::{Cast, Content, Str, cast, func};
+use crate::text::TextElem;
+
+/// Converts a string or content to lowercase.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #lower("ABC") \
 /// #lower[*My Text*] \
@@ -11,15 +20,25 @@ use crate::text::TextElem;
 /// ```
 #[func(title = "Lowercase")]
 pub fn lower(
+<<<<<<< HEAD
     /// 小文字に変換するテキスト。
+=======
+    /// The text to convert to lowercase.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     text: Caseable,
 ) -> Caseable {
     case(text, Case::Lower)
 }
 
+<<<<<<< HEAD
 ///  文字列やコンテンツを大文字に変換。
 ///
 /// # 例
+=======
+/// Converts a string or content to uppercase.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #upper("abc") \
 /// #upper[*my text*] \
@@ -27,7 +46,11 @@ pub fn lower(
 /// ```
 #[func(title = "Uppercase")]
 pub fn upper(
+<<<<<<< HEAD
     /// 大文字に変換するテキスト。
+=======
+    /// The text to convert to uppercase.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     text: Caseable,
 ) -> Caseable {
     case(text, Case::Upper)
@@ -37,9 +60,13 @@ pub fn upper(
 fn case(text: Caseable, case: Case) -> Caseable {
     match text {
         Caseable::Str(v) => Caseable::Str(case.apply(&v).into()),
+<<<<<<< HEAD
         Caseable::Content(v) => {
             Caseable::Content(v.styled(TextElem::set_case(Some(case))))
         }
+=======
+        Caseable::Content(v) => Caseable::Content(v.set(TextElem::case, Some(case))),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

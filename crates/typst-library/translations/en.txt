@@ -5,4 +5,11 @@ bibliography = Bibliography
 heading = Section
 outline = Contents
 raw = Listing
+<<<<<<< HEAD
 page = page
+=======
+page = page
+footnote = Footnote
+email = Email
+telephone = Telephone
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

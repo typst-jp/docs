@@ -18,12 +18,20 @@
 #csv("nope.csv")
 
 --- csv-invalid ---
+<<<<<<< HEAD
 // Error: 6-28 failed to parse CSV (found 3 instead of 2 fields in line 3)
+=======
+// Error: "/assets/data/bad.csv" 3:1 failed to parse CSV (found 3 instead of 2 fields in line 3)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #csv("/assets/data/bad.csv")
 
 --- csv-invalid-row-type-dict ---
 // Test error numbering with dictionary rows.
+<<<<<<< HEAD
 // Error: 6-28 failed to parse CSV (found 3 instead of 2 fields in line 3)
+=======
+// Error: "/assets/data/bad.csv" 3:1 failed to parse CSV (found 3 instead of 2 fields in line 3)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #csv("/assets/data/bad.csv", row-type: dictionary)
 
 --- csv-invalid-delimiter ---
@@ -32,4 +40,8 @@
 
 --- csv-decode-deprecated ---
 // Warning: 14-20 `csv.decode` is deprecated, directly pass bytes to `csv` instead
+<<<<<<< HEAD
+=======
+// Hint: 14-20 it will be removed in Typst 0.15.0
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #let _ = csv.decode

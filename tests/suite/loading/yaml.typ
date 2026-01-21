@@ -13,9 +13,46 @@
 #test(data.at("1"), "ok")
 
 --- yaml-invalid ---
+<<<<<<< HEAD
 // Error: 7-30 failed to parse YAML (did not find expected ',' or ']' at line 2 column 1, while parsing a flow sequence at line 1 column 18)
+=======
+// Error: "/assets/data/bad.yaml" 2:1 failed to parse YAML (did not find expected ',' or ']' at line 2 column 1, while parsing a flow sequence at line 1 column 18)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #yaml("/assets/data/bad.yaml")
 
 --- yaml-decode-deprecated ---
 // Warning: 15-21 `yaml.decode` is deprecated, directly pass bytes to `yaml` instead
+<<<<<<< HEAD
 #let _ = yaml.decode
+=======
+// Hint: 15-21 it will be removed in Typst 0.15.0
+#let _ = yaml.decode
+
+--- yaml-decode-number ---
+#import "edge-case.typ": large-integer, representable-integer
+
+#for (name, source) in representable-integer {
+  assert.eq(
+    type(yaml(bytes(source))),
+    int,
+    message: "failed to decode " + name,
+  )
+}
+
+#for (name, source) in large-integer {
+  assert.eq(
+    type(yaml(bytes(source))),
+    float,
+    message: "failed to approximately decode " + name,
+  )
+}
+
+--- yaml-encode-any ---
+#import "edge-case.typ": special-types-for-human
+#for value in special-types-for-human {
+  test(
+    yaml.encode(value),
+    yaml.encode(repr(value)),
+  )
+}
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

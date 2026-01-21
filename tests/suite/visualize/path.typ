@@ -76,7 +76,12 @@
 #path(((0%, 0%), (0%, 0%), (0%, 0%), (0%, 0%)))
 
 --- path-bad-point-array ---
+<<<<<<< HEAD
 // Error: 7-31 point array must contain exactly two entries
+=======
+// Error: 7-31 array must contain exactly two items
+// Hint: 7-31 the first item determines the value for the X axis and the second item the value for the Y axis
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Warning: 2-6 the `path` function is deprecated, use `curve` instead
 #path(((0%, 0%), (0%, 0%, 0%)))
 

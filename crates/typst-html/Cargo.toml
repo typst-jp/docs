@@ -13,14 +13,27 @@ keywords = { workspace = true }
 readme = { workspace = true }
 
 [dependencies]
+<<<<<<< HEAD
+=======
+typst-assets = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 typst-library = { workspace = true }
 typst-macros = { workspace = true }
 typst-syntax = { workspace = true }
 typst-timing = { workspace = true }
 typst-utils = { workspace = true }
 typst-svg = { workspace = true }
+<<<<<<< HEAD
 comemo = { workspace = true }
 ecow = { workspace = true }
+=======
+bumpalo = { workspace = true }
+comemo = { workspace = true }
+ecow = { workspace = true }
+palette = { workspace = true }
+rustc-hash = { workspace = true }
+time = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 [lints]
 workspace = true

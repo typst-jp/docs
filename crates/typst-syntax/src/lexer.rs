@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
+=======
+use ecow::{EcoString, eco_format};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use unicode_ident::{is_xid_continue, is_xid_start};
 use unicode_script::{Script, UnicodeScript};
 use unicode_segmentation::UnicodeSegmentation;
 use unscanny::Scanner;
 
+<<<<<<< HEAD
 use crate::{SyntaxError, SyntaxKind, SyntaxNode};
+=======
+use crate::{SyntaxError, SyntaxKind, SyntaxMode, SyntaxNode};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// An iterator over a source code string which returns tokens.
 #[derive(Clone)]
@@ -13,13 +21,18 @@ pub(super) struct Lexer<'s> {
     s: Scanner<'s>,
     /// The mode the lexer is in. This determines which kinds of tokens it
     /// produces.
+<<<<<<< HEAD
     mode: LexMode,
+=======
+    mode: SyntaxMode,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Whether the last token contained a newline.
     newline: bool,
     /// An error for the last token.
     error: Option<SyntaxError>,
 }
 
+<<<<<<< HEAD
 /// What kind of tokens to emit.
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub(super) enum LexMode {
@@ -35,6 +48,12 @@ impl<'s> Lexer<'s> {
     /// Create a new lexer with the given mode and a prefix to offset column
     /// calculations.
     pub fn new(text: &'s str, mode: LexMode) -> Self {
+=======
+impl<'s> Lexer<'s> {
+    /// Create a new lexer with the given mode and a prefix to offset column
+    /// calculations.
+    pub fn new(text: &'s str, mode: SyntaxMode) -> Self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Self {
             s: Scanner::new(text),
             mode,
@@ -44,12 +63,20 @@ impl<'s> Lexer<'s> {
     }
 
     /// Get the current lexing mode.
+<<<<<<< HEAD
     pub fn mode(&self) -> LexMode {
+=======
+    pub fn mode(&self) -> SyntaxMode {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.mode
     }
 
     /// Change the lexing mode.
+<<<<<<< HEAD
     pub fn set_mode(&mut self, mode: LexMode) {
+=======
+    pub fn set_mode(&mut self, mode: SyntaxMode) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.mode = mode;
     }
 
@@ -92,7 +119,11 @@ impl Lexer<'_> {
     }
 }
 
+<<<<<<< HEAD
 /// Shared methods with all [`LexMode`].
+=======
+/// Shared methods with all [`SyntaxMode`].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl Lexer<'_> {
     /// Return the next token in our text. Returns both the [`SyntaxNode`]
     /// and the raw [`SyntaxKind`] to make it more ergonomic to check the kind
@@ -114,6 +145,7 @@ impl Lexer<'_> {
                 );
                 kind
             }
+<<<<<<< HEAD
             Some('`') if self.mode != LexMode::Math => return self.raw(),
             Some(c) => match self.mode {
                 LexMode::Markup => self.markup(start, c),
@@ -122,6 +154,16 @@ impl Lexer<'_> {
                     (kind, Some(node)) => return (kind, node),
                 },
                 LexMode::Code => self.code(start, c),
+=======
+            Some('`') if self.mode != SyntaxMode::Math => return self.raw(),
+            Some(c) => match self.mode {
+                SyntaxMode::Markup => self.markup(start, c),
+                SyntaxMode::Math => match self.math(start, c) {
+                    (kind, None) => kind,
+                    (kind, Some(node)) => return (kind, node),
+                },
+                SyntaxMode::Code => self.code(start, c),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             },
 
             None => SyntaxKind::End,
@@ -145,7 +187,11 @@ impl Lexer<'_> {
         };
 
         self.newline = newlines > 0;
+<<<<<<< HEAD
         if self.mode == LexMode::Markup && newlines >= 2 {
+=======
+        if self.mode == SyntaxMode::Markup && newlines >= 2 {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             SyntaxKind::Parbreak
         } else {
             SyntaxKind::Space
@@ -196,7 +242,11 @@ impl Lexer<'_> {
             'h' if self.s.eat_if("ttp://") => self.link(),
             'h' if self.s.eat_if("ttps://") => self.link(),
             '<' if self.s.at(is_id_continue) => self.label(),
+<<<<<<< HEAD
             '@' => self.ref_marker(),
+=======
+            '@' if self.s.at(is_id_continue) => self.ref_marker(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
             '.' if self.s.eat_if("..") => SyntaxKind::Shorthand,
             '-' if self.s.eat_if("--") => SyntaxKind::Shorthand,
@@ -216,11 +266,15 @@ impl Lexer<'_> {
             ':' => SyntaxKind::Colon,
             '=' => {
                 self.s.eat_while('=');
+<<<<<<< HEAD
                 if self.space_or_end() {
                     SyntaxKind::HeadingMarker
                 } else {
                     self.text()
                 }
+=======
+                if self.space_or_end() { SyntaxKind::HeadingMarker } else { self.text() }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
             '-' if self.space_or_end() => SyntaxKind::ListMarker,
             '+' if self.space_or_end() => SyntaxKind::EnumMarker,
@@ -480,7 +534,11 @@ impl Lexer<'_> {
         self.s.eat_while(char::is_ascii_digit);
 
         let read = self.s.from(start);
+<<<<<<< HEAD
         if self.s.eat_if('.') && self.space_or_end() && read.parse::<usize>().is_ok() {
+=======
+        if self.s.eat_if('.') && self.space_or_end() && read.parse::<u64>().is_ok() {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             return SyntaxKind::EnumMarker;
         }
 
@@ -794,6 +852,7 @@ impl Lexer<'_> {
         let ident = self.s.from(start);
 
         let prev = self.s.get(0..start);
+<<<<<<< HEAD
         if !prev.ends_with(['.', '@']) || prev.ends_with("..") {
             if let Some(keyword) = keyword(ident) {
                 return keyword;
@@ -887,6 +946,107 @@ impl Lexer<'_> {
         }
 
         SyntaxKind::Numeric
+=======
+        if (!prev.ends_with(['.', '@']) || prev.ends_with(".."))
+            && let Some(keyword) = keyword(ident)
+        {
+            return keyword;
+        }
+
+        if ident == "_" { SyntaxKind::Underscore } else { SyntaxKind::Ident }
+    }
+
+    fn number(&mut self, start: usize, first_c: char) -> SyntaxKind {
+        // Handle alternative integer bases.
+        let base = match first_c {
+            '0' if self.s.eat_if('b') => 2,
+            '0' if self.s.eat_if('o') => 8,
+            '0' if self.s.eat_if('x') => 16,
+            _ => 10,
+        };
+
+        // Read the initial digits.
+        if base == 16 {
+            self.s.eat_while(char::is_ascii_alphanumeric);
+        } else {
+            self.s.eat_while(char::is_ascii_digit);
+        }
+
+        // Read floating point digits and exponents.
+        let mut is_float = false;
+        if base == 10 {
+            // Read digits following a dot. Make sure not to confuse a spread
+            // operator or a method call for the decimal separator.
+            if first_c == '.' {
+                is_float = true; // We already ate the trailing digits above.
+            } else if !self.s.at("..")
+                && !self.s.scout(1).is_some_and(is_id_start)
+                && self.s.eat_if('.')
+            {
+                is_float = true;
+                self.s.eat_while(char::is_ascii_digit);
+            }
+
+            // Read the exponent.
+            if !self.s.at("em") && self.s.eat_if(['e', 'E']) {
+                is_float = true;
+                self.s.eat_if(['+', '-']);
+                self.s.eat_while(char::is_ascii_digit);
+            }
+        }
+
+        let number = self.s.from(start);
+        let suffix = self.s.eat_while(|c: char| c.is_ascii_alphanumeric() || c == '%');
+
+        let mut suffix_result = match suffix {
+            "" => Ok(None),
+            "pt" | "mm" | "cm" | "in" | "deg" | "rad" | "em" | "fr" | "%" => Ok(Some(())),
+            _ => Err(eco_format!("invalid number suffix: {suffix}")),
+        };
+
+        let number_result = if is_float && number.parse::<f64>().is_err() {
+            // The only invalid case should be when a float lacks digits after
+            // the exponent: e.g. `1.2e`, `2.3E-`, or `1EM`.
+            Err(eco_format!("invalid floating point number: {number}"))
+        } else if base == 10 {
+            Ok(())
+        } else {
+            let name = match base {
+                2 => "binary",
+                8 => "octal",
+                16 => "hexadecimal",
+                _ => unreachable!(),
+            };
+            // The index `[2..]` skips the leading `0b`/`0o`/`0x`.
+            match i64::from_str_radix(&number[2..], base) {
+                Ok(_) if suffix.is_empty() => Ok(()),
+                Ok(value) => {
+                    if suffix_result.is_ok() {
+                        suffix_result = Err(eco_format!(
+                            "try using a decimal number: {value}{suffix}"
+                        ));
+                    }
+                    Err(eco_format!("{name} numbers cannot have a suffix"))
+                }
+                Err(_) => Err(eco_format!("invalid {name} number: {number}")),
+            }
+        };
+
+        // Return our number or write an error with helpful hints.
+        match (number_result, suffix_result) {
+            // Valid numbers :D
+            (Ok(()), Ok(None)) if is_float => SyntaxKind::Float,
+            (Ok(()), Ok(None)) => SyntaxKind::Int,
+            (Ok(()), Ok(Some(()))) => SyntaxKind::Numeric,
+            // Invalid numbers :(
+            (Err(number_err), Err(suffix_err)) => {
+                let err = self.error(number_err);
+                self.hint(suffix_err);
+                err
+            }
+            (Ok(()), Err(msg)) | (Err(msg), Ok(_)) => self.error(msg),
+        }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     fn string(&mut self) -> SyntaxKind {
@@ -955,9 +1115,15 @@ impl ScannerExt for Scanner<'_> {
 
 /// Whether a character will become a [`SyntaxKind::Space`] token.
 #[inline]
+<<<<<<< HEAD
 fn is_space(character: char, mode: LexMode) -> bool {
     match mode {
         LexMode::Markup => matches!(character, ' ' | '\t') || is_newline(character),
+=======
+fn is_space(character: char, mode: SyntaxMode) -> bool {
+    match mode {
+        SyntaxMode::Markup => matches!(character, ' ' | '\t') || is_newline(character),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         _ => character.is_whitespace(),
     }
 }

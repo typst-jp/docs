@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{
@@ -11,6 +12,16 @@ use crate::text::{TextElem, WeightDelta};
 /// 現在のフォントの太さに指定した差分 `delta` を加えます。
 ///
 /// # 例
+=======
+use crate::foundations::{Content, elem};
+use crate::introspection::{Locatable, Tagged};
+
+/// Strongly emphasizes content by increasing the font weight.
+///
+/// Increases the current font weight by a given `delta`.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// This is *strong.* \
 /// This is #strong[too.] \
@@ -19,6 +30,7 @@ use crate::text::{TextElem, WeightDelta};
 /// And this is *evermore.*
 /// ```
 ///
+<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// 強調したいコンテンツをアスタリスク（`*`）で囲むだけです。
@@ -27,6 +39,16 @@ use crate::text::{TextElem, WeightDelta};
 #[elem(title = "Strong Emphasis", keywords = ["bold", "weight"], Show)]
 pub struct StrongElem {
     /// フォントの太さに適用する変化量。
+=======
+/// # Syntax
+/// This function also has dedicated syntax: To strongly emphasize content,
+/// simply enclose it in stars/asterisks (`*`). Note that this only works at
+/// word boundaries. To strongly emphasize part of a word, you have to use the
+/// function.
+#[elem(title = "Strong Emphasis", keywords = ["bold", "weight"], Locatable, Tagged)]
+pub struct StrongElem {
+    /// The delta to apply on the font weight.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set strong(delta: 0)
@@ -35,6 +57,7 @@ pub struct StrongElem {
     #[default(300)]
     pub delta: i64,
 
+<<<<<<< HEAD
     /// 強調するコンテンツ。
     #[required]
     pub body: Content,
@@ -54,3 +77,9 @@ impl Show for Packed<StrongElem> {
         })
     }
 }
+=======
+    /// The content to strongly emphasize.
+    #[required]
+    pub body: Content,
+}
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

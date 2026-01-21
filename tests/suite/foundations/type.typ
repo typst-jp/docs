@@ -2,6 +2,7 @@
 #test(type(1), int)
 #test(type(ltr), direction)
 #test(type(10 / 3), float)
+<<<<<<< HEAD
 #test(type(10) == int, true)
 #test(type(10) != int, false)
 
@@ -58,6 +59,8 @@
 // Warning: 7-37 checking whether a type is contained in a dictionary is deprecated
 // Hint: 7-37 this compatibility behavior only exists because `type` used to return a string
 #test(int in (integer: 1, string: 2), true)
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- issue-3110-type-constructor ---
 // Let the error message report the type name.

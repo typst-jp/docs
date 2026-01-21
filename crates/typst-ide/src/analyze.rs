@@ -1,9 +1,18 @@
 use comemo::Track;
+<<<<<<< HEAD
 use ecow::{eco_vec, EcoString, EcoVec};
 use typst::foundations::{Label, Styles, Value};
 use typst::layout::PagedDocument;
 use typst::model::BibliographyElem;
 use typst::syntax::{ast, LinkedNode, SyntaxKind};
+=======
+use ecow::{EcoString, EcoVec, eco_vec};
+use rustc_hash::FxHashSet;
+use typst::foundations::{Label, Styles, Value};
+use typst::layout::PagedDocument;
+use typst::model::{BibliographyElem, FigureElem};
+use typst::syntax::{LinkedNode, SyntaxKind, ast};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::IdeWorld;
 
@@ -25,6 +34,7 @@ pub fn analyze_expr(
         ast::Expr::Numeric(v) => Value::numeric(v.get()),
         ast::Expr::Str(v) => Value::Str(v.get().into()),
         _ => {
+<<<<<<< HEAD
             if node.kind() == SyntaxKind::Contextual {
                 if let Some(child) = node.children().last() {
                     return analyze_expr(world, &child);
@@ -35,6 +45,19 @@ pub fn analyze_expr(
                 if parent.kind() == SyntaxKind::FieldAccess && node.index() > 0 {
                     return analyze_expr(world, parent);
                 }
+=======
+            if node.kind() == SyntaxKind::Contextual
+                && let Some(child) = node.children().next_back()
+            {
+                return analyze_expr(world, &child);
+            }
+
+            if let Some(parent) = node.parent()
+                && parent.kind() == SyntaxKind::FieldAccess
+                && node.index() > 0
+            {
+                return analyze_expr(world, parent);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
 
             return typst::trace::<PagedDocument>(world.upcast(), node.span());
@@ -66,17 +89,42 @@ pub fn analyze_import(world: &dyn IdeWorld, source: &LinkedNode) -> Option<Value
 /// - All labels and descriptions for them, if available
 /// - A split offset: All labels before this offset belong to nodes, all after
 ///   belong to a bibliography.
+<<<<<<< HEAD
+=======
+///
+/// Note: When multiple labels in the document have the same identifier,
+/// this only returns the first one.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub fn analyze_labels(
     document: &PagedDocument,
 ) -> (Vec<(Label, Option<EcoString>)>, usize) {
     let mut output = vec![];
+<<<<<<< HEAD
+=======
+    let mut seen_labels = FxHashSet::default();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Labels in the document.
     for elem in document.introspector.all() {
         let Some(label) = elem.label() else { continue };
+<<<<<<< HEAD
         let details = elem
             .get_by_name("caption")
             .or_else(|_| elem.get_by_name("body"))
+=======
+        if !seen_labels.insert(label) {
+            continue;
+        }
+
+        let details = elem
+            .to_packed::<FigureElem>()
+            .and_then(|figure| match figure.caption.as_option() {
+                Some(Some(caption)) => Some(caption.pack_ref()),
+                _ => None,
+            })
+            .unwrap_or(elem)
+            .get_by_name("body")
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .ok()
             .and_then(|field| match field {
                 Value::Content(content) => Some(content),

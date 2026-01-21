@@ -21,8 +21,15 @@ typst-timing = { workspace = true }
 typst-utils = { workspace = true }
 az = { workspace = true }
 bumpalo = { workspace = true }
+<<<<<<< HEAD
 comemo = { workspace = true }
 ecow = { workspace = true }
+=======
+codex = { workspace = true }
+comemo = { workspace = true }
+ecow = { workspace = true }
+either = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 hypher = { workspace = true }
 icu_properties = { workspace = true }
 icu_provider = { workspace = true }
@@ -30,6 +37,11 @@ icu_provider_adapters = { workspace = true }
 icu_provider_blob = { workspace = true }
 icu_segmenter = { workspace = true }
 kurbo = { workspace = true }
+<<<<<<< HEAD
+=======
+memchr = { workspace = true }
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 rustybuzz = { workspace = true }
 smallvec = { workspace = true }
 ttf-parser = { workspace = true }

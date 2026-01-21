@@ -2,6 +2,7 @@ use std::any::{Any, TypeId};
 use std::sync::Arc;
 
 use comemo::Tracked;
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString, EcoVec};
 use smallvec::SmallVec;
 
@@ -9,6 +10,15 @@ use crate::diag::{bail, HintedStrResult, StrResult};
 use crate::foundations::{
     cast, func, repr, scope, ty, CastInfo, Content, Context, Dict, Element, FromValue,
     Func, Label, Reflect, Regex, Repr, Str, StyleChain, Symbol, Type, Value,
+=======
+use ecow::{EcoString, EcoVec, eco_format};
+use smallvec::SmallVec;
+
+use crate::diag::{HintedStrResult, StrResult, bail};
+use crate::foundations::{
+    CastInfo, Content, Context, Dict, Element, FromValue, Func, Label, Reflect, Regex,
+    Repr, Str, StyleChain, Symbol, Type, Value, cast, func, repr, scope, ty,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::introspection::{Introspector, Locatable, Location, Unqueriable};
 
@@ -18,15 +28,26 @@ use crate::introspection::{Introspector, Locatable, Location, Unqueriable};
 macro_rules! __select_where {
     ($ty:ty $(, $field:ident => $value:expr)* $(,)?) => {{
         #[allow(unused_mut)]
+<<<<<<< HEAD
         let mut fields = ::smallvec::SmallVec::new();
         $(
             fields.push((
                 <$ty as $crate::foundations::Fields>::Enum::$field as u8,
+=======
+        let mut fields = $crate::foundations::SmallVec::new();
+        $(
+            fields.push((
+                <$ty>::$field.index(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 $crate::foundations::IntoValue::into_value($value),
             ));
         )*
         $crate::foundations::Selector::Elem(
+<<<<<<< HEAD
             <$ty as $crate::foundations::NativeElement>::elem(),
+=======
+            <$ty as $crate::foundations::NativeElement>::ELEM,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Some(fields),
         )
     }};
@@ -37,6 +58,7 @@ pub use crate::__select_where as select_where;
 
 /// A filter for selecting elements within the document.
 ///
+<<<<<<< HEAD
 /// You can construct a selector in the following ways:
 /// - you can use an element [function]
 /// - you can filter for an element function with
@@ -44,6 +66,14 @@ pub use crate::__select_where as select_where;
 /// - you can use a [string]($str) or [regular expression]($regex)
 /// - you can use a [`{<label>}`]($label)
 /// - you can use a [`location`]
+=======
+/// To construct a selector you can:
+/// - use an element [function]
+/// - filter for an element function with [specific fields]($function.where)
+/// - use a [string]($str) or [regular expression]($regex)
+/// - use a [`{<label>}`]($label)
+/// - use a [`location`]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// - call the [`selector`] constructor to convert any of the above types into a
 ///   selector value and use the methods below to refine it
 ///
@@ -148,7 +178,13 @@ impl Selector {
 impl Selector {
     /// Turns a value into a selector. The following values are accepted:
     /// - An element function like a `heading` or `figure`.
+<<<<<<< HEAD
     /// - A `{<label>}`.
+=======
+    /// - A [string]($str) or [regular expression]($regex).
+    /// - A `{<label>}`.
+    /// - A [`location`].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// - A more complex selector like `{heading.where(level: 1)}`.
     #[func(constructor)]
     pub fn construct(

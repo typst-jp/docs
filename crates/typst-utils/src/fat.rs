@@ -17,9 +17,17 @@ use std::ptr::NonNull;
 /// been extracted with [`vtable`].
 #[track_caller]
 pub unsafe fn from_raw_parts<T: ?Sized>(data: *const (), vtable: *const ()) -> *const T {
+<<<<<<< HEAD
     let fat = FatPointer { data, vtable };
     debug_assert_eq!(Layout::new::<*const T>(), Layout::new::<FatPointer>());
     mem::transmute_copy::<FatPointer, *const T>(&fat)
+=======
+    unsafe {
+        let fat = FatPointer { data, vtable };
+        debug_assert_eq!(Layout::new::<*const T>(), Layout::new::<FatPointer>());
+        mem::transmute_copy::<FatPointer, *const T>(&fat)
+    }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Create a mutable fat pointer from a data address and a vtable address.
@@ -30,9 +38,17 @@ pub unsafe fn from_raw_parts<T: ?Sized>(data: *const (), vtable: *const ()) -> *
 /// been extracted with [`vtable`].
 #[track_caller]
 pub unsafe fn from_raw_parts_mut<T: ?Sized>(data: *mut (), vtable: *const ()) -> *mut T {
+<<<<<<< HEAD
     let fat = FatPointer { data, vtable };
     debug_assert_eq!(Layout::new::<*mut T>(), Layout::new::<FatPointer>());
     mem::transmute_copy::<FatPointer, *mut T>(&fat)
+=======
+    unsafe {
+        let fat = FatPointer { data, vtable };
+        debug_assert_eq!(Layout::new::<*mut T>(), Layout::new::<FatPointer>());
+        mem::transmute_copy::<FatPointer, *mut T>(&fat)
+    }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Extract the address to a trait object's vtable.
@@ -41,10 +57,19 @@ pub unsafe fn from_raw_parts_mut<T: ?Sized>(data: *mut (), vtable: *const ()) ->
 /// Must only be called when `T` is a `dyn Trait`.
 #[track_caller]
 pub unsafe fn vtable<T: ?Sized>(ptr: *const T) -> NonNull<()> {
+<<<<<<< HEAD
     debug_assert_eq!(Layout::new::<*const T>(), Layout::new::<FatPointer>());
     NonNull::new_unchecked(
         mem::transmute_copy::<*const T, FatPointer>(&ptr).vtable as *mut (),
     )
+=======
+    unsafe {
+        debug_assert_eq!(Layout::new::<*const T>(), Layout::new::<FatPointer>());
+        NonNull::new_unchecked(
+            mem::transmute_copy::<*const T, FatPointer>(&ptr).vtable as *mut (),
+        )
+    }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// The memory representation of a trait object pointer.

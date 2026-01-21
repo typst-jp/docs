@@ -1,5 +1,6 @@
 use std::ops::Add;
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 
 use crate::diag::{bail, HintedStrResult, SourceResult, StrResult};
@@ -7,14 +8,29 @@ use crate::engine::Engine;
 use crate::foundations::{
     cast, elem, func, scope, ty, CastInfo, Content, Fold, FromValue, IntoValue, Packed,
     Reflect, Repr, Resolve, Show, StyleChain, Value,
+=======
+use ecow::{EcoString, eco_format};
+
+use crate::diag::{HintedStrResult, StrResult, bail};
+use crate::foundations::{
+    CastInfo, Content, Fold, FromValue, IntoValue, Reflect, Repr, Resolve, StyleChain,
+    Value, cast, elem, func, scope, ty,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::{Abs, Axes, Axis, Dir, Side};
 use crate::text::TextElem;
 
+<<<<<<< HEAD
 /// コンテンツを水平方向・垂直方向に配置。
 ///
 /// # 例
 /// コンテンツを水平方向に中央揃えにすることから始めましょう。
+=======
+/// Aligns content horizontally and vertically.
+///
+/// # Example
+/// Let's start with centering our content horizontally:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(center)
@@ -25,7 +41,11 @@ use crate::text::TextElem;
 /// A work of art, a visual throne
 /// ```
 ///
+<<<<<<< HEAD
 /// 垂直方向に中央揃えにするには _horizon_ 配置を使用します。
+=======
+/// To center something vertically, use _horizon_ alignment:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(horizon)
@@ -35,9 +55,16 @@ use crate::text::TextElem;
 /// a new paragraph.
 /// ```
 ///
+<<<<<<< HEAD
 /// # 配置の組み合わせ
 /// `+`演算子を用いて2種類の配置を組み合わせることができます。
 /// setルールの代わりに関数形式を用いて1つのコンテンツのみに適用してみましょう。
+=======
+/// # Combining alignments
+/// You can combine two alignments with the `+` operator. Let's also only apply
+/// this to one piece of content by using the function form instead of a set
+/// rule:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #set page(height: 120pt)
 /// Though left in the beginning ...
@@ -49,9 +76,15 @@ use crate::text::TextElem;
 /// ]
 /// ```
 ///
+<<<<<<< HEAD
 /// # 配置のネスト
 /// レイアウトコンテナおよびその内部の要素にさまざまな配置設定を適用できます。
 /// このようにすることで複雑なレイアウトを作成できます。
+=======
+/// # Nested alignment
+/// You can use varying alignments for layout containers and the elements within
+/// them. This way, you can create intricate layouts:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #align(center, block[
@@ -64,16 +97,29 @@ use crate::text::TextElem;
 /// ])
 /// ```
 ///
+<<<<<<< HEAD
 /// # 同一行での配置設定
 /// `align` 関数はブロックレベルで配置を実行するため、常に現在のパラグラフを中断します。
 /// 同じ行の一部を異なる配置にするためには、代わりに[比率間隔]($h)を使用しなければなりません。
+=======
+/// # Alignment within the same line
+/// The `align` function performs block-level alignment and thus always
+/// interrupts the current paragraph. To have different alignment for parts
+/// of the same line, you should use [fractional spacing]($h) instead:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// Start #h(1fr) End
 /// ```
+<<<<<<< HEAD
 #[elem(Show)]
 pub struct AlignElem {
     /// 両方の軸に沿った[alignment]。
+=======
+#[elem]
+pub struct AlignElem {
+    /// The [alignment] along both axes.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set page(height: 6cm)
@@ -90,11 +136,16 @@ pub struct AlignElem {
     #[default]
     pub alignment: Alignment,
 
+<<<<<<< HEAD
     /// 配置するコンテンツ。
+=======
+    /// The content to align.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 impl Show for Packed<AlignElem> {
     #[typst_macros::time(name = "align", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -116,24 +167,55 @@ impl Show for Packed<AlignElem> {
 ///
 /// これらの値はグローバルスコープでも、alignment型のスコープでも用いることができます。
 /// したがって、以下の2つのどちらでも書くことができます。
+=======
+/// Where to align something along an axis.
+///
+/// Possible values are:
+/// - `start`: Aligns at the [start]($direction.start) of the [text
+///   direction]($text.dir).
+/// - `end`: Aligns at the [end]($direction.end) of the [text
+///   direction]($text.dir).
+/// - `left`: Align at the left.
+/// - `center`: Aligns in the middle, horizontally.
+/// - `right`: Aligns at the right.
+/// - `top`: Aligns at the top.
+/// - `horizon`: Aligns in the middle, vertically.
+/// - `bottom`: Align at the bottom.
+///
+/// These values are available globally and also in the alignment type's scope,
+/// so you can write either of the following two:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #align(center)[Hi]
 /// #align(alignment.center)[Hi]
 /// ```
 ///
+<<<<<<< HEAD
 /// # 2次元配置
 /// 両方の軸に沿った配置を同時に行うには、`+`演算子を用いて2種類の配置を足し合わせます。
 /// 例えば、`top + right`はコンテンツを右上隅に配置します。
+=======
+/// # 2D alignments
+/// To align along both axes at the same time, add the two alignments using the
+/// `+` operator. For example, `top + right` aligns the content to the top right
+/// corner.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #set page(height: 3cm)
 /// #align(center + bottom)[Hi]
 /// ```
 ///
+<<<<<<< HEAD
 /// # フィールド
 /// `x`、`y`フィールドには、それぞれ配置の水平成分と垂直成分が（別の`alignment`として）保持されます。
 /// これらは`{none}`になる可能性があります。
+=======
+/// # Fields
+/// The `x` and `y` fields hold the alignment's horizontal and vertical
+/// components, respectively (as yet another `alignment`). They may be `{none}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #(top + right).x \
@@ -185,10 +267,17 @@ impl Alignment {
     pub const HORIZON: Self = Alignment::V(VAlignment::Horizon);
     pub const BOTTOM: Self = Alignment::V(VAlignment::Bottom);
 
+<<<<<<< HEAD
     /// このalignmentが属する軸。
     /// -  `start`、`left`、`center`、`right`および`end`の場合は`{"horizontal"}`
     /// - `top`、`horizon`および`bottom`の場合は`{"vertical"}`
     /// - 2次元配置の場合は`{none}`
+=======
+    /// The axis this alignment belongs to.
+    /// - `{"horizontal"}` for `start`, `left`, `center`, `right`, and `end`
+    /// - `{"vertical"}` for `top`, `horizon`, and `bottom`
+    /// - `{none}` for 2-dimensional alignments
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #left.axis() \
@@ -203,7 +292,11 @@ impl Alignment {
         }
     }
 
+<<<<<<< HEAD
     /// 逆の配置。
+=======
+    /// The inverse alignment.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #top.inv() \
@@ -272,7 +365,11 @@ impl Resolve for Alignment {
     type Output = Axes<FixedAlignment>;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
+<<<<<<< HEAD
         self.fix(TextElem::dir_in(styles))
+=======
+        self.fix(styles.resolve(TextElem::dir))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -373,7 +470,11 @@ impl Resolve for HAlignment {
     type Output = FixedAlignment;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
+<<<<<<< HEAD
         self.fix(TextElem::dir_in(styles))
+=======
+        self.fix(styles.resolve(TextElem::dir))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -409,7 +510,11 @@ impl Resolve for OuterHAlignment {
     type Output = FixedAlignment;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
+<<<<<<< HEAD
         self.fix(TextElem::dir_in(styles))
+=======
+        self.fix(styles.resolve(TextElem::dir))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -631,7 +736,11 @@ where
     type Output = Axes<FixedAlignment>;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
+<<<<<<< HEAD
         self.fix(TextElem::dir_in(styles))
+=======
+        self.fix(styles.resolve(TextElem::dir))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

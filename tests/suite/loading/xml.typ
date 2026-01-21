@@ -24,9 +24,17 @@
 ),))
 
 --- xml-invalid ---
+<<<<<<< HEAD
 // Error: 6-28 failed to parse XML (found closing tag 'data' instead of 'hello' in line 3)
+=======
+// Error: "/assets/data/bad.xml" 3:0 failed to parse XML (found closing tag 'data' instead of 'hello')
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #xml("/assets/data/bad.xml")
 
 --- xml-decode-deprecated ---
 // Warning: 14-20 `xml.decode` is deprecated, directly pass bytes to `xml` instead
+<<<<<<< HEAD
+=======
+// Hint: 14-20 it will be removed in Typst 0.15.0
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #let _ = xml.decode

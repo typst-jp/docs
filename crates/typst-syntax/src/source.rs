@@ -2,14 +2,23 @@
 
 use std::fmt::{self, Debug, Formatter};
 use std::hash::{Hash, Hasher};
+<<<<<<< HEAD
 use std::iter::zip;
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::ops::Range;
 use std::sync::Arc;
 
 use typst_utils::LazyHash;
 
+<<<<<<< HEAD
 use crate::reparser::reparse;
 use crate::{is_newline, parse, FileId, LinkedNode, Span, SyntaxNode, VirtualPath};
+=======
+use crate::lines::Lines;
+use crate::reparser::reparse;
+use crate::{FileId, LinkedNode, Span, SyntaxNode, VirtualPath, parse};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A source file.
 ///
@@ -24,9 +33,14 @@ pub struct Source(Arc<Repr>);
 #[derive(Clone)]
 struct Repr {
     id: FileId,
+<<<<<<< HEAD
     text: LazyHash<String>,
     root: LazyHash<SyntaxNode>,
     lines: Vec<Line>,
+=======
+    root: LazyHash<SyntaxNode>,
+    lines: LazyHash<Lines<String>>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Source {
@@ -37,8 +51,12 @@ impl Source {
         root.numberize(id, Span::FULL).unwrap();
         Self(Arc::new(Repr {
             id,
+<<<<<<< HEAD
             lines: lines(&text),
             text: LazyHash::new(text),
+=======
+            lines: LazyHash::new(Lines::new(text)),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             root: LazyHash::new(root),
         }))
     }
@@ -60,12 +78,22 @@ impl Source {
 
     /// The whole source as a string slice.
     pub fn text(&self) -> &str {
+<<<<<<< HEAD
         &self.0.text
     }
 
     /// Slice out the part of the source code enclosed by the range.
     pub fn get(&self, range: Range<usize>) -> Option<&str> {
         self.text().get(range)
+=======
+        self.0.lines.text()
+    }
+
+    /// An acceleration structure for conversion of UTF-8, UTF-16 and
+    /// line/column indices.
+    pub fn lines(&self) -> &Lines<String> {
+        &self.0.lines
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Fully replace the source text.
@@ -77,6 +105,7 @@ impl Source {
     /// Returns the range in the new source that was ultimately reparsed.
     pub fn replace(&mut self, new: &str) -> Range<usize> {
         let _scope = typst_timing::TimingScope::new("replace source");
+<<<<<<< HEAD
         let old = self.text();
 
         let mut prefix =
@@ -100,6 +129,14 @@ impl Source {
             suffix += 1;
         }
 
+=======
+
+        let Some((prefix, suffix)) = self.0.lines.replacement_range(new) else {
+            return 0..0;
+        };
+
+        let old = self.text();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let replace = prefix..old.len() - suffix;
         let with = &new[prefix..new.len() - suffix];
         self.edit(replace, with)
@@ -112,6 +149,7 @@ impl Source {
     /// The method panics if the `replace` range is out of bounds.
     #[track_caller]
     pub fn edit(&mut self, replace: Range<usize>, with: &str) -> Range<usize> {
+<<<<<<< HEAD
         let start_byte = replace.start;
         let start_utf16 = self.byte_to_utf16(start_byte).unwrap();
         let line = self.byte_to_line(start_byte).unwrap();
@@ -154,6 +192,15 @@ impl Source {
     /// Get the length of the file in lines.
     pub fn len_lines(&self) -> usize {
         self.0.lines.len()
+=======
+        let inner = Arc::make_mut(&mut self.0);
+
+        // Update the text and lines.
+        inner.lines.edit(replace.clone(), with);
+
+        // Incrementally reparse the replaced range.
+        reparse(&mut inner.root, inner.lines.text(), replace, with.len())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Find the node with the given span.
@@ -171,6 +218,7 @@ impl Source {
     pub fn range(&self, span: Span) -> Option<Range<usize>> {
         Some(self.find(span)?.range())
     }
+<<<<<<< HEAD
 
     /// Return the index of the UTF-16 code unit at the byte index.
     pub fn byte_to_utf16(&self, byte_idx: usize) -> Option<usize> {
@@ -250,6 +298,8 @@ impl Source {
         }
         Some(range.start + (line.len() - chars.as_str().len()))
     }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Debug for Source {
@@ -261,7 +311,11 @@ impl Debug for Source {
 impl Hash for Source {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.0.id.hash(state);
+<<<<<<< HEAD
         self.0.text.hash(state);
+=======
+        self.0.lines.hash(state);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0.root.hash(state);
     }
 }
@@ -271,6 +325,7 @@ impl AsRef<str> for Source {
         self.text()
     }
 }
+<<<<<<< HEAD
 
 /// Metadata about a line.
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
@@ -444,3 +499,5 @@ mod tests {
         test(TEST, 0..21, "", "");
     }
 }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

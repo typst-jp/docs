@@ -1,6 +1,10 @@
 // Test headings.
 
+<<<<<<< HEAD
 --- heading-basic ---
+=======
+--- heading-basic render ---
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Different number of equals signs.
 
 = Level 1
@@ -82,7 +86,11 @@ comment spans lines
 ===== Heading 🌍
 #heading(level: 5)[Heading]
 
+<<<<<<< HEAD
 --- heading-offset ---
+=======
+--- heading-offset render pdftags ---
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Test setting the starting offset.
 #set heading(numbering: "1.1")
 #show heading.where(level: 2): set text(blue)
@@ -101,6 +109,14 @@ comment spans lines
 #set heading(numbering: "1.1.a.")
 = State of the Art
 
+<<<<<<< HEAD
+=======
+--- heading-hanging-indent-auto-center-align ---
+#set heading(numbering: "1.1.a.")
+#show heading: set align(center)
+= Center aligned
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- heading-hanging-indent-zero ---
 #set heading(numbering: "1.1.a.", hanging-indent: 0pt)
 = State of the Art

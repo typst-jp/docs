@@ -5,4 +5,11 @@ bibliography = Kaynakça
 heading = Bölüm
 outline = İçindekiler
 raw = Liste
+<<<<<<< HEAD
 page = sayfa
+=======
+page = sayfa
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

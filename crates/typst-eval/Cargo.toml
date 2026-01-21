@@ -20,8 +20,13 @@ typst-timing = { workspace = true }
 typst-utils = { workspace = true }
 comemo = { workspace = true }
 ecow = { workspace = true }
+<<<<<<< HEAD
 if_chain = { workspace = true }
 indexmap = { workspace = true }
+=======
+indexmap = { workspace = true }
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 toml = { workspace = true }
 unicode-segmentation = { workspace = true }
 

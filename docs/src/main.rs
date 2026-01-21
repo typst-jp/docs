@@ -3,7 +3,11 @@ use std::path::{Path, PathBuf};
 
 use clap::Parser;
 use typst::layout::PagedDocument;
+<<<<<<< HEAD
 use typst_docs::{provide, Html, Resolver};
+=======
+use typst_docs::{Html, Resolver, provide};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_render::render;
 
 #[derive(Debug)]
@@ -34,6 +38,7 @@ impl Resolver for CliResolver<'_> {
             );
         }
 
+<<<<<<< HEAD
         let page = document.pages.first().expect("page 0");
         let pixmap = render(page, 2.0);
         let filename = format!("{hash:x}.png");
@@ -42,16 +47,48 @@ impl Resolver for CliResolver<'_> {
         pixmap.save_png(path.as_path()).expect("save png");
         let src = format!("{}assets/{filename}", self.base);
         eprintln!("Generated example image {path:?}");
+=======
+        fs::create_dir_all(self.assets_dir).expect("create dir");
+
+        let pages = match &document.pages[..] {
+            [page] => vec![(page, format!("{hash:x}.png"), "Preview".to_string())],
+            pages => pages
+                .iter()
+                .enumerate()
+                .map(|(i, page)| {
+                    (page, format!("{hash:x}-{i}.png"), format!("Preview page {}", i + 1))
+                })
+                .collect(),
+        }
+        .iter()
+        .map(|(page, filename, alt)| {
+            let pixmap = render(page, 2.0);
+            let path = self.assets_dir.join(filename);
+            pixmap.save_png(path.as_path()).expect("save png");
+            eprintln!("Generated example image {path:?}");
+
+            let src = format!("{}assets/{filename}", self.base);
+            format!(r#"<img src="{src}" alt="{alt}">"#)
+        })
+        .collect::<String>();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         if let Some(code) = source {
             let code_safe = code.as_str();
             Html::new(format!(
+<<<<<<< HEAD
                 r#"<div class="previewed-code"><pre>{code_safe}</pre><div class="preview"><img src="{src}" alt="Preview"></div></div>"#
             ))
         } else {
             Html::new(format!(
                 r#"<div class="preview"><img src="{src}" alt="Preview"></div>"#
             ))
+=======
+                r#"<div class="previewed-code"><pre>{code_safe}</pre><div class="preview">{pages}</div></div>"#
+            ))
+        } else {
+            Html::new(format!(r#"<div class="preview">{pages}</div>"#))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -83,7 +120,11 @@ impl Resolver for CliResolver<'_> {
 /// Generates the JSON representation of the documentation. This can be used to
 /// generate the HTML yourself. Be warned: the JSON structure is not stable and
 /// may change at any time.
+<<<<<<< HEAD
 #[derive(Parser, Debug)]
+=======
+#[derive(Debug, Parser)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[command(version, about, long_about = None)]
 struct Args {
     /// The generation process can produce additional assets. Namely images.

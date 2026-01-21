@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 use typst_library::diag::{bail, SourceResult};
+=======
+use typst_library::diag::{SourceResult, bail};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::engine::Engine;
 use typst_library::foundations::{Content, Packed, Resolve, StyleChain, StyledElem};
 use typst_library::introspection::{Locator, SplitLocator};
@@ -19,12 +23,20 @@ pub fn layout_stack(
     regions: Regions,
 ) -> SourceResult<Fragment> {
     let mut layouter =
+<<<<<<< HEAD
         StackLayouter::new(elem.span(), elem.dir(styles), locator, styles, regions);
+=======
+        StackLayouter::new(elem.span(), elem.dir.get(styles), locator, styles, regions);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     let axis = layouter.dir.axis();
 
     // Spacing to insert before the next block.
+<<<<<<< HEAD
     let spacing = elem.spacing(styles);
+=======
+    let spacing = elem.spacing.get(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut deferred = None;
 
     for child in &elem.children {
@@ -167,11 +179,19 @@ impl<'a> StackLayouter<'a> {
 
         // Block-axis alignment of the `AlignElem` is respected by stacks.
         let align = if let Some(align) = block.to_packed::<AlignElem>() {
+<<<<<<< HEAD
             align.alignment(styles)
         } else if let Some(styled) = block.to_packed::<StyledElem>() {
             AlignElem::alignment_in(styles.chain(&styled.styles))
         } else {
             AlignElem::alignment_in(styles)
+=======
+            align.alignment.get(styles)
+        } else if let Some(styled) = block.to_packed::<StyledElem>() {
+            styles.chain(&styled.styles).get(AlignElem::alignment)
+        } else {
+            styles.get(AlignElem::alignment)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         .resolve(styles);
 

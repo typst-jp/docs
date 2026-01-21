@@ -23,7 +23,11 @@ impl PaintSampler for sk::PremultipliedColorU8 {
 ///
 /// It caches the inverse transform to the parent, so that we can
 /// reuse it instead of recomputing it for each pixel.
+<<<<<<< HEAD
 #[derive(Clone, Copy)]
+=======
+#[derive(Copy, Clone)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct GradientSampler<'a> {
     gradient: &'a Gradient,
     container_size: Size,
@@ -76,7 +80,11 @@ impl PaintSampler for GradientSampler<'_> {
 ///
 /// It caches the inverse transform to the parent, so that we can
 /// reuse it instead of recomputing it for each pixel.
+<<<<<<< HEAD
 #[derive(Clone, Copy)]
+=======
+#[derive(Copy, Clone)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct TilingSampler<'a> {
     size: Size,
     transform_to_parent: sk::Transform,
@@ -255,13 +263,21 @@ pub fn to_sk_paint<'a>(
 }
 
 pub fn to_sk_color(color: Color) -> sk::Color {
+<<<<<<< HEAD
     let [r, g, b, a] = color.to_rgb().to_vec4();
+=======
+    let (r, g, b, a) = color.to_rgb().into_components();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     sk::Color::from_rgba(r, g, b, a)
         .expect("components must always be in the range [0..=1]")
 }
 
 pub fn to_sk_color_u8(color: Color) -> sk::ColorU8 {
+<<<<<<< HEAD
     let [r, g, b, a] = color.to_rgb().to_vec4_u8();
+=======
+    let (r, g, b, a) = color.to_rgb().into_format::<u8, u8>().into_components();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     sk::ColorU8::from_rgba(r, g, b, a)
 }
 

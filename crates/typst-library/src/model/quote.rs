@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{
@@ -15,6 +16,22 @@ use crate::text::{SmartQuoteElem, SmartQuotes, SpaceElem, TextElem};
 /// 引用文を表示し、オプションとして帰属情報を併記する。
 ///
 /// # 例
+=======
+use typst_syntax::Span;
+
+use crate::foundations::{
+    Content, Depth, Label, NativeElement, Packed, ShowSet, Smart, StyleChain, Styles,
+    cast, elem,
+};
+use crate::introspection::{Locatable, Tagged};
+use crate::layout::{BlockElem, Em, PadElem};
+use crate::model::{CitationForm, CiteElem};
+use crate::text::{SmartQuotes, SpaceElem, TextElem};
+
+/// Displays a quote alongside an optional attribution.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// Plato is often misquoted as the author of #quote[I know that I know
 /// nothing], however, this is a derivation form his original quote:
@@ -31,8 +48,13 @@ use crate::text::{SmartQuoteElem, SmartQuotes, SpaceElem, TextElem};
 /// ]
 /// ```
 ///
+<<<<<<< HEAD
 /// デフォルトでは、ブロック引用には左右それぞれ `{1em}` のパディングが設定されており、
 /// 配置やパディングはshowルールで制御できます。
+=======
+/// By default block quotes are padded left and right by `{1em}`, alignment and
+/// padding can be controlled with show rules:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #set quote(block: true)
 /// #show quote: set align(center)
@@ -44,9 +66,15 @@ use crate::text::{SmartQuoteElem, SmartQuotes, SpaceElem, TextElem};
 ///   flame of Udûn. Go back to the Shadow! You cannot pass.
 /// ]
 /// ```
+<<<<<<< HEAD
 #[elem(Locatable, ShowSet, Show)]
 pub struct QuoteElem {
     /// ブロック引用にするかどうか。
+=======
+#[elem(Locatable, Tagged, ShowSet)]
+pub struct QuoteElem {
+    /// Whether this is a block quote.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// An inline citation would look like
@@ -62,6 +90,7 @@ pub struct QuoteElem {
     ///   Ich bin ein Berliner.
     /// ]
     /// ```
+<<<<<<< HEAD
     block: bool,
 
     /// 引用文の両端を二重引用符で囲むかどうか。
@@ -74,6 +103,20 @@ pub struct QuoteElem {
     /// - `{auto}`: 引用文を二重引用符で囲むかどうかを、`block`プロパティに基づいて推測します。
     /// `block`が`{false}`の場合、二重引用符が自動的に追加されます。
     ///
+=======
+    pub block: bool,
+
+    /// Whether double quotes should be added around this quote.
+    ///
+    /// The double quotes used are inferred from the `quotes` property on
+    /// [smartquote], which is affected by the `lang` property on [text].
+    ///
+    /// - `{true}`: Wrap this quote in double quotes.
+    /// - `{false}`: Do not wrap this quote in double quotes.
+    /// - `{auto}`: Infer whether to wrap this quote in double quotes based on
+    ///   the `block` property. If `block` is `{false}`, double quotes are
+    ///   automatically added.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set text(lang: "de")
@@ -88,11 +131,19 @@ pub struct QuoteElem {
     /// translate the quote:
     /// #quote[I am a Berliner.]
     /// ```
+<<<<<<< HEAD
     quotes: Smart<bool>,
 
     /// 引用文の帰属情報。通常は著者名や出典元を指します。
     /// 参考文献を指すラベルや任意のコンテンツを設定することもできます。
     /// デフォルトではブロック引用にのみ表示されますが、`{show}`ルールを使用して変更できます。
+=======
+    pub quotes: Smart<bool>,
+
+    /// The attribution of this quote, usually the author or source. Can be a
+    /// label pointing to a bibliography entry or any content. By default only
+    /// displayed for block quotes, but can be changed using a `{show}` rule.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #quote(attribution: [René Descartes])[
@@ -105,7 +156,11 @@ pub struct QuoteElem {
     /// }
     ///
     /// #quote(
+<<<<<<< HEAD
     ///   attribution: link("https://typst.app/home")[typst.com]
+=======
+    ///   attribution: link("https://typst.app/home")[typst.app]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// )[
     ///   Compose papers faster
     /// ]
@@ -123,18 +178,49 @@ pub struct QuoteElem {
     ///
     /// #bibliography("works.bib", style: "apa")
     /// ```
+<<<<<<< HEAD
     #[borrowed]
     attribution: Option<Attribution>,
 
     /// 引用文。
     #[required]
     body: Content,
+=======
+    pub attribution: Option<Attribution>,
+
+    /// The quote.
+    #[required]
+    pub body: Content,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     /// The nesting depth.
     #[internal]
     #[fold]
     #[ghost]
+<<<<<<< HEAD
     depth: Depth,
+=======
+    pub depth: Depth,
+}
+
+impl QuoteElem {
+    /// Quotes the body content with the appropriate quotes based on the current
+    /// styles and surroundings.
+    pub fn quoted(body: Content, styles: StyleChain<'_>) -> Content {
+        let quotes = SmartQuotes::get_in(styles);
+
+        // Alternate between single and double quotes.
+        let Depth(depth) = styles.get(QuoteElem::depth);
+        let double = depth % 2 == 0;
+
+        Content::sequence([
+            TextElem::packed(quotes.open(double)),
+            body,
+            TextElem::packed(quotes.close(double)),
+        ])
+        .set(QuoteElem::depth, Depth(1))
+    }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Attribution for a [quote](QuoteElem).
@@ -144,6 +230,26 @@ pub enum Attribution {
     Label(Label),
 }
 
+<<<<<<< HEAD
+=======
+impl Attribution {
+    /// Realize as an em dash followed by text or a citation.
+    pub fn realize(&self, span: Span) -> Content {
+        Content::sequence([
+            TextElem::packed('—'),
+            SpaceElem::shared().clone(),
+            match self {
+                Attribution::Content(content) => content.clone(),
+                Attribution::Label(label) => CiteElem::new(*label)
+                    .with_form(Some(CitationForm::Prose))
+                    .pack()
+                    .spanned(span),
+            },
+        ])
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 cast! {
     Attribution,
     self => match self {
@@ -154,6 +260,7 @@ cast! {
     label: Label => Self::Label(label),
 }
 
+<<<<<<< HEAD
 impl Show for Packed<QuoteElem> {
     #[typst_macros::time(name = "quote", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -252,6 +359,16 @@ impl ShowSet for Packed<QuoteElem> {
             out.set(PadElem::set_right(Em::new(1.0).into()));
             out.set(BlockElem::set_above(Smart::Custom(Em::new(2.4).into())));
             out.set(BlockElem::set_below(Smart::Custom(Em::new(1.8).into())));
+=======
+impl ShowSet for Packed<QuoteElem> {
+    fn show_set(&self, styles: StyleChain) -> Styles {
+        let mut out = Styles::new();
+        if self.block.get(styles) {
+            out.set(PadElem::left, Em::new(1.0).into());
+            out.set(PadElem::right, Em::new(1.0).into());
+            out.set(BlockElem::above, Smart::Custom(Em::new(2.4).into()));
+            out.set(BlockElem::below, Smart::Custom(Em::new(1.8).into()));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         out
     }

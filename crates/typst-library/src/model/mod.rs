@@ -20,6 +20,10 @@ mod reference;
 mod strong;
 mod table;
 mod terms;
+<<<<<<< HEAD
+=======
+mod title;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 pub use self::bibliography::*;
 pub use self::cite::*;
@@ -39,6 +43,10 @@ pub use self::reference::*;
 pub use self::strong::*;
 pub use self::table::*;
 pub use self::terms::*;
+<<<<<<< HEAD
+=======
+pub use self::title::*;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::foundations::Scope;
 
@@ -46,6 +54,7 @@ use crate::foundations::Scope;
 pub fn define(global: &mut Scope) {
     global.start_category(crate::Category::Model);
     global.define_elem::<DocumentElem>();
+<<<<<<< HEAD
     global.define_elem::<RefElem>();
     global.define_elem::<LinkElem>();
     global.define_elem::<OutlineElem>();
@@ -63,6 +72,26 @@ pub fn define(global: &mut Scope) {
     global.define_elem::<TermsElem>();
     global.define_elem::<EmphElem>();
     global.define_elem::<StrongElem>();
+=======
+    global.define_elem::<ParElem>();
+    global.define_elem::<ParbreakElem>();
+    global.define_elem::<StrongElem>();
+    global.define_elem::<EmphElem>();
+    global.define_elem::<ListElem>();
+    global.define_elem::<EnumElem>();
+    global.define_elem::<TermsElem>();
+    global.define_elem::<LinkElem>();
+    global.define_elem::<TitleElem>();
+    global.define_elem::<HeadingElem>();
+    global.define_elem::<FigureElem>();
+    global.define_elem::<QuoteElem>();
+    global.define_elem::<FootnoteElem>();
+    global.define_elem::<OutlineElem>();
+    global.define_elem::<RefElem>();
+    global.define_elem::<CiteElem>();
+    global.define_elem::<BibliographyElem>();
+    global.define_elem::<TableElem>();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     global.define_func::<numbering>();
     global.reset_category();
 }

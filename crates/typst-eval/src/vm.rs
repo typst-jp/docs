@@ -1,10 +1,19 @@
 use comemo::Tracked;
+<<<<<<< HEAD
 use typst_library::diag::warning;
 use typst_library::engine::Engine;
 use typst_library::foundations::{Binding, Context, IntoValue, Scopes, Value};
 use typst_library::World;
 use typst_syntax::ast::{self, AstNode};
 use typst_syntax::Span;
+=======
+use typst_library::World;
+use typst_library::diag::warning;
+use typst_library::engine::Engine;
+use typst_library::foundations::{Binding, Context, IntoValue, Scopes, Value};
+use typst_syntax::Span;
+use typst_syntax::ast::{self, AstNode};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::FlowEvent;
 

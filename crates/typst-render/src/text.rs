@@ -9,23 +9,42 @@ use typst_library::text::{Font, TextItem};
 use typst_library::visualize::{FixedStroke, Paint};
 
 use crate::paint::{self, GradientSampler, PaintSampler, TilingSampler};
+<<<<<<< HEAD
 use crate::{shape, AbsExt, State};
+=======
+use crate::{AbsExt, State, shape};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Render a text run into the canvas.
 pub fn render_text(canvas: &mut sk::Pixmap, state: State, text: &TextItem) {
     let mut x = Abs::zero();
+<<<<<<< HEAD
     for glyph in &text.glyphs {
         let id = GlyphId(glyph.id);
         let offset = x + glyph.x_offset.at(text.size);
 
         if should_outline(&text.font, glyph) {
             let state = state.pre_translate(Point::with_x(offset));
+=======
+    let mut y = Abs::zero();
+    for glyph in &text.glyphs {
+        let id = GlyphId(glyph.id);
+        let x_offset = x + glyph.x_offset.at(text.size);
+        let y_offset = y + glyph.y_offset.at(text.size);
+
+        if should_outline(&text.font, glyph) {
+            let state = state.pre_translate(Point::new(x_offset, -y_offset));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             render_outline_glyph(canvas, state, text, id);
         } else {
             let upem = text.font.units_per_em();
             let text_scale = text.size / upem;
             let state = state
+<<<<<<< HEAD
                 .pre_translate(Point::new(offset, -text.size))
+=======
+                .pre_translate(Point::new(x_offset, -y_offset - text.size))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 .pre_scale(Axes::new(text_scale, text_scale));
 
             let (glyph_frame, _) = glyph_frame(&text.font, glyph.id);
@@ -33,6 +52,10 @@ pub fn render_text(canvas: &mut sk::Pixmap, state: State, text: &TextItem) {
         }
 
         x += glyph.x_advance.at(text.size);
+<<<<<<< HEAD
+=======
+        y += glyph.y_advance.at(text.size);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -54,6 +77,10 @@ fn render_outline_glyph(
         || ts.ky != 0.0
         || ts.sx != ts.sy
         || text.stroke.is_some()
+<<<<<<< HEAD
+=======
+        || text.size < Abs::zero()
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     {
         let path = {
             let mut builder = WrappedPathBuilder(sk::PathBuilder::new());
@@ -84,6 +111,7 @@ fn render_outline_glyph(
 
         if let Some(FixedStroke { paint, thickness, cap, join, dash, miter_limit }) =
             &text.stroke
+<<<<<<< HEAD
         {
             if thickness.to_f32() > 0.0 {
                 let dash = dash.as_ref().and_then(shape::to_sk_dash_pattern);
@@ -107,6 +135,30 @@ fn render_outline_glyph(
 
                 canvas.stroke_path(&path, &paint, &stroke, ts, state.mask);
             }
+=======
+            && thickness.to_f32() > 0.0
+        {
+            let dash = dash.as_ref().and_then(shape::to_sk_dash_pattern);
+
+            let paint = paint::to_sk_paint(
+                paint,
+                state_ts,
+                Size::zero(),
+                true,
+                None,
+                &mut pixmap,
+                None,
+            );
+            let stroke = sk::Stroke {
+                width: thickness.to_f32() / scale, // When we scale the path, we need to scale the stroke width, too.
+                line_cap: shape::to_sk_line_cap(*cap),
+                line_join: shape::to_sk_line_join(*join),
+                dash,
+                miter_limit: miter_limit.get() as f32,
+            };
+
+            canvas.stroke_path(&path, &paint, &stroke, ts, state.mask);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         return Some(());
     }

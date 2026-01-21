@@ -28,7 +28,12 @@ typst-render = { workspace = true }
 typst-svg = { workspace = true }
 typst-timing = { workspace = true }
 chrono = { workspace = true }
+<<<<<<< HEAD
 clap = { workspace = true }
+=======
+clap = { workspace = true, features = ["string"] }
+clap_complete = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 codespan-reporting = { workspace = true }
 color-print = { workspace = true }
 comemo = { workspace = true }
@@ -40,6 +45,10 @@ open = { workspace = true }
 parking_lot = { workspace = true }
 pathdiff = { workspace = true }
 rayon = { workspace = true }
+<<<<<<< HEAD
+=======
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 same-file = { workspace = true }
 self-replace = { workspace = true, optional = true }
 semver = { workspace = true }
@@ -63,6 +72,10 @@ clap_complete = { workspace = true }
 clap_mangen = { workspace = true }
 color-print = { workspace = true }
 semver = { workspace = true }
+<<<<<<< HEAD
+=======
+serde = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 [features]
 default = ["embed-fonts", "http-server"]

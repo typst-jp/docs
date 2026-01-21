@@ -49,7 +49,11 @@ impl Eval for ast::MathShorthand<'_> {
     type Output = Value;
 
     fn eval(self, _: &mut Vm) -> SourceResult<Self::Output> {
+<<<<<<< HEAD
         Ok(Value::Symbol(Symbol::single(self.get())))
+=======
+        Ok(Value::Symbol(Symbol::runtime_char(self.get())))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -80,17 +84,29 @@ impl Eval for ast::MathAttach<'_> {
         let mut elem = AttachElem::new(base);
 
         if let Some(expr) = self.top() {
+<<<<<<< HEAD
             elem.push_t(Some(expr.eval_display(vm)?));
+=======
+            elem.t.set(Some(expr.eval_display(vm)?));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         // Always attach primes in scripts style (not limits style),
         // i.e. at the top-right corner.
         if let Some(primes) = self.primes() {
+<<<<<<< HEAD
             elem.push_tr(Some(primes.eval(vm)?));
         }
 
         if let Some(expr) = self.bottom() {
             elem.push_b(Some(expr.eval_display(vm)?));
+=======
+            elem.tr.set(Some(primes.eval(vm)?));
+        }
+
+        if let Some(expr) = self.bottom() {
+            elem.b.set(Some(expr.eval_display(vm)?));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         Ok(elem.pack())
@@ -109,9 +125,26 @@ impl Eval for ast::MathFrac<'_> {
     type Output = Content;
 
     fn eval(self, vm: &mut Vm) -> SourceResult<Self::Output> {
+<<<<<<< HEAD
         let num = self.num().eval_display(vm)?;
         let denom = self.denom().eval_display(vm)?;
         Ok(FracElem::new(num, denom).pack())
+=======
+        let num_expr = self.num();
+        let num = num_expr.eval_display(vm)?;
+        let denom_expr = self.denom();
+        let denom = denom_expr.eval_display(vm)?;
+
+        let num_depar =
+            matches!(num_expr, ast::Expr::Math(math) if math.was_deparenthesized());
+        let denom_depar =
+            matches!(denom_expr, ast::Expr::Math(math) if math.was_deparenthesized());
+
+        Ok(FracElem::new(num, denom)
+            .with_num_deparenthesized(num_depar)
+            .with_denom_deparenthesized(denom_depar)
+            .pack())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

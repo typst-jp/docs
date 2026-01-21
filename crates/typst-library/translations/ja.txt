@@ -5,4 +5,11 @@ bibliography = 参考文献
 heading = 節
 outline = 目次
 raw = リスト
+<<<<<<< HEAD
 page = ページ
+=======
+page = ページ
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

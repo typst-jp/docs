@@ -1,8 +1,19 @@
 figure = 圖
+<<<<<<< HEAD
 # table = 
+=======
+table = 表
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 equation = 式
 bibliography = 書目
 heading = 小節
 outline = 目錄
 raw = 程式
+<<<<<<< HEAD
 # page = 
+=======
+page = 頁
+footnote = 註腳
+email = 電子郵件
+telephone = 電話
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # figure = 
 # table = 
 # equation = 
@@ -6,3 +7,16 @@ heading = Secção
 outline = Índice
 # raw = 
 page = página
+=======
+# figure =
+# table =
+# equation =
+# bibliography =
+heading = Secção
+outline = Índice
+# raw =
+page = página
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

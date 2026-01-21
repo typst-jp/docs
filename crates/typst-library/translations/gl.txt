@@ -4,5 +4,13 @@ equation = Ecuación
 bibliography = Bibliografía
 heading = Sección
 outline = Índice
+<<<<<<< HEAD
 raw = Listado
 page = páxina
+=======
+raw = Listaxe
+page = páxina
+footnote = Nota a pé de páxina
+email = Correo electrónico
+telephone = Teléfono
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

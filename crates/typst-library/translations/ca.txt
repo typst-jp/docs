@@ -5,4 +5,11 @@ bibliography = Bibliografia
 heading = Secció
 outline = Índex
 raw = Llistat
+<<<<<<< HEAD
 page = pàgina
+=======
+page = pàgina
+footnote = Nota
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

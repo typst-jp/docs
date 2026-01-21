@@ -3,6 +3,7 @@ use typst_syntax::Span;
 
 use crate::diag::{At, SourceResult};
 use crate::engine::Engine;
+<<<<<<< HEAD
 use crate::foundations::{dict, func, Content, Context, Dict, Resolve, Smart};
 use crate::introspection::{Locator, LocatorLink};
 use crate::layout::{Abs, Axes, Length, Region, Size};
@@ -16,6 +17,26 @@ use crate::layout::{Abs, Axes, Length, Region, Size};
 /// # 例
 /// 同じコンテンツでも置く場所の[context]によって異なる大きさになることがあります。
 /// 以下の例では、フォントサイズを大きくすると`[#content]`は必然的に大きくなります。
+=======
+use crate::foundations::{
+    Content, Context, Dict, Resolve, Smart, Target, TargetElem, dict, func,
+};
+use crate::introspection::{Locator, LocatorLink};
+use crate::layout::{Abs, Axes, Length, Region, Size};
+
+/// Measures the layouted size of content.
+///
+/// The `measure` function lets you determine the layouted size of content.
+/// By default an infinite space is assumed, so the measured dimensions may
+/// not necessarily match the final dimensions of the content.
+/// If you want to measure in the current layout dimensions, you can combine
+/// `measure` and [`layout`].
+///
+/// # Example
+/// The same content can have a different size depending on the [context] that
+/// it is placed into. In the example below, the `[#content]` is of course
+/// bigger when we increase the font size.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #let content = [Hello!]
@@ -24,7 +45,11 @@ use crate::layout::{Abs, Axes, Length, Region, Size};
 /// #content
 /// ```
 ///
+<<<<<<< HEAD
 /// この理由から、測定が可能なのはコンテキストが利用可能な場合に限ります。
+=======
+/// For this reason, you can only measure when context is available.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #let thing(body) = context {
@@ -36,18 +61,34 @@ use crate::layout::{Abs, Axes, Length, Region, Size};
 /// #thing[Welcome]
 /// ```
 ///
+<<<<<<< HEAD
 /// measure関数はキーが`width`と`height`で、その値がいずれも[`length`]型の辞書を返します。
+=======
+/// The measure function returns a dictionary with the entries `width` and
+/// `height`, both of type [`length`].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[func(contextual)]
 pub fn measure(
     engine: &mut Engine,
     context: Tracked<Context>,
     span: Span,
+<<<<<<< HEAD
     /// コンテンツをレイアウトするのに利用可能な幅。
     ///
     /// これを`{auto}`に設定すると無限大の幅が利用可能であると見なされます。
     ///
     /// この関数の`width`および`height`パラメーターを用いることは、大きさを持ち、コンテンツを有する[`block`]を測定することとは異なることに注意してください。
     /// 以下の例では、前者はブロックの寸法ではなく、内側のコンテンツの寸法を取得します。
+=======
+    /// The width available to layout the content.
+    ///
+    /// Setting this to `{auto}` indicates infinite available width.
+    ///
+    /// Note that using the `width` and `height` parameters of this function is
+    /// different from measuring a sized [`block`] containing the content. In
+    /// the following example, the former will get the dimensions of the inner
+    /// content instead of the dimensions of the block.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #context measure(lorem(100), width: 400pt)
@@ -57,6 +98,7 @@ pub fn measure(
     #[named]
     #[default(Smart::Auto)]
     width: Smart<Length>,
+<<<<<<< HEAD
     /// コンテンツをレイアウトするのに利用可能な高さ。
     ///
     /// これを`{auto}`に設定すると無限大の高さが利用可能であると見なされます。
@@ -64,6 +106,15 @@ pub fn measure(
     #[default(Smart::Auto)]
     height: Smart<Length>,
     /// 大きさを測定するコンテンツ。
+=======
+    /// The height available to layout the content.
+    ///
+    /// Setting this to `{auto}` indicates infinite available height.
+    #[named]
+    #[default(Smart::Auto)]
+    height: Smart<Length>,
+    /// The content whose size to measure.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     content: Content,
 ) -> SourceResult<Dict> {
     // Create a pod region with the available space.
@@ -83,8 +134,20 @@ pub fn measure(
     let here = context.location().at(span)?;
     let link = LocatorLink::measure(here);
     let locator = Locator::link(&link);
+<<<<<<< HEAD
 
     let frame = (engine.routines.layout_frame)(engine, &content, locator, styles, pod)?;
+=======
+    let style = TargetElem::target.set(Target::Paged).wrap();
+
+    let frame = (engine.routines.layout_frame)(
+        engine,
+        &content,
+        locator,
+        styles.chain(&style),
+        pod,
+    )?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let Size { x, y } = frame.size();
     Ok(dict! { "width" => x, "height" => y })
 }

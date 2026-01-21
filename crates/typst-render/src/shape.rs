@@ -5,7 +5,11 @@ use typst_library::visualize::{
     Shape,
 };
 
+<<<<<<< HEAD
 use crate::{paint, AbsExt, State};
+=======
+use crate::{AbsExt, State, paint};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Render a geometrical shape into the canvas.
 pub fn render_shape(canvas: &mut sk::Pixmap, state: State, shape: &Shape) -> Option<()> {
@@ -69,9 +73,17 @@ pub fn render_shape(canvas: &mut sk::Pixmap, state: State, shape: &Shape) -> Opt
             let dash = dash.as_ref().and_then(to_sk_dash_pattern);
 
             let bbox = shape.geometry.bbox_size();
+<<<<<<< HEAD
             let offset_bbox = (!matches!(shape.geometry, Geometry::Line(..)))
                 .then(|| offset_bounding_box(bbox, *thickness))
                 .unwrap_or(bbox);
+=======
+            let offset_bbox = if !matches!(shape.geometry, Geometry::Line(..)) {
+                offset_bounding_box(bbox, *thickness)
+            } else {
+                bbox
+            };
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
             let fill_transform =
                 (!matches!(shape.geometry, Geometry::Line(..))).then(|| {

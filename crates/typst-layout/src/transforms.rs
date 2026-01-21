@@ -1,6 +1,10 @@
 use std::cell::LazyCell;
 
+<<<<<<< HEAD
 use typst_library::diag::{bail, SourceResult};
+=======
+use typst_library::diag::{SourceResult, bail};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::engine::Engine;
 use typst_library::foundations::{Content, Packed, Resolve, Smart, StyleChain};
 use typst_library::introspection::Locator;
@@ -20,7 +24,11 @@ pub fn layout_move(
     region: Region,
 ) -> SourceResult<Frame> {
     let mut frame = crate::layout_frame(engine, &elem.body, locator, styles, region)?;
+<<<<<<< HEAD
     let delta = Axes::new(elem.dx(styles), elem.dy(styles)).resolve(styles);
+=======
+    let delta = Axes::new(elem.dx.resolve(styles), elem.dy.resolve(styles));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let delta = delta.zip_map(region.size, Rel::relative_to);
     frame.translate(delta.to_point());
     Ok(frame)
@@ -35,8 +43,13 @@ pub fn layout_rotate(
     styles: StyleChain,
     region: Region,
 ) -> SourceResult<Frame> {
+<<<<<<< HEAD
     let angle = elem.angle(styles);
     let align = elem.origin(styles).resolve(styles);
+=======
+    let angle = elem.angle.get(styles);
+    let align = elem.origin.resolve(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Compute the new region's approximate size.
     let is_finite = region.size.is_finite();
@@ -55,7 +68,11 @@ pub fn layout_rotate(
         &elem.body,
         Transform::rotate(angle),
         align,
+<<<<<<< HEAD
         elem.reflow(styles),
+=======
+        elem.reflow.get(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     )
 }
 
@@ -83,8 +100,13 @@ pub fn layout_scale(
         styles,
         &elem.body,
         Transform::scale(scale.x, scale.y),
+<<<<<<< HEAD
         elem.origin(styles).resolve(styles),
         elem.reflow(styles),
+=======
+        elem.origin.resolve(styles),
+        elem.reflow.get(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     )
 }
 
@@ -121,13 +143,21 @@ fn resolve_scale(
     });
 
     let x = resolve_axis(
+<<<<<<< HEAD
         elem.x(styles),
+=======
+        elem.x.get(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         || size.as_ref().map(|size| size.x).map_err(Clone::clone),
         styles,
     )?;
 
     let y = resolve_axis(
+<<<<<<< HEAD
         elem.y(styles),
+=======
+        elem.y.get(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         || size.as_ref().map(|size| size.y).map_err(Clone::clone),
         styles,
     )?;
@@ -152,9 +182,15 @@ pub fn layout_skew(
     styles: StyleChain,
     region: Region,
 ) -> SourceResult<Frame> {
+<<<<<<< HEAD
     let ax = elem.ax(styles);
     let ay = elem.ay(styles);
     let align = elem.origin(styles).resolve(styles);
+=======
+    let ax = elem.ax.get(styles);
+    let ay = elem.ay.get(styles);
+    let align = elem.origin.resolve(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Compute the new region's approximate size.
     let size = if region.size.is_finite() {
@@ -172,7 +208,11 @@ pub fn layout_skew(
         &elem.body,
         Transform::skew(ax, ay),
         align,
+<<<<<<< HEAD
         elem.reflow(styles),
+=======
+        elem.reflow.get(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     )
 }
 

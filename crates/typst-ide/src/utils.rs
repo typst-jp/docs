@@ -2,7 +2,11 @@ use std::fmt::Write;
 use std::ops::ControlFlow;
 
 use comemo::Track;
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
+=======
+use ecow::{EcoString, eco_format};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst::engine::{Engine, Route, Sink, Traced};
 use typst::foundations::{Scope, Value};
 use typst::introspection::Introspector;
@@ -77,23 +81,36 @@ pub fn plain_docs_sentence(docs: &str) -> EcoString {
 }
 
 /// Create a short description of a font family.
+<<<<<<< HEAD
 pub fn summarize_font_family<'a>(
     variants: impl Iterator<Item = &'a FontInfo>,
 ) -> EcoString {
     let mut infos: Vec<_> = variants.collect();
     infos.sort_by_key(|info| info.variant);
+=======
+pub fn summarize_font_family(mut variants: Vec<&FontInfo>) -> EcoString {
+    variants.sort_by_key(|info| info.variant);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     let mut has_italic = false;
     let mut min_weight = u16::MAX;
     let mut max_weight = 0;
+<<<<<<< HEAD
     for info in &infos {
+=======
+    for info in &variants {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let weight = info.variant.weight.to_number();
         has_italic |= info.variant.style == FontStyle::Italic;
         min_weight = min_weight.min(weight);
         max_weight = min_weight.max(weight);
     }
 
+<<<<<<< HEAD
     let count = infos.len();
+=======
+    let count = variants.len();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut detail = eco_format!("{count} variant{}.", if count == 1 { "" } else { "s" });
 
     if min_weight == max_weight {
@@ -117,6 +134,7 @@ pub fn globals<'a>(world: &'a dyn IdeWorld, leaf: &LinkedNode) -> &'a Scope {
             | Some(SyntaxKind::Math)
             | Some(SyntaxKind::MathFrac)
             | Some(SyntaxKind::MathAttach)
+<<<<<<< HEAD
     );
 
     let library = world.library();
@@ -125,6 +143,14 @@ pub fn globals<'a>(world: &'a dyn IdeWorld, leaf: &LinkedNode) -> &'a Scope {
     } else {
         library.global.scope()
     }
+=======
+    ) && leaf
+        .prev_leaf()
+        .is_none_or(|prev| !matches!(prev.kind(), SyntaxKind::Hash));
+
+    let library = world.library();
+    if in_math { library.math.scope() } else { library.global.scope() }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Checks whether the given value or any of its constituent parts satisfy the

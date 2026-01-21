@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 use crate::foundations::{cast, elem, Content, Func, Smart};
+=======
+use crate::foundations::{Content, Func, Smart, cast, elem};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::layout::{Abs, Angle, Length, Ratio, Rel};
 use crate::math::Mathy;
 use crate::visualize::Stroke;
 
+<<<<<<< HEAD
 /// 数式の一部分上に対角線を表示。
 ///
 /// 項の除去を示すのによく使われます。
 ///
 /// # 例
+=======
+/// Displays a diagonal line over a part of an equation.
+///
+/// This is commonly used to show the elimination of a term.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// >>> #set page(width: 140pt)
 /// Here, we can simplify:
@@ -16,24 +28,43 @@ use crate::visualize::Stroke;
 /// ```
 #[elem(Mathy)]
 pub struct CancelElem {
+<<<<<<< HEAD
     /// 線が配置されるべきコンテンツ。
     #[required]
     pub body: Content,
 
     /// 「キャンセル」したい要素全体をまたぐ対角線を基準とした相対的な線の長さ。
     /// `{100%}`という値は、要素の対角線と正確に一致する長さになります。
+=======
+    /// The content over which the line should be placed.
+    #[required]
+    pub body: Content,
+
+    /// The length of the line, relative to the length of the diagonal spanning
+    /// the whole element being "cancelled". A value of `{100%}` would then have
+    /// the line span precisely the element's diagonal.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// >>> #set page(width: 140pt)
     /// $ a + cancel(x, length: #200%)
     ///     - cancel(x, length: #200%) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[default(Rel::new(Ratio::one(), Abs::pt(3.0).into()))]
     pub length: Rel<Length>,
 
     /// 打ち消し線を（y軸に関して）反転させるべきかどうか。
     /// デフォルト角度設定では、反転により打ち消し線が右上ではなく左上を指すようになります。
+=======
+    #[default(Rel::new(Ratio::one(), Abs::pt(3.0).into()))]
+    pub length: Rel<Length>,
+
+    /// Whether the cancel line should be inverted (flipped along the y-axis).
+    /// For the default angle setting, inverted means the cancel line
+    /// points to the top left instead of top right.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// >>> #set page(width: 140pt)
@@ -43,8 +74,13 @@ pub struct CancelElem {
     #[default(false)]
     pub inverted: bool,
 
+<<<<<<< HEAD
     /// 要素上で交差する、相対する2つの打ち消し線を描画するかどうか。
     /// これは`inverted`を上書きします。
+=======
+    /// Whether two opposing cancel lines should be drawn, forming a cross over
+    /// the element. Overrides `inverted`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// >>> #set page(width: 140pt)
@@ -53,12 +89,24 @@ pub struct CancelElem {
     #[default(false)]
     pub cross: bool,
 
+<<<<<<< HEAD
     /// 打ち消し線をどれくらい回転させるか。
     ///
     /// - 角度が与えられた場合、y軸方向を0度として時計回りに与えられた角度だけ線が回転します。
     /// - `{auto}`の場合、デフォルトの角度を用いた線となります。すなわち、コンテンツのボックスの右上がりの対角線に沿うものになります。
     /// - `angle => angle`の形の関数が与えられた場合、y軸方向を0度として、その関数が返す角度で線が回転します。
     /// 関数は入力としてデフォルトの角度を受け取ります。
+=======
+    /// How much to rotate the cancel line.
+    ///
+    /// - If given an angle, the line is rotated by that angle clockwise with
+    ///   respect to the y-axis.
+    /// - If `{auto}`, the line assumes the default angle; that is, along the
+    ///   rising diagonal of the content box.
+    /// - If given a function `angle => angle`, the line is rotated, with
+    ///   respect to the y-axis, by the angle returned by that function. The
+    ///   function receives the default angle as its input.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// >>> #set page(width: 140pt)
@@ -71,7 +119,11 @@ pub struct CancelElem {
     /// ```
     pub angle: Smart<CancelAngle>,
 
+<<<<<<< HEAD
     /// 打ち消し線の[ストローク]($stroke)をどうするか。
+=======
+    /// How to [stroke]($stroke) the cancel line.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// >>> #set page(width: 140pt)
@@ -84,7 +136,10 @@ pub struct CancelElem {
     ///   ),
     /// ) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     #[default(Stroke {
         // Default stroke has 0.5pt for better visuals.

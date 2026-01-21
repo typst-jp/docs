@@ -34,7 +34,11 @@ To the right! Where the sunlight peeks behind the mountain.
 #align(start)[Start]
 #align(end)[Ende]
 
+<<<<<<< HEAD
 #set text(lang: "ar")
+=======
+#set text(lang: "ar", font: "Noto Sans Arabic")
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #align(start)[يبدأ]
 #align(end)[نهاية]
 

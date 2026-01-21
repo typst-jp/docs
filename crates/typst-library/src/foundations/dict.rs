@@ -3,15 +3,25 @@ use std::hash::{Hash, Hasher};
 use std::ops::{Add, AddAssign};
 use std::sync::Arc;
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use indexmap::IndexMap;
+=======
+use ecow::{EcoString, eco_format};
+use indexmap::IndexMap;
+use rustc_hash::FxBuildHasher;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use typst_syntax::is_ident;
 use typst_utils::ArcExt;
 
 use crate::diag::{Hint, HintedStrResult, StrResult};
 use crate::foundations::{
+<<<<<<< HEAD
     array, cast, func, repr, scope, ty, Array, Module, Repr, Str, Value,
+=======
+    Array, Module, Repr, Str, Value, array, cast, func, repr, scope, ty,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// Create a new [`Dict`] from key-value pairs.
@@ -20,7 +30,11 @@ use crate::foundations::{
 macro_rules! __dict {
     ($($key:expr => $value:expr),* $(,)?) => {{
         #[allow(unused_mut)]
+<<<<<<< HEAD
         let mut map = $crate::foundations::IndexMap::new();
+=======
+        let mut map = $crate::foundations::IndexMap::default();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         $(map.insert($key.into(), $crate::foundations::IntoValue::into_value($value));)*
         $crate::foundations::Dict::from(map)
     }};
@@ -36,6 +50,7 @@ pub use crate::__dict as dict;
 /// empty parentheses already yield an empty array, you have to use the special
 /// `(:)` syntax to create an empty dictionary.
 ///
+<<<<<<< HEAD
 /// A dictionary is conceptually similar to an array, but it is indexed by
 /// strings instead of integers. You can access and create dictionary entries
 /// with the `.at()` method. If you know the key statically, you can
@@ -47,6 +62,23 @@ pub use crate::__dict as dict;
 /// You can iterate over the pairs in a dictionary using a [for
 /// loop]($scripting/#loops). This will iterate in the order the pairs were
 /// inserted / declared.
+=======
+/// A dictionary is conceptually similar to an [array], but it is indexed by
+/// strings instead of integers. You can access and create dictionary entries
+/// with the `.at()` method. If you know the key statically, you can
+/// alternatively use [field access notation]($scripting/#fields) (`.key`) to
+/// access the value. To check whether a key is present in the dictionary, use
+/// the `in` keyword.
+///
+/// You can iterate over the pairs in a dictionary using a [for
+/// loop]($scripting/#loops). This will iterate in the order the pairs were
+/// inserted / declared initially.
+///
+/// Dictionaries can be added with the `+` operator and [joined together]($scripting/#blocks).
+/// They can also be [spread]($arguments/#spreading) into a function call or
+/// another dictionary[^1] with the `..spread` operator. In each case, if a
+/// key appears multiple times, the last value will override the others.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// # Example
 /// ```example
@@ -61,12 +93,25 @@ pub use crate::__dict as dict;
 /// #dict.keys() \
 /// #dict.values() \
 /// #dict.at("born") \
+<<<<<<< HEAD
 /// #dict.insert("city", "Berlin ")
 /// #("name" in dict)
 /// ```
 #[ty(scope, cast, name = "dictionary")]
 #[derive(Default, Clone, PartialEq)]
 pub struct Dict(Arc<IndexMap<Str, Value>>);
+=======
+/// #dict.insert("city", "Berlin")
+/// #("name" in dict)
+/// ```
+///
+/// [^1]: When spreading into a dictionary, if all items between the parentheses
+/// are spread, you have to use the special `(:..spread)` syntax. Otherwise, it
+/// will spread into an array.
+#[ty(scope, cast, name = "dictionary")]
+#[derive(Default, Clone, PartialEq)]
+pub struct Dict(Arc<IndexMap<Str, Value, FxBuildHasher>>);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 impl Dict {
     /// Create a new, empty dictionary.
@@ -114,7 +159,11 @@ impl Dict {
     }
 
     /// Iterate over pairs of references to the contained keys and values.
+<<<<<<< HEAD
     pub fn iter(&self) -> indexmap::map::Iter<Str, Value> {
+=======
+    pub fn iter(&self) -> indexmap::map::Iter<'_, Str, Value> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0.iter()
     }
 
@@ -206,6 +255,12 @@ impl Dict {
 
     /// Inserts a new pair into the dictionary. If the dictionary already
     /// contains this key, the value is updated.
+<<<<<<< HEAD
+=======
+    ///
+    /// To insert multiple pairs at once, you can just alternatively another
+    /// dictionary with the `+=` operator.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn insert(
         &mut self,
@@ -343,7 +398,11 @@ impl<'de> Deserialize<'de> for Dict {
     where
         D: Deserializer<'de>,
     {
+<<<<<<< HEAD
         Ok(IndexMap::<Str, Value>::deserialize(deserializer)?.into())
+=======
+        Ok(IndexMap::<Str, Value, FxBuildHasher>::deserialize(deserializer)?.into())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -377,8 +436,13 @@ impl<'a> IntoIterator for &'a Dict {
     }
 }
 
+<<<<<<< HEAD
 impl From<IndexMap<Str, Value>> for Dict {
     fn from(map: IndexMap<Str, Value>) -> Self {
+=======
+impl From<IndexMap<Str, Value, FxBuildHasher>> for Dict {
+    fn from(map: IndexMap<Str, Value, FxBuildHasher>) -> Self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Self(Arc::new(map))
     }
 }

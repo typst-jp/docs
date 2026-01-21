@@ -14,25 +14,41 @@ mod methods;
 mod rules;
 mod vm;
 
+<<<<<<< HEAD
 pub use self::call::{eval_closure, CapturesVisitor};
 pub use self::flow::FlowEvent;
 pub use self::import::import;
 pub use self::vm::Vm;
 pub use typst_library::routines::EvalMode;
+=======
+pub use self::call::{CapturesVisitor, eval_closure};
+pub use self::flow::FlowEvent;
+pub use self::import::import;
+pub use self::vm::Vm;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use self::access::*;
 use self::binding::*;
 use self::methods::*;
 
 use comemo::{Track, Tracked, TrackedMut};
+<<<<<<< HEAD
 use typst_library::diag::{bail, SourceResult};
+=======
+use typst_library::World;
+use typst_library::diag::{SourceResult, bail};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::engine::{Engine, Route, Sink, Traced};
 use typst_library::foundations::{Context, Module, NativeElement, Scope, Scopes, Value};
 use typst_library::introspection::Introspector;
 use typst_library::math::EquationElem;
 use typst_library::routines::Routines;
+<<<<<<< HEAD
 use typst_library::World;
 use typst_syntax::{ast, parse, parse_code, parse_math, Source, Span};
+=======
+use typst_syntax::{Source, Span, SyntaxMode, ast, parse, parse_code, parse_math};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Evaluate a source file and return the resulting module.
 #[comemo::memoize]
@@ -101,6 +117,7 @@ pub fn eval(
 pub fn eval_string(
     routines: &Routines,
     world: Tracked<dyn World + '_>,
+<<<<<<< HEAD
     string: &str,
     span: Span,
     mode: EvalMode,
@@ -110,6 +127,18 @@ pub fn eval_string(
         EvalMode::Code => parse_code(string),
         EvalMode::Markup => parse(string),
         EvalMode::Math => parse_math(string),
+=======
+    sink: TrackedMut<Sink>,
+    string: &str,
+    span: Span,
+    mode: SyntaxMode,
+    scope: Scope,
+) -> SourceResult<Value> {
+    let mut root = match mode {
+        SyntaxMode::Code => parse_code(string),
+        SyntaxMode::Markup => parse(string),
+        SyntaxMode::Math => parse_math(string),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     };
 
     root.synthesize(span);
@@ -121,7 +150,10 @@ pub fn eval_string(
     }
 
     // Prepare the engine.
+<<<<<<< HEAD
     let mut sink = Sink::new();
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let introspector = Introspector::default();
     let traced = Traced::default();
     let engine = Engine {
@@ -129,7 +161,11 @@ pub fn eval_string(
         world,
         introspector: introspector.track(),
         traced: traced.track(),
+<<<<<<< HEAD
         sink: sink.track_mut(),
+=======
+        sink,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         route: Route::default(),
     };
 
@@ -141,11 +177,19 @@ pub fn eval_string(
 
     // Evaluate the code.
     let output = match mode {
+<<<<<<< HEAD
         EvalMode::Code => root.cast::<ast::Code>().unwrap().eval(&mut vm)?,
         EvalMode::Markup => {
             Value::Content(root.cast::<ast::Markup>().unwrap().eval(&mut vm)?)
         }
         EvalMode::Math => Value::Content(
+=======
+        SyntaxMode::Code => root.cast::<ast::Code>().unwrap().eval(&mut vm)?,
+        SyntaxMode::Markup => {
+            Value::Content(root.cast::<ast::Markup>().unwrap().eval(&mut vm)?)
+        }
+        SyntaxMode::Math => Value::Content(
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             EquationElem::new(root.cast::<ast::Math>().unwrap().eval(&mut vm)?)
                 .with_block(false)
                 .pack()

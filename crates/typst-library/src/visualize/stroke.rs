@@ -3,8 +3,13 @@ use typst_utils::{Numeric, Scalar};
 
 use crate::diag::{HintedStrResult, SourceResult};
 use crate::foundations::{
+<<<<<<< HEAD
     cast, dict, func, scope, ty, Args, Cast, Dict, Fold, FromValue, NoneValue, Repr,
     Resolve, Smart, StyleChain, Value,
+=======
+    Args, Cast, Dict, Fold, FromValue, NoneValue, Repr, Resolve, Smart, StyleChain,
+    Value, cast, dict, func, scope, ty,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::{Abs, Length};
 use crate::visualize::{Color, Gradient, Paint, Tiling};

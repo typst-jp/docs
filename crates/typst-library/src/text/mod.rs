@@ -30,9 +30,16 @@ pub use self::space::*;
 
 use std::fmt::{self, Debug, Formatter};
 use std::hash::Hash;
+<<<<<<< HEAD
 use std::sync::LazyLock;
 
 use ecow::{eco_format, EcoString};
+=======
+use std::str::FromStr;
+use std::sync::LazyLock;
+
+use ecow::{EcoString, eco_format};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use icu_properties::sets::CodePointSetData;
 use icu_provider::AsDeserializingBufferProvider;
 use icu_provider_blob::BlobDataProvider;
@@ -42,17 +49,30 @@ use ttf_parser::Tag;
 use typst_syntax::Spanned;
 use typst_utils::singleton;
 
+<<<<<<< HEAD
 use crate::diag::{bail, warning, HintedStrResult, SourceResult};
 use crate::engine::Engine;
 use crate::foundations::{
     cast, dict, elem, Args, Array, Cast, Construct, Content, Dict, Fold, IntoValue,
     NativeElement, Never, NoneValue, Packed, PlainText, Regex, Repr, Resolve, Scope, Set,
     Smart, StyleChain,
+=======
+use crate::World;
+use crate::diag::{HintedStrResult, SourceResult, StrResult, bail, warning};
+use crate::engine::Engine;
+use crate::foundations::{
+    Args, Array, Cast, Construct, Content, Dict, Fold, IntoValue, NativeElement, Never,
+    NoneValue, Packed, PlainText, Regex, Repr, Resolve, Scope, Set, Smart, StyleChain,
+    cast, dict, elem,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::{Abs, Axis, Dir, Em, Length, Ratio, Rel};
 use crate::math::{EquationElem, MathSize};
 use crate::visualize::{Color, Paint, RelativeTo, Stroke};
+<<<<<<< HEAD
 use crate::World;
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Hook up all `text` definitions.
 pub(super) fn define(global: &mut Scope) {
@@ -91,7 +111,11 @@ pub(super) fn define(global: &mut Scope) {
 /// ```
 #[elem(Debug, Construct, PlainText, Repr)]
 pub struct TextElem {
+<<<<<<< HEAD
     /// A font family descriptor or priority list of font family descriptor.
+=======
+    /// A font family descriptor or priority list of font family descriptors.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// A font family descriptor can be a plain string representing the family
     /// name or a dictionary with the following keys:
@@ -101,7 +125,11 @@ pub struct TextElem {
     ///   family shall be used. This can be:
     ///   - A predefined coverage set:
     ///     - `{"latin-in-cjk"}` covers all codepoints except for those which
+<<<<<<< HEAD
     ///       exist in Latin fonts, but should preferrably be taken from CJK
+=======
+    ///       exist in Latin fonts, but should preferably be taken from CJK
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///       fonts.
     ///   - A [regular expression]($regex) that defines exactly which codepoints
     ///     shall be covered. Accepts only the subset of regular expressions
@@ -164,7 +192,10 @@ pub struct TextElem {
         font_list.map(|font_list| font_list.v)
     })]
     #[default(FontList(vec![FontFamily::new("Libertinus Serif")]))]
+<<<<<<< HEAD
     #[borrowed]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub font: FontList,
 
@@ -259,7 +290,10 @@ pub struct TextElem {
     #[parse(args.named_or_find("size")?)]
     #[fold]
     #[default(TextSize(Abs::pt(11.0).into()))]
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub size: TextSize,
 
@@ -271,15 +305,23 @@ pub struct TextElem {
     /// ```
     #[parse({
         let paint: Option<Spanned<Paint>> = args.named_or_find("fill")?;
+<<<<<<< HEAD
         if let Some(paint) = &paint {
             if paint.v.relative() == Smart::Custom(RelativeTo::Self_) {
+=======
+        if let Some(paint) = &paint
+            && paint.v.relative() == Smart::Custom(RelativeTo::Self_) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 bail!(
                     paint.span,
                     "gradients and tilings on text must be relative to the parent";
                     hint: "make sure to set `relative: auto` on your text fill"
                 );
             }
+<<<<<<< HEAD
         }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         paint.map(|paint| paint.v)
     })]
     #[default(Color::BLACK.into())]
@@ -291,7 +333,10 @@ pub struct TextElem {
     /// ```example
     /// #text(stroke: 0.5pt + red)[Stroked]
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub stroke: Option<Stroke>,
 
@@ -301,7 +346,10 @@ pub struct TextElem {
     /// #set text(tracking: 1.5pt)
     /// Distant text.
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub tracking: Length,
 
@@ -317,7 +365,10 @@ pub struct TextElem {
     /// #set text(spacing: 200%)
     /// Text with distant words.
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[default(Rel::one())]
     #[ghost]
     pub spacing: Rel<Length>,
@@ -340,7 +391,10 @@ pub struct TextElem {
     /// A #text(baseline: 3pt)[lowered]
     /// word.
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub baseline: Length,
 
@@ -348,15 +402,27 @@ pub struct TextElem {
     /// This can make justification visually more pleasing.
     ///
     /// ```example
+<<<<<<< HEAD
     /// #set par(justify: true)
     /// This justified text has a hyphen in
     /// the paragraph's first line. Hanging
+=======
+    /// #set page(width: 220pt)
+    ///
+    /// #set par(justify: true)
+    /// This justified text has a hyphen in
+    /// the paragraph's second line. Hanging
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// the hyphen slightly into the margin
     /// results in a clearer paragraph edge.
     ///
     /// #set text(overhang: false)
     /// This justified text has a hyphen in
+<<<<<<< HEAD
     /// the paragraph's first line. Hanging
+=======
+    /// the paragraph's second line. Hanging
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// the hyphen slightly into the margin
     /// results in a clearer paragraph edge.
     /// ```
@@ -408,7 +474,34 @@ pub struct TextElem {
     ///   language.
     /// - And all other things which are language-aware.
     ///
+<<<<<<< HEAD
     /// ```example
+=======
+    /// Choosing the correct language is important for accessibility. For
+    /// example, screen readers will use it to choose a voice that matches the
+    /// language of the text. If your document is in another language than
+    /// English (the default), you should set the text language at the start of
+    /// your document, before any other content. You can, for example, put it
+    /// right after the `[#set document(/* ... */)]` rule that [sets your
+    /// document's title]($document.title).
+    ///
+    /// If your document contains passages in a different language than the main
+    /// language, you should locally change the text language just for those parts,
+    /// either with a set rule [scoped to a block]($scripting/#blocks) or using
+    /// a direct text function call such as `[#text(lang: "de")[...]]`.
+    ///
+    /// If multiple codes are available for your language, you should prefer the
+    /// two-letter code (ISO 639-1) over the three-letter codes (ISO 639-2/3).
+    /// When you have to use a three-letter code and your language differs
+    /// between ISO 639-2 and ISO 639-3, use ISO 639-2 for PDF 1.7 (Typst's
+    /// default for PDF export) and below and ISO 639-3 for PDF 2.0 and HTML
+    /// export.
+    ///
+    /// The language code is case-insensitive, and will be lowercased when
+    /// accessed through [context]($context).
+    ///
+    /// ```example:"Setting the text language to German"
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// #set text(lang: "de")
     /// #outline()
     ///
@@ -422,6 +515,12 @@ pub struct TextElem {
     /// An [ISO 3166-1 alpha-2 region code.](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
     ///
     /// This lets the text processing pipeline make more informed choices.
+<<<<<<< HEAD
+=======
+    ///
+    /// The region code is case-insensitive, and will be uppercased when
+    /// accessed through [context]($context).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub region: Option<Region>,
 
@@ -480,7 +579,10 @@ pub struct TextElem {
     /// #set text(dir: rtl)
     /// هذا عربي.
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[ghost]
     pub dir: TextDir,
 
@@ -752,6 +854,15 @@ pub struct TextElem {
     #[internal]
     #[ghost]
     pub smallcaps: Option<Smallcaps>,
+<<<<<<< HEAD
+=======
+
+    /// The configuration for superscripts or subscripts, if one of them is
+    /// enabled.
+    #[internal]
+    #[ghost]
+    pub shift_settings: Option<ShiftSettings>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl TextElem {
@@ -891,9 +1002,27 @@ cast! {
 }
 
 /// Font family fallback list.
+<<<<<<< HEAD
 #[derive(Debug, Default, Clone, PartialEq, Hash)]
 pub struct FontList(pub Vec<FontFamily>);
 
+=======
+///
+/// Must contain at least one font.
+#[derive(Debug, Default, Clone, PartialEq, Hash)]
+pub struct FontList(pub Vec<FontFamily>);
+
+impl FontList {
+    pub fn new(fonts: Vec<FontFamily>) -> StrResult<Self> {
+        if fonts.is_empty() {
+            bail!("font fallback list must not be empty")
+        } else {
+            Ok(Self(fonts))
+        }
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl<'a> IntoIterator for &'a FontList {
     type IntoIter = std::slice::Iter<'a, FontFamily>;
     type Item = &'a FontFamily;
@@ -911,11 +1040,19 @@ cast! {
         self.0.into_value()
     },
     family: FontFamily => Self(vec![family]),
+<<<<<<< HEAD
     values: Array => Self(values.into_iter().map(|v| v.cast()).collect::<HintedStrResult<_>>()?),
 }
 
 /// Resolve a prioritized iterator over the font families.
 pub fn families(styles: StyleChain) -> impl Iterator<Item = &FontFamily> + Clone {
+=======
+    values: Array => Self::new(values.into_iter().map(|v| v.cast()).collect::<HintedStrResult<_>>()?)?,
+}
+
+/// Resolve a prioritized iterator over the font families.
+pub fn families(styles: StyleChain<'_>) -> impl Iterator<Item = &'_ FontFamily> + Clone {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let fallbacks = singleton!(Vec<FontFamily>, {
         [
             "libertinus serif",
@@ -929,24 +1066,42 @@ pub fn families(styles: StyleChain) -> impl Iterator<Item = &FontFamily> + Clone
         .collect()
     });
 
+<<<<<<< HEAD
     let tail = if TextElem::fallback_in(styles) { fallbacks.as_slice() } else { &[] };
     TextElem::font_in(styles).into_iter().chain(tail.iter())
+=======
+    let tail = if styles.get(TextElem::fallback) { fallbacks.as_slice() } else { &[] };
+    styles.get_ref(TextElem::font).into_iter().chain(tail.iter())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Resolve the font variant.
 pub fn variant(styles: StyleChain) -> FontVariant {
     let mut variant = FontVariant::new(
+<<<<<<< HEAD
         TextElem::style_in(styles),
         TextElem::weight_in(styles),
         TextElem::stretch_in(styles),
     );
 
     let WeightDelta(delta) = TextElem::delta_in(styles);
+=======
+        styles.get(TextElem::style),
+        styles.get(TextElem::weight),
+        styles.get(TextElem::stretch),
+    );
+
+    let WeightDelta(delta) = styles.get(TextElem::delta);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     variant.weight = variant
         .weight
         .thicken(delta.clamp(i16::MIN as i64, i16::MAX as i64) as i16);
 
+<<<<<<< HEAD
     if TextElem::emph_in(styles).0 {
+=======
+    if styles.get(TextElem::emph).0 {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         variant.style = match variant.style {
             FontStyle::Normal => FontStyle::Italic,
             FontStyle::Italic => FontStyle::Normal,
@@ -975,11 +1130,19 @@ impl Resolve for TextSize {
     type Output = Abs;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
+<<<<<<< HEAD
         let factor = match EquationElem::size_in(styles) {
             MathSize::Display | MathSize::Text => 1.0,
             MathSize::Script => EquationElem::script_scale_in(styles).0 as f64 / 100.0,
             MathSize::ScriptScript => {
                 EquationElem::script_scale_in(styles).1 as f64 / 100.0
+=======
+        let factor = match styles.get(EquationElem::size) {
+            MathSize::Display | MathSize::Text => 1.0,
+            MathSize::Script => styles.get(EquationElem::script_scale).0 as f64 / 100.0,
+            MathSize::ScriptScript => {
+                styles.get(EquationElem::script_scale).1 as f64 / 100.0
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         };
         factor * self.0.resolve(styles)
@@ -1014,6 +1177,7 @@ cast! {
 /// Metrics that describe the top edge of text.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum TopEdgeMetric {
+<<<<<<< HEAD
     /// フォントアセンダー。通常、これは全ての字形の高さを超えます。
     Ascender,
     /// 大文字の高さの近似値。
@@ -1023,6 +1187,17 @@ pub enum TopEdgeMetric {
     /// 文字が置かれるベースライン。
     Baseline,
     /// 字形が持つバウンディングボックスの上端。
+=======
+    /// The font's ascender, which typically exceeds the height of all glyphs.
+    Ascender,
+    /// The approximate height of uppercase letters.
+    CapHeight,
+    /// The approximate height of non-ascending lowercase letters.
+    XHeight,
+    /// The baseline on which the letters rest.
+    Baseline,
+    /// The top edge of the glyph's bounding box.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     Bounds,
 }
 
@@ -1062,11 +1237,19 @@ cast! {
 /// Metrics that describe the bottom edge of text.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum BottomEdgeMetric {
+<<<<<<< HEAD
     /// 文字が置かれるベースライン。
     Baseline,
     /// フォントディセンダー。通常、これは全ての字形の深さを超えます。
     Descender,
     /// 字形が持つバウンディングボックスの下端。
+=======
+    /// The baseline on which the letters rest.
+    Baseline,
+    /// The font's descender, which typically exceeds the depth of all glyphs.
+    Descender,
+    /// The bottom edge of the glyph's bounding box.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     Bounds,
 }
 
@@ -1102,14 +1285,22 @@ impl Resolve for TextDir {
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
         match self.0 {
+<<<<<<< HEAD
             Smart::Auto => TextElem::lang_in(styles).dir(),
+=======
+            Smart::Auto => styles.get(TextElem::lang).dir(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Smart::Custom(dir) => dir,
         }
     }
 }
 
 /// A set of stylistic sets to enable.
+<<<<<<< HEAD
 #[derive(Debug, Copy, Clone, Default, Eq, PartialEq, Hash)]
+=======
+#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct StylisticSets(u32);
 
 impl StylisticSets {
@@ -1215,32 +1406,53 @@ pub fn features(styles: StyleChain) -> Vec<Feature> {
     };
 
     // Features that are on by default in Harfbuzz are only added if disabled.
+<<<<<<< HEAD
     if !TextElem::kerning_in(styles) {
+=======
+    if !styles.get(TextElem::kerning) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         feat(b"kern", 0);
     }
 
     // Features that are off by default in Harfbuzz are only added if enabled.
+<<<<<<< HEAD
     if let Some(sc) = TextElem::smallcaps_in(styles) {
+=======
+    if let Some(sc) = styles.get(TextElem::smallcaps) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         feat(b"smcp", 1);
         if sc == Smallcaps::All {
             feat(b"c2sc", 1);
         }
     }
 
+<<<<<<< HEAD
     if TextElem::alternates_in(styles) {
         feat(b"salt", 1);
     }
 
     for set in TextElem::stylistic_set_in(styles).sets() {
+=======
+    if styles.get(TextElem::alternates) {
+        feat(b"salt", 1);
+    }
+
+    for set in styles.get(TextElem::stylistic_set).sets() {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let storage = [b's', b's', b'0' + set / 10, b'0' + set % 10];
         feat(&storage, 1);
     }
 
+<<<<<<< HEAD
     if !TextElem::ligatures_in(styles) {
+=======
+    if !styles.get(TextElem::ligatures) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         feat(b"liga", 0);
         feat(b"clig", 0);
     }
 
+<<<<<<< HEAD
     if TextElem::discretionary_ligatures_in(styles) {
         feat(b"dlig", 1);
     }
@@ -1250,17 +1462,33 @@ pub fn features(styles: StyleChain) -> Vec<Feature> {
     }
 
     match TextElem::number_type_in(styles) {
+=======
+    if styles.get(TextElem::discretionary_ligatures) {
+        feat(b"dlig", 1);
+    }
+
+    if styles.get(TextElem::historical_ligatures) {
+        feat(b"hlig", 1);
+    }
+
+    match styles.get(TextElem::number_type) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Smart::Auto => {}
         Smart::Custom(NumberType::Lining) => feat(b"lnum", 1),
         Smart::Custom(NumberType::OldStyle) => feat(b"onum", 1),
     }
 
+<<<<<<< HEAD
     match TextElem::number_width_in(styles) {
+=======
+    match styles.get(TextElem::number_width) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Smart::Auto => {}
         Smart::Custom(NumberWidth::Proportional) => feat(b"pnum", 1),
         Smart::Custom(NumberWidth::Tabular) => feat(b"tnum", 1),
     }
 
+<<<<<<< HEAD
     if TextElem::slashed_zero_in(styles) {
         feat(b"zero", 1);
     }
@@ -1270,12 +1498,43 @@ pub fn features(styles: StyleChain) -> Vec<Feature> {
     }
 
     for (tag, value) in TextElem::features_in(styles).0 {
+=======
+    if styles.get(TextElem::slashed_zero) {
+        feat(b"zero", 1);
+    }
+
+    if styles.get(TextElem::fractions) {
+        feat(b"frac", 1);
+    }
+
+    match styles.get(EquationElem::size) {
+        MathSize::Script => feat(b"ssty", 1),
+        MathSize::ScriptScript => feat(b"ssty", 2),
+        _ => {}
+    }
+
+    for (tag, value) in styles.get_cloned(TextElem::features).0 {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         tags.push(Feature::new(tag, value, ..))
     }
 
     tags
 }
 
+<<<<<<< HEAD
+=======
+/// Process the language and region of a style chain into a
+/// rustybuzz-compatible BCP 47 language.
+pub fn language(styles: StyleChain) -> rustybuzz::Language {
+    let mut bcp: EcoString = styles.get(TextElem::lang).as_str().into();
+    if let Some(region) = styles.get(TextElem::region) {
+        bcp.push('-');
+        bcp.push_str(region.as_str());
+    }
+    rustybuzz::Language::from_str(&bcp).unwrap()
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A toggle that turns on and off alternatingly if folded.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct ItalicToggle(pub bool);
@@ -1380,12 +1639,33 @@ pub fn is_default_ignorable(c: char) -> bool {
 fn check_font_list(engine: &mut Engine, list: &Spanned<FontList>) {
     let book = engine.world.book();
     for family in &list.v {
+<<<<<<< HEAD
         if !book.contains_family(family.as_str()) {
             engine.sink.warn(warning!(
                 list.span,
                 "unknown font family: {}",
                 family.as_str(),
             ));
+=======
+        match book.select_family(family.as_str()).next() {
+            Some(index) => {
+                if book
+                    .info(index)
+                    .is_some_and(|x| x.flags.contains(FontFlags::VARIABLE))
+                {
+                    engine.sink.warn(warning!(
+                        list.span,
+                        "variable fonts are not currently supported and may render incorrectly";
+                        hint: "try installing a static version of \"{}\" instead", family.as_str()
+                    ))
+                }
+            }
+            None => engine.sink.warn(warning!(
+                list.span,
+                "unknown font family: {}",
+                family.as_str(),
+            )),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }

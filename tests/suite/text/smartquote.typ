@@ -46,6 +46,13 @@
 #set text(lang: "ru")
 "Лошадь не ест салат из огурцов" - это была первая фраза, сказанная по 'телефону'.
 
+<<<<<<< HEAD
+=======
+--- smartquote-uk ---
+#set text(lang: "uk")
+"Кінь не їсть огірковий салат" — перше речення, коли-небудь вимовлене по 'телефону'.
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- smartquote-it ---
 #set text(lang: "it")
 "Il cavallo non mangia insalata di cetrioli" è stata la prima frase pronunciata al 'telefono'.
@@ -99,7 +106,11 @@ He's told some books contain questionable "example text".
 
 --- smartquote-disabled-temporarily ---
 // Test changing properties within text.
+<<<<<<< HEAD
 "She suddenly started speaking french: #text(lang: "fr")['Je suis une banane.']" Roman told me.
+=======
+"She suddenly started speaking french: #text(lang: "fr", region: "CH")['Je suis une banane.']" Roman told me.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 Some people's thought on this would be #[#set smartquote(enabled: false); "strange."]
 
@@ -109,6 +120,19 @@ Some people's thought on this would be #[#set smartquote(enabled: false); "stran
 "'test' statement" \
 "statement 'test'"
 
+<<<<<<< HEAD
+=======
+--- smartquote-nesting-twice render html ---
+When you said _that "he_ surely meant that 'she intended to say "I'm sorry"'", I was quite confused.
+
+'#box[box]'
+
+--- smartquote-inline-block html ---
+Applies across #html.span["inline-level] elements".
+
+Does not apply across #html.div["block-level] elements".
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- smartquote-with-embedding-chars ---
 #set text(lang: "fr")
 "#"\u{202A}"bonjour#"\u{202C}"" \

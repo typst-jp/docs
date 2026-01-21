@@ -2,12 +2,17 @@ use std::f64::consts::PI;
 
 use typst_syntax::Span;
 
+<<<<<<< HEAD
 use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{
     elem, func, scope, Content, NativeElement, Packed, Show, Smart, StyleChain,
 };
 use crate::layout::{Axes, BlockElem, Em, Length, Rel};
+=======
+use crate::foundations::{Content, NativeElement, Smart, elem, func, scope};
+use crate::layout::{Axes, Em, Length, Rel};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::visualize::{FillRule, Paint, Stroke};
 
 /// A closed polygon.
@@ -25,7 +30,11 @@ use crate::visualize::{FillRule, Paint, Stroke};
 ///   (0%,  2cm),
 /// )
 /// ```
+<<<<<<< HEAD
 #[elem(scope, Show)]
+=======
+#[elem(scope)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct PolygonElem {
     /// How to fill the polygon.
     ///
@@ -39,11 +48,18 @@ pub struct PolygonElem {
     #[default]
     pub fill_rule: FillRule,
 
+<<<<<<< HEAD
     /// How to [stroke] the polygon. This can be:
     ///
     /// Can be set to  `{none}` to disable the stroke or to `{auto}` for a
     /// stroke of `{1pt}` black if and if only if no fill is given.
     #[resolve]
+=======
+    /// How to [stroke] the polygon.
+    ///
+    /// Can be set to  `{none}` to disable the stroke or to `{auto}` for a
+    /// stroke of `{1pt}` black if and only if no fill is given.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub stroke: Smart<Option<Stroke>>,
 
@@ -117,14 +133,22 @@ impl PolygonElem {
 
         let mut elem = PolygonElem::new(vertices);
         if let Some(fill) = fill {
+<<<<<<< HEAD
             elem.push_fill(fill);
         }
         if let Some(stroke) = stroke {
             elem.push_stroke(stroke);
+=======
+            elem.fill.set(fill);
+        }
+        if let Some(stroke) = stroke {
+            elem.stroke.set(stroke);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         elem.pack().spanned(span)
     }
 }
+<<<<<<< HEAD
 
 impl Show for Packed<PolygonElem> {
     fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
@@ -133,3 +157,5 @@ impl Show for Packed<PolygonElem> {
             .spanned(self.span()))
     }
 }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

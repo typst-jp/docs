@@ -1,6 +1,10 @@
 // Test configuring paragraph properties.
 
+<<<<<<< HEAD
 --- par-basic ---
+=======
+--- par-basic render pdftags ---
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set page(width: 250pt, height: 120pt)
 
 But, soft! what light through yonder window breaks? It is the east, and Juliet
@@ -194,7 +198,11 @@ Even the first.
 
 + D
 
+<<<<<<< HEAD
 --- par-first-line-indent-all-terms ---
+=======
+--- par-first-line-indent-all-terms render pdftags ---
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #show terms.where(tight: false): set terms(spacing: 1.2em)
 #set terms(hanging-indent: 10pt)
 #set par(
@@ -231,7 +239,11 @@ Welcome \ here. Does this work well?
 
 --- par-hanging-indent-rtl ---
 #set par(hanging-indent: 2em)
+<<<<<<< HEAD
 #set text(dir: rtl)
+=======
+#set text(dir: rtl, font: ("Libertinus Serif", "Noto Sans Arabic"))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 لآن وقد أظلم الليل وبدأت النجوم
 تنضخ وجه الطبيعة التي أعْيَتْ من طول ما انبعثت في النهار
 

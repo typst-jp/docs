@@ -5,4 +5,11 @@ bibliography = Viitteet
 heading = Osio
 outline = Sisällys
 raw = Esimerkki
+<<<<<<< HEAD
 page = sivu
+=======
+page = sivu
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

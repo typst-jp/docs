@@ -6,14 +6,23 @@ use typst_library::layout::{
 };
 use typst_library::routines::Pair;
 use typst_library::text::{
+<<<<<<< HEAD
     is_default_ignorable, LinebreakElem, SmartQuoteElem, SmartQuoter, SmartQuotes,
     SpaceElem, TextElem,
+=======
+    LinebreakElem, SmartQuoteElem, SmartQuoter, SmartQuotes, SpaceElem, TextElem,
+    is_default_ignorable,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use typst_syntax::Span;
 use typst_utils::Numeric;
 
 use super::*;
+<<<<<<< HEAD
 use crate::modifiers::{layout_and_modify, FrameModifiers, FrameModify};
+=======
+use crate::modifiers::{FrameModifiers, FrameModify, layout_and_modify};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 // The characters by which spacing, inline content and pins are replaced in the
 // full text.
@@ -46,6 +55,14 @@ pub enum Item<'a> {
 }
 
 impl<'a> Item<'a> {
+<<<<<<< HEAD
+=======
+    /// Whether this is a tag item.
+    pub fn is_tag(&self) -> bool {
+        matches!(self, Self::Tag(_))
+    }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// If this a text item, return it.
     pub fn text(&self) -> Option<&ShapedText<'a>> {
         match self {
@@ -82,7 +99,11 @@ impl<'a> Item<'a> {
     /// The natural layouted width of the item.
     pub fn natural_width(&self) -> Abs {
         match self {
+<<<<<<< HEAD
             Self::Text(shaped) => shaped.width,
+=======
+            Self::Text(shaped) => shaped.width(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Absolute(v, _) => *v,
             Self::Frame(frame) => frame.width(),
             Self::Fractional(_, _) | Self::Tag(_) => Abs::zero(),
@@ -144,7 +165,11 @@ pub fn collect<'a>(
             collector.push_text(" ", styles);
         } else if let Some(elem) = child.to_packed::<TextElem>() {
             collector.build_text(styles, |full| {
+<<<<<<< HEAD
                 let dir = TextElem::dir_in(styles);
+=======
+                let dir = styles.resolve(TextElem::dir);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 if dir != config.dir {
                     // Insert "Explicit Directional Embedding".
                     match dir {
@@ -154,7 +179,11 @@ pub fn collect<'a>(
                     }
                 }
 
+<<<<<<< HEAD
                 if let Some(case) = TextElem::case_in(styles) {
+=======
+                if let Some(case) = styles.get(TextElem::case) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     full.push_str(&case.apply(&elem.text));
                 } else {
                     full.push_str(&elem.text);
@@ -174,6 +203,7 @@ pub fn collect<'a>(
                 Spacing::Fr(fr) => Item::Fractional(fr, None),
                 Spacing::Rel(rel) => Item::Absolute(
                     rel.resolve(styles).relative_to(region.x),
+<<<<<<< HEAD
                     elem.weak(styles),
                 ),
             });
@@ -188,13 +218,35 @@ pub fn collect<'a>(
                     TextElem::lang_in(styles),
                     TextElem::region_in(styles),
                     elem.alternative(styles),
+=======
+                    elem.weak.get(styles),
+                ),
+            });
+        } else if let Some(elem) = child.to_packed::<LinebreakElem>() {
+            collector.push_text(
+                if elem.justify.get(styles) { "\u{2028}" } else { "\n" },
+                styles,
+            );
+        } else if let Some(elem) = child.to_packed::<SmartQuoteElem>() {
+            let double = elem.double.get(styles);
+            if elem.enabled.get(styles) {
+                let quotes = SmartQuotes::get(
+                    elem.quotes.get_ref(styles),
+                    styles.get(TextElem::lang),
+                    styles.get(TextElem::region),
+                    elem.alternative.get(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 );
                 let before =
                     collector.full.chars().rev().find(|&c| !is_default_ignorable(c));
                 let quote = quoter.quote(before, &quotes, double);
                 collector.push_text(quote, styles);
             } else {
+<<<<<<< HEAD
                 collector.push_text(if double { "\"" } else { "'" }, styles);
+=======
+                collector.push_text(SmartQuotes::fallback(double), styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         } else if let Some(elem) = child.to_packed::<InlineElem>() {
             collector.push_item(Item::Skip(LTR_ISOLATE));
@@ -206,7 +258,11 @@ pub fn collect<'a>(
                     }
                     InlineItem::Frame(mut frame) => {
                         frame.modify(&FrameModifiers::get_in(styles));
+<<<<<<< HEAD
                         apply_baseline_shift(&mut frame, styles);
+=======
+                        apply_shift(&engine.world, &mut frame, styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                         collector.push_item(Item::Frame(frame));
                     }
                 }
@@ -215,13 +271,21 @@ pub fn collect<'a>(
             collector.push_item(Item::Skip(POP_ISOLATE));
         } else if let Some(elem) = child.to_packed::<BoxElem>() {
             let loc = locator.next(&elem.span());
+<<<<<<< HEAD
             if let Sizing::Fr(v) = elem.width(styles) {
+=======
+            if let Sizing::Fr(v) = elem.width.get(styles) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 collector.push_item(Item::Fractional(v, Some((elem, loc, styles))));
             } else {
                 let mut frame = layout_and_modify(styles, |styles| {
                     layout_box(elem, engine, loc, styles, region)
                 })?;
+<<<<<<< HEAD
                 apply_baseline_shift(&mut frame, styles);
+=======
+                apply_shift(&engine.world, &mut frame, styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 collector.push_item(Item::Frame(frame));
             }
         } else if let Some(elem) = child.to_packed::<TagElem>() {
@@ -272,11 +336,19 @@ impl<'a> Collector<'a> {
         let segment_len = self.full.len() - prev;
 
         // Merge adjacent text segments with the same styles.
+<<<<<<< HEAD
         if let Some(Segment::Text(last_len, last_styles)) = self.segments.last_mut() {
             if *last_styles == styles {
                 *last_len += segment_len;
                 return;
             }
+=======
+        if let Some(Segment::Text(last_len, last_styles)) = self.segments.last_mut()
+            && *last_styles == styles
+        {
+            *last_len += segment_len;
+            return;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         self.segments.push(Segment::Text(segment_len, styles));

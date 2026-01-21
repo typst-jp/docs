@@ -1,18 +1,28 @@
+<<<<<<< HEAD
 use std::ffi::OsStr;
 
 use typst_library::diag::{warning, At, SourceResult, StrResult};
 use typst_library::engine::Engine;
 use typst_library::foundations::{Bytes, Derived, Packed, Smart, StyleChain};
+=======
+use typst_library::diag::SourceResult;
+use typst_library::engine::Engine;
+use typst_library::foundations::{Packed, StyleChain};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::introspection::Locator;
 use typst_library::layout::{
     Abs, Axes, FixedAlignment, Frame, FrameItem, Point, Region, Size,
 };
+<<<<<<< HEAD
 use typst_library::loading::DataSource;
 use typst_library::text::families;
 use typst_library::visualize::{
     Curve, ExchangeFormat, Image, ImageElem, ImageFit, ImageFormat, ImageKind,
     RasterImage, SvgImage, VectorFormat,
 };
+=======
+use typst_library::visualize::{Curve, Image, ImageElem, ImageFit};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Layout the image.
 #[typst_macros::time(span = elem.span())]
@@ -23,6 +33,7 @@ pub fn layout_image(
     styles: StyleChain,
     region: Region,
 ) -> SourceResult<Frame> {
+<<<<<<< HEAD
     let span = elem.span();
 
     // Take the format that was explicitly defined, or parse the extension,
@@ -70,6 +81,9 @@ pub fn layout_image(
     };
 
     let image = Image::new(kind, elem.alt(styles), elem.scaling(styles));
+=======
+    let image = elem.decode(engine, styles)?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Determine the image's pixel aspect ratio.
     let pxw = image.width();
@@ -106,7 +120,11 @@ pub fn layout_image(
     };
 
     // Compute the actual size of the fitted image.
+<<<<<<< HEAD
     let fit = elem.fit(styles);
+=======
+    let fit = elem.fit.get(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let fitted = match fit {
         ImageFit::Cover | ImageFit::Contain => {
             if wide == (fit == ImageFit::Contain) {
@@ -122,7 +140,11 @@ pub fn layout_image(
     // the frame to the target size, center aligning the image in the
     // process.
     let mut frame = Frame::soft(fitted);
+<<<<<<< HEAD
     frame.push(Point::zero(), FrameItem::Image(image, fitted, span));
+=======
+    frame.push(Point::zero(), FrameItem::Image(image, fitted, elem.span()));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     frame.resize(target, Axes::splat(FixedAlignment::Center));
 
     // Create a clipping group if only part of the image should be visible.
@@ -132,6 +154,7 @@ pub fn layout_image(
 
     Ok(frame)
 }
+<<<<<<< HEAD
 
 /// Try to determine the image format based on the data.
 fn determine_format(source: &DataSource, data: &Bytes) -> StrResult<ImageFormat> {
@@ -153,3 +176,5 @@ fn determine_format(source: &DataSource, data: &Bytes) -> StrResult<ImageFormat>
 
     Ok(ImageFormat::detect(data).ok_or("unknown image format")?)
 }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

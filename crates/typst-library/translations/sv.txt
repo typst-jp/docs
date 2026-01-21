@@ -1,8 +1,19 @@
 figure = Figur
 table = Tabell
 equation = Ekvation
+<<<<<<< HEAD
 bibliography = Bibliografi
 heading = Kapitel
 outline = Innehåll
 raw = Listing
 page = sida
+=======
+bibliography = Referenser
+heading = Avsnitt
+outline = Innehåll
+raw = Kodlistning
+page = sida
+footnote = Fotnot
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

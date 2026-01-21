@@ -4,8 +4,13 @@ use syn::parse::{Parse, ParseStream};
 use syn::{Attribute, Ident, Result};
 
 use crate::util::{
+<<<<<<< HEAD
     determine_name_and_title, documentation, foundations, kw, parse_flag, parse_string,
     parse_string_array, BareType,
+=======
+    BareType, determine_name_and_title, documentation, foundations, kw, parse_flag,
+    parse_string, parse_string_array,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// Expand the `#[ty]` macro.

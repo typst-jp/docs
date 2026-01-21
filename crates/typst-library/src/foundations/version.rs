@@ -3,10 +3,17 @@ use std::fmt::{self, Display, Formatter, Write};
 use std::hash::Hash;
 use std::iter::repeat;
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString, EcoVec};
 
 use crate::diag::{bail, StrResult};
 use crate::foundations::{cast, func, repr, scope, ty, Repr};
+=======
+use ecow::{EcoString, EcoVec, eco_format};
+
+use crate::diag::{StrResult, bail};
+use crate::foundations::{Repr, cast, func, repr, scope, ty};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A version with an arbitrary number of components.
 ///

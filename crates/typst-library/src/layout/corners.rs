@@ -150,10 +150,17 @@ where
     T: PartialEq + IntoValue,
 {
     fn into_value(self) -> Value {
+<<<<<<< HEAD
         if self.is_uniform() {
             if let Some(top_left) = self.top_left {
                 return top_left.into_value();
             }
+=======
+        if self.is_uniform()
+            && let Some(top_left) = self.top_left
+        {
+            return top_left.into_value();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         let mut dict = Dict::new();

@@ -112,6 +112,15 @@ Tras el estallido de la contienda Ruiz-Giménez fue detenido junto a sus
 dos hermanos y puesto bajo custodia por las autoridades republicanas, con
 el objetivo de protegerle de las patrullas de milicianos.
 
+<<<<<<< HEAD
+=======
+--- hyphenate-repeat-style ---
+// Ensure that a repeated hard hyphen keeps its styles.
+#set page(width: 2cm)
+#set text(lang: "es")
+Hello-#text(red)[world]
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- costs-widow-orphan ---
 #set page(height: 60pt)
 
@@ -165,3 +174,15 @@ el objetivo de protegerle de las patrullas de milicianos.
 #set text(costs: (hyphenation: 1%, runt: 2%))
 #set text(costs: (widow: 3%))
 #context test(text.costs, (hyphenation: 1%, runt: 2%, widow: 3%, orphan: 100%))
+<<<<<<< HEAD
+=======
+
+--- issue-hyphenate-after-tag ---
+// Ensure that an invisible tag does not prevent hyphenation.
+#set page(width: 50pt)
+#set text(hyphenate: true)
+#show "Tree": emph
+#show emph: set text(red)
+#show emph: it => it + metadata(none)
+Treebeard
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

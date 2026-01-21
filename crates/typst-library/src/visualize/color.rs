@@ -3,7 +3,11 @@ use std::hash::{Hash, Hasher};
 use std::str::FromStr;
 use std::sync::LazyLock;
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString, EcoVec};
+=======
+use ecow::{EcoString, EcoVec, eco_format};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use palette::encoding::{self, Linear};
 use palette::{
     Alpha, Darken, Desaturate, FromColor, Lighten, OklabHue, RgbHue, Saturate, ShiftHue,
@@ -11,10 +15,17 @@ use palette::{
 use qcms::Profile;
 use typst_syntax::{Span, Spanned};
 
+<<<<<<< HEAD
 use crate::diag::{bail, At, SourceResult, StrResult};
 use crate::foundations::{
     array, cast, func, repr, scope, ty, Args, Array, IntoValue, Module, Repr, Scope, Str,
     Value,
+=======
+use crate::diag::{At, SourceResult, StrResult, bail};
+use crate::foundations::{
+    Args, Array, IntoValue, Module, Repr, Scope, Str, Value, array, cast, func, repr,
+    scope, ty,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::{Angle, Ratio};
 
@@ -60,7 +71,11 @@ static TO_SRGB: LazyLock<qcms::Transform> = LazyLock::new(|| {
 ///
 /// Typst supports:
 /// - sRGB through the [`rgb` function]($color.rgb)
+<<<<<<< HEAD
 /// - Device CMYK through [`cmyk` function]($color.cmyk)
+=======
+/// - Device CMYK through the [`cmyk` function]($color.cmyk)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// - D65 Gray through the [`luma` function]($color.luma)
 /// - Oklab through the [`oklab` function]($color.oklab)
 /// - Oklch through the [`oklch` function]($color.oklch)
@@ -130,7 +145,11 @@ static TO_SRGB: LazyLock<qcms::Transform> = LazyLock::new(|| {
 ///
 /// # Predefined color maps
 /// Typst also includes a number of preset color maps that can be used for
+<<<<<<< HEAD
 /// [gradients]($gradient.linear). These are simply arrays of colors defined in
+=======
+/// [gradients]($gradient/#stops). These are simply arrays of colors defined in
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// the module `color.map`.
 ///
 /// ```example
@@ -148,11 +167,19 @@ static TO_SRGB: LazyLock<qcms::Transform> = LazyLock::new(|| {
 /// | `magma`    | A black to purple to yellow color map.                      |
 /// | `plasma`   | A purple to pink to yellow color map.                       |
 /// | `rocket`   | A black to red to white color map.                          |
+<<<<<<< HEAD
 /// | `mako`     | A black to teal to yellow color map.                        |
 /// | `vlag`     | A light blue to white to red color map.                     |
 /// | `icefire`  | A light teal to black to yellow color map.                  |
 /// | `flare`    | A orange to purple color map that is perceptually uniform.  |
 /// | `crest`    | A blue to white to red color map.                           |
+=======
+/// | `mako`     | A black to teal to white color map.                         |
+/// | `vlag`     | A light blue to white to red color map.                     |
+/// | `icefire`  | A light teal to black to orange color map.                  |
+/// | `flare`    | A orange to purple color map that is perceptually uniform.  |
+/// | `crest`    | A light green to blue color map.                            |
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// Some popular presets are not included because they are not available under a
 /// free licence. Others, like
@@ -262,7 +289,11 @@ impl Color {
         color: Color,
     ) -> SourceResult<Color> {
         Ok(if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_luma()
+=======
+            Color::Luma(color.to_luma())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let Component(gray) =
                 args.expect("gray component").unwrap_or(Component(Ratio::one()));
@@ -318,7 +349,11 @@ impl Color {
         color: Color,
     ) -> SourceResult<Color> {
         Ok(if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_oklab()
+=======
+            Color::Oklab(color.to_oklab())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let RatioComponent(l) = args.expect("lightness component")?;
             let ChromaComponent(a) = args.expect("A component")?;
@@ -374,7 +409,11 @@ impl Color {
         color: Color,
     ) -> SourceResult<Color> {
         Ok(if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_oklch()
+=======
+            Color::Oklch(color.to_oklch())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let RatioComponent(l) = args.expect("lightness component")?;
             let ChromaComponent(c) = args.expect("chroma component")?;
@@ -434,7 +473,11 @@ impl Color {
         color: Color,
     ) -> SourceResult<Color> {
         Ok(if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_linear_rgb()
+=======
+            Color::LinearRgb(color.to_linear_rgb())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let Component(r) = args.expect("red component")?;
             let Component(g) = args.expect("green component")?;
@@ -505,7 +548,11 @@ impl Color {
         Ok(if let Some(string) = args.find::<Spanned<Str>>()? {
             Self::from_str(&string.v).at(string.span)?
         } else if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_rgb()
+=======
+            Color::Rgb(color.to_rgb())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let Component(r) = args.expect("red component")?;
             let Component(g) = args.expect("green component")?;
@@ -565,7 +612,11 @@ impl Color {
         color: Color,
     ) -> SourceResult<Color> {
         Ok(if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_cmyk()
+=======
+            Color::Cmyk(color.to_cmyk())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let RatioComponent(c) = args.expect("cyan component")?;
             let RatioComponent(m) = args.expect("magenta component")?;
@@ -622,7 +673,11 @@ impl Color {
         color: Color,
     ) -> SourceResult<Color> {
         Ok(if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_hsl()
+=======
+            Color::Hsl(color.to_hsl())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let h: Angle = args.expect("hue component")?;
             let Component(s) = args.expect("saturation component")?;
@@ -679,7 +734,11 @@ impl Color {
         color: Color,
     ) -> SourceResult<Color> {
         Ok(if let Some(color) = args.find::<Color>()? {
+<<<<<<< HEAD
             color.to_hsv()
+=======
+            Color::Hsv(color.to_hsv())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             let h: Angle = args.expect("hue component")?;
             let Component(s) = args.expect("saturation component")?;
@@ -797,7 +856,13 @@ impl Color {
         components
     }
 
+<<<<<<< HEAD
     /// Returns the constructor function for this color's space:
+=======
+    /// Returns the constructor function for this color's space.
+    ///
+    /// Returns one of:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// - [`luma`]($color.luma)
     /// - [`oklab`]($color.oklab)
     /// - [`oklch`]($color.oklch)
@@ -830,7 +895,11 @@ impl Color {
     /// omitted if it is equal to `ff` (255 / 100%).
     #[func]
     pub fn to_hex(self) -> EcoString {
+<<<<<<< HEAD
         let [r, g, b, a] = self.to_rgb().to_vec4_u8();
+=======
+        let (r, g, b, a) = self.to_rgb().into_format::<u8, u8>().into_components();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         if a != 255 {
             eco_format!("#{:02x}{:02x}{:02x}{:02x}", r, g, b, a)
         } else {
@@ -886,6 +955,7 @@ impl Color {
         /// The factor to saturate the color by.
         factor: Ratio,
     ) -> SourceResult<Color> {
+<<<<<<< HEAD
         Ok(match self {
             Self::Luma(_) => {
                 bail!(
@@ -900,6 +970,23 @@ impl Color {
             Self::Cmyk(_) => self.to_hsv().saturate(span, factor)?.to_cmyk(),
             Self::Hsl(c) => Self::Hsl(c.saturate(factor.get() as f32)),
             Self::Hsv(c) => Self::Hsv(c.saturate(factor.get() as f32)),
+=======
+        let f = factor.get() as f32;
+        Ok(match self {
+            Self::Luma(_) => bail!(
+                span, "cannot saturate grayscale color";
+                hint: "try converting your color to RGB first"
+            ),
+            Self::Hsl(c) => Self::Hsl(c.saturate(f)),
+            Self::Hsv(c) => Self::Hsv(c.saturate(f)),
+            Self::Oklab(_)
+            | Self::Oklch(_)
+            | Self::LinearRgb(_)
+            | Self::Rgb(_)
+            | Self::Cmyk(_) => {
+                Color::Hsv(self.to_hsv().saturate(f)).to_space(self.space())
+            }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         })
     }
 
@@ -911,6 +998,7 @@ impl Color {
         /// The factor to desaturate the color by.
         factor: Ratio,
     ) -> SourceResult<Color> {
+<<<<<<< HEAD
         Ok(match self {
             Self::Luma(_) => {
                 bail!(
@@ -925,6 +1013,23 @@ impl Color {
             Self::Cmyk(_) => self.to_hsv().desaturate(span, factor)?.to_cmyk(),
             Self::Hsl(c) => Self::Hsl(c.desaturate(factor.get() as f32)),
             Self::Hsv(c) => Self::Hsv(c.desaturate(factor.get() as f32)),
+=======
+        let f = factor.get() as f32;
+        Ok(match self {
+            Self::Luma(_) => bail!(
+                span, "cannot desaturate grayscale color";
+                hint: "try converting your color to RGB first"
+            ),
+            Self::Hsl(c) => Self::Hsl(c.desaturate(f)),
+            Self::Hsv(c) => Self::Hsv(c.desaturate(f)),
+            Self::Oklab(_)
+            | Self::Oklch(_)
+            | Self::LinearRgb(_)
+            | Self::Rgb(_)
+            | Self::Cmyk(_) => {
+                Color::Hsv(self.to_hsv().desaturate(f)).to_space(self.space())
+            }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         })
     }
 
@@ -994,23 +1099,35 @@ impl Color {
     ) -> SourceResult<Color> {
         Ok(match space {
             ColorSpace::Oklch => {
+<<<<<<< HEAD
                 let Self::Oklch(oklch) = self.to_oklch() else {
                     unreachable!();
                 };
+=======
+                let oklch = self.to_oklch();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let rotated = oklch.shift_hue(angle.to_deg() as f32);
                 Self::Oklch(rotated).to_space(self.space())
             }
             ColorSpace::Hsl => {
+<<<<<<< HEAD
                 let Self::Hsl(hsl) = self.to_hsl() else {
                     unreachable!();
                 };
+=======
+                let hsl = self.to_hsl();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let rotated = hsl.shift_hue(angle.to_deg() as f32);
                 Self::Hsl(rotated).to_space(self.space())
             }
             ColorSpace::Hsv => {
+<<<<<<< HEAD
                 let Self::Hsv(hsv) = self.to_hsv() else {
                     unreachable!();
                 };
+=======
+                let hsv = self.to_hsv();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let rotated = hsv.shift_hue(angle.to_deg() as f32);
                 Self::Hsv(rotated).to_space(self.space())
             }
@@ -1125,6 +1242,7 @@ impl Color {
             }
 
             // Ensure that the hue circle is traversed in the short direction.
+<<<<<<< HEAD
             if let Some(index) = space.hue_index() {
                 if (c0[index] - c1[index]).abs() > 180.0 {
                     let (h0, h1) = if c0[index] < c1[index] {
@@ -1134,6 +1252,17 @@ impl Color {
                     };
                     m[index] = (w0 * h0 + w1 * h1) / (w0 + w1);
                 }
+=======
+            if let Some(index) = space.hue_index()
+                && (c0[index] - c1[index]).abs() > 180.0
+            {
+                let (h0, h1) = if c0[index] < c1[index] {
+                    (c0[index] + 360.0, c1[index])
+                } else {
+                    (c0[index], c1[index] + 360.0)
+                };
+                m[index] = (w0 * h0 + w1 * h1) / (w0 + w1);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
 
             m
@@ -1281,6 +1410,7 @@ impl Color {
 
     pub fn to_space(self, space: ColorSpace) -> Self {
         match space {
+<<<<<<< HEAD
             ColorSpace::Oklab => self.to_oklab(),
             ColorSpace::Oklch => self.to_oklch(),
             ColorSpace::Srgb => self.to_rgb(),
@@ -1294,6 +1424,21 @@ impl Color {
 
     pub fn to_luma(self) -> Self {
         Self::Luma(match self {
+=======
+            ColorSpace::D65Gray => Self::Luma(self.to_luma()),
+            ColorSpace::Oklab => Self::Oklab(self.to_oklab()),
+            ColorSpace::Oklch => Self::Oklch(self.to_oklch()),
+            ColorSpace::Srgb => Self::Rgb(self.to_rgb()),
+            ColorSpace::LinearRgb => Self::LinearRgb(self.to_linear_rgb()),
+            ColorSpace::Cmyk => Self::Cmyk(self.to_cmyk()),
+            ColorSpace::Hsl => Self::Hsl(self.to_hsl()),
+            ColorSpace::Hsv => Self::Hsv(self.to_hsv()),
+        }
+    }
+
+    pub fn to_luma(self) -> Luma {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => c,
             Self::Oklab(c) => Luma::from_color(c),
             Self::Oklch(c) => Luma::from_color(c),
@@ -1302,11 +1447,19 @@ impl Color {
             Self::Cmyk(c) => Luma::from_color(c.to_rgba()),
             Self::Hsl(c) => Luma::from_color(c),
             Self::Hsv(c) => Luma::from_color(c),
+<<<<<<< HEAD
         })
     }
 
     pub fn to_oklab(self) -> Self {
         Self::Oklab(match self {
+=======
+        }
+    }
+
+    pub fn to_oklab(self) -> Oklab {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => Oklab::from_color(c),
             Self::Oklab(c) => c,
             Self::Oklch(c) => Oklab::from_color(c),
@@ -1315,11 +1468,19 @@ impl Color {
             Self::Cmyk(c) => Oklab::from_color(c.to_rgba()),
             Self::Hsl(c) => Oklab::from_color(c),
             Self::Hsv(c) => Oklab::from_color(c),
+<<<<<<< HEAD
         })
     }
 
     pub fn to_oklch(self) -> Self {
         Self::Oklch(match self {
+=======
+        }
+    }
+
+    pub fn to_oklch(self) -> Oklch {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => Oklch::from_color(c),
             Self::Oklab(c) => Oklch::from_color(c),
             Self::Oklch(c) => c,
@@ -1328,11 +1489,19 @@ impl Color {
             Self::Cmyk(c) => Oklch::from_color(c.to_rgba()),
             Self::Hsl(c) => Oklch::from_color(c),
             Self::Hsv(c) => Oklch::from_color(c),
+<<<<<<< HEAD
         })
     }
 
     pub fn to_rgb(self) -> Self {
         Self::Rgb(match self {
+=======
+        }
+    }
+
+    pub fn to_rgb(self) -> Rgb {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => Rgb::from_color(c),
             Self::Oklab(c) => Rgb::from_color(c),
             Self::Oklch(c) => Rgb::from_color(c),
@@ -1341,11 +1510,19 @@ impl Color {
             Self::Cmyk(c) => Rgb::from_color(c.to_rgba()),
             Self::Hsl(c) => Rgb::from_color(c),
             Self::Hsv(c) => Rgb::from_color(c),
+<<<<<<< HEAD
         })
     }
 
     pub fn to_linear_rgb(self) -> Self {
         Self::LinearRgb(match self {
+=======
+        }
+    }
+
+    pub fn to_linear_rgb(self) -> LinearRgb {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => LinearRgb::from_color(c),
             Self::Oklab(c) => LinearRgb::from_color(c),
             Self::Oklch(c) => LinearRgb::from_color(c),
@@ -1354,11 +1531,19 @@ impl Color {
             Self::Cmyk(c) => LinearRgb::from_color(c.to_rgba()),
             Self::Hsl(c) => Rgb::from_color(c).into_linear(),
             Self::Hsv(c) => Rgb::from_color(c).into_linear(),
+<<<<<<< HEAD
         })
     }
 
     pub fn to_cmyk(self) -> Self {
         Self::Cmyk(match self {
+=======
+        }
+    }
+
+    pub fn to_cmyk(self) -> Cmyk {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => Cmyk::from_luma(c),
             Self::Oklab(c) => Cmyk::from_rgba(Rgb::from_color(c)),
             Self::Oklch(c) => Cmyk::from_rgba(Rgb::from_color(c)),
@@ -1367,11 +1552,19 @@ impl Color {
             Self::Cmyk(c) => c,
             Self::Hsl(c) => Cmyk::from_rgba(Rgb::from_color(c)),
             Self::Hsv(c) => Cmyk::from_rgba(Rgb::from_color(c)),
+<<<<<<< HEAD
         })
     }
 
     pub fn to_hsl(self) -> Self {
         Self::Hsl(match self {
+=======
+        }
+    }
+
+    pub fn to_hsl(self) -> Hsl {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => Hsl::from_color(c),
             Self::Oklab(c) => Hsl::from_color(c),
             Self::Oklch(c) => Hsl::from_color(c),
@@ -1380,11 +1573,19 @@ impl Color {
             Self::Cmyk(c) => Hsl::from_color(c.to_rgba()),
             Self::Hsl(c) => c,
             Self::Hsv(c) => Hsl::from_color(c),
+<<<<<<< HEAD
         })
     }
 
     pub fn to_hsv(self) -> Self {
         Self::Hsv(match self {
+=======
+        }
+    }
+
+    pub fn to_hsv(self) -> Hsv {
+        match self {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Luma(c) => Hsv::from_color(c),
             Self::Oklab(c) => Hsv::from_color(c),
             Self::Oklch(c) => Hsv::from_color(c),
@@ -1393,7 +1594,11 @@ impl Color {
             Self::Cmyk(c) => Hsv::from_color(c.to_rgba()),
             Self::Hsl(c) => Hsv::from_color(c),
             Self::Hsv(c) => c,
+<<<<<<< HEAD
         })
+=======
+        }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

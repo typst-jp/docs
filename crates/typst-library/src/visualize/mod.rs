@@ -24,6 +24,10 @@ pub use self::shape::*;
 pub use self::stroke::*;
 pub use self::tiling::*;
 
+<<<<<<< HEAD
+=======
+use crate::foundations::Deprecation;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::foundations::{Element, Scope, Type};
 
 /// Hook up all visualize definitions.
@@ -41,11 +45,23 @@ pub(super) fn define(global: &mut Scope) {
     global.define_elem::<CircleElem>();
     global.define_elem::<PolygonElem>();
     global.define_elem::<CurveElem>();
+<<<<<<< HEAD
     global
         .define("path", Element::of::<PathElem>())
         .deprecated("the `path` function is deprecated, use `curve` instead");
     global
         .define("pattern", Type::of::<Tiling>())
         .deprecated("the name `pattern` is deprecated, use `tiling` instead");
+=======
+    global.define("path", Element::of::<PathElem>()).deprecated(
+        Deprecation::new()
+            .with_message("the `path` function is deprecated, use `curve` instead"),
+    );
+    global.define("pattern", Type::of::<Tiling>()).deprecated(
+        Deprecation::new()
+            .with_message("the name `pattern` is deprecated, use `tiling` instead")
+            .with_until("0.15.0"),
+    );
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     global.reset_category();
 }

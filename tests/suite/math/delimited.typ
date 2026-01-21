@@ -77,6 +77,17 @@ $ lr(body) quad
   lr(size: #1em, body) quad
   lr(size: #(1em+20%), body) $
 
+<<<<<<< HEAD
+=======
+--- math-lr-mid-class ---
+// Test that `mid` creates a Relation, but that can be overridden.
+$ (a | b) $
+$ (a mid(|) b) $
+$ (a class("unary", |) b) $
+$ (a class("unary", mid(|)) b) $
+$ (a mid(class("unary", |)) b) $
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- math-lr-unbalanced ---
 // Test unbalanced delimiters.
 $ 1/(2 (x) $

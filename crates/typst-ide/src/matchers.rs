@@ -1,9 +1,15 @@
 use ecow::EcoString;
 use typst::foundations::{Module, Value};
 use typst::syntax::ast::AstNode;
+<<<<<<< HEAD
 use typst::syntax::{ast, LinkedNode, Span, SyntaxKind};
 
 use crate::{analyze_import, IdeWorld};
+=======
+use typst::syntax::{LinkedNode, Span, SyntaxKind, ast};
+
+use crate::{IdeWorld, analyze_import};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Find the named items starting from the given position.
 pub fn named_items<T>(
@@ -59,10 +65,17 @@ pub fn named_items<T>(
                 };
 
                 // Seeing the module itself.
+<<<<<<< HEAD
                 if let Some((name, span)) = name_and_span {
                     if let Some(res) = recv(NamedItem::Module(&name, span, module)) {
                         return Some(res);
                     }
+=======
+                if let Some((name, span)) = name_and_span
+                    && let Some(res) = recv(NamedItem::Module(&name, span, module))
+                {
+                    return Some(res);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
 
                 // Seeing the imported items.
@@ -124,6 +137,7 @@ pub fn named_items<T>(
         }
 
         if let Some(parent) = node.parent() {
+<<<<<<< HEAD
             if let Some(v) = parent.cast::<ast::ForLoop>() {
                 if node.prev_sibling_kind() != Some(SyntaxKind::In) {
                     let pattern = v.pattern();
@@ -131,6 +145,15 @@ pub fn named_items<T>(
                         if let Some(res) = recv(NamedItem::Var(ident)) {
                             return Some(res);
                         }
+=======
+            if let Some(v) = parent.cast::<ast::ForLoop>()
+                && node.prev_sibling_kind() != Some(SyntaxKind::In)
+            {
+                let pattern = v.pattern();
+                for ident in pattern.bindings() {
+                    if let Some(res) = recv(NamedItem::Var(ident)) {
+                        return Some(res);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     }
                 }
             }
@@ -155,10 +178,17 @@ pub fn named_items<T>(
                             }
                         }
                         ast::Param::Spread(s) => {
+<<<<<<< HEAD
                             if let Some(sink_ident) = s.sink_ident() {
                                 if let Some(t) = recv(NamedItem::Var(sink_ident)) {
                                     return Some(t);
                                 }
+=======
+                            if let Some(sink_ident) = s.sink_ident()
+                                && let Some(t) = recv(NamedItem::Var(sink_ident))
+                            {
+                                return Some(t);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                             }
                         }
                     }
@@ -216,7 +246,11 @@ impl<'a> NamedItem<'a> {
 
 /// Categorize an expression into common classes IDE functionality can operate
 /// on.
+<<<<<<< HEAD
 pub fn deref_target(node: LinkedNode) -> Option<DerefTarget<'_>> {
+=======
+pub fn deref_target(node: LinkedNode<'_>) -> Option<DerefTarget<'_>> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     // Move to the first ancestor that is an expression.
     let mut ancestor = node;
     while !ancestor.is::<ast::Expr>() {
@@ -232,7 +266,13 @@ pub fn deref_target(node: LinkedNode) -> Option<DerefTarget<'_>> {
         ast::Expr::FuncCall(call) => {
             DerefTarget::Callee(expr_node.find(call.callee().span())?)
         }
+<<<<<<< HEAD
         ast::Expr::Set(set) => DerefTarget::Callee(expr_node.find(set.target().span())?),
+=======
+        ast::Expr::SetRule(set) => {
+            DerefTarget::Callee(expr_node.find(set.target().span())?)
+        }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         ast::Expr::Ident(_) | ast::Expr::MathIdent(_) | ast::Expr::FieldAccess(_) => {
             DerefTarget::VarAccess(expr_node)
         }

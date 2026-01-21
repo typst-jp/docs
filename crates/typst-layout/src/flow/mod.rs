@@ -7,14 +7,23 @@ mod distribute;
 
 pub(crate) use self::block::unbreakable_pod;
 
+<<<<<<< HEAD
 use std::collections::HashSet;
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::num::NonZeroUsize;
 use std::rc::Rc;
 
 use bumpalo::Bump;
 use comemo::{Track, Tracked, TrackedMut};
 use ecow::EcoVec;
+<<<<<<< HEAD
 use typst_library::diag::{bail, At, SourceDiagnostic, SourceResult};
+=======
+use rustc_hash::FxHashSet;
+use typst_library::World;
+use typst_library::diag::{At, SourceDiagnostic, SourceResult, bail};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::engine::{Engine, Route, Sink, Traced};
 use typst_library::foundations::{Content, Packed, Resolve, StyleChain};
 use typst_library::introspection::{
@@ -25,16 +34,28 @@ use typst_library::layout::{
     Regions, Rel, Size,
 };
 use typst_library::model::{FootnoteElem, FootnoteEntry, LineNumberingScope, ParLine};
+<<<<<<< HEAD
 use typst_library::routines::{Arenas, FragmentKind, Pair, RealizationKind, Routines};
 use typst_library::text::TextElem;
 use typst_library::World;
+=======
+use typst_library::pdf::ArtifactKind;
+use typst_library::routines::{Arenas, FragmentKind, Pair, RealizationKind, Routines};
+use typst_library::text::TextElem;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_utils::{NonZeroExt, Numeric};
 
 use self::block::{layout_multi_block, layout_single_block};
 use self::collect::{
+<<<<<<< HEAD
     collect, Child, LineChild, MultiChild, MultiSpill, PlacedChild, SingleChild,
 };
 use self::compose::{compose, Composer};
+=======
+    Child, LineChild, MultiChild, MultiSpill, PlacedChild, SingleChild, collect,
+};
+use self::compose::{Composer, compose};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use self::distribute::distribute;
 
 /// Lays out content into a single region, producing a single frame.
@@ -98,8 +119,13 @@ pub fn layout_columns(
         locator.track(),
         styles,
         regions,
+<<<<<<< HEAD
         elem.count(styles),
         elem.gutter(styles),
+=======
+        elem.count.get(styles),
+        elem.gutter.resolve(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     )
 }
 
@@ -143,7 +169,11 @@ fn layout_fragment_impl(
     let mut kind = FragmentKind::Block;
     let arenas = Arenas::default();
     let children = (engine.routines.realize)(
+<<<<<<< HEAD
         RealizationKind::LayoutFragment(&mut kind),
+=======
+        RealizationKind::LayoutFragment { kind: &mut kind },
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         &mut engine,
         &mut locator,
         &arenas,
@@ -251,6 +281,7 @@ fn configuration<'x>(
 
             let gutter = column_gutter.relative_to(regions.base().x);
             let width = (regions.size.x - gutter * (count - 1) as f64) / count as f64;
+<<<<<<< HEAD
             let dir = TextElem::dir_in(shared);
             ColumnConfig { count, width, gutter, dir }
         },
@@ -267,6 +298,26 @@ fn configuration<'x>(
                     PageElem::height_in(shared)
                 } else {
                     PageElem::width_in(shared)
+=======
+            let dir = shared.resolve(TextElem::dir);
+            ColumnConfig { count, width, gutter, dir }
+        },
+        footnote: FootnoteConfig {
+            separator: shared
+                .get_cloned(FootnoteEntry::separator)
+                .artifact(ArtifactKind::Other),
+            clearance: shared.resolve(FootnoteEntry::clearance),
+            gap: shared.resolve(FootnoteEntry::gap),
+            expand: regions.expand.x,
+        },
+        line_numbers: (mode == FlowMode::Root).then(|| LineNumberConfig {
+            scope: shared.get(ParLine::numbering_scope),
+            default_clearance: {
+                let width = if shared.get(PageElem::flipped) {
+                    shared.resolve(PageElem::height)
+                } else {
+                    shared.resolve(PageElem::width)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 };
 
                 // Clamp below is safe (min <= max): if the font size is
@@ -303,7 +354,11 @@ struct Work<'a, 'b> {
     /// Identifies floats and footnotes that can be skipped if visited because
     /// they were already handled and incorporated as column or page level
     /// insertions.
+<<<<<<< HEAD
     skips: Rc<HashSet<Location>>,
+=======
+    skips: Rc<FxHashSet<Location>>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a, 'b> Work<'a, 'b> {
@@ -316,7 +371,11 @@ impl<'a, 'b> Work<'a, 'b> {
             footnotes: EcoVec::new(),
             footnote_spill: None,
             tags: EcoVec::new(),
+<<<<<<< HEAD
             skips: Rc::new(HashSet::new()),
+=======
+            skips: Rc::new(FxHashSet::default()),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 

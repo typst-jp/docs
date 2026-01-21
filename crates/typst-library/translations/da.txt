@@ -5,4 +5,11 @@ bibliography = Bibliografi
 heading = Afsnit
 outline = Indhold
 raw = Liste
+<<<<<<< HEAD
 page = side
+=======
+page = side
+footnote = Fodnote
+email = E-mail
+telephone = Telefon
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

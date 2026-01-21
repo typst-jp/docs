@@ -1,16 +1,28 @@
 use ecow::EcoString;
+<<<<<<< HEAD
 use ttf_parser::OutlineBuilder;
 use typst_library::layout::{Abs, Ratio, Size, Transform};
+=======
+use typst_library::layout::{Abs, Point, Ratio, Size, Transform};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::visualize::{
     Curve, CurveItem, FixedStroke, Geometry, LineCap, LineJoin, Paint, RelativeTo, Shape,
 };
 
 use crate::paint::ColorEncode;
+<<<<<<< HEAD
 use crate::{SVGRenderer, State, SvgPathBuilder};
 
 impl SVGRenderer {
     /// Render a shape element.
     pub(super) fn render_shape(&mut self, state: State, shape: &Shape) {
+=======
+use crate::{SVGRenderer, State, SvgMatrix, SvgPathBuilder};
+
+impl SVGRenderer<'_> {
+    /// Render a shape element.
+    pub(super) fn render_shape(&mut self, state: &State, shape: &Shape) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.xml.start_element("path");
         self.xml.write_attribute("class", "typst-shape");
 
@@ -33,6 +45,13 @@ impl SVGRenderer {
             );
         }
 
+<<<<<<< HEAD
+=======
+        if !state.transform.is_identity() {
+            self.xml.write_attribute("transform", &SvgMatrix(state.transform));
+        }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let path = convert_geometry_to_path(&shape.geometry);
         self.xml.write_attribute("d", &path);
         self.xml.end_element();
@@ -41,7 +60,11 @@ impl SVGRenderer {
     /// Calculate the transform of the shape's fill or stroke.
     fn shape_paint_transform(
         &self,
+<<<<<<< HEAD
         state: State,
+=======
+        state: &State,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         paint: &Paint,
         shape: &Shape,
     ) -> Transform {
@@ -78,7 +101,11 @@ impl SVGRenderer {
     }
 
     /// Calculate the size of the shape's fill.
+<<<<<<< HEAD
     fn shape_fill_size(&self, state: State, paint: &Paint, shape: &Shape) -> Size {
+=======
+    fn shape_fill_size(&self, state: &State, paint: &Paint, shape: &Shape) -> Size {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let mut shape_size = shape.geometry.bbox_size();
         // Edge cases for strokes.
         if shape_size.x.to_pt() == 0.0 {
@@ -155,7 +182,13 @@ impl SVGRenderer {
 /// Convert a geometry to an SVG path.
 #[comemo::memoize]
 fn convert_geometry_to_path(geometry: &Geometry) -> EcoString {
+<<<<<<< HEAD
     let mut builder = SvgPathBuilder::default();
+=======
+    let mut builder =
+        SvgPathBuilder::with_translate(Point::new(Abs::zero(), Abs::zero()));
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     match geometry {
         Geometry::Line(t) => {
             builder.move_to(0.0, 0.0);
@@ -166,6 +199,7 @@ fn convert_geometry_to_path(geometry: &Geometry) -> EcoString {
             let y = rect.y.to_pt() as f32;
             builder.rect(x, y);
         }
+<<<<<<< HEAD
         Geometry::Curve(p) => return convert_curve(p),
     };
     builder.0
@@ -173,6 +207,17 @@ fn convert_geometry_to_path(geometry: &Geometry) -> EcoString {
 
 pub fn convert_curve(curve: &Curve) -> EcoString {
     let mut builder = SvgPathBuilder::default();
+=======
+        Geometry::Curve(p) => {
+            return convert_curve(Point::new(Abs::zero(), Abs::zero()), p);
+        }
+    };
+    builder.path
+}
+
+pub fn convert_curve(initial_point: Point, curve: &Curve) -> EcoString {
+    let mut builder = SvgPathBuilder::with_translate(initial_point);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     for item in &curve.0 {
         match item {
             CurveItem::Move(m) => builder.move_to(m.x.to_pt() as f32, m.y.to_pt() as f32),
@@ -188,5 +233,9 @@ pub fn convert_curve(curve: &Curve) -> EcoString {
             CurveItem::Close => builder.close(),
         }
     }
+<<<<<<< HEAD
     builder.0
+=======
+    builder.path
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

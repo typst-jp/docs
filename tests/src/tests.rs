@@ -59,10 +59,19 @@ fn main() {
 fn setup() {
     // Make all paths relative to the workspace. That's nicer for IDEs when
     // clicking on paths printed to the terminal.
+<<<<<<< HEAD
     std::env::set_current_dir("..").unwrap();
 
     // Create the storage.
     for ext in ["render", "html", "pdf", "svg"] {
+=======
+    let workspace_dir =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join(std::path::Component::ParentDir);
+    std::env::set_current_dir(workspace_dir).unwrap();
+
+    // Create the storage.
+    for ext in ["render", "html", "pdf", "pdftags", "svg"] {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         std::fs::create_dir_all(Path::new(STORE_PATH).join(ext)).unwrap();
     }
 

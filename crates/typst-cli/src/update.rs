@@ -6,7 +6,11 @@ use ecow::eco_format;
 use semver::Version;
 use serde::Deserialize;
 use tempfile::NamedTempFile;
+<<<<<<< HEAD
 use typst::diag::{bail, StrResult};
+=======
+use typst::diag::{StrResult, bail};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_kit::download::Downloader;
 use xz2::bufread::XzDecoder;
 use zip::ZipArchive;

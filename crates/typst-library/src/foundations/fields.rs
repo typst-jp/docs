@@ -1,6 +1,10 @@
 //! Fields on values.
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
+=======
+use ecow::{EcoString, eco_format};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::diag::StrResult;
 use crate::foundations::{IntoValue, Type, Value, Version};

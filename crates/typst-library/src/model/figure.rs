@@ -5,6 +5,7 @@ use std::str::FromStr;
 use ecow::EcoString;
 use typst_utils::NonZeroExt;
 
+<<<<<<< HEAD
 use crate::diag::{bail, SourceResult};
 use crate::engine::Engine;
 use crate::foundations::{
@@ -32,6 +33,33 @@ use crate::visualize::ImageElem;
 ///
 /// # 例
 /// 以下の例は、画像を含む基本的な図表を示しています。
+=======
+use crate::diag::{SourceResult, bail};
+use crate::engine::Engine;
+use crate::foundations::{
+    Content, Element, NativeElement, Packed, Selector, ShowSet, Smart, StyleChain,
+    Styles, Synthesize, cast, elem, scope, select_where,
+};
+use crate::introspection::{
+    Count, Counter, CounterKey, CounterUpdate, Locatable, Location, Tagged,
+};
+use crate::layout::{
+    AlignElem, Alignment, BlockElem, Em, Length, OuterVAlignment, PlacementScope,
+    VAlignment,
+};
+use crate::model::{Numbering, NumberingPattern, Outlinable, Refable, Supplement};
+use crate::text::{Lang, Locale, TextElem};
+use crate::visualize::ImageElem;
+
+/// A figure with an optional caption.
+///
+/// Automatically detects its kind to select the correct counting track. For
+/// example, figures containing images will be numbered separately from figures
+/// containing tables.
+///
+/// # Examples
+/// The example below shows a basic figure with an image:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// @glacier shows a glacier. Glaciers
 /// are complex systems.
@@ -42,8 +70,13 @@ use crate::visualize::ImageElem;
 /// ) <glacier>
 /// ```
 ///
+<<<<<<< HEAD
 /// 図表に [tables]($table) を挿入してキャプションを付けることもできます。
 /// 図表は表を含むこと検出し、自動的に別のカウンターを使用します。
+=======
+/// You can also insert [tables]($table) into figures to give them a caption.
+/// The figure will detect this and automatically use a separate counter.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #figure(
@@ -56,6 +89,7 @@ use crate::visualize::ImageElem;
 /// )
 /// ```
 ///
+<<<<<<< HEAD
 /// この動作は、図表の種類である `kind` を明示的に指定することで上書き可能です。
 /// 同じ種類の図表は全て共通のカウンターを共有します。
 ///
@@ -64,15 +98,38 @@ use crate::visualize::ImageElem;
 /// 図表をページの上部または下部に配置するには、[`placement`]($figure.placement)引数を使用します。
 ///
 /// 図表が大きすぎてそのコンテンツがページをまたいで分割可能な場合（例えば大きな表が含まれている場合）、このshowルールで図表自体もページをまたいで分割可能です。
+=======
+/// This behaviour can be overridden by explicitly specifying the figure's
+/// `kind`. All figures of the same kind share a common counter.
+///
+/// # Figure behaviour
+/// By default, figures are placed within the flow of content. To make them
+/// float to the top or bottom of the page, you can use the
+/// [`placement`]($figure.placement) argument.
+///
+/// If your figure is too large and its contents are breakable across pages
+/// (e.g. if it contains a large table), then you can make the figure itself
+/// breakable across pages as well with this show rule:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```typ
 /// #show figure: set block(breakable: true)
 /// ```
 ///
+<<<<<<< HEAD
 /// 分割できるブロックと分割できないブロックの詳細については、[block]($block.breakable)のドキュメントを参照してください。
 ///
 /// # キャプションの改変
 /// 図表のキャプションの外観は、関連するキャプション機能で改変できます。
 /// 以下の例では、全てのキャプションを斜体で強調しています。
+=======
+/// See the [block]($block.breakable) documentation for more information about
+/// breakable and non-breakable blocks.
+///
+/// # Caption customization
+/// You can modify the appearance of the figure's caption with its associated
+/// [`caption`]($figure.caption) function. In the example below, we emphasize
+/// all captions:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #show figure.caption: emph
@@ -83,8 +140,15 @@ use crate::visualize::ImageElem;
 /// )
 /// ```
 ///
+<<<<<<< HEAD
 /// [`where`]($function.where)セレクターを使うことで、このようなルールを特定の種類の図表に適用可能です。
 /// 例えば、図表の種類が表の場合はキャプションを表の上に配置し、他の種類ではキャプションを下に配置するには、次のようなshow-setルールを記述します。
+=======
+/// By using a [`where`]($function.where) selector, we can scope such rules to
+/// specific kinds of figures. For example, to position the caption above
+/// tables, but keep it below for all other kinds of figures, we could write the
+/// following show-set rule:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #show figure.where(
@@ -96,6 +160,7 @@ use crate::visualize::ImageElem;
 ///   caption: [I'm up here],
 /// )
 /// ```
+<<<<<<< HEAD
 #[elem(scope, Locatable, Synthesize, Count, Show, ShowSet, Refable, Outlinable)]
 pub struct FigureElem {
     /// 図表のコンテンツ。多くの場合、 [image] が使われます。
@@ -113,6 +178,65 @@ pub struct FigureElem {
     ///
     /// ```example
     /// #set page(height: 200pt)
+=======
+///
+/// # Accessibility
+/// You can use the [`alt`]($figure.alt) parameter to provide an [alternative
+/// description]($guides/accessibility/#textual-representations) of the figure
+/// for screen readers and other Assistive Technology (AT). Refer to [its
+/// documentation]($figure.alt) to learn more.
+///
+/// You can use figures to add alternative descriptions to paths, shapes, or
+/// visualizations that do not have their own `alt` parameter. If your graphic
+/// is purely decorative and does not have a semantic meaning, consider wrapping
+/// it in [`pdf.artifact`] instead, which will hide it from AT when exporting to
+/// PDF.
+///
+/// AT will always read the figure at the point where it appears in the
+/// document, regardless of its [`placement`]($figure.placement). Put its markup
+/// where it would make the most sense in the reading order.
+#[elem(scope, Locatable, Tagged, Synthesize, Count, ShowSet, Refable, Outlinable)]
+pub struct FigureElem {
+    /// The content of the figure. Often, an [image].
+    #[required]
+    pub body: Content,
+
+    /// An alternative description of the figure.
+    ///
+    /// When you add an alternative description, AT will read both it and the
+    /// caption (if any). However, the content of the figure itself will be
+    /// skipped.
+    ///
+    /// When the body of your figure is an [image]($image) with its own `alt`
+    /// text set, this parameter should not be used on the figure element.
+    /// Likewise, do not use this parameter when the figure contains a table,
+    /// code, or other content that is already accessible. In such cases, the
+    /// content of the figure will be read by AT, and adding an alternative
+    /// description would lead to a loss of information.
+    ///
+    /// You can learn how to write good alternative descriptions in the
+    /// [Accessibility Guide]($guides/accessibility/#textual-representations).
+    pub alt: Option<EcoString>,
+
+    /// The figure's placement on the page.
+    ///
+    /// - `{none}`: The figure stays in-flow exactly where it was specified
+    ///   like other content.
+    /// - `{auto}`: The figure picks `{top}` or `{bottom}` depending on which
+    ///   is closer.
+    /// - `{top}`: The figure floats to the top of the page.
+    /// - `{bottom}`: The figure floats to the bottom of the page.
+    ///
+    /// The gap between the main flow content and the floating figure is
+    /// controlled by the [`clearance`]($place.clearance) argument on the
+    /// `place` function.
+    ///
+    /// ```example
+    /// #set page(height: 200pt)
+    /// #show figure: set place(
+    ///   clearance: 1em,
+    /// )
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// = Introduction
     /// #figure(
@@ -124,11 +248,20 @@ pub struct FigureElem {
     /// ```
     pub placement: Option<Smart<VAlignment>>,
 
+<<<<<<< HEAD
     /// どの包含スコープに対して図を配置するか。
     ///
     /// これを`{"parent"}`に設定すると、段組みをまたいで、ページの幅を全て使用した図表を作成します。
     ///
     /// もし`placement`を`{none}`とした場合には、何の効果もありません。
+=======
+    /// Relative to which containing scope the figure is placed.
+    ///
+    /// Set this to `{"parent"}` to create a full-width figure in a two-column
+    /// document.
+    ///
+    /// Has no effect if `placement` is `{none}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set page(height: 250pt, columns: 2)
@@ -144,6 +277,7 @@ pub struct FigureElem {
     /// ```
     pub scope: PlacementScope,
 
+<<<<<<< HEAD
     /// 図表のキャプション。
     #[borrowed]
     pub caption: Option<Packed<FigureCaption>>,
@@ -165,6 +299,32 @@ pub struct FigureElem {
     /// [`{table}`]($table)、[`{raw}`](raw)、[`{image}`](image)以外の要素関数に設定した場合は、図表の補足語（supplement）を手動で指定する必要があります。
     ///
     /// ```example
+=======
+    /// The figure's caption.
+    pub caption: Option<Packed<FigureCaption>>,
+
+    /// The kind of figure this is.
+    ///
+    /// All figures of the same kind share a common counter.
+    ///
+    /// If set to `{auto}`, the figure will try to automatically determine its
+    /// kind based on the type of its body. Automatically detected kinds are
+    /// [tables]($table) and [code]($raw). In other cases, the inferred kind is
+    /// that of an [image].
+    ///
+    /// Setting this to something other than `{auto}` will override the
+    /// automatic detection. This can be useful if
+    /// - you wish to create a custom figure type that is not an
+    ///   [image], a [table] or [code]($raw),
+    /// - you want to force the figure to use a specific counter regardless of
+    ///   its content.
+    ///
+    /// You can set the kind to be an element function or a string. If you set
+    /// it to an element function other than [`table`], [`raw`], or [`image`],
+    /// you will need to manually specify the figure's supplement.
+    ///
+    /// ```example:"Customizing the figure kind"
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// #figure(
     ///   circle(radius: 10pt),
     ///   caption: [A curious atom.],
@@ -172,6 +332,7 @@ pub struct FigureElem {
     ///   supplement: [Atom],
     /// )
     /// ```
+<<<<<<< HEAD
     pub kind: Smart<FigureKind>,
 
     /// 図表の補足語。
@@ -180,6 +341,53 @@ pub struct FigureElem {
     /// 独自の図表タイプを使用している場合は、補足語を手動で指定する必要があります。
     ///
     /// 関数が指定された場合、その関数は指定された種類の最初の子孫要素（通常は図の本体）に渡され、コンテンツを返す必要があります。
+=======
+    ///
+    /// If you want to modify a counter to skip a number or reset the counter,
+    /// you can access the [counter] of each kind of figure with a
+    /// [`where`]($function.where) selector:
+    ///
+    /// - For [tables]($table): `{counter(figure.where(kind: table))}`
+    /// - For [images]($image): `{counter(figure.where(kind: image))}`
+    /// - For a custom kind: `{counter(figure.where(kind: kind))}`
+    ///
+    /// ```example:"Modifying the figure counter for specific kinds"
+    /// #figure(
+    ///   table(columns: 2, $n$, $1$),
+    ///   caption: [The first table.],
+    /// )
+    ///
+    /// #counter(
+    ///   figure.where(kind: table)
+    /// ).update(41)
+    ///
+    /// #figure(
+    ///   table(columns: 2, $n$, $42$),
+    ///   caption: [The 42nd table],
+    /// )
+    ///
+    /// #figure(
+    ///   rect[Image],
+    ///   caption: [Does not affect images],
+    /// )
+    /// ```
+    ///
+    /// To conveniently use the correct counter in a show rule, you can access
+    /// the `counter` field. There is an example of this in the documentation
+    /// [of the `figure.caption` element's `body` field]($figure.caption.body).
+    pub kind: Smart<FigureKind>,
+
+    /// The figure's supplement.
+    ///
+    /// If set to `{auto}`, the figure will try to automatically determine the
+    /// correct supplement based on the `kind` and the active
+    /// [text language]($text.lang). If you are using a custom figure type, you
+    /// will need to manually specify the supplement.
+    ///
+    /// If a function is specified, it is passed the first descendant of the
+    /// specified `kind` (typically, the figure's body) and should return
+    /// content.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #figure(
@@ -189,6 +397,7 @@ pub struct FigureElem {
     ///   kind: "foo",
     /// )
     /// ```
+<<<<<<< HEAD
     #[borrowed]
     pub supplement: Smart<Option<Supplement>>,
 
@@ -215,6 +424,39 @@ pub struct FigureElem {
     /// 数字をスキップしたり、カウンターをリセットしたい場合は、これらのカウンターを修正する必要があります。
     #[synthesized]
     pub counter: Option<Counter>,
+=======
+    pub supplement: Smart<Option<Supplement>>,
+
+    /// How to number the figure. Accepts a
+    /// [numbering pattern or function]($numbering) taking a single number.
+    #[default(Some(NumberingPattern::from_str("1").unwrap().into()))]
+    pub numbering: Option<Numbering>,
+
+    /// The vertical gap between the body and caption.
+    #[default(Em::new(0.65).into())]
+    pub gap: Length,
+
+    /// Whether the figure should appear in an [`outline`] of figures.
+    #[default(true)]
+    pub outlined: bool,
+
+    /// Convenience field to get access to the counter for this figure.
+    ///
+    /// The counter only depends on the `kind`:
+    /// - For [tables]($table): `{counter(figure.where(kind: table))}`
+    /// - For [images]($image): `{counter(figure.where(kind: image))}`
+    /// - For a custom kind: `{counter(figure.where(kind: kind))}`
+    ///
+    /// These are the counters you'll need to modify if you want to skip a
+    /// number or reset the counter.
+    #[synthesized]
+    pub counter: Option<Counter>,
+
+    /// The locale of this element (used for the alternative description).
+    #[internal]
+    #[synthesized]
+    pub locale: Locale,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 #[scope]
@@ -223,6 +465,19 @@ impl FigureElem {
     type FigureCaption;
 }
 
+<<<<<<< HEAD
+=======
+impl FigureElem {
+    /// Retrieves the locale separator.
+    pub fn resolve_separator(&self, styles: StyleChain) -> Content {
+        match self.caption.get_ref(styles) {
+            Some(caption) => caption.resolve_separator(styles),
+            None => FigureCaption::local_separator_in(styles),
+        }
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl Synthesize for Packed<FigureElem> {
     fn synthesize(
         &mut self,
@@ -232,6 +487,7 @@ impl Synthesize for Packed<FigureElem> {
         let span = self.span();
         let location = self.location();
         let elem = self.as_mut();
+<<<<<<< HEAD
         let numbering = elem.numbering(styles);
 
         // Determine the figure's kind.
@@ -244,13 +500,32 @@ impl Synthesize for Packed<FigureElem> {
 
         // Resolve the supplement.
         let supplement = match elem.supplement(styles).as_ref() {
+=======
+        let numbering = elem.numbering.get_ref(styles);
+
+        // Determine the figure's kind.
+        let kind = elem.kind.get_cloned(styles).unwrap_or_else(|| {
+            elem.body
+                .query_first_naive(&Selector::can::<dyn Figurable>())
+                .map(|elem| FigureKind::Elem(elem.func()))
+                .unwrap_or_else(|| FigureKind::Elem(ImageElem::ELEM))
+        });
+
+        // Resolve the supplement.
+        let supplement = match elem.supplement.get_ref(styles).as_ref() {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Smart::Auto => {
                 // Default to the local name for the kind, if available.
                 let name = match &kind {
                     FigureKind::Elem(func) => func
                         .local_name(
+<<<<<<< HEAD
                             TextElem::lang_in(styles),
                             TextElem::region_in(styles),
+=======
+                            styles.get(TextElem::lang),
+                            styles.get(TextElem::region),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                         )
                         .map(TextElem::packed),
                     FigureKind::Name(_) => None,
@@ -267,9 +542,16 @@ impl Synthesize for Packed<FigureElem> {
                 // Resolve the supplement with the first descendant of the kind or
                 // just the body, if none was found.
                 let descendant = match kind {
+<<<<<<< HEAD
                     FigureKind::Elem(func) => {
                         elem.body.query_first(&Selector::Elem(func, None)).map(Cow::Owned)
                     }
+=======
+                    FigureKind::Elem(func) => elem
+                        .body
+                        .query_first_naive(&Selector::Elem(func, None))
+                        .map(Cow::Owned),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     FigureKind::Name(_) => None,
                 };
 
@@ -280,6 +562,7 @@ impl Synthesize for Packed<FigureElem> {
 
         // Construct the figure's counter.
         let counter = Counter::new(CounterKey::Selector(
+<<<<<<< HEAD
             select_where!(FigureElem, Kind => kind.clone()),
         ));
 
@@ -298,11 +581,34 @@ impl Synthesize for Packed<FigureElem> {
         elem.push_supplement(Smart::Custom(supplement.map(Supplement::Content)));
         elem.push_counter(Some(counter));
         elem.push_caption(caption);
+=======
+            select_where!(FigureElem, kind => kind.clone()),
+        ));
+
+        // Fill the figure's caption.
+        let mut caption = elem.caption.get_cloned(styles);
+        if let Some(caption) = &mut caption {
+            caption.synthesize(engine, styles)?;
+            caption.kind = Some(kind.clone());
+            caption.supplement = Some(supplement.clone());
+            caption.numbering = Some(numbering.clone());
+            caption.counter = Some(Some(counter.clone()));
+            caption.figure_location = Some(location);
+        }
+
+        elem.kind.set(Smart::Custom(kind));
+        elem.supplement
+            .set(Smart::Custom(supplement.map(Supplement::Content)));
+        elem.counter = Some(Some(counter));
+        elem.caption.set(caption);
+        elem.locale = Some(Locale::get_in(styles));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         Ok(())
     }
 }
 
+<<<<<<< HEAD
 impl Show for Packed<FigureElem> {
     #[typst_macros::time(name = "figure", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -362,13 +668,20 @@ impl Show for Packed<FigureElem> {
     }
 }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl ShowSet for Packed<FigureElem> {
     fn show_set(&self, _: StyleChain) -> Styles {
         // Still allows breakable figures with
         // `show figure: set block(breakable: true)`.
         let mut map = Styles::new();
+<<<<<<< HEAD
         map.set(BlockElem::set_breakable(false));
         map.set(AlignElem::set_alignment(Alignment::CENTER));
+=======
+        map.set(BlockElem::breakable, false);
+        map.set(AlignElem::alignment, Alignment::CENTER);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         map
     }
 }
@@ -386,13 +699,19 @@ impl Count for Packed<FigureElem> {
 impl Refable for Packed<FigureElem> {
     fn supplement(&self) -> Content {
         // After synthesis, this should always be custom content.
+<<<<<<< HEAD
         match (**self).supplement(StyleChain::default()).as_ref() {
             Smart::Custom(Some(Supplement::Content(content))) => content.clone(),
+=======
+        match self.supplement.get_cloned(StyleChain::default()) {
+            Smart::Custom(Some(Supplement::Content(content))) => content,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => Content::empty(),
         }
     }
 
     fn counter(&self) -> Counter {
+<<<<<<< HEAD
         (**self)
             .counter()
             .cloned()
@@ -402,13 +721,28 @@ impl Refable for Packed<FigureElem> {
 
     fn numbering(&self) -> Option<&Numbering> {
         (**self).numbering(StyleChain::default()).as_ref()
+=======
+        self.counter
+            .clone()
+            .flatten()
+            .unwrap_or_else(|| Counter::of(FigureElem::ELEM))
+    }
+
+    fn numbering(&self) -> Option<&Numbering> {
+        self.numbering.get_ref(StyleChain::default()).as_ref()
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 impl Outlinable for Packed<FigureElem> {
     fn outlined(&self) -> bool {
+<<<<<<< HEAD
         (**self).outlined(StyleChain::default())
             && (self.caption(StyleChain::default()).is_some()
+=======
+        self.outlined.get(StyleChain::default())
+            && (self.caption.get_ref(StyleChain::default()).is_some()
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 || self.numbering().is_some())
     }
 
@@ -422,19 +756,35 @@ impl Outlinable for Packed<FigureElem> {
     }
 
     fn body(&self) -> Content {
+<<<<<<< HEAD
         self.caption(StyleChain::default())
+=======
+        self.caption
+            .get_ref(StyleChain::default())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .as_ref()
             .map(|caption| caption.body.clone())
             .unwrap_or_default()
     }
 }
 
+<<<<<<< HEAD
 /// 図のキャプション。
 /// この要素は、全ての図や特定の種類の図のキャプションの外観を改変するために、
 /// setルールやshowルールで使用可能です。
 ///
 /// キャプションは、`pos`と`body`に加えて、図の`kind`や`supplement`、`counter`、`numbering`もフィールドとして提供します。
 /// これらの要素を[`where`]($function.where)セレクターやshowルールで使用することで、独自のキャプションを構築できます。
+=======
+/// The caption of a figure. This element can be used in set and show rules to
+/// customize the appearance of captions for all figures or figures of a
+/// specific kind.
+///
+/// In addition to its `position` and `body`, the `caption` also provides the
+/// figure's `kind`, `supplement`, `counter`, and `numbering` as fields. These
+/// parts can be used in [`where`]($function.where) selectors and show rules to
+/// build a completely custom caption.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #show figure.caption: emph
@@ -444,9 +794,15 @@ impl Outlinable for Packed<FigureElem> {
 ///   caption: [A rectangle],
 /// )
 /// ```
+<<<<<<< HEAD
 #[elem(name = "caption", Synthesize, Show)]
 pub struct FigureCaption {
     /// 図表の仲のキャプションの位置。`{top}`や`{bottom}`を入力してください。
+=======
+#[elem(name = "caption", Locatable, Tagged, Synthesize)]
+pub struct FigureCaption {
+    /// The caption's position in the figure. Either `{top}` or `{bottom}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #show figure.where(
@@ -474,10 +830,17 @@ pub struct FigureCaption {
     #[default(OuterVAlignment::Bottom)]
     pub position: OuterVAlignment,
 
+<<<<<<< HEAD
     /// 番号とキャプション名の間に表示する区切り文字。
     ///
     /// `{auto}`に設定すると、区切り文字は
     /// [language]($text.lang)と[region]($text.region)に応じて決まります。
+=======
+    /// The separator which will appear between the number and body.
+    ///
+    /// If set to `{auto}`, the separator will be adapted to the current
+    /// [language]($text.lang) and [region]($text.region).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set figure.caption(separator: [ --- ])
@@ -489,10 +852,17 @@ pub struct FigureCaption {
     /// ```
     pub separator: Smart<Content>,
 
+<<<<<<< HEAD
     /// キャプション名。
     ///
     /// 独自のキャプションに改変するために
     /// `kind`、`supplement`、`counter`、`numbering`、`location`が同時に使えます。
+=======
+    /// The caption's body.
+    ///
+    /// Can be used alongside `kind`, `supplement`, `counter`, `numbering`, and
+    /// `location` to completely customize the caption.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #show figure.caption: it => [
@@ -532,6 +902,7 @@ pub struct FigureCaption {
 }
 
 impl FigureCaption {
+<<<<<<< HEAD
     /// Gets the default separator in the given language and (optionally)
     /// region.
     fn local_separator(lang: Lang, _: Option<Region>) -> &'static str {
@@ -564,6 +935,14 @@ impl Synthesize for Packed<FigureCaption> {
 impl Show for Packed<FigureCaption> {
     #[typst_macros::time(name = "figure.caption", span = self.span())]
     fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
+=======
+    /// Realizes the textual caption content.
+    pub fn realize(
+        &self,
+        engine: &mut Engine,
+        styles: StyleChain,
+    ) -> SourceResult<Content> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let mut realized = self.body.clone();
 
         if let (
@@ -572,15 +951,23 @@ impl Show for Packed<FigureCaption> {
             Some(Some(counter)),
             Some(Some(location)),
         ) = (
+<<<<<<< HEAD
             self.supplement().cloned(),
             self.numbering(),
             self.counter(),
             self.figure_location(),
+=======
+            self.supplement.clone(),
+            &self.numbering,
+            &self.counter,
+            &self.figure_location,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         ) {
             let numbers = counter.display_at_loc(engine, *location, styles, numbering)?;
             if !supplement.is_empty() {
                 supplement += TextElem::packed('\u{a0}');
             }
+<<<<<<< HEAD
             realized = supplement + numbers + self.get_separator(styles) + realized;
         }
 
@@ -594,10 +981,46 @@ impl Show for Packed<FigureCaption> {
                 .with_body(Some(BlockBody::Content(realized)))
                 .pack()
                 .spanned(self.span())
+=======
+            realized = supplement + numbers + self.resolve_separator(styles) + realized;
+        }
+
+        Ok(realized)
+    }
+
+    /// Retrieves the locale separator.
+    fn resolve_separator(&self, styles: StyleChain) -> Content {
+        self.separator
+            .get_cloned(styles)
+            .unwrap_or_else(|| Self::local_separator_in(styles))
+    }
+
+    /// Gets the default separator in the given language and (optionally)
+    /// region.
+    fn local_separator_in(styles: StyleChain) -> Content {
+        styles.get_cloned(Self::separator).unwrap_or_else(|| {
+            TextElem::packed(match styles.get(TextElem::lang) {
+                Lang::CHINESE => "\u{2003}",
+                Lang::FRENCH => ".\u{a0}– ",
+                Lang::RUSSIAN => ". ",
+                Lang::ENGLISH | _ => ": ",
+            })
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         })
     }
 }
 
+<<<<<<< HEAD
+=======
+impl Synthesize for Packed<FigureCaption> {
+    fn synthesize(&mut self, _: &mut Engine, styles: StyleChain) -> SourceResult<()> {
+        let elem = self.as_mut();
+        elem.separator.set(Smart::Custom(elem.resolve_separator(styles)));
+        Ok(())
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 cast! {
     FigureCaption,
     v: Content => v.unpack::<Self>().unwrap_or_else(Self::new),

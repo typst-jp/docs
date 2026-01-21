@@ -5,6 +5,7 @@ use std::fmt::{self, Debug, Formatter};
 use std::sync::{Arc, LazyLock};
 
 use comemo::{Tracked, TrackedMut};
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use typst_syntax::{ast, Span, SyntaxNode};
 use typst_utils::{singleton, LazyHash, Static};
@@ -28,6 +29,33 @@ use crate::foundations::{
 /// 詳細は[数式のドキュメント]($category/math)を参照して下さい。
 ///
 /// # 例
+=======
+use ecow::{EcoString, eco_format};
+use typst_syntax::{Span, SyntaxNode, ast};
+use typst_utils::{LazyHash, Static, singleton};
+
+use crate::diag::{At, DeprecationSink, SourceResult, StrResult, bail};
+use crate::engine::Engine;
+use crate::foundations::{
+    Args, Bytes, CastInfo, Content, Context, Element, IntoArgs, PluginFunc, Scope,
+    Selector, Type, Value, cast, repr, scope, ty,
+};
+
+/// A mapping from argument values to a return value.
+///
+/// You can call a function by writing a comma-separated list of function
+/// _arguments_ enclosed in parentheses directly after the function name.
+/// Additionally, you can pass any number of trailing content block arguments
+/// to a function _after_ the normal argument list. If the normal argument list
+/// would become empty, it can be omitted. Typst supports positional and named
+/// arguments. The former are identified by position and type, while the latter
+/// are written as `name: value`.
+///
+/// Within math mode, function calls have special behaviour. See the
+/// [math documentation]($category/math) for more details.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// // Call a function.
 /// #list([A], [B])
@@ -40,6 +68,7 @@ use crate::foundations::{
 /// #list[A][B]
 /// ```
 ///
+<<<<<<< HEAD
 /// 関数はTypstにおいて基礎となる構成要素です。
 /// Typstはさまざまな組版タスクに応じた関数を提供しています。
 /// さらには、作成されるマークアップの裏側では関数が用いられており、全てのスタイル設定は関数を介して行われます。
@@ -69,6 +98,49 @@ use crate::foundations::{
 /// 意味のある値を何も返さない関数は、代わりに[`none`]を返します。
 /// このような関数の戻り値の型はドキュメント中では明示的に指定されていません
 /// （この例としては[`array.push`]が該当します）。
+=======
+/// Functions are a fundamental building block of Typst. Typst provides
+/// functions for a variety of typesetting tasks. Moreover, the markup you write
+/// is backed by functions and all styling happens through functions. This
+/// reference lists all available functions and how you can use them. Please
+/// also refer to the documentation about [set]($styling/#set-rules) and
+/// [show]($styling/#show-rules) rules to learn about additional ways you can
+/// work with functions in Typst.
+///
+/// # Element functions
+/// Some functions are associated with _elements_ like [headings]($heading) or
+/// [tables]($table). When called, these create an element of their respective
+/// kind. In contrast to normal functions, they can further be used in [set
+/// rules]($styling/#set-rules), [show rules]($styling/#show-rules), and
+/// [selectors]($selector).
+///
+/// # Function scopes
+/// Functions can hold related definitions in their own scope, similar to a
+/// [module]($scripting/#modules). Examples of this are [`assert.eq`] or
+/// [`list.item`]. However, this feature is currently only available for
+/// built-in functions.
+///
+/// # Defining functions
+/// You can define your own function with a [let binding]($scripting/#bindings)
+/// that has a parameter list after the binding's name. The parameter list can
+/// contain mandatory positional parameters, named parameters with default
+/// values and [argument sinks]($arguments).
+///
+/// The right-hand side of a function binding is the function body, which can be
+/// a block or any other expression. It defines the function's return value and
+/// can depend on the parameters. If the function body is a [code
+/// block]($scripting/#blocks), the return value is the result of joining the
+/// values of each expression in the block.
+///
+/// Within a function body, the `return` keyword can be used to exit early and
+/// optionally specify a return value. If no explicit return value is given, the
+/// body evaluates to the result of joining all expressions preceding the
+/// `return`.
+///
+/// Functions that don't return any meaningful value return [`none`] instead.
+/// The return type of such functions is not explicitly specified in the
+/// documentation. (An example of this is [`array.push`]).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #let alert(body, fill: red) = {
@@ -91,6 +163,7 @@ use crate::foundations::{
 /// ]
 /// ```
 ///
+<<<<<<< HEAD
 /// # 関数のインポート
 /// 関数は、`{import}`を用いてあるファイル（[`module`]($scripting/#modules)）から別のファイルにインポートすることができます。
 /// 例えば、上記の例にある`alert`関数を`foo.typ`というファイルに定義したとします。
@@ -100,12 +173,28 @@ use crate::foundations::{
 /// 引数リストに続けて `=>` と関数本体を指定することで、バインディングを作らずに無名関数も作成できます。
 /// もし関数の引数が1つだけならば、引数リストの周りの括弧は必須ではありません。
 /// 無名関数は主にshowルールで用いると便利ですが、page関数の[`footer`]($page.footer)プロパティのような、関数を引数に取る設定可能プロパティにも便利です。
+=======
+/// # Importing functions
+/// Functions can be imported from one file ([`module`]($scripting/#modules)) into
+/// another using `{import}`. For example, assume that we have defined the `alert`
+/// function from the previous example in a file called `foo.typ`. We can import
+/// it into another file by writing `{import "foo.typ": alert}`.
+///
+/// # Unnamed functions { #unnamed }
+/// You can also create an unnamed function without creating a binding by
+/// specifying a parameter list followed by `=>` and the function body. If your
+/// function has just one parameter, the parentheses around the parameter list
+/// are optional. Unnamed functions are mainly useful for show rules, but also
+/// for settable properties that take functions like the page function's
+/// [`footer`]($page.footer) property.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #show "once?": it => [#it #it]
 /// once?
 /// ```
 ///
+<<<<<<< HEAD
 /// # 関数の純粋性に関する注意
 /// Typstにおいて関数は全て _純粋_ です。
 /// これは同じ引数からは常に同じ結果が返ってくることを意味します。
@@ -113,6 +202,16 @@ use crate::foundations::{
 ///
 /// 唯一の例外は[`array.push(value)`]($array.push)のような組み込みメソッドです。
 /// これらは呼び出された対象を変更できます。
+=======
+/// # Note on function purity
+/// In Typst, all functions are _pure._ This means that for the same
+/// arguments, they always return the same result. They cannot "remember" things to
+/// produce another value when they are called a second time.
+///
+/// The only exception are built-in methods like
+/// [`array.push(value)`]($array.push). These can modify the values they are
+/// called on.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[ty(scope, cast, name = "function")]
 #[derive(Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
@@ -288,7 +387,11 @@ impl Func {
     ) -> SourceResult<Value> {
         match &self.repr {
             Repr::Native(native) => {
+<<<<<<< HEAD
                 let value = (native.function)(engine, context, &mut args)?;
+=======
+                let value = (native.function.0)(engine, context, &mut args)?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 args.finish()?;
                 Ok(value)
             }
@@ -338,12 +441,20 @@ impl Func {
 
 #[scope]
 impl Func {
+<<<<<<< HEAD
     /// 指定した引数を事前に適用した新しい関数を返します。
+=======
+    /// Returns a new function that has the given arguments pre-applied.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn with(
         self,
         args: &mut Args,
+<<<<<<< HEAD
         /// 関数に適用する引数。
+=======
+        /// The arguments to apply to the function.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         #[external]
         #[variadic]
         arguments: Vec<Value>,
@@ -355,7 +466,12 @@ impl Func {
         }
     }
 
+<<<<<<< HEAD
     /// この関数に属する要素のうち、与えられた引数と同じ値のフィールドを持つものを絞り込むセレクターを返します。
+=======
+    /// Returns a selector that filters for elements belonging to this function
+    /// whose fields have the values of the given arguments.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #show heading.where(level: 2): set text(blue)
@@ -367,7 +483,11 @@ impl Func {
     pub fn where_(
         self,
         args: &mut Args,
+<<<<<<< HEAD
         /// 絞り込むフィールド。
+=======
+        /// The fields to filter for.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         #[variadic]
         #[external]
         fields: Vec<Value>,
@@ -404,9 +524,19 @@ impl Debug for Func {
 
 impl repr::Repr for Func {
     fn repr(&self) -> EcoString {
+<<<<<<< HEAD
         match self.name() {
             Some(name) => name.into(),
             None => "(..) => ..".into(),
+=======
+        const DEFAULT: &str = "(..) => ..";
+        match &self.repr {
+            Repr::Native(native) => native.name.into(),
+            Repr::Element(elem) => elem.name().into(),
+            Repr::Closure(closure) => closure.name().unwrap_or(DEFAULT).into(),
+            Repr::Plugin(func) => func.name().clone(),
+            Repr::With(_) => DEFAULT.into(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
@@ -426,6 +556,18 @@ impl PartialEq<&'static NativeFuncData> for Func {
     }
 }
 
+<<<<<<< HEAD
+=======
+impl PartialEq<Element> for Func {
+    fn eq(&self, other: &Element) -> bool {
+        match &self.repr {
+            Repr::Element(elem) => elem == other,
+            _ => false,
+        }
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl From<Repr> for Func {
     fn from(repr: Repr) -> Self {
         Self { repr, span: Span::detached() }
@@ -471,8 +613,13 @@ pub trait NativeFunc {
 /// Defines a native function.
 #[derive(Debug)]
 pub struct NativeFuncData {
+<<<<<<< HEAD
     /// Invokes the function from Typst.
     pub function: fn(&mut Engine, Tracked<Context>, &mut Args) -> SourceResult<Value>,
+=======
+    /// The implementation of the function.
+    pub function: NativeFuncPtr,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The function's normal name (e.g. `align`), as exposed to Typst.
     pub name: &'static str,
     /// The function's title case name (e.g. `Align`).
@@ -484,11 +631,19 @@ pub struct NativeFuncData {
     /// Whether this function makes use of context.
     pub contextual: bool,
     /// Definitions in the scope of the function.
+<<<<<<< HEAD
     pub scope: LazyLock<Scope>,
     /// A list of parameter information for each parameter.
     pub params: LazyLock<Vec<ParamInfo>>,
     /// Information about the return value of this function.
     pub returns: LazyLock<CastInfo>,
+=======
+    pub scope: DynLazyLock<Scope>,
+    /// A list of parameter information for each parameter.
+    pub params: DynLazyLock<Vec<ParamInfo>>,
+    /// Information about the return value of this function.
+    pub returns: DynLazyLock<CastInfo>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 cast! {
@@ -496,6 +651,31 @@ cast! {
     self => Func::from(self).into_value(),
 }
 
+<<<<<<< HEAD
+=======
+/// A pointer to a native function's implementation.
+pub struct NativeFuncPtr(pub &'static NativeFuncSignature);
+
+/// The signature of a native function's implementation.
+type NativeFuncSignature =
+    dyn Fn(&mut Engine, Tracked<Context>, &mut Args) -> SourceResult<Value> + Send + Sync;
+
+impl Debug for NativeFuncPtr {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.pad("NativeFuncPtr(..)")
+    }
+}
+
+/// A `LazyLock` that uses a static closure for initialization instead of only
+/// working with function pointers.
+///
+/// Can be created from a normal function or closure by prepending with a `&`,
+/// e.g. `LazyLock::new(&|| "hello")`. Can be created from a dynamic closure
+/// by allocating and then leaking it. This is equivalent to having it
+/// statically allocated, but allows for it to be generated at runtime.
+type DynLazyLock<T> = LazyLock<T, &'static (dyn Fn() -> T + Send + Sync)>;
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Describes a function parameter.
 #[derive(Debug, Clone)]
 pub struct ParamInfo {
@@ -522,6 +702,7 @@ pub struct ParamInfo {
     pub settable: bool,
 }
 
+<<<<<<< HEAD
 /// A user-defined closure.
 #[derive(Debug, Hash)]
 pub struct Closure {
@@ -529,6 +710,23 @@ pub struct Closure {
     /// `ast::Expr`. In the latter case, this is a synthesized closure without
     /// any parameters (used by `context` expressions).
     pub node: SyntaxNode,
+=======
+/// Distinguishes between variants of closures.
+#[derive(Debug, Hash)]
+pub enum ClosureNode {
+    /// A regular closure. Must always be castable to a `ast::Closure`.
+    Closure(SyntaxNode),
+    /// Synthetic closure used for `context` expressions. Can be any `ast::Expr`
+    /// and has no parameters.
+    Context(SyntaxNode),
+}
+
+/// A user-defined closure.
+#[derive(Debug, Hash)]
+pub struct Closure {
+    /// The closure's syntax node.
+    pub node: ClosureNode,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Default values of named parameters.
     pub defaults: Vec<Value>,
     /// Captured values from outer scopes.
@@ -540,7 +738,16 @@ pub struct Closure {
 impl Closure {
     /// The name of the closure.
     pub fn name(&self) -> Option<&str> {
+<<<<<<< HEAD
         self.node.cast::<ast::Closure>()?.name().map(|ident| ident.as_str())
+=======
+        match self.node {
+            ClosureNode::Closure(ref node) => {
+                node.cast::<ast::Closure>()?.name().map(|ident| ident.as_str())
+            }
+            _ => None,
+        }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

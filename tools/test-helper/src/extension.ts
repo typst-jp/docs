@@ -1,6 +1,10 @@
 import * as vscode from "vscode";
 import * as cp from "child_process";
 import { clearInterval } from "timers";
+<<<<<<< HEAD
+=======
+const shiki = import("shiki"); // Normal import causes TypeScript problems.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 // Called when an activation event is triggered. Our activation event is the
 // presence of "tests/suite/playground.typ".
@@ -17,6 +21,11 @@ class TestHelper {
   opened?: {
     // The tests's name.
     name: string;
+<<<<<<< HEAD
+=======
+    // The test's attributes.
+    attrs: string[];
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     // The WebView panel that displays the test images and output.
     panel: vscode.WebviewPanel;
   };
@@ -44,6 +53,7 @@ class TestHelper {
     );
 
     // Triggered when clicking "View" in the lens.
+<<<<<<< HEAD
     this.registerCommand("typst-test-helper.viewFromLens", (name) =>
       this.viewFromLens(name)
     );
@@ -56,6 +66,20 @@ class TestHelper {
     // Triggered when clicking "Save" in the lens.
     this.registerCommand("typst-test-helper.saveFromLens", (name) =>
       this.saveFromLens(name)
+=======
+    this.registerCommand("typst-test-helper.viewFromLens", (name, attrs) =>
+      this.viewFromLens(name, attrs)
+    );
+
+    // Triggered when clicking "Run" in the lens.
+    this.registerCommand("typst-test-helper.runFromLens", (name, attrs) =>
+      this.runFromLens(name, attrs)
+    );
+
+    // Triggered when clicking "Save" in the lens.
+    this.registerCommand("typst-test-helper.saveFromLens", (name, attrs) =>
+      this.saveFromLens(name, attrs)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     );
 
     // Triggered when clicking "Terminal" in the lens.
@@ -121,31 +145,51 @@ class TestHelper {
     const lenses = [];
     for (let nr = 0; nr < document.lineCount; nr++) {
       const line = document.lineAt(nr);
+<<<<<<< HEAD
       const re = /^--- ([\d\w-]+)( [\d\w-]+)* ---$/;
+=======
+      const re = /^--- ([\d\w-]+)(( [\d\w-]+)*) ---$/;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
       const m = line.text.match(re);
       if (!m) {
         continue;
       }
 
       const name = m[1];
+<<<<<<< HEAD
+=======
+      const attrs = m[2].trim().split(" ");
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
       lenses.push(
         new vscode.CodeLens(line.range, {
           title: "View",
           tooltip: "View the test output and reference in a new tab",
           command: "typst-test-helper.viewFromLens",
+<<<<<<< HEAD
           arguments: [name],
+=======
+          arguments: [name, attrs],
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }),
         new vscode.CodeLens(line.range, {
           title: "Run",
           tooltip: "Run the test and view the results in a new tab",
           command: "typst-test-helper.runFromLens",
+<<<<<<< HEAD
           arguments: [name],
+=======
+          arguments: [name, attrs],
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }),
         new vscode.CodeLens(line.range, {
           title: "Save",
           tooltip: "Run and view the test and save the reference output",
           command: "typst-test-helper.saveFromLens",
+<<<<<<< HEAD
           arguments: [name],
+=======
+          arguments: [name, attrs],
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }),
         new vscode.CodeLens(line.range, {
           title: "Terminal",
@@ -159,40 +203,76 @@ class TestHelper {
   }
 
   // Triggered when clicking "View" in the lens.
+<<<<<<< HEAD
   private viewFromLens(name: string) {
     if (this.opened?.name == name) {
+=======
+  private viewFromLens(name: string, attrs: string[]) {
+    if (
+      this.opened?.name == name &&
+      this.opened.attrs.join(" ") == attrs.join(" ")
+    ) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
       this.opened.panel.reveal();
       return;
     }
 
     if (this.opened) {
       this.opened.name = name;
+<<<<<<< HEAD
+=======
+      this.opened.attrs = attrs;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
       this.opened.panel.title = name;
     } else {
       const panel = vscode.window.createWebviewPanel(
         "typst-test-helper.preview",
         name,
         vscode.ViewColumn.Beside,
+<<<<<<< HEAD
         { enableFindWidget: true }
       );
 
       panel.onDidDispose(() => (this.opened = undefined));
 
       this.opened = { name, panel };
+=======
+        { enableFindWidget: true, enableScripts: true }
+      );
+
+      panel.onDidDispose(() => (this.opened = undefined));
+      panel.webview.onDidReceiveMessage((message) => {
+        if (message.command === "openFile") {
+          vscode.env.openExternal(vscode.Uri.parse(message.uri));
+        }
+      });
+
+      this.opened = { name, attrs, panel };
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     this.refreshWebView();
   }
 
   // Triggered when clicking "Run" in the lens.
+<<<<<<< HEAD
   private runFromLens(name: string) {
     this.viewFromLens(name);
+=======
+  private runFromLens(name: string, attrs: string[]) {
+    this.viewFromLens(name, attrs);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     this.runFromPreview();
   }
 
   // Triggered when clicking "Run" in the lens.
+<<<<<<< HEAD
   private saveFromLens(name: string) {
     this.viewFromLens(name);
+=======
+  private saveFromLens(name: string, attrs: string[]) {
+    this.viewFromLens(name, attrs);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     this.saveFromPreview();
   }
 
@@ -288,6 +368,7 @@ class TestHelper {
   private copyImageFilePathFromPreviewContext(webviewSection: string) {
     if (!this.opened) return;
     const { name } = this.opened;
+<<<<<<< HEAD
     const { png, ref } = getImageUris(name);
     switch (webviewSection) {
       case "png":
@@ -299,12 +380,19 @@ class TestHelper {
       default:
         break;
     }
+=======
+    const [bucket, format] = webviewSection.split("/");
+    vscode.env.clipboard.writeText(
+      getUri(name, bucket as Bucket, format as Format).fsPath
+    );
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   }
 
   // Reloads the web view.
   private refreshWebView(output?: { stdout: string; stderr: string }) {
     if (!this.opened) return;
 
+<<<<<<< HEAD
     const { name, panel } = this.opened;
     const { png, ref } = getImageUris(name);
 
@@ -323,6 +411,29 @@ class TestHelper {
           throw new Error("panel to refresh is falsy after waiting");
         }
         panel.webview.html = getWebviewContent(webViewSrcs, output);
+=======
+    const { name, attrs, panel } = this.opened;
+
+    if (panel) {
+      console.log(
+        `Refreshing WebView for ${name}` +
+          (panel.visible ? " in background" : "")
+      );
+
+      panel.webview.html = "";
+
+      // Make refresh notable.
+      setTimeout(async () => {
+        if (!panel) {
+          throw new Error("panel to refresh is falsy after waiting");
+        }
+        panel.webview.html = await getWebviewContent(
+          panel,
+          name,
+          attrs,
+          output
+        );
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
       }, 50);
     }
   }
@@ -386,6 +497,7 @@ function getWorkspaceRoot() {
   return vscode.workspace.workspaceFolders![0].uri;
 }
 
+<<<<<<< HEAD
 // Returns the URIs for a test's images.
 function getImageUris(name: string) {
   const root = getWorkspaceRoot();
@@ -397,10 +509,33 @@ function getImageUris(name: string) {
 // Produces the content of the WebView.
 function getWebviewContent(
   webViewSrcs: { png: vscode.Uri; ref: vscode.Uri },
+=======
+const EXTENSION = { html: "html", render: "png" };
+
+type Bucket = "store" | "ref";
+type Format = "html" | "render";
+
+function getUri(name: string, bucket: Bucket, format: Format) {
+  let path;
+  if (bucket === "ref" && format === "render") {
+    path = `tests/ref/${name}.png`;
+  } else {
+    path = `tests/${bucket}/${format}/${name}.${EXTENSION[format]}`;
+  }
+  return vscode.Uri.joinPath(getWorkspaceRoot(), path);
+}
+
+// Produces the content of the WebView.
+async function getWebviewContent(
+  panel: vscode.WebviewPanel,
+  name: string,
+  attrs: string[],
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   output?: {
     stdout: string;
     stderr: string;
   }
+<<<<<<< HEAD
 ): string {
   const escape = (text: string) =>
     text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -410,6 +545,21 @@ function getWebviewContent(
     : "";
   const stderrHtml = output?.stderr
     ? `<h1>Standard error</h1><pre>${escape(output.stderr)}</pre>`
+=======
+): Promise<string> {
+  const showHtml = attrs.includes("html");
+  const showRender = !showHtml || attrs.includes("render");
+
+  const stdout = output?.stdout
+    ? `<h2>Standard output</h2><pre class="output">${escape(
+        output.stdout
+      )}</pre>`
+    : "";
+  const stderr = output?.stderr
+    ? `<h2>Standard error</h2><pre class="output">${escape(
+        output.stderr
+      )}</pre>`
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     : "";
 
   return `
@@ -449,17 +599,30 @@ function getWebviewContent(
           color: #bebebe;
           content: "Not present";
         }
+<<<<<<< HEAD
         pre {
           display: inline-block;
           font-family: var(--vscode-editor-font-family);
           text-align: left;
           width: 80%;
+=======
+        h2 {
+          margin-bottom: 12px;
+        }
+        h2 a {
+          color: var(--vscode-editor-foreground);
+          text-decoration: underline;
+        }
+        h2 a:hover {
+          cursor: pointer;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         .flex {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
         }
+<<<<<<< HEAD
       </style>
     </head>
     <body>
@@ -492,3 +655,156 @@ function getWebviewContent(
     </body>
   </html>`;
 }
+=======
+        .vertical {
+          flex-direction: column;
+        }
+        .top-bottom {
+          display: flex;
+          flex-direction: column;
+          padding-inline: 32px;
+          width: calc(100vw - 64px);
+        }
+        pre {
+          font-family: var(--vscode-editor-font-family);
+          text-align: left;
+          white-space: pre-wrap;
+        }
+        pre.output {
+          display: inline-block;
+          width: 80%;
+          margin-block-start: 0;
+        }
+        pre.shiki {
+          background-color: transparent !important;
+          padding: 12px;
+          margin-block-start: 0;
+        }
+        pre.shiki code {
+          --vscode-textPreformat-background: transparent;
+        }
+        iframe, pre.shiki {
+          border: 1px solid rgb(189, 191, 204);
+          border-radius: 6px;
+        }
+        iframe {
+          background: white;
+        }
+        .vscode-dark iframe {
+          filter: invert(1) hue-rotate(180deg);
+        }
+      </style>
+      <script>
+        const api = acquireVsCodeApi()
+        function openFile(uri) {
+          api.postMessage({ command: 'openFile', uri });
+        }
+        function sizeIframe(obj){
+          obj.style.height = 0;
+          obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        }
+      </script>
+    </head>
+    <body>
+      ${showRender ? renderSection(panel, name) : ""}
+      ${showHtml ? await htmlSection(name) : ""}
+      ${stdout}
+      ${stderr}
+    </body>
+  </html>`;
+}
+
+function renderSection(panel: vscode.WebviewPanel, name: string) {
+  const outputUri = getUri(name, "store", "render");
+  const refUri = getUri(name, "ref", "render");
+  return `<div
+    class="flex"
+    data-vscode-context='{"preventDefaultContextMenuItems": true}'
+  >
+    <div>
+      ${linkedTitle("Output", outputUri)}
+      <img
+        class="output"
+        data-vscode-context='{"bucket":"store", format: "render"}'
+        src="${panel.webview.asWebviewUri(outputUri)}"
+        alt="Placeholder"
+      >
+    </div>
+
+    <div>
+      ${linkedTitle("Reference", refUri)}
+      <img
+        class="ref"
+        data-vscode-context='{"bucket":"ref", format: "render"}'
+        src="${panel.webview.asWebviewUri(refUri)}"
+        alt="Placeholder"
+      >
+    </div>
+  </div>`;
+}
+
+async function htmlSection(name: string) {
+  const storeHtml = await htmlSnippet(
+    "HTML Output",
+    getUri(name, "store", "html")
+  );
+  const refHtml = await htmlSnippet(
+    "HTML Reference",
+    getUri(name, "ref", "html")
+  );
+  return `<div
+    class="flex vertical"
+    data-vscode-context='{"preventDefaultContextMenuItems": true}'
+  >
+    ${storeHtml}
+    ${refHtml}
+  </div>`;
+}
+
+async function htmlSnippet(title: string, uri: vscode.Uri): Promise<string> {
+  try {
+    const data = await vscode.workspace.fs.readFile(uri);
+    const code = new TextDecoder("utf-8").decode(data);
+    return `<div>
+      ${linkedTitle(title, uri)}
+      <div class="top-bottom">
+        ${await highlight(code)}
+        <iframe srcdoc="${escape(code)}"></iframe>
+      </div>
+    </div>`;
+  } catch {
+    return `<div><h2>${title}</h2>Not present</div>`;
+  }
+}
+
+function linkedTitle(title: string, uri: vscode.Uri) {
+  return `<h2><a onclick="openFile('${uri.toString()}')">${title}</a></h2>`;
+}
+
+async function highlight(code: string): Promise<string> {
+  return (await shiki).codeToHtml(code, {
+    lang: "html",
+    theme: selectTheme(),
+  });
+}
+
+function selectTheme() {
+  switch (vscode.window.activeColorTheme.kind) {
+    case vscode.ColorThemeKind.Light:
+    case vscode.ColorThemeKind.HighContrastLight:
+      return "github-light";
+    case vscode.ColorThemeKind.Dark:
+    case vscode.ColorThemeKind.HighContrast:
+      return "github-dark";
+  }
+}
+
+function escape(text: string) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

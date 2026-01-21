@@ -4,5 +4,13 @@ equation = Rovnice
 bibliography = Bibliografie
 heading = Kapitola
 outline = Obsah
+<<<<<<< HEAD
 raw = Seznam
 page = strana
+=======
+raw = Výpis
+page = strana
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

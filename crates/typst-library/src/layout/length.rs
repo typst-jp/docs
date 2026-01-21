@@ -3,6 +3,7 @@ use std::fmt::{self, Debug, Formatter};
 use std::ops::{Add, Div, Mul, Neg};
 
 use comemo::Tracked;
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use typst_syntax::Span;
 use typst_utils::Numeric;
@@ -24,6 +25,29 @@ use crate::layout::{Abs, Em};
 /// 長さは整数や浮動小数点数で乗除算できます。
 ///
 /// # 例
+=======
+use ecow::{EcoString, eco_format};
+use typst_syntax::Span;
+use typst_utils::Numeric;
+
+use crate::diag::{HintedStrResult, SourceResult, bail};
+use crate::foundations::{Context, Fold, Repr, Resolve, StyleChain, func, scope, ty};
+use crate::layout::{Abs, Em};
+
+/// A size or distance, possibly expressed with contextual units.
+///
+/// Typst supports the following length units:
+///
+/// - Points: `{72pt}`
+/// - Millimeters: `{254mm}`
+/// - Centimeters: `{2.54cm}`
+/// - Inches: `{1in}`
+/// - Relative to font size: `{2.5em}`
+///
+/// You can multiply lengths with and divide them by integers and floats.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #rect(width: 20pt)
 /// #rect(width: 2em)
@@ -35,9 +59,16 @@ use crate::layout::{Abs, Em};
 /// #(5em).abs
 /// ```
 ///
+<<<<<<< HEAD
 /// # フィールド
 /// - `abs`: 現在の長さの単なる数値部分（すなわち`em`部分を除いたもの）。
 /// - `em`: [float]としての、このlengthでの`em`単位の大きさ。
+=======
+/// # Fields
+/// - `abs`: A length with just the absolute component of the current length
+///   (that is, excluding the `em` component).
+/// - `em`: The amount of `em` units in this length, as a [float].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[ty(scope, cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Length {
@@ -94,47 +125,81 @@ impl Length {
 
 #[scope]
 impl Length {
+<<<<<<< HEAD
     /// このlengthをポイントに変換します。
     ///
     /// このlengthの`em`単位の値が（単に`2pt`ではなく`5em + 2pt`のように）非ゼロの場合にエラーが発生して失敗します。
     /// 長さの`em`成分を無視するために（`(5em + 2pt).abs.pt()`のように）`abs`フィールドを使用してください（したがって、数値部分のみが変換されます）。
+=======
+    /// Converts this length to points.
+    ///
+    /// Fails with an error if this length has non-zero `em` units (such as
+    /// `5em + 2pt` instead of just `2pt`). Use the `abs` field (such as in
+    /// `(5em + 2pt).abs.pt()`) to ignore the `em` component of the length (thus
+    /// converting only its absolute component).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func(name = "pt", title = "Points")]
     pub fn to_pt(&self, span: Span) -> SourceResult<f64> {
         self.ensure_that_em_is_zero(span, "pt")?;
         Ok(self.abs.to_pt())
     }
 
+<<<<<<< HEAD
     /// このlengthをミリメートルに変換します。
     ///
     /// このlengthの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
+=======
+    /// Converts this length to millimeters.
+    ///
+    /// Fails with an error if this length has non-zero `em` units. See the
+    /// [`pt`]($length.pt) method for more details.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func(name = "mm", title = "Millimeters")]
     pub fn to_mm(&self, span: Span) -> SourceResult<f64> {
         self.ensure_that_em_is_zero(span, "mm")?;
         Ok(self.abs.to_mm())
     }
 
+<<<<<<< HEAD
     /// このlengthをセンチメートルに変換します。
     ///
     /// このlengthの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
+=======
+    /// Converts this length to centimeters.
+    ///
+    /// Fails with an error if this length has non-zero `em` units. See the
+    /// [`pt`]($length.pt) method for more details.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func(name = "cm", title = "Centimeters")]
     pub fn to_cm(&self, span: Span) -> SourceResult<f64> {
         self.ensure_that_em_is_zero(span, "cm")?;
         Ok(self.abs.to_cm())
     }
 
+<<<<<<< HEAD
     /// このlengthをインチに変換します。
     ///
     /// このlengthの`em`単位の値が非ゼロの場合にエラーが発生して失敗します。
     /// 詳細は[`pt`]($length.pt)メソッドを参照して下さい。
+=======
+    /// Converts this length to inches.
+    ///
+    /// Fails with an error if this length has non-zero `em` units. See the
+    /// [`pt`]($length.pt) method for more details.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func(name = "inches")]
     pub fn to_inches(&self, span: Span) -> SourceResult<f64> {
         self.ensure_that_em_is_zero(span, "inches")?;
         Ok(self.abs.to_inches())
     }
 
+<<<<<<< HEAD
     /// このlengthを絶対的な長さに変換します。
+=======
+    /// Resolve this length to an absolute length.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set text(size: 12pt)

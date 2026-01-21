@@ -16,7 +16,11 @@ use typst::{Library, World};
 use unscanny::Scanner;
 use yaml_front_matter::YamlFrontMatter;
 
+<<<<<<< HEAD
 use crate::{contributors, OutlineItem, Resolver, FONTS, LIBRARY};
+=======
+use crate::{FONTS, LIBRARY, OutlineItem, Resolver, contributors};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// HTML documentation.
 #[derive(Serialize)]
@@ -84,6 +88,7 @@ impl Html {
             md::Parser::new_with_broken_link_callback(text, options, Some(&mut link))
                 .peekable();
 
+<<<<<<< HEAD
         let iter = std::iter::from_fn(|| loop {
             let mut event = events.next()?;
             handler.peeked = events.peek().and_then(|event| match event {
@@ -92,6 +97,18 @@ impl Html {
             });
             if handler.handle(&mut event) {
                 return Some(event);
+=======
+        let iter = std::iter::from_fn(|| {
+            loop {
+                let mut event = events.next()?;
+                handler.peeked = events.peek().and_then(|event| match event {
+                    md::Event::Text(text) => Some(text.clone()),
+                    _ => None,
+                });
+                if handler.handle(&mut event) {
+                    return Some(event);
+                }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         });
 
@@ -318,6 +335,7 @@ impl<'a> Handler<'a> {
 
         *id_slot = (!id.is_empty()).then_some(id);
 
+<<<<<<< HEAD
         let title = self.peeked.as_ref().map(|text| text.to_string());
         let name = if id.starts_with('v') && id.contains('.') {
             // Special case for things like "v0.3.0".
@@ -333,6 +351,13 @@ impl<'a> Handler<'a> {
                     .as_str()
                     .into(),
             }
+=======
+        // Special case for things like "v0.3.0".
+        let name = match &body {
+            _ if id.starts_with('v') && id.contains('.') => id.into(),
+            Some(body) if !has_id => body.as_ref().into(),
+            _ => id.to_title_case().into(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         };
 
         let mut children = &mut self.outline;
@@ -363,8 +388,68 @@ impl<'a> Handler<'a> {
     }
 }
 
+<<<<<<< HEAD
 /// Render a code block to HTML.
 fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
+=======
+#[derive(Debug, Clone, Copy)]
+pub struct ExampleArgs<'a> {
+    /// The language of the example.
+    pub lang: &'a str,
+    /// How to display the example.
+    pub view: ExampleView,
+    /// An optional title for the example.
+    pub title: Option<&'a str>,
+}
+
+impl<'a> ExampleArgs<'a> {
+    /// Parse a language tag.
+    pub fn from_tag(tag: &'a str) -> Self {
+        let mut parts = tag.split(':');
+        let lang = parts.next().unwrap_or(tag);
+
+        let mut view = ExampleView::default();
+        let mut title = None;
+
+        for args in parts {
+            if let Some(inner) =
+                args.strip_prefix('"').and_then(|rest| rest.strip_suffix('"'))
+            {
+                title = Some(inner);
+            } else if args.contains("single") {
+                view = ExampleView::Single(None);
+            } else if args.chars().next().is_some_and(char::is_numeric) {
+                view = ExampleView::Single(
+                    args.split(',')
+                        .take(4)
+                        .map(|s| Abs::pt(s.parse().unwrap()))
+                        .collect::<Vec<_>>()
+                        .try_into()
+                        .ok(),
+                )
+            } else if args == "all" {
+                // Default.
+            } else {
+                panic!("invalid example arguments: {args}");
+            }
+        }
+
+        Self { lang, view, title }
+    }
+}
+
+#[derive(Debug, Clone, Copy, Default)]
+pub enum ExampleView {
+    /// Display all pages
+    #[default]
+    All,
+    /// Display a single page
+    Single(Option<[Abs; 4]>),
+}
+
+/// Render a code block to HTML.
+fn code_block(resolver: &dyn Resolver, tag: &str, text: &str) -> Html {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut display = String::new();
     let mut compile = String::new();
     for line in text.lines() {
@@ -382,6 +467,7 @@ fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
         }
     }
 
+<<<<<<< HEAD
     let mut parts = lang.split(':');
     let lang = parts.next().unwrap_or(lang);
 
@@ -399,6 +485,10 @@ fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
                 .ok();
         }
     }
+=======
+    let args = ExampleArgs::from_tag(tag);
+    let lang = args.lang;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     if lang.is_empty() {
         let mut buf = String::from("<pre>");
@@ -440,12 +530,20 @@ fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
         }
     };
 
+<<<<<<< HEAD
     if let Some([x, y, w, h]) = zoom {
+=======
+    if let ExampleView::Single(Some([x, y, w, h])) = args.view {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         document.pages[0].frame.translate(Point::new(-x, -y));
         *document.pages[0].frame.size_mut() = Size::new(w, h);
     }
 
+<<<<<<< HEAD
     if single {
+=======
+    if let ExampleView::Single(_) = args.view {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         document.pages.truncate(1);
     }
 
@@ -508,7 +606,11 @@ impl World for DocWorld {
     }
 
     fn font(&self, index: usize) -> Option<Font> {
+<<<<<<< HEAD
         Some(FONTS.1[index].clone())
+=======
+        FONTS.1.get(index).cloned()
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     fn today(&self, _: Option<i64>) -> Option<Datetime> {

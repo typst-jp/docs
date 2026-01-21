@@ -1,6 +1,7 @@
 use std::fmt::{self, Debug, Formatter};
 use std::ops::Add;
 
+<<<<<<< HEAD
 use ecow::{eco_format, eco_vec, EcoString, EcoVec};
 use typst_syntax::{Span, Spanned};
 
@@ -14,6 +15,23 @@ use crate::foundations::{
 /// # 引数シンク
 /// 組み込み関数と同様に、カスタム関数も可変長引数を受け取れます。
 /// 余分にある引数を全てまとめて受け取る _引数シンク_（キッチンシンクのようにさまざまなものが流れ込む先）は、`..sink`の形で指定できます。このとき生成される`sink`の値は`arguments`型になります。この型は、位置引数と名前付き引数の両方にアクセスするためのメソッドを提供しています。
+=======
+use ecow::{EcoString, EcoVec, eco_format, eco_vec};
+use typst_syntax::{Span, Spanned};
+
+use crate::diag::{At, SourceDiagnostic, SourceResult, StrResult, bail, error};
+use crate::foundations::{
+    Array, Dict, FromValue, IntoValue, Repr, Str, Value, cast, func, repr, scope, ty,
+};
+
+/// Captured arguments to a function.
+///
+/// # Argument Sinks
+/// Like built-in functions, custom functions can also take a variable number of
+/// arguments. You can specify an _argument sink_ which collects all excess
+/// arguments as `..sink`. The resulting `sink` value is of the `arguments`
+/// type. It exposes methods to access the positional and named arguments.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #let format(title, ..authors) = {
@@ -27,8 +45,14 @@ use crate::foundations::{
 /// #format("ArtosFlow", "Jane", "Joe")
 /// ```
 ///
+<<<<<<< HEAD
 /// # 引数の展開
 /// 引数シンクとは逆に、`..spread`演算子を使うと、関数呼び出しにおいて引数や配列、辞書を展開して渡すことができます。
+=======
+/// # Spreading
+/// Inversely to an argument sink, you can _spread_ arguments, arrays and
+/// dictionaries into a function call with the `..spread` operator:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #let array = (2, 3, 5)
@@ -40,14 +64,23 @@ use crate::foundations::{
 #[derive(Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
 pub struct Args {
+<<<<<<< HEAD
     /// 関数呼び出し箇所のスパン。これは引数リスト自体のスパンではなく、関数呼び出し全体のものです。
+=======
+    /// The callsite span for the function. This is not the span of the argument
+    /// list itself, but of the whole function call.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub span: Span,
     /// The positional and named arguments.
     pub items: EcoVec<Arg>,
 }
 
 impl Args {
+<<<<<<< HEAD
     /// スパンと値から位置引数を作成します。
+=======
+    /// Create positional arguments from a span and values.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn new<T: IntoValue>(span: Span, values: impl IntoIterator<Item = T>) -> Self {
         let items = values
             .into_iter()
@@ -60,7 +93,11 @@ impl Args {
         Self { span, items }
     }
 
+<<<<<<< HEAD
     /// 引数にスパンがアタッチされていない場合はアタッチします。
+=======
+    /// Attach a span to these arguments if they don't already have one.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn spanned(mut self, span: Span) -> Self {
         if self.span.is_detached() {
             self.span = span;
@@ -68,12 +105,20 @@ impl Args {
         self
     }
 
+<<<<<<< HEAD
     /// 残りの位置引数の個数を返します。
+=======
+    /// Returns the number of remaining positional arguments.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn remaining(&self) -> usize {
         self.items.iter().filter(|slot| slot.name.is_none()).count()
     }
 
+<<<<<<< HEAD
     /// 指定したインデックスに位置引数を挿入します。
+=======
+    /// Insert a positional argument at a specific index.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn insert(&mut self, index: usize, span: Span, value: Value) {
         self.items.insert(
             index,
@@ -85,7 +130,11 @@ impl Args {
         )
     }
 
+<<<<<<< HEAD
     /// 位置引数をプッシュします。
+=======
+    /// Push a positional argument.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn push(&mut self, span: Span, value: Value) {
         self.items.push(Arg {
             span: self.span,
@@ -94,7 +143,11 @@ impl Args {
         })
     }
 
+<<<<<<< HEAD
     /// 最初の位置引数がある場合、それを取り出してキャストします。
+=======
+    /// Consume and cast the first positional argument if there is one.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn eat<T>(&mut self) -> SourceResult<Option<T>>
     where
         T: FromValue<Spanned<Value>>,
@@ -109,7 +162,11 @@ impl Args {
         Ok(None)
     }
 
+<<<<<<< HEAD
     /// 可能ならn個の位置引数を取り出します。
+=======
+    /// Consume n positional arguments if possible.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn consume(&mut self, n: usize) -> SourceResult<Vec<Arg>> {
         let mut list = vec![];
 
@@ -129,9 +186,16 @@ impl Args {
         Ok(list)
     }
 
+<<<<<<< HEAD
     /// 最初の位置引数を取り出してキャストします。
     ///
     /// 位置引数が残っていなければ、`missing argument: {what}`エラーを返します。
+=======
+    /// Consume and cast the first positional argument.
+    ///
+    /// Returns a `missing argument: {what}` error if no positional argument is
+    /// left.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn expect<T>(&mut self, what: &str) -> SourceResult<T>
     where
         T: FromValue<Spanned<Value>>,
@@ -142,7 +206,11 @@ impl Args {
         }
     }
 
+<<<<<<< HEAD
     /// 引数が足りない場合のエラーメッセージ。
+=======
+    /// The error message for missing arguments.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     fn missing_argument(&self, what: &str) -> SourceDiagnostic {
         for item in &self.items {
             let Some(name) = item.name.as_deref() else { continue };
@@ -290,9 +358,15 @@ impl Args {
 
 #[scope]
 impl Args {
+<<<<<<< HEAD
     /// 展開可能な引数をその場で生成します。
     ///
     /// この関数は、`{let args(..sink) = sink}`のように動作します。
+=======
+    /// Construct spreadable arguments in place.
+    ///
+    /// This function behaves like `{let args(..sink) = sink}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #let args = arguments(stroke: red, inset: 1em, [Body])
@@ -301,7 +375,11 @@ impl Args {
     #[func(constructor)]
     pub fn construct(
         args: &mut Args,
+<<<<<<< HEAD
         /// 作成する引数。
+=======
+        /// The arguments to construct.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         #[external]
         #[variadic]
         arguments: Vec<Value>,
@@ -309,6 +387,7 @@ impl Args {
         args.take()
     }
 
+<<<<<<< HEAD
     /// 指定したインデックスの位置引数、または指定した名前の名前付き引数を返します。
     ///
     /// キーが[整数型]($int)の場合、それはまず[`pos`]($arguments.pos)メソッドを呼んでから、次に[`array.at`]を呼ぶのと同等です。キーが[文字列型]($str)である場合、まず[`named`]($arguments.named)メソッドを呼び、次に[`dictionary.at`]を呼ぶのと同等です。
@@ -318,6 +397,21 @@ impl Args {
         /// 取得する引数のインデックスまたは名前。
         key: ArgumentKey,
         /// キーが無効な場合に返すデフォルト値。
+=======
+    /// Returns the positional argument at the specified index, or the named
+    /// argument with the specified name.
+    ///
+    /// If the key is an [integer]($int), this is equivalent to first calling
+    /// [`pos`]($arguments.pos) and then [`array.at`]. If it is a [string]($str),
+    /// this is equivalent to first calling [`named`]($arguments.named) and then
+    /// [`dictionary.at`].
+    #[func]
+    pub fn at(
+        &self,
+        /// The index or name of the argument to get.
+        key: ArgumentKey,
+        /// A default value to return if the key is invalid.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         #[named]
         default: Option<Value>,
     ) -> StrResult<Value> {
@@ -327,7 +421,11 @@ impl Args {
             .ok_or_else(|| missing_key_no_default(key))
     }
 
+<<<<<<< HEAD
     /// 渡された位置引数を配列の形で返します。
+=======
+    /// Returns the captured positional arguments as an array.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func(name = "pos", title = "Positional")]
     pub fn to_pos(&self) -> Array {
         self.items
@@ -337,7 +435,11 @@ impl Args {
             .collect()
     }
 
+<<<<<<< HEAD
     /// 渡された名前付き引数を辞書の形で返します。
+=======
+    /// Returns the captured named arguments as a dictionary.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func(name = "named")]
     pub fn to_named(&self) -> Dict {
         self.items

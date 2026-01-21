@@ -2,6 +2,7 @@ use std::fmt::{self, Debug, Formatter};
 use std::hash::{Hash, Hasher};
 use std::sync::{Arc, Mutex};
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use typst_syntax::Spanned;
 use wasmi::Memory;
@@ -9,6 +10,15 @@ use wasmi::Memory;
 use crate::diag::{bail, At, SourceResult, StrResult};
 use crate::engine::Engine;
 use crate::foundations::{cast, func, scope, Binding, Bytes, Func, Module, Scope, Value};
+=======
+use ecow::{EcoString, eco_format};
+use typst_syntax::Spanned;
+use wasmi::Memory;
+
+use crate::diag::{At, SourceResult, StrResult, bail};
+use crate::engine::Engine;
+use crate::foundations::{Binding, Bytes, Func, Module, Scope, Value, cast, func, scope};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::loading::{DataSource, Load};
 
 /// Loads a WebAssembly module.
@@ -21,7 +31,13 @@ use crate::loading::{DataSource, Load};
 /// compiled to a 32-bit shared WebAssembly library. Plugin functions may accept
 /// multiple [byte buffers]($bytes) as arguments and return a single byte
 /// buffer. They should typically be wrapped in idiomatic Typst functions that
+<<<<<<< HEAD
 /// perform the necessary conversions between native Typst types and bytes.
+=======
+/// perform the necessary conversions between native Typst types and bytes by
+/// leveraging [`str`]($str/#constructor), [`bytes`]($bytes/#constructor), and
+/// [data loading functions]($reference/data-loading).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// For security reasons, plugins run in isolation from your system. This means
 /// that printing, reading files, or similar things are not supported.
@@ -46,7 +62,11 @@ use crate::loading::{DataSource, Load};
 /// ```
 ///
 /// # Purity
+<<<<<<< HEAD
 /// Plugin functions **must be pure:** A plugin function call most not have any
+=======
+/// Plugin functions **must be pure:** A plugin function call must not have any
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// observable side effects on future plugin calls and given the same arguments,
 /// it must always return the same value.
 ///
@@ -151,8 +171,13 @@ pub fn plugin(
     /// A [path]($syntax/#paths) to a WebAssembly file or raw WebAssembly bytes.
     source: Spanned<DataSource>,
 ) -> SourceResult<Module> {
+<<<<<<< HEAD
     let data = source.load(engine.world)?;
     Plugin::module(data).at(source.span)
+=======
+    let loaded = source.load(engine.world)?;
+    Plugin::module(loaded.data).at(source.span)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 #[scope]
@@ -212,7 +237,11 @@ pub struct PluginFunc {
 
 impl PluginFunc {
     /// The name of the plugin function.
+<<<<<<< HEAD
     pub fn name(&self) -> &str {
+=======
+    pub fn name(&self) -> &EcoString {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         &self.name
     }
 
@@ -266,7 +295,16 @@ impl Plugin {
 
     /// Create a new plugin from raw WebAssembly bytes.
     fn new(bytes: Bytes) -> StrResult<Self> {
+<<<<<<< HEAD
         let engine = wasmi::Engine::default();
+=======
+        let mut config = wasmi::Config::default();
+
+        // Disable relaxed SIMD as it can introduce non-determinism.
+        config.wasm_relaxed_simd(false);
+
+        let engine = wasmi::Engine::new(&config);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let module = wasmi::Module::new(&engine, bytes.as_slice())
             .map_err(|err| format!("failed to load WebAssembly module ({err})"))?;
 
@@ -415,7 +453,11 @@ struct PluginInstance {
 /// A snapshot of a plugin instance.
 struct Snapshot {
     /// The number of pages in the main memory.
+<<<<<<< HEAD
     mem_pages: u32,
+=======
+    mem_pages: u64,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The data in the main memory.
     mem_data: Vec<u8>,
 }
@@ -428,8 +470,12 @@ impl PluginInstance {
         let mut store = wasmi::Store::new(base.linker.engine(), CallData::default());
         let instance = base
             .linker
+<<<<<<< HEAD
             .instantiate(&mut store, &base.module)
             .and_then(|pre_instance| pre_instance.start(&mut store))
+=======
+            .instantiate_and_start(&mut store, &base.module)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .map_err(|e| eco_format!("{e}"))?;
 
         let mut instance = PluginInstance { instance, store };
@@ -557,7 +603,11 @@ struct CallData {
     args: Vec<Bytes>,
     /// The results of the current call.
     output: Vec<u8>,
+<<<<<<< HEAD
     /// A memory error that occured during execution of the current call.
+=======
+    /// A memory error that occurred during execution of the current call.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     memory_error: Option<MemoryError>,
 }
 

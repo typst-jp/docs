@@ -1,9 +1,16 @@
 use std::fmt::{self, Debug, Formatter};
 
+<<<<<<< HEAD
 use crate::diag::{bail, SourceResult};
 use crate::engine::Engine;
 use crate::foundations::{
     elem, Args, Construct, Content, NativeElement, Packed, Unlabellable,
+=======
+use crate::diag::{SourceResult, bail};
+use crate::engine::Engine;
+use crate::foundations::{
+    Args, Construct, Content, NativeElement, Packed, Unlabellable, elem,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::introspection::Location;
 
@@ -14,34 +21,74 @@ pub enum Tag {
     ///
     /// Content placed in a tag **must** have a [`Location`] or there will be
     /// panics.
+<<<<<<< HEAD
     Start(Content),
+=======
+    Start(Content, TagFlags),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The element with the given location and key hash ends here.
     ///
     /// Note: The key hash is stored here instead of in `Start` simply to make
     /// the two enum variants more balanced in size, keeping a `Tag`'s memory
     /// size down. There are no semantic reasons for this.
+<<<<<<< HEAD
     End(Location, u128),
+=======
+    End(Location, u128, TagFlags),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Tag {
     /// Access the location of the tag.
     pub fn location(&self) -> Location {
         match self {
+<<<<<<< HEAD
             Tag::Start(elem) => elem.location().unwrap(),
             Tag::End(loc, _) => *loc,
+=======
+            Tag::Start(elem, ..) => elem.location().unwrap(),
+            Tag::End(loc, ..) => *loc,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
 
 impl Debug for Tag {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+<<<<<<< HEAD
         match self {
             Tag::Start(elem) => write!(f, "Start({:?})", elem.elem().name()),
             Tag::End(..) => f.pad("End"),
+=======
+        let loc = self.location();
+        match self {
+            Tag::Start(elem, ..) => write!(f, "Start({:?}, {loc:?})", elem.elem().name()),
+            Tag::End(..) => write!(f, "End({loc:?})"),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
 
+<<<<<<< HEAD
+=======
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
+pub struct TagFlags {
+    /// Whether the element will be inserted into the
+    /// [`Introspector`](super::Introspector).
+    /// Either because it is [`Locatable`](super::Locatable), has been labelled,
+    /// or a location has been manually set.
+    pub introspectable: bool,
+    /// Whether the element is [`Tagged`](super::Tagged).
+    pub tagged: bool,
+}
+
+impl TagFlags {
+    pub fn any(&self) -> bool {
+        self.introspectable || self.tagged
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Holds a tag for a locatable element that was realized.
 ///
 /// The `TagElem` is handled by all layouters. The held element becomes

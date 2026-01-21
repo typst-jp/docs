@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{
     elem, Cast, Content, NativeElement, Packed, Show, Smart, StyleChain,
 };
 use crate::layout::{Abs, BlockElem, Corners, Length, Point, Rel, Sides, Size, Sizing};
+=======
+use crate::foundations::{Cast, Content, Smart, elem};
+use crate::layout::{Abs, Corners, Length, Point, Rect, Rel, Sides, Size, Sizing};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::visualize::{Curve, FixedStroke, Paint, Stroke};
 
 /// A rectangle with optional content.
@@ -19,7 +24,11 @@ use crate::visualize::{Curve, FixedStroke, Paint, Stroke};
 ///   to fit the content.
 /// ]
 /// ```
+<<<<<<< HEAD
 #[elem(title = "Rectangle", Show)]
+=======
+#[elem(title = "Rectangle")]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct RectElem {
     /// The rectangle's width, relative to its parent container.
     pub width: Smart<Rel<Length>>,
@@ -40,11 +49,23 @@ pub struct RectElem {
     /// How to stroke the rectangle. This can be:
     ///
     /// - `{none}` to disable stroking
+<<<<<<< HEAD
     /// - `{auto}` for a stroke of `{1pt + black}` if and if only if no fill is
     ///   given.
     /// - Any kind of [stroke]
     /// - A dictionary describing the stroke for each side individually. The
     ///   dictionary can contain the following keys in order of precedence:
+=======
+    ///
+    /// - `{auto}` for a stroke of `{1pt + black}` if and only if no fill is
+    ///   given.
+    ///
+    /// - Any kind of [stroke]
+    ///
+    /// - A dictionary describing the stroke for each side individually. The
+    ///   dictionary can contain the following keys in order of precedence:
+    ///
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///   - `top`: The top stroke.
     ///   - `right`: The right stroke.
     ///   - `bottom`: The bottom stroke.
@@ -54,6 +75,12 @@ pub struct RectElem {
     ///   - `rest`: The stroke on all sides except those for which the
     ///     dictionary explicitly sets a size.
     ///
+<<<<<<< HEAD
+=======
+    ///   All keys are optional; omitted keys will use their previously set
+    ///   value, or the default stroke if never set.
+    ///
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// ```example
     /// #stack(
     ///   dir: ltr,
@@ -63,7 +90,10 @@ pub struct RectElem {
     ///   rect(stroke: 2pt + red),
     /// )
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub stroke: Smart<Sides<Option<Option<Stroke>>>>,
 
@@ -71,6 +101,10 @@ pub struct RectElem {
     /// the width and height divided by two. This can be:
     ///
     /// - A relative length for a uniform corner radius.
+<<<<<<< HEAD
+=======
+    ///
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// - A dictionary: With a dictionary, the stroke for each side can be set
     ///   individually. The dictionary can contain the following keys in order
     ///   of precedence:
@@ -101,20 +135,30 @@ pub struct RectElem {
     ///   ),
     /// )
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
     /// How much to pad the rectangle's content.
+<<<<<<< HEAD
     /// See the [box's documentation]($box.outset) for more details.
     #[resolve]
+=======
+    /// See the [box's documentation]($box.inset) for more details.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     #[default(Sides::splat(Some(Abs::pt(5.0).into())))]
     pub inset: Sides<Option<Rel<Length>>>,
 
     /// How much to expand the rectangle's size without affecting the layout.
     /// See the [box's documentation]($box.outset) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
@@ -123,6 +167,7 @@ pub struct RectElem {
     /// When this is omitted, the rectangle takes on a default size of at most
     /// `{45pt}` by `{30pt}`.
     #[positional]
+<<<<<<< HEAD
     #[borrowed]
     pub body: Option<Content>,
 }
@@ -137,6 +182,11 @@ impl Show for Packed<RectElem> {
     }
 }
 
+=======
+    pub body: Option<Content>,
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A square with optional content.
 ///
 /// # Example
@@ -150,7 +200,11 @@ impl Show for Packed<RectElem> {
 ///   sized to fit.
 /// ]
 /// ```
+<<<<<<< HEAD
 #[elem(Show)]
+=======
+#[elem]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct SquareElem {
     /// The square's side length. This is mutually exclusive with `width` and
     /// `height`.
@@ -186,26 +240,38 @@ pub struct SquareElem {
 
     /// How to stroke the square. See the
     /// [rectangle's documentation]($rect.stroke) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub stroke: Smart<Sides<Option<Option<Stroke>>>>,
 
     /// How much to round the square's corners. See the
     /// [rectangle's documentation]($rect.radius) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
     /// How much to pad the square's content. See the
     /// [box's documentation]($box.inset) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     #[default(Sides::splat(Some(Abs::pt(5.0).into())))]
     pub inset: Sides<Option<Rel<Length>>>,
 
     /// How much to expand the square's size without affecting the layout. See
     /// the [box's documentation]($box.outset) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
@@ -215,6 +281,7 @@ pub struct SquareElem {
     /// When this is omitted, the square takes on a default size of at most
     /// `{30pt}`.
     #[positional]
+<<<<<<< HEAD
     #[borrowed]
     pub body: Option<Content>,
 }
@@ -229,6 +296,11 @@ impl Show for Packed<SquareElem> {
     }
 }
 
+=======
+    pub body: Option<Content>,
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// An ellipse with optional content.
 ///
 /// # Example
@@ -243,7 +315,11 @@ impl Show for Packed<SquareElem> {
 ///   to fit the content.
 /// ]
 /// ```
+<<<<<<< HEAD
 #[elem(Show)]
+=======
+#[elem]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct EllipseElem {
     /// The ellipse's width, relative to its parent container.
     pub width: Smart<Rel<Length>>,
@@ -257,20 +333,29 @@ pub struct EllipseElem {
 
     /// How to stroke the ellipse. See the
     /// [rectangle's documentation]($rect.stroke) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub stroke: Smart<Option<Stroke>>,
 
     /// How much to pad the ellipse's content. See the
     /// [box's documentation]($box.inset) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     #[default(Sides::splat(Some(Abs::pt(5.0).into())))]
     pub inset: Sides<Option<Rel<Length>>>,
 
     /// How much to expand the ellipse's size without affecting the layout. See
     /// the [box's documentation]($box.outset) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
@@ -279,6 +364,7 @@ pub struct EllipseElem {
     /// When this is omitted, the ellipse takes on a default size of at most
     /// `{45pt}` by `{30pt}`.
     #[positional]
+<<<<<<< HEAD
     #[borrowed]
     pub body: Option<Content>,
 }
@@ -293,6 +379,11 @@ impl Show for Packed<EllipseElem> {
     }
 }
 
+=======
+    pub body: Option<Content>,
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A circle with optional content.
 ///
 /// # Example
@@ -307,7 +398,11 @@ impl Show for Packed<EllipseElem> {
 ///   sized to fit.
 /// ]
 /// ```
+<<<<<<< HEAD
 #[elem(Show)]
+=======
+#[elem]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct CircleElem {
     /// The circle's radius. This is mutually exclusive with `width` and
     /// `height`.
@@ -347,27 +442,37 @@ pub struct CircleElem {
 
     /// How to stroke the circle. See the
     /// [rectangle's documentation]($rect.stroke) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     #[default(Smart::Auto)]
     pub stroke: Smart<Option<Stroke>>,
 
     /// How much to pad the circle's content. See the
     /// [box's documentation]($box.inset) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     #[default(Sides::splat(Some(Abs::pt(5.0).into())))]
     pub inset: Sides<Option<Rel<Length>>>,
 
     /// How much to expand the circle's size without affecting the layout. See
     /// the [box's documentation]($box.outset) for more details.
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
     /// The content to place into the circle. The circle expands to fit this
     /// content, keeping the 1-1 aspect ratio.
     #[positional]
+<<<<<<< HEAD
     #[borrowed]
     pub body: Option<Content>,
 }
@@ -382,6 +487,11 @@ impl Show for Packed<CircleElem> {
     }
 }
 
+=======
+    pub body: Option<Content>,
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A geometric shape with optional fill and stroke.
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 pub struct Shape {
@@ -438,6 +548,27 @@ impl Geometry {
     }
 
     /// The bounding box of the geometry.
+<<<<<<< HEAD
+=======
+    pub fn bbox(&self) -> Rect {
+        match self {
+            Self::Line(end) => {
+                let min = end.min(Point::zero());
+                let max = end.max(Point::zero());
+                Rect::new(min, max)
+            }
+            Self::Rect(size) => {
+                let p = size.to_point();
+                let min = p.min(Point::zero());
+                let max = p.max(Point::zero());
+                Rect::new(min, max)
+            }
+            Self::Curve(curve) => curve.bbox(),
+        }
+    }
+
+    /// The bounding box of the geometry.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn bbox_size(&self) -> Size {
         match self {
             Self::Line(line) => Size::new(line.x, line.y),

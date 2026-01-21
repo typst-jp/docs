@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 use typst_library::diag::{bail, SourceResult};
+=======
+use typst_library::diag::{SourceResult, bail};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::engine::Engine;
 use typst_library::foundations::{Packed, Resolve, StyleChain};
 use typst_library::introspection::Locator;
@@ -29,7 +33,11 @@ pub fn layout_repeat(
         frame.set_baseline(piece.baseline());
     }
 
+<<<<<<< HEAD
     let mut gap = elem.gap(styles).resolve(styles);
+=======
+    let mut gap = elem.gap.resolve(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let fill = region.size.x;
     let width = piece.width();
 
@@ -47,12 +55,20 @@ pub fn layout_repeat(
     let count = ((fill + gap) / (width + gap)).floor();
     let remaining = (fill + gap) % (width + gap);
 
+<<<<<<< HEAD
     let justify = elem.justify(styles);
+=======
+    let justify = elem.justify.get(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     if justify {
         gap += remaining / (count - 1.0);
     }
 
+<<<<<<< HEAD
     let align = AlignElem::alignment_in(styles).resolve(styles);
+=======
+    let align = styles.get(AlignElem::alignment).resolve(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut offset = Abs::zero();
     if count == 1.0 || !justify {
         offset += align.x.position(remaining);

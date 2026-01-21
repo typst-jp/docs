@@ -5,12 +5,22 @@ use std::ops::{Add, AddAssign, Deref};
 use std::str::Utf8Error;
 use std::sync::Arc;
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use serde::{Serialize, Serializer};
 use typst_utils::LazyHash;
 
 use crate::diag::{bail, StrResult};
 use crate::foundations::{cast, func, scope, ty, Array, Reflect, Repr, Str, Value};
+=======
+use ecow::{EcoString, eco_format};
+use serde::{Serialize, Serializer};
+use typst_syntax::Lines;
+use typst_utils::LazyHash;
+
+use crate::diag::{StrResult, bail};
+use crate::foundations::{Array, Reflect, Repr, Str, Value, cast, func, scope, ty};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A sequence of bytes.
 ///
@@ -196,12 +206,17 @@ impl Bytes {
         #[named]
         count: Option<i64>,
     ) -> StrResult<Bytes> {
+<<<<<<< HEAD
         let mut end = end;
         if end.is_none() {
             end = count.map(|c: i64| start + c);
         }
 
         let start = self.locate(start)?;
+=======
+        let start = self.locate(start)?;
+        let end = end.or(count.map(|c| start as i64 + c));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let end = self.locate(end.unwrap_or(self.len() as i64))?.max(start);
         let slice = &self.as_slice()[start..end];
 
@@ -279,13 +294,30 @@ impl Serialize for Bytes {
         S: Serializer,
     {
         if serializer.is_human_readable() {
+<<<<<<< HEAD
             serializer.serialize_str(&eco_format!("{self:?}"))
+=======
+            serializer.serialize_str(&self.repr())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else {
             serializer.serialize_bytes(self)
         }
     }
 }
 
+<<<<<<< HEAD
+=======
+impl TryFrom<&Bytes> for Lines<String> {
+    type Error = Utf8Error;
+
+    #[comemo::memoize]
+    fn try_from(value: &Bytes) -> Result<Lines<String>, Utf8Error> {
+        let text = value.as_str()?;
+        Ok(Lines::new(text.to_string()))
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Any type that can back a byte buffer.
 trait Bytelike: Send + Sync {
     fn as_bytes(&self) -> &[u8];

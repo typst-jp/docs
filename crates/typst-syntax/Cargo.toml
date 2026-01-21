@@ -16,6 +16,10 @@ readme = { workspace = true }
 typst-timing = { workspace = true }
 typst-utils = { workspace = true }
 ecow = { workspace = true }
+<<<<<<< HEAD
+=======
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 serde = { workspace = true }
 toml = { workspace = true }
 unicode-ident = { workspace = true }

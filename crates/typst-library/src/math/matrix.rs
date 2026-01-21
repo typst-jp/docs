@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use smallvec::{smallvec, SmallVec};
 use typst_syntax::Spanned;
 use typst_utils::{default_math_class, Numeric};
@@ -7,6 +8,17 @@ use crate::diag::{bail, At, HintedStrResult, StrResult};
 use crate::foundations::{
     array, cast, dict, elem, Array, Content, Dict, Fold, NoneValue, Resolve, Smart,
     StyleChain, Symbol, Value,
+=======
+use smallvec::{SmallVec, smallvec};
+use typst_syntax::Spanned;
+use typst_utils::{Numeric, default_math_class};
+use unicode_math_class::MathClass;
+
+use crate::diag::{At, HintedStrResult, StrResult, bail};
+use crate::foundations::{
+    Array, Content, Dict, Fold, NoneValue, Resolve, Smart, StyleChain, Symbol, Value,
+    array, cast, dict, elem,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::{Abs, Em, HAlignment, Length, Rel};
 use crate::math::Mathy;
@@ -15,21 +27,42 @@ use crate::visualize::Stroke;
 const DEFAULT_ROW_GAP: Em = Em::new(0.2);
 const DEFAULT_COL_GAP: Em = Em::new(0.5);
 
+<<<<<<< HEAD
 /// 列ベクトル。
 ///
 /// ベクトルの要素内のコンテンツは[`align`]($math.vec.align)パラメーターか`&`記号を用いて配置できます。
 ///
 /// # 例
+=======
+/// A column vector.
+///
+/// Content in the vector's elements can be aligned with the
+/// [`align`]($math.vec.align) parameter, or the `&` symbol.
+///
+/// This function is for typesetting vector components. To typeset a symbol that
+/// represents a vector, [`arrow`]($math.accent) and [`bold`]($math.bold) are
+/// commonly used.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// $ vec(a, b, c) dot vec(1, 2, 3)
 ///     = a + 2b + 3c $
 /// ```
 #[elem(title = "Vector", Mathy)]
 pub struct VecElem {
+<<<<<<< HEAD
     /// 用いる区切り文字。
     ///
     /// 単一の文字で左区切り文字を指定する場合、右区切り文字は自動的に推論されます。
     /// それ以外の場合は、左区切り文字と右区切り文字を含む配列を指定します。
+=======
+    /// The delimiter to use.
+    ///
+    /// Can be a single character specifying the left delimiter, in which case
+    /// the right delimiter is inferred. Otherwise, can be an array containing a
+    /// left and a right delimiter.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.vec(delim: "[")
@@ -38,31 +71,50 @@ pub struct VecElem {
     #[default(DelimiterPair::PAREN)]
     pub delim: DelimiterPair,
 
+<<<<<<< HEAD
     /// 各要素の水平方向の配置。
+=======
+    /// The horizontal alignment that each element should have.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.vec(align: right)
     /// $ vec(-1, 1, -1) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[default(HAlignment::Center)]
     pub align: HAlignment,
 
     /// 要素間の間隔。
+=======
+    #[default(HAlignment::Center)]
+    pub align: HAlignment,
+
+    /// The gap between elements.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.vec(gap: 1em)
     /// $ vec(1, 2) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[default(DEFAULT_ROW_GAP.into())]
     pub gap: Rel<Length>,
 
     /// ベクトルの要素。
+=======
+    #[default(DEFAULT_ROW_GAP.into())]
+    pub gap: Rel<Length>,
+
+    /// The elements of the vector.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[variadic]
     pub children: Vec<Content>,
 }
 
+<<<<<<< HEAD
 /// 行列。
 ///
 /// 行内の要素はカンマで区切り、行自身はセミコロンで区切らなければなりません。
@@ -72,6 +124,21 @@ pub struct VecElem {
 /// セル内のコンテンツは[`align`]($math.mat.align)パラメーターを用いて配置できます。 また、同じ行にあるコンテンツは`&`記号を用いて配置できます。
 ///
 /// # 例
+=======
+/// A matrix.
+///
+/// The elements of a row should be separated by commas, while the rows
+/// themselves should be separated by semicolons. The semicolon syntax merges
+/// preceding arguments separated by commas into an array. You can also use this
+/// special syntax of math function calls to define custom functions that take
+/// 2D data.
+///
+/// Content in cells can be aligned with the [`align`]($math.mat.align)
+/// parameter, or content in cells that are in the same row can be aligned with
+/// the `&` symbol.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// $ mat(
 ///   1, 2, ..., 10;
@@ -82,10 +149,18 @@ pub struct VecElem {
 /// ```
 #[elem(title = "Matrix", Mathy)]
 pub struct MatElem {
+<<<<<<< HEAD
     /// 用いる区切り文字。
     ///
     /// 単一の文字で左区切り文字を指定する場合、右区切り文字は自動的に推論されます。
     /// それ以外の場合は、左区切り文字と右区切り文字を含む配列を指定します。
+=======
+    /// The delimiter to use.
+    ///
+    /// Can be a single character specifying the left delimiter, in which case
+    /// the right delimiter is inferred. Otherwise, can be an array containing a
+    /// left and a right delimiter.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.mat(delim: "[")
@@ -94,12 +169,17 @@ pub struct MatElem {
     #[default(DelimiterPair::PAREN)]
     pub delim: DelimiterPair,
 
+<<<<<<< HEAD
     /// 各セルの水平方向の配置。
+=======
+    /// The horizontal alignment that each cell should have.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.mat(align: right)
     /// $ mat(-1, 1, 1; 1, -1, 1; 1, 1, -1) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[default(HAlignment::Center)]
     pub align: HAlignment,
@@ -123,11 +203,39 @@ pub struct MatElem {
     ///     `{auto}`が指定された場合、0.05emの太さで四角い線端になります。
     ///
     /// ```example
+=======
+    #[default(HAlignment::Center)]
+    pub align: HAlignment,
+
+    /// Draws augmentation lines in a matrix.
+    ///
+    /// - `{none}`: No lines are drawn.
+    /// - A single number: A vertical augmentation line is drawn
+    ///   after the specified column number. Negative numbers start from the end.
+    /// - A dictionary: With a dictionary, multiple augmentation lines can be
+    ///   drawn both horizontally and vertically. Additionally, the style of the
+    ///   lines can be set. The dictionary can contain the following keys:
+    ///   - `hline`: The offsets at which horizontal lines should be drawn.
+    ///     For example, an offset of `2` would result in a horizontal line
+    ///     being drawn after the second row of the matrix. Accepts either an
+    ///     integer for a single line, or an array of integers
+    ///     for multiple lines. Like for a single number, negative numbers start from the end.
+    ///   - `vline`: The offsets at which vertical lines should be drawn.
+    ///     For example, an offset of `2` would result in a vertical line being
+    ///     drawn after the second column of the matrix. Accepts either an
+    ///     integer for a single line, or an array of integers
+    ///     for multiple lines. Like for a single number, negative numbers start from the end.
+    ///   - `stroke`: How to [stroke]($stroke) the line. If set to `{auto}`,
+    ///     takes on a thickness of 0.05 em and square line caps.
+    ///
+    /// ```example:"Basic usage"
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// $ mat(1, 0, 1; 0, 1, 2; augment: #2) $
     /// // Equivalent to:
     /// $ mat(1, 0, 1; 0, 1, 2; augment: #(-1)) $
     /// ```
     ///
+<<<<<<< HEAD
     /// ```example
     /// $ mat(0, 0, 0; 1, 1, 1; augment: #(hline: 1, stroke: 2pt + green)) $
     /// ```
@@ -138,6 +246,17 @@ pub struct MatElem {
     /// 行間と列間の間隔。
     ///
     /// これは`row-gap`と`column-gap`を同じ値で設定する省略記法です。
+=======
+    /// ```example:"Customizing the augmentation line"
+    /// $ mat(0, 0, 0; 1, 1, 1; augment: #(hline: 1, stroke: 2pt + green)) $
+    /// ```
+    #[fold]
+    pub augment: Option<Augment>,
+
+    /// The gap between rows and columns.
+    ///
+    /// This is a shorthand to set `row-gap` and `column-gap` to the same value.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.mat(gap: 1em)
@@ -146,13 +265,20 @@ pub struct MatElem {
     #[external]
     pub gap: Rel<Length>,
 
+<<<<<<< HEAD
     /// 行間の間隔。
+=======
+    /// The gap between rows.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.mat(row-gap: 1em)
     /// $ mat(1, 2; 3, 4) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[parse(
         let gap = args.named("gap")?;
         args.named("row-gap")?.or(gap)
@@ -160,18 +286,29 @@ pub struct MatElem {
     #[default(DEFAULT_ROW_GAP.into())]
     pub row_gap: Rel<Length>,
 
+<<<<<<< HEAD
     /// 列間の間隔。
+=======
+    /// The gap between columns.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.mat(column-gap: 1em)
     /// $ mat(1, 2; 3, 4) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[parse(args.named("column-gap")?.or(gap))]
     #[default(DEFAULT_COL_GAP.into())]
     pub column_gap: Rel<Length>,
 
+<<<<<<< HEAD
     /// 行列の各行を要素とする配列の配列。
+=======
+    /// An array of arrays with the rows of the matrix.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #let data = ((1, 2, 3), (4, 5, 6))
@@ -206,11 +343,19 @@ pub struct MatElem {
     pub rows: Vec<Vec<Content>>,
 }
 
+<<<<<<< HEAD
 /// 場合分け。
 ///
 /// `&`記号を用いると異なる分岐に属するコンテンツを整列できます。
 ///
 /// # 例
+=======
+/// A case distinction.
+///
+/// Content across different branches can be aligned with the `&` symbol.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// $ f(x, y) := cases(
 ///   1 "if" (x dot y)/2 <= 0,
@@ -221,10 +366,18 @@ pub struct MatElem {
 /// ```
 #[elem(Mathy)]
 pub struct CasesElem {
+<<<<<<< HEAD
     /// 使用する区切り文字。
     ///
     /// 単一の文字で左区切り文字を指定する場合、右区切り文字は自動的に推論されます。
     /// それ以外の場合は、左区切り文字と右区切り文字を含む配列を指定します。
+=======
+    /// The delimiter to use.
+    ///
+    /// Can be a single character specifying the left delimiter, in which case
+    /// the right delimiter is inferred. Otherwise, can be an array containing a
+    /// left and a right delimiter.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.cases(delim: "[")
@@ -233,7 +386,11 @@ pub struct CasesElem {
     #[default(DelimiterPair::BRACE)]
     pub delim: DelimiterPair,
 
+<<<<<<< HEAD
     /// 場合分けの向きを反転させるかどうか。
+=======
+    /// Whether the direction of cases should be reversed.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.cases(reverse: true)
@@ -242,17 +399,28 @@ pub struct CasesElem {
     #[default(false)]
     pub reverse: bool,
 
+<<<<<<< HEAD
     /// 分岐間の間隔。
+=======
+    /// The gap between branches.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set math.cases(gap: 1em)
     /// $ x = cases(1, 2) $
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[default(DEFAULT_ROW_GAP.into())]
     pub gap: Rel<Length>,
 
     /// 場合分けの各分岐を表す子要素。
+=======
+    #[default(DEFAULT_ROW_GAP.into())]
+    pub gap: Rel<Length>,
+
+    /// The branches of the case distinction.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[variadic]
     pub children: Vec<Content>,
 }
@@ -270,7 +438,11 @@ cast! {
     Delimiter,
     self => self.0.into_value(),
     _: NoneValue => Self::none(),
+<<<<<<< HEAD
     v: Symbol => Self::char(v.get())?,
+=======
+    v: Symbol => Self::char(v.get().parse::<char>().map_err(|_| "expected a single-codepoint symbol")?)?,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     v: char => Self::char(v)?,
 }
 

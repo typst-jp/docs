@@ -5,8 +5,13 @@ use std::ops::{Add, Div, Mul, Neg};
 use ecow::EcoString;
 use typst_utils::{Numeric, Scalar};
 
+<<<<<<< HEAD
 use crate::foundations::{cast, repr, Repr, Resolve, StyleChain, Value};
 use crate::layout::Abs;
+=======
+use crate::foundations::{Repr, Resolve, StyleChain, Value, cast, repr};
+use crate::layout::{Abs, Length};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::text::TextElem;
 
 /// A length that is relative to the font size.
@@ -26,16 +31,25 @@ impl Em {
         Self(Scalar::ONE)
     }
 
+<<<<<<< HEAD
     /// Create a font-relative length.
+=======
+    /// Creates a font-relative length.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub const fn new(em: f64) -> Self {
         Self(Scalar::new(em))
     }
 
+<<<<<<< HEAD
     /// Create an em length from font units at the given units per em.
+=======
+    /// Creates an em length from font units at the given units per em.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn from_units(units: impl Into<f64>, units_per_em: f64) -> Self {
         Self(Scalar::new(units.into() / units_per_em))
     }
 
+<<<<<<< HEAD
     /// Create an em length from a length at the given font size.
     pub fn from_length(length: Abs, font_size: Abs) -> Self {
         let result = length / font_size;
@@ -44,6 +58,17 @@ impl Em {
         } else {
             Self::zero()
         }
+=======
+    /// Creates an em length from an absolute length at the given font size.
+    pub fn from_abs(length: Abs, font_size: Abs) -> Self {
+        let result = length / font_size;
+        if result.is_finite() { Self(Scalar::new(result)) } else { Self::zero() }
+    }
+
+    /// Creates an em length from a length at the given font size.
+    pub fn from_length(length: Length, font_size: Abs) -> Em {
+        length.em + Self::from_abs(length.abs, font_size)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The number of em units.
@@ -56,6 +81,7 @@ impl Em {
         Self::new(self.get().abs())
     }
 
+<<<<<<< HEAD
     /// Convert to an absolute length at the given font size.
     pub fn at(self, font_size: Abs) -> Abs {
         let resolved = font_size * self.get();
@@ -64,6 +90,12 @@ impl Em {
         } else {
             Abs::zero()
         }
+=======
+    /// Converts to an absolute length at the given font size.
+    pub fn at(self, font_size: Abs) -> Abs {
+        let resolved = font_size * self.get();
+        if resolved.is_finite() { resolved } else { Abs::zero() }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -159,10 +191,14 @@ impl Resolve for Em {
     type Output = Abs;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
+<<<<<<< HEAD
         if self.is_zero() {
             Abs::zero()
         } else {
             self.at(TextElem::size_in(styles))
         }
+=======
+        if self.is_zero() { Abs::zero() } else { self.at(styles.resolve(TextElem::size)) }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }

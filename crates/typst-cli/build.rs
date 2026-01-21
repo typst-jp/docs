@@ -1,10 +1,18 @@
 use std::env;
+<<<<<<< HEAD
 use std::fs::{create_dir_all, File};
+=======
+use std::fs::{File, create_dir_all};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::path::Path;
 use std::process::Command;
 
 use clap::{CommandFactory, ValueEnum};
+<<<<<<< HEAD
 use clap_complete::{generate_to, Shell};
+=======
+use clap_complete::{Shell, generate_to};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use clap_mangen::Man;
 
 #[path = "src/args.rs"]
@@ -21,6 +29,13 @@ fn main() {
         println!("cargo:rustc-env=TYPST_VERSION={}", typst_version());
     }
 
+<<<<<<< HEAD
+=======
+    if option_env!("TYPST_COMMIT_SHA").is_none() {
+        println!("cargo:rustc-env=TYPST_COMMIT_SHA={}", typst_commit_sha());
+    }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     if let Some(dir) = env::var_os("GEN_ARTIFACTS") {
         let out = &Path::new(&dir);
         create_dir_all(out).unwrap();
@@ -44,6 +59,7 @@ fn main() {
 }
 
 /// Also used by `args.rs`.
+<<<<<<< HEAD
 fn typst_version() -> String {
     if let Some(version) = option_env!("TYPST_VERSION") {
         return version.to_owned();
@@ -51,12 +67,33 @@ fn typst_version() -> String {
 
     let pkg = env!("CARGO_PKG_VERSION");
     let hash = Command::new("git")
+=======
+fn typst_version() -> &'static str {
+    if let Some(version) = option_env!("TYPST_VERSION") {
+        return version;
+    }
+
+    env!("CARGO_PKG_VERSION")
+}
+
+/// Also used by `args.rs`.
+fn typst_commit_sha() -> String {
+    if let Some(version) = option_env!("TYPST_COMMIT_SHA") {
+        return version.to_owned();
+    }
+
+    Command::new("git")
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         .args(["rev-parse", "HEAD"])
         .output()
         .ok()
         .filter(|output| output.status.success())
         .and_then(|output| String::from_utf8(output.stdout.get(..8)?.into()).ok())
+<<<<<<< HEAD
         .unwrap_or_else(|| "unknown hash".into());
 
     format!("{pkg} ({hash})")
+=======
+        .unwrap_or_else(|| "unknown hash".into())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

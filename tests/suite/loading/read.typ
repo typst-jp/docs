@@ -8,5 +8,9 @@
 #let data = read("/assets/text/missing.txt")
 
 --- read-invalid-utf-8 ---
+<<<<<<< HEAD
 // Error: 18-40 file is not valid utf-8
+=======
+// Error: 18-40 failed to convert to string (file is not valid utf-8 in assets/text/bad.txt:1:1)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #let data = read("/assets/text/bad.txt")

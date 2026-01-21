@@ -1,5 +1,9 @@
 # General
+<<<<<<< HEAD
 # .vscode
+=======
+.vscode
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 .idea
 _things
 desktop.ini
@@ -26,7 +30,10 @@ package-lock.json
 # Nix
 /result
 .direnv/
+<<<<<<< HEAD
 
 # Generated documentation
 /assets
 /docs.json
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -1,9 +1,17 @@
 use ecow::eco_format;
+<<<<<<< HEAD
 use typst_library::diag::{bail, At, Hint, SourceResult, Trace, Tracepoint};
 use typst_library::foundations::{Dict, Value};
 use typst_syntax::ast::{self, AstNode};
 
 use crate::{call_method_access, is_accessor_method, Eval, Vm};
+=======
+use typst_library::diag::{At, Hint, SourceResult, Trace, Tracepoint, bail};
+use typst_library::foundations::{Dict, Value};
+use typst_syntax::ast::{self, AstNode};
+
+use crate::{Eval, Vm, call_method_access, is_accessor_method};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Access an expression mutably.
 pub(crate) trait Access {
@@ -29,10 +37,17 @@ impl Access for ast::Expr<'_> {
 impl Access for ast::Ident<'_> {
     fn access<'a>(self, vm: &'a mut Vm) -> SourceResult<&'a mut Value> {
         let span = self.span();
+<<<<<<< HEAD
         if vm.inspected == Some(span) {
             if let Ok(binding) = vm.scopes.get(&self) {
                 vm.trace(binding.read().clone());
             }
+=======
+        if vm.inspected == Some(span)
+            && let Ok(binding) = vm.scopes.get(&self)
+        {
+            vm.trace(binding.read().clone());
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         vm.scopes
             .get_mut(&self)

@@ -5,9 +5,15 @@ use std::cmp::Ordering;
 use ecow::eco_format;
 use typst_utils::Numeric;
 
+<<<<<<< HEAD
 use crate::diag::{bail, DeprecationSink, HintedStrResult, StrResult};
 use crate::foundations::{
     format_str, Datetime, IntoValue, Regex, Repr, SymbolElem, Value,
+=======
+use crate::diag::{HintedStrResult, StrResult, bail};
+use crate::foundations::{
+    Datetime, IntoValue, Regex, Repr, SymbolElem, Value, format_str,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::{Alignment, Length, Rel};
 use crate::text::TextElem;
@@ -21,7 +27,11 @@ macro_rules! mismatch {
 }
 
 /// Join a value with another value.
+<<<<<<< HEAD
 pub fn join(lhs: Value, rhs: Value, sink: &mut dyn DeprecationSink) -> StrResult<Value> {
+=======
+pub fn join(lhs: Value, rhs: Value) -> StrResult<Value> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use Value::*;
     Ok(match (lhs, rhs) {
         (a, None) => a,
@@ -39,6 +49,7 @@ pub fn join(lhs: Value, rhs: Value, sink: &mut dyn DeprecationSink) -> StrResult
         (Array(a), Array(b)) => Array(a + b),
         (Dict(a), Dict(b)) => Dict(a + b),
         (Args(a), Args(b)) => Args(a + b),
+<<<<<<< HEAD
 
         // Type compatibility.
         (Type(a), Str(b)) => {
@@ -50,6 +61,8 @@ pub fn join(lhs: Value, rhs: Value, sink: &mut dyn DeprecationSink) -> StrResult
             Str(format_str!("{a}{b}"))
         }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         (a, b) => mismatch!("cannot join {} with {}", a, b),
     })
 }
@@ -99,11 +112,15 @@ pub fn neg(value: Value) -> HintedStrResult<Value> {
 }
 
 /// Compute the sum of two values.
+<<<<<<< HEAD
 pub fn add(
     lhs: Value,
     rhs: Value,
     sink: &mut dyn DeprecationSink,
 ) -> HintedStrResult<Value> {
+=======
+pub fn add(lhs: Value, rhs: Value) -> HintedStrResult<Value> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use Value::*;
     Ok(match (lhs, rhs) {
         (a, None) => a,
@@ -171,6 +188,7 @@ pub fn add(
         (Datetime(a), Duration(b)) => Datetime(a + b),
         (Duration(a), Datetime(b)) => Datetime(b + a),
 
+<<<<<<< HEAD
         // Type compatibility.
         (Type(a), Str(b)) => {
             warn_type_str_add(sink);
@@ -181,6 +199,8 @@ pub fn add(
             Str(format_str!("{a}{b}"))
         }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         (Dyn(a), Dyn(b)) => {
             // Alignments can be summed.
             if let (Some(&a), Some(&b)) =
@@ -419,6 +439,7 @@ pub fn or(lhs: Value, rhs: Value) -> HintedStrResult<Value> {
 }
 
 /// Compute whether two values are equal.
+<<<<<<< HEAD
 pub fn eq(
     lhs: Value,
     rhs: Value,
@@ -434,6 +455,15 @@ pub fn neq(
     sink: &mut dyn DeprecationSink,
 ) -> HintedStrResult<Value> {
     Ok(Value::Bool(!equal(&lhs, &rhs, sink)))
+=======
+pub fn eq(lhs: Value, rhs: Value) -> HintedStrResult<Value> {
+    Ok(Value::Bool(equal(&lhs, &rhs)))
+}
+
+/// Compute whether two values are unequal.
+pub fn neq(lhs: Value, rhs: Value) -> HintedStrResult<Value> {
+    Ok(Value::Bool(!equal(&lhs, &rhs)))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 macro_rules! comparison {
@@ -452,7 +482,11 @@ comparison!(gt, ">", Ordering::Greater);
 comparison!(geq, ">=", Ordering::Greater | Ordering::Equal);
 
 /// Determine whether two values are equal.
+<<<<<<< HEAD
 pub fn equal(lhs: &Value, rhs: &Value, sink: &mut dyn DeprecationSink) -> bool {
+=======
+pub fn equal(lhs: &Value, rhs: &Value) -> bool {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use Value::*;
     match (lhs, rhs) {
         // Compare reflexively.
@@ -496,12 +530,15 @@ pub fn equal(lhs: &Value, rhs: &Value, sink: &mut dyn DeprecationSink) -> bool {
             rat == rel.rel && rel.abs.is_zero()
         }
 
+<<<<<<< HEAD
         // Type compatibility.
         (Type(ty), Str(str)) | (Str(str), Type(ty)) => {
             warn_type_str_equal(sink, str);
             ty.compat_name() == str.as_str()
         }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         _ => false,
     }
 }
@@ -573,12 +610,17 @@ fn try_cmp_arrays(a: &[Value], b: &[Value]) -> StrResult<Ordering> {
 }
 
 /// Test whether one value is "in" another one.
+<<<<<<< HEAD
 pub fn in_(
     lhs: Value,
     rhs: Value,
     sink: &mut dyn DeprecationSink,
 ) -> HintedStrResult<Value> {
     if let Some(b) = contains(&lhs, &rhs, sink) {
+=======
+pub fn in_(lhs: Value, rhs: Value) -> HintedStrResult<Value> {
+    if let Some(b) = contains(&lhs, &rhs) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Ok(Value::Bool(b))
     } else {
         mismatch!("cannot apply 'in' to {} and {}", lhs, rhs)
@@ -586,12 +628,17 @@ pub fn in_(
 }
 
 /// Test whether one value is "not in" another one.
+<<<<<<< HEAD
 pub fn not_in(
     lhs: Value,
     rhs: Value,
     sink: &mut dyn DeprecationSink,
 ) -> HintedStrResult<Value> {
     if let Some(b) = contains(&lhs, &rhs, sink) {
+=======
+pub fn not_in(lhs: Value, rhs: Value) -> HintedStrResult<Value> {
+    if let Some(b) = contains(&lhs, &rhs) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Ok(Value::Bool(!b))
     } else {
         mismatch!("cannot apply 'not in' to {} and {}", lhs, rhs)
@@ -599,16 +646,21 @@ pub fn not_in(
 }
 
 /// Test for containment.
+<<<<<<< HEAD
 pub fn contains(
     lhs: &Value,
     rhs: &Value,
     sink: &mut dyn DeprecationSink,
 ) -> Option<bool> {
+=======
+pub fn contains(lhs: &Value, rhs: &Value) -> Option<bool> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use Value::*;
     match (lhs, rhs) {
         (Str(a), Str(b)) => Some(b.as_str().contains(a.as_str())),
         (Dyn(a), Str(b)) => a.downcast::<Regex>().map(|regex| regex.is_match(b)),
         (Str(a), Dict(b)) => Some(b.contains(a)),
+<<<<<<< HEAD
         (a, Array(b)) => Some(b.contains_impl(a, sink)),
 
         // Type compatibility.
@@ -620,6 +672,10 @@ pub fn contains(
             warn_type_in_dict(sink);
             Some(b.contains(a.compat_name()))
         }
+=======
+        (Str(a), Module(b)) => Some(b.scope().get(a).is_some()),
+        (a, Array(b)) => Some(b.contains(a.clone())),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         _ => Option::None,
     }
@@ -629,6 +685,7 @@ pub fn contains(
 fn too_large() -> &'static str {
     "value is too large"
 }
+<<<<<<< HEAD
 
 #[cold]
 fn warn_type_str_add(sink: &mut dyn DeprecationSink) {
@@ -716,3 +773,5 @@ fn is_compat_type_name(s: &str) -> bool {
             | "version"
     )
 }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

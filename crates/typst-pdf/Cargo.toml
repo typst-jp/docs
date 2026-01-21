@@ -19,13 +19,18 @@ typst-macros = { workspace = true }
 typst-syntax = { workspace = true }
 typst-timing = { workspace = true }
 typst-utils = { workspace = true }
+<<<<<<< HEAD
 arrayvec = { workspace = true }
 base64 = { workspace = true }
+=======
+az = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 bytemuck = { workspace = true }
 comemo = { workspace = true }
 ecow = { workspace = true }
 image = { workspace = true }
 indexmap = { workspace = true }
+<<<<<<< HEAD
 miniz_oxide = { workspace = true }
 pdf-writer = { workspace = true }
 serde = { workspace = true }
@@ -33,6 +38,14 @@ subsetter = { workspace = true }
 svg2pdf = { workspace = true }
 ttf-parser = { workspace = true }
 xmp-writer = { workspace = true }
+=======
+infer = { workspace = true }
+krilla = { workspace = true }
+krilla-svg = { workspace = true }
+rustc-hash = { workspace = true }
+serde = { workspace = true }
+smallvec = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 [lints]
 workspace = true

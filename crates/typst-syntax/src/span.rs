@@ -71,10 +71,14 @@ impl Span {
 
     /// Create a span that does not point into any file.
     pub const fn detached() -> Self {
+<<<<<<< HEAD
         match NonZeroU64::new(Self::DETACHED) {
             Some(v) => Self(v),
             None => unreachable!(),
         }
+=======
+        Self(NonZeroU64::new(Self::DETACHED).unwrap())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Create a new span from a file id and a number.
@@ -111,11 +115,17 @@ impl Span {
     /// Pack a file ID and the low bits into a span.
     const fn pack(id: FileId, low: u64) -> Self {
         let bits = ((id.into_raw().get() as u64) << Self::FILE_ID_SHIFT) | low;
+<<<<<<< HEAD
         match NonZeroU64::new(bits) {
             Some(v) => Self(v),
             // The file ID is non-zero.
             None => unreachable!(),
         }
+=======
+
+        // The file ID is non-zero.
+        Self(NonZeroU64::new(bits).unwrap())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Whether the span is detached.
@@ -160,11 +170,15 @@ impl Span {
 
     /// Return `other` if `self` is detached and `self` otherwise.
     pub fn or(self, other: Self) -> Self {
+<<<<<<< HEAD
         if self.is_detached() {
             other
         } else {
             self
         }
+=======
+        if self.is_detached() { other } else { self }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Find the first non-detached span in the iterator.

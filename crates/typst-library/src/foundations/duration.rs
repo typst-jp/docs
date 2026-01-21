@@ -1,10 +1,17 @@
 use std::fmt::{self, Debug, Formatter};
 use std::ops::{Add, Div, Mul, Neg, Sub};
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use time::ext::NumericalDuration;
 
 use crate::foundations::{func, repr, scope, ty, Repr};
+=======
+use ecow::{EcoString, eco_format};
+use time::ext::NumericalDuration;
+
+use crate::foundations::{Repr, func, repr, scope, ty};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Represents a positive or negative span of time.
 #[ty(scope, cast)]
@@ -16,6 +23,24 @@ impl Duration {
     pub fn is_zero(&self) -> bool {
         self.0.is_zero()
     }
+<<<<<<< HEAD
+=======
+
+    /// Decomposes the time into whole weeks, days, hours, minutes, and seconds.
+    pub fn decompose(&self) -> [i64; 5] {
+        let mut tmp = self.0;
+        let weeks = tmp.whole_weeks();
+        tmp -= weeks.weeks();
+        let days = tmp.whole_days();
+        tmp -= days.days();
+        let hours = tmp.whole_hours();
+        tmp -= hours.hours();
+        let minutes = tmp.whole_minutes();
+        tmp -= minutes.minutes();
+        let seconds = tmp.whole_seconds();
+        [weeks, days, hours, minutes, seconds]
+    }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 #[scope]
@@ -118,6 +143,7 @@ impl Debug for Duration {
 
 impl Repr for Duration {
     fn repr(&self) -> EcoString {
+<<<<<<< HEAD
         let mut tmp = self.0;
         let mut vec = Vec::with_capacity(5);
 
@@ -146,6 +172,27 @@ impl Repr for Duration {
         tmp -= minutes.minutes();
 
         let seconds = tmp.whole_seconds();
+=======
+        let [weeks, days, hours, minutes, seconds] = self.decompose();
+        let mut vec = Vec::with_capacity(5);
+
+        if weeks != 0 {
+            vec.push(eco_format!("weeks: {}", weeks.repr()));
+        }
+
+        if days != 0 {
+            vec.push(eco_format!("days: {}", days.repr()));
+        }
+
+        if hours != 0 {
+            vec.push(eco_format!("hours: {}", hours.repr()));
+        }
+
+        if minutes != 0 {
+            vec.push(eco_format!("minutes: {}", minutes.repr()));
+        }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         if seconds != 0 {
             vec.push(eco_format!("seconds: {}", seconds.repr()));
         }

@@ -24,6 +24,10 @@ mod page;
 mod place;
 mod point;
 mod ratio;
+<<<<<<< HEAD
+=======
+mod rect;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 mod regions;
 mod rel;
 mod repeat;
@@ -55,6 +59,10 @@ pub use self::page::*;
 pub use self::place::*;
 pub use self::point::*;
 pub use self::ratio::*;
+<<<<<<< HEAD
+=======
+pub use self::rect::*;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub use self::regions::*;
 pub use self::rel::*;
 pub use self::repeat::*;

@@ -1,6 +1,10 @@
 use heck::{ToKebabCase, ToTitleCase};
 use proc_macro2::TokenStream;
+<<<<<<< HEAD
 use quote::{quote, ToTokens};
+=======
+use quote::{ToTokens, quote};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use syn::parse::{Parse, ParseStream};
 use syn::token::Token;
 use syn::{Attribute, Ident, Result, Token};
@@ -27,6 +31,7 @@ pub fn documentation(attrs: &[syn::Attribute]) -> String {
 
     // Parse doc comments.
     for attr in attrs {
+<<<<<<< HEAD
         if let syn::Meta::NameValue(meta) = &attr.meta {
             if meta.path.is_ident("doc") {
                 if let syn::Expr::Lit(lit) = &meta.value {
@@ -38,6 +43,17 @@ pub fn documentation(attrs: &[syn::Attribute]) -> String {
                     }
                 }
             }
+=======
+        if let syn::Meta::NameValue(meta) = &attr.meta
+            && meta.path.is_ident("doc")
+            && let syn::Expr::Lit(lit) = &meta.value
+            && let syn::Lit::Str(string) = &lit.lit
+        {
+            let full = string.value();
+            let line = full.strip_prefix(' ').unwrap_or(&full);
+            doc.push_str(line);
+            doc.push('\n');
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 

@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 use typst_library::layout::{Dir, Em};
+=======
+use either::Either;
+use typst_library::layout::{Dir, Em};
+use typst_library::text::TextElem;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use unicode_bidi::{BidiInfo, Level as BidiLevel};
 
 use super::*;
@@ -34,8 +40,17 @@ impl<'a> Preparation<'a> {
         &self.items[idx]
     }
 
+<<<<<<< HEAD
     /// Iterate over the items that intersect the given `sliced` range.
     pub fn slice(&self, sliced: Range) -> impl Iterator<Item = &(Range, Item<'a>)> {
+=======
+    /// Iterate over the items that intersect the given `sliced` range alongside
+    /// their indices in `self.items` and their ranges in the paragraph's text.
+    pub fn slice(
+        &self,
+        sliced: Range,
+    ) -> impl Iterator<Item = (usize, &(Range, Item<'a>))> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         // Usually, we don't want empty-range items at the start of the line
         // (because they will be part of the previous line), but for the first
         // line, we need to keep them.
@@ -43,9 +58,19 @@ impl<'a> Preparation<'a> {
             0 => 0,
             n => self.indices.get(n).copied().unwrap_or(0),
         };
+<<<<<<< HEAD
         self.items[start..].iter().take_while(move |(range, _)| {
             range.start < sliced.end || range.end <= sliced.end
         })
+=======
+        self.items
+            .iter()
+            .enumerate()
+            .skip(start)
+            .take_while(move |(_, (range, _))| {
+                range.start < sliced.end || range.end <= sliced.end
+            })
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -114,6 +139,7 @@ pub fn prepare<'a>(
 /// Requirements for Chinese Text Layout, Section 3.2.2 Mixed Text Composition
 /// in Horizontal Written Mode
 fn add_cjk_latin_spacing(items: &mut [(Range, Item)]) {
+<<<<<<< HEAD
     let mut items = items
         .iter_mut()
         .filter(|(_, x)| !matches!(x, Item::Tag(_)))
@@ -157,5 +183,53 @@ fn add_cjk_latin_spacing(items: &mut [(Range, Item)]) {
 
             prev = Some(glyph);
         }
+=======
+    let mut iter = items
+        .iter_mut()
+        .filter(|(_, item)| !matches!(item, Item::Tag(_)))
+        .flat_map(|(_, item)| match item {
+            Item::Text(text) => Either::Left({
+                // Check whether the text is normal, sub- or superscript. At
+                // boundaries between these three, we do not want to insert
+                // CJK-Latin-Spacing.
+                let shift =
+                    text.styles.get_ref(TextElem::shift_settings).map(|shift| shift.kind);
+
+                // Since we only call this function in [`prepare`], we can
+                // assume that the Cow is owned, and `to_mut` can be called
+                // without overhead.
+                text.glyphs.to_mut().iter_mut().map(move |g| Some((g, shift)))
+            }),
+            _ => Either::Right(std::iter::once(None)),
+        })
+        .peekable();
+
+    let mut prev: Option<(&mut ShapedGlyph, _)> = None;
+    while let Some(mut item) = iter.next() {
+        if let Some((glyph, shift)) = &mut item {
+            // Case 1: CJ followed by a Latin character
+            if glyph.is_cj_script()
+                && let Some(Some((next_glyph, next_shift))) = iter.peek()
+                && next_glyph.is_letter_or_number()
+                && *shift == *next_shift
+            {
+                // The spacing defaults to 1/4 em, and can be shrunk to 1/8 em.
+                glyph.x_advance += Em::new(0.25);
+                glyph.adjustability.shrinkability.1 += Em::new(0.125);
+            }
+
+            // Case 2: Latin followed by a CJ character
+            if glyph.is_cj_script()
+                && let Some((prev_glyph, prev_shift)) = prev
+                && prev_glyph.is_letter_or_number()
+                && *shift == prev_shift
+            {
+                glyph.x_advance += Em::new(0.25);
+                glyph.x_offset += Em::new(0.25);
+                glyph.adjustability.shrinkability.0 += Em::new(0.125);
+            }
+        }
+        prev = item;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }

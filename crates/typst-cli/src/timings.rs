@@ -2,9 +2,15 @@ use std::fs::File;
 use std::io::BufWriter;
 use std::path::{Path, PathBuf};
 
+<<<<<<< HEAD
 use typst::diag::{bail, StrResult};
 use typst::syntax::Span;
 use typst::World;
+=======
+use typst::World;
+use typst::diag::{HintedStrResult, bail};
+use typst::syntax::Span;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::args::{CliArguments, Command};
 use crate::world::SystemWorld;
@@ -43,7 +49,11 @@ impl Timer {
         &mut self,
         world: &mut SystemWorld,
         f: impl FnOnce(&mut SystemWorld) -> T,
+<<<<<<< HEAD
     ) -> StrResult<T> {
+=======
+    ) -> HintedStrResult<T> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let Some(path) = &self.path else {
             return Ok(f(world));
         };
@@ -85,6 +95,10 @@ fn resolve_span(world: &SystemWorld, span: Span) -> Option<(String, u32)> {
     let id = span.id()?;
     let source = world.source(id).ok()?;
     let range = source.range(span)?;
+<<<<<<< HEAD
     let line = source.byte_to_line(range.start)?;
+=======
+    let line = source.lines().byte_to_line(range.start)?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     Some((format!("{id:?}"), line as u32 + 1))
 }

@@ -3,7 +3,11 @@
 --- enum-function-call ---
 #enum[Embrace][Extend][Extinguish]
 
+<<<<<<< HEAD
 --- enum-number-override-nested ---
+=======
+--- enum-number-override-nested render pdftags ---
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 0. Before first!
 1. First.
    2. Indented
@@ -56,6 +60,13 @@ a + 0.
    enum.item(5)[Fifth]
 )
 
+<<<<<<< HEAD
+=======
+--- enum-item-number-optional ---
+#enum.item[First]
+#enum.item[Second]
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- enum-numbering-pattern ---
 // Test numbering pattern.
 #set enum(numbering: "(1.a.*)")
@@ -78,8 +89,13 @@ a + 0.
 + Tea
 + Milk
 
+<<<<<<< HEAD
 --- enum-numbering-reversed-overriden ---
 // Test reverse numbering with overriden numbers.
+=======
+--- enum-numbering-reversed-overridden ---
+// Test reverse numbering with overridden numbers.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set enum(reversed: true)
 + A
 + B
@@ -134,6 +150,14 @@ a + 0.
 // Error: 22-28 invalid numbering pattern
 #set enum(numbering: "(())")
 
+<<<<<<< HEAD
+=======
+--- enum-numbering-huge ---
+// Test values greater than 32-bits
+100000000001. A
++             B
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- enum-number-align-unaffected ---
 // Alignment shouldn't affect number
 #set align(horizon)
@@ -212,7 +236,11 @@ a + 0.
 
 --- issue-2530-enum-item-panic ---
 // Enum item (pre-emptive)
+<<<<<<< HEAD
 #enum.item(none)[Hello]
+=======
+#enum.item(auto)[Hello]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #enum.item(17)[Hello]
 
 --- issue-5503-enum-in-align ---

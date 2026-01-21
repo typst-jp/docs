@@ -39,6 +39,10 @@ typst-library = { workspace = true, optional = true }
 typst-pdf = { workspace = true, optional = true }
 typst-render = { workspace = true, optional = true }
 typst-svg = { workspace = true, optional = true }
+<<<<<<< HEAD
+=======
+bitflags = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 clap = { workspace = true }
 comemo = { workspace = true }
 ecow = { workspace = true }
@@ -46,6 +50,10 @@ oxipng = { workspace = true }
 parking_lot = { workspace = true }
 rayon = { workspace = true }
 regex = { workspace = true }
+<<<<<<< HEAD
+=======
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 tiny-skia = { workspace = true }
 unscanny = { workspace = true }
 walkdir = { workspace = true }

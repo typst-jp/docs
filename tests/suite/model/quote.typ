@@ -1,14 +1,26 @@
 // Test the quote element.
 
+<<<<<<< HEAD
 --- quote-dir-author-pos ---
 // Text direction affects author positioning
+=======
+--- quote-dir-author-pos render pdftags ---
+// Text direction affects author positioning
+#set text(font: ("Libertinus Serif", "Noto Sans Arabic"))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 And I quote: #quote(attribution: [René Descartes])[cogito, ergo sum].
 
 #set text(lang: "ar")
 #quote(attribution: [عالم])[مرحبًا]
 
+<<<<<<< HEAD
 --- quote-dir-align ---
 // Text direction affects block alignment
+=======
+--- quote-dir-align render pdftags ---
+// Text direction affects block alignment
+#set text(font: ("Libertinus Serif", "Noto Sans Arabic"))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set quote(block: true)
 #quote(attribution: [René Descartes])[cogito, ergo sum]
 
@@ -48,7 +60,11 @@ And I quote: #quote(attribution: [René Descartes])[cogito, ergo sum].
 #quote(attribution: <tolkien54>)[In a hole in the ground there lived a hobbit.]
 
 #show bibliography: none
+<<<<<<< HEAD
 #bibliography("/assets/bib/works.bib", style: "chicago-notes")
+=======
+#bibliography("/assets/bib/works.bib", style: "chicago-shortened-notes")
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- quote-cite-format-author-date ---
 // Citation-format: author-date or author
@@ -118,3 +134,9 @@ An inline #quote[quote.]
 #quote(block: true, attribution: [The Test Author])[
   A block-level quote.
 ]
+<<<<<<< HEAD
+=======
+
+--- issue-5536-quote-inline-quotes-false ---
+Lorem #quote(block: false, quotes: false)[dolor].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

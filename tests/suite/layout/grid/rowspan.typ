@@ -488,3 +488,10 @@
   table.cell(rowspan: 15, align: horizon, lets-repeat((rotate(-90deg, reflow: true)[*All Tests*]), 3)),
   ..([123], [456], [789]) * 15
 )
+<<<<<<< HEAD
+=======
+
+--- issue-6399-grid-cell-rowspan-set-rule ---
+#set grid.cell(rowspan: 2)
+#grid(columns: 2, [hehe])
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

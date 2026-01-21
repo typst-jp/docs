@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 use heck::{ToKebabCase, ToShoutySnakeCase, ToUpperCamelCase};
+=======
+use heck::ToKebabCase;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::parse::{Parse, ParseStream};
 use syn::punctuated::Punctuated;
+<<<<<<< HEAD
 use syn::{parse_quote, Ident, Result, Token};
 
 use crate::util::{
     determine_name_and_title, documentation, foundations, has_attr, kw, parse_attr,
     parse_flag, parse_string, parse_string_array, validate_attrs, BlockWithReturn,
+=======
+use syn::{Ident, Result, Token};
+
+use crate::util::{
+    BlockWithReturn, determine_name_and_title, documentation, foundations, has_attr, kw,
+    parse_attr, parse_flag, parse_string, parse_string_array, validate_attrs,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// Expand the `#[elem]` macro.
@@ -39,17 +51,34 @@ struct Elem {
 }
 
 impl Elem {
+<<<<<<< HEAD
     /// Calls the closure to produce a token stream if the
     /// element has the given capability.
+=======
+    /// Whether the element has the given trait listed as a capability.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     fn can(&self, name: &str) -> bool {
         self.capabilities.iter().any(|capability| capability == name)
     }
 
+<<<<<<< HEAD
     /// Calls the closure to produce a token stream if the
     /// element does not have the given capability.
     fn cannot(&self, name: &str) -> bool {
         !self.can(name)
     }
+=======
+    /// Whether the element does not have the given trait listed as a
+    /// capability.
+    fn cannot(&self, name: &str) -> bool {
+        !self.can(name)
+    }
+
+    /// Whether the element has the given trait listed as a capability.
+    fn with(&self, name: &str) -> Option<&Ident> {
+        self.capabilities.iter().find(|capability| *capability == name)
+    }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Elem {
@@ -68,6 +97,7 @@ impl Elem {
         self.struct_fields().filter(|field| !field.required)
     }
 
+<<<<<<< HEAD
     /// Fields that are relevant for equality.
     ///
     /// Synthesized fields are excluded to ensure equality before and after
@@ -83,6 +113,8 @@ impl Elem {
             .filter(|field| !field.internal && !field.synthesized)
     }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Fields that are relevant for `Construct` impl.
     ///
     /// The reason why fields that are `parse` and internal are allowed is
@@ -98,6 +130,7 @@ impl Elem {
     fn set_fields(&self) -> impl Iterator<Item = &Field> + Clone {
         self.construct_fields().filter(|field| !field.required)
     }
+<<<<<<< HEAD
 
     /// Fields that can be accessed from the style chain.
     fn style_fields(&self) -> impl Iterator<Item = &Field> + Clone {
@@ -109,10 +142,13 @@ impl Elem {
     fn visible_fields(&self) -> impl Iterator<Item = &Field> + Clone {
         self.real_fields().filter(|field| !field.internal)
     }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// A field of an [element definition][`Elem`].
 struct Field {
+<<<<<<< HEAD
     /// The name of this field.
     ident: Ident,
     /// The identifier `{ident}_in`.
@@ -127,15 +163,26 @@ struct Field {
     enum_ident: Ident,
     /// The all-caps snake-case version of `ident`, used for the constant name.
     const_ident: Ident,
+=======
+    /// The index of the field among all.
+    i: u8,
+    /// The name of this field.
+    ident: Ident,
+    /// The identifier `with_{ident}`.
+    with_ident: Ident,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The visibility of this field.
     vis: syn::Visibility,
     /// The type of this field.
     ty: syn::Type,
+<<<<<<< HEAD
     /// The type returned by accessor methods for this field.
     ///
     /// Usually, this is the same as `ty`, but this might be different
     /// if this field has a `#[resolve]` attribute.
     output: syn::Type,
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The field's identifier as exposed to Typst.
     name: String,
     /// The documentation for this field as a string.
@@ -147,16 +194,22 @@ struct Field {
     /// Whether this field is variadic; that is, has its values
     /// taken from a variable number of arguments.
     variadic: bool,
+<<<<<<< HEAD
     /// Whether this field has a `#[resolve]` attribute.
     resolve: bool,
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Whether this field has a `#[fold]` attribute.
     fold: bool,
     /// Whether this field is excluded from documentation.
     internal: bool,
     /// Whether this field exists only in documentation.
     external: bool,
+<<<<<<< HEAD
     /// Whether this field has a `#[borrowed]` attribute.
     borrowed: bool,
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Whether this field has a `#[ghost]` attribute.
     ghost: bool,
     /// Whether this field has a `#[synthesized]` attribute.
@@ -206,7 +259,16 @@ fn parse(stream: TokenStream, body: &syn::ItemStruct) -> Result<Elem> {
         bail!(body, "expected named fields");
     };
 
+<<<<<<< HEAD
     let fields = named.named.iter().map(parse_field).collect::<Result<Vec<_>>>()?;
+=======
+    let mut fields = named.named.iter().map(parse_field).collect::<Result<Vec<_>>>()?;
+    fields.sort_by_key(|field| field.internal);
+    for (i, field) in fields.iter_mut().enumerate() {
+        field.i = i as u8;
+    }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     if fields.iter().any(|field| field.ghost && !field.internal)
         && meta.capabilities.iter().all(|capability| capability != "Construct")
     {
@@ -243,6 +305,7 @@ fn parse_field(field: &syn::Field) -> Result<Field> {
     let required = has_attr(&mut attrs, "required") || variadic;
     let positional = has_attr(&mut attrs, "positional") || required;
 
+<<<<<<< HEAD
     let mut field = Field {
         ident: ident.clone(),
         ident_in: format_ident!("{ident}_in"),
@@ -254,16 +317,30 @@ fn parse_field(field: &syn::Field) -> Result<Field> {
         vis: field.vis.clone(),
         ty: field.ty.clone(),
         output: field.ty.clone(),
+=======
+    let field = Field {
+        i: 0,
+        ident: ident.clone(),
+        with_ident: format_ident!("with_{ident}"),
+        vis: field.vis.clone(),
+        ty: field.ty.clone(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         name: ident.to_string().to_kebab_case(),
         docs: documentation(&attrs),
         positional,
         required,
         variadic,
+<<<<<<< HEAD
         resolve: has_attr(&mut attrs, "resolve"),
         fold: has_attr(&mut attrs, "fold"),
         internal: has_attr(&mut attrs, "internal"),
         external: has_attr(&mut attrs, "external"),
         borrowed: has_attr(&mut attrs, "borrowed"),
+=======
+        fold: has_attr(&mut attrs, "fold"),
+        internal: has_attr(&mut attrs, "internal"),
+        external: has_attr(&mut attrs, "external"),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         ghost: has_attr(&mut attrs, "ghost"),
         synthesized: has_attr(&mut attrs, "synthesized"),
         parse: parse_attr(&mut attrs, "parse")?.flatten(),
@@ -275,6 +352,7 @@ fn parse_field(field: &syn::Field) -> Result<Field> {
     }
 
     if (field.required || field.synthesized)
+<<<<<<< HEAD
         && (field.default.is_some() || field.fold || field.resolve || field.ghost)
     {
         bail!(
@@ -286,6 +364,11 @@ fn parse_field(field: &syn::Field) -> Result<Field> {
     if field.resolve {
         let ty = &field.ty;
         field.output = parse_quote! { <#ty as #foundations::Resolve>::Output };
+=======
+        && (field.default.is_some() || field.fold || field.ghost)
+    {
+        bail!(ident, "required and synthesized fields cannot be default, fold, or ghost");
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     validate_attrs(&attrs)?;
@@ -297,6 +380,7 @@ fn parse_field(field: &syn::Field) -> Result<Field> {
 fn create(element: &Elem) -> Result<TokenStream> {
     // The struct itself.
     let struct_ = create_struct(element);
+<<<<<<< HEAD
     let inherent_impl = create_inherent_impl(element);
 
     // The enum with the struct's fields.
@@ -321,6 +405,27 @@ fn create(element: &Elem) -> Result<TokenStream> {
     let locatable_impl = element.can("Locatable").then(|| create_locatable_impl(element));
     let mathy_impl = element.can("Mathy").then(|| create_mathy_impl(element));
     let into_value_impl = create_into_value_impl(element);
+=======
+
+    // Implementations.
+    let inherent_impl = create_inherent_impl(element);
+    let native_element_impl = create_native_elem_impl(element);
+    let field_impls =
+        element.fields.iter().map(|field| create_field_impl(element, field));
+    let construct_impl =
+        element.cannot("Construct").then(|| create_construct_impl(element));
+    let set_impl = element.cannot("Set").then(|| create_set_impl(element));
+    let unqueriable_impl = element
+        .with("Unqueriable")
+        .map(|cap| create_introspection_impl(element, cap));
+    let locatable_impl = element
+        .with("Locatable")
+        .map(|cap| create_introspection_impl(element, cap));
+    let tagged_impl = element
+        .with("Tagged")
+        .map(|cap| create_introspection_impl(element, cap));
+    let mathy_impl = element.can("Mathy").then(|| create_mathy_impl(element));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // We use a const block to create an anonymous scope, as to not leak any
     // local definitions.
@@ -328,6 +433,7 @@ fn create(element: &Elem) -> Result<TokenStream> {
         #struct_
 
         const _: () = {
+<<<<<<< HEAD
             #fields_enum
             #(#default_statics)*
             #inherent_impl
@@ -341,6 +447,17 @@ fn create(element: &Elem) -> Result<TokenStream> {
             #locatable_impl
             #mathy_impl
             #into_value_impl
+=======
+            #inherent_impl
+            #native_element_impl
+            #(#field_impls)*
+            #construct_impl
+            #set_impl
+            #unqueriable_impl
+            #locatable_impl
+            #tagged_impl
+            #mathy_impl
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         };
     })
 }
@@ -354,7 +471,11 @@ fn create_struct(element: &Elem) -> TokenStream {
 
     quote! {
         #[doc = #docs]
+<<<<<<< HEAD
         #[derive(#debug Clone, Hash)]
+=======
+        #[derive(Hash, #debug Clone)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         #[allow(clippy::derived_hash_with_manual_eq)]
         #[allow(rustdoc::broken_intra_doc_links)]
         #vis struct #ident {
@@ -365,6 +486,7 @@ fn create_struct(element: &Elem) -> TokenStream {
 
 /// Create a field declaration for the struct.
 fn create_field(field: &Field) -> TokenStream {
+<<<<<<< HEAD
     let Field { vis, ident, ty, .. } = field;
     if field.required {
         quote! { #vis #ident: #ty }
@@ -439,6 +561,15 @@ fn create_default_static(field: &Field) -> TokenStream {
     quote! {
         static #const_ident: ::std::sync::LazyLock<#ty> =
             ::std::sync::LazyLock::new(#init);
+=======
+    let Field { i, vis, ident, ty, .. } = field;
+    if field.required {
+        quote! { #vis #ident: #ty }
+    } else if field.synthesized {
+        quote! { #vis #ident: ::std::option::Option<#ty> }
+    } else {
+        quote! { #vis #ident: #foundations::Settable<Self, #i> }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -448,19 +579,37 @@ fn create_inherent_impl(element: &Elem) -> TokenStream {
 
     let new_func = create_new_func(element);
     let with_field_methods = element.accessor_fields().map(create_with_field_method);
+<<<<<<< HEAD
     let push_field_methods = element.accessor_fields().map(create_push_field_method);
     let field_methods = element.accessor_fields().map(create_field_method);
     let field_in_methods = element.style_fields().map(create_field_in_method);
     let set_field_methods = element.style_fields().map(create_set_field_method);
+=======
+
+    let style_consts = element.real_fields().map(|field| {
+        let Field { i, vis, ident, .. } = field;
+        quote! {
+            #vis const #ident: #foundations::Field<Self, #i>
+                = #foundations::Field::new();
+        }
+    });
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     quote! {
         impl #ident {
             #new_func
             #(#with_field_methods)*
+<<<<<<< HEAD
             #(#push_field_methods)*
             #(#field_methods)*
             #(#field_in_methods)*
             #(#set_field_methods)*
+=======
+        }
+        #[allow(non_upper_case_globals)]
+        impl #ident {
+            #(#style_consts)*
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
@@ -476,8 +625,15 @@ fn create_new_func(element: &Elem) -> TokenStream {
         let ident = &field.ident;
         if field.required {
             quote! { #ident }
+<<<<<<< HEAD
         } else {
             quote! { #ident: None }
+=======
+        } else if field.synthesized {
+            quote! { #ident: None }
+        } else {
+            quote! { #ident: #foundations::Settable::new() }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     });
 
@@ -491,17 +647,36 @@ fn create_new_func(element: &Elem) -> TokenStream {
 
 /// Create a builder-style setter method for a field.
 fn create_with_field_method(field: &Field) -> TokenStream {
+<<<<<<< HEAD
     let Field { vis, ident, with_ident, push_ident, name, ty, .. } = field;
     let doc = format!("Builder-style setter for the [`{name}`](Self::{ident}) field.");
     quote! {
         #[doc = #doc]
         #vis fn #with_ident(mut self, #ident: #ty) -> Self {
             self.#push_ident(#ident);
+=======
+    let Field { vis, ident, with_ident, name, ty, .. } = field;
+    let doc = format!("Builder-style setter for the [`{name}`](Self::{ident}) field.");
+
+    let expr = if field.required {
+        quote! { self.#ident = #ident }
+    } else if field.synthesized {
+        quote! { self.#ident = Some(#ident) }
+    } else {
+        quote! { self.#ident.set(#ident) }
+    };
+
+    quote! {
+        #[doc = #doc]
+        #vis fn #with_ident(mut self, #ident: #ty) -> Self {
+            #expr;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             self
         }
     }
 }
 
+<<<<<<< HEAD
 /// Create a setter method for a field.
 fn create_push_field_method(field: &Field) -> TokenStream {
     let Field { vis, ident, push_ident, name, ty, .. } = field;
@@ -634,10 +809,13 @@ fn create_style_chain_access(
     }
 }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Creates the element's `NativeElement` implementation.
 fn create_native_elem_impl(element: &Elem) -> TokenStream {
     let Elem { name, ident, title, scope, keywords, docs, .. } = element;
 
+<<<<<<< HEAD
     let local_name = if element.can("LocalName") {
         quote! { Some(<#foundations::Packed<#ident> as ::typst_library::text::LocalName>::local_name) }
     } else {
@@ -739,6 +917,167 @@ fn create_partial_eq_impl(element: &Elem) -> TokenStream {
             fn eq(&self, other: &Self) -> bool {
                 #empty
                 #(self.#fields == other.#fields)&&*
+=======
+    let fields = element.fields.iter().filter(|field| !field.internal).map(|field| {
+        let i = field.i;
+        if field.external {
+            quote! { #foundations::ExternalFieldData::<#ident, #i>::vtable() }
+        } else if field.variadic {
+            quote! { #foundations::RequiredFieldData::<#ident, #i>::vtable_variadic() }
+        } else if field.required {
+            quote! { #foundations::RequiredFieldData::<#ident, #i>::vtable() }
+        } else if field.synthesized {
+            quote! { #foundations::SynthesizedFieldData::<#ident, #i>::vtable() }
+        } else if field.ghost {
+            quote! { #foundations::SettablePropertyData::<#ident, #i>::vtable() }
+        } else {
+            quote! { #foundations::SettableFieldData::<#ident, #i>::vtable() }
+        }
+    });
+
+    let field_arms = element
+        .fields
+        .iter()
+        .filter(|field| !field.internal && !field.external)
+        .map(|field| {
+            let Field { name, i, .. } = field;
+            quote! { #name => Some(#i) }
+        });
+    let field_id = quote! {
+        |name| match name {
+            #(#field_arms,)*
+            _ => None,
+        }
+    };
+
+    let capable_func = create_capable_func(element);
+
+    let with_keywords =
+        (!keywords.is_empty()).then(|| quote! { .with_keywords(&[#(#keywords),*]) });
+    let with_repr = element.can("Repr").then(|| quote! { .with_repr() });
+    let with_partial_eq = element.can("PartialEq").then(|| quote! { .with_partial_eq() });
+    let with_local_name = element.can("LocalName").then(|| quote! { .with_local_name() });
+    let with_scope = scope.then(|| quote! { .with_scope() });
+
+    quote! {
+        unsafe impl #foundations::NativeElement for #ident {
+            const ELEM: #foundations::Element = #foundations::Element::from_vtable({
+                static STORE: #foundations::LazyElementStore
+                    = #foundations::LazyElementStore::new();
+                static VTABLE: #foundations::ContentVtable =
+                    #foundations::ContentVtable::new::<#ident>(
+                        #name,
+                        #title,
+                        #docs,
+                        &[#(#fields),*],
+                        #field_id,
+                        #capable_func,
+                        || &STORE,
+                    ) #with_keywords
+                    #with_repr
+                    #with_partial_eq
+                    #with_local_name
+                    #with_scope
+                    .erase();
+                &VTABLE
+            });
+        }
+    }
+}
+
+/// Creates the appropriate trait implementation for a field.
+fn create_field_impl(element: &Elem, field: &Field) -> TokenStream {
+    let elem_ident = &element.ident;
+    let Field { i, ty, ident, default, positional, name, docs, .. } = field;
+
+    let default = match default {
+        Some(default) => quote! { || #default },
+        None => quote! { std::default::Default::default },
+    };
+
+    if field.external {
+        quote! {
+            impl #foundations::ExternalField<#i> for #elem_ident {
+                type Type = #ty;
+                const FIELD: #foundations::ExternalFieldData<Self, #i> =
+                    #foundations::ExternalFieldData::<Self, #i>::new(
+                        #name,
+                        #docs,
+                        #default,
+                    );
+            }
+        }
+    } else if field.required {
+        quote! {
+            impl #foundations::RequiredField<#i> for #elem_ident {
+                type Type = #ty;
+                const FIELD: #foundations::RequiredFieldData<Self, #i> =
+                    #foundations::RequiredFieldData::<Self, #i>::new(
+                        #name,
+                        #docs,
+                        |elem| &elem.#ident,
+                    );
+            }
+        }
+    } else if field.synthesized {
+        quote! {
+            impl #foundations::SynthesizedField<#i> for #elem_ident {
+                type Type = #ty;
+                const FIELD: #foundations::SynthesizedFieldData<Self, #i> =
+                    #foundations::SynthesizedFieldData::<Self, #i>::new(
+                        #name,
+                        #docs,
+                        |elem| &elem.#ident,
+                    );
+            }
+        }
+    } else {
+        let slot = quote! {
+            || {
+                static LOCK: ::std::sync::OnceLock<#ty> = ::std::sync::OnceLock::new();
+                &LOCK
+            }
+        };
+
+        let with_fold = field.fold.then(|| quote! { .with_fold() });
+        let refable = (!field.fold).then(|| {
+            quote! {
+                impl #foundations::RefableProperty<#i> for #elem_ident {}
+            }
+        });
+
+        if field.ghost {
+            quote! {
+                impl #foundations::SettableProperty<#i> for #elem_ident {
+                    type Type = #ty;
+                    const FIELD: #foundations::SettablePropertyData<Self, #i> =
+                        #foundations::SettablePropertyData::<Self, #i>::new(
+                            #name,
+                            #docs,
+                            #positional,
+                            #default,
+                            #slot,
+                        ) #with_fold;
+                }
+                #refable
+            }
+        } else {
+            quote! {
+                impl #foundations::SettableField<#i> for #elem_ident {
+                    type Type = #ty;
+                    const FIELD: #foundations::SettableFieldData<Self, #i> =
+                        #foundations::SettableFieldData::<Self, #i>::new(
+                            #name,
+                            #docs,
+                            #positional,
+                            |elem| &elem.#ident,
+                            |elem| &mut elem.#ident,
+                            #default,
+                            #slot,
+                        ) #with_fold;
+                }
+                #refable
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         }
     }
@@ -758,10 +1097,19 @@ fn create_construct_impl(element: &Elem) -> TokenStream {
 
     let fields = element.struct_fields().map(|field| {
         let ident = &field.ident;
+<<<<<<< HEAD
         if field.synthesized {
             quote! { #ident: None }
         } else {
             quote! { #ident }
+=======
+        if field.required {
+            quote! { #ident }
+        } else if field.synthesized {
+            quote! { #ident: None }
+        } else {
+            quote! { #ident: #foundations::Settable::from(#ident) }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     });
 
@@ -782,12 +1130,20 @@ fn create_construct_impl(element: &Elem) -> TokenStream {
 fn create_set_impl(element: &Elem) -> TokenStream {
     let ident = &element.ident;
     let handlers = element.set_fields().map(|field| {
+<<<<<<< HEAD
         let set_ident = &field.set_ident;
+=======
+        let field_ident = &field.ident;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let (prefix, value) = create_field_parser(field);
         quote! {
             #prefix
             if let Some(value) = #value {
+<<<<<<< HEAD
                 styles.set(Self::#set_ident(value));
+=======
+                styles.set(Self::#field_ident, value);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         }
     });
@@ -827,7 +1183,11 @@ fn create_field_parser(field: &Field) -> (TokenStream, TokenStream) {
 }
 
 /// Creates the element's casting vtable.
+<<<<<<< HEAD
 fn create_capable_impl(element: &Elem) -> TokenStream {
+=======
+fn create_capable_func(element: &Elem) -> TokenStream {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     // Forbidden capabilities (i.e capabilities that are not object safe).
     const FORBIDDEN: &[&str] =
         &["Debug", "PartialEq", "Hash", "Construct", "Set", "Repr", "LocalName"];
@@ -851,16 +1211,24 @@ fn create_capable_impl(element: &Elem) -> TokenStream {
     });
 
     quote! {
+<<<<<<< HEAD
         unsafe impl #foundations::Capable for #ident {
             fn vtable(capability: ::std::any::TypeId) -> ::std::option::Option<::std::ptr::NonNull<()>> {
                 let dangling = ::std::ptr::NonNull::<#foundations::Packed<#ident>>::dangling().as_ptr();
                 #(#checks)*
                 None
             }
+=======
+        |capability| {
+            let dangling = ::std::ptr::NonNull::<#foundations::Packed<#ident>>::dangling().as_ptr();
+            #(#checks)*
+            None
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
 
+<<<<<<< HEAD
 /// Creates the element's `Fields` implementation.
 fn create_fields_impl(element: &Elem) -> TokenStream {
     let into_value = quote! { #foundations::IntoValue::into_value };
@@ -1055,6 +1423,12 @@ fn create_repr_impl(element: &Elem) -> TokenStream {
 fn create_locatable_impl(element: &Elem) -> TokenStream {
     let ident = &element.ident;
     quote! { impl ::typst_library::introspection::Locatable for #foundations::Packed<#ident> {} }
+=======
+/// Creates the element's introspection capability implementation.
+fn create_introspection_impl(element: &Elem, capability: &Ident) -> TokenStream {
+    let ident = &element.ident;
+    quote! { impl ::typst_library::introspection::#capability for #foundations::Packed<#ident> {} }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Creates the element's `Mathy` implementation.
@@ -1062,6 +1436,7 @@ fn create_mathy_impl(element: &Elem) -> TokenStream {
     let ident = &element.ident;
     quote! { impl ::typst_library::math::Mathy for #foundations::Packed<#ident> {} }
 }
+<<<<<<< HEAD
 
 /// Creates the element's `IntoValue` implementation.
 fn create_into_value_impl(element: &Elem) -> TokenStream {
@@ -1074,3 +1449,5 @@ fn create_into_value_impl(element: &Elem) -> TokenStream {
         }
     }
 }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -5,4 +5,11 @@ bibliography = Conspectus librorum
 heading = Caput
 outline = Index capitum
 raw = Exemplum
+<<<<<<< HEAD
 page = charta
+=======
+page = charta
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

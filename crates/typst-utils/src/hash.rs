@@ -30,9 +30,16 @@ use siphasher::sip128::{Hasher128, SipHasher13};
 /// # Usage
 /// If the value is expected to be cloned, it is best used inside of an `Arc`
 /// or `Rc` to best re-use the hash once it has been computed.
+<<<<<<< HEAD
 pub struct LazyHash<T: ?Sized> {
     /// The hash for the value.
     hash: AtomicU128,
+=======
+#[derive(Clone)]
+pub struct LazyHash<T: ?Sized> {
+    /// The hash for the value.
+    hash: HashLock,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The underlying value.
     value: T,
 }
@@ -48,6 +55,7 @@ impl<T> LazyHash<T> {
     /// Wraps an item without pre-computed hash.
     #[inline]
     pub fn new(value: T) -> Self {
+<<<<<<< HEAD
         Self { hash: AtomicU128::new(0), value }
     }
 
@@ -58,6 +66,9 @@ impl<T> LazyHash<T> {
     #[inline]
     pub fn reuse<U: ?Sized>(value: T, existing: &LazyHash<U>) -> Self {
         LazyHash { hash: AtomicU128::new(existing.load_hash()), value }
+=======
+        Self { hash: HashLock::new(), value }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Returns the wrapped value.
@@ -67,6 +78,7 @@ impl<T> LazyHash<T> {
     }
 }
 
+<<<<<<< HEAD
 impl<T: ?Sized> LazyHash<T> {
     /// Get the hash, returns zero if not computed yet.
     #[inline]
@@ -77,10 +89,13 @@ impl<T: ?Sized> LazyHash<T> {
     }
 }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl<T: Hash + ?Sized + 'static> LazyHash<T> {
     /// Get the hash or compute it if not set yet.
     #[inline]
     fn load_or_compute_hash(&self) -> u128 {
+<<<<<<< HEAD
         let mut hash = self.load_hash();
         if hash == 0 {
             hash = hash_item(&self.value);
@@ -94,6 +109,9 @@ impl<T: Hash + ?Sized + 'static> LazyHash<T> {
     fn reset_hash(&mut self) {
         // Because we have a mutable reference, we can skip the atomic.
         *self.hash.get_mut() = 0;
+=======
+        self.hash.get_or_insert_with(|| hash_item(&self.value))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -140,14 +158,22 @@ impl<T: ?Sized> Deref for LazyHash<T> {
     }
 }
 
+<<<<<<< HEAD
 impl<T: Hash + ?Sized + 'static> DerefMut for LazyHash<T> {
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target {
         self.reset_hash();
+=======
+impl<T: ?Sized + 'static> DerefMut for LazyHash<T> {
+    #[inline]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        self.hash.reset();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         &mut self.value
     }
 }
 
+<<<<<<< HEAD
 impl<T: Hash + Clone + 'static> Clone for LazyHash<T> {
     fn clone(&self) -> Self {
         Self {
@@ -157,6 +183,8 @@ impl<T: Hash + Clone + 'static> Clone for LazyHash<T> {
     }
 }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl<T: Debug> Debug for LazyHash<T> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.value.fmt(f)
@@ -233,3 +261,54 @@ impl<T: Debug> Debug for ManuallyHash<T> {
         self.value.fmt(f)
     }
 }
+<<<<<<< HEAD
+=======
+
+/// Storage for lazy hash computation.
+pub struct HashLock(AtomicU128);
+
+impl HashLock {
+    /// Create a new unset hash cell.
+    pub const fn new() -> Self {
+        Self(AtomicU128::new(0))
+    }
+
+    /// Get the hash or compute it if not set yet.
+    #[inline]
+    pub fn get_or_insert_with(&self, f: impl FnOnce() -> u128) -> u128 {
+        let mut hash = self.get();
+        if hash == 0 {
+            hash = f();
+            self.0.store(hash, Ordering::Relaxed);
+        }
+        hash
+    }
+
+    /// Reset the hash to unset.
+    #[inline]
+    pub fn reset(&mut self) {
+        // Because we have a mutable reference, we can skip the atomic.
+        *self.0.get_mut() = 0;
+    }
+
+    /// Get the hash, returns zero if not computed yet.
+    #[inline]
+    fn get(&self) -> u128 {
+        // We only need atomicity and no synchronization of other operations, so
+        // `Relaxed` is fine.
+        self.0.load(Ordering::Relaxed)
+    }
+}
+
+impl Default for HashLock {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl Clone for HashLock {
+    fn clone(&self) -> Self {
+        Self(AtomicU128::new(self.get()))
+    }
+}
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

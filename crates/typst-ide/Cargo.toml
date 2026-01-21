@@ -17,8 +17,13 @@ typst = { workspace = true }
 typst-eval = { workspace = true }
 comemo = { workspace = true }
 ecow = { workspace = true }
+<<<<<<< HEAD
 if_chain = { workspace = true }
 pathdiff = { workspace = true }
+=======
+pathdiff = { workspace = true }
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 serde = { workspace = true }
 unscanny = { workspace = true }
 

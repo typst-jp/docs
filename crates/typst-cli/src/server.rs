@@ -5,7 +5,11 @@ use std::sync::Arc;
 use ecow::eco_format;
 use parking_lot::{Condvar, Mutex, MutexGuard};
 use tiny_http::{Header, Request, Response, StatusCode};
+<<<<<<< HEAD
 use typst::diag::{bail, StrResult};
+=======
+use typst::diag::{StrResult, bail};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::args::{Input, ServerArgs};
 
@@ -162,7 +166,11 @@ impl<T> Bucket<T> {
     }
 
     /// Retrieves the current data in the bucket.
+<<<<<<< HEAD
     fn get(&self) -> MutexGuard<T> {
+=======
+    fn get(&self) -> MutexGuard<'_, T> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.mutex.lock()
     }
 
@@ -181,8 +189,16 @@ impl<T> Bucket<T> {
 
 /// The initial HTML before compilation is finished.
 const PLACEHOLDER_HTML: &str = "\
+<<<<<<< HEAD
 <html>
   <head>
+=======
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=\"utf-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     <title>Waiting for {INPUT}</title>
     <style>
       body {
@@ -201,7 +217,11 @@ const PLACEHOLDER_HTML: &str = "\
   </head>
   <body>
     <main>
+<<<<<<< HEAD
       <div>Waiting for output ...</div>
+=======
+      <div>Waiting for output…</div>
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
       <div><code>typst watch {INPUT}</code></div>
     </main>
   </body>

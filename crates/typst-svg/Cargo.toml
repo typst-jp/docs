@@ -13,6 +13,10 @@ keywords = { workspace = true }
 readme = { workspace = true }
 
 [dependencies]
+<<<<<<< HEAD
+=======
+typst-assets = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 typst-library = { workspace = true }
 typst-macros = { workspace = true }
 typst-timing = { workspace = true }
@@ -21,7 +25,14 @@ base64 = { workspace = true }
 comemo = { workspace = true }
 ecow = { workspace = true }
 flate2 = { workspace = true }
+<<<<<<< HEAD
 image = { workspace = true }
+=======
+hayro = { workspace = true }
+hayro-svg = { workspace = true }
+image = { workspace = true }
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ttf-parser = { workspace = true }
 xmlparser = { workspace = true }
 xmlwriter = { workspace = true }

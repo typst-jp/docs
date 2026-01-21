@@ -5,4 +5,11 @@ bibliography = Бібліографія
 heading = Розділ
 outline = Зміст
 raw = Лістинг
+<<<<<<< HEAD
 page = c.
+=======
+page = c.
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

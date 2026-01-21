@@ -1,9 +1,16 @@
 use comemo::Track;
 
+<<<<<<< HEAD
 use crate::diag::{bail, Hint, HintedStrResult, SourceResult};
 use crate::engine::Engine;
 use crate::foundations::{
     elem, Args, Construct, Content, Func, Packed, Show, StyleChain, Value,
+=======
+use crate::diag::{Hint, HintedStrResult, SourceResult, bail};
+use crate::engine::Engine;
+use crate::foundations::{
+    Args, Construct, Content, Func, ShowFn, StyleChain, Value, elem,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::introspection::{Locatable, Location};
 
@@ -61,7 +68,11 @@ fn require<T>(val: Option<T>) -> HintedStrResult<T> {
 }
 
 /// Executes a `context` block.
+<<<<<<< HEAD
 #[elem(Construct, Locatable, Show)]
+=======
+#[elem(Construct, Locatable)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct ContextElem {
     /// The function to call with the context.
     #[required]
@@ -75,6 +86,7 @@ impl Construct for ContextElem {
     }
 }
 
+<<<<<<< HEAD
 impl Show for Packed<ContextElem> {
     #[typst_macros::time(name = "context", span = self.span())]
     fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -83,3 +95,10 @@ impl Show for Packed<ContextElem> {
         Ok(self.func.call::<[Value; 0]>(engine, context.track(), [])?.display())
     }
 }
+=======
+pub const CONTEXT_RULE: ShowFn<ContextElem> = |elem, engine, styles| {
+    let loc = elem.location().unwrap();
+    let context = Context::new(Some(loc), Some(styles));
+    Ok(elem.func.call::<[Value; 0]>(engine, context.track(), [])?.display())
+};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

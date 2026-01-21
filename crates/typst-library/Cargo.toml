@@ -29,7 +29,13 @@ csv = { workspace = true }
 ecow = { workspace = true }
 flate2 = { workspace = true }
 fontdb = { workspace = true }
+<<<<<<< HEAD
 hayagriva = { workspace = true }
+=======
+glidesort = { workspace = true }
+hayagriva = { workspace = true }
+hayro-syntax = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 icu_properties = { workspace = true }
 icu_provider = { workspace = true }
 icu_provider_blob = { workspace = true }
@@ -48,6 +54,10 @@ regex = { workspace = true }
 regex-syntax = { workspace = true }
 roxmltree = { workspace = true }
 rust_decimal = { workspace = true }
+<<<<<<< HEAD
+=======
+rustc-hash = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 rustybuzz = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
@@ -61,9 +71,17 @@ ttf-parser = { workspace = true }
 two-face = { workspace = true }
 typed-arena = { workspace = true }
 unicode-math-class = { workspace = true }
+<<<<<<< HEAD
 unicode-segmentation = { workspace = true }
 unscanny = { workspace = true }
 usvg = { workspace = true }
+=======
+unicode-normalization = { workspace = true }
+unicode-segmentation = { workspace = true }
+unscanny = { workspace = true }
+usvg = { workspace = true }
+utf8_iter = { workspace = true }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 wasmi = { workspace = true }
 xmlwriter = { workspace = true }
 

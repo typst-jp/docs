@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 use typst_library::diag::{warning, At, SourceResult};
+=======
+use typst_library::diag::{At, SourceResult, warning};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::foundations::{
     Content, Label, NativeElement, Repr, Smart, Symbol, Unlabellable, Value,
 };
@@ -33,7 +37,11 @@ fn eval_markup<'a>(
 
     while let Some(expr) = exprs.next() {
         match expr {
+<<<<<<< HEAD
             ast::Expr::Set(set) => {
+=======
+            ast::Expr::SetRule(set) => {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let styles = set.eval(vm)?;
                 if vm.flow.is_some() {
                     break;
@@ -41,7 +49,11 @@ fn eval_markup<'a>(
 
                 seq.push(eval_markup(vm, exprs)?.styled_with_map(styles))
             }
+<<<<<<< HEAD
             ast::Expr::Show(show) => {
+=======
+            ast::Expr::ShowRule(show) => {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let recipe = show.eval(vm)?;
                 if vm.flow.is_some() {
                     break;
@@ -123,7 +135,11 @@ impl Eval for ast::Escape<'_> {
     type Output = Value;
 
     fn eval(self, _: &mut Vm) -> SourceResult<Self::Output> {
+<<<<<<< HEAD
         Ok(Value::Symbol(Symbol::single(self.get())))
+=======
+        Ok(Value::Symbol(Symbol::runtime_char(self.get())))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -131,7 +147,11 @@ impl Eval for ast::Shorthand<'_> {
     type Output = Value;
 
     fn eval(self, _: &mut Vm) -> SourceResult<Self::Output> {
+<<<<<<< HEAD
         Ok(Value::Symbol(Symbol::single(self.get())))
+=======
+        Ok(Value::Symbol(Symbol::runtime_char(self.get())))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -186,7 +206,11 @@ impl Eval for ast::Raw<'_> {
         let lines = self.lines().map(|line| (line.get().clone(), line.span())).collect();
         let mut elem = RawElem::new(RawContent::Lines(lines)).with_block(self.block());
         if let Some(lang) = self.lang() {
+<<<<<<< HEAD
             elem.push_lang(Some(lang.get().clone()));
+=======
+            elem.lang.set(Some(lang.get().clone()));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         Ok(elem.pack())
     }
@@ -205,7 +229,13 @@ impl Eval for ast::Label<'_> {
     type Output = Value;
 
     fn eval(self, _: &mut Vm) -> SourceResult<Self::Output> {
+<<<<<<< HEAD
         Ok(Value::Label(Label::new(PicoStr::intern(self.get()))))
+=======
+        Ok(Value::Label(
+            Label::new(PicoStr::intern(self.get())).expect("unexpected empty label"),
+        ))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -213,12 +243,21 @@ impl Eval for ast::Ref<'_> {
     type Output = Content;
 
     fn eval(self, vm: &mut Vm) -> SourceResult<Self::Output> {
+<<<<<<< HEAD
         let target = Label::new(PicoStr::intern(self.target()));
         let mut elem = RefElem::new(target);
         if let Some(supplement) = self.supplement() {
             elem.push_supplement(Smart::Custom(Some(Supplement::Content(
                 supplement.eval(vm)?,
             ))));
+=======
+        let target = Label::new(PicoStr::intern(self.target()))
+            .expect("unexpected empty reference");
+        let mut elem = RefElem::new(target);
+        if let Some(supplement) = self.supplement() {
+            elem.supplement
+                .set(Smart::Custom(Some(Supplement::Content(supplement.eval(vm)?))));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         Ok(elem.pack())
     }
@@ -249,7 +288,11 @@ impl Eval for ast::EnumItem<'_> {
         let body = self.body().eval(vm)?;
         let mut elem = EnumItem::new(body);
         if let Some(number) = self.number() {
+<<<<<<< HEAD
             elem.push_number(Some(number));
+=======
+            elem.number.set(Smart::Custom(number));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         Ok(elem.pack())
     }

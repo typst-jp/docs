@@ -10,10 +10,15 @@ mod modifiers;
 mod pad;
 mod pages;
 mod repeat;
+<<<<<<< HEAD
+=======
+mod rules;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 mod shapes;
 mod stack;
 mod transforms;
 
+<<<<<<< HEAD
 pub use self::flow::{layout_columns, layout_fragment, layout_frame};
 pub use self::grid::{layout_grid, layout_table};
 pub use self::image::layout_image;
@@ -28,3 +33,8 @@ pub use self::shapes::{
 };
 pub use self::stack::layout_stack;
 pub use self::transforms::{layout_move, layout_rotate, layout_scale, layout_skew};
+=======
+pub use self::flow::{layout_fragment, layout_frame};
+pub use self::pages::layout_document;
+pub use self::rules::register;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

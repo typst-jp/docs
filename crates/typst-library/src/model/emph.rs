@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{
@@ -14,6 +15,19 @@ use crate::text::{ItalicToggle, TextElem};
 ///   `{"normal"}`に戻します。
 ///
 /// # 例
+=======
+use crate::foundations::{Content, elem};
+use crate::introspection::{Locatable, Tagged};
+
+/// Emphasizes content by toggling italics.
+///
+/// - If the current [text style]($text.style) is `{"normal"}`, this turns it
+///   into `{"italic"}`.
+/// - If it is already `{"italic"}` or `{"oblique"}`, it turns it back to
+///   `{"normal"}`.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// This is _emphasized._ \
 /// This is #emph[too.]
@@ -25,6 +39,7 @@ use crate::text::{ItalicToggle, TextElem};
 /// This is _emphasized_ differently.
 /// ```
 ///
+<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// 強調したいコンテンツをアンダースコア（`_`）で囲むだけです。
@@ -51,3 +66,15 @@ impl Show for Packed<EmphElem> {
         })
     }
 }
+=======
+/// # Syntax
+/// This function also has dedicated syntax: To emphasize content, simply
+/// enclose it in underscores (`_`). Note that this only works at word
+/// boundaries. To emphasize part of a word, you have to use the function.
+#[elem(title = "Emphasis", keywords = ["italic"], Locatable, Tagged)]
+pub struct EmphElem {
+    /// The content to emphasize.
+    #[required]
+    pub body: Content,
+}
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

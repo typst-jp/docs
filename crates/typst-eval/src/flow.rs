@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 use typst_library::diag::{bail, error, At, SourceDiagnostic, SourceResult};
 use typst_library::foundations::{ops, IntoValue, Value};
+=======
+use typst_library::diag::{At, SourceDiagnostic, SourceResult, bail, error};
+use typst_library::foundations::{IntoValue, Value, ops};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_syntax::ast::{self, AstNode};
 use typst_syntax::{Span, SyntaxKind, SyntaxNode};
 use unicode_segmentation::UnicodeSegmentation;
 
+<<<<<<< HEAD
 use crate::{destructure, Eval, Vm};
+=======
+use crate::{Eval, Vm, destructure};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// The maximum number of loop iterations.
 const MAX_ITERATIONS: usize = 10_000;
@@ -83,8 +92,12 @@ impl Eval for ast::WhileLoop<'_> {
             }
 
             let value = body.eval(vm)?;
+<<<<<<< HEAD
             let span = body.span();
             output = ops::join(output, value, &mut (&mut vm.engine, span)).at(span)?;
+=======
+            output = ops::join(output, value).at(body.span())?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
             match vm.flow {
                 Some(FlowEvent::Break(_)) => {
@@ -130,9 +143,13 @@ impl Eval for ast::ForLoop<'_> {
 
                     let body = self.body();
                     let value = body.eval(vm)?;
+<<<<<<< HEAD
                     let span = body.span();
                     output =
                         ops::join(output, value, &mut (&mut vm.engine, span)).at(span)?;
+=======
+                    output = ops::join(output, value).at(body.span())?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
                     match vm.flow {
                         Some(FlowEvent::Break(_)) => {

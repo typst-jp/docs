@@ -49,3 +49,10 @@
   let fonts = ("nope", "Roboto")
   set text(font: fonts.at(n))
 }
+<<<<<<< HEAD
+=======
+
+--- context-body-is-closure ---
+// Regression test since this used to be a hard crash.
+#(context (a: none) => {})
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

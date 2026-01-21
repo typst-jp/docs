@@ -334,6 +334,10 @@
 
 --- import-cyclic-in-other-file ---
 // Cyclic import in other file.
+<<<<<<< HEAD
+=======
+// Error: "tests/suite/scripting/modules/cycle2.typ" 2:9-2:21 cyclic import
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #import "./modules/cycle1.typ": *
 
 This is never reached.
@@ -428,7 +432,11 @@ This is never reached.
 
 --- import-from-package-required-compiler-version ---
 // Test too high required compiler version.
+<<<<<<< HEAD
 // Error: 9-29 package requires typst 1.0.0 or newer (current version is VERSION)
+=======
+// Error: 9-29 package requires Typst 1.0.0 or newer (current version is VERSION)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #import "@test/future:0.1.0": future
 
 --- import-from-package-namespace-invalid-1 ---

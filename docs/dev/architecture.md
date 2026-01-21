@@ -12,6 +12,10 @@ Let's start with a broad overview of the directories in this repository:
 - `crates/typst-cli`: Typst's command line interface. This is a relatively small
   layer on top of the compiler and the exporters.
 - `crates/typst-eval`: The interpreter for the Typst language.
+<<<<<<< HEAD
+=======
+- `crates/typst-html`: The HTML exporter.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 - `crates/typst-ide`: Exposes IDE functionality.
 - `crates/typst-kit`: Contains various default implementation of
   functionality used in `typst-cli`.

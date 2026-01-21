@@ -21,6 +21,13 @@
   ("lightning", "🖄"),
   ("fly", "🖅"),
 )
+<<<<<<< HEAD
+=======
+#let one = symbol(
+  "1",
+  ("emoji", "1️")
+)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 #envelope
 #envelope.stamped
@@ -28,6 +35,11 @@
 #envelope.stamped.pen
 #envelope.lightning
 #envelope.fly
+<<<<<<< HEAD
+=======
+#one
+#one.emoji
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- symbol-constructor-empty ---
 // Error: 2-10 expected at least one variant
@@ -82,6 +94,29 @@
   ("variant.duplicate", "y"),
 )
 
+<<<<<<< HEAD
+=======
+--- symbol-constructor-empty-variant-value ---
+// Error: 2:3-2:5 invalid variant value: ""
+// Hint: 2:3-2:5 variant value must be exactly one grapheme cluster
+// Error: 3:3-3:16 invalid variant value: ""
+// Hint: 3:3-3:16 variant value must be exactly one grapheme cluster
+#symbol(
+  "",
+  ("empty", "")
+)
+
+--- symbol-constructor-multi-cluster-variant-value ---
+// Error: 2:3-2:7 invalid variant value: "aa"
+// Hint: 2:3-2:7 variant value must be exactly one grapheme cluster
+// Error: 3:3-3:14 invalid variant value: "bb"
+// Hint: 3:3-3:14 variant value must be exactly one grapheme cluster
+#symbol(
+  "aa",
+  ("b", "bb")
+)
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- symbol-unknown-modifier ---
 // Error: 13-20 unknown symbol modifier
 #emoji.face.garbage
@@ -104,9 +139,17 @@
     ("long", "⟹"),
     ("long.bar", "⟾"),
     ("not", "⇏"),
+<<<<<<< HEAD
     ("l", "⇔"),
     ("l.long", "⟺"),
     ("l.not", "⇎"),
+=======
+    ("struck", "⤃"),
+    ("l", "⇔"),
+    ("l.long", "⟺"),
+    ("l.not", "⇎"),
+    ("l.struck", "⤄"),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   )
   ```.text,
 )
@@ -152,6 +195,28 @@
 // Warning: 5-9 `sect` is deprecated, use `inter` instead
 $ A sect B = A inter B $
 
+<<<<<<< HEAD
 --- issue-5930-symbol-label ---
 #emoji.face<lab>
 #context test(query(<lab>).first().text, "😀")
+=======
+--- symbol-modifier-deprecated ---
+// Warning: 7-12 `ast.small` is deprecated (CJK compatibility character), use ﹡ or `\u{fe61}` instead
+$ ast.small $
+
+// Warning: 14-20 `bracket.double` is deprecated, use `bracket.stroked` instead
+#sym.bracket.double.r
+
+--- issue-5930-symbol-label ---
+#emoji.face<lab>
+#context test(query(<lab>).first().text, "😀")
+
+--- presentation-selectors ---
+// Currently, presentation selectors do not cause font fallback when the main
+// font supports at least one presentation, instead causing a fallback of the
+// presentation form. This should probably be solved at some point, making the
+// emojis below render with an emoji form.
+// See: https://github.com/typst/typst/pull/6875.
+#sym.copyright #emoji.copyright \
+#sym.suit.heart #emoji.suit.heart
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

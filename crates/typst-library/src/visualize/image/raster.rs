@@ -3,6 +3,7 @@ use std::hash::{Hash, Hasher};
 use std::io;
 use std::sync::Arc;
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use image::codecs::gif::GifDecoder;
 use image::codecs::jpeg::JpegDecoder;
@@ -14,6 +15,19 @@ use image::{
 use crate::diag::{bail, StrResult};
 use crate::foundations::{cast, dict, Bytes, Cast, Dict, Smart, Value};
 
+=======
+use crate::diag::{StrResult, bail};
+use crate::foundations::{Bytes, Cast, Dict, Smart, Value, cast, dict};
+use ecow::{EcoString, eco_format};
+use image::codecs::gif::GifDecoder;
+use image::codecs::jpeg::JpegDecoder;
+use image::codecs::png::PngDecoder;
+use image::codecs::webp::WebPDecoder;
+use image::{
+    DynamicImage, ImageBuffer, ImageDecoder, ImageResult, Limits, Pixel, guess_format,
+};
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A decoded raster image.
 #[derive(Clone, Hash)]
 pub struct RasterImage(Arc<Repr>);
@@ -22,7 +36,12 @@ pub struct RasterImage(Arc<Repr>);
 struct Repr {
     data: Bytes,
     format: RasterFormat,
+<<<<<<< HEAD
     dynamic: image::DynamicImage,
+=======
+    dynamic: Arc<DynamicImage>,
+    exif_rotation: Option<u32>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     icc: Option<Bytes>,
     dpi: Option<f64>,
 }
@@ -50,6 +69,11 @@ impl RasterImage {
         format: RasterFormat,
         icc: Smart<Bytes>,
     ) -> StrResult<RasterImage> {
+<<<<<<< HEAD
+=======
+        let mut exif_rot = None;
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let (dynamic, icc, dpi) = match format {
             RasterFormat::Exchange(format) => {
                 fn decode<T: ImageDecoder>(
@@ -75,6 +99,10 @@ impl RasterImage {
                     ExchangeFormat::Jpg => decode(JpegDecoder::new(cursor), icc),
                     ExchangeFormat::Png => decode(PngDecoder::new(cursor), icc),
                     ExchangeFormat::Gif => decode(GifDecoder::new(cursor), icc),
+<<<<<<< HEAD
+=======
+                    ExchangeFormat::Webp => decode(WebPDecoder::new(cursor), icc),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
                 .map_err(format_image_error)?;
 
@@ -85,6 +113,10 @@ impl RasterImage {
                 // Apply rotation from EXIF metadata.
                 if let Some(rotation) = exif.as_ref().and_then(exif_rotation) {
                     apply_rotation(&mut dynamic, rotation);
+<<<<<<< HEAD
+=======
+                    exif_rot = Some(rotation);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
 
                 // Extract pixel density.
@@ -136,7 +168,18 @@ impl RasterImage {
             }
         };
 
+<<<<<<< HEAD
         Ok(Self(Arc::new(Repr { data, format, dynamic, icc, dpi })))
+=======
+        Ok(Self(Arc::new(Repr {
+            data,
+            format,
+            exif_rotation: exif_rot,
+            dynamic: Arc::new(dynamic),
+            icc,
+            dpi,
+        })))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The raw image data.
@@ -159,6 +202,17 @@ impl RasterImage {
         self.dynamic().height()
     }
 
+<<<<<<< HEAD
+=======
+    /// The EXIF orientation value of the original image.
+    ///
+    /// The [`dynamic`](Self::dynamic) image already has this factored in. This
+    /// value is only relevant to consumers of the raw [`data`](Self::data).
+    pub fn exif_rotation(&self) -> Option<u32> {
+        self.0.exif_rotation
+    }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The image's pixel density in pixels per inch, if known.
     ///
     /// This is guaranteed to be positive.
@@ -167,7 +221,11 @@ impl RasterImage {
     }
 
     /// Access the underlying dynamic image.
+<<<<<<< HEAD
     pub fn dynamic(&self) -> &image::DynamicImage {
+=======
+    pub fn dynamic(&self) -> &Arc<DynamicImage> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         &self.0.dynamic
     }
 
@@ -220,6 +278,7 @@ cast! {
 /// A raster format typically used in image exchange, with efficient encoding.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum ExchangeFormat {
+<<<<<<< HEAD
     /// イラストや透明グラフィック用のラスターフォーマット。
     Png,
     /// 写真に適した非可逆ラスターフォーマット。
@@ -227,6 +286,17 @@ pub enum ExchangeFormat {
     /// 短いアニメーションクリップによく使われるラスターフォーマット。
     /// TypstはGIFを読み込めるが、静止画となってしまう。
     Gif,
+=======
+    /// Raster format for illustrations and transparent graphics.
+    Png,
+    /// Lossy raster format suitable for photos.
+    Jpg,
+    /// Raster format that is typically used for short animated clips. Typst can
+    /// load GIFs, but they will become static.
+    Gif,
+    /// Raster format that supports both lossy and lossless compression.
+    Webp,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl ExchangeFormat {
@@ -242,6 +312,10 @@ impl From<ExchangeFormat> for image::ImageFormat {
             ExchangeFormat::Png => image::ImageFormat::Png,
             ExchangeFormat::Jpg => image::ImageFormat::Jpeg,
             ExchangeFormat::Gif => image::ImageFormat::Gif,
+<<<<<<< HEAD
+=======
+            ExchangeFormat::Webp => image::ImageFormat::WebP,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
@@ -254,6 +328,10 @@ impl TryFrom<image::ImageFormat> for ExchangeFormat {
             image::ImageFormat::Png => ExchangeFormat::Png,
             image::ImageFormat::Jpeg => ExchangeFormat::Jpg,
             image::ImageFormat::Gif => ExchangeFormat::Gif,
+<<<<<<< HEAD
+=======
+            image::ImageFormat::WebP => ExchangeFormat::Webp,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => bail!("format not yet supported"),
         })
     }

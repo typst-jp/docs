@@ -3,9 +3,14 @@ use std::ops::{Deref, Range};
 use std::rc::Rc;
 use std::sync::Arc;
 
+<<<<<<< HEAD
 use ecow::{eco_format, eco_vec, EcoString, EcoVec};
 
 use crate::ast::AstNode;
+=======
+use ecow::{EcoString, EcoVec, eco_format, eco_vec};
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::{FileId, Span, SyntaxKind};
 
 /// A node in the untyped syntax tree.
@@ -119,6 +124,7 @@ impl SyntaxNode {
         }
     }
 
+<<<<<<< HEAD
     /// Whether the node can be cast to the given AST node.
     pub fn is<'a, T: AstNode<'a>>(&'a self) -> bool {
         self.cast::<T>().is_some()
@@ -139,6 +145,8 @@ impl SyntaxNode {
         self.children().rev().find_map(Self::cast)
     }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Whether the node or its children contain an error.
     pub fn erroneous(&self) -> bool {
         match &self.0 {
@@ -753,11 +761,18 @@ impl<'a> LinkedNode<'a> {
                 // sibling's span number is larger than the target span's number.
                 if children
                     .peek()
+<<<<<<< HEAD
                     .map_or(true, |next| next.span().number() > span.number())
                 {
                     if let Some(found) = child.find(span) {
                         return Some(found);
                     }
+=======
+                    .is_none_or(|next| next.span().number() > span.number())
+                    && let Some(found) = child.find(span)
+                {
+                    return Some(found);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
             }
         }
@@ -780,11 +795,15 @@ impl LinkedNode<'_> {
         let node = parent.node.children().nth(index)?;
         let offset = self.offset - node.len();
         let prev = Self { node, parent: self.parent.clone(), index, offset };
+<<<<<<< HEAD
         if prev.kind().is_trivia() {
             prev.prev_sibling()
         } else {
             Some(prev)
         }
+=======
+        if prev.kind().is_trivia() { prev.prev_sibling() } else { Some(prev) }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Get the next non-trivia sibling node.
@@ -794,11 +813,15 @@ impl LinkedNode<'_> {
         let node = parent.node.children().nth(index)?;
         let offset = self.offset + self.node.len();
         let next = Self { node, parent: self.parent.clone(), index, offset };
+<<<<<<< HEAD
         if next.kind().is_trivia() {
             next.next_sibling()
         } else {
             Some(next)
         }
+=======
+        if next.kind().is_trivia() { next.next_sibling() } else { Some(next) }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Get the kind of this node's parent.

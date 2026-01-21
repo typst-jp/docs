@@ -1,22 +1,40 @@
 use std::borrow::Borrow;
 use std::cmp::Ordering;
+<<<<<<< HEAD
 use std::collections::HashMap;
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::fmt::{self, Debug, Display, Formatter};
 use std::hash::{Hash, Hasher};
 use std::num::NonZeroU64;
 use std::ops::Deref;
 use std::sync::{LazyLock, RwLock};
 
+<<<<<<< HEAD
+=======
+use rustc_hash::FxHashMap;
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Marks a number as a bitcode encoded `PicoStr``.
 const MARKER: u64 = 1 << 63;
 
 /// The global runtime string interner.
+<<<<<<< HEAD
 static INTERNER: LazyLock<RwLock<Interner>> =
     LazyLock::new(|| RwLock::new(Interner { seen: HashMap::new(), strings: Vec::new() }));
 
 /// A string interner.
 struct Interner {
     seen: HashMap<&'static str, PicoStr>,
+=======
+static INTERNER: LazyLock<RwLock<Interner>> = LazyLock::new(|| {
+    RwLock::new(Interner { seen: FxHashMap::default(), strings: Vec::new() })
+});
+
+/// A string interner.
+struct Interner {
+    seen: FxHashMap<&'static str, PicoStr>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     strings: Vec<&'static str>,
 }
 
@@ -65,6 +83,26 @@ impl PicoStr {
         id
     }
 
+<<<<<<< HEAD
+=======
+    /// Try to create a `PicoStr`, but don't intern it if it does not exist yet.
+    ///
+    /// This is useful to try to compare against one or multiple `PicoStr`
+    /// without interning needlessly.
+    ///
+    /// Will always return `Some(_)` if the string can be represented inline.
+    pub fn get(string: &str) -> Option<PicoStr> {
+        // Try to use bitcode or exception representations.
+        if let Ok(value) = PicoStr::try_constant(string) {
+            return Some(value);
+        }
+
+        // Try to find an existing entry that we can reuse.
+        let interner = INTERNER.read().unwrap();
+        interner.seen.get(string).copied()
+    }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Creates a compile-time constant `PicoStr`.
     ///
     /// Should only be used in const contexts because it can panic.
@@ -72,7 +110,11 @@ impl PicoStr {
     pub const fn constant(string: &'static str) -> PicoStr {
         match PicoStr::try_constant(string) {
             Ok(value) => value,
+<<<<<<< HEAD
             Err(err) => panic!("{}", err.message()),
+=======
+            Err(err) => failed_to_compile_time_intern(err, string),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -95,10 +137,14 @@ impl PicoStr {
             }
         };
 
+<<<<<<< HEAD
         match NonZeroU64::new(value) {
             Some(value) => Ok(Self(value)),
             None => unreachable!(),
         }
+=======
+        Ok(Self(NonZeroU64::new(value).unwrap()))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Resolve to a decoded string.
@@ -193,6 +239,7 @@ mod bitcode {
     impl EncodingError {
         pub const fn message(&self) -> &'static str {
             match self {
+<<<<<<< HEAD
                 Self::TooLong => {
                     "the maximum auto-internible string length is 12. \
                      you can add an exception to typst-utils/src/pico.rs \
@@ -202,6 +249,11 @@ mod bitcode {
                     "can only auto-intern the chars 'a'-'z', '1'-'4', and '-'. \
                      you can add an exception to typst-utils/src/pico.rs \
                      to intern other strings."
+=======
+                Self::TooLong => "the maximum auto-internible string length is 12",
+                Self::BadChar => {
+                    "can only auto-intern the chars 'a'-'z', '1'-'4', and '-'"
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
             }
         }
@@ -213,18 +265,82 @@ mod exceptions {
     use std::cmp::Ordering;
 
     /// A global list of non-bitcode-encodable compile-time internible strings.
+<<<<<<< HEAD
     pub const LIST: &[&str] = &[
         "cjk-latin-spacing",
         "discretionary-ligatures",
+=======
+    ///
+    /// Must be sorted.
+    pub const LIST: &[&str] = &[
+        "accept-charset",
+        "allowfullscreen",
+        "aria-activedescendant",
+        "aria-autocomplete",
+        "aria-colcount",
+        "aria-colindex",
+        "aria-controls",
+        "aria-describedby",
+        "aria-disabled",
+        "aria-dropeffect",
+        "aria-errormessage",
+        "aria-expanded",
+        "aria-haspopup",
+        "aria-keyshortcuts",
+        "aria-labelledby",
+        "aria-multiline",
+        "aria-multiselectable",
+        "aria-orientation",
+        "aria-placeholder",
+        "aria-posinset",
+        "aria-readonly",
+        "aria-relevant",
+        "aria-required",
+        "aria-roledescription",
+        "aria-rowcount",
+        "aria-rowindex",
+        "aria-selected",
+        "aria-valuemax",
+        "aria-valuemin",
+        "aria-valuenow",
+        "aria-valuetext",
+        "autocapitalize",
+        "cjk-latin-spacing",
+        "contenteditable",
+        "discretionary-ligatures",
+        "fetchpriority",
+        "formnovalidate",
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         "h5",
         "h6",
         "historical-ligatures",
         "number-clearance",
         "number-margin",
         "numbering-scope",
+<<<<<<< HEAD
         "page-numbering",
         "par-line-marker",
         "transparentize",
+=======
+        "onbeforeprint",
+        "onbeforeunload",
+        "onlanguagechange",
+        "onmessageerror",
+        "onrejectionhandled",
+        "onunhandledrejection",
+        "page-numbering",
+        "par-line-marker",
+        "popovertarget",
+        "popovertargetaction",
+        "referrerpolicy",
+        "shadowrootclonable",
+        "shadowrootcustomelementregistry",
+        "shadowrootdelegatesfocus",
+        "shadowrootmode",
+        "shadowrootserializable",
+        "transparentize",
+        "writingsuggestions",
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ];
 
     /// Try to find the index of an exception if it exists.
@@ -270,11 +386,15 @@ mod exceptions {
 
     /// Determine the minimum of two integers.
     const fn min(a: usize, b: usize) -> usize {
+<<<<<<< HEAD
         if a < b {
             a
         } else {
             b
         }
+=======
+        if a < b { a } else { b }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -359,6 +479,42 @@ impl Hash for ResolvedPicoStr {
     }
 }
 
+<<<<<<< HEAD
+=======
+/// The error when a string could not be interned at compile time. Because the
+/// normal formatting machinery is not available at compile time, just producing
+/// the message is a bit involved ...
+#[track_caller]
+const fn failed_to_compile_time_intern(
+    error: bitcode::EncodingError,
+    string: &'static str,
+) -> ! {
+    const CAPACITY: usize = 512;
+    const fn push((buf, i): &mut ([u8; CAPACITY], usize), s: &str) {
+        let mut k = 0;
+        while k < s.len() && *i < buf.len() {
+            buf[*i] = s.as_bytes()[k];
+            k += 1;
+            *i += 1;
+        }
+    }
+
+    let mut dest = ([0; CAPACITY], 0);
+    push(&mut dest, "failed to compile-time intern string \"");
+    push(&mut dest, string);
+    push(&mut dest, "\". ");
+    push(&mut dest, error.message());
+    push(&mut dest, ". you can add an exception to ");
+    push(&mut dest, file!());
+    push(&mut dest, " to intern longer strings.");
+
+    let (slice, _) = dest.0.split_at(dest.1);
+    let Ok(message) = std::str::from_utf8(slice) else { panic!() };
+
+    panic!("{}", message);
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -1,6 +1,10 @@
 // Test tables.
 
+<<<<<<< HEAD
 --- table-empty ---
+=======
+--- table-empty render pdftags ---
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #table()
 
 --- table-newlines ---

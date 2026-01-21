@@ -1,7 +1,11 @@
 use std::ops::Range;
 
 use crate::{
+<<<<<<< HEAD
     is_newline, parse, reparse_block, reparse_markup, Span, SyntaxKind, SyntaxNode,
+=======
+    Span, SyntaxKind, SyntaxNode, is_newline, parse, reparse_block, reparse_markup,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// Refresh the given syntax node with as little parsing as possible.
@@ -70,6 +74,7 @@ fn try_reparse(
             }
 
             // If the child is a block, try to reparse the block.
+<<<<<<< HEAD
             if child.kind().is_block() {
                 if let Some(newborn) = reparse_block(text, new_range.clone()) {
                     return node
@@ -77,6 +82,15 @@ fn try_reparse(
                         .is_ok()
                         .then_some(new_range);
                 }
+=======
+            if child.kind().is_block()
+                && let Some(newborn) = reparse_block(text, new_range.clone())
+            {
+                return node
+                    .replace_children(i..i + 1, vec![newborn])
+                    .is_ok()
+                    .then_some(new_range);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         }
 
@@ -240,7 +254,11 @@ fn next_nesting(node: &SyntaxNode, nesting: &mut usize) {
 mod tests {
     use std::ops::Range;
 
+<<<<<<< HEAD
     use crate::{parse, Source, Span};
+=======
+    use crate::{Source, Span, parse};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     #[track_caller]
     fn test(prev: &str, range: Range<usize>, with: &str, incremental: bool) {
@@ -259,10 +277,17 @@ mod tests {
             panic!("test failed");
         }
         if incremental {
+<<<<<<< HEAD
             assert_ne!(source.len_bytes(), range.len(), "should have been incremental");
         } else {
             assert_eq!(
                 source.len_bytes(),
+=======
+            assert_ne!(source.text().len(), range.len(), "should have been incremental");
+        } else {
+            assert_eq!(
+                source.text().len(),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 range.len(),
                 "shouldn't have been incremental"
             );

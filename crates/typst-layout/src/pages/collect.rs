@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 use std::collections::HashSet;
 
+=======
+use rustc_hash::FxHashSet;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::foundations::StyleChain;
 use typst_library::introspection::{Locator, SplitLocator, Tag, TagElem};
 use typst_library::layout::{PagebreakElem, Parity};
@@ -39,14 +43,22 @@ pub fn collect<'a>(
         if let Some(pagebreak) = elem.to_packed::<PagebreakElem>() {
             // Add a blank page if we encounter a strong pagebreak and there was
             // a staged empty page.
+<<<<<<< HEAD
             let strong = !pagebreak.weak(styles);
+=======
+            let strong = !pagebreak.weak.get(styles);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             if strong && staged_empty_page {
                 let locator = locator.next(&elem.span());
                 items.push(Item::Run(&[], initial, locator));
             }
 
             // Add an instruction to adjust the page parity if requested.
+<<<<<<< HEAD
             if let Some(parity) = pagebreak.to(styles) {
+=======
+            if let Some(parity) = pagebreak.to.get(styles) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let locator = locator.next(&elem.span());
                 items.push(Item::Parity(parity, styles, locator));
             }
@@ -56,7 +68,11 @@ pub fn collect<'a>(
             // the scope of a page set rule to ensure a page boundary. Its
             // styles correspond to the styles _before_ the page set rule, so we
             // don't want to apply it to a potential empty page.
+<<<<<<< HEAD
             if !pagebreak.boundary(styles) {
+=======
+            if !pagebreak.boundary.get(styles) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 initial = styles;
             }
 
@@ -94,7 +110,11 @@ pub fn collect<'a>(
             if group.iter().all(|(c, _)| c.is::<TagElem>())
                 && !(staged_empty_page
                     && children.iter().all(|&(c, s)| {
+<<<<<<< HEAD
                         c.to_packed::<PagebreakElem>().is_some_and(|c| c.boundary(s))
+=======
+                        c.to_packed::<PagebreakElem>().is_some_and(|c| c.boundary.get(s))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     }))
             {
                 items.push(Item::Tags(group));
@@ -134,11 +154,19 @@ fn migrate_unterminated_tags(children: &mut [Pair], mid: usize) -> usize {
 
     // Determine the set of tag locations which we won't migrate (because they
     // are terminated).
+<<<<<<< HEAD
     let excluded: HashSet<_> = children[start..mid]
         .iter()
         .filter_map(|(c, _)| match c.to_packed::<TagElem>()?.tag {
             Tag::Start(_) => None,
             Tag::End(loc, _) => Some(loc),
+=======
+    let excluded: FxHashSet<_> = children[start..mid]
+        .iter()
+        .filter_map(|(c, _)| match c.to_packed::<TagElem>()?.tag {
+            Tag::Start(..) => None,
+            Tag::End(loc, ..) => Some(loc),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         })
         .collect();
 

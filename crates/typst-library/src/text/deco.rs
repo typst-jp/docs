@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use smallvec::smallvec;
 
 use crate::diag::SourceResult;
@@ -18,6 +19,26 @@ pub struct UnderlineElem {
     /// 線の[stroke]をどうするか。
     ///
     /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
+=======
+use crate::foundations::{Content, Smart, elem};
+use crate::introspection::{Locatable, Tagged};
+use crate::layout::{Abs, Corners, Length, Rel, Sides};
+use crate::text::{BottomEdge, BottomEdgeMetric, TopEdge, TopEdgeMetric};
+use crate::visualize::{Color, FixedStroke, Paint, Stroke};
+
+/// Underlines text.
+///
+/// # Example
+/// ```example
+/// This is #underline[important].
+/// ```
+#[elem(Locatable, Tagged)]
+pub struct UnderlineElem {
+    /// How to [stroke] the line.
+    ///
+    /// If set to `{auto}`, takes on the text's color and a thickness defined in
+    /// the current font.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// Take #underline(
@@ -26,32 +47,54 @@ pub struct UnderlineElem {
     ///   [care],
     /// )
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[fold]
     pub stroke: Smart<Stroke>,
 
     /// ベースラインを基準とする線の位置。
     /// `{auto}`の場合、フォントテーブルから読まれます。
+=======
+    #[fold]
+    pub stroke: Smart<Stroke>,
+
+    /// The position of the line relative to the baseline, read from the font
+    /// tables if `{auto}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #underline(offset: 5pt)[
     ///   The Tale Of A Faraway Line I
     /// ]
     /// ```
+<<<<<<< HEAD
     #[resolve]
     pub offset: Smart<Length>,
 
     /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
+=======
+    pub offset: Smart<Length>,
+
+    /// The amount by which to extend the line beyond (or within if negative)
+    /// the content.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #align(center,
     ///   underline(extent: 2pt)[Chapter 1]
     /// )
     /// ```
+<<<<<<< HEAD
     #[resolve]
     pub extent: Length,
 
     /// 字形と衝突する線の部分を省略するかどうか。
+=======
+    pub extent: Length,
+
+    /// Whether the line skips sections in which it would collide with the
+    /// glyphs.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// This #underline(evade: true)[is great].
@@ -60,7 +103,11 @@ pub struct UnderlineElem {
     #[default(true)]
     pub evade: bool,
 
+<<<<<<< HEAD
     /// 線をコンテンツの背後に置くかどうか。
+=======
+    /// Whether the line is placed behind the content it underlines.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set underline(stroke: (thickness: 1em, paint: maroon, cap: "round"))
@@ -70,11 +117,16 @@ pub struct UnderlineElem {
     #[default(false)]
     pub background: bool,
 
+<<<<<<< HEAD
     /// 下部に線を置くコンテンツ。
+=======
+    /// The content to underline.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 impl Show for Packed<UnderlineElem> {
     #[typst_macros::time(name = "underline", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -101,6 +153,20 @@ pub struct OverlineElem {
     /// 線の[stroke]をどうするか。
     ///
     /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
+=======
+/// Adds a line over text.
+///
+/// # Example
+/// ```example
+/// #overline[A line over text.]
+/// ```
+#[elem(Locatable, Tagged)]
+pub struct OverlineElem {
+    /// How to [stroke] the line.
+    ///
+    /// If set to `{auto}`, takes on the text's color and a thickness defined in
+    /// the current font.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set text(fill: olive)
@@ -110,32 +176,54 @@ pub struct OverlineElem {
     ///   [The Forest Theme],
     /// )
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[fold]
     pub stroke: Smart<Stroke>,
 
     /// ベースラインを基準とする線の位置。
     /// `{auto}`の場合、フォントテーブルから読まれます。
+=======
+    #[fold]
+    pub stroke: Smart<Stroke>,
+
+    /// The position of the line relative to the baseline. Read from the font
+    /// tables if `{auto}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #overline(offset: -1.2em)[
     ///   The Tale Of A Faraway Line II
     /// ]
     /// ```
+<<<<<<< HEAD
     #[resolve]
     pub offset: Smart<Length>,
 
     /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
+=======
+    pub offset: Smart<Length>,
+
+    /// The amount by which to extend the line beyond (or within if negative)
+    /// the content.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set overline(extent: 4pt)
     /// #set underline(extent: 4pt)
     /// #overline(underline[Typography Today])
     /// ```
+<<<<<<< HEAD
     #[resolve]
     pub extent: Length,
 
     /// 字形と衝突する線の部分を省略するかどうか。
+=======
+    pub extent: Length,
+
+    /// Whether the line skips sections in which it would collide with the
+    /// glyphs.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #overline(
@@ -149,7 +237,11 @@ pub struct OverlineElem {
     #[default(true)]
     pub evade: bool,
 
+<<<<<<< HEAD
     /// 線をコンテンツの背後に置くかどうか。
+=======
+    /// Whether the line is placed behind the content it overlines.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set overline(stroke: (thickness: 1em, paint: maroon, cap: "round"))
@@ -159,11 +251,16 @@ pub struct OverlineElem {
     #[default(false)]
     pub background: bool,
 
+<<<<<<< HEAD
     /// 上部に線を置くコンテンツ。
+=======
+    /// The content to add a line over.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 impl Show for Packed<OverlineElem> {
     #[typst_macros::time(name = "overline", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -192,11 +289,29 @@ pub struct StrikeElem {
     /// `{auto}`に設定された場合、現在のテキストフォントで使用されているテキストの太さと色が使用されます。
     ///
     /// _注意:_ テキストのコピー・ペーストは依然として可能なため、実際の黒塗りには使用しないでください。
+=======
+/// Strikes through text.
+///
+/// # Example
+/// ```example
+/// This is #strike[not] relevant.
+/// ```
+#[elem(title = "Strikethrough", Locatable, Tagged)]
+pub struct StrikeElem {
+    /// How to [stroke] the line.
+    ///
+    /// If set to `{auto}`, takes on the text's color and a thickness defined in
+    /// the current font.
+    ///
+    /// _Note:_ Please don't use this for real redaction as you can still copy
+    /// paste the text.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// This is #strike(stroke: 1.5pt + red)[very stricken through]. \
     /// This is #strike(stroke: 10pt)[redacted].
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[fold]
     pub stroke: Smart<Stroke>,
@@ -205,25 +320,47 @@ pub struct StrikeElem {
     /// `{auto}`の場合、フォントテーブルから読まれます。
     ///
     /// これはフォントが提供するオフセットに不満がある場合に便利です。
+=======
+    #[fold]
+    pub stroke: Smart<Stroke>,
+
+    /// The position of the line relative to the baseline. Read from the font
+    /// tables if `{auto}`.
+    ///
+    /// This is useful if you are unhappy with the offset your font provides.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set text(font: "Inria Serif")
     /// This is #strike(offset: auto)[low-ish]. \
     /// This is #strike(offset: -3.5pt)[on-top].
     /// ```
+<<<<<<< HEAD
     #[resolve]
     pub offset: Smart<Length>,
 
     /// コンテンツの外側に（負の値のときは内側に）線を左右に拡張する量。
+=======
+    pub offset: Smart<Length>,
+
+    /// The amount by which to extend the line beyond (or within if negative)
+    /// the content.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// This #strike(extent: -2pt)[skips] parts of the word.
     /// This #strike(extent: 2pt)[extends] beyond the word.
     /// ```
+<<<<<<< HEAD
     #[resolve]
     pub extent: Length,
 
     /// 線をコンテンツの背後に置くかどうか。
+=======
+    pub extent: Length,
+
+    /// Whether the line is placed behind the content.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set strike(stroke: red)
@@ -233,11 +370,16 @@ pub struct StrikeElem {
     #[default(false)]
     pub background: bool,
 
+<<<<<<< HEAD
     /// 打ち消すコンテンツ。
+=======
+    /// The content to strike through.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 impl Show for Packed<StrikeElem> {
     #[typst_macros::time(name = "strike", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -262,6 +404,17 @@ impl Show for Packed<StrikeElem> {
 #[elem(Show)]
 pub struct HighlightElem {
     /// テキストをハイライトする色。
+=======
+/// Highlights text with a background color.
+///
+/// # Example
+/// ```example
+/// This is #highlight[important].
+/// ```
+#[elem(Locatable, Tagged)]
+pub struct HighlightElem {
+    /// The color to highlight the text with.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// This is #highlight(
@@ -271,19 +424,31 @@ pub struct HighlightElem {
     #[default(Some(Color::from_u8(0xFF, 0xFD, 0x11, 0xA1).into()))]
     pub fill: Option<Paint>,
 
+<<<<<<< HEAD
     /// ハイライトの枠線の色。
     /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
+=======
+    /// The highlight's border color. See the
+    /// [rectangle's documentation]($rect.stroke) for more details.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// This is a #highlight(
     ///   stroke: fuchsia
     /// )[stroked highlighting].
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Stroke>>>,
 
     /// 背景の長方形の上端。
+=======
+    #[fold]
+    pub stroke: Sides<Option<Option<Stroke>>>,
+
+    /// The top end of the background rectangle.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set highlight(top-edge: "ascender")
@@ -295,7 +460,11 @@ pub struct HighlightElem {
     #[default(TopEdge::Metric(TopEdgeMetric::Ascender))]
     pub top_edge: TopEdge,
 
+<<<<<<< HEAD
     /// 背景の長方形の下端。
+=======
+    /// The bottom end of the background rectangle.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set highlight(bottom-edge: "descender")
@@ -307,31 +476,51 @@ pub struct HighlightElem {
     #[default(BottomEdge::Metric(BottomEdgeMetric::Descender))]
     pub bottom_edge: BottomEdge,
 
+<<<<<<< HEAD
     /// コンテンツの外側に（負の値のときは内側に）背景を左右に拡張する量。
+=======
+    /// The amount by which to extend the background to the sides beyond
+    /// (or within if negative) the content.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// A long #highlight(extent: 4pt)[background].
     /// ```
+<<<<<<< HEAD
     #[resolve]
     pub extent: Length,
 
     /// 背景の角を丸める量。
     /// 詳細は[rectangleのドキュメント]($rect.radius)を参照してください。
+=======
+    pub extent: Length,
+
+    /// How much to round the highlight's corners. See the
+    /// [rectangle's documentation]($rect.radius) for more details.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// Listen #highlight(
     ///   radius: 5pt, extent: 2pt
     /// )[carefully], it will be on the test.
     /// ```
+<<<<<<< HEAD
     #[resolve]
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
     /// ハイライトされるべきコンテンツ。
+=======
+    #[fold]
+    pub radius: Corners<Option<Rel<Length>>>,
+
+    /// The content that should be highlighted.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 impl Show for Packed<HighlightElem> {
     #[typst_macros::time(name = "highlight", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -351,6 +540,8 @@ impl Show for Packed<HighlightElem> {
     }
 }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A text decoration.
 ///
 /// Can be positioned over, under, or on top of text, or highlight the text with
@@ -363,6 +554,10 @@ pub struct Decoration {
 
 /// A kind of decorative line.
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
+<<<<<<< HEAD
+=======
+#[allow(clippy::large_enum_variant)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub enum DecoLine {
     Underline {
         stroke: Stroke<Abs>,

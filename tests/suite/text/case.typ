@@ -14,6 +14,13 @@
 // Check that cases are applied to symbols nested in content
 #lower($H I !$.body)
 
+<<<<<<< HEAD
+=======
+--- cases-content-html html ---
+#lower[MY #html.strong[Lower] #symbol("A")] \
+#upper[my #html.strong[Upper] #symbol("a")] \
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- upper-bad-type ---
 // Error: 8-9 expected string or content, found integer
 #upper(1)

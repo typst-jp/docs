@@ -1,6 +1,7 @@
 use std::fmt::{self, Debug, Formatter};
 use std::hash::{Hash, Hasher};
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use indexmap::map::Entry;
 use indexmap::IndexMap;
@@ -10,6 +11,17 @@ use crate::diag::{bail, DeprecationSink, HintedStrResult, HintedString, StrResul
 use crate::foundations::{
     Element, Func, IntoValue, NativeElement, NativeFunc, NativeFuncData, NativeType,
     Type, Value,
+=======
+use ecow::{EcoString, eco_format};
+use indexmap::IndexMap;
+use indexmap::map::Entry;
+use rustc_hash::FxBuildHasher;
+use typst_syntax::Span;
+
+use crate::diag::{DeprecationSink, HintedStrResult, HintedString, StrResult, bail};
+use crate::foundations::{
+    Func, IntoValue, NativeElement, NativeFunc, NativeFuncData, NativeType, Value,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::{Category, Library};
 
@@ -103,7 +115,11 @@ impl<'a> Scopes<'a> {
 /// A map from binding names to values.
 #[derive(Default, Clone)]
 pub struct Scope {
+<<<<<<< HEAD
     map: IndexMap<EcoString, Binding>,
+=======
+    map: IndexMap<EcoString, Binding, FxBuildHasher>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     deduplicate: bool,
     category: Option<Category>,
 }
@@ -149,15 +165,25 @@ impl Scope {
     /// Define a native type.
     #[track_caller]
     pub fn define_type<T: NativeType>(&mut self) -> &mut Binding {
+<<<<<<< HEAD
         let data = T::data();
         self.define(data.name, Type::from(data))
+=======
+        let ty = T::ty();
+        self.define(ty.short_name(), ty)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Define a native element.
     #[track_caller]
     pub fn define_elem<T: NativeElement>(&mut self) -> &mut Binding {
+<<<<<<< HEAD
         let data = T::data();
         self.define(data.name, Element::from(data))
+=======
+        let elem = T::ELEM;
+        self.define(elem.name(), elem)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Define a built-in with compile-time known name and returns a mutable
@@ -254,8 +280,13 @@ pub struct Binding {
     span: Span,
     /// The category of the binding.
     category: Option<Category>,
+<<<<<<< HEAD
     /// A deprecation message for the definition.
     deprecation: Option<&'static str>,
+=======
+    /// The deprecation information if this item is deprecated.
+    deprecation: Option<Box<Deprecation>>,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// The different kinds of slots.
@@ -285,8 +316,13 @@ impl Binding {
     }
 
     /// Marks this binding as deprecated, with the given `message`.
+<<<<<<< HEAD
     pub fn deprecated(&mut self, message: &'static str) -> &mut Self {
         self.deprecation = Some(message);
+=======
+    pub fn deprecated(&mut self, deprecation: Deprecation) -> &mut Self {
+        self.deprecation = Some(Box::new(deprecation));
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self
     }
 
@@ -300,9 +336,15 @@ impl Binding {
     /// As the `sink`
     /// - pass `()` to ignore the message.
     /// - pass `(&mut engine, span)` to emit a warning into the engine.
+<<<<<<< HEAD
     pub fn read_checked(&self, mut sink: impl DeprecationSink) -> &Value {
         if let Some(message) = self.deprecation {
             sink.emit(message);
+=======
+    pub fn read_checked(&self, sink: impl DeprecationSink) -> &Value {
+        if let Some(info) = &self.deprecation {
+            sink.emit(info.message, info.until);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         &self.value
     }
@@ -338,8 +380,13 @@ impl Binding {
     }
 
     /// A deprecation message for the value, if any.
+<<<<<<< HEAD
     pub fn deprecation(&self) -> Option<&'static str> {
         self.deprecation
+=======
+    pub fn deprecation(&self) -> Option<&Deprecation> {
+        self.deprecation.as_deref()
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The category of the value, if any.
@@ -357,6 +404,54 @@ pub enum Capturer {
     Context,
 }
 
+<<<<<<< HEAD
+=======
+/// Information about a deprecated binding.
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
+pub struct Deprecation {
+    /// A deprecation message for the definition.
+    message: &'static str,
+    /// A version in which the deprecated binding is planned to be removed.
+    until: Option<&'static str>,
+}
+
+impl Deprecation {
+    /// Creates new deprecation info with a default message to display when
+    /// emitting the deprecation warning.
+    pub fn new() -> Self {
+        Self { message: "item is deprecated", until: None }
+    }
+
+    /// Set the message to display when emitting the deprecation warning.
+    pub fn with_message(mut self, message: &'static str) -> Self {
+        self.message = message;
+        self
+    }
+
+    /// Set the version in which the binding is planned to be removed.
+    pub fn with_until(mut self, version: &'static str) -> Self {
+        self.until = Some(version);
+        self
+    }
+
+    /// The message to display when emitting the deprecation warning.
+    pub fn message(&self) -> &'static str {
+        self.message
+    }
+
+    /// The version in which the binding is planned to be removed.
+    pub fn until(&self) -> Option<&'static str> {
+        self.until
+    }
+}
+
+impl Default for Deprecation {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// The error message when trying to mutate a variable from the standard
 /// library.
 #[cold]

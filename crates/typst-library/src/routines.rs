@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #![allow(unused)]
 
 use std::hash::{Hash, Hasher};
@@ -25,6 +26,26 @@ use crate::visualize::{
     RectElem, SquareElem,
 };
 use crate::World;
+=======
+use std::fmt::{self, Debug, Formatter};
+use std::hash::{Hash, Hasher};
+
+use comemo::{Tracked, TrackedMut};
+use typst_syntax::{Span, SyntaxMode};
+use typst_utils::LazyHash;
+
+use crate::World;
+use crate::diag::SourceResult;
+use crate::engine::{Engine, Route, Sink, Traced};
+use crate::foundations::{
+    Args, Closure, Content, Context, Func, Module, NativeRuleMap, Scope, StyleChain,
+    Styles, Value,
+};
+use crate::introspection::{Introspector, Locator, SplitLocator};
+use crate::layout::{Frame, Region};
+use crate::model::DocumentInfo;
+use crate::visualize::Color;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Defines the `Routines` struct.
 macro_rules! routines {
@@ -38,6 +59,11 @@ macro_rules! routines {
         /// This is essentially dynamic linking and done to allow for crate
         /// splitting.
         pub struct Routines {
+<<<<<<< HEAD
+=======
+            /// Native show rules.
+            pub rules: NativeRuleMap,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             $(
                 $(#[$attr])*
                 pub $name: $(for<$($time),*>)? fn ($($args)*) -> $ret
@@ -47,6 +73,15 @@ macro_rules! routines {
         impl Hash for Routines {
             fn hash<H: Hasher>(&self, _: &mut H) {}
         }
+<<<<<<< HEAD
+=======
+
+        impl Debug for Routines {
+            fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+                f.pad("Routines(..)")
+            }
+        }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     };
 }
 
@@ -55,9 +90,16 @@ routines! {
     fn eval_string(
         routines: &Routines,
         world: Tracked<dyn World + '_>,
+<<<<<<< HEAD
         string: &str,
         span: Span,
         mode: EvalMode,
+=======
+        sink: TrackedMut<Sink>,
+        string: &str,
+        span: Span,
+        mode: SyntaxMode,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         scope: Scope,
     ) -> SourceResult<Value>
 
@@ -85,6 +127,7 @@ routines! {
         styles: StyleChain<'a>,
     ) -> SourceResult<Vec<Pair<'a>>>
 
+<<<<<<< HEAD
     /// Lays out content into multiple regions.
     fn layout_fragment(
         engine: &mut Engine,
@@ -94,6 +137,8 @@ routines! {
         regions: Regions,
     ) -> SourceResult<Fragment>
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Lays out content into a single region, producing a single frame.
     fn layout_frame(
         engine: &mut Engine,
@@ -103,6 +148,7 @@ routines! {
         region: Region,
     ) -> SourceResult<Frame>
 
+<<<<<<< HEAD
     /// Lays out a [`ListElem`].
     fn layout_list(
         elem: &Packed<ListElem>,
@@ -320,12 +366,23 @@ pub enum EvalMode {
     Markup,
     /// Evaluate as math, as in an equation.
     Math,
+=======
+    /// Constructs the `html` module.
+    fn html_module() -> Module
+
+    /// Wraps content in a span with a color.
+    ///
+    /// This is a temporary workaround until `TextElem::fill` is supported in
+    /// HTML export.
+    fn html_span_filled(content: Content, color: Color) -> Content
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Defines what kind of realization we are performing.
 pub enum RealizationKind<'a> {
     /// This the root realization for layout. Requires a mutable reference
     /// to document metadata that will be filled from `set document` rules.
+<<<<<<< HEAD
     LayoutDocument(&'a mut DocumentInfo),
     /// A nested realization in a container (e.g. a `block`). Requires a mutable
     /// reference to an enum that will be set to `FragmentKind::Inline` if the
@@ -340,6 +397,27 @@ pub enum RealizationKind<'a> {
     /// reference to an enum that will be set to `FragmentKind::Inline` if the
     /// fragment's content was fully inline.
     HtmlFragment(&'a mut FragmentKind),
+=======
+    LayoutDocument { info: &'a mut DocumentInfo },
+    /// A nested realization in a container (e.g. a `block`). Requires a mutable
+    /// reference to an enum that will be set to `FragmentKind::Inline` if the
+    /// fragment's content was fully inline.
+    LayoutFragment { kind: &'a mut FragmentKind },
+    /// A nested realization in a paragraph (i.e. a `par`)
+    LayoutPar,
+    /// This the root realization for HTML. Requires a mutable reference to
+    /// document metadata that will be filled from `set document` rules.
+    ///
+    /// The `is_inline` function checks whether content consists of an inline
+    /// HTML element. It's used by the `PAR` grouping rules. This is slightly
+    /// hacky and might be replaced by a mechanism to supply the grouping rules
+    /// as a realization user.
+    HtmlDocument { info: &'a mut DocumentInfo, is_inline: fn(&Content) -> bool },
+    /// A nested realization in a container (e.g. a `block`). Requires a mutable
+    /// reference to an enum that will be set to `FragmentKind::Inline` if the
+    /// fragment's content was fully inline.
+    HtmlFragment { kind: &'a mut FragmentKind, is_inline: fn(&Content) -> bool },
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// A realization within math.
     Math,
 }
@@ -347,18 +425,37 @@ pub enum RealizationKind<'a> {
 impl RealizationKind<'_> {
     /// It this a realization for HTML export?
     pub fn is_html(&self) -> bool {
+<<<<<<< HEAD
         matches!(self, Self::HtmlDocument(_) | Self::HtmlFragment(_))
+=======
+        matches!(self, Self::HtmlDocument { .. } | Self::HtmlFragment { .. })
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// It this a realization for a container?
     pub fn is_fragment(&self) -> bool {
+<<<<<<< HEAD
         matches!(self, Self::LayoutFragment(_) | Self::HtmlFragment(_))
+=======
+        matches!(self, Self::LayoutFragment { .. } | Self::HtmlFragment { .. })
+    }
+
+    /// It this a realization for the whole document?
+    pub fn is_document(&self) -> bool {
+        matches!(self, Self::LayoutDocument { .. } | Self::HtmlDocument { .. })
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// If this is a document-level realization, accesses the document info.
     pub fn as_document_mut(&mut self) -> Option<&mut DocumentInfo> {
         match self {
+<<<<<<< HEAD
             Self::LayoutDocument(info) | Self::HtmlDocument(info) => Some(*info),
+=======
+            Self::LayoutDocument { info } | Self::HtmlDocument { info, .. } => {
+                Some(*info)
+            }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => None,
         }
     }
@@ -366,7 +463,13 @@ impl RealizationKind<'_> {
     /// If this is a container-level realization, accesses the fragment kind.
     pub fn as_fragment_mut(&mut self) -> Option<&mut FragmentKind> {
         match self {
+<<<<<<< HEAD
             Self::LayoutFragment(kind) | Self::HtmlFragment(kind) => Some(*kind),
+=======
+            Self::LayoutFragment { kind } | Self::HtmlFragment { kind, .. } => {
+                Some(*kind)
+            }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => None,
         }
     }

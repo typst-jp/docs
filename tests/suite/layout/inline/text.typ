@@ -80,7 +80,11 @@ I'm in#text(tracking: 0.15em + 1.5pt)[ spaace]!
 
 --- text-tracking-arabic ---
 // Test tracking in arabic text (makes no sense whatsoever)
+<<<<<<< HEAD
 #set text(tracking: 0.3em)
+=======
+#set text(tracking: 0.3em, font: "Noto Sans Arabic")
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 النص
 
 --- text-spacing ---

@@ -15,7 +15,10 @@ extern crate self as typst_library;
 pub mod diag;
 pub mod engine;
 pub mod foundations;
+<<<<<<< HEAD
 pub mod html;
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub mod introspection;
 pub mod layout;
 pub mod loading;
@@ -36,6 +39,10 @@ use typst_utils::{LazyHash, SmallBitSet};
 use crate::diag::FileResult;
 use crate::foundations::{Array, Binding, Bytes, Datetime, Dict, Module, Scope, Styles};
 use crate::layout::{Alignment, Dir};
+<<<<<<< HEAD
+=======
+use crate::routines::Routines;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::text::{Font, FontBook};
 use crate::visualize::Color;
 
@@ -139,6 +146,14 @@ impl<T: World + ?Sized> WorldExt for T {
 }
 
 /// Definition of Typst's standard library.
+<<<<<<< HEAD
+=======
+///
+/// To create and configure the standard library, use the `LibraryExt` trait
+/// and call
+/// - `Library::default()` for a standard configuration
+/// - `Library::builder().build()` if you want to customize the library
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[derive(Debug, Clone, Hash)]
 pub struct Library {
     /// The module that contains the definitions that are available everywhere.
@@ -148,12 +163,17 @@ pub struct Library {
     /// The default style properties (for page size, font selection, and
     /// everything else configurable via set and show rules).
     pub styles: Styles,
+<<<<<<< HEAD
     /// The standard library as a value. Used to provide the `std` variable.
+=======
+    /// The standard library as a value. Used to provide the `std` module.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub std: Binding,
     /// In-development features that were enabled.
     pub features: Features,
 }
 
+<<<<<<< HEAD
 impl Library {
     /// Create a new builder for a library.
     pub fn builder() -> LibraryBuilder {
@@ -173,11 +193,32 @@ impl Default for Library {
 /// This struct is created by [`Library::builder`].
 #[derive(Debug, Clone, Default)]
 pub struct LibraryBuilder {
+=======
+/// Configurable builder for the standard library.
+///
+/// Constructed via the `LibraryExt` trait.
+#[derive(Debug, Clone)]
+pub struct LibraryBuilder {
+    routines: &'static Routines,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     inputs: Option<Dict>,
     features: Features,
 }
 
 impl LibraryBuilder {
+<<<<<<< HEAD
+=======
+    /// Creates a new builder.
+    #[doc(hidden)]
+    pub fn from_routines(routines: &'static Routines) -> Self {
+        Self {
+            routines,
+            inputs: None,
+            features: Features::default(),
+        }
+    }
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Configure the inputs visible through `sys.inputs`.
     pub fn with_inputs(mut self, inputs: Dict) -> Self {
         self.inputs = Some(inputs);
@@ -196,7 +237,11 @@ impl LibraryBuilder {
     pub fn build(self) -> Library {
         let math = math::module();
         let inputs = self.inputs.unwrap_or_default();
+<<<<<<< HEAD
         let global = global(math.clone(), inputs, &self.features);
+=======
+        let global = global(self.routines, math.clone(), inputs, &self.features);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Library {
             global: global.clone(),
             math,
@@ -235,6 +280,10 @@ impl FromIterator<Feature> for Features {
 #[non_exhaustive]
 pub enum Feature {
     Html,
+<<<<<<< HEAD
+=======
+    A11yExtras,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// A group of related standard library definitions.
@@ -278,7 +327,16 @@ impl Category {
 }
 
 /// Construct the module with global definitions.
+<<<<<<< HEAD
 fn global(math: Module, inputs: Dict, features: &Features) -> Module {
+=======
+fn global(
+    routines: &Routines,
+    math: Module,
+    inputs: Dict,
+    features: &Features,
+) -> Module {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut global = Scope::deduplicating();
 
     self::foundations::define(&mut global, inputs, features);
@@ -291,9 +349,15 @@ fn global(math: Module, inputs: Dict, features: &Features) -> Module {
     self::symbols::define(&mut global);
 
     global.define("math", math);
+<<<<<<< HEAD
     global.define("pdf", self::pdf::module());
     if features.is_enabled(Feature::Html) {
         global.define("html", self::html::module());
+=======
+    global.define("pdf", self::pdf::module(features));
+    if features.is_enabled(Feature::Html) {
+        global.define("html", (routines.html_module)());
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     prelude(&mut global);

@@ -1,5 +1,6 @@
 use std::num::NonZeroUsize;
 
+<<<<<<< HEAD
 use ecow::eco_format;
 use typst_utils::{Get, NonZeroExt};
 
@@ -33,6 +34,46 @@ use crate::text::{FontWeight, LocalName, SpaceElem, TextElem, TextSize};
 /// `outlined`パラメーターを`{false}`に設定してください。
 ///
 /// # 例
+=======
+use ecow::EcoString;
+use typst_utils::NonZeroExt;
+
+use crate::diag::SourceResult;
+use crate::engine::Engine;
+use crate::foundations::{
+    Content, NativeElement, Packed, ShowSet, Smart, StyleChain, Styles, Synthesize, elem,
+};
+use crate::introspection::{Count, Counter, CounterUpdate, Locatable, Tagged};
+use crate::layout::{BlockElem, Em, Length};
+use crate::model::{Numbering, Outlinable, Refable, Supplement};
+use crate::text::{FontWeight, LocalName, TextElem, TextSize};
+
+/// A section heading.
+///
+/// With headings, you can structure your document into sections. Each heading
+/// has a _level,_ which starts at one and is unbounded upwards. This level
+/// indicates the logical role of the following content (section, subsection,
+/// etc.) A top-level heading indicates a top-level section of the document (not
+/// the document's title). To insert a title, use the [`title`]($title) element
+/// instead.
+///
+/// Typst can automatically number your headings for you. To enable numbering,
+/// specify how you want your headings to be numbered with a
+/// [numbering pattern or function]($numbering).
+///
+/// Independently of the numbering, Typst can also automatically generate an
+/// [outline] of all headings for you. To exclude one or more headings from this
+/// outline, you can set the `outlined` parameter to `{false}`.
+///
+/// When writing a [show rule]($styling/#show-rules) that accesses the
+/// [`body` field]($heading.body) to create a completely custom look for
+/// headings, make sure to wrap the content in a [`block`]($block) (which is
+/// implicitly [sticky]($block.sticky) for headings through a built-in show-set
+/// rule). This prevents headings from becoming "orphans", i.e. remaining
+/// at the end of the page with the following content being on the next page.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #set heading(numbering: "1.a)")
 ///
@@ -43,6 +84,7 @@ use crate::text::{FontWeight, LocalName, SpaceElem, TextElem, TextSize};
 /// To start, ...
 /// ```
 ///
+<<<<<<< HEAD
 /// # 構文
 /// 見出しには専用の構文があります。
 /// 行の先頭に等号を1つ以上入力し、その後にスペースを入力することで見出しを作成できます。
@@ -56,6 +98,42 @@ pub struct HeadingElem {
     /// これは主に[showルール]($styling/#show-rules)で利用する際に役立ちます
     /// （[`where`]($function.where)セレクターを使う場合や
     /// 表示された見出しのレベルに直接アクセスする場合など）。
+=======
+/// # Syntax
+/// Headings have dedicated syntax: They can be created by starting a line with
+/// one or multiple equals signs, followed by a space. The number of equals
+/// signs determines the heading's logical nesting depth. The `{offset}` field
+/// can be set to configure the starting depth.
+///
+/// # Accessibility
+/// Headings are important for accessibility, as they help users of Assistive
+/// Technologies (AT) like screen readers to navigate within your document.
+/// Screen reader users will be able to skip from heading to heading, or get an
+/// overview of all headings in the document.
+///
+/// To make your headings accessible, you should not skip heading levels. This
+/// means that you should start with a first-level heading. Also, when the
+/// previous heading was of level 3, the next heading should be of level 3
+/// (staying at the same depth), level 4 (going exactly one level deeper), or
+/// level 1 or 2 (new hierarchically higher headings).
+///
+/// # HTML export
+/// As mentioned above, a top-level heading indicates a top-level section of
+/// the document rather than its title. This is in contrast to the HTML `<h1>`
+/// element of which there should be only one per document.
+///
+/// For this reason, in HTML export, a [`title`] element will turn into an
+/// `<h1>` and headings turn into `<h2>` and lower (a level 1 heading thus turns
+/// into `<h2>`, a level 2 heading into `<h3>`, etc).
+#[elem(Locatable, Tagged, Synthesize, Count, ShowSet, LocalName, Refable, Outlinable)]
+pub struct HeadingElem {
+    /// The absolute nesting depth of the heading, starting from one. If set
+    /// to `{auto}`, it is computed from `{offset + depth}`.
+    ///
+    /// This is primarily useful for usage in [show rules]($styling/#show-rules)
+    /// (either with [`where`]($function.where) selectors or by accessing the
+    /// level directly on a shown heading).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #show heading.where(level: 2): set text(red)
@@ -69,6 +147,7 @@ pub struct HeadingElem {
     /// ```
     pub level: Smart<NonZeroUsize>,
 
+<<<<<<< HEAD
     /// 1から始まる、見出しの相対的なネストの深さ。
     /// この値は`{offset}`と組み合わせて、実際の`{level}`を計算するのに用いられます。
     ///
@@ -81,6 +160,20 @@ pub struct HeadingElem {
 
     /// 各見出しの`{level}`の開始オフセットであり、
     /// 相対的な`{depth}`を絶対的な`{level}`に変換するために使用されます。
+=======
+    /// The relative nesting depth of the heading, starting from one. This is
+    /// combined with `{offset}` to compute the actual `{level}`.
+    ///
+    /// This is set by the heading syntax, such that `[== Heading]` creates a
+    /// heading with logical depth of 2, but actual level `{offset + 2}`. If you
+    /// construct a heading manually, you should typically prefer this over
+    /// setting the absolute level.
+    #[default(NonZeroUsize::ONE)]
+    pub depth: NonZeroUsize,
+
+    /// The starting offset of each heading's `{level}`, used to turn its
+    /// relative `{depth}` into its absolute `{level}`.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// = Level 1
@@ -95,8 +188,13 @@ pub struct HeadingElem {
     #[default(0)]
     pub offset: usize,
 
+<<<<<<< HEAD
     /// 見出しを番号付けする方法。
     /// [番号付けパターンまたは関数]($numbering)を指定できます。
+=======
+    /// How to number the heading. Accepts a
+    /// [numbering pattern or function]($numbering) taking multiple numbers.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set heading(numbering: "1.a.")
@@ -105,6 +203,7 @@ pub struct HeadingElem {
     /// == A subsection
     /// === A sub-subsection
     /// ```
+<<<<<<< HEAD
     #[borrowed]
     pub numbering: Option<Numbering>,
 
@@ -114,6 +213,28 @@ pub struct HeadingElem {
     ///
     /// 関数を指定した場合、参照された見出しが引数として渡され、
     /// その関数は表示されるコンテンツを返す必要があります。
+=======
+    pub numbering: Option<Numbering>,
+
+    /// The resolved plain-text numbers.
+    ///
+    /// This field is internal and only used for creating PDF bookmarks. We
+    /// don't currently have access to `World`, `Engine`, or `styles` in export,
+    /// which is needed to resolve the counter and numbering pattern into a
+    /// concrete string.
+    ///
+    /// This remains unset if `numbering` is `None`.
+    #[internal]
+    #[synthesized]
+    pub numbers: EcoString,
+
+    /// A supplement for the heading.
+    ///
+    /// For references to headings, this is added before the referenced number.
+    ///
+    /// If a function is specified, it is passed the referenced heading and
+    /// should return content.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set heading(numbering: "1.", supplement: [Chapter])
@@ -126,11 +247,19 @@ pub struct HeadingElem {
     /// ```
     pub supplement: Smart<Option<Supplement>>,
 
+<<<<<<< HEAD
     /// 見出しを[目次]($outline)に表示するかどうか。
     ///
     /// なお、このプロパティを`{true}`に設定すると、
     /// PDFへのエクスポート時に、見出しがPDFの目次にしおりとしても表示されます。
     /// この動作を変更するには、`bookmarked`プロパティを使用してください。
+=======
+    /// Whether the heading should appear in the [outline].
+    ///
+    /// Note that this property, if set to `{true}`, ensures the heading is also
+    /// shown as a bookmark in the exported PDF's outline (when exporting to
+    /// PDF). To change that behavior, use the `bookmarked` property.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #outline()
@@ -145,6 +274,7 @@ pub struct HeadingElem {
     #[default(true)]
     pub outlined: bool,
 
+<<<<<<< HEAD
     /// エクスポートされたPDFの目次に見出しをしおりとして表示するかどうか。
     /// PNGなどの他のエクスポート形式には影響しません。
     ///
@@ -153,6 +283,16 @@ pub struct HeadingElem {
     /// PDFエクスポート時の目次に表示されることを示します。
     /// このプロパティを`{true}`（しおりあり）または`{false}`（しおりなし）に設定すると、
     /// この動作を無視します。
+=======
+    /// Whether the heading should appear as a bookmark in the exported PDF's
+    /// outline. Doesn't affect other export formats, such as PNG.
+    ///
+    /// The default value of `{auto}` indicates that the heading will only
+    /// appear in the exported PDF's outline if its `outlined` property is set
+    /// to `{true}`, that is, if it would also be listed in Typst's [outline].
+    /// Setting this property to either `{true}` (bookmark) or `{false}` (don't
+    /// bookmark) bypasses that behavior.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #heading[Normal heading]
@@ -167,6 +307,7 @@ pub struct HeadingElem {
     #[default(Smart::Auto)]
     pub bookmarked: Smart<bool>,
 
+<<<<<<< HEAD
     /// 見出しの最初の行を除く全ての行に適用されるインデント。
     ///
     /// デフォルト値の`{auto}`では、
@@ -175,19 +316,42 @@ pub struct HeadingElem {
     /// ```example
     /// #set heading(numbering: "1.")
     /// #heading[A very, very, very, very, very, very long heading]
+=======
+    /// The indent all but the first line of a heading should have.
+    ///
+    /// The default value of `{auto}` uses the width of the numbering as indent
+    /// if the heading is aligned at the [start]($direction.start) of the [text
+    /// direction]($text.dir), and no indent for center and other alignments.
+    ///
+    /// ```example
+    /// #set heading(numbering: "1.")
+    /// = A very, very, very, very, very, very long heading
+    ///
+    /// #show heading: set align(center)
+    /// == A very long heading\ with center alignment
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// ```
     #[default(Smart::Auto)]
     pub hanging_indent: Smart<Length>,
 
+<<<<<<< HEAD
     /// 見出しのタイトル。
+=======
+    /// The heading's title.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
 impl HeadingElem {
     pub fn resolve_level(&self, styles: StyleChain) -> NonZeroUsize {
+<<<<<<< HEAD
         self.level(styles).unwrap_or_else(|| {
             NonZeroUsize::new(self.offset(styles) + self.depth(styles).get())
+=======
+        self.level.get(styles).unwrap_or_else(|| {
+            NonZeroUsize::new(self.offset.get(styles) + self.depth.get(styles).get())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 .expect("overflow to 0 on NoneZeroUsize + usize")
         })
     }
@@ -199,7 +363,11 @@ impl Synthesize for Packed<HeadingElem> {
         engine: &mut Engine,
         styles: StyleChain,
     ) -> SourceResult<()> {
+<<<<<<< HEAD
         let supplement = match (**self).supplement(styles) {
+=======
+        let supplement = match self.supplement.get_ref(styles) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Smart::Auto => TextElem::packed(Self::local_name_in(styles)),
             Smart::Custom(None) => Content::empty(),
             Smart::Custom(Some(supplement)) => {
@@ -207,6 +375,7 @@ impl Synthesize for Packed<HeadingElem> {
             }
         };
 
+<<<<<<< HEAD
         let elem = self.as_mut();
         elem.push_level(Smart::Custom(elem.resolve_level(styles)));
         elem.push_supplement(Smart::Custom(Some(Supplement::Content(supplement))));
@@ -301,12 +470,33 @@ impl Show for Packed<HeadingElem> {
             };
             block.pack().spanned(span)
         })
+=======
+        if let Some((numbering, location)) =
+            self.numbering.get_ref(styles).as_ref().zip(self.location())
+        {
+            self.numbers = Some(
+                self.counter()
+                    .display_at_loc(engine, location, styles, numbering)?
+                    .plain_text(),
+            );
+        }
+
+        let elem = self.as_mut();
+        elem.level.set(Smart::Custom(elem.resolve_level(styles)));
+        elem.supplement
+            .set(Smart::Custom(Some(Supplement::Content(supplement))));
+        Ok(())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 impl ShowSet for Packed<HeadingElem> {
     fn show_set(&self, styles: StyleChain) -> Styles {
+<<<<<<< HEAD
         let level = (**self).resolve_level(styles).get();
+=======
+        let level = self.resolve_level(styles).get();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let scale = match level {
             1 => 1.4,
             2 => 1.2,
@@ -318,49 +508,84 @@ impl ShowSet for Packed<HeadingElem> {
         let below = Em::new(0.75) / scale;
 
         let mut out = Styles::new();
+<<<<<<< HEAD
         out.set(TextElem::set_size(TextSize(size.into())));
         out.set(TextElem::set_weight(FontWeight::BOLD));
         out.set(BlockElem::set_above(Smart::Custom(above.into())));
         out.set(BlockElem::set_below(Smart::Custom(below.into())));
         out.set(BlockElem::set_sticky(true));
+=======
+        out.set(TextElem::size, TextSize(size.into()));
+        out.set(TextElem::weight, FontWeight::BOLD);
+        out.set(BlockElem::above, Smart::Custom(above.into()));
+        out.set(BlockElem::below, Smart::Custom(below.into()));
+        out.set(BlockElem::sticky, true);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         out
     }
 }
 
 impl Count for Packed<HeadingElem> {
     fn update(&self) -> Option<CounterUpdate> {
+<<<<<<< HEAD
         (**self)
             .numbering(StyleChain::default())
             .is_some()
             .then(|| CounterUpdate::Step((**self).resolve_level(StyleChain::default())))
+=======
+        self.numbering
+            .get_ref(StyleChain::default())
+            .is_some()
+            .then(|| CounterUpdate::Step(self.resolve_level(StyleChain::default())))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 impl Refable for Packed<HeadingElem> {
     fn supplement(&self) -> Content {
         // After synthesis, this should always be custom content.
+<<<<<<< HEAD
         match (**self).supplement(StyleChain::default()) {
+=======
+        match self.supplement.get_cloned(StyleChain::default()) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Smart::Custom(Some(Supplement::Content(content))) => content,
             _ => Content::empty(),
         }
     }
 
     fn counter(&self) -> Counter {
+<<<<<<< HEAD
         Counter::of(HeadingElem::elem())
     }
 
     fn numbering(&self) -> Option<&Numbering> {
         (**self).numbering(StyleChain::default()).as_ref()
+=======
+        Counter::of(HeadingElem::ELEM)
+    }
+
+    fn numbering(&self) -> Option<&Numbering> {
+        self.numbering.get_ref(StyleChain::default()).as_ref()
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 impl Outlinable for Packed<HeadingElem> {
     fn outlined(&self) -> bool {
+<<<<<<< HEAD
         (**self).outlined(StyleChain::default())
     }
 
     fn level(&self) -> NonZeroUsize {
         (**self).resolve_level(StyleChain::default())
+=======
+        self.outlined.get(StyleChain::default())
+    }
+
+    fn level(&self) -> NonZeroUsize {
+        self.resolve_level(StyleChain::default())
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     fn prefix(&self, numbers: Content) -> Content {

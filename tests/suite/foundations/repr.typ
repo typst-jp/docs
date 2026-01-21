@@ -35,6 +35,10 @@
 #t(f, `f`)
 #t(rect , `rect`)
 #t(() => none, `(..) => ..`)
+<<<<<<< HEAD
+=======
+#t(f.with(), `(..) => ..`)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 // Types.
 #t(int, `int`)

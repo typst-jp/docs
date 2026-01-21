@@ -47,12 +47,20 @@ impl Fragment {
     }
 
     /// Iterate over the contained frames.
+<<<<<<< HEAD
     pub fn iter(&self) -> std::slice::Iter<Frame> {
+=======
+    pub fn iter(&self) -> std::slice::Iter<'_, Frame> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0.iter()
     }
 
     /// Iterate over the contained frames.
+<<<<<<< HEAD
     pub fn iter_mut(&mut self) -> std::slice::IterMut<Frame> {
+=======
+    pub fn iter_mut(&mut self) -> std::slice::IterMut<'_, Frame> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0.iter_mut()
     }
 }

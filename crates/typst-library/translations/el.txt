@@ -4,4 +4,12 @@ equation = Εξίσωση
 bibliography = Βιβλιογραφία
 heading = Κεφάλαιο
 outline = Περιεχόμενα
+<<<<<<< HEAD
 raw = Παράθεση
+=======
+raw = Παράθεση
+page = Σελίδα
+# footnote =
+# email =
+# telephone =
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

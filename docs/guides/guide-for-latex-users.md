@@ -1,9 +1,17 @@
 ---
 description: |
+<<<<<<< HEAD
   あなたはLaTeXユーザーですか？ このガイドではTypstとLaTeXの違いや類似点を説明し、すぐにTypstを使い始められるよう手助けをします。
 ---
 
 # LaTeXユーザー向けガイド { # }
+=======
+  Are you a LaTeX user? This guide explains the differences and
+  similarities between Typst and LaTeX so you can get started quickly.
+---
+
+# Guide for LaTeX Users { # }
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 This page is a good starting point if you have used LaTeX before and want to try
 out Typst. We will explore the main differences between these two systems from a
 user perspective. Although Typst is not built upon LaTeX and has a different
@@ -22,7 +30,11 @@ provide instant previews.
 
 In the following, we will cover some of the most common questions a user
 switching from LaTeX will have when composing a document in Typst. If you prefer
+<<<<<<< HEAD
 a step-by-step introduction to Typst, check out our [tutorial]($tutorial).
+=======
+a step-by-step introduction to Typst, check out our [tutorial].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 ## Installation
 You have two ways to use Typst: In [our web app](https://typst.app/signup/) or
@@ -32,9 +44,16 @@ collaborative editor and run Typst in your browser, no installation required.
 
 If you choose to use Typst on your computer instead, you can download the
 compiler as a single, small binary which any user can run, no root privileges
+<<<<<<< HEAD
 required. Unlike LaTeX, packages are downloaded  when you first use them and
 then cached locally, keeping your Typst installation lean. You can use your own
 editor and decide where to store your files with the local compiler.
+=======
+required. Unlike popular LaTeX distributions such as TeX Live, packages are
+downloaded when you first use them and then cached locally, keeping your Typst
+installation lean. You can use your own editor and decide where to store your
+files with the local compiler.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 ## How do I create a new, empty document? { #getting-started }
 That's easy. You just create a new, empty text file (the file extension is
@@ -74,6 +93,7 @@ Emphasis (usually rendered as italic text) is expressed by enclosing text in
 Here is a list of common markup commands used in LaTeX and their Typst
 equivalents. You can also check out the [full syntax cheat sheet]($syntax).
 
+<<<<<<< HEAD
 | Element          | LaTeX                     | Typst                  | See        |
 |:-----------------|:--------------------------|:-----------------------|:-----------|
 | Strong emphasis  | `\textbf{strong}`         | `[*strong*]`           | [`strong`] |
@@ -89,6 +109,25 @@ equivalents. You can also check out the [full syntax cheat sheet]($syntax).
 | Figure           | `figure` environment      | `figure` function      | [`figure`] |
 | Table            | `table` environment       | `table` function       | [`table`]  |
 | Equation         | `$x$`, `align` / `equation` environments | `[$x$]`, `[$ x = y $]` | [`equation`]($math.equation) |
+=======
+| Element                | LaTeX                     | Typst                  | See        |
+|:-----------------------|:--------------------------|:-----------------------|:-----------|
+| Strong emphasis        | `\textbf{strong}`         | `[*strong*]`           | [`strong`] |
+| Emphasis               | `\emph{emphasis}`         | `[_emphasis_]`         | [`emph`]   |
+| Link                   | `\url{https://typst.app}` | `[https://typst.app/]` | [`link`]   |
+| Label                  | `\label{intro}`           | `[<intro>]`            | [`label`]  |
+| Reference              | `\ref{intro}`             | `[@intro]`             | [`ref`]    |
+| Citation               | `\cite{humphrey97}`       | `[@humphrey97]`        | [`cite`]   |
+| Monospace (typewriter) | `\texttt{mono}` | `text` or `mono` functions | [`text`], [`mono`]($math.mono) |
+| Code                   | `lstlisting` environment  | ``[`print(f"{x}")`]``  | [`raw`]  |
+| Verbatim               | `verbatim` environment    | ``[`#typst-code()`]``  | [`raw`]  |
+| Bullet list            | `itemize` environment     | `[- List]`             | [`list`]   |
+| Numbered list          | `enumerate` environment   | `[+ List]`             | [`enum`]   |
+| Term list              | `description` environment | `[/ Term: List]`       | [`terms`]  |
+| Figure                 | `figure` environment      | `figure` function      | [`figure`] |
+| Table                  | `table` environment       | `table` function       | [`table`]  |
+| Equation               | `$x$`, `align` / `equation` environments | `[$x$]`, `[$ x = y $]` | [`equation`]($math.equation) |
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 [Lists]($list) do not rely on environments in Typst. Instead, they have
 lightweight syntax like headings. To create an unordered list (`itemize`),
@@ -120,6 +159,21 @@ To get a [numbered list]($enum) (`enumerate`) instead, use a `+` instead of the
 hyphen. For a [term list]($terms) (`description`), write `[/ Term: Description]`
 instead.
 
+<<<<<<< HEAD
+=======
+Note that the [`raw` function]($raw) and syntax (e.g. ``[`raw`]``) only work for
+verbatim (unformatted) text. If you require formatting, you can use the
+[`text` function]($text) with a monospace font instead, like in the example
+below:
+
+```example
+#text(
+  font: "DejaVu Sans Mono",
+  size: 0.8em,
+)[monospace *bold*]
+```
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ## How do I use a command? { #commands }
 LaTeX heavily relies on commands (prefixed by backslashes). It uses these
 _macros_ to affect the typesetting process and to insert and manipulate content.
@@ -161,7 +215,11 @@ A function call always involves the name of the function ([`rect`],
 parentheses (as opposed to LaTeX where the square brackets and curly braces are
 optional if the macro requires no arguments). The expected list of arguments
 passed within those parentheses depends on the concrete function and is
+<<<<<<< HEAD
 specified in the [reference]($reference).
+=======
+specified in the [reference].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 ### Arguments
 A function can have multiple arguments. Some arguments are positional, i.e., you
@@ -186,10 +244,17 @@ Named arguments are similar to how some LaTeX environments are configured, for
 example, you would type `\begin{enumerate}[label={\alph*)}]` to start a list
 with the labels `a)`, `b)`, and so on.
 
+<<<<<<< HEAD
 Often, you want to provide some [content]($content) to a function. For example, the LaTeX
 command `\underline{Alternative A}` would translate to
 `[#underline([Alternative A])]` in Typst. The square brackets indicate that a
 value is [content]($content). Within these brackets, you can use normal markup.
+=======
+Often, you want to provide some [content] to a function. For example, the LaTeX
+command `\underline{Alternative A}` would translate to
+`[#underline([Alternative A])]` in Typst. The square brackets indicate that a
+value is [content]. Within these brackets, you can use normal markup.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 However, that's a lot of parentheses for a pretty simple construct. This is why
 you can also move trailing content arguments after the parentheses (and omit the
 parentheses if they would end up empty).
@@ -255,8 +320,13 @@ In Typst, the same function can be used both to affect the appearance for the
 remainder of the document, a block (or scope), or just its arguments. For
 example, `[#text(weight: "bold")[bold text]]` will only embolden its argument,
 while `[#set text(weight: "bold")]` will embolden any text until the end of the
+<<<<<<< HEAD
 current block, or, if there is none, document. The effects of a function are
 immediately obvious based on whether it is used in a call or a
+=======
+current block, or the end of the document, if there is none. The effects of a
+function are immediately obvious based on whether it is used in a call or a
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 [set rule.]($styling/#set-rules)
 
 ```example
@@ -292,7 +362,11 @@ You can achieve the effects of LaTeX commands like `\textbf`, `\textsf`,
 `\rmfamily`, `\mdseries`, and `\itshape` with the [`font`]($text.font),
 [`style`]($text.style), and [`weight`]($text.weight) arguments of the `text`
 function. The text function can be used in a set rule (declaration style) or
+<<<<<<< HEAD
 with a content argument. To replace `\textsc`, you can use the [`smallcaps`]($smallcaps)
+=======
+with a content argument. To replace `\textsc`, you can use the [`smallcaps`]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 function, which renders its content argument as smallcaps. Should you want to
 use it declaration style (like `\scshape`), you can use an
 [_everything_ show rule]($styling/#show-rules) that applies the function to the
@@ -458,7 +532,11 @@ and their corresponding Typst functions.
 | LaTeX Package                   | Typst Alternative                          |
 |:--------------------------------|:-------------------------------------------|
 | graphicx, svg                   | [`image`] function                         |
+<<<<<<< HEAD
 | tabularx                        | [`table`], [`grid`] functions              |
+=======
+| tabularx, tabularray            | [`table`], [`grid`] functions              |
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 | fontenc, inputenc, unicode-math | Just start writing!                        |
 | babel, polyglossia              | [`text`]($text.lang) function: `[#set text(lang: "zh")]` |
 | amsmath                         | [Math mode]($category/math)                |
@@ -472,6 +550,7 @@ and their corresponding Typst functions.
 | csquotes                        | Set the [`text`]($text.lang) language and type `["]` or `[']` |
 | caption                         | [`figure`] function                        |
 | enumitem                        | [`list`], [`enum`], [`terms`] functions    |
+<<<<<<< HEAD
 
 Although _many_ things are built-in, not everything can be. That's why Typst has
 its own [package ecosystem]($universe) where the community share its creations
@@ -481,6 +560,18 @@ you can just write:
 
 ```typ
 #import "@preview/cetz:0.2.1"
+=======
+| nicefrac                        | [`frac.style`]($math.frac.style) property  |
+
+Although _many_ things are built-in, not everything can be. That's why Typst has
+its own [package ecosystem]($universe) where the community share its creations
+and automations. Let's take, for instance, the _CeTZ_ package: This package
+allows you to create complex drawings and plots. To use CeTZ in your document,
+you can just write:
+
+```typ
+#import "@preview/cetz:0.4.1"
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ```
 
 (The `@preview` is a _namespace_ that is used while the package manager is still
@@ -549,8 +640,13 @@ $ f(x) = (x + 1) / x $
 to include more than one value in a sub- or superscript, enclose their contents
 in parentheses: `{$x_(a -> epsilon)$}`.
 
+<<<<<<< HEAD
 Since variables in math mode do not need to be prepended with a `#` or a `/`,
 you can also call functions without these special characters:
+=======
+Since variables in math mode do not need to be prepended with a `#` (or a `\`
+like in LaTeX), you can also call functions without these special characters:
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 ```example
 $ f(x, y) := cases(
@@ -579,8 +675,13 @@ their call with a `#`. Nobody can stop you from using rectangles or emoji as
 your variables anymore:
 
 ```example
+<<<<<<< HEAD
 $ sum^10_(🥸=1)
   #rect(width: 4mm, height: 2mm)/🥸
+=======
+$ sum^10_(🤓=1)
+  #rect(width: 4mm, height: 2mm)/🤓
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   = 🧠 maltese $
 ```
 
@@ -627,7 +728,11 @@ a reusable template?
 ## Bibliographies
 Typst includes a fully-featured bibliography system that is compatible with
 BibTeX files. You can continue to use your `.bib` literature libraries by
+<<<<<<< HEAD
 loading them with the [`bibliography`]($bibliography) function. Another possibility is to use
+=======
+loading them with the [`bibliography`] function. Another possibility is to use
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 [Typst's YAML-based native format](https://github.com/typst/hayagriva/blob/main/docs/file-format.md).
 
 Typst uses the Citation Style Language to define and process citation and
@@ -639,13 +744,21 @@ your own.
 
 You can cite an entry in your bibliography or reference a label in your document
 with the same syntax: `[@key]` (this would reference an entry called `key`).
+<<<<<<< HEAD
 Alternatively, you can use the [`cite`]($cite) function.
+=======
+Alternatively, you can use the [`cite`] function.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 Alternative forms for your citation, such as year only and citations for natural
 use in prose (cf. `\citet` and `\textcite`) are available with
 [`[#cite(<key>, form: "prose")]`]($cite.form).
 
+<<<<<<< HEAD
 You can find more information on the documentation page of the [`bibliography`]($bibliography)
+=======
+You can find more information on the documentation page of the [`bibliography`]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 function.
 
 ## What limitations does Typst currently have compared to LaTeX? { #limitations }
@@ -664,6 +777,7 @@ applicable, contains possible workarounds.
   [`page` function]($page) which will force a page break. If you just want a few
   paragraphs to stretch into the margins, then reverting to the old margins, you
   can use the [`pad` function]($pad) with negative padding.
+<<<<<<< HEAD
 
 - **Include PDFs as images.** In LaTeX, it has become customary to insert vector
   graphics as PDF or EPS files. Typst supports neither format as an image
@@ -673,3 +787,5 @@ applicable, contains possible workarounds.
   files to SVG files upon uploading them. You can also use the
   community-provided [`muchpdf` package](https://typst.app/universe/package/muchpdf)
   to embed PDFs. It internally converts PDFs to SVGs on-the-fly.
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -17,7 +17,11 @@
 
 --- repeat-dots-rtl ---
 // Test dots with RTL.
+<<<<<<< HEAD
 #set text(lang: "ar")
+=======
+#set text(lang: "ar", font: ("Libertinus Serif", "Noto Sans Arabic"))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 مقدمة #box(width: 1fr, repeat[.]) 15
 
 --- repeat-empty ---
@@ -35,7 +39,11 @@ A#box(width: 1fr, repeat(rect(width: 6em, height: 0.7em)))B
 #set align(center)
 A#box(width: 1fr, repeat(rect(width: 6em, height: 0.7em)))B
 
+<<<<<<< HEAD
 #set text(dir: rtl)
+=======
+#set text(dir: rtl, font: "Noto Sans Arabic")
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ريجين#box(width: 1fr, repeat(rect(width: 4em, height: 0.7em)))سون
 
 --- repeat-unrestricted ---

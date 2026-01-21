@@ -5,12 +5,21 @@ use std::cmp::Ordering;
 use std::fmt::{self, Debug, Display, Formatter};
 use std::sync::LazyLock;
 
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString};
 use typst_utils::Static;
 
 use crate::diag::{bail, DeprecationSink, StrResult};
 use crate::foundations::{
     cast, func, AutoValue, Func, NativeFuncData, NoneValue, Repr, Scope, Value,
+=======
+use ecow::{EcoString, eco_format};
+use typst_utils::Static;
+
+use crate::diag::{DeprecationSink, StrResult, bail};
+use crate::foundations::{
+    AutoValue, Func, NativeFuncData, NoneValue, Repr, Scope, Value, cast, func,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// Describes a kind of value.
@@ -39,12 +48,17 @@ use crate::foundations::{
 /// #type(image("glacier.jpg")).
 /// ```
 ///
+<<<<<<< HEAD
 /// The type of `10` is `int`. Now, what is the type of `int` or even `type`?
+=======
+/// The type of `{10}` is `int`. Now, what is the type of `int` or even `type`?
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #type(int) \
 /// #type(type)
 /// ```
 ///
+<<<<<<< HEAD
 /// # Compatibility
 /// In Typst 0.7 and lower, the `type` function returned a string instead of a
 /// type. Compatibility with the old way will remain until Typst 0.14 to give
@@ -54,6 +68,21 @@ use crate::foundations::{
 /// - Adding/joining a type and string will yield a string
 /// - The `{in}` operator on a type and a dictionary will evaluate to `{true}`
 ///   if the dictionary has a string key matching the type's name
+=======
+/// Unlike other types like `int`, [none] and [auto] do not have a name
+/// representing them. To test if a value is one of these, compare your value to
+/// them directly, e.g:
+/// ```example
+/// #let val = none
+/// #if val == none [
+///   Yep, it's none.
+/// ]
+/// ```
+///
+/// Note that `type` will return [`content`] for all document elements. To
+/// programmatically determine which kind of content you are dealing with, see
+/// [`content.func`].
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[ty(scope, cast)]
 #[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Type(Static<NativeTypeData>);
@@ -116,6 +145,7 @@ impl Type {
     }
 }
 
+<<<<<<< HEAD
 // Type compatibility.
 impl Type {
     /// The type's backward-compatible name.
@@ -124,6 +154,8 @@ impl Type {
     }
 }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[scope]
 impl Type {
     /// Determines a value's type.

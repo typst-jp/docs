@@ -13,6 +13,14 @@ $ underline(f' : NN -> RR) \
     1 - 0 thick &...,
   ) $
 
+<<<<<<< HEAD
+=======
+--- math-shorthands-noncontinuable ---
+// Test that shorthands are not continuable.
+$ x >=(y) / z \
+  x >= (y) / z $
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- math-common-symbols ---
 // Test common symbols.
 $ dot \ dots \ ast \ tilde \ star $
@@ -23,6 +31,13 @@ $ dot \ dots \ ast \ tilde \ star $
 $floor(phi.alt.)$
 $floor(phi.alt. )$
 
+<<<<<<< HEAD
+=======
+--- issue-4828-math-number-multi-char ---
+// Numbers should parse the same regardless of number of characters.
+$1/2(x)$ vs. $1/10(x)$
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- math-unclosed ---
 // Error: 1-2 unclosed delimiter
 $a

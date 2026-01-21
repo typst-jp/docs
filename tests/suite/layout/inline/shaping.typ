@@ -29,6 +29,10 @@ ABCअपार्टमेंट
 \ ט
 
 --- shaping-font-fallback ---
+<<<<<<< HEAD
+=======
+#set text(font: ("Libertinus Serif", "Noto Sans Arabic"))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Font fallback for emoji.
 A😀B
 

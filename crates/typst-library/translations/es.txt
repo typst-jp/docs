@@ -5,4 +5,11 @@ bibliography = Bibliografía
 heading = Sección
 outline = Índice
 raw = Listado
+<<<<<<< HEAD
 page = página
+=======
+page = página
+footnote = Nota al pie
+email = Correo electrónico
+telephone = Teléfono
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

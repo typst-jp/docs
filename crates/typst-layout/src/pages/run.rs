@@ -1,11 +1,19 @@
 use comemo::{Track, Tracked, TrackedMut};
+<<<<<<< HEAD
+=======
+use typst_library::World;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::diag::SourceResult;
 use typst_library::engine::{Engine, Route, Sink, Traced};
 use typst_library::foundations::{
     Content, NativeElement, Resolve, Smart, StyleChain, Styles,
 };
 use typst_library::introspection::{
+<<<<<<< HEAD
     Counter, CounterDisplayElem, CounterKey, Introspector, Locator, LocatorLink, TagElem,
+=======
+    Counter, CounterDisplayElem, CounterKey, Introspector, Locator, LocatorLink,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use typst_library::layout::{
     Abs, AlignElem, Alignment, Axes, Binding, ColumnsElem, Dir, Frame, HAlignment,
@@ -13,6 +21,7 @@ use typst_library::layout::{
     VAlignment,
 };
 use typst_library::model::Numbering;
+<<<<<<< HEAD
 use typst_library::routines::{Pair, Routines};
 use typst_library::text::{LocalName, TextElem};
 use typst_library::visualize::Paint;
@@ -20,6 +29,15 @@ use typst_library::World;
 use typst_utils::Numeric;
 
 use crate::flow::{layout_flow, FlowMode};
+=======
+use typst_library::pdf::ArtifactKind;
+use typst_library::routines::{Pair, Routines};
+use typst_library::text::{LocalName, TextElem};
+use typst_library::visualize::Paint;
+use typst_utils::Numeric;
+
+use crate::flow::{FlowMode, layout_flow};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A mostly finished layout for one page. Needs only knowledge of its exact
 /// page number to be finalized into a `Page`. (Because the margins can depend
@@ -96,15 +114,26 @@ fn layout_page_run_impl(
     };
 
     // Determine the page-wide styles.
+<<<<<<< HEAD
     let styles = determine_page_styles(children, initial);
+=======
+    let styles = Styles::root(children, initial);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let styles = StyleChain::new(&styles);
 
     // When one of the lengths is infinite the page fits its content along
     // that axis.
+<<<<<<< HEAD
     let width = PageElem::width_in(styles).unwrap_or(Abs::inf());
     let height = PageElem::height_in(styles).unwrap_or(Abs::inf());
     let mut size = Size::new(width, height);
     if PageElem::flipped_in(styles) {
+=======
+    let width = styles.resolve(PageElem::width).unwrap_or(Abs::inf());
+    let height = styles.resolve(PageElem::height).unwrap_or(Abs::inf());
+    let mut size = Size::new(width, height);
+    if styles.get(PageElem::flipped) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         std::mem::swap(&mut size.x, &mut size.y);
     }
 
@@ -115,7 +144,11 @@ fn layout_page_run_impl(
 
     // Determine the margins.
     let default = Rel::<Length>::from((2.5 / 21.0) * min);
+<<<<<<< HEAD
     let margin = PageElem::margin_in(styles);
+=======
+    let margin = styles.get(PageElem::margin);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let two_sided = margin.two_sided.unwrap_or(false);
     let margin = margin
         .sides
@@ -123,6 +156,7 @@ fn layout_page_run_impl(
         .resolve(styles)
         .relative_to(size);
 
+<<<<<<< HEAD
     let fill = PageElem::fill_in(styles);
     let foreground = PageElem::foreground_in(styles);
     let background = PageElem::background_in(styles);
@@ -139,6 +173,26 @@ fn layout_page_run_impl(
             Dir::LTR => Binding::Left,
             _ => Binding::Right,
         });
+=======
+    let fill = styles.get_cloned(PageElem::fill);
+    let foreground = styles.get_ref(PageElem::foreground);
+    let background = styles.get_ref(PageElem::background);
+    let header_ascent = styles.resolve(PageElem::header_ascent).relative_to(margin.top);
+    let footer_descent =
+        styles.resolve(PageElem::footer_descent).relative_to(margin.bottom);
+    let numbering = styles.get_ref(PageElem::numbering);
+    let supplement = match styles.get_cloned(PageElem::supplement) {
+        Smart::Auto => TextElem::packed(PageElem::local_name_in(styles)),
+        Smart::Custom(content) => content.unwrap_or_default(),
+    };
+    let number_align = styles.get(PageElem::number_align);
+    let binding = styles.get(PageElem::binding).unwrap_or_else(|| {
+        match styles.resolve(TextElem::dir) {
+            Dir::LTR => Binding::Left,
+            _ => Binding::Right,
+        }
+    });
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Construct the numbering (for header or footer).
     let numbering_marginal = numbering.as_ref().map(|numbering| {
@@ -163,8 +217,13 @@ fn layout_page_run_impl(
         counter
     });
 
+<<<<<<< HEAD
     let header = PageElem::header_in(styles);
     let footer = PageElem::footer_in(styles);
+=======
+    let header = styles.get_ref(PageElem::header);
+    let footer = styles.get_ref(PageElem::footer);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let (header, footer) = if matches!(number_align.y(), Some(OuterVAlignment::Top)) {
         (header.as_ref().unwrap_or(&numbering_marginal), footer.as_ref().unwrap_or(&None))
     } else {
@@ -179,15 +238,24 @@ fn layout_page_run_impl(
         &mut locator,
         styles,
         Regions::repeat(area, area.map(Abs::is_finite)),
+<<<<<<< HEAD
         PageElem::columns_in(styles),
         ColumnsElem::gutter_in(styles),
+=======
+        styles.get(PageElem::columns),
+        styles.get(ColumnsElem::gutter).resolve(styles),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         FlowMode::Root,
     )?;
 
     // Layouts a single marginal.
     let mut layout_marginal = |content: &Option<Content>, area, align| {
         let Some(content) = content else { return Ok(None) };
+<<<<<<< HEAD
         let aligned = content.clone().styled(AlignElem::set_alignment(align));
+=======
+        let aligned = content.clone().set(AlignElem::alignment, align);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         crate::layout_frame(
             &mut engine,
             &aligned,
@@ -200,6 +268,14 @@ fn layout_page_run_impl(
 
     // Layout marginals.
     let mut layouted = Vec::with_capacity(fragment.len());
+<<<<<<< HEAD
+=======
+
+    let header = header.clone().map(|h| h.artifact(ArtifactKind::Header));
+    let footer = footer.clone().map(|f| f.artifact(ArtifactKind::Footer));
+    let background = background.clone().map(|b| b.artifact(ArtifactKind::Page));
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     for inner in fragment {
         let header_size = Size::new(inner.width(), margin.top - header_ascent);
         let footer_size = Size::new(inner.width(), margin.bottom - footer_descent);
@@ -210,9 +286,15 @@ fn layout_page_run_impl(
             fill: fill.clone(),
             numbering: numbering.clone(),
             supplement: supplement.clone(),
+<<<<<<< HEAD
             header: layout_marginal(header, header_size, Alignment::BOTTOM)?,
             footer: layout_marginal(footer, footer_size, Alignment::TOP)?,
             background: layout_marginal(background, full_size, mid)?,
+=======
+            header: layout_marginal(&header, header_size, Alignment::BOTTOM)?,
+            footer: layout_marginal(&footer, footer_size, Alignment::TOP)?,
+            background: layout_marginal(&background, full_size, mid)?,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             foreground: layout_marginal(foreground, full_size, mid)?,
             margin,
             binding,
@@ -222,6 +304,7 @@ fn layout_page_run_impl(
 
     Ok(layouted)
 }
+<<<<<<< HEAD
 
 /// Determines the styles used for a page run itself and page-level content like
 /// marginals and footnotes.
@@ -271,3 +354,5 @@ fn determine_page_styles(children: &[Pair], initial: StyleChain) -> Styles {
         .map(|(_, style)| style)
         .collect()
 }
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -5,4 +5,11 @@ bibliography = Библиография
 heading = Раздел
 outline = Содержание
 raw = Листинг
+<<<<<<< HEAD
 page = с.
+=======
+page = с.
+footnote = Сноска
+email = Электронная почта
+telephone = Телефон
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

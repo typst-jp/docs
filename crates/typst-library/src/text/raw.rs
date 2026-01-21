@@ -3,14 +3,22 @@ use std::ops::Range;
 use std::sync::{Arc, LazyLock};
 
 use comemo::Tracked;
+<<<<<<< HEAD
 use ecow::{eco_format, EcoString, EcoVec};
 use syntect::highlighting as synt;
 use syntect::parsing::{SyntaxDefinition, SyntaxSet, SyntaxSetBuilder};
 use typst_syntax::{split_newlines, LinkedNode, Span, Spanned};
+=======
+use ecow::{EcoString, EcoVec};
+use syntect::highlighting::{self as synt};
+use syntect::parsing::{ParseSyntaxError, SyntaxDefinition, SyntaxSet, SyntaxSetBuilder};
+use typst_syntax::{LinkedNode, Span, Spanned, split_newlines};
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_utils::ManuallyHash;
 use unicode_segmentation::UnicodeSegmentation;
 
 use super::Lang;
+<<<<<<< HEAD
 use crate::diag::{At, FileError, SourceResult, StrResult};
 use crate::engine::Engine;
 use crate::foundations::{
@@ -31,6 +39,37 @@ use crate::World;
 /// これは通常、計算機のコードをドキュメント内に埋め込むために使います。
 ///
 /// # 例
+=======
+use crate::World;
+use crate::diag::{
+    LineCol, LoadError, LoadResult, LoadedWithin, ReportPos, SourceResult,
+};
+use crate::engine::Engine;
+use crate::foundations::{
+    Bytes, Content, Derived, OneOrMultiple, Packed, PlainText, ShowSet, Smart,
+    StyleChain, Styles, Synthesize, Target, TargetElem, cast, elem, scope,
+};
+use crate::introspection::{Locatable, Tagged};
+use crate::layout::{Em, HAlignment};
+use crate::loading::{DataSource, Load};
+use crate::model::{Figurable, ParElem};
+use crate::routines::Routines;
+use crate::text::{FontFamily, FontList, LocalName, TextElem, TextSize};
+use crate::visualize::Color;
+
+/// Raw text with optional syntax highlighting.
+///
+/// Displays the text verbatim and in a monospace font. This is typically used
+/// to embed computer code into your document.
+///
+/// Note that text given to this element cannot contain arbitrary formatting,
+/// such as `[*strong*]` or `[_emphasis_]`, as it is displayed verbatim. If
+/// you'd like to display any kind of content with a monospace font, instead of
+/// using [`raw`], you should change its font to a monospace font using the
+/// [`text`]($text) function.
+///
+/// # Example
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ````example
 /// Adding `rbx` to `rcx` gives
 /// the desired result.
@@ -50,11 +89,17 @@ use crate::World;
 /// also trimmed.
 /// ````
 ///
+<<<<<<< HEAD
 /// また、プログラミング的に文字列から[`raw`]要素を作成できます（オプションの[`lang`]($raw.lang)引数を用いて言語タグを提供できます）。
+=======
+/// You can also construct a [`raw`] element programmatically from a string (and
+/// provide the language tag via the optional [`lang`]($raw.lang) argument).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #raw("fn " + "main() {}", lang: "rust")
 /// ```
 ///
+<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// テキストを1つまたは3つ以上のバッククォート（`` ` ``）で囲むと生テキストにできます。
@@ -67,22 +112,97 @@ use crate::World;
 /// 言語タグは、3つ以上のバッククォートがある場合にのみ使用できる、開きバッククォートの直後に付ける識別子です。
 /// 識別子のようなものからテキストが始まるものの、シンタックスハイライトが不要な場合、単一の空白（トリムされます）からテキストを始めるか、単一のバッククォート構文を使用してください。
 /// バッククォートでテキストが始まるか終わるかしなければならない場合は、その前か後に空白を置いてください（トリムされます）。
+=======
+/// # Syntax
+/// This function also has dedicated syntax. You can enclose text in 1 or 3+
+/// backticks (`` ` ``) to make it raw. Two backticks produce empty raw text.
+/// This works both in markup and code.
+///
+/// When you use three or more backticks, you can additionally specify a
+/// language tag for syntax highlighting directly after the opening backticks.
+/// Within raw blocks, everything (except for the language tag, if applicable)
+/// is rendered as is, in particular, there are no escape sequences.
+///
+/// The language tag is an identifier that directly follows the opening
+/// backticks only if there are three or more backticks. If your text starts
+/// with something that looks like an identifier, but no syntax highlighting is
+/// needed, start the text with a single space (which will be trimmed) or use
+/// the single backtick syntax. If your text should start or end with a
+/// backtick, put a space before or after it (it will be trimmed).
+///
+/// If no syntax highlighting is available by default for your specified
+/// language tag (or if you want to override the built-in definition), you may
+/// provide a custom syntax specification file to the
+/// [`syntaxes`]($raw.syntaxes) field.
+///
+/// # Styling
+/// By default, the `raw` element uses the `DejaVu Sans Mono` font (included
+/// with Typst), with a smaller font size of `{0.8em}` (that is, 80% of
+/// the global font size). This is because monospace fonts tend to be visually
+/// larger than non-monospace fonts.
+///
+/// You can customize these properties with show-set rules:
+///
+/// ````example
+/// // Switch to Cascadia Code for both
+/// // inline and block raw.
+/// #show raw: set text(font: "Cascadia Code")
+///
+/// // Reset raw blocks to the same size as normal text,
+/// // but keep inline raw at the reduced size.
+/// #show raw.where(block: true): set text(1em / 0.8)
+///
+/// Now using the `Cascadia Code` font for raw text.
+/// Here's some Python code. It looks larger now:
+///
+/// ```py
+/// def python():
+///   return 5 + 5
+/// ```
+/// ````
+///
+/// In addition, you can customize the syntax highlighting colors by setting
+/// a custom theme through the [`theme`]($raw.theme) field.
+///
+/// For complete customization of the appearance of a raw block, a show rule
+/// on [`raw.line`]($raw.line) could be helpful, such as to add line numbers.
+///
+/// Note that, in raw text, typesetting features like
+/// [hyphenation]($text.hyphenate), [overhang]($text.overhang),
+/// [CJK-Latin spacing]($text.cjk-latin-spacing) (and
+/// [justification]($par.justify) for [raw blocks]($raw.block)) will be
+/// disabled by default.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[elem(
     scope,
     title = "Raw Text / Code",
     Synthesize,
+<<<<<<< HEAD
     Show,
+=======
+    Locatable,
+    Tagged,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ShowSet,
     LocalName,
     Figurable,
     PlainText
 )]
 pub struct RawElem {
+<<<<<<< HEAD
     /// 生テキスト。
     ///
     /// 自動化のために、rawブロックを使ってカスタム構文をクリエイティブに作成することもできます。
     ///
     /// ````example
+=======
+    /// The raw text.
+    ///
+    /// You can also use raw blocks creatively to create custom syntaxes for
+    /// your automations.
+    ///
+    /// ````example:"Implementing a DSL using raw and show rules"
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// // Parse numbers in raw blocks with the
     /// // `mydsl` tag and sum them up.
     /// #show raw.where(lang: "mydsl"): it => {
@@ -100,10 +220,18 @@ pub struct RawElem {
     #[required]
     pub text: RawContent,
 
+<<<<<<< HEAD
     /// 生テキストを独立したブロックとして表示するかどうか。
     ///
     /// マークアップモードでは、バッククォート1つを使うとこれは`{false}`になります。
     /// バッククォート3つ使うと、囲まれたコンテンツが1つ以上の改行を含む場合は`{true}`になります。
+=======
+    /// Whether the raw text is displayed as a separate block.
+    ///
+    /// In markup mode, using one-backtick notation makes this `{false}`.
+    /// Using three-backtick notation makes it `{true}` if the enclosed content
+    /// contains at least one line break.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ````example
     /// // Display inline code in a small box
@@ -134,9 +262,19 @@ pub struct RawElem {
     #[default(false)]
     pub block: bool,
 
+<<<<<<< HEAD
     /// シンタックスハイライトを行う言語。
     ///
     /// Markdownで用いられている一般的な言語以外では、[Typst markup]($reference/syntax/#markup)の`{"typ"}`、[Typst code]($reference/syntax/#code)の`{"typc"}`、[Typst math]($reference/syntax/#math)の`{"typm"}`のタグがそれぞれサポートされています。
+=======
+    /// The language to syntax-highlight in.
+    ///
+    /// Apart from typical language tags known from Markdown, this supports the
+    /// `{"typ"}`, `{"typc"}`, and `{"typm"}` tags for
+    /// [Typst markup]($reference/syntax/#markup),
+    /// [Typst code]($reference/syntax/#code), and
+    /// [Typst math]($reference/syntax/#math), respectively.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ````example
     /// ```typ
@@ -145,6 +283,7 @@ pub struct RawElem {
     ///
     /// This is ```typ also *Typst*```, but inline!
     /// ````
+<<<<<<< HEAD
     #[borrowed]
     pub lang: Option<EcoString>,
 
@@ -152,6 +291,19 @@ pub struct RawElem {
     /// このオプションはrawブロックではない（`block: false`が指定されるか、マークアップモードで1つのバッククォートが使用された）場合は無視されます。
     ///
     /// これはデフォルトでは`{start}`で、現在のコンテキストの配置によらず、生テキストがブロック内部の書き始めの位置揃えになることを意味します（例えば、内部テキストを中央揃えにせずにrawブロックを中央揃えにできます）。
+=======
+    pub lang: Option<EcoString>,
+
+    /// The horizontal alignment that each line in a raw block should have.
+    /// This option is ignored if this is not a raw block (if specified
+    /// `block: false` or single backticks were used in markup mode).
+    ///
+    /// By default, this is set to `{start}`, meaning that raw text is
+    /// aligned towards the start of the text direction inside the block
+    /// by default, regardless of the current context's alignment (allowing
+    /// you to center the raw block itself without centering the text inside
+    /// it, for example).
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ````example
     /// #set raw(align: center)
@@ -164,6 +316,7 @@ pub struct RawElem {
     #[default(HAlignment::Start)]
     pub align: HAlignment,
 
+<<<<<<< HEAD
     /// 追加で読み込む構文定義。
     /// 構文定義は[`sublime-syntax`ファイル形式](https://www.sublimetext.com/docs/syntax.html)でなければなりません。
     ///
@@ -173,6 +326,17 @@ pub struct RawElem {
     /// パスに関する詳細は[パスのセクション]($syntax/#paths)を参照してください。
     /// - 構文をデコードするための生バイト列。
     /// - 各アイテムが上記のいずれかである配列。
+=======
+    /// Additional syntax definitions to load. The syntax definitions should be
+    /// in the [`sublime-syntax` file format](https://www.sublimetext.com/docs/syntax.html).
+    ///
+    /// You can pass any of the following values:
+    ///
+    /// - A path string to load a syntax file from the given path. For more
+    ///   details about paths, see the [Paths section]($syntax/#paths).
+    /// - Raw bytes from which the syntax should be decoded.
+    /// - An array where each item is one of the above.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ````example
     /// #set raw(syntaxes: "SExpressions.sublime-syntax")
@@ -192,6 +356,7 @@ pub struct RawElem {
     #[fold]
     pub syntaxes: Derived<OneOrMultiple<DataSource>, Vec<RawSyntax>>,
 
+<<<<<<< HEAD
     /// シンタックスハイライトに用いるテーマ。
     /// テーマは[`tmTheme`ファイル形式](https://www.sublimetext.com/docs/color_schemes_tmtheme.html)でなければなりません。
     ///
@@ -206,6 +371,25 @@ pub struct RawElem {
     /// テーマの適用はハイライトされたテキストの色にのみ影響を与えます。テーマの前景および背景プロパティは無視され、生テキストの色の制御は残ります。
     /// [`text`]関数を用いて前景色を、[ブロックの塗り潰し]($block.fill)を用いて背景色を、それぞれ手動で設定できます。
     /// [`xml`]関数でもこれらのプロパティをテーマから抽出できます。
+=======
+    /// The theme to use for syntax highlighting. Themes should be in the
+    /// [`tmTheme` file format](https://www.sublimetext.com/docs/color_schemes_tmtheme.html).
+    ///
+    /// You can pass any of the following values:
+    ///
+    /// - `{none}`: Disables syntax highlighting.
+    /// - `{auto}`: Highlights with Typst's default theme.
+    /// - A path string to load a theme file from the given path. For more
+    ///   details about paths, see the [Paths section]($syntax/#paths).
+    /// - Raw bytes from which the theme should be decoded.
+    ///
+    /// Applying a theme only affects the color of specifically highlighted
+    /// text. It does not consider the theme's foreground and background
+    /// properties, so that you retain control over the color of raw text. You
+    /// can apply the foreground color yourself with the [`text`] function and
+    /// the background with a [filled block]($block.fill). You could also use
+    /// the [`xml`] function to extract these properties from the theme.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ````example
     /// #set raw(theme: "halcyon.tmTheme")
@@ -229,11 +413,18 @@ pub struct RawElem {
         Some(Spanned { v: Smart::Auto, .. }) => Some(Smart::Auto),
         None => None,
     })]
+<<<<<<< HEAD
     #[borrowed]
     pub theme: Smart<Option<Derived<DataSource, RawTheme>>>,
 
     /// スペースで測ったタブ幅。
     /// タブは、次のタブ幅の整数倍位置までのスペースで置き換えられます。
+=======
+    pub theme: Smart<Option<Derived<DataSource, RawTheme>>>,
+
+    /// The size for a tab stop in spaces. A tab is replaced with enough spaces to
+    /// align with the next multiple of the size.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ````example
     /// #set raw(tab-size: 8)
@@ -283,23 +474,42 @@ impl RawElem {
 }
 
 impl Synthesize for Packed<RawElem> {
+<<<<<<< HEAD
     fn synthesize(&mut self, _: &mut Engine, styles: StyleChain) -> SourceResult<()> {
         let seq = self.highlight(styles);
         self.push_lines(seq);
+=======
+    fn synthesize(
+        &mut self,
+        engine: &mut Engine,
+        styles: StyleChain,
+    ) -> SourceResult<()> {
+        let seq = self.highlight(engine.routines, styles);
+        self.lines = Some(seq);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Ok(())
     }
 }
 
 impl Packed<RawElem> {
     #[comemo::memoize]
+<<<<<<< HEAD
     fn highlight(&self, styles: StyleChain) -> Vec<Packed<RawLine>> {
+=======
+    fn highlight(&self, routines: &Routines, styles: StyleChain) -> Vec<Packed<RawLine>> {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let elem = self.as_ref();
         let lines = preprocess(&elem.text, styles, self.span());
 
         let count = lines.len() as i64;
         let lang = elem
+<<<<<<< HEAD
             .lang(styles)
             .as_ref()
+=======
+            .lang
+            .get_ref(styles)
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .as_ref()
             .map(|s| s.to_lowercase())
             .or(Some("txt".into()));
@@ -316,14 +526,23 @@ impl Packed<RawElem> {
             })
         };
 
+<<<<<<< HEAD
         let syntaxes = LazyCell::new(|| elem.syntaxes(styles));
         let theme: &synt::Theme = match elem.theme(styles) {
+=======
+        let syntaxes = LazyCell::new(|| elem.syntaxes.get_cloned(styles));
+        let theme: &synt::Theme = match elem.theme.get_ref(styles) {
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Smart::Auto => &RAW_THEME,
             Smart::Custom(Some(theme)) => theme.derived.get(),
             Smart::Custom(None) => return non_highlighted_result(lines).collect(),
         };
 
         let foreground = theme.settings.foreground.unwrap_or(synt::Color::BLACK);
+<<<<<<< HEAD
+=======
+        let target = styles.get(TargetElem::target);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         let mut seq = vec![];
         if matches!(lang.as_deref(), Some("typ" | "typst" | "typc" | "typm")) {
@@ -346,7 +565,19 @@ impl Packed<RawElem> {
                     let span_offset = text[..range.start]
                         .rfind('\n')
                         .map_or(0, |i| range.start - (i + 1));
+<<<<<<< HEAD
                     styled(&text[range], foreground, style, span, span_offset)
+=======
+                    styled(
+                        routines,
+                        target,
+                        &text[range],
+                        foreground,
+                        style,
+                        span,
+                        span_offset,
+                    )
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 },
                 &mut |i, range, line| {
                     let span = lines.get(i).map_or_else(Span::detached, |l| l.1);
@@ -383,6 +614,11 @@ impl Packed<RawElem> {
                     .flatten()
                 {
                     line_content.push(styled(
+<<<<<<< HEAD
+=======
+                        routines,
+                        target,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                         piece,
                         foreground,
                         style,
@@ -410,6 +646,7 @@ impl Packed<RawElem> {
     }
 }
 
+<<<<<<< HEAD
 impl Show for Packed<RawElem> {
     #[typst_macros::time(name = "raw", span = self.span())]
     fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
@@ -461,6 +698,19 @@ impl ShowSet for Packed<RawElem> {
         out.set(TextElem::set_cjk_latin_spacing(Smart::Custom(None)));
         if self.block(styles) {
             out.set(ParElem::set_justify(false));
+=======
+impl ShowSet for Packed<RawElem> {
+    fn show_set(&self, styles: StyleChain) -> Styles {
+        let mut out = Styles::new();
+        out.set(TextElem::overhang, false);
+        out.set(TextElem::lang, Lang::ENGLISH);
+        out.set(TextElem::hyphenate, Smart::Custom(false));
+        out.set(TextElem::size, TextSize(Em::new(0.8).into()));
+        out.set(TextElem::font, FontList(vec![FontFamily::new("DejaVu Sans Mono")]));
+        out.set(TextElem::cjk_latin_spacing, Smart::Custom(None));
+        if self.block.get(styles) {
+            out.set(ParElem::justify, false);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         out
     }
@@ -479,7 +729,15 @@ impl PlainText for Packed<RawElem> {
 }
 
 /// The content of the raw text.
+<<<<<<< HEAD
 #[derive(Debug, Clone, Hash, PartialEq)]
+=======
+#[derive(Debug, Clone, Hash)]
+#[allow(
+    clippy::derived_hash_with_manual_eq,
+    reason = "https://github.com/typst/typst/pull/6560#issuecomment-3045393640"
+)]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub enum RawContent {
     /// From a string.
     Text(EcoString),
@@ -504,6 +762,25 @@ impl RawContent {
     }
 }
 
+<<<<<<< HEAD
+=======
+impl PartialEq for RawContent {
+    fn eq(&self, other: &Self) -> bool {
+        match (self, other) {
+            (RawContent::Text(a), RawContent::Text(b)) => a == b,
+            (lines @ RawContent::Lines(_), RawContent::Text(text))
+            | (RawContent::Text(text), lines @ RawContent::Lines(_)) => {
+                *text == lines.get()
+            }
+            (RawContent::Lines(a), RawContent::Lines(b)) => Iterator::eq(
+                a.iter().map(|(line, _)| line),
+                b.iter().map(|(line, _)| line),
+            ),
+        }
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 cast! {
     RawContent,
     self => self.get().into_value(),
@@ -520,6 +797,7 @@ impl RawSyntax {
         world: Tracked<dyn World + '_>,
         sources: Spanned<OneOrMultiple<DataSource>>,
     ) -> SourceResult<Derived<OneOrMultiple<DataSource>, Vec<RawSyntax>>> {
+<<<<<<< HEAD
         let data = sources.load(world)?;
         let list = sources
             .v
@@ -529,12 +807,20 @@ impl RawSyntax {
             .map(|(source, data)| Self::decode(source, data))
             .collect::<StrResult<_>>()
             .at(sources.span)?;
+=======
+        let loaded = sources.load(world)?;
+        let list = loaded
+            .iter()
+            .map(|data| Self::decode(&data.data).within(data))
+            .collect::<SourceResult<_>>()?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Ok(Derived::new(sources.v, list))
     }
 
     /// Decode a syntax from a loaded source.
     #[comemo::memoize]
     #[typst_macros::time(name = "load syntaxes")]
+<<<<<<< HEAD
     fn decode(source: &DataSource, data: &Bytes) -> StrResult<RawSyntax> {
         let src = data.as_str().map_err(FileError::from)?;
         let syntax = SyntaxDefinition::load_from_str(src, false, None).map_err(
@@ -547,13 +833,24 @@ impl RawSyntax {
                 }
             },
         )?;
+=======
+    fn decode(bytes: &Bytes) -> LoadResult<RawSyntax> {
+        let str = bytes.as_str()?;
+
+        let syntax = SyntaxDefinition::load_from_str(str, false, None)
+            .map_err(format_syntax_error)?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         let mut builder = SyntaxSetBuilder::new();
         builder.add(syntax);
 
         Ok(RawSyntax(Arc::new(ManuallyHash::new(
             builder.build(),
+<<<<<<< HEAD
             typst_utils::hash128(data),
+=======
+            typst_utils::hash128(bytes),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         ))))
     }
 
@@ -563,6 +860,27 @@ impl RawSyntax {
     }
 }
 
+<<<<<<< HEAD
+=======
+fn format_syntax_error(error: ParseSyntaxError) -> LoadError {
+    let pos = syntax_error_pos(&error);
+    LoadError::new(pos, "failed to parse syntax", error)
+}
+
+fn syntax_error_pos(error: &ParseSyntaxError) -> ReportPos {
+    match error {
+        ParseSyntaxError::InvalidYaml(scan_error) => {
+            let m = scan_error.marker();
+            ReportPos::full(
+                m.index()..m.index(),
+                LineCol::one_based(m.line(), m.col() + 1),
+            )
+        }
+        _ => ReportPos::None,
+    }
+}
+
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A loaded syntect theme.
 #[derive(Debug, Clone, PartialEq, Hash)]
 pub struct RawTheme(Arc<ManuallyHash<synt::Theme>>);
@@ -573,18 +891,31 @@ impl RawTheme {
         world: Tracked<dyn World + '_>,
         source: Spanned<DataSource>,
     ) -> SourceResult<Derived<DataSource, Self>> {
+<<<<<<< HEAD
         let data = source.load(world)?;
         let theme = Self::decode(&data).at(source.span)?;
+=======
+        let loaded = source.load(world)?;
+        let theme = Self::decode(&loaded.data).within(&loaded)?;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Ok(Derived::new(source.v, theme))
     }
 
     /// Decode a theme from bytes.
     #[comemo::memoize]
+<<<<<<< HEAD
     fn decode(data: &Bytes) -> StrResult<RawTheme> {
         let mut cursor = std::io::Cursor::new(data.as_slice());
         let theme = synt::ThemeSet::load_from_reader(&mut cursor)
             .map_err(|err| eco_format!("failed to parse theme ({err})"))?;
         Ok(RawTheme(Arc::new(ManuallyHash::new(theme, typst_utils::hash128(data)))))
+=======
+    fn decode(bytes: &Bytes) -> LoadResult<RawTheme> {
+        let mut cursor = std::io::Cursor::new(bytes.as_slice());
+        let theme =
+            synt::ThemeSet::load_from_reader(&mut cursor).map_err(format_theme_error)?;
+        Ok(RawTheme(Arc::new(ManuallyHash::new(theme, typst_utils::hash128(bytes)))))
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Get the underlying syntect theme.
@@ -593,6 +924,7 @@ impl RawTheme {
     }
 }
 
+<<<<<<< HEAD
 /// ハイライトされた生テキストの行。
 ///
 /// これは[`raw`]要素によって合成される補助要素です。
@@ -613,10 +945,43 @@ pub struct RawLine {
     pub text: EcoString,
 
     /// ハイライトされた生テキスト。
+=======
+fn format_theme_error(error: syntect::LoadingError) -> LoadError {
+    let pos = match &error {
+        syntect::LoadingError::ParseSyntax(err, _) => syntax_error_pos(err),
+        _ => ReportPos::None,
+    };
+    LoadError::new(pos, "failed to parse theme", error)
+}
+
+/// A highlighted line of raw text.
+///
+/// This is a helper element that is synthesized by [`raw`] elements.
+///
+/// It allows you to access various properties of the line, such as the line
+/// number, the raw non-highlighted text, the highlighted text, and whether it
+/// is the first or last line of the raw block.
+#[elem(name = "line", title = "Raw Text / Code Line", Tagged, PlainText)]
+pub struct RawLine {
+    /// The line number of the raw line inside of the raw block, starts at 1.
+    #[required]
+    pub number: i64,
+
+    /// The total number of lines in the raw block.
+    #[required]
+    pub count: i64,
+
+    /// The line of raw text.
+    #[required]
+    pub text: EcoString,
+
+    /// The highlighted raw text.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 impl Show for Packed<RawLine> {
     #[typst_macros::time(name = "raw.line", span = self.span())]
     fn show(&self, _: &mut Engine, _styles: StyleChain) -> SourceResult<Content> {
@@ -624,13 +989,19 @@ impl Show for Packed<RawLine> {
     }
 }
 
+=======
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl PlainText for Packed<RawLine> {
     fn plain_text(&self, text: &mut EcoString) {
         text.push_str(&self.text);
     }
 }
 
+<<<<<<< HEAD
 /// Wrapper struct for the state required to highlight typst code.
+=======
+/// Wrapper struct for the state required to highlight Typst code.
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 struct ThemedHighlighter<'a> {
     /// The code being highlighted.
     code: &'a str,
@@ -743,15 +1114,26 @@ fn preprocess(
     styles: StyleChain,
     span: Span,
 ) -> EcoVec<(EcoString, Span)> {
+<<<<<<< HEAD
     if let RawContent::Lines(lines) = text {
         if lines.iter().all(|(s, _)| !s.contains('\t')) {
             return lines.clone();
         }
+=======
+    if let RawContent::Lines(lines) = text
+        && lines.iter().all(|(s, _)| !s.contains('\t'))
+    {
+        return lines.clone();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     let mut text = text.get();
     if text.contains('\t') {
+<<<<<<< HEAD
         let tab_size = RawElem::tab_size_in(styles);
+=======
+        let tab_size = styles.get(RawElem::tab_size);
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         text = align_tabs(&text, tab_size);
     }
     split_newlines(&text)
@@ -762,6 +1144,11 @@ fn preprocess(
 
 /// Style a piece of text with a syntect style.
 fn styled(
+<<<<<<< HEAD
+=======
+    routines: &Routines,
+    target: Target,
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     piece: &str,
     foreground: synt::Color,
     style: synt::Style,
@@ -771,11 +1158,23 @@ fn styled(
     let mut body = TextElem::packed(piece).spanned(span);
 
     if span_offset > 0 {
+<<<<<<< HEAD
         body = body.styled(TextElem::set_span_offset(span_offset));
     }
 
     if style.foreground != foreground {
         body = body.styled(TextElem::set_fill(to_typst(style.foreground).into()));
+=======
+        body = body.set(TextElem::span_offset, span_offset);
+    }
+
+    if style.foreground != foreground {
+        let color = to_typst(style.foreground);
+        body = match target {
+            Target::Html => (routines.html_span_filled)(body, color),
+            Target::Paged => body.set(TextElem::fill, color.into()),
+        };
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     if style.font_style.contains(synt::FontStyle::BOLD) {
@@ -798,7 +1197,11 @@ fn to_typst(synt::Color { r, g, b, a }: synt::Color) -> Color {
 }
 
 fn to_syn(color: Color) -> synt::Color {
+<<<<<<< HEAD
     let [r, g, b, a] = color.to_rgb().to_vec4_u8();
+=======
+    let (r, g, b, a) = color.to_rgb().into_format::<u8, u8>().into_components();
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     synt::Color { r, g, b, a }
 }
 
@@ -828,6 +1231,7 @@ fn align_tabs(text: &str, tab_size: usize) -> EcoString {
     let mut column = 0;
 
     for grapheme in text.graphemes(true) {
+<<<<<<< HEAD
         match grapheme {
             "\t" => {
                 let required = tab_size - column % divisor;
@@ -842,6 +1246,19 @@ fn align_tabs(text: &str, tab_size: usize) -> EcoString {
                 res.push_str(grapheme);
                 column += 1;
             }
+=======
+        let c = grapheme.parse::<char>();
+        if c == Ok('\t') {
+            let required = tab_size - column % divisor;
+            res.push_str(&replacement[..required]);
+            column += required;
+        } else if c.is_ok_and(typst_syntax::is_newline) || grapheme == "\r\n" {
+            res.push_str(grapheme);
+            column = 0;
+        } else {
+            res.push_str(grapheme);
+            column += 1;
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -861,14 +1278,24 @@ pub static RAW_THEME: LazyLock<synt::Theme> = LazyLock::new(|| synt::Theme {
     author: Some("The Typst Project Developers".into()),
     settings: synt::ThemeSettings::default(),
     scopes: vec![
+<<<<<<< HEAD
         item("comment", Some("#8a8a8a"), None),
+=======
+        item("comment", Some("#74747c"), None),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         item("constant.character.escape", Some("#1d6c76"), None),
         item("markup.bold", None, Some(synt::FontStyle::BOLD)),
         item("markup.italic", None, Some(synt::FontStyle::ITALIC)),
         item("markup.underline", None, Some(synt::FontStyle::UNDERLINE)),
+<<<<<<< HEAD
         item("markup.raw", Some("#818181"), None),
         item("string.other.math.typst", None, None),
         item("punctuation.definition.math", Some("#298e0d"), None),
+=======
+        item("markup.raw", Some("#6b6b6f"), None),
+        item("string.other.math.typst", None, None),
+        item("punctuation.definition.math", Some("#198810"), None),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         item("keyword.operator.math", Some("#1d6c76"), None),
         item("markup.heading, entity.name.section", None, Some(synt::FontStyle::BOLD)),
         item(
@@ -879,16 +1306,30 @@ pub static RAW_THEME: LazyLock<synt::Theme> = LazyLock::new(|| synt::Theme {
         item("punctuation.definition.list", Some("#8b41b1"), None),
         item("markup.list.term", None, Some(synt::FontStyle::BOLD)),
         item("entity.name.label, markup.other.reference", Some("#1d6c76"), None),
+<<<<<<< HEAD
         item("keyword, constant.language, variable.language", Some("#d73a49"), None),
         item("storage.type, storage.modifier", Some("#d73a49"), None),
         item("constant", Some("#b60157"), None),
         item("string", Some("#298e0d"), None),
+=======
+        item("keyword, constant.language, variable.language", Some("#d73948"), None),
+        item("storage.type, storage.modifier", Some("#d73948"), None),
+        item("constant", Some("#b60157"), None),
+        item("string", Some("#198810"), None),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         item("entity.name, variable.function, support", Some("#4b69c6"), None),
         item("support.macro", Some("#16718d"), None),
         item("meta.annotation", Some("#301414"), None),
         item("entity.other, meta.interpolation", Some("#8b41b1"), None),
         item("meta.diff.range", Some("#8b41b1"), None),
+<<<<<<< HEAD
         item("markup.inserted, meta.diff.header.to-file", Some("#298e0d"), None),
         item("markup.deleted, meta.diff.header.from-file", Some("#d73a49"), None),
+=======
+        item("markup.inserted, meta.diff.header.to-file", Some("#198810"), None),
+        item("markup.deleted, meta.diff.header.from-file", Some("#d73948"), None),
+        item("meta.mapping.key.json string.quoted.double.json", Some("#4b69c6"), None),
+        item("meta.mapping.value.json string.quoted.double.json", Some("#198810"), None),
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ],
 });

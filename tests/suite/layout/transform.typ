@@ -165,3 +165,25 @@ Hello #skewed[World]!\
 
 #set skew(reflow: true)
 Hello #skewed[World]!
+<<<<<<< HEAD
+=======
+
+--- transform-combinations ---
+#block[
+  #rect(width: 10pt, height: 10pt)
+  #block(inset: 10pt)[
+    #rect(width: 10pt, height: 10pt)
+    #rotate(45deg, block(inset: 10pt)[
+      #block(inset: 10pt)[
+        #rect(width: 10pt, height: 10pt)
+        Hello world
+        #rect(width: 10pt, height: 10pt, radius: 10pt)
+        #rotate(45deg, block(inset: 10pt)[
+          #rect(width: 10pt, height: 10pt, radius: 10pt)
+          #rect(width: 10pt, height: 10pt, radius: 10pt)
+        ])
+      ]
+    ])
+  ]
+]
+>>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
