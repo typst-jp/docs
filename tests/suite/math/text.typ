@@ -17,8 +17,6 @@ $ nothing $
 $ "hi ∅ hey" $
 $ sum_(i in NN) 1 + i $
 
-<<<<<<< HEAD
-=======
 --- math-font-features-switch ---
 #let scr(it) = text(stylistic-set: 1, $cal(it)$)
 $cal(P)_i != scr(P)_i$, $cal(bold(I))_l != bold(scr(I))_l$
@@ -53,7 +51,6 @@ $ brace.stroked.l -1 brace.stroked.r $
 $ brace.stroked.l -1 brace.stroked.r $
 $ lr(brace.stroked.l -1 brace.stroked.r) $
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- math-optical-size-nested-scripts ---
 // Test transition from script to scriptscript.
 #[

@@ -1,19 +1,5 @@
 use std::fmt::Write;
 
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString};
-use if_chain::if_chain;
-use typst::engine::Sink;
-use typst::foundations::{repr, Binding, Capturer, CastInfo, Repr, Value};
-use typst::layout::{Length, PagedDocument};
-use typst::syntax::ast::AstNode;
-use typst::syntax::{ast, LinkedNode, Side, Source, SyntaxKind};
-use typst::utils::{round_with_precision, Numeric};
-use typst_eval::CapturesVisitor;
-
-use crate::utils::{plain_docs_sentence, summarize_font_family};
-use crate::{analyze_expr, analyze_import, analyze_labels, IdeWorld};
-=======
 use ecow::{EcoString, eco_format};
 use typst::engine::Sink;
 use typst::foundations::{Binding, Capturer, CastInfo, Repr, Value, repr};
@@ -25,7 +11,6 @@ use typst_eval::CapturesVisitor;
 
 use crate::utils::{plain_docs_sentence, summarize_font_family};
 use crate::{IdeWorld, analyze_expr, analyze_import, analyze_labels};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Describe the item under the cursor.
 ///
@@ -80,17 +65,10 @@ fn expr_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
             return Some(Tooltip::Text(plain_docs_sentence(docs)));
         }
 
-<<<<<<< HEAD
-        if let &Value::Length(length) = value {
-            if let Some(tooltip) = length_tooltip(length) {
-                return Some(tooltip);
-            }
-=======
         if let &Value::Length(length) = value
             && let Some(tooltip) = length_tooltip(length)
         {
             return Some(tooltip);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -107,28 +85,17 @@ fn expr_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
                 *count += 1;
                 continue;
             } else if *count > 1 {
-<<<<<<< HEAD
-                write!(pieces.last_mut().unwrap(), " (x{count})").unwrap();
-=======
                 write!(pieces.last_mut().unwrap(), " (×{count})").unwrap();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         }
         pieces.push(value.repr());
         last = Some((value, 1));
     }
 
-<<<<<<< HEAD
-    if let Some((_, count)) = last {
-        if count > 1 {
-            write!(pieces.last_mut().unwrap(), " (x{count})").unwrap();
-        }
-=======
     if let Some((_, count)) = last
         && count > 1
     {
         write!(pieces.last_mut().unwrap(), " (×{count})").unwrap();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     if iter.next().is_some() {
@@ -141,21 +108,6 @@ fn expr_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
 
 /// Tooltips for imports.
 fn import_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
-<<<<<<< HEAD
-    if_chain! {
-        if leaf.kind() == SyntaxKind::Star;
-        if let Some(parent) = leaf.parent();
-        if let Some(import) = parent.cast::<ast::ModuleImport>();
-        if let Some(node) = parent.find(import.source().span());
-        if let Some(value) = analyze_import(world, &node);
-        if let Some(scope) = value.scope();
-        then {
-            let names: Vec<_> =
-                scope.iter().map(|(name, ..)| eco_format!("`{name}`")).collect();
-            let list = repr::separated_list(&names, "and");
-            return Some(Tooltip::Text(eco_format!("This star imports {list}")));
-        }
-=======
     if leaf.kind() == SyntaxKind::Star
         && let Some(parent) = leaf.parent()
         && let Some(import) = parent.cast::<ast::ModuleImport>()
@@ -167,7 +119,6 @@ fn import_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
             scope.iter().map(|(name, ..)| eco_format!("`{name}`")).collect();
         let list = repr::separated_list(&names, "and");
         return Some(Tooltip::Text(eco_format!("This star imports {list}")));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     None
@@ -236,25 +187,6 @@ fn label_tooltip(document: &PagedDocument, leaf: &LinkedNode) -> Option<Tooltip>
 
 /// Tooltips for components of a named parameter.
 fn named_param_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
-<<<<<<< HEAD
-    let (func, named) = if_chain! {
-        // Ensure that we are in a named pair in the arguments to a function
-        // call or set rule.
-        if let Some(parent) = leaf.parent();
-        if let Some(named) = parent.cast::<ast::Named>();
-        if let Some(grand) = parent.parent();
-        if matches!(grand.kind(), SyntaxKind::Args);
-        if let Some(grand_grand) = grand.parent();
-        if let Some(expr) = grand_grand.cast::<ast::Expr>();
-        if let Some(ast::Expr::Ident(callee)) = match expr {
-            ast::Expr::FuncCall(call) => Some(call.callee()),
-            ast::Expr::Set(set) => Some(set.target()),
-            _ => None,
-        };
-
-        // Find metadata about the function.
-        if let Some(Value::Func(func)) = world
-=======
     let (func, named) =
         // Ensure that we are in a named pair in the arguments to a function
         // call or set rule.
@@ -272,36 +204,10 @@ fn named_param_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Toolti
 
         // Find metadata about the function.
         && let Some(Value::Func(func)) = world
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .library()
             .global
             .scope()
             .get(&callee)
-<<<<<<< HEAD
-            .map(Binding::read);
-        then { (func, named) }
-        else { return None; }
-    };
-
-    // Hovering over the parameter name.
-    if_chain! {
-        if leaf.index() == 0;
-        if let Some(ident) = leaf.cast::<ast::Ident>();
-        if let Some(param) = func.param(&ident);
-        then {
-            return Some(Tooltip::Text(plain_docs_sentence(param.docs)));
-        }
-    }
-
-    // Hovering over a string parameter value.
-    if_chain! {
-        if let Some(string) = leaf.cast::<ast::Str>();
-        if let Some(param) = func.param(&named.name());
-        if let Some(docs) = find_string_doc(&param.input, &string.get());
-        then {
-            return Some(Tooltip::Text(docs.into()));
-        }
-=======
             .map(Binding::read)
          { (func, named) }
         else { return None; };
@@ -320,7 +226,6 @@ fn named_param_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Toolti
         && let Some(docs) = find_string_doc(&param.input, &string.get())
     {
         return Some(Tooltip::Text(docs.into()));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     None
@@ -339,29 +244,6 @@ fn find_string_doc(info: &CastInfo, string: &str) -> Option<&'static str> {
 
 /// Tooltip for font.
 fn font_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
-<<<<<<< HEAD
-    if_chain! {
-        // Ensure that we are on top of a string.
-        if let Some(string) = leaf.cast::<ast::Str>();
-        let lower = string.get().to_lowercase();
-
-        // Ensure that we are in the arguments to the text function.
-        if let Some(parent) = leaf.parent();
-        if let Some(named) = parent.cast::<ast::Named>();
-        if named.name().as_str() == "font";
-
-        // Find the font family.
-        if let Some((_, iter)) = world
-            .book()
-            .families()
-            .find(|&(family, _)| family.to_lowercase().as_str() == lower.as_str());
-
-        then {
-            let detail = summarize_font_family(iter);
-            return Some(Tooltip::Text(detail));
-        }
-    };
-=======
     // Ensure that we are on top of a string.
     if let Some(string) = leaf.cast::<ast::Str>()
         && let lower = string.get().to_lowercase()
@@ -380,7 +262,6 @@ fn font_tooltip(world: &dyn IdeWorld, leaf: &LinkedNode) -> Option<Tooltip> {
         let detail = summarize_font_family(iter.collect());
         return Some(Tooltip::Text(detail));
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     None
 }
@@ -391,11 +272,7 @@ mod tests {
 
     use typst::syntax::Side;
 
-<<<<<<< HEAD
-    use super::{tooltip, Tooltip};
-=======
     use super::{Tooltip, tooltip};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use crate::tests::{FilePos, TestWorld, WorldLike};
 
     type Response = Option<Tooltip>;
@@ -483,8 +360,6 @@ mod tests {
         test(&world, -2, Side::Before).must_be_none();
         test(&world, -2, Side::After).must_be_text("This star imports `a`, `b`, and `c`");
     }
-<<<<<<< HEAD
-=======
 
     #[test]
     fn test_tooltip_field_call() {
@@ -497,5 +372,4 @@ mod tests {
     fn test_tooltip_reference() {
         test("#figure(caption: [Hi])[]<f> @f", -1, Side::Before).must_be_text("Hi");
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

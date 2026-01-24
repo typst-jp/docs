@@ -164,8 +164,6 @@ B
 #context test(c.get(), (1,))
 #c.step(level: 3)
 #context test(c.get(), (1, 0, 1))
-<<<<<<< HEAD
-=======
 
 --- counter-huge ---
 // Test values greater than 32-bits
@@ -185,4 +183,3 @@ B
 #let line = [A #s B #tree #s #tree #s #tree C #s D #s]
 #line \
 #line
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

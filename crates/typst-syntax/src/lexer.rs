@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString};
-=======
 use ecow::{EcoString, eco_format};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use unicode_ident::{is_xid_continue, is_xid_start};
 use unicode_script::{Script, UnicodeScript};
 use unicode_segmentation::UnicodeSegmentation;
 use unscanny::Scanner;
 
-<<<<<<< HEAD
-use crate::{SyntaxError, SyntaxKind, SyntaxNode};
-=======
 use crate::{SyntaxError, SyntaxKind, SyntaxMode, SyntaxNode};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// An iterator over a source code string which returns tokens.
 #[derive(Clone)]
@@ -21,39 +13,17 @@ pub(super) struct Lexer<'s> {
     s: Scanner<'s>,
     /// The mode the lexer is in. This determines which kinds of tokens it
     /// produces.
-<<<<<<< HEAD
-    mode: LexMode,
-=======
     mode: SyntaxMode,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Whether the last token contained a newline.
     newline: bool,
     /// An error for the last token.
     error: Option<SyntaxError>,
 }
 
-<<<<<<< HEAD
-/// What kind of tokens to emit.
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
-pub(super) enum LexMode {
-    /// Text and markup.
-    Markup,
-    /// Math atoms, operators, etc.
-    Math,
-    /// Keywords, literals and operators.
-    Code,
-}
-
-impl<'s> Lexer<'s> {
-    /// Create a new lexer with the given mode and a prefix to offset column
-    /// calculations.
-    pub fn new(text: &'s str, mode: LexMode) -> Self {
-=======
 impl<'s> Lexer<'s> {
     /// Create a new lexer with the given mode and a prefix to offset column
     /// calculations.
     pub fn new(text: &'s str, mode: SyntaxMode) -> Self {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Self {
             s: Scanner::new(text),
             mode,
@@ -63,20 +33,12 @@ impl<'s> Lexer<'s> {
     }
 
     /// Get the current lexing mode.
-<<<<<<< HEAD
-    pub fn mode(&self) -> LexMode {
-=======
     pub fn mode(&self) -> SyntaxMode {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.mode
     }
 
     /// Change the lexing mode.
-<<<<<<< HEAD
-    pub fn set_mode(&mut self, mode: LexMode) {
-=======
     pub fn set_mode(&mut self, mode: SyntaxMode) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.mode = mode;
     }
 
@@ -119,11 +81,7 @@ impl Lexer<'_> {
     }
 }
 
-<<<<<<< HEAD
-/// Shared methods with all [`LexMode`].
-=======
 /// Shared methods with all [`SyntaxMode`].
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl Lexer<'_> {
     /// Return the next token in our text. Returns both the [`SyntaxNode`]
     /// and the raw [`SyntaxKind`] to make it more ergonomic to check the kind
@@ -145,16 +103,6 @@ impl Lexer<'_> {
                 );
                 kind
             }
-<<<<<<< HEAD
-            Some('`') if self.mode != LexMode::Math => return self.raw(),
-            Some(c) => match self.mode {
-                LexMode::Markup => self.markup(start, c),
-                LexMode::Math => match self.math(start, c) {
-                    (kind, None) => kind,
-                    (kind, Some(node)) => return (kind, node),
-                },
-                LexMode::Code => self.code(start, c),
-=======
             Some('`') if self.mode != SyntaxMode::Math => return self.raw(),
             Some(c) => match self.mode {
                 SyntaxMode::Markup => self.markup(start, c),
@@ -163,7 +111,6 @@ impl Lexer<'_> {
                     (kind, Some(node)) => return (kind, node),
                 },
                 SyntaxMode::Code => self.code(start, c),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             },
 
             None => SyntaxKind::End,
@@ -187,11 +134,7 @@ impl Lexer<'_> {
         };
 
         self.newline = newlines > 0;
-<<<<<<< HEAD
-        if self.mode == LexMode::Markup && newlines >= 2 {
-=======
         if self.mode == SyntaxMode::Markup && newlines >= 2 {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             SyntaxKind::Parbreak
         } else {
             SyntaxKind::Space
@@ -242,11 +185,7 @@ impl Lexer<'_> {
             'h' if self.s.eat_if("ttp://") => self.link(),
             'h' if self.s.eat_if("ttps://") => self.link(),
             '<' if self.s.at(is_id_continue) => self.label(),
-<<<<<<< HEAD
-            '@' => self.ref_marker(),
-=======
             '@' if self.s.at(is_id_continue) => self.ref_marker(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
             '.' if self.s.eat_if("..") => SyntaxKind::Shorthand,
             '-' if self.s.eat_if("--") => SyntaxKind::Shorthand,
@@ -266,15 +205,7 @@ impl Lexer<'_> {
             ':' => SyntaxKind::Colon,
             '=' => {
                 self.s.eat_while('=');
-<<<<<<< HEAD
-                if self.space_or_end() {
-                    SyntaxKind::HeadingMarker
-                } else {
-                    self.text()
-                }
-=======
                 if self.space_or_end() { SyntaxKind::HeadingMarker } else { self.text() }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
             '-' if self.space_or_end() => SyntaxKind::ListMarker,
             '+' if self.space_or_end() => SyntaxKind::EnumMarker,
@@ -534,11 +465,7 @@ impl Lexer<'_> {
         self.s.eat_while(char::is_ascii_digit);
 
         let read = self.s.from(start);
-<<<<<<< HEAD
-        if self.s.eat_if('.') && self.space_or_end() && read.parse::<usize>().is_ok() {
-=======
         if self.s.eat_if('.') && self.space_or_end() && read.parse::<u64>().is_ok() {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             return SyntaxKind::EnumMarker;
         }
 
@@ -852,101 +779,6 @@ impl Lexer<'_> {
         let ident = self.s.from(start);
 
         let prev = self.s.get(0..start);
-<<<<<<< HEAD
-        if !prev.ends_with(['.', '@']) || prev.ends_with("..") {
-            if let Some(keyword) = keyword(ident) {
-                return keyword;
-            }
-        }
-
-        if ident == "_" {
-            SyntaxKind::Underscore
-        } else {
-            SyntaxKind::Ident
-        }
-    }
-
-    fn number(&mut self, mut start: usize, c: char) -> SyntaxKind {
-        // Handle alternative integer bases.
-        let mut base = 10;
-        if c == '0' {
-            if self.s.eat_if('b') {
-                base = 2;
-            } else if self.s.eat_if('o') {
-                base = 8;
-            } else if self.s.eat_if('x') {
-                base = 16;
-            }
-            if base != 10 {
-                start = self.s.cursor();
-            }
-        }
-
-        // Read the first part (integer or fractional depending on `first`).
-        self.s.eat_while(if base == 16 {
-            char::is_ascii_alphanumeric
-        } else {
-            char::is_ascii_digit
-        });
-
-        // Read the fractional part if not already done.
-        // Make sure not to confuse a range for the decimal separator.
-        if c != '.'
-            && !self.s.at("..")
-            && !self.s.scout(1).is_some_and(is_id_start)
-            && self.s.eat_if('.')
-            && base == 10
-        {
-            self.s.eat_while(char::is_ascii_digit);
-        }
-
-        // Read the exponent.
-        if !self.s.at("em") && self.s.eat_if(['e', 'E']) && base == 10 {
-            self.s.eat_if(['+', '-']);
-            self.s.eat_while(char::is_ascii_digit);
-        }
-
-        // Read the suffix.
-        let suffix_start = self.s.cursor();
-        if !self.s.eat_if('%') {
-            self.s.eat_while(char::is_ascii_alphanumeric);
-        }
-
-        let number = self.s.get(start..suffix_start);
-        let suffix = self.s.from(suffix_start);
-
-        let kind = if i64::from_str_radix(number, base).is_ok() {
-            SyntaxKind::Int
-        } else if base == 10 && number.parse::<f64>().is_ok() {
-            SyntaxKind::Float
-        } else {
-            return self.error(match base {
-                2 => eco_format!("invalid binary number: 0b{}", number),
-                8 => eco_format!("invalid octal number: 0o{}", number),
-                16 => eco_format!("invalid hexadecimal number: 0x{}", number),
-                _ => eco_format!("invalid number: {}", number),
-            });
-        };
-
-        if suffix.is_empty() {
-            return kind;
-        }
-
-        if !matches!(
-            suffix,
-            "pt" | "mm" | "cm" | "in" | "deg" | "rad" | "em" | "fr" | "%"
-        ) {
-            return self.error(eco_format!("invalid number suffix: {}", suffix));
-        }
-
-        if base != 10 {
-            let kind = self.error(eco_format!("invalid base-{base} prefix"));
-            self.hint("numbers with a unit cannot have a base prefix");
-            return kind;
-        }
-
-        SyntaxKind::Numeric
-=======
         if (!prev.ends_with(['.', '@']) || prev.ends_with(".."))
             && let Some(keyword) = keyword(ident)
         {
@@ -1046,7 +878,6 @@ impl Lexer<'_> {
             }
             (Ok(()), Err(msg)) | (Err(msg), Ok(_)) => self.error(msg),
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     fn string(&mut self) -> SyntaxKind {
@@ -1115,15 +946,9 @@ impl ScannerExt for Scanner<'_> {
 
 /// Whether a character will become a [`SyntaxKind::Space`] token.
 #[inline]
-<<<<<<< HEAD
-fn is_space(character: char, mode: LexMode) -> bool {
-    match mode {
-        LexMode::Markup => matches!(character, ' ' | '\t') || is_newline(character),
-=======
 fn is_space(character: char, mode: SyntaxMode) -> bool {
     match mode {
         SyntaxMode::Markup => matches!(character, ' ' | '\t') || is_newline(character),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         _ => character.is_whitespace(),
     }
 }

@@ -1,343 +1,5 @@
 //! Typst's HTML exporter.
 
-<<<<<<< HEAD
-mod encode;
-
-pub use self::encode::html;
-
-use comemo::{Track, Tracked, TrackedMut};
-use typst_library::diag::{bail, warning, At, SourceResult};
-use typst_library::engine::{Engine, Route, Sink, Traced};
-use typst_library::foundations::{Content, StyleChain, Target, TargetElem};
-use typst_library::html::{
-    attr, tag, FrameElem, HtmlDocument, HtmlElem, HtmlElement, HtmlNode,
-};
-use typst_library::introspection::{
-    Introspector, Locator, LocatorLink, SplitLocator, TagElem,
-};
-use typst_library::layout::{Abs, Axes, BlockBody, BlockElem, BoxElem, Region, Size};
-use typst_library::model::{DocumentInfo, ParElem};
-use typst_library::routines::{Arenas, FragmentKind, Pair, RealizationKind, Routines};
-use typst_library::text::{LinebreakElem, SmartQuoteElem, SpaceElem, TextElem};
-use typst_library::World;
-use typst_syntax::Span;
-
-/// Produce an HTML document from content.
-///
-/// This first performs root-level realization and then turns the resulting
-/// elements into HTML.
-#[typst_macros::time(name = "html document")]
-pub fn html_document(
-    engine: &mut Engine,
-    content: &Content,
-    styles: StyleChain,
-) -> SourceResult<HtmlDocument> {
-    html_document_impl(
-        engine.routines,
-        engine.world,
-        engine.introspector,
-        engine.traced,
-        TrackedMut::reborrow_mut(&mut engine.sink),
-        engine.route.track(),
-        content,
-        styles,
-    )
-}
-
-/// The internal implementation of `html_document`.
-#[comemo::memoize]
-#[allow(clippy::too_many_arguments)]
-fn html_document_impl(
-    routines: &Routines,
-    world: Tracked<dyn World + '_>,
-    introspector: Tracked<Introspector>,
-    traced: Tracked<Traced>,
-    sink: TrackedMut<Sink>,
-    route: Tracked<Route>,
-    content: &Content,
-    styles: StyleChain,
-) -> SourceResult<HtmlDocument> {
-    let mut locator = Locator::root().split();
-    let mut engine = Engine {
-        routines,
-        world,
-        introspector,
-        traced,
-        sink,
-        route: Route::extend(route).unnested(),
-    };
-
-    // Mark the external styles as "outside" so that they are valid at the page
-    // level.
-    let styles = styles.to_map().outside();
-    let styles = StyleChain::new(&styles);
-
-    let arenas = Arenas::default();
-    let mut info = DocumentInfo::default();
-    let children = (engine.routines.realize)(
-        RealizationKind::HtmlDocument(&mut info),
-        &mut engine,
-        &mut locator,
-        &arenas,
-        content,
-        styles,
-    )?;
-
-    let output = handle_list(&mut engine, &mut locator, children.iter().copied())?;
-    let introspector = Introspector::html(&output);
-    let root = root_element(output, &info)?;
-
-    Ok(HtmlDocument { info, root, introspector })
-}
-
-/// Produce HTML nodes from content.
-#[typst_macros::time(name = "html fragment")]
-pub fn html_fragment(
-    engine: &mut Engine,
-    content: &Content,
-    locator: Locator,
-    styles: StyleChain,
-) -> SourceResult<Vec<HtmlNode>> {
-    html_fragment_impl(
-        engine.routines,
-        engine.world,
-        engine.introspector,
-        engine.traced,
-        TrackedMut::reborrow_mut(&mut engine.sink),
-        engine.route.track(),
-        content,
-        locator.track(),
-        styles,
-    )
-}
-
-/// The cached, internal implementation of [`html_fragment`].
-#[comemo::memoize]
-#[allow(clippy::too_many_arguments)]
-fn html_fragment_impl(
-    routines: &Routines,
-    world: Tracked<dyn World + '_>,
-    introspector: Tracked<Introspector>,
-    traced: Tracked<Traced>,
-    sink: TrackedMut<Sink>,
-    route: Tracked<Route>,
-    content: &Content,
-    locator: Tracked<Locator>,
-    styles: StyleChain,
-) -> SourceResult<Vec<HtmlNode>> {
-    let link = LocatorLink::new(locator);
-    let mut locator = Locator::link(&link).split();
-    let mut engine = Engine {
-        routines,
-        world,
-        introspector,
-        traced,
-        sink,
-        route: Route::extend(route),
-    };
-
-    engine.route.check_html_depth().at(content.span())?;
-
-    let arenas = Arenas::default();
-    let children = (engine.routines.realize)(
-        // No need to know about the `FragmentKind` because we handle both
-        // uniformly.
-        RealizationKind::HtmlFragment(&mut FragmentKind::Block),
-        &mut engine,
-        &mut locator,
-        &arenas,
-        content,
-        styles,
-    )?;
-
-    handle_list(&mut engine, &mut locator, children.iter().copied())
-}
-
-/// Convert children into HTML nodes.
-fn handle_list<'a>(
-    engine: &mut Engine,
-    locator: &mut SplitLocator,
-    children: impl IntoIterator<Item = Pair<'a>>,
-) -> SourceResult<Vec<HtmlNode>> {
-    let mut output = Vec::new();
-    for (child, styles) in children {
-        handle(engine, child, locator, styles, &mut output)?;
-    }
-    Ok(output)
-}
-
-/// Convert a child into HTML node(s).
-fn handle(
-    engine: &mut Engine,
-    child: &Content,
-    locator: &mut SplitLocator,
-    styles: StyleChain,
-    output: &mut Vec<HtmlNode>,
-) -> SourceResult<()> {
-    if let Some(elem) = child.to_packed::<TagElem>() {
-        output.push(HtmlNode::Tag(elem.tag.clone()));
-    } else if let Some(elem) = child.to_packed::<HtmlElem>() {
-        let mut children = vec![];
-        if let Some(body) = elem.body(styles) {
-            children = html_fragment(engine, body, locator.next(&elem.span()), styles)?;
-        }
-        if tag::is_void(elem.tag) && !children.is_empty() {
-            bail!(elem.span(), "HTML void elements may not have children");
-        }
-        let element = HtmlElement {
-            tag: elem.tag,
-            attrs: elem.attrs(styles).clone(),
-            children,
-            span: elem.span(),
-        };
-        output.push(element.into());
-    } else if let Some(elem) = child.to_packed::<ParElem>() {
-        let children =
-            html_fragment(engine, &elem.body, locator.next(&elem.span()), styles)?;
-        output.push(
-            HtmlElement::new(tag::p)
-                .with_children(children)
-                .spanned(elem.span())
-                .into(),
-        );
-    } else if let Some(elem) = child.to_packed::<BoxElem>() {
-        // TODO: This is rather incomplete.
-        if let Some(body) = elem.body(styles) {
-            let children =
-                html_fragment(engine, body, locator.next(&elem.span()), styles)?;
-            output.push(
-                HtmlElement::new(tag::span)
-                    .with_attr(attr::style, "display: inline-block;")
-                    .with_children(children)
-                    .spanned(elem.span())
-                    .into(),
-            )
-        }
-    } else if let Some((elem, body)) =
-        child
-            .to_packed::<BlockElem>()
-            .and_then(|elem| match elem.body(styles) {
-                Some(BlockBody::Content(body)) => Some((elem, body)),
-                _ => None,
-            })
-    {
-        // TODO: This is rather incomplete.
-        let children = html_fragment(engine, body, locator.next(&elem.span()), styles)?;
-        output.push(
-            HtmlElement::new(tag::div)
-                .with_children(children)
-                .spanned(elem.span())
-                .into(),
-        );
-    } else if child.is::<SpaceElem>() {
-        output.push(HtmlNode::text(' ', child.span()));
-    } else if let Some(elem) = child.to_packed::<TextElem>() {
-        output.push(HtmlNode::text(elem.text.clone(), elem.span()));
-    } else if let Some(elem) = child.to_packed::<LinebreakElem>() {
-        output.push(HtmlElement::new(tag::br).spanned(elem.span()).into());
-    } else if let Some(elem) = child.to_packed::<SmartQuoteElem>() {
-        output.push(HtmlNode::text(
-            if elem.double(styles) { '"' } else { '\'' },
-            child.span(),
-        ));
-    } else if let Some(elem) = child.to_packed::<FrameElem>() {
-        let locator = locator.next(&elem.span());
-        let style = TargetElem::set_target(Target::Paged).wrap();
-        let frame = (engine.routines.layout_frame)(
-            engine,
-            &elem.body,
-            locator,
-            styles.chain(&style),
-            Region::new(Size::splat(Abs::inf()), Axes::splat(false)),
-        )?;
-        output.push(HtmlNode::Frame(frame));
-    } else {
-        engine.sink.warn(warning!(
-            child.span(),
-            "{} was ignored during HTML export",
-            child.elem().name()
-        ));
-    }
-    Ok(())
-}
-
-/// Wrap the nodes in `<html>` and `<body>` if they are not yet rooted,
-/// supplying a suitable `<head>`.
-fn root_element(output: Vec<HtmlNode>, info: &DocumentInfo) -> SourceResult<HtmlElement> {
-    let body = match classify_output(output)? {
-        OutputKind::Html(element) => return Ok(element),
-        OutputKind::Body(body) => body,
-        OutputKind::Leafs(leafs) => HtmlElement::new(tag::body).with_children(leafs),
-    };
-    Ok(HtmlElement::new(tag::html)
-        .with_children(vec![head_element(info).into(), body.into()]))
-}
-
-/// Generate a `<head>` element.
-fn head_element(info: &DocumentInfo) -> HtmlElement {
-    let mut children = vec![];
-
-    children.push(HtmlElement::new(tag::meta).with_attr(attr::charset, "utf-8").into());
-
-    children.push(
-        HtmlElement::new(tag::meta)
-            .with_attr(attr::name, "viewport")
-            .with_attr(attr::content, "width=device-width, initial-scale=1")
-            .into(),
-    );
-
-    if let Some(title) = &info.title {
-        children.push(
-            HtmlElement::new(tag::title)
-                .with_children(vec![HtmlNode::Text(title.clone(), Span::detached())])
-                .into(),
-        );
-    }
-
-    if let Some(description) = &info.description {
-        children.push(
-            HtmlElement::new(tag::meta)
-                .with_attr(attr::name, "description")
-                .with_attr(attr::content, description.clone())
-                .into(),
-        );
-    }
-
-    HtmlElement::new(tag::head).with_children(children)
-}
-
-/// Determine which kind of output the user generated.
-fn classify_output(mut output: Vec<HtmlNode>) -> SourceResult<OutputKind> {
-    let count = output.iter().filter(|node| !matches!(node, HtmlNode::Tag(_))).count();
-    for node in &mut output {
-        let HtmlNode::Element(elem) = node else { continue };
-        let tag = elem.tag;
-        let mut take = || std::mem::replace(elem, HtmlElement::new(tag::html));
-        match (tag, count) {
-            (tag::html, 1) => return Ok(OutputKind::Html(take())),
-            (tag::body, 1) => return Ok(OutputKind::Body(take())),
-            (tag::html | tag::body, _) => bail!(
-                elem.span,
-                "`{}` element must be the only element in the document",
-                elem.tag,
-            ),
-            _ => {}
-        }
-    }
-    Ok(OutputKind::Leafs(output))
-}
-
-/// What kinds of output the user generated.
-enum OutputKind {
-    /// The user generated their own `<html>` element. We do not need to supply
-    /// one.
-    Html(HtmlElement),
-    /// The user generate their own `<body>` element. We do not need to supply
-    /// one, but need supply the `<html>` element.
-    Body(HtmlElement),
-    /// The user generated leafs which we wrap in a `<body>` and `<html>`.
-    Leafs(Vec<HtmlNode>),
-=======
 mod attr;
 mod charsets;
 mod convert;
@@ -372,21 +34,22 @@ pub fn module() -> Module {
     Module::new("html", html)
 }
 
-/// An HTML element that can contain Typst content.
+/// Typstのコンテンツを含むことができるHTML要素。
 ///
-/// Typst's HTML export automatically generates the appropriate tags for most
-/// elements. However, sometimes, it is desirable to retain more control. For
-/// example, when using Typst to generate your blog, you could use this function
-/// to wrap each article in an `<article>` tag.
+/// TypstのHTMLエクスポートは、ほとんどの要素に対して適切なタグを自動的に生成します。
+/// ただし、より細かく制御したい場合もあります。
+/// 例えば、Typstを使ってブログを生成する場合、
+/// この関数を用いると、それぞれの記事を`<article>`タグで囲めます。
 ///
-/// Typst is aware of what is valid HTML. A tag and its attributes must form
-/// syntactically valid HTML. Some tags, like `meta` do not accept content.
-/// Hence, you must not provide a body for them. We may add more checks in the
-/// future, so be sure that you are generating valid HTML when using this
-/// function.
+/// Typstは有効なHTMLが何であるかを認識しています。
+/// タグとその属性は、構文的に有効なHTMLを構成していなければなりません。
+/// `meta`のようないくつかのタグはコンテンツを受け付けません。
+/// したがって、それらに対して本文を提供してはいけません。
+/// 将来的に、この機能に対してさらに多くのチェックを追加する可能性があるため、
+/// この関数を使用する際は有効なHTMLを生成していることを確認してください。
 ///
-/// Normally, Typst will generate `html`, `head`, and `body` tags for you. If
-/// you instead create them with this function, Typst will omit its own tags.
+/// 通常、Typstは`html`、`head`、および`body`タグを生成します。
+/// 代わりにこの関数でそれらを作成した場合、Typstは自身の生成するタグを省略します。
 ///
 /// ```typ
 /// #html.elem("div", attrs: (style: "background: aqua"))[
@@ -395,16 +58,16 @@ pub fn module() -> Module {
 /// ```
 #[elem(name = "elem")]
 pub struct HtmlElem {
-    /// The element's tag.
+    /// 要素のタグ。
     #[required]
     pub tag: HtmlTag,
 
-    /// The element's HTML attributes.
+    /// 要素のHTML属性。
     pub attrs: HtmlAttrs,
 
-    /// The contents of the HTML element.
+    /// HTML要素の内容。
     ///
-    /// The body can be arbitrary Typst content.
+    /// 本文には任意のTypstコンテンツを指定できます。
     #[positional]
     pub body: Option<Content>,
 
@@ -413,17 +76,18 @@ pub struct HtmlElem {
     #[synthesized]
     pub parent: Location,
 
-    /// A role that should be applied to the top-level styled HTML element, but
-    /// not its descendants. If we ever get set rules that apply to a specific
-    /// element instead of a subtree, they could supplant this. If we need the
-    /// same mechanism for things like `class`, this could potentially also be
-    /// extended to arbitrary attributes. It's minimal for now.
+    /// 役割は、最上位のスタイル設定されたHTML要素に適用されるべきですが、
+    /// その子孫には適用されません。スタイルセットルールが今後追加されて、
+    /// サブツリーではなく特定の要素に適用される場合は、
+    /// これを置き換えることができます。`class`のような他のことについて
+    /// 同じメカニズムが必要な場合は、これは潜在的に任意の属性にも拡張できます。
+    /// 現在は最小限です。
     ///
-    /// This is ignored for `<p>` elements as it otherwise tends to
-    /// unintentionally attach to paragraphs resulting from grouping of a single
-    /// element instead of attaching to that element. This is a bit of a hack,
-    /// but good enough for now as the `role` property is purely internal and
-    /// we control what it is used for.
+    /// これは`<p>`要素に対して無視されます。
+    /// そうしないと、要素をグループ化した結果として生じる段落に
+    /// 意図せずに付与されてしまう傾向があります。
+    /// これは多少のハックですが、`role`プロパティは純粋に内部的なものであり、
+    /// その使用方法は私たちが制御しているため、十分です。
     #[internal]
     #[ghost]
     pub role: Option<EcoString>,
@@ -464,21 +128,19 @@ impl HtmlElem {
     }
 }
 
-/// An element that lays out its content as an inline SVG.
+/// コンテンツをインラインSVGとしてレイアウトする要素。
 ///
-/// Sometimes, converting Typst content to HTML is not desirable. This can be
-/// the case for plots and other content that relies on positioning and styling
-/// to convey its message.
+/// TypstのコンテンツにはHTMLへの変換が不適切なものがあります。
+/// グラフプロットや、意味を伝えるために位置決めやスタイルに依存するコンテンツが該当します。
 ///
-/// This function allows you to use the Typst layout engine that would also be
-/// used for PDF, SVG, and PNG export to render a part of your document exactly
-/// how it would appear when exported in one of these formats. It embeds the
-/// content as an inline SVG.
+/// この関数を使用すると、
+/// PDF、SVG、およびPNGエクスポートにも使用されるTypstレイアウトエンジンを使用して、
+/// 文書の一部を、これらの形式のいずれかでエクスポートした場合に表示されるのとまったく同じようにレンダリングできます。
+/// この関数はコンテンツをインラインSVGとして埋め込みます。
 #[elem]
 pub struct FrameElem {
-    /// The content that shall be laid out.
+    /// レイアウト対象のコンテンツ。
     #[positional]
     #[required]
     pub body: Content,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

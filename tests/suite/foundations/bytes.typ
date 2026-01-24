@@ -29,8 +29,6 @@
 --- bytes-bad-conversion-from-dict ---
 // Error: 8-14 expected string, array, or bytes, found dictionary
 #bytes((a: 1))
-<<<<<<< HEAD
-=======
 
 --- bytes-slice ---
 // Test the `slice` method.
@@ -46,4 +44,3 @@
 #test(bytes("abcd").slice(1, count: 3), bytes("bcd"))
 #test(bytes("abcd").slice(-3, count: 3), bytes("bcd"))
 #test(bytes("abcd").slice(2, count: 0), bytes(""))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

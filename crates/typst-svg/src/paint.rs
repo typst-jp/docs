@@ -1,11 +1,6 @@
 use std::f32::consts::TAU;
 
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString};
-use ttf_parser::OutlineBuilder;
-=======
 use ecow::{EcoString, eco_format};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::foundations::Repr;
 use typst_library::layout::{Angle, Axes, Frame, Quadrant, Ratio, Size, Transform};
 use typst_library::visualize::{Color, FillRule, Gradient, Paint, RatioOrAngle, Tiling};
@@ -19,26 +14,12 @@ use crate::{Id, SVGRenderer, State, SvgMatrix, SvgPathBuilder};
 /// Smaller values could be interesting for optimization.
 const CONIC_SEGMENT: usize = 360;
 
-<<<<<<< HEAD
-impl SVGRenderer {
-    /// Render a frame to a string.
-    pub(super) fn render_tiling_frame(
-        &mut self,
-        state: State,
-        ts: Transform,
-        frame: &Frame,
-    ) -> String {
-        let mut xml = XmlWriter::new(xmlwriter::Options::default());
-        std::mem::swap(&mut self.xml, &mut xml);
-        self.render_frame(state, ts, frame);
-=======
 impl SVGRenderer<'_> {
     /// Render a frame to a string.
     pub(super) fn render_tiling_frame(&mut self, state: &State, frame: &Frame) -> String {
         let mut xml = XmlWriter::new(xmlwriter::Options::default());
         std::mem::swap(&mut self.xml, &mut xml);
         self.render_frame(state, frame);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         std::mem::swap(&mut self.xml, &mut xml);
         xml.end_document()
     }
@@ -110,12 +91,7 @@ impl SVGRenderer<'_> {
         // render the frame twice: once to allocate all of the resources
         // that it needs and once to actually render it.
         self.render_tiling_frame(
-<<<<<<< HEAD
-            State::new(tiling_size, Transform::identity()),
-            Transform::identity(),
-=======
             &State::new(tiling_size, Transform::identity()),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             tiling.frame(),
         );
 
@@ -244,11 +220,7 @@ impl SVGRenderer<'_> {
 
                         // Add the path to the pattern.
                         self.xml.start_element("path");
-<<<<<<< HEAD
-                        self.xml.write_attribute("d", &builder.0);
-=======
                         self.xml.write_attribute("d", &builder.path);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                         self.xml.write_attribute_fmt("fill", format_args!("url(#{id})"));
                         self.xml
                             .write_attribute_fmt("stroke", format_args!("url(#{id})"));
@@ -415,12 +387,7 @@ impl SVGRenderer<'_> {
 
             // Render the frame.
             let state = State::new(size, Transform::identity());
-<<<<<<< HEAD
-            let ts = Transform::identity();
-            self.render_frame(state, ts, tiling.frame());
-=======
             self.render_frame(&state, tiling.frame());
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
             self.xml.end_element();
         }
@@ -502,11 +469,7 @@ pub struct SVGSubGradient {
 }
 
 /// The kind of linear gradient.
-<<<<<<< HEAD
-#[derive(Hash, Clone, Copy, PartialEq, Eq)]
-=======
 #[derive(Copy, Clone, Eq, PartialEq, Hash)]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 enum GradientKind {
     /// A linear gradient.
     Linear,

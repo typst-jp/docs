@@ -7,17 +7,6 @@ pub use self::layouter::GridLayouter;
 
 use typst_library::diag::SourceResult;
 use typst_library::engine::Engine;
-<<<<<<< HEAD
-use typst_library::foundations::{Packed, StyleChain};
-use typst_library::introspection::Locator;
-use typst_library::layout::grid::resolve::{grid_to_cellgrid, table_to_cellgrid, Cell};
-use typst_library::layout::{Fragment, GridElem, Regions};
-use typst_library::model::TableElem;
-
-use self::layouter::RowPiece;
-use self::lines::{
-    generate_line_segments, hline_stroke_at_column, vline_stroke_at_row, LineSegment,
-=======
 use typst_library::foundations::{Content, NativeElement, Packed, StyleChain};
 use typst_library::introspection::{Location, Locator, SplitLocator, Tag, TagFlags};
 use typst_library::layout::grid::resolve::Cell;
@@ -29,7 +18,6 @@ use typst_library::model::{TableCell, TableElem};
 use self::layouter::RowPiece;
 use self::lines::{
     LineSegment, generate_line_segments, hline_stroke_at_column, vline_stroke_at_row,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use self::rowspans::{Rowspan, UnbreakableRowGroup};
 
@@ -42,17 +30,6 @@ use self::rowspans::{Rowspan, UnbreakableRowGroup};
 pub fn layout_cell(
     cell: &Cell,
     engine: &mut Engine,
-<<<<<<< HEAD
-    disambiguator: usize,
-    styles: StyleChain,
-    regions: Regions,
-) -> SourceResult<Fragment> {
-    let mut locator = cell.locator.relayout();
-    if disambiguator > 0 {
-        locator = locator.split().next_inner(disambiguator as u128);
-    }
-    crate::layout_fragment(engine, &cell.body, locator, styles, regions)
-=======
     locator: Locator,
     styles: StyleChain,
     regions: Regions,
@@ -116,7 +93,6 @@ fn generate_tags<T: NativeElement>(
     let loc = locator.next_location(engine.introspector, key);
     cell.set_location(loc);
     (cell.pack(), loc, key)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Layout the grid.
@@ -128,13 +104,8 @@ pub fn layout_grid(
     styles: StyleChain,
     regions: Regions,
 ) -> SourceResult<Fragment> {
-<<<<<<< HEAD
-    let grid = grid_to_cellgrid(elem, engine, locator, styles)?;
-    GridLayouter::new(&grid, regions, styles, elem.span()).layout(engine)
-=======
     let grid = elem.grid.as_ref().unwrap();
     GridLayouter::new(grid, regions, locator, styles, elem.span()).layout(engine)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Layout the table.
@@ -146,11 +117,6 @@ pub fn layout_table(
     styles: StyleChain,
     regions: Regions,
 ) -> SourceResult<Fragment> {
-<<<<<<< HEAD
-    let grid = table_to_cellgrid(elem, engine, locator, styles)?;
-    GridLayouter::new(&grid, regions, styles, elem.span()).layout(engine)
-=======
     let grid = elem.grid.as_ref().unwrap();
     GridLayouter::new(grid, regions, locator, styles, elem.span()).layout(engine)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

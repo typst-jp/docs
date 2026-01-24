@@ -8,10 +8,7 @@ mod bitset;
 mod deferred;
 mod duration;
 mod hash;
-<<<<<<< HEAD
-=======
 mod listset;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 mod pico;
 mod round;
 mod scalar;
@@ -19,12 +16,8 @@ mod scalar;
 pub use self::bitset::{BitSet, SmallBitSet};
 pub use self::deferred::Deferred;
 pub use self::duration::format_duration;
-<<<<<<< HEAD
-pub use self::hash::{LazyHash, ManuallyHash};
-=======
 pub use self::hash::{HashLock, LazyHash, ManuallyHash};
 pub use self::listset::ListSet;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub use self::pico::{PicoStr, ResolvedPicoStr};
 pub use self::round::{round_int_with_precision, round_with_precision};
 pub use self::scalar::Scalar;
@@ -32,19 +25,11 @@ pub use self::scalar::Scalar;
 #[doc(hidden)]
 pub use once_cell;
 
-<<<<<<< HEAD
-use std::fmt::{Debug, Formatter};
-use std::hash::Hash;
-use std::iter::{Chain, Flatten, Rev};
-use std::num::NonZeroUsize;
-use std::ops::{Add, Deref, Div, Mul, Neg, Sub};
-=======
 use std::fmt::{Debug, Display, Formatter};
 use std::hash::Hash;
 use std::iter::{Chain, Flatten, Rev};
 use std::num::{NonZeroU32, NonZeroUsize};
 use std::ops::{Add, Deref, DerefMut, Div, Mul, Neg, Sub};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::sync::Arc;
 
 use siphasher::sip128::{Hasher128, SipHasher13};
@@ -69,8 +54,6 @@ where
     Wrapper(f)
 }
 
-<<<<<<< HEAD
-=======
 /// Turn a closure into a struct implementing [`Display`].
 pub fn display<F>(f: F) -> impl Display
 where
@@ -90,7 +73,6 @@ where
     Wrapper(f)
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Calculate a 128-bit siphash of a value.
 pub fn hash128<T: Hash + ?Sized>(value: &T) -> u128 {
     let mut state = SipHasher13::new();
@@ -105,18 +87,11 @@ pub trait NonZeroExt {
 }
 
 impl NonZeroExt for NonZeroUsize {
-<<<<<<< HEAD
-    const ONE: Self = match Self::new(1) {
-        Some(v) => v,
-        None => unreachable!(),
-    };
-=======
     const ONE: Self = Self::new(1).unwrap();
 }
 
 impl NonZeroExt for NonZeroU32 {
     const ONE: Self = Self::new(1).unwrap();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Extra methods for [`Arc`].
@@ -407,11 +382,6 @@ pub fn default_math_class(c: char) -> Option<MathClass> {
         // https://github.com/typst/typst/pull/5714
         '\u{22A5}' => Some(MathClass::Normal),
 
-<<<<<<< HEAD
-        c => unicode_math_class::class(c),
-    }
-}
-=======
         // Used as a binary connector in linear logic, where it is referred to
         // as "par".
         // https://github.com/typst/typst/issues/5764
@@ -467,4 +437,3 @@ pub fn defer<T, F: FnOnce(&mut T)>(
 
     DeferHandle { thing, deferred: Some(deferred) }
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

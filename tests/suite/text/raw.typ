@@ -91,8 +91,6 @@ Year	Month	Day
     (* x (factorial (- x 1)))))
 ```
 
-<<<<<<< HEAD
-=======
 --- raw-syntaxes-invalid-sublime-syntax ---
 // Prevent test parser from failing on "^---" line.
 #let sublime-syntax = ```yaml
@@ -109,7 +107,6 @@ contexts:
 
 // Error: 35-56 failed to parse syntax (Error while compiling regex '/': Parsing error at position 0: Backslash without following character)
 #raw("text", lang: "a", syntaxes: bytes(sublime-syntax))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- raw-theme ---
 // Test code highlighting with custom theme.
@@ -244,8 +241,6 @@ emph(hello.my().world())
 #hello.world()
 #box[]
 ```
-<<<<<<< HEAD
-=======
 
 --- raw-highlight-typm-extra ---
 // Math highlighting for strings, alignments, shorthands, and named args.
@@ -255,7 +250,6 @@ emph(hello.my().world())
 |=> & [|define(x: #y, x::= y)|]
 ```
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-highlight-rust ---
 #set page(width: auto)
 
@@ -518,8 +512,6 @@ test
   assert.eq(block, c.input.block, message: "in point " + c.name + ", expect " + repr(block) + ", got " + repr(c.input.block) + "")
 }
 
-<<<<<<< HEAD
-=======
 --- raw-html html ---
 This is ```typ *inline*```.
 ```typ
@@ -532,7 +524,6 @@ This is ```typ *inline*```.
 --- raw-html-inline-spaces html ---
 This has `double  spaces  inside`, which should be kept.
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-line ---
 #set page(width: 200pt)
 
@@ -677,8 +668,6 @@ if true {
 }
 ```
 
-<<<<<<< HEAD
-=======
 --- issue-6961-tab-crlf-raw-indent ---
 #let snippet = (
   ```
@@ -693,7 +682,6 @@ if true {
   block: true,
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-4662-math-mode-language-for-raw ---
 // Test lang: "typm" syntax highlighting without enclosing dollar signs
 #raw("pi^2", lang: "typm")
@@ -750,14 +738,11 @@ a b c --------------------
 #let hi = "你好world"
 ```
 
-<<<<<<< HEAD
-=======
 --- issue-6559-equality-between-raws ---
 
 #test(`foo`, `foo`)
 #assert.ne(`foo`, `bar`)
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-theme-set-to-auto ---
 ```typ
 #let hi = "Hello World"
@@ -779,8 +764,6 @@ a b c --------------------
 #let foo = "bar"
 ```
 
-<<<<<<< HEAD
-=======
 --- raw-default-json-theme ---
 ```json
 {
@@ -813,7 +796,6 @@ hi:
   What is this?: This is incredible text!
 ```
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- raw-unclosed ---
 // Test unterminated raw text.
 //

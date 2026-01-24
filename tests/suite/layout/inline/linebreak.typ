@@ -44,8 +44,6 @@ break you can force a break without #linebreak(justify: true)
 breaking justification. #linebreak(justify: false)
 Nice!
 
-<<<<<<< HEAD
-=======
 --- linebreak-whitespace-trimming ---
 // Ensure that even spaces across multiple layout items are trimmed during
 // line breaking.
@@ -58,7 +56,6 @@ Nice!
 
 Hello From Earth
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- linebreak-thai ---
 // Test linebreak for East Asian languages
 ทีวีตรวจทานนอร์ทแฟรีเลคเชอร์โกลด์อัลบัมเชอร์รี่เย้วสโตร์กฤษณ์เคลมเยอบีร่าพ่อค้าบลูเบอร์รี่สหัสวรรษโฮปแคนูโยโย่จูนสตรอว์เบอร์รีซื่อบื้อเยนแบ็กโฮเป็นไงโดนัททอมสเตริโอแคนูวิทย์แดรี่โดนัทวิทย์แอปพริคอทเซอร์ไพรส์ไฮบริดกิฟท์อินเตอร์โซนเซอร์วิสเทียมทานโคโยตี้ม็อบเที่ยงคืนบุญคุณ
@@ -154,8 +151,6 @@ Some texts feature many longer
 words. Those are often exceedingly
 challenging to break in a visually
 pleasing way.
-<<<<<<< HEAD
-=======
 
 --- issue-5489-matrix-stray-linebreak ---
 #table(
@@ -168,4 +163,3 @@ pleasing way.
 --- linebreak-default-ignorables ---
 #set text(font: "Noto Sans Math")
 \u{2295}\u{FE00} vs \u{2295}\u{FE00}
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

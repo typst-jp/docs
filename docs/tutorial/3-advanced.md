@@ -1,5 +1,4 @@
 ---
-<<<<<<< HEAD
 description: Typstチュートリアル
 ---
 
@@ -44,70 +43,11 @@ description: Typstチュートリアル
 
 ```example
 #set page(
->>>  margin: auto,
-  paper: "us-letter",
-  header: align(right)[
-    A fluid dynamic model for
-    glacier flow
-=======
-description: Typst's tutorial.
----
-
-# Advanced Styling
-In the previous two chapters of this tutorial, you have learned how to write a
-document in Typst and how to change its formatting. The report you wrote
-throughout the last two chapters got a straight A and your supervisor wants to
-base a conference paper on it! The report will of course have to comply with the
-conference's style guide. Let's see how we can achieve that.
-
-Before we start, let's create a team, invite your supervisor and add them to the
-team. You can do this by going back to the app dashboard with the back icon in
-the top left corner of the editor. Then, choose the plus icon in the left
-toolbar and create a team. Finally, click on the new team and go to its settings
-by clicking 'manage team' next to the team name. Now you can invite your
-supervisor by email.
-
-![The team settings](3-advanced-team-settings.png)
-
-Next, move your project into the team: Open it, going to its settings by
-choosing the gear icon in the left toolbar and selecting your new team from the
-owners dropdown. Don't forget to save your changes!
-
-Now, your supervisor can also edit the project and you can both see the changes
-in real time. You can join our [Discord server](https://discord.gg/2uDybryKPe)
-to find other users and try teams with them!
-
-## The conference guidelines { #guidelines }
-The layout guidelines are available on the conference website. Let's take a look
-at them:
-
-- The font should be an 11pt serif font
-- The title should be in 17pt and bold
-- The paper contains a single-column abstract and two-column main text
-- The abstract should be centered
-- The main text should be justified
-- First level section headings should be 13pt, centered, and rendered in small
-  capitals
-- Second level headings are run-ins, italicized and have the same size as the
-  body text
-- Finally, the pages should be US letter sized, numbered in the center of the
-  footer and the top right corner of each page should contain the title of the
-  paper
-
-We already know how to do many of these things, but for some of them, we'll need
-to learn some new tricks.
-
-## Writing the right set rules { #set-rules }
-Let's start by writing some set rules for the document.
-
-```example
-#set page(
 >>> margin: auto,
   paper: "us-letter",
   header: align(right)[
     A Fluid Dynamic Model for
     Glacier Flow
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   ],
   numbering: "1",
 )
@@ -120,7 +60,6 @@ Let's start by writing some set rules for the document.
 #lorem(600)
 ```
 
-<<<<<<< HEAD
 ここで行われていることの大半は、すでに分かりでしょう。
 テキストサイズを`{11pt}`に、フォントをLibertinus Serifに設定しています。
 また、段落の両端揃えを有効にし、ページサイズをUSレターとしています。
@@ -137,44 +76,11 @@ Let's start by writing some set rules for the document.
 
 ## タイトルとアブストラクトの作成 { #title-and-abstract }
 それでは、タイトルとアブストラクトを追加しましょう。
-まずはタイトルを中央揃えにし、`[*stars*]`で囲んでフォントを太文字にします。
-=======
-You are already familiar with most of what is going on here. We set the text
-size to `{11pt}` and the font to Libertinus Serif. We also enable paragraph
-justification and set the page size to US letter.
-
-The `header` argument is new: With it, we can provide content to fill the top
-margin of every page. In the header, we specify our paper's title as requested
-by the conference style guide. We use the `align` function to align the text to
-the right.
-
-Last but not least is the `numbering` argument. Here, we can provide a
-[numbering pattern]($numbering) that defines how to number the pages. By
-setting it to `{"1"}`, Typst only displays the bare page number. Setting it to
-`{"(1/1)"}` would have displayed the current page and total number of pages
-surrounded by parentheses. And we could even have provided a completely custom
-function here to format things to our liking.
-
-## Creating a title and abstract { #title-and-abstract }
-Now, let's add a title and an abstract. We'll start with the title. Typst comes
-with a [`title`] function. Let's start by providing our title as an argument:
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+Typst comes with a [`title`]($title) function. Let's start by providing our title as an argument:
 
 ```example
 >>> #set page(width: 300pt, margin: 30pt)
 >>> #set text(font: "Libertinus Serif", 11pt)
-<<<<<<< HEAD
-#align(center, text(17pt)[
-  *A fluid dynamic model
-  for glacier flow*
-])
-```
-
-正しく動作していることが確認できます。
-`text`関数を使って、前のテキストのsetルールをローカルで上書きし、関数の引数で文字サイズを17ptに大きくしました。
-次に、著者リストも追加しましょう。
-指導教員と一緒にこの論文を書いているため、自分の名前と教員の名前を追加します。
-=======
 #title[
   A Fluid Dynamic Model
   for Glacier Flow
@@ -230,18 +136,11 @@ Our example now looks like this:
 
 This looks right. Let's also add the author list: Since we are writing this
 paper together with our supervisor, we'll add our own and their name.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 ```example
 >>> #set page(width: 300pt, margin: 30pt)
 >>> #set text(font: "Libertinus Serif", 11pt)
 >>>
-<<<<<<< HEAD
->>> #align(center, text(17pt)[
->>>   *A fluid dynamic model
->>>   for glacier flow*
->>> ])
-=======
 >>> #show title: set text(size: 17pt)
 >>> #show title: set align(center)
 >>>
@@ -250,7 +149,6 @@ paper together with our supervisor, we'll add our own and their name.
 >>>   for Glacier Flow
 >>> ]
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #grid(
   columns: (1fr, 1fr),
   align(center)[
@@ -266,7 +164,6 @@ paper together with our supervisor, we'll add our own and their name.
 )
 ```
 
-<<<<<<< HEAD
 著者情報が記載された2つのブロックが隣り合わせにレイアウトされています。
 このレイアウトを作るために[`grid`]($grid)関数を使っています。
 これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御することができます。
@@ -278,30 +175,11 @@ paper together with our supervisor, we'll add our own and their name.
 grid関数はセルを指定するコンテンツ引数を任意の数で受け取れます。
 行は自動的に追加されますが、`rows`引数で手動でサイズを指定することも可能です。
 
-それでは、アブストラクトを追加しましょう。
-学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。
-
-```example:0,0,612,317.5
->>> #set text(font: "Libertinus Serif", 11pt)
->>> #set par(justify: true)
-=======
-The two author blocks are laid out next to each other. We use the [`grid`]
-function to create this layout. With a grid, we can control exactly how large
-each column is and which content goes into which cell. The `columns` argument
-takes an array of [relative lengths]($relative) or [fractions]($fraction). In
-this case, we passed it two equal fractional sizes, telling it to split the
-available space into two equal columns. We then passed two content arguments to
-the grid function. The first with our own details, and the second with our
-supervisors'. We again use the `align` function to center the content within the
-column. The grid takes an arbitrary number of content arguments specifying the
-cells. Rows are added automatically, but they can also be manually sized with
-the `rows` argument.
-
 Looking at the authors and the title, they are a bit too close together. You can
 address this by using another show-set rule to configure the space below the
 title. The title, the grid, paragraphs, and all other elements that Typst
 arranges from the top to the bottom of the page are called _blocks._ Each block
-is controlled by the [`block`] function. It controls behaviors like their
+is controlled by the [`block`]($block) function. It controls behaviors like their
 distance and whether a block can contain a page break. That means that we can
 write another show-set rule that selects the title to set the block spacing:
 
@@ -337,27 +215,17 @@ write another show-set rule that selects the title to set the block spacing:
 With this show-set rule, we overrode the spacing below the title. We have used
 the `em` unit: It allows us to express lengths as multiples of the font size.
 Here, we used it to space the title and the author list exactly 1.2× the font
-size apart. Now, let's add the abstract. Remember that the conference wants the
-abstract to be set ragged and centered.
+size apart.
+
+それでは、アブストラクトを追加しましょう。
+学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。
+Now, let's add the abstract. Remember that the conference wants the abstract to be set ragged and centered.
 
 ```example:0,0,612,317.5
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 >>> #set page(
 >>>   "us-letter",
 >>>   margin: auto,
 >>>   header: align(right + horizon)[
-<<<<<<< HEAD
->>>     A fluid dynamic model for
->>>     glacier flow
->>>   ],
->>>   numbering: "1",
->>> )
->>>
->>> #align(center, text(17pt)[
->>>   *A fluid dynamic model
->>>   for glacier flow*
->>> ])
-=======
 >>>     A Fluid Dynamic Model for
 >>>     Glacier Flow
 >>>   ],
@@ -374,7 +242,6 @@ abstract to be set ragged and centered.
 >>>   A Fluid Dynamic Model
 >>>   for Glacier Flow
 >>> ]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 >>>
 >>> #grid(
 >>>   columns: (1fr, 1fr),
@@ -399,40 +266,68 @@ abstract to be set ragged and centered.
 ]
 >>> #lorem(600)
 ```
-
-<<<<<<< HEAD
 できました！特筆すべき点は、`align`のコンテンツ引数の中にあるsetルールを使って、アブストラクトの両端揃えをオフにしたことです。
 これは、最初のsetルールの後に指定されたにもかかわらず、文書の残りの部分には影響しません。
 コンテンツ・ブロック内で設定されたものは、そのブロック内のコンテンツにのみ影響します。
 
-ヘッダーとタイトルの2回入力する必要がないように、論文タイトルを変数に保存することも可能です。
-変数の宣言には`{let}`を使用します。
+Another tweak could be to remove the duplication between the header and the
+title element's argument. Since they share the title, it would be convenient to
+store it in a place designed to hold metadata about the document. We would then
+need a way to retrieve the title in both places. The `document` element can help
+us with the former: By using it in a set rule, we can store document metadata
+like title, description, and keywords.
+
+```typ
+#set document(title: [A Fluid Dynamic Model for Glacier Flow])
+```
+
+When exporting a PDF, the title set here will appear in the title bar of your
+PDF reader. Your operating system will also use this title to make the file
+retrievable with search. Last but not least, it contributes to making your
+document more accessible and is required if you choose to comply with PDF/UA, a
+PDF standard focused on accessibility.
+
+Now, we need a way to retrieve the value we set in the main title and the
+header. Because the `title` function is designed to work together with the
+`document` element, calling it with no arguments will just print the title. For
+the header, we will need to be more explicit: Because Typst has no way of
+knowing that we want to insert the title there, we will need to tell it to do so
+manually.
+
+Using _context,_ we can retrieve the contents of any values we have set on
+elements before. When we use the `{context}` keyword, we can access any property
+of any element, including the document element's title property. Its use looks
+like this:
 
 ```example:single
-#let title = [
-  A fluid dynamic model
-  for glacier flow
-]
+#set document(title: [
+  A Fluid Dynamic Model
+  for Glacier Flow
+])
 
 <<< ...
 
->>> #set text(font: "Libertinus Serif", 11pt)
->>> #set par(justify: true)
 #set page(
->>>   "us-letter",
->>>   margin: auto,
+>>> "us-letter",
+>>> margin: auto,
   header: align(
     right + horizon,
-    title
+    // Retrieve the document
+    // element's title property.
+    context document.title,
   ),
 <<<   ...
->>>   numbering: "1",
+>>> numbering: "1",
 )
+>>> #set par(justify: true)
+>>> #set text(font: "Libertinus Serif", 11pt)
 
-#align(center, text(17pt)[
-  *#title*
-])
-=======
+>>> #show title: set text(size: 17pt)
+>>>
+>>> #show title: set align(center)
+>>> #show title: set block(below: 1.2em)
+#title()
+```
 Well done! One notable thing is that we used a set rule within the content
 argument of `align` to turn off justification for the abstract. This does not
 affect the remainder of the document even though it was specified after the
@@ -496,7 +391,6 @@ like this:
 >>> #show title: set align(center)
 >>> #show title: set block(below: 1.2em)
 #title()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 <<< ...
 
@@ -523,23 +417,6 @@ like this:
 >>> #lorem(600)
 ```
 
-<<<<<<< HEAD
-`title`変数にコンテンツを設定した後は、関数内やマークアップ内（関数のように接頭辞に`#`をつける）で使用できます。
-こうすることで、別のタイトルに決めた場合、一箇所で簡単に変更することができます。
-
-## 段組みと見出しの追加 { #columns-and-headings }
-上の論文は、残念ながら文字が単調にぎっしり詰まっていて読みにくい見た目をしています。
-これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。
-幸いなことに、setルールで`page`に`column`引数を追加することで簡単に行えます。
-
-引数リストに`{columns: 2}`を加えることで、文書全体を2段組みとなります。
-しかし、これではタイトルと著者、アブストラクトにも影響が出てしまいます。
-それらを1段組みのままに維持するためには、[`{place}`]($place)関数を呼び出して囲みましょう。
-place関数は引数として配置とコンテンツを受け取ります。
-オプション引数である`{scope}`引数を使えば、現在の段組みとその親（ページ）のどちらに対して配置するかを決めることが可能です。
-これらに加えて、もうひとつ設定することがあります。
-オプション引数がない場合、`{place}`はそのコンテンツを文書の流れから外し、他のレイアウトに影響を与えることなく、他のコンテンツの上に配置します。
-=======
 First, notice how we called the title function with empty, round
 parentheses. Because no argument was passed, it defaulted to what we set for the
 document element above. The distinction between empty round and empty square
@@ -582,23 +459,18 @@ completing this tutorial.
 </details>
 </div>
 
-## Adding columns and headings { #columns-and-headings }
-The paper above unfortunately looks like a wall of lead. To fix that, let's add
-some headings and switch our paper to a two-column layout. Fortunately, that's
-easy to do: We just need to amend our `page` set rule with the `columns`
-argument.
+## 段組みと見出しの追加 { #columns-and-headings }
+上の論文は、残念ながら文字が単調にぎっしり詰まっていて読みにくい見た目をしています。
+これを修正するために、見出しを追加し、2段組のレイアウトに変更してみましょう。
+幸いなことに、setルールで`page`に`column`引数を追加することで簡単に行えます。
 
-By adding `{columns: 2}` to the argument list, we have wrapped the whole
-document in two columns. However, that would also affect the title and authors
-overview. To keep them spanning the whole page, we can wrap them in a function
-call to [`{place}`]($place). Place expects an alignment and the content it
-should place as positional arguments. Using the named `{scope}` argument, we can
-decide if the items should be placed relative to the current column or its
-parent (the page). There is one more thing to configure: If no other arguments
-are provided, `{place}` takes its content out of the flow of the document and
-positions it over the other content without affecting the layout of other
-content in its container:
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+引数リストに`{columns: 2}`を加えることで、文書全体を2段組みとなります。
+しかし、これではタイトルと著者、アブストラクトにも影響が出てしまいます。
+それらを1段組みのままに維持するためには、[`{place}`]($place)関数を呼び出して囲みましょう。
+place関数は引数として配置とコンテンツを受け取ります。
+オプション引数である`{scope}`引数を使えば、現在の段組みとその親（ページ）のどちらに対して配置するかを決めることが可能です。
+これらに加えて、もうひとつ設定することがあります。
+オプション引数がない場合、`{place}`はそのコンテンツを文書の流れから外し、他のレイアウトに影響を与えることなく、他のコンテンツの上に配置します。
 
 ```example
 #place(
@@ -608,7 +480,6 @@ content in its container:
 #lorem(30)
 ```
 
-<<<<<<< HEAD
 もしここで`{place}`を使わなければ、黒塗りの長方形は独立した行になるはずですが、
 `{place}`を使うと、それに続く数行のテキストの上に重なります。
 同様に、テキスト側もこの長方形がないかのように振る舞います。
@@ -616,46 +487,23 @@ content in its container:
 これにより`{place}`でページの上部または下部に配置されたアイテムが、他のコンテンツと重ならないように設定できます。
 
 ```example:single
->>> #let title = [
->>>   A fluid dynamic model
->>>   for glacier flow
->>> ]
->>>
->>> #set text(font: "Libertinus Serif", 11pt)
->>> #set par(justify: true)
-=======
-If we hadn't used `{place}` here, the square would be in its own line, but here
-it overlaps the few lines of text following it. Likewise, that text acts as if
-there was no square. To change this behavior, we can pass the argument
-`{float: true}` to ensure that the space taken up by the placed item at the top
-or bottom of the page is not occupied by any other content.
-
-```example:single
 >>> #set document(title: [
 >>>   A Fluid Dynamic Model
 >>>   for Glacier Flow
 >>> ])
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 >>>
 #set page(
 >>> margin: auto,
   paper: "us-letter",
   header: align(
     right + horizon,
-<<<<<<< HEAD
-    title
-=======
     context document.title,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   ),
   numbering: "1",
   columns: 2,
 )
-<<<<<<< HEAD
-=======
 >>> #set par(justify: true)
 >>> #set text(font: "Libertinus Serif", 11pt)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 #place(
   top + center,
@@ -663,27 +511,6 @@ or bottom of the page is not occupied by any other content.
   scope: "parent",
   clearance: 2em,
 )[
-<<<<<<< HEAD
->>>  #text(
->>>    17pt,
->>>    weight: "bold",
->>>    title,
->>>  )
->>>
->>>  #grid(
->>>    columns: (1fr, 1fr),
->>>    [
->>>      Therese Tungsten \
->>>      Artos Institute \
->>>      #link("mailto:tung@artos.edu")
->>>    ],
->>>    [
->>>      Dr. John Doe \
->>>      Artos Institute \
->>>      #link("mailto:doe@artos.edu")
->>>    ]
->>>  )
-=======
 >>> #show title: set text(size: 17pt)
 >>> #show title: set align(center)
 >>> #show title: set block(below: 1.2em)
@@ -703,7 +530,6 @@ or bottom of the page is not occupied by any other content.
 >>>     #link("mailto:doe@artos.edu")
 >>>   ]
 >>> )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 <<<   ...
 
   #par(justify: false)[
@@ -719,7 +545,6 @@ or bottom of the page is not occupied by any other content.
 #lorem(200)
 ```
 
-<<<<<<< HEAD
 この例では、`{place}` 関数の `clearance` 引数も使用しています。
 これにより、[`{v}`]($v)関数を使用する代わりに、本文との間にスペースを設けています。
 また、コンテンツはcenter引数を継承しているため、各パーツごとに行っていた明示的な `{align(center, ...)}` 呼び出しも削除できます。
@@ -727,25 +552,6 @@ or bottom of the page is not occupied by any other content.
 最後に見出しのスタイルの設定をしましょう。
 ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
 `heading`関数はそのような設定を提供していないため、独自の見出しshowルールを書く必要があります。
-
-```example:50,250,265,270
->>> #let title = [
->>>   A fluid dynamic model
->>>   for glacier flow
->>> ]
->>>
->>> #set text(font: "Libertinus Serif", 11pt)
->>> #set par(justify: true)
-=======
-In this example, we also used the `clearance` argument of the `{place}` function
-to provide the space between it and the body instead of using the [`{v}`]($v)
-function. We can also remove the explicit `{align(center, ..)}` calls around the
-various parts since they inherit the center alignment from the placement.
-
-Now there is only one thing left to do: Style our headings. We need to make them
-centered and use small capitals. These properties are not available on the
-`heading` function, so we will need to write a few show-set rules and a show
-rule:
 
 - A show-set rule to make headings center-aligned
 - A show-set rule to make headings 13pt large and use the regular weight
@@ -757,30 +563,16 @@ rule:
 >>>   for Glacier Flow
 >>> ])
 >>>
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 >>> #set page(
 >>>   "us-letter",
 >>>   margin: auto,
 >>>   header: align(
 >>>     right + horizon,
-<<<<<<< HEAD
->>>     title
-=======
 >>>     context document.title,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 >>>   ),
 >>>   numbering: "1",
 >>>   columns: 2,
 >>> )
-<<<<<<< HEAD
-#show heading: it => [
-  #set align(center)
-  #set text(13pt, weight: "regular")
-  #block(smallcaps(it.body))
-]
-
-<<< ...
-=======
 >>> #set par(justify: true)
 >>> #set text(font: "Libertinus Serif", 11pt)
 #show heading: set align(center)
@@ -876,7 +668,6 @@ between section and subsection headings:
 #show heading.where(level: 2): it => {
   it.body + [.]
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 >>>
 >>> #place(
 >>>   top + center,
@@ -884,19 +675,11 @@ between section and subsection headings:
 >>>   scope: "parent",
 >>>   clearance: 2em,
 >>> )[
-<<<<<<< HEAD
->>>   #text(
->>>     17pt,
->>>     weight: "bold",
->>>     title,
->>>   )
-=======
 >>>   #show title: set text(size: 17pt)
 >>>   #show title: set align(center)
 >>>   #show title: set block(below: 1.2em)
 >>>
 >>>   #title()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 >>>
 >>>   #grid(
 >>>     columns: (1fr, 1fr),
@@ -925,113 +708,6 @@ between section and subsection headings:
 >>> #lorem(45)
 ```
 
-<<<<<<< HEAD
-うまくできました！
-全ての見出しに適用されるshowルールを使用しました。
-この関数にパラメータとして見出しを渡します。
-このパラメータはコンテンツとして使用することもできますが、`title`、`numbers`、`level`といったフィールドも持っているため、そこから独自の書式を構成することも可能です。
-ここではセンター揃えにし、見出しはデフォルトで太字なのでフォントのウェイトを `{"regular"}` に設定し、[`smallcaps`]($smallcaps) 関数を使って見出しのタイトルを小さな大文字でレンダリングしています。
-
-残る唯一の問題は、全ての見出しが同じように見えることです。
-MotivationとProblem Statementはサブセクションであり、イタリック体であるべきですが、今はセクションの見出しと見分けがつきません。
-この問題は、setルールに`where`セレクターを使うことで解決できます。
-これは、見出し（および他の要素）に対して呼び出せる[メソッド]($scripting/#methods)で、レベルごとにフィルタリングすることが可能です。
-これによりセクションとサブセクションの見出しを区別できます。
-
-```example:50,250,265,245
->>> #let title = [
->>>   A fluid dynamic model
->>>   for glacier flow
->>> ]
->>>
->>> #set text(font: "Libertinus Serif", 11pt)
->>> #set par(justify: true)
->>> #set page(
->>>   "us-letter",
->>>   margin: auto,
->>>   header: align(
->>>     right + horizon,
->>>     title
->>>   ),
->>>   numbering: "1",
->>>   columns: 2,
->>> )
->>>
-#show heading.where(
-  level: 1
-): it => block(width: 100%)[
-  #set align(center)
-  #set text(13pt, weight: "regular")
-  #smallcaps(it.body)
-]
-
-#show heading.where(
-  level: 2
-): it => text(
-  size: 11pt,
-  weight: "regular",
-  style: "italic",
-  it.body + [.],
-)
->>>
->>> #place(
->>>   top + center,
->>>   float: true,
->>>   scope: "parent",
->>>   clearance: 2em,
->>> )[
->>>   #text(
->>>     17pt,
->>>     weight: "bold",
->>>     title,
->>>   )
->>>
->>>  #grid(
->>>    columns: (1fr, 1fr),
->>>    [
->>>      Therese Tungsten \
->>>      Artos Institute \
->>>      #link("mailto:tung@artos.edu")
->>>    ],
->>>    [
->>>      Dr. John Doe \
->>>      Artos Institute \
->>>      #link("mailto:doe@artos.edu")
->>>    ]
->>>  )
->>>
->>>   #par(justify: false)[
->>>     *Abstract* \
->>>     #lorem(80)
->>>   ]
->>> ]
->>>
->>> = Introduction
->>> #lorem(35)
->>>
->>> == Motivation
->>> #lorem(45)
-```
-
-これは素晴らしい！
-第1レベルと第2レベルの見出しにそれぞれ選択的に適用される2つのshowルールを書きました。
-`where`セレクタを使用して、見出しをレベルでフィルタリングしました。
-そして、サブセクションの見出しを本文と改行せずにレンダリングしました。
-また、サブセクションの見出しの最後にピリオドを自動的に追加してます。
-
-ここで、学会のスタイルガイドを確認しましょう。
-
-- フォントは11ptのセリフ体 ✓
-- タイトルは17ptで太字 ✓
-- アブストラクトは1段組みで本文は2段組み ✓
-- アブストラクトは中央揃え ✓
-- 本文は両端揃え ✓
-- 第1レベルのセクションの見出しは13ptで中央に配置し、小さな大文字で表示 ✓
-- 第2レベルの見出しは斜体で、本文と同じ大きさ ✓
-- ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載 ✓
-
-これで、全てのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。
-=======
 In this example, we first scope our previous rules to first-level headings by
 using `{.where(level: 1)}` to make the selector more specific. Then, we add a
 show-set rule for the second heading level. Finally, we need a show rule with a
@@ -1051,37 +727,33 @@ not explicitly use `it.numbering` in the show rule. If you are writing show
 rules like this and want the document to remain customizable, you will need to
 take these fields into account.
 
-This looks great! We wrote show rules that selectively apply to the first and
-second level headings. We used a `where` selector to filter the headings by
-their level. We then rendered the subsection headings as run-ins. We
-also automatically add a period to the end of the subsection headings.
+これは素晴らしい！
+第1レベルと第2レベルの見出しにそれぞれ選択的に適用される2つのshowルールを書きました。
+`where`セレクタを使用して、見出しをレベルでフィルタリングしました。
+そして、サブセクションの見出しを本文と改行せずにレンダリングしました。
+また、サブセクションの見出しの最後にピリオドを自動的に追加してます。
 
-Let's review the conference's style guide:
-- The font should be an 11pt serif font ✓
-- The title should be in 17pt and bold ✓
-- The paper contains a single-column abstract and two-column main text ✓
-- The abstract should be centered ✓
-- The main text should be justified ✓
-- First level section headings should be centered, rendered in small caps and in
-  13pt ✓
-- Second level headings are run-ins, italicized and have the same size as the
-  body text ✓
-- Finally, the pages should be US letter sized, numbered in the center and the
-  top right corner of each page should contain the title of the paper ✓
+ここで、学会のスタイルガイドを確認しましょう。
 
-We are now in compliance with all of these styles and can submit the paper to
-the conference! The finished paper looks like this:
+- フォントは11ptのセリフ体 ✓
+- タイトルは17ptで太字 ✓
+- アブストラクトは1段組みで本文は2段組み ✓
+- アブストラクトは中央揃え ✓
+- 本文は両端揃え ✓
+- 第1レベルのセクションの見出しは13ptで中央に配置し、小さな大文字で表示 ✓
+- 第2レベルの見出しは斜体で、本文と同じ大きさ ✓
+- ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載 ✓
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+これで、全てのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。
 <img
   src="3-advanced-paper.png"
   alt="The finished paper"
   style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 500px; max-width: 100%; display: block; margin: 24px auto;"
 >
 
-<<<<<<< HEAD
 ## まとめ
 このセクションでは、ヘッダーとフッターの作成方法、関数とスコープを使用してローカルにスタイルをオーバーライドする方法、[`grid`]関数を使用してより複雑なレイアウトを作成する方法、個々の関数と文書全体のshowルールを記述する方法を学びました。
+You also learned how to access element properties with context.
 また、[`where`セレクタ]($styling/#show-rules)を使用して、見出しをそのレベルによってフィルタリングする方法も学びました。
 
 結果として論文は大成功でした！
@@ -1090,22 +762,3 @@ the conference! The finished paper looks like this:
 
 次のセクションでは、複数の文書で再利用できるテンプレートの作成方法を学びます。
 これはより高度なトピックですので、今すぐには手が出せないという方は、後ほどお気軽にお越しください。
-=======
-## Review
-You have now learned how to create titles, headers, and footers, how to use
-functions, show-set rules, and scopes to locally override styles, how to create
-more complex layouts with the [`grid`] function, how to access element
-properties with context, and how to write show rules for individual functions,
-and the whole document. You also learned how to use the [`where`
-selector]($styling/#show-rules) to filter the headings by their level.
-
-The paper was a great success! You've met a lot of like-minded researchers at
-the conference and are planning a project which you hope to publish at the same
-venue next year. You'll need to write a new paper using the same style guide
-though, so maybe now you want to create a time-saving template for you and your
-team?
-
-In the next section, we will learn how to create templates that can be reused in
-multiple documents. This is a more advanced topic, so feel free to come back
-to it later if you don't feel up to it right now.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

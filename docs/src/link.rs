@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-use typst::diag::{bail, StrResult};
-use typst::foundations::{Binding, Func};
-
-use crate::{get_module, GROUPS, LIBRARY};
-=======
 use regex::Regex;
 use typst::diag::{StrResult, bail};
 use typst::foundations::{Binding, Func, Type};
 
 use crate::{GROUPS, LIBRARY, get_module};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Resolve an intra-doc link.
 pub fn resolve(link: &str, base: &str) -> StrResult<String> {
@@ -17,9 +10,6 @@ pub fn resolve(link: &str, base: &str) -> StrResult<String> {
         return Ok(link.to_string());
     }
 
-<<<<<<< HEAD
-    let (head, tail) = split_link(link)?;
-=======
     if let Some(cap) =
         typst_utils::singleton!(Regex, Regex::new(r"^\$((\w+)\/(\w+))?#(\d+)$").unwrap())
             .captures(link)
@@ -31,7 +21,6 @@ pub fn resolve(link: &str, base: &str) -> StrResult<String> {
     }
 
     let (head, tail) = split_link(link);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut route = match resolve_known(head, base) {
         Some(route) => route,
         None => resolve_definition(head, base)?,
@@ -50,17 +39,10 @@ pub fn resolve(link: &str, base: &str) -> StrResult<String> {
 }
 
 /// Split a link at the first slash.
-<<<<<<< HEAD
-fn split_link(link: &str) -> StrResult<(&str, &str)> {
-    let first = link.split('/').next().unwrap_or(link);
-    let rest = link[first.len()..].trim_start_matches('/');
-    Ok((first, rest))
-=======
 fn split_link(link: &str) -> (&str, &str) {
     let first = link.split('/').next().unwrap_or(link);
     let rest = link[first.len()..].trim_start_matches('/');
     (first, rest)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Resolve a `$` link head to a known destination.
@@ -77,10 +59,7 @@ fn resolve_known(head: &str, base: &str) -> Option<String> {
         "$pdf" => format!("{base}reference/pdf"),
         "$guides" => format!("{base}guides"),
         "$changelog" => format!("{base}changelog"),
-<<<<<<< HEAD
         "$japanese" => format!("{base}japanese"),
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         "$universe" => "https://typst.app/universe".into(),
         _ => return None,
     })
@@ -127,12 +106,6 @@ fn resolve_definition(head: &str, base: &str) -> StrResult<String> {
     let mut route = format!("{}reference/{}/{name}", base, category.name());
     if let Some(next) = parts.next() {
         if let Ok(field) = value.field(next, ()) {
-<<<<<<< HEAD
-            route.push_str("/#definitions-");
-            route.push_str(next);
-            if let Some(next) = parts.next() {
-                if field.cast::<Func>().is_ok_and(|func| func.param(next).is_some()) {
-=======
             // For top-level definitions
             route.push_str("/#definitions-");
             route.push_str(next);
@@ -151,13 +124,10 @@ fn resolve_definition(head: &str, base: &str) -> StrResult<String> {
                     .is_ok_and(|func| func.param(next).is_some())
                 {
                     // For parameters
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     route.push('-');
                     route.push_str(next);
                 }
             }
-<<<<<<< HEAD
-=======
         } else if let Ok(ty) = value.clone().cast::<Type>()
             && let Ok(func) = ty.constructor()
             && func.param(next).is_some()
@@ -165,34 +135,25 @@ fn resolve_definition(head: &str, base: &str) -> StrResult<String> {
             // For parameters of a constructor function
             route.push_str("/#constructor-");
             route.push_str(next);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         } else if value
             .clone()
             .cast::<Func>()
             .is_ok_and(|func| func.param(next).is_some())
         {
-<<<<<<< HEAD
-=======
             // For parameters of a function (except for constructor functions)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             route.push_str("/#parameters-");
             route.push_str(next);
         } else {
             bail!("field {next} not found");
         }
-<<<<<<< HEAD
-=======
 
         if let Some(next) = parts.next() {
             bail!("found redundant field {next}");
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     Ok(route)
 }
-<<<<<<< HEAD
-=======
 
 #[cfg(test)]
 mod tests {
@@ -300,4 +261,3 @@ mod tests {
         );
     }
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

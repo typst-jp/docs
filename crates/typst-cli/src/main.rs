@@ -1,17 +1,11 @@
 mod args;
 mod compile;
-<<<<<<< HEAD
-mod download;
-mod fonts;
-mod greet;
-=======
 mod completions;
 mod deps;
 mod download;
 mod fonts;
 mod greet;
 mod info;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 mod init;
 mod package;
 mod query;
@@ -29,15 +23,6 @@ use std::io::{self, Write};
 use std::process::ExitCode;
 use std::sync::LazyLock;
 
-<<<<<<< HEAD
-use clap::error::ErrorKind;
-use clap::Parser;
-use codespan_reporting::term;
-use codespan_reporting::term::termcolor::WriteColor;
-use typst::diag::HintedStrResult;
-
-use crate::args::{CliArguments, Command};
-=======
 use clap::Parser;
 use clap::error::ErrorKind;
 use codespan_reporting::term;
@@ -47,7 +32,6 @@ use serde::Serialize;
 use typst::diag::{HintedStrResult, StrResult};
 
 use crate::args::{CliArguments, Command, SerializationFormat};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::timings::Timer;
 
 thread_local! {
@@ -76,12 +60,9 @@ fn main() -> ExitCode {
     if let Err(msg) = res {
         set_failed();
         print_error(msg.message()).expect("failed to print error");
-<<<<<<< HEAD
-=======
         for hint in msg.hints() {
             print_hint(hint).expect("failed to print hint");
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     EXIT.with(|cell| cell.get())
@@ -98,11 +79,8 @@ fn dispatch() -> HintedStrResult<()> {
         Command::Query(command) => crate::query::query(command)?,
         Command::Fonts(command) => crate::fonts::fonts(command),
         Command::Update(command) => crate::update::update(command)?,
-<<<<<<< HEAD
-=======
         Command::Completions(command) => crate::completions::completions(command),
         Command::Info(command) => crate::info::info(command)?,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     Ok(())
@@ -118,14 +96,11 @@ fn typst_version() -> &'static str {
     env!("TYPST_VERSION")
 }
 
-<<<<<<< HEAD
-=======
 /// Used by `args.rs`.
 fn typst_commit_sha() -> &'static str {
     env!("TYPST_COMMIT_SHA")
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Print an application-level error (independent from a source file).
 fn print_error(msg: &str) -> io::Result<()> {
     let styles = term::Styles::default();
@@ -138,11 +113,6 @@ fn print_error(msg: &str) -> io::Result<()> {
     writeln!(output, ": {msg}")
 }
 
-<<<<<<< HEAD
-#[cfg(not(feature = "self-update"))]
-mod update {
-    use typst::diag::{bail, StrResult};
-=======
 /// Print an application-level hint (independent from a source file).
 fn print_hint(msg: &str) -> io::Result<()> {
     let styles = term::Styles::default();
@@ -179,7 +149,6 @@ fn serialize(
 #[cfg(not(feature = "self-update"))]
 mod update {
     use typst::diag::{StrResult, bail};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     use crate::args::UpdateCommand;
 

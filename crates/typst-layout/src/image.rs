@@ -1,28 +1,11 @@
-<<<<<<< HEAD
-use std::ffi::OsStr;
-
-use typst_library::diag::{warning, At, SourceResult, StrResult};
-use typst_library::engine::Engine;
-use typst_library::foundations::{Bytes, Derived, Packed, Smart, StyleChain};
-=======
 use typst_library::diag::SourceResult;
 use typst_library::engine::Engine;
 use typst_library::foundations::{Packed, StyleChain};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::introspection::Locator;
 use typst_library::layout::{
     Abs, Axes, FixedAlignment, Frame, FrameItem, Point, Region, Size,
 };
-<<<<<<< HEAD
-use typst_library::loading::DataSource;
-use typst_library::text::families;
-use typst_library::visualize::{
-    Curve, ExchangeFormat, Image, ImageElem, ImageFit, ImageFormat, ImageKind,
-    RasterImage, SvgImage, VectorFormat,
-};
-=======
 use typst_library::visualize::{Curve, Image, ImageElem, ImageFit};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Layout the image.
 #[typst_macros::time(span = elem.span())]
@@ -33,57 +16,7 @@ pub fn layout_image(
     styles: StyleChain,
     region: Region,
 ) -> SourceResult<Frame> {
-<<<<<<< HEAD
-    let span = elem.span();
-
-    // Take the format that was explicitly defined, or parse the extension,
-    // or try to detect the format.
-    let Derived { source, derived: data } = &elem.source;
-    let format = match elem.format(styles) {
-        Smart::Custom(v) => v,
-        Smart::Auto => determine_format(source, data).at(span)?,
-    };
-
-    // Warn the user if the image contains a foreign object. Not perfect
-    // because the svg could also be encoded, but that's an edge case.
-    if format == ImageFormat::Vector(VectorFormat::Svg) {
-        let has_foreign_object =
-            data.as_str().is_ok_and(|s| s.contains("<foreignObject"));
-
-        if has_foreign_object {
-            engine.sink.warn(warning!(
-                span,
-                "image contains foreign object";
-                hint: "SVG images with foreign objects might render incorrectly in typst";
-                hint: "see https://github.com/typst/typst/issues/1421 for more information"
-            ));
-        }
-    }
-
-    // Construct the image itself.
-    let kind = match format {
-        ImageFormat::Raster(format) => ImageKind::Raster(
-            RasterImage::new(
-                data.clone(),
-                format,
-                elem.icc(styles).as_ref().map(|icc| icc.derived.clone()),
-            )
-            .at(span)?,
-        ),
-        ImageFormat::Vector(VectorFormat::Svg) => ImageKind::Svg(
-            SvgImage::with_fonts(
-                data.clone(),
-                engine.world,
-                &families(styles).map(|f| f.as_str()).collect::<Vec<_>>(),
-            )
-            .at(span)?,
-        ),
-    };
-
-    let image = Image::new(kind, elem.alt(styles), elem.scaling(styles));
-=======
     let image = elem.decode(engine, styles)?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Determine the image's pixel aspect ratio.
     let pxw = image.width();
@@ -120,11 +53,7 @@ pub fn layout_image(
     };
 
     // Compute the actual size of the fitted image.
-<<<<<<< HEAD
-    let fit = elem.fit(styles);
-=======
     let fit = elem.fit.get(styles);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let fitted = match fit {
         ImageFit::Cover | ImageFit::Contain => {
             if wide == (fit == ImageFit::Contain) {
@@ -140,11 +69,7 @@ pub fn layout_image(
     // the frame to the target size, center aligning the image in the
     // process.
     let mut frame = Frame::soft(fitted);
-<<<<<<< HEAD
-    frame.push(Point::zero(), FrameItem::Image(image, fitted, span));
-=======
     frame.push(Point::zero(), FrameItem::Image(image, fitted, elem.span()));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     frame.resize(target, Axes::splat(FixedAlignment::Center));
 
     // Create a clipping group if only part of the image should be visible.
@@ -154,27 +79,3 @@ pub fn layout_image(
 
     Ok(frame)
 }
-<<<<<<< HEAD
-
-/// Try to determine the image format based on the data.
-fn determine_format(source: &DataSource, data: &Bytes) -> StrResult<ImageFormat> {
-    if let DataSource::Path(path) = source {
-        let ext = std::path::Path::new(path.as_str())
-            .extension()
-            .and_then(OsStr::to_str)
-            .unwrap_or_default()
-            .to_lowercase();
-
-        match ext.as_str() {
-            "png" => return Ok(ExchangeFormat::Png.into()),
-            "jpg" | "jpeg" => return Ok(ExchangeFormat::Jpg.into()),
-            "gif" => return Ok(ExchangeFormat::Gif.into()),
-            "svg" | "svgz" => return Ok(VectorFormat::Svg.into()),
-            _ => {}
-        }
-    }
-
-    Ok(ImageFormat::detect(data).ok_or("unknown image format")?)
-}
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

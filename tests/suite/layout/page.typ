@@ -246,8 +246,6 @@ Look, ma, no page numbers!
 #set page(header: auto, footer: auto)
 Default page numbers now.
 
-<<<<<<< HEAD
-=======
 --- page-numbering-huge ---
 #set page(margin: (bottom: 20pt, rest: 0pt))
 #let filler = lines(1)
@@ -258,7 +256,6 @@ Default page numbers now.
 #pagebreak()
 #pagebreak()
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- page-marginal-style-text-set ---
 #set page(numbering: "1", margin: (bottom: 20pt))
 #set text(red)

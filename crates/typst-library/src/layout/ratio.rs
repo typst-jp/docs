@@ -4,28 +4,11 @@ use std::ops::{Add, Div, Mul, Neg};
 use ecow::EcoString;
 use typst_utils::{Numeric, Scalar};
 
-<<<<<<< HEAD
-use crate::foundations::{repr, ty, Repr};
+use crate::foundations::{Repr, repr, ty};
 
 /// 百分率。
 ///
 /// 数値の後にパーセント記号を付けて表記します。
-///
-/// # 例
-/// ```example
-/// #set align(center)
-/// #scale(x: 150%)[
-///   Scaled apart.
-/// ]
-/// ```
-=======
-use crate::foundations::{Repr, repr, ty};
-
-/// A ratio of a whole.
-///
-/// A ratio is written as a number, followed by a percent sign. Ratios most
-/// often appear as part of a [relative length]($relative), to specify the size
-/// of some layout element relative to the page or some container.
 ///
 /// ```example
 /// #rect(width: 25%)
@@ -52,7 +35,6 @@ use crate::foundations::{Repr, repr, ty};
 ///
 /// When ratios are [displayed]($repr) in the document, they are rounded to two
 /// significant digits for readability.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[ty(cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Ratio(Scalar);
@@ -96,15 +78,7 @@ impl Ratio {
     /// Return the ratio of the given `whole`.
     pub fn of<T: Numeric>(self, whole: T) -> T {
         let resolved = whole * self.get();
-<<<<<<< HEAD
-        if resolved.is_finite() {
-            resolved
-        } else {
-            T::zero()
-        }
-=======
         if resolved.is_finite() { resolved } else { T::zero() }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

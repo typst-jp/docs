@@ -1,8 +1,4 @@
-<<<<<<< HEAD
---- outline-spacing ---
-=======
 --- outline-spacing render pdftags ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set heading(numbering: "1.a.")
 #set outline.entry(fill: none)
 #show outline.entry.where(level: 1): set block(above: 1.2em)
@@ -256,8 +252,6 @@ A
 = B
 = C
 
-<<<<<<< HEAD
-=======
 --- outline-html html ---
 #set heading(numbering: "1.1.")
 
@@ -283,7 +277,6 @@ A
 #set text(lang: "de")
 #figure([C], caption: figure.caption(separator: " ~ ")[Das C])
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-2048-outline-multiline ---
 // Without the word joiner between the dots and the page number,
 // the page number would be alone in its line.

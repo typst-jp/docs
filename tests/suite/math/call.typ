@@ -80,11 +80,7 @@ $args(..(a + b))$
 
 --- math-call-spread-multiple-exprs ---
 #let args(..body) = body
-<<<<<<< HEAD
-// Error: 10 expected comma or semicolon
-=======
 // Error: 7-14 cannot spread content
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 $args(..a + b)$
 
 --- math-call-spread-unexpected-dots ---
@@ -96,8 +92,6 @@ $args(#..range(1, 5).chunks(2))$
 #let func(body) = body
 $func(...)$
 
-<<<<<<< HEAD
-=======
 --- math-call-spread-empty ---
 // Test that a spread operator followed by nothing generates two dots.
 #let args(..body) = body
@@ -124,7 +118,6 @@ $func(...)$
 // Error: 22-23 duplicate argument: a
 $func(a: #2, ..dict, a: #3)$
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- math-call-spread-repr ---
 #let args(..body) = body
 #let check(it, r) = test-repr(it.body.text, r)
@@ -254,8 +247,6 @@ $
 // Hint: 4-6 or if you meant to display this as text, try placing it in quotes: `"ab"`
 $ 5ab $
 
-<<<<<<< HEAD
-=======
 --- math-call-symbol ---
 $ phi(x) $
 $ phi(x, y) $
@@ -265,7 +256,6 @@ $ phi(1,2,,3,) $
 // Error: 10-18 unexpected argument: alpha
 $ phi(x, alpha: y) $
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-3774-math-call-empty-2d-args ---
 $ mat(;,) $
 // Add some whitespace/trivia:
@@ -285,8 +275,6 @@ $ mat(
 // Error: 7-10 unknown variable: rgb
 // Hint: 7-10 `rgb` is not available directly in math, try adding a hash before it: `#rgb`
 $text(rgb(0, 0, 0), "foo")$
-<<<<<<< HEAD
-=======
 
 --- math-call-error ---
 // Test the span of errors when calling a function.
@@ -301,4 +289,3 @@ $ int(
   // Error: 3-8 missing argument: value
   int()
 ) $
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

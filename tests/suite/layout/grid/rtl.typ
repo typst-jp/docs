@@ -193,8 +193,6 @@
   ),
   ..range(0, 10).map(i => ([\##i], table.cell(stroke: green)[123], table.cell(stroke: blue)[456], [789], [?], table.hline(start: 4, end: 5, stroke: red))).flatten()
 )
-<<<<<<< HEAD
-=======
 
 --- grid-rtl-counter ---
 // Test interaction between RTL and counters
@@ -335,4 +333,3 @@
     #context test.get().first()
   ]
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -8,13 +8,8 @@ use typst_library::introspection::{
     SplitLocator, Tag,
 };
 use typst_library::layout::{
-<<<<<<< HEAD
-    Abs, Axes, Dir, FixedAlignment, Fragment, Frame, FrameItem, OuterHAlignment,
-    PlacementScope, Point, Region, Regions, Rel, Size,
-=======
     Abs, Axes, Dir, FixedAlignment, Fragment, Frame, FrameItem, FrameParent, Inherit,
     OuterHAlignment, PlacementScope, Point, Region, Regions, Rel, Size,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use typst_library::model::{
     FootnoteElem, FootnoteEntry, LineNumberingScope, Numbering, ParLineMarker,
@@ -23,11 +18,7 @@ use typst_syntax::Span;
 use typst_utils::{NonZeroExt, Numeric};
 
 use super::{
-<<<<<<< HEAD
-    distribute, Config, FlowMode, FlowResult, LineNumberConfig, PlacedChild, Stop, Work,
-=======
     Config, FlowMode, FlowResult, LineNumberConfig, PlacedChild, Stop, Work, distribute,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// Composes the contents of a single page/region. A region can have multiple
@@ -124,11 +115,7 @@ impl<'a, 'b> Composer<'a, 'b, '_, '_> {
         let column_height = regions.size.y;
         let backlog: Vec<_> = std::iter::once(&column_height)
             .chain(regions.backlog)
-<<<<<<< HEAD
-            .flat_map(|&h| std::iter::repeat(h).take(self.config.columns.count))
-=======
             .flat_map(|&h| std::iter::repeat_n(h, self.config.columns.count))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .skip(1)
             .collect();
 
@@ -332,15 +319,7 @@ impl<'a, 'b> Composer<'a, 'b, '_, '_> {
             let used = base.y - remaining;
             let half = need / 2.0;
             let ratio = (used + half) / base.y;
-<<<<<<< HEAD
-            if ratio <= 0.5 {
-                FixedAlignment::Start
-            } else {
-                FixedAlignment::End
-            }
-=======
             if ratio <= 0.5 { FixedAlignment::Start } else { FixedAlignment::End }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         });
 
         // Select the insertion area where we'll put this float.
@@ -382,11 +361,7 @@ impl<'a, 'b> Composer<'a, 'b, '_, '_> {
         // Search for footnotes.
         let mut notes = vec![];
         for tag in &self.work.tags {
-<<<<<<< HEAD
-            let Tag::Start(elem) = tag else { continue };
-=======
             let Tag::Start(elem, _) = tag else { continue };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             let Some(note) = elem.to_packed::<FootnoteElem>() else { continue };
             notes.push((Abs::zero(), note.clone()));
         }
@@ -626,27 +601,19 @@ fn layout_footnote(
     let loc = elem.location().unwrap();
     crate::layout_fragment(
         engine,
-<<<<<<< HEAD
-        &FootnoteEntry::new(elem.clone()).pack(),
-=======
         &FootnoteEntry::new(elem.clone())
             .pack()
             .spanned(elem.span())
             // We attach a well-known derived location to the entry so that the
             // note can link to this entry without first querying for it.
             .located(loc.variant(1)),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Locator::synthesize(loc),
         config.shared,
         pod,
     )
     .map(|mut fragment| {
         for frame in &mut fragment {
-<<<<<<< HEAD
-            frame.set_parent(loc);
-=======
             frame.set_parent(FrameParent::new(loc, Inherit::No));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         fragment
     })
@@ -701,11 +668,7 @@ impl<'a, 'b> Insertions<'a, 'b> {
         self.footnote_separator = Some(frame);
     }
 
-<<<<<<< HEAD
-    /// The combined height of the top and bottom area (includings clearances).
-=======
     /// The combined height of the top and bottom area (including clearances).
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Subtracting this from the total region size yields the available space
     /// for distribution.
     fn height(&self) -> Abs {
@@ -889,11 +852,7 @@ fn layout_line_number_reset(
     config: &Config,
     locator: &mut SplitLocator,
 ) -> SourceResult<Frame> {
-<<<<<<< HEAD
-    let counter = Counter::of(ParLineMarker::elem());
-=======
     let counter = Counter::of(ParLineMarker::ELEM);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let update = CounterUpdate::Set(CounterState::init(false));
     let content = counter.update(Span::detached(), update);
     crate::layout_frame(
@@ -921,11 +880,7 @@ fn layout_line_number(
     locator: &mut SplitLocator,
     numbering: &Numbering,
 ) -> SourceResult<Frame> {
-<<<<<<< HEAD
-    let counter = Counter::of(ParLineMarker::elem());
-=======
     let counter = Counter::of(ParLineMarker::ELEM);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let update = CounterUpdate::Step(NonZeroUsize::ONE);
     let numbering = Smart::Custom(numbering.clone());
 
@@ -980,11 +935,7 @@ fn find_in_frame_impl<T: NativeElement>(
         let y = y_offset + pos.y;
         match item {
             FrameItem::Group(group) => find_in_frame_impl(output, &group.frame, y),
-<<<<<<< HEAD
-            FrameItem::Tag(Tag::Start(elem)) => {
-=======
             FrameItem::Tag(Tag::Start(elem, _)) => {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 if let Some(elem) = elem.to_packed::<T>() {
                     output.push((y, elem.clone()));
                 }

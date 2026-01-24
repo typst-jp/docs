@@ -1,16 +1,5 @@
 use std::fmt::Write;
 
-<<<<<<< HEAD
-use typst_library::diag::{bail, At, SourceResult, StrResult};
-use typst_library::foundations::Repr;
-use typst_library::html::{charsets, tag, HtmlDocument, HtmlElement, HtmlNode, HtmlTag};
-use typst_library::layout::Frame;
-use typst_syntax::Span;
-
-/// Encodes an HTML document into a string.
-pub fn html(document: &HtmlDocument) -> SourceResult<String> {
-    let mut w = Writer { pretty: true, ..Writer::default() };
-=======
 use ecow::{EcoString, eco_format};
 use typst_library::diag::{At, SourceResult, StrResult, bail};
 use typst_library::foundations::Repr;
@@ -24,7 +13,6 @@ use crate::{
 /// Encodes an HTML document into a string.
 pub fn html(document: &HtmlDocument) -> SourceResult<String> {
     let mut w = Writer::new(&document.introspector, true);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     w.buf.push_str("<!DOCTYPE html>");
     write_indent(&mut w);
     write_element(&mut w, &document.root)?;
@@ -34,29 +22,18 @@ pub fn html(document: &HtmlDocument) -> SourceResult<String> {
     Ok(w.buf)
 }
 
-<<<<<<< HEAD
-#[derive(Default)]
-struct Writer {
-=======
 /// Encodes HTML.
 struct Writer<'a> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The output buffer.
     buf: String,
     /// The current indentation level
     level: usize,
-<<<<<<< HEAD
-=======
     /// The document's introspector.
     introspector: &'a Introspector,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Whether pretty printing is enabled.
     pretty: bool,
 }
 
-<<<<<<< HEAD
-/// Write a newline and indent, if pretty printing is enabled.
-=======
 impl<'a> Writer<'a> {
     /// Creates a new writer.
     fn new(introspector: &'a Introspector, pretty: bool) -> Self {
@@ -65,7 +42,6 @@ impl<'a> Writer<'a> {
 }
 
 /// Writes a newline and indent, if pretty printing is enabled.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 fn write_indent(w: &mut Writer) {
     if w.pretty {
         w.buf.push('\n');
@@ -75,34 +51,17 @@ fn write_indent(w: &mut Writer) {
     }
 }
 
-<<<<<<< HEAD
-/// Encode an HTML node into the writer.
-fn write_node(w: &mut Writer, node: &HtmlNode) -> SourceResult<()> {
-    match node {
-        HtmlNode::Tag(_) => {}
-        HtmlNode::Text(text, span) => write_text(w, text, *span)?,
-=======
 /// Encodes an HTML node into the writer.
 fn write_node(w: &mut Writer, node: &HtmlNode, escape_text: bool) -> SourceResult<()> {
     match node {
         HtmlNode::Tag(_) => {}
         HtmlNode::Text(text, span) => write_text(w, text, *span, escape_text)?,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         HtmlNode::Element(element) => write_element(w, element)?,
         HtmlNode::Frame(frame) => write_frame(w, frame),
     }
     Ok(())
 }
 
-<<<<<<< HEAD
-/// Encode plain text into the writer.
-fn write_text(w: &mut Writer, text: &str, span: Span) -> SourceResult<()> {
-    for c in text.chars() {
-        if charsets::is_valid_in_normal_element_text(c) {
-            w.buf.push(c);
-        } else {
-            write_escape(w, c).at(span)?;
-=======
 /// Encodes plain text into the writer.
 fn write_text(w: &mut Writer, text: &str, span: Span, escape: bool) -> SourceResult<()> {
     for c in text.chars() {
@@ -110,17 +69,12 @@ fn write_text(w: &mut Writer, text: &str, span: Span, escape: bool) -> SourceRes
             write_escape(w, c).at(span)?;
         } else {
             w.buf.push(c);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
     Ok(())
 }
 
-<<<<<<< HEAD
-/// Encode one element into the write.
-=======
 /// Encodes one element into the writer.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 fn write_element(w: &mut Writer, element: &HtmlElement) -> SourceResult<()> {
     w.buf.push('<');
     w.buf.push_str(&element.tag.resolve());
@@ -128,18 +82,6 @@ fn write_element(w: &mut Writer, element: &HtmlElement) -> SourceResult<()> {
     for (attr, value) in &element.attrs.0 {
         w.buf.push(' ');
         w.buf.push_str(&attr.resolve());
-<<<<<<< HEAD
-        w.buf.push('=');
-        w.buf.push('"');
-        for c in value.chars() {
-            if charsets::is_valid_in_attribute_value(c) {
-                w.buf.push(c);
-            } else {
-                write_escape(w, c).at(element.span)?;
-            }
-        }
-        w.buf.push('"');
-=======
 
         // If the string is empty, we can use shorthand syntax.
         // `<elem attr="">..</div` is equivalent to `<elem attr>..</div>`
@@ -155,47 +97,11 @@ fn write_element(w: &mut Writer, element: &HtmlElement) -> SourceResult<()> {
             }
             w.buf.push('"');
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     w.buf.push('>');
 
     if tag::is_void(element.tag) {
-<<<<<<< HEAD
-        return Ok(());
-    }
-
-    let pretty = w.pretty;
-    if !element.children.is_empty() {
-        let pretty_inside = allows_pretty_inside(element.tag)
-            && element.children.iter().any(|node| match node {
-                HtmlNode::Element(child) => wants_pretty_around(child.tag),
-                _ => false,
-            });
-
-        w.pretty &= pretty_inside;
-        let mut indent = w.pretty;
-
-        w.level += 1;
-        for c in &element.children {
-            let pretty_around = match c {
-                HtmlNode::Tag(_) => continue,
-                HtmlNode::Element(child) => w.pretty && wants_pretty_around(child.tag),
-                HtmlNode::Text(..) | HtmlNode::Frame(_) => false,
-            };
-
-            if core::mem::take(&mut indent) || pretty_around {
-                write_indent(w);
-            }
-            write_node(w, c)?;
-            indent = pretty_around;
-        }
-        w.level -= 1;
-
-        write_indent(w);
-    }
-    w.pretty = pretty;
-=======
         if !element.children.is_empty() {
             bail!(element.span, "HTML void elements must not have children");
         }
@@ -214,7 +120,6 @@ fn write_element(w: &mut Writer, element: &HtmlElement) -> SourceResult<()> {
     } else if !element.children.is_empty() {
         write_children(w, element)?;
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     w.buf.push_str("</");
     w.buf.push_str(&element.tag.resolve());
@@ -223,8 +128,6 @@ fn write_element(w: &mut Writer, element: &HtmlElement) -> SourceResult<()> {
     Ok(())
 }
 
-<<<<<<< HEAD
-=======
 /// Encodes the children of an element.
 fn write_children(w: &mut Writer, element: &HtmlElement) -> SourceResult<()> {
     let pretty = w.pretty;
@@ -387,7 +290,6 @@ impl RawMode {
     }
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Whether we are allowed to add an extra newline at the start and end of the
 /// element's contents.
 ///
@@ -423,22 +325,11 @@ fn write_escape(w: &mut Writer, c: char) -> StrResult<()> {
         c if charsets::is_w3c_text_char(c) && c != '\r' => {
             write!(w.buf, "&#x{:x};", c as u32).unwrap()
         }
-<<<<<<< HEAD
-        _ => bail!("the character {} cannot be encoded in HTML", c.repr()),
-=======
         _ => return Err(unencodable(c)),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
     Ok(())
 }
 
-<<<<<<< HEAD
-/// Encode a laid out frame into the writer.
-fn write_frame(w: &mut Writer, frame: &Frame) {
-    // FIXME: This string replacement is obviously a hack.
-    let svg = typst_svg::svg_frame(frame)
-        .replace("<svg class", "<svg style=\"overflow: visible;\" class");
-=======
 /// The error message for a character that cannot be encoded.
 #[cold]
 fn unencodable(c: char) -> EcoString {
@@ -454,6 +345,5 @@ fn write_frame(w: &mut Writer, frame: &HtmlFrame) {
         &frame.link_points,
         w.introspector,
     );
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     w.buf.push_str(&svg);
 }

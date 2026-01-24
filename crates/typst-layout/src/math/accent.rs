@@ -1,11 +1,4 @@
 use typst_library::diag::SourceResult;
-<<<<<<< HEAD
-use typst_library::foundations::{Packed, StyleChain};
-use typst_library::layout::{Em, Frame, Point, Size};
-use typst_library::math::{Accent, AccentElem};
-
-use super::{style_cramped, FrameFragment, GlyphFragment, MathContext, MathFragment};
-=======
 use typst_library::foundations::{Packed, StyleChain, SymbolElem};
 use typst_library::layout::{Em, Frame, Point, Size};
 use typst_library::math::AccentElem;
@@ -13,7 +6,6 @@ use typst_library::math::AccentElem;
 use super::{
     FrameFragment, MathContext, MathFragment, style_cramped, style_dtls, style_flac,
 };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// How much the accent can be shorter than the base.
 const ACCENT_SHORT_FALL: Em = Em::new(0.5);
@@ -25,15 +17,6 @@ pub fn layout_accent(
     ctx: &mut MathContext,
     styles: StyleChain,
 ) -> SourceResult<()> {
-<<<<<<< HEAD
-    let cramped = style_cramped();
-    let mut base = ctx.layout_into_fragment(&elem.base, styles.chain(&cramped))?;
-
-    // Try to replace a glyph with its dotless variant.
-    if let MathFragment::Glyph(glyph) = &mut base {
-        glyph.make_dotless_form(ctx);
-    }
-=======
     let accent = elem.accent;
     let top_accent = !accent.is_bottom();
 
@@ -47,45 +30,11 @@ pub fn layout_accent(
     let base = ctx.layout_into_fragment(&elem.base, base_styles)?;
 
     let (font, size) = base.font(ctx, base_styles);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Preserve class to preserve automatic spacing.
     let base_class = base.class();
     let base_attach = base.accent_attach();
 
-<<<<<<< HEAD
-    let width = elem.size(styles).relative_to(base.width());
-
-    let Accent(c) = elem.accent;
-    let mut glyph = GlyphFragment::new(ctx, styles, c, elem.span());
-
-    // Try to replace accent glyph with flattened variant.
-    let flattened_base_height = scaled!(ctx, styles, flattened_accent_base_height);
-    if base.height() > flattened_base_height {
-        glyph.make_flattened_accent_form(ctx);
-    }
-
-    // Forcing the accent to be at least as large as the base makes it too
-    // wide in many case.
-    let short_fall = ACCENT_SHORT_FALL.at(glyph.font_size);
-    let variant = glyph.stretch_horizontal(ctx, width, short_fall);
-    let accent = variant.frame;
-    let accent_attach = variant.accent_attach;
-
-    // Descent is negative because the accent's ink bottom is above the
-    // baseline. Therefore, the default gap is the accent's negated descent
-    // minus the accent base height. Only if the base is very small, we need
-    // a larger gap so that the accent doesn't move too low.
-    let accent_base_height = scaled!(ctx, styles, accent_base_height);
-    let gap = -accent.descent() - base.height().min(accent_base_height);
-    let size = Size::new(base.width(), accent.height() + gap + base.height());
-    let accent_pos = Point::with_x(base_attach - accent_attach);
-    let base_pos = Point::with_y(accent.height() + gap);
-    let baseline = base_pos.y + base.ascent();
-    let base_italics_correction = base.italics_correction();
-    let base_text_like = base.is_text_like();
-
-=======
     // Try to replace the accent glyph with its flattened variant.
     let flattened_base_height = font.math().flattened_accent_base_height.at(size);
     let flac = style_flac();
@@ -130,18 +79,14 @@ pub fn layout_accent(
 
     let base_italics_correction = base.italics_correction();
     let base_text_like = base.is_text_like();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let base_ascent = match &base {
         MathFragment::Frame(frame) => frame.base_ascent,
         _ => base.ascent(),
     };
-<<<<<<< HEAD
-=======
     let base_descent = match &base {
         MathFragment::Frame(frame) => frame.base_descent,
         _ => base.descent(),
     };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     let mut frame = Frame::soft(size);
     frame.set_baseline(baseline);
@@ -151,10 +96,7 @@ pub fn layout_accent(
         FrameFragment::new(styles, frame)
             .with_class(base_class)
             .with_base_ascent(base_ascent)
-<<<<<<< HEAD
-=======
             .with_base_descent(base_descent)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .with_italics_correction(base_italics_correction)
             .with_accent_attach(base_attach)
             .with_text_like(base_text_like),

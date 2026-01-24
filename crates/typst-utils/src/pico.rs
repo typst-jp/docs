@@ -1,32 +1,17 @@
 use std::borrow::Borrow;
 use std::cmp::Ordering;
-<<<<<<< HEAD
-use std::collections::HashMap;
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::fmt::{self, Debug, Display, Formatter};
 use std::hash::{Hash, Hasher};
 use std::num::NonZeroU64;
 use std::ops::Deref;
 use std::sync::{LazyLock, RwLock};
 
-<<<<<<< HEAD
-=======
 use rustc_hash::FxHashMap;
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Marks a number as a bitcode encoded `PicoStr``.
 const MARKER: u64 = 1 << 63;
 
 /// The global runtime string interner.
-<<<<<<< HEAD
-static INTERNER: LazyLock<RwLock<Interner>> =
-    LazyLock::new(|| RwLock::new(Interner { seen: HashMap::new(), strings: Vec::new() }));
-
-/// A string interner.
-struct Interner {
-    seen: HashMap<&'static str, PicoStr>,
-=======
 static INTERNER: LazyLock<RwLock<Interner>> = LazyLock::new(|| {
     RwLock::new(Interner { seen: FxHashMap::default(), strings: Vec::new() })
 });
@@ -34,7 +19,6 @@ static INTERNER: LazyLock<RwLock<Interner>> = LazyLock::new(|| {
 /// A string interner.
 struct Interner {
     seen: FxHashMap<&'static str, PicoStr>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     strings: Vec<&'static str>,
 }
 
@@ -83,8 +67,6 @@ impl PicoStr {
         id
     }
 
-<<<<<<< HEAD
-=======
     /// Try to create a `PicoStr`, but don't intern it if it does not exist yet.
     ///
     /// This is useful to try to compare against one or multiple `PicoStr`
@@ -102,7 +84,6 @@ impl PicoStr {
         interner.seen.get(string).copied()
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Creates a compile-time constant `PicoStr`.
     ///
     /// Should only be used in const contexts because it can panic.
@@ -110,11 +91,7 @@ impl PicoStr {
     pub const fn constant(string: &'static str) -> PicoStr {
         match PicoStr::try_constant(string) {
             Ok(value) => value,
-<<<<<<< HEAD
-            Err(err) => panic!("{}", err.message()),
-=======
             Err(err) => failed_to_compile_time_intern(err, string),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -137,14 +114,7 @@ impl PicoStr {
             }
         };
 
-<<<<<<< HEAD
-        match NonZeroU64::new(value) {
-            Some(value) => Ok(Self(value)),
-            None => unreachable!(),
-        }
-=======
         Ok(Self(NonZeroU64::new(value).unwrap()))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Resolve to a decoded string.
@@ -239,21 +209,9 @@ mod bitcode {
     impl EncodingError {
         pub const fn message(&self) -> &'static str {
             match self {
-<<<<<<< HEAD
-                Self::TooLong => {
-                    "the maximum auto-internible string length is 12. \
-                     you can add an exception to typst-utils/src/pico.rs \
-                     to intern longer strings."
-                }
-                Self::BadChar => {
-                    "can only auto-intern the chars 'a'-'z', '1'-'4', and '-'. \
-                     you can add an exception to typst-utils/src/pico.rs \
-                     to intern other strings."
-=======
                 Self::TooLong => "the maximum auto-internible string length is 12",
                 Self::BadChar => {
                     "can only auto-intern the chars 'a'-'z', '1'-'4', and '-'"
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
             }
         }
@@ -265,11 +223,6 @@ mod exceptions {
     use std::cmp::Ordering;
 
     /// A global list of non-bitcode-encodable compile-time internible strings.
-<<<<<<< HEAD
-    pub const LIST: &[&str] = &[
-        "cjk-latin-spacing",
-        "discretionary-ligatures",
-=======
     ///
     /// Must be sorted.
     pub const LIST: &[&str] = &[
@@ -310,18 +263,12 @@ mod exceptions {
         "discretionary-ligatures",
         "fetchpriority",
         "formnovalidate",
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         "h5",
         "h6",
         "historical-ligatures",
         "number-clearance",
         "number-margin",
         "numbering-scope",
-<<<<<<< HEAD
-        "page-numbering",
-        "par-line-marker",
-        "transparentize",
-=======
         "onbeforeprint",
         "onbeforeunload",
         "onlanguagechange",
@@ -340,7 +287,6 @@ mod exceptions {
         "shadowrootserializable",
         "transparentize",
         "writingsuggestions",
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ];
 
     /// Try to find the index of an exception if it exists.
@@ -386,15 +332,7 @@ mod exceptions {
 
     /// Determine the minimum of two integers.
     const fn min(a: usize, b: usize) -> usize {
-<<<<<<< HEAD
-        if a < b {
-            a
-        } else {
-            b
-        }
-=======
         if a < b { a } else { b }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -479,8 +417,6 @@ impl Hash for ResolvedPicoStr {
     }
 }
 
-<<<<<<< HEAD
-=======
 /// The error when a string could not be interned at compile time. Because the
 /// normal formatting machinery is not available at compile time, just producing
 /// the message is a bit involved ...
@@ -514,7 +450,6 @@ const fn failed_to_compile_time_intern(
     panic!("{}", message);
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[cfg(test)]
 mod tests {
     use super::*;

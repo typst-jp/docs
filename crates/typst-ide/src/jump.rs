@@ -1,18 +1,10 @@
 use std::num::NonZeroUsize;
 
-<<<<<<< HEAD
-use typst::layout::{Frame, FrameItem, PagedDocument, Point, Position, Size};
-use typst::model::{Destination, Url};
-use typst::syntax::{FileId, LinkedNode, Side, Source, Span, SyntaxKind};
-use typst::visualize::Geometry;
-use typst::WorldExt;
-=======
 use typst::WorldExt;
 use typst::layout::{Frame, FrameItem, PagedDocument, Point, Position, Size};
 use typst::model::{Destination, Url};
 use typst::syntax::{FileId, LinkedNode, Side, Source, Span, SyntaxKind};
 use typst::visualize::{Curve, CurveItem, FillRule, Geometry};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::IdeWorld;
 
@@ -44,18 +36,6 @@ pub fn jump_from_click(
 ) -> Option<Jump> {
     // Try to find a link first.
     for (pos, item) in frame.items() {
-<<<<<<< HEAD
-        if let FrameItem::Link(dest, size) = item {
-            if is_in_rect(*pos, *size, click) {
-                return Some(match dest {
-                    Destination::Url(url) => Jump::Url(url.clone()),
-                    Destination::Position(pos) => Jump::Position(*pos),
-                    Destination::Location(loc) => {
-                        Jump::Position(document.introspector.position(*loc))
-                    }
-                });
-            }
-=======
         if let FrameItem::Link(dest, size) = item
             && is_in_rect(*pos, *size, click)
         {
@@ -66,20 +46,10 @@ pub fn jump_from_click(
                     Jump::Position(document.introspector.position(*loc))
                 }
             });
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
     // If there's no link, search for a jump target.
-<<<<<<< HEAD
-    for (mut pos, item) in frame.items().rev() {
-        match item {
-            FrameItem::Group(group) => {
-                // TODO: Handle transformation.
-                if let Some(span) =
-                    jump_from_click(world, document, &group.frame, click - pos)
-                {
-=======
     for &(mut pos, ref item) in frame.items().rev() {
         match item {
             FrameItem::Group(group) => {
@@ -97,7 +67,6 @@ pub fn jump_from_click(
                 };
                 let pos = pos.transform_inf(inv_transform);
                 if let Some(span) = jump_from_click(world, document, &group.frame, pos) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     return Some(span);
                 }
             }
@@ -135,11 +104,6 @@ pub fn jump_from_click(
             }
 
             FrameItem::Shape(shape, span) => {
-<<<<<<< HEAD
-                let Geometry::Rect(size) = shape.geometry else { continue };
-                if is_in_rect(pos, size, click) {
-                    return Jump::from_span(world, *span);
-=======
                 if shape.fill.is_some() {
                     let within = match &shape.geometry {
                         Geometry::Line(..) => false,
@@ -166,7 +130,6 @@ pub fn jump_from_click(
                     if within {
                         return Jump::from_span(world, *span);
                     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
             }
 
@@ -214,20 +177,11 @@ pub fn jump_from_cursor(
 
 /// Find the position of a span in a frame.
 fn find_in_frame(frame: &Frame, span: Span) -> Option<Point> {
-<<<<<<< HEAD
-    for (mut pos, item) in frame.items() {
-        if let FrameItem::Group(group) = item {
-            // TODO: Handle transformation.
-            if let Some(point) = find_in_frame(&group.frame, span) {
-                return Some(point + pos);
-            }
-=======
     for &(mut pos, ref item) in frame.items() {
         if let FrameItem::Group(group) = item
             && let Some(point) = find_in_frame(&group.frame, span)
         {
             return Some(pos + point.transform(group.transform));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         if let FrameItem::Text(text) = item {
@@ -268,11 +222,7 @@ mod tests {
 
     use typst::layout::{Abs, Point, Position};
 
-<<<<<<< HEAD
-    use super::{jump_from_click, jump_from_cursor, Jump};
-=======
     use super::{Jump, jump_from_click, jump_from_cursor};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use crate::tests::{FilePos, TestWorld, WorldLike};
 
     fn point(x: f64, y: f64) -> Point {
@@ -352,8 +302,6 @@ mod tests {
     }
 
     #[test]
-<<<<<<< HEAD
-=======
     fn test_jump_from_click_transform_clip() {
         let margin = point(10.0, 10.0);
         test_click(
@@ -445,7 +393,6 @@ mod tests {
     }
 
     #[test]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     fn test_jump_from_cursor() {
         let s = "*Hello* #box[ABC] World";
         test_cursor(s, 12, None);
@@ -458,11 +405,6 @@ mod tests {
     }
 
     #[test]
-<<<<<<< HEAD
-    fn test_backlink() {
-        let s = "#footnote[Hi]";
-        test_click(s, point(10.0, 10.0), pos(1, 18.5, 37.1).map(Jump::Position));
-=======
     fn test_jump_from_cursor_transform() {
         test_cursor(
             r#"#rotate(90deg, origin: bottom + left, [hello world])"#,
@@ -482,6 +424,5 @@ mod tests {
     fn test_footnote_link_entry_customized() {
         let s = "#show footnote.entry: [Replaced]; #footnote[Hi]";
         test_click(s, point(10.0, 10.0), pos(1, 10.0, 31.58).map(Jump::Position));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }

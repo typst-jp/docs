@@ -1,16 +1,9 @@
 //! Debug representation of values.
 
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString};
-use typst_utils::round_with_precision;
-
-use crate::foundations::{func, Str, Value};
-=======
 use ecow::{EcoString, eco_format};
 use typst_utils::round_with_precision;
 
 use crate::foundations::{Str, Value, func};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// The Unicode minus sign.
 pub const MINUS_SIGN: &str = "\u{2212}";
@@ -21,12 +14,6 @@ pub const MINUS_SIGN: &str = "\u{2212}";
 /// in monospace with syntax-highlighting. The exceptions are `{none}`,
 /// integers, floats, strings, content, and functions.
 ///
-<<<<<<< HEAD
-/// **Note:** This function is for debugging purposes. Its output should not be
-/// considered stable and may change at any time!
-///
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// # Example
 /// ```example
 /// #none vs #repr(none) \
@@ -34,8 +21,6 @@ pub const MINUS_SIGN: &str = "\u{2212}";
 /// #(1, 2) vs #repr((1, 2)) \
 /// #[*Hi*] vs #repr([*Hi*])
 /// ```
-<<<<<<< HEAD
-=======
 ///
 /// # For debugging purposes only { #debugging-only }
 ///
@@ -54,7 +39,6 @@ pub const MINUS_SIGN: &str = "\u{2212}";
 ///
 /// #repr(x => x + 1)
 /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[func(title = "Representation")]
 pub fn repr(
     /// The value whose string representation to produce.

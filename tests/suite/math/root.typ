@@ -44,8 +44,6 @@ $ root(2, x) quad
 $ √2^3 = sqrt(2^3) $
 $ √(x+y) quad ∛x quad ∜x $
 $ (√2+3) = (sqrt(2)+3) $
-<<<<<<< HEAD
-=======
 
 --- math-root-syntax-prec ---
 // Precedence of root syntax with other math operators.
@@ -57,4 +55,3 @@ $ √a/b ∛a_b ∜f' √n! \
 $ a root(, 3)         & a root(., 3) \
   a sqrt(3)           & a root(2, 3) \
   a root(#h(-1em), 3) & a root(123, 3) $
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

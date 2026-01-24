@@ -54,8 +54,6 @@
 #v(3pt)
 #rect(width: 20pt, height: 20pt, stroke: (thickness: 5pt, join: "round"))
 
-<<<<<<< HEAD
-=======
 --- rect-stroke-caps ---
 // Separated segments
 #rect(width: 20pt, height: 20pt, stroke: (
@@ -72,7 +70,6 @@
   left: (cap: "round", thickness: 5pt),
   top: (cap: "square", thickness: 7pt),
 ))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- red-stroke-bad-type ---
 // Error: 15-21 expected length, color, gradient, tiling, dictionary, stroke, none, or auto, found array
 #rect(stroke: (1, 2))

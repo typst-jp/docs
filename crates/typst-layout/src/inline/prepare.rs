@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-use typst_library::layout::{Dir, Em};
-=======
 use either::Either;
 use typst_library::layout::{Dir, Em};
 use typst_library::text::TextElem;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use unicode_bidi::{BidiInfo, Level as BidiLevel};
 
 use super::*;
@@ -40,17 +36,12 @@ impl<'a> Preparation<'a> {
         &self.items[idx]
     }
 
-<<<<<<< HEAD
-    /// Iterate over the items that intersect the given `sliced` range.
-    pub fn slice(&self, sliced: Range) -> impl Iterator<Item = &(Range, Item<'a>)> {
-=======
     /// Iterate over the items that intersect the given `sliced` range alongside
     /// their indices in `self.items` and their ranges in the paragraph's text.
     pub fn slice(
         &self,
         sliced: Range,
     ) -> impl Iterator<Item = (usize, &(Range, Item<'a>))> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         // Usually, we don't want empty-range items at the start of the line
         // (because they will be part of the previous line), but for the first
         // line, we need to keep them.
@@ -58,11 +49,6 @@ impl<'a> Preparation<'a> {
             0 => 0,
             n => self.indices.get(n).copied().unwrap_or(0),
         };
-<<<<<<< HEAD
-        self.items[start..].iter().take_while(move |(range, _)| {
-            range.start < sliced.end || range.end <= sliced.end
-        })
-=======
         self.items
             .iter()
             .enumerate()
@@ -70,7 +56,6 @@ impl<'a> Preparation<'a> {
             .take_while(move |(_, (range, _))| {
                 range.start < sliced.end || range.end <= sliced.end
             })
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -139,51 +124,6 @@ pub fn prepare<'a>(
 /// Requirements for Chinese Text Layout, Section 3.2.2 Mixed Text Composition
 /// in Horizontal Written Mode
 fn add_cjk_latin_spacing(items: &mut [(Range, Item)]) {
-<<<<<<< HEAD
-    let mut items = items
-        .iter_mut()
-        .filter(|(_, x)| !matches!(x, Item::Tag(_)))
-        .peekable();
-
-    let mut prev: Option<&ShapedGlyph> = None;
-    while let Some((_, item)) = items.next() {
-        let Some(text) = item.text_mut() else {
-            prev = None;
-            continue;
-        };
-
-        // Since we only call this function in [`prepare`], we can assume that
-        // the Cow is owned, and `to_mut` can be called without overhead.
-        debug_assert!(matches!(text.glyphs, std::borrow::Cow::Owned(_)));
-        let mut glyphs = text.glyphs.to_mut().iter_mut().peekable();
-
-        while let Some(glyph) = glyphs.next() {
-            let next = glyphs.peek().map(|n| n as _).or_else(|| {
-                items
-                    .peek()
-                    .and_then(|(_, i)| i.text())
-                    .and_then(|shaped| shaped.glyphs.first())
-            });
-
-            // Case 1: CJ followed by a Latin character
-            if glyph.is_cj_script() && next.is_some_and(|g| g.is_letter_or_number()) {
-                // The spacing is default to 1/4 em, and can be shrunk to 1/8 em.
-                glyph.x_advance += Em::new(0.25);
-                glyph.adjustability.shrinkability.1 += Em::new(0.125);
-                text.width += Em::new(0.25).at(text.size);
-            }
-
-            // Case 2: Latin followed by a CJ character
-            if glyph.is_cj_script() && prev.is_some_and(|g| g.is_letter_or_number()) {
-                glyph.x_advance += Em::new(0.25);
-                glyph.x_offset += Em::new(0.25);
-                glyph.adjustability.shrinkability.0 += Em::new(0.125);
-                text.width += Em::new(0.25).at(text.size);
-            }
-
-            prev = Some(glyph);
-        }
-=======
     let mut iter = items
         .iter_mut()
         .filter(|(_, item)| !matches!(item, Item::Tag(_)))
@@ -230,6 +170,5 @@ fn add_cjk_latin_spacing(items: &mut [(Range, Item)]) {
             }
         }
         prev = item;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }

@@ -1,8 +1,5 @@
 --- cbor-decode-deprecated ---
 // Warning: 15-21 `cbor.decode` is deprecated, directly pass bytes to `cbor` instead
-<<<<<<< HEAD
-#let _ = cbor.decode
-=======
 // Hint: 15-21 it will be removed in Typst 0.15.0
 #let _ = cbor.decode
 
@@ -38,4 +35,3 @@
     cbor.encode(repr(value)),
   )
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

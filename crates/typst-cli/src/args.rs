@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-use std::fmt::{self, Display, Formatter};
-=======
 // This module is imported both from the `typst-cli` crate itself
 // and from its build script. In this module, you can only import from crates
 // that are both runtime and build dependencies of this crate, or else
@@ -8,7 +5,6 @@ use std::fmt::{self, Display, Formatter};
 
 use std::fmt::{self, Display, Formatter};
 use std::io::Write;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::num::NonZeroUsize;
 use std::ops::RangeInclusive;
 use std::path::PathBuf;
@@ -17,13 +13,9 @@ use std::str::FromStr;
 use chrono::{DateTime, Utc};
 use clap::builder::{TypedValueParser, ValueParser};
 use clap::{ArgAction, Args, ColorChoice, Parser, Subcommand, ValueEnum, ValueHint};
-<<<<<<< HEAD
-use semver::Version;
-=======
 use clap_complete::Shell;
 use semver::Version;
 use serde::Serialize;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// The character typically used to separate path components
 /// in environment variables.
@@ -53,11 +45,7 @@ const AFTER_HELP: &str = color_print::cstr!("\
 #[derive(Debug, Clone, Parser)]
 #[clap(
     name = "typst",
-<<<<<<< HEAD
-    version = crate::typst_version(),
-=======
     version = format!("{} ({})", crate::typst_version(), crate::typst_commit_sha()),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     author,
     help_template = HELP_TEMPLATE,
     after_help = AFTER_HELP,
@@ -101,15 +89,12 @@ pub enum Command {
     /// Self update the Typst CLI.
     #[cfg_attr(not(feature = "self-update"), clap(hide = true))]
     Update(UpdateCommand),
-<<<<<<< HEAD
-=======
 
     /// Generates shell completion scripts.
     Completions(CompletionsCommand),
 
     /// Displays debugging information about Typst.
     Info(InfoCommand),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Compiles an input file into a supported output format.
@@ -180,13 +165,10 @@ pub struct QueryCommand {
     #[clap(long)]
     pub pretty: bool,
 
-<<<<<<< HEAD
-=======
     /// The target to compile for.
     #[clap(long, default_value_t)]
     pub target: Target,
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// World arguments.
     #[clap(flatten)]
     pub world: WorldArgs,
@@ -234,8 +216,6 @@ pub struct UpdateCommand {
     pub backup_path: Option<PathBuf>,
 }
 
-<<<<<<< HEAD
-=======
 /// Generates shell completion scripts.
 #[derive(Debug, Clone, Parser)]
 pub struct CompletionsCommand {
@@ -260,7 +240,6 @@ pub struct InfoCommand {
     pub pretty: bool,
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Arguments for compilation and watching.
 #[derive(Debug, Clone, Args)]
 pub struct CompileArgs {
@@ -309,8 +288,6 @@ pub struct CompileArgs {
     #[arg(long = "pdf-standard", value_delimiter = ',')]
     pub pdf_standard: Vec<PdfStandard>,
 
-<<<<<<< HEAD
-=======
     /// By default, even when not producing a `PDF/UA-1` document, a tagged PDF
     /// document is written to provide a baseline of accessibility. In some
     /// circumstances (for example when trying to reduce the size of a document)
@@ -318,18 +295,12 @@ pub struct CompileArgs {
     #[arg(long = "no-pdf-tags")]
     pub no_pdf_tags: bool,
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The PPI (pixels per inch) to use for PNG export.
     #[arg(long = "ppi", default_value_t = 144.0)]
     pub ppi: f32,
 
     /// File path to which a Makefile with the current compilation's
     /// dependencies will be written.
-<<<<<<< HEAD
-    #[clap(long = "make-deps", value_name = "PATH")]
-    pub make_deps: Option<PathBuf>,
-
-=======
     #[clap(long = "make-deps", value_name = "PATH", hide = true)]
     pub make_deps: Option<PathBuf>,
 
@@ -347,7 +318,6 @@ pub struct CompileArgs {
     #[clap(long, default_value_t)]
     pub deps_format: DepsFormat,
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Processing arguments.
     #[clap(flatten)]
     pub process: ProcessArgs,
@@ -454,10 +424,6 @@ pub struct FontArgs {
 
     /// Ensures system fonts won't be searched, unless explicitly included via
     /// `--font-path`.
-<<<<<<< HEAD
-    #[arg(long)]
-    pub ignore_system_fonts: bool,
-=======
     #[arg(long, env = "TYPST_IGNORE_SYSTEM_FONTS")]
     pub ignore_system_fonts: bool,
 
@@ -465,7 +431,6 @@ pub struct FontArgs {
     #[cfg(feature = "embed-fonts")]
     #[arg(long, env = "TYPST_IGNORE_EMBEDDED_FONTS")]
     pub ignore_embedded_fonts: bool,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Arguments for the HTTP server.
@@ -528,8 +493,6 @@ pub enum Output {
     Path(PathBuf),
 }
 
-<<<<<<< HEAD
-=======
 impl Output {
     /// Write data to the output.
     pub fn write(&self, buffer: &[u8]) -> std::io::Result<()> {
@@ -548,7 +511,6 @@ impl Output {
     }
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl Display for Output {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match self {
@@ -558,8 +520,6 @@ impl Display for Output {
     }
 }
 
-<<<<<<< HEAD
-=======
 /// A step-by-step writable version of [`Output`].
 #[derive(Debug)]
 pub enum OpenOutput<'a> {
@@ -583,7 +543,6 @@ impl Write for OpenOutput<'_> {
     }
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Which format to use for the generated output file.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, ValueEnum)]
 pub enum OutputFormat {
@@ -595,8 +554,6 @@ pub enum OutputFormat {
 
 display_possible_values!(OutputFormat);
 
-<<<<<<< HEAD
-=======
 /// Which format to use for a generated dependency file.
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, ValueEnum)]
 pub enum DepsFormat {
@@ -623,7 +580,6 @@ pub enum Target {
 
 display_possible_values!(Target);
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Which format to use for diagnostics.
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, ValueEnum)]
 pub enum DiagnosticFormat {
@@ -635,16 +591,10 @@ pub enum DiagnosticFormat {
 display_possible_values!(DiagnosticFormat);
 
 /// An in-development feature that may be changed or removed at any time.
-<<<<<<< HEAD
-#[derive(Debug, Copy, Clone, Eq, PartialEq, ValueEnum)]
-pub enum Feature {
-    Html,
-=======
 #[derive(Debug, Copy, Clone, Eq, PartialEq, ValueEnum, Serialize)]
 pub enum Feature {
     Html,
     A11yExtras,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 display_possible_values!(Feature);
@@ -653,17 +603,6 @@ display_possible_values!(Feature);
 #[derive(Debug, Copy, Clone, Eq, PartialEq, ValueEnum)]
 #[allow(non_camel_case_types)]
 pub enum PdfStandard {
-<<<<<<< HEAD
-    /// PDF 1.7.
-    #[value(name = "1.7")]
-    V_1_7,
-    /// PDF/A-2b.
-    #[value(name = "a-2b")]
-    A_2b,
-    /// PDF/A-3b.
-    #[value(name = "a-3b")]
-    A_3b,
-=======
     /// PDF 1.4.
     #[value(name = "1.4")]
     V_1_4,
@@ -715,16 +654,11 @@ pub enum PdfStandard {
     /// PDF/UA-1.
     #[value(name = "ua-1")]
     UA_1,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 display_possible_values!(PdfStandard);
 
-<<<<<<< HEAD
-// Output file format for query command
-=======
 /// Output file format for query and info commands
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, ValueEnum)]
 pub enum SerializationFormat {
     #[default]

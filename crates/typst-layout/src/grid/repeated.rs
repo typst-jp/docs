@@ -1,22 +1,10 @@
-<<<<<<< HEAD
-=======
 use std::ops::Deref;
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::diag::SourceResult;
 use typst_library::engine::Engine;
 use typst_library::layout::grid::resolve::{Footer, Header, Repeatable};
 use typst_library::layout::{Abs, Axes, Frame, Regions};
 
-<<<<<<< HEAD
-use super::layouter::GridLayouter;
-use super::rowspans::UnbreakableRowGroup;
-
-impl GridLayouter<'_> {
-    /// Layouts the header's rows.
-    /// Skips regions as necessary.
-    pub fn layout_header(
-=======
 use super::layouter::{GridLayouter, RowState};
 use super::rowspans::UnbreakableRowGroup;
 
@@ -139,51 +127,10 @@ impl<'a> GridLayouter<'a> {
     /// size rows only).
     #[inline]
     fn layout_header_rows(
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         &mut self,
         header: &Header,
         engine: &mut Engine,
         disambiguator: usize,
-<<<<<<< HEAD
-    ) -> SourceResult<()> {
-        let header_rows =
-            self.simulate_header(header, &self.regions, engine, disambiguator)?;
-        let mut skipped_region = false;
-        while self.unbreakable_rows_left == 0
-            && !self.regions.size.y.fits(header_rows.height + self.footer_height)
-            && self.regions.may_progress()
-        {
-            // Advance regions without any output until we can place the
-            // header and the footer.
-            self.finish_region_internal(Frame::soft(Axes::splat(Abs::zero())), vec![]);
-            skipped_region = true;
-        }
-
-        // Reset the header height for this region.
-        // It will be re-calculated when laying out each header row.
-        self.header_height = Abs::zero();
-
-        if let Some(Repeatable::Repeated(footer)) = &self.grid.footer {
-            if skipped_region {
-                // Simulate the footer again; the region's 'full' might have
-                // changed.
-                self.footer_height = self
-                    .simulate_footer(footer, &self.regions, engine, disambiguator)?
-                    .height;
-            }
-        }
-
-        // Header is unbreakable.
-        // Thus, no risk of 'finish_region' being recursively called from
-        // within 'layout_row'.
-        self.unbreakable_rows_left += header.end;
-        for y in 0..header.end {
-            self.layout_row(y, engine, disambiguator)?;
-        }
-        Ok(())
-    }
-
-=======
         as_short_lived: bool,
         is_being_repeated: bool,
     ) -> SourceResult<Abs> {
@@ -498,7 +445,6 @@ impl<'a> GridLayouter<'a> {
         Ok(height)
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Simulate the header's group of rows.
     pub fn simulate_header(
         &self,
@@ -513,13 +459,8 @@ impl<'a> GridLayouter<'a> {
         // assume that the amount of unbreakable rows following the first row
         // in the header will be precisely the rows in the header.
         self.simulate_unbreakable_row_group(
-<<<<<<< HEAD
-            0,
-            Some(header.end),
-=======
             header.range.start,
             Some(header.range.end - header.range.start),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             regions,
             engine,
             disambiguator,
@@ -543,13 +484,6 @@ impl<'a> GridLayouter<'a> {
         {
             // Advance regions without any output until we can place the
             // footer.
-<<<<<<< HEAD
-            self.finish_region_internal(Frame::soft(Axes::splat(Abs::zero())), vec![]);
-            skipped_region = true;
-        }
-
-        self.footer_height = if skipped_region {
-=======
             self.finish_region_internal(
                 Frame::soft(Axes::splat(Abs::zero())),
                 vec![],
@@ -566,7 +500,6 @@ impl<'a> GridLayouter<'a> {
         // and no headers were placed so far, but what about when we can have
         // footers in the middle of the region? Let's think about this then.
         self.current.footer_height = if skipped_region {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             // Simulate the footer again; the region's 'full' might have
             // changed.
             self.simulate_footer(footer, &self.regions, engine, disambiguator)?
@@ -585,22 +518,11 @@ impl<'a> GridLayouter<'a> {
         footer: &Footer,
         engine: &mut Engine,
         disambiguator: usize,
-<<<<<<< HEAD
-=======
         is_being_repeated: bool,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ) -> SourceResult<()> {
         // Ensure footer rows have their own height available.
         // Won't change much as we're creating an unbreakable row group
         // anyway, so this is mostly for correctness.
-<<<<<<< HEAD
-        self.regions.size.y += self.footer_height;
-
-        let footer_len = self.grid.rows.len() - footer.start;
-        self.unbreakable_rows_left += footer_len;
-        for y in footer.start..self.grid.rows.len() {
-            self.layout_row(y, engine, disambiguator)?;
-=======
         self.regions.size.y += self.current.footer_height;
 
         let repeats = self.grid.footer.as_ref().is_some_and(|f| f.repeated);
@@ -618,7 +540,6 @@ impl<'a> GridLayouter<'a> {
                     ..Default::default()
                 },
             )?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         Ok(())
@@ -639,19 +560,13 @@ impl<'a> GridLayouter<'a> {
         // in the footer will be precisely the rows in the footer.
         self.simulate_unbreakable_row_group(
             footer.start,
-<<<<<<< HEAD
-            Some(self.grid.rows.len() - footer.start),
-=======
             Some(footer.end - footer.start),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             regions,
             engine,
             disambiguator,
         )
     }
 }
-<<<<<<< HEAD
-=======
 
 /// The total amount of rows in the given list of headers.
 #[inline]
@@ -660,4 +575,3 @@ pub fn total_header_row_count<'h>(
 ) -> usize {
     headers.into_iter().map(|h| h.range.end - h.range.start).sum()
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

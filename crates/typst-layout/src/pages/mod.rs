@@ -4,30 +4,14 @@ mod collect;
 mod finalize;
 mod run;
 
-<<<<<<< HEAD
-use comemo::{Tracked, TrackedMut};
-=======
 use std::num::NonZeroUsize;
 
 use comemo::{Tracked, TrackedMut};
 use typst_library::World;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::diag::SourceResult;
 use typst_library::engine::{Engine, Route, Sink, Traced};
 use typst_library::foundations::{Content, StyleChain};
 use typst_library::introspection::{
-<<<<<<< HEAD
-    Introspector, Locator, ManualPageCounter, SplitLocator, TagElem,
-};
-use typst_library::layout::{FrameItem, Page, PagedDocument, Point};
-use typst_library::model::DocumentInfo;
-use typst_library::routines::{Arenas, Pair, RealizationKind, Routines};
-use typst_library::World;
-
-use self::collect::{collect, Item};
-use self::finalize::finalize;
-use self::run::{layout_blank_page, layout_page_run, LayoutedPage};
-=======
     Introspector, IntrospectorBuilder, Locator, ManualPageCounter, SplitLocator, TagElem,
 };
 use typst_library::layout::{FrameItem, Page, PagedDocument, Point, Transform};
@@ -37,7 +21,6 @@ use typst_library::routines::{Arenas, Pair, RealizationKind, Routines};
 use self::collect::{Item, collect};
 use self::finalize::finalize;
 use self::run::{LayoutedPage, layout_blank_page, layout_page_run};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Layout content into a document.
 ///
@@ -94,11 +77,7 @@ fn layout_document_impl(
     let arenas = Arenas::default();
     let mut info = DocumentInfo::default();
     let mut children = (engine.routines.realize)(
-<<<<<<< HEAD
-        RealizationKind::LayoutDocument(&mut info),
-=======
         RealizationKind::LayoutDocument { info: &mut info },
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         &mut engine,
         &mut locator,
         &arenas,
@@ -107,11 +86,7 @@ fn layout_document_impl(
     )?;
 
     let pages = layout_pages(&mut engine, &mut children, &mut locator, styles)?;
-<<<<<<< HEAD
-    let introspector = Introspector::paged(&pages);
-=======
     let introspector = introspect_pages(&pages);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     Ok(PagedDocument { pages, info, introspector })
 }
@@ -184,8 +159,6 @@ fn layout_pages<'a>(
 
     Ok(pages)
 }
-<<<<<<< HEAD
-=======
 
 /// Introspects pages.
 #[typst_macros::time(name = "introspect pages")]
@@ -210,4 +183,3 @@ fn introspect_pages(pages: &[Page]) -> Introspector {
 
     builder.finalize(elems)
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

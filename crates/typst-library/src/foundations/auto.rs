@@ -4,13 +4,8 @@ use ecow::EcoString;
 
 use crate::diag::HintedStrResult;
 use crate::foundations::{
-<<<<<<< HEAD
-    ty, CastInfo, Fold, FromValue, IntoValue, Reflect, Repr, Resolve, StyleChain, Type,
-    Value,
-=======
     CastInfo, Fold, FromValue, IntoValue, Reflect, Repr, Resolve, StyleChain, Type,
     Value, ty,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// A value that indicates a smart default.
@@ -218,8 +213,6 @@ impl<T> Default for Smart<T> {
     }
 }
 
-<<<<<<< HEAD
-=======
 impl<T> From<Option<T>> for Smart<T> {
     fn from(value: Option<T>) -> Self {
         match value {
@@ -229,7 +222,6 @@ impl<T> From<Option<T>> for Smart<T> {
     }
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl<T: Reflect> Reflect for Smart<T> {
     fn input() -> CastInfo {
         T::input() + AutoValue::input()

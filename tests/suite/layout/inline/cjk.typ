@@ -84,8 +84,6 @@ abc字#linebreak()
 abc字\
 母
 
-<<<<<<< HEAD
-=======
 --- issue-6539-cjk-latin-spacing-at-manual-linebreak ---
 // Issue #6539
 #set text(cjk-latin-spacing: auto)
@@ -99,13 +97,10 @@ abc字\
 
 #box(align(end)[丁国T国])
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-2650-cjk-latin-spacing-meta ---
 测a试
 
 测#context [a]试
-<<<<<<< HEAD
-=======
 
 --- issue-7113-cjk-latin-spacing-shift ---
 孔乙己#super[1]与上大人#super[2]。
@@ -115,4 +110,3 @@ abc字\
 时间#footnote[有空白]
 
 时间#sub[123]#super[时间]B
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

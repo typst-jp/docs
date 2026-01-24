@@ -145,8 +145,6 @@
 #dict.remove("b")
 #test(dict.keys(), ("a", "c", "d"))
 
-<<<<<<< HEAD
-=======
 --- dict-insert-order ---
 #let dict = (a: 1, b: 2)
 #let rhs = (c: 3, a: 4)
@@ -175,7 +173,6 @@
   test(dict.keys(), ("a", "b", "c", "d"))
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- dict-temporary-lvalue ---
 // Error: 3-15 cannot mutate a temporary value
 #((key: "val").other = "some")

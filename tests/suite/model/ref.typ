@@ -1,10 +1,6 @@
 // Test references.
 
-<<<<<<< HEAD
---- ref-basic ---
-=======
 --- ref-basic render html ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set heading(numbering: "1.")
 
 = Introduction <intro>
@@ -55,12 +51,8 @@ $ A = 1 $ <eq2>
 // Test ambiguous reference.
 = Introduction <arrgh>
 
-<<<<<<< HEAD
-// Error: 1-7 label occurs in the document and its bibliography
-=======
 // Error: 1-7 label `<arrgh>` occurs both in the document and its bibliography
 // Hint: 1-7 change either the heading's label or the bibliography key to resolve the ambiguity
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 @arrgh
 #bibliography("/assets/bib/works.bib")
 
@@ -94,8 +86,6 @@ Text seen on #ref(<text>, form: "page", supplement: "Page").
 // Test reference with non-whitespace before it.
 #figure[] <1>
 #test([(#ref(<1>))], [(@1)])
-<<<<<<< HEAD
-=======
 
 --- ref-to-empty-label-not-possible ---
 // @ without any following label should just produce the symbol in the output
@@ -107,4 +97,3 @@ Text seen on #ref(<text>, form: "page", supplement: "Page").
 // Error: 6-7 unexpected less-than operator
 // Error: 7-8 unexpected greater-than operator
 #ref(<>)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

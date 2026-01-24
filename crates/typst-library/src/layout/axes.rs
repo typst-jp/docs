@@ -4,18 +4,12 @@ use std::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign, Deref, Not};
 
 use typst_utils::Get;
 
-<<<<<<< HEAD
-use crate::diag::bail;
-use crate::foundations::{array, cast, Array, Resolve, Smart, StyleChain};
-use crate::layout::{Abs, Dir, Length, Ratio, Rel, Size};
-=======
 use crate::diag::{HintedStrResult, bail};
 use crate::foundations::{
     Array, CastInfo, FromValue, IntoValue, Reflect, Resolve, Smart, StyleChain, Value,
     array, cast,
 };
 use crate::layout::{Abs, Dir, Rel, Size};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A container with a horizontal and vertical component.
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
@@ -284,42 +278,6 @@ impl BitAndAssign for Axes<bool> {
     }
 }
 
-<<<<<<< HEAD
-cast! {
-    Axes<Rel<Length>>,
-    self => array![self.x, self.y].into_value(),
-    array: Array => {
-        let mut iter = array.into_iter();
-        match (iter.next(), iter.next(), iter.next()) {
-            (Some(a), Some(b), None) => Axes::new(a.cast()?, b.cast()?),
-            _ => bail!("point array must contain exactly two entries"),
-        }
-    },
-}
-
-cast! {
-    Axes<Ratio>,
-    self => array![self.x, self.y].into_value(),
-    array: Array => {
-        let mut iter = array.into_iter();
-        match (iter.next(), iter.next(), iter.next()) {
-            (Some(a), Some(b), None) => Axes::new(a.cast()?, b.cast()?),
-            _ => bail!("ratio array must contain exactly two entries"),
-        }
-    },
-}
-
-cast! {
-    Axes<Length>,
-    self => array![self.x, self.y].into_value(),
-    array: Array => {
-        let mut iter = array.into_iter();
-        match (iter.next(), iter.next(), iter.next()) {
-            (Some(a), Some(b), None) => Axes::new(a.cast()?, b.cast()?),
-            _ => bail!("length array must contain exactly two entries"),
-        }
-    },
-=======
 impl<T: Reflect> Reflect for Axes<T> {
     fn input() -> CastInfo {
         Array::input()
@@ -353,7 +311,6 @@ impl<T: IntoValue> IntoValue for Axes<T> {
     fn into_value(self) -> Value {
         array![self.x.into_value(), self.y.into_value()].into_value()
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<T: Resolve> Resolve for Axes<T> {

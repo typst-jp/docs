@@ -1,19 +1,12 @@
 // Test citations and bibliographies.
 
-<<<<<<< HEAD
---- bibliography-basic ---
-#set page(width: 200pt)
-=======
 --- bibliography-basic render html pdftags ---
 #show: it => context { set page(width: 200pt) if target() == "paged"; it }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 = Details
 See also @arrgh #cite(<distress>, supplement: [p.~22]), @arrgh[p.~4], and @distress[p.~5].
 #bibliography("/assets/bib/works.bib")
 
-<<<<<<< HEAD
-=======
 --- bibliography-no-title render html ---
 @distress
 #bibliography("/assets/bib/works.bib", title: none)
@@ -22,7 +15,6 @@ See also @arrgh #cite(<distress>, supplement: [p.~22]), @arrgh[p.~4], and @distr
 @distress
 #bibliography("/assets/bib/works.bib", title: [My References])
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- bibliography-before-content ---
 // Test unconventional order.
 #set page(width: 200pt)
@@ -38,14 +30,9 @@ the net-work is a creature of its own.
 This is close to piratery! @arrgh
 And quark! @quark
 
-<<<<<<< HEAD
---- bibliography-multiple-files ---
-#set page(width: 200pt)
-=======
 --- bibliography-multiple-files render html ---
 #show: it => context { set page(width: 200pt) if target() == "paged"; it }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set heading(numbering: "1.")
 #show bibliography: set heading(numbering: "1.")
 
@@ -93,8 +80,6 @@ Now we have multiple bibliographies containing @glacier-melt @keshav2007read
 
 #bibliography("/assets/bib/works_too.bib", style: "mla")
 
-<<<<<<< HEAD
-=======
 --- bibliography-style-not-suitable ---
 // Error: 2-62 CSL style "Alphanumeric" is not suitable for bibliographies
 #bibliography("/assets/bib/works.bib", style: "alphanumeric")
@@ -107,7 +92,6 @@ Now we have multiple bibliographies containing @glacier-melt @keshav2007read
 // Error: 15-30 bibliography contains entry with empty key
 #bibliography(bytes(src.text))
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-4618-bibliography-set-heading-level ---
 // Test that the bibliography block's heading is set to 2 by the show rule,
 // and therefore should be rendered like a level-2 heading. Notably, this
@@ -120,8 +104,6 @@ Now we have multiple bibliographies containing @glacier-melt @keshav2007read
 @Zee04
 
 #bibliography("/assets/bib/works_too.bib")
-<<<<<<< HEAD
-=======
 
 --- bibliography-chicago-fullnotes-warning ---
 // Test warning for deprecated alias.
@@ -181,4 +163,3 @@ Now we have multiple bibliographies containing @glacier-melt @keshav2007read
   title: none,
   full: true,
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

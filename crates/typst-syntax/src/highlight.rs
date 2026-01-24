@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-use crate::{ast, LinkedNode, SyntaxKind, SyntaxNode};
-=======
 use crate::{LinkedNode, SyntaxKind, SyntaxNode, ast};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A syntax highlighting tag.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
@@ -304,20 +300,6 @@ pub fn highlight(node: &LinkedNode) -> Option<Tag> {
 fn highlight_ident(node: &LinkedNode) -> Option<Tag> {
     // Are we directly before an argument list?
     let next_leaf = node.next_leaf();
-<<<<<<< HEAD
-    if let Some(next) = &next_leaf {
-        if node.range().end == next.offset()
-            && ((next.kind() == SyntaxKind::LeftParen
-                && matches!(
-                    next.parent_kind(),
-                    Some(SyntaxKind::Args | SyntaxKind::Params)
-                ))
-                || (next.kind() == SyntaxKind::LeftBracket
-                    && next.parent_kind() == Some(SyntaxKind::ContentBlock)))
-        {
-            return Some(Tag::Function);
-        }
-=======
     if let Some(next) = &next_leaf
         && node.range().end == next.offset()
         && ((next.kind() == SyntaxKind::LeftParen
@@ -326,7 +308,6 @@ fn highlight_ident(node: &LinkedNode) -> Option<Tag> {
                 && next.parent_kind() == Some(SyntaxKind::ContentBlock)))
     {
         return Some(Tag::Function);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     // Are we in math?
@@ -394,15 +375,6 @@ pub fn highlight_html(root: &SyntaxNode) -> String {
 /// Highlight one source node, emitting HTML.
 fn highlight_html_impl(html: &mut String, node: &LinkedNode) {
     let mut span = false;
-<<<<<<< HEAD
-    if let Some(tag) = highlight(node) {
-        if tag != Tag::Error {
-            span = true;
-            html.push_str("<span class=\"");
-            html.push_str(tag.css_class());
-            html.push_str("\">");
-        }
-=======
     if let Some(tag) = highlight(node)
         && tag != Tag::Error
     {
@@ -410,7 +382,6 @@ fn highlight_html_impl(html: &mut String, node: &LinkedNode) {
         html.push_str("<span class=\"");
         html.push_str(tag.css_class());
         html.push_str("\">");
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     let text = node.text();

@@ -7,15 +7,6 @@ use comemo::Tracked;
 use ecow::EcoString;
 use serde::{Deserialize, Serialize};
 use typst_syntax::{Span, Spanned};
-<<<<<<< HEAD
-use unicode_segmentation::UnicodeSegmentation;
-
-use crate::diag::{bail, At, SourceResult, StrResult};
-use crate::engine::Engine;
-use crate::foundations::{
-    cast, dict, func, repr, scope, ty, Array, Bytes, Context, Decimal, Dict, Func,
-    IntoValue, Label, Repr, Type, Value, Version,
-=======
 use unicode_normalization::UnicodeNormalization;
 use unicode_segmentation::UnicodeSegmentation;
 
@@ -24,7 +15,6 @@ use crate::engine::Engine;
 use crate::foundations::{
     Array, Bytes, Cast, Context, Decimal, Dict, Func, IntoValue, Label, Repr, Type,
     Value, Version, cast, dict, func, repr, scope, ty,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::Alignment;
 
@@ -52,16 +42,10 @@ pub use crate::__format_str as format_str;
 /// [joined together]($scripting/#blocks) and multiplied with integers.
 ///
 /// Typst provides utility methods for string manipulation. Many of these
-<<<<<<< HEAD
-/// methods (e.g., `split`, `trim` and `replace`) operate on _patterns:_ A
-/// pattern can be either a string or a [regular expression]($regex). This makes
-/// the methods quite versatile.
-=======
 /// methods (e.g., [`split`]($str.split), [`trim`]($str.trim) and
 /// [`replace`]($str.replace)) operate on _patterns:_ A pattern can be either a
 /// string or a [regular expression]($regex). This makes the methods quite
 /// versatile.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// All lengths and indices are expressed in terms of UTF-8 bytes. Indices are
 /// zero-based and negative indices wrap around to the end of the string.
@@ -196,11 +180,6 @@ impl Str {
     }
 
     /// Extracts the first grapheme cluster of the string.
-<<<<<<< HEAD
-    /// Fails with an error if the string is empty.
-    #[func]
-    pub fn first(&self) -> StrResult<Str> {
-=======
     ///
     /// Returns the provided default value if the string is empty or fails with
     /// an error if no default value was specified.
@@ -211,24 +190,15 @@ impl Str {
         #[named]
         default: Option<Str>,
     ) -> StrResult<Str> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0
             .graphemes(true)
             .next()
             .map(Into::into)
-<<<<<<< HEAD
-=======
             .or(default)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .ok_or_else(string_is_empty)
     }
 
     /// Extracts the last grapheme cluster of the string.
-<<<<<<< HEAD
-    /// Fails with an error if the string is empty.
-    #[func]
-    pub fn last(&self) -> StrResult<Str> {
-=======
     ///
     /// Returns the provided default value if the string is empty or fails with
     /// an error if no default value was specified.
@@ -239,15 +209,11 @@ impl Str {
         #[named]
         default: Option<Str>,
     ) -> StrResult<Str> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0
             .graphemes(true)
             .next_back()
             .map(Into::into)
-<<<<<<< HEAD
-=======
             .or(default)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .ok_or_else(string_is_empty)
     }
 
@@ -288,15 +254,9 @@ impl Str {
         #[named]
         count: Option<i64>,
     ) -> StrResult<Str> {
-<<<<<<< HEAD
-        let end = end.or(count.map(|c| start + c)).unwrap_or(self.len() as i64);
-        let start = self.locate(start)?;
-        let end = self.locate(end)?.max(start);
-=======
         let start = self.locate(start)?;
         let end = end.or(count.map(|c| start as i64 + c));
         let end = self.locate(end.unwrap_or(self.len() as i64))?.max(start);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Ok(self.0[start..end].into())
     }
 
@@ -344,8 +304,6 @@ impl Str {
         Ok(c.into())
     }
 
-<<<<<<< HEAD
-=======
     /// Normalizes the string to the given Unicode normal form.
     ///
     /// This is useful when manipulating strings containing Unicode combining
@@ -369,8 +327,6 @@ impl Str {
             UnicodeNormalForm::Nfkd => self.nfkd().collect(),
         }
     }
-
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Whether the string contains the specified pattern.
     ///
     /// This method also has dedicated syntax: You can write `{"bc" in "abcd"}`
@@ -466,8 +422,6 @@ impl Str {
     ///   group. The first item of the array contains the first matched
     ///   capturing, not the whole match! This is empty unless the `pattern` was
     ///   a regex with capturing groups.
-<<<<<<< HEAD
-=======
     ///
     /// ```example:"Shape of the returned dictionary"
     /// #let pat = regex("not (a|an) (apple|cat)")
@@ -479,7 +433,6 @@ impl Str {
     /// #assert.eq("Is there a".match("for this?"), none)
     /// #"The time of my life.".match(regex("[mit]+e"))
     /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn match_(
         &self,
@@ -496,15 +449,11 @@ impl Str {
 
     /// Searches for the specified pattern in the string and returns an array of
     /// dictionaries with details about all matches. For details about the
-<<<<<<< HEAD
-    /// returned dictionaries, see above.
-=======
     /// returned dictionaries, see [above]($str.match).
     ///
     /// ```example
     /// #"Day by Day.".matches("Day")
     /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn matches(
         &self,
@@ -539,12 +488,9 @@ impl Str {
         /// The string to replace the matches with or a function that gets a
         /// dictionary for each match and can return individual replacement
         /// strings.
-<<<<<<< HEAD
-=======
         ///
         /// The dictionary passed to the function has the same shape as the
         /// dictionary returned by [`match`]($str.match).
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         replacement: Replacement,
         ///  If given, only the first `count` matches of the pattern are placed.
         #[named]
@@ -901,8 +847,6 @@ cast! {
     v: Str => Self::Str(v),
 }
 
-<<<<<<< HEAD
-=======
 /// A Unicode normalization form.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum UnicodeNormalForm {
@@ -922,7 +866,6 @@ pub enum UnicodeNormalForm {
     Nfkd,
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Convert an item of std's `match_indices` to a dictionary.
 fn match_to_dict((start, text): (usize, &str)) -> Dict {
     dict! {
@@ -956,15 +899,11 @@ fn out_of_bounds(index: i64, len: usize) -> EcoString {
 /// The out of bounds access error message when no default value was given.
 #[cold]
 fn no_default_and_out_of_bounds(index: i64, len: usize) -> EcoString {
-<<<<<<< HEAD
-    eco_format!("no default value was specified and string index out of bounds (index: {}, len: {})", index, len)
-=======
     eco_format!(
         "no default value was specified and string index out of bounds (index: {}, len: {})",
         index,
         len
     )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// The char boundary access error message.

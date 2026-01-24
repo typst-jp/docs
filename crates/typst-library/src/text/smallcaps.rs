@@ -1,59 +1,29 @@
-<<<<<<< HEAD
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{elem, Content, Packed, Show, StyleChain};
-use crate::text::TextElem;
+use crate::foundations::{Content, elem};
 
 /// スモールキャピタルでテキストを表示。
 ///
 /// # 例
-=======
-use crate::foundations::{Content, elem};
-
-/// Displays text in small capitals.
-///
-/// # Example
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// Hello \
 /// #smallcaps[Hello]
 /// ```
 ///
-<<<<<<< HEAD
 /// # スモールキャピタルのフォント
 /// デフォルトでは、この関数はフォントのOpenTypeフィーチャーの`smcp`および`c2sc`を使用します。
 /// 全てのフォントがこれらのフィーチャーをサポートしているわけではありません。
 /// スモールキャピタルは専用のフォントとして提供されることがあります。
 /// この例として _Latin Modern_ フォントファミリーが該当します。
 /// この場合、show-setルールを用いてスモールキャピタルでのテキストの見た目がカスタマイズできます。
-=======
-/// # Smallcaps fonts
-/// By default, this uses the `smcp` and `c2sc` OpenType features on the font.
-/// Not all fonts support these features. Sometimes, smallcaps are part of a
-/// dedicated font. This is, for example, the case for the _Latin Modern_ family
-/// of fonts. In those cases, you can use a show-set rule to customize the
-/// appearance of the text in smallcaps:
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```typ
 /// #show smallcaps: set text(font: "Latin Modern Roman Caps")
 /// ```
 ///
-<<<<<<< HEAD
 /// 将来的に、この関数は標準サイズの文字からスモールキャピタルの文字を合成することをサポートする予定ですが、まだ実装されていません。
 ///
 /// # スモールキャピタルの見出し
 /// [showルール]($styling/#show-rules)を用いて見出し全てにスモールキャピタルを適用できます。
 /// 以下の例では、見出しを中央揃えにし、通常の太字フォントの無効化も行っています。
-=======
-/// In the future, this function will support synthesizing smallcaps from normal
-/// letters, but this is not yet implemented.
-///
-/// # Smallcaps headings
-/// You can use a [show rule]($styling/#show-rules) to apply smallcaps
-/// formatting to all your headings. In the example below, we also center-align
-/// our headings and disable the standard bold font.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// ```example
 /// #set par(justify: true)
@@ -68,20 +38,11 @@ use crate::foundations::{Content, elem};
 /// = Introduction
 /// #lorem(40)
 /// ```
-<<<<<<< HEAD
-#[elem(title = "Small Capitals", Show)]
+#[elem(title = "Small Capitals")]
 pub struct SmallcapsElem {
     /// 大文字も同様にスモールキャピタルに変更するかどうか。
     ///
     /// showルールで上書きされない限り、これはOpenTypeフィーチャーの`c2sc`を有効化します。
-=======
-#[elem(title = "Small Capitals")]
-pub struct SmallcapsElem {
-    /// Whether to turn uppercase letters into small capitals as well.
-    ///
-    /// Unless overridden by a show rule, this enables the `c2sc` OpenType
-    /// feature.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #smallcaps(all: true)[UNICEF] is an
@@ -89,26 +50,11 @@ pub struct SmallcapsElem {
     /// ```
     #[default(false)]
     pub all: bool,
-<<<<<<< HEAD
     /// スモールキャピタルで表示するコンテンツ。
-=======
-    /// The content to display in small capitals.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     pub body: Content,
 }
 
-<<<<<<< HEAD
-impl Show for Packed<SmallcapsElem> {
-    #[typst_macros::time(name = "smallcaps", span = self.span())]
-    fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        let sc = if self.all(styles) { Smallcaps::All } else { Smallcaps::Minuscules };
-        Ok(self.body.clone().styled(TextElem::set_smallcaps(Some(sc))))
-    }
-}
-
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// What becomes small capitals.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub enum Smallcaps {

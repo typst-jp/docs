@@ -127,18 +127,8 @@ fn draw_raster_glyph(
     Some(())
 }
 
-<<<<<<< HEAD
-/// Draws a glyph from the COLR table into the frame.
-fn draw_colr_glyph(
-    frame: &mut Frame,
-    font: &Font,
-    upem: Abs,
-    glyph_id: GlyphId,
-) -> Option<()> {
-=======
 /// Convert a COLR glyph into an SVG file.
 pub fn colr_glyph_to_svg(font: &Font, glyph_id: GlyphId) -> Option<String> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut svg = XmlWriter::new(xmlwriter::Options::default());
 
     let ttf = font.ttf();
@@ -181,9 +171,6 @@ pub fn colr_glyph_to_svg(font: &Font, glyph_id: GlyphId) -> Option<String> {
     ttf.paint_color_glyph(glyph_id, 0, RgbaColor::new(0, 0, 0, 255), &mut glyph_painter)?;
     svg.end_element();
 
-<<<<<<< HEAD
-    let data = Bytes::from_string(svg.end_document());
-=======
     Some(svg.end_document())
 }
 
@@ -203,7 +190,6 @@ fn draw_colr_glyph(
     let y_max = ttf.global_bounding_box().y_max as f64;
 
     let data = Bytes::from_string(svg_string);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let image = Image::plain(SvgImage::new(data).ok()?);
 
     let y_shift = Abs::pt(upem.to_pt() - y_max);

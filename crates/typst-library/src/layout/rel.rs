@@ -2,11 +2,10 @@ use std::cmp::Ordering;
 use std::fmt::{self, Debug, Formatter};
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString};
+use ecow::{EcoString, eco_format};
 use typst_utils::Numeric;
 
-use crate::foundations::{cast, ty, Fold, Repr, Resolve, StyleChain};
+use crate::foundations::{Fold, Repr, Resolve, StyleChain, cast, ty};
 use crate::layout::{Abs, Em, Length, Ratio};
 
 /// 既知の長さに対する相対的な長さ。
@@ -14,30 +13,6 @@ use crate::layout::{Abs, Em, Length, Ratio};
 /// この型は[length]と[ratio]の組み合わせです。
 /// これは長さと百分率の加減算の結果になります。
 /// 相対長さが想定されているあらゆる箇所で長さまたは百分率を単体でも指定可能です。
-///
-/// # 例
-/// ```example
-/// #rect(width: 100% - 50pt)
-///
-/// #(100% - 50pt).length \
-/// #(100% - 50pt).ratio
-/// ```
-///
-/// 相対長さは以下のフィールドを持ちます。
-/// - `length`: 長さ成分。
-/// - `ratio`: 百分率成分。
-=======
-use ecow::{EcoString, eco_format};
-use typst_utils::Numeric;
-
-use crate::foundations::{Fold, Repr, Resolve, StyleChain, cast, ty};
-use crate::layout::{Abs, Em, Length, Ratio};
-
-/// A length in relation to some known length.
-///
-/// This type is a combination of a [length] with a [ratio]. It results from
-/// addition and subtraction of a length and a ratio. Wherever a relative length
-/// is expected, you can also use a bare length or ratio.
 ///
 /// # Relative to the page
 /// A common use case is setting the width or height of a layout element (e.g.,
@@ -91,7 +66,6 @@ use crate::layout::{Abs, Em, Length, Ratio};
 /// #(100% - 50pt).length \
 /// #(100% - 50pt).ratio
 /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[ty(cast, name = "relative", title = "Relative Length")]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Rel<T: Numeric = Length> {
@@ -113,11 +87,7 @@ impl<T: Numeric> Rel<T> {
     }
 
     /// Create a new relative from its parts.
-<<<<<<< HEAD
-    pub fn new(rel: Ratio, abs: T) -> Self {
-=======
     pub const fn new(rel: Ratio, abs: T) -> Self {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Self { rel, abs }
     }
 
@@ -157,15 +127,6 @@ impl Rel<Length> {
             None
         }
     }
-<<<<<<< HEAD
-
-    /// Convert to a relative length with the absolute part resolved at the
-    /// given font size.
-    pub fn at(self, font_size: Abs) -> Rel<Abs> {
-        self.map(|abs| abs.at(font_size))
-    }
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<T: Numeric + Debug> Debug for Rel<T> {

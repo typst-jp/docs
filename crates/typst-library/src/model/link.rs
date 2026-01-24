@@ -1,26 +1,4 @@
 use std::ops::Deref;
-<<<<<<< HEAD
-
-use ecow::{eco_format, EcoString};
-
-use crate::diag::{bail, warning, At, SourceResult, StrResult};
-use crate::engine::Engine;
-use crate::foundations::{
-    cast, elem, Content, Label, NativeElement, Packed, Repr, Show, ShowSet, Smart,
-    StyleChain, Styles, TargetElem,
-};
-use crate::html::{attr, tag, HtmlElem};
-use crate::introspection::Location;
-use crate::layout::Position;
-use crate::text::TextElem;
-
-/// URLや文書中の位置へのリンク。
-///
-/// デフォルトでは、リンクの外見は通常のテキストと変わりません。
-/// しかし、showルールを使うことで、簡単に任意のスタイルを適用できます。
-///
-/// # 例
-=======
 use std::str::FromStr;
 
 use comemo::Tracked;
@@ -29,8 +7,8 @@ use ecow::{EcoString, eco_format};
 use crate::diag::{SourceResult, StrResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    Args, Construct, Content, Label, Packed, Repr, Selector, ShowSet, Smart, StyleChain,
-    Styles, cast, elem,
+    Args, Construct, Content, Label, Packed, Repr, Selector, ShowSet, Smart,
+    StyleChain, Styles, cast, elem,
 };
 use crate::introspection::{
     Counter, CounterKey, Introspector, Locatable, Location, Tagged,
@@ -39,13 +17,12 @@ use crate::layout::{PageElem, Position};
 use crate::model::{NumberingPattern, Refable};
 use crate::text::{LocalName, TextElem};
 
-/// Links to a URL or a location in the document.
+/// URLや文書中の位置へのリンク。
 ///
-/// By default, links do not look any different from normal text. However,
-/// you can easily apply a style of your choice with a show rule.
+/// デフォルトでは、リンクの外見は通常のテキストと変わりません。
+/// しかし、showルールを使うことで、簡単に任意のスタイルを適用できます。
 ///
-/// # Example
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+/// # 例
 /// ```example
 /// #show link: underline
 ///
@@ -57,45 +34,14 @@ use crate::text::{LocalName, TextElem};
 /// ]
 /// ```
 ///
-<<<<<<< HEAD
+/// # 構文
+/// この関数には専用の構文もあります。
+/// `http://`や`https://`で始まるテキストは、自動的にリンクに変換されます。
+///
 /// # ハイフネーション
 /// ハイフネーションや両端揃えを有効にしていても、意図しないURL中のハイフネーションを防ぐため、
 /// デフォルトではリンクには適用されません。
 /// これを無効化するには、`{show link: set text(hyphenate: true)}`を使用します。
-///
-/// # 構文
-/// この関数には専用の構文もあります。
-/// `http://`や`https://`で始まるテキストは、自動的にリンクに変換されます。
-#[elem(Show)]
-pub struct LinkElem {
-    /// リンクの遷移先。
-    ///
-    /// - Webページにリンクする場合、`dest`は有効なURL文字列である必要があります。
-    ///   `mailto:`や`tel:`のURLスキームを含むURLが指定され、
-    ///   かつ`body`パラメーターが省略された場合、
-    ///   URLスキームを除いたメールアドレスまたは電話番号がリンクの本文になります。
-    ///
-    /// - 文書中の別の部分にリンクする場合、
-    ///     `dest`には次の3つのうちいずれかの形式を用いることができます。
-    ///   - 要素に付与された[label]。
-    ///     要素に基づいて自動的にリンクの本文を生成したい場合は、
-    ///     [reference]($ref)の使用を検討してください。
-    ///
-    ///   - [`location`]（通常は[`here`]や[`locate`]、
-    ///     [`query`]から取得される）。
-    ///
-    ///   - [integer]($int)型の`page`キーと[length]型の`x`座標、`y`座標を持つ辞書。
-    ///     ページ番号は1から始まり、
-    ///     座標はページの左上隅からの相対位置です。
-=======
-/// # Syntax
-/// This function also has dedicated syntax: Text that starts with `http://` or
-/// `https://` is automatically turned into a link.
-///
-/// # Hyphenation
-/// If you enable hyphenation or justification, by default, it will not apply to
-/// links to prevent unwanted hyphenation in URLs. You can opt out of this
-/// default via `{show link: set text(hyphenate: true)}`.
 ///
 /// # Accessibility
 /// The destination of a link should be clear from the link text itself, or at
@@ -151,26 +97,25 @@ pub struct LinkElem {
 ///   generated.
 #[elem(Locatable)]
 pub struct LinkElem {
-    /// The destination the link points to.
+    /// リンクの遷移先。
     ///
-    /// - To link to web pages, `dest` should be a valid URL string. If the URL
-    ///   is in the `mailto:` or `tel:` scheme and the `body` parameter is
-    ///   omitted, the email address or phone number will be the link's body,
-    ///   without the scheme.
+    /// - Webページにリンクする場合、`dest`は有効なURL文字列である必要があります。
+    ///   `mailto:`や`tel:`のURLスキームを含むURLが指定され、
+    ///   かつ`body`パラメーターが省略された場合、
+    ///   URLスキームを除いたメールアドレスまたは電話番号がリンクの本文になります。
     ///
-    /// - To link to another part of the document, `dest` can take one of three
-    ///   forms:
-    ///   - A [label] attached to an element. If you also want automatic text
-    ///     for the link based on the element, consider using a
-    ///     [reference]($ref) instead.
+    /// - 文書中の別の部分にリンクする場合、
+    ///     `dest`には次の3つのうちいずれかの形式を用いることができます。
+    ///   - 要素に付与された[label]。
+    ///     要素に基づいて自動的にリンクの本文を生成したい場合は、
+    ///     [reference]($ref)の使用を検討してください。
     ///
-    ///   - A [`location`] (typically retrieved from [`here`], [`locate`] or
-    ///     [`query`]).
+    ///   - [`location`]（通常は[`here`]や[`locate`]、
+    ///     [`query`]から取得される）。
     ///
-    ///   - A dictionary with a `page` key of type [integer]($int) and `x` and
-    ///     `y` coordinates of type [length]. Pages are counted from one, and
-    ///     the coordinates are relative to the page's top left corner.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+    ///   - [integer]($int)型の`page`キーと[length]型の`x`座標、`y`座標を持つ辞書。
+    ///     ページ番号は1から始まり、
+    ///     座標はページの左上隅からの相対位置です。
     ///
     /// ```example
     /// = Introduction <intro>
@@ -187,17 +132,10 @@ pub struct LinkElem {
     )]
     pub dest: LinkTarget,
 
-<<<<<<< HEAD
     /// リンクとして表示するコンテンツ。
     ///
     /// `dest`がURL文字列の場合、このパラメーターは省略可能です。
     /// この場合、URLがリンクとして表示されます。
-=======
-    /// The content that should become a link.
-    ///
-    /// If `dest` is an URL string, the parameter can be omitted. In this case,
-    /// the URL will be shown as the link.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     #[parse(match &dest {
         LinkTarget::Dest(Destination::Url(url)) => match args.eat()? {
@@ -222,66 +160,17 @@ impl LinkElem {
     }
 }
 
-<<<<<<< HEAD
-impl Show for Packed<LinkElem> {
-    #[typst_macros::time(name = "link", span = self.span())]
-    fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        let body = self.body.clone();
-
-        Ok(if TargetElem::target_in(styles).is_html() {
-            if let LinkTarget::Dest(Destination::Url(url)) = &self.dest {
-                HtmlElem::new(tag::a)
-                    .with_attr(attr::href, url.clone().into_inner())
-                    .with_body(Some(body))
-                    .pack()
-                    .spanned(self.span())
-            } else {
-                engine.sink.warn(warning!(
-                    self.span(),
-                    "non-URL links are not yet supported by HTML export"
-                ));
-                body
-            }
-        } else {
-            match &self.dest {
-                LinkTarget::Dest(dest) => body.linked(dest.clone()),
-                LinkTarget::Label(label) => {
-                    let elem = engine.introspector.query_label(*label).at(self.span())?;
-                    let dest = Destination::Location(elem.location().unwrap());
-                    body.clone().linked(dest)
-                }
-            }
-        })
-    }
-}
-
-impl ShowSet for Packed<LinkElem> {
-    fn show_set(&self, _: StyleChain) -> Styles {
-        let mut out = Styles::new();
-        out.set(TextElem::set_hyphenate(Smart::Custom(false)));
-=======
 impl ShowSet for Packed<LinkElem> {
     fn show_set(&self, _: StyleChain) -> Styles {
         let mut out = Styles::new();
         out.set(TextElem::hyphenate, Smart::Custom(false));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         out
     }
 }
 
-<<<<<<< HEAD
-fn body_from_url(url: &Url) -> Content {
-    let text = ["mailto:", "tel:"]
-        .into_iter()
-        .find_map(|prefix| url.strip_prefix(prefix))
-        .unwrap_or(url);
-    let shorter = text.len() < url.len();
-    TextElem::packed(if shorter { text.into() } else { (**url).clone() })
-=======
 pub(crate) fn body_from_url(url: &Url) -> Content {
     let stripped = url.strip_contact_scheme().map(|(_, s)| s.into());
     TextElem::packed(stripped.unwrap_or_else(|| url.clone().into_inner()))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// A target where a link can go.
@@ -291,8 +180,6 @@ pub enum LinkTarget {
     Label(Label),
 }
 
-<<<<<<< HEAD
-=======
 impl LinkTarget {
     /// Resolves the destination.
     pub fn resolve(&self, introspector: Tracked<Introspector>) -> StrResult<Destination> {
@@ -306,7 +193,6 @@ impl LinkTarget {
     }
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 cast! {
     LinkTarget,
     self => match self {
@@ -334,9 +220,6 @@ pub enum Destination {
     Location(Location),
 }
 
-<<<<<<< HEAD
-impl Destination {}
-=======
 impl Destination {
     pub fn alt_text(
         &self,
@@ -396,7 +279,6 @@ impl Destination {
         }
     }
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 impl Repr for Destination {
     fn repr(&self) -> EcoString {
@@ -426,11 +308,8 @@ impl Url {
         let url = url.into();
         if url.len() > 8000 {
             bail!("URL is too long")
-<<<<<<< HEAD
-=======
         } else if url.is_empty() {
             bail!("URL must not be empty")
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         Ok(Self(url))
     }
@@ -439,8 +318,6 @@ impl Url {
     pub fn into_inner(self) -> EcoString {
         self.0
     }
-<<<<<<< HEAD
-=======
 
     pub fn strip_contact_scheme(&self) -> Option<(UrlContactScheme, &str)> {
         [UrlContactScheme::Mailto, UrlContactScheme::Tel]
@@ -450,7 +327,6 @@ impl Url {
                 Some((scheme, stripped))
             })
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Deref for Url {
@@ -466,8 +342,6 @@ cast! {
     self => self.0.into_value(),
     v: EcoString => Self::new(v)?,
 }
-<<<<<<< HEAD
-=======
 
 /// This is a temporary hack to dispatch to
 /// - a raw link that does not go through `LinkElem` in paged
@@ -553,4 +427,3 @@ pub struct Telephone;
 impl LocalName for Telephone {
     const KEY: &'static str = "telephone";
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

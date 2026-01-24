@@ -1,24 +1,9 @@
-<<<<<<< HEAD
-use std::collections::{BTreeSet, HashMap, HashSet};
-=======
 use std::collections::BTreeSet;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::fmt::{self, Debug, Formatter};
 use std::hash::Hash;
 use std::num::NonZeroUsize;
 use std::sync::RwLock;
 
-<<<<<<< HEAD
-use ecow::EcoVec;
-use smallvec::SmallVec;
-use typst_utils::NonZeroExt;
-
-use crate::diag::{bail, StrResult};
-use crate::foundations::{Content, Label, Repr, Selector};
-use crate::html::HtmlNode;
-use crate::introspection::{Location, Tag};
-use crate::layout::{Frame, FrameItem, Page, Point, Position, Transform};
-=======
 use ecow::{EcoString, EcoVec};
 use rustc_hash::{FxHashMap, FxHashSet};
 use smallvec::SmallVec;
@@ -28,7 +13,6 @@ use crate::diag::{StrResult, bail};
 use crate::foundations::{Content, Label, Repr, Selector};
 use crate::introspection::{Location, Tag};
 use crate::layout::{Frame, FrameItem, Point, Position, Transform};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::model::Numbering;
 
 /// Can be queried for elements and their positions.
@@ -48,12 +32,6 @@ pub struct Introspector {
     keys: MultiMap<u128, Location>,
 
     /// Accelerates lookup of elements by location.
-<<<<<<< HEAD
-    locations: HashMap<Location, usize>,
-    /// Accelerates lookup of elements by label.
-    labels: MultiMap<Label, usize>,
-
-=======
     locations: FxHashMap<Location, usize>,
     /// Accelerates lookup of elements by label.
     labels: MultiMap<Label, usize>,
@@ -63,7 +41,6 @@ pub struct Introspector {
     /// empty and [`Self::html_id`] is not used.
     html_ids: FxHashMap<Location, EcoString>,
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Caches queries done on the introspector. This is important because
     /// even if all top-level queries are distinct, they often have shared
     /// subqueries. Example: Individual counter queries with `before` that
@@ -75,28 +52,11 @@ pub struct Introspector {
 type Pair = (Content, Position);
 
 impl Introspector {
-<<<<<<< HEAD
-    /// Creates an introspector for a page list.
-    #[typst_macros::time(name = "introspect pages")]
-    pub fn paged(pages: &[Page]) -> Self {
-        IntrospectorBuilder::new().build_paged(pages)
-    }
-
-    /// Creates an introspector for HTML.
-    #[typst_macros::time(name = "introspect html")]
-    pub fn html(output: &[HtmlNode]) -> Self {
-        IntrospectorBuilder::new().build_html(output)
-    }
-
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Iterates over all locatable elements.
     pub fn all(&self) -> impl Iterator<Item = &Content> + '_ {
         self.elems.iter().map(|(c, _)| c)
     }
 
-<<<<<<< HEAD
-=======
     /// Checks how many times a label exists.
     pub fn label_count(&self, label: Label) -> usize {
         self.labels.get(&label).len()
@@ -108,7 +68,6 @@ impl Introspector {
         self.html_ids = html_ids;
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Retrieves the element with the given index.
     #[track_caller]
     fn get_by_idx(&self, idx: usize) -> &Content {
@@ -326,14 +285,11 @@ impl Introspector {
         self.page_supplements.get(page.get() - 1).cloned().unwrap_or_default()
     }
 
-<<<<<<< HEAD
-=======
     /// Retrieves the ID to link to for this location in HTML export.
     pub fn html_id(&self, location: Location) -> Option<&EcoString> {
         self.html_ids.get(&location)
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Try to find a location for an element with the given `key` hash
     /// that is closest after the `anchor`.
     ///
@@ -358,11 +314,7 @@ impl Debug for Introspector {
 
 /// A map from one keys to multiple elements.
 #[derive(Clone)]
-<<<<<<< HEAD
-struct MultiMap<K, V>(HashMap<K, SmallVec<[V; 1]>>);
-=======
 struct MultiMap<K, V>(FxHashMap<K, SmallVec<[V; 1]>>);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 impl<K, V> MultiMap<K, V>
 where
@@ -376,32 +328,20 @@ where
         self.0.entry(key).or_default().push(value);
     }
 
-<<<<<<< HEAD
-    fn take(&mut self, key: &K) -> Option<impl Iterator<Item = V>> {
-=======
     fn take(&mut self, key: &K) -> Option<impl Iterator<Item = V> + use<K, V>> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0.remove(key).map(|vec| vec.into_iter())
     }
 }
 
 impl<K, V> Default for MultiMap<K, V> {
     fn default() -> Self {
-<<<<<<< HEAD
-        Self(HashMap::new())
-=======
         Self(FxHashMap::default())
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 /// Caches queries.
 #[derive(Default)]
-<<<<<<< HEAD
-struct QueryCache(RwLock<HashMap<u128, EcoVec<Content>>>);
-=======
 struct QueryCache(RwLock<FxHashMap<u128, EcoVec<Content>>>);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 impl QueryCache {
     fn get(&self, hash: u128) -> Option<EcoVec<Content>> {
@@ -421,16 +361,6 @@ impl Clone for QueryCache {
 
 /// Builds the introspector.
 #[derive(Default)]
-<<<<<<< HEAD
-struct IntrospectorBuilder {
-    pages: usize,
-    page_numberings: Vec<Option<Numbering>>,
-    page_supplements: Vec<Content>,
-    seen: HashSet<Location>,
-    insertions: MultiMap<Location, Vec<Pair>>,
-    keys: MultiMap<u128, Location>,
-    locations: HashMap<Location, usize>,
-=======
 pub struct IntrospectorBuilder {
     pub pages: usize,
     pub page_numberings: Vec<Option<Numbering>>,
@@ -440,56 +370,17 @@ pub struct IntrospectorBuilder {
     insertions: MultiMap<Location, Vec<Pair>>,
     keys: MultiMap<u128, Location>,
     locations: FxHashMap<Location, usize>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     labels: MultiMap<Label, usize>,
 }
 
 impl IntrospectorBuilder {
     /// Create an empty builder.
-<<<<<<< HEAD
-    fn new() -> Self {
-        Self::default()
-    }
-
-    /// Build an introspector for a page list.
-    fn build_paged(mut self, pages: &[Page]) -> Introspector {
-        self.pages = pages.len();
-        self.page_numberings.reserve(pages.len());
-        self.page_supplements.reserve(pages.len());
-
-        // Discover all elements.
-        let mut elems = Vec::new();
-        for (i, page) in pages.iter().enumerate() {
-            self.page_numberings.push(page.numbering.clone());
-            self.page_supplements.push(page.supplement.clone());
-            self.discover_in_frame(
-                &mut elems,
-                &page.frame,
-                NonZeroUsize::new(1 + i).unwrap(),
-                Transform::identity(),
-            );
-        }
-
-        self.finalize(elems)
-    }
-
-    /// Build an introspector for an HTML document.
-    fn build_html(mut self, output: &[HtmlNode]) -> Introspector {
-        let mut elems = Vec::new();
-        self.discover_in_html(&mut elems, output);
-        self.finalize(elems)
-    }
-
-    /// Processes the tags in the frame.
-    fn discover_in_frame(
-=======
     pub fn new() -> Self {
         Self::default()
     }
 
     /// Processes the tags in the frame.
     pub fn discover_in_frame(
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         &mut self,
         sink: &mut Vec<Pair>,
         frame: &Frame,
@@ -506,11 +397,7 @@ impl IntrospectorBuilder {
                     if let Some(parent) = group.parent {
                         let mut nested = vec![];
                         self.discover_in_frame(&mut nested, &group.frame, page, ts);
-<<<<<<< HEAD
-                        self.insertions.insert(parent, nested);
-=======
                         self.register_insertion(parent.location, nested);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     } else {
                         self.discover_in_frame(sink, &group.frame, page, ts);
                     }
@@ -527,25 +414,6 @@ impl IntrospectorBuilder {
         }
     }
 
-<<<<<<< HEAD
-    /// Processes the tags in the HTML element.
-    fn discover_in_html(&mut self, sink: &mut Vec<Pair>, nodes: &[HtmlNode]) {
-        for node in nodes {
-            match node {
-                HtmlNode::Tag(tag) => self.discover_in_tag(
-                    sink,
-                    tag,
-                    Position { page: NonZeroUsize::ONE, point: Point::zero() },
-                ),
-                HtmlNode::Text(_, _) => {}
-                HtmlNode::Element(elem) => self.discover_in_html(sink, &elem.children),
-                HtmlNode::Frame(frame) => self.discover_in_frame(
-                    sink,
-                    frame,
-                    NonZeroUsize::ONE,
-                    Transform::identity(),
-                ),
-=======
     /// Handle a tag.
     pub fn discover_in_tag(
         &mut self,
@@ -566,39 +434,18 @@ impl IntrospectorBuilder {
                 if flags.introspectable {
                     self.keys.insert(*key, *loc);
                 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
         }
     }
 
-<<<<<<< HEAD
-    /// Handle a tag.
-    fn discover_in_tag(&mut self, sink: &mut Vec<Pair>, tag: &Tag, position: Position) {
-        match tag {
-            Tag::Start(elem) => {
-                let loc = elem.location().unwrap();
-                if self.seen.insert(loc) {
-                    sink.push((elem.clone(), position));
-                }
-            }
-            Tag::End(loc, key) => {
-                self.keys.insert(*key, *loc);
-            }
-        }
-=======
     /// Saves nested pairs as logically belonging to the `parent`.
     pub fn register_insertion(&mut self, parent: Location, nested: Vec<Pair>) {
         self.insertions.insert(parent, nested);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Build a complete introspector with all acceleration structures from a
     /// list of top-level pairs.
-<<<<<<< HEAD
-    fn finalize(mut self, root: Vec<Pair>) -> Introspector {
-=======
     pub fn finalize(mut self, root: Vec<Pair>) -> Introspector {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.locations.reserve(self.seen.len());
 
         // Save all pairs and their descendants in the correct order.
@@ -611,10 +458,7 @@ impl IntrospectorBuilder {
             pages: self.pages,
             page_numberings: self.page_numberings,
             page_supplements: self.page_supplements,
-<<<<<<< HEAD
-=======
             html_ids: self.html_ids,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             elems,
             keys: self.keys,
             locations: self.locations,

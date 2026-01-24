@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-use std::sync::Arc;
-
-use image::imageops::FilterType;
-use image::{GenericImageView, Rgba};
-use tiny_skia as sk;
-use typst_library::foundations::Smart;
-use typst_library::layout::Size;
-use typst_library::visualize::{Image, ImageKind, ImageScaling};
-=======
 use hayro::{FontData, FontQuery, InterpreterSettings, RenderSettings, StandardFont};
 use image::imageops::FilterType;
 use image::{GenericImageView, Rgba};
@@ -17,7 +7,6 @@ use tiny_skia::IntSize;
 use typst_library::foundations::Smart;
 use typst_library::layout::Size;
 use typst_library::visualize::{Image, ImageKind, ImageScaling, PdfImage};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::{AbsExt, State};
 
@@ -71,15 +60,9 @@ pub fn render_image(
 /// Prepare a texture for an image at a scaled size.
 #[comemo::memoize]
 fn build_texture(image: &Image, w: u32, h: u32) -> Option<Arc<sk::Pixmap>> {
-<<<<<<< HEAD
-    let mut texture = sk::Pixmap::new(w, h)?;
-    match image.kind() {
-        ImageKind::Raster(raster) => {
-=======
     let texture = match image.kind() {
         ImageKind::Raster(raster) => {
             let mut texture = sk::Pixmap::new(w, h)?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             let w = texture.width();
             let h = texture.height();
 
@@ -103,28 +86,17 @@ fn build_texture(image: &Image, w: u32, h: u32) -> Option<Arc<sk::Pixmap>> {
                 let Rgba([r, g, b, a]) = src;
                 *dest = sk::ColorU8::from_rgba(r, g, b, a).premultiply();
             }
-<<<<<<< HEAD
-        }
-        ImageKind::Svg(svg) => {
-=======
 
             texture
         }
         ImageKind::Svg(svg) => {
             let mut texture = sk::Pixmap::new(w, h)?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             let tree = svg.tree();
             let ts = tiny_skia::Transform::from_scale(
                 w as f32 / tree.size().width(),
                 h as f32 / tree.size().height(),
             );
             resvg::render(tree, ts, &mut texture.as_mut());
-<<<<<<< HEAD
-        }
-    }
-    Some(Arc::new(texture))
-}
-=======
             texture
         }
         ImageKind::Pdf(pdf) => build_pdf_texture(pdf, w, h)?,
@@ -174,4 +146,3 @@ fn build_pdf_texture(pdf: &PdfImage, w: u32, h: u32) -> Option<sk::Pixmap> {
 
     sk::Pixmap::from_vec(hayro_pix.take_u8(), IntSize::from_wh(w, h)?)
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -28,8 +28,6 @@ $ bold(op("bold", limits: #true))_x y $
 --- math-non-math-content ---
 // With non-text content
 $ op(#underline[ul]) a $
-<<<<<<< HEAD
-=======
 
 --- math-op-font ---
 // Test with different font.
@@ -47,4 +45,3 @@ $ colim_(x -> 0) inline(colim_(x -> 0)) $
 #test
 #show math.op: set text(font: "New Computer Modern")
 #test
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

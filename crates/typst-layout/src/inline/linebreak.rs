@@ -2,13 +2,8 @@ use std::ops::{Add, Sub};
 use std::sync::LazyLock;
 
 use az::SaturatingAs;
-<<<<<<< HEAD
-use icu_properties::maps::{CodePointMapData, CodePointMapDataBorrowed};
-use icu_properties::LineBreak;
-=======
 use icu_properties::LineBreak;
 use icu_properties::maps::{CodePointMapData, CodePointMapDataBorrowed};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use icu_provider::AsDeserializingBufferProvider;
 use icu_provider_adapters::fork::ForkByKeyProvider;
 use icu_provider_blob::BlobDataProvider;
@@ -16,11 +11,7 @@ use icu_segmenter::LineSegmenter;
 use typst_library::engine::Engine;
 use typst_library::layout::{Abs, Em};
 use typst_library::model::Linebreaks;
-<<<<<<< HEAD
-use typst_library::text::{is_default_ignorable, Lang, TextElem};
-=======
 use typst_library::text::{Lang, TextElem};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_syntax::link_prefix;
 use unicode_segmentation::UnicodeSegmentation;
 
@@ -66,12 +57,9 @@ static LINEBREAK_DATA: LazyLock<CodePointMapData<LineBreak>> = LazyLock::new(|| 
     icu_properties::maps::load_line_break(&blob().as_deserializing()).unwrap()
 });
 
-<<<<<<< HEAD
-=======
 // Zero width space.
 const ZWS: char = '\u{200B}';
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A line break opportunity.
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub enum Breakpoint {
@@ -86,15 +74,6 @@ pub enum Breakpoint {
 
 impl Breakpoint {
     /// Trim a line before this breakpoint.
-<<<<<<< HEAD
-    pub fn trim(self, line: &str) -> &str {
-        // Trim default ignorables.
-        let line = line.trim_end_matches(is_default_ignorable);
-
-        match self {
-            // Trim whitespace.
-            Self::Normal => line.trim_end_matches(char::is_whitespace),
-=======
     pub fn trim(self, start: usize, line: &str) -> Trim {
         match self {
             // Trailing whitespace should be shaped, but the glyphs should have
@@ -112,16 +91,11 @@ impl Breakpoint {
                     shaping: start + line.len(),
                 }
             }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
             // Trim linebreaks.
             Self::Mandatory => {
                 let lb = LINEBREAK_DATA.as_borrowed();
-<<<<<<< HEAD
-                line.trim_end_matches(|c| {
-=======
                 let trimmed = line.trim_end_matches(|c| {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     matches!(
                         lb.get(c),
                         LineBreak::MandatoryBreak
@@ -129,20 +103,12 @@ impl Breakpoint {
                             | LineBreak::LineFeed
                             | LineBreak::NextLine
                     )
-<<<<<<< HEAD
-                })
-            }
-
-            // Trim nothing further.
-            Self::Hyphen(..) => line,
-=======
                 });
                 Trim::uniform(start + trimmed.len())
             }
 
             // Trim nothing.
             Self::Hyphen(..) => Trim::uniform(start + line.len()),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -152,8 +118,6 @@ impl Breakpoint {
     }
 }
 
-<<<<<<< HEAD
-=======
 /// How to trim the end of a line.
 ///
 /// It's an invariant that `self.layout <= self.shaping`.
@@ -174,7 +138,6 @@ impl Trim {
     }
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Breaks the text into lines.
 pub fn linebreak<'a>(
     engine: &Engine,
@@ -207,21 +170,12 @@ fn linebreak_simple<'a>(
         // If the line doesn't fit anymore, we push the last fitting attempt
         // into the stack and rebuild the line from the attempt's end. The
         // resulting line cannot be broken up further.
-<<<<<<< HEAD
-        if !width.fits(attempt.width) {
-            if let Some((last_attempt, last_end)) = last.take() {
-                lines.push(last_attempt);
-                start = last_end;
-                attempt = line(engine, p, start..end, breakpoint, lines.last());
-            }
-=======
         if !width.fits(attempt.width)
             && let Some((last_attempt, last_end)) = last.take()
         {
             lines.push(last_attempt);
             start = last_end;
             attempt = line(engine, p, start..end, breakpoint, lines.last());
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         // Finish the current line if there is a mandatory line break (i.e. due
@@ -370,11 +324,7 @@ fn linebreak_optimized_bounded<'a>(
             }
 
             // If this attempt is better than what we had before, take it!
-<<<<<<< HEAD
-            if best.as_ref().map_or(true, |best| best.total >= total) {
-=======
             if best.as_ref().is_none_or(|best| best.total >= total) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 best = Some(Entry { pred: pred_index, total, line: attempt, end });
             }
         }
@@ -507,11 +457,7 @@ fn linebreak_optimized_approximate(
             let total = pred.total + line_cost;
 
             // If this attempt is better than what we had before, take it!
-<<<<<<< HEAD
-            if best.as_ref().map_or(true, |best| best.total >= total) {
-=======
             if best.as_ref().is_none_or(|best| best.total >= total) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 best = Some(Entry {
                     pred: pred_index,
                     total,
@@ -778,20 +724,12 @@ fn breakpoints(p: &Preparation, mut f: impl FnMut(usize, Breakpoint)) {
         let breakpoint = if point == text.len() {
             Breakpoint::Mandatory
         } else {
-<<<<<<< HEAD
-            match lb.get(c) {
-                // Fix for: https://github.com/unicode-org/icu4x/issues/4146
-                LineBreak::Glue | LineBreak::WordJoiner | LineBreak::ZWJ => continue,
-=======
             const OBJ_REPLACE: char = '\u{FFFC}';
             match lb.get(c) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 LineBreak::MandatoryBreak
                 | LineBreak::CarriageReturn
                 | LineBreak::LineFeed
                 | LineBreak::NextLine => Breakpoint::Mandatory,
-<<<<<<< HEAD
-=======
 
                 // https://github.com/typst/typst/issues/5489
                 //
@@ -814,7 +752,6 @@ fn breakpoints(p: &Preparation, mut f: impl FnMut(usize, Breakpoint)) {
                     continue;
                 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 _ => Breakpoint::Normal,
             }
         };
@@ -943,13 +880,9 @@ fn hyphenate_at(p: &Preparation, offset: usize) -> bool {
     p.config.hyphenate.unwrap_or_else(|| {
         let (_, item) = p.get(offset);
         match item.text() {
-<<<<<<< HEAD
-            Some(text) => TextElem::hyphenate_in(text.styles).unwrap_or(p.config.justify),
-=======
             Some(text) => {
                 text.styles.get(TextElem::hyphenate).unwrap_or(p.config.justify)
             }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             None => false,
         }
     })
@@ -960,11 +893,7 @@ fn lang_at(p: &Preparation, offset: usize) -> Option<hypher::Lang> {
     let lang = p.config.lang.or_else(|| {
         let (_, item) = p.get(offset);
         let styles = item.text()?.styles;
-<<<<<<< HEAD
-        Some(TextElem::lang_in(styles))
-=======
         Some(styles.get(TextElem::lang))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     })?;
 
     let bytes = lang.as_str().as_bytes().try_into().ok()?;
@@ -999,15 +928,7 @@ impl CostMetrics {
     /// we allow less because otherwise we get an invalid layout fairly often,
     /// which makes our bound useless.
     fn min_ratio(&self, approx: bool) -> f64 {
-<<<<<<< HEAD
-        if approx {
-            self.min_approx_ratio
-        } else {
-            self.min_ratio
-        }
-=======
         if approx { self.min_approx_ratio } else { self.min_ratio }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -1038,15 +959,9 @@ impl Estimates {
                     let byte_len = g.range.len();
                     let stretch = g.stretchability().0 + g.stretchability().1;
                     let shrink = g.shrinkability().0 + g.shrinkability().1;
-<<<<<<< HEAD
-                    widths.push(byte_len, g.x_advance.at(shaped.size));
-                    stretchability.push(byte_len, stretch.at(shaped.size));
-                    shrinkability.push(byte_len, shrink.at(shaped.size));
-=======
                     widths.push(byte_len, g.x_advance.at(g.size));
                     stretchability.push(byte_len, stretch.at(g.size));
                     shrinkability.push(byte_len, shrink.at(g.size));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     justifiables.push(byte_len, g.is_justifiable() as usize);
                 }
             } else {

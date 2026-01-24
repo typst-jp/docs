@@ -71,8 +71,6 @@ pub fn enable() {
     ENABLED.store(true, Ordering::Relaxed);
 }
 
-<<<<<<< HEAD
-=======
 /// Disable the timer.
 #[inline]
 pub fn disable() {
@@ -81,7 +79,6 @@ pub fn disable() {
     ENABLED.store(false, Ordering::Relaxed);
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Whether the timer is enabled.
 #[inline]
 pub fn is_enabled() -> bool {
@@ -219,11 +216,7 @@ struct Event {
 }
 
 /// Whether an event marks the start or end of a scope.
-<<<<<<< HEAD
-#[derive(Debug, Clone, Copy, Eq, PartialEq)]
-=======
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 enum EventKind {
     Start,
     End,

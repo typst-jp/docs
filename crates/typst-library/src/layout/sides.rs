@@ -3,17 +3,10 @@ use std::ops::Add;
 
 use typst_utils::Get;
 
-<<<<<<< HEAD
-use crate::diag::{bail, HintedStrResult};
-use crate::foundations::{
-    cast, AlternativeFold, CastInfo, Dict, Fold, FromValue, IntoValue, Reflect, Resolve,
-    StyleChain, Value,
-=======
 use crate::diag::{HintedStrResult, bail};
 use crate::foundations::{
     AlternativeFold, CastInfo, Dict, Fold, FromValue, IntoValue, Reflect, Resolve,
     StyleChain, Value, cast,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use crate::layout::{Abs, Alignment, Axes, Axis, Corner, Rel, Size};
 
@@ -104,8 +97,6 @@ impl<T: Add> Sides<T> {
 }
 
 impl<T> Sides<Option<T>> {
-<<<<<<< HEAD
-=======
     /// Unwrap-or the individual sides.
     pub fn unwrap_or(self, default: T) -> Sides<T>
     where
@@ -114,7 +105,6 @@ impl<T> Sides<Option<T>> {
         self.map(|v| v.unwrap_or(default.clone()))
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Unwrap-or-default the individual sides.
     pub fn unwrap_or_default(self) -> Sides<T>
     where
@@ -202,17 +192,10 @@ where
     T: PartialEq + IntoValue,
 {
     fn into_value(self) -> Value {
-<<<<<<< HEAD
-        if self.is_uniform() {
-            if let Some(left) = self.left {
-                return left.into_value();
-            }
-=======
         if self.is_uniform()
             && let Some(left) = self.left
         {
             return left.into_value();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         let mut dict = Dict::new();

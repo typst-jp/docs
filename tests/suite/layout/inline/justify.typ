@@ -92,8 +92,6 @@ int main() {
 }
 ```
 
-<<<<<<< HEAD
-=======
 --- justify-limits-glyph-shrink-only ---
 #set text(hyphenate: false, overhang: false)
 #set par(
@@ -192,7 +190,6 @@ int main() {
 // Error: 32-76 `min` value of `spacing` is invalid (ratio must be positive)
 #set par(justification-limits: (spacing: (min: -50% - 1pt, max: 50% + 1pt)))
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- justify-chinese ---
 // In Chinese typography, line length should be multiples of the character size
 // and the line ends should be aligned with each other. Most Chinese

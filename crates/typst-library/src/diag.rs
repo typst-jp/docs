@@ -1,23 +1,11 @@
 //! Diagnostics.
 
-<<<<<<< HEAD
-use std::fmt::{self, Display, Formatter};
-=======
 use std::fmt::{self, Display, Formatter, Write as _};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::io;
 use std::path::{Path, PathBuf};
 use std::str::Utf8Error;
 use std::string::FromUtf8Error;
 
-<<<<<<< HEAD
-use comemo::Tracked;
-use ecow::{eco_vec, EcoVec};
-use typst_syntax::package::{PackageSpec, PackageVersion};
-use typst_syntax::{Span, Spanned, SyntaxError};
-
-use crate::engine::Engine;
-=======
 use az::SaturatingAs;
 use comemo::Tracked;
 use ecow::{EcoVec, eco_vec};
@@ -27,7 +15,6 @@ use utf8_iter::ErrorReportingUtf8Chars;
 
 use crate::engine::Engine;
 use crate::loading::{LoadSource, Loaded};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::{World, WorldExt};
 
 /// Early-return with a [`StrResult`] or [`SourceResult`].
@@ -164,9 +151,6 @@ pub struct Warned<T> {
     pub warnings: EcoVec<SourceDiagnostic>,
 }
 
-<<<<<<< HEAD
-/// An error or warning in a source file.
-=======
 impl<T> Warned<T> {
     /// Maps the output, keeping the same warnings.
     pub fn map<R, F: FnOnce(T) -> R>(self, f: F) -> Warned<R> {
@@ -175,7 +159,6 @@ impl<T> Warned<T> {
 }
 
 /// An error or warning in a source or text file.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// The contained spans will only be detached if any of the input source files
 /// were detached.
@@ -195,11 +178,7 @@ pub struct SourceDiagnostic {
 }
 
 /// The severity of a [`SourceDiagnostic`].
-<<<<<<< HEAD
-#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
-=======
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub enum Severity {
     /// A fatal error.
     Error,
@@ -262,44 +241,6 @@ impl From<SyntaxError> for SourceDiagnostic {
 
 /// Destination for a deprecation message when accessing a deprecated value.
 pub trait DeprecationSink {
-<<<<<<< HEAD
-    /// Emits the given deprecation message into this sink.
-    fn emit(&mut self, message: &str);
-
-    /// Emits the given deprecation message into this sink, with the given
-    /// hints.
-    fn emit_with_hints(&mut self, message: &str, hints: &[&str]);
-}
-
-impl DeprecationSink for () {
-    fn emit(&mut self, _: &str) {}
-    fn emit_with_hints(&mut self, _: &str, _: &[&str]) {}
-}
-
-impl DeprecationSink for (&mut Vec<SourceDiagnostic>, Span) {
-    fn emit(&mut self, message: &str) {
-        self.0.push(SourceDiagnostic::warning(self.1, message));
-    }
-
-    fn emit_with_hints(&mut self, message: &str, hints: &[&str]) {
-        self.0.push(
-            SourceDiagnostic::warning(self.1, message)
-                .with_hints(hints.iter().copied().map(Into::into)),
-        );
-    }
-}
-
-impl DeprecationSink for (&mut Engine<'_>, Span) {
-    fn emit(&mut self, message: &str) {
-        self.0.sink.warn(SourceDiagnostic::warning(self.1, message));
-    }
-
-    fn emit_with_hints(&mut self, message: &str, hints: &[&str]) {
-        self.0.sink.warn(
-            SourceDiagnostic::warning(self.1, message)
-                .with_hints(hints.iter().copied().map(Into::into)),
-        );
-=======
     /// Emits the given deprecation message into this sink alongside a version
     /// in which the deprecated item is planned to be removed.
     fn emit(self, message: &str, until: Option<&str>);
@@ -317,7 +258,6 @@ impl DeprecationSink for (&mut Engine<'_>, Span) {
             .warn(SourceDiagnostic::warning(self.1, message).with_hints(
                 version.map(|v| eco_format!("it will be removed in Typst {}", v)),
             ));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -368,22 +308,12 @@ impl<T> Trace<T> for SourceResult<T> {
             let Some(trace_range) = world.range(span) else { return errors };
             for error in errors.make_mut().iter_mut() {
                 // Skip traces that surround the error.
-<<<<<<< HEAD
-                if let Some(error_range) = world.range(error.span) {
-                    if error.span.id() == span.id()
-                        && trace_range.start <= error_range.start
-                        && trace_range.end >= error_range.end
-                    {
-                        continue;
-                    }
-=======
                 if let Some(error_range) = world.range(error.span)
                     && error.span.id() == span.id()
                     && trace_range.start <= error_range.start
                     && trace_range.end >= error_range.end
                 {
                     continue;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 }
 
                 error.trace.push(Spanned::new(make_point(), span));
@@ -562,11 +492,7 @@ impl Display for FileError {
             }
             Self::AccessDenied => f.pad("failed to load file (access denied)"),
             Self::IsDirectory => f.pad("failed to load file (is a directory)"),
-<<<<<<< HEAD
-            Self::NotSource => f.pad("not a typst source file"),
-=======
             Self::NotSource => f.pad("not a Typst source file"),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::InvalidUtf8 => f.pad("file is not valid utf-8"),
             Self::Package(error) => error.fmt(f),
             Self::Other(Some(err)) => write!(f, "failed to load file ({err})"),
@@ -656,29 +582,6 @@ impl From<PackageError> for EcoString {
     }
 }
 
-<<<<<<< HEAD
-/// Format a user-facing error message for an XML-like file format.
-pub fn format_xml_like_error(format: &str, error: roxmltree::Error) -> EcoString {
-    match error {
-        roxmltree::Error::UnexpectedCloseTag(expected, actual, pos) => {
-            eco_format!(
-                "failed to parse {format} (found closing tag '{actual}' \
-                 instead of '{expected}' in line {})",
-                pos.row
-            )
-        }
-        roxmltree::Error::UnknownEntityReference(entity, pos) => {
-            eco_format!(
-                "failed to parse {format} (unknown entity '{entity}' in line {})",
-                pos.row
-            )
-        }
-        roxmltree::Error::DuplicatedAttribute(attr, pos) => {
-            eco_format!(
-                "failed to parse {format} (duplicate attribute '{attr}' in line {})",
-                pos.row
-            )
-=======
 /// A result type with a data-loading-related error.
 pub type LoadResult<T> = Result<T, LoadError>;
 
@@ -956,17 +859,12 @@ pub fn format_xml_like_error(format: &str, error: roxmltree::Error) -> LoadError
         }
         roxmltree::Error::DuplicatedAttribute(attr, _) => {
             eco_format!("failed to parse {format} (duplicate attribute '{attr}')")
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         roxmltree::Error::NoRootNode => {
             eco_format!("failed to parse {format} (missing root node)")
         }
         err => eco_format!("failed to parse {format} ({err})"),
-<<<<<<< HEAD
-    }
-=======
     };
 
     LoadError { pos: pos.into(), message }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

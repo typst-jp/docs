@@ -53,15 +53,9 @@ $ ext(arrow.r) quad ext(arrow.l.double.bar) \
 // Test stretching along vertical axis.
 #let ext(sym) = math.stretch(sym, size: 2em)
 $ ext(bar.v) quad ext(bar.v.double) quad
-<<<<<<< HEAD
-  ext(angle.l) quad ext(angle.r) quad
-  ext(paren.l) quad ext(paren.r) \
-  ext(bracket.l.double) quad ext(bracket.r.double) quad
-=======
   ext(chevron.l) quad ext(chevron.r) quad
   ext(paren.l) quad ext(paren.r) \
   ext(bracket.l.stroked) quad ext(bracket.r.stroked) quad
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   ext(brace.l) quad ext(brace.r) quad
   ext(bracket.l) quad ext(bracket.r) $
 
@@ -97,8 +91,6 @@ $ body^"text" $
   }
   $body^"long text"$
 }
-<<<<<<< HEAD
-=======
 
 --- math-stretch-min-overlap-exceeds-max ---
 // Test that glyph assembly doesn't end up with negative lengths if the max
@@ -108,4 +100,3 @@ $ body^"text" $
 // Hint: its rendering may appear broken - this is probably a font bug
 // Hint: please file an issue at https://github.com/typst/typst/issues
 $ stretch(->)^"Gauss-Jordan Elimination" $
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -11,8 +11,6 @@
 #v(10pt)
 #context test(here().position().y, 20pt)
 
-<<<<<<< HEAD
-=======
 --- locate-start-of-par ---
 #metadata(none)<a>A#metadata(none)<b>B
 
@@ -32,7 +30,6 @@
   locate(<d>).position().y,
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- locate-missing-label ---
 // Error: 10-25 label `<intro>` does not exist in the document
 #context locate(<intro>)
@@ -94,8 +91,6 @@ B
 #pagebreak(weak: true)
 #metadata(none) <e>
 
-<<<<<<< HEAD
-=======
 --- locate-migrated-breakable ---
 // Ensure that when a breakable element fully migrates to the next page without
 // orphan frames, its position correctly reflects that.
@@ -108,7 +103,6 @@ A
   (page: 2, x: 10pt, y: 10pt),
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-4029-locate-after-spacing ---
 #set page(margin: 10pt)
 #show heading: it => v(40pt) + it

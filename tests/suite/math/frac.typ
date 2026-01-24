@@ -37,21 +37,14 @@ $ 1/2/3 = (1/2)/3 = 1/(2/3) $
 // Test precedence.
 $ a_1/b_2, 1/f(x), zeta(x)/2, "foo"[|x|]/2 \
   1.2/3.7, 2.3^3.4 \
-<<<<<<< HEAD
-  🏳️‍🌈[x]/2, f [x]/2, phi [x]/2, 🏳️‍🌈 [x]/2 \
-  +[x]/2, 1(x)/2, 2[x]/2 \
-=======
   f [x]/2, phi [x]/2 \
   +[x]/2, 1(x)/2, 2[x]/2, 🏳️‍🌈[x]/2 \
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   (a)b/2, b(a)[b]/2 \
   n!/2, 5!/2, n !/2, 1/n!, 1/5! $
 
 --- math-frac-gap ---
 // Test that the gap above and below the fraction rule is correct.
 $ sqrt(n^(2/3)) $
-<<<<<<< HEAD
-=======
 
 --- math-frac-horizontal ---
 // Test that horizontal fractions look identical to inline math with `slash`
@@ -83,4 +76,3 @@ $ [x+y] / {z} $
 // Test inline layout of styled fractions
 #set math.frac(style: "horizontal")
 $a/(b+c), frac(a, b+c, style: "skewed"), frac(a, b+c, style: "vertical")$
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

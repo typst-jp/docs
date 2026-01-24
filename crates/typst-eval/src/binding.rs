@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-use std::collections::HashSet;
-
-use ecow::eco_format;
-use typst_library::diag::{bail, error, At, SourceDiagnostic, SourceResult};
-=======
 use ecow::eco_format;
 use rustc_hash::FxHashSet;
 use typst_library::diag::{At, SourceDiagnostic, SourceResult, bail, error};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::foundations::{Array, Dict, Value};
 use typst_syntax::ast::{self, AstNode};
 
@@ -143,11 +136,7 @@ where
     F: Fn(&mut Vm, ast::Expr, Value) -> SourceResult<()>,
 {
     let mut sink = None;
-<<<<<<< HEAD
-    let mut used = HashSet::new();
-=======
     let mut used = FxHashSet::default();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     for p in destruct.items() {
         match p {

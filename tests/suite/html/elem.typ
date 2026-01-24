@@ -13,8 +13,6 @@ Text
   val
 })
 #metadata("Hi") <l>
-<<<<<<< HEAD
-=======
 
 --- html-elem-custom html ---
 #html.elem("my-element")[Hi]
@@ -37,4 +35,3 @@ Text
 --- html-elem-custom-reserved html ---
 // Error: 12-28 name is reserved and not valid for a custom element
 #html.elem("annotation-xml")
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -135,8 +135,6 @@ I
 
 The number 123.
 
-<<<<<<< HEAD
-=======
 --- text-font-covers-repeat ---
 // Repeatedly use the same font.
 #set text(font: (
@@ -165,7 +163,6 @@ The number 123.
 // but not:
 #text(font: "Twitter Color Emoji", "🔗⛓‍💥🖥️🔑")
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- text-font-covers-bad-1 ---
 // Error: 17-59 coverage regex may only use dot, letters, and character classes
 // Hint: 17-59 the regex is applied to each letter individually
@@ -180,8 +177,6 @@ The number 123.
 #set text(-1pt)
 
 a
-<<<<<<< HEAD
-=======
 
 --- issue-5940-text-negative-size-panic ---
 #set align(center)
@@ -191,4 +186,3 @@ Hello
 --- empty-text-font-array ---
 // Error: 17-19 font fallback list must not be empty
 #set text(font: ())
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

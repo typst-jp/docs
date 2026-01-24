@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-//! A typed layer over the untyped syntax tree.
-//!
-//! The AST is rooted in the [`Markup`] node.
-=======
 /*!
 # Abstract Syntax Tree Interface
 
@@ -81,7 +76,6 @@ re-traverse the AST every time a function is evaluated. A bytecode interpreter
 using the lazy interface would only need to traverse each node once, improving
 throughput at the cost of initial latency and development flexibility.
 */
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use std::num::NonZeroUsize;
 use std::ops::Deref;
@@ -92,11 +86,7 @@ use ecow::EcoString;
 use unscanny::Scanner;
 
 use crate::package::PackageSpec;
-<<<<<<< HEAD
-use crate::{is_ident, is_newline, Span, SyntaxKind, SyntaxNode};
-=======
 use crate::{Span, SyntaxKind, SyntaxNode, is_ident, is_newline};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A typed AST node.
 pub trait AstNode<'a>: Sized {
@@ -112,10 +102,6 @@ pub trait AstNode<'a>: Sized {
     }
 }
 
-<<<<<<< HEAD
-macro_rules! node {
-    ($(#[$attr:meta])* $name:ident) => {
-=======
 // A generic interface for converting untyped nodes into typed AST nodes.
 impl SyntaxNode {
     /// Whether the node can be cast to the given AST node.
@@ -165,7 +151,6 @@ impl SyntaxNode {
 macro_rules! node {
     ($(#[$attr:meta])* struct $name:ident) => {
         // Create the struct as a wrapper around a `SyntaxNode` reference.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
         #[repr(transparent)]
         $(#[$attr])*
@@ -200,11 +185,7 @@ macro_rules! node {
 
 node! {
     /// The syntactical root capable of representing a full parsed document.
-<<<<<<< HEAD
-    Markup
-=======
     struct Markup
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Markup<'a> {
@@ -258,19 +239,11 @@ pub enum Expr<'a> {
     /// A section heading: `= Introduction`.
     Heading(Heading<'a>),
     /// An item in a bullet list: `- ...`.
-<<<<<<< HEAD
-    List(ListItem<'a>),
-    /// An item in an enumeration (numbered list): `+ ...` or `1. ...`.
-    Enum(EnumItem<'a>),
-    /// An item in a term list: `/ Term: Details`.
-    Term(TermItem<'a>),
-=======
     ListItem(ListItem<'a>),
     /// An item in an enumeration (numbered list): `+ ...` or `1. ...`.
     EnumItem(EnumItem<'a>),
     /// An item in a term list: `/ Term: Details`.
     TermItem(TermItem<'a>),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// A mathematical equation: `$x$`, `$ x^2 $`.
     Equation(Equation<'a>),
     /// The contents of a mathematical equation: `x^2 + 1`.
@@ -310,15 +283,9 @@ pub enum Expr<'a> {
     /// A quoted string: `"..."`.
     Str(Str<'a>),
     /// A code block: `{ let x = 1; x + 2 }`.
-<<<<<<< HEAD
-    Code(CodeBlock<'a>),
-    /// A content block: `[*Hi* there!]`.
-    Content(ContentBlock<'a>),
-=======
     CodeBlock(CodeBlock<'a>),
     /// A content block: `[*Hi* there!]`.
     ContentBlock(ContentBlock<'a>),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// A grouped expression: `(1 + 2)`.
     Parenthesized(Parenthesized<'a>),
     /// An array: `(1, "hi", 12cm)`.
@@ -336,15 +303,6 @@ pub enum Expr<'a> {
     /// A closure: `(x, y) => z`.
     Closure(Closure<'a>),
     /// A let binding: `let x = 1`.
-<<<<<<< HEAD
-    Let(LetBinding<'a>),
-    /// A destructuring assignment: `(x, y) = (1, 2)`.
-    DestructAssign(DestructAssignment<'a>),
-    /// A set rule: `set text(...)`.
-    Set(SetRule<'a>),
-    /// A show rule: `show heading: it => emph(it.body)`.
-    Show(ShowRule<'a>),
-=======
     LetBinding(LetBinding<'a>),
     /// A destructuring assignment: `(x, y) = (1, 2)`.
     DestructAssignment(DestructAssignment<'a>),
@@ -352,27 +310,11 @@ pub enum Expr<'a> {
     SetRule(SetRule<'a>),
     /// A show rule: `show heading: it => emph(it.body)`.
     ShowRule(ShowRule<'a>),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// A contextual expression: `context text.lang`.
     Contextual(Contextual<'a>),
     /// An if-else conditional: `if x { y } else { z }`.
     Conditional(Conditional<'a>),
     /// A while loop: `while x { y }`.
-<<<<<<< HEAD
-    While(WhileLoop<'a>),
-    /// A for loop: `for x in y { z }`.
-    For(ForLoop<'a>),
-    /// A module import: `import "utils.typ": a, b, c`.
-    Import(ModuleImport<'a>),
-    /// A module include: `include "chapter1.typ"`.
-    Include(ModuleInclude<'a>),
-    /// A break from a loop: `break`.
-    Break(LoopBreak<'a>),
-    /// A continue in a loop: `continue`.
-    Continue(LoopContinue<'a>),
-    /// A return from a function: `return`, `return x + 1`.
-    Return(FuncReturn<'a>),
-=======
     WhileLoop(WhileLoop<'a>),
     /// A for loop: `for x in y { z }`.
     ForLoop(ForLoop<'a>),
@@ -386,17 +328,12 @@ pub enum Expr<'a> {
     LoopContinue(LoopContinue<'a>),
     /// A return from a function: `return`, `return x + 1`.
     FuncReturn(FuncReturn<'a>),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Expr<'a> {
     fn cast_with_space(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Space => node.cast().map(Self::Space),
-=======
             SyntaxKind::Space => Some(Self::Space(Space(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => Self::from_untyped(node),
         }
     }
@@ -405,66 +342,6 @@ impl<'a> Expr<'a> {
 impl<'a> AstNode<'a> for Expr<'a> {
     fn from_untyped(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Linebreak => node.cast().map(Self::Linebreak),
-            SyntaxKind::Parbreak => node.cast().map(Self::Parbreak),
-            SyntaxKind::Text => node.cast().map(Self::Text),
-            SyntaxKind::Escape => node.cast().map(Self::Escape),
-            SyntaxKind::Shorthand => node.cast().map(Self::Shorthand),
-            SyntaxKind::SmartQuote => node.cast().map(Self::SmartQuote),
-            SyntaxKind::Strong => node.cast().map(Self::Strong),
-            SyntaxKind::Emph => node.cast().map(Self::Emph),
-            SyntaxKind::Raw => node.cast().map(Self::Raw),
-            SyntaxKind::Link => node.cast().map(Self::Link),
-            SyntaxKind::Label => node.cast().map(Self::Label),
-            SyntaxKind::Ref => node.cast().map(Self::Ref),
-            SyntaxKind::Heading => node.cast().map(Self::Heading),
-            SyntaxKind::ListItem => node.cast().map(Self::List),
-            SyntaxKind::EnumItem => node.cast().map(Self::Enum),
-            SyntaxKind::TermItem => node.cast().map(Self::Term),
-            SyntaxKind::Equation => node.cast().map(Self::Equation),
-            SyntaxKind::Math => node.cast().map(Self::Math),
-            SyntaxKind::MathText => node.cast().map(Self::MathText),
-            SyntaxKind::MathIdent => node.cast().map(Self::MathIdent),
-            SyntaxKind::MathShorthand => node.cast().map(Self::MathShorthand),
-            SyntaxKind::MathAlignPoint => node.cast().map(Self::MathAlignPoint),
-            SyntaxKind::MathDelimited => node.cast().map(Self::MathDelimited),
-            SyntaxKind::MathAttach => node.cast().map(Self::MathAttach),
-            SyntaxKind::MathPrimes => node.cast().map(Self::MathPrimes),
-            SyntaxKind::MathFrac => node.cast().map(Self::MathFrac),
-            SyntaxKind::MathRoot => node.cast().map(Self::MathRoot),
-            SyntaxKind::Ident => node.cast().map(Self::Ident),
-            SyntaxKind::None => node.cast().map(Self::None),
-            SyntaxKind::Auto => node.cast().map(Self::Auto),
-            SyntaxKind::Bool => node.cast().map(Self::Bool),
-            SyntaxKind::Int => node.cast().map(Self::Int),
-            SyntaxKind::Float => node.cast().map(Self::Float),
-            SyntaxKind::Numeric => node.cast().map(Self::Numeric),
-            SyntaxKind::Str => node.cast().map(Self::Str),
-            SyntaxKind::CodeBlock => node.cast().map(Self::Code),
-            SyntaxKind::ContentBlock => node.cast().map(Self::Content),
-            SyntaxKind::Parenthesized => node.cast().map(Self::Parenthesized),
-            SyntaxKind::Array => node.cast().map(Self::Array),
-            SyntaxKind::Dict => node.cast().map(Self::Dict),
-            SyntaxKind::Unary => node.cast().map(Self::Unary),
-            SyntaxKind::Binary => node.cast().map(Self::Binary),
-            SyntaxKind::FieldAccess => node.cast().map(Self::FieldAccess),
-            SyntaxKind::FuncCall => node.cast().map(Self::FuncCall),
-            SyntaxKind::Closure => node.cast().map(Self::Closure),
-            SyntaxKind::LetBinding => node.cast().map(Self::Let),
-            SyntaxKind::DestructAssignment => node.cast().map(Self::DestructAssign),
-            SyntaxKind::SetRule => node.cast().map(Self::Set),
-            SyntaxKind::ShowRule => node.cast().map(Self::Show),
-            SyntaxKind::Contextual => node.cast().map(Self::Contextual),
-            SyntaxKind::Conditional => node.cast().map(Self::Conditional),
-            SyntaxKind::WhileLoop => node.cast().map(Self::While),
-            SyntaxKind::ForLoop => node.cast().map(Self::For),
-            SyntaxKind::ModuleImport => node.cast().map(Self::Import),
-            SyntaxKind::ModuleInclude => node.cast().map(Self::Include),
-            SyntaxKind::LoopBreak => node.cast().map(Self::Break),
-            SyntaxKind::LoopContinue => node.cast().map(Self::Continue),
-            SyntaxKind::FuncReturn => node.cast().map(Self::Return),
-=======
             SyntaxKind::Space => Option::None, // Skipped unless using `cast_with_space`.
             SyntaxKind::Linebreak => Some(Self::Linebreak(Linebreak(node))),
             SyntaxKind::Parbreak => Some(Self::Parbreak(Parbreak(node))),
@@ -528,7 +405,6 @@ impl<'a> AstNode<'a> for Expr<'a> {
             SyntaxKind::LoopBreak => Some(Self::LoopBreak(LoopBreak(node))),
             SyntaxKind::LoopContinue => Some(Self::LoopContinue(LoopContinue(node))),
             SyntaxKind::FuncReturn => Some(Self::FuncReturn(FuncReturn(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => Option::None,
         }
     }
@@ -549,15 +425,9 @@ impl<'a> AstNode<'a> for Expr<'a> {
             Self::Label(v) => v.to_untyped(),
             Self::Ref(v) => v.to_untyped(),
             Self::Heading(v) => v.to_untyped(),
-<<<<<<< HEAD
-            Self::List(v) => v.to_untyped(),
-            Self::Enum(v) => v.to_untyped(),
-            Self::Term(v) => v.to_untyped(),
-=======
             Self::ListItem(v) => v.to_untyped(),
             Self::EnumItem(v) => v.to_untyped(),
             Self::TermItem(v) => v.to_untyped(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Equation(v) => v.to_untyped(),
             Self::Math(v) => v.to_untyped(),
             Self::MathText(v) => v.to_untyped(),
@@ -577,13 +447,8 @@ impl<'a> AstNode<'a> for Expr<'a> {
             Self::Float(v) => v.to_untyped(),
             Self::Numeric(v) => v.to_untyped(),
             Self::Str(v) => v.to_untyped(),
-<<<<<<< HEAD
-            Self::Code(v) => v.to_untyped(),
-            Self::Content(v) => v.to_untyped(),
-=======
             Self::CodeBlock(v) => v.to_untyped(),
             Self::ContentBlock(v) => v.to_untyped(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Array(v) => v.to_untyped(),
             Self::Dict(v) => v.to_untyped(),
             Self::Parenthesized(v) => v.to_untyped(),
@@ -592,21 +457,6 @@ impl<'a> AstNode<'a> for Expr<'a> {
             Self::FieldAccess(v) => v.to_untyped(),
             Self::FuncCall(v) => v.to_untyped(),
             Self::Closure(v) => v.to_untyped(),
-<<<<<<< HEAD
-            Self::Let(v) => v.to_untyped(),
-            Self::DestructAssign(v) => v.to_untyped(),
-            Self::Set(v) => v.to_untyped(),
-            Self::Show(v) => v.to_untyped(),
-            Self::Contextual(v) => v.to_untyped(),
-            Self::Conditional(v) => v.to_untyped(),
-            Self::While(v) => v.to_untyped(),
-            Self::For(v) => v.to_untyped(),
-            Self::Import(v) => v.to_untyped(),
-            Self::Include(v) => v.to_untyped(),
-            Self::Break(v) => v.to_untyped(),
-            Self::Continue(v) => v.to_untyped(),
-            Self::Return(v) => v.to_untyped(),
-=======
             Self::LetBinding(v) => v.to_untyped(),
             Self::DestructAssignment(v) => v.to_untyped(),
             Self::SetRule(v) => v.to_untyped(),
@@ -620,7 +470,6 @@ impl<'a> AstNode<'a> for Expr<'a> {
             Self::LoopBreak(v) => v.to_untyped(),
             Self::LoopContinue(v) => v.to_untyped(),
             Self::FuncReturn(v) => v.to_untyped(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
@@ -638,32 +487,13 @@ impl Expr<'_> {
                 | Self::Float(_)
                 | Self::Numeric(_)
                 | Self::Str(_)
-<<<<<<< HEAD
-                | Self::Code(_)
-                | Self::Content(_)
-=======
                 | Self::CodeBlock(_)
                 | Self::ContentBlock(_)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 | Self::Array(_)
                 | Self::Dict(_)
                 | Self::Parenthesized(_)
                 | Self::FieldAccess(_)
                 | Self::FuncCall(_)
-<<<<<<< HEAD
-                | Self::Let(_)
-                | Self::Set(_)
-                | Self::Show(_)
-                | Self::Contextual(_)
-                | Self::Conditional(_)
-                | Self::While(_)
-                | Self::For(_)
-                | Self::Import(_)
-                | Self::Include(_)
-                | Self::Break(_)
-                | Self::Continue(_)
-                | Self::Return(_)
-=======
                 | Self::LetBinding(_)
                 | Self::SetRule(_)
                 | Self::ShowRule(_)
@@ -676,7 +506,6 @@ impl Expr<'_> {
                 | Self::LoopBreak(_)
                 | Self::LoopContinue(_)
                 | Self::FuncReturn(_)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         )
     }
 
@@ -703,11 +532,7 @@ impl Default for Expr<'_> {
 
 node! {
     /// Plain text without markup.
-<<<<<<< HEAD
-    Text
-=======
     struct Text
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Text<'a> {
@@ -720,38 +545,22 @@ impl<'a> Text<'a> {
 node! {
     /// Whitespace in markup or math. Has at most one newline in markup, as more
     /// indicate a paragraph break.
-<<<<<<< HEAD
-    Space
-=======
     struct Space
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A forced line break: `\`.
-<<<<<<< HEAD
-    Linebreak
-=======
     struct Linebreak
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A paragraph break, indicated by one or multiple blank lines.
-<<<<<<< HEAD
-    Parbreak
-=======
     struct Parbreak
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// An escape sequence: `\#`, `\u{1F5FA}`.
-<<<<<<< HEAD
-    Escape
-=======
     struct Escape
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Escape<'_> {
@@ -774,11 +583,7 @@ impl Escape<'_> {
 node! {
     /// A shorthand for a unicode codepoint. For example, `~` for a non-breaking
     /// space or `-?` for a soft hyphen.
-<<<<<<< HEAD
-    Shorthand
-=======
     struct Shorthand
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Shorthand<'_> {
@@ -804,11 +609,7 @@ impl Shorthand<'_> {
 
 node! {
     /// A smart quote: `'` or `"`.
-<<<<<<< HEAD
-    SmartQuote
-=======
     struct SmartQuote
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl SmartQuote<'_> {
@@ -820,51 +621,31 @@ impl SmartQuote<'_> {
 
 node! {
     /// Strong content: `*Strong*`.
-<<<<<<< HEAD
-    Strong
-=======
     struct Strong
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Strong<'a> {
     /// The contents of the strong node.
     pub fn body(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// Emphasized content: `_Emphasized_`.
-<<<<<<< HEAD
-    Emph
-=======
     struct Emph
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Emph<'a> {
     /// The contents of the emphasis node.
     pub fn body(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// Raw text with optional syntax highlighting: `` `...` ``.
-<<<<<<< HEAD
-    Raw
-=======
     struct Raw
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Raw<'a> {
@@ -876,30 +657,18 @@ impl<'a> Raw<'a> {
     /// An optional identifier specifying the language to syntax-highlight in.
     pub fn lang(self) -> Option<RawLang<'a>> {
         // Only blocky literals are supposed to contain a language.
-<<<<<<< HEAD
-        let delim: RawDelim = self.0.cast_first_match()?;
-=======
         let delim: RawDelim = self.0.try_cast_first()?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         if delim.0.len() < 3 {
             return Option::None;
         }
 
-<<<<<<< HEAD
-        self.0.cast_first_match()
-=======
         self.0.try_cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Whether the raw text should be displayed in a separate block.
     pub fn block(self) -> bool {
         self.0
-<<<<<<< HEAD
-            .cast_first_match()
-=======
             .try_cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .is_some_and(|delim: RawDelim| delim.0.len() >= 3)
             && self.0.children().any(|e| {
                 e.kind() == SyntaxKind::RawTrimmed && e.text().chars().any(is_newline)
@@ -909,11 +678,7 @@ impl<'a> Raw<'a> {
 
 node! {
     /// A language tag at the start of raw element: ``typ ``.
-<<<<<<< HEAD
-    RawLang
-=======
     struct RawLang
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> RawLang<'a> {
@@ -925,20 +690,12 @@ impl<'a> RawLang<'a> {
 
 node! {
     /// A raw delimiter in single or 3+ backticks: `` ` ``.
-<<<<<<< HEAD
-    RawDelim
-=======
     struct RawDelim
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A hyperlink: `https://typst.org`.
-<<<<<<< HEAD
-    Link
-=======
     struct Link
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Link<'a> {
@@ -950,11 +707,7 @@ impl<'a> Link<'a> {
 
 node! {
     /// A label: `<intro>`.
-<<<<<<< HEAD
-    Label
-=======
     struct Label
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Label<'a> {
@@ -966,20 +719,13 @@ impl<'a> Label<'a> {
 
 node! {
     /// A reference: `@target`, `@target[..]`.
-<<<<<<< HEAD
-    Ref
-=======
     struct Ref
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Ref<'a> {
     /// Get the target.
-<<<<<<< HEAD
-=======
     ///
     /// Will not be empty.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn target(self) -> &'a str {
         self.0
             .children()
@@ -990,31 +736,19 @@ impl<'a> Ref<'a> {
 
     /// Get the supplement.
     pub fn supplement(self) -> Option<ContentBlock<'a>> {
-<<<<<<< HEAD
-        self.0.cast_last_match()
-=======
         self.0.try_cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A section heading: `= Introduction`.
-<<<<<<< HEAD
-    Heading
-=======
     struct Heading
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Heading<'a> {
     /// The contents of the heading.
     pub fn body(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The section depth (number of equals signs).
@@ -1029,40 +763,24 @@ impl<'a> Heading<'a> {
 
 node! {
     /// An item in a bullet list: `- ...`.
-<<<<<<< HEAD
-    ListItem
-=======
     struct ListItem
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ListItem<'a> {
     /// The contents of the list item.
     pub fn body(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// An item in an enumeration (numbered list): `+ ...` or `1. ...`.
-<<<<<<< HEAD
-    EnumItem
-=======
     struct EnumItem
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> EnumItem<'a> {
     /// The explicit numbering, if any: `23.`.
-<<<<<<< HEAD
-    pub fn number(self) -> Option<usize> {
-=======
     pub fn number(self) -> Option<u64> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0.children().find_map(|node| match node.kind() {
             SyntaxKind::EnumMarker => node.text().trim_end_matches('.').parse().ok(),
             _ => Option::None,
@@ -1071,60 +789,36 @@ impl<'a> EnumItem<'a> {
 
     /// The contents of the list item.
     pub fn body(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// An item in a term list: `/ Term: Details`.
-<<<<<<< HEAD
-    TermItem
-=======
     struct TermItem
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> TermItem<'a> {
     /// The term described by the item.
     pub fn term(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The description of the term.
     pub fn description(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A mathematical equation: `$x$`, `$ x^2 $`.
-<<<<<<< HEAD
-    Equation
-=======
     struct Equation
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Equation<'a> {
     /// The contained math.
     pub fn body(self) -> Math<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Whether the equation should be displayed as a separate block.
@@ -1138,11 +832,7 @@ impl<'a> Equation<'a> {
 
 node! {
     /// The contents of a mathematical equation: `x^2 + 1`.
-<<<<<<< HEAD
-    Math
-=======
     struct Math
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Math<'a> {
@@ -1150,8 +840,6 @@ impl<'a> Math<'a> {
     pub fn exprs(self) -> impl DoubleEndedIterator<Item = Expr<'a>> {
         self.0.children().filter_map(Expr::cast_with_space)
     }
-<<<<<<< HEAD
-=======
 
     /// Whether this `Math` node was originally parenthesized.
     pub fn was_deparenthesized(self) -> bool {
@@ -1162,16 +850,11 @@ impl<'a> Math<'a> {
                 Some(SyntaxKind::RightParen)
             )
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A lone text fragment in math: `x`, `25`, `3.1415`, `=`, `[`.
-<<<<<<< HEAD
-    MathText
-=======
     struct MathText
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// The underlying text kind.
@@ -1199,11 +882,7 @@ impl<'a> MathText<'a> {
 
 node! {
     /// An identifier in math: `pi`.
-<<<<<<< HEAD
-    MathIdent
-=======
     struct MathIdent
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> MathIdent<'a> {
@@ -1230,11 +909,7 @@ impl Deref for MathIdent<'_> {
 
 node! {
     /// A shorthand for a unicode codepoint in math: `a <= b`.
-<<<<<<< HEAD
-    MathShorthand
-=======
     struct MathShorthand
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl MathShorthand<'_> {
@@ -1292,68 +967,40 @@ impl MathShorthand<'_> {
 
 node! {
     /// An alignment point in math: `&`.
-<<<<<<< HEAD
-    MathAlignPoint
-=======
     struct MathAlignPoint
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// Matched delimiters in math: `[x + y]`.
-<<<<<<< HEAD
-    MathDelimited
-=======
     struct MathDelimited
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> MathDelimited<'a> {
     /// The opening delimiter.
     pub fn open(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The contents, including the delimiters.
     pub fn body(self) -> Math<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The closing delimiter.
     pub fn close(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A base with optional attachments in math: `a_1^2`.
-<<<<<<< HEAD
-    MathAttach
-=======
     struct MathAttach
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> MathAttach<'a> {
     /// The base, to which things are attached.
     pub fn base(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The bottom attachment.
@@ -1384,11 +1031,7 @@ impl<'a> MathAttach<'a> {
 
 node! {
     /// Grouped primes in math: `a'''`.
-<<<<<<< HEAD
-    MathPrimes
-=======
     struct MathPrimes
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl MathPrimes<'_> {
@@ -1403,49 +1046,29 @@ impl MathPrimes<'_> {
 
 node! {
     /// A fraction in math: `x/2`
-<<<<<<< HEAD
-    MathFrac
-=======
     struct MathFrac
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> MathFrac<'a> {
     /// The numerator.
     pub fn num(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The denominator.
     pub fn denom(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A root in math: `√x`, `∛x` or `∜x`.
-<<<<<<< HEAD
-    MathRoot
-=======
     struct MathRoot
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> MathRoot<'a> {
     /// The index of the root.
-<<<<<<< HEAD
-    pub fn index(self) -> Option<usize> {
-=======
     pub fn index(self) -> Option<u8> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         match self.0.children().next().map(|node| node.text().as_str()) {
             Some("∜") => Some(4),
             Some("∛") => Some(3),
@@ -1456,21 +1079,13 @@ impl<'a> MathRoot<'a> {
 
     /// The radicand.
     pub fn radicand(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// An identifier: `it`.
-<<<<<<< HEAD
-    Ident
-=======
     struct Ident
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Ident<'a> {
@@ -1497,29 +1112,17 @@ impl Deref for Ident<'_> {
 
 node! {
     /// The `none` literal.
-<<<<<<< HEAD
-    None
-=======
     struct None
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// The `auto` literal.
-<<<<<<< HEAD
-    Auto
-=======
     struct Auto
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A boolean: `true`, `false`.
-<<<<<<< HEAD
-    Bool
-=======
     struct Bool
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Bool<'_> {
@@ -1531,11 +1134,7 @@ impl Bool<'_> {
 
 node! {
     /// An integer: `120`.
-<<<<<<< HEAD
-    Int
-=======
     struct Int
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Int<'_> {
@@ -1557,11 +1156,7 @@ impl Int<'_> {
 
 node! {
     /// A floating-point number: `1.2`, `10e-4`.
-<<<<<<< HEAD
-    Float
-=======
     struct Float
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Float<'_> {
@@ -1573,11 +1168,7 @@ impl Float<'_> {
 
 node! {
     /// A numeric value with a unit: `12pt`, `3cm`, `2em`, `90deg`, `50%`.
-<<<<<<< HEAD
-    Numeric
-=======
     struct Numeric
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Numeric<'_> {
@@ -1634,11 +1225,7 @@ pub enum Unit {
 
 node! {
     /// A quoted string: `"..."`.
-<<<<<<< HEAD
-    Str
-=======
     struct Str
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Str<'_> {
@@ -1688,31 +1275,19 @@ impl Str<'_> {
 
 node! {
     /// A code block: `{ let x = 1; x + 2 }`.
-<<<<<<< HEAD
-    CodeBlock
-=======
     struct CodeBlock
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> CodeBlock<'a> {
     /// The contained code.
     pub fn body(self) -> Code<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// The body of a code block.
-<<<<<<< HEAD
-    Code
-=======
     struct Code
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Code<'a> {
@@ -1724,31 +1299,19 @@ impl<'a> Code<'a> {
 
 node! {
     /// A content block: `[*Hi* there!]`.
-<<<<<<< HEAD
-    ContentBlock
-=======
     struct ContentBlock
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ContentBlock<'a> {
     /// The contained markup.
     pub fn body(self) -> Markup<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A grouped expression: `(1 + 2)`.
-<<<<<<< HEAD
-    Parenthesized
-=======
     struct Parenthesized
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Parenthesized<'a> {
@@ -1756,32 +1319,20 @@ impl<'a> Parenthesized<'a> {
     ///
     /// Should only be accessed if this is contained in an `Expr`.
     pub fn expr(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The wrapped pattern.
     ///
     /// Should only be accessed if this is contained in a `Pattern`.
     pub fn pattern(self) -> Pattern<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// An array: `(1, "hi", 12cm)`.
-<<<<<<< HEAD
-    Array
-=======
     struct Array
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Array<'a> {
@@ -1803,11 +1354,7 @@ pub enum ArrayItem<'a> {
 impl<'a> AstNode<'a> for ArrayItem<'a> {
     fn from_untyped(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Spread => node.cast().map(Self::Spread),
-=======
             SyntaxKind::Spread => Some(Self::Spread(Spread(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => node.cast().map(Self::Pos),
         }
     }
@@ -1822,11 +1369,7 @@ impl<'a> AstNode<'a> for ArrayItem<'a> {
 
 node! {
     /// A dictionary: `(thickness: 3pt, dash: "solid")`.
-<<<<<<< HEAD
-    Dict
-=======
     struct Dict
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Dict<'a> {
@@ -1850,15 +1393,9 @@ pub enum DictItem<'a> {
 impl<'a> AstNode<'a> for DictItem<'a> {
     fn from_untyped(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Named => node.cast().map(Self::Named),
-            SyntaxKind::Keyed => node.cast().map(Self::Keyed),
-            SyntaxKind::Spread => node.cast().map(Self::Spread),
-=======
             SyntaxKind::Named => Some(Self::Named(Named(node))),
             SyntaxKind::Keyed => Some(Self::Keyed(Keyed(node))),
             SyntaxKind::Spread => Some(Self::Spread(Spread(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => Option::None,
         }
     }
@@ -1874,21 +1411,13 @@ impl<'a> AstNode<'a> for DictItem<'a> {
 
 node! {
     /// A named pair: `thickness: 3pt`.
-<<<<<<< HEAD
-    Named
-=======
     struct Named
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Named<'a> {
     /// The name: `thickness`.
     pub fn name(self) -> Ident<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The right-hand side of the pair: `3pt`.
@@ -1896,11 +1425,7 @@ impl<'a> Named<'a> {
     /// This should only be accessed if this `Named` is contained in a
     /// `DictItem`, `Arg`, or `Param`.
     pub fn expr(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The right-hand side of the pair as a pattern.
@@ -1908,31 +1433,19 @@ impl<'a> Named<'a> {
     /// This should only be accessed if this `Named` is contained in a
     /// `Destructuring`.
     pub fn pattern(self) -> Pattern<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A keyed pair: `"spacy key": true`.
-<<<<<<< HEAD
-    Keyed
-=======
     struct Keyed
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Keyed<'a> {
     /// The key: `"spacy key"`.
     pub fn key(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The right-hand side of the pair: `true`.
@@ -1940,21 +1453,13 @@ impl<'a> Keyed<'a> {
     /// This should only be accessed if this `Keyed` is contained in a
     /// `DictItem`.
     pub fn expr(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A spread: `..x` or `..x.at(0)`.
-<<<<<<< HEAD
-    Spread
-=======
     struct Spread
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Spread<'a> {
@@ -1963,11 +1468,7 @@ impl<'a> Spread<'a> {
     /// This should only be accessed if this `Spread` is contained in an
     /// `ArrayItem`, `DictItem`, or `Arg`.
     pub fn expr(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The sink identifier, if present.
@@ -1975,11 +1476,7 @@ impl<'a> Spread<'a> {
     /// This should only be accessed if this `Spread` is contained in a
     /// `Param` or binding `DestructuringItem`.
     pub fn sink_ident(self) -> Option<Ident<'a>> {
-<<<<<<< HEAD
-        self.0.cast_first_match()
-=======
         self.0.try_cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The sink expressions, if present.
@@ -1987,21 +1484,13 @@ impl<'a> Spread<'a> {
     /// This should only be accessed if this `Spread` is contained in a
     /// `DestructuringItem`.
     pub fn sink_expr(self) -> Option<Expr<'a>> {
-<<<<<<< HEAD
-        self.0.cast_first_match()
-=======
         self.0.try_cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A unary operation: `-x`.
-<<<<<<< HEAD
-    Unary
-=======
     struct Unary
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Unary<'a> {
@@ -2015,11 +1504,7 @@ impl<'a> Unary<'a> {
 
     /// The expression to operate on: `x`.
     pub fn expr(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -2046,11 +1531,7 @@ impl UnOp {
     }
 
     /// The precedence of this operator.
-<<<<<<< HEAD
-    pub fn precedence(self) -> usize {
-=======
     pub fn precedence(self) -> u8 {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         match self {
             Self::Pos | Self::Neg => 7,
             Self::Not => 4,
@@ -2069,11 +1550,7 @@ impl UnOp {
 
 node! {
     /// A binary operation: `a + b`.
-<<<<<<< HEAD
-    Binary
-=======
     struct Binary
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Binary<'a> {
@@ -2095,20 +1572,12 @@ impl<'a> Binary<'a> {
 
     /// The left-hand side of the operation: `a`.
     pub fn lhs(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The right-hand side of the operation: `b`.
     pub fn rhs(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -2182,11 +1651,7 @@ impl BinOp {
     }
 
     /// The precedence of this operator.
-<<<<<<< HEAD
-    pub fn precedence(self) -> usize {
-=======
     pub fn precedence(self) -> u8 {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         match self {
             Self::Mul => 6,
             Self::Div => 6,
@@ -2272,69 +1737,41 @@ pub enum Assoc {
 
 node! {
     /// A field access: `properties.age`.
-<<<<<<< HEAD
-    FieldAccess
-=======
     struct FieldAccess
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> FieldAccess<'a> {
     /// The expression to access the field on.
     pub fn target(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The name of the field.
     pub fn field(self) -> Ident<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// An invocation of a function or method: `f(x, y)`.
-<<<<<<< HEAD
-    FuncCall
-=======
     struct FuncCall
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> FuncCall<'a> {
     /// The function to call.
     pub fn callee(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The arguments to the function.
     pub fn args(self) -> Args<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A function call's argument list: `(12pt, y)`.
-<<<<<<< HEAD
-    Args
-=======
     struct Args
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Args<'a> {
@@ -2368,13 +1805,8 @@ pub enum Arg<'a> {
 impl<'a> AstNode<'a> for Arg<'a> {
     fn from_untyped(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Named => node.cast().map(Self::Named),
-            SyntaxKind::Spread => node.cast().map(Self::Spread),
-=======
             SyntaxKind::Named => Some(Self::Named(Named(node))),
             SyntaxKind::Spread => Some(Self::Spread(Spread(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => node.cast().map(Self::Pos),
         }
     }
@@ -2390,11 +1822,7 @@ impl<'a> AstNode<'a> for Arg<'a> {
 
 node! {
     /// A closure: `(x, y) => z`.
-<<<<<<< HEAD
-    Closure
-=======
     struct Closure
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Closure<'a> {
@@ -2407,30 +1835,18 @@ impl<'a> Closure<'a> {
 
     /// The parameter bindings.
     pub fn params(self) -> Params<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The body of the closure.
     pub fn body(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A closure's parameters: `(x, y)`.
-<<<<<<< HEAD
-    Params
-=======
     struct Params
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Params<'a> {
@@ -2454,13 +1870,8 @@ pub enum Param<'a> {
 impl<'a> AstNode<'a> for Param<'a> {
     fn from_untyped(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Named => node.cast().map(Self::Named),
-            SyntaxKind::Spread => node.cast().map(Self::Spread),
-=======
             SyntaxKind::Named => Some(Self::Named(Named(node))),
             SyntaxKind::Spread => Some(Self::Spread(Spread(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => node.cast().map(Self::Pos),
         }
     }
@@ -2490,15 +1901,9 @@ pub enum Pattern<'a> {
 impl<'a> AstNode<'a> for Pattern<'a> {
     fn from_untyped(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Underscore => node.cast().map(Self::Placeholder),
-            SyntaxKind::Parenthesized => node.cast().map(Self::Parenthesized),
-            SyntaxKind::Destructuring => node.cast().map(Self::Destructuring),
-=======
             SyntaxKind::Underscore => Some(Self::Placeholder(Underscore(node))),
             SyntaxKind::Parenthesized => Some(Self::Parenthesized(Parenthesized(node))),
             SyntaxKind::Destructuring => Some(Self::Destructuring(Destructuring(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => node.cast().map(Self::Normal),
         }
     }
@@ -2533,20 +1938,12 @@ impl Default for Pattern<'_> {
 
 node! {
     /// An underscore: `_`
-<<<<<<< HEAD
-    Underscore
-=======
     struct Underscore
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A destructuring pattern: `x` or `(x, _, ..y)`.
-<<<<<<< HEAD
-    Destructuring
-=======
     struct Destructuring
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Destructuring<'a> {
@@ -2583,13 +1980,8 @@ pub enum DestructuringItem<'a> {
 impl<'a> AstNode<'a> for DestructuringItem<'a> {
     fn from_untyped(node: &'a SyntaxNode) -> Option<Self> {
         match node.kind() {
-<<<<<<< HEAD
-            SyntaxKind::Named => node.cast().map(Self::Named),
-            SyntaxKind::Spread => node.cast().map(Self::Spread),
-=======
             SyntaxKind::Named => Some(Self::Named(Named(node))),
             SyntaxKind::Spread => Some(Self::Spread(Spread(node))),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ => node.cast().map(Self::Pattern),
         }
     }
@@ -2605,11 +1997,7 @@ impl<'a> AstNode<'a> for DestructuringItem<'a> {
 
 node! {
     /// A let binding: `let x = 1`.
-<<<<<<< HEAD
-    LetBinding
-=======
     struct LetBinding
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// The kind of a let binding, either a normal one or a closure.
@@ -2634,19 +2022,11 @@ impl<'a> LetBindingKind<'a> {
 impl<'a> LetBinding<'a> {
     /// The kind of the let binding.
     pub fn kind(self) -> LetBindingKind<'a> {
-<<<<<<< HEAD
-        match self.0.cast_first_match::<Pattern>() {
-            Some(Pattern::Normal(Expr::Closure(closure))) => {
-                LetBindingKind::Closure(closure.name().unwrap_or_default())
-            }
-            pattern => LetBindingKind::Normal(pattern.unwrap_or_default()),
-=======
         match self.0.cast_first() {
             Pattern::Normal(Expr::Closure(closure)) => {
                 LetBindingKind::Closure(closure.name().unwrap_or_default())
             }
             pattern => LetBindingKind::Normal(pattern),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -2656,72 +2036,43 @@ impl<'a> LetBinding<'a> {
             LetBindingKind::Normal(Pattern::Normal(_) | Pattern::Parenthesized(_)) => {
                 self.0.children().filter_map(SyntaxNode::cast).nth(1)
             }
-<<<<<<< HEAD
-            LetBindingKind::Normal(_) => self.0.cast_first_match(),
-            LetBindingKind::Closure(_) => self.0.cast_first_match(),
-=======
             LetBindingKind::Normal(_) => self.0.try_cast_first(),
             LetBindingKind::Closure(_) => self.0.try_cast_first(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
 
 node! {
     /// An assignment expression `(x, y) = (1, 2)`.
-<<<<<<< HEAD
-    DestructAssignment
-=======
     struct DestructAssignment
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> DestructAssignment<'a> {
     /// The pattern of the assignment.
     pub fn pattern(self) -> Pattern<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match::<Pattern>().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The expression that is assigned.
     pub fn value(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A set rule: `set text(...)`.
-<<<<<<< HEAD
-    SetRule
-=======
     struct SetRule
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> SetRule<'a> {
     /// The function to set style properties for.
     pub fn target(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The style properties to set.
     pub fn args(self) -> Args<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// A condition under which the set rule applies.
@@ -2735,11 +2086,7 @@ impl<'a> SetRule<'a> {
 
 node! {
     /// A show rule: `show heading: it => emph(it.body)`.
-<<<<<<< HEAD
-    ShowRule
-=======
     struct ShowRule
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ShowRule<'a> {
@@ -2754,51 +2101,31 @@ impl<'a> ShowRule<'a> {
 
     /// The transformation recipe.
     pub fn transform(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A contextual expression: `context text.lang`.
-<<<<<<< HEAD
-    Contextual
-=======
     struct Contextual
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Contextual<'a> {
     /// The expression which depends on the context.
     pub fn body(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// An if-else conditional: `if x { y } else { z }`.
-<<<<<<< HEAD
-    Conditional
-=======
     struct Conditional
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> Conditional<'a> {
     /// The condition which selects the body to evaluate.
     pub fn condition(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The expression to evaluate if the condition is true.
@@ -2818,50 +2145,30 @@ impl<'a> Conditional<'a> {
 
 node! {
     /// A while loop: `while x { y }`.
-<<<<<<< HEAD
-    WhileLoop
-=======
     struct WhileLoop
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> WhileLoop<'a> {
     /// The condition which selects whether to evaluate the body.
     pub fn condition(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The expression to evaluate while the condition is true.
     pub fn body(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A for loop: `for x in y { z }`.
-<<<<<<< HEAD
-    ForLoop
-=======
     struct ForLoop
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ForLoop<'a> {
     /// The pattern to assign to.
     pub fn pattern(self) -> Pattern<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The expression to iterate over.
@@ -2875,31 +2182,19 @@ impl<'a> ForLoop<'a> {
 
     /// The expression to evaluate for each iteration.
     pub fn body(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A module import: `import "utils.typ": a, b, c`.
-<<<<<<< HEAD
-    ModuleImport
-=======
     struct ModuleImport
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ModuleImport<'a> {
     /// The module or path from which the items should be imported.
     pub fn source(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The items to be imported.
@@ -2979,11 +2274,7 @@ pub enum Imports<'a> {
 
 node! {
     /// Items to import from a module: `a, b, c`.
-<<<<<<< HEAD
-    ImportItems
-=======
     struct ImportItems
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ImportItems<'a> {
@@ -2999,11 +2290,7 @@ impl<'a> ImportItems<'a> {
 
 node! {
     /// A path to a submodule's imported name: `a.b.c`.
-<<<<<<< HEAD
-    ImportItemPath
-=======
     struct ImportItemPath
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ImportItemPath<'a> {
@@ -3014,11 +2301,7 @@ impl<'a> ImportItemPath<'a> {
 
     /// The name of the imported item. This is the last segment in the path.
     pub fn name(self) -> Ident<'a> {
-<<<<<<< HEAD
-        self.iter().last().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -3063,21 +2346,13 @@ impl<'a> ImportItem<'a> {
 
 node! {
     /// A renamed import item: `a as d`
-<<<<<<< HEAD
-    RenamedImportItem
-=======
     struct RenamedImportItem
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> RenamedImportItem<'a> {
     /// The path to the imported item.
     pub fn path(self) -> ImportItemPath<'a> {
-<<<<<<< HEAD
-        self.0.cast_first_match().unwrap_or_default()
-=======
         self.0.cast_first()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The original name of the imported item (`a` in `a as d` or `c.b.a as d`).
@@ -3087,73 +2362,41 @@ impl<'a> RenamedImportItem<'a> {
 
     /// The new name of the imported item (`d` in `a as d`).
     pub fn new_name(self) -> Ident<'a> {
-<<<<<<< HEAD
-        self.0
-            .children()
-            .filter_map(SyntaxNode::cast)
-            .last()
-            .unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A module include: `include "chapter1.typ"`.
-<<<<<<< HEAD
-    ModuleInclude
-=======
     struct ModuleInclude
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> ModuleInclude<'a> {
     /// The module or path from which the content should be included.
     pub fn source(self) -> Expr<'a> {
-<<<<<<< HEAD
-        self.0.cast_last_match().unwrap_or_default()
-=======
         self.0.cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 node! {
     /// A break from a loop: `break`.
-<<<<<<< HEAD
-    LoopBreak
-=======
     struct LoopBreak
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A continue in a loop: `continue`.
-<<<<<<< HEAD
-    LoopContinue
-=======
     struct LoopContinue
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 node! {
     /// A return from a function: `return`, `return x + 1`.
-<<<<<<< HEAD
-    FuncReturn
-=======
     struct FuncReturn
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> FuncReturn<'a> {
     /// The expression to return.
     pub fn body(self) -> Option<Expr<'a>> {
-<<<<<<< HEAD
-        self.0.cast_last_match()
-=======
         self.0.try_cast_last()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

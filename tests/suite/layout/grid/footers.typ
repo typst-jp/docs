@@ -83,10 +83,6 @@
   grid.cell(y: 1)[c],
 )
 
-<<<<<<< HEAD
---- grid-footer-expand ---
-// Ensure footer properly expands
-=======
 --- grid-footer-cell-with-x ---
 #grid(
   columns: 2,
@@ -100,13 +96,10 @@
 )
 
 --- grid-footer-no-expand-with-col-and-row-pos-cell ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #grid(
   columns: 2,
   [a], [],
   [b], [],
-<<<<<<< HEAD
-=======
   fill: (_, y) => if calc.odd(y) { blue } else { red },
   inset: 5pt,
   grid.cell(x: 1, y: 3, rowspan: 4)[b],
@@ -139,7 +132,6 @@
   [b], [],
   stroke: red,
   inset: 5pt,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   grid.cell(x: 1, y: 3, rowspan: 4)[b],
   grid.cell(y: 2, rowspan: 2)[a],
   grid.footer(),
@@ -164,15 +156,6 @@
 )
 
 --- grid-footer-overlap ---
-<<<<<<< HEAD
-// Error: 4:3-4:19 footer would conflict with a cell placed before it at column 1 row 0
-// Hint: 4:3-4:19 try reducing that cell's rowspan or moving the footer
-#grid(
-  columns: 2,
-  grid.header(),
-  grid.footer([a]),
-  grid.cell(x: 1, y: 0, rowspan: 2)[a],
-=======
 #grid(
   columns: 2,
   grid.header(),
@@ -189,7 +172,6 @@
   grid.hline(stroke: red),
   grid.footer([b]),
   grid.hline(stroke: 3pt),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 )
 
 --- grid-footer-multiple ---
@@ -416,8 +398,6 @@
   table.footer[a][b][c]
 )
 
-<<<<<<< HEAD
-=======
 --- grid-footer-repeatable-unbreakable ---
 #set page(height: 8em, width: auto)
 #table(
@@ -441,7 +421,6 @@
   )
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- grid-footer-stroke-edge-cases ---
 // Test footer stroke priority edge case
 #set page(height: 10em)
@@ -470,13 +449,8 @@
     table.hline(stroke: red),
     table.vline(stroke: green),
     [b],
-<<<<<<< HEAD
-  ),
-  table.cell(x: 1, y: 3)[c]
-=======
     [c]
   ),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 )
 
 --- grid-footer-hline-and-vline-2 ---
@@ -486,13 +460,8 @@
 #table(
   columns: 3,
   inset: 1.5pt,
-<<<<<<< HEAD
-  table.cell(y: 0)[a],
-  table.footer(
-=======
   table.footer(
     table.cell(y: 0)[a],
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     table.hline(stroke: red),
     table.hline(y: 1, stroke: aqua),
     table.cell(y: 0)[b],
@@ -500,8 +469,6 @@
   )
 )
 
-<<<<<<< HEAD
-=======
 --- grid-footer-top-hlines-with-only-row-pos-cell ---
 // Top hlines should attach to the top of the footer.
 #set page(margin: 2pt)
@@ -534,7 +501,6 @@
   )
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- grid-footer-below-rowspans ---
 // Footer should go below the rowspans.
 #set page(margin: 2pt)
@@ -545,8 +511,6 @@
   table.cell(rowspan: 2)[a], table.cell(rowspan: 2)[b],
   table.footer()
 )
-<<<<<<< HEAD
-=======
 
 --- grid-footer-row-pos-cell-inside-conflicts-with-row-before ---
 #set page(margin: 2pt)
@@ -623,4 +587,3 @@
 	table.footer([*foo*], [*bar*]),
 	table.hline(stroke: 8pt),
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

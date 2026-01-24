@@ -1,8 +1,4 @@
-<<<<<<< HEAD
---- grid-headers ---
-=======
 --- grid-headers render pdftags ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set page(width: auto, height: 12em)
 #table(
   columns: 5,
@@ -64,8 +60,6 @@
   grid.cell(y: 2)[c]
 )
 
-<<<<<<< HEAD
-=======
 --- grid-header-cell-with-x ---
 #grid(
   columns: 2,
@@ -76,7 +70,6 @@
   grid.cell(x: 1)[c]
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- grid-header-last-child ---
 // When the header is the last grid child, it shouldn't include the gutter row
 // after it, because there is none.
@@ -125,42 +118,25 @@
 )
 
 --- grid-header-not-at-first-row ---
-<<<<<<< HEAD
-// Error: 3:3-3:19 header must start at the first row
-// Hint: 3:3-3:19 remove any rows before the header
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #grid(
   [a],
   grid.header([b])
 )
 
 --- grid-header-not-at-first-row-two-columns ---
-<<<<<<< HEAD
-// Error: 4:3-4:19 header must start at the first row
-// Hint: 4:3-4:19 remove any rows before the header
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #grid(
   columns: 2,
   [a],
   grid.header([b])
 )
 
-<<<<<<< HEAD
---- grow-header-multiple ---
-// Error: 3:3-3:19 cannot have more than one header
-=======
 --- grid-header-multiple ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #grid(
   grid.header([a]),
   grid.header([b]),
   [a],
 )
 
-<<<<<<< HEAD
-=======
 --- grid-header-multiple-unordered ---
 #set page(height: 4em)
 #grid(
@@ -287,7 +263,6 @@
   [c],
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- table-header-in-grid ---
 // Error: 2:3-2:20 cannot use `table.header` as a grid header
 // Hint: 2:3-2:20 use `grid.header` instead
@@ -374,8 +349,6 @@
   table.cell(rowspan: 3, lines(15))
 )
 
-<<<<<<< HEAD
-=======
 --- grid-header-and-rowspan-contiguous-1 ---
 // Block should occupy all space
 #set page(height: 15em)
@@ -421,7 +394,6 @@
   block(height: 2.5em + 2em + 20em, width: 100%, fill: red)
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- grid-header-lack-of-space ---
 // Test lack of space for header + text.
 #set page(height: 8em)
@@ -449,8 +421,6 @@
   ..([Test], [Test], [Test]) * 20
 )
 
-<<<<<<< HEAD
-=======
 --- grid-header-non-repeating-orphan-prevention ---
 #set page(height: 5em)
 #v(2em)
@@ -462,7 +432,6 @@
   [d]
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- grid-header-empty ---
 // Empty header should just be a repeated blank row
 #set page(height: 12em)
@@ -491,12 +460,7 @@
 )
 #context count.display()
 
-<<<<<<< HEAD
---- grid-header-expand ---
-// Ensure header expands to fit cell placed in it after its declaration
-=======
 --- grid-header-no-expand-with-col-and-row-pos-cell ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #set page(height: 10em)
 #table(
   columns: 2,
@@ -504,11 +468,6 @@
     [a], [b],
     [c],
   ),
-<<<<<<< HEAD
-  table.cell(x: 1, y: 1, rowspan: 2, lorem(80))
-)
-
-=======
   // Error: 3-48 cell would conflict with header also spanning row 1
   // Hint: 3-48 try moving the cell or the header
   table.cell(x: 1, y: 1, rowspan: 2, lorem(80))
@@ -527,7 +486,6 @@
   table.cell(y: 1, rowspan: 2, lorem(80))
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- grid-nested-with-headers ---
 // Nested table with header should repeat both headers
 #set page(height: 10em)
@@ -558,8 +516,6 @@
   [a\ b]
 )
 
-<<<<<<< HEAD
-=======
 --- grid-header-not-at-the-top ---
 #set page(height: 5em)
 #v(2em)
@@ -610,7 +566,6 @@
   [f],
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- grid-header-stroke-edge-cases ---
 // Test header stroke priority edge case (last header row removed)
 #set page(height: 8em)
@@ -664,8 +619,6 @@
     [b]
   )
 )
-<<<<<<< HEAD
-=======
 
 --- grid-header-row-pos-cell-inside-conflicts-with-row-before ---
 #set page(margin: 2pt)
@@ -793,4 +746,3 @@
 	[a], [b],
 	[c], [d],
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

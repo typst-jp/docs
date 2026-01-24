@@ -1,17 +1,4 @@
 use kurbo::ParamCurveExtrema;
-<<<<<<< HEAD
-use typst_macros::{scope, Cast};
-use typst_utils::Numeric;
-
-use crate::diag::{bail, HintedStrResult, HintedString, SourceResult};
-use crate::engine::Engine;
-use crate::foundations::{
-    cast, elem, Content, NativeElement, Packed, Show, Smart, StyleChain,
-};
-use crate::layout::{Abs, Axes, BlockElem, Length, Point, Rel, Size};
-use crate::visualize::{FillRule, Paint, Stroke};
-
-=======
 use typst_macros::{Cast, scope};
 use typst_utils::Numeric;
 
@@ -22,7 +9,6 @@ use crate::visualize::{FillRule, Paint, Stroke};
 
 use super::FixedStroke;
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A curve consisting of movements, lines, and Bézier segments.
 ///
 /// At any point in time, there is a conceptual pen or cursor.
@@ -53,21 +39,12 @@ use super::FixedStroke;
 ///   curve.close(),
 /// )
 /// ```
-<<<<<<< HEAD
-#[elem(scope, Show)]
-pub struct CurveElem {
-    /// How to fill the curve.
-    ///
-    /// When setting a fill, the default stroke disappears. To create a
-    /// rectangle with both fill and stroke, you have to configure both.
-=======
 #[elem(scope)]
 pub struct CurveElem {
     /// How to fill the curve.
     ///
     /// When setting a fill, the default stroke disappears. To create a curve
     /// with both fill and stroke, you have to configure both.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fill: Option<Paint>,
 
     /// The drawing rule used to fill the curve.
@@ -92,17 +69,10 @@ pub struct CurveElem {
     #[default]
     pub fill_rule: FillRule,
 
-<<<<<<< HEAD
-    /// How to [stroke] the curve. This can be:
-    ///
-    /// Can be set to `{none}` to disable the stroke or to `{auto}` for a
-    /// stroke of `{1pt}` black if and if only if no fill is given.
-=======
     /// How to [stroke] the curve.
     ///
     /// Can be set to `{none}` to disable the stroke or to `{auto}` for a
     /// stroke of `{1pt}` black if and only if no fill is given.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #let down = curve.line((40pt, 40pt), relative: true)
@@ -113,10 +83,6 @@ pub struct CurveElem {
     ///   down, up, down, up, down,
     /// )
     /// ```
-<<<<<<< HEAD
-    #[resolve]
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub stroke: Smart<Option<Stroke>>,
 
@@ -126,17 +92,6 @@ pub struct CurveElem {
     pub components: Vec<CurveComponent>,
 }
 
-<<<<<<< HEAD
-impl Show for Packed<CurveElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::single_layouter(self.clone(), engine.routines.layout_curve)
-            .pack()
-            .spanned(self.span()))
-    }
-}
-
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[scope]
 impl CurveElem {
     #[elem]
@@ -413,11 +368,7 @@ pub struct CurveClose {
 }
 
 /// How to close a curve.
-<<<<<<< HEAD
-#[derive(Debug, Copy, Clone, Default, Eq, PartialEq, Hash, Cast)]
-=======
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub enum CloseMode {
     /// Closes the curve with a smooth segment that takes into account the
     /// control point opposite the start point.
@@ -523,43 +474,20 @@ impl Curve {
         }
     }
 
-<<<<<<< HEAD
-    /// Computes the size of the bounding box of this curve.
-    pub fn bbox_size(&self) -> Size {
-        let mut min_x = Abs::inf();
-        let mut min_y = Abs::inf();
-        let mut max_x = -Abs::inf();
-        let mut max_y = -Abs::inf();
-=======
     /// Computes the bounding box of this curve.
     pub fn bbox(&self) -> Rect {
         let mut min = Point::splat(Abs::inf());
         let mut max = Point::splat(-Abs::inf());
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         let mut cursor = Point::zero();
         for item in self.0.iter() {
             match item {
                 CurveItem::Move(to) => {
-<<<<<<< HEAD
-                    min_x = min_x.min(cursor.x);
-                    min_y = min_y.min(cursor.y);
-                    max_x = max_x.max(cursor.x);
-                    max_y = max_y.max(cursor.y);
-                    cursor = *to;
-                }
-                CurveItem::Line(to) => {
-                    min_x = min_x.min(cursor.x);
-                    min_y = min_y.min(cursor.y);
-                    max_x = max_x.max(cursor.x);
-                    max_y = max_y.max(cursor.y);
-=======
                     cursor = *to;
                 }
                 CurveItem::Line(to) => {
                     min = min.min(cursor).min(*to);
                     max = max.max(cursor).max(*to);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     cursor = *to;
                 }
                 CurveItem::Cubic(c0, c1, end) => {
@@ -571,28 +499,16 @@ impl Curve {
                     );
 
                     let bbox = cubic.bounding_box();
-<<<<<<< HEAD
-                    min_x = min_x.min(Abs::pt(bbox.x0)).min(Abs::pt(bbox.x1));
-                    min_y = min_y.min(Abs::pt(bbox.y0)).min(Abs::pt(bbox.y1));
-                    max_x = max_x.max(Abs::pt(bbox.x0)).max(Abs::pt(bbox.x1));
-                    max_y = max_y.max(Abs::pt(bbox.y0)).max(Abs::pt(bbox.y1));
-=======
                     min.x = min.x.min(Abs::pt(bbox.x0)).min(Abs::pt(bbox.x1));
                     min.y = min.y.min(Abs::pt(bbox.y0)).min(Abs::pt(bbox.y1));
                     max.x = max.x.max(Abs::pt(bbox.x0)).max(Abs::pt(bbox.x1));
                     max.y = max.y.max(Abs::pt(bbox.y0)).max(Abs::pt(bbox.y1));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     cursor = *end;
                 }
                 CurveItem::Close => (),
             }
         }
 
-<<<<<<< HEAD
-        Size::new(max_x - min_x, max_y - min_y)
-    }
-}
-=======
         Rect::new(min, max)
     }
 
@@ -663,4 +579,3 @@ impl Curve {
 fn point_to_kurbo(point: Point) -> kurbo::Point {
     kurbo::Point::new(point.x.to_raw(), point.y.to_raw())
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

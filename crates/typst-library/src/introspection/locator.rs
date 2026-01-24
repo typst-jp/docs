@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-use std::collections::HashMap;
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::fmt::{self, Debug, Formatter};
 use std::hash::Hash;
 use std::sync::OnceLock;
 
-<<<<<<< HEAD
-use comemo::{Tracked, Validate};
-=======
 use comemo::{Track, Tracked};
 use rustc_hash::FxHashMap;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::introspection::{Introspector, Location};
 
@@ -196,11 +188,7 @@ impl<'a> Locator<'a> {
         SplitLocator {
             local: self.local,
             outer: self.outer,
-<<<<<<< HEAD
-            disambiguators: HashMap::new(),
-=======
             disambiguators: FxHashMap::default(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 
@@ -256,11 +244,7 @@ pub struct SplitLocator<'a> {
     /// for all the layers beyond the memoization boundary on-demand.
     outer: Option<&'a LocatorLink<'a>>,
     /// Simply counts up the number of times we've seen each local hash.
-<<<<<<< HEAD
-    disambiguators: HashMap<u128, usize>,
-=======
     disambiguators: FxHashMap<u128, usize>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl<'a> SplitLocator<'a> {
@@ -328,11 +312,7 @@ enum LinkKind<'a> {
     /// We need to override the constraint's lifetime here so that `Tracked` is
     /// covariant over the constraint. If it becomes invariant, we're in for a
     /// world of lifetime pain.
-<<<<<<< HEAD
-    Outer(Tracked<'a, Locator<'a>, <Locator<'static> as Validate>::Constraint>),
-=======
     Outer(Tracked<'a, Locator<'a>, <Locator<'static> as Track>::Call>),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// A link which indicates that we are in measurement mode.
     Measure(Location),
 }

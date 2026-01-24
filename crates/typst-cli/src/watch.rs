@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-use std::collections::{HashMap, HashSet};
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::io::{self, Write};
 use std::iter;
 use std::path::PathBuf;
@@ -12,14 +8,6 @@ use codespan_reporting::term::termcolor::WriteColor;
 use codespan_reporting::term::{self, termcolor};
 use ecow::eco_format;
 use notify::{Event, RecommendedWatcher, RecursiveMode, Watcher as _};
-<<<<<<< HEAD
-use same_file::is_same_file;
-use typst::diag::{bail, StrResult};
-use typst::utils::format_duration;
-
-use crate::args::{Input, Output, WatchCommand};
-use crate::compile::{compile_once, CompileConfig};
-=======
 use rustc_hash::{FxHashMap, FxHashSet};
 use same_file::is_same_file;
 use typst::diag::{HintedStrResult, StrResult, bail, warning};
@@ -28,17 +16,12 @@ use typst::utils::format_duration;
 
 use crate::args::{Input, Output, WatchCommand};
 use crate::compile::{CompileConfig, compile_once, print_diagnostics};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::timings::Timer;
 use crate::world::{SystemWorld, WorldCreationError};
 use crate::{print_error, terminal};
 
 /// Execute a watching compilation command.
-<<<<<<< HEAD
-pub fn watch(timer: &mut Timer, command: &WatchCommand) -> StrResult<()> {
-=======
 pub fn watch(timer: &mut Timer, command: &WatchCommand) -> HintedStrResult<()> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut config = CompileConfig::watching(command)?;
 
     let Output::Path(output) = &config.output else {
@@ -73,13 +56,6 @@ pub fn watch(timer: &mut Timer, command: &WatchCommand) -> HintedStrResult<()> {
     // Perform initial compilation.
     timer.record(&mut world, |world| compile_once(world, &mut config))??;
 
-<<<<<<< HEAD
-    // Watch all dependencies of the initial compilation.
-    watcher.update(world.dependencies())?;
-
-    // Recompile whenever something relevant happens.
-    loop {
-=======
     // Print warning when trying to watch stdin.
     if matches!(&config.input, Input::Stdin) {
         warn_watching_std(&world, &config)?;
@@ -90,7 +66,6 @@ pub fn watch(timer: &mut Timer, command: &WatchCommand) -> HintedStrResult<()> {
         // Watch all dependencies of the most recent compilation.
         watcher.update(world.dependencies())?;
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         // Wait until anything relevant happens.
         watcher.wait()?;
 
@@ -102,12 +77,6 @@ pub fn watch(timer: &mut Timer, command: &WatchCommand) -> HintedStrResult<()> {
 
         // Evict the cache.
         comemo::evict(10);
-<<<<<<< HEAD
-
-        // Adjust the file watching.
-        watcher.update(world.dependencies())?;
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -122,17 +91,10 @@ struct Watcher {
     /// Keeps track of which paths are watched via `watcher`. The boolean is
     /// used during updating for mark-and-sweep garbage collection of paths we
     /// should unwatch.
-<<<<<<< HEAD
-    watched: HashMap<PathBuf, bool>,
-    /// A set of files that should be watched, but don't exist. We manually poll
-    /// for those.
-    missing: HashSet<PathBuf>,
-=======
     watched: FxHashMap<PathBuf, bool>,
     /// A set of files that should be watched, but don't exist. We manually poll
     /// for those.
     missing: FxHashSet<PathBuf>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Watcher {
@@ -165,13 +127,8 @@ impl Watcher {
             output,
             rx,
             watcher,
-<<<<<<< HEAD
-            watched: HashMap::new(),
-            missing: HashSet::new(),
-=======
             watched: FxHashMap::default(),
             missing: FxHashSet::default(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         })
     }
 
@@ -182,10 +139,7 @@ impl Watcher {
     fn update(&mut self, iter: impl IntoIterator<Item = PathBuf>) -> StrResult<()> {
         // Mark all files as not "seen" so that we may unwatch them if they
         // aren't in the dependency list.
-<<<<<<< HEAD
-=======
         #[allow(clippy::iter_over_hash_type, reason = "order does not matter")]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         for seen in self.watched.values_mut() {
             *seen = false;
         }
@@ -385,8 +339,6 @@ impl Status {
         }
     }
 }
-<<<<<<< HEAD
-=======
 
 /// Emits a warning when trying to watch stdin.
 fn warn_watching_std(world: &SystemWorld, config: &CompileConfig) -> StrResult<()> {
@@ -399,4 +351,3 @@ fn warn_watching_std(world: &SystemWorld, config: &CompileConfig) -> StrResult<(
     print_diagnostics(world, &[], &[warning], config.diagnostic_format)
         .map_err(|err| eco_format!("failed to print diagnostics ({err})"))
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

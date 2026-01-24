@@ -9,8 +9,6 @@
 #set page(height: 60pt)
 #image("/assets/images/tiger.jpg")
 
-<<<<<<< HEAD
-=======
 --- image-jpg-html-base64 html ---
 #image("/assets/images/f2t.jpg", alt: "The letter F")
 
@@ -22,7 +20,6 @@
 #image("/assets/images/f2t.jpg", height: 80pt, alt: "height: 80pt")  
 #image("/assets/images/f2t.jpg", height: 20% + 40pt, alt: "height: calc(20% + 40pt)")
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- image-sizing ---
 // Test configuring the size and fitting behaviour of images.
 
@@ -90,8 +87,6 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
   ```.text
 ))
 
-<<<<<<< HEAD
-=======
 --- image-svg-linked-jpg1 ---
 #set page(fill: gray)
 #image(bytes(
@@ -179,7 +174,6 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
   ```.text
 ))
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- image-pixmap-rgb8 ---
 #image(
   bytes((
@@ -232,11 +226,7 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
   width: 1cm,
 )
 
-<<<<<<< HEAD
---- image-scaling-methods ---
-=======
 --- image-scaling-methods render html ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #let img(scaling) = image(
   bytes((
     0xFF, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF,
@@ -252,20 +242,12 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
   scaling: scaling,
 )
 
-<<<<<<< HEAD
-#stack(
-  dir: ltr,
-  spacing: 4pt,
-=======
 #let images = (
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   img(auto),
   img("smooth"),
   img("pixelated"),
 )
 
-<<<<<<< HEAD
-=======
 #context if target() == "html" {
   // TODO: Remove this once `stack` is supported in HTML export.
   html.div(
@@ -280,7 +262,6 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
   )
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- image-natural-dpi-sizing ---
 // Test that images aren't upscaled.
 // Image is just 48x80 at 220dpi. It should not be scaled to fit the page
@@ -296,23 +277,12 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
 #image("/assets/plugins/hello.wasm")
 
 --- image-bad-svg ---
-<<<<<<< HEAD
-// Error: 2-33 failed to parse SVG (found closing tag 'g' instead of 'style' in line 4)
-=======
 // Error: "/assets/images/bad.svg" 4:3 failed to parse SVG (found closing tag 'g' instead of 'style')
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #image("/assets/images/bad.svg")
 
 --- image-decode-svg ---
 // Test parsing from svg data
 // Warning: 8-14 `image.decode` is deprecated, directly pass bytes to `image` instead
-<<<<<<< HEAD
-#image.decode(`<svg xmlns="http://www.w3.org/2000/svg" height="140" width="500"><ellipse cx="200" cy="80" rx="100" ry="50" style="fill:yellow;stroke:purple;stroke-width:2" /></svg>`.text, format: "svg")
-
---- image-decode-bad-svg ---
-// Error: 2-168 failed to parse SVG (missing root node)
-// Warning: 8-14 `image.decode` is deprecated, directly pass bytes to `image` instead
-=======
 // Hint: 8-14 it will be removed in Typst 0.15.0
 #image.decode(`<svg xmlns="http://www.w3.org/2000/svg" height="140" width="500"><ellipse cx="200" cy="80" rx="100" ry="50" style="fill:yellow;stroke:purple;stroke-width:2" /></svg>`.text, format: "svg")
 
@@ -320,34 +290,24 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
 // Error: 15-152 failed to parse SVG (missing root node at 1:1)
 // Warning: 8-14 `image.decode` is deprecated, directly pass bytes to `image` instead
 // Hint: 8-14 it will be removed in Typst 0.15.0
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #image.decode(`<svg height="140" width="500"><ellipse cx="200" cy="80" rx="100" ry="50" style="fill:yellow;stroke:purple;stroke-width:2" /></svg>`.text, format: "svg")
 
 --- image-decode-detect-format ---
 // Test format auto detect
 // Warning: 8-14 `image.decode` is deprecated, directly pass bytes to `image` instead
-<<<<<<< HEAD
-=======
 // Hint: 8-14 it will be removed in Typst 0.15.0
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #image.decode(read("/assets/images/tiger.jpg", encoding: none), width: 80%)
 
 --- image-decode-specify-format ---
 // Test format manual
 // Warning: 8-14 `image.decode` is deprecated, directly pass bytes to `image` instead
-<<<<<<< HEAD
-=======
 // Hint: 8-14 it will be removed in Typst 0.15.0
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #image.decode(read("/assets/images/tiger.jpg", encoding: none), format: "jpg", width: 80%)
 
 --- image-decode-specify-wrong-format ---
 // Error: 2-91 failed to decode image (Format error decoding Png: Invalid PNG signature.)
 // Warning: 8-14 `image.decode` is deprecated, directly pass bytes to `image` instead
-<<<<<<< HEAD
-=======
 // Hint: 8-14 it will be removed in Typst 0.15.0
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #image.decode(read("/assets/images/tiger.jpg", encoding: none), format: "png", width: 80%)
 
 --- image-pixmap-empty ---
@@ -398,23 +358,10 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
 --- image-png-but-pixmap-format ---
 #image(
   read("/assets/images/tiger.jpg", encoding: none),
-<<<<<<< HEAD
-  // Error: 11-18 expected "png", "jpg", "gif", dictionary, "svg", or auto
-  format: "rgba8",
-)
-
---- issue-870-image-rotation ---
-// Ensure that EXIF rotation is applied.
-// https://github.com/image-rs/image/issues/1045
-// File is from https://magnushoff.com/articles/jpeg-orientation/
-#image("/assets/images/f2t.jpg", width: 10pt)
-
-=======
   // Error: 11-18 expected "png", "jpg", "gif", "webp", dictionary, "svg", "pdf", or auto
   format: "rgba8",
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-measure-image ---
 // Test that image measurement doesn't turn `inf / some-value` into 0pt.
 #context {
@@ -429,8 +376,6 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
 --- issue-3733-dpi-svg ---
 #set page(width: 200pt, height: 200pt, margin: 0pt)
 #image("/assets/images/relative.svg")
-<<<<<<< HEAD
-=======
 
 --- image-exif-rotation ---
 #let rotations = range(1, 9)
@@ -475,4 +420,3 @@ A #box(image("/assets/images/tiger.jpg", height: 1cm, width: 80%)) B
 --- issue-6869-image-zero-sized ---
 // Primarily to ensure that it does not crash in PDF export.
 #image("/assets/images/f2t.jpg", width: 0pt, height: 0pt)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

@@ -1,27 +1,17 @@
 use typst_syntax::Spanned;
 
 use crate::diag::bail;
-<<<<<<< HEAD
-use crate::foundations::{elem, Content, Value};
+use crate::foundations::{Cast, Content, Value, elem};
 use crate::math::Mathy;
 
 /// 分数。
 ///
 /// # 例
-=======
-use crate::foundations::{Cast, Content, Value, elem};
-use crate::math::Mathy;
-
-/// A mathematical fraction.
-///
-/// # Example
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// $ 1/2 < (x+1)/2 $
 /// $ ((x+1)) / 2 = frac(a, b) $
 /// ```
 ///
-<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// 隣接する式をスラッシュで区切ると、分数になります。
@@ -34,26 +24,6 @@ pub struct FracElem {
     pub num: Content,
 
     /// 分数の分母。
-    #[required]
-    pub denom: Content,
-}
-
-/// 二項係数。
-///
-/// # 例
-=======
-/// # Syntax
-/// This function also has dedicated syntax: Use a slash to turn neighbouring
-/// expressions into a fraction. Multiple atoms can be grouped into a single
-/// expression using round grouping parentheses. Such parentheses are removed
-/// from the output, but you can nest multiple to force them.
-#[elem(title = "Fraction", Mathy)]
-pub struct FracElem {
-    /// The fraction's numerator.
-    #[required]
-    pub num: Content,
-
-    /// The fraction's denominator.
     #[required]
     pub denom: Content,
 
@@ -122,29 +92,20 @@ pub enum FracStyle {
     Horizontal,
 }
 
-/// A binomial expression.
+/// 二項係数。
 ///
-/// # Example
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+/// # 例
 /// ```example
 /// $ binom(n, k) $
 /// $ binom(n, k_1, k_2, k_3, ..., k_m) $
 /// ```
 #[elem(title = "Binomial", Mathy)]
 pub struct BinomElem {
-<<<<<<< HEAD
     /// 二項係数の上側の数。
     #[required]
     pub upper: Content,
 
     /// 二項係数の下側の数。
-=======
-    /// The binomial's upper index.
-    #[required]
-    pub upper: Content,
-
-    /// The binomial's lower index.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[required]
     #[variadic]
     #[parse(

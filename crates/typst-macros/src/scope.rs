@@ -1,16 +1,10 @@
 use heck::ToKebabCase;
 use proc_macro2::TokenStream;
 use quote::quote;
-<<<<<<< HEAD
-use syn::{parse_quote, Result};
-
-use crate::util::{foundations, BareType};
-=======
 use syn::punctuated::Punctuated;
 use syn::{MetaNameValue, Result, Token, parse_quote};
 
 use crate::util::{BareType, foundations};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Expand the `#[scope]` macro.
 pub fn scope(_: TokenStream, item: syn::Item) -> Result<TokenStream> {
@@ -21,22 +15,12 @@ pub fn scope(_: TokenStream, item: syn::Item) -> Result<TokenStream> {
     let self_ty = &item.self_ty;
 
     let mut primitive_ident_ext = None;
-<<<<<<< HEAD
-    if let syn::Type::Path(syn::TypePath { path, .. }) = self_ty.as_ref() {
-        if let Some(ident) = path.get_ident() {
-            if is_primitive(ident) {
-                let ident_ext = quote::format_ident!("{ident}Ext");
-                primitive_ident_ext = Some(ident_ext);
-            }
-        }
-=======
     if let syn::Type::Path(syn::TypePath { path, .. }) = self_ty.as_ref()
         && let Some(ident) = path.get_ident()
         && is_primitive(ident)
     {
         let ident_ext = quote::format_ident!("{ident}Ext");
         primitive_ident_ext = Some(ident_ext);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     let self_ty_expr = match &primitive_ident_ext {
@@ -69,15 +53,6 @@ pub fn scope(_: TokenStream, item: syn::Item) -> Result<TokenStream> {
             _ => bail!(child, "unexpected item in scope"),
         };
 
-<<<<<<< HEAD
-        if let Some(message) = attrs.iter().find_map(|attr| match &attr.meta {
-            syn::Meta::NameValue(pair) if pair.path.is_ident("deprecated") => {
-                Some(&pair.value)
-            }
-            _ => None,
-        }) {
-            def = quote! { #def.deprecated(#message) }
-=======
         if let Some(attr) = attrs.iter().find(|attr| attr.path().is_ident("deprecated")) {
             match &attr.meta {
                 syn::Meta::NameValue(pair) if pair.path.is_ident("deprecated") => {
@@ -108,7 +83,6 @@ pub fn scope(_: TokenStream, item: syn::Item) -> Result<TokenStream> {
                 }
                 _ => {}
             }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         definitions.push(def);

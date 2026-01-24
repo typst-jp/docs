@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString};
-use typst_utils::{PicoStr, ResolvedPicoStr};
-
-use crate::foundations::{func, scope, ty, Repr, Str};
-=======
 use ecow::{EcoString, eco_format};
 use typst_utils::{PicoStr, ResolvedPicoStr};
 
 use crate::diag::StrResult;
 use crate::foundations::{Repr, Str, bail, func, scope, ty};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A label for an element.
 ///
@@ -35,12 +28,8 @@ use crate::foundations::{Repr, Str, bail, func, scope, ty};
 /// # Syntax
 /// This function also has dedicated syntax: You can create a label by enclosing
 /// its name in angle brackets. This works both in markup and code. A label's
-<<<<<<< HEAD
-/// name can contain letters, numbers, `_`, `-`, `:`, and `.`.
-=======
 /// name can contain letters, numbers, `_`, `-`, `:`, and `.`. A label cannot
 /// be empty.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// Note that there is a syntactical difference when using the dedicated syntax
 /// for this function. In the code below, the `[<a>]` terminates the heading and
@@ -63,16 +52,11 @@ pub struct Label(PicoStr);
 
 impl Label {
     /// Creates a label from an interned string.
-<<<<<<< HEAD
-    pub fn new(name: PicoStr) -> Self {
-        Self(name)
-=======
     ///
     /// Returns `None` if the given string is empty.
     pub fn new(name: PicoStr) -> Option<Self> {
         const EMPTY: PicoStr = PicoStr::constant("");
         (name != EMPTY).then_some(Self(name))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Resolves the label to a string.
@@ -92,11 +76,6 @@ impl Label {
     #[func(constructor)]
     pub fn construct(
         /// The name of the label.
-<<<<<<< HEAD
-        name: Str,
-    ) -> Label {
-        Self(PicoStr::intern(name.as_str()))
-=======
         ///
         /// Unlike the [dedicated syntax](#syntax), this constructor accepts
         /// any non-empty string, including names with special characters.
@@ -107,22 +86,17 @@ impl Label {
         }
 
         Ok(Self(PicoStr::intern(name.as_str())))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 impl Repr for Label {
     fn repr(&self) -> EcoString {
-<<<<<<< HEAD
-        eco_format!("<{}>", self.resolve())
-=======
         let resolved = self.resolve();
         if typst_syntax::is_valid_label_literal_id(&resolved) {
             eco_format!("<{resolved}>")
         } else {
             eco_format!("label({})", resolved.repr())
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

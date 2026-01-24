@@ -1,25 +1,14 @@
 // Test footnotes.
 
-<<<<<<< HEAD
---- footnote-basic ---
-#footnote[Hi]
-
---- footnote-space-collapsing ---
-=======
 --- footnote-basic render html ---
 #footnote[Hi]
 
 --- footnote-space-collapsing render html ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Test space collapsing before footnote.
 A#footnote[A] \
 A #footnote[A]
 
-<<<<<<< HEAD
---- footnote-nested ---
-=======
 --- footnote-nested render html ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 First \
 Second #footnote[A, #footnote[B, #footnote[C]]]
 Third #footnote[D, #footnote[E]] \
@@ -43,8 +32,6 @@ B #footnote[III]
 
 Beautiful footnotes. #footnote[Wonderful, aren't they?]
 
-<<<<<<< HEAD
-=======
 --- footnote-entry-html html ---
 #show footnote.entry: it => {
   if it.note.body == [A] {
@@ -76,7 +63,6 @@ An "A" #footnote[A "B"]
 #show par: set smartquote(quotes: ("[", "]"))
 An "A" #footnote[A "B"]
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- footnote-break-across-pages ---
 #set page(height: 200pt)
 
@@ -246,11 +232,7 @@ A reference to it @fn
 // Error: 2-16 footnote cannot reference itself
 #footnote(<fn>) <fn>
 
-<<<<<<< HEAD
---- footnote-ref-multiple ---
-=======
 --- footnote-ref-multiple render html ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Multiple footnotes are refs
 First #footnote[A]<fn1> \
 Second #footnote[B]<fn2> \
@@ -407,8 +389,6 @@ C
 #set footnote.entry(separator: v(5em))
 
 #footnote[]
-<<<<<<< HEAD
-=======
 
 --- footnote-custom-head-html html ---
 #html.html({
@@ -428,4 +408,3 @@ C
     Hello #footnote[Footnote 1]
   ]
 })
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

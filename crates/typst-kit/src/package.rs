@@ -1,20 +1,13 @@
 //! Download and unpack packages and package indices.
 
 use std::fs;
-<<<<<<< HEAD
-=======
 use std::io;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::path::{Path, PathBuf};
 
 use ecow::eco_format;
 use once_cell::sync::OnceCell;
 use serde::Deserialize;
-<<<<<<< HEAD
-use typst_library::diag::{bail, PackageError, PackageResult, StrResult};
-=======
 use typst_library::diag::{PackageError, PackageResult, StrResult, bail};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_syntax::package::{PackageSpec, PackageVersion, VersionlessPackageSpec};
 
 use crate::download::{Downloader, Progress};
@@ -28,8 +21,6 @@ pub const DEFAULT_NAMESPACE: &str = "preview";
 /// The default packages sub directory within the package and package cache paths.
 pub const DEFAULT_PACKAGES_SUBDIR: &str = "typst/packages";
 
-<<<<<<< HEAD
-=======
 /// Attempts to infer the default package cache directory from the current
 /// environment.
 ///
@@ -48,7 +39,6 @@ pub fn default_package_path() -> Option<PathBuf> {
     dirs::data_dir().map(|data_dir| data_dir.join(DEFAULT_PACKAGES_SUBDIR))
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Holds information about where packages should be stored and downloads them
 /// on demand, if possible.
 #[derive(Debug)]
@@ -84,17 +74,8 @@ impl PackageStorage {
         index: OnceCell<Vec<serde_json::Value>>,
     ) -> Self {
         Self {
-<<<<<<< HEAD
-            package_cache_path: package_cache_path.or_else(|| {
-                dirs::cache_dir().map(|cache_dir| cache_dir.join(DEFAULT_PACKAGES_SUBDIR))
-            }),
-            package_path: package_path.or_else(|| {
-                dirs::data_dir().map(|data_dir| data_dir.join(DEFAULT_PACKAGES_SUBDIR))
-            }),
-=======
             package_cache_path: package_cache_path.or_else(default_package_cache_path),
             package_path: package_path.or_else(default_package_path),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             downloader,
             index,
         }
@@ -111,12 +92,8 @@ impl PackageStorage {
         self.package_path.as_deref()
     }
 
-<<<<<<< HEAD
-    /// Make a package available in the on-disk.
-=======
     /// Makes a package available on-disk and returns the path at which it is
     /// located (will be either in the cache or package directory).
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn prepare_package(
         &self,
         spec: &PackageSpec,
@@ -139,11 +116,7 @@ impl PackageStorage {
 
             // Download from network if it doesn't exist yet.
             if spec.namespace == DEFAULT_NAMESPACE {
-<<<<<<< HEAD
-                self.download_package(spec, &dir, progress)?;
-=======
                 self.download_package(spec, cache_dir, progress)?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 if dir.exists() {
                     return Ok(dir);
                 }
@@ -153,11 +126,7 @@ impl PackageStorage {
         Err(PackageError::NotFound(spec.clone()))
     }
 
-<<<<<<< HEAD
-    /// Try to determine the latest version of a package.
-=======
     /// Tries to determine the latest version of a package.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub fn determine_latest_version(
         &self,
         spec: &VersionlessPackageSpec,
@@ -190,11 +159,7 @@ impl PackageStorage {
     }
 
     /// Download the package index. The result of this is cached for efficiency.
-<<<<<<< HEAD
-    pub fn download_index(&self) -> StrResult<&[serde_json::Value]> {
-=======
     fn download_index(&self) -> StrResult<&[serde_json::Value]> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.index
             .get_or_try_init(|| {
                 let url = format!("{DEFAULT_REGISTRY}/{DEFAULT_NAMESPACE}/index.json");
@@ -215,17 +180,10 @@ impl PackageStorage {
     ///
     /// # Panics
     /// Panics if the package spec namespace isn't `DEFAULT_NAMESPACE`.
-<<<<<<< HEAD
-    pub fn download_package(
-        &self,
-        spec: &PackageSpec,
-        package_dir: &Path,
-=======
     fn download_package(
         &self,
         spec: &PackageSpec,
         cache_dir: &Path,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         progress: &mut dyn Progress,
     ) -> PackageResult<()> {
         assert_eq!(spec.namespace, DEFAULT_NAMESPACE);
@@ -245,17 +203,6 @@ impl PackageStorage {
                 }
             }
             Err(err) => {
-<<<<<<< HEAD
-                return Err(PackageError::NetworkFailed(Some(eco_format!("{err}"))))
-            }
-        };
-
-        let decompressed = flate2::read::GzDecoder::new(data.as_slice());
-        tar::Archive::new(decompressed).unpack(package_dir).map_err(|err| {
-            fs::remove_dir_all(package_dir).ok();
-            PackageError::MalformedArchive(Some(eco_format!("{err}")))
-        })
-=======
                 return Err(PackageError::NetworkFailed(Some(eco_format!("{err}"))));
             }
         };
@@ -306,7 +253,6 @@ impl PackageStorage {
             Err(err) if err.kind() == io::ErrorKind::DirectoryNotEmpty => Ok(()),
             Err(err) => Err(error("failed to move downloaded package directory", err)),
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -318,8 +264,6 @@ struct MinimalPackageInfo {
     version: PackageVersion,
 }
 
-<<<<<<< HEAD
-=======
 /// A temporary directory that is a automatically cleaned up.
 struct Tempdir(PathBuf);
 
@@ -350,7 +294,6 @@ fn error(message: &str, err: io::Error) -> PackageError {
     PackageError::Other(Some(eco_format!("{message}: {err}")))
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #[cfg(test)]
 mod tests {
     use super::*;

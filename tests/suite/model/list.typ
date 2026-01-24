@@ -28,11 +28,7 @@ _Shopping list_
   - Top-level indent
 - is fine.
 
-<<<<<<< HEAD
---- list-indent-specifics ---
-=======
 --- list-indent-specifics render pdftags ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
  - A
      - B
    - C
@@ -308,8 +304,6 @@ World
   - C
 - = D
   E
-<<<<<<< HEAD
-=======
 
 --- issue-6242-tight-list-attach-spacing ---
 // Nested tight lists should be uniformly spaced when list spacing is set.
@@ -318,4 +312,3 @@ World
   - B
   - C
 - C
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

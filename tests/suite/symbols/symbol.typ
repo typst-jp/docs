@@ -21,13 +21,10 @@
   ("lightning", "🖄"),
   ("fly", "🖅"),
 )
-<<<<<<< HEAD
-=======
 #let one = symbol(
   "1",
   ("emoji", "1️")
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 #envelope
 #envelope.stamped
@@ -35,11 +32,8 @@
 #envelope.stamped.pen
 #envelope.lightning
 #envelope.fly
-<<<<<<< HEAD
-=======
 #one
 #one.emoji
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- symbol-constructor-empty ---
 // Error: 2-10 expected at least one variant
@@ -94,8 +88,6 @@
   ("variant.duplicate", "y"),
 )
 
-<<<<<<< HEAD
-=======
 --- symbol-constructor-empty-variant-value ---
 // Error: 2:3-2:5 invalid variant value: ""
 // Hint: 2:3-2:5 variant value must be exactly one grapheme cluster
@@ -116,7 +108,6 @@
   ("b", "bb")
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- symbol-unknown-modifier ---
 // Error: 13-20 unknown symbol modifier
 #emoji.face.garbage
@@ -139,17 +130,11 @@
     ("long", "⟹"),
     ("long.bar", "⟾"),
     ("not", "⇏"),
-<<<<<<< HEAD
-    ("l", "⇔"),
-    ("l.long", "⟺"),
-    ("l.not", "⇎"),
-=======
     ("struck", "⤃"),
     ("l", "⇔"),
     ("l.long", "⟺"),
     ("l.not", "⇎"),
     ("l.struck", "⤄"),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   )
   ```.text,
 )
@@ -195,11 +180,6 @@
 // Warning: 5-9 `sect` is deprecated, use `inter` instead
 $ A sect B = A inter B $
 
-<<<<<<< HEAD
---- issue-5930-symbol-label ---
-#emoji.face<lab>
-#context test(query(<lab>).first().text, "😀")
-=======
 --- symbol-modifier-deprecated ---
 // Warning: 7-12 `ast.small` is deprecated (CJK compatibility character), use ﹡ or `\u{fe61}` instead
 $ ast.small $
@@ -219,4 +199,3 @@ $ ast.small $
 // See: https://github.com/typst/typst/pull/6875.
 #sym.copyright #emoji.copyright \
 #sym.suit.heart #emoji.suit.heart
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

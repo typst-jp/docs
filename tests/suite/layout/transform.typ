@@ -165,8 +165,6 @@ Hello #skewed[World]!\
 
 #set skew(reflow: true)
 Hello #skewed[World]!
-<<<<<<< HEAD
-=======
 
 --- transform-combinations ---
 #block[
@@ -186,4 +184,3 @@ Hello #skewed[World]!
     ])
   ]
 ]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

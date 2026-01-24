@@ -1,7 +1,6 @@
 use ecow::EcoString;
 
-<<<<<<< HEAD
-use crate::foundations::{func, scope, ty, Repr};
+use crate::foundations::{Repr, func, scope, ty};
 use crate::layout::{Axis, Side};
 
 /// コンテンツをレイアウトできる4つの向き。
@@ -14,22 +13,6 @@ use crate::layout::{Axis, Side};
 ///
 /// これらの値はグローバルスコープでも、direction型のスコープでも用いることができます。
 /// したがって、以下の2つのどちらでも書くことができます。
-=======
-use crate::foundations::{Repr, func, scope, ty};
-use crate::layout::{Axis, Side};
-
-/// The four directions into which content can be laid out.
-///
-///  Possible values are:
-/// - `{ltr}`: Left to right.
-/// - `{rtl}`: Right to left.
-/// - `{ttb}`: Top to bottom.
-/// - `{btt}`: Bottom to top.
-///
-/// These values are available globally and
-/// also in the direction type's scope, so you can write either of the following
-/// two:
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// ```example
 /// #stack(dir: rtl)[A][B][C]
 /// #stack(dir: direction.rtl)[A][B][C]
@@ -66,9 +49,6 @@ impl Dir {
     pub const TTB: Self = Self::TTB;
     pub const BTT: Self = Self::BTT;
 
-<<<<<<< HEAD
-    /// このdirectionが属する軸。`{"horizontal"}`か`{"vertical"}`のいずれかになります。
-=======
     /// Returns a direction from a starting point.
     ///
     /// ```example
@@ -105,9 +85,7 @@ impl Dir {
         }
     }
 
-    /// The axis this direction belongs to, either `{"horizontal"}` or
-    /// `{"vertical"}`.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+    /// このdirectionが属する軸。`{"horizontal"}`か`{"vertical"}`のいずれかになります。
     ///
     /// ```example
     /// #ltr.axis() \
@@ -121,9 +99,6 @@ impl Dir {
         }
     }
 
-<<<<<<< HEAD
-    /// このdirectionの始点をalignmentとして返します。
-=======
     /// The corresponding sign, for use in calculations.
     ///
     /// ```example
@@ -140,8 +115,7 @@ impl Dir {
         }
     }
 
-    /// The start point of this direction, as an alignment.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+    /// このdirectionの始点をalignmentとして返します。
     ///
     /// ```example
     /// #ltr.start() \
@@ -159,11 +133,7 @@ impl Dir {
         }
     }
 
-<<<<<<< HEAD
     /// このdirectionの終点をalignmentとして返します。
-=======
-    /// The end point of this direction, as an alignment.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #ltr.end() \
@@ -181,11 +151,7 @@ impl Dir {
         }
     }
 
-<<<<<<< HEAD
     /// 逆の向き。
-=======
-    /// The inverse direction.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #ltr.inv() \

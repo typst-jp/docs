@@ -1,9 +1,4 @@
 use typst_library::diag::SourceResult;
-<<<<<<< HEAD
-use typst_library::foundations::{Content, Packed, Resolve, StyleChain, SymbolElem};
-use typst_library::layout::{Em, Frame, FrameItem, Point, Size};
-use typst_library::math::{BinomElem, FracElem};
-=======
 use typst_library::foundations::{
     Content, NativeElement, Packed, Resolve, StyleChain, SymbolElem,
 };
@@ -11,19 +6,13 @@ use typst_library::layout::{Abs, Em, Frame, FrameItem, Point, Size};
 use typst_library::math::{
     BinomElem, EquationElem, FracElem, FracStyle, LrElem, MathSize,
 };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use typst_library::text::TextElem;
 use typst_library::visualize::{FixedStroke, Geometry};
 use typst_syntax::Span;
 
 use super::{
-<<<<<<< HEAD
-    style_for_denominator, style_for_numerator, FrameFragment, GlyphFragment,
-    MathContext, DELIM_SHORT_FALL,
-=======
     DELIM_SHORT_FALL, FrameFragment, MathContext, style_for_denominator,
     style_for_numerator,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 const FRAC_AROUND: Em = Em::new(0.1);
@@ -35,16 +24,6 @@ pub fn layout_frac(
     ctx: &mut MathContext,
     styles: StyleChain,
 ) -> SourceResult<()> {
-<<<<<<< HEAD
-    layout_frac_like(
-        ctx,
-        styles,
-        &elem.num,
-        std::slice::from_ref(&elem.denom),
-        false,
-        elem.span(),
-    )
-=======
     match elem.style.get(styles) {
         FracStyle::Skewed => {
             layout_skewed_frac(ctx, styles, &elem.num, &elem.denom, elem.span())
@@ -67,7 +46,6 @@ pub fn layout_frac(
             elem.span(),
         ),
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Lays out a [`BinomElem`].
@@ -77,19 +55,11 @@ pub fn layout_binom(
     ctx: &mut MathContext,
     styles: StyleChain,
 ) -> SourceResult<()> {
-<<<<<<< HEAD
-    layout_frac_like(ctx, styles, &elem.upper, &elem.lower, true, elem.span())
-}
-
-/// Layout a fraction or binomial.
-fn layout_frac_like(
-=======
     layout_vertical_frac_like(ctx, styles, &elem.upper, &elem.lower, true, elem.span())
 }
 
 /// Layout a vertical fraction or binomial.
 fn layout_vertical_frac_like(
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ctx: &mut MathContext,
     styles: StyleChain,
     num: &Content,
@@ -97,31 +67,6 @@ fn layout_vertical_frac_like(
     binom: bool,
     span: Span,
 ) -> SourceResult<()> {
-<<<<<<< HEAD
-    let short_fall = DELIM_SHORT_FALL.resolve(styles);
-    let axis = scaled!(ctx, styles, axis_height);
-    let thickness = scaled!(ctx, styles, fraction_rule_thickness);
-    let shift_up = scaled!(
-        ctx, styles,
-        text: fraction_numerator_shift_up,
-        display: fraction_numerator_display_style_shift_up,
-    );
-    let shift_down = scaled!(
-        ctx, styles,
-        text: fraction_denominator_shift_down,
-        display: fraction_denominator_display_style_shift_down,
-    );
-    let num_min = scaled!(
-        ctx, styles,
-        text: fraction_numerator_gap_min,
-        display: fraction_num_display_style_gap_min,
-    );
-    let denom_min = scaled!(
-        ctx, styles,
-        text: fraction_denominator_gap_min,
-        display: fraction_denom_display_style_gap_min,
-    );
-=======
     let constants = ctx.font().math();
     let axis = constants.axis_height.resolve(styles);
     let thickness = constants.fraction_rule_thickness.resolve(styles);
@@ -146,7 +91,6 @@ fn layout_vertical_frac_like(
         _ => constants.fraction_denominator_gap_min,
     }
     .resolve(styles);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     let num_style = style_for_numerator(styles);
     let num = ctx.layout_into_frame(num, styles.chain(&num_style))?;
@@ -157,11 +101,7 @@ fn layout_vertical_frac_like(
             // Add a comma between each element.
             denom
                 .iter()
-<<<<<<< HEAD
-                .flat_map(|a| [SymbolElem::packed(','), a.clone()])
-=======
                 .flat_map(|a| [SymbolElem::packed(',').spanned(span), a.clone()])
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 .skip(1),
         ),
         styles.chain(&denom_style),
@@ -188,16 +128,6 @@ fn layout_vertical_frac_like(
     frame.push_frame(denom_pos, denom);
 
     if binom {
-<<<<<<< HEAD
-        let mut left = GlyphFragment::new(ctx, styles, '(', span)
-            .stretch_vertical(ctx, height, short_fall);
-        left.center_on_axis(ctx);
-        ctx.push(left);
-        ctx.push(FrameFragment::new(styles, frame));
-        let mut right = GlyphFragment::new(ctx, styles, ')', span)
-            .stretch_vertical(ctx, height, short_fall);
-        right.center_on_axis(ctx);
-=======
         let short_fall = DELIM_SHORT_FALL.resolve(styles);
 
         let mut left =
@@ -212,7 +142,6 @@ fn layout_vertical_frac_like(
             ctx.layout_into_fragment(&SymbolElem::packed(')').spanned(span), styles)?;
         right.stretch_vertical(ctx, height, short_fall);
         right.center_on_axis();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         ctx.push(right);
     } else {
         frame.push(
@@ -220,11 +149,7 @@ fn layout_vertical_frac_like(
             FrameItem::Shape(
                 Geometry::Line(Point::with_x(line_width)).stroked(
                     FixedStroke::from_pair(
-<<<<<<< HEAD
-                        TextElem::fill_in(styles).as_decoration(),
-=======
                         styles.get_ref(TextElem::fill).as_decoration(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                         thickness,
                     ),
                 ),
@@ -236,8 +161,6 @@ fn layout_vertical_frac_like(
 
     Ok(())
 }
-<<<<<<< HEAD
-=======
 
 // Lays out a horizontal fraction
 fn layout_horizontal_frac(
@@ -354,4 +277,3 @@ fn layout_skewed_frac(
 
     Ok(())
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

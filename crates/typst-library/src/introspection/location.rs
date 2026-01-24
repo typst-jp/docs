@@ -4,8 +4,7 @@ use std::num::NonZeroUsize;
 use ecow::EcoString;
 
 use crate::engine::Engine;
-<<<<<<< HEAD
-use crate::foundations::{func, scope, ty, Repr};
+use crate::foundations::{Repr, func, scope, ty};
 use crate::layout::Position;
 use crate::model::Numbering;
 
@@ -16,46 +15,26 @@ use crate::model::Numbering;
 /// また、検索したロケーションや表示された要素のロケーションは、コンテンツの[`location()`]($content.location)メソッドを使って取得できます。
 ///
 /// # ロケータブル要素 { #locatable }
-/// 現在、要素関数の一部のみがロケーションを取得可能です。
-/// 見出しや図表の他に、数式、参照、引用、全ての明示的なラベルを持つ要素が該当します。
-/// したがって、例えば[`strong`]要素に対してクエリが実行 _可能_ ですが、見つかるのは明示的にラベルが付けられたもののみです。
-/// この制限は将来的に解消される予定です。
-=======
-use crate::foundations::{Repr, func, scope, ty};
-use crate::layout::Position;
-use crate::model::Numbering;
-
-/// Identifies an element in the document.
+/// ロケーションが自動的に割り当てられる要素は _ロケータブル_ と呼ばれます。
+/// 効率上の理由から、全ての要素がロケータブルであるわけではありません。
 ///
-/// A location uniquely identifies an element in the document and lets you
-/// access its absolute position on the pages. You can retrieve the current
-/// location with the [`here`] function and the location of a queried or shown
-/// element with the [`location()`]($content.location) method on content.
+/// - [Modelカテゴリ]($category/model)では、ほとんどの要素がロケータブルです。
+///   これは[見出し]($heading)や[図表]($figure)などの意味的要素が内省で
+///   よく使われるためです。
 ///
-/// # Locatable elements { #locatable }
-/// Elements that are automatically assigned a location are called _locatable._
-/// For efficiency reasons, not all elements are locatable.
+/// - [Textカテゴリ]($category/text)では、[`raw`]要素と装飾要素
+///   [`underline`], [`overline`], [`strike`], [`highlight`]がロケータブルです。
 ///
-/// - In the [Model category]($category/model), most elements are locatable.
-///   This is because semantic elements like [headings]($heading) and
-///   [figures]($figure) are often used with introspection.
+/// - [Introspectionカテゴリ]($category/introspection)では、[`metadata`]
+///   要素がロケータブルです。
 ///
-/// - In the [Text category]($category/text), the [`raw`] element, and the
-///   decoration elements [`underline`], [`overline`], [`strike`], and
-///   [`highlight`] are locatable as these are also quite semantic in nature.
+/// - その他のカテゴリでは、多くの要素がロケータブルではありません。
+///   例外として、[`math.equation`]と[`image`]があります。
 ///
-/// - In the [Introspection category]($category/introspection), the [`metadata`]
-///   element is locatable as being queried for is its primary purpose.
+/// 特定の要素がロケータブルかどうかは、[`query`]を試すことで確認できます。
 ///
-/// - In the other categories, most elements are not locatable. Exceptions are
-///   [`math.equation`] and [`image`].
-///
-/// To find out whether a specific element is locatable, you can try to
-/// [`query`] for it.
-///
-/// Note that you can still observe elements that are not locatable in queries
-/// through other means, for instance, when they have a label attached to them.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+/// ロケータブルでない要素でも、ラベルが付いている場合は
+/// クエリで観測できることがあります。
 #[ty(scope)]
 #[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Location(u128);
@@ -83,7 +62,6 @@ impl Location {
 
 #[scope]
 impl Location {
-<<<<<<< HEAD
     /// このlocationのページ番号を返します。
     ///
     /// このlocationの[ページカウンター]($counter)の値を返すのではなく、（1始まりの）実際のページ番号を返すことに注意してください。
@@ -91,18 +69,6 @@ impl Location {
     /// ページカウンターの値が知りたい場合は代わりに`{counter(page).at(loc)}`を使用してください。
     ///
     /// [`here`]と組み合わせることで現在のコンテキストにおける実際のページ番号が取得できます。
-=======
-    /// Returns the page number for this location.
-    ///
-    /// Note that this does not return the value of the [page counter]($counter)
-    /// at this location, but the true page number (starting from one).
-    ///
-    /// If you want to know the value of the page counter, use
-    /// `{counter(page).at(loc)}` instead.
-    ///
-    /// Can be used with [`here`] to retrieve the physical page position
-    /// of the current context:
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// ```example
     /// #context [
     ///   I am located on
@@ -114,39 +80,20 @@ impl Location {
         engine.introspector.page(self)
     }
 
-<<<<<<< HEAD
     /// このlocationのページ番号とx座標とy座標を辞書で返します。
     /// ページ番号は1始まりで、座標はページの左上から測ります。
     ///
     /// ページ番号のみに興味がある場合は、代わりに`page()`を使用すると不要な処理を省略できます。
-=======
-    /// Returns a dictionary with the page number and the x, y position for this
-    /// location. The page number starts at one and the coordinates are measured
-    /// from the top-left of the page.
-    ///
-    /// If you only need the page number, use `page()` instead as it allows
-    /// Typst to skip unnecessary work.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn position(self, engine: &mut Engine) -> Position {
         engine.introspector.position(self)
     }
 
-<<<<<<< HEAD
     /// このlocationのページ番号の番号付けパターンを返します。
     /// これにより、ページカウンターの表示する際に、その位置での番号付けを取得できます。
     /// これは独自の索引やアウトラインを作成する場合に便利です。
     ///
     /// そのロケーションのページの番号付けが`{none}`に設定されていた場合、`{none}`を返します。
-=======
-    /// Returns the page numbering pattern of the page at this location. This
-    /// can be used when displaying the page counter in order to obtain the
-    /// local numbering. This is useful if you are building custom indices or
-    /// outlines.
-    ///
-    /// If the page numbering is set to `{none}` at that location, this function
-    /// returns `{none}`.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn page_numbering(self, engine: &mut Engine) -> Option<Numbering> {
         engine.introspector.page_numbering(self).cloned()
@@ -155,9 +102,6 @@ impl Location {
 
 impl Debug for Location {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-<<<<<<< HEAD
-        write!(f, "Location({})", self.0)
-=======
         if f.alternate() {
             write!(f, "Location({})", self.0)
         } else {
@@ -165,7 +109,6 @@ impl Debug for Location {
             let truncated = self.0 as u16;
             write!(f, "Location({truncated})")
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -175,14 +118,6 @@ impl Repr for Location {
     }
 }
 
-<<<<<<< HEAD
-/// Makes this element as locatable through the introspector.
-pub trait Locatable {}
-
-/// Marks this element as not being queryable even though it is locatable for
-/// internal reasons.
-pub trait Unqueriable {}
-=======
 /// Can be used to have a location as a key in an ordered set or map.
 ///
 /// [`Location`] itself does not implement [`Ord`] because comparing hashes like
@@ -215,4 +150,3 @@ pub trait Unqueriable: Locatable {}
 
 /// Marks this element as tagged in PDF files.
 pub trait Tagged {}
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

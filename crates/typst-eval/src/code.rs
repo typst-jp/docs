@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-use ecow::{eco_vec, EcoVec};
-use typst_library::diag::{bail, error, warning, At, SourceResult};
-use typst_library::engine::Engine;
-use typst_library::foundations::{
-    ops, Array, Capturer, Closure, Content, ContextElem, Dict, Func, NativeElement,
-    Selector, Str, Value,
-=======
 use ecow::{EcoVec, eco_vec};
 use typst_library::diag::{At, SourceResult, bail, error, warning};
 use typst_library::engine::Engine;
 use typst_library::foundations::{
     Array, Capturer, Closure, ClosureNode, Content, ContextElem, Dict, Func,
     NativeElement, Selector, Str, Value, ops,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use typst_library::introspection::{Counter, State};
 use typst_syntax::ast::{self, AstNode};
@@ -39,11 +30,7 @@ fn eval_code<'a>(
     while let Some(expr) = exprs.next() {
         let span = expr.span();
         let value = match expr {
-<<<<<<< HEAD
-            ast::Expr::Set(set) => {
-=======
             ast::Expr::SetRule(set) => {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let styles = set.eval(vm)?;
                 if vm.flow.is_some() {
                     break;
@@ -52,11 +39,7 @@ fn eval_code<'a>(
                 let tail = eval_code(vm, exprs)?.display();
                 Value::Content(tail.styled_with_map(styles))
             }
-<<<<<<< HEAD
-            ast::Expr::Show(show) => {
-=======
             ast::Expr::ShowRule(show) => {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 let recipe = show.eval(vm)?;
                 if vm.flow.is_some() {
                     break;
@@ -72,11 +55,7 @@ fn eval_code<'a>(
             _ => expr.eval(vm)?,
         };
 
-<<<<<<< HEAD
-        output = ops::join(output, value, &mut (&mut vm.engine, span)).at(span)?;
-=======
         output = ops::join(output, value).at(span)?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         if let Some(event) = &vm.flow {
             warn_for_discarded_content(&mut vm.engine, event, &output);
@@ -115,15 +94,9 @@ impl Eval for ast::Expr<'_> {
             Self::Label(v) => v.eval(vm),
             Self::Ref(v) => v.eval(vm).map(Value::Content),
             Self::Heading(v) => v.eval(vm).map(Value::Content),
-<<<<<<< HEAD
-            Self::List(v) => v.eval(vm).map(Value::Content),
-            Self::Enum(v) => v.eval(vm).map(Value::Content),
-            Self::Term(v) => v.eval(vm).map(Value::Content),
-=======
             Self::ListItem(v) => v.eval(vm).map(Value::Content),
             Self::EnumItem(v) => v.eval(vm).map(Value::Content),
             Self::TermItem(v) => v.eval(vm).map(Value::Content),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Equation(v) => v.eval(vm).map(Value::Content),
             Self::Math(v) => v.eval(vm).map(Value::Content),
             Self::MathText(v) => v.eval(vm).map(Value::Content),
@@ -143,13 +116,8 @@ impl Eval for ast::Expr<'_> {
             Self::Float(v) => v.eval(vm),
             Self::Numeric(v) => v.eval(vm),
             Self::Str(v) => v.eval(vm),
-<<<<<<< HEAD
-            Self::Code(v) => v.eval(vm),
-            Self::Content(v) => v.eval(vm).map(Value::Content),
-=======
             Self::CodeBlock(v) => v.eval(vm),
             Self::ContentBlock(v) => v.eval(vm).map(Value::Content),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Self::Array(v) => v.eval(vm).map(Value::Array),
             Self::Dict(v) => v.eval(vm).map(Value::Dict),
             Self::Parenthesized(v) => v.eval(vm),
@@ -158,21 +126,6 @@ impl Eval for ast::Expr<'_> {
             Self::Closure(v) => v.eval(vm),
             Self::Unary(v) => v.eval(vm),
             Self::Binary(v) => v.eval(vm),
-<<<<<<< HEAD
-            Self::Let(v) => v.eval(vm),
-            Self::DestructAssign(v) => v.eval(vm),
-            Self::Set(_) => bail!(forbidden("set")),
-            Self::Show(_) => bail!(forbidden("show")),
-            Self::Contextual(v) => v.eval(vm).map(Value::Content),
-            Self::Conditional(v) => v.eval(vm),
-            Self::While(v) => v.eval(vm),
-            Self::For(v) => v.eval(vm),
-            Self::Import(v) => v.eval(vm),
-            Self::Include(v) => v.eval(vm).map(Value::Content),
-            Self::Break(v) => v.eval(vm),
-            Self::Continue(v) => v.eval(vm),
-            Self::Return(v) => v.eval(vm),
-=======
             Self::LetBinding(v) => v.eval(vm),
             Self::DestructAssignment(v) => v.eval(vm),
             Self::SetRule(_) => bail!(forbidden("set")),
@@ -186,7 +139,6 @@ impl Eval for ast::Expr<'_> {
             Self::LoopBreak(v) => v.eval(vm),
             Self::LoopContinue(v) => v.eval(vm),
             Self::FuncReturn(v) => v.eval(vm),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }?
         .spanned(span);
 
@@ -294,11 +246,7 @@ impl Eval for ast::Dict<'_> {
     type Output = Dict;
 
     fn eval(self, vm: &mut Vm) -> SourceResult<Self::Output> {
-<<<<<<< HEAD
-        let mut map = indexmap::IndexMap::new();
-=======
         let mut map = indexmap::IndexMap::default();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let mut invalid_keys = eco_vec![];
 
         for item in self.items() {
@@ -376,23 +324,6 @@ impl Eval for ast::FieldAccess<'_> {
         };
 
         // Check whether this is a get rule field access.
-<<<<<<< HEAD
-        if_chain::if_chain! {
-            if let Value::Func(func) = &value;
-            if let Some(element) = func.element();
-            if let Some(id) = element.field_id(&field);
-            let styles = vm.context.styles().at(field.span());
-            if let Ok(value) = element.field_from_styles(
-                id,
-                styles.as_ref().map(|&s| s).unwrap_or_default(),
-            );
-            then {
-                // Only validate the context once we know that this is indeed
-                // a field from the style chain.
-                let _ = styles?;
-                return Ok(value);
-            }
-=======
         if let Value::Func(func) = &value
             && let Some(element) = func.element()
             && let Some(id) = element.field_id(&field)
@@ -404,7 +335,6 @@ impl Eval for ast::FieldAccess<'_> {
             // a field from the style chain.
             let _ = styles?;
             return Ok(value);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         Err(err)
@@ -426,11 +356,7 @@ impl Eval for ast::Contextual<'_> {
 
         // Define the closure.
         let closure = Closure {
-<<<<<<< HEAD
-            node: self.body().to_untyped().clone(),
-=======
             node: ClosureNode::Context(self.body().to_untyped().clone()),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             defaults: vec![],
             captured,
             num_pos_params: 0,
@@ -457,11 +383,7 @@ fn warn_for_discarded_content(engine: &mut Engine, event: &FlowEvent, joined: &V
         hint: "try omitting the `return` to automatically join all values"
     );
 
-<<<<<<< HEAD
-    if tree.query_first(selector).is_some() {
-=======
     if tree.query_first_naive(selector).is_some() {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         warning.hint("state/counter updates are content that must end up in the document to have an effect");
     }
 

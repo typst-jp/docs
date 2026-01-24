@@ -1,8 +1,4 @@
 use std::borrow::Cow;
-<<<<<<< HEAD
-use std::collections::HashMap;
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::fs;
 use std::io::Write;
 use std::path::{Path, PathBuf};
@@ -11,33 +7,20 @@ use std::sync::OnceLock;
 
 use comemo::Tracked;
 use parking_lot::Mutex;
-<<<<<<< HEAD
-use typst::diag::{bail, At, FileError, FileResult, SourceResult, StrResult};
-use typst::engine::Engine;
-use typst::foundations::{
-    func, Array, Bytes, Context, Datetime, IntoValue, NoneValue, Repr, Smart, Value,
-=======
 use rustc_hash::FxHashMap;
 use typst::diag::{At, FileError, FileResult, SourceResult, StrResult, bail};
 use typst::engine::Engine;
 use typst::foundations::{
     Array, Bytes, Context, Datetime, IntoValue, NoneValue, Repr, Smart, Value, func,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use typst::layout::{Abs, Margin, PageElem};
 use typst::model::{Numbering, NumberingPattern};
 use typst::syntax::{FileId, Source, Span};
 use typst::text::{Font, FontBook, TextElem, TextSize};
-<<<<<<< HEAD
-use typst::utils::{singleton, LazyHash};
-use typst::visualize::Color;
-use typst::{Feature, Library, World};
-=======
 use typst::utils::{LazyHash, singleton};
 use typst::visualize::Color;
 use typst::{Feature, Library, LibraryExt, World};
 use typst_syntax::Lines;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A world that provides access to the tests environment.
 #[derive(Clone)]
@@ -85,11 +68,7 @@ impl World for TestWorld {
     }
 
     fn font(&self, index: usize) -> Option<Font> {
-<<<<<<< HEAD
-        Some(self.base.fonts[index].clone())
-=======
         self.base.fonts.get(index).cloned()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     fn today(&self, _: Option<i64>) -> Option<Datetime> {
@@ -106,8 +85,6 @@ impl TestWorld {
         let mut map = self.base.slots.lock();
         f(map.entry(id).or_insert_with(|| FileSlot::new(id)))
     }
-<<<<<<< HEAD
-=======
 
     /// Lookup line metadata for a file by id.
     #[track_caller]
@@ -124,7 +101,6 @@ impl TestWorld {
             }
         })
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Shared foundation of all test worlds.
@@ -132,11 +108,7 @@ struct TestBase {
     library: LazyHash<Library>,
     book: LazyHash<FontBook>,
     fonts: Vec<Font>,
-<<<<<<< HEAD
-    slots: Mutex<HashMap<FileId, FileSlot>>,
-=======
     slots: Mutex<FxHashMap<FileId, FileSlot>>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl Default for TestBase {
@@ -150,11 +122,7 @@ impl Default for TestBase {
             library: LazyHash::new(library()),
             book: LazyHash::new(FontBook::from_fonts(&fonts)),
             fonts,
-<<<<<<< HEAD
-            slots: Mutex::new(HashMap::new()),
-=======
             slots: Mutex::new(FxHashMap::default()),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
@@ -198,11 +166,7 @@ impl FileSlot {
 }
 
 /// The file system path for a file ID.
-<<<<<<< HEAD
-fn system_path(id: FileId) -> FileResult<PathBuf> {
-=======
 pub(crate) fn system_path(id: FileId) -> FileResult<PathBuf> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let root: PathBuf = match id.package() {
         Some(spec) => format!("tests/packages/{}-{}", spec.name, spec.version).into(),
         None => PathBuf::new(),
@@ -212,11 +176,7 @@ pub(crate) fn system_path(id: FileId) -> FileResult<PathBuf> {
 }
 
 /// Read a file.
-<<<<<<< HEAD
-fn read(path: &Path) -> FileResult<Cow<'static, [u8]>> {
-=======
 pub(crate) fn read(path: &Path) -> FileResult<Cow<'static, [u8]>> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     // Resolve asset.
     if let Ok(suffix) = path.strip_prefix("assets/") {
         return typst_dev_assets::get(&suffix.to_string_lossy())
@@ -238,11 +198,7 @@ fn library() -> Library {
     // exactly 100pt wide. Page height is unbounded and font size is 10pt so
     // that it multiplies to nice round numbers.
     let mut lib = Library::builder()
-<<<<<<< HEAD
-        .with_features([Feature::Html].into_iter().collect())
-=======
         .with_features([Feature::Html, Feature::A11yExtras].into_iter().collect())
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         .build();
 
     // Hook up helpers into the global scope.
@@ -258,21 +214,11 @@ fn library() -> Library {
         .define("forest", Color::from_u8(0x43, 0xA1, 0x27, 0xFF));
 
     // Hook up default styles.
-<<<<<<< HEAD
-    lib.styles
-        .set(PageElem::set_width(Smart::Custom(Abs::pt(120.0).into())));
-    lib.styles.set(PageElem::set_height(Smart::Auto));
-    lib.styles.set(PageElem::set_margin(Margin::splat(Some(Smart::Custom(
-        Abs::pt(10.0).into(),
-    )))));
-    lib.styles.set(TextElem::set_size(TextSize(Abs::pt(10.0).into())));
-=======
     lib.styles.set(PageElem::width, Smart::Custom(Abs::pt(120.0).into()));
     lib.styles.set(PageElem::height, Smart::Auto);
     lib.styles
         .set(PageElem::margin, Margin::splat(Some(Smart::Custom(Abs::pt(10.0).into()))));
     lib.styles.set(TextElem::size, TextSize(Abs::pt(10.0).into()));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     lib
 }
@@ -313,21 +259,13 @@ fn lines(
     engine: &mut Engine,
     context: Tracked<Context>,
     span: Span,
-<<<<<<< HEAD
-    count: usize,
-=======
     count: u64,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[default(Numbering::Pattern(NumberingPattern::from_str("A").unwrap()))]
     numbering: Numbering,
 ) -> SourceResult<Value> {
     (1..=count)
         .map(|n| numbering.apply(engine, context, &[n]))
         .collect::<SourceResult<Array>>()?
-<<<<<<< HEAD
-        .join(engine, span, Some('\n'.into_value()), None)
-=======
         .join(Some('\n'.into_value()), None, None)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         .at(span)
 }

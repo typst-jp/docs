@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString};
-use typst_syntax::{is_newline, Spanned};
-
-use crate::diag::{At, FileError, SourceResult};
-use crate::engine::Engine;
-use crate::foundations::{func, scope, Str, Value};
-use crate::loading::{DataSource, Load, Readable};
-
-/// TOMLファイルから構造化データを読み込む。
-///
-/// 読み込むファイルには有効なTOMLテーブルが含まれていなければなりません。
-/// TOMLテーブルはTypstの辞書に変換され、
-/// TOML配列はTypstの配列に変換されます。
-/// 文字列、ブール値、日時はTypstの対応する型に変換され、
-/// 数値は整数値であれば整数型に、そうでなければ浮動小数点数型に変換されます。
-///
-/// この例におけるTOMLファイルは、
-/// `title`、`version`、および`authors`のキーを持つテーブルで構成されています。
-///
-/// # 例
-=======
 use ecow::eco_format;
 use typst_syntax::Spanned;
 
@@ -28,18 +6,17 @@ use crate::engine::Engine;
 use crate::foundations::{Dict, Str, func, scope};
 use crate::loading::{DataSource, Load, Readable};
 
-/// Reads structured data from a TOML file.
+/// TOMLファイルから構造化データを読み込む。
 ///
-/// The file must contain a valid TOML table. The TOML values will be converted
-/// into corresponding Typst values as listed in the [table below](#conversion).
+/// 読み込むファイルには有効なTOMLテーブルが含まれていなければなりません。
+/// TOMLの値は、[下の表](#conversion)に示す対応するTypstの値に変換されます。
 ///
-/// The function returns a dictionary representing the TOML table.
+/// この関数はTOMLテーブルに対応する辞書を返します。
 ///
-/// The TOML file in the example consists of a table with the keys `title`,
-/// `version`, and `authors`.
+/// この例におけるTOMLファイルは、
+/// `title`、`version`、および`authors`のキーを持つテーブルで構成されています。
 ///
-/// # Example
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+/// # 例
 /// ```example
 /// #let details = toml("details.toml")
 ///
@@ -48,78 +25,65 @@ use crate::loading::{DataSource, Load, Readable};
 /// Authors: #(details.authors
 ///   .join(", ", last: " and "))
 /// ```
-<<<<<<< HEAD
+///
+/// # 変換の詳細 { #conversion }
+///
+/// まず、TOML文書はテーブルです。その他の値はテーブルに入れて
+/// エンコード/デコードする必要があります。
+///
+/// | TOMLの値 | Typstへの変換先 |
+/// | -------- | -------------- |
+/// | string   | [`str`]        |
+/// | integer  | [`int`]        |
+/// | float    | [`float`]      |
+/// | boolean  | [`bool`]       |
+/// | datetime | [`datetime`]   |
+/// | array    | [`array`]      |
+/// | table    | [`dictionary`] |
+///
+/// | Typstの値                            | TOMLへの変換先                      |
+/// | ------------------------------------- | ----------------------------------- |
+/// | TOMLから変換できる型                  | 対応するTOML値                      |
+/// | `{none}`                              | 無視                                |
+/// | [`bytes`]                             | [`repr`]経由の文字列                |
+/// | [`symbol`]                            | 文字列                              |
+/// | [`content`]                           | コンテンツを記述するテーブル         |
+/// | その他の型（[`length`]など）          | [`repr`]経由の文字列                |
+///
+/// ## 注意事項
+/// - 2<sup>63</sup>-1より大きい（または-2<sup>63</sup>より小さい）TOML整数は
+///   Typstで損失なく表現できず、
+///   [仕様](https://toml.io/en/v1.0.0#integer)に従ってエラーになります。
+///
+/// - `bytes`は性能と可読性のためTOML配列としてはエンコードされません。
+///   バイナリデータには[`cbor.encode`]を検討してください。
+///
+/// - `repr`関数は[デバッグ目的のみ]($repr/#debugging-only)で、
+///   出力の安定性はTypstのバージョン間で保証されません。
 #[func(scope, title = "TOML")]
 pub fn toml(
     engine: &mut Engine,
     /// TOMLファイルの[パス]($syntax/#paths)、または生のTOMLバイト列。
     source: Spanned<DataSource>,
-) -> SourceResult<Value> {
-    let data = source.load(engine.world)?;
-    let raw = data.as_str().map_err(FileError::from).at(source.span)?;
-    ::toml::from_str(raw)
-        .map_err(|err| format_toml_error(err, raw))
-        .at(source.span)
-=======
-///
-/// # Conversion details { #conversion }
-///
-/// First of all, TOML documents are tables. Other values must be put in a table
-/// to be encoded or decoded.
-///
-/// | TOML value | Converted into Typst |
-/// | ---------- | -------------------- |
-/// | string     | [`str`]              |
-/// | integer    | [`int`]              |
-/// | float      | [`float`]            |
-/// | boolean    | [`bool`]             |
-/// | datetime   | [`datetime`]         |
-/// | array      | [`array`]            |
-/// | table      | [`dictionary`]       |
-///
-/// | Typst value                           | Converted into TOML            |
-/// | ------------------------------------- | ------------------------------ |
-/// | types that can be converted from TOML | corresponding TOML value       |
-/// | `{none}`                              | ignored                        |
-/// | [`bytes`]                             | string via [`repr`]            |
-/// | [`symbol`]                            | string                         |
-/// | [`content`]                           | a table describing the content |
-/// | other types ([`length`], etc.)        | string via [`repr`]            |
-///
-/// ## Notes
-/// - Be aware that TOML integers larger than 2<sup>63</sup>-1 or smaller
-///   than -2<sup>63</sup> cannot be represented losslessly in Typst, and an
-///   error will be thrown according to the
-///   [specification](https://toml.io/en/v1.0.0#integer).
-///
-/// - Bytes are not encoded as TOML arrays for performance and readability
-///   reasons. Consider using [`cbor.encode`] for binary data.
-///
-/// - The `repr` function is [for debugging purposes only]($repr/#debugging-only),
-///   and its output is not guaranteed to be stable across Typst versions.
-#[func(scope, title = "TOML")]
-pub fn toml(
-    engine: &mut Engine,
-    /// A [path]($syntax/#paths) to a TOML file or raw TOML bytes.
-    source: Spanned<DataSource>,
 ) -> SourceResult<Dict> {
     let loaded = source.load(engine.world)?;
     let raw = loaded.data.as_str().within(&loaded)?;
     ::toml::from_str(raw).map_err(format_toml_error).within(&loaded)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 #[scope]
 impl toml {
-<<<<<<< HEAD
     /// TOMLの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode TOML")]
-    #[deprecated = "`toml.decode`は非推奨です。代わりにバイト列を直接`toml`に渡してください。"]
+    #[deprecated(
+        message = "`toml.decode`は非推奨です。代わりにバイト列を直接`toml`に渡してください。",
+        until = "0.15.0"
+    )]
     pub fn decode(
         engine: &mut Engine,
         /// TOMLデータ。
         data: Spanned<Readable>,
-    ) -> SourceResult<Value> {
+    ) -> SourceResult<Dict> {
         toml(engine, data.map(Readable::into_source))
     }
 
@@ -127,32 +91,10 @@ impl toml {
     #[func(title = "Encode TOML")]
     pub fn encode(
         /// エンコード対象の値。
-        value: Spanned<Value>,
-        /// TOMLを整形表示するかどうか。
-=======
-    /// Reads structured data from a TOML string/bytes.
-    #[func(title = "Decode TOML")]
-    #[deprecated(
-        message = "`toml.decode` is deprecated, directly pass bytes to `toml` instead",
-        until = "0.15.0"
-    )]
-    pub fn decode(
-        engine: &mut Engine,
-        /// TOML data.
-        data: Spanned<Readable>,
-    ) -> SourceResult<Dict> {
-        toml(engine, data.map(Readable::into_source))
-    }
-
-    /// Encodes structured data into a TOML string.
-    #[func(title = "Encode TOML")]
-    pub fn encode(
-        /// Value to be encoded.
         ///
-        /// TOML documents are tables. Therefore, only dictionaries are suitable.
+        /// TOML文書はテーブルなので、辞書のみが適しています。
         value: Spanned<Dict>,
-        /// Whether to pretty-print the resulting TOML.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+        /// TOMLを整形表示するかどうか。
         #[named]
         #[default(true)]
         pretty: bool,
@@ -166,21 +108,7 @@ impl toml {
 }
 
 /// Format the user-facing TOML error message.
-<<<<<<< HEAD
-fn format_toml_error(error: ::toml::de::Error, raw: &str) -> EcoString {
-    if let Some(head) = error.span().and_then(|range| raw.get(..range.start)) {
-        let line = head.lines().count();
-        let column = 1 + head.chars().rev().take_while(|&c| !is_newline(c)).count();
-        eco_format!(
-            "failed to parse TOML ({} at line {line} column {column})",
-            error.message(),
-        )
-    } else {
-        eco_format!("failed to parse TOML ({})", error.message())
-    }
-=======
 fn format_toml_error(error: ::toml::de::Error) -> LoadError {
     let pos = error.span().map(ReportPos::from).unwrap_or_default();
     LoadError::new(pos, "failed to parse TOML", error.message())
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

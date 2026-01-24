@@ -7,11 +7,7 @@ use std::sync::Arc;
 use typst_syntax::Span;
 use typst_utils::{LazyHash, Numeric};
 
-<<<<<<< HEAD
-use crate::foundations::{cast, dict, Dict, Label, Value};
-=======
 use crate::foundations::{Dict, Label, Value, cast, dict};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::introspection::{Location, Tag};
 use crate::layout::{Abs, Axes, FixedAlignment, Length, Point, Size, Transform};
 use crate::model::Destination;
@@ -350,11 +346,7 @@ impl Frame {
 
     /// Set a parent for the frame. As a result, all elements in the frame
     /// become logically ordered immediately after the given location.
-<<<<<<< HEAD
-    pub fn set_parent(&mut self, parent: Location) {
-=======
     pub fn set_parent(&mut self, parent: FrameParent) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         if !self.is_empty() {
             self.group(|g| g.parent = Some(parent));
         }
@@ -443,11 +435,7 @@ impl Debug for Frame {
 /// This corresponds to whether or not the frame is considered to be the
 /// innermost parent of its contents. This is used to determine the coordinate
 /// reference system for gradients.
-<<<<<<< HEAD
-#[derive(Default, Clone, Copy, PartialEq, Eq, Hash, Debug)]
-=======
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash)]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub enum FrameKind {
     /// A container which follows its parent's size.
     ///
@@ -515,15 +503,10 @@ pub struct GroupItem {
     /// The group's label.
     pub label: Option<Label>,
     /// The group's logical parent. All elements in this group are logically
-<<<<<<< HEAD
-    /// ordered immediately after the parent's start location.
-    pub parent: Option<Location>,
-=======
     /// ordered immediately after the parent's start location. This can be
     /// thought of as inserting the elements at the end but still inside of the
     /// parent.
     pub parent: Option<FrameParent>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl GroupItem {
@@ -546,8 +529,6 @@ impl Debug for GroupItem {
     }
 }
 
-<<<<<<< HEAD
-=======
 /// The parent of a [`GroupItem`]. The child will be logically ordered at the
 /// end but still inside of the parent.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
@@ -594,7 +575,6 @@ pub enum Inherit {
     No,
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A physical position in a document.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Position {

@@ -666,8 +666,6 @@ $ A = mat(
 #let _ = gradient.linear(..my-gradient.stops())
 #let my-gradient2 = gradient.linear(red, blue).repeat(5, mirror: true)
 #let _ = gradient.linear(..my-gradient2.stops())
-<<<<<<< HEAD
-=======
 
 --- issue-6162-coincident-gradient-stops-export-png ---
 // Ensure that multiple gradient stops with the same position
@@ -697,4 +695,3 @@ $ A = mat(
 
 --- issue-6680-gradient-linear-with-aspect-correction ---
 #set page(width: 200pt, height: auto, margin: 10pt, fill: gradient.linear(red, blue, angle: 45deg).sharp(2))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

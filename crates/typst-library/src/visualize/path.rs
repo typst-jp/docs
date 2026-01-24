@@ -1,17 +1,7 @@
 use self::PathVertex::{AllControlPoints, MirroredControlPoint, Vertex};
-<<<<<<< HEAD
-use crate::diag::{bail, SourceResult};
-use crate::engine::Engine;
-use crate::foundations::{
-    array, cast, elem, Array, Content, NativeElement, Packed, Reflect, Show, Smart,
-    StyleChain,
-};
-use crate::layout::{Axes, BlockElem, Length, Rel};
-=======
 use crate::diag::bail;
 use crate::foundations::{Array, Reflect, Smart, array, cast, elem};
 use crate::layout::{Axes, Length, Rel};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::visualize::{FillRule, Paint, Stroke};
 
 /// A path through a list of points, connected by Bézier curves.
@@ -27,11 +17,7 @@ use crate::visualize::{FillRule, Paint, Stroke};
 ///   ((50%, 0pt), (40pt, 0pt)),
 /// )
 /// ```
-<<<<<<< HEAD
-#[elem(Show)]
-=======
 #[elem]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct PathElem {
     /// How to fill the path.
     ///
@@ -61,18 +47,10 @@ pub struct PathElem {
     #[default]
     pub fill_rule: FillRule,
 
-<<<<<<< HEAD
-    /// How to [stroke] the path. This can be:
-    ///
-    /// Can be set to  `{none}` to disable the stroke or to `{auto}` for a
-    /// stroke of `{1pt}` black if and if only if no fill is given.
-    #[resolve]
-=======
     /// How to [stroke] the path.
     ///
     /// Can be set to  `{none}` to disable the stroke or to `{auto}` for a
     /// stroke of `{1pt}` black if and only if no fill is given.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[fold]
     pub stroke: Smart<Option<Stroke>>,
 
@@ -101,17 +79,6 @@ pub struct PathElem {
     pub vertices: Vec<PathVertex>,
 }
 
-<<<<<<< HEAD
-impl Show for Packed<PathElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::single_layouter(self.clone(), engine.routines.layout_path)
-            .pack()
-            .spanned(self.span()))
-    }
-}
-
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A component used for path creation.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub enum PathVertex {

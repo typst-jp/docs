@@ -1,10 +1,6 @@
 Drawing and data visualization.
 
 If you want to create more advanced drawings or plots, also have a look at the
-<<<<<<< HEAD
-[CetZ](https://github.com/johannes-wolf/cetz) package as well as more
-specialized [packages]($universe) for your use case.
-=======
 [CeTZ](https://github.com/johannes-wolf/cetz) package as well as more
 specialized [packages]($universe) for your use case.
 
@@ -18,4 +14,3 @@ If you are using the functions in this model to create an illustration with
 semantic meaning, make it accessible by wrapping it in a [`figure`] function
 call. Use its [`alt` parameter]($figure.alt) to provide an
 [alternative description]($guides/accessibility/#textual-representations).
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

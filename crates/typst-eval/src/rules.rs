@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-use typst_library::diag::{warning, At, SourceResult};
-use typst_library::foundations::{
-    Element, Fields, Func, Recipe, Selector, ShowableSelector, Styles, Transformation,
-=======
 use typst_library::diag::{At, SourceResult, warning};
 use typst_library::foundations::{
     Element, Func, Recipe, Selector, ShowableSelector, Styles, Transformation,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 use typst_library::layout::BlockElem;
 use typst_library::model::ParElem;
@@ -18,17 +12,10 @@ impl Eval for ast::SetRule<'_> {
     type Output = Styles;
 
     fn eval(self, vm: &mut Vm) -> SourceResult<Self::Output> {
-<<<<<<< HEAD
-        if let Some(condition) = self.condition() {
-            if !condition.eval(vm)?.cast::<bool>().at(condition.span())? {
-                return Ok(Styles::new());
-            }
-=======
         if let Some(condition) = self.condition()
             && !condition.eval(vm)?.cast::<bool>().at(condition.span())?
         {
             return Ok(Styles::new());
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         let target = self.target();
@@ -58,11 +45,7 @@ impl Eval for ast::ShowRule<'_> {
 
         let transform = self.transform();
         let transform = match transform {
-<<<<<<< HEAD
-            ast::Expr::Set(set) => Transformation::Style(set.eval(vm)?),
-=======
             ast::Expr::SetRule(set) => Transformation::Style(set.eval(vm)?),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             expr => expr.eval(vm)?.cast::<Transformation>().at(transform.span())?,
         };
 
@@ -75,31 +58,16 @@ impl Eval for ast::ShowRule<'_> {
 
 /// Migration hint for `show par: set block(spacing: ..)`.
 fn check_show_par_set_block(vm: &mut Vm, recipe: &Recipe) {
-<<<<<<< HEAD
-    if_chain::if_chain! {
-        if let Some(Selector::Elem(elem, _)) = recipe.selector();
-        if *elem == Element::of::<ParElem>();
-        if let Transformation::Style(styles) = recipe.transform();
-        if styles.has::<BlockElem>(<BlockElem as Fields>::Enum::Above as _) ||
-           styles.has::<BlockElem>(<BlockElem as Fields>::Enum::Below as _);
-        then {
-            vm.engine.sink.warn(warning!(
-=======
     if let Some(Selector::Elem(elem, _)) = recipe.selector()
         && *elem == Element::of::<ParElem>()
         && let Transformation::Style(styles) = recipe.transform()
         && (styles.has(BlockElem::above) || styles.has(BlockElem::below))
     {
         vm.engine.sink.warn(warning!(
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 recipe.span(),
                 "`show par: set block(spacing: ..)` has no effect anymore";
                 hint: "write `set par(spacing: ..)` instead";
                 hint: "this is specific to paragraphs as they are not considered blocks anymore"
             ))
-<<<<<<< HEAD
-        }
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }

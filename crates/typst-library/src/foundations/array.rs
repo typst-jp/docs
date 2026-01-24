@@ -4,30 +4,16 @@ use std::num::{NonZeroI64, NonZeroUsize};
 use std::ops::{Add, AddAssign};
 
 use comemo::Tracked;
-<<<<<<< HEAD
-use ecow::{eco_format, EcoString, EcoVec};
-=======
 use ecow::{EcoString, EcoVec, eco_format};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use serde::{Deserialize, Serialize};
 use smallvec::SmallVec;
 use typst_syntax::{Span, Spanned};
 
-<<<<<<< HEAD
-use crate::diag::{
-    bail, At, DeprecationSink, HintedStrResult, SourceDiagnostic, SourceResult, StrResult,
-};
-use crate::engine::Engine;
-use crate::foundations::{
-    cast, func, ops, repr, scope, ty, Args, Bytes, CastInfo, Context, Dict, FromValue,
-    Func, IntoValue, Reflect, Repr, Str, Value, Version,
-=======
 use crate::diag::{At, HintedStrResult, SourceDiagnostic, SourceResult, StrResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
     Args, Bytes, CastInfo, Context, Dict, FromValue, Func, IntoValue, Reflect, Repr, Str,
     Value, Version, cast, func, ops, repr, scope, ty,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 };
 
 /// Create a new [`Array`] from values.
@@ -108,11 +94,7 @@ impl Array {
     }
 
     /// Iterate over references to the contained values.
-<<<<<<< HEAD
-    pub fn iter(&self) -> std::slice::Iter<Value> {
-=======
     pub fn iter(&self) -> std::slice::Iter<'_, Value> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0.iter()
     }
 
@@ -161,14 +143,6 @@ impl Array {
 
         Ok(self.iter().cloned().cycle().take(count).collect())
     }
-<<<<<<< HEAD
-
-    /// The internal implementation of [`Array::contains`].
-    pub fn contains_impl(&self, value: &Value, sink: &mut dyn DeprecationSink) -> bool {
-        self.0.iter().any(|v| ops::equal(v, value, sink))
-    }
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 #[scope]
@@ -198,19 +172,6 @@ impl Array {
     }
 
     /// Returns the first item in the array. May be used on the left-hand side
-<<<<<<< HEAD
-    /// of an assignment. Fails with an error if the array is empty.
-    #[func]
-    pub fn first(&self) -> StrResult<Value> {
-        self.0.first().cloned().ok_or_else(array_is_empty)
-    }
-
-    /// Returns the last item in the array. May be used on the left-hand side of
-    /// an assignment. Fails with an error if the array is empty.
-    #[func]
-    pub fn last(&self) -> StrResult<Value> {
-        self.0.last().cloned().ok_or_else(array_is_empty)
-=======
     /// an assignment. Returns the default value if the array is empty
     /// or fails with an error is no default value was specified.
     #[func]
@@ -234,7 +195,6 @@ impl Array {
         default: Option<Value>,
     ) -> StrResult<Value> {
         self.0.last().cloned().or(default).ok_or_else(array_is_empty)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Returns the item at the specified index in the array. May be used on the
@@ -326,16 +286,8 @@ impl Array {
         #[named]
         count: Option<i64>,
     ) -> StrResult<Array> {
-<<<<<<< HEAD
-        let mut end = end;
-        if end.is_none() {
-            end = count.map(|c: i64| start + c);
-        }
-        let start = self.locate(start, true)?;
-=======
         let start = self.locate(start, true)?;
         let end = end.or(count.map(|c| start as i64 + c));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let end = self.locate(end.unwrap_or(self.len() as i64), true)?.max(start);
         Ok(self.0[start..end].into())
     }
@@ -347,19 +299,10 @@ impl Array {
     #[func]
     pub fn contains(
         &self,
-<<<<<<< HEAD
-        engine: &mut Engine,
-        span: Span,
-        /// The value to search for.
-        value: Value,
-    ) -> bool {
-        self.contains_impl(&value, &mut (engine, span))
-=======
         /// The value to search for.
         value: Value,
     ) -> bool {
         self.0.contains(&value)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Searches for an item for which the given function returns `{true}` and
@@ -500,8 +443,6 @@ impl Array {
     /// The returned array consists of `(index, value)` pairs in the form of
     /// length-2 arrays. These can be [destructured]($scripting/#bindings) with
     /// a let binding or for loop.
-<<<<<<< HEAD
-=======
     ///
     /// ```example
     /// #for (i, value) in ("A", "B", "C").enumerate() {
@@ -510,7 +451,6 @@ impl Array {
     ///
     /// #("A", "B", "C").enumerate(start: 1)
     /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn enumerate(
         self,
@@ -631,14 +571,11 @@ impl Array {
     }
 
     /// Folds all items into a single value using an accumulator function.
-<<<<<<< HEAD
-=======
     ///
     /// ```example
     /// #let array = (1, 2, 3, 4)
     /// #array.fold(0, (acc, x) => acc + x)
     /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn fold(
         self,
@@ -661,11 +598,6 @@ impl Array {
     #[func]
     pub fn sum(
         self,
-<<<<<<< HEAD
-        engine: &mut Engine,
-        span: Span,
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         /// What to return if the array is empty. Must be set if the array can
         /// be empty.
         #[named]
@@ -677,20 +609,12 @@ impl Array {
             .or(default)
             .ok_or("cannot calculate sum of empty array with no default")?;
         for item in iter {
-<<<<<<< HEAD
-            acc = ops::add(acc, item, &mut (&mut *engine, span))?;
-=======
             acc = ops::add(acc, item)?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
         Ok(acc)
     }
 
-<<<<<<< HEAD
-    /// Calculates the product all items (works for all types that can be
-=======
     /// Calculates the product of all items (works for all types that can be
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// multiplied).
     #[func]
     pub fn product(
@@ -768,13 +692,10 @@ impl Array {
     }
 
     /// Split the array at occurrences of the specified value.
-<<<<<<< HEAD
-=======
     ///
     /// ```example
     /// #(1, 1, 2, 3, 2, 4, 5).split(2)
     /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn split(
         &self,
@@ -791,21 +712,12 @@ impl Array {
     #[func]
     pub fn join(
         self,
-<<<<<<< HEAD
-        engine: &mut Engine,
-        span: Span,
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         /// A value to insert between each item of the array.
         #[default]
         separator: Option<Value>,
         /// An alternative separator between the last two items.
         #[named]
         last: Option<Value>,
-<<<<<<< HEAD
-    ) -> StrResult<Value> {
-        let len = self.0.len();
-=======
         /// What to return if the array is empty.
         #[named]
         default: Option<Value>,
@@ -818,7 +730,6 @@ impl Array {
             return Ok(result);
         }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let separator = separator.unwrap_or(Value::None);
 
         let mut last = last;
@@ -826,20 +737,6 @@ impl Array {
         for (i, value) in self.into_iter().enumerate() {
             if i > 0 {
                 if i + 1 == len && last.is_some() {
-<<<<<<< HEAD
-                    result = ops::join(
-                        result,
-                        last.take().unwrap(),
-                        &mut (&mut *engine, span),
-                    )?;
-                } else {
-                    result =
-                        ops::join(result, separator.clone(), &mut (&mut *engine, span))?;
-                }
-            }
-
-            result = ops::join(result, value, &mut (&mut *engine, span))?;
-=======
                     result = ops::join(result, last.take().unwrap())?;
                 } else {
                     result = ops::join(result, separator.clone())?;
@@ -847,7 +744,6 @@ impl Array {
             }
 
             result = ops::join(result, value)?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
 
         Ok(result)
@@ -855,13 +751,10 @@ impl Array {
 
     /// Returns an array with a copy of the separator value placed between
     /// adjacent elements.
-<<<<<<< HEAD
-=======
     ///
     /// ```example
     /// #("A", "B", "C").intersperse("-")
     /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn intersperse(
         self,
@@ -943,11 +836,7 @@ impl Array {
     /// function. The sorting algorithm used is stable.
     ///
     /// Returns an error if two values could not be compared or if the key
-<<<<<<< HEAD
-    /// function (if given) yields an error.
-=======
     /// or comparison function (if given) yields an error.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// To sort according to multiple criteria at once, e.g. in case of equality
     /// between some criteria, the key function can return an array. The results
@@ -967,39 +856,6 @@ impl Array {
         engine: &mut Engine,
         context: Tracked<Context>,
         span: Span,
-<<<<<<< HEAD
-        /// If given, applies this function to the elements in the array to
-        /// determine the keys to sort by.
-        #[named]
-        key: Option<Func>,
-    ) -> SourceResult<Array> {
-        let mut result = Ok(());
-        let mut vec = self.0;
-        let mut key_of = |x: Value| match &key {
-            // NOTE: We are relying on `comemo`'s memoization of function
-            // evaluation to not excessively reevaluate the `key`.
-            Some(f) => f.call(engine, context, [x]),
-            None => Ok(x),
-        };
-        vec.make_mut().sort_by(|a, b| {
-            // Until we get `try` blocks :)
-            match (key_of(a.clone()), key_of(b.clone())) {
-                (Ok(a), Ok(b)) => ops::compare(&a, &b).unwrap_or_else(|err| {
-                    if result.is_ok() {
-                        result = Err(err).at(span);
-                    }
-                    Ordering::Equal
-                }),
-                (Err(e), _) | (_, Err(e)) => {
-                    if result.is_ok() {
-                        result = Err(e);
-                    }
-                    Ordering::Equal
-                }
-            }
-        });
-        result.map(|_| vec.into())
-=======
         /// If given, applies this function to each element in the array to
         /// determine the keys to sort by.
         #[named]
@@ -1134,7 +990,6 @@ impl Array {
                 result.map(|()| vec.into())
             }
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Deduplicates all items in the array.
@@ -1143,38 +998,24 @@ impl Array {
     /// element of each duplicate is kept.
     ///
     /// ```example
-<<<<<<< HEAD
-    /// #(1, 1, 2, 3, 1).dedup()
-=======
     /// #(3, 3, 1, 2, 3).dedup()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// ```
     #[func(title = "Deduplicate")]
     pub fn dedup(
         self,
         engine: &mut Engine,
         context: Tracked<Context>,
-<<<<<<< HEAD
-        span: Span,
-        /// If given, applies this function to the elements in the array to
-        /// determine the keys to deduplicate by.
-=======
         /// If given, applies this function to each element in the array to
         /// determine the keys to deduplicate by.
         ///
         /// ```example
         /// #("apple", "banana", " apple ").dedup(key: s => s.trim())
         /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         #[named]
         key: Option<Func>,
     ) -> SourceResult<Array> {
         let mut out = EcoVec::with_capacity(self.0.len());
-<<<<<<< HEAD
-        let key_of = |engine: &mut Engine, x: Value| match &key {
-=======
         let mut key_of = |x: Value| match &key {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             // NOTE: We are relying on `comemo`'s memoization of function
             // evaluation to not excessively reevaluate the `key`.
             Some(f) => f.call(engine, context, [x]),
@@ -1185,26 +1026,14 @@ impl Array {
         // 1. We would like to preserve the order of the elements.
         // 2. We cannot hash arbitrary `Value`.
         'outer: for value in self {
-<<<<<<< HEAD
-            let key = key_of(&mut *engine, value.clone())?;
-=======
             let key = key_of(value.clone())?;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             if out.is_empty() {
                 out.push(value);
                 continue;
             }
 
             for second in out.iter() {
-<<<<<<< HEAD
-                if ops::equal(
-                    &key,
-                    &key_of(&mut *engine, second.clone())?,
-                    &mut (&mut *engine, span),
-                ) {
-=======
                 if ops::equal(&key, &key_of(second.clone())?) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     continue 'outer;
                 }
             }
@@ -1259,14 +1088,11 @@ impl Array {
     /// For arrays with at least one element, this is the same as [`array.fold`]
     /// with the first element of the array as the initial accumulator value,
     /// folding every subsequent element into it.
-<<<<<<< HEAD
-=======
     ///
     /// ```example
     /// #let array = (2, 1, 4, 3)
     /// #array.reduce((acc, x) => calc.max(acc, x))
     /// ```
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[func]
     pub fn reduce(
         self,

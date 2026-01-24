@@ -42,8 +42,6 @@ $tilde(U, size: #1.1em), x^tilde(U, size: #1.1em), sscript(tilde(U, size: #1.1em
   macron(bb(#c)), dot(cal(#c)), diaer(upright(#c)), breve(bold(#c)),
   circle(bold(upright(#c))), caron(upright(sans(#c))), arrow(bold(frak(#c)))$
 $test(i) \ test(j)$
-<<<<<<< HEAD
-=======
 
 --- math-accent-dotless-disabled ---
 // Test disabling the dotless glyph variants.
@@ -94,4 +92,3 @@ $accent(sum, \u{0330}), accent(sum, \u{0330}, size: #50%), accent(H, \u{032D}, s
 $hat(accent(L, \u{0330})), accent(circle(p), \u{0323}),
   macron(accent(caron(accent(A, \u{20ED})), \u{0333})) \
   breve(accent(eta, \u{032E})) = accent(breve(eta), \u{032E})$
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

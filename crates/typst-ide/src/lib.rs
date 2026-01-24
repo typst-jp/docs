@@ -9,18 +9,6 @@ mod tooltip;
 mod utils;
 
 pub use self::analyze::{analyze_expr, analyze_import, analyze_labels};
-<<<<<<< HEAD
-pub use self::complete::{autocomplete, Completion, CompletionKind};
-pub use self::definition::{definition, Definition};
-pub use self::jump::{jump_from_click, jump_from_cursor, Jump};
-pub use self::matchers::{deref_target, named_items, DerefTarget, NamedItem};
-pub use self::tooltip::{tooltip, Tooltip};
-
-use ecow::EcoString;
-use typst::syntax::package::PackageSpec;
-use typst::syntax::FileId;
-use typst::World;
-=======
 pub use self::complete::{Completion, CompletionKind, autocomplete};
 pub use self::definition::{Definition, definition};
 pub use self::jump::{Jump, jump_from_click, jump_from_cursor};
@@ -31,7 +19,6 @@ use ecow::EcoString;
 use typst::World;
 use typst::syntax::FileId;
 use typst::syntax::package::PackageSpec;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Extends the `World` for IDE functionality.
 pub trait IdeWorld: World {

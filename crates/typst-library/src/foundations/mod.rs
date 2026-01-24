@@ -17,10 +17,6 @@ mod datetime;
 mod decimal;
 mod dict;
 mod duration;
-<<<<<<< HEAD
-mod element;
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 mod fields;
 mod float;
 mod func;
@@ -52,10 +48,6 @@ pub use self::datetime::*;
 pub use self::decimal::*;
 pub use self::dict::*;
 pub use self::duration::*;
-<<<<<<< HEAD
-pub use self::element::*;
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub use self::fields::*;
 pub use self::float::*;
 pub use self::func::*;
@@ -75,26 +67,13 @@ pub use self::ty::*;
 pub use self::value::*;
 pub use self::version::*;
 pub use typst_macros::{scope, ty};
-<<<<<<< HEAD
-=======
 use typst_syntax::SyntaxMode;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 #[rustfmt::skip]
 #[doc(hidden)]
 pub use {
     ecow::{eco_format, eco_vec},
     indexmap::IndexMap,
-<<<<<<< HEAD
-};
-
-use ecow::EcoString;
-use typst_syntax::Spanned;
-
-use crate::diag::{bail, SourceResult, StrResult};
-use crate::engine::Engine;
-use crate::routines::EvalMode;
-=======
     smallvec::SmallVec,
 };
 
@@ -104,7 +83,6 @@ use typst_syntax::Spanned;
 
 use crate::diag::{SourceResult, StrResult, bail};
 use crate::engine::Engine;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::{Feature, Features};
 
 /// Hook up all `foundations` definitions.
@@ -177,13 +155,8 @@ pub fn panic(
 /// Fails with an error if the condition is not fulfilled. Does not
 /// produce any output in the document.
 ///
-<<<<<<< HEAD
-/// If you wish to test equality between two values, see
-/// [`assert.eq`]($assert.eq) and [`assert.ne`]($assert.ne).
-=======
 /// If you wish to test equality between two values, see [`assert.eq`] and
 /// [`assert.ne`].
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ///
 /// # Example
 /// ```typ
@@ -299,13 +272,8 @@ pub fn eval(
     /// #eval("1_2^3", mode: "math")
     /// ```
     #[named]
-<<<<<<< HEAD
-    #[default(EvalMode::Code)]
-    mode: EvalMode,
-=======
     #[default(SyntaxMode::Code)]
     mode: SyntaxMode,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// A scope of definitions that are made available.
     ///
     /// ```example
@@ -329,9 +297,6 @@ pub fn eval(
     for (key, value) in dict {
         scope.bind(key.into(), Binding::new(value, span));
     }
-<<<<<<< HEAD
-    (engine.routines.eval_string)(engine.routines, engine.world, &text, span, mode, scope)
-=======
 
     (engine.routines.eval_string)(
         engine.routines,
@@ -342,5 +307,4 @@ pub fn eval(
         mode,
         scope,
     )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

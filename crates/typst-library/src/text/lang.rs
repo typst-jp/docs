@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-use std::collections::HashMap;
-use std::str::FromStr;
-
-use ecow::{eco_format, EcoString};
-
-use crate::diag::Hint;
-use crate::foundations::{cast, StyleChain};
-=======
 use std::str::FromStr;
 
 use ecow::{EcoString, eco_format};
@@ -14,7 +5,6 @@ use rustc_hash::FxHashMap;
 
 use crate::diag::Hint;
 use crate::foundations::{StyleChain, cast};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::layout::Dir;
 use crate::text::TextElem;
 
@@ -24,37 +14,6 @@ macro_rules! translation {
     };
 }
 
-<<<<<<< HEAD
-const TRANSLATIONS: [(&str, &str); 38] = [
-    translation!("ar"),
-    translation!("bg"),
-    translation!("ca"),
-    translation!("cs"),
-    translation!("da"),
-    translation!("de"),
-    translation!("en"),
-    translation!("es"),
-    translation!("et"),
-    translation!("eu"),
-    translation!("fi"),
-    translation!("fr"),
-    translation!("gl"),
-    translation!("el"),
-    translation!("he"),
-    translation!("hu"),
-    translation!("is"),
-    translation!("it"),
-    translation!("ja"),
-    translation!("la"),
-    translation!("nb"),
-    translation!("nl"),
-    translation!("nn"),
-    translation!("pl"),
-    translation!("pt-PT"),
-    translation!("pt"),
-    translation!("ro"),
-    translation!("ru"),
-=======
 const TRANSLATIONS: &[(&str, &str)] = &[
     translation!("af"),
     translation!("alt"),
@@ -140,21 +99,10 @@ const TRANSLATIONS: &[(&str, &str)] = &[
     translation!("se"),
     translation!("si"),
     translation!("sk"),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     translation!("sl"),
     translation!("sq"),
     translation!("sr"),
     translation!("sv"),
-<<<<<<< HEAD
-    translation!("tl"),
-    translation!("tr"),
-    translation!("uk"),
-    translation!("vi"),
-    translation!("zh-TW"),
-    translation!("zh"),
-];
-
-=======
     translation!("ta"),
     translation!("te"),
     translation!("th"),
@@ -203,53 +151,11 @@ impl Locale {
     }
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// An identifier for a natural language.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Lang([u8; 3], u8);
 
 impl Lang {
-<<<<<<< HEAD
-    pub const ALBANIAN: Self = Self(*b"sq ", 2);
-    pub const ARABIC: Self = Self(*b"ar ", 2);
-    pub const BASQUE: Self = Self(*b"eu ", 2);
-    pub const BOKMÅL: Self = Self(*b"nb ", 2);
-    pub const BULGARIAN: Self = Self(*b"bg ", 2);
-    pub const CATALAN: Self = Self(*b"ca ", 2);
-    pub const CHINESE: Self = Self(*b"zh ", 2);
-    pub const CROATIAN: Self = Self(*b"hr ", 2);
-    pub const CZECH: Self = Self(*b"cs ", 2);
-    pub const DANISH: Self = Self(*b"da ", 2);
-    pub const DUTCH: Self = Self(*b"nl ", 2);
-    pub const ENGLISH: Self = Self(*b"en ", 2);
-    pub const ESTONIAN: Self = Self(*b"et ", 2);
-    pub const FILIPINO: Self = Self(*b"tl ", 2);
-    pub const FINNISH: Self = Self(*b"fi ", 2);
-    pub const FRENCH: Self = Self(*b"fr ", 2);
-    pub const GALICIAN: Self = Self(*b"gl ", 2);
-    pub const GERMAN: Self = Self(*b"de ", 2);
-    pub const GREEK: Self = Self(*b"el ", 2);
-    pub const HEBREW: Self = Self(*b"he ", 2);
-    pub const HUNGARIAN: Self = Self(*b"hu ", 2);
-    pub const ICELANDIC: Self = Self(*b"is ", 2);
-    pub const ITALIAN: Self = Self(*b"it ", 2);
-    pub const JAPANESE: Self = Self(*b"ja ", 2);
-    pub const LATIN: Self = Self(*b"la ", 2);
-    pub const LOWER_SORBIAN: Self = Self(*b"dsb", 3);
-    pub const NYNORSK: Self = Self(*b"nn ", 2);
-    pub const POLISH: Self = Self(*b"pl ", 2);
-    pub const PORTUGUESE: Self = Self(*b"pt ", 2);
-    pub const ROMANIAN: Self = Self(*b"ro ", 2);
-    pub const RUSSIAN: Self = Self(*b"ru ", 2);
-    pub const SERBIAN: Self = Self(*b"sr ", 2);
-    pub const SLOVAK: Self = Self(*b"sk ", 2);
-    pub const SLOVENIAN: Self = Self(*b"sl ", 2);
-    pub const SPANISH: Self = Self(*b"es ", 2);
-    pub const SWEDISH: Self = Self(*b"sv ", 2);
-    pub const TURKISH: Self = Self(*b"tr ", 2);
-    pub const UKRAINIAN: Self = Self(*b"uk ", 2);
-    pub const VIETNAMESE: Self = Self(*b"vi ", 2);
-=======
     pub const ABKHAZIAN: Self = Self(*b"ab ", 2);
     pub const AFAR: Self = Self(*b"aa ", 2);
     pub const AFRIKAANS: Self = Self(*b"af ", 2);
@@ -567,7 +473,6 @@ impl Lang {
     pub const ZARMA: Self = Self(*b"dje", 3);
     pub const ZHUANG: Self = Self(*b"za ", 2);
     pub const ZULU: Self = Self(*b"zu ", 2);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     /// Return the language code as an all lowercase string slice.
     pub fn as_str(&self) -> &str {
@@ -606,26 +511,15 @@ cast! {
     self => self.as_str().into_value(),
     string: EcoString => {
         let result = Self::from_str(&string);
-<<<<<<< HEAD
-        if result.is_err() {
-            if let Some((lang, region)) = string.split_once('-') {
-                if Lang::from_str(lang).is_ok() && Region::from_str(region).is_ok() {
-=======
         if result.is_err()
             && let Some((lang, region)) = string.split_once('-')
                 && Lang::from_str(lang).is_ok() && Region::from_str(region).is_ok() {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     return result
                         .hint(eco_format!(
                             "you should leave only \"{}\" in the `lang` parameter and specify \"{}\" in the `region` parameter",
                             lang, region,
                         ));
                 }
-<<<<<<< HEAD
-            }
-        }
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         result?
     }
@@ -723,11 +617,7 @@ pub trait LocalName {
     where
         Self: Sized,
     {
-<<<<<<< HEAD
-        Self::local_name(TextElem::lang_in(styles), TextElem::region_in(styles))
-=======
         Self::local_name(styles.get(TextElem::lang), styles.get(TextElem::region))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -755,15 +645,6 @@ pub fn localized_str(lang: Lang, region: Option<Region>, key: &str) -> &'static 
 fn parse_language_bundle(
     lang: Lang,
     region: Option<Region>,
-<<<<<<< HEAD
-) -> Result<HashMap<&'static str, &'static str>, &'static str> {
-    let language_tuple = TRANSLATIONS.iter().find(|it| it.0 == lang_str(lang, region));
-    let Some((_lang_name, language_file)) = language_tuple else {
-        return Ok(HashMap::new());
-    };
-
-    let mut bundle = HashMap::new();
-=======
 ) -> Result<FxHashMap<&'static str, &'static str>, &'static str> {
     let language_tuple = TRANSLATIONS.iter().find(|it| it.0 == lang_str(lang, region));
     let Some((_lang_name, language_file)) = language_tuple else {
@@ -771,7 +652,6 @@ fn parse_language_bundle(
     };
 
     let mut bundle = FxHashMap::default();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let lines = language_file.trim().lines();
     for line in lines {
         if line.trim().starts_with('#') {
@@ -800,18 +680,13 @@ fn lang_str(lang: Lang, region: Option<Region>) -> EcoString {
 
 #[cfg(test)]
 mod tests {
-<<<<<<< HEAD
-=======
     use std::path::PathBuf;
 
     use rustc_hash::FxHashSet;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     use typst_utils::option_eq;
 
     use super::*;
 
-<<<<<<< HEAD
-=======
     fn translation_files_iter() -> impl Iterator<Item = PathBuf> {
         std::fs::read_dir("translations")
             .unwrap()
@@ -819,15 +694,12 @@ mod tests {
             .filter(|e| e.is_file() && e.extension().is_some_and(|e| e == "txt"))
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[test]
     fn test_region_option_eq() {
         let region = Some(Region([b'U', b'S']));
         assert!(option_eq(region, "US"));
         assert!(!option_eq(region, "AB"));
     }
-<<<<<<< HEAD
-=======
 
     #[test]
     fn test_all_translations_included() {
@@ -878,5 +750,4 @@ mod tests {
             "TRANSLATIONS should be sorted"
         );
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }

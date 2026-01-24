@@ -21,8 +21,6 @@ $ x := #table(columns: 2)[x][y]/mat(1, 2, 3)
 #let here = text.with(font: "Noto Sans")
 $#here[f] := #here[Hi there]$.
 
-<<<<<<< HEAD
-=======
 --- math-root-show-rule-1 ---
 #show "√": set text(red, font: "Noto Sans Math")
 $ root(2, (a + b) / c) $
@@ -102,7 +100,6 @@ $grave(x)$, x\u{0300}
 #show "\u{0302}": box(inset: (bottom: 5pt), text(0.5em, sym.diamond.small))
 $hat(X)$, $hat(x)$
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- math-box-without-baseline ---
 // Test boxes without a baseline act as if the baseline is at the base
 #{

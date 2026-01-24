@@ -81,32 +81,18 @@ pub struct CategoryItem {
 
 /// Details about a function.
 #[derive(Debug, Serialize)]
-<<<<<<< HEAD
-=======
 #[serde(rename_all = "camelCase")]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct FuncModel {
     pub path: Vec<EcoString>,
     pub name: EcoString,
     pub title: &'static str,
     pub keywords: &'static [&'static str],
-<<<<<<< HEAD
-    pub oneliner: &'static str,
-    pub element: bool,
-    pub contextual: bool,
-    pub deprecation: Option<&'static str>,
-    pub details: Html,
-    /// This example is only for nested function models. Others can have
-    /// their example directly in their details.
-    pub example: Option<Html>,
-=======
     pub oneliner: EcoString,
     pub element: bool,
     pub contextual: bool,
     pub deprecation_message: Option<&'static str>,
     pub deprecation_until: Option<&'static str>,
     pub details: Vec<DetailsBlock>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     #[serde(rename = "self")]
     pub self_: bool,
     pub params: Vec<ParamModel>,
@@ -118,12 +104,7 @@ pub struct FuncModel {
 #[derive(Debug, Serialize)]
 pub struct ParamModel {
     pub name: &'static str,
-<<<<<<< HEAD
-    pub details: Html,
-    pub example: Option<Html>,
-=======
     pub details: Vec<DetailsBlock>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub types: Vec<&'static str>,
     pub strings: Vec<StrParam>,
     pub default: Option<Html>,
@@ -134,8 +115,6 @@ pub struct ParamModel {
     pub settable: bool,
 }
 
-<<<<<<< HEAD
-=======
 /// A block-level segment in a function's or parameters documentation.
 #[derive(Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -147,7 +126,6 @@ pub enum DetailsBlock {
     Example { body: Html, title: Option<EcoString> },
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A specific string that can be passed as an argument.
 #[derive(Debug, Serialize)]
 pub struct StrParam {
@@ -162,10 +140,7 @@ pub struct GroupModel {
     pub title: EcoString,
     pub details: Html,
     pub functions: Vec<FuncModel>,
-<<<<<<< HEAD
-=======
     pub global_attributes: Vec<ParamModel>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Details about a type.
@@ -174,11 +149,7 @@ pub struct TypeModel {
     pub name: &'static str,
     pub title: &'static str,
     pub keywords: &'static [&'static str],
-<<<<<<< HEAD
-    pub oneliner: &'static str,
-=======
     pub oneliner: EcoString,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub details: Html,
     pub constructor: Option<FuncModel>,
     pub scope: Vec<FuncModel>,
@@ -198,22 +169,14 @@ pub struct SymbolsModel {
 #[serde(rename_all = "camelCase")]
 pub struct SymbolModel {
     pub name: EcoString,
-<<<<<<< HEAD
-    pub codepoint: u32,
-=======
     pub value: EcoString,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub accent: bool,
     pub alternates: Vec<EcoString>,
     pub markup_shorthand: Option<&'static str>,
     pub math_shorthand: Option<&'static str>,
     pub math_class: Option<&'static str>,
-<<<<<<< HEAD
-    pub deprecation: Option<&'static str>,
-=======
     pub deprecation_message: Option<&'static str>,
     pub deprecation_until: Option<&'static str>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Shorthands listed on a category page.

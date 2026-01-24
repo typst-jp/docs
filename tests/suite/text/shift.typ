@@ -1,15 +1,6 @@
 // Test sub- and superscript shifts.
 
 --- sub-super ---
-<<<<<<< HEAD
-#table(
-  columns: 3,
-  [Typo.], [Fallb.], [Synth],
-  [x#super[1]], [x#super[5n]], [x#super[2 #box(square(size: 6pt))]],
-  [x#sub[1]], [x#sub[5n]], [x#sub[2 #box(square(size: 6pt))]],
-)
-
-=======
 #let sq = box(square(size: 4pt))
 #table(
   columns: 3,
@@ -37,18 +28,12 @@ x#sub(synth) x#sub(typo) x#sub(sq)
 x#super(synth) x#super(typo) x#super(sq) \
 x#sub(synth) x#sub(typo) x#sub(sq)
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- sub-super-non-typographic ---
 #set super(typographic: false, baseline: -0.25em, size: 0.7em)
 n#super[1], n#sub[2], ... n#super[N]
 
 --- super-underline ---
 #set underline(stroke: 0.5pt, offset: 0.15em)
-<<<<<<< HEAD
-#underline[The claim#super[\[4\]]] has been disputed. \
-The claim#super[#underline[\[4\]]] has been disputed. \
-It really has been#super(box(text(baseline: 0pt, underline[\[4\]]))) \
-=======
 #set super(typographic: false)
 #underline[A#super[4]] B \
 A#super[#underline[4]] B \
@@ -104,4 +89,3 @@ A#super(highlight[4])
 1#super[st], 2#super[nd], 3#super[rd].
 
 log#sub[2], log#sub[3], log#sub[variable].
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

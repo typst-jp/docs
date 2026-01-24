@@ -12,26 +12,16 @@ pub use self::variant::{FontStretch, FontStyle, FontVariant, FontWeight};
 use std::cell::OnceCell;
 use std::fmt::{self, Debug, Formatter};
 use std::hash::{Hash, Hasher};
-<<<<<<< HEAD
-use std::sync::Arc;
-
-use ttf_parser::GlyphId;
-=======
 use std::sync::{Arc, OnceLock};
 
 use ttf_parser::{GlyphId, name_id};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use self::book::find_name;
 use crate::foundations::{Bytes, Cast};
 use crate::layout::{Abs, Em, Frame};
-<<<<<<< HEAD
-use crate::text::{BottomEdge, TopEdge};
-=======
 use crate::text::{
     BottomEdge, DEFAULT_SUBSCRIPT_METRICS, DEFAULT_SUPERSCRIPT_METRICS, TopEdge,
 };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// An OpenType font.
 ///
@@ -107,15 +97,12 @@ impl Font {
         &self.0.metrics
     }
 
-<<<<<<< HEAD
-=======
     /// The font's math constants.
     #[inline]
     pub fn math(&self) -> &MathConstants {
         self.0.metrics.math.get_or_init(|| FontMetrics::init_math(self))
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// The number of font units per one em.
     pub fn units_per_em(&self) -> f64 {
         self.0.metrics.units_per_em
@@ -127,19 +114,13 @@ impl Font {
     }
 
     /// Look up the horizontal advance width of a glyph.
-<<<<<<< HEAD
-    pub fn advance(&self, glyph: u16) -> Option<Em> {
-=======
     pub fn x_advance(&self, glyph: u16) -> Option<Em> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.0
             .ttf
             .glyph_hor_advance(GlyphId(glyph))
             .map(|units| self.to_em(units))
     }
 
-<<<<<<< HEAD
-=======
     /// Look up the vertical advance width of a glyph.
     pub fn y_advance(&self, glyph: u16) -> Option<Em> {
         self.0
@@ -148,7 +129,6 @@ impl Font {
             .map(|units| self.to_em(units))
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Lookup a name by id.
     pub fn find_name(&self, id: u16) -> Option<String> {
         find_name(&self.0.ttf, id)
@@ -233,11 +213,7 @@ impl PartialEq for Font {
 }
 
 /// Metrics of a font.
-<<<<<<< HEAD
-#[derive(Debug, Copy, Clone)]
-=======
 #[derive(Debug, Clone)]
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub struct FontMetrics {
     /// How many font units represent one em unit.
     pub units_per_em: f64,
@@ -255,15 +231,12 @@ pub struct FontMetrics {
     pub underline: LineMetrics,
     /// Recommended metrics for an overline.
     pub overline: LineMetrics,
-<<<<<<< HEAD
-=======
     /// Metrics for subscripts, if provided by the font.
     pub subscript: Option<ScriptMetrics>,
     /// Metrics for superscripts, if provided by the font.
     pub superscript: Option<ScriptMetrics>,
     /// Metrics for math layout.
     pub math: OnceLock<Box<MathConstants>>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 impl FontMetrics {
@@ -276,10 +249,7 @@ impl FontMetrics {
         let cap_height = ttf.capital_height().filter(|&h| h > 0).map_or(ascender, to_em);
         let x_height = ttf.x_height().filter(|&h| h > 0).map_or(ascender, to_em);
         let descender = to_em(ttf.typographic_descender().unwrap_or(ttf.descender()));
-<<<<<<< HEAD
-=======
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let strikeout = ttf.strikeout_metrics();
         let underline = ttf.underline_metrics();
 
@@ -302,8 +272,6 @@ impl FontMetrics {
             thickness: underline.thickness,
         };
 
-<<<<<<< HEAD
-=======
         let subscript = ttf.subscript_metrics().map(|metrics| ScriptMetrics {
             width: to_em(metrics.x_size),
             height: to_em(metrics.y_size),
@@ -318,7 +286,6 @@ impl FontMetrics {
             vertical_offset: to_em(metrics.y_offset),
         });
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Self {
             units_per_em,
             ascender,
@@ -328,11 +295,6 @@ impl FontMetrics {
             strikethrough,
             underline,
             overline,
-<<<<<<< HEAD
-        }
-    }
-
-=======
             superscript,
             subscript,
             math: OnceLock::new(),
@@ -522,7 +484,6 @@ impl FontMetrics {
         )
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Look up a vertical metric.
     pub fn vertical(&self, metric: VerticalFontMetric) -> Em {
         match metric {
@@ -545,8 +506,6 @@ pub struct LineMetrics {
     pub thickness: Em,
 }
 
-<<<<<<< HEAD
-=======
 /// Metrics for subscripts or superscripts.
 #[derive(Debug, Copy, Clone)]
 pub struct ScriptMetrics {
@@ -619,7 +578,6 @@ pub struct MathConstants {
     pub radical_degree_bottom_raise_percent: f64,
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// Identifies a vertical metric of a font.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum VerticalFontMetric {

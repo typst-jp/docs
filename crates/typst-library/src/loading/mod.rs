@@ -17,11 +17,7 @@ mod yaml_;
 
 use comemo::Tracked;
 use ecow::EcoString;
-<<<<<<< HEAD
-use typst_syntax::Spanned;
-=======
 use typst_syntax::{FileId, Spanned};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 pub use self::cbor_::*;
 pub use self::csv_::*;
@@ -31,17 +27,10 @@ pub use self::toml_::*;
 pub use self::xml_::*;
 pub use self::yaml_::*;
 
-<<<<<<< HEAD
-use crate::diag::{At, SourceResult};
-use crate::foundations::OneOrMultiple;
-use crate::foundations::{cast, Bytes, Scope, Str};
-use crate::World;
-=======
 use crate::World;
 use crate::diag::{At, SourceResult};
 use crate::foundations::OneOrMultiple;
 use crate::foundations::{Bytes, Scope, Str, cast};
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// Hook up all `data-loading` definitions.
 pub(super) fn define(global: &mut Scope) {
@@ -85,31 +74,14 @@ pub trait Load {
 }
 
 impl Load for Spanned<DataSource> {
-<<<<<<< HEAD
-    type Output = Bytes;
-
-    fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Bytes> {
-=======
     type Output = Loaded;
 
     fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Self::Output> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.as_ref().load(world)
     }
 }
 
 impl Load for Spanned<&DataSource> {
-<<<<<<< HEAD
-    type Output = Bytes;
-
-    fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Bytes> {
-        match &self.v {
-            DataSource::Path(path) => {
-                let file_id = self.span.resolve_path(path).at(self.span)?;
-                world.file(file_id).at(self.span)
-            }
-            DataSource::Bytes(bytes) => Ok(bytes.clone()),
-=======
     type Output = Loaded;
 
     fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Self::Output> {
@@ -124,35 +96,22 @@ impl Load for Spanned<&DataSource> {
                 let source = Spanned::new(LoadSource::Bytes, self.span);
                 Ok(Loaded::new(source, data.clone()))
             }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         }
     }
 }
 
 impl Load for Spanned<OneOrMultiple<DataSource>> {
-<<<<<<< HEAD
-    type Output = Vec<Bytes>;
-
-    fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Vec<Bytes>> {
-=======
     type Output = Vec<Loaded>;
 
     fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Self::Output> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.as_ref().load(world)
     }
 }
 
 impl Load for Spanned<&OneOrMultiple<DataSource>> {
-<<<<<<< HEAD
-    type Output = Vec<Bytes>;
-
-    fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Vec<Bytes>> {
-=======
     type Output = Vec<Loaded>;
 
     fn load(&self, world: Tracked<dyn World + '_>) -> SourceResult<Self::Output> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         self.v
             .0
             .iter()
@@ -161,8 +120,6 @@ impl Load for Spanned<&OneOrMultiple<DataSource>> {
     }
 }
 
-<<<<<<< HEAD
-=======
 /// Data loaded from a [`DataSource`].
 #[derive(Debug, Clone, Eq, PartialEq, Hash)]
 pub struct Loaded {
@@ -185,7 +142,6 @@ pub enum LoadSource {
     Bytes,
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 /// A value that can be read from a file.
 #[derive(Debug, Clone, PartialEq, Hash)]
 pub enum Readable {

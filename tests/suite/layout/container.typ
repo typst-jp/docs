@@ -64,15 +64,12 @@ First!
   is the sun.
 ]
 
-<<<<<<< HEAD
-=======
 --- block-multiple-pages-empty ---
 #set page(height: 60pt)
 A
 #block(height: 30pt)
 B
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- block-box-fill ---
 #set page(height: 100pt)
 #let words = lorem(18).split()
@@ -161,8 +158,6 @@ Paragraph
 #show bibliography: none
 #bibliography("/assets/bib/works.bib")
 
-<<<<<<< HEAD
-=======
 --- box-inset-ratio ---
 #let body-width = 10pt
 #context for inset in range(10).map(n => n / 10) {
@@ -183,7 +178,6 @@ Paragraph
   assert.eq(measured-width, body-width / (1 - inset))
 }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- block-sticky ---
 #set page(height: 100pt)
 #lines(3)
@@ -319,8 +313,6 @@ Paragraph
 #block(width: 100%, fill: red, box("a box"))
 #block(width: 100%, fill: red, [#box("a box") #box()])
 
-<<<<<<< HEAD
-=======
 --- issue-2914-block-height-cut-off ---
 // Ensure that breaking a block doesn't shrink its height.
 #set page(height: 65pt)
@@ -352,7 +344,6 @@ A
 #b
 #b
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- issue-5296-block-sticky-in-block-at-top ---
 #set page(height: 3cm)
 #v(1.6cm)
@@ -391,8 +382,6 @@ b
 a
 #block(height: -25pt)[b]
 c
-<<<<<<< HEAD
-=======
 
 --- issue-6267-clip-anti-alias ---
 #block(
@@ -400,4 +389,3 @@ c
   radius: 100%,
   rect(fill: gray, height: 1cm, width: 1cm),
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

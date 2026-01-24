@@ -2,20 +2,6 @@ use ecow::EcoString;
 use typst_syntax::is_newline;
 use unicode_segmentation::UnicodeSegmentation;
 
-<<<<<<< HEAD
-use crate::diag::{bail, HintedStrResult, StrResult};
-use crate::foundations::{
-    array, cast, dict, elem, Array, Dict, FromValue, Packed, PlainText, Smart, Str,
-};
-use crate::layout::Dir;
-use crate::text::{Lang, Region};
-
-/// 言語を認識し、コンテキストに反応する引用符。
-///
-/// アクティブな[テキストの言語設定]($text.lang)に基づいて適切な開き引用符か閉じ引用符に自動的に変更します。
-///
-/// # 例
-=======
 use crate::diag::{HintedStrResult, StrResult, bail};
 use crate::foundations::{
     Array, Dict, FromValue, Packed, PlainText, Smart, Str, StyleChain, array, cast, dict,
@@ -24,13 +10,11 @@ use crate::foundations::{
 use crate::layout::Dir;
 use crate::text::{Lang, Region, TextElem};
 
-/// A language-aware quote that reacts to its context.
+/// 言語を認識し、コンテキストに反応する引用符。
 ///
-/// Automatically turns into an appropriate opening or closing quote based on
-/// the active [text language]($text.lang).
+/// アクティブな[テキストの言語設定]($text.lang)に基づいて適切な開き引用符か閉じ引用符に自動的に変更します。
 ///
-/// # Example
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
+/// # 例
 /// ```example
 /// "This is in quotes."
 ///
@@ -41,7 +25,6 @@ use crate::text::{Lang, Region, TextElem};
 /// "C'est entre guillemets."
 /// ```
 ///
-<<<<<<< HEAD
 /// # 構文
 /// この関数は専用の構文もあります。
 /// 通常の引用記号（`'`と`"`）です。
@@ -55,21 +38,6 @@ pub struct SmartQuoteElem {
     /// スマートクォートを有効化するかどうか。
     ///
     /// 単一引用符の場合は、バックスラッシュでエスケープしても無効化できます。
-=======
-/// # Syntax
-/// This function also has dedicated syntax: The normal quote characters
-/// (`'` and `"`). Typst automatically makes your quotes smart.
-#[elem(name = "smartquote", PlainText)]
-pub struct SmartQuoteElem {
-    /// Whether this should be a double quote.
-    #[default(true)]
-    pub double: bool,
-
-    /// Whether smart quotes are enabled.
-    ///
-    /// To disable smartness for a single quote, you can also escape it with a
-    /// backslash.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set smartquote(enabled: false)
@@ -79,16 +47,9 @@ pub struct SmartQuoteElem {
     #[default(true)]
     pub enabled: bool,
 
-<<<<<<< HEAD
     /// 代替引用符を使用するかどうか。
     ///
     /// 代替引用符を持たない言語に対してや、明示的に引用符が設定されている場合には、何もしません。
-=======
-    /// Whether to use alternative quotes.
-    ///
-    /// Does nothing for languages that don't have alternative quotes, or if
-    /// explicit quotes were set.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set text(lang: "de")
@@ -99,7 +60,6 @@ pub struct SmartQuoteElem {
     #[default(false)]
     pub alternative: bool,
 
-<<<<<<< HEAD
     /// 使用する引用符。
     ///
     /// - `{auto}`に設定された場合、[テキストの言語]($text.lang)に対して適切な単一引用符が使用されます。これがデフォルトです。
@@ -107,19 +67,6 @@ pub struct SmartQuoteElem {
     ///   - [文字列]($str): 開き二重引用符と閉じ二重引用符の2文字からなる文字列（ここの文字はUnicodeグラフェムクラスターを指します）
     ///   - [配列]($array): 開き二重引用符と閉じ二重引用符を持つ配列
     ///   - [辞書]($dictionary): doubleやsingleをキーとして引用符を指定する辞書。その値は`{auto}`、文字列、配列のいずれかで指定します。
-=======
-    /// The quotes to use.
-    ///
-    /// - When set to `{auto}`, the appropriate single quotes for the
-    ///   [text language]($text.lang) will be used. This is the default.
-    /// - Custom quotes can be passed as a string, array, or dictionary of either
-    ///   - [string]($str): a string consisting of two characters containing the
-    ///     opening and closing double quotes (characters here refer to Unicode
-    ///     grapheme clusters)
-    ///   - [array]: an array containing the opening and closing double quotes
-    ///   - [dictionary]: a dictionary containing the double and single quotes, each
-    ///     specified as either `{auto}`, string, or array
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     ///
     /// ```example
     /// #set text(lang: "de")
@@ -131,24 +78,12 @@ pub struct SmartQuoteElem {
     /// #set smartquote(quotes: (single: ("[[", "]]"),  double: auto))
     /// 'Das sind eigene Anführungszeichen.'
     /// ```
-<<<<<<< HEAD
-    #[borrowed]
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     pub quotes: Smart<SmartQuoteDict>,
 }
 
 impl PlainText for Packed<SmartQuoteElem> {
     fn plain_text(&self, text: &mut EcoString) {
-<<<<<<< HEAD
-        if self.double.unwrap_or(true) {
-            text.push_str("\"");
-        } else {
-            text.push_str("'");
-        }
-=======
         text.push_str(SmartQuotes::fallback(self.double.as_option().unwrap_or(true)));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -256,8 +191,6 @@ pub struct SmartQuotes<'s> {
 }
 
 impl<'s> SmartQuotes<'s> {
-<<<<<<< HEAD
-=======
     /// Retrieve the smart quotes as configured by the current styles.
     pub fn get_in(styles: StyleChain<'s>) -> Self {
         Self::get(
@@ -268,7 +201,6 @@ impl<'s> SmartQuotes<'s> {
         )
     }
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Create a new `Quotes` struct with the given quotes, optionally falling
     /// back to the defaults for a language and region.
     ///
@@ -305,13 +237,8 @@ impl<'s> SmartQuotes<'s> {
             "cs" | "da" | "de" | "sk" | "sl" if alternative => ("›", "‹", "»", "«"),
             "cs" | "de" | "et" | "is" | "lt" | "lv" | "sk" | "sl" => low_high,
             "da" => ("‘", "’", "“", "”"),
-<<<<<<< HEAD
-            "fr" | "ru" if alternative => default,
-            "fr" => ("‹\u{00A0}", "\u{00A0}›", "«\u{00A0}", "\u{00A0}»"),
-=======
             "fr" if alternative => default,
             "fr" => ("“", "”", "«\u{202F}", "\u{202F}»"),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             "fi" | "sv" if alternative => ("’", "’", "»", "»"),
             "bs" | "fi" | "sv" => ("’", "’", "”", "”"),
             "it" if alternative => default,
@@ -320,21 +247,14 @@ impl<'s> SmartQuotes<'s> {
             "es" if matches!(region, Some("ES") | None) => ("“", "”", "«", "»"),
             "hu" | "pl" | "ro" => ("’", "’", "„", "”"),
             "no" | "nb" | "nn" if alternative => low_high,
-<<<<<<< HEAD
-            "ru" | "no" | "nb" | "nn" | "uk" => ("’", "’", "«", "»"),
-=======
             "no" | "nb" | "nn" => ("’", "’", "«", "»"),
             "ru" => ("„", "“", "«", "»"),
             "uk" => ("“", "”", "«", "»"),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             "el" => ("‘", "’", "«", "»"),
             "he" => ("’", "’", "”", "”"),
             "hr" => ("‘", "’", "„", "”"),
             "bg" => ("’", "’", "„", "“"),
-<<<<<<< HEAD
-=======
             "ar" if !alternative => ("’", "‘", "«", "»"),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             _ if lang.dir() == Dir::RTL => ("’", "‘", "”", "“"),
             _ => default,
         };
@@ -368,33 +288,17 @@ impl<'s> SmartQuotes<'s> {
 
     /// The opening quote.
     pub fn open(&self, double: bool) -> &'s str {
-<<<<<<< HEAD
-        if double {
-            self.double_open
-        } else {
-            self.single_open
-        }
-=======
         if double { self.double_open } else { self.single_open }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// The closing quote.
     pub fn close(&self, double: bool) -> &'s str {
-<<<<<<< HEAD
-        if double {
-            self.double_close
-        } else {
-            self.single_close
-        }
-=======
         if double { self.double_close } else { self.single_close }
     }
 
     /// Get the fallback "dumb" quotes for when smart quotes are disabled.
     pub fn fallback(double: bool) -> &'static str {
         if double { "\"" } else { "'" }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 

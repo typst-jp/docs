@@ -131,8 +131,6 @@
 // Error: 7-19 cannot use `table.cell` as a grid cell
 // Hint: 7-19 use `grid.cell` instead
 #grid(table.cell[])
-<<<<<<< HEAD
-=======
 
 --- issue-5723-grid-heading-numbering ---
 #set heading(numbering: "1.1.")
@@ -178,4 +176,3 @@
   columns: 1,
   word-numbering(lorem(8))
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

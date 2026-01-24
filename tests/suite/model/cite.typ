@@ -3,17 +3,10 @@ Hello @netwok
 And again: @netwok
 
 #pagebreak()
-<<<<<<< HEAD
-#bibliography("/assets/bib/works.bib", style: "chicago-notes")
-
---- cite-form ---
-#set page(width: 200pt)
-=======
 #bibliography("/assets/bib/works.bib", style: "chicago-shortened-notes")
 
 --- cite-form render html ---
 #show: it => context { set page(width: 200pt) if target() == "paged"; it }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 Nothing: #cite(<arrgh>, form: none)
 
@@ -21,11 +14,7 @@ Nothing: #cite(<arrgh>, form: none)
 
 #bibliography("/assets/bib/works.bib", style: "apa")
 
-<<<<<<< HEAD
---- cite-group ---
-=======
 --- cite-group render html ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 A#[@netwok@arrgh]B \
 A@netwok@arrgh B \
 A@netwok @arrgh B \
@@ -40,11 +29,7 @@ A#[@netwok @arrgh @quark]B. \
 A @netwok @arrgh @quark B. \
 A @netwok @arrgh @quark, B.
 
-<<<<<<< HEAD
-#set text(0pt)
-=======
 #show bibliography: it => if target() == "html" { it }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #bibliography("/assets/bib/works.bib", style: "american-physics-society")
 
 --- cite-grouping-and-ordering ---
@@ -85,11 +70,7 @@ A @netwok @arrgh @quark, B.
 #context [Citation @distress on page #here().page()]
 
 #show bibliography: none
-<<<<<<< HEAD
-#bibliography("/assets/bib/works.bib", style: "chicago-notes")
-=======
 #bibliography("/assets/bib/works.bib", style: "chicago-shortened-notes")
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- issue-1597-cite-footnote ---
 // Tests that when a citation footnote is pushed to next page, things still
@@ -166,8 +147,6 @@ B #cite(<netwok>) #cite(<arrgh>).
 // Error: 7-17 expected label, found string
 // Hint: 7-17 use `label("%@&#*!\\")` to create a label
 #cite("%@&#*!\\")
-<<<<<<< HEAD
-=======
 
 --- issue-5775-cite-order-rtl ---
 // Test citation order in RTL text.
@@ -267,4 +246,3 @@ Par 6 @arrgh[*p. 9-10*]
 )
 
 #bibliography("/assets/bib/works.bib", style: style)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

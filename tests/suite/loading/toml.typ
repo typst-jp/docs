@@ -37,18 +37,11 @@
 ))
 
 --- toml-invalid ---
-<<<<<<< HEAD
-// Error: 7-30 failed to parse TOML (expected `.`, `=` at line 1 column 16)
-=======
 // Error: "/assets/data/bad.toml" 1:16-2:1 failed to parse TOML (expected `.`, `=`)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #toml("/assets/data/bad.toml")
 
 --- toml-decode-deprecated ---
 // Warning: 15-21 `toml.decode` is deprecated, directly pass bytes to `toml` instead
-<<<<<<< HEAD
-#let _ = toml.decode
-=======
 // Hint: 15-21 it will be removed in Typst 0.15.0
 #let _ = toml.decode
 
@@ -93,4 +86,3 @@
 --- toml-decode-non-table ---
 // Error: 7-17 failed to parse TOML (expected `.`, `=` at 1:2)
 #toml(bytes("3"))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

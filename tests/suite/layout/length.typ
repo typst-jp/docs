@@ -75,13 +75,6 @@
 // Hint: 2-24 or use `length.abs.inches()` instead to ignore its em component
 #(4.5em + 6in).inches()
 
-<<<<<<< HEAD
---- issue-5519-length-base ---
-// Error: 2-9 invalid base-2 prefix
-// Hint: 2-9 numbers with a unit cannot have a base prefix
-#0b100pt
-
-=======
 --- issue-5519-nondecimal-suffix ---
 // Error: 2-9 binary numbers cannot have a suffix
 // Hint: 2-9 try using a decimal number: 4pt
@@ -101,7 +94,6 @@
 #0b0101dag
 
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- number-syntax-edge-cases ---
 // Test numeric syntax edge cases with suffixes and which spans of text are
 // highlighted. Valid items are those not annotated with an error comment since
@@ -114,29 +106,15 @@
 #1.2E+0%
 #1.2e-0%
 #0.0e0deg
-<<<<<<< HEAD
-#5in%
-#0.%
-=======
 #0.%
 // Error: 2-6 invalid number suffix: in%
 #5in%
 // Error: 2-6 invalid number suffix: %in
 #5%in
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Error: 2-8 invalid number suffix: hello
 #1hello
 // Error: 2-7 invalid number suffix: infr
 #1infr
-<<<<<<< HEAD
-// Error: 2-5 invalid number: 2E
-#2EM
-// Error: 2-8 invalid number: .1E-
-#.1E-fr
-// Error: 2-16 invalid number: 0.1E+
-#0.1E+fr123e456
-// Error: 2-11 invalid number: .1e-
-=======
 // Error: 2-5 invalid floating point number: 2E
 // Hint: 2-5 invalid number suffix: M
 #2EM
@@ -147,5 +125,4 @@
 #0.1E+fr123e456
 // Error: 2-11 invalid floating point number: .1e-
 // Hint: 2-11 invalid number suffix: fr123
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #.1e-fr123.456

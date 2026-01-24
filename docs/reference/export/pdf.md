@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 PDFファイルは文書を視覚的に正確に記述することに重点を置いていますが、文書構造に注釈をつける機能も備えています。
 このハイブリッドなアプローチにより、
 PDFファイルは文書交換に適した形式となっています。
@@ -6,37 +5,6 @@ PDFファイルは文書交換に適した形式となっています。
 内容や構造を（少なくともある程度は）抽出することも可能であるためです。
 PNGファイルとは異なり、PDFファイルは特定の解像度に縛られません。
 これによって、品質を損なうことなく任意のサイズでファイルを閲覧することができます。
-
-# PDF規格
-国際標準化機構（ISO）は、基本となるPDF規格に加え、
-特定の用途により適した形でPDFを利用できるようにする各種拡張規格を公開しています。
-TypstはデフォルトでPDF 1.7形式のファイルをエクスポートします。
-Adobe Acrobat 8以降および一般的に使用されているほとんどのPDFビューアーは
-このPDFバージョンとの互換性があります。
-
-## PDF/A
-TypstはオプションでPDF/A準拠ファイルの出力をサポートしています。
-PDF/Aファイルは、現在および将来のPDF用ツールとの最大限の互換性を目的として設計された形式です。
-この形式は実装が困難な機能や独自仕様に依存せず、網羅的なメタデータを含みます。
-これにより、長期的なアーカイブに適した形式となっています。
-
-PDF/A規格には複数のバージョン（ISOにおける用語では _パート_）があり、
-ほとんどのパートにはファイルの適合レベルを示す複数のプロファイルが存在します。
-現在、Typstは以下のPDF/A出力プロファイルをサポートしています。
-
-- PDF/A-2b: ISO 19005-2における基本適合レベル。
-  このPDF/AバージョンはPDF 1.7を基盤としており、自己完結型でアーカイブ可能なPDFファイルを生成します。
-
-- PDF/A-3b: ISO 19005-3における基本適合レベル。
-  このPDF/AバージョンはPDF 1.7を基盤としており、
-  任意の関連ファイルを[添付ファイル]($pdf.embed)として含むことができるアーカイブ可能なPDFファイルを生成します。
-  PDF/A-2bとの違いは、
-  PDF/A非準拠のファイルを埋め込む機能がある点のみです。
-
-PDF/Aと通常のPDFのどちらをエクスポートするかを選択する際には、
-PDF/Aファイルには追加のメタデータが含まれ、
-また一部のリーダーはユーザーによるPDF/Aファイルの修正を阻止することに留意してください。
-一部のTypstの機能は、選択したPDF規格によっては無効化される場合があります。
 
 # PDF形式でのエクスポート
 ## コマンドライン
@@ -46,8 +14,15 @@ PDF形式でエクスポートする際には、以下の設定オプション�
 
 - `--pdf-standard`の後に1つまたは複数のカンマ区切りの規格を指定することで、
   Typstが準拠を強制するPDF規格を指定します。
-  指定可能な規格は`1.7`、`a-2b`、`a-3b`です。
+  指定可能な規格は`1.4`, `1.5`, `1.6`, `1.7`, `2.0`, `a-1b`, `a-1a`, `a-2b`,
+  `a-2u`, `a-2a`, `a-3b`, `a-3u`, `a-3a`, `a-4`, `a-4f`, `a-4e`, `ua-1`です。
   デフォルトではPDF 1.7に準拠したファイルが出力されます。
+
+- You can disable PDF tagging completely with `--no-pdf-tags`. By default, Typst
+  will always write _Tagged PDF_ to provide a baseline level of accessibility.
+  Using this flag, you can turn tags off. This will make your file inaccessible
+  and prevent conformance with accessible conformance levels of PDF/A and all
+  parts of PDF/UA.
 
 - `--pages` の後に、カンマ区切りのページ番号またはダッシュによる番号範囲を指定することで、エクスポートするページを指定します。
   範囲指定は半開区間にすることもできます。
@@ -61,70 +36,22 @@ PDF形式でエクスポートする際には、以下の設定項目を指定�
 
 - Typstが準拠を強制するPDF規格。
   デフォルトではPDF 1.7準拠のファイルが出力されます。
-  指定可能な追加規格は`A-2b`と`A-3b`です。
+  指定可能な追加規格は`A-1b`, `A-1a`, `A-2b`, `A-2u`, `A-2a`, `A-3b`, `A-3u`,
+  `A-3a`, `A-4`, `A-4f`, `A-4e`, `UA-1`です。
 
 - エクスポートするページ。有効なオプションは「All pages（全てのページ）」、「Current page（現在のページ）」、および「Custom ranges（カスタム範囲）」です。
   カスタム範囲は、カンマ区切りの番号リストまたはダッシュで区切られた番号範囲です。
   範囲は半開区間にすることもできます。例：`2,3,7-9,11-`。
 
-# PDF固有の機能
-Typstでは、グローバルな`pdf`モジュールを通じてPDFに特化した機能を提供しています。
-そのモジュールに含まれる定義については、以下を参照してください。
-=======
-PDF files focus on accurately describing documents visually, but also have
-facilities for annotating their structure. This hybrid approach makes
-them a good fit for document exchange: They render exactly the same on every
-device, but also support extraction of a document's content and structure (at
-least to an extent). Unlike PNG files, PDFs are not bound to a specific
-resolution. Hence, you can view them at any size without incurring a loss of
-quality.
+# PDF規格
+国際標準化機構（ISO）は、基本となるPDF規格に加え、
+特定の用途により適した形でPDFを利用できるようにする各種拡張規格を公開しています。
+TypstはデフォルトでPDF 1.7形式のファイルをエクスポートします。
+Adobe Acrobat 8以降および一般的に使用されているほとんどのPDFビューアーは
+このPDFバージョンとの互換性があります。
 
-# Exporting as PDF
-## Command Line
-PDF is Typst's default export format. Running the `compile` or `watch`
-subcommand without specifying a format will create a PDF. When exporting to PDF,
-you have the following configuration options:
-
-- Which [PDF standards](#pdf-standards) Typst should enforce conformance with by
-  specifying `--pdf-standard` followed by one or multiple comma-separated
-  standards. Valid standards are `1.4`, `1.5`, `1.6`, `1.7`, `2.0`, `a-1b`,
-  `a-1a`, `a-2b`, `a-2u`, `a-2a`, `a-3b`, `a-3u`, `a-3a`, `a-4`, `a-4f`, `a-4e`,
-  and `ua-1`. By default, Typst outputs PDF-1.7-compliant files.
-
-- You can disable PDF tagging completely with `--no-pdf-tags`. By default, Typst
-  will always write _Tagged PDF_ to provide a baseline level of accessibility.
-  Using this flag, you can turn tags off. This will make your file inaccessible
-  and prevent conformance with accessible conformance levels of PDF/A and all
-  parts of PDF/UA.
-
-- Which pages to export by specifying `--pages` followed by a comma-separated
-  list of numbers or dash-separated number ranges. Ranges can be half-open.
-  Example: `2,3,7-9,11-`.
-
-## Web App
-Click the quick download button at the top right to export a PDF with default
-settings. For further configuration, click "File" > "Export as" > "PDF" or click
-the downwards-facing arrow next to the quick download button and select "Export
-as PDF". When exporting to PDF, you have the following configuration options:
-
-- Which PDF standards Typst should enforce conformance with. By default, Typst
-  outputs PDF-1.7-compliant files. You can choose the PDF version freely between
-  1.4 and 2.0. Valid additional standards are `A-1b`, `A-1a`, `A-2b`, `A-2u`,
-  `A-2a`, `A-3b`. `A-3u`, `A-3a`, `A-4`, `A-4f`, `A-4e`, and `UA-1`.
-
-- Which pages to export. Valid options are "All pages", "Current page", and
-  "Custom ranges". Custom ranges are a comma-separated list of numbers or
-  dash-separated number ranges. Ranges can be half-open. Example: `2,3,7-9,11-`.
-
-# PDF standards
-The International Standards Organization (ISO) has published the base PDF
-standard and various standards that extend it to make PDFs more suitable for
-specific use-cases. By default, Typst exports PDF 1.7 files. Adobe Acrobat 8 and
-later as well as all other commonly used PDF viewers are compatible with this
-PDF version.
-
-Some features of Typst may not be available depending on the PDF standard you
-choose. You currently cannot choose both PDF/A and PDF/UA at the same time.
+一部のTypstの機能は、選択したPDF規格によっては無効化される場合があります。
+You currently cannot choose both PDF/A and PDF/UA at the same time.
 
 ## PDF versions
 Typst supports five different PDF versions: 1.4, 1.5, 1.6, 1.7 (default), and
@@ -172,7 +99,7 @@ sure you did the following:
 - Do not exclusively use contrast, color, format, or layout to communicate an
   idea. Use text or alternative descriptions instead of or in addition to these
   elements.
-- Wrap all decorative elements without a semantic meaning in [`pdf.artifact`].
+- Wrap all decorative elements without a semantic meaning in [`pdf.artifact`]($pdf.artifact).
 - Do not use images of text. Instead, insert the text directly into your markup.
 
 Typst currently only supports part one (PDF/UA-1) which is based on PDF 1.7
@@ -188,15 +115,14 @@ greater compatibility. The second part of PDF/UA is designed for PDF 2.0, but
 not yet supported by Typst.
 
 ## PDF/A
-Typst optionally supports emitting PDF/A-conformant files. PDF/A files are
-geared towards maximum compatibility with current and future PDF tooling. They
-do not rely on difficult-to-implement or proprietary features and contain
-exhaustive metadata. This makes them suitable for long-term archival.
+TypstはオプションでPDF/A準拠ファイルの出力をサポートしています。
+PDF/Aファイルは、現在および将来のPDF用ツールとの最大限の互換性を目的として設計された形式です。
+この形式は実装が困難な機能や独自仕様に依存せず、網羅的なメタデータを含みます。
+これにより、長期的なアーカイブに適した形式となっています。
 
-The PDF/A Standard has multiple versions (_parts_ in ISO terminology) and most
-parts have multiple profiles that indicate the file's conformance level. You can
-target one part and conformance level at a time. Currently, Typst supports these
-PDF/A output profiles:
+PDF/A規格には複数のバージョン（ISOにおける用語では _パート_）があり、
+ほとんどのパートにはファイルの適合レベルを示す複数のプロファイルが存在します。
+現在、Typstは以下のPDF/A出力プロファイルをサポートしています。
 
 - **PDF/A-1b:** The _basic_ conformance level of ISO 19005-1. This version of
   PDF/A is based on PDF 1.4 (2001) and results in self-contained, archivable PDF
@@ -209,9 +135,8 @@ PDF/A output profiles:
   parts as not all PDF accessibility features are available for PDF 1.4 files.
   Furthermore, all text in the file must consist of known Unicode code points.
 
-- **PDF/A-2b:** The _basic_ conformance level of ISO 19005-2. This version of
-  PDF/A is based on PDF 1.7 (2006) and results in self-contained, archivable PDF
-  files.
+- **PDF/A-2b：** ISO 19005-2における基本適合レベル。
+  このPDF/AバージョンはPDF 1.7を基盤としており、自己完結型でアーカイブ可能なPDFファイルを生成します。
 
 - **PDF/A-2u:** This is the _Unicode-mappable_ conformance level that builds on
   the basic level A-2b. It also adds rules that all text in the document must
@@ -229,11 +154,11 @@ PDF/A output profiles:
   want to build an accessible file, also consider additionally targeting
   PDF/UA-1, which enables more automatic accessibility checks.
 
-- **PDF/A-3b:** The _basic_ conformance level of ISO 19005-3. This version of
-  PDF/A is based on PDF 1.7 (2006) and results in archivable PDF files that can
-  contain arbitrary other related files as [attachments]($pdf.attach). The only
-  difference between it and PDF/A-2b is the capability to attach
-  non-PDF/A-conformant files.
+- **PDF/A-3b：** ISO 19005-3における基本適合レベル。
+  このPDF/AバージョンはPDF 1.7を基盤としており、
+  任意の関連ファイルを[添付ファイル]($pdf.attach)として含むことができるアーカイブ可能なPDFファイルを生成します。
+  PDF/A-2bとの違いは、
+  PDF/A非準拠のファイルを埋め込む機能がある点のみです。
 
 - **PDF/A-3u:** This is the _Unicode-mappable_ conformance level that builds on
   the basic level A-3b. Just like PDF/A-2b, this requires all text to consist
@@ -294,13 +219,14 @@ the end).
 - **If you have chosen part four,** you should choose the basic conformance
   level (PDF/A-4) except when needing to embed files.
 
-When choosing between exporting PDF/A and regular PDF, keep in mind that PDF/A
-files contain additional metadata, and that some readers will prevent the user
-from modifying a PDF/A file.
+PDF/Aと通常のPDFのどちらをエクスポートするかを選択する際には、
+PDF/Aファイルには追加のメタデータが含まれ、
+また一部のリーダーはユーザーによるPDF/Aファイルの修正を阻止することに留意してください。
+一部のTypstの機能は、選択したPDF規格によっては無効化される場合があります。
 
-# PDF-specific functionality
-Typst exposes PDF-specific functionality in the global `pdf` module. See below
-for the definitions it contains.
+# PDF固有の機能
+Typstでは、グローバルな`pdf`モジュールを通じてPDFに特化した機能を提供しています。
+そのモジュールに含まれる定義については、以下を参照してください。
 
 This module contains some functions without a final API. They are designed to
 enhance accessibility for documents with complex tables. This includes
@@ -310,4 +236,3 @@ future Typst release, either through integration into table functions or through
 full removal. You can enable these functions by passing `--features a11y-extras`
 or setting the `TYPST_FEATURES` environment variable to `a11y-extras`. In the
 web app, these features are not available at this time.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

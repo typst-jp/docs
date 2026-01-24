@@ -45,10 +45,7 @@ Lריווח #h(1cm) R
 
 --- bidi-whitespace-reset ---
 // Test whether L1 whitespace resetting destroys stuff.
-<<<<<<< HEAD
-=======
 #set text(font: ("Libertinus Serif", "Noto Sans Arabic"))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 الغالب #h(70pt) ن#" "ة
 
 --- bidi-explicit-dir ---
@@ -91,12 +88,6 @@ Lריווח #h(1cm) R
   columns: (1fr, 1fr),
   lines(6),
   [
-<<<<<<< HEAD
-    #text(lang: "ar")[مجرد نص مؤقت لأغراض العرض التوضيحي. ]
-    #text(lang: "ar")[سلام]
-  ],
-)
-=======
     #text(lang: "ar", font: ("Libertinus Serif", "Noto Sans Arabic"))[مجرد نص مؤقت لأغراض العرض التوضيحي. ]
     #text(lang: "ar")[سلام]
   ],
@@ -105,4 +96,3 @@ Lריווח #h(1cm) R
 --- issue-5276-shaping-consecutive-ltr-with-lang ---
 #let a = text(lang: "ar")[\u{645}]
 #a#a
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

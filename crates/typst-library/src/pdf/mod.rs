@@ -1,18 +1,5 @@
 //! PDF-specific functionality.
 
-<<<<<<< HEAD
-mod embed;
-
-pub use self::embed::*;
-
-use crate::foundations::{Module, Scope};
-
-/// Hook up all `pdf` definitions.
-pub fn module() -> Module {
-    let mut pdf = Scope::deduplicating();
-    pdf.start_category(crate::Category::Pdf);
-    pdf.define_elem::<EmbedElem>();
-=======
 mod accessibility;
 mod attach;
 
@@ -39,6 +26,5 @@ pub fn module(features: &Features) -> Module {
         pdf.define_func::<header_cell>();
         pdf.define_func::<data_cell>();
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     Module::new("pdf", pdf)
 }

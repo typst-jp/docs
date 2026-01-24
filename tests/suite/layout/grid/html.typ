@@ -57,8 +57,6 @@
   [d], [e], [f],
   [g], [h], [i]
 )
-<<<<<<< HEAD
-=======
 
 --- multi-header-table html ---
 #table(
@@ -134,4 +132,3 @@
     [Ending], [Table],
   ),
 )
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

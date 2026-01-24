@@ -99,8 +99,6 @@
   assert(height > 4pt)
   assert(height < 5pt)
 }
-<<<<<<< HEAD
-=======
 
 --- measure-html html ---
 #context {
@@ -108,4 +106,3 @@
   test(width, 36pt)
   test(height, 36pt)
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

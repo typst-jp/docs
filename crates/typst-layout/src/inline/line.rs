@@ -2,15 +2,6 @@ use std::fmt::{self, Debug, Formatter};
 use std::ops::{Deref, DerefMut};
 
 use typst_library::engine::Engine;
-<<<<<<< HEAD
-use typst_library::introspection::{SplitLocator, Tag};
-use typst_library::layout::{Abs, Dir, Em, Fr, Frame, FrameItem, Point};
-use typst_library::model::ParLineMarker;
-use typst_library::text::{Lang, TextElem};
-use typst_utils::Numeric;
-
-use super::*;
-=======
 use typst_library::foundations::Resolve;
 use typst_library::introspection::{SplitLocator, Tag, TagFlags};
 use typst_library::layout::{Abs, Dir, Em, Fr, Frame, FrameItem, Point};
@@ -21,7 +12,6 @@ use typst_utils::Numeric;
 use super::*;
 use crate::inline::linebreak::Trim;
 use crate::inline::shaping::Adjustability;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use crate::modifiers::layout_and_modify;
 
 const SHY: char = '\u{ad}';
@@ -73,12 +63,7 @@ impl Line<'_> {
         // CJK character at line end should not be adjusted.
         if self
             .items
-<<<<<<< HEAD
-            .last()
-            .and_then(Item::text)
-=======
             .trailing_text()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             .map(|s| s.cjk_justifiable_at_last())
             .unwrap_or(false)
         {
@@ -144,11 +129,7 @@ pub fn line<'a>(
     p: &'a Preparation,
     range: Range,
     breakpoint: Breakpoint,
-<<<<<<< HEAD
-    pred: Option<&Line>,
-=======
     pred: Option<&Line<'a>>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 ) -> Line<'a> {
     // The line's full text.
     let full = &p.text[range.clone()];
@@ -169,29 +150,6 @@ pub fn line<'a>(
     };
 
     // Trim the line at the end, if necessary for this breakpoint.
-<<<<<<< HEAD
-    let trim = range.start + breakpoint.trim(full).len();
-
-    // Collect the items for the line.
-    let mut items = collect_items(engine, p, range, trim);
-
-    // Add a hyphen at the line start, if a previous dash should be repeated.
-    if pred.map_or(false, |pred| should_repeat_hyphen(pred, full)) {
-        if let Some(shaped) = items.first_text_mut() {
-            shaped.prepend_hyphen(engine, p.config.fallback);
-        }
-    }
-
-    // Add a hyphen at the line end, if we ended on a soft hyphen.
-    if dash == Some(Dash::Soft) {
-        if let Some(shaped) = items.last_text_mut() {
-            shaped.push_hyphen(engine, p.config.fallback);
-        }
-    }
-
-    // Deal with CJ characters at line boundaries.
-    adjust_cj_at_line_boundaries(p, full, &mut items);
-=======
     let trim = breakpoint.trim(range.start, full);
     let trimmed_range = range.start..trim.layout;
 
@@ -229,7 +187,6 @@ pub fn line<'a>(
 
     // Deal with stretchability of glyphs at the end of the line.
     adjust_glyph_stretch_at_line_end(p, &mut items);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     // Compute the line's width.
     let width = items.iter().map(Item::natural_width).sum();
@@ -246,38 +203,23 @@ pub fn line<'a>(
 /// We do not factor the `trim` directly into the `range` because we still want
 /// to keep non-text items after the trim (e.g. tags).
 fn collect_items<'a>(
-<<<<<<< HEAD
-    engine: &Engine,
-    p: &'a Preparation,
-    range: Range,
-    trim: usize,
-) -> Items<'a> {
-    let mut items = Items::new();
-=======
     items: &mut Items<'a>,
     engine: &Engine,
     p: &'a Preparation,
     range: Range,
     trim: &Trim,
 ) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let mut fallback = None;
 
     // Collect the items for each consecutively ordered run.
     reorder(p, range.clone(), |subrange, rtl| {
         let from = items.len();
-<<<<<<< HEAD
-        collect_range(engine, p, subrange, trim, &mut items, &mut fallback);
-=======
         collect_range(engine, p, subrange, trim, items, &mut fallback);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         if rtl {
             items.reorder(from);
         }
     });
 
-<<<<<<< HEAD
-=======
     // Add fallback text to expand the line height, if necessary.
     if !items.iter().any(|item| matches!(item, Item::Text(_)))
         && let Some(fallback) = fallback
@@ -288,7 +230,6 @@ fn collect_items<'a>(
 
 /// Trims weak spacing from the start and end of the line.
 fn trim_weak_spacing(items: &mut Items) {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     // Trim weak spacing at the start of the line.
     let prefix = items
         .iter()
@@ -299,24 +240,9 @@ fn trim_weak_spacing(items: &mut Items) {
     }
 
     // Trim weak spacing at the end of the line.
-<<<<<<< HEAD
-    while matches!(items.last(), Some(Item::Absolute(_, true))) {
-        items.pop();
-    }
-
-    // Add fallback text to expand the line height, if necessary.
-    if !items.iter().any(|item| matches!(item, Item::Text(_))) {
-        if let Some(fallback) = fallback {
-            items.push(fallback);
-        }
-    }
-
-    items
-=======
     while matches!(items.iter().next_back(), Some(Item::Absolute(_, true))) {
         items.pop();
     }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Calls `f` for the BiDi-reordered ranges of a line.
@@ -359,16 +285,6 @@ fn collect_range<'a>(
     engine: &Engine,
     p: &'a Preparation,
     range: Range,
-<<<<<<< HEAD
-    trim: usize,
-    items: &mut Items<'a>,
-    fallback: &mut Option<ItemEntry<'a>>,
-) {
-    for (subrange, item) in p.slice(range.clone()) {
-        // All non-text items are just kept, they can't be split.
-        let Item::Text(shaped) = item else {
-            items.push(item);
-=======
     trim: &Trim,
     items: &mut Items<'a>,
     fallback: &mut Option<ItemEntry<'a>>,
@@ -379,19 +295,13 @@ fn collect_range<'a>(
         // All non-text items are just kept, they can't be split.
         let Item::Text(shaped) = item else {
             items.push(item, idx);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             continue;
         };
 
         // The intersection range of the item, the subrange, and the line's
         // trimming.
-<<<<<<< HEAD
-        let sliced =
-            range.start.max(subrange.start)..range.end.min(subrange.end).min(trim);
-=======
         let sliced = range.start.max(subrange.start)
             ..range.end.min(subrange.end).min(trim.shaping);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         // Whether the item is split by the line.
         let split = subrange.start < sliced.start || sliced.end < subrange.end;
@@ -401,16 +311,6 @@ fn collect_range<'a>(
             // we can use to force a non-zero line-height when the line doesn't
             // contain any other text.
             *fallback = Some(ItemEntry::from(Item::Text(shaped.empty())));
-<<<<<<< HEAD
-        } else if split {
-            // When the item is split in half, reshape it.
-            let reshaped = shaped.reshape(engine, sliced);
-            items.push(Item::Text(reshaped));
-        } else {
-            // When the item is fully contained, just keep it.
-            items.push(item);
-        }
-=======
             continue;
         }
 
@@ -430,7 +330,6 @@ fn collect_range<'a>(
         }
 
         items.push(item, idx);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
@@ -438,15 +337,11 @@ fn collect_range<'a>(
 ///
 /// See Requirements for Chinese Text Layout, Section 3.1.6.3 Compression of
 /// punctuation marks at line start or line end.
-<<<<<<< HEAD
-fn adjust_cj_at_line_boundaries(p: &Preparation, text: &str, items: &mut Items) {
-=======
 ///
 /// The `range` should only contain regular texts, with linebreaks trimmed.
 fn adjust_cj_at_line_boundaries(p: &Preparation, range: Range, items: &mut Items) {
     let text = &p.text[range];
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     if text.starts_with(BEGIN_PUNCT_PAT)
         || (p.config.cjk_latin_spacing && text.starts_with(is_of_cj_script))
     {
@@ -460,11 +355,6 @@ fn adjust_cj_at_line_boundaries(p: &Preparation, range: Range, items: &mut Items
     }
 }
 
-<<<<<<< HEAD
-/// Add spacing around punctuation marks for CJ glyphs at the line start.
-fn adjust_cj_at_line_start(p: &Preparation, items: &mut Items) {
-    let Some(shaped) = items.first_text_mut() else { return };
-=======
 /// Remove stretchability from the last glyph in the line to avoid trailing
 /// space after a glyph due to glyph-level justification.
 fn adjust_glyph_stretch_at_line_end(p: &Preparation, items: &mut Items) {
@@ -484,7 +374,6 @@ fn adjust_glyph_stretch_at_line_end(p: &Preparation, items: &mut Items) {
 /// Add spacing around punctuation marks for CJ glyphs at the line start.
 fn adjust_cj_at_line_start(p: &Preparation, items: &mut Items) {
     let Some(shaped) = items.leading_text_mut() else { return };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let Some(glyph) = shaped.glyphs.first() else { return };
 
     if glyph.is_cjk_right_aligned_punctuation() {
@@ -493,10 +382,6 @@ fn adjust_cj_at_line_start(p: &Preparation, items: &mut Items) {
         let glyph = shaped.glyphs.to_mut().first_mut().unwrap();
         let shrink = glyph.shrinkability().0;
         glyph.shrink_left(shrink);
-<<<<<<< HEAD
-        shaped.width -= shrink.at(shaped.size);
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     } else if p.config.cjk_latin_spacing
         && glyph.is_cj_script()
         && glyph.x_offset > Em::zero()
@@ -508,20 +393,12 @@ fn adjust_cj_at_line_start(p: &Preparation, items: &mut Items) {
         glyph.x_advance -= shrink;
         glyph.x_offset = Em::zero();
         glyph.adjustability.shrinkability.0 = Em::zero();
-<<<<<<< HEAD
-        shaped.width -= shrink.at(shaped.size);
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 }
 
 /// Add spacing around punctuation marks for CJ glyphs at the line end.
 fn adjust_cj_at_line_end(p: &Preparation, items: &mut Items) {
-<<<<<<< HEAD
-    let Some(shaped) = items.last_text_mut() else { return };
-=======
     let Some(shaped) = items.trailing_text_mut() else { return };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     let Some(glyph) = shaped.glyphs.last() else { return };
 
     // Deal with CJK punctuation at line ends.
@@ -533,10 +410,6 @@ fn adjust_cj_at_line_end(p: &Preparation, items: &mut Items) {
         let shrink = glyph.shrinkability().1;
         let punct = shaped.glyphs.to_mut().last_mut().unwrap();
         punct.shrink_right(shrink);
-<<<<<<< HEAD
-        shaped.width -= shrink.at(shaped.size);
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     } else if p.config.cjk_latin_spacing
         && glyph.is_cj_script()
         && (glyph.x_advance - glyph.x_offset) > Em::one()
@@ -547,25 +420,6 @@ fn adjust_cj_at_line_end(p: &Preparation, items: &mut Items) {
         let glyph = shaped.glyphs.to_mut().last_mut().unwrap();
         glyph.x_advance -= shrink;
         glyph.adjustability.shrinkability.1 = Em::zero();
-<<<<<<< HEAD
-        shaped.width -= shrink.at(shaped.size);
-    }
-}
-
-/// Whether a hyphen should be inserted at the start of the next line.
-fn should_repeat_hyphen(pred_line: &Line, text: &str) -> bool {
-    // If the predecessor line does not end with a `Dash::Hard`, we shall
-    // not place a hyphen at the start of the next line.
-    if pred_line.dash != Some(Dash::Hard) {
-        return false;
-    }
-
-    // The hyphen should repeat only in the languages that require that feature.
-    // For more information see the discussion at https://github.com/typst/typst/issues/3235
-    let Some(Item::Text(shaped)) = pred_line.items.last() else { return false };
-
-    match shaped.lang {
-=======
     }
 }
 
@@ -573,7 +427,6 @@ fn should_repeat_hyphen(pred_line: &Line, text: &str) -> bool {
 /// language, when the following text is the given one.
 fn should_repeat_hyphen(lang: Lang, following_text: &str) -> bool {
     match lang {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         // - Lower Sorbian: see https://dolnoserbski.de/ortografija/psawidla/K3
         // - Czech: see https://prirucka.ujc.cas.cz/?id=164
         // - Croatian: see http://pravopis.hr/pravilo/spojnica/68/
@@ -592,21 +445,12 @@ fn should_repeat_hyphen(lang: Lang, following_text: &str) -> bool {
         //
         // See § 4.1.1.1.2.e on the "Ortografía de la lengua española"
         // https://www.rae.es/ortografía/como-signo-de-división-de-palabras-a-final-de-línea
-<<<<<<< HEAD
-        Lang::SPANISH => text.chars().next().map_or(false, |c| !c.is_uppercase()),
-=======
         Lang::SPANISH => following_text.chars().next().is_some_and(|c| !c.is_uppercase()),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         _ => false,
     }
 }
 
-<<<<<<< HEAD
-/// Apply the current baseline shift to a frame.
-pub fn apply_baseline_shift(frame: &mut Frame, styles: StyleChain) {
-    frame.translate(Point::with_y(TextElem::baseline_in(styles)));
-=======
 /// Apply the current baseline shift and italic compensation to a frame.
 pub fn apply_shift<'a>(
     world: &Tracked<'a, dyn World + 'a>,
@@ -632,7 +476,6 @@ pub fn apply_shift<'a>(
         compensation += font_metrics.horizontal_offset.resolve(styles);
     }
     frame.translate(Point::new(compensation, baseline));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Commit to a line and build its frame.
@@ -656,32 +499,6 @@ pub fn commit(
     }
 
     // Handle hanging punctuation to the left.
-<<<<<<< HEAD
-    if let Some(Item::Text(text)) = line.items.first() {
-        if let Some(glyph) = text.glyphs.first() {
-            if !text.dir.is_positive()
-                && TextElem::overhang_in(text.styles)
-                && (line.items.len() > 1 || text.glyphs.len() > 1)
-            {
-                let amount = overhang(glyph.c) * glyph.x_advance.at(text.size);
-                offset -= amount;
-                remaining += amount;
-            }
-        }
-    }
-
-    // Handle hanging punctuation to the right.
-    if let Some(Item::Text(text)) = line.items.last() {
-        if let Some(glyph) = text.glyphs.last() {
-            if text.dir.is_positive()
-                && TextElem::overhang_in(text.styles)
-                && (line.items.len() > 1 || text.glyphs.len() > 1)
-            {
-                let amount = overhang(glyph.c) * glyph.x_advance.at(text.size);
-                remaining += amount;
-            }
-        }
-=======
     if let Some(text) = line.items.leading_text()
         && let Some(glyph) = text.glyphs.first()
         && !text.dir.is_positive()
@@ -702,7 +519,6 @@ pub fn commit(
     {
         let amount = overhang(glyph.c) * glyph.x_advance.at(glyph.size);
         remaining += amount;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     // Determine how much additional space is needed. The justification_ratio is
@@ -740,18 +556,6 @@ pub fn commit(
 
     // Build the frames and determine the height and baseline.
     let mut frames = vec![];
-<<<<<<< HEAD
-    for item in line.items.iter() {
-        let mut push = |offset: &mut Abs, frame: Frame| {
-            let width = frame.width();
-            top.set_max(frame.baseline());
-            bottom.set_max(frame.size().y - frame.baseline());
-            frames.push((*offset, frame));
-            *offset += width;
-        };
-
-        match item {
-=======
     for &(idx, ref item) in line.items.indexed_iter() {
         let mut push = |offset: &mut Abs, frame: Frame, idx: LogicalIndex| {
             let width = frame.width();
@@ -762,7 +566,6 @@ pub fn commit(
         };
 
         match &**item {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             Item::Absolute(v, _) => {
                 offset += *v;
             }
@@ -773,13 +576,8 @@ pub fn commit(
                     let mut frame = layout_and_modify(*styles, |styles| {
                         layout_box(elem, engine, loc.relayout(), styles, region)
                     })?;
-<<<<<<< HEAD
-                    apply_baseline_shift(&mut frame, *styles);
-                    push(&mut offset, frame);
-=======
                     apply_shift(&engine.world, &mut frame, *styles);
                     push(&mut offset, frame, idx);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                 } else {
                     offset += amount;
                 }
@@ -791,26 +589,15 @@ pub fn commit(
                     justification_ratio,
                     extra_justification,
                 );
-<<<<<<< HEAD
-                push(&mut offset, frame);
-            }
-            Item::Frame(frame) => {
-                push(&mut offset, frame.clone());
-=======
                 push(&mut offset, frame, idx);
             }
             Item::Frame(frame) => {
                 push(&mut offset, frame.clone(), idx);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
             Item::Tag(tag) => {
                 let mut frame = Frame::soft(Size::zero());
                 frame.push(Point::zero(), FrameItem::Tag((*tag).clone()));
-<<<<<<< HEAD
-                frames.push((offset, frame));
-=======
                 frames.push((offset, frame, idx));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             }
             Item::Skip(_) => {}
         }
@@ -829,10 +616,6 @@ pub fn commit(
         add_par_line_marker(&mut output, marker, engine, locator, top);
     }
 
-<<<<<<< HEAD
-    // Construct the line's frame.
-    for (offset, frame) in frames {
-=======
     // Ensure that the final frame's items are in logical order rather than in
     // visual order. This is important because it affects the order of elements
     // during introspection and thus things like counters.
@@ -840,7 +623,6 @@ pub fn commit(
 
     // Construct the line's frame.
     for (offset, frame, _) in frames {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let x = offset + p.config.align.position(remaining);
         let y = top - frame.baseline();
         output.push_frame(Point::new(x, y), frame);
@@ -881,14 +663,9 @@ fn add_par_line_marker(
     // line's general baseline. However, the line number will still need to
     // manually adjust its own 'y' position based on its own baseline.
     let pos = Point::with_y(top);
-<<<<<<< HEAD
-    output.push(pos, FrameItem::Tag(Tag::Start(marker.pack())));
-    output.push(pos, FrameItem::Tag(Tag::End(loc, key)));
-=======
     let flags = TagFlags { introspectable: false, tagged: false };
     output.push(pos, FrameItem::Tag(Tag::Start(marker.pack(), flags)));
     output.push(pos, FrameItem::Tag(Tag::End(loc, key, flags)));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// How much a character should hang into the end margin.
@@ -899,11 +676,7 @@ fn overhang(c: char) -> f64 {
     match c {
         // Dashes.
         '–' | '—' => 0.2,
-<<<<<<< HEAD
-        '-' => 0.55,
-=======
         '-' | '\u{ad}' => 0.55,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
         // Punctuation.
         '.' | ',' => 0.8,
@@ -917,11 +690,7 @@ fn overhang(c: char) -> f64 {
 }
 
 /// A collection of owned or borrowed inline items.
-<<<<<<< HEAD
-pub struct Items<'a>(Vec<ItemEntry<'a>>);
-=======
 pub struct Items<'a>(Vec<(LogicalIndex, ItemEntry<'a>)>);
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 impl<'a> Items<'a> {
     /// Create empty items.
@@ -930,35 +699,6 @@ impl<'a> Items<'a> {
     }
 
     /// Push a new item.
-<<<<<<< HEAD
-    pub fn push(&mut self, entry: impl Into<ItemEntry<'a>>) {
-        self.0.push(entry.into());
-    }
-
-    /// Iterate over the items
-    pub fn iter(&self) -> impl Iterator<Item = &Item<'a>> {
-        self.0.iter().map(|item| &**item)
-    }
-
-    /// Access the first item.
-    pub fn first(&self) -> Option<&Item<'a>> {
-        self.0.first().map(|item| &**item)
-    }
-
-    /// Access the last item.
-    pub fn last(&self) -> Option<&Item<'a>> {
-        self.0.last().map(|item| &**item)
-    }
-
-    /// Access the first item mutably, if it is text.
-    pub fn first_text_mut(&mut self) -> Option<&mut ShapedText<'a>> {
-        self.0.first_mut()?.text_mut()
-    }
-
-    /// Access the last item mutably, if it is text.
-    pub fn last_text_mut(&mut self) -> Option<&mut ShapedText<'a>> {
-        self.0.last_mut()?.text_mut()
-=======
     pub fn push(&mut self, entry: impl Into<ItemEntry<'a>>, idx: LogicalIndex) {
         self.0.push((idx, entry.into()));
     }
@@ -997,7 +737,6 @@ impl<'a> Items<'a> {
     /// Access the last item (skipping tags) mutably, if it is text.
     pub fn trailing_text_mut(&mut self) -> Option<&mut ShapedText<'a>> {
         self.0.iter_mut().rev().find(|(_, item)| !item.is_tag())?.1.text_mut()
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Reorder the items starting at the given index to RTL.
@@ -1006,19 +745,8 @@ impl<'a> Items<'a> {
     }
 }
 
-<<<<<<< HEAD
-impl<'a> FromIterator<ItemEntry<'a>> for Items<'a> {
-    fn from_iter<I: IntoIterator<Item = ItemEntry<'a>>>(iter: I) -> Self {
-        Self(iter.into_iter().collect())
-    }
-}
-
-impl<'a> Deref for Items<'a> {
-    type Target = Vec<ItemEntry<'a>>;
-=======
 impl<'a> Deref for Items<'a> {
     type Target = Vec<(LogicalIndex, ItemEntry<'a>)>;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
     fn deref(&self) -> &Self::Target {
         &self.0
@@ -1037,9 +765,6 @@ impl Debug for Items<'_> {
     }
 }
 
-<<<<<<< HEAD
-/// A reference to or a boxed item.
-=======
 /// We use indices to remember the logical (as opposed to visual) order of
 /// items. During line building, the items are stored in visual (BiDi-reordered)
 /// order. When committing to a line and building its frame, we sort by logical
@@ -1073,7 +798,6 @@ impl LogicalIndex {
 /// This is conceptually similar to a [`Cow<'a, Item<'a>>`][std::borrow::Cow],
 /// but we box owned items since an [`Item`] is much bigger than
 /// a box.
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 pub enum ItemEntry<'a> {
     Ref(&'a Item<'a>),
     Box(Box<Item<'a>>),

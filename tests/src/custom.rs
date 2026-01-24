@@ -1,17 +1,10 @@
 use std::fmt::Write;
 
-<<<<<<< HEAD
-use typst::foundations::Smart;
-use typst::layout::PagedDocument;
-use typst::model::DocumentInfo;
-use typst::World;
-=======
 use typst::World;
 use typst::foundations::Smart;
 use typst::introspection::{Location, Tag};
 use typst::layout::{Frame, FrameItem, PagedDocument};
 use typst::model::DocumentInfo;
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 use crate::collect::Test;
 use crate::world::TestWorld;
@@ -44,8 +37,6 @@ pub fn check(test: &Test, world: &TestWorld, doc: Option<&PagedDocument>) -> Str
             test_eq!(sink, info.author, ["Changed"]);
             test_eq!(sink, info.title.as_deref(), Some("Alternative"));
         }
-<<<<<<< HEAD
-=======
         "tags-grouping" | "tags-textual" => {
             if let Some(doc) = doc {
                 if let Err(message) = check_balanced(doc) {
@@ -55,7 +46,6 @@ pub fn check(test: &Test, world: &TestWorld, doc: Option<&PagedDocument>) -> Str
                 sink.push_str("missing document");
             }
         }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         _ => {}
     }
     sink
@@ -65,8 +55,6 @@ pub fn check(test: &Test, world: &TestWorld, doc: Option<&PagedDocument>) -> Str
 fn info(doc: Option<&PagedDocument>) -> DocumentInfo {
     doc.map(|doc| doc.info.clone()).unwrap_or_default()
 }
-<<<<<<< HEAD
-=======
 
 /// Naive check for whether tags are balanced in the document.
 ///
@@ -104,4 +92,3 @@ fn check_balanced(doc: &PagedDocument) -> Result<(), &'static str> {
     let mut stack = Vec::new();
     doc.pages.iter().try_for_each(|page| visit(&mut stack, &page.frame))
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

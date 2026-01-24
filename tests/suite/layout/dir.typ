@@ -1,7 +1,3 @@
-<<<<<<< HEAD
---- dir-axis ---
-// Test direction methods.
-=======
 --- dir-from ---
 #test(direction.from(left), ltr)
 #test(direction.from(right), rtl)
@@ -23,21 +19,17 @@
 #direction.to(center)
 
 --- dir-axis ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 #test(ltr.axis(), "horizontal")
 #test(rtl.axis(), "horizontal")
 #test(ttb.axis(), "vertical")
 #test(btt.axis(), "vertical")
 
-<<<<<<< HEAD
-=======
 --- dir-sign ---
 #test(ltr.sign(), 1)
 #test(rtl.sign(), -1)
 #test(ttb.sign(), 1)
 #test(btt.sign(), -1)
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- dir-start ---
 #test(ltr.start(), left)
 #test(rtl.start(), right)

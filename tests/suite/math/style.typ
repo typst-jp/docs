@@ -12,8 +12,6 @@ $A, italic(A), upright(A), bold(A), bold(upright(A)), \
  bb("hello") + bold(cal("world")), \
  mono("SQRT")(x) wreath mono(123 + 456)$
 
-<<<<<<< HEAD
-=======
 --- math-style-fallback ---
 // Test how math styles fallback.
 $upright(frak(bold(alpha))) = upright(bold(alpha)) \
@@ -23,7 +21,6 @@ bold(upright(planck)) != planck \
 bb(e) != italic(bb(e)) \
 serif(sans(A)) != serif(A)$
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- math-style-dotless ---
 // Test styling dotless i and j.
 $ dotless.i dotless.j,
@@ -33,11 +30,7 @@ $ dotless.i dotless.j,
   bb(dotless.i) bb(dotless.j),
   cal(dotless.i) cal(dotless.j),
   frak(dotless.i) frak(dotless.j),
-<<<<<<< HEAD
-  mono(dotless.i) mono(dotless.j), 
-=======
   mono(dotless.i) mono(dotless.j),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
   bold(frak(dotless.i)) upright(sans(dotless.j)),
   italic(bb(dotless.i)) frak(sans(dotless.j)) $
 
@@ -54,9 +47,6 @@ $bb(Gamma) , bb(gamma), bb(Pi), bb(pi), bb(sum)$
 
 --- math-style-hebrew-exceptions ---
 // Test hebrew exceptions.
-<<<<<<< HEAD
-$aleph, beth, gimel, daleth$
-=======
 $aleph, beth, gimel, daleth$ \
 $upright(aleph), upright(beth), upright(gimel), upright(daleth)$
 
@@ -66,7 +56,6 @@ $cal(A) scr(A) bold(cal(O)) scr(bold(O))$
 
 #show math.equation: set text(font: "Noto Sans Math")
 $scr(E) cal(E) bold(scr(Y)) cal(bold(Y))$
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- issue-3650-italic-equation ---
 _abc $sin(x) "abc"$_ \

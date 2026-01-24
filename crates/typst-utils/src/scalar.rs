@@ -28,11 +28,7 @@ impl Scalar {
     ///
     /// If the value is NaN, then it is set to `0.0` in the result.
     pub const fn new(x: f64) -> Self {
-<<<<<<< HEAD
-        Self(if is_nan(x) { 0.0 } else { x })
-=======
         Self(if x.is_nan() { 0.0 } else { x })
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     }
 
     /// Gets the value of this [`Scalar`].
@@ -41,20 +37,6 @@ impl Scalar {
     }
 }
 
-<<<<<<< HEAD
-// We have to detect NaNs this way since `f64::is_nan` isn’t const
-// on stable yet:
-// ([tracking issue](https://github.com/rust-lang/rust/issues/57241))
-#[allow(clippy::unusual_byte_groupings)]
-const fn is_nan(x: f64) -> bool {
-    // Safety: all bit patterns are valid for u64, and f64 has no padding bits.
-    // We cannot use `f64::to_bits` because it is not const.
-    let x_bits = unsafe { std::mem::transmute::<f64, u64>(x) };
-    (x_bits << 1 >> (64 - 12 + 1)) == 0b0_111_1111_1111 && (x_bits << 12) != 0
-}
-
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 impl Numeric for Scalar {
     fn zero() -> Self {
         Self(0.0)

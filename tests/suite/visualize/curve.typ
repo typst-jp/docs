@@ -130,8 +130,6 @@
   down, up, down, up, down,
 )
 
-<<<<<<< HEAD
-=======
 --- curve-stroke-gradient-sharp ---
 #set page(width: auto)
 #let down = curve.line((40pt, 40pt), relative: true)
@@ -142,7 +140,6 @@
   down, up, down, up, down,
 )
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- curve-fill-rule ---
 #stack(
   dir: ltr,

@@ -1,23 +1,7 @@
-<<<<<<< HEAD
-use std::collections::HashMap;
-=======
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 use std::hash::{Hash, Hasher};
 use std::sync::{Arc, Mutex};
 
 use comemo::Tracked;
-<<<<<<< HEAD
-use ecow::EcoString;
-use siphasher::sip128::{Hasher128, SipHasher13};
-
-use crate::diag::{format_xml_like_error, StrResult};
-use crate::foundations::Bytes;
-use crate::layout::Axes;
-use crate::text::{
-    Font, FontBook, FontFlags, FontStretch, FontStyle, FontVariant, FontWeight,
-};
-use crate::World;
-=======
 use ecow::{EcoString, eco_format};
 use rustc_hash::FxHashMap;
 use siphasher::sip128::{Hasher128, SipHasher13};
@@ -34,7 +18,6 @@ use crate::visualize::image::{ImageFormat, determine_format_from_path};
 use crate::text::{
     Font, FontBook, FontFlags, FontStretch, FontStyle, FontVariant, FontWeight,
 };
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 /// A decoded SVG.
 #[derive(Clone, Hash)]
@@ -52,28 +35,12 @@ impl SvgImage {
     /// Decode an SVG image without fonts.
     #[comemo::memoize]
     #[typst_macros::time(name = "load svg")]
-<<<<<<< HEAD
-    pub fn new(data: Bytes) -> StrResult<SvgImage> {
-=======
     pub fn new(data: Bytes) -> LoadResult<SvgImage> {
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let tree =
             usvg::Tree::from_data(&data, &base_options()).map_err(format_usvg_error)?;
         Ok(Self(Arc::new(Repr { data, size: tree_size(&tree), font_hash: 0, tree })))
     }
 
-<<<<<<< HEAD
-    /// Decode an SVG image with access to fonts.
-    #[comemo::memoize]
-    #[typst_macros::time(name = "load svg")]
-    pub fn with_fonts(
-        data: Bytes,
-        world: Tracked<dyn World + '_>,
-        families: &[&str],
-    ) -> StrResult<SvgImage> {
-        let book = world.book();
-        let resolver = Mutex::new(FontResolver::new(world, book, families));
-=======
     /// Decode an SVG image with access to fonts and linked images.
     #[comemo::memoize]
     #[typst_macros::time(name = "load svg")]
@@ -86,18 +53,11 @@ impl SvgImage {
         let book = world.book();
         let font_resolver = Mutex::new(FontResolver::new(world, book, families));
         let image_resolver = Mutex::new(ImageResolver::new(world, svg_file));
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         let tree = usvg::Tree::from_data(
             &data,
             &usvg::Options {
                 font_resolver: usvg::FontResolver {
                     select_font: Box::new(|font, db| {
-<<<<<<< HEAD
-                        resolver.lock().unwrap().select_font(font, db)
-                    }),
-                    select_fallback: Box::new(|c, exclude_fonts, db| {
-                        resolver.lock().unwrap().select_fallback(c, exclude_fonts, db)
-=======
                         font_resolver.lock().unwrap().select_font(font, db)
                     }),
                     select_fallback: Box::new(|c, exclude_fonts, db| {
@@ -112,21 +72,16 @@ impl SvgImage {
                     resolve_data: usvg::ImageHrefResolver::default_data_resolver(),
                     resolve_string: Box::new(|href, _opts| {
                         image_resolver.lock().unwrap().load(href)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
                     }),
                 },
                 ..base_options()
             },
         )
         .map_err(format_usvg_error)?;
-<<<<<<< HEAD
-        let font_hash = resolver.into_inner().unwrap().finish();
-=======
         if let Some(err) = image_resolver.into_inner().unwrap().error {
             return Err(err);
         }
         let font_hash = font_resolver.into_inner().unwrap().finish();
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
         Ok(Self(Arc::new(Repr { data, size: tree_size(&tree), font_hash, tree })))
     }
 
@@ -190,18 +145,6 @@ fn tree_size(tree: &usvg::Tree) -> Axes<f64> {
 }
 
 /// Format the user-facing SVG decoding error message.
-<<<<<<< HEAD
-fn format_usvg_error(error: usvg::Error) -> EcoString {
-    match error {
-        usvg::Error::NotAnUtf8Str => "file is not valid utf-8".into(),
-        usvg::Error::MalformedGZip => "file is not compressed correctly".into(),
-        usvg::Error::ElementsLimitReached => "file is too large".into(),
-        usvg::Error::InvalidSize => {
-            "failed to parse SVG (width, height, or viewbox is invalid)".into()
-        }
-        usvg::Error::ParsingFailed(error) => format_xml_like_error("SVG", error),
-    }
-=======
 fn format_usvg_error(error: usvg::Error) -> LoadError {
     let error = match error {
         usvg::Error::NotAnUtf8Str => "file is not valid utf-8",
@@ -211,7 +154,6 @@ fn format_usvg_error(error: usvg::Error) -> LoadError {
         usvg::Error::ParsingFailed(error) => return format_xml_like_error("SVG", error),
     };
     LoadError::new(ReportPos::None, "failed to parse SVG", error)
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 }
 
 /// Provides Typst's fonts to usvg.
@@ -223,15 +165,9 @@ struct FontResolver<'a> {
     /// The active list of font families at the location of the SVG.
     families: &'a [&'a str],
     /// A mapping from Typst font indices to fontdb IDs.
-<<<<<<< HEAD
-    to_id: HashMap<usize, Option<fontdb::ID>>,
-    /// The reverse mapping.
-    from_id: HashMap<fontdb::ID, Font>,
-=======
     to_id: FxHashMap<usize, Option<fontdb::ID>>,
     /// The reverse mapping.
     from_id: FxHashMap<fontdb::ID, Font>,
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
     /// Accumulates a hash of all used fonts.
     hasher: SipHasher13,
 }
@@ -247,13 +183,8 @@ impl<'a> FontResolver<'a> {
             book,
             world,
             families,
-<<<<<<< HEAD
-            to_id: HashMap::new(),
-            from_id: HashMap::new(),
-=======
             to_id: FxHashMap::default(),
             from_id: FxHashMap::default(),
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
             hasher: SipHasher13::new(),
         }
     }
@@ -377,8 +308,6 @@ impl FontResolver<'_> {
         Some(id)
     }
 }
-<<<<<<< HEAD
-=======
 
 /// Resolves linked images in an SVG.
 /// (Linked SVG images from an SVG are not supported yet.)
@@ -496,4 +425,3 @@ impl<'a> ImageResolver<'a> {
         }
     }
 }
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534

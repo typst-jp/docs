@@ -1,10 +1,6 @@
 // Test hyperlinking.
 
-<<<<<<< HEAD
---- link-basic render html ---
-=======
 --- link-basic render html pdftags ---
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 // Link syntax.
 https://example.com/
 
@@ -70,8 +66,6 @@ My cool #box(move(dx: 0.7cm, dy: 0.7cm, rotate(10deg, scale(200%, mylink))))
 Text <hey>
 #link(<hey>)[Go to text.]
 
-<<<<<<< HEAD
-=======
 --- link-html-id-attach html ---
 // Tests how IDs and, if necessary, spans, are added to the DOM to support
 // links.
@@ -185,7 +179,6 @@ See #metadata(none) <t8>
 #html.frame[@intro]
 = Introduction <intro>
 
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 --- link-to-label-missing ---
 // Error: 2-20 label `<hey>` does not exist in the document
 #link(<hey>)[Nope.]
@@ -196,17 +189,12 @@ Text <hey>
 // Error: 2-20 label `<hey>` occurs multiple times in the document
 #link(<hey>)[Nope.]
 
-<<<<<<< HEAD
---- link-empty-block ---
-#link("", block(height: 10pt, width: 100%))
-=======
 --- link-empty-url ---
 // Error: 7-9 URL must not be empty
 #link("")[Empty]
 
 --- link-empty-block ---
 #link("https://example.com", block(height: 10pt, width: 100%))
->>>>>>> dd1e6e94f73db6a257a5ac34a6320e00410a2534
 
 --- issue-758-link-repeat ---
 #let url = "https://typst.org/"
