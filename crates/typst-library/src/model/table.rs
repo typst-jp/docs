@@ -21,41 +21,30 @@ use crate::model::Figurable;
 use crate::text::LocalName;
 use crate::visualize::{Paint, Stroke};
 
-/// A table of items.
+/// 複数の項目からなる表。
 ///
-/// Tables are used to arrange content in cells. Cells can contain arbitrary
-/// content, including multiple paragraphs and are specified in row-major order.
-/// For a hands-on explanation of all the ways you can use and customize tables
-/// in Typst, check out the [table guide]($guides/table-guide).
+/// 表はコンテンツをセルに配置するために用います。 
+/// セルは複数の段落を含む任意の要素を含めることができ、その配置は行優先順序で指定します。
+/// Typstにおける表の利用とカスタマイズについて、全ての手法の実践的な説明は[表ガイド]($guides/table-guide)をご覧ください。
 ///
-/// Because tables are just grids with different defaults for some cell
-/// properties (notably `stroke` and `inset`), refer to the [grid
-/// documentation]($grid) for more information on how to size the table tracks
-/// and specify the cell appearance properties.
+/// 表は単にいくつかのセルのプロパティ（特に`stroke`と`inset`）のデフォルト値が異なるグリッドであるため、
+/// 表の各行および列の大きさの指定、およびセルの外見に関するプロパティの指定についての詳細な情報は[gridのドキュメント]($grid)を参照してください。
 ///
-/// If you are unsure whether you should be using a table or a grid, consider
-/// whether the content you are arranging semantically belongs together as a set
-/// of related data points or similar or whether you are just want to enhance
-/// your presentation by arranging unrelated content in a grid. In the former
-/// case, a table is the right choice, while in the latter case, a grid is more
-/// appropriate. Furthermore, Typst will annotate its output in the future such
-/// that screenreaders will announce content in `table` as tabular while a
-/// grid's content will be announced no different than multiple content blocks
-/// in the document flow.
+/// 表とグリッドのどちらを使用すべきかわからない場合は、配置しようとしているコンテンツが1つの関連したデータの集合に属するのか、あるいは無関係なコンテンツを整列することで文書の見た目を整えようとしているだけなのかを検討してください。
+/// 前者の場合は表を使用するのが適切な選択ですが、後者の場合はグリッドの方が適しています。
+/// 加えてTypstは将来的に表には注釈をつけることを予定しています。
+/// これにより、スクリーンリーダーは`table`に含まれるコンテンツを表形式として読み上げますが、グリッドの場合は文書内に順に配置した複数のコンテンツブロックと同じように発音されます。
 ///
-/// Note that, to override a particular cell's properties or apply show rules on
-/// table cells, you can use the [`table.cell`]($table.cell) element. See its
-/// documentation for more information.
+/// また、表中の特定のセルについてプロパティを上書きしたりshowルールを適用したい場合、[`table.cell`]($table.cell)要素を使用できます。
+/// 詳細については当該ドキュメントを参照してください。
 ///
-/// Although the `table` and the `grid` share most properties, set and show
-/// rules on one of them do not affect the other.
+/// `table`と`grid`はほとんどのプロパティを共有していますが、一方に対するsetルールおよびshowルールの指定がもう一方に影響することはありません。
 ///
-/// To give a table a caption and make it [referenceable]($ref), put it into a
-/// [figure].
+/// 表を[`figure`]($figure)で囲むことで、表にキャプションを設けたり [_参照可能な要素_]($ref) にしたりすることができます。
 ///
-/// # Example
+/// # 例
 ///
-/// The example below demonstrates some of the most common table options.
+/// 以下の例では最も一般的ないくつか表のオプションを示します。
 /// ```example
 /// #table(
 ///   columns: (1fr, auto, auto),
@@ -77,8 +66,7 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// Much like with grids, you can use [`table.cell`]($table.cell) to customize
-/// the appearance and the position of each cell.
+/// グリッドを用いる場合と同様に、[`table.cell`]($table.cell)を使用することでそれぞれのセルの外見と配置をカスタマイズできます。
 ///
 /// ```example
 /// >>> #set page(width: auto)
@@ -123,24 +111,21 @@ use crate::visualize::{Paint, Stroke};
 /// ```
 #[elem(scope, Show, LocalName, Figurable)]
 pub struct TableElem {
-    /// The column sizes. See the [grid documentation]($grid) for more
-    /// information on track sizing.
+    /// 列のサイズ。表の行および列のサイズ指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[borrowed]
     pub columns: TrackSizings,
 
-    /// The row sizes. See the [grid documentation]($grid) for more information
-    /// on track sizing.
+    /// 行のサイズ。表の行および列のサイズ指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[borrowed]
     pub rows: TrackSizings,
 
-    /// The gaps between rows and columns. This is a shorthand for setting
-    /// `column-gutter` and `row-gutter` to the same value. See the [grid
-    /// documentation]($grid) for more information on gutters.
+    /// 各行および列間の間隔。これは`column-gutter`および`row-gutter`を同一の値に設定する場合の省略記法です。
+    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[external]
     pub gutter: TrackSizings,
 
-    /// The gaps between columns. Takes precedence over `gutter`. See the
-    /// [grid documentation]($grid) for more information on gutters.
+    /// 各列間の間隔。`gutter`での指定よりも優先されます。
+    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[borrowed]
     #[parse(
         let gutter = args.named("gutter")?;
@@ -148,17 +133,17 @@ pub struct TableElem {
     )]
     pub column_gutter: TrackSizings,
 
-    /// The gaps between rows. Takes precedence over `gutter`. See the
-    /// [grid documentation]($grid) for more information on gutters.
+    /// 各列間の間隔。`gutter`での指定よりも優先されます。
+    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[parse(args.named("row-gutter")?.or_else(|| gutter.clone()))]
     #[borrowed]
     pub row_gutter: TrackSizings,
 
-    /// How to fill the cells.
+    /// どのようにセルを着色するか。
     ///
-    /// This can be a color or a function that returns a color. The function
-    /// receives the cells' column and row indices, starting from zero. This can
-    /// be used to implement striped tables.
+    /// 色または色を返す関数を指定できます。
+    /// 関数を指定した場合、そのセルの列および行の0で始まる番号が引数に渡されます。
+    /// これによってストライプ柄の表を作成できます。
     ///
     /// ```example
     /// #table(
@@ -179,12 +164,11 @@ pub struct TableElem {
     #[borrowed]
     pub fill: Celled<Option<Paint>>,
 
-    /// How to align the cells' content.
+    /// セル内のコンテンツをどのように配置するか。
     ///
-    /// This can either be a single alignment, an array of alignments
-    /// (corresponding to each column) or a function that returns an alignment.
-    /// The function receives the cells' column and row indices, starting from
-    /// zero. If set to `{auto}`, the outer alignment is used.
+    /// 単一の`alignment`、それぞれの列についての指定となる`alignment`の配列、`alignment`を返す関数のいずれかを指定できます。
+    /// 関数を指定した場合、そのセルの列および行の0で始まる番号が引数に渡されます。
+    /// `{auto}`が指定された場合、表の外部の配置設定を使用します。
     ///
     /// ```example
     /// #table(
@@ -197,24 +181,19 @@ pub struct TableElem {
     #[borrowed]
     pub align: Celled<Smart<Alignment>>,
 
-    /// How to [stroke] the cells.
+    /// セルの枠線をどのように描画するか。
     ///
-    /// Strokes can be disabled by setting this to `{none}`.
+    /// 枠線を非表示にする場合、これを`{none}`に指定します。
     ///
-    /// If it is necessary to place lines which can cross spacing between cells
-    /// produced by the `gutter` option, or to override the stroke between
-    /// multiple specific cells, consider specifying one or more of
-    /// [`table.hline`]($table.hline) and [`table.vline`]($table.vline)
-    /// alongside your table cells.
+    /// `gutter`引数の指定によるセル間の間隔をまたいだ枠線が必要な場合、および複数の特定セル間の枠線の表示を上書きする場合は、そのセルについて[`table.hline`]($table.hline)と[`table.vline`]($table.vline)またはその両方を指定することを検討してください。
     ///
-    /// See the [grid documentation]($grid.stroke) for more information on
-    /// strokes.
+    /// 枠線指定についての詳細は[gridのドキュメント]($grid.stroke)を参照してください。
     #[resolve]
     #[fold]
     #[default(Celled::Value(Sides::splat(Some(Some(Arc::new(Stroke::default()))))))]
     pub stroke: Celled<Sides<Option<Option<Arc<Stroke>>>>>,
 
-    /// How much to pad the cells' content.
+    /// セル内部のコンテンツまでの隙間をどの程度設けるか。
     ///
     /// ```example
     /// #table(
@@ -237,9 +216,7 @@ pub struct TableElem {
     #[default(Celled::Value(Sides::splat(Some(Abs::pt(5.0).into()))))]
     pub inset: Celled<Sides<Option<Rel<Length>>>>,
 
-    /// The contents of the table cells, plus any extra table lines specified
-    /// with the [`table.hline`]($table.hline) and
-    /// [`table.vline`]($table.vline) elements.
+    /// 表の各セルのコンテンツ、および[`table.hline`]($table.hline)要素と[`table.vline`]($table.vline)要素による追加の行。
     #[variadic]
     pub children: Vec<TableChild>,
 }
@@ -442,15 +419,12 @@ impl TryFrom<Content> for TableItem {
     }
 }
 
-/// A repeatable table header.
+/// 繰り返し可能な表のヘッダー。
 ///
-/// You should wrap your tables' heading rows in this function even if you do not
-/// plan to wrap your table across pages because Typst will use this function to
-/// attach accessibility metadata to tables in the future and ensure universal
-/// access to your document.
+/// たとえその表が複数ページにわたるつもりではないとしても、表のヘッダーとなる行はこの関数によってラップされるべきです。
+/// これによりTypstは将来的に表にアクセシビリティのためのメタデータを埋め込んだり、その文書における普遍的なアクセスを提供できるようになります。
 ///
-/// You can use the `repeat` parameter to control whether your table's header
-/// will be repeated across pages.
+/// `repeat`引数を用いてその表のヘッダーがページをまたいで繰り返されるかを制御できます。
 ///
 /// ```example
 /// #set page(height: 11.5em)
@@ -488,45 +462,39 @@ impl TryFrom<Content> for TableItem {
 /// ```
 #[elem(name = "header", title = "Table Header")]
 pub struct TableHeader {
-    /// Whether this header should be repeated across pages.
+    /// このヘッダーがページをまたいで繰り返されるべきかどうか。
     #[default(true)]
     pub repeat: bool,
 
-    /// The cells and lines within the header.
+    /// ヘッダー内の各セルと各行。
     #[variadic]
     pub children: Vec<TableItem>,
 }
 
-/// A repeatable table footer.
+/// 繰り返し可能な表のフッター。
 ///
-/// Just like the [`table.header`]($table.header) element, the footer can repeat
-/// itself on every page of the table. This is useful for improving legibility
-/// by adding the column labels in both the header and footer of a large table,
-/// totals, or other information that should be visible on every page.
+/// [`table.header`]($table.header)要素と同様に、フッターは表内で各ページごとに繰り返すことができます。
+/// これによって大きい表においてヘッダーとフッターの両方に各列のラベルを追加したり、合計などの各ページごとに表示されるべき情報を付加したりすることができ、表を読みやすくすることができます。
 ///
-/// No other table cells may be placed after the footer.
+/// いかなるセルもフッターよりも後には配置されません。
 #[elem(name = "footer", title = "Table Footer")]
 pub struct TableFooter {
-    /// Whether this footer should be repeated across pages.
+    /// このフッターがページをまたいで繰り返されるべきかどうか。
     #[default(true)]
     pub repeat: bool,
 
-    /// The cells and lines within the footer.
+    /// フッター内の各セルと各行。
     #[variadic]
     pub children: Vec<TableItem>,
 }
 
-/// A horizontal line in the table.
+/// 表内の水平罫線。
 ///
-/// Overrides any per-cell stroke, including stroke specified through the
-/// table's `stroke` field. Can cross spacing between cells created through the
-/// table's [`column-gutter`]($table.column-gutter) option.
+/// 表の`stroke`フィールドによる指定を含むセルごとの枠線設定を上書きします。
+/// 表の[`column-gutter`]($table.column-gutter)オプションによるセル間の間隔をまたぐことができます。
 ///
-/// Use this function instead of the table's `stroke` field if you want to
-/// manually place a horizontal line at a specific position in a single table.
-/// Consider using [table's `stroke`]($table.stroke) field or [`table.cell`'s
-/// `stroke`]($table.cell.stroke) field instead if the line you want to place is
-/// part of all your tables' designs.
+/// 単一の表内の特定の位置に手動で罫線を配置したい場合は、表の`stroke`フィールドの代わりにこの関数を使用してください。
+/// もし配置したい罫線が文書内の全ての表のデザインの一部である場合は[表の`stroke`]($table.stroke)フィールドか[`table.cell`の`stroke`]($table.cell.stroke)フィールドを使用してください。
 ///
 /// ```example
 /// #set table.hline(stroke: .6pt)
@@ -550,94 +518,80 @@ pub struct TableFooter {
 /// ```
 #[elem(name = "hline", title = "Table Horizontal Line")]
 pub struct TableHLine {
-    /// The row above which the horizontal line is placed (zero-indexed).
-    /// Functions identically to the `y` field in [`grid.hline`]($grid.hline.y).
+    /// この罫線が配置される行。（最初の行は0）
+    /// [`grid.hline`]($grid.hline.y)の`y`フィールドと同様に機能します。
     pub y: Smart<usize>,
 
-    /// The column at which the horizontal line starts (zero-indexed, inclusive).
+    /// この罫線が開始される行。（最初の行は0、指定した行を含みます）
     pub start: usize,
 
-    /// The column before which the horizontal line ends (zero-indexed,
-    /// exclusive).
+    /// この罫線が終了する行。（最初の行は0、指定した行を含みません）
     pub end: Option<NonZeroUsize>,
 
-    /// The line's stroke.
+    /// この罫線のstroke。
     ///
-    /// Specifying `{none}` removes any lines previously placed across this
-    /// line's range, including hlines or per-cell stroke below it.
+    /// `{none}`が指定された場合、他の水平罫線とセルごとのstroke設定を含むこの罫線の範囲にまたがって配置されたいかなる罫線も削除されます。
     #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
 
-    /// The position at which the line is placed, given its row (`y`) - either
-    /// `{top}` to draw above it or `{bottom}` to draw below it.
-    ///
-    /// This setting is only relevant when row gutter is enabled (and
-    /// shouldn't be used otherwise - prefer just increasing the `y` field by
-    /// one instead), since then the position below a row becomes different
-    /// from the position above the next row due to the spacing between both.
+    /// 指定した行（`y`）に基づいてこの罫線が配置される位置。
+    /// 指定した行の上部に描画する場合は`{top}`、下部に描画する場合は`{bottom}`を指定します。
+    /// 
+    /// `row-gutter`オプションによる行間隔の設定が無効になっている場合、ある行の下部とその次の行の上部が示す位置は一致します。
+    /// このため、この設定は`row-gutter`オプションが設定されている場合にのみ意味があります。
+    /// （そうでない場合は使用するべきではありません。代わりに`y`フィールドを1大きく指定してください）
     #[default(OuterVAlignment::Top)]
     pub position: OuterVAlignment,
 }
 
-/// A vertical line in the table. See the docs for [`grid.vline`]($grid.vline)
-/// for more information regarding how to use this element's fields.
+/// 表内の垂直罫線。
+/// この要素のフィールドの使用法についての詳細は[`grid.vline`]($grid.vline)のドキュメントを参照してください。
 ///
-/// Overrides any per-cell stroke, including stroke specified through the
-/// table's `stroke` field. Can cross spacing between cells created through the
-/// table's [`row-gutter`]($table.row-gutter) option.
+/// 表の`stroke`フィールドによる指定を含むセルごとの枠線設定を上書きします。
+/// 表の[`row-gutter`]($table.row-gutter)オプションによるセル間の間隔をまたぐことができます。
 ///
-/// Similar to [`table.hline`]($table.hline), use this function if you want to
-/// manually place a vertical line at a specific position in a single table and
-/// use the [table's `stroke`]($table.stroke) field or [`table.cell`'s
-/// `stroke`]($table.cell.stroke) field instead if the line you want to place is
-/// part of all your tables' designs.
+/// [`table.hline`]($table.hline)と同様、単一の表内の特定の位置に手動で罫線を配置したい場合は、表の`stroke`フィールドの代わりにこの関数を使用してください。
+/// もし配置したい罫線が文書内の全ての表のデザインの一部である場合は[表の`stroke`]($table.stroke)フィールドか[`table.cell`の`stroke`]($table.cell.stroke)フィールドを使用してください。
 #[elem(name = "vline", title = "Table Vertical Line")]
 pub struct TableVLine {
-    /// The column before which the horizontal line is placed (zero-indexed).
-    /// Functions identically to the `x` field in [`grid.vline`]($grid.vline).
+    /// この罫線が配置される列。（最初の列は0）
+    ///
+    /// [`grid.vline`]($grid.vline.x)の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
-    /// The row at which the vertical line starts (zero-indexed, inclusive).
+    /// この罫線が開始される列。（最初の列は0、指定した列を含みます）
     pub start: usize,
 
-    /// The row on top of which the vertical line ends (zero-indexed,
-    /// exclusive).
+    /// この罫線が終了する列。（最初の列は0、指定した列を含みません）
     pub end: Option<NonZeroUsize>,
 
-    /// The line's stroke.
+    /// この罫線のstroke。
     ///
-    /// Specifying `{none}` removes any lines previously placed across this
-    /// line's range, including vlines or per-cell stroke below it.
+    /// `{none}`が指定された場合、他の垂直罫線とセルごとのstroke設定を含むこの罫線の範囲にまたがって配置されたいかなる罫線も削除されます。
     #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
 
-    /// The position at which the line is placed, given its column (`x`) -
-    /// either `{start}` to draw before it or `{end}` to draw after it.
+    /// 指定した列（`x`）に基づいてこの罫線が配置される位置。
+    /// 指定した列の前に描画する場合は`{start}`、後に描画する場合は`{end}`を指定します。
     ///
-    /// The values `{left}` and `{right}` are also accepted, but discouraged as
-    /// they cause your table to be inconsistent between left-to-right and
-    /// right-to-left documents.
-    ///
-    /// This setting is only relevant when column gutter is enabled (and
-    /// shouldn't be used otherwise - prefer just increasing the `x` field by
-    /// one instead), since then the position after a column becomes different
-    /// from the position before the next column due to the spacing between
-    /// both.
+    /// 値`{left}`と`{right}`を使用することもできます。
+    /// ただし左から右への向きのドキュメントと右から左への向きのドキュメント間で一貫性を損なうため推奨されていません。
+    /// 
+    /// `column-gutter`オプションによる列間隔の設定が無効になっている場合、ある列の後とその次の列の前が示す位置は一致します。
+    /// このため、この設定は`column-gutter`オプションが設定されている場合にのみ関係します。
+    /// （そうでない場合は使用するべきではありません。代わりに`x`フィールドを1大きく指定してください）
     #[default(OuterHAlignment::Start)]
     pub position: OuterHAlignment,
 }
 
-/// A cell in the table. Use this to position a cell manually or to apply
-/// styling. To do the latter, you can either use the function to override the
-/// properties for a particular cell, or use it in show rules to apply certain
-/// styles to multiple cells at once.
+/// 表中のセル。セルを手動で配置する場合やスタイル設定をする場合に使用します。
+/// スタイル設定をする場合、この関数を用いて特定のセルのプロパティを上書きするかshowルールによって特定のスタイルを複数のセルに一度に指定することができます。
 ///
-/// Perhaps the most important use case of `{table.cell}` is to make a cell span
-/// multiple columns and/or rows with the `colspan` and `rowspan` fields.
+/// おそらく`{table.cell}`の最も重要な利用用途は`colspan`と`rowspan`フィールドを用いて複数の行または列をまたいだセルを作成することです。
 ///
 /// ```example
 /// >>> #set page(width: auto)
@@ -668,6 +622,7 @@ pub struct TableVLine {
 /// )
 /// ```
 ///
+/// 例えば、表中の単一のセルについてfill、alignementあるいはinsetを上書きすることができます。
 /// For example, you can override the fill, alignment or inset for a single
 /// cell:
 ///
@@ -698,9 +653,8 @@ pub struct TableVLine {
 /// )
 /// ```
 ///
-/// You may also apply a show rule on `table.cell` to style all cells at once.
-/// Combined with selectors, this allows you to apply styles based on a cell's
-/// position:
+/// 全てのセルに対して同時にスタイルを設定するために使用することもできます。
+/// セレクターと組み合わせることで、セルの位置に基づいたスタイル指定も可能です。
 ///
 /// ```example
 /// #show table.cell.where(x: 0): strong
@@ -716,44 +670,44 @@ pub struct TableVLine {
 /// ```
 #[elem(name = "cell", title = "Table Cell", Show)]
 pub struct TableCell {
-    /// The cell's body.
+    /// セル内の要素。
     #[required]
     pub body: Content,
 
-    /// The cell's column (zero-indexed).
-    /// Functions identically to the `x` field in [`grid.cell`]($grid.cell).
+    /// セルの列の位置。（最初の要素は0）
+    ///
+    /// [`grid.cell`]($grid.cell)の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
-    /// The cell's row (zero-indexed).
-    /// Functions identically to the `y` field in [`grid.cell`]($grid.cell).
+    /// セルの行の位置。（最初の要素は0）
+    ///
+    /// [`grid.cell`]($grid.cell)の`y`フィールドと同様に機能します。
     pub y: Smart<usize>,
 
-    /// The amount of columns spanned by this cell.
+    /// このセルがまたぐ列の数。
     #[default(NonZeroUsize::ONE)]
     pub colspan: NonZeroUsize,
 
-    /// The amount of rows spanned by this cell.
+    /// このセルがまたぐ行の数。
     #[default(NonZeroUsize::ONE)]
     pub rowspan: NonZeroUsize,
 
-    /// The cell's [fill]($table.fill) override.
+    /// そのセルの[fill]($table.fill)を上書きします。
     pub fill: Smart<Option<Paint>>,
 
-    /// The cell's [alignment]($table.align) override.
+    /// そのセルの[alignment]($table.align)を上書きします。
     pub align: Smart<Alignment>,
 
-    /// The cell's [inset]($table.inset) override.
+    /// そのセルの[inset]($table.inset)を上書きします。
     pub inset: Smart<Sides<Option<Rel<Length>>>>,
 
-    /// The cell's [stroke]($table.stroke) override.
+    /// そのセルの[stroke]($table.stroke)を上書きします。
     #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Arc<Stroke>>>>,
 
-    /// Whether rows spanned by this cell can be placed in different pages.
-    /// When equal to `{auto}`, a cell spanning only fixed-size rows is
-    /// unbreakable, while a cell spanning at least one `{auto}`-sized row is
-    /// breakable.
+    /// このセルがまたがる行が別のページに配置できるかどうか。
+    /// 値が`{auto}`の場合、固定サイズの行のみをまたぐセルは改ページされず、少なくとも1つの`{auto}`でサイズ指定された行をまたいでいるセルは改ページできます。
     pub breakable: Smart<bool>,
 }
 
