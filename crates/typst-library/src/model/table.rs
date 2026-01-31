@@ -44,7 +44,7 @@ use crate::visualize::{Paint, Stroke};
 ///
 /// # 例
 ///
-/// 以下の例では最も一般的ないくつか表のオプションを示します。
+/// 以下の例では最も一般的ないくつかの表のオプションを示します。
 /// ```example
 /// #table(
 ///   columns: (1fr, auto, auto),
