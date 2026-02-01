@@ -623,7 +623,6 @@ pub struct TableVLine {
 /// ```
 ///
 /// 例えば、表中の単一のセルについてfill、alignementあるいはinsetを上書きすることができます。
-/// For example, you can override the fill, alignment or inset for a single
 /// cell:
 ///
 /// ```example
