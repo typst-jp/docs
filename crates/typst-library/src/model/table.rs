@@ -119,12 +119,12 @@ pub struct TableElem {
     #[borrowed]
     pub rows: TrackSizings,
 
-    /// 各行および列間の間隔。これは`column-gutter`および`row-gutter`を同一の値に設定する場合の省略記法です。
+    /// 行間と列間の間隔。これは`column-gutter`および`row-gutter`を同一の値に設定する場合の省略記法です。
     /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[external]
     pub gutter: TrackSizings,
 
-    /// 各列間の間隔。`gutter`での指定よりも優先されます。
+    /// 列間の間隔。`gutter`での指定よりも優先されます。
     /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[borrowed]
     #[parse(
@@ -133,7 +133,7 @@ pub struct TableElem {
     )]
     pub column_gutter: TrackSizings,
 
-    /// 各列間の間隔。`gutter`での指定よりも優先されます。
+    /// 列間の間隔。`gutter`での指定よりも優先されます。
     /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[parse(args.named("row-gutter")?.or_else(|| gutter.clone()))]
     #[borrowed]
@@ -164,7 +164,7 @@ pub struct TableElem {
     #[borrowed]
     pub fill: Celled<Option<Paint>>,
 
-    /// セル内のコンテンツをどのように配置するか。
+    /// セルのコンテンツをどう配置するか。
     ///
     /// 単一の`alignment`、それぞれの列についての指定となる`alignment`の配列、`alignment`を返す関数のいずれかを指定できます。
     /// 関数を指定した場合、そのセルの列および行の0で始まる番号が引数に渡されます。
@@ -193,7 +193,7 @@ pub struct TableElem {
     #[default(Celled::Value(Sides::splat(Some(Some(Arc::new(Stroke::default()))))))]
     pub stroke: Celled<Sides<Option<Option<Arc<Stroke>>>>>,
 
-    /// セル内部のコンテンツまでの隙間をどの程度設けるか。
+    /// セル内のコンテンツに対するパディングの大きさ。
     ///
     /// ```example
     /// #table(
@@ -216,7 +216,7 @@ pub struct TableElem {
     #[default(Celled::Value(Sides::splat(Some(Abs::pt(5.0).into()))))]
     pub inset: Celled<Sides<Option<Rel<Length>>>>,
 
-    /// 表の各セルのコンテンツ、および[`table.hline`]($table.hline)要素と[`table.vline`]($table.vline)要素による追加の行。
+    /// 表の各セルのコンテンツと、[`table.hline`]($table.hline)要素および[`table.vline`]($table.vline)要素による追加の罫線。
     #[variadic]
     pub children: Vec<TableChild>,
 }
@@ -462,11 +462,11 @@ impl TryFrom<Content> for TableItem {
 /// ```
 #[elem(name = "header", title = "Table Header")]
 pub struct TableHeader {
-    /// このヘッダーがページをまたいで繰り返されるべきかどうか。
+    /// ページごとにヘッダーを繰り返すかどうか。
     #[default(true)]
     pub repeat: bool,
 
-    /// ヘッダー内の各セルと各行。
+    /// ヘッダー内のセルと罫線。
     #[variadic]
     pub children: Vec<TableItem>,
 }
@@ -479,18 +479,18 @@ pub struct TableHeader {
 /// いかなるセルもフッターよりも後には配置されません。
 #[elem(name = "footer", title = "Table Footer")]
 pub struct TableFooter {
-    /// このフッターがページをまたいで繰り返されるべきかどうか。
+    /// ページごとにフッターを繰り返すどうか。
     #[default(true)]
     pub repeat: bool,
 
-    /// フッター内の各セルと各行。
+    /// フッター内のセルと罫線。
     #[variadic]
     pub children: Vec<TableItem>,
 }
 
 /// 表内の水平罫線。
 ///
-/// 表の`stroke`フィールドによる指定を含むセルごとの枠線設定を上書きします。
+/// 表の`stroke`フィールドによる指定を含めてセルごとに設定されたストロークを上書きします。
 /// 表の[`column-gutter`]($table.column-gutter)オプションによるセル間の間隔をまたぐことができます。
 ///
 /// 単一の表内の特定の位置に手動で罫線を配置したい場合は、表の`stroke`フィールドの代わりにこの関数を使用してください。
@@ -528,9 +528,10 @@ pub struct TableHLine {
     /// この罫線が終了する行。（最初の行は0、指定した行を含みません）
     pub end: Option<NonZeroUsize>,
 
-    /// この罫線のstroke。
+    /// この罫線のストローク。
     ///
-    /// `{none}`が指定された場合、他の水平罫線とセルごとのstroke設定を含むこの罫線の範囲にまたがって配置されたいかなる罫線も削除されます。
+    /// `{none}`を指定すると、この罫線の範囲に含まれているこれまで配置された全ての罫線が削除されます。
+    /// これには他の`hline`による水平罫線やセルごとのストロークが含まれます。
     #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
@@ -549,7 +550,7 @@ pub struct TableHLine {
 /// 表内の垂直罫線。
 /// この要素のフィールドの使用法についての詳細は[`grid.vline`]($grid.vline)のドキュメントを参照してください。
 ///
-/// 表の`stroke`フィールドによる指定を含むセルごとの枠線設定を上書きします。
+/// 表の`stroke`フィールドによる指定を含めてセルごとに設定されたストロークを上書きします。
 /// 表の[`row-gutter`]($table.row-gutter)オプションによるセル間の間隔をまたぐことができます。
 ///
 /// [`table.hline`]($table.hline)と同様、単一の表内の特定の位置に手動で罫線を配置したい場合は、表の`stroke`フィールドの代わりにこの関数を使用してください。
@@ -567,9 +568,10 @@ pub struct TableVLine {
     /// この罫線が終了する列。（最初の列は0、指定した列を含みません）
     pub end: Option<NonZeroUsize>,
 
-    /// この罫線のstroke。
+    /// この罫線のストローク。
     ///
-    /// `{none}`が指定された場合、他の垂直罫線とセルごとのstroke設定を含むこの罫線の範囲にまたがって配置されたいかなる罫線も削除されます。
+    /// `{none}`を指定すると、この罫線の範囲に含まれているこれまで配置された全ての罫線が削除されます。
+    /// これには他の`vline`による垂直罫線やセルごとのストロークが含まれます。
     #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
@@ -588,7 +590,7 @@ pub struct TableVLine {
     pub position: OuterHAlignment,
 }
 
-/// 表中のセル。セルを手動で配置する場合やスタイル設定をする場合に使用します。
+/// 表のセル。セルを手動で配置する場合やスタイル設定をする場合に使用します。
 /// スタイル設定をする場合、この関数を用いて特定のセルのプロパティを上書きするかshowルールによって特定のスタイルを複数のセルに一度に指定することができます。
 ///
 /// おそらく`{table.cell}`の最も重要な利用用途は`colspan`と`rowspan`フィールドを用いて複数の行または列をまたいだセルを作成することです。
@@ -673,12 +675,12 @@ pub struct TableCell {
     #[required]
     pub body: Content,
 
-    /// セルの列の位置。（最初の要素は0）
+    /// セルの列。（最初の列は0）
     ///
     /// [`grid.cell`]($grid.cell)の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
-    /// セルの行の位置。（最初の要素は0）
+    /// セルの行。（最初の行は0）
     ///
     /// [`grid.cell`]($grid.cell)の`y`フィールドと同様に機能します。
     pub y: Smart<usize>,
@@ -705,8 +707,8 @@ pub struct TableCell {
     #[fold]
     pub stroke: Sides<Option<Option<Arc<Stroke>>>>,
 
-    /// このセルがまたがる行が別のページに配置できるかどうか。
-    /// 値が`{auto}`の場合、固定サイズの行のみをまたぐセルは改ページされず、少なくとも1つの`{auto}`でサイズ指定された行をまたいでいるセルは改ページできます。
+    /// このセルがまたぐ行が複数ページにまたがって配置できるかどうか。
+    /// `{auto}`に設定された場合、固定サイズの行のみを跨ぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
     pub breakable: Smart<bool>,
 }
 
