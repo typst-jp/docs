@@ -352,7 +352,7 @@ impl TryFrom<Content> for TableChild {
     }
 }
 
-/// A table item, which is the basic unit of table specification.
+/// 表設定の基本単位となる表の項目。
 #[derive(Debug, PartialEq, Clone, Hash)]
 pub enum TableItem {
     HLine(Packed<TableHLine>),
