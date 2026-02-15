@@ -27,3 +27,15 @@ description: |
 | numbering | 番号付け | [見出し]($heading/#parameters-numbering)や[図表]($figure/#parameters-numbering)、[番号付きリスト]($enum/#parameters-numbering)などの番号の書式を定義する方法 |
 | location | ロケーション | [ロケーション]($location)を参照 |
 | locatable | ロケータブル | [ロケータブル要素]($location/#locatable)を参照 |
+| gutter | 罫間 | [罫間]($table.gutter)を参照 |
+| context | コンテキスト | [コンテキスト]($context)を参照 |
+| metadata | メタデータ | [メタデータ]($metadata)を参照 |
+| visualization | 視覚化 | カテゴリ名 |
+| curve | 曲線 | [曲線]($curve)を参照 |
+| introspection | 内省 | カテゴリ名 |
+| symbol | 記号 | [記号]($symbol)を参照 |
+| query | 検索 | [検索]($query)を参照 |
+| deprecation | 廃止予定 | カテゴリ名 |
+| Command Line Interface | コマンドラインインターフェース | カテゴリ名 |
+| HTML export | HTMLエクスポート | カテゴリ名 |
+| contributors | 貢献者 | カテゴリ名 |
