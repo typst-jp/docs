@@ -2,7 +2,7 @@ use comemo::Tracked;
 
 use crate::diag::HintedStrResult;
 use crate::engine::Engine;
-use crate::foundations::{func, Array, Context, LocatableSelector, Value};
+use crate::foundations::{Array, Context, LocatableSelector, Value, func};
 
 /// 文書中の要素の検索。
 ///
@@ -108,6 +108,8 @@ use crate::foundations::{func, Array, Context, LocatableSelector, Value};
 /// ]
 /// ```
 ///
+/// ## 特定のフィールドの取得
+///
 /// 結果となる要素の特定の1つのフィールドにのみ興味があることが多いです。
 /// `metadata`要素の場合、`value`フィールドが興味の対象です。
 /// `--field`引数を用いてこのフィールドのみを抽出できます。
@@ -123,6 +125,12 @@ use crate::foundations::{func, Array, Context, LocatableSelector, Value};
 /// $ typst query example.typ "<note>" --field value --one
 /// "This is a note"
 /// ```
+///
+/// ## Querying for a specific export target
+///
+/// In case you need to query a document when exporting for a specific target,
+/// you can use the `--target` argument. Valid values are `paged`, and `html`
+/// (if the [`html`] feature is enabled).
 #[func(contextual)]
 pub fn query(
     engine: &mut Engine,

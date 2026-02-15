@@ -3,28 +3,52 @@ use typst_syntax::Spanned;
 
 use crate::diag::{At, SourceResult};
 use crate::engine::Engine;
-use crate::foundations::{func, scope, Bytes, Value};
+use crate::foundations::{Bytes, Value, func, scope};
 use crate::loading::{DataSource, Load};
 
 /// CBORファイルから構造化データを読み込む。
 ///
 /// 読み込むファイルには有効なCBORによるシリアル化データが含まれていなければなりません。
-/// マッピングはTypstの辞書に変換され、シーケンスはTypstの配列に変換されます。
-/// 文字列やブール値はTypstの対応する型に変換され、
-/// ヌル値（`null`、`~`、または空の``）は`{none}`に、
-/// 数値は整数値であれば整数型に、
-/// そうでなければ浮動小数点数型に変換されます。
+/// CBORの値は、[下の表](#conversion)に示す対応するTypstの値に変換されます。
 ///
-/// 2<sup>63</sup>-1より大きな整数は浮動小数点数に変換されるため、
-/// 近似値になる可能性があることに留意してください。
+/// この関数は辞書、配列、あるいはCBORファイルの内容に応じた別のCBORデータ型を返します。
+///
+/// # 変換の詳細 { #conversion }
+///
+/// | CBORの値 | Typstへの変換先 |
+/// | -------- | -------------- |
+/// | integer  | [`int`] または [`float`] |
+/// | bytes    | [`bytes`]      |
+/// | float    | [`float`]      |
+/// | text     | [`str`]        |
+/// | bool     | [`bool`]       |
+/// | null     | `{none}`       |
+/// | array    | [`array`]      |
+/// | map      | [`dictionary`] |
+///
+/// | Typstの値                            | CBORへの変換先                       |
+/// | ------------------------------------- | ------------------------------------ |
+/// | CBORから変換できる型                  | 対応するCBOR値                       |
+/// | [`symbol`]                            | text                                 |
+/// | [`content`]                           | contentを記述するマップ              |
+/// | その他の型（[`length`]など）          | [`repr`]経由の文字列                 |
+///
+/// ## 注意事項
+/// - 2<sup>63</sup>-1より大きい（または-2<sup>63</sup>より小さい）整数は
+///   浮動小数点数に変換されるため、近似値になる可能性があります。
+///
+/// - CBORタグはサポートされず、エラーになります。
+///
+/// - `repr`関数は[デバッグ目的のみ]($repr/#debugging-only)で、
+///   出力の安定性はTypstのバージョン間で保証されません。
 #[func(scope, title = "CBOR")]
 pub fn cbor(
     engine: &mut Engine,
-    /// CBORファイルの[パス]($syntax/#paths)、または生のCBORバイト列。
+    /// CBORファイルへの[パス]($syntax/#paths)、または生のCBORバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
-    let data = source.load(engine.world)?;
-    ciborium::from_reader(data.as_slice())
+    let loaded = source.load(engine.world)?;
+    ciborium::from_reader(loaded.data.as_slice())
         .map_err(|err| eco_format!("failed to parse CBOR ({err})"))
         .at(source.span)
 }
@@ -33,7 +57,10 @@ pub fn cbor(
 impl cbor {
     /// CBORバイト列から構造化データを読み込む。
     #[func(title = "Decode CBOR")]
-    #[deprecated = "`cbor.decode`は非推奨です。代わりにバイト列を直接`cbor`に渡してください。"]
+    #[deprecated(
+        message = "`cbor.decode`は非推奨です。代わりにバイト列を直接`cbor`に渡してください。",
+        until = "0.15.0"
+    )]
     pub fn decode(
         engine: &mut Engine,
         /// CBORデータ。

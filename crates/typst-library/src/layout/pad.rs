@@ -1,7 +1,5 @@
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{elem, Content, NativeElement, Packed, Show, StyleChain};
-use crate::layout::{BlockElem, Length, Rel};
+use crate::foundations::{Content, elem};
+use crate::layout::{Length, Rel};
 
 /// コンテンツの周囲に空白を追加。
 ///
@@ -15,7 +13,7 @@ use crate::layout::{BlockElem, Length, Rel};
 /// _Typing speeds can be
 ///  measured in words per minute._
 /// ```
-#[elem(title = "Padding", Show)]
+#[elem(title = "Padding")]
 pub struct PadElem {
     /// 左辺のパディング。
     #[parse(
@@ -53,12 +51,4 @@ pub struct PadElem {
     /// パディングを追加するコンテンツ。
     #[required]
     pub body: Content,
-}
-
-impl Show for Packed<PadElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::multi_layouter(self.clone(), engine.routines.layout_pad)
-            .pack()
-            .spanned(self.span()))
-    }
 }

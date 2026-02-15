@@ -1,19 +1,12 @@
 use std::str::FromStr;
 
-use ecow::eco_format;
 use smallvec::SmallVec;
 
-use crate::diag::{bail, SourceResult};
-use crate::engine::Engine;
-use crate::foundations::{
-    cast, elem, scope, Array, Content, NativeElement, Packed, Show, Smart, StyleChain,
-    Styles, TargetElem,
-};
-use crate::html::{attr, tag, HtmlElem};
-use crate::layout::{Alignment, BlockElem, Em, HAlignment, Length, VAlignment, VElem};
-use crate::model::{
-    ListItemLike, ListLike, Numbering, NumberingPattern, ParElem, ParbreakElem,
-};
+use crate::diag::bail;
+use crate::foundations::{Array, Content, Packed, Smart, Styles, cast, elem, scope};
+use crate::introspection::{Locatable, Tagged};
+use crate::layout::{Alignment, Em, HAlignment, Length, VAlignment};
+use crate::model::{ListItemLike, ListLike, Numbering, NumberingPattern};
 
 /// 番号付きリスト。
 ///
@@ -71,7 +64,7 @@ use crate::model::{
 /// リストの項目には、複数の段落やその他のブロックレベルのコンテンツを含めることができます。
 /// 項目のマーカーよりもインデントが深いコンテンツは全て、
 /// その項目の一部となります。
-#[elem(scope, title = "Numbered List", Show)]
+#[elem(scope, title = "Numbered List", Locatable, Tagged)]
 pub struct EnumElem {
     /// リストのデフォルトの[spacing]($enum.spacing)を定義します。
     /// これが`{false}`の場合、
@@ -117,7 +110,6 @@ pub struct EnumElem {
     /// + Numbering!
     /// ```
     #[default(Numbering::Pattern(NumberingPattern::from_str("1.").unwrap()))]
-    #[borrowed]
     pub numbering: Numbering,
 
     /// リストの開始番号を指定します。
@@ -129,11 +121,10 @@ pub struct EnumElem {
     ///   [Ahead],
     /// )
     /// ```
-    pub start: Smart<usize>,
+    pub start: Smart<u64>,
 
     /// 親リストの番号も含めて、
     /// 完全な番号付けを表示するかどうかを指定します。
-    ///
     ///
     /// ```example
     /// #set enum(numbering: "1.a)", full: true)
@@ -157,19 +148,17 @@ pub struct EnumElem {
     pub reversed: bool,
 
     /// 各項目のインデント。
-    #[resolve]
     pub indent: Length,
 
     /// 各項目の番号付けと本文の間隔を指定します。
-    #[resolve]
     #[default(Em::new(0.5).into())]
     pub body_indent: Length,
 
     /// リストの項目同士の間隔を指定します。
     ///
     /// `{auto}`に設定すると、
-    /// コンパクトなリストの場合は段落の[leading]($par.leading)を、
-    /// 幅のある（コンパクトでない）リストの場合は段落の[spacing]($par.spacing)を使用します。
+    /// コンパクトなリストの場合は段落の[`leading`]($par.leading)を、
+    /// 幅のある（コンパクトでない）リストの場合は段落の[`spacing`]($par.spacing)を使用します。
     pub spacing: Smart<Length>,
 
     /// リストの番号の配置を指定します。
@@ -217,7 +206,7 @@ pub struct EnumElem {
     #[internal]
     #[fold]
     #[ghost]
-    pub parents: SmallVec<[usize; 4]>,
+    pub parents: SmallVec<[u64; 4]>,
 }
 
 #[scope]
@@ -226,55 +215,12 @@ impl EnumElem {
     type EnumItem;
 }
 
-impl Show for Packed<EnumElem> {
-    fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        let tight = self.tight(styles);
-
-        if TargetElem::target_in(styles).is_html() {
-            let mut elem = HtmlElem::new(tag::ol);
-            if self.reversed(styles) {
-                elem = elem.with_attr(attr::reversed, "reversed");
-            }
-            if let Some(n) = self.start(styles).custom() {
-                elem = elem.with_attr(attr::start, eco_format!("{n}"));
-            }
-            let body = Content::sequence(self.children.iter().map(|item| {
-                let mut li = HtmlElem::new(tag::li);
-                if let Some(nr) = item.number(styles) {
-                    li = li.with_attr(attr::value, eco_format!("{nr}"));
-                }
-                // Text in wide enums shall always turn into paragraphs.
-                let mut body = item.body.clone();
-                if !tight {
-                    body += ParbreakElem::shared();
-                }
-                li.with_body(Some(body)).pack().spanned(item.span())
-            }));
-            return Ok(elem.with_body(Some(body)).pack().spanned(self.span()));
-        }
-
-        let mut realized =
-            BlockElem::multi_layouter(self.clone(), engine.routines.layout_enum)
-                .pack()
-                .spanned(self.span());
-
-        if tight {
-            let leading = ParElem::leading_in(styles);
-            let spacing =
-                VElem::new(leading.into()).with_weak(true).with_attach(true).pack();
-            realized = spacing + realized;
-        }
-
-        Ok(realized)
-    }
-}
-
 /// 番号付きリストの項目。
-#[elem(name = "item", title = "Numbered List Item")]
+#[elem(name = "item", title = "Numbered List Item", Tagged)]
 pub struct EnumItem {
     /// 項目の番号。
     #[positional]
-    pub number: Option<usize>,
+    pub number: Smart<u64>,
 
     /// 項目の本文。
     #[required]

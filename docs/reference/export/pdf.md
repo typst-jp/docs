@@ -6,37 +6,6 @@ PDFファイルは文書交換に適した形式となっています。
 PNGファイルとは異なり、PDFファイルは特定の解像度に縛られません。
 これによって、品質を損なうことなく任意のサイズでファイルを閲覧することができます。
 
-# PDF規格
-国際標準化機構（ISO）は、基本となるPDF規格に加え、
-特定の用途により適した形でPDFを利用できるようにする各種拡張規格を公開しています。
-TypstはデフォルトでPDF 1.7形式のファイルをエクスポートします。
-Adobe Acrobat 8以降および一般的に使用されているほとんどのPDFビューアーは
-このPDFバージョンとの互換性があります。
-
-## PDF/A
-TypstはオプションでPDF/A準拠ファイルの出力をサポートしています。
-PDF/Aファイルは、現在および将来のPDF用ツールとの最大限の互換性を目的として設計された形式です。
-この形式は実装が困難な機能や独自仕様に依存せず、網羅的なメタデータを含みます。
-これにより、長期的なアーカイブに適した形式となっています。
-
-PDF/A規格には複数のバージョン（ISOにおける用語では _パート_）があり、
-ほとんどのパートにはファイルの適合レベルを示す複数のプロファイルが存在します。
-現在、Typstは以下のPDF/A出力プロファイルをサポートしています。
-
-- PDF/A-2b: ISO 19005-2における基本適合レベル。
-  このPDF/AバージョンはPDF 1.7を基盤としており、自己完結型でアーカイブ可能なPDFファイルを生成します。
-
-- PDF/A-3b: ISO 19005-3における基本適合レベル。
-  このPDF/AバージョンはPDF 1.7を基盤としており、
-  任意の関連ファイルを[添付ファイル]($pdf.embed)として含むことができるアーカイブ可能なPDFファイルを生成します。
-  PDF/A-2bとの違いは、
-  PDF/A非準拠のファイルを埋め込む機能がある点のみです。
-
-PDF/Aと通常のPDFのどちらをエクスポートするかを選択する際には、
-PDF/Aファイルには追加のメタデータが含まれ、
-また一部のリーダーはユーザーによるPDF/Aファイルの修正を阻止することに留意してください。
-一部のTypstの機能は、選択したPDF規格によっては無効化される場合があります。
-
 # PDF形式でのエクスポート
 ## コマンドライン
 PDFはTypstのデフォルトのエクスポート形式です。
@@ -45,8 +14,15 @@ PDF形式でエクスポートする際には、以下の設定オプション�
 
 - `--pdf-standard`の後に1つまたは複数のカンマ区切りの規格を指定することで、
   Typstが準拠を強制するPDF規格を指定します。
-  指定可能な規格は`1.7`、`a-2b`、`a-3b`です。
+  指定可能な規格は`1.4`, `1.5`, `1.6`, `1.7`, `2.0`, `a-1b`, `a-1a`, `a-2b`,
+  `a-2u`, `a-2a`, `a-3b`, `a-3u`, `a-3a`, `a-4`, `a-4f`, `a-4e`, `ua-1`です。
   デフォルトではPDF 1.7に準拠したファイルが出力されます。
+
+- You can disable PDF tagging completely with `--no-pdf-tags`. By default, Typst
+  will always write _Tagged PDF_ to provide a baseline level of accessibility.
+  Using this flag, you can turn tags off. This will make your file inaccessible
+  and prevent conformance with accessible conformance levels of PDF/A and all
+  parts of PDF/UA.
 
 - `--pages` の後に、カンマ区切りのページ番号またはダッシュによる番号範囲を指定することで、エクスポートするページを指定します。
   範囲指定は半開区間にすることもできます。
@@ -60,12 +36,203 @@ PDF形式でエクスポートする際には、以下の設定項目を指定�
 
 - Typstが準拠を強制するPDF規格。
   デフォルトではPDF 1.7準拠のファイルが出力されます。
-  指定可能な追加規格は`A-2b`と`A-3b`です。
+  指定可能な追加規格は`A-1b`, `A-1a`, `A-2b`, `A-2u`, `A-2a`, `A-3b`, `A-3u`,
+  `A-3a`, `A-4`, `A-4f`, `A-4e`, `UA-1`です。
 
 - エクスポートするページ。有効なオプションは「All pages（全てのページ）」、「Current page（現在のページ）」、および「Custom ranges（カスタム範囲）」です。
   カスタム範囲は、カンマ区切りの番号リストまたはダッシュで区切られた番号範囲です。
   範囲は半開区間にすることもできます。例：`2,3,7-9,11-`。
 
+# PDF規格
+国際標準化機構（ISO）は、基本となるPDF規格に加え、
+特定の用途により適した形でPDFを利用できるようにする各種拡張規格を公開しています。
+TypstはデフォルトでPDF 1.7形式のファイルをエクスポートします。
+Adobe Acrobat 8以降および一般的に使用されているほとんどのPDFビューアーは
+このPDFバージョンとの互換性があります。
+
+一部のTypstの機能は、選択したPDF規格によっては無効化される場合があります。
+You currently cannot choose both PDF/A and PDF/UA at the same time.
+
+## PDF versions
+Typst supports five different PDF versions: 1.4, 1.5, 1.6, 1.7 (default), and
+2.0. You can choose each of these versions for your document export. However,
+based on the features you used there may be a minimum version. Likewise, the
+standards you target can limit which versions you can choose (see below for
+more).
+
+Here is a list on how each new version improves over PDF 1.4 for Typst
+documents:
+
+- **PDF 1.5** (2003): Improved color management, text extraction, table
+  accessibility, reflow, and emoji fonts
+- **PDF 1.6** (2004): More flexible links
+- **PDF 1.7** (2006): Allows [attachments]($pdf.attach), improved reflow
+- **PDF 2.0** (2017): Improved both metadata and tag semantics for accessibility
+
+The software used to read your file must support your PDF version. Under normal
+circumstances, this poses no problem, but it can be a source of errors when
+working with older hardware. For general exchange, we recommend keeping the
+default PDF 1.7 setting or choosing PDF 2.0.
+
+When using PDF files as [images]($image) in your document, the export PDF
+version must equal or exceed the image file versions.
+
+## PDF/UA
+Typst supports writing PDF/UA-conformant files. PDF/UA files are designed
+for _[Universal Access]($guides/accessibility/#basics)._ When you choose this PDF
+standard, Typst will run additional checks when exporting your document. These
+checks will make sure that you are following accessibility best practices. For
+example, it will make sure that all your images come with alternative
+descriptions.
+
+Note that there are some rules in PDF/UA that are crucial for accessibility but
+cannot be automatically checked. Hence, when exporting a PDF/UA-1 document, make
+sure you did the following:
+
+- If your document is written in a different language than English, make sure
+  [set the text language]($text.lang) before any content.
+- Make sure to use Typst's semantic elements (like [headings]($heading),
+  [figures]($figure), and [lists]($list)) when appropriate instead of defining
+  custom constructs. This lets Typst know (and export) the role a construct
+  plays in the document. See [the Accessibility guide]($guides/accessibility)
+  for more details.
+- Do not exclusively use contrast, color, format, or layout to communicate an
+  idea. Use text or alternative descriptions instead of or in addition to these
+  elements.
+- Wrap all decorative elements without a semantic meaning in [`pdf.artifact`]($pdf.artifact).
+- Do not use images of text. Instead, insert the text directly into your markup.
+
+Typst currently only supports part one (PDF/UA-1) which is based on PDF 1.7
+(2006). When exporting to PDF/UA-1, be aware that you will need to manually
+provide [alternative descriptions of mathematics]($category/math/#accessibility)
+in natural language.
+
+New accessibility features were added to PDF 2.0 (2017). When set to PDF 2.0
+export, Typst will leverage some of these features. PDF 2.0 and PDF/UA-1,
+however, are mutually incompatible. For accessible documents, we currently
+recommend exporting to PDF/UA-1 instead of PDF 2.0 for the additional checks and
+greater compatibility. The second part of PDF/UA is designed for PDF 2.0, but
+not yet supported by Typst.
+
+## PDF/A
+TypstはオプションでPDF/A準拠ファイルの出力をサポートしています。
+PDF/Aファイルは、現在および将来のPDF用ツールとの最大限の互換性を目的として設計された形式です。
+この形式は実装が困難な機能や独自仕様に依存せず、網羅的なメタデータを含みます。
+これにより、長期的なアーカイブに適した形式となっています。
+
+PDF/A規格には複数のバージョン（ISOにおける用語では _パート_）があり、
+ほとんどのパートにはファイルの適合レベルを示す複数のプロファイルが存在します。
+現在、Typstは以下のPDF/A出力プロファイルをサポートしています。
+
+- **PDF/A-1b:** The _basic_ conformance level of ISO 19005-1. This version of
+  PDF/A is based on PDF 1.4 (2001) and results in self-contained, archivable PDF
+  files. As opposed to later parts of the PDF/A standard, transparency is not
+  allowed in PDF/A-1 files.
+
+- **PDF/A-1a:** This is the _accessible_ conformance level that builds on the
+  basic level PDF/A-1b. To conform to this level, your file must be an
+  accessible _Tagged PDF_ file. Note that accessibility is improved with later
+  parts as not all PDF accessibility features are available for PDF 1.4 files.
+  Furthermore, all text in the file must consist of known Unicode code points.
+
+- **PDF/A-2b：** ISO 19005-2における基本適合レベル。
+  このPDF/AバージョンはPDF 1.7を基盤としており、自己完結型でアーカイブ可能なPDFファイルを生成します。
+
+- **PDF/A-2u:** This is the _Unicode-mappable_ conformance level that builds on
+  the basic level A-2b. It also adds rules that all text in the document must
+  consist of known Unicode code points. If possible, always prefer this standard
+  over PDF/A-2b.
+
+- **PDF/A-2a:** This is the _accessible_ conformance level that builds on the
+  Unicode-mappable level A-2u. This conformance level also adds two
+  requirements: Your file must be an accessible _Tagged PDF_ file. Typst
+  automatically adds tags to help you reach this conformance level. Also pay
+  attention to the Accessibility Sections throughout the reference and the
+  [Accessibility Guide]($guides/accessibility) when targeting this conformance
+  level. Finally, PDF/A-2a forbids you from using code points in the [Unicode
+  Private Use area](https://en.wikipedia.org/wiki/Private_Use_Areas). If you
+  want to build an accessible file, also consider additionally targeting
+  PDF/UA-1, which enables more automatic accessibility checks.
+
+- **PDF/A-3b：** ISO 19005-3における基本適合レベル。
+  このPDF/AバージョンはPDF 1.7を基盤としており、
+  任意の関連ファイルを[添付ファイル]($pdf.attach)として含むことができるアーカイブ可能なPDFファイルを生成します。
+  PDF/A-2bとの違いは、
+  PDF/A非準拠のファイルを埋め込む機能がある点のみです。
+
+- **PDF/A-3u:** This is the _Unicode-mappable_ conformance level that builds on
+  the basic level A-3b. Just like PDF/A-2b, this requires all text to consist
+  of known Unicode code points. These rules do not apply to attachments. If
+  possible, always prefer this standard over PDF/A-3b.
+
+- **PDF/A-3a:** This is the _accessible_ conformance level that builds on the
+  Unicode-mappable level A-3u. Just like PDF/A-2a, this requires files to be
+  accessible _Tagged PDF_ and to not use characters from the Unicode Private Use
+  area. Just like before, these rules do not apply to attachments.
+
+- **PDF/A-4:** The basic conformance level of ISO 19005-4. This version of PDF/A
+  is based on PDF 2.0 (2017) and results in self-contained, archivable PDF
+  files. PDF/A-4 has no parts relating to accessibility. Instead, the topic has
+  been elaborated on more in the dedicated PDF/UA standard. PDF/A-4 files can
+  conform to PDF/UA-2 (currently not supported in Typst).
+
+- **PDF/A-4f:** The _embedded files_ conformance level that builds on the basic
+  level A-4. Files conforming to this level can contain arbitrary other related
+  files as [attachments]($pdf.attach), just as files conforming to part 3 of ISO
+  19005. The only difference between it and PDF/A-4 is the capability to attach
+  non-PDF/A-conformant files.
+
+- **PDF/A-4e:** The _engineering_ conformance level that builds on the embedded
+  files level A-4f. Files conforming to this level can contain 3D objects. Typst
+  does not support 3D content, so this is functionally equivalent to PDF/A-4f
+  from a Typst perspective.
+
+If you want to target PDF/A but are unsure about which particular setting to
+use, there are some good rules of thumb. First, you must determine your
+**part,** that's the "version number" of the standard. Ask yourself these
+questions:
+
+1. **Does pre-2006 software or equipment need to be able to read my file?** If
+   so, choose part one (PDF/A-1).
+
+2. **If not, does my file need [attachments]($pdf.attach)?** If so, you must
+   choose part three (PDF/A-3) or the embedded files level of part four
+   (PDF/A-4f).
+
+3. **Does your file need to use features introduced in PDF 2.0?** Currently, use
+   of PDF 2.0 features in Typst is limited to minor improvements in
+   accessibility, e.g. for the [title element]($title). If you can do without
+   these improvements, maximize compatibility by choosing part two (when you
+   don't need attachments) or part three (when you do need attachments). If you
+   rely on PDF 2.0 features, use part four.
+
+Now, you only need to choose a **conformance level** (the lowercase letter at
+the end).
+
+- **If you decided on part one, two, or three,** you should typically choose the
+  accessible conformance level of your part, indicated by a lowercase `a` at the
+  end. If your document is inherently inaccessible, e.g. an artist's portfolio
+  that cannot be boiled down to alternative descriptions, choose conformance
+  level `u` instead. Only if this results in a compiler error, e.g. because you
+  used code points from the Unicode Private Use Area, use the basic level `b`.
+
+- **If you have chosen part four,** you should choose the basic conformance
+  level (PDF/A-4) except when needing to embed files.
+
+PDF/Aと通常のPDFのどちらをエクスポートするかを選択する際には、
+PDF/Aファイルには追加のメタデータが含まれ、
+また一部のリーダーはユーザーによるPDF/Aファイルの修正を阻止することに留意してください。
+一部のTypstの機能は、選択したPDF規格によっては無効化される場合があります。
+
 # PDF固有の機能
 Typstでは、グローバルな`pdf`モジュールを通じてPDFに特化した機能を提供しています。
 そのモジュールに含まれる定義については、以下を参照してください。
+
+This module contains some functions without a final API. They are designed to
+enhance accessibility for documents with complex tables. This includes
+[`table-summary`]($pdf.table-summary), [`header-cell`]($pdf.header-cell), and
+[`data-cell`]($pdf.data-cell). All of these functions will be removed in a
+future Typst release, either through integration into table functions or through
+full removal. You can enable these functions by passing `--features a11y-extras`
+or setting the `TYPST_FEATURES` environment variable to `a11y-extras`. In the
+web app, these features are not available at this time.

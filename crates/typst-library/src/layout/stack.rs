@@ -1,9 +1,7 @@
 use std::fmt::{self, Debug, Formatter};
 
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{cast, elem, Content, NativeElement, Packed, Show, StyleChain};
-use crate::layout::{BlockElem, Dir, Spacing};
+use crate::foundations::{Content, cast, elem};
+use crate::layout::{Dir, Spacing};
 
 /// コンテンツと間隔を垂直または水平方向に配置。
 ///
@@ -18,7 +16,12 @@ use crate::layout::{BlockElem, Dir, Spacing};
 ///   rect(width: 90pt),
 /// )
 /// ```
-#[elem(Show)]
+///
+/// # Accessibility
+/// Stacks do not carry any special semantics. The contents of the stack are
+/// read by Assistive Technology (AT) in the order in which they have been
+/// passed to this function.
+#[elem]
 pub struct StackElem {
     /// アイテムを積み重ねる向き。可能な値は以下の通りです。
     ///
@@ -41,14 +44,6 @@ pub struct StackElem {
     /// 軸に沿って積み重ねる子要素。
     #[variadic]
     pub children: Vec<StackChild>,
-}
-
-impl Show for Packed<StackElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::multi_layouter(self.clone(), engine.routines.layout_stack)
-            .pack()
-            .spanned(self.span()))
-    }
 }
 
 /// A child of a stack element.

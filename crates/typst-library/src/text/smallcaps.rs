@@ -1,7 +1,4 @@
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{elem, Content, Packed, Show, StyleChain};
-use crate::text::TextElem;
+use crate::foundations::{Content, elem};
 
 /// スモールキャピタルでテキストを表示。
 ///
@@ -41,7 +38,7 @@ use crate::text::TextElem;
 /// = Introduction
 /// #lorem(40)
 /// ```
-#[elem(title = "Small Capitals", Show)]
+#[elem(title = "Small Capitals")]
 pub struct SmallcapsElem {
     /// 大文字も同様にスモールキャピタルに変更するかどうか。
     ///
@@ -56,14 +53,6 @@ pub struct SmallcapsElem {
     /// スモールキャピタルで表示するコンテンツ。
     #[required]
     pub body: Content,
-}
-
-impl Show for Packed<SmallcapsElem> {
-    #[typst_macros::time(name = "smallcaps", span = self.span())]
-    fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        let sc = if self.all(styles) { Smallcaps::All } else { Smallcaps::Minuscules };
-        Ok(self.body.clone().styled(TextElem::set_smallcaps(Some(sc))))
-    }
 }
 
 /// What becomes small capitals.

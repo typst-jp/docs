@@ -1,6 +1,4 @@
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{elem, Content, Packed, Show, StyleChain, Value};
+use crate::foundations::{Value, elem};
 use crate::introspection::Locatable;
 
 /// 可視コンテンツの生成を伴わないクエリシステムへの値の公開。
@@ -20,15 +18,9 @@ use crate::introspection::Locatable;
 ///   query(<note>).first().value
 /// }
 /// ```
-#[elem(Show, Locatable)]
+#[elem(Locatable)]
 pub struct MetadataElem {
     /// 文書に埋め込む値。
     #[required]
     pub value: Value,
-}
-
-impl Show for Packed<MetadataElem> {
-    fn show(&self, _: &mut Engine, _styles: StyleChain) -> SourceResult<Content> {
-        Ok(Content::empty())
-    }
 }

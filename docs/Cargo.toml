@@ -22,9 +22,12 @@ typst-utils = { workspace = true }
 typst-assets = { workspace = true, features = ["fonts"] }
 typst-dev-assets = { workspace = true }
 clap = { workspace = true, optional = true }
+codex = { workspace = true }
 ecow = { workspace = true }
 heck = { workspace = true }
 pulldown-cmark = { workspace = true }
+regex = { workspace = true }
+rustc-hash = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true, optional = true }
 serde_yaml = { workspace = true }
@@ -33,9 +36,6 @@ typed-arena = { workspace = true }
 unicode-math-class = { workspace = true }
 unscanny = { workspace = true }
 yaml-front-matter = { workspace = true }
-md5 = { workspace = true }
-include_dir = { workspace = true }
-unicode_names2 = { workspace = true }
 
 [lints]
 workspace = true

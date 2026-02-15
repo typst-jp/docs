@@ -4,7 +4,7 @@ use std::num::NonZeroUsize;
 use ecow::EcoString;
 
 use crate::engine::Engine;
-use crate::foundations::{func, scope, ty, Repr};
+use crate::foundations::{Repr, func, scope, ty};
 use crate::layout::Position;
 use crate::model::Numbering;
 
@@ -15,10 +15,26 @@ use crate::model::Numbering;
 /// また、検索したロケーションや表示された要素のロケーションは、コンテンツの[`location()`]($content.location)メソッドを使って取得できます。
 ///
 /// # ロケータブル要素 { #locatable }
-/// 現在、要素関数の一部のみがロケーションを取得可能です。
-/// 見出しや図表の他に、数式、参照、引用、全ての明示的なラベルを持つ要素が該当します。
-/// したがって、例えば[`strong`]要素に対してクエリが実行 _可能_ ですが、見つかるのは明示的にラベルが付けられたもののみです。
-/// この制限は将来的に解消される予定です。
+/// ロケーションが自動的に割り当てられる要素は _ロケータブル_ と呼ばれます。
+/// 効率上の理由から、全ての要素がロケータブルであるわけではありません。
+///
+/// - [Modelカテゴリ]($category/model)では、ほとんどの要素がロケータブルです。
+///   これは[見出し]($heading)や[図表]($figure)などの意味的要素が内省で
+///   よく使われるためです。
+///
+/// - [Textカテゴリ]($category/text)では、[`raw`]要素と装飾要素
+///   [`underline`], [`overline`], [`strike`], [`highlight`]がロケータブルです。
+///
+/// - [Introspectionカテゴリ]($category/introspection)では、[`metadata`]
+///   要素がロケータブルです。
+///
+/// - その他のカテゴリでは、多くの要素がロケータブルではありません。
+///   例外として、[`math.equation`]と[`image`]があります。
+///
+/// 特定の要素がロケータブルかどうかは、[`query`]を試すことで確認できます。
+///
+/// ロケータブルでない要素でも、ラベルが付いている場合は
+/// クエリで観測できることがあります。
 #[ty(scope)]
 #[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Location(u128);
@@ -86,7 +102,13 @@ impl Location {
 
 impl Debug for Location {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        write!(f, "Location({})", self.0)
+        if f.alternate() {
+            write!(f, "Location({})", self.0)
+        } else {
+            // Print a shorter version by default to make it more readable.
+            let truncated = self.0 as u16;
+            write!(f, "Location({truncated})")
+        }
     }
 }
 
@@ -96,9 +118,35 @@ impl Repr for Location {
     }
 }
 
-/// Makes this element as locatable through the introspector.
+/// Can be used to have a location as a key in an ordered set or map.
+///
+/// [`Location`] itself does not implement [`Ord`] because comparing hashes like
+/// this has no semantic meaning. The potential for misuse (e.g. checking
+/// whether locations have a particular relative ordering) is relatively high.
+///
+/// Still, it can be useful to have orderable locations for things like sets.
+/// That's where this type comes in.
+#[derive(Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
+pub struct LocationKey(u128);
+
+impl LocationKey {
+    /// Create a location key from a location.
+    pub fn new(location: Location) -> Self {
+        Self(location.0)
+    }
+}
+
+impl From<Location> for LocationKey {
+    fn from(location: Location) -> Self {
+        Self::new(location)
+    }
+}
+
+/// Make this element available in the introspector.
 pub trait Locatable {}
 
-/// Marks this element as not being queryable even though it is locatable for
-/// internal reasons.
-pub trait Unqueriable {}
+/// Make this element not queriable for the user.
+pub trait Unqueriable: Locatable {}
+
+/// Marks this element as tagged in PDF files.
+pub trait Tagged {}

@@ -31,26 +31,26 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 ほとんどの構文要素は、対応する関数のショートカットに過ぎません。
 以下の表は、利用可能な全てのマークアップと、その構文と使用法について詳しく学ぶための最適なページへのリンクを示しています。
 
-| 名称             | 例                       | 参照                                 |
-| ---------------- | ------------------------ | ------------------------------------ |
-| 段落区切り       | 空行                     | [`parbreak`]($parbreak)              |
-| 強調(太字)       | `[*strong*]`             | [`strong`]($strong)                  |
-| 強調(イタリック) | `[_emphasis_]`           | [`emph`]($emph)                      |
-| rawテキスト      | ``[`print(1)`]``         | [`raw`]($raw)                        |
-| リンク           | `[https://typst.app/]`   | [`link`]($link)                      |
-| ラベル           | `[<intro>]`              | [`label`]($label)                    |
-| 参照             | `[@intro]`               | [`ref`]($ref)                        |
-| 見出し           | `[= Heading]`            | [`heading`]($heading)                |
-| 箇条書きリスト   | `[- item]`               | [`list`]($list)                      |
-| 番号付きリスト   | `[+ item]`               | [`enum`]($enum)                      |
-| 用語リスト       | `[/ Term: description]`  | [`terms`]($terms)                    |
-| 数式             | `[$x^2$]`                | [Math]($category/math)               |
-| 改行             | `[\]`                    | [`linebreak`]($linebreak)            |
-| スマートクオート | `['single' or "double"]` | [`smartquote`]($smartquote)          |
-| 短縮記号         | `[~]`, `[---]`           | [Symbols]($category/symbols/sym)     |
-| コード構文       | `[#rect(width: 1cm)]`    | [Scripting]($scripting/#expressions) |
-| 文字エスケープ   | `[Tweet at us \#ad]`     | [Below]($category/syntax/#escapes)   |
-| コメント         | `[/* block */]`, `[// line]` | [Below]($category/syntax/#comments) |
+| 名称             | 例                          | 参照                                 |
+| ---------------- | --------------------------- | ------------------------------------ |
+| 段落区切り       | 空行                        | [`parbreak`]($parbreak)              |
+| 強調(太字)       | `[*strong*]`                | [`strong`]($strong)                  |
+| 強調(イタリック) | `[_emphasis_]`              | [`emph`]($emph)                      |
+| rawテキスト      | ``[`print(1)`]``            | [`raw`]($raw)                        |
+| リンク           | `[https://typst.app/]`      | [`link`]($link)                      |
+| ラベル           | `[<intro>]`                 | [`label`]($label)                    |
+| 参照             | `[@intro]`                  | [`ref`]($ref)                        |
+| 見出し           | `[= Heading]`               | [`heading`]($heading)                |
+| 箇条書きリスト   | `[- item]`                  | [`list`]($list)                      |
+| 番号付きリスト   | `[+ item]`                  | [`enum`]($enum)                      |
+| 用語リスト       | `[/ Term: description]`     | [`terms`]($terms)                    |
+| 数式             | `[$x^2$]`                   | [Math]($category/math)               |
+| 改行             | `[\]`                       | [`linebreak`]($linebreak)            |
+| スマートクオート | `['single' or "double"]`    | [`smartquote`]($smartquote)          |
+| 短縮記号         | `[~]`, `[---]`              | [Symbols]($category/symbols/sym)     |
+| コード構文       | `[#rect(width: 1cm)]`       | [Scripting]($scripting/#expressions) |
+| 文字エスケープ   | `[Tweet at us \#ad]`        | [Below](#escapes)                    |
+| コメント         | `[/* block */]`, `[// line]` | [Below](#comments)                   |
 
 ## 数式モード { #math }
 
@@ -61,24 +61,24 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 インライン数式は、スペースを省略することで作成できます（例：`[$x^2$]`）。
 以下に、数式モードに特有の構文の概要を示します。
 
-| 名称                    | 例                      | 参照                                 |
-| ----------------------- | ----------------------- | ------------------------------------ |
-| インライン数式          | `[$x^2$]`               | [Math]($category/math)               |
-| ブロック数式            | `[$ x^2 $]`             | [Math]($category/math)               |
-| 下付き文字              | `[$x_1$]`               | [`attach`]($category/math/attach)    |
-| 上付き文字              | `[$x^2$]`               | [`attach`]($category/math/attach)    |
-| 分数                    | `[$1 + (a+b)/5$]`       | [`frac`]($math.frac)                 |
-| 改行                    | `[$x \ y$]`             | [`linebreak`]($linebreak)            |
-| 揃え位置                | `[$x &= 2 \ &= 3$]`     | [Math]($category/math)               |
-| 変数アクセス            | `[$#x$, $pi$]`          | [Math]($category/math)               |
-| フィールドアクセス      | `[$arrow.r.long$]`      | [Scripting]($scripting/#fields)      |
-| 暗黙の乗算              | `[$x y$]`               | [Math]($category/math)               |
-| 短縮記号                | `[$->$]`, `[$!=$]`      | [Symbols]($category/symbols/sym)     |
-| 数式内のテキスト/文字列 | `[$a "is natural"$]`    | [Math]($category/math)               |
-| 数式関数呼び出し        | `[$floor(x)$]`          | [Math]($category/math)               |
-| コード構文              | `[$#rect(width: 1cm)$]` | [Scripting]($scripting/#expressions) |
-| 文字エスケープ          | `[$x\^2$]`              | [Below]($category/syntax/#escapes)   |
-| コメント                | `[$/* comment */$]`     | [Below]($category/syntax/#comments)  |
+| 名称                    | 例                       | 参照                                 |
+| ----------------------- | ------------------------ | ------------------------------------ |
+| インライン数式          | `[$x^2$]`                | [Math]($category/math)               |
+| ブロック数式            | `[$ x^2 $]`              | [Math]($category/math)               |
+| 下付き文字              | `[$x_1$]`                | [`attach`]($category/math/attach)    |
+| 上付き文字              | `[$x^2$]`                | [`attach`]($category/math/attach)    |
+| 分数                    | `[$1 + (a+b)/5$]`        | [`frac`]($math.frac)                 |
+| 改行                    | `[$x \ y$]`              | [`linebreak`]($linebreak)            |
+| 揃え位置                | `[$x &= 2 \ &= 3$]`      | [Math]($category/math)               |
+| 変数アクセス            | `[$#x$, $pi$]`           | [Math]($category/math)               |
+| フィールドアクセス      | `[$arrow.r.long$]`       | [Scripting]($scripting/#fields)      |
+| 暗黙の乗算              | `[$x y$]`                | [Math]($category/math)               |
+| 短縮記号                | `[$->$]`, `[$!=$]`       | [Symbols]($category/symbols/sym)     |
+| 数式内のテキスト/文字列 | `[$a "is natural"$]`     | [Math]($category/math)               |
+| 数式関数呼び出し        | `[$floor(x)$]`           | [Math]($category/math)               |
+| コード構文              | `[$#rect(width: 1cm)$]`  | [Scripting]($scripting/#expressions) |
+| 文字エスケープ          | `[$x\^2$]`               | [Below](#escapes)                    |
+| コメント                | `[$/* comment */$]`      | [Below](#comments)                   |
 
 ## コードモード { #code }
 
@@ -86,52 +86,52 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 多くの構文要素は式に特有のものです。
 以下に、コードモードで利用可能な全ての構文の一覧表を示します。
 
-| 名称                       | 例                            | 参照                                  |
-| -------------------------- | ----------------------------- | ------------------------------------- |
-| none                       | `{none}`                      | [`none`]($reference/foundations/none) |
-| 自動                       | `{auto}`                      | [`auto`]($reference/foundations/auto) |
-| ブール値                   | `{false}`, `{true}`           | [`bool`]($reference/foundations/bool) |
-| 整数                       | `{10}`, `{0xff}`              | [`int`]($reference/foundations/int)   |
-| 浮動小数点数               | `{3.14}`, `{1e5}`             | [`float`]($reference/foundations/float) |
-| 長さ                       | `{2pt}`, `{3mm}`, `{1em}`, .. | [`length`]($reference/layout/length)  |
-| 角度                       | `{90deg}`, `{1rad}`           | [`angle`]($reference/layout/angle)    |
-| 比率                       | `{2fr}`                       | [`fraction`]($reference/layout/fraction) |
-| 割合                       | `{50%}`                       | [`ratio`]($reference/layout/ratio)    |
-| 文字列                     | `{"hello"}`                   | [`str`]($reference/foundations/str)   |
-| ラベル                     | `{<intro>}`                   | [`label`]($reference/foundations/label) |
-| 数式                       | `[$x^2$]`                     | [Math]($category/math)                |
-| rawテキスト                | ``[`print(1)`]``              | [`raw`]($reference/text/raw)          |
-| 変数アクセス               | `{x}`                         | [Scripting]($scripting/#blocks)       |
-| コードブロック             | `{{ let x = 1; x + 2 }}`      | [Scripting]($scripting/#blocks)       |
-| コンテンツブロック         | `{[*Hello*]}`                 | [Scripting]($scripting/#blocks)       |
-| 括弧付き式                 | `{(1 + 2)}`                   | [Scripting]($scripting/#blocks)       |
-| 配列                       | `{(1, 2, 3)}`                 | [Array]($array)                 |
-| 辞書                       | `{(a: "hi", b: 2)}`           | [Dictionary]($dictionary)       |
-| 単項演算子                 | `{-x}`                        | [Scripting]($scripting/#operators)    |
-| 二項演算子                 | `{x + y}`                     | [Scripting]($scripting/#operators)    |
-| 代入                       | `{x = 1}`                     | [Scripting]($scripting/#operators)    |
-| フィールドアクセス         | `{x.y}`                       | [Scripting]($scripting/#fields)       |
-| メソッド呼び出し           | `{x.flatten()}`               | [Scripting]($scripting/#methods)      |
-| 関数呼び出し               | `{min(x, y)}`                 | [Function]($function)           |
-| 引数展開                   | `{min(..nums)}`               | [Arguments]($arguments)         |
-| 無名関数                   | `{(x, y) => x + y}`           | [Function]($function)           |
-| letバインディング          | `{let x = 1}`                 | [Scripting]($scripting/#bindings)     |
-| 名前付き関数               | `{let f(x) = 2 * x}`          | [Function]($function)           |
-| setルール                  | `{set text(14pt)}`            | [Styling]($styling/#set-rules)        |
-| set-ifルール               | `{set text(..) if .. }`       | [Styling]($styling/#set-rules)        |
+| 名称                       | 例                             | 参照                                  |
+| -------------------------- | ------------------------------ | ------------------------------------- |
+| none                       | `{none}`                       | [`none`]($reference/foundations/none) |
+| 自動                       | `{auto}`                       | [`auto`]($reference/foundations/auto) |
+| ブール値                   | `{false}`, `{true}`            | [`bool`]($reference/foundations/bool) |
+| 整数                       | `{10}`, `{0xff}`               | [`int`]($reference/foundations/int)   |
+| 浮動小数点数               | `{3.14}`, `{1e5}`              | [`float`]($reference/foundations/float) |
+| 長さ                       | `{2pt}`, `{3mm}`, `{1em}`, ..  | [`length`]($reference/layout/length)  |
+| 角度                       | `{90deg}`, `{1rad}`            | [`angle`]($reference/layout/angle)    |
+| 比率                       | `{2fr}`                        | [`fraction`]($reference/layout/fraction) |
+| 割合                       | `{50%}`                        | [`ratio`]($reference/layout/ratio)    |
+| 文字列                     | `{"hello"}`                    | [`str`]($reference/foundations/str)   |
+| ラベル                     | `{<intro>}`                    | [`label`]($reference/foundations/label) |
+| 数式                       | `[$x^2$]`                      | [Math]($category/math)                |
+| rawテキスト                | ``[`print(1)`]``               | [`raw`]($reference/text/raw)          |
+| 変数アクセス               | `{x}`                          | [Scripting]($scripting/#blocks)       |
+| コードブロック             | `{{ let x = 1; x + 2 }}`       | [Scripting]($scripting/#blocks)       |
+| コンテンツブロック         | `{[*Hello*]}`                  | [Scripting]($scripting/#blocks)       |
+| 括弧付き式                 | `{(1 + 2)}`                    | [Scripting]($scripting/#blocks)       |
+| 配列                       | `{(1, 2, 3)}`                  | [Array]($array)                       |
+| 辞書                       | `{(a: "hi", b: 2)}`            | [Dictionary]($dictionary)             |
+| 単項演算子                 | `{-x}`                         | [Scripting]($scripting/#operators)    |
+| 二項演算子                 | `{x + y}`                      | [Scripting]($scripting/#operators)    |
+| 代入                       | `{x = 1}`                      | [Scripting]($scripting/#operators)    |
+| フィールドアクセス         | `{x.y}`                        | [Scripting]($scripting/#fields)       |
+| メソッド呼び出し           | `{x.flatten()}`                | [Scripting]($scripting/#methods)      |
+| 関数呼び出し               | `{min(x, y)}`                  | [Function]($function)                 |
+| 引数展開                   | `{min(..nums)}`                | [Arguments]($arguments)               |
+| 無名関数                   | `{(x, y) => x + y}`            | [Function]($function)                 |
+| letバインディング          | `{let x = 1}`                  | [Scripting]($scripting/#bindings)     |
+| 名前付き関数               | `{let f(x) = 2 * x}`           | [Function]($function)                 |
+| setルール                  | `{set text(14pt)}`             | [Styling]($styling/#set-rules)        |
+| set-ifルール               | `{set text(..) if .. }`        | [Styling]($styling/#set-rules)        |
 | show-setルール             | `{show heading: set block(..)}` | [Styling]($styling/#show-rules)     |
-| 関数付きshowルール         | `{show raw: it => {..}}`      | [Styling]($styling/#show-rules)       |
-| show-everythingルール      | `{show: template}`            | [Styling]($styling/#show-rules)       |
-| コンテキスト式             | `{context text.lang}`         | [Context]($context)                   |
-| 条件式                     | `{if x == 1 {..} else {..}}`  | [Scripting]($scripting/#conditionals) |
-| forループ                  | `{for x in (1, 2, 3) {..}}`   | [Scripting]($scripting/#loops)        |
-| whileループ                | `{while x < 10 {..}}`         | [Scripting]($scripting/#loops)        |
-| ループ制御フロー           | `{break, continue}`           | [Scripting]($scripting/#loops)        |
-| 関数からのリターン         | `{return x}`                  | [Function]($function)           |
-| モジュールをインクルード   | `{include "bar.typ"}`         | [Scripting]($scripting/#modules)      |
-| モジュールをインポート     | `{import "bar.typ"}`          | [Scripting]($scripting/#modules)      |
-| モジュールからのインポート | `{import "bar.typ": a, b, c}` | [Scripting]($scripting/#modules)      |
-| コメント                   | `{/* block */}`, `{// line}`  | [Below]($category/syntax/#comments)   |
+| 関数付きshowルール         | `{show raw: it => {..}}`       | [Styling]($styling/#show-rules)       |
+| show-everythingルール      | `{show: template}`             | [Styling]($styling/#show-rules)       |
+| コンテキスト式             | `{context text.lang}`          | [Context]($context)                   |
+| 条件式                     | `{if x == 1 {..} else {..}}`   | [Scripting]($scripting/#conditionals) |
+| forループ                  | `{for x in (1, 2, 3) {..}}`    | [Scripting]($scripting/#loops)        |
+| whileループ                | `{while x < 10 {..}}`          | [Scripting]($scripting/#loops)        |
+| ループ制御フロー           | `{break, continue}`            | [Scripting]($scripting/#loops)        |
+| 関数からのリターン         | `{return x}`                   | [Function]($function)                 |
+| モジュールをインクルード   | `{include "bar.typ"}`          | [Scripting]($scripting/#modules)      |
+| モジュールをインポート     | `{import "bar.typ"}`           | [Scripting]($scripting/#modules)      |
+| モジュールからのインポート | `{import "bar.typ": a, b, c}`  | [Scripting]($scripting/#modules)      |
+| コメント                   | `{/* block */}`, `{// line}`   | [Below](#comments)                    |
 
 ## コメント { #comments }
 
@@ -167,6 +167,34 @@ Our study design is as follows:
 ```example
 I got an ice cream for
 \$1.50! \u{1f600}
+```
+
+## Identifiers
+Names of variables, functions, and so on (_identifiers_) can contain letters,
+numbers, hyphens (`-`), and underscores (`_`). They must start with a letter or
+an underscore.
+
+More specifically, the identifier syntax in Typst is based on the
+[Unicode Standard Annex #31](https://www.unicode.org/reports/tr31/), with two
+extensions: Allowing `_` as a starting character, and allowing both `_` and `-`
+as continuing characters.
+
+For multi-word identifiers, the recommended case convention is
+[Kebab case](https://en.wikipedia.org/wiki/Letter_case#Kebab_case). In Kebab
+case, words are written in lowercase and separated by hyphens (as in
+`top-edge`). This is especially relevant when developing modules and packages
+for others to use, as it keeps things predictable.
+
+```example
+#let kebab-case = [Using hyphen]
+#let _schön = "😊"
+#let 始料不及 = "😱"
+#let π = calc.pi
+
+#kebab-case
+#if -π < 0 { _schön } else { 始料不及 }
+// -π means -1 * π,
+// so it's not a valid identifier
 ```
 
 ## パス { #paths }

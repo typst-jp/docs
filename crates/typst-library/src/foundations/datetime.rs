@@ -2,17 +2,17 @@ use std::cmp::Ordering;
 use std::hash::Hash;
 use std::ops::{Add, Sub};
 
-use ecow::{eco_format, EcoString, EcoVec};
+use ecow::{EcoString, EcoVec, eco_format};
 use time::error::{Format, InvalidFormatDescription};
 use time::macros::format_description;
-use time::{format_description, Month, PrimitiveDateTime};
+use time::{Month, PrimitiveDateTime, format_description};
 
-use crate::diag::{bail, StrResult};
+use crate::World;
+use crate::diag::{StrResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, func, repr, scope, ty, Dict, Duration, Repr, Smart, Str, Value,
+    Dict, Duration, Repr, Smart, Str, Value, cast, func, repr, scope, ty,
 };
-use crate::World;
 
 /// 日付、時刻、またはその両方を表します。
 ///
@@ -102,7 +102,7 @@ use crate::World;
 ///
 /// 全てのコンポーネントが常に使用できるとは限らない点には注意してください。例えば、`{datetime(year: 2023, month: 10, day: 13)}`のようにして新しい`datetime`を作成すると、内部的には日付のみが保持されるため、`hour`や`minute`のようなコンポーネントは使用できません。それらは特定の時刻が指定された`datetime`でのみ動作します。
 #[ty(scope, cast)]
-#[derive(Debug, Clone, Copy, PartialEq, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Hash)]
 pub enum Datetime {
     /// Representation as a date.
     Date(time::Date),

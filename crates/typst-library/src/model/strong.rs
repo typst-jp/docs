@@ -1,12 +1,7 @@
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{
-    elem, Content, NativeElement, Packed, Show, StyleChain, TargetElem,
-};
-use crate::html::{tag, HtmlElem};
-use crate::text::{TextElem, WeightDelta};
+use crate::foundations::{Content, elem};
+use crate::introspection::{Locatable, Tagged};
 
-/// 太字によるコンテンツの強調。
+/// フォントの太さを増やすことでコンテンツを強調します。
 ///
 /// 現在のフォントの太さに指定した差分 `delta` を加えます。
 ///
@@ -24,7 +19,7 @@ use crate::text::{TextElem, WeightDelta};
 /// 強調したいコンテンツをアスタリスク（`*`）で囲むだけです。
 /// ただし、これは単語の区切りにおいてのみ機能します。
 /// 単語の一部を強調したい場合は、関数を使用してください。
-#[elem(title = "Strong Emphasis", keywords = ["bold", "weight"], Show)]
+#[elem(title = "Strong Emphasis", keywords = ["bold", "weight"], Locatable, Tagged)]
 pub struct StrongElem {
     /// フォントの太さに適用する変化量。
     ///
@@ -38,19 +33,4 @@ pub struct StrongElem {
     /// 強調するコンテンツ。
     #[required]
     pub body: Content,
-}
-
-impl Show for Packed<StrongElem> {
-    #[typst_macros::time(name = "strong", span = self.span())]
-    fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        let body = self.body.clone();
-        Ok(if TargetElem::target_in(styles).is_html() {
-            HtmlElem::new(tag::strong)
-                .with_body(Some(body))
-                .pack()
-                .spanned(self.span())
-        } else {
-            body.styled(TextElem::set_delta(WeightDelta(self.delta(styles))))
-        })
-    }
 }

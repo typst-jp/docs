@@ -1,8 +1,8 @@
-use crate::diag::{bail, SourceResult};
+use crate::diag::{SourceResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, Args, AutoValue, Construct, Content, NativeElement, Packed, Smart,
-    StyleChain, Value,
+    Args, AutoValue, Construct, Content, NativeElement, Packed, Smart, StyleChain, Value,
+    cast, elem,
 };
 use crate::introspection::Locator;
 use crate::layout::{
@@ -48,7 +48,6 @@ pub struct BoxElem {
     /// ```example
     /// Image: #box(baseline: 40%, image("tiger.jpg", width: 2cm)).
     /// ```
-    #[resolve]
     pub baseline: Rel<Length>,
 
     /// ボックスの背景色。
@@ -57,28 +56,44 @@ pub struct BoxElem {
 
     /// ボックスの枠線の色。
     /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
-    #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Stroke>>>,
 
     /// ボックスの角の丸めの大きさ。
     /// 詳細は[rectangleのドキュメント]($rect.radius)を参照してください。
-    #[resolve]
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
     /// ボックスのコンテンツのパディング量。
     ///
     /// _注意:_ ボックスがテキストを含むとき、その正確な大きさは現在の[テキストの端]($text.top-edge)に依存します。
+    /// How much to pad the box's content.
+    ///
+    /// This can be a single length for all sides or a dictionary of lengths
+    /// for individual sides. When passing a dictionary, it can contain the
+    /// following keys in order of precedence: `top`, `right`, `bottom`, `left`
+    /// (controlling the respective cell sides), `x`, `y` (controlling vertical
+    /// and horizontal insets), and `rest` (covers all insets not styled by
+    /// other dictionary entries). All keys are optional; omitted keys will use
+    /// their previously set value, or the default value if never set.
+    ///
+    /// [Relative lengths]($relative) are relative to the box size without
+    /// outset.
+    ///
+    /// _Note:_ When the box contains text, its exact size depends on the
+    /// current [text edges]($text.top-edge).
     ///
     /// ```example
     /// #rect(inset: 0pt)[Tight]
     /// ```
-    #[resolve]
     #[fold]
     pub inset: Sides<Option<Rel<Length>>>,
-
     /// レイアウトに影響を与えずにボックスの大きさを拡大する量。
+    ///
+    /// This can be a single length for all sides or a dictionary of lengths for
+    /// individual sides. [Relative lengths]($relative) are relative to the box
+    /// size without outset. See the documentation for [inset]($box.inset) above
+    /// for further details.
     ///
     /// これはパディングが行のレイアウトに影響を与えるのを防ぐために便利です。
     /// 以下の例より一般的な場合については、[未加工テキストのblockパラメーター]($raw.block)のドキュメントを参照してください。
@@ -92,7 +107,6 @@ pub struct BoxElem {
     ///   radius: 2pt,
     /// )[rectangle].
     /// ```
-    #[resolve]
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
@@ -112,7 +126,6 @@ pub struct BoxElem {
 
     /// ボックスのコンテンツ。
     #[positional]
-    #[borrowed]
     pub body: Option<Content>,
 }
 
@@ -250,25 +263,21 @@ pub struct BlockElem {
 
     /// ブロックの枠線の色。
     /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
-    #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Stroke>>>,
 
     /// ブロックの角の丸めの大きさ。
     /// 詳細は[rectangleのドキュメント]($rect.radius)を参照してください。
-    #[resolve]
     #[fold]
     pub radius: Corners<Option<Rel<Length>>>,
 
     /// ブロックのコンテンツのパディング量。
     /// 詳細は[boxのドキュメント]($box.inset)を参照してください。
-    #[resolve]
     #[fold]
     pub inset: Sides<Option<Rel<Length>>>,
 
     /// レイアウトに影響を与えずにブロックの大きさを拡大する量。
     /// 詳細は[boxのドキュメント]($box.outset)を参照してください。
-    #[resolve]
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
@@ -338,7 +347,6 @@ pub struct BlockElem {
 
     /// ブロックのコンテンツ。
     #[positional]
-    #[borrowed]
     pub body: Option<BlockBody>,
 }
 
@@ -477,7 +485,8 @@ mod callbacks {
 
     macro_rules! callback {
         ($name:ident = ($($param:ident: $param_ty:ty),* $(,)?) -> $ret:ty) => {
-            #[derive(Debug, Clone, PartialEq, Hash)]
+            #[derive(Debug, Clone, Hash)]
+            #[allow(clippy::derived_hash_with_manual_eq)]
             pub struct $name {
                 captured: Content,
                 f: fn(&Content, $($param_ty),*) -> $ret,
@@ -513,6 +522,19 @@ mod callbacks {
 
                 pub fn call(&self, $($param: $param_ty),*) -> $ret {
                     (self.f)(&self.captured, $($param),*)
+                }
+            }
+
+            impl PartialEq for $name {
+                fn eq(&self, other: &Self) -> bool {
+                    // Comparing function pointers is problematic. Since for
+                    // each type of content, there is typically just one
+                    // callback, we skip it. It barely matters anyway since
+                    // getting into a comparison codepath for inline & block
+                    // elements containing callback bodies is close to
+                    // impossible (as these are generally generated in show
+                    // rules).
+                    self.captured.eq(&other.captured)
                 }
             }
         };

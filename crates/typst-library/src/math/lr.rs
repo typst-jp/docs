@@ -1,4 +1,4 @@
-use crate::foundations::{elem, func, Content, NativeElement, SymbolElem};
+use crate::foundations::{Content, NativeElement, SymbolElem, elem, func};
 use crate::layout::{Length, Rel};
 use crate::math::Mathy;
 
@@ -8,7 +8,6 @@ use crate::math::Mathy;
 #[elem(title = "Left/Right", Mathy)]
 pub struct LrElem {
     /// ラップしたコンテンツの高さを基準とした括弧の大きさ。
-    #[resolve]
     #[default(Rel::one())]
     pub size: Rel<Length>,
 
@@ -129,7 +128,7 @@ fn delimited(
     ]));
     // Push size only if size is provided
     if let Some(size) = size {
-        elem.push_size(size);
+        elem.size.set(size);
     }
     elem.pack().spanned(span)
 }

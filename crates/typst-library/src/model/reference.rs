@@ -1,35 +1,44 @@
 use comemo::Track;
 use ecow::eco_format;
 
-use crate::diag::{bail, At, Hint, SourceResult};
+use crate::diag::{At, Hint, SourceResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, Cast, Content, Context, Func, IntoValue, Label, NativeElement, Packed,
-    Show, Smart, StyleChain, Synthesize,
+    Cast, Content, Context, Func, IntoValue, Label, NativeElement, Packed, Repr, Smart,
+    StyleChain, Synthesize, cast, elem,
 };
-use crate::introspection::{Counter, CounterKey, Locatable};
+use crate::introspection::{Counter, CounterKey, Locatable, Tagged};
 use crate::math::EquationElem;
 use crate::model::{
-    BibliographyElem, CiteElem, Destination, Figurable, FootnoteElem, Numbering,
+    BibliographyElem, CiteElem, DirectLinkElem, Figurable, FootnoteElem, Numbering,
 };
 use crate::text::TextElem;
 
 /// ラベルや参考文献への参照。
 ///
-/// ラベルを指定して、その参照を生成します。
-/// 参照の[`form`]($ref.form)には`{"normal"}`と`{"page"}`の2種類があります。
+/// ラベルを指定して、その参照を生成します。参照の[`form`]($ref.form)には
+/// `{"normal"}`と`{"page"}`の2種類があります。
 ///
 /// デフォルトの`{"normal"}`参照では、ラベルに対するテキスト形式の参照が作られます。
-/// 例えば見出しへの参照なら、"Section 1"などのような適切な文字列が表示されます。
-/// この参照は、該当する要素へのリンクとしても機能します。
-/// また、参照の構文は文献リストからの引用を行う[cite]にも使用できます。
+/// 例えば見出しへの参照なら、最初の見出しに対しては「Section 1」のような文字列になります。
+/// 「Section」という語は[`lang`]($text.lang)の設定により自動的にローカライズされます。
+/// 参照は該当する要素へのリンクにもなります。
+/// また、参照の構文は文献リストからの[cite]にも使用できます。
 ///
 /// このデフォルト形式では補足語と番号が必要なため、ラベルは _参照可能な要素_ に付けなくてはなりません。
 /// 参照可能な要素としては、
 /// [headings]($heading)、[figures]($figure)、[equations]($math.equation)、[footnotes]($footnote)
 /// などがあります。
-/// 定理（theorem）などのカスタム参照可能要素を作成したい場合は、カスタム[`kind`]($figure.kind)の図表として作成し、それに対応するshowルールを書くことで作成可能です。
+/// 定理（theorem）などのカスタム参照可能要素を作成したい場合は、カスタム[`kind`]($figure.kind)の図表として作成し、
+/// それに対応するshowルールを書くことで作成できます。
 /// 将来的には、カスタム参照可能要素をもっと直接的に定義する方法が導入されるかもしれません。
+///
+/// 自動的な文字列表現が不要で、単にラベル付き要素へリンクしたい場合は、
+/// [`link`]関数の使用を検討してください。
+///
+/// `{"page"}`参照は、ラベルの位置に対応するページ番号への参照を生成します。
+/// [pageのsupplement]($page.supplement)を使うと、ページ番号の前の文言を変更できます。
+/// `{"normal"}`参照と異なり、ラベルは任意の要素に付けられます。
 ///
 /// # 例
 /// ```example
@@ -60,15 +69,43 @@ use crate::text::TextElem;
 ///
 /// # Syntax
 /// この機能には専用の記法も用意されています。
-/// `{"normal"}` の参照を作成するためには`@`に続けてラベル名を入力します。
-/// （例えば`[= Introduction <intro>]`というラベルを参照するには`[@intro]`と入力します）
+/// `{"normal"}`の参照を作成するためには`@`に続けてラベル名を入力します
+/// （例えば`[= Introduction <intro>]`というラベルを参照するには`[@intro]`と入力します）。
 ///
 /// 補足語をカスタマイズするには、
 /// `[@intro[Chapter]]`のように、参照の後に角括弧でコンテンツを追加します。
 ///
-/// # カスタム
-/// 参照のshowルールを書く場合、
-/// 参照の`element`フィールドを通じて参照先の要素にアクセスできます。
+/// # カスタマイズ
+/// 図表や見出しなどのページ参照だけが必要な場合は、setルールで`form`の既定値を
+/// `{"page"}`に変更できます。"page"より短い"p."のような補足語にしたい場合は、
+/// [`page.supplement`]フィールドで変更できます。
+///
+/// ```example
+/// #set page(
+///   numbering: "1",
+///   supplement: "p.",
+/// >>> margin: (bottom: 3em),
+/// >>> footer-descent: 1.25em,
+/// )
+/// #set ref(form: "page")
+///
+/// #figure(
+///   stack(
+///     dir: ltr,
+///     spacing: 1em,
+///     circle(),
+///     square(),
+///   ),
+///   caption: [Shapes],
+/// ) <shapes>
+///
+/// #pagebreak()
+///
+/// See @shapes for examples
+/// of different shapes.
+/// ```
+///
+/// 参照のshowルールを書く場合、参照の`element`フィールドを通じて参照先の要素にアクセスできます。
 /// ただし、Typstがまだそれを発見していない場合、`element`は存在していても`{none}`になる可能性があるため、
 /// 常にコード内でそのケースを処理する必要があります。
 ///
@@ -79,39 +116,35 @@ use crate::text::TextElem;
 /// #show ref: it => {
 ///   let eq = math.equation
 ///   let el = it.element
-///   if el != none and el.func() == eq {
-///     // Override equation references.
-///     link(el.location(),numbering(
-///       el.numbering,
-///       ..counter(eq).at(el.location())
-///     ))
-///   } else {
-///     // Other references as usual.
-///     it
-///   }
+///   // Skip all other references.
+///   if el == none or el.func() != eq { return it }
+///   // Override equation references.
+///   link(el.location(), numbering(
+///     el.numbering,
+///     ..counter(eq).at(el.location())
+///   ))
 /// }
 ///
 /// = Beginnings <beginning>
 /// In @beginning we prove @pythagoras.
 /// $ a^2 + b^2 = c^2 $ <pythagoras>
 /// ```
-#[elem(title = "Reference", Synthesize, Locatable, Show)]
+#[elem(title = "Reference", Locatable, Tagged, Synthesize)]
 pub struct RefElem {
     /// 参照されるべき対象ラベル。
     ///
-    /// これは、ドキュメント内で定義されたラベルや、
-    /// [`参考文献リスト`]($bibliography)の参照キーである場合があります。
+    /// ドキュメント内で定義されたラベル、または
+    /// [`form`]($ref.form)が`{"normal"}`の場合は[`bibliography`]の項目でも構いません。
     #[required]
     pub target: Label,
 
     /// 参照の補足語。
     ///
-    /// [`form`]($ref.form)が`{"normal"}`で設定されている場合は以下の通りです。
+    /// [`form`]($ref.form)が`{"normal"}`の場合：
     /// - 見出しや図への参照では、この値が参照番号の前に追加されます。
     /// - 文献引用の場合は、ページ番号などを追記するのに使えます。
     ///
-    /// もし[`form`]($ref.form)が`{"page"}`に設定されている場合には、
-    /// 参照先ラベルのページ番号の前にこの値が追加されます。
+    /// [`form`]($ref.form)が`{"page"}`の場合は、参照先ラベルのページ番号の前にこの値が追加されます。
     ///
     /// また、関数が指定されている場合は、それに参照先の要素が渡され、戻り値のコンテンツが補足語となります。
     ///
@@ -133,10 +166,9 @@ pub struct RefElem {
     /// in @intro[Part], it is done
     /// manually.
     /// ```
-    #[borrowed]
     pub supplement: Smart<Option<Supplement>>,
 
-    /// 生成する参照の種類
+    /// 生成する参照の種類。
     ///
     /// ```example
     /// #set page(numbering: "1")
@@ -147,11 +179,11 @@ pub struct RefElem {
     #[default(RefForm::Normal)]
     pub form: RefForm,
 
-    /// A synthesized citation.
+    /// 合成された引用。
     #[synthesized]
     pub citation: Option<Packed<CiteElem>>,
 
-    /// The referenced element.
+    /// 参照先の要素。
     #[synthesized]
     pub element: Option<Content>,
 }
@@ -165,27 +197,31 @@ impl Synthesize for Packed<RefElem> {
         let citation = to_citation(self, engine, styles)?;
 
         let elem = self.as_mut();
-        elem.push_citation(Some(citation));
-        elem.push_element(None);
+        elem.citation = Some(Some(citation));
+        elem.element = Some(None);
 
-        if !BibliographyElem::has(engine, elem.target) {
-            if let Ok(found) = engine.introspector.query_label(elem.target).cloned() {
-                elem.push_element(Some(found));
-                return Ok(());
-            }
+        if !BibliographyElem::has(engine, elem.target)
+            && let Ok(found) = engine.introspector.query_label(elem.target).cloned()
+        {
+            elem.element = Some(Some(found));
+            return Ok(());
         }
 
         Ok(())
     }
 }
 
-impl Show for Packed<RefElem> {
-    #[typst_macros::time(name = "ref", span = self.span())]
-    fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
+impl Packed<RefElem> {
+    /// Realize as a linked, textual reference.
+    pub fn realize(
+        &self,
+        engine: &mut Engine,
+        styles: StyleChain,
+    ) -> SourceResult<Content> {
         let elem = engine.introspector.query_label(self.target);
         let span = self.span();
 
-        let form = self.form(styles);
+        let form = self.form.get(styles);
         if form == RefForm::Page {
             let elem = elem.at(span)?;
             let elem = elem.clone();
@@ -201,7 +237,7 @@ impl Show for Packed<RefElem> {
                 .at(span)?;
             let supplement = engine.introspector.page_supplement(loc);
 
-            return show_reference(
+            return realize_reference(
                 self,
                 engine,
                 styles,
@@ -214,8 +250,15 @@ impl Show for Packed<RefElem> {
         // RefForm::Normal
 
         if BibliographyElem::has(engine, self.target) {
-            if elem.is_ok() {
-                bail!(span, "label occurs in the document and its bibliography");
+            if let Ok(elem) = elem {
+                bail!(
+                    span,
+                    "label `{}` occurs both in the document and its bibliography",
+                    self.target.repr();
+                    hint: "change either the {}'s label or the \
+                           bibliography key to resolve the ambiguity",
+                    elem.func().name(),
+                );
             }
 
             return Ok(to_citation(self, engine, styles)?.pack().spanned(span));
@@ -250,7 +293,7 @@ impl Show for Packed<RefElem> {
             .hint(eco_format!(
                 "you can enable {} numbering with `#set {}(numbering: \"1.\")`",
                 elem.func().name(),
-                if elem.func() == EquationElem::elem() {
+                if elem.func() == EquationElem::ELEM {
                     "math.equation"
                 } else {
                     elem.func().name()
@@ -258,7 +301,7 @@ impl Show for Packed<RefElem> {
             ))
             .at(span)?;
 
-        show_reference(
+        realize_reference(
             self,
             engine,
             styles,
@@ -271,7 +314,7 @@ impl Show for Packed<RefElem> {
 }
 
 /// Show a reference.
-fn show_reference(
+fn realize_reference(
     reference: &Packed<RefElem>,
     engine: &mut Engine,
     styles: StyleChain,
@@ -283,10 +326,16 @@ fn show_reference(
     let loc = elem.location().unwrap();
     let numbers = counter.display_at_loc(engine, loc, styles, &numbering.trimmed())?;
 
-    let supplement = match reference.supplement(styles).as_ref() {
+    let supplement = match reference.supplement.get_ref(styles) {
         Smart::Auto => supplement,
         Smart::Custom(None) => Content::empty(),
         Smart::Custom(Some(supplement)) => supplement.resolve(engine, styles, [elem])?,
+    };
+
+    let alt = {
+        let supplement = supplement.plain_text();
+        let numbering = numbers.plain_text();
+        eco_format!("{supplement} {numbering}",)
     };
 
     let mut content = numbers;
@@ -294,7 +343,9 @@ fn show_reference(
         content = supplement + TextElem::packed("\u{a0}") + content;
     }
 
-    Ok(content.linked(Destination::Location(loc)))
+    content = content.spanned(reference.span());
+
+    Ok(DirectLinkElem::new(loc, content, Some(alt)).pack())
 }
 
 /// Turn a reference into a citation.
@@ -304,15 +355,11 @@ fn to_citation(
     styles: StyleChain,
 ) -> SourceResult<Packed<CiteElem>> {
     let mut elem = Packed::new(CiteElem::new(reference.target).with_supplement(
-        match reference.supplement(styles).clone() {
+        match reference.supplement.get_cloned(styles) {
             Smart::Custom(Some(Supplement::Content(content))) => Some(content),
             _ => None,
         },
     ));
-
-    if let Some(loc) = reference.location() {
-        elem.set_location(loc);
-    }
 
     elem.synthesize(engine, styles)?;
 
@@ -353,7 +400,7 @@ cast! {
     v: Func => Self::Func(v),
 }
 
-/// The form of the reference.
+/// 参照の形式。
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum RefForm {
     /// ラベルに対して文字列での参照を生成します。

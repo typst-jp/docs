@@ -1,4 +1,4 @@
-use crate::foundations::{elem, Content, Packed};
+use crate::foundations::{Content, Packed, elem};
 use crate::layout::{Length, Rel};
 use crate::math::{EquationElem, Mathy};
 
@@ -56,9 +56,9 @@ impl Packed<AttachElem> {
 
             macro_rules! merge {
                 ($content:ident) => {
-                    if base.$content.is_none() && elem.$content.is_some() {
+                    if !base.$content.is_set() && elem.$content.is_set() {
                         base.$content = elem.$content.clone();
-                        elem.$content = None;
+                        elem.$content.unset();
                     }
                 };
             }
@@ -144,7 +144,6 @@ pub struct StretchElem {
     pub body: Content,
 
     /// 字形およびそのアタッチメントを基準とした伸縮の大きさ。
-    #[resolve]
     #[default(Rel::one())]
     pub size: Rel<Length>,
 }

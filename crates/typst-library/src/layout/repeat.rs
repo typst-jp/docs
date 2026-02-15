@@ -1,7 +1,6 @@
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{elem, Content, NativeElement, Packed, Show, StyleChain};
-use crate::layout::{BlockElem, Length};
+use crate::foundations::{Content, elem};
+use crate::introspection::Tagged;
+use crate::layout::Length;
 
 /// 利用可能なスペースでのコンテンツの繰り返し。
 ///
@@ -22,7 +21,12 @@ use crate::layout::{BlockElem, Length};
 ///   Berlin, the 22nd of December, 2022
 /// ]
 /// ```
-#[elem(Show)]
+///
+/// # Accessibility
+/// Repeated content is automatically marked as an [artifact]($pdf.artifact) and
+/// hidden from Assistive Technology (AT). Do not use this function to create
+/// content that contributes to the meaning of your document.
+#[elem(Tagged)]
 pub struct RepeatElem {
     /// 繰り返すコンテンツ。
     #[required]
@@ -35,12 +39,4 @@ pub struct RepeatElem {
     /// 利用可能なスペースを完全に埋めるために、実体間の間隔を大きくするかどうか。
     #[default(true)]
     pub justify: bool,
-}
-
-impl Show for Packed<RepeatElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::single_layouter(self.clone(), engine.routines.layout_repeat)
-            .pack()
-            .spanned(self.span()))
-    }
 }

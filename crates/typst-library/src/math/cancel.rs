@@ -1,4 +1,4 @@
-use crate::foundations::{cast, elem, Content, Func, Smart};
+use crate::foundations::{Content, Func, Smart, cast, elem};
 use crate::layout::{Abs, Angle, Length, Ratio, Rel};
 use crate::math::Mathy;
 use crate::visualize::Stroke;
@@ -28,7 +28,6 @@ pub struct CancelElem {
     /// $ a + cancel(x, length: #200%)
     ///     - cancel(x, length: #200%) $
     /// ```
-    #[resolve]
     #[default(Rel::new(Ratio::one(), Abs::pt(3.0).into()))]
     pub length: Rel<Length>,
 
@@ -84,7 +83,6 @@ pub struct CancelElem {
     ///   ),
     /// ) $
     /// ```
-    #[resolve]
     #[fold]
     #[default(Stroke {
         // Default stroke has 0.5pt for better visuals.

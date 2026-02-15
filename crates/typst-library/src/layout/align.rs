@@ -1,12 +1,11 @@
 use std::ops::Add;
 
-use ecow::{eco_format, EcoString};
+use ecow::{EcoString, eco_format};
 
-use crate::diag::{bail, HintedStrResult, SourceResult, StrResult};
-use crate::engine::Engine;
+use crate::diag::{HintedStrResult, StrResult, bail};
 use crate::foundations::{
-    cast, elem, func, scope, ty, CastInfo, Content, Fold, FromValue, IntoValue, Packed,
-    Reflect, Repr, Resolve, Show, StyleChain, Value,
+    CastInfo, Content, Fold, FromValue, IntoValue, Reflect, Repr, Resolve, StyleChain,
+    Value, cast, elem, func, scope, ty,
 };
 use crate::layout::{Abs, Axes, Axis, Dir, Side};
 use crate::text::TextElem;
@@ -71,7 +70,7 @@ use crate::text::TextElem;
 /// ```example
 /// Start #h(1fr) End
 /// ```
-#[elem(Show)]
+#[elem]
 pub struct AlignElem {
     /// 両方の軸に沿った[alignment]。
     ///
@@ -93,13 +92,6 @@ pub struct AlignElem {
     /// 配置するコンテンツ。
     #[required]
     pub body: Content,
-}
-
-impl Show for Packed<AlignElem> {
-    #[typst_macros::time(name = "align", span = self.span())]
-    fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        Ok(self.body.clone().aligned(self.alignment(styles)))
-    }
 }
 
 /// 軸に沿って何かを[align]する位置。
@@ -272,7 +264,7 @@ impl Resolve for Alignment {
     type Output = Axes<FixedAlignment>;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
-        self.fix(TextElem::dir_in(styles))
+        self.fix(styles.resolve(TextElem::dir))
     }
 }
 
@@ -373,7 +365,7 @@ impl Resolve for HAlignment {
     type Output = FixedAlignment;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
-        self.fix(TextElem::dir_in(styles))
+        self.fix(styles.resolve(TextElem::dir))
     }
 }
 
@@ -409,7 +401,7 @@ impl Resolve for OuterHAlignment {
     type Output = FixedAlignment;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
-        self.fix(TextElem::dir_in(styles))
+        self.fix(styles.resolve(TextElem::dir))
     }
 }
 
@@ -631,7 +623,7 @@ where
     type Output = Axes<FixedAlignment>;
 
     fn resolve(self, styles: StyleChain) -> Self::Output {
-        self.fix(TextElem::dir_in(styles))
+        self.fix(styles.resolve(TextElem::dir))
     }
 }
 

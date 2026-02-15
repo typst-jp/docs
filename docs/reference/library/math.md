@@ -90,3 +90,20 @@ $ sum_(i in NN) 1 + i $
 # mathモジュール
 全ての数学関数は、数式中ではデフォルトで利用できる`math`[モジュール]($scripting/#modules)に属しています。
 数式外では、`math.`プレフィックスを付けるとアクセスできます。
+
+# Accessibility
+To make math accessible, you must provide alternative descriptions of equations
+in natural language using the [`alt` parameter of
+`math.equation`]($math.equation.alt). For more information, see the [Textual
+Representations section of the Accessibility
+Guide]($guides/accessibility/#textual-representations).
+
+```example
+#math.equation(
+  alt: "d S equals delta q divided by T",
+  $ d "S" = (delta q) / T $,
+)
+```
+
+In the future, Typst will automatically make equations without alternative
+descriptions accessible in HTML and PDF 2.0 export.

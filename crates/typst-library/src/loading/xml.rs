@@ -1,10 +1,9 @@
-use ecow::EcoString;
 use roxmltree::ParsingOptions;
 use typst_syntax::Spanned;
 
-use crate::diag::{format_xml_like_error, At, FileError, SourceResult};
+use crate::diag::{LoadError, LoadedWithin, SourceResult, format_xml_like_error};
 use crate::engine::Engine;
-use crate::foundations::{dict, func, scope, Array, Dict, IntoValue, Str, Value};
+use crate::foundations::{Array, Dict, IntoValue, Str, Value, dict, func, scope};
 use crate::loading::{DataSource, Load, Readable};
 
 /// XMLファイルから構造化データを読み込む。
@@ -61,14 +60,14 @@ pub fn xml(
     /// XMLファイルの[パス]($syntax/#paths)または生のXMLバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
-    let data = source.load(engine.world)?;
-    let text = data.as_str().map_err(FileError::from).at(source.span)?;
+    let loaded = source.load(engine.world)?;
+    let text = loaded.data.as_str().within(&loaded)?;
     let document = roxmltree::Document::parse_with_options(
         text,
         ParsingOptions { allow_dtd: true, ..Default::default() },
     )
     .map_err(format_xml_error)
-    .at(source.span)?;
+    .within(&loaded)?;
     Ok(convert_xml(document.root()))
 }
 
@@ -76,7 +75,10 @@ pub fn xml(
 impl xml {
     /// XMLの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode XML")]
-    #[deprecated = "`xml.decode`は非推奨です。代わりにバイト列を直接`xml`に渡してください。"]
+    #[deprecated(
+        message = "`xml.decode`は非推奨です。代わりにバイト列を直接`xml`に渡してください。",
+        until = "0.15.0"
+    )]
     pub fn decode(
         engine: &mut Engine,
         /// XMLデータ。
@@ -111,6 +113,6 @@ fn convert_xml(node: roxmltree::Node) -> Value {
 }
 
 /// Format the user-facing XML error message.
-fn format_xml_error(error: roxmltree::Error) -> EcoString {
+fn format_xml_error(error: roxmltree::Error) -> LoadError {
     format_xml_like_error("XML", error)
 }

@@ -1,17 +1,16 @@
 use comemo::{Track, Tracked, TrackedMut};
-use ecow::{eco_format, eco_vec, EcoString, EcoVec};
+use ecow::{EcoString, EcoVec, eco_format, eco_vec};
 use typst_syntax::Span;
 
-use crate::diag::{bail, At, SourceResult};
+use crate::World;
+use crate::diag::{At, SourceResult, bail};
 use crate::engine::{Engine, Route, Sink, Traced};
 use crate::foundations::{
-    cast, elem, func, scope, select_where, ty, Args, Construct, Content, Context, Func,
-    LocatableSelector, NativeElement, Packed, Repr, Selector, Show, Str, StyleChain,
-    Value,
+    Args, Construct, Content, Context, Func, LocatableSelector, NativeElement, Repr,
+    Selector, Str, Value, cast, elem, func, scope, select_where, ty,
 };
 use crate::introspection::{Introspector, Locatable, Location};
 use crate::routines::Routines;
-use crate::World;
 
 /// 文書中の状態の管理。
 ///
@@ -22,18 +21,18 @@ use crate::World;
 ///
 /// ```typ
 /// // This doesn't work!
-/// #let x = 0
+/// #let star = 0
 /// #let compute(expr) = {
-///   x = eval(
-///     expr.replace("x", str(x))
+///   star = eval(
+///     expr.replace("⭐", str(star))
 ///   )
-///   [New value is #x. ]
+///   [New value is #star.]
 /// }
 ///
 /// #compute("10") \
-/// #compute("x + 3") \
-/// #compute("x * 2") \
-/// #compute("x - 5")
+/// #compute("⭐ + 3") \
+/// #compute("⭐ * 2") \
+/// #compute("⭐ - 5")
 /// ```
 ///
 /// # 状態と文書のマークアップ { #state-and-markup }
@@ -85,18 +84,18 @@ use crate::World;
 /// 最初の例は以下のようになります。
 ///
 /// ```example
-/// #let s = state("x", 0)
-/// #let compute(expr) = [
-///   #s.update(x =>
-///     eval(expr.replace("x", str(x)))
+/// #let star = state("star", 0)
+/// #let compute(expr) = {
+///   star.update(old =>
+///     eval(expr.replace("⭐", str(old)))
 ///   )
-///   New value is #context s.get().
-/// ]
+///   [New value is #context star.get().]
+/// }
 ///
 /// #compute("10") \
-/// #compute("x + 3") \
-/// #compute("x * 2") \
-/// #compute("x - 5")
+/// #compute("⭐ + 3") \
+/// #compute("⭐ * 2") \
+/// #compute("⭐ - 5")
 /// ```
 ///
 /// Typstが管理する状態は常に評価順ではなくレイアウト順で更新されます。
@@ -105,22 +104,22 @@ use crate::World;
 /// このようにして、計算結果を変数に保存できるようになり、正しい結果を表示しています。
 ///
 /// ```example
-/// >>> #let s = state("x", 0)
-/// >>> #let compute(expr) = [
-/// >>>   #s.update(x =>
-/// >>>     eval(expr.replace("x", str(x)))
+/// >>> #let star = state("star", 0)
+/// >>> #let compute(expr) = {
+/// >>>   star.update(old =>
+/// >>>     eval(expr.replace("⭐", str(old)))
 /// >>>   )
-/// >>>   New value is #context s.get().
-/// >>> ]
+/// >>>   [New value is #context star.get().]
+/// >>> }
 /// <<< ...
 ///
 /// #let more = [
-///   #compute("x * 2") \
-///   #compute("x - 5")
+///   #compute("⭐ * 2") \
+///   #compute("⭐ - 5")
 /// ]
 ///
 /// #compute("10") \
-/// #compute("x + 3") \
+/// #compute("⭐ + 3") \
 /// #more
 /// ```
 ///
@@ -134,23 +133,23 @@ use crate::World;
 /// 特に、`at`メソッドを用いると特定の任意の位置での状態値が取得でき、`final`メソッドを用いると文書の終わりでの状態値を取得できます。
 ///
 /// ```example
-/// >>> #let s = state("x", 0)
-/// >>> #let compute(expr) = [
-/// >>>   #s.update(x => {
-/// >>>     eval(expr.replace("x", str(x)))
-/// >>>   })
-/// >>>   New value is #context s.get().
-/// >>> ]
+/// >>> #let star = state("star", 0)
+/// >>> #let compute(expr) = {
+/// >>>   star.update(old =>
+/// >>>     eval(expr.replace("⭐", str(old)))
+/// >>>   )
+/// >>>   [New value is #context star.get().]
+/// >>> }
 /// <<< ...
 ///
 /// Value at `<here>` is
-/// #context s.at(<here>)
+/// #context star.at(<here>)
 ///
 /// #compute("10") \
-/// #compute("x + 3") \
+/// #compute("⭐ + 3") \
 /// *Here.* <here> \
-/// #compute("x * 2") \
-/// #compute("x - 5")
+/// #compute("⭐ * 2") \
+/// #compute("⭐ - 5")
 /// ```
 ///
 /// # 注意事項 { #caution }
@@ -165,9 +164,9 @@ use crate::World;
 ///
 /// ```example
 /// // This is bad!
-/// #let s = state("x", 1)
-/// #context s.update(s.final() + 1)
-/// #context s.get()
+/// #let x = state("key", 1)
+/// #context x.update(x.final() + 1)
+/// #context x.get()
 /// ```
 ///
 /// 一般に、コンテキスト内部で更新を行う状態を作成しないようにしてください。
@@ -248,12 +247,12 @@ impl State {
 
     /// The selector for this state's updates.
     fn selector(&self) -> Selector {
-        select_where!(StateUpdateElem, Key => self.key.clone())
+        select_where!(StateUpdateElem, key => self.key.clone())
     }
 
     /// Selects all state updates.
     pub fn select_any() -> Selector {
-        StateUpdateElem::elem().select()
+        StateUpdateElem::ELEM.select()
     }
 }
 
@@ -263,8 +262,28 @@ impl State {
     #[func(constructor)]
     pub fn construct(
         /// 状態を識別するキー。
+        ///
+        /// この文字列キーで、状態への[更新]($state.update)が識別されます。
+        /// 同じ`key`で複数の状態を作ると、どれを更新しても同じ状態として扱われます。
         key: Str,
         /// 状態の初期値。
+        ///
+        /// 同じ`key`でも`init`が異なる場合、各状態は自分の初期値を使いますが、
+        /// 更新は共有されます。つまり、ある場所での状態値は、その状態の初期値と
+        /// それ以前の更新から計算されます。
+        ///
+        /// ```example
+        /// #let banana = state("key", "🍌")
+        /// #let broccoli = state("key", "🥦")
+        ///
+        /// #banana.update(it => it + "😋")
+        ///
+        /// #context [
+        ///   - #state("key", "🍎").get()
+        ///   - #banana.get()
+        ///   - #broccoli.get()
+        /// ]
+        /// ```
         #[default]
         init: Value,
     ) -> State {
@@ -297,7 +316,7 @@ impl State {
         engine: &mut Engine,
         context: Tracked<Context>,
         span: Span,
-        /// 状態値を取得する場所。
+    /// 状態値を取得する場所。
         selector: LocatableSelector,
     ) -> SourceResult<Value> {
         let loc = selector.resolve_unique(engine.introspector, context).at(span)?;
@@ -323,12 +342,41 @@ impl State {
     /// 文書中に出力がなければ何も起こりません！
     /// 例えば`{let _ = state("key").update(7)}`と書いた場合が、この何も起きないときに該当します。
     /// 状態の更新は常にレイアウト順に適用されるため、この場合にはTypstはいつ状態を更新するのか分かりません。
+    ///
+    /// [`get`]($state.get)、[`at`]($state.at)、[`final`]($state.final)とは異なり、
+    /// この関数は[コンテキスト]($context)を必要としません。
     #[func]
     pub fn update(
         self,
         span: Span,
-        /// 関数ではない値が与えられた場合、状態にその値を設定します。
-        /// 関数が与えられた場合、その関数は前の状態を受け取り、新しい状態を返さなければなりません。
+    /// 更新に使う値または関数。
+    ///
+    /// - 関数ではない値が与えられた場合、状態にその値を設定します。
+    /// - 関数が与えられた場合、その関数は前の状態を受け取り、新しい状態を返さなければなりません。
+    ///
+    /// 以前の値に基づいて更新する場合は、[コンテキスト]($context)から
+    /// 以前の値を取得するよりも、関数形式を使うことを推奨します。
+    /// これによりコンパイラが最終状態を効率良く解決でき、
+    /// 必要な[レイアウト反復]($context/#compiler-iterations)回数を抑えられます。
+    ///
+    /// 次の例では、`{fill.update(f => not f)}`は期待通りに
+    /// [箇条書きの項目]($list.item)の奇数行を塗ります。
+    /// これを`{context fill.update(not fill.get())}`に置き換えると、
+    /// 各更新が追加の反復を必要とし、5回以内に収束しません。
+    ///
+    /// ```example
+    /// #let fill = state("fill", false)
+    ///
+    /// #show list.item: it => {
+    ///   fill.update(f => not f)
+    ///   context {
+    ///     set text(fill: fuchsia) if fill.get()
+    ///     it
+    ///   }
+    /// }
+    ///
+    /// #lorem(5).split().map(list.item).join()
+    /// ```
         update: StateUpdate,
     ) -> Content {
         StateUpdateElem::new(self.key, update).pack().spanned(span)
@@ -357,8 +405,8 @@ cast! {
 }
 
 /// Executes a display of a state.
-#[elem(Construct, Locatable, Show)]
-struct StateUpdateElem {
+#[elem(Construct, Locatable)]
+pub struct StateUpdateElem {
     /// The key that identifies the state.
     #[required]
     key: Str,
@@ -372,11 +420,5 @@ struct StateUpdateElem {
 impl Construct for StateUpdateElem {
     fn construct(_: &mut Engine, args: &mut Args) -> SourceResult<Content> {
         bail!(args.span, "cannot be constructed manually");
-    }
-}
-
-impl Show for Packed<StateUpdateElem> {
-    fn show(&self, _: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(Content::empty())
     }
 }
