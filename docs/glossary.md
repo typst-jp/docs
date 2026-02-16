@@ -41,7 +41,7 @@ description: |
 | accessible | アクセシブル | [アクセシビリティ]($guides/accessibility)など |
 | PDF/A | PDF/A | PDFの国際規格 |
 | tag | タグ | [タグ]($guides/accessibility)など |
-| attachment | 添付ファイル | [添付ファイル]($pdf.attach) |
+| attach / attachment | アタッチメント（数式） / 添付ファイル（PDF） | [アタッチメント]($math.attach) / [添付ファイル]($pdf.attach) |
 | justification | 均等割り付け | [均等割り付け]($par.justify) |
 | header | ヘッダー | [ヘッダー]($table.header)など |
 | footer | フッター | [フッター]($table.footer)など |
