@@ -16,7 +16,7 @@ description: |
 | content | コンテンツ | 型の一種で、マークアップによって表される |
 | element | 要素 | 見出し、数式、表などの文書を構成する要素 |
 | element function | 要素関数 | [要素関数]($function/#element-functions)を参照 |
-| styling | スタイル設定 |   |
+| styling | スタイル設定 | カテゴリ名など |
 | set rule | setルール | [スタイル設定]($styling)に出てきます |
 | show rule | showルール | [スタイル設定]($styling)に出てきます |
 | markup | マークアップ | Typstのデフォルトモード |
@@ -67,7 +67,6 @@ description: |
 | visualize / visualization | 視覚化 | カテゴリ名 |
 | foundations | 基礎 | カテゴリ名 |
 | data loading | データの読み込み | カテゴリ名 |
-| styling | スタイル設定 | カテゴリ名 |
 | bookmark | ブックマーク | PDFの見出しブックマークなど |
 | glyph | グリフ | フォント内の文字の視覚的表現 |
 | artifact | アーティファクト | [`pdf.artifact`]($pdf.artifact)を参照 |
