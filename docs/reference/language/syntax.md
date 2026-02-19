@@ -169,21 +169,21 @@ I got an ice cream for
 \$1.50! \u{1f600}
 ```
 
-## Identifiers
-Names of variables, functions, and so on (_identifiers_) can contain letters,
-numbers, hyphens (`-`), and underscores (`_`). They must start with a letter or
-an underscore.
+## 識別子 { #identifiers }
+変数名や関数名など(_識別子_)には、
+文字、数字、ハイフン（`-`）、アンダースコア（`_`）を使用できます。
+先頭は文字またはアンダースコアでなければなりません。
 
-More specifically, the identifier syntax in Typst is based on the
-[Unicode Standard Annex #31](https://www.unicode.org/reports/tr31/), with two
-extensions: Allowing `_` as a starting character, and allowing both `_` and `-`
-as continuing characters.
+より厳密には、Typstにおける識別子の構文は[Unicode Standard Annex #31](https://www.unicode.org/reports/tr31/)に基づいていますが、
+2つの拡張を行っています。
+開始文字として`_`を許可すること、
+継続文字として`_`と`-`の両方を許可することです。
 
-For multi-word identifiers, the recommended case convention is
-[Kebab case](https://en.wikipedia.org/wiki/Letter_case#Kebab_case). In Kebab
-case, words are written in lowercase and separated by hyphens (as in
-`top-edge`). This is especially relevant when developing modules and packages
-for others to use, as it keeps things predictable.
+複数の単語からなる識別子の場合、
+推奨される表記規約は[ケバブケース](https://en.wikipedia.org/wiki/Letter_case#Kebab_case)です。
+ケバブケースでは、単語は小文字で書かれ、ハイフンで区切られます（例: `top-edge`）。
+これは、他の人が使用するモジュールやパッケージを開発する際に特に重要であり、
+予測可能性を保つことができます。
 
 ```example
 #let kebab-case = [Using hyphen]
