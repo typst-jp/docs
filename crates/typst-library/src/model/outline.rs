@@ -49,7 +49,7 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// 同様に`{figure.where(kind: table)}`と設定すれば、表のアウトラインを生成できます。
 ///
 /// [`where`]($function.where)セレクターを使わずに`figure`のみの指定もできますが、その場合は画像や表、
-/// またその他の素材も含む _全て_ の図表がアウトラインに表示されます。
+/// またその他の素材も含む_全て_の図表がアウトラインに表示されます。
 ///
 /// ```example
 /// #outline(

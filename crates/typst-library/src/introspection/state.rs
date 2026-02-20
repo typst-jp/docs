@@ -17,7 +17,7 @@ use crate::routines::Routines;
 /// 文書中で何回か計算を行い、最後の計算結果を次の計算で使用するために記憶しておきたいとします。
 /// 以下と同等のコードを試すと10、13、26、21と出力されることを期待するでしょう。
 /// しかしTypstでは**そうはなりません**。
-/// このコードを試してみると、Typstは _Variables from outside the function are read-only and cannot be modified._ というエラーメッセージを出力することが分かります。
+/// このコードを試してみると、Typstは_Variables from outside the function are read-only and cannot be modified._というエラーメッセージを出力することが分かります。
 ///
 /// ```typ
 /// // This doesn't work!
@@ -74,7 +74,7 @@ use crate::routines::Routines;
 /// この状態値はいくつかの関数を公開しており、最も重要な2つの関数が`get`と`update`です。
 ///
 /// - [`get`]($state.get)関数は状態の現在値を取得します。
-/// 値は文書中で変化するため、これは[コンテキスト]($context)が利用可能な場合にのみ使用できる _コンテキスト_ 関数です。
+/// 値は文書中で変化するため、これは[コンテキスト]($context)が利用可能な場合にのみ使用できる_コンテキスト_関数です。
 ///
 /// - [`update`]($state.update)関数は状態に修正を加えます。
 /// 任意の値が使用できます。
