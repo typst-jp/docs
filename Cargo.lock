@@ -2092,15 +2092,20 @@ dependencies = [
 
 [[package]]
 name = "pulldown-cmark"
-version = "0.9.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "57206b407293d2bcd3af849ce869d52068623f19e1b5ff8e8778e3309439682b"
+version = "0.13.0"
+source = "git+https://github.com/3w36zj6/pulldown-cmark-cjk-friendly?rev=ccdd8e0#ccdd8e0bd2ed96da7786272250b79a996911fd05"
 dependencies = [
  "bitflags 2.9.1",
  "getopts",
  "memchr",
+ "pulldown-cmark-escape",
  "unicase",
 ]
+
+[[package]]
+name = "pulldown-cmark-escape"
+version = "0.11.0"
+source = "git+https://github.com/3w36zj6/pulldown-cmark-cjk-friendly?rev=ccdd8e0#ccdd8e0bd2ed96da7786272250b79a996911fd05"
 
 [[package]]
 name = "pxfm"
@@ -3018,6 +3023,7 @@ dependencies = [
  "ecow",
  "heck",
  "pulldown-cmark",
+ "pulldown-cmark-escape",
  "regex",
  "rustc-hash",
  "serde",

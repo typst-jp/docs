@@ -24,7 +24,7 @@ use crate::text::TextElem;
 /// A work of art, a visual throne
 /// ```
 ///
-/// 垂直方向に中央揃えにするには _horizon_ 配置を使用します。
+/// 垂直方向に中央揃えにするには_horizon_配置を使用します。
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(horizon)
