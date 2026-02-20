@@ -182,8 +182,8 @@ I got an ice cream for
 複数の単語からなる識別子の場合、
 推奨される表記規約は[ケバブケース](https://en.wikipedia.org/wiki/Letter_case#Kebab_case)です。
 ケバブケースでは、単語は小文字で書かれ、ハイフンで区切られます（例: `top-edge`）。
-これは、他の人が使用するモジュールやパッケージを開発する際に特に重要であり、
-予測可能性を保つことができます。
+これは、予測可能性を維持できるため、
+他の人が利用するモジュールやパッケージを開発する際に特に重要です。
 
 ```example
 #let kebab-case = [Using hyphen]
