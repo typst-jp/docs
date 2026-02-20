@@ -234,7 +234,7 @@ horizontal stripes or <a href="/docs/reference/layout/grid/#definitions-cell">ch
   <span class="typ-punct">[</span>April<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>The Catcher in the Rye<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>J.D. Salinger<span class="typ-punct">]</span><span class="typ-punct">,</span> <span class="typ-punct">[</span>Coming-of-Age<span class="typ-punct">]</span><span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/docs/assets/86722819d20f9157f8ad24caea8c4046.png" alt="Preview"></div></div>
-<p>This example shows a book club reading list. The line <code>fill: <span class="typ-punct">(</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-str">&quot;EAF2F5&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span> <span class="typ-key">none</span><span class="typ-punct">)</span></code> in <code>table</code>'s set rule is all that is needed to add striped columns. It
+<p>This example shows a book club reading list. The line <code>fill: <span class="typ-punct">(</span><span class="typ-func">rgb</span><span class="typ-punct">(</span><span class="typ-str">&quot;EAF2F5&quot;</span><span class="typ-punct">)</span><span class="typ-punct">,</span>  <span class="typ-key">none</span><span class="typ-punct">)</span></code> in <code>table</code>'s set rule is all that is needed to add striped columns. It
 tells Typst to alternate between coloring columns with a light blue (in the
 <a href="/docs/reference/visualize/color/#definitions-rgb"><code>rgb</code></a> function call) and nothing (<code><span class="typ-key">none</span></code>). Note that we
 extracted all of our styling from the <code>table</code> function call itself into set and
@@ -722,8 +722,8 @@ merge adjacent cells with the same value:</p>
     ofi<span class="typ-punct">,</span>
 <span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/docs/assets/cb268a7fe2cb41bcb2dd071c5495dbdb.png" alt="Preview"></div></div>
-<p>In the example, we first define variables with &quot;Office&quot;, &quot;Remote&quot;, and &quot;On
-leave&quot; so we don't have to write these labels out every time. We can then use
+<p>In the example, we first define variables with "Office", "Remote", and "On
+leave" so we don't have to write these labels out every time. We can then use
 these variables in the table body either directly or in a <code>table.cell</code> call if
 the team member spends multiple consecutive days in office, remote, or on leave.</p>
 <p>The example also contains a black header (created with <code>table</code>'s <code>fill</code>
@@ -889,14 +889,14 @@ on the web or from your experiment. Fortunately, Typst can load many <a href="/d
 file formats</a>, so you can use scripting to include their
 data in a table.</p>
 <p>The most common file format for tabular data is CSV. You can obtain a CSV file
-from Excel by choosing &quot;Save as&quot; in the <em>File</em> menu and choosing the file format
-&quot;CSV UTF-8 (Comma-delimited) (.csv)&quot;. Save the file and, if you are using the
+from Excel by choosing "Save as" in the <em>File</em> menu and choosing the file format
+"CSV UTF-8 (Comma-delimited) (.csv)". Save the file and, if you are using the
 web app, upload it to your project.</p>
 <p>In our case, we will be building a table about Moore's Law. For this purpose, we
 are using a statistic with <a href="https://ourworldindata.org/grapher/transistors-per-microprocessor">how many transistors the average microprocessor
 consists of per year from Our World in
 Data</a>. Let's
-start by pressing the &quot;Download&quot; button to get a CSV file with the raw data.</p>
+start by pressing the "Download" button to get a CSV file with the raw data.</p>
 <p>Be sure to move the file to your project or somewhere Typst can see it, if you
 are using the CLI. Once you did that, we can open the file to see how it is
 structured:</p>
@@ -909,7 +909,7 @@ structured:</p>
 <p>The file starts with a header and contains four columns: Entity (which is to
 whom the metric applies), Code, the year, and the number of transistors per
 microprocessor. Only the last two columns change between each row, so we can
-disregard &quot;Entity&quot; and &quot;Code&quot;.</p>
+disregard "Entity" and "Code".</p>
 <p>First, let's start by loading this file with the <a href="/docs/reference/data-loading/csv/"><code>csv</code></a> function. It accepts
 the file name of the file we want to load as a string argument:</p>
 <pre><code><span class="typ-key">#</span><span class="typ-key">let</span> moore <span class="typ-op">=</span> <span class="typ-func">csv</span><span class="typ-punct">(</span><span class="typ-str">&quot;moore.csv&quot;</span><span class="typ-punct">)</span>

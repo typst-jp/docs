@@ -54,7 +54,7 @@
 <p>重要なのは、作成時に <code>value</code> は中身を覗くことができない不透明な <a href="/docs/reference/foundations/content/">content</a> になることです。それはどこかに配置されたときにのみ解決されます。なぜなら、そのときに初めてコンテキストが認識されるからです。コンテキスト式の本体は、それが配置される場所の数に応じて、0回、1回、または複数回評価される可能性があります。</p>
 <h2 id="location-context">位置コンテキスト</h2>
 <p>コンテキストでアクセスできるのはsetルールの値だけではありません。
-そのコンテキストが現在の文書内の <em>どこにあるのか</em> を、他の要素との相対位置やページの絶対位置として知ることも可能です。
+そのコンテキストが現在の文書内の<em>どこにあるのか</em>を、他の要素との相対位置やページの絶対位置として知ることも可能です。
 この情報を活用することで、文書内のさまざまなパーツ同士を柔軟に連携させることができます。
 位置コンテキストは、見出し番号や目次、章ごとに変わるページヘッダーを扱う機能の基盤となります。</p>
 <p><a href="/docs/reference/introspection/counter/#definitions-get"><code>counter.get</code></a>のようないくつかの関数は、暗黙的に現在の位置にアクセスします。
@@ -80,7 +80,7 @@
 <ul>
 <li>最初に <code><span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> があり、これは先程のように <code><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span><span class="typ-punct">)</span></code> に解決されます。</li>
 <li>次に、より強力な <a href="/docs/reference/introspection/counter/#definitions-at"><code>counter.at</code></a> と <a href="/docs/reference/introspection/here/"><code>here</code></a> を組み合わせて使用します。これは <code>get</code> と同等であるため <code><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span><span class="typ-punct">)</span></code> が得られます。</li>
-<li>最後に、<a href="/docs/reference/foundations/label/">label</a> と組み合わせて <code>at</code> を使用して、文書内の <em>異なる</em> 位置、つまり導入見出しの位置でカウンターの値を取得します。これにより <code><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span><span class="typ-punct">)</span></code> が得られます。Typstのコンテキストシステムは、文書内の <em>任意の</em> 位置でカウンターや状態の値を取得することができるタイムトラベル能力を提供します。</li>
+<li>最後に、<a href="/docs/reference/foundations/label/">label</a> と組み合わせて <code>at</code> を使用して、文書内の<em>異なる</em>位置、つまり導入見出しの位置でカウンターの値を取得します。これにより <code><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">,</span><span class="typ-punct">)</span></code> が得られます。Typstのコンテキストシステムは、文書内の<em>任意の</em>位置でカウンターや状態の値を取得することができるタイムトラベル能力を提供します。</li>
 </ul>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.&quot;</span><span class="typ-punct">)</span>
 
@@ -144,7 +144,7 @@
   <span class="typ-key">#</span><span class="typ-key">context</span> text<span class="typ-punct">.</span>lang
 <span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/docs/assets/a6d31a15dab2710195f259b4ea0dbdfa.png" alt="Preview"></div></div>
-<p>しかし、2番目の <code>text.lang</code> は言語の変更に反応 <em>します</em>。なぜなら、その周囲のコンテキストブロックの評価が、それに対するスタイルがわかるまで遅延されるからです。これは、正確なスタイルにアクセスするために、コンテキストにとって適切な挿入ポイントを選択することの重要性を示しています。</p>
+<p>しかし、2番目の <code>text.lang</code> は言語の変更に反応<em>します</em>。なぜなら、その周囲のコンテキストブロックの評価が、それに対するスタイルがわかるまで遅延されるからです。これは、正確なスタイルにアクセスするために、コンテキストにとって適切な挿入ポイントを選択することの重要性を示しています。</p>
 <p>同様のことが位置コンテキストにも当てはまります。
 以下の例では、最初の <code>c<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> 呼び出しは外側のコンテキストブロックにアクセスするため、 <code>c<span class="typ-punct">.</span><span class="typ-func">update</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">)</span></code> の効果を見ることはできません。
 一方、2番目の <code>c<span class="typ-punct">.</span><span class="typ-func">display</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> は内部のコンテキストにアクセスするため、効果を見ることができます。</p>
@@ -162,7 +162,7 @@
 カウンターや状態、クエリを解決するためにも同じアプローチが取られます。
 特定の場合には、Typstは全てを解決するために2回以上の反復が必要になることもあります。
 それが必要な場合もあれば、コンテキスト依存関数の誤用の兆候であることもあります（例えば<a href="/docs/reference/introspection/state/#caution">state</a>の誤用）。
-Typstが5回の試行で全てを解決できない場合、警告 &quot;layout did not converge within 5 attempts.&quot; が出力され、処理が停止します。</p>
+Typstが5回の試行で全てを解決できない場合、警告 "layout did not converge within 5 attempts." が出力され、処理が停止します。</p>
 <p>非常に注意深い読者の方は、上記で紹介した関数のうち、全ての関数が現在の位置を実際に使用しているわけではないことに気づいたかもしれません。<code><span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">get</span><span class="typ-punct">(</span><span class="typ-punct">)</span></code> は確かに現在の位置に依存していますが、例えば <code><span class="typ-func">counter</span><span class="typ-punct">(</span>heading<span class="typ-punct">)</span><span class="typ-punct">.</span><span class="typ-func">at</span><span class="typ-punct">(</span><span class="typ-label">&lt;intro&gt;</span><span class="typ-punct">)</span></code> はそうではありません。しかし、それでもコンテキストが必要です。その値は1つのコンパイラ反復内では常に同じですが、複数のコンパイラ反復の間に変化する可能性があります。もしこれをモジュールのトップレベルで直接呼び出すことができれば、モジュール全体とそのエクスポートは複数のコンパイラ反復の間に変化する可能性があり、それは望ましくありません。</p>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>現在、全てのshowルールは<a href="#style-context">書式コンテキスト</a>を提供しますが、<a href="/docs/reference/introspection/location/#locatable">locatable</a>要素のshowルールのみが<a href="#location-context">位置コンテキスト</a>を提供します。</p>

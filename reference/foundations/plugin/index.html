@@ -113,7 +113,7 @@ then interpreted as an UTF-8 encoded error message.</p>
 runtime. (Types and functions are described using WAT syntax.)</p>
 <ul>
 <li>
-<p><code>(import &quot;typst_env&quot; &quot;wasm_minimal_protocol_write_args_to_buffer&quot; (func (param i32)))</code></p>
+<p><code>(import "typst_env" "wasm_minimal_protocol_write_args_to_buffer" (func (param i32)))</code></p>
 <p>Writes the arguments for the current function into a plugin-allocated
 buffer. When a plugin function is called, it <a href="#exports">receives the
 lengths</a> of its input buffers as arguments. It should then
@@ -122,7 +122,7 @@ should then call this function with a <code>ptr</code> to the buffer to fill it 
 the arguments, one after another.</p>
 </li>
 <li>
-<p><code>(import &quot;typst_env&quot; &quot;wasm_minimal_protocol_send_result_to_host&quot; (func (param i32 i32)))</code></p>
+<p><code>(import "typst_env" "wasm_minimal_protocol_send_result_to_host" (func (param i32 i32)))</code></p>
 <p>Sends the output of the current function to the host (Typst). The first
 parameter shall be a pointer to a buffer (<code>ptr</code>), while the second is the
 length of that buffer (<code>len</code>). The memory pointed at by <code>ptr</code> can be freed

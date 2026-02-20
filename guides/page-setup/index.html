@@ -60,8 +60,8 @@ requirements with examples.</p>
 <p>Typst's default page size is A4 paper. Depending on your region and your use
 case, you will want to change this. You can do this by using the
 <a href="/docs/reference/layout/page/"><code>page</code></a> set rule and passing it a string argument to use a common page
-size. Options include the complete ISO 216 series (e.g. <code>&quot;a4&quot;</code> and <code>&quot;iso-c2&quot;</code>),
-customary US formats like <code>&quot;us-legal&quot;</code> or <code>&quot;us-letter&quot;</code>, and more. Check out the
+size. Options include the complete ISO 216 series (e.g. <code>"a4"</code> and <code>"iso-c2"</code>),
+customary US formats like <code>"us-legal"</code> or <code>"us-letter"</code>, and more. Check out the
 reference for the <a href="/docs/reference/layout/page/#parameters-paper">page's paper argument</a> to learn about all
 available options.</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span><span class="typ-str">&quot;us-letter&quot;</span><span class="typ-punct">)</span>
@@ -212,7 +212,7 @@ This is a numbered page.
 </code></pre><div class="preview"><img src="/docs/assets/b48b5390c93bf60c40473268b2bc55b2.png" alt="Preview"></div></div>
 <p>Above, you can check out the simplest conceivable example. It adds a single
 Arabic page number at the center of the footer. You can specify other characters
-than <code>&quot;1&quot;</code> to get other numerals. For example, <code>&quot;i&quot;</code> will yield lowercase Roman
+than <code>"1"</code> to get other numerals. For example, <code>"i"</code> will yield lowercase Roman
 numerals. Any character that is not interpreted as a number will be output
 as-is. For example, put dashes around your page number by typing this:</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;— 1 —&quot;</span><span class="typ-punct">)</span>

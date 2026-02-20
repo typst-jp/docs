@@ -18,7 +18,7 @@
 <p>文書中で何回か計算を行い、最後の計算結果を次の計算で使用するために記憶しておきたいとします。
 以下と同等のコードを試すと10、13、26、21と出力されることを期待するでしょう。
 しかしTypstでは<strong>そうはなりません</strong>。
-このコードを試してみると、Typstは <em>Variables from outside the function are read-only and cannot be modified.</em> というエラーメッセージを出力することが分かります。</p>
+このコードを試してみると、Typstは<em>Variables from outside the function are read-only and cannot be modified.</em>というエラーメッセージを出力することが分かります。</p>
 <pre><code><span class="typ-comment">// This doesn&#39;t work!</span>
 <span class="typ-key">#</span><span class="typ-key">let</span> star <span class="typ-op">=</span> <span class="typ-num">0</span>
 <span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">compute</span><span class="typ-punct">(</span>expr<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-punct">{</span>
@@ -68,7 +68,7 @@ Typstの状態管理システムを使用します。
 <ul>
 <li>
 <p><a href="/docs/reference/introspection/state/#definitions-get"><code>get</code></a>関数は状態の現在値を取得します。
-値は文書中で変化するため、これは<a href="/docs/reference/context/">コンテキスト</a>が利用可能な場合にのみ使用できる <em>コンテキスト</em> 関数です。</p>
+値は文書中で変化するため、これは<a href="/docs/reference/context/">コンテキスト</a>が利用可能な場合にのみ使用できる<em>コンテキスト</em>関数です。</p>
 </li>
 <li>
 <p><a href="/docs/reference/introspection/state/#definitions-update"><code>update</code></a>関数は状態に修正を加えます。

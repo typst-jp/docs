@@ -19,7 +19,7 @@
 以下は、スクリプト記述の概念の概要です。</p>
 <h2 id="expressions">式</h2>
 <p>Typstでは、マークアップとコードが一体となっています。
-最も一般的な要素以外のものは <em>関数</em> を使って作成されます。
+最も一般的な要素以外のものは<em>関数</em>を使って作成されます。
 これを可能な限り便利にするため、Typstはコード式をマークアップに埋め込むためのコンパクトな構文を提供しています。式はハッシュ（<code>#</code>）で始まり、
 この式が終了すると通常のマークアップの解析が再開されます。
 式の直後に通常の文字列として解釈されるべき文字が続く場合、セミコロン（<code>;</code>）を使って式を強制的に終了できます。
@@ -35,7 +35,7 @@
 いくつかの種類の式はハッシュ構文と互換性がありません（例えば二項演算子式）。
 このような式をマークアップに埋め込むためには、<code><span class="typ-punct">#</span><span class="typ-punct">(</span><span class="typ-num">1</span> <span class="typ-op">+</span> <span class="typ-num">2</span><span class="typ-punct">)</span></code>のように丸括弧を使用します。</p>
 <h2 id="blocks">ブロック</h2>
-<p>コードを構造化し、マークアップを埋め込むために、Typstは次の二種類の <em>ブロック</em> を提供します。</p>
+<p>コードを構造化し、マークアップを埋め込むために、Typstは次の二種類の<em>ブロック</em>を提供します。</p>
 <ul>
 <li>
 <p><strong>コードブロック：</strong> <code><span class="typ-punct">{</span> <span class="typ-key">let</span> x <span class="typ-op">=</span> <span class="typ-num">1</span><span class="typ-punct">;</span> x <span class="typ-op">+</span> <span class="typ-num">2</span> <span class="typ-punct">}</span></code> <br />
@@ -141,7 +141,7 @@ Typstは<code><span class="typ-key">if</span></code>式、<code>else <span class
 <p>ループを使用すると、コンテンツを繰り返したり、何かを反復的に計算したりできます。
 Typstは、<code><span class="typ-key">for</span></code>ループと<code><span class="typ-key">while</span></code>ループの2つのループをサポートしています。
 前者は指定されたコレクションを反復するのに対し、後者は条件が満たされている限り反復を続けます。
-ブロックと同様に、ループは各反復からの結果を1つの値に <em>結合</em> します。</p>
+ブロックと同様に、ループは各反復からの結果を1つの値に<em>結合</em>します。</p>
 <p>以下の例では、forループによって作成された3つの文が1つのコンテンツ値に結合され、whileループの中の長さ1の配列が1つの大きな配列に結合されます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">for</span> c <span class="typ-key">in</span> <span class="typ-str">&quot;ABC&quot;</span> <span class="typ-punct">[</span>
   <span class="typ-pol">#</span><span class="typ-pol">c</span> is a letter.
@@ -190,7 +190,7 @@ Typstは、<code><span class="typ-key">for</span></code>ループと<code><span 
 <li><code><span class="typ-key">while</span> condition <span class="typ-punct">[</span>..<span class="typ-punct">]</span></code></li>
 </ul>
 <h2 id="fields">フィールド</h2>
-<p><em>ドット記法</em> を使用することで値のフィールドにアクセスできます。<a href="/docs/reference/foundations/content/">コンテンツ</a>型の値については、<a href="/docs/reference/foundations/content/#definitions-fields">fields</a>関数を使用してフィールドを一覧表示できます。</p>
+<p><em>ドット記法</em>を使用することで値のフィールドにアクセスできます。<a href="/docs/reference/foundations/content/">コンテンツ</a>型の値については、<a href="/docs/reference/foundations/content/#definitions-fields">fields</a>関数を使用してフィールドを一覧表示できます。</p>
 <!-- textlint-disable jtf-style/1.1.3.箇条書き -->
 <p>対象の値は以下のいずれかです。</p>
 <ul>
@@ -229,12 +229,12 @@ Typstは、<code><span class="typ-key">for</span></code>ループと<code><span 
 <span class="typ-pol">#</span><span class="typ-pol">str</span><span class="typ-punct">.</span><span class="typ-func">len</span><span class="typ-punct">(</span><span class="typ-str">&quot;abc&quot;</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/docs/assets/69c81d74d21d4e212b8bdde97b02c949.png" alt="Preview"></div></div>
 <p>特定の値に対して呼び出された際に、その値を変更する特別な関数がいくつかあります（例： <a href="/docs/reference/foundations/array/#definitions-push"><code>array.push</code></a>）。
-これらの関数は、<em>必ず</em> メソッド形式で呼び出す必要があります。
+これらの関数は、<em>必ず</em>メソッド形式で呼び出す必要があります。
 場合によっては、メソッドが副作用のためだけに呼び出されるとき、その戻り値は無視されるべきです（結合に加わるべきではありません）。
 値を破棄する標準的な方法は、<code><span class="typ-key">let</span> _ <span class="typ-op">=</span> array<span class="typ-punct">.</span><span class="typ-func">remove</span><span class="typ-punct">(</span><span class="typ-num">1</span><span class="typ-punct">)</span></code>のように
 letバインディングを使用することです。</p>
 <h2 id="modules">モジュール</h2>
-<p>Typstプロジェクトを、<em>モジュール</em> と呼ばれる複数のファイルに分割できます。
+<p>Typstプロジェクトを、<em>モジュール</em>と呼ばれる複数のファイルに分割できます。
 モジュールは他のモジュールのコンテンツや定義を複数の方法で参照できます。</p>
 <!-- textlint-disable jtf-style/1.1.3.箇条書き -->
 <ul>
@@ -264,7 +264,7 @@ You can import nested items using dot notation: <code><span class="typ-key">impo
 <span class="typ-pol">#</span><span class="typ-pol">face</span><span class="typ-punct">.</span><span class="typ-pol">grin</span>
 </code></pre><div class="preview"><img src="/docs/assets/9c38d95483bccbf7479a82427087ab2a.png" alt="Preview"></div></div>
 <h2 id="packages">パッケージ</h2>
-<p>プロジェクト間でビルド中のブロックを再利用するために、Typstの <em>パッケージ</em> を作成してインポートできます。
+<p>プロジェクト間でビルド中のブロックを再利用するために、Typstの<em>パッケージ</em>を作成してインポートできます。
 パッケージのインポートは、名前空間、名前、バージョンの3つの組み合わせとして指定されます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">import</span> <span class="typ-str">&quot;@preview/example:0.1.0&quot;</span><span class="typ-punct">:</span> add
 <span class="typ-func">#</span><span class="typ-func">add</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> <span class="typ-num">7</span><span class="typ-punct">)</span>

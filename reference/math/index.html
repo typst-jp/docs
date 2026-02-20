@@ -39,7 +39,7 @@ Typstはさらに<code>=&gt;</code>のような、記号を近似するいくつ
 </code></pre><div class="preview"><img src="/docs/assets/dd08c3941abc7b8b1c9310fbebf71b6e.png" alt="Preview"></div></div>
 <h2 id="改行">改行</h2>
 <p>数式には改行を含めることもできます。
-各行には、その場所で配置することを指定する、1つまたは複数の <em>配置点</em>（<code>&amp;</code>）を含めることができます。</p>
+各行には、その場所で配置することを指定する、1つまたは複数の<em>配置点</em>（<code>&amp;</code>）を含めることができます。</p>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-pol">sum</span><span class="typ-math-op">_</span><span class="typ-punct">(</span>k=0<span class="typ-punct">)</span><span class="typ-math-op">^</span>n k
     <span class="typ-math-op">&amp;</span>= 1 + <span class="typ-escape">...</span> + n <span class="typ-escape">\</span>
     <span class="typ-math-op">&amp;</span>= <span class="typ-punct">(</span>n(n+1)<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 2 <span class="typ-math-delim">$</span>
@@ -66,11 +66,11 @@ Typstはさらに<code>=&gt;</code>のような、記号を近似するいくつ
 一方、コロンは識別子の直後にあるときにのみ特別な方法で認識されるため、そのまま表示したい場合は単にその前に空白を挿入してください。</p>
 <p>前にハッシュがある関数呼び出しは通常のコードの関数呼び出しで、これらの規則に影響されません。</p>
 <h2 id="配置">配置</h2>
-<p>数式が複数の <em>配置点</em>（<code>&amp;</code>）を含む場合、右揃えと左揃えが交互に行われる列のブロックが作成されます。
+<p>数式が複数の<em>配置点</em>（<code>&amp;</code>）を含む場合、右揃えと左揃えが交互に行われる列のブロックが作成されます。
 以下の例では、<code>(3x + y) / 7</code>という式は右揃えで、<code>= 9</code>が左揃えです。
-&quot;given&quot;という単語も左揃えです。これは<code>&amp;&amp;</code>が行内に2つの配置点を作成し、2回配置方法が切り替わるためです。
+"given"という単語も左揃えです。これは<code>&amp;&amp;</code>が行内に2つの配置点を作成し、2回配置方法が切り替わるためです。
 <code>&amp; &amp;</code>と<code>&amp;&amp;</code>は全く同じように振る舞います。
-一方、&quot;multiply by 7&quot;は、その前に<code>&amp;</code>がただ1つあるため右揃えです。
+一方、"multiply by 7"は、その前に<code>&amp;</code>がただ1つあるため右揃えです。
 各配置点は単に右揃えと左揃えを交互に切り替えます。</p>
 <div class="previewed-code"><pre><code><span class="typ-math-delim">$</span> <span class="typ-punct">(</span>3x + y<span class="typ-punct">)</span> <span class="typ-math-op">/</span> 7 <span class="typ-math-op">&amp;</span>= 9 <span class="typ-math-op">&amp;</span><span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;given&quot;</span> <span class="typ-escape">\</span>
   3x + y <span class="typ-math-op">&amp;</span>= 63 <span class="typ-math-op">&amp;</span> <span class="typ-str">&quot;multiply by 7&quot;</span> <span class="typ-escape">\</span>
