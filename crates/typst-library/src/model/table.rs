@@ -133,7 +133,7 @@ pub struct TableElem {
     )]
     pub column_gutter: TrackSizings,
 
-    /// 列間の間隔。`gutter`での指定よりも優先されます。
+    /// 行間の間隔。`gutter`での指定よりも優先されます。
     /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
     #[parse(args.named("row-gutter")?.or_else(|| gutter.clone()))]
     #[borrowed]
@@ -479,7 +479,7 @@ pub struct TableHeader {
 /// いかなるセルもフッターよりも後には配置されません。
 #[elem(name = "footer", title = "Table Footer")]
 pub struct TableFooter {
-    /// ページごとにフッターを繰り返すどうか。
+    /// ページごとにフッターを繰り返すかどうか。
     #[default(true)]
     pub repeat: bool,
 
@@ -522,10 +522,10 @@ pub struct TableHLine {
     /// [`grid.hline`]($grid.hline.y)の`y`フィールドと同様に機能します。
     pub y: Smart<usize>,
 
-    /// この罫線が開始される行。（最初の行は0、指定した行を含みます）
+    /// この罫線が開始される列。（最初の列は0、指定した列を含みます）
     pub start: usize,
 
-    /// この罫線が終了する行。（最初の行は0、指定した行を含みません）
+    /// この罫線が終了する列。（最初の列は0、指定した列を含みません）
     pub end: Option<NonZeroUsize>,
 
     /// この罫線のストローク。
@@ -562,10 +562,10 @@ pub struct TableVLine {
     /// [`grid.vline`]($grid.vline.x)の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
-    /// この罫線が開始される列。（最初の列は0、指定した列を含みます）
+    /// この罫線が開始される行。（最初の列は0、指定した行を含みます）
     pub start: usize,
 
-    /// この罫線が終了する列。（最初の列は0、指定した列を含みません）
+    /// この罫線が終了する行。（最初の行は0、指定した行を含みません）
     pub end: Option<NonZeroUsize>,
 
     /// この罫線のストローク。
@@ -624,7 +624,7 @@ pub struct TableVLine {
 /// )
 /// ```
 ///
-/// 例えば、表中の単一のセルについてfill、alignementあるいはinsetを上書きすることができます。
+/// 例えば、表中の単一のセルについてfill、alignmentあるいはinsetを上書きすることができます。
 /// cell:
 ///
 /// ```example
@@ -654,7 +654,7 @@ pub struct TableVLine {
 /// )
 /// ```
 ///
-/// 全てのセルに対して同時にスタイルを設定するために使用することもできます。
+/// `table.cell`にshowルールを適用することで、全てのセルに対して同時にスタイルを設定するために使用することもできます。
 /// セレクターと組み合わせることで、セルの位置に基づいたスタイル指定も可能です。
 ///
 /// ```example
