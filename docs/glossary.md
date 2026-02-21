@@ -54,6 +54,7 @@ description: |
 | bibliography | 参考文献 | カテゴリ名 |
 | layout | レイアウト | カテゴリ名 |
 | math | 数式 | カテゴリ名 |
+| skewed fraction | 斜め分数 | [`math.frac`]($math.frac)の`style`など |
 | model | モデル | カテゴリ名 |
 | text | 文章 | カテゴリ名 |
 | scripting | スクリプト記述 | カテゴリ名 |
