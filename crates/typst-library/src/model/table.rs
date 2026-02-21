@@ -625,7 +625,6 @@ pub struct TableVLine {
 /// ```
 ///
 /// 例えば、表中の単一のセルについてfill、alignmentあるいはinsetを上書きすることができます。
-/// cell:
 ///
 /// ```example
 /// >>> #set page(width: auto)
