@@ -1,6 +1,7 @@
 ---
 description: |
-  Learn how to create accessible documents with Typst. This guide covers semantic markup, reading order, alt text, color contrast, language settings, and PDF/UA compliance to ensure your files work for all readers and Assistive Technology.
+  Typst を使ってアクセシブルな文書を作成する方法を学びます。
+  このガイドでは、セマンティックマークアップ、読み上げ順序、代替テキスト、色のコントラスト、言語設定、PDF/UA準拠などをカバーし、すべての読者と支援技術に対応するファイルを作成する方法を説明します。
 ---
 
 # Accessibility Guide
