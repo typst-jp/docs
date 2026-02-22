@@ -157,7 +157,7 @@ top-edgeとbottom-edgeの値の正確な配分が最初の行と最後の行の�
 文字ごとに相対長さの基準が変わってしまい、見た目が不均一になるためです。
 <code>spacing</code>と比べた場合の挙動は、基準が常に<code><span class="typ-num">100%</span></code>であるかのように扱われます。</p>
 <p>それ以外では、<code>min</code>と<code>max</code>の挙動は<code>spacing</code>と同じです。
-<code>max</code>が<code><span class="typ-num">0.01em</span></code>であれば、すべての文字ペアの間に
+<code>max</code>が<code><span class="typ-num">0.01em</span></code>であれば、全ての文字ペアの間に
 現在のフォントサイズの0.01倍に相当する追加の間隔を挿入できます。
 これは空白と文字の間の隙間も含むため、空白に対しては
 <code>tracking</code>の値が<code>spacing</code>の値に加算されます。</p>
@@ -172,7 +172,7 @@ top-edgeとbottom-edgeの値の正確な配分が最初の行と最後の行の�
 範囲を広げすぎると不自然になりやすいので注意してください。</p>
 <p>文字単位の両端揃えは、特に細いカラムで両端揃えの見栄えを改善できる
 影響力のあるマイクロタイポグラフィ技法です。
-ただし、すべてのフォントや言語で機能するわけではありません。
+ただし、全てのフォントや言語で機能するわけではありません。
 例えば、筆記体のフォントは文字同士が連結されるため、
 文字単位の両端揃えを行うと接続部分がぎこちなく見えることがあります。</p></div></div><details class="my-4 folding-example group"><summary class="flex items-center gap-1 text-sm font-medium cursor-pointer text-gray-600 hover:text-gray-800 transition-colors marker:hidden"><div class="w-4 h-4 text-gray-400 transform transition-transform duration-200 group-open:rotate-90"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" role="graphics-symbol"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg></div>例を表示：Character-level justification</summary><div><div class="overflow-hidden mt-5 [&amp;_p]:first:mt-0 mb-5 [&amp;_p]:last:mb-0 [&amp;_img]:mx-auto [&amp;_img]:block [&amp;_img]:max-w-full [&amp;_img]:h-auto [&amp;_img]:object-contain [&amp;_img]:w-auto [&amp;_pre]:overflow-x-auto [&amp;_pre]:max-w-full [&amp;_pre]:whitespace-pre [&amp;_pre]:break-all [&amp;_pre_code]:block [&amp;_pre_code]:w-full"><div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">example</span><span class="typ-punct">(</span>name<span class="typ-punct">)</span> <span class="typ-op">=</span> <span class="typ-func">columns</span><span class="typ-punct">(</span><span class="typ-num">2</span><span class="typ-punct">,</span> gutter<span class="typ-punct">:</span> <span class="typ-num">10pt</span><span class="typ-punct">)</span><span class="typ-punct">[</span>
   <span class="typ-func">#</span><span class="typ-func">place</span><span class="typ-punct">(</span>top<span class="typ-punct">,</span> float<span class="typ-punct">:</span> <span class="typ-key">true</span><span class="typ-punct">,</span> scope<span class="typ-punct">:</span> <span class="typ-str">&quot;parent&quot;</span><span class="typ-punct">,</span> <span class="typ-func">strong</span><span class="typ-punct">(</span>name<span class="typ-punct">)</span><span class="typ-punct">)</span>
