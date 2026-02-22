@@ -28,7 +28,7 @@ Accessibility support differs based on viewer and AT. Some combinations work bet
 
 Only PDF and HTML export produce accessible files. Neither PNGs nor SVGs are accessible on their own. Both formats can be used in an accessible larger work by providing a [textual representation](#textual-representations).
 
-## Maintaining semantics
+## Maintaining semantics { #maintaining-semantics }
 
 To add correct semantic information for AT and repurposing to a file, Typst needs to know what semantic role each part of the file plays. For example, this means that a heading in a compiled PDF should not just be text that is large and bold. Instead, the file should contain the explicit information (known as a _tag_) that a particular text makes up a heading. A screen reader will then announce it as a heading and allow the user to navigate between headings.
 
@@ -71,13 +71,13 @@ When setting up your tents, *never forget* to secure the pegs.
 
 The show-set rule completely changes the default appearance of the [`strong`] element, but its semantic meaning will be preserved. If you need even more customization, you can provide show rules with fully custom layout code and Typst will still retain the semantic purpose of the element.
 
-## Reading order
+## Reading order { #reading-order }
 
 For AT to read the contents of a document in the right order and for repurposing applications, accessible files must make their reading order explicit. This is because the logical reading order can differ from layout order. Floating figures are a common example for such a difference: A figure may be relevant to a paragraph in the center of a page but appear at the top or bottom edge. In non-accessible files, PDF readers and AT have to assume that layout order equals the logical reading order, often leading to confusion for AT users. When the reading order is well-defined, screen readers read a footnote or a floating figure immediately where it makes sense.
 
 Fortunately, Typst markup already implies a single reading order. You can assume that Typst documents will read in the order that content has been placed in the markup. For most documents, this is good enough. However, when using the [`place`] and [`move`] function or [floating figures]($figure.placement), you must pay special attention to place the function call at an appropriate spot in the logical reading order in markup, even if this has no consequence on the layout. Just ask yourself where you would want a screen reader to announce the content that you are placing.
 
-## Layout containers
+## Layout containers { #layout-containers }
 
 Typst provides some layout containers like [`grid`], [`stack`], [`box`], [`columns`], and [`block`] to visually arrange your content. None of these containers come with any semantic meaning attached. Typst will conserve some of these containers during PDF reflow while other containers will be discarded.
 
@@ -87,7 +87,7 @@ Do not use the grid container to represent tabular data. Instead, use [`table`].
 
 Likewise, if you use functions like [`rotate`], [`scale`], and [`skew`], take care that this transformation either has no semantic meaning or that the meaning is available to AT users elsewhere, i.e. in figure [alt text](#textual-representations) or a caption.
 
-## Artifacts
+## Artifacts { #artifacts }
 
 Some things on a page have no semantic meaning and are irrelevant to the content of a document. We call these items _artifacts._ Artifacts are hidden from AT and repurposing and will vanish during reflow. Here are some examples for artifacts:
 
@@ -103,7 +103,7 @@ For technical reasons, once in an artifact, content cannot become semantic again
 
 Please note that Typst will mark shapes and paths like [`square`] and [`circle`] as artifacts while their content will remain semantically relevant and accessible to AT. If your shapes have a semantic meaning, please wrap them in the [`figure`] element to provide an alternative textual description.
 
-## Color use and contrast
+## Color use and contrast { #color-use-and-contrast }
 
 Universal Access not only means that your documents works with AT, reflow, and repurposing, but also that visual access is possible to everyone, including people with impaired eyesight. Not only does aging often come with worse sight, a significant portion of people have problems differentiating color: About 8% of men and 0.5% of women are color blind.
 
@@ -144,7 +144,7 @@ There are [tools to compare how much contrast a pair of colors has][wcag-contras
 
 Note that common accessibility frameworks like WCAG make an exception for purely decorative text and logos: Due to their graphic character, they can have contrast ratios that fail to achieve AA contrast ratio.
 
-## Textual representations
+## Textual representations { #textual-representations }
 
 To support AT use and some repurposing workflows, all elements with a semantic meaning must have a textual representation. Think about it in terms of Universal Access: If an item is not an [artifact](#artifacts), it has a semantic meaning. If, however, AT cannot ingest the item, the full semantic meaning of a document is not available to AT users. Hence, to provide Universal Access, use the mechanisms built into Typst to provide alternative representations.
 
@@ -210,7 +210,7 @@ Finally, you can specify an alternative description on math using [`math.equatio
 
 Another element that represents itself as text are links. It is best to avoid non-descriptive link texts such as _here_ or _go._ These link texts also hurt Search Engine Optimization (SEO) if that is a consideration for your document. Instead, try to have the link contain text about where it is pointing to. Note that, unless you are aiming for the highest level of accessibility, it is also okay if the link itself is not descriptive but its purpose can be understood from the content immediately surrounding it.
 
-## Natural Language
+## Natural Language { #natural-language }
 
 In order for screen readers to pronounce your document correctly and translation software to work properly, you must indicate in which natural language your document is written. Use the rule [`[#set text(lang: "..")]`]($text.lang) at the very start of your document or your template's capability to set a language. If you do not do so, Typst will assume that your content is in English. The natural language you choose not only impacts accessibility, but also how Typst will apply hyphenation, what typesetting conventions are applied, the labels of figures and references, and, in the web app, what language is used for spellcheck.
 
@@ -240,7 +240,7 @@ This is #text(lang: "fr")[français].
 ]
 ```
 
-## Document Title and Headings
+## Document Title and Headings { #document-title-and-headings }
 
 Titling your document makes it easier to retrieve it and to navigate between it and other documents, both for AT users and regular users of PDF viewers. This is why accessibility standards such as WCAG and PDF/UA require you to set a machine-readable title for your document.
 
@@ -266,7 +266,7 @@ It is important that the sequence of headings you use is sequential: Never skip 
 
 Note that in order to pass the [automated accessibility check in Adobe Acrobat][acro-check-outline], documents with 21 pages or more must contain outlined headings.
 
-## Accessibility Standards and Legislation
+## Accessibility Standards and Legislation { #accessibility-standards-and-legislation }
 
 Typst can help you to assert that your document is accessible by checking it against international standards. For PDF export, there are multiple standards for accessible files, most notably the PDF/UA standard. Its first part (PDF/UA-1) is already supported by Typst while support for the second part (PDF/UA-2) is planned for the future. Below, you can find an explanation of all relevant standards:
 
@@ -300,7 +300,7 @@ Many territories have accessibility legislation that requires you to create acce
 
 Using this guide can help you reach compliance with either regulation.
 
-## Testing for Accessibility
+## Testing for Accessibility { #testing-for-accessibility }
 
 In order to test whether your PDF document is accessible, you can use automated tools and manual testing. Some standards like PDF/UA and PDF/A can be checked exclusively through automated tools, while some rules in WCAG and other standards require manual checks. Many of the automatable checks are automatically passed by Typst when Tagged PDF is enabled. For many other automatable checks, you can enable PDF/UA-1 export so that Typst will run them instead. Automated tools can only provide a baseline of accessibility. For truly Universal Access, it is best if you try the document yourself with AT.
 
@@ -322,7 +322,7 @@ However, to reach the highest standard of accessibility for widely circulated do
 
 When first getting into testing, consider completing the interactive training program your screen reader offers, if any. Building confidence with a screen reader helps you experience your document like a full-time screen reader user. When checking your document, check that it not only makes all the same information accessible that is available to a sighted user, but also that it is easy to navigate. The experience your users will have will vary based on the pairing of PDF viewer and AT they use.
 
-## Limits and considerations for export formats
+## Limits and considerations for export formats { #limits-and-considerations-for-export-formats }
 
 Even when you design your document with accessibility in mind, you should be aware of the limitations of your export format. Fundamentally, AT support for PDF files is more difficult to implement than for other formats such as HTML. PDF was conceived in 1993 to accurately render print documents on a computer. Accessibility features were first added with PDF 1.4 in 2001, and improved in PDF 1.5 (2003) and PDF 2.0 (2017). By contrast, HTML offers a richer semantic model and more flexibility, so AT support in browsers generally surpasses what is possible in PDF viewers.
 
