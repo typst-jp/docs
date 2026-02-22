@@ -1,22 +1,22 @@
 ---
 description: |
   Typst を使ってアクセシブルな文書を作成する方法を学びます。
-  このガイドでは、セマンティックマークアップ、読み上げ順序、代替テキスト、色のコントラスト、言語設定、PDF/UA準拠などをカバーし、すべての読者と支援技術に対応するファイルを作成する方法を説明します。
+  このガイドでは、セマンティックマークアップ、読み上げ順序、代替テキスト、色のコントラスト、言語設定、PDF/UA準拠などをカバーし、全ての読者と支援技術に対応するファイルを作成する方法を説明します。
 ---
 
-# Accessibility Guide
+# アクセシビリティガイド
 
-Making a document accessible means that it can be used and understood by everyone. That not only includes people with permanent or temporary disabilities, but also those with different devices or preferences. To underscore why accessibility is important, consider that people might read your document in more contexts than you expected:
+文書をアクセシブルにするということは、全ての人がその文書を使用し理解できるようにすることを意味します。それには、恒久的または一時的な障害を持つ人々だけでなく、さまざまなデバイスや好みを持つ人々も含まれます。アクセシビリティが重要な理由を強調するために、人々があなたの想定以上にさまざまな状況で文書を読む可能性があることを考えてみてください。
 
-- A user may print the document on paper
-- A user may read your document on a phone, with reflow in their PDF reader enabled
-- A user may have their computer read the document back to them
-- A user may ask artificial intelligence to summarize your document for them
-- A user may convert your document to another file format like HTML that is more accessible to them
+- ユーザーが文書を紙に印刷するかもしれない
+- ユーザーがPDFリーダーのリフロー機能を有効にして、携帯電話で文書を読むかもしれない
+- ユーザーが自身のコンピュータに文書を読み上げさせるかもしれない
+- ユーザーが人工知能に文書の要約を依頼するかもしれない
+- ユーザーが文書をHTMLなどの、よりアクセシブルなファイル形式に変換するかもしれない
 
-To accommodate all of these people and scenarios, you should design your document for **Universal Access.** Universal Access is a simple but powerful principle: instead of retrofitting a project for accessibility after the fact, design from the beginning to work for the broadest possible range of people and situations. This will improve the experience for all readers!
+これら全ての人々とシナリオに対応するために、**ユニバーサルアクセス**のために文書を設計するべきです。ユニバーサルアクセスは、単純ですが強力な原則です。後からアクセシビリティ対応を付け足すのではなく、最初から、できるだけ幅広い利用者と利用状況に対応できるように設計します。これにより、すべての読者の体験が向上します！
 
-Typst can help you to create accessible files that read well on screen readers, look good even when reflowed for a different screen size, and pass automated accessibility checkers. However, to create accessible files, you will have to keep some rules in mind. This guide will help you learn what issues impact accessibility, how to design for Universal Access, and what tools Typst gives you to accomplish this. Much of the guidance here applies to all export targets, but the guide focuses on PDF export. Notable differences to HTML export are called out.
+Typstは、スクリーンリーダーで読み取りやすく、異なる画面サイズ向けにリフローされても見栄えがよく、自動アクセシビリティチェッカーにも合格しやすいアクセシブルなファイルの作成を支援できます。ただし、アクセシブルなファイルを作成するには、いくつかのルールを意識する必要があります。このガイドでは、アクセシビリティに影響する要因、ユニバーサルアクセスのための設計方法、そしてそれを実現するためにTypstが提供するツールを学べます。ここで述べる指針の多くは、全てのエクスポート形式に当てはまりますが、本ガイドはPDFエクスポートに焦点を当てています。HTMLエクスポートとの重要な違いも記載します。
 
 ## Basics of Accessibility { #basics }
 
