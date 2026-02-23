@@ -20,7 +20,11 @@
 このリポジトリは`website/typst-docs-web`をGitサブモジュールとして含んでいます（`.gitmodules` を参照）。初めてクローンする場合は以下のいずれかを実行してください。
 
 ```bash
-git clone --recursive <REPO_URL>
+# HTTPS
+git clone --recursive https://github.com/typst-jp/docs.git
+
+# SSH
+git clone --recursive git@github.com:typst-jp/docs.git
 ```
 
 もしすでにクローン済みであれば：
