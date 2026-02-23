@@ -12,5 +12,5 @@ Typstが描画する全ての図形とパスは、PDFエクスポート時に支
 
 このモデルの関数を使って意味論的意味を持つ図を作成する場合は、
 [`figure`]関数呼び出しで包むことでアクセシブルにしてください。
-[代替説明]($guides/accessibility/#textual-representations)を提供するには、
+[テキストによる表現]($guides/accessibility/#textual-representations)を提供するには、
 figure関数の [alt パラメーター]($figure.alt)で指定します。
