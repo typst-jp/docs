@@ -117,7 +117,7 @@ mise run generate-docs
 
 Webサイトの生成にはNode.jsとViteとHonoを使用しています。また、パッケージ管理にBunを使用しています。
 
-`mise run generate-web`を実行すると、`docs.json`を基にWebサイトのデータが`website/dist/`に生成されます。
+`mise run generate-web`を実行すると、`docs.json`を基にWebサイトのデータが`website/typst-docs-web/dist/`に生成されます。
 
 ```sh
 mise run generate-web
