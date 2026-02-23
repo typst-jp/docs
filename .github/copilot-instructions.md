@@ -15,6 +15,27 @@
 - `crates/`: 翻訳対象のrustdocドキュメント。リファレンス系の文章はここで管理されます。rustdocのみを編集対象とし、コード本体は変更しません。
 - `website/`: Webサイトのメタデータと静的サイトジェネレーター（typst-docs-web）。翻訳状況は`website/translation-status.json`で管理されます。
 
+## 初回セットアップ
+
+このリポジトリは`website/typst-docs-web`をGitサブモジュールとして含んでいます（`.gitmodules` を参照）。初めてクローンする場合は以下のいずれかを実行してください。
+
+```bash
+git clone --recursive <REPO_URL>
+```
+
+もしすでにクローン済みであれば：
+
+```bash
+git submodule update --init --recursive
+```
+
+また、`mise run`を使う前に一度だけ以下を実行してください（詳細は `CONTRIBUTING.md`を参照）。
+
+```bash
+mise trust    # このリポジトリの`mise.toml`を信頼
+mise install  # Rust, Node.js, jqなどのツールをインストール
+```
+
 ## 開発の流れ
 
 開発や検証は、リポジトリのルートから`mise run`コマンドを使用して行います。
