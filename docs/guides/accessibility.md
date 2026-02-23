@@ -10,7 +10,7 @@ description: |
 
 - ユーザーが文書を紙に印刷するかもしれない
 - ユーザーがPDFリーダーのリフロー機能を有効にして、携帯電話で文書を読むかもしれない
-- ユーザーが自身のコンピュータに文書を読み上げさせるかもしれない
+- ユーザーが自身のコンピューターに文書を読み上げさせるかもしれない
 - ユーザーが人工知能に文書の要約を依頼するかもしれない
 - ユーザーが文書をHTMLなどの、よりアクセシブルなファイル形式に変換するかもしれない
 
@@ -18,15 +18,15 @@ description: |
 
 Typstは、スクリーンリーダーで読み取りやすく、異なる画面サイズ向けにリフローされても見栄えがよく、自動アクセシビリティチェッカーにも合格しやすいアクセシブルなファイルの作成を支援できます。ただし、アクセシブルなファイルを作成するには、いくつかのルールを意識する必要があります。このガイドでは、アクセシビリティに影響する要因、ユニバーサルアクセスのための設計方法、そしてそれを実現するためにTypstが提供するツールを学べます。ここで述べる指針の多くは、全てのエクスポート形式に当てはまりますが、本ガイドはPDFエクスポートに焦点を当てています。HTMLエクスポートとの重要な違いも記載します。
 
-## Basics of Accessibility { #basics }
+## アクセシビリティの基礎 { #basics }
 
-Accessible files allow software to do more with them than to just render them. Instead, your computer can understand what each part of the document is supposed to represent and use this information to present the document to the user.
+アクセシブルなファイルは、ソフトウェアが単にファイルを描画する以上のことを行えるようにします。すなわち、コンピュータが文書の各要素が何を表しているかを理解し、その情報を用いてユーザーに文書を提示できるようになるのです。
 
-This information is consumed by different software to provide access. When exporting a PDF from Typst, the _PDF viewer_ (sometimes also called a reader) will display the document's pages just as you designed them with Typst's preview. Some people rely on _Assistive Technology_ (AT) such as screen readers, braille displays, screen magnifiers, and more for consuming PDF files. In that case, the semantic information in the file is used to adapt the contents of a file into spoken or written text, or into a different visual representation. Other users will make the PDF viewer reflow the file to create a layout similar to a web page: The content will fit the viewport's width and scroll continuously. Finally, some users will repurpose the PDF into another format, for example plain text for ingestion into a Large Language Model (LLM) or HTML. A special form of repurposing is copy and paste where users use the clipboard to extract content from a file to use it in another application.
+この情報はアクセスを提供するためにさまざまなソフトウェアによって利用されます。TypstからPDFをエクスポートすると、_PDFビューアー_（リーダーとも呼ばれます）が、Typstのプレビューでデザインした通りに文書のページを表示します。なかには、スクリーンリーダーや点字ディスプレイ、画面拡大鏡などの_支援技術_（AT：Assistive Technology）に頼ってPDFを利用する人もいます。その場合、ファイルに含まれるセマンティック情報が使われ、内容は音声や文字、あるいは別の視覚表現へと変換されます。一方で、別のユーザーはPDFビューアーにファイルをリフローさせて、Webページに似たレイアウトを作ります。内容はビューポートの幅に収まり、連続的にスクロールできるようになります。さらに、別のユーザーはPDFを別の形式に再利用します。たとえば大規模言語モデル（LLM：Large Language Model）に取り込むためのプレーンテキストやHTMLなどです。再利用の特殊な形としてコピー＆ペーストがあり、ユーザーはクリップボードを使ってファイルから内容を抽出し、別のアプリケーションで利用します。
 
-Accessibility support differs based on viewer and AT. Some combinations work better than others. In our testing, [Adobe Acrobat][Acrobat] paired with [NVDA][NVDA] on Windows and [VoiceOver][VoiceOver] on macOS provided the richest accessibility support. Paired with HTML export, browsers provide a more consistent baseline of accessibility when compared to PDF readers.
+アクセシビリティ対応はビューアーとATによって異なります。組み合わせによっては、他よりもうまく動作するものもあります。私たちのテストでは、Windowsでは[Adobe Acrobat][Acrobat]と[NVDA][NVDA]の組み合わせ、macOSでは[VoiceOver][VoiceOver]が最も充実したアクセシビリティ対応を提供しました。またHTMLエクスポートと組み合わせた場合、ブラウザはPDFリーダーと比べて、より一貫したアクセシビリティの基準を提供します。
 
-Only PDF and HTML export produce accessible files. Neither PNGs nor SVGs are accessible on their own. Both formats can be used in an accessible larger work by providing a [textual representation](#textual-representations).
+アクセシブルなファイルを生成できるのは、PDFとHTMLのエクスポートだけです。PNGとSVGは、どちらも単体ではアクセシブルではありません。どちらの形式も、[テキストによる表現](#textual-representations)を用意することで、アクセシブルなより大きな成果物の中で利用できます。
 
 ## Maintaining semantics { #maintaining-semantics }
 
