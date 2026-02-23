@@ -107,7 +107,7 @@ mise install
 
 ドキュメントデータのJSONファイルは、typst-docsによりTypstのソースコード内のコメントおよび`docs/`にあるMarkdownファイル群から生成されます。
 
-`mise run generate-docs`を実行すると、ドキュメントデータのJSONファイルが`assets/docs.json`に生成されます。
+`mise run generate-docs`を実行すると、ドキュメントデータのJSONファイルがリポジトリルートの`docs.json`に生成されます。
 
 ```sh
 mise run generate-docs
@@ -117,7 +117,7 @@ mise run generate-docs
 
 Webサイトの生成にはNode.jsとViteとHonoを使用しています。また、パッケージ管理にBunを使用しています。
 
-`mise run generate-web`を実行すると、`assets/docs.json`を基にWebサイトのデータが`website/dist/`に生成されます。
+`mise run generate-web`を実行すると、`docs.json`を基にWebサイトのデータが`website/dist/`に生成されます。
 
 ```sh
 mise run generate-web
