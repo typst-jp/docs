@@ -43,7 +43,7 @@ mise install  # Rust, Node.js, jqなどのツールをインストール
 ### よく使うコマンド
 
 - `mise run generate`: `docs.json`を再生成し静的Webサイトをビルドします。ドキュメント編集後は必ず実行してください。
-- `mise run preview`: ローカルの開発サーバーを起動し、プレビュー（http://localhost:4173/docs/）を開始します。
+- `mise run preview`: ビルド済みの成果物をプレビューするサーバー（`http://localhost:4173/docs/`）を起動します。
 - `mise run textlint-md`: Markdownの文章をtextlintで校正します。
 - `mise run textlint-html`: 生成されたHTMLの文章をtextlintで校正します。
 
