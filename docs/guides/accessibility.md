@@ -71,11 +71,11 @@ When setting up your tents, *never forget* to secure the pegs.
 
 show-setルールは[`strong`]要素のデフォルトの見た目を完全に変更しますが、そのセマンティックな意味は保持します。さらにカスタマイズが必要な場合は、完全に独自ののレイアウトコードを持つshowルールを指定できますが、それでもTypstはその要素のセマンティックな目的を保持します。
 
-## Reading order { #reading-order }
+##  { #reading-order }
 
-For AT to read the contents of a document in the right order and for repurposing applications, accessible files must make their reading order explicit. This is because the logical reading order can differ from layout order. Floating figures are a common example for such a difference: A figure may be relevant to a paragraph in the center of a page but appear at the top or bottom edge. In non-accessible files, PDF readers and AT have to assume that layout order equals the logical reading order, often leading to confusion for AT users. When the reading order is well-defined, screen readers read a footnote or a floating figure immediately where it makes sense.
+ATが文書中のコンテンツを正しい順序で読み上げられるようにするため、また再利用アプリケーションのためにも、アクセシブルなファイルは読み上げ順序を明示しなければなりません。これは、論理的な読み上げ順序がレイアウト順序とは異なる可能性があるためです。こうした差異の典型的な例がフロート図表です。図表がページ中央の段落に関連するものであっても、ページの上端や下端に配置されることがあります。アクセシブルでないファイルでは、PDFリーダーやATはレイアウト順序と論理的な読み上げ順序が同一であると推測せざるを得ず、その結果ATユーザーに混乱を招くことがよくあります。読み上げ順序が適切に定義されていれば、スクリーンリーダーは脚注やフロート図表を、意味が通る位置で直ちに読み上げます。
 
-Fortunately, Typst markup already implies a single reading order. You can assume that Typst documents will read in the order that content has been placed in the markup. For most documents, this is good enough. However, when using the [`place`] and [`move`] function or [floating figures]($figure.placement), you must pay special attention to place the function call at an appropriate spot in the logical reading order in markup, even if this has no consequence on the layout. Just ask yourself where you would want a screen reader to announce the content that you are placing.
+幸い、Typstのマークアップは既に単一の読み上げ順序を暗黙的に含んでいます。Typst文書は、マークアップ内で内容を配置した順に読み上げられると考えてよいでしょう。ほとんどの文章ではそれで十分です。ただし、[`place`]関数や[`move`]関数、あるいは[フロート図表]($figure.placement)を使用する場合は、たとえレイアウトに影響しなくても、マークアップ上の論理的な読み上げ順序として適切な位置に関数呼び出しを置くよう、特に注意が必要です。配置しようとしている内容をスクリーンリーダーにどの位置で読み上げてほしいかを自問してみてください。
 
 ## Layout containers { #layout-containers }
 
