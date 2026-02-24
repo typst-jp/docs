@@ -28,11 +28,11 @@ Typstは、スクリーンリーダーで読み取りやすく、異なる画面
 
 アクセシブルなファイルを生成できるのは、PDFとHTMLのエクスポートだけです。PNGとSVGは、どちらも単体ではアクセシブルではありません。どちらの形式も、[テキストによる表現](#textual-representations)を用意することで、アクセシブルなより大きな成果物の中で利用できます。
 
-## Maintaining semantics { #maintaining-semantics }
+## セマンティクスの保持 { #maintaining-semantics }
 
-To add correct semantic information for AT and repurposing to a file, Typst needs to know what semantic role each part of the file plays. For example, this means that a heading in a compiled PDF should not just be text that is large and bold. Instead, the file should contain the explicit information (known as a _tag_) that a particular text makes up a heading. A screen reader will then announce it as a heading and allow the user to navigate between headings.
+ATによる利用や再利用のために正しいセマンティック情報をファイルに付与するためには、ファイル中の各部分がどのようなセマンティック上の役割を果たすのかをTypstが把握する必要があります。例えば、これはコンパイルされたPDFの見出しが単なる大きく太い文字のテキストであってはならないということを意味します。代わりに、その特定のテキストが見出しを構成することを示す明示的な情報（_タグ_として知られます）を含めるべきです。そうするとスクリーンリーダーはそれを見出しとして読み上げ、ユーザーが見出し間を移動できるようになります。
 
-If you are using Typst idiomatically, using the built-in markup and elements, Typst automatically adds tags with rich semantic information to your files. Let's take a look at two code examples:
+Typstの慣用的な使い方、すなわち組み込みのマークアップや要素を用いている場合、Typstは自動的にリッチなセマンティック情報を持つタグをファイルへ付与します。次の2つのコード例を見てみましょう。
 
 ```example
 // ❌ Don't do this
@@ -48,19 +48,19 @@ If you are using Typst idiomatically, using the built-in markup and elements, Ty
 = Heading
 ```
 
-Both of these examples look the same. They both contain the text "Heading" in boldface, sized at 16 point. However, only the second example is accessible. By using the heading markup, Typst knows that the semantic meaning of this text is that of a heading and can propagate that information to the final PDF. In the first example, it just knows that it should use boldface and larger type on otherwise normal text and cannot make the assumption that you meant that to be a heading and not a stylistic choice or some other element like a quote.
+どちらの例も、見た目は同じです。どちらも"Heading"というテキストが太字で、サイズは16ptになっています。しかしながら、アクセシブルなのは例のうち2つ目のみです。見出し用のマークアップを使うことで、Typstはこのテキストのセマンティックな意味が「見出し」であることを理解し、その情報を最終的なPDFに反映できます。1つ目の例では、Typstは通常のテキストに対して太字と大きめの文字を適用すべきだということしか分かりません。そのため、それが見出しを意図したものなのか、スタイル上の選択なのか、あるいは引用のような別の要素なのかを推測することはできません。
 
-Using semantics is not limited to headings. Here are a few more examples for elements you should use:
+セマンティクスの利用は見出しに限りません。以下はセマンティクスを利用すべき要素のさらなる例です。
 
-- Use underscores / [`emph`] instead of the [`text`] function to make text emphasized
-- Use stars / [`strong`] instead of the text function to make text carry strong emphasis
-- Use lists ([`list`], [`enum`], [`terms`]) instead of normal text with newlines when working with itemized or ordered content
-- Use [`quote`] for inline and block quotes
-- Use the built-in [`bibliography`] and [`cite`] functions instead of manually printing a bibliography
-- Use labels and [`ref`] or `@references` to reference other parts of your documents instead of just typing out a reference
-- Use the [`caption` argument of the `figure` element]($figure.caption) to provide captions instead of adding them as text below the function call
+- テキストを強調する場合は[`text`]関数の代わりにアンダースコア / [`emph`]を使用する
+- テキストに強い強調を与える場合は[`text`]関数の代わりにアスタリスク / [`strong`]を使用する
+- アイテム化された内容や順序のある内容を扱う場合は、改行を伴う通常のテキストの代わりにリスト（[`list`]、[`enum`]、[`terms`]）を使用する
+- インライン引用やブロック引用には[`quote`]を使用する
+- 文献を手動で印刷するのではなく、組み込みの[`bibliography`]と[`cite`]関数を使用する
+- 文書の他の部分を参照する場合は、単に参照をタイプするのではなく、ラベルと[`ref`]または`@references`を使用する
+- キャプションを提供する場合は、テキストを関数呼び出しの下に追加するのではなく、[`figure`要素の`caption`引数]($figure.caption)を使用する
 
-If you want to style the default appearance of an element, do not replace it with your own custom function. Instead, use [set]($styling/#set-rules), show-set, and [show rules]($styling/#show-rules) to customize its appearance. Here is an example on how you can change how strong emphasis looks in your document:
+要素のデフォルトのスタイルを調整したい時であっても、独自のカスタム関数で置き換えるのではなく、[setルール]($styling/#set-rules)、show-setルール、そして[showルール]($styling/#show-rules)を使用して外観をカスタマイズしてください。以下は、ドキュメント内の強い強調の見た目を変更する方法の例です。
 
 ```example
 // Change how text inside of strong emphasis looks
@@ -69,7 +69,7 @@ If you want to style the default appearance of an element, do not replace it wit
 When setting up your tents, *never forget* to secure the pegs.
 ```
 
-The show-set rule completely changes the default appearance of the [`strong`] element, but its semantic meaning will be preserved. If you need even more customization, you can provide show rules with fully custom layout code and Typst will still retain the semantic purpose of the element.
+show-setルールは[`strong`]要素のデフォルトの見た目を完全に変更しますが、そのセマンティックな意味は保持します。さらにカスタマイズが必要な場合は、完全に独自ののレイアウトコードを持つshowルールを指定できますが、それでもTypstはその要素のセマンティックな目的を保持します。
 
 ## Reading order { #reading-order }
 
