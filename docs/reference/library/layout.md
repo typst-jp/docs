@@ -1,3 +1,3 @@
-Arranging elements on the page in different ways.
+ページ内の要素をさまざまな方法で配置。
 
-By combining layout functions, you can create complex and automatic layouts.
+layout関数を組み合わせることで複雑なレイアウトを自動的に作成できます。
