@@ -71,21 +71,21 @@ When setting up your tents, *never forget* to secure the pegs.
 
 show-setルールは[`strong`]要素のデフォルトの見た目を完全に変更しますが、そのセマンティックな意味は保持します。さらにカスタマイズが必要な場合は、完全に独自ののレイアウトコードを持つshowルールを指定できますが、それでもTypstはその要素のセマンティックな目的を保持します。
 
-##  { #reading-order }
+## 読み上げ順序 { #reading-order }
 
 ATが文書中のコンテンツを正しい順序で読み上げられるようにするため、また再利用アプリケーションのためにも、アクセシブルなファイルは読み上げ順序を明示しなければなりません。これは、論理的な読み上げ順序がレイアウト順序とは異なる可能性があるためです。こうした差異の典型的な例がフロート図表です。図表がページ中央の段落に関連するものであっても、ページの上端や下端に配置されることがあります。アクセシブルでないファイルでは、PDFリーダーやATはレイアウト順序と論理的な読み上げ順序が同一であると推測せざるを得ず、その結果ATユーザーに混乱を招くことがよくあります。読み上げ順序が適切に定義されていれば、スクリーンリーダーは脚注やフロート図表を、意味が通る位置で直ちに読み上げます。
 
 幸い、Typstのマークアップは既に単一の読み上げ順序を暗黙的に含んでいます。Typst文書は、マークアップ内で内容を配置した順に読み上げられると考えてよいでしょう。ほとんどの文章ではそれで十分です。ただし、[`place`]関数や[`move`]関数、あるいは[フロート図表]($figure.placement)を使用する場合は、たとえレイアウトに影響しなくても、マークアップ上の論理的な読み上げ順序として適切な位置に関数呼び出しを置くよう、特に注意が必要です。配置しようとしている内容をスクリーンリーダーにどの位置で読み上げてほしいかを自問してみてください。
 
-## Layout containers { #layout-containers }
+## レイアウトコンテナ { #layout-containers }
 
-Typst provides some layout containers like [`grid`], [`stack`], [`box`], [`columns`], and [`block`] to visually arrange your content. None of these containers come with any semantic meaning attached. Typst will conserve some of these containers during PDF reflow while other containers will be discarded.
+Typstはコンテンツを視覚的に配置するための、[`grid`]、[`stack`]、[`box`]、[`columns`]、[`block`]などのレイアウトコンテナを提供します。これらのコンテナにはセマンティックな意味は付与されません。TypstはPDFリフローの際にこれらのコンテナの一部を保持しますが、他のコンテナは破棄されます。
 
-When designing for Universal Access, you need to be aware that AT users often cannot view the visual layout that the container creates. Instead, AT will just read its contents, so it is best to think about these containers as transparent in terms of accessibility. For example, a grid's contents will just be read out flatly, in the order that you have added the cells in the source code. If the layout you created is merely visual and decorative, this is fine. If, however, the layout carries semantic meaning that is apparent to a sighted user viewing the file in a regular PDF reader, it is not accessible. Instead, create an alternative representation of your content that leverages text or wrap your container in the [`figure`] element to provide an alternative textual description.
+ユニバーサルアクセスのための設計の際、ATユーザーはコンテナが作り出す視覚的なレイアウトを閲覧できないことが多い、という点を認識しておく必要があります。代わりに、ATはその内容をただ読み上げるだけなので、アクセシビリティの観点ではこれらのコンテナは透過的なものと考えるのが最善です。例えば、グリッドの内容は、ソースコード内でセルを追加した順番通りに、ただ平坦に読み上げられるだけです。あなたが作成したレイアウトが単に視覚的・装飾的なものであれば、それで問題ありません。しかし、もしそのレイアウトが通常のPDFリーダーを用いてファイルを閲覧する、目の見える人にとっては明らかなセマンティックな意味を持つ場合は、それはアクセシブルではありません。その代わりに、テキストを活用した代替表現を作成するか、あるいは代替となるテキストによる表現を提供するために、[`figure`]要素で包んでください。
 
-Do not use the grid container to represent tabular data. Instead, use [`table`]. Tables are accessible to AT users: their AT will allow them to navigate the table two-dimensionally. Tables are conserved during reflow and repurposing. When creating tables, use the [`table.header`]($table.header) and [`table.footer`]($table.footer) elements to mark up the semantic roles of individual rows. The table documentation contains an [accessibility section]($table/#accessibility) with more information on how to make your tables accessible. Keep in mind that while AT users can access tables, it is often cumbersome to them: Tables are optimized for visual consumption. Being read the contents of a set of cells while having to recall their row and column creates additional mental load. Consider making the core takeaway of the table accessible as text or a caption elsewhere.
+グリッドコンテナを表形式データの表現に使用してはいけません。代わりに[`table`]を使用してください。表はATユーザーにとってアクセシブルであり、ユーザーはATによって表を二次元的に移動して参照できます。表はリフローや再利用の際にも保持されます。表を作成する際には[`table.header`]($table.header)と[`table.footer`]($table.footer)要素を使用して、個々の行のセマンティックな役割をマークアップしてください。表のドキュメントには、表をアクセシブルにする方法について詳しく説明した[アクセシビリティセクション]($table/#accessibility)があります。また、ATユーザーが表にアクセスできるとはいえ、それがしばしば負担になることにも留意してください。表は視覚的な閲覧に最適化されているためです。セル群の内容を読み上げられながら、その行と列を思い出し続けなければならない状況は、追加の認知負荷を生みます。表の要点を、別の箇所でテキストやキャプションとしてアクセシブルに提供することを検討してください。
 
-Likewise, if you use functions like [`rotate`], [`scale`], and [`skew`], take care that this transformation either has no semantic meaning or that the meaning is available to AT users elsewhere, i.e. in figure [alt text](#textual-representations) or a caption.
+同様に、[`rotate`]、[`scale`]、[`skew`]のような関数を使用する場合は、この変換がセマンティックな意味を持たないか、あるいは意味がATユーザーに他の場所、つまり図の[代替テキスト](#textual-representations)やキャプションなどで利用可能であることに注意してください。
 
 ## Artifacts { #artifacts }
 
