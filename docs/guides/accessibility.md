@@ -87,21 +87,21 @@ Typstはコンテンツを視覚的に配置するための、[`grid`]、[`stack
 
 同様に、[`rotate`]、[`scale`]、[`skew`]のような関数を使用する場合は、この変換がセマンティックな意味を持たないか、あるいは意味がATユーザーに他の場所、つまり図の[代替テキスト](#textual-representations)やキャプションなどで利用可能であることに注意してください。
 
-## Artifacts { #artifacts }
+## アーティファクト { #artifacts }
 
-Some things on a page have no semantic meaning and are irrelevant to the content of a document. We call these items _artifacts._ Artifacts are hidden from AT and repurposing and will vanish during reflow. Here are some examples for artifacts:
+ページ上の一部のものには、セマンティックな意味がなく、文書の内容にも関係しないものがあります。これらの項目を_アーティファクト_と呼びます。アーティファクトはATや再利用からは隠され、リフローの際には消失します。以下はアーティファクトの例です。
 
-- The hyphens inserted by automatic hyphenation at the end of a line
-- The headers and footers on each page
-- A purely decorative page background image
+- 行末に自動ハイフネーションによって挿入されるハイフン
+- 各ページのヘッダーおよびフッター
+- 純粋に装飾目的のページ背景画像
 
-In general, every element on a page must either have some way for AT to announce it or be an artifact for a document to be considered accessible.
+一般に文書がアクセシブルと見なされるためには、ページ上のすべての要素が、ATが読み上げられる何らかの方法を持つか、またはアーティファクトである必要があります。
 
-Typst automatically tags many layout artifacts such as headers, footers, page back- and foregrounds, and automatic hyphenation as artifacts. However, if you'd like to add purely decorative content to your document, you can use the [`pdf.artifact`] function to mark a piece of content as an artifact. If you are unsure if you should mark an element as an artifact, ask yourself this: Would it be purely annoying if a screen reader announced the element to you? Then, it may be an artifact. If, instead, it could be useful to have it announced, then it is not an artifact.
+Typstは、ヘッダー、フッター、ページの背景・前景、自動ハイフネーションなど、多くのレイアウト上のアーティファクトを自動的にアーティファクトとしてタグ付けします。ただし、文書に純粋に装飾的な内容を追加したい場合は、[`pdf.artifact`]関数を使用して、コンテンツの一部をアーティファクトとしてマークできます。要素をアーティファクトとしてマークすべきかどうか迷った場合は、自問してみてください。スクリーンリーダーがその要素を読み上げるとしたら、単に邪魔になるだけでしょうか？それならば、それはアーティファクトかもしれません。逆に、読み上げられると便利なものであれば、それはアーティファクトではありません。
 
-For technical reasons, once in an artifact, content cannot become semantic again. To stack artifacts and semantic contents, use [`place`] to move the contents on top of one another.
+技術的な理由により、いったんアーティファクトの中に入ると、コンテンツは再びセマンティックになることはできません。アーティファクトとセマンティックな内容を重ねるには、[`place`]を使用して内容を互いの上に移動してください。
 
-Please note that Typst will mark shapes and paths like [`square`] and [`circle`] as artifacts while their content will remain semantically relevant and accessible to AT. If your shapes have a semantic meaning, please wrap them in the [`figure`] element to provide an alternative textual description.
+Typstは、[`square`]や[`circle`]のような形状やパスをアーティファクトとしてマークしますが、その内容はセマンティックに関連し、ATにアクセス可能なままになることに留意してください。形状にセマンティックな意味がある場合は、代替のテキスト説明を提供するために、[`figure`]要素でそれらを包んでください。
 
 ## Color use and contrast { #color-use-and-contrast }
 
