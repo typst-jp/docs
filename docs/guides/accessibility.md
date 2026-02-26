@@ -103,46 +103,46 @@ Typstは、ヘッダー、フッター、ページの背景・前景、自動ハ
 
 Typstは、[`square`]や[`circle`]のような形状やパスをアーティファクトとしてマークしますが、その内容はセマンティックに関連し、ATにアクセス可能なままになることに留意してください。形状にセマンティックな意味がある場合は、代替のテキスト説明を提供するために、[`figure`]要素でそれらを包んでください。
 
-## Color use and contrast { #color-use-and-contrast }
+## 色の使用とコントラスト { #color-use-and-contrast }
 
-Universal Access not only means that your documents works with AT, reflow, and repurposing, but also that visual access is possible to everyone, including people with impaired eyesight. Not only does aging often come with worse sight, a significant portion of people have problems differentiating color: About 8% of men and 0.5% of women are color blind.
+ユニバーサルアクセスとは、文書がAT、リフロー、再利用に対応していることのみを意味するのではありません。視力が低下している人も含め、すべての人が視覚的にアクセシブルであることを意味します。加齢にはしばしば視力の低下が伴うだけでなく、かなりの割合の人が色の識別に困難を抱えています。具体的には、男性の約8%、女性の約0.5%が色覚異常です。
 
 <div style="display:flex; gap: 8px 16px; width: 100%; flex-wrap: wrap; margin: 24px auto; ">
 <img src="chart-bad-regular.png" alt="Bar chart showing Energy production in Germany by kind in terawatt-hours on the X axis and the year on the y-axis. Each bar has up to four segments, for Nuclear (violet), Renewables (green), Fossil Fuels (red), and Other (blue). There is a legend in the top right corner associating the segment colors with their labels" width="958" height="637" style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 200px; max-width: 100%; height: auto; display: block; border-radius: 6px; flex-grow: 1">
 <img src="chart-bad-deuteranopia.png" alt="The same bar chart with changed colors, with the segments for Nuclear and Other in a very similar dark blue, and the neighboring segments of Renewables and Fossil Fuels in two almost indistinguishable shades of sickly yellow" width="958" height="637" style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 200px; max-width: 100%; height: auto; display: block; border-radius: 6px; flex-grow: 1">
 </div>
 
-This means that color must not be the only way you make information accessible to sighted users in your documents. As an example, consider a stacked bar chart with multiple colored segments per bar. Our example shows a chart of the domestic energy production in Germany by kind[^1]. In the picture, you can see the chart as it would normally appear and a simulation of how it would appear to people with deuteranopia-type color blindness. You can see that the two pairs of the first and last segment both look blue and the center pair looks yellow-ish. The first challenge for the colorblind user is thus to make out the boundary of the "Renewable" and "Fossil Fuels" bar. Then, they must keep track of which bar is which by only their order, adding to their mental load. A way to make this chart even less accessible would be to make the order of segments not match their order in the legend.
+これは、文書内の情報を目の見える人にアクセシブルにする方法として、色を唯一の手段にしてはならない、ということを意味します。例として、1本の棒が複数の色分けされた区画で構成される積み上げ棒グラフを考えてみましょう。この例では、ドイツ国内のエネルギー生産量を種類別に示したグラフ[^1]を扱います。この図には、グラフの通常の見え方と、2型色覚の色覚異常がある人にはどのように見えるかをシミュレートした画像が示されています。最初と最後の区画の2組はどちらも青っぽく見え、中央の2区画は黄色っぽく見えることが分かります。したがって、色覚異常の利用者にとって最初の課題は、「Renewable」と「Fossil Fuels」の区画の境界を見分けることです。さらに、どの区画がどれに対応するかを順序だけで追跡しなければならず、認知負荷が増します。このグラフをさらにアクセシブルでなくする方法としては、区画の順序を凡例の順序と一致させないことが挙げられます。
 
-How can we improve the chart? First, make sure that no information is solely communicated through color use. One possible way to do this by adding a pattern to each bar. Then, we can help the user make out the boundaries of each segment by adding a high-contrast border. Then, our chart could look something like this:
+では、どうすればこのグラフを改善できるでしょうか。まず、どの情報も色の使用だけで伝えられないようにしてください。その方法のひとつは、各区画にパターンを追加することです。さらに、各区画の境界を見分けやすくするために、高コントラストの境界線を追加できます。すると、グラフはたとえば次のようになります。
 
 <div>
 <img src="chart-good.png" alt="The same bar chart with the original colors. This time, black outlines around each segment are added. Additionally, each segment has a unique pattern." width="958" height="637" style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 500px; max-width: 100%; height: auto; display: block; margin: 24px auto; border-radius: 6px">
 </div>
 
-This could be further improved by choosing colors that are differentiable to people afflicted by common colorblindness types. You could also iterate on the design by choosing two-tone patterns, aligning them to the bars, or changing font use.
+一般的な色覚異常の人にも識別しやすい色を選ぶことで、このグラフはさらに改善できます。また、2色パターンを選ぶ、棒に合わせてそれらを整列させる、あるいはフォントの使い方を変えることで、デザインをさらに調整していくこともできます。
 
-You can check your design in the web app by using the built-in color blindness simulator. To use it, open the "View" menu and select the desired mode in the "Simulate color blindness" menu. You can also use other tools on the web to [simulate the color perception of various color blindnesses][color-blind-simulator] if you are not using our web app.
+Webアプリでは、内蔵の色覚異常シミュレーターを使ってデザインを確認できます。利用するには、「View」メニューを開き、「Simulate color blindness」メニューで目的のモードを選択してください。Webアプリを使用していない場合でも、Web上の他のツールを使って、[さまざまな種類の色覚異常における色の見え方をシミュレーション][color-blind-simulator]できます。
 
-Also consider the color contrast between background and foreground. For example, when you are using light gray text for footnotes, they could become hard to read. Another situation that often leads to low contrast is superimposing text on an image.
+背景と前景の間の色のコントラストにも注意してください。たとえば、脚注に薄いグレーの文字を使うと、読みにくくなることがあります。低コントラストを招きやすいもう一つの状況として、画像の上に文字を重ねる場合があります。
 
 <div>
 <img src="color-contrast.png" alt="Two callout boxes with the text 'Caution: Keep hands away from active stapler' with different designs. Each box has a contrast gauge for its text and graphical elements below it. The left box is shaded in a light red and the text is a regular shade of red. It has a text contrast of 2.8:1 and a graphics contrast of 1.4:1. The right box is white with a red outline and dark red text. It has a text contrast of 5.9:1 and a graphics contrast of 3.9:1." width="1536" height="708" style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 512px; max-width: 100%; height: auto; display: block; margin: 24px auto; border-radius: 6px">
 </div>
 
-In our example, we can see two designs for callout boxes. Because these boxes aim to help the user avoid a hazard, it is paramount that they can actually read them. However, in the first box, the background is fairly light, making it hard to make out the box. Worse, the red text is difficult to read on the light red background. The text has a 2.8:1 contrast ratio, failing the bar of 4.5:1 contrast the Web Content Accessibility Guidelines (WCAG) set. Likewise, the box has an 1.4:1 contrast ratio with the white page background, falling short of the 3:1 threshold for graphical objects.
+この例では、注意喚起ボックスの2つのデザインを比較できます。これらのボックスはユーザーが危険を回避するのを助けることを目的としているため、ユーザーが実際にその内容を読めることが極めて重要です。しかし、最初のボックスでは背景がかなり明るく、ボックス自体の輪郭を見分けにくくなっています。さらに悪いことに、薄い赤の背景上では赤い文字が読みにくくなっています。文字のコントラスト比は2.8:1で、Web Content Accessibility Guidelines（WCAG）が定める4.5:1の基準を満たしていません。同様に、ボックスの白いページ背景に対するコントラスト比も1.4:1で、グラフィカルオブジェクトに対する3:1の閾値を下回っています。
 
-Colors in the second example have been adjusted to meet WCAG AA color contrast thresholds. It should be markedly easier to read the text in the box, even if you have good vision!
+2つ目の例では、WCAG AA の色コントラスト閾値を満たすように色が調整されています。視力に問題がない場合でも、ボックス内の文字は明らかに読みやすくなっているはずです!
 
-There are [tools to compare how much contrast a pair of colors has][wcag-contrast] as foreground and background. The most common one is the WCAG color contrast ratio. For a given font size, a color pair may either fail the test, get to the AA level, or reach the higher AAA level. Aim for at least AA contrast for all your color pairings.
+前景色と背景色として使う[2色の組み合わせがどの程度のコントラストを持つかを比較するためのツール][wcag-contrast]があります。最も一般的なのは、WCAGの色コントラスト比です。フォントサイズが決まると、色の組み合わせは、基準を満たさないか、AAレベルに達するか、あるいはより高いAAAレベルに達するかのいずれかになります。すべての色の組み合わせについて、少なくともAAコントラストを目指してください。
 
-| Content                                | AA Ratio | AAA Ratio |
-|----------------------------------------|---------:|----------:|
-| Large text (≥18pt, or bold and ≥14pt)  | 3:1      | 4.5:1     |
-| Small text                             | 4.5:1    | 7:1       |
-| Non-text content                       | 3:1      | 3:1       |
+| コンテンツ                                   | AA比率 | AAA比率 |
+| -------------------------------------------- | -----: | ------: |
+| 大きい文字（18pt以上、または太字で14pt以上） |    3:1 |   4.5:1 |
+| 小さい文字                                   |  4.5:1 |     7:1 |
+| 非テキストコンテンツ                         |    3:1 |     3:1 |
 
-Note that common accessibility frameworks like WCAG make an exception for purely decorative text and logos: Due to their graphic character, they can have contrast ratios that fail to achieve AA contrast ratio.
+WCAGのような一般的なアクセシビリティフレームワークでは、純粋に装飾目的の文字やロゴは例外扱いとなる点に注意してください。これらはグラフィックとしての性質を持つため、AA のコントラスト比基準を満たさないコントラスト比であっても許容される場合があります。
 
 ## Textual representations { #textual-representations }
 
