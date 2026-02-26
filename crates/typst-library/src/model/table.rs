@@ -181,13 +181,13 @@ pub struct TableElem {
     #[borrowed]
     pub align: Celled<Smart<Alignment>>,
 
-    /// セルの枠線をどのように描画するか。
+    /// セルの[ストローク]($stroke)をどうするか。
     ///
-    /// 枠線を非表示にする場合、これを`{none}`に指定します。
+    /// ストロークを無効にする場合、これを`{none}`に指定します。
     ///
-    /// `gutter`引数の指定によるセル間の間隔をまたいだ枠線が必要な場合、および複数の特定セル間の枠線の表示を上書きする場合は、そのセルについて[`table.hline`]($table.hline)と[`table.vline`]($table.vline)またはその両方を指定することを検討してください。
+    /// `gutter`引数の指定によるセル間の間隔をまたいだ罫線が必要な場合、および複数の特定セル間のストロークを上書きする場合は、そのセルについて[`table.hline`]($table.hline)と[`table.vline`]($table.vline)またはその両方を指定することを検討してください。
     ///
-    /// 枠線指定についての詳細は[gridのドキュメント]($grid.stroke)を参照してください。
+    /// ストロークについての詳細は[gridのドキュメント]($grid.stroke)を参照してください。
     #[resolve]
     #[fold]
     #[default(Celled::Value(Sides::splat(Some(Some(Arc::new(Stroke::default()))))))]
@@ -562,7 +562,7 @@ pub struct TableVLine {
     /// [`grid.vline`]($grid.vline.x)の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
-    /// この罫線が開始される行。（最初の列は0、指定した行を含みます）
+    /// この罫線が開始される行。（最初の行は0、指定した行を含みます）
     pub start: usize,
 
     /// この罫線が終了する行。（最初の行は0、指定した行を含みません）
@@ -707,7 +707,7 @@ pub struct TableCell {
     pub stroke: Sides<Option<Option<Arc<Stroke>>>>,
 
     /// このセルがまたぐ行が複数ページにまたがって配置できるかどうか。
-    /// `{auto}`に設定された場合、固定サイズの行のみを跨ぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
+    /// `{auto}`に設定された場合、固定サイズの行のみをまたぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
     pub breakable: Smart<bool>,
 }
 
