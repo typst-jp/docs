@@ -518,14 +518,14 @@ pub struct TableFooter {
 /// ```
 #[elem(name = "hline", title = "Table Horizontal Line")]
 pub struct TableHLine {
-    /// この罫線が配置される行。（最初の行は0）
+    /// この罫線が配置される行（最初の行は0）。
     /// [`grid.hline`]($grid.hline.y)の`y`フィールドと同様に機能します。
     pub y: Smart<usize>,
 
-    /// この罫線が開始される列。（最初の列は0、指定した列を含みます）
+    /// この罫線が開始される列（最初の列は0、指定した列を含みます）。
     pub start: usize,
 
-    /// この罫線が終了する列。（最初の列は0、指定した列を含みません）
+    /// この罫線が終了する列（最初の列は0、指定した列を含みません）。
     pub end: Option<NonZeroUsize>,
 
     /// この罫線のストローク。
@@ -557,15 +557,15 @@ pub struct TableHLine {
 /// もし配置したい罫線が文書内の全ての表のデザインの一部である場合は[表の`stroke`]($table.stroke)フィールドか[`table.cell`の`stroke`]($table.cell.stroke)フィールドを使用してください。
 #[elem(name = "vline", title = "Table Vertical Line")]
 pub struct TableVLine {
-    /// この罫線が配置される列。（最初の列は0）
+    /// この罫線が配置される列（最初の列は0）。
     ///
     /// [`grid.vline`]($grid.vline.x)の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
-    /// この罫線が開始される行。（最初の行は0、指定した行を含みます）
+    /// この罫線が開始される行（最初の行は0、指定した行を含みます）。
     pub start: usize,
 
-    /// この罫線が終了する行。（最初の行は0、指定した行を含みません）
+    /// この罫線が終了する行（最初の行は0、指定した行を含みません）。
     pub end: Option<NonZeroUsize>,
 
     /// この罫線のストローク。
@@ -674,12 +674,12 @@ pub struct TableCell {
     #[required]
     pub body: Content,
 
-    /// セルの列。（最初の列は0）
+    /// セルの列（最初の列は0）。
     ///
     /// [`grid.cell`]($grid.cell)の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
-    /// セルの行。（最初の行は0）
+    /// セルの行（最初の行は0）。
     ///
     /// [`grid.cell`]($grid.cell)の`y`フィールドと同様に機能します。
     pub y: Smart<usize>,
