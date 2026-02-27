@@ -144,11 +144,11 @@ Webアプリでは、内蔵の色覚異常シミュレーターを使ってデ�
 
 WCAGのような一般的なアクセシビリティフレームワークでは、純粋に装飾目的の文字やロゴは例外扱いとなる点に注意してください。これらはグラフィックとしての性質を持つため、AA のコントラスト比基準を満たさないコントラスト比であっても許容される場合があります。
 
-## Textual representations { #textual-representations }
+## テキストによる表現 { #textual-representations }
 
-To support AT use and some repurposing workflows, all elements with a semantic meaning must have a textual representation. Think about it in terms of Universal Access: If an item is not an [artifact](#artifacts), it has a semantic meaning. If, however, AT cannot ingest the item, the full semantic meaning of a document is not available to AT users. Hence, to provide Universal Access, use the mechanisms built into Typst to provide alternative representations.
+ATの利用や一部の再利用ワークフローをサポートするためには、セマンティックな意味を持つ全ての要素にテキストによる表現が必要です。これをユニバーサルアクセスの観点で考えてみてください。ある項目が[アーティファクト](#artifacts)でないなら、それはセマンティックな意味を持っています。しかし、ATがその項目を取り込めない場合、文書の持つセマンティックな意味をATユーザーは完全には受け取れません。したがって、ユニバーサルアクセスを実現するために、代替表現を提供するためのTypstの組み込み機能を利用してください。
 
-When you add an image, be sure to use the [`alt` argument of the image function]($image.alt) to describe what's visible in the image. This alternative description (sometimes known as alt text) should describe the gist of the image: Think about how you would describe the image to a friend if you called them on the phone. To write good alternative descriptions, consider the context in which the image appears:
+画像を追加する際は、画像内で見えている内容を説明するために、必ず[image関数の`alt`引数]($image.alt)を使用してください。この代替説明（altテキストとも呼ばれます）は、画像の要点を説明するものにすべきです。電話で友人にその画像を説明するとしたら、どのように説明するかを考えてみてください。良い代替説明を書くためには、その画像が現れる文脈を考慮してください。
 
 ```example
 #image("heron.jpg", alt: "?")
@@ -159,30 +159,30 @@ when swimming, and wings that span
 up to 2.3 m.
 ```
 
-What could be a good alternative description for [this image][heron]? Let's consider a few examples for what _not_ to do:
+[この画像][heron]には、どのような代替説明が適切でしょうか？_避けるべき_例をいくつか見てみましょう。
 
-- `{"Image of a heron"}` \
-  ❌ The screen reader will already announce the image on its own, so saying this is an image is redundant. In this example, the AT user would hear "Image, Image of a heron".
+- `{"サギの画像"}` \
+  ❌ スクリーンリーダーは画像であることをすでに自動で読み上げるため、「画像」と言うのは冗長です。この例では、ATユーザーには「画像、サギの画像」と聞こえます。
 
-- `{"A bird"}` \
-  ❌ The alternative description is not specific enough. For example, it is relevant to a user that the image depicts a heron and both its feet and wings are visible.
+- `{"鳥"}` \
+  ❌ この代替説明は十分に具体的ではありません。たとえば、この画像がサギを描いていること、そして足と翼の両方が見えていることは、ユーザーにとって重要な情報です。
 
-- `{"Gray heron in flight. Picture by Makasch1966 on Wikimedia Commons, CC Attribution 4.0 International license"}` \
-  ❌ The alternative description should not include details not visible in the image, such as attribution, jokes, or metadata. Keep in mind that it is not accessible to sighted users. That information belongs elsewhere.
+- `{"飛行中のアオサギ。Wikimedia Commonsの Makasch1966による写真。CC Attribution 4.0 Internationalライセンス"}` \
+  ❌ 代替説明には、帰属情報・ジョーク・メタデータのような、画像に見えていない情報を含めるべきではありません。その情報は目の見えるユーザーにはアクセシブルでないことを念頭に置いてください。そうした情報は別の場所に記載すべきです。
 
-- `{"Gray heron flying low, heading from the right to left. Its feet are extended and slightly point downwards, touching a blurred horizon where a dark forest becomes visible. The bird's wings are extended and arc upwards. There are out-of-focus branches visible in the lower left corner of the image."}` \
-  ❌ The alternative description is too verbose. Use your discretion and determine how important the image is to the content. Think about how long a sighted user would realistically look at the image; your alt text should take about the same effort to 'consume.' For example, the anatomic description contained above could be appropriate for a longer discussion in a zoology textbook while the compositional information is useful when writing about photography. The context the example image comes with is relatively short, so write a more brief description.
+- `{"低空を右から左へ飛ぶアオサギ。足は伸びており、やや下向きで、暗い森が見え始めるぼやけた地平線に触れている。鳥の翼は広がって上向きに弧を描いている。画像の左下には、ピントの合っていない枝が見える。"}` \
+  ❌ この代替説明は冗長すぎます。画像が内容にとってどの程度重要かを判断してください。目の見えるユーザーが現実的にどのくらいその画像を見るかを考えてください。altテキストも、読むのにかかる負担がだいたい同程度になるようにするべきです。たとえば、上の説明に含まれる解剖学的な記述は、動物学の教科書でより長い説明をする場合には適切かもしれません。一方、構図に関する情報は、写真について書く場合に有用です。この例の画像に付随する文脈は比較的短いため、より簡潔な説明にしてください。
 
-Instead, in the given example, you could use this alternative text:
+代わりに、この例では次のような代替テキストを使うことができます。
 
-- `{"Heron in flight with feet and wings spread"}` \
-  ✅ This alternative description describes the image, is relevant to the context, and matches its brevity.
+- `{"足と翼を広げて飛ぶサギ"}` \
+  ✅ この代替説明は画像を説明しており、文脈にも関連していて、求められる簡潔さにも合っています。
 
-There are resources available on the web [to learn more about writing good alternative descriptions][alt-text-tips]. The requirement to add alternative text to images applies to all image formats. Typst does not currently retain the tags of a PDF image in the compiled document, even if the PDF image file on its own was accessible.
+良い代替説明の書き方をさらに学ぶための [Web 上のリソース][alt-text-tips] があります。画像に代替テキストを追加するという要件は、すべての画像形式に適用されます。Typstは現在、PDF画像ファイル単体がアクセシブルであっても、コンパイル後の文書内ではそのPDF画像のタグを保持しません。
 
-Do not use images of text; likewise, do not use the path operations to draw text manually. Typst will not be able to process text in any images to make it accessible in the same way that native text is. There is one exception to this rule: Use an image of text when the appearance of the text is essential to the semantic meaning of the document and cannot be reproduced with Typst natively. In that case, you must describe both the textual content and the essential visual characteristics in the alternative description.
+文字を画像にしたものは使わないでください。同様に、パス操作を使って文字を手動で描画しないでください。Typstは、画像内の文字をネイティブなテキストと同じようにアクセシブルにするために処理できません。このルールには1つだけ例外があります。文字の見た目が文書の意味にとって本質的であり、かつTypstのネイティブ機能では再現できない場合に限って、文字の画像を使用してください。その場合は、代替説明の中で、文字としての内容と本質的な視覚的特徴の両方を記述しなければなりません。
 
-Like the image function, the figure function has a [`alt` attribute]($figure.alt). When you use this attribute, many screen readers and other AT will not announce the content inside of the figure and instead just read the alternative description. Your alternative description must be comprehensive enough so that the AT user does not need to access the body of the figure. Only use the alternative description if the content of the figure are not otherwise accessible. For example, do not use the `alt` attribute of a figure if it contains a `table` element, but do use it if you used shapes within that come with a semantic meaning. If you specify both `alt` and `caption`, both will be read by AT. When your figure contains an image, set the alternative description on the [image itself]($image.alt), not on the figure. Do not set both, as the image description would be overridden by the figure description.
+image関数と同様に、figure関数も[alt属性]($figure.alt)を持ちます。この属性を使用すると、多くのスクリーンリーダーやその他のATはfigure内部の内容を読み上げず、代わりに代替説明のみを読み上げます。代替説明は、AT利用者がfigure本体にアクセスする必要がないよう、十分に包括的でなければなりません。代替説明は、figureの内容にほかの方法ではアクセスできない場合にのみ使用してください。たとえば、figureに`table`要素が含まれている場合は、そのfigureの`alt`属性を使用しないでください。一方、セマンティックな意味を持つ図形をfigure内で使用している場合は、`alt`属性を使用してください。`alt`と`caption`の両方を指定すると、その両方がATによって読み上げられます。figureに画像が含まれている場合、代替説明はfigureではなく[画像自体]($image.alt)に設定してください。両方への設定は行わないでください。画像の説明がfigureの説明によって上書きされてしまうためです。
 
 ```typ
 #figure(
@@ -199,7 +199,7 @@ Like the image function, the figure function has a [`alt` attribute]($figure.alt
 )
 ```
 
-Finally, you can specify an alternative description on math using [`math.equation`]. Describe your formula as if read out loud in natural language. Currently, adding an alternative description is required for accessible math for all export formats. Not adding an alternative description for your formula will result in a failure of PDF/UA-1 export. In the future, Typst will automatically make math accessible in HTML and PDF 2.0 by leveraging MathML technology.
+最後に、[`math.equation`]を使って数式に代替説明を指定できます。数式は、自然言語で声に出して読み上げる場合を想定して記述してください。現時点では、すべてのエクスポート形式で数式をアクセシブルにするために、代替説明の追加が必要です。数式に代替説明を追加しなかった場合、PDF/UA-1におけるエクスポートは失敗します。将来的には、TypstはMathML技術を活用し、HTMLおよびPDF 2.0における数式を自動的にアクセシブルにする予定です。
 
 ```typ
 #math.equation(
@@ -208,7 +208,7 @@ Finally, you can specify an alternative description on math using [`math.equatio
 )
 ```
 
-Another element that represents itself as text are links. It is best to avoid non-descriptive link texts such as _here_ or _go._ These link texts also hurt Search Engine Optimization (SEO) if that is a consideration for your document. Instead, try to have the link contain text about where it is pointing to. Note that, unless you are aiming for the highest level of accessibility, it is also okay if the link itself is not descriptive but its purpose can be understood from the content immediately surrounding it.
+テキストとして表現される要素のもう一つが、リンクです。_here_ や _go_ のような、説明的でないリンクテキストは避けるのが望ましいです。こうしたリンクテキストは、文書において検索エンジン最適化（SEO：Search Engine Optimization）を考慮する場合、SEOにも悪影響を及ぼします。代わりに、リンクがどこを指しているのかをわかるテキストを、リンク自体に含めるようにしてください。なお、最高レベルのアクセシビリティを目指しているのでなければ、リンク自体の文言が説明的でなくても、その目的が直近の周辺の文脈から理解できるのであれば問題ありません。
 
 ## Natural Language { #natural-language }
 
