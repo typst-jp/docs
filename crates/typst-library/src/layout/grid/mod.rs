@@ -50,7 +50,7 @@ use crate::visualize::{Paint, Stroke};
 ///
 /// # 例
 /// 以下の例は異なるトラックサイズオプションの実演です。
-/// また、1つのセルをグリッドの2つのトラックに跨がせるために[`grid.cell`]($grid.cell)をどう使うのかも示しています。
+/// また、1つのセルをグリッドの2つのトラックにまたがせるために[`grid.cell`]($grid.cell)をどう使うのかも示しています。
 ///
 /// ```example
 /// // We use `rect` to emphasize the
@@ -452,7 +452,7 @@ pub struct GridFooter {
 /// グリッドの水平方向の線。
 ///
 /// グリッドの`stroke`フィールドを用いて指定されたものを含めてセルごとに設定されたストロークを上書きします。
-/// グリッドの`column-gutter`オプションで作成されたセル間の間隔を跨げます。
+/// グリッドの`column-gutter`オプションで作成されたセル間の間隔をまたげます。
 ///
 /// この関数の例は[`table.hline`]($table.hline)要素のドキュメントにあります。
 #[elem(name = "hline", title = "Grid Horizontal Line")]
@@ -495,7 +495,7 @@ pub struct GridHLine {
 /// グリッドの垂直方向の線。
 ///
 /// グリッドのstrokeフィールドを用いて指定されたものを含めてセルごとに設定されたストロークを上書きします。
-/// グリッドの`row-gutter`オプションで作成されたセル間の間隔を跨げます。
+/// グリッドの`row-gutter`オプションで作成されたセル間の間隔をまたげます。
 #[elem(name = "vline", title = "Grid Vertical Line")]
 pub struct GridVLine {
     /// 配置される垂直方向の線の前にある列（0始まり）。
@@ -634,11 +634,11 @@ pub struct GridCell {
     /// ```
     pub y: Smart<usize>,
 
-    /// このcellが跨ぐ列の数。
+    /// このcellがまたぐ列の数。
     #[default(NonZeroUsize::ONE)]
     pub colspan: NonZeroUsize,
 
-    /// このcellが跨ぐ行の数。
+    /// このcellがまたぐ行の数。
     #[default(NonZeroUsize::ONE)]
     pub rowspan: NonZeroUsize,
 
@@ -656,8 +656,8 @@ pub struct GridCell {
     #[fold]
     pub stroke: Sides<Option<Option<Arc<Stroke>>>>,
 
-    /// このcellが跨ぐ行のページ跨ぎを許すかどうか。
-    /// `{auto}`に設定された場合、固定サイズの行のみを跨ぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
+    /// このcellがまたぐ行のページまたぎを許すかどうか。
+    /// `{auto}`に設定された場合、固定サイズの行のみをまたぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
     pub breakable: Smart<bool>,
 }
 
