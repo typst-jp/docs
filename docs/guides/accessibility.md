@@ -240,23 +240,23 @@ This is #text(lang: "fr")[français].
 ]
 ```
 
-## Document Title and Headings { #document-title-and-headings }
+## 文書タイトルと見出し { #document-title-and-headings }
 
-Titling your document makes it easier to retrieve it and to navigate between it and other documents, both for AT users and regular users of PDF viewers. This is why accessibility standards such as WCAG and PDF/UA require you to set a machine-readable title for your document.
+文書にタイトルを付けると、ATユーザーにとっても、通常のPDFビューアーのユーザーにとっても、その文書を見つけたり、ほかの文書との間を移動したりしやすくなります。このため、WCAGやPDF/UAなどのアクセシビリティ標準では、文書に機械可読なタイトルを設定することが求められています。
 
-To do so in Typst, place this set rule in your document before any content:
+Typstでこれを行うには、以下のsetルールを、文書内のどのコンテンツよりも前に配置してください。
 
 ```typ
 #set document(title: "GlorboCorp Q1 2023 Revenue Report")
 ```
 
-This will set the [title in the document's metadata]($document.title) and in the title bar of the PDF viewer or web browser. If this results in an error when using a template, consider whether your template may provide an alternative way to set the document title.
+これにより、[文書メタデータ内のタイトル]($document.title)と、PDFビューアーやWebブラウザのタイトルバーのタイトルが設定されます。テンプレートを使用していてこれがエラーになる場合は、テンプレート側で文書タイトルを設定する別の方法が用意されていないか確認してください。
 
-Most likely, you will also want to include the title visibly in your document. To do so, use the [`title`] element. When you add a call to the title element without any arguments, it will print the contents of what you set as the document's title. Alternatively, you can customize the title by passing content as the positional body argument. Do not use the title element more than once in your document.
+おそらく、文書内にもタイトルを目に見える形で示したくなるでしょう。そのためには、[`title`]要素を使用します。title要素を引数なしで呼び出すと、文書タイトルとして設定したコンテンツがそのまま出力されます。あるいは、コンテンツを位置引数としてのbody引数として渡して、タイトルをカスタマイズすることもできます。文書内でtitle要素を複数回使用しないでください。
 
-Never use a heading for your document title; instead, use the title element. Should you have experience with HTML, it is important to remember that the semantics of the heading element in Typst differ from HTML headings. It is encouraged to use multiple first-level headings for section headings in Typst documents. When exporting to HTML, a [title] will be serialized as a `h1` tag while a [first-level heading]($heading.level) will be serialized as a `h2` tag. In PDF export, the title and headings will be correctly tagged based on the PDF version targeted.
+文書タイトルに見出しを使ってはいけません。代わりにtitle要素を使用してください。HTMLの経験がある場合は、Typstにおけるheading要素のセマンティクスがHTMLの見出しとは異なることを覚えておくことが重要です。Typst文書では、セクション見出しとして複数の第1レベルの見出しを使用することが推奨されます。HTMLにエクスポートする際、[title]は`h1`タグとしてシリアル化される一方、[第1レベルの見出し]($heading.level)は`h2`タグとしてシリアル化されます。PDFエクスポートでは、対象とするPDFバージョンに基づいて、タイトルと見出しが正しくタグ付けされます。
 
-It is important that the sequence of headings you use is sequential: Never skip a heading level when going deeper. This means that a third-level heading must be followed by a heading of level four or lower, but never a heading of level five or higher.
+使用する見出しの階層は、順番通りであることが重要です。より深い階層に進むときに、見出しレベルを飛ばしてはいけません。つまり、第3レベルの見出しの次には、レベル4以下の見出しが続く必要がありますが、レベル5以上の見出しが続いてはいけません。
 
 ```typ
 // ❌ Don't do this:
@@ -264,7 +264,7 @@ It is important that the sequence of headings you use is sequential: Never skip 
 === Third level heading
 ```
 
-Note that in order to pass the [automated accessibility check in Adobe Acrobat][acro-check-outline], documents with 21 pages or more must contain outlined headings.
+[Adobe Acrobat の自動アクセシビリティチェック][acro-check-outline]を通過するためには、21ページ以上の文書にはアウトライン化された見出しが必要であることに注意してください。
 
 ## Accessibility Standards and Legislation { #accessibility-standards-and-legislation }
 
