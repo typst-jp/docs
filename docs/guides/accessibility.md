@@ -210,25 +210,25 @@ image関数と同様に、figure関数も[alt属性]($figure.alt)を持ちます
 
 テキストとして表現される要素のもう一つが、リンクです。_here_ や _go_ のような、説明的でないリンクテキストは避けるのが望ましいです。こうしたリンクテキストは、文書において検索エンジン最適化（SEO：Search Engine Optimization）を考慮する場合、SEOにも悪影響を及ぼします。代わりに、リンクがどこを指しているのかをわかるテキストを、リンク自体に含めるようにしてください。なお、最高レベルのアクセシビリティを目指しているのでなければ、リンク自体の文言が説明的でなくても、その目的が直近の周辺の文脈から理解できるのであれば問題ありません。
 
-## Natural Language { #natural-language }
+## 自然言語 { #natural-language }
 
-In order for screen readers to pronounce your document correctly and translation software to work properly, you must indicate in which natural language your document is written. Use the rule [`[#set text(lang: "..")]`]($text.lang) at the very start of your document or your template's capability to set a language. If you do not do so, Typst will assume that your content is in English. The natural language you choose not only impacts accessibility, but also how Typst will apply hyphenation, what typesetting conventions are applied, the labels of figures and references, and, in the web app, what language is used for spellcheck.
+スクリーンリーダーが文書を正しく読み上げ、翻訳ソフトウェアが適切に動作するためには、文書がどの自然言語で書かれているかを明示する必要があります。文書の冒頭で[`[#set text(lang: "..")]`]($text.lang)ルールを使用するか、テンプレート側の言語設定機能を使用してください。そうしない場合、Typstはその内容を英語で書かれているものとみなします。選択した自然言語は、アクセシビリティだけでなく、Typstがどのようにハイフネーションを適用するか、どの組版規則が適用されるか、図や参照のラベル、そしてWebアプリではスペルチェックにどの言語が使われるかにも影響します。
 
-If you are using a language with significant variation between regions, such as Chinese or English, also use [the `region` argument]($text.region). For example, Chinese as it is spoken in Hong Kong would look like this:
+中国語や英語のように地域差が大きい言語を使用する場合は、[`region`引数]($text.region)も使用してください。たとえば、香港で話される中国語は次のように指定します。
 
 ```typ
 #set text(lang: "zh", region: "HK")
 ```
 
-To specify your language, use ISO 639 codes. For regions, use the [ISO 3166-1 alpha-2][iso-3166-1-alpha-2] code. ISO 639 contains three variants, one for two-letter language codes like "de" for German [(ISO 639-1)][iso-639-1-list] and two for three-letter language codes like "deu" ([ISO 639-2][iso-639-2-list] and [ISO 639-3][iso-639-3-list]). If your language has a two-letter ISO 639-1 code, always prefer using that. ISO 639-2 and 639-3 share most codes, but there are some differences. When your language code differs between the two standards, use ISO 639-2 when exporting to PDF 1.7 (Typst's default) and below and ISO 639-3 for export to PDF 2.0 and HTML.
+言語を指定するには、ISO 639コードを使用します。地域については、[ISO 3166-1 alpha-2][iso-3166-1-alpha-2] コードを使用します。ISO 639には3種類の規格があり、ドイツ語の"de"のような2文字の言語コード用のものが1つ（[ISO 639-1][iso-639-1-list]）、"deu" のような3文字の言語コード用のものが2つ（[ISO 639-2][iso-639-2-list] と [ISO 639-3][iso-639-3-list]）あります。使用する言語に2文字のISO 639-1コードがある場合は、常にそちらを使用してください。ISO 639-2と639-3はほとんどのコードを共有していますが、いくつかの違いがあります。言語コードが両規格で異なる場合は、PDF 1.7（Typstのデフォルト）およびそれ以下へのエクスポートにはISO 639-2を、PDF 2.0とHTMLへのエクスポートにはISO 639-3を使用してください。
 
-There are three special language codes defined by both ISO 639-2 and ISO 639-3 that you can use when providing a normal language code is difficult:
+通常の言語コードを提供するのが難しい場合に使用できる、ISO 639-2とISO 639-3の両方で定義されている3つの特別な言語コードがあります。
 
-- `zxx` for text that is not in a natural language
-- `und` for text for which you cannot determine the natural language
-- `mis` for text in languages that have not been assigned a language code
+- `zxx` は自然言語でないテキスト用
+- `und` は自然言語を特定できないテキスト用
+- `mis` は言語コードが割り当てられていない言語のテキスト用
 
-If your document contains text in multiple languages, you can use the text function or a scoped text set rule to enclose instances of other languages:
+文書に複数言語のテキストが含まれている場合は、text関数やスコープ付きのtext setルールを使用して、他の言語のインスタンスを囲むことができます。
 
 ```example
 This is #text(lang: "fr")[français].
