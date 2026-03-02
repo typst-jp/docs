@@ -5,20 +5,20 @@ use std::fmt::{self, Debug, Formatter};
 use std::sync::{Arc, LazyLock};
 
 use comemo::{Tracked, TrackedMut};
-use ecow::{eco_format, EcoString};
-use typst_syntax::{ast, Span, SyntaxNode};
-use typst_utils::{singleton, LazyHash, Static};
+use ecow::{EcoString, eco_format};
+use typst_syntax::{Span, SyntaxNode, ast};
+use typst_utils::{LazyHash, Static, singleton};
 
-use crate::diag::{bail, At, DeprecationSink, SourceResult, StrResult};
+use crate::diag::{At, DeprecationSink, SourceResult, StrResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, repr, scope, ty, Args, Bytes, CastInfo, Content, Context, Element, IntoArgs,
-    PluginFunc, Scope, Selector, Type, Value,
+    Args, Bytes, CastInfo, Content, Context, Element, IntoArgs, PluginFunc, Scope,
+    Selector, Type, Value, cast, repr, scope, ty,
 };
 
 /// 引数値から戻り値への写像。
 ///
-/// 関数名の直後に括弧で囲まれたカンマ区切りの関数の _引数_ のリストを書くことにより関数を呼び出すことができます。
+/// 関数名の直後に括弧で囲まれたカンマ区切りの関数の_引数_のリストを書くことにより関数を呼び出すことができます。
 /// 加えて、通常の引数リストの後に任意の数のコンテンツブロック引数を関数に渡すこともできます。
 /// 通常の引数リストが空の場合は省略が可能です。
 /// Typstは位置引数と名前付き引数をサポートしています。
@@ -47,7 +47,7 @@ use crate::foundations::{
 /// Typstで関数をさらに活用する方法については、[setルール]($styling/#set-rules)および[showルール]($styling/#show-rules)のドキュメントも参照して下さい。
 ///
 /// # 要素関数
-/// [見出し]($heading)や[表]($table)のような、いくつかの関数は _要素_ と結びついており、呼び出すとその種類に応じた要素を作成します。
+/// [見出し]($heading)や[表]($table)のような、いくつかの関数は_要素_と結びついており、呼び出すとその種類に応じた要素を作成します。
 /// さらに、通常の関数とは異なり、要素関数は[setルール]($styling/#set-rules)、[showルール]($styling/#show-rules)および [セレクター]($selector)で使用可能です。
 ///
 /// # 関数スコープ
@@ -107,7 +107,7 @@ use crate::foundations::{
 /// ```
 ///
 /// # 関数の純粋性に関する注意
-/// Typstにおいて関数は全て _純粋_ です。
+/// Typstにおいて関数は全て_純粋_です。
 /// これは同じ引数からは常に同じ結果が返ってくることを意味します。
 /// 純粋関数は2回目の呼び出し時に別の値を生成するために何かを「記憶」することはできません。
 ///
@@ -288,7 +288,7 @@ impl Func {
     ) -> SourceResult<Value> {
         match &self.repr {
             Repr::Native(native) => {
-                let value = (native.function)(engine, context, &mut args)?;
+                let value = (native.function.0)(engine, context, &mut args)?;
                 args.finish()?;
                 Ok(value)
             }
@@ -404,9 +404,13 @@ impl Debug for Func {
 
 impl repr::Repr for Func {
     fn repr(&self) -> EcoString {
-        match self.name() {
-            Some(name) => name.into(),
-            None => "(..) => ..".into(),
+        const DEFAULT: &str = "(..) => ..";
+        match &self.repr {
+            Repr::Native(native) => native.name.into(),
+            Repr::Element(elem) => elem.name().into(),
+            Repr::Closure(closure) => closure.name().unwrap_or(DEFAULT).into(),
+            Repr::Plugin(func) => func.name().clone(),
+            Repr::With(_) => DEFAULT.into(),
         }
     }
 }
@@ -421,6 +425,15 @@ impl PartialEq<&'static NativeFuncData> for Func {
     fn eq(&self, other: &&'static NativeFuncData) -> bool {
         match &self.repr {
             Repr::Native(native) => *native == Static(*other),
+            _ => false,
+        }
+    }
+}
+
+impl PartialEq<Element> for Func {
+    fn eq(&self, other: &Element) -> bool {
+        match &self.repr {
+            Repr::Element(elem) => elem == other,
             _ => false,
         }
     }
@@ -471,8 +484,8 @@ pub trait NativeFunc {
 /// Defines a native function.
 #[derive(Debug)]
 pub struct NativeFuncData {
-    /// Invokes the function from Typst.
-    pub function: fn(&mut Engine, Tracked<Context>, &mut Args) -> SourceResult<Value>,
+    /// The implementation of the function.
+    pub function: NativeFuncPtr,
     /// The function's normal name (e.g. `align`), as exposed to Typst.
     pub name: &'static str,
     /// The function's title case name (e.g. `Align`).
@@ -484,17 +497,39 @@ pub struct NativeFuncData {
     /// Whether this function makes use of context.
     pub contextual: bool,
     /// Definitions in the scope of the function.
-    pub scope: LazyLock<Scope>,
+    pub scope: DynLazyLock<Scope>,
     /// A list of parameter information for each parameter.
-    pub params: LazyLock<Vec<ParamInfo>>,
+    pub params: DynLazyLock<Vec<ParamInfo>>,
     /// Information about the return value of this function.
-    pub returns: LazyLock<CastInfo>,
+    pub returns: DynLazyLock<CastInfo>,
 }
 
 cast! {
     &'static NativeFuncData,
     self => Func::from(self).into_value(),
 }
+
+/// A pointer to a native function's implementation.
+pub struct NativeFuncPtr(pub &'static NativeFuncSignature);
+
+/// The signature of a native function's implementation.
+type NativeFuncSignature =
+    dyn Fn(&mut Engine, Tracked<Context>, &mut Args) -> SourceResult<Value> + Send + Sync;
+
+impl Debug for NativeFuncPtr {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        f.pad("NativeFuncPtr(..)")
+    }
+}
+
+/// A `LazyLock` that uses a static closure for initialization instead of only
+/// working with function pointers.
+///
+/// Can be created from a normal function or closure by prepending with a `&`,
+/// e.g. `LazyLock::new(&|| "hello")`. Can be created from a dynamic closure
+/// by allocating and then leaking it. This is equivalent to having it
+/// statically allocated, but allows for it to be generated at runtime.
+type DynLazyLock<T> = LazyLock<T, &'static (dyn Fn() -> T + Send + Sync)>;
 
 /// Describes a function parameter.
 #[derive(Debug, Clone)]
@@ -522,13 +557,21 @@ pub struct ParamInfo {
     pub settable: bool,
 }
 
+/// Distinguishes between variants of closures.
+#[derive(Debug, Hash)]
+pub enum ClosureNode {
+    /// A regular closure. Must always be castable to a `ast::Closure`.
+    Closure(SyntaxNode),
+    /// Synthetic closure used for `context` expressions. Can be any `ast::Expr`
+    /// and has no parameters.
+    Context(SyntaxNode),
+}
+
 /// A user-defined closure.
 #[derive(Debug, Hash)]
 pub struct Closure {
-    /// The closure's syntax node. Must be either castable to `ast::Closure` or
-    /// `ast::Expr`. In the latter case, this is a synthesized closure without
-    /// any parameters (used by `context` expressions).
-    pub node: SyntaxNode,
+    /// The closure's syntax node.
+    pub node: ClosureNode,
     /// Default values of named parameters.
     pub defaults: Vec<Value>,
     /// Captured values from outer scopes.
@@ -540,7 +583,12 @@ pub struct Closure {
 impl Closure {
     /// The name of the closure.
     pub fn name(&self) -> Option<&str> {
-        self.node.cast::<ast::Closure>()?.name().map(|ident| ident.as_str())
+        match self.node {
+            ClosureNode::Closure(ref node) => {
+                node.cast::<ast::Closure>()?.name().map(|ident| ident.as_str())
+            }
+            _ => None,
+        }
     }
 }
 

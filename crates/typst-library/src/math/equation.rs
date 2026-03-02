@@ -1,22 +1,22 @@
 use std::num::NonZeroUsize;
 
+use codex::styling::MathVariant;
+use ecow::EcoString;
 use typst_utils::NonZeroExt;
 use unicode_math_class::MathClass;
 
 use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{
-    elem, Content, NativeElement, Packed, Show, ShowSet, Smart, StyleChain, Styles,
-    Synthesize,
+    Content, NativeElement, Packed, ShowSet, Smart, StyleChain, Styles, Synthesize, elem,
 };
-use crate::introspection::{Count, Counter, CounterUpdate, Locatable};
+use crate::introspection::{Count, Counter, CounterUpdate, Locatable, Tagged};
 use crate::layout::{
-    AlignElem, Alignment, BlockElem, InlineElem, OuterHAlignment, SpecificAlignment,
-    VAlignment,
+    AlignElem, Alignment, BlockElem, OuterHAlignment, SpecificAlignment, VAlignment,
 };
-use crate::math::{MathSize, MathVariant};
+use crate::math::MathSize;
 use crate::model::{Numbering, Outlinable, ParLine, Refable, Supplement};
-use crate::text::{FontFamily, FontList, FontWeight, LocalName, TextElem};
+use crate::text::{FontFamily, FontList, FontWeight, LocalName, Locale, TextElem};
 
 /// 数式。
 ///
@@ -46,13 +46,15 @@ use crate::text::{FontFamily, FontList, FontWeight, LocalName, TextElem};
 /// 式の先頭と末尾にそれぞれ少なくとも1つのスペースを挿入すると、
 /// 数式は独立したブロックとして扱われ、水平中央に配置されます。
 /// 数式の構文の詳細については、[数式のメインページ]($category/math)を参照してください。
-#[elem(Locatable, Synthesize, Show, ShowSet, Count, LocalName, Refable, Outlinable)]
+#[elem(Locatable, Tagged, Synthesize, ShowSet, Count, LocalName, Refable, Outlinable)]
 pub struct EquationElem {
     /// 数式が独立したブロックとして表示されるかどうか。
     #[default(false)]
     pub block: bool,
 
     /// ブロックレベル数式への[番号付け]($numbering)方法。
+    ///
+    /// 1つの数値を受け取る[番号付けパターンまたは関数]($numbering)を受け入れます。
     ///
     /// ```example
     /// #set math.equation(numbering: "(1)")
@@ -63,7 +65,6 @@ pub struct EquationElem {
     /// With @ratio, we get:
     /// $ F_n = floor(1 / sqrt(5) phi.alt^n) $
     /// ```
-    #[borrowed]
     pub numbering: Option<Numbering>,
 
     /// 数式番号の配置。
@@ -101,6 +102,20 @@ pub struct EquationElem {
     /// ```
     pub supplement: Smart<Option<Supplement>>,
 
+    /// 数式の別説明。
+    ///
+    /// 数式全体を自然言語で説明する必要があり、補助技術向けに利用されます。
+    /// 詳細は[アクセシビリティガイドのテキスト表現]($guides/accessibility/#textual-representations)
+    /// を参照してください。
+    ///
+    /// ```example
+    /// #math.equation(
+    ///   alt: "integral from 1 to infinity of a x squared plus b with respect to x",
+    ///   $ integral_1^oo a x^2 + b med d x $,
+    /// )
+    /// ```
+    pub alt: Option<EcoString>,
+
     /// 数式のコンテンツ。
     #[required]
     pub body: Content,
@@ -114,7 +129,7 @@ pub struct EquationElem {
     /// The style variant to select.
     #[internal]
     #[ghost]
-    pub variant: MathVariant,
+    pub variant: Option<MathVariant>,
 
     /// Affects the height of exponents.
     #[internal]
@@ -131,7 +146,7 @@ pub struct EquationElem {
     /// Whether to use italic glyphs.
     #[internal]
     #[ghost]
-    pub italic: Smart<bool>,
+    pub italic: Option<bool>,
 
     /// A forced class to use for all fragment.
     #[internal]
@@ -144,6 +159,11 @@ pub struct EquationElem {
     #[default((70, 50))]
     #[ghost]
     pub script_scale: (i16, i16),
+
+    /// The locale of this element (used for the alternative description).
+    #[internal]
+    #[synthesized]
+    pub locale: Locale,
 }
 
 impl Synthesize for Packed<EquationElem> {
@@ -152,7 +172,7 @@ impl Synthesize for Packed<EquationElem> {
         engine: &mut Engine,
         styles: StyleChain,
     ) -> SourceResult<()> {
-        let supplement = match self.as_ref().supplement(styles) {
+        let supplement = match self.as_ref().supplement.get_ref(styles) {
             Smart::Auto => TextElem::packed(Self::local_name_in(styles)),
             Smart::Custom(None) => Content::empty(),
             Smart::Custom(Some(supplement)) => {
@@ -160,50 +180,38 @@ impl Synthesize for Packed<EquationElem> {
             }
         };
 
-        self.push_supplement(Smart::Custom(Some(Supplement::Content(supplement))));
-        Ok(())
-    }
-}
+        self.supplement
+            .set(Smart::Custom(Some(Supplement::Content(supplement))));
 
-impl Show for Packed<EquationElem> {
-    fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        if self.block(styles) {
-            Ok(BlockElem::multi_layouter(
-                self.clone(),
-                engine.routines.layout_equation_block,
-            )
-            .pack()
-            .spanned(self.span()))
-        } else {
-            Ok(InlineElem::layouter(self.clone(), engine.routines.layout_equation_inline)
-                .pack()
-                .spanned(self.span()))
-        }
+        self.locale = Some(Locale::get_in(styles));
+
+        Ok(())
     }
 }
 
 impl ShowSet for Packed<EquationElem> {
     fn show_set(&self, styles: StyleChain) -> Styles {
         let mut out = Styles::new();
-        if self.block(styles) {
-            out.set(AlignElem::set_alignment(Alignment::CENTER));
-            out.set(BlockElem::set_breakable(false));
-            out.set(ParLine::set_numbering(None));
-            out.set(EquationElem::set_size(MathSize::Display));
+        if self.block.get(styles) {
+            out.set(AlignElem::alignment, Alignment::CENTER);
+            out.set(BlockElem::breakable, false);
+            out.set(ParLine::numbering, None);
+            out.set(EquationElem::size, MathSize::Display);
         } else {
-            out.set(EquationElem::set_size(MathSize::Text));
+            out.set(EquationElem::size, MathSize::Text);
         }
-        out.set(TextElem::set_weight(FontWeight::from_number(450)));
-        out.set(TextElem::set_font(FontList(vec![FontFamily::new(
-            "New Computer Modern Math",
-        )])));
+        out.set(TextElem::weight, FontWeight::from_number(450));
+        out.set(
+            TextElem::font,
+            FontList(vec![FontFamily::new("New Computer Modern Math")]),
+        );
         out
     }
 }
 
 impl Count for Packed<EquationElem> {
     fn update(&self) -> Option<CounterUpdate> {
-        (self.block(StyleChain::default()) && self.numbering().is_some())
+        (self.block.get(StyleChain::default()) && self.numbering().is_some())
             .then(|| CounterUpdate::Step(NonZeroUsize::ONE))
     }
 }
@@ -215,24 +223,24 @@ impl LocalName for Packed<EquationElem> {
 impl Refable for Packed<EquationElem> {
     fn supplement(&self) -> Content {
         // After synthesis, this should always be custom content.
-        match (**self).supplement(StyleChain::default()) {
+        match self.supplement.get_cloned(StyleChain::default()) {
             Smart::Custom(Some(Supplement::Content(content))) => content,
             _ => Content::empty(),
         }
     }
 
     fn counter(&self) -> Counter {
-        Counter::of(EquationElem::elem())
+        Counter::of(EquationElem::ELEM)
     }
 
     fn numbering(&self) -> Option<&Numbering> {
-        (**self).numbering(StyleChain::default()).as_ref()
+        self.numbering.get_ref(StyleChain::default()).as_ref()
     }
 }
 
 impl Outlinable for Packed<EquationElem> {
     fn outlined(&self) -> bool {
-        self.block(StyleChain::default()) && self.numbering().is_some()
+        self.block.get(StyleChain::default()) && self.numbering().is_some()
     }
 
     fn prefix(&self, numbers: Content) -> Content {

@@ -7,6 +7,7 @@ description: |
 最新のTypstリリースで追加された新機能を確認し、あなたのドキュメントをさらに進化させましょう。本セクションでは、Typstの最初の一般公開リリース以降に行われた全ての変更内容を記録しています。
 
 ## Versions
+- [Typst 0.14.0]($changelog/0.14.0)
 - [Typst 0.13.1]($changelog/0.13.1)
 - [Typst 0.13.0]($changelog/0.13.0)
 - [Typst 0.12.0]($changelog/0.12.0)

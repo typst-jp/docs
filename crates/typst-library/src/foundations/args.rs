@@ -1,19 +1,19 @@
 use std::fmt::{self, Debug, Formatter};
 use std::ops::Add;
 
-use ecow::{eco_format, eco_vec, EcoString, EcoVec};
+use ecow::{EcoString, EcoVec, eco_format, eco_vec};
 use typst_syntax::{Span, Spanned};
 
-use crate::diag::{bail, error, At, SourceDiagnostic, SourceResult, StrResult};
+use crate::diag::{At, SourceDiagnostic, SourceResult, StrResult, bail, error};
 use crate::foundations::{
-    cast, func, repr, scope, ty, Array, Dict, FromValue, IntoValue, Repr, Str, Value,
+    Array, Dict, FromValue, IntoValue, Repr, Str, Value, cast, func, repr, scope, ty,
 };
 
 /// 関数に渡された引数。
 ///
 /// # 引数シンク
 /// 組み込み関数と同様に、カスタム関数も可変長引数を受け取れます。
-/// 余分にある引数を全てまとめて受け取る _引数シンク_（キッチンシンクのようにさまざまなものが流れ込む先）は、`..sink`の形で指定できます。このとき生成される`sink`の値は`arguments`型になります。この型は、位置引数と名前付き引数の両方にアクセスするためのメソッドを提供しています。
+/// 余分にある引数を全てまとめて受け取る_引数シンク_（キッチンシンクのようにさまざまなものが流れ込む先）は、`..sink`の形で指定できます。このとき生成される`sink`の値は`arguments`型になります。この型は、位置引数と名前付き引数の両方にアクセスするためのメソッドを提供しています。
 ///
 /// ```example
 /// #let format(title, ..authors) = {

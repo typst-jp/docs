@@ -4,6 +4,7 @@ use std::ops::Range;
 use ecow::EcoString;
 use heck::{ToKebabCase, ToTitleCase};
 use pulldown_cmark as md;
+use pulldown_cmark_escape::escape_html;
 use serde::{Deserialize, Serialize};
 use typed_arena::Arena;
 use typst::diag::{FileError, FileResult, StrResult};
@@ -16,7 +17,7 @@ use typst::{Library, World};
 use unscanny::Scanner;
 use yaml_front_matter::YamlFrontMatter;
 
-use crate::{contributors, OutlineItem, Resolver, FONTS, LIBRARY};
+use crate::{FONTS, LIBRARY, OutlineItem, Resolver, contributors};
 
 /// HTML documentation.
 #[derive(Serialize)]
@@ -61,7 +62,8 @@ impl Html {
         let options = md::Options::ENABLE_TABLES
             | md::Options::ENABLE_FOOTNOTES
             | md::Options::ENABLE_STRIKETHROUGH
-            | md::Options::ENABLE_HEADING_ATTRIBUTES;
+            | md::Options::ENABLE_HEADING_ATTRIBUTES
+            | md::Options::ENABLE_CJK_FRIENDLY_EMPHASIS;
 
         // Convert `[foo]` to `[foo]($foo)`.
         let mut link = |broken: md::BrokenLink| {
@@ -84,14 +86,16 @@ impl Html {
             md::Parser::new_with_broken_link_callback(text, options, Some(&mut link))
                 .peekable();
 
-        let iter = std::iter::from_fn(|| loop {
-            let mut event = events.next()?;
-            handler.peeked = events.peek().and_then(|event| match event {
-                md::Event::Text(text) => Some(text.clone()),
-                _ => None,
-            });
-            if handler.handle(&mut event) {
-                return Some(event);
+        let iter = std::iter::from_fn(|| {
+            loop {
+                let mut event = events.next()?;
+                handler.peeked = events.peek().and_then(|event| match event {
+                    md::Event::Text(text) => Some(text.clone()),
+                    _ => None,
+                });
+                if handler.handle(&mut event) {
+                    return Some(event);
+                }
             }
         });
 
@@ -189,7 +193,7 @@ impl<'a> Handler<'a> {
     fn handle(&mut self, event: &mut md::Event<'a>) -> bool {
         match event {
             // Rewrite Markdown images.
-            md::Event::Start(md::Tag::Image(_, path, _)) => {
+            md::Event::Start(md::Tag::Image { dest_url: path, .. }) => {
                 *path = self.handle_image(path).into();
             }
 
@@ -203,12 +207,12 @@ impl<'a> Handler<'a> {
             }
 
             // Register HTML headings for the outline.
-            md::Event::Start(md::Tag::Heading(level, id, _)) => {
+            md::Event::Start(md::Tag::Heading { level, id, .. }) => {
                 self.handle_heading(id, level);
             }
 
             // Also handle heading closings.
-            md::Event::End(md::Tag::Heading(level, _, _)) => {
+            md::Event::End(md::TagEnd::Heading(level)) => {
                 nest_heading(level, self.nesting());
             }
 
@@ -223,7 +227,7 @@ impl<'a> Handler<'a> {
             }
 
             // Rewrite links.
-            md::Event::Start(md::Tag::Link(ty, dest, _)) => {
+            md::Event::Start(md::Tag::Link { link_type: ty, dest_url: dest, .. }) => {
                 assert!(
                     matches!(
                         ty,
@@ -261,7 +265,7 @@ impl<'a> Handler<'a> {
                 self.code = EcoString::new();
                 return false;
             }
-            md::Event::End(md::Tag::CodeBlock(md::CodeBlockKind::Fenced(_))) => {
+            md::Event::End(md::TagEnd::CodeBlock) => {
                 let Some(lang) = self.lang.take() else { return false };
                 let html = code_block(self.resolver, &lang, &self.code);
                 *event = md::Event::Html(html.raw.into());
@@ -293,7 +297,7 @@ impl<'a> Handler<'a> {
 
     fn handle_heading(
         &mut self,
-        id_slot: &mut Option<&'a str>,
+        id_slot: &mut Option<md::CowStr<'a>>,
         level: &mut md::HeadingLevel,
     ) {
         nest_heading(level, self.nesting());
@@ -305,34 +309,24 @@ impl<'a> Handler<'a> {
         let default = body.map(|text| text.to_kebab_case());
         let has_id = id_slot.is_some();
 
-        let id: &'a str = match (&id_slot, default) {
-            (Some(id), default) => {
-                if Some(*id) == default.as_deref() {
+        let id = match id_slot.take() {
+            Some(id) => {
+                if Some(id.as_ref()) == default.as_deref() {
                     eprintln!("heading id #{id} was specified unnecessarily");
                 }
                 id
             }
-            (None, Some(default)) => self.ids.alloc(default).as_str(),
-            (None, None) => panic!("missing heading id {}", self.text),
+            None => match default {
+                Some(default) => md::CowStr::Borrowed(self.ids.alloc(default).as_str()),
+                None => panic!("missing heading id {}", self.text),
+            },
         };
 
-        *id_slot = (!id.is_empty()).then_some(id);
-
-        let title = self.peeked.as_ref().map(|text| text.to_string());
-        let name = if id.starts_with('v') && id.contains('.') {
-            // Special case for things like "v0.3.0".
-            id.into()
-        } else if title.iter().all(|c| c.is_ascii()) {
-            id.to_title_case().into()
-        } else {
-            match &body {
-                Some(body_value) if !has_id => body_value.as_ref().into(),
-                _ => self
-                    .ids
-                    .alloc(title.expect("heading should always have a title"))
-                    .as_str()
-                    .into(),
-            }
+        // Special case for things like "v0.3.0".
+        let name = match &body {
+            _ if id.starts_with('v') && id.contains('.') => id.as_ref().into(),
+            Some(body) if !has_id => body.as_ref().into(),
+            _ => id.as_ref().to_title_case().into(),
         };
 
         let mut children = &mut self.outline;
@@ -344,7 +338,8 @@ impl<'a> Handler<'a> {
             depth -= 1;
         }
 
-        children.push(OutlineItem { id: id.into(), name, children: vec![] });
+        children.push(OutlineItem { id: id.as_ref().into(), name, children: vec![] });
+        *id_slot = (!id.is_empty()).then_some(id);
     }
 
     fn handle_link(&self, link: &str) -> StrResult<String> {
@@ -363,8 +358,63 @@ impl<'a> Handler<'a> {
     }
 }
 
+#[derive(Debug, Clone, Copy)]
+pub struct ExampleArgs<'a> {
+    /// The language of the example.
+    pub lang: &'a str,
+    /// How to display the example.
+    pub view: ExampleView,
+    /// An optional title for the example.
+    pub title: Option<&'a str>,
+}
+
+impl<'a> ExampleArgs<'a> {
+    /// Parse a language tag.
+    pub fn from_tag(tag: &'a str) -> Self {
+        let mut parts = tag.split(':');
+        let lang = parts.next().unwrap_or(tag);
+
+        let mut view = ExampleView::default();
+        let mut title = None;
+
+        for args in parts {
+            if let Some(inner) =
+                args.strip_prefix('"').and_then(|rest| rest.strip_suffix('"'))
+            {
+                title = Some(inner);
+            } else if args.contains("single") {
+                view = ExampleView::Single(None);
+            } else if args.chars().next().is_some_and(char::is_numeric) {
+                view = ExampleView::Single(
+                    args.split(',')
+                        .take(4)
+                        .map(|s| Abs::pt(s.parse().unwrap()))
+                        .collect::<Vec<_>>()
+                        .try_into()
+                        .ok(),
+                )
+            } else if args == "all" {
+                // Default.
+            } else {
+                panic!("invalid example arguments: {args}");
+            }
+        }
+
+        Self { lang, view, title }
+    }
+}
+
+#[derive(Debug, Clone, Copy, Default)]
+pub enum ExampleView {
+    /// Display all pages
+    #[default]
+    All,
+    /// Display a single page
+    Single(Option<[Abs; 4]>),
+}
+
 /// Render a code block to HTML.
-fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
+fn code_block(resolver: &dyn Resolver, tag: &str, text: &str) -> Html {
     let mut display = String::new();
     let mut compile = String::new();
     for line in text.lines() {
@@ -382,27 +432,12 @@ fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
         }
     }
 
-    let mut parts = lang.split(':');
-    let lang = parts.next().unwrap_or(lang);
-
-    let mut zoom: Option<[Abs; 4]> = None;
-    let mut single = false;
-    if let Some(args) = parts.next() {
-        single = true;
-        if !args.contains("single") {
-            zoom = args
-                .split(',')
-                .take(4)
-                .map(|s| Abs::pt(s.parse().unwrap()))
-                .collect::<Vec<_>>()
-                .try_into()
-                .ok();
-        }
-    }
+    let args = ExampleArgs::from_tag(tag);
+    let lang = args.lang;
 
     if lang.is_empty() {
         let mut buf = String::from("<pre>");
-        md::escape::escape_html(&mut buf, &display).unwrap();
+        escape_html(&mut buf, &display).unwrap();
         buf.push_str("</pre>");
         return Html::new(buf);
     } else if !matches!(lang, "example" | "typ" | "preview") {
@@ -440,12 +475,12 @@ fn code_block(resolver: &dyn Resolver, lang: &str, text: &str) -> Html {
         }
     };
 
-    if let Some([x, y, w, h]) = zoom {
+    if let ExampleView::Single(Some([x, y, w, h])) = args.view {
         document.pages[0].frame.translate(Point::new(-x, -y));
         *document.pages[0].frame.size_mut() = Size::new(w, h);
     }
 
-    if single {
+    if let ExampleView::Single(_) = args.view {
         document.pages.truncate(1);
     }
 
@@ -508,7 +543,7 @@ impl World for DocWorld {
     }
 
     fn font(&self, index: usize) -> Option<Font> {
-        Some(FONTS.1[index].clone())
+        FONTS.1.get(index).cloned()
     }
 
     fn today(&self, _: Option<i64>) -> Option<Datetime> {

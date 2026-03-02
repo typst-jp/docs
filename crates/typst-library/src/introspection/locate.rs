@@ -2,7 +2,7 @@ use comemo::Tracked;
 
 use crate::diag::HintedStrResult;
 use crate::engine::Engine;
-use crate::foundations::{func, Context, LocatableSelector};
+use crate::foundations::{Context, LocatableSelector, func};
 use crate::introspection::Location;
 
 /// 文書中の要素のロケーションを特定。

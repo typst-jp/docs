@@ -1,23 +1,22 @@
-use std::num::NonZeroUsize;
+use std::num::{NonZeroU32, NonZeroUsize};
 use std::sync::Arc;
 
+use ecow::EcoString;
 use typst_utils::NonZeroExt;
 
-use crate::diag::{bail, HintedStrResult, HintedString, SourceResult};
+use crate::diag::{HintedStrResult, HintedString, SourceResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, scope, Content, NativeElement, Packed, Show, Smart, StyleChain,
-    TargetElem,
+    Content, Packed, Smart, StyleChain, Synthesize, cast, elem, scope,
 };
-use crate::html::{attr, tag, HtmlAttrs, HtmlElem, HtmlTag};
-use crate::introspection::Locator;
-use crate::layout::grid::resolve::{table_to_cellgrid, Cell, CellGrid, Entry};
+use crate::introspection::{Locatable, Tagged};
+use crate::layout::resolve::{CellGrid, table_to_cellgrid};
 use crate::layout::{
-    show_grid_cell, Abs, Alignment, BlockElem, Celled, GridCell, GridFooter, GridHLine,
-    GridHeader, GridVLine, Length, OuterHAlignment, OuterVAlignment, Rel, Sides,
-    TrackSizings,
+    Abs, Alignment, Celled, GridCell, GridFooter, GridHLine, GridHeader, GridVLine,
+    Length, OuterHAlignment, OuterVAlignment, Rel, Sides, TrackSizings,
 };
 use crate::model::Figurable;
+use crate::pdf::TableCellKind;
 use crate::text::LocalName;
 use crate::visualize::{Paint, Stroke};
 
@@ -28,17 +27,19 @@ use crate::visualize::{Paint, Stroke};
 /// Typstにおける表の実践的な利用方法に関する網羅的な説明とカスタマイズについては[表ガイド]($guides/table-guide)をご覧ください。
 ///
 /// 表は単にいくつかのセルのプロパティ（特に`stroke`と`inset`）のデフォルト値が異なるグリッドであるため、
-/// 表の各行および列の大きさの指定、およびセルの外観に関するプロパティの指定についての詳細な情報は[gridのドキュメント]($grid)を参照してください。
+/// 表の各行および列の大きさの指定、およびセルの外観に関するプロパティの指定についての詳細な情報は[gridのドキュメント]($grid/#track-size)を参照してください。
 ///
 /// 表とグリッドのどちらを使用すべきかわからない場合は、配置するコンテンツが関連するデータ項目の集合として意味的にまとまっているか、あるいは無関係なコンテンツをグリッド状に配置することで文書の見た目を整えようとしているだけなのかを検討してください。
 /// 前者の場合は表を使用するのが適切な選択ですが、後者の場合はグリッドの方が適しています。
-/// 加えてTypstは将来的に表には注釈をつけることを予定しています。
-/// これにより、スクリーンリーダーは`table`に含まれるコンテンツを表形式として読み上げますが、グリッドの場合は文書内に順に配置した複数のコンテンツブロックと同じように発音されます。
+/// 加えてスクリーンリーダーのような支援技術（Assistive Technology）は`table`に含まれるコンテンツを表形式として読み上げますが、グリッドの場合は文書内に順に配置した複数のコンテンツブロックと同じように発音されます。
+/// 支援技術のユーザーはセルによって表を二次元的に移動操作できるようになります。
 ///
 /// また、表中の特定のセルについてプロパティを上書きしたりshowルールを適用したい場合、[`table.cell`]($table.cell)要素を使用できます。
 /// 詳細については当該ドキュメントを参照してください。
 ///
 /// `table`と`grid`はほとんどのプロパティを共有していますが、一方に対するsetルールおよびshowルールの指定がもう一方に影響することはありません。
+/// 表自体の使用を簡潔で読みやすく保つために、スタイル設定のほとんどはsetルールとshowルールに配置することが推奨されます。
+/// またこのようにすることで、全ての表の外観を一か所で容易に変更することも可能になります。
 ///
 /// 表を[`figure`]($figure)で囲むことで、表にキャプションを設けたり [参照可能な要素]($ref) にしたりすることができます。
 ///
@@ -66,7 +67,7 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// グリッドを用いる場合と同様に、[`table.cell`]($table.cell)を使用することでそれぞれのセルの外見と配置をカスタマイズできます。
+/// グリッドを用いる場合と同様に、[`table.cell`]を使用することでそれぞれのセルの外見と配置をカスタマイズできます。
 ///
 /// ```example
 /// >>> #set page(width: auto)
@@ -109,23 +110,31 @@ use crate::visualize::{Paint, Stroke};
 ///   [Robert], b, a, b,
 /// )
 /// ```
-#[elem(scope, Show, LocalName, Figurable)]
+///
+/// # アクセシビリティ
+/// 表は支援技術（Assistive Technology）のユーザーにとっては取り扱いが困難なものです。
+/// 支援技術ユーザーの生活を用意にするために、我々は表におけるヘッダーとフッター領域に[`table.header`]と[`table.footer`]を使用することを強く推奨します。
+/// これにより支援技術がそれぞれのセルについて各列のラベルを発音することが可能になります。
+///
+/// セルによる表の移動操作はそれを視覚的に読み上げるよりも扱いにくいものであるため、表における核となる情報はテキストでも利用可能にすることを検討するべきです。
+/// このために表を[figure]要素でラップし、キャプションを表のコンテンツの要約に使用することができます。
+#[elem(scope, Locatable, Tagged, Synthesize, LocalName, Figurable)]
 pub struct TableElem {
-    /// 列のサイズ。表の行および列のサイズ指定についての詳細は[gridのドキュメント]($grid)を参照してください。
+    /// 列のサイズ。表の行および列のサイズ指定についての詳細は[gridのドキュメント]($grid/#track-size)を参照してください。
     #[borrowed]
     pub columns: TrackSizings,
 
-    /// 行のサイズ。表の行および列のサイズ指定についての詳細は[gridのドキュメント]($grid)を参照してください。
+    /// 行のサイズ。表の行および列のサイズ指定についての詳細は[gridのドキュメント]($grid/#track-size)を参照してください。
     #[borrowed]
     pub rows: TrackSizings,
 
     /// 行間と列間の間隔。これは`column-gutter`および`row-gutter`を同一の値に設定する場合の省略記法です。
-    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
+    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid.gutter)を参照してください。
     #[external]
     pub gutter: TrackSizings,
 
     /// 列間の間隔。`gutter`での指定よりも優先されます。
-    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
+    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid.gutter)を参照してください。
     #[borrowed]
     #[parse(
         let gutter = args.named("gutter")?;
@@ -134,16 +143,71 @@ pub struct TableElem {
     pub column_gutter: TrackSizings,
 
     /// 行間の間隔。`gutter`での指定よりも優先されます。
-    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid)を参照してください。
+    /// 各行および列間の間隔指定についての詳細は[gridのドキュメント]($grid.gutter)を参照してください。
     #[parse(args.named("row-gutter")?.or_else(|| gutter.clone()))]
-    #[borrowed]
     pub row_gutter: TrackSizings,
+
+    /// セル内のコンテンツに対するパディングの大きさ。
+    ///
+    /// 全てのセルに同じインセットを指定するには、全ての側面に適用される単一のlengthを指定するか、個別の側面への指定を有するlengthのdictionaryを使用します。
+    /// 詳細は[boxのドキュメント]($box.inset)を参照してください。
+    ///
+    /// 異なるセルに異なるインセットを指定する場合は、次のいずれかを使用できます。
+    /// - 全てのセルへ適用される単一かつ均一なインセット
+    /// - インセットの配列による各列への指定
+    /// - セルのX/Y位置（共に0から開始）をインセットに変換する関数
+    ///
+    /// 詳細は[gridのドキュメント]($grid/#styling)を参照してください。
+    ///
+    /// ```example
+    /// #table(
+    ///   columns: 2,
+    ///   inset: 10pt,
+    ///   [Hello],
+    ///   [World],
+    /// )
+    ///
+    /// #table(
+    ///   columns: 2,
+    ///   inset: (x: 20pt, y: 10pt),
+    ///   [Hello],
+    ///   [World],
+    /// )
+    /// ```
+    #[fold]
+    #[default(Celled::Value(Sides::splat(Some(Abs::pt(5.0).into()))))]
+    pub inset: Celled<Sides<Option<Rel<Length>>>>,
+
+    /// どのようにセルのコンテンツを配置するか。
+    ///
+    /// `{auto}`に設定された場合、表の外部の配置設定が使用されます。
+    ///
+    /// 以下のいずれかの方法でalignmentを指定できます。
+    /// - 全てのセルへ適用される単一のalignment
+    /// - 各列に対応するalignmentの配列
+    /// - セルのX/Y位置（共に0から開始）をalignmentに変換する関数
+    ///
+    /// 詳細は[表ガイド]($guides/tables/#alignment)を参照してください。
+    ///
+    /// ```example
+    /// #table(
+    ///   columns: 3,
+    ///   align: (left, center, right),
+    ///   [Hello], [Hello], [Hello],
+    ///   [A], [B], [C],
+    /// )
+    /// ```
+    pub align: Celled<Smart<Alignment>>,
 
     /// セルの塗り潰し方。
     ///
-    /// colorかcolorを返す関数を指定できます。
-    /// 関数を指定した場合、そのセルの列および行の0で始まる番号が引数に渡されます。
-    /// これによってストライプ柄の表を作成できます。
+    /// 次のいずれかを使用できます。
+    /// - 全てのセルへ適用される単一の塗り潰し
+    /// - 各列に対応する塗り潰しの配列
+    /// - セルの位置を塗り潰しに変換する関数
+    ///
+    /// 特に配列と関数による指定はストライプ柄の表の作成に便利です。
+    /// 詳細は[表ガイド]($guides/tables/#alignment)を参照してください。
     ///
     /// ```example
     /// #table(
@@ -161,25 +225,7 @@ pub struct TableElem {
     ///   [Profit:], [500 €], [1000 €], [1500 €],
     /// )
     /// ```
-    #[borrowed]
     pub fill: Celled<Option<Paint>>,
-
-    /// セルのコンテンツをどう配置するか。
-    ///
-    /// 単一のalignment、それぞれの列についての指定となるalignmentの配列、alignmentを返す関数のいずれかを指定できます。
-    /// 関数を指定した場合、そのセルの列および行の0で始まる番号が引数に渡されます。
-    /// `{auto}`が指定された場合、表の外部の配置設定を使用します。
-    ///
-    /// ```example
-    /// #table(
-    ///   columns: 3,
-    ///   align: (left, center, right),
-    ///   [Hello], [Hello], [Hello],
-    ///   [A], [B], [C],
-    /// )
-    /// ```
-    #[borrowed]
-    pub align: Celled<Smart<Alignment>>,
 
     /// セルの[ストローク]($stroke)をどうするか。
     ///
@@ -187,36 +233,32 @@ pub struct TableElem {
     ///
     /// `gutter`引数の指定によるセル間の間隔をまたいだ罫線が必要な場合、および複数の特定セル間のストロークを上書きする場合は、そのセルについて[`table.hline`]($table.hline)と[`table.vline`]($table.vline)またはその両方を指定することを検討してください。
     ///
-    /// ストロークについての詳細は[gridのドキュメント]($grid.stroke)を参照してください。
+    /// 全てのセルに同じストロークを指定する場合は、全ての側面に適用される単一の[stroke]を指定するか、個別の側面への指定を有する[stroke]のdictionaryを使用します。
+    /// 詳細は[rectangleのドキュメント]($rect.stroke)を参照してください。
+    ///
+    /// 異なるセルに異なるストロークを指定する場合は、次のいずれかを使用できます。
+    /// - 全てのセルに適用される単一のstroke
+    /// - 各列に対応するstrokeの配列
+    /// - セルの位置をstrokeに変換する関数
+    ///
+    /// 詳細は[表ガイド]($guides/tables/#strokes)を参照してください。
     #[resolve]
     #[fold]
     #[default(Celled::Value(Sides::splat(Some(Some(Arc::new(Stroke::default()))))))]
     pub stroke: Celled<Sides<Option<Option<Arc<Stroke>>>>>,
 
-    /// セル内のコンテンツに対するパディングの大きさ。
+    /// 複雑な表の構造と目的についての要約。
     ///
-    /// ```example
-    /// #table(
-    ///   inset: 10pt,
-    ///   [Hello],
-    ///   [World],
-    /// )
-    ///
-    /// #table(
-    ///   columns: 2,
-    ///   inset: (
-    ///     x: 20pt,
-    ///     y: 10pt,
-    ///   ),
-    ///   [Hello],
-    ///   [World],
-    /// )
-    /// ```
-    #[fold]
-    #[default(Celled::Value(Sides::splat(Some(Abs::pt(5.0).into()))))]
-    pub inset: Celled<Sides<Option<Rel<Length>>>>,
+    /// 詳細は[`crate::pdf::accessibility::table_summary`]関数を参照してください。
+    #[internal]
+    #[parse(None)]
+    pub summary: Option<EcoString>,
 
-    /// 表の各セルのコンテンツと、[`table.hline`]($table.hline)要素および[`table.vline`]($table.vline)要素による追加の罫線。
+    #[internal]
+    #[synthesized]
+    pub grid: Arc<CellGrid>,
+
+    /// 表の各セルのコンテンツと、[`table.hline`]要素および[`table.vline`]要素による追加の罫線。
     #[variadic]
     pub children: Vec<TableChild>,
 }
@@ -239,65 +281,15 @@ impl TableElem {
     type TableFooter;
 }
 
-fn show_cell_html(tag: HtmlTag, cell: &Cell, styles: StyleChain) -> Content {
-    let cell = cell.body.clone();
-    let Some(cell) = cell.to_packed::<TableCell>() else { return cell };
-    let mut attrs = HtmlAttrs::default();
-    let span = |n: NonZeroUsize| (n != NonZeroUsize::MIN).then(|| n.to_string());
-    if let Some(colspan) = span(cell.colspan(styles)) {
-        attrs.push(attr::colspan, colspan);
-    }
-    if let Some(rowspan) = span(cell.rowspan(styles)) {
-        attrs.push(attr::rowspan, rowspan);
-    }
-    HtmlElem::new(tag)
-        .with_body(Some(cell.body.clone()))
-        .with_attrs(attrs)
-        .pack()
-        .spanned(cell.span())
-}
-
-fn show_cellgrid_html(grid: CellGrid, styles: StyleChain) -> Content {
-    let elem = |tag, body| HtmlElem::new(tag).with_body(Some(body)).pack();
-    let mut rows: Vec<_> = grid.entries.chunks(grid.non_gutter_column_count()).collect();
-
-    let tr = |tag, row: &[Entry]| {
-        let row = row
-            .iter()
-            .flat_map(|entry| entry.as_cell())
-            .map(|cell| show_cell_html(tag, cell, styles));
-        elem(tag::tr, Content::sequence(row))
-    };
-
-    let footer = grid.footer.map(|ft| {
-        let rows = rows.drain(ft.unwrap().start..);
-        elem(tag::tfoot, Content::sequence(rows.map(|row| tr(tag::td, row))))
-    });
-    let header = grid.header.map(|hd| {
-        let rows = rows.drain(..hd.unwrap().end);
-        elem(tag::thead, Content::sequence(rows.map(|row| tr(tag::th, row))))
-    });
-
-    let mut body = Content::sequence(rows.into_iter().map(|row| tr(tag::td, row)));
-    if header.is_some() || footer.is_some() {
-        body = elem(tag::tbody, body);
-    }
-
-    let content = header.into_iter().chain(core::iter::once(body)).chain(footer);
-    elem(tag::table, Content::sequence(content))
-}
-
-impl Show for Packed<TableElem> {
-    fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        Ok(if TargetElem::target_in(styles).is_html() {
-            // TODO: This is a hack, it is not clear whether the locator is actually used by HTML.
-            // How can we find out whether locator is actually used?
-            let locator = Locator::root();
-            show_cellgrid_html(table_to_cellgrid(self, engine, locator, styles)?, styles)
-        } else {
-            BlockElem::multi_layouter(self.clone(), engine.routines.layout_table).pack()
-        }
-        .spanned(self.span()))
+impl Synthesize for Packed<TableElem> {
+    fn synthesize(
+        &mut self,
+        engine: &mut Engine,
+        styles: StyleChain,
+    ) -> SourceResult<()> {
+        let grid = table_to_cellgrid(self, engine, styles)?;
+        self.grid = Some(Arc::new(grid));
+        Ok(())
     }
 }
 
@@ -307,8 +299,13 @@ impl LocalName for Packed<TableElem> {
 
 impl Figurable for Packed<TableElem> {}
 
+cast! {
+    TableElem,
+    v: Content => v.unpack::<Self>().map_err(|_| "expected table")?,
+}
+
 /// Any child of a table element.
-#[derive(Debug, PartialEq, Clone, Hash)]
+#[derive(Debug, Clone, PartialEq, Hash)]
 pub enum TableChild {
     Header(Packed<TableHeader>),
     Footer(Packed<TableFooter>),
@@ -353,7 +350,7 @@ impl TryFrom<Content> for TableChild {
 }
 
 /// 表設定の基本単位となる表の項目。
-#[derive(Debug, PartialEq, Clone, Hash)]
+#[derive(Debug, Clone, PartialEq, Hash)]
 pub enum TableItem {
     HLine(Packed<TableHLine>),
     VLine(Packed<TableVLine>),
@@ -422,9 +419,15 @@ impl TryFrom<Content> for TableItem {
 /// 繰り返し可能な表のヘッダー。
 ///
 /// たとえその表が複数ページにわたるつもりではないとしても、表のヘッダーとなる行はこの関数によってラップされるべきです。
-/// これによりTypstは将来的に表にアクセシビリティのためのメタデータを埋め込んだり、その文書における普遍的なアクセスを提供できるようになります。
+/// これによりTypstは表にアクセシビリティのためのメタデータを埋め込んだり、その文書における[普遍的なアクセス]($guides/accessibility/#basics)を提供できます。
 ///
 /// `repeat`引数を用いてその表のヘッダーがページをまたいで繰り返されるかを制御できます。
+///
+/// 現在、この機能はヘッダー列や単一のヘッダーセルを作成する用途には適していません。
+/// この場合は通常のセルを使用するか、PDFにエクスポートする場合は[`pdf.header-cell`]関数を用いてセルをヘッダーセルとしてマークできます。
+/// 同様に[`pdf.data-cell`]関数はセルをデータセルとしてマークするために使用できます。
+/// これらの関数は最終的なものではなく、またそのため`a11y-extras`機能を有効化した場合にのみ利用可能であることに注意してください。
+/// 詳細は[PDFモジュールのドキュメント]($pdf)を参照してください。
 ///
 /// ```example
 /// #set page(height: 11.5em)
@@ -466,6 +469,15 @@ pub struct TableHeader {
     #[default(true)]
     pub repeat: bool,
 
+    /// ヘッダーのレベル。0であってはいけません。
+    ///
+    /// 複数のヘッダーが一度に繰り返すことを可能にします。
+    /// 異なるレベルを持つヘッダーは、それらのレベルが昇順になっている場合は同時に繰り返しができます
+    ///
+    /// 明確には、より低いレベルを持つヘッダーが繰り返しを始める時、全てのより高いか同じレベルを持つヘッダーは繰り返しを止めます（それらは新しいヘッダーに「置き換えられ」ます）。
+    #[default(NonZeroU32::ONE)]
+    pub level: NonZeroU32,
+
     /// ヘッダー内のセルと罫線。
     #[variadic]
     pub children: Vec<TableItem>,
@@ -473,7 +485,7 @@ pub struct TableHeader {
 
 /// 繰り返し可能な表のフッター。
 ///
-/// [`table.header`]($table.header)要素と同様に、フッターは表内で各ページごとに繰り返すことができます。
+/// [`table.header`]要素と同様に、フッターは表内で各ページごとに繰り返すことができます。
 /// これによって大きい表においてヘッダーとフッターの両方に各列のラベルを追加したり、合計などの各ページごとに表示されるべき情報を付加したりすることができ、表を読みやすくすることができます。
 ///
 /// いかなるセルもフッターよりも後には配置されません。
@@ -532,7 +544,6 @@ pub struct TableHLine {
     ///
     /// `{none}`を指定すると、この罫線の範囲に含まれているこれまで配置された全ての罫線が削除されます。
     /// これには他の`hline`による水平罫線やセルごとのストロークが含まれます。
-    #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
@@ -548,12 +559,12 @@ pub struct TableHLine {
 }
 
 /// 表内の垂直罫線。
-/// この要素のフィールドの使用法についての詳細は[`grid.vline`]($grid.vline)のドキュメントを参照してください。
+/// この要素のフィールドの使用法についての詳細は[`grid.vline`]のドキュメントを参照してください。
 ///
 /// 表の`stroke`フィールドによる指定を含めてセルごとに設定されたストロークを上書きします。
 /// 表の[`row-gutter`]($table.row-gutter)オプションによるセル間の間隔をまたぐことができます。
 ///
-/// [`table.hline`]($table.hline)と同様、単一の表内の特定の位置に手動で罫線を配置したい場合は、表の`stroke`フィールドの代わりにこの関数を使用してください。
+/// [`table.hline`]と同様、単一の表内の特定の位置に手動で罫線を配置したい場合は、表の`stroke`フィールドの代わりにこの関数を使用してください。
 /// もし配置したい罫線が文書内の全ての表のデザインの一部である場合は[表の`stroke`]($table.stroke)フィールドか[`table.cell`の`stroke`]($table.cell.stroke)フィールドを使用してください。
 #[elem(name = "vline", title = "Table Vertical Line")]
 pub struct TableVLine {
@@ -572,7 +583,6 @@ pub struct TableVLine {
     ///
     /// `{none}`を指定すると、この罫線の範囲に含まれているこれまで配置された全ての罫線が削除されます。
     /// これには他の`vline`による垂直罫線やセルごとのストロークが含まれます。
-    #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
@@ -648,7 +658,7 @@ pub struct TableVLine {
 ///   cell(align: left)[🌴🚗],
 ///   cell(
 ///     inset: 0.06em,
-///     text(1.62em)[🛖🌅🌊],
+///     text(1.62em)[🏝️🌅🌊],
 ///   ),
 /// )
 /// ```
@@ -668,7 +678,7 @@ pub struct TableVLine {
 ///   [Vikram], [49], [Perseverance],
 /// )
 /// ```
-#[elem(name = "cell", title = "Table Cell", Show)]
+#[elem(name = "cell", title = "Table Cell")]
 pub struct TableCell {
     /// セルの本文。
     #[required]
@@ -676,12 +686,12 @@ pub struct TableCell {
 
     /// セルの列（最初の列は0）。
     ///
-    /// [`grid.cell`]($grid.cell)の`x`フィールドと同様に機能します。
+    /// [`grid.cell`]の`x`フィールドと同様に機能します。
     pub x: Smart<usize>,
 
     /// セルの行（最初の行は0）。
     ///
-    /// [`grid.cell`]($grid.cell)の`y`フィールドと同様に機能します。
+    /// [`grid.cell`]の`y`フィールドと同様に機能します。
     pub y: Smart<usize>,
 
     /// このセルがまたぐ列の数。
@@ -692,23 +702,30 @@ pub struct TableCell {
     #[default(NonZeroUsize::ONE)]
     pub rowspan: NonZeroUsize,
 
-    /// そのセルの[fill]($table.fill)を上書きします。
-    pub fill: Smart<Option<Paint>>,
+    /// そのセルの[inset]($table.inset)を上書きします。
+    pub inset: Smart<Sides<Option<Rel<Length>>>>,
 
     /// そのセルの[alignment]($table.align)を上書きします。
     pub align: Smart<Alignment>,
 
-    /// そのセルの[inset]($table.inset)を上書きします。
-    pub inset: Smart<Sides<Option<Rel<Length>>>>,
+    /// そのセルの[fill]($table.fill)を上書きします。
+    pub fill: Smart<Option<Paint>>,
 
     /// そのセルの[stroke]($table.stroke)を上書きします。
-    #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Arc<Stroke>>>>,
 
     /// このセルがまたぐ行が複数ページにまたがって配置できるかどうか。
     /// `{auto}`に設定された場合、固定サイズの行のみをまたぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
     pub breakable: Smart<bool>,
+
+    #[internal]
+    #[parse(Some(Smart::Auto))]
+    pub kind: Smart<TableCellKind>,
+
+    #[internal]
+    #[parse(Some(false))]
+    pub is_repeated: bool,
 }
 
 cast! {
@@ -716,15 +733,16 @@ cast! {
     v: Content => v.into(),
 }
 
-impl Show for Packed<TableCell> {
-    fn show(&self, _engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        show_grid_cell(self.body.clone(), self.inset(styles), self.align(styles))
-    }
-}
-
 impl Default for Packed<TableCell> {
     fn default() -> Self {
-        Packed::new(TableCell::new(Content::default()))
+        Packed::new(
+            // Explicitly set colspan and rowspan to ensure they won't be
+            // overridden by set rules (default cells are created after
+            // colspans and rowspans are processed in the resolver)
+            TableCell::new(Content::default())
+                .with_colspan(NonZeroUsize::ONE)
+                .with_rowspan(NonZeroUsize::ONE),
+        )
     }
 }
 

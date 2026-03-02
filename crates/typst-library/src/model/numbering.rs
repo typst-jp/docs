@@ -1,23 +1,23 @@
 use std::str::FromStr;
 
 use chinese_number::{
-    from_usize_to_chinese_ten_thousand as usize_to_chinese, ChineseCase, ChineseVariant,
+    ChineseCase, ChineseVariant, from_u64_to_chinese_ten_thousand as u64_to_chinese,
 };
 use comemo::Tracked;
-use ecow::{eco_format, EcoString, EcoVec};
+use ecow::{EcoString, EcoVec, eco_format};
 
 use crate::diag::SourceResult;
 use crate::engine::Engine;
-use crate::foundations::{cast, func, Context, Func, Str, Value};
-use crate::text::Case;
+use crate::foundations::{Context, Func, Str, Value, cast, func};
 
 /// 順序に応じた番号付け。
 ///
 /// 番号付けは、一連の数値をコンテンツとしてどのように表示するかを定義します。
 /// これはパターン文字列または任意の関数によって指定されます。
 ///
-/// 番号付けパターンは、数値を置き換えるためのカウント記号、それらに付けるプレフィックス、そして1つのサフィックスから構成されます。
-/// プレフィックスとサフィックスは、そのままの形で繰り返し使用されます。
+/// 番号付けパターンは、数値を置き換えるためのカウント記号、それらに付けるプレフィックス、
+/// そして1つのサフィックスから構成されます。プレフィックスとサフィックスは、
+/// そのままの形で繰り返し使用されます。
 ///
 /// # 例
 /// ```example
@@ -52,27 +52,30 @@ pub fn numbering(
     context: Tracked<Context>,
     /// 番号付けの表示形式を定義します。
     ///
-    /// **カウント記号** として使用できるパターン文字は `1`, `a`, `A`, `i`, `I`, `α`, `Α`, `一`, `壹`, `あ`, `い`, `ア`, `イ`, `א`, `가`, `ㄱ`, `*`, `١`, `۱`, `१`, `১`, `ক`, `①`, `⓵`があります。
+    /// **カウント記号**として使用できるパターン文字は `1`, `a`, `A`, `i`, `I`, `α`, `Α`, `一`, `壹`, `あ`, `い`, `ア`, `イ`, `א`, `가`, `ㄱ`, `*`, `١`, `۱`, `१`, `১`, `ক`, `①`, `⓵`があります。
     /// これらの文字は、大文字・小文字を維持したまま、対応する順序の番号文字に置き換えられます。
     ///
     /// 記号`*`は `*`, `†`, `‡`, `§`, `¶`, `‖`の順序で番号付けすることを意味します。
     /// 項目が6つ以上ある場合は、記号を繰り返し使用して番号を表現します。
     ///
-    /// **サフィックス** とは、最後のカウント記号の後ろに置く文字列です。
+    /// **サフィックス**とは、最後のカウント記号の後ろに置く文字列です。
     /// これらは、生成された番号文字の末尾に、そのままの形で繰り返し表示されます。
     ///
-    /// **プレフィックス** は、カウント記号でもサフィックスでもない文字列です。
+    /// **プレフィックス**は、カウント記号でもサフィックスでもない文字列です。
     /// それぞれのカウント記号の前に、そのままの形で繰り返し表示されます。
     ///
     /// このパラメータには、数値を個別の引数として受け取る任意の関数も指定できます。
     /// 関数が与えられた場合、`numbering`関数はその引数をそのまま関数に渡します。
     /// これ自体は特に便利というわけではありませんが、番号付けがパターン指定であっても関数指定であっても、番号付けの定義を`numbering`関数に適用できるという意味を持ちます。
     numbering: Numbering,
-    /// 番号付けを適用する対象の数値。正の数で与えてください。
+    /// 番号付けを適用する対象の数値。負でない数で与えてください。
     ///
-    /// 番号付けがパターン指定であり、カウント記号よりも多くの数値が指定された場合、最後のカウント記号とそのプレフィックスが繰り返されます。
+    /// 一般に番号は1から数えます。値が0の場合は、最初の要素がまだ出現していないことを示します。
+    ///
+    /// 番号付けがパターン指定であり、カウント記号よりも多くの数値が指定された場合、
+    /// 最後のカウント記号とそのプレフィックスが繰り返されます。
     #[variadic]
-    numbers: Vec<usize>,
+    numbers: Vec<u64>,
 ) -> SourceResult<Value> {
     numbering.apply(engine, context, &numbers)
 }
@@ -92,7 +95,7 @@ impl Numbering {
         &self,
         engine: &mut Engine,
         context: Tracked<Context>,
-        numbers: &[usize],
+        numbers: &[u64],
     ) -> SourceResult<Value> {
         Ok(match self {
             Self::Pattern(pattern) => Value::Str(pattern.apply(numbers).into()),
@@ -143,7 +146,7 @@ pub struct NumberingPattern {
 
 impl NumberingPattern {
     /// Apply the pattern to the given number.
-    pub fn apply(&self, numbers: &[usize]) -> EcoString {
+    pub fn apply(&self, numbers: &[u64]) -> EcoString {
         let mut fmt = EcoString::new();
         let mut numbers = numbers.iter();
 
@@ -172,7 +175,7 @@ impl NumberingPattern {
     }
 
     /// Apply only the k-th segment of the pattern to a number.
-    pub fn apply_kth(&self, k: usize, number: usize) -> EcoString {
+    pub fn apply_kth(&self, k: usize, number: u64) -> EcoString {
         let mut fmt = EcoString::new();
         if let Some((prefix, _)) = self.pieces.first() {
             fmt.push_str(prefix);
@@ -248,9 +251,9 @@ pub enum NumberingKind {
     LowerRoman,
     /// Uppercase Roman numerals (I, II, III, etc.).
     UpperRoman,
-    /// Lowercase Greek numerals (Α, Β, Γ, etc.).
+    /// Lowercase Greek letters (α, β, γ, etc.).
     LowerGreek,
-    /// Uppercase Greek numerals (α, β, γ, etc.).
+    /// Uppercase Greek letters (Α, Β, Γ, etc.).
     UpperGreek,
     /// Paragraph/note-like symbols: *, †, ‡, §, ¶, and ‖. Further items use
     /// repeated symbols.
@@ -366,41 +369,196 @@ impl NumberingKind {
     }
 
     /// Apply the numbering to the given number.
-    pub fn apply(self, n: usize) -> EcoString {
+    pub fn apply(self, n: u64) -> EcoString {
         match self {
-            Self::Arabic => eco_format!("{n}"),
-            Self::LowerRoman => roman_numeral(n, Case::Lower),
-            Self::UpperRoman => roman_numeral(n, Case::Upper),
-            Self::LowerGreek => greek_numeral(n, Case::Lower),
-            Self::UpperGreek => greek_numeral(n, Case::Upper),
-            Self::Symbol => {
-                if n == 0 {
-                    return '-'.into();
-                }
-
-                const SYMBOLS: &[char] = &['*', '†', '‡', '§', '¶', '‖'];
-                let symbol = SYMBOLS[(n - 1) % SYMBOLS.len()];
-                let amount = ((n - 1) / SYMBOLS.len()) + 1;
-                std::iter::repeat(symbol).take(amount).collect()
+            Self::Arabic => {
+                numeric(&['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], n)
             }
-            Self::Hebrew => hebrew_numeral(n),
-
-            Self::LowerLatin => zeroless(
-                [
+            Self::LowerRoman => additive(
+                &[
+                    ("m̅", 1000000),
+                    ("d̅", 500000),
+                    ("c̅", 100000),
+                    ("l̅", 50000),
+                    ("x̅", 10000),
+                    ("v̅", 5000),
+                    ("i̅v̅", 4000),
+                    ("m", 1000),
+                    ("cm", 900),
+                    ("d", 500),
+                    ("cd", 400),
+                    ("c", 100),
+                    ("xc", 90),
+                    ("l", 50),
+                    ("xl", 40),
+                    ("x", 10),
+                    ("ix", 9),
+                    ("v", 5),
+                    ("iv", 4),
+                    ("i", 1),
+                    ("n", 0),
+                ],
+                n,
+            ),
+            Self::UpperRoman => additive(
+                &[
+                    ("M̅", 1000000),
+                    ("D̅", 500000),
+                    ("C̅", 100000),
+                    ("L̅", 50000),
+                    ("X̅", 10000),
+                    ("V̅", 5000),
+                    ("I̅V̅", 4000),
+                    ("M", 1000),
+                    ("CM", 900),
+                    ("D", 500),
+                    ("CD", 400),
+                    ("C", 100),
+                    ("XC", 90),
+                    ("L", 50),
+                    ("XL", 40),
+                    ("X", 10),
+                    ("IX", 9),
+                    ("V", 5),
+                    ("IV", 4),
+                    ("I", 1),
+                    ("N", 0),
+                ],
+                n,
+            ),
+            Self::LowerGreek => additive(
+                &[
+                    ("͵θ", 9000),
+                    ("͵η", 8000),
+                    ("͵ζ", 7000),
+                    ("͵ϛ", 6000),
+                    ("͵ε", 5000),
+                    ("͵δ", 4000),
+                    ("͵γ", 3000),
+                    ("͵β", 2000),
+                    ("͵α", 1000),
+                    ("ϡ", 900),
+                    ("ω", 800),
+                    ("ψ", 700),
+                    ("χ", 600),
+                    ("φ", 500),
+                    ("υ", 400),
+                    ("τ", 300),
+                    ("σ", 200),
+                    ("ρ", 100),
+                    ("ϟ", 90),
+                    ("π", 80),
+                    ("ο", 70),
+                    ("ξ", 60),
+                    ("ν", 50),
+                    ("μ", 40),
+                    ("λ", 30),
+                    ("κ", 20),
+                    ("ι", 10),
+                    ("θ", 9),
+                    ("η", 8),
+                    ("ζ", 7),
+                    ("ϛ", 6),
+                    ("ε", 5),
+                    ("δ", 4),
+                    ("γ", 3),
+                    ("β", 2),
+                    ("α", 1),
+                    ("𐆊", 0),
+                ],
+                n,
+            ),
+            Self::UpperGreek => additive(
+                &[
+                    ("͵Θ", 9000),
+                    ("͵Η", 8000),
+                    ("͵Ζ", 7000),
+                    ("͵Ϛ", 6000),
+                    ("͵Ε", 5000),
+                    ("͵Δ", 4000),
+                    ("͵Γ", 3000),
+                    ("͵Β", 2000),
+                    ("͵Α", 1000),
+                    ("Ϡ", 900),
+                    ("Ω", 800),
+                    ("Ψ", 700),
+                    ("Χ", 600),
+                    ("Φ", 500),
+                    ("Υ", 400),
+                    ("Τ", 300),
+                    ("Σ", 200),
+                    ("Ρ", 100),
+                    ("Ϟ", 90),
+                    ("Π", 80),
+                    ("Ο", 70),
+                    ("Ξ", 60),
+                    ("Ν", 50),
+                    ("Μ", 40),
+                    ("Λ", 30),
+                    ("Κ", 20),
+                    ("Ι", 10),
+                    ("Θ", 9),
+                    ("Η", 8),
+                    ("Ζ", 7),
+                    ("Ϛ", 6),
+                    ("Ε", 5),
+                    ("Δ", 4),
+                    ("Γ", 3),
+                    ("Β", 2),
+                    ("Α", 1),
+                    ("𐆊", 0),
+                ],
+                n,
+            ),
+            Self::Hebrew => additive(
+                &[
+                    ("ת", 400),
+                    ("ש", 300),
+                    ("ר", 200),
+                    ("ק", 100),
+                    ("צ", 90),
+                    ("פ", 80),
+                    ("ע", 70),
+                    ("ס", 60),
+                    ("נ", 50),
+                    ("מ", 40),
+                    ("ל", 30),
+                    ("כ", 20),
+                    ("יט", 19),
+                    ("יח", 18),
+                    ("יז", 17),
+                    ("טז", 16),
+                    ("טו", 15),
+                    ("י", 10),
+                    ("ט", 9),
+                    ("ח", 8),
+                    ("ז", 7),
+                    ("ו", 6),
+                    ("ה", 5),
+                    ("ד", 4),
+                    ("ג", 3),
+                    ("ב", 2),
+                    ("א", 1),
+                    ("-", 0),
+                ],
+                n,
+            ),
+            Self::LowerLatin => alphabetic(
+                &[
                     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
                     'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
                 ],
                 n,
             ),
-            Self::UpperLatin => zeroless(
-                [
+            Self::UpperLatin => alphabetic(
+                &[
                     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
                     'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
                 ],
                 n,
             ),
-            Self::HiraganaAiueo => zeroless(
-                [
+            Self::HiraganaAiueo => alphabetic(
+                &[
                     'あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ', 'さ',
                     'し', 'す', 'せ', 'そ', 'た', 'ち', 'つ', 'て', 'と', 'な', 'に',
                     'ぬ', 'ね', 'の', 'は', 'ひ', 'ふ', 'へ', 'ほ', 'ま', 'み', 'む',
@@ -409,8 +567,8 @@ impl NumberingKind {
                 ],
                 n,
             ),
-            Self::HiraganaIroha => zeroless(
-                [
+            Self::HiraganaIroha => alphabetic(
+                &[
                     'い', 'ろ', 'は', 'に', 'ほ', 'へ', 'と', 'ち', 'り', 'ぬ', 'る',
                     'を', 'わ', 'か', 'よ', 'た', 'れ', 'そ', 'つ', 'ね', 'な', 'ら',
                     'む', 'う', 'ゐ', 'の', 'お', 'く', 'や', 'ま', 'け', 'ふ', 'こ',
@@ -419,8 +577,8 @@ impl NumberingKind {
                 ],
                 n,
             ),
-            Self::KatakanaAiueo => zeroless(
-                [
+            Self::KatakanaAiueo => alphabetic(
+                &[
                     'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ',
                     'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ',
                     'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム',
@@ -429,8 +587,8 @@ impl NumberingKind {
                 ],
                 n,
             ),
-            Self::KatakanaIroha => zeroless(
-                [
+            Self::KatakanaIroha => alphabetic(
+                &[
                     'イ', 'ロ', 'ハ', 'ニ', 'ホ', 'ヘ', 'ト', 'チ', 'リ', 'ヌ', 'ル',
                     'ヲ', 'ワ', 'カ', 'ヨ', 'タ', 'レ', 'ソ', 'ツ', 'ネ', 'ナ', 'ラ',
                     'ム', 'ウ', 'ヰ', 'ノ', 'オ', 'ク', 'ヤ', 'マ', 'ケ', 'フ', 'コ',
@@ -439,359 +597,219 @@ impl NumberingKind {
                 ],
                 n,
             ),
-            Self::KoreanJamo => zeroless(
-                [
+            Self::KoreanJamo => alphabetic(
+                &[
                     'ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ',
                     'ㅌ', 'ㅍ', 'ㅎ',
                 ],
                 n,
             ),
-            Self::KoreanSyllable => zeroless(
-                [
+            Self::KoreanSyllable => alphabetic(
+                &[
                     '가', '나', '다', '라', '마', '바', '사', '아', '자', '차', '카',
                     '타', '파', '하',
                 ],
                 n,
             ),
-            Self::BengaliLetter => zeroless(
-                [
+            Self::BengaliLetter => alphabetic(
+                &[
                     'ক', 'খ', 'গ', 'ঘ', 'ঙ', 'চ', 'ছ', 'জ', 'ঝ', 'ঞ', 'ট', 'ঠ', 'ড', 'ঢ',
                     'ণ', 'ত', 'থ', 'দ', 'ধ', 'ন', 'প', 'ফ', 'ব', 'ভ', 'ম', 'য', 'র', 'ল',
                     'শ', 'ষ', 'স', 'হ',
                 ],
                 n,
             ),
-            Self::CircledNumber => zeroless(
-                [
-                    '①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫', '⑬', '⑭',
-                    '⑮', '⑯', '⑰', '⑱', '⑲', '⑳', '㉑', '㉒', '㉓', '㉔', '㉕', '㉖',
-                    '㉗', '㉘', '㉙', '㉚', '㉛', '㉜', '㉝', '㉞', '㉟', '㊱', '㊲',
-                    '㊳', '㊴', '㊵', '㊶', '㊷', '㊸', '㊹', '㊺', '㊻', '㊼', '㊽',
-                    '㊾', '㊿',
+            Self::CircledNumber => fixed(
+                &[
+                    '⓪', '①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫', '⑬',
+                    '⑭', '⑮', '⑯', '⑰', '⑱', '⑲', '⑳', '㉑', '㉒', '㉓', '㉔', '㉕',
+                    '㉖', '㉗', '㉘', '㉙', '㉚', '㉛', '㉜', '㉝', '㉞', '㉟', '㊱',
+                    '㊲', '㊳', '㊴', '㊵', '㊶', '㊷', '㊸', '㊹', '㊺', '㊻', '㊼',
+                    '㊽', '㊾', '㊿',
                 ],
                 n,
             ),
             Self::DoubleCircledNumber => {
-                zeroless(['⓵', '⓶', '⓷', '⓸', '⓹', '⓺', '⓻', '⓼', '⓽', '⓾'], n)
+                fixed(&['0', '⓵', '⓶', '⓷', '⓸', '⓹', '⓺', '⓻', '⓼', '⓽', '⓾'], n)
             }
 
             Self::LowerSimplifiedChinese => {
-                usize_to_chinese(ChineseVariant::Simple, ChineseCase::Lower, n).into()
+                u64_to_chinese(ChineseVariant::Simple, ChineseCase::Lower, n).into()
             }
             Self::UpperSimplifiedChinese => {
-                usize_to_chinese(ChineseVariant::Simple, ChineseCase::Upper, n).into()
+                u64_to_chinese(ChineseVariant::Simple, ChineseCase::Upper, n).into()
             }
             Self::LowerTraditionalChinese => {
-                usize_to_chinese(ChineseVariant::Traditional, ChineseCase::Lower, n)
-                    .into()
+                u64_to_chinese(ChineseVariant::Traditional, ChineseCase::Lower, n).into()
             }
             Self::UpperTraditionalChinese => {
-                usize_to_chinese(ChineseVariant::Traditional, ChineseCase::Upper, n)
-                    .into()
+                u64_to_chinese(ChineseVariant::Traditional, ChineseCase::Upper, n).into()
             }
 
-            Self::EasternArabic => decimal('\u{0660}', n),
-            Self::EasternArabicPersian => decimal('\u{06F0}', n),
-            Self::DevanagariNumber => decimal('\u{0966}', n),
-            Self::BengaliNumber => decimal('\u{09E6}', n),
-        }
-    }
-}
-
-/// Stringify an integer to a Hebrew number.
-fn hebrew_numeral(mut n: usize) -> EcoString {
-    if n == 0 {
-        return '-'.into();
-    }
-    let mut fmt = EcoString::new();
-    'outer: for (name, value) in [
-        ('ת', 400),
-        ('ש', 300),
-        ('ר', 200),
-        ('ק', 100),
-        ('צ', 90),
-        ('פ', 80),
-        ('ע', 70),
-        ('ס', 60),
-        ('נ', 50),
-        ('מ', 40),
-        ('ל', 30),
-        ('כ', 20),
-        ('י', 10),
-        ('ט', 9),
-        ('ח', 8),
-        ('ז', 7),
-        ('ו', 6),
-        ('ה', 5),
-        ('ד', 4),
-        ('ג', 3),
-        ('ב', 2),
-        ('א', 1),
-    ] {
-        while n >= value {
-            match n {
-                15 => fmt.push_str("ט״ו"),
-                16 => fmt.push_str("ט״ז"),
-                _ => {
-                    let append_geresh = n == value && fmt.is_empty();
-                    if n == value && !fmt.is_empty() {
-                        fmt.push('״');
-                    }
-                    fmt.push(name);
-                    if append_geresh {
-                        fmt.push('׳');
-                    }
-
-                    n -= value;
-                    continue;
-                }
+            Self::EasternArabic => {
+                numeric(&['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'], n)
             }
-            break 'outer;
-        }
-    }
-    fmt
-}
-
-/// Stringify an integer to a Roman numeral.
-fn roman_numeral(mut n: usize, case: Case) -> EcoString {
-    if n == 0 {
-        return match case {
-            Case::Lower => 'n'.into(),
-            Case::Upper => 'N'.into(),
-        };
-    }
-
-    // Adapted from Yann Villessuzanne's roman.rs under the
-    // Unlicense, at https://github.com/linfir/roman.rs/
-    let mut fmt = EcoString::new();
-    for &(name, value) in &[
-        ("M̅", 1000000),
-        ("D̅", 500000),
-        ("C̅", 100000),
-        ("L̅", 50000),
-        ("X̅", 10000),
-        ("V̅", 5000),
-        ("I̅V̅", 4000),
-        ("M", 1000),
-        ("CM", 900),
-        ("D", 500),
-        ("CD", 400),
-        ("C", 100),
-        ("XC", 90),
-        ("L", 50),
-        ("XL", 40),
-        ("X", 10),
-        ("IX", 9),
-        ("V", 5),
-        ("IV", 4),
-        ("I", 1),
-    ] {
-        while n >= value {
-            n -= value;
-            for c in name.chars() {
-                match case {
-                    Case::Lower => fmt.extend(c.to_lowercase()),
-                    Case::Upper => fmt.push(c),
-                }
+            Self::EasternArabicPersian => {
+                numeric(&['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'], n)
             }
+            Self::DevanagariNumber => {
+                numeric(&['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'], n)
+            }
+            Self::BengaliNumber => {
+                numeric(&['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'], n)
+            }
+            Self::Symbol => symbolic(&['*', '†', '‡', '§', '¶', '‖'], n),
         }
     }
-
-    fmt
 }
 
-/// Stringify an integer to Greek numbers.
+/// Stringify a number using symbols representing values. The decimal
+/// representation of the number is recovered by summing over the values of the
+/// symbols present.
 ///
-/// Greek numbers use the Greek Alphabet to represent numbers; it is based on 10
-/// (decimal). Here we implement the single digit M power representation from
-/// [The Greek Number Converter][convert] and also described in
-/// [Greek Numbers][numbers].
-///
-/// [converter]: https://www.russellcottrell.com/greek/utilities/GreekNumberConverter.htm
-/// [numbers]: https://mathshistory.st-andrews.ac.uk/HistTopics/Greek_numbers/
-fn greek_numeral(n: usize, case: Case) -> EcoString {
-    let thousands = [
-        ["͵α", "͵Α"],
-        ["͵β", "͵Β"],
-        ["͵γ", "͵Γ"],
-        ["͵δ", "͵Δ"],
-        ["͵ε", "͵Ε"],
-        ["͵ϛ", "͵Ϛ"],
-        ["͵ζ", "͵Ζ"],
-        ["͵η", "͵Η"],
-        ["͵θ", "͵Θ"],
-    ];
-    let hundreds = [
-        ["ρ", "Ρ"],
-        ["σ", "Σ"],
-        ["τ", "Τ"],
-        ["υ", "Υ"],
-        ["φ", "Φ"],
-        ["χ", "Χ"],
-        ["ψ", "Ψ"],
-        ["ω", "Ω"],
-        ["ϡ", "Ϡ"],
-    ];
-    let tens = [
-        ["ι", "Ι"],
-        ["κ", "Κ"],
-        ["λ", "Λ"],
-        ["μ", "Μ"],
-        ["ν", "Ν"],
-        ["ξ", "Ξ"],
-        ["ο", "Ο"],
-        ["π", "Π"],
-        ["ϙ", "Ϟ"],
-    ];
-    let ones = [
-        ["α", "Α"],
-        ["β", "Β"],
-        ["γ", "Γ"],
-        ["δ", "Δ"],
-        ["ε", "Ε"],
-        ["ϛ", "Ϛ"],
-        ["ζ", "Ζ"],
-        ["η", "Η"],
-        ["θ", "Θ"],
-    ];
-
-    if n == 0 {
-        // Greek Zero Sign
-        return '𐆊'.into();
-    }
-
-    let mut fmt = EcoString::new();
-    let case = match case {
-        Case::Lower => 0,
-        Case::Upper => 1,
-    };
-
-    // Extract a list of decimal digits from the number
-    let mut decimal_digits: Vec<usize> = Vec::new();
-    let mut n = n;
-    while n > 0 {
-        decimal_digits.push(n % 10);
-        n /= 10;
-    }
-
-    // Pad the digits with leading zeros to ensure we can form groups of 4
-    while decimal_digits.len() % 4 != 0 {
-        decimal_digits.push(0);
-    }
-    decimal_digits.reverse();
-
-    let mut m_power = decimal_digits.len() / 4;
-
-    // M are used to represent 10000, M_power = 2 means 10000^2 = 10000 0000
-    // The prefix of M is also made of Greek numerals but only be single digits, so it is 9 at max. This enables us
-    // to represent up to (10000)^(9 + 1) - 1 = 10^40 -1  (9,999,999,999,999,999,999,999,999,999,999,999,999,999)
-    let get_m_prefix = |m_power: usize| {
-        if m_power == 0 {
-            None
-        } else {
-            assert!(m_power <= 9);
-            // the prefix of M is a single digit lowercase
-            Some(ones[m_power - 1][0])
-        }
-    };
-
-    let mut previous_has_number = false;
-    for chunk in decimal_digits.chunks_exact(4) {
-        // chunk must be exact 4 item
-        assert_eq!(chunk.len(), 4);
-
-        m_power = m_power.saturating_sub(1);
-
-        // `th`ousan, `h`undred, `t`en and `o`ne
-        let (th, h, t, o) = (chunk[0], chunk[1], chunk[2], chunk[3]);
-        if th + h + t + o == 0 {
-            continue;
-        }
-
-        if previous_has_number {
-            fmt.push_str(", ");
-        }
-
-        if let Some(m_prefix) = get_m_prefix(m_power) {
-            fmt.push_str(m_prefix);
-            fmt.push_str("Μ");
-        }
-        if th != 0 {
-            let thousand_digit = thousands[th - 1][case];
-            fmt.push_str(thousand_digit);
-        }
-        if h != 0 {
-            let hundred_digit = hundreds[h - 1][case];
-            fmt.push_str(hundred_digit);
-        }
-        if t != 0 {
-            let ten_digit = tens[t - 1][case];
-            fmt.push_str(ten_digit);
-        }
-        if o != 0 {
-            let one_digit = ones[o - 1][case];
-            fmt.push_str(one_digit);
-        }
-        // if we do not have thousan, we need to append 'ʹ' at the end.
-        if th == 0 {
-            fmt.push_str("ʹ");
-        }
-        previous_has_number = true;
-    }
-    fmt
-}
-
-/// Stringify a number using a base-N counting system with no zero digit.
-///
-/// This is best explained by example. Suppose our digits are 'A', 'B', and 'C'.
-/// We would get the following:
+/// Consider the situation where ['I': 1, 'IV': 4, 'V': 5],
 ///
 /// ```text
-///  1 =>   "A"
-///  2 =>   "B"
-///  3 =>   "C"
-///  4 =>  "AA"
-///  5 =>  "AB"
-///  6 =>  "AC"
-///  7 =>  "BA"
-///  8 =>  "BB"
-///  9 =>  "BC"
-/// 10 =>  "CA"
-/// 11 =>  "CB"
-/// 12 =>  "CC"
-/// 13 => "AAA"
-///    etc.
+/// 1 => 'I'
+/// 2 => 'II'
+/// 3 => 'III'
+/// 4 => 'IV'
+/// 5 => 'V'
+/// 6 => 'VI'
+/// 7 => 'VII'
+/// 8 => 'VIII'
 /// ```
 ///
-/// You might be familiar with this scheme from the way spreadsheet software
-/// tends to label its columns.
-fn zeroless<const N_DIGITS: usize>(
-    alphabet: [char; N_DIGITS],
-    mut n: usize,
-) -> EcoString {
+/// where this is the start of the familiar Roman numeral system.
+fn additive(symbols: &[(&str, u64)], mut n: u64) -> EcoString {
+    if n == 0 {
+        if let Some(&(symbol, 0)) = symbols.last() {
+            return symbol.into();
+        }
+        return '0'.into();
+    }
+
+    let mut s = EcoString::new();
+    for (symbol, weight) in symbols {
+        if *weight == 0 || *weight > n {
+            continue;
+        }
+        let reps = n / weight;
+        for _ in 0..reps {
+            s.push_str(symbol);
+        }
+
+        n -= weight * reps;
+        if n == 0 {
+            return s;
+        }
+    }
+    s
+}
+
+/// Stringify a number using a base-n (where n is the number of provided
+/// symbols) system without a zero symbol.
+///
+/// Consider the situation where ['A', 'B', 'C'] are the provided symbols,
+///
+/// ```text
+/// 1 => 'A'
+/// 2 => 'B'
+/// 3 => 'C'
+/// 4 => 'AA
+/// 5 => 'AB'
+/// 6 => 'AC'
+/// 7 => 'BA'
+/// ...
+/// ```
+///
+/// This system is commonly used in spreadsheet software.
+fn alphabetic(symbols: &[char], mut n: u64) -> EcoString {
+    let n_digits = symbols.len() as u64;
     if n == 0 {
         return '-'.into();
     }
-    let mut cs = EcoString::new();
-    while n > 0 {
+    let mut s = EcoString::new();
+    while n != 0 {
         n -= 1;
-        cs.push(alphabet[n % N_DIGITS]);
-        n /= N_DIGITS;
+        s.push(symbols[(n % n_digits) as usize]);
+        n /= n_digits;
     }
-    cs.chars().rev().collect()
+    s.chars().rev().collect()
 }
 
-/// Stringify a number using a base-10 counting system with a zero digit.
+/// Stringify a number using the symbols provided, defaulting to the arabic
+/// representation when the number is greater than the number of symbols.
 ///
-/// This function assumes that the digits occupy contiguous codepoints.
-fn decimal(start: char, mut n: usize) -> EcoString {
+/// Consider the situation where ['0', 'A', 'B', 'C'] are the provided symbols,
+///
+/// ```text
+/// 0 => '0'
+/// 1 => 'A'
+/// 2 => 'B'
+/// 3 => 'C'
+/// 4 => '4'
+/// ...
+/// n => 'n'
+/// ```
+fn fixed(symbols: &[char], n: u64) -> EcoString {
+    let n_digits = symbols.len() as u64;
+    if n < n_digits {
+        return symbols[(n) as usize].into();
+    }
+    eco_format!("{n}")
+}
+
+/// Stringify a number using a base-n (where n is the number of provided
+/// symbols) system with a zero symbol.
+///
+/// Consider the situation where ['0', '1', '2'] are the provided symbols,
+///
+/// ```text
+/// 0 => '0'
+/// 1 => '1'
+/// 2 => '2'
+/// 3 => '10'
+/// 4 => '11'
+/// 5 => '12'
+/// 6 => '20'
+/// ...
+/// ```
+///
+/// which is the familiar trinary counting system.
+fn numeric(symbols: &[char], mut n: u64) -> EcoString {
+    let n_digits = symbols.len() as u64;
     if n == 0 {
-        return start.into();
+        return symbols[0].into();
     }
-    let mut cs = EcoString::new();
-    while n > 0 {
-        cs.push(char::from_u32((start as u32) + ((n % 10) as u32)).unwrap());
-        n /= 10;
+    let mut s = EcoString::new();
+    while n != 0 {
+        s.push(symbols[(n % n_digits) as usize]);
+        n /= n_digits;
     }
-    cs.chars().rev().collect()
+    s.chars().rev().collect()
+}
+
+/// Stringify a number using repeating symbols.
+///
+/// Consider the situation where ['A', 'B', 'C'] are the provided symbols,
+///
+/// ```text
+/// 0 => '-'
+/// 1 => 'A'
+/// 2 => 'B'
+/// 3 => 'C'
+/// 4 => 'AA'
+/// 5 => 'BB'
+/// 6 => 'CC'
+/// 7 => 'AAA'
+/// ...
+/// ```
+fn symbolic(symbols: &[char], n: u64) -> EcoString {
+    let n_digits = symbols.len() as u64;
+    if n == 0 {
+        return '-'.into();
+    }
+    EcoString::from(symbols[((n - 1) % n_digits) as usize])
+        .repeat((n.div_ceil(n_digits)) as usize)
 }

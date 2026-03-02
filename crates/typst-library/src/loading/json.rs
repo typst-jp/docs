@@ -1,25 +1,17 @@
 use ecow::eco_format;
 use typst_syntax::Spanned;
 
-use crate::diag::{At, SourceResult};
+use crate::diag::{At, LineCol, LoadError, LoadedWithin, SourceResult};
 use crate::engine::Engine;
-use crate::foundations::{func, scope, Str, Value};
+use crate::foundations::{Str, Value, func, scope};
 use crate::loading::{DataSource, Load, Readable};
 
 /// JSONファイルから構造化データを読み込む。
 ///
 /// 読み込むファイルにはオブジェクトや配列などの有効なJSON値が含まれていなければなりません。
-/// JSONオブジェクトはTypstの辞書に変換され、
-/// JSON配列はTypstの配列に変換されます。
-/// 文字列やブール値はTypstの対応する型に変換され、`null`は`{none}`に、
-/// 数値は整数値であれば整数型に、
-/// そうでなければ浮動小数点数型に変換されます。
+/// JSONの値は、[下の表](#conversion)に示す対応するTypstの値に変換されます。
 ///
-/// 2<sup>63</sup>-1より大きな整数は浮動小数点数に変換されるため、
-/// 近似値になる可能性があることに留意してください。
-///
-/// この関数は、辞書、配列、
-/// あるいはJSONファイルの内容に応じてその他のJSONデータ型を返します。
+/// この関数は辞書、配列、あるいはJSONファイルの内容に応じた別のJSONデータ型を返します。
 ///
 /// この例におけるJSONファイルは、
 /// `temperature`、`unit`、および`weather`というキーを持つオブジェクトを含んでいます。
@@ -48,23 +40,59 @@ use crate::loading::{DataSource, Load, Readable};
 /// #forecast(json("monday.json"))
 /// #forecast(json("tuesday.json"))
 /// ```
+///
+/// # 変換の詳細 { #conversion }
+///
+/// | JSONの値 | Typstへの変換先 |
+/// | -------- | -------------- |
+/// | `null`   | `{none}`       |
+/// | bool     | [`bool`]       |
+/// | number   | [`float`] または [`int`] |
+/// | string   | [`str`]        |
+/// | array    | [`array`]      |
+/// | object   | [`dictionary`] |
+///
+/// | Typstの値                            | JSONへの変換先                       |
+/// | ------------------------------------- | ------------------------------------ |
+/// | JSONから変換できる型                  | 対応するJSON値                       |
+/// | [`bytes`]                             | [`repr`]経由の文字列                 |
+/// | [`symbol`]                            | 文字列                               |
+/// | [`content`]                           | コンテンツを記述するオブジェクト      |
+/// | その他の型（[`length`]など）          | [`repr`]経由の文字列                 |
+///
+/// ## 注意事項
+/// - 多くの場合、JSONの数値は整数か小数かに応じて`float`または`int`に変換されます。
+///   ただし、2<sup>63</sup>-1より大きい（または-2<sup>63</sup>より小さい）整数は
+///   浮動小数点数に変換されるため、近似値になる可能性があります。
+///
+/// - `bytes`は性能と可読性のためJSON配列としてはエンコードされません。
+///   バイナリデータには[`cbor.encode`]を検討してください。
+///
+/// - `repr`関数は[デバッグ目的のみ]($repr/#debugging-only)で、
+///   出力の安定性はTypstのバージョン間で保証されません。
 #[func(scope, title = "JSON")]
 pub fn json(
     engine: &mut Engine,
     /// JSONファイルの[パス]($syntax/#paths)、または生のJSONバイト列。
     source: Spanned<DataSource>,
 ) -> SourceResult<Value> {
-    let data = source.load(engine.world)?;
-    serde_json::from_slice(data.as_slice())
-        .map_err(|err| eco_format!("failed to parse JSON ({err})"))
-        .at(source.span)
+    let loaded = source.load(engine.world)?;
+    serde_json::from_slice(loaded.data.as_slice())
+        .map_err(|err| {
+            let pos = LineCol::one_based(err.line(), err.column());
+            LoadError::new(pos, "failed to parse JSON", err)
+        })
+        .within(&loaded)
 }
 
 #[scope]
 impl json {
     /// JSONの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode JSON")]
-    #[deprecated = "`json.decode`は非推奨です。代わりにバイト列を直接`json`に渡してください。"]
+    #[deprecated(
+        message = "`json.decode`は非推奨です。代わりにバイト列を直接`json`に渡してください。",
+        until = "0.15.0"
+    )]
     pub fn decode(
         engine: &mut Engine,
         /// JSONデータ。

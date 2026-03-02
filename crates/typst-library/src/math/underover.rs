@@ -1,4 +1,4 @@
-use crate::foundations::{elem, Content};
+use crate::foundations::{Content, elem};
 use crate::math::Mathy;
 
 /// コンテンツの下にある水平方向の線。
@@ -28,7 +28,7 @@ pub struct OverlineElem {
 /// コンテンツの下にある水平方向の波括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
-/// $ underbrace(1 + 2 + ... + 5, "numbers") $
+/// $ underbrace(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UnderbraceElem {
@@ -44,7 +44,7 @@ pub struct UnderbraceElem {
 /// コンテンツの上にある水平方向の波括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
-/// $ overbrace(1 + 2 + ... + 5, "numbers") $
+/// $ overbrace(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OverbraceElem {
@@ -60,7 +60,7 @@ pub struct OverbraceElem {
 /// コンテンツの下にある水平方向の角括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
-/// $ underbracket(1 + 2 + ... + 5, "numbers") $
+/// $ underbracket(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UnderbracketElem {
@@ -76,7 +76,7 @@ pub struct UnderbracketElem {
 /// コンテンツの上にある水平方向の角括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
-/// $ overbracket(1 + 2 + ... + 5, "numbers") $
+/// $ overbracket(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OverbracketElem {
@@ -92,7 +92,7 @@ pub struct OverbracketElem {
 /// コンテンツの下にある水平方向の丸括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
-/// $ underparen(1 + 2 + ... + 5, "numbers") $
+/// $ underparen(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UnderparenElem {
@@ -108,7 +108,7 @@ pub struct UnderparenElem {
 /// コンテンツの上にある水平方向の丸括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
-/// $ overparen(1 + 2 + ... + 5, "numbers") $
+/// $ overparen(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OverparenElem {
@@ -124,7 +124,7 @@ pub struct OverparenElem {
 /// コンテンツの下にある水平方向の亀甲括弧。その下にオプションで注釈ができます。
 ///
 /// ```example
-/// $ undershell(1 + 2 + ... + 5, "numbers") $
+/// $ undershell(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct UndershellElem {
@@ -136,11 +136,10 @@ pub struct UndershellElem {
     #[positional]
     pub annotation: Option<Content>,
 }
-
 /// コンテンツの上にある水平方向の亀甲括弧。その上にオプションで注釈ができます。
 ///
 /// ```example
-/// $ overshell(1 + 2 + ... + 5, "numbers") $
+/// $ overshell(0 + 1 + dots.c + n, n + 1 "numbers") $
 /// ```
 #[elem(Mathy)]
 pub struct OvershellElem {
