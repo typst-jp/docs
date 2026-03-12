@@ -1,6 +1,6 @@
 use typst_syntax::Span;
 
-use crate::foundations::{elem, func, Content, NativeElement};
+use crate::foundations::{Content, NativeElement, elem, func};
 use crate::math::Mathy;
 
 /// 平方根。
@@ -17,7 +17,7 @@ pub fn sqrt(
     RootElem::new(radicand).pack().spanned(span)
 }
 
-/// 累乗根。
+/// 冪根。
 ///
 /// ```example
 /// $ root(3, x) $

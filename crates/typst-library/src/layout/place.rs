@@ -1,11 +1,11 @@
-use crate::foundations::{elem, scope, Cast, Content, Packed, Smart};
-use crate::introspection::{Locatable, Unqueriable};
+use crate::foundations::{Cast, Content, Smart, elem, scope};
+use crate::introspection::{Locatable, Tagged, Unqueriable};
 use crate::layout::{Alignment, Em, Length, Rel};
 
 /// 親コンテナに対して相対的なコンテンツの配置。
 ///
 /// コンテンツはオーバーレイ（デフォルト）またはフロートのいずれかで配置できます。
-/// オーバーレイのコンテンツは、指定された[`alignment`]($place.alignment)に従って親コンテナに合わせて配置され、これまでに追加された他のコンテンツの上に表示されます。
+/// オーバーレイのコンテンツは、指定された[`alignment`]($place.alignment)に従って親コンテナにあわせて配置され、これまでに追加された他のコンテンツの上に表示されます。
 /// フロートのコンテンツは、親コンテナの上部または下部に配置され、他のコンテンツを下または上にそれぞれずらします。
 /// 両方の場合で、コンテンツの位置は[`dx`]($place.dx)および[`dy`]($place.dy)オフセットを用いてレイアウトに影響を与えることなく調整可能です。
 ///
@@ -55,7 +55,13 @@ use crate::layout::{Alignment, Em, Length, Rel};
 /// ```
 ///
 /// ゼロ幅の弱い空白は、関数呼び出しと次の単語との間の空白を削除する役割を果たします。
-#[elem(scope, Locatable, Unqueriable)]
+///
+/// # Accessibility
+/// Assistive Technology (AT) will always read the placed element at the point
+/// where it logically appears in the document, regardless of where this
+/// function physically moved it. Put its markup where it would make the most
+/// sense in the reading order.
+#[elem(scope, Unqueriable, Locatable, Tagged)]
 pub struct PlaceElem {
     /// コンテンツを配置する基準となる親コンテナ内の位置。
     ///
@@ -71,7 +77,7 @@ pub struct PlaceElem {
     ///
     /// 親スコープは主に図表に使用されるため、figure関数にはそれを反映した[`scope`パラメーター]($figure.scope)が用意されています。
     /// しかしながら、段組を中断することは、より一般的な場合に有用であることもあります。
-    /// 典型的な例は2段組の文書で1段組のタイトル節を作成することでしょう。
+    /// 典型的な例は2段組の文書で[1段組のタイトル節]($guides/page-setup/#columns)を作成することでしょう。
     ///
     /// 現在、親スコープでの配置は`float`が`{true}`の場合のみサポートされています。 この挙動は将来変更される可能性があります。
     ///
@@ -115,9 +121,7 @@ pub struct PlaceElem {
     /// フロートレイアウトでの配置された要素と他の要素との間隔。
     ///
     /// `float`が`{false}`の場合は影響がありません。
-
     #[default(Em::new(1.5).into())]
-    #[resolve]
     pub clearance: Length,
 
     /// 配置したコンテンツの水平方向の変位。
@@ -145,10 +149,6 @@ pub struct PlaceElem {
     pub body: Content,
 }
 
-/// `PlaceElem` must be locatable to support logical ordering of floats, but I
-/// do not want to expose `query(place)` for now.
-impl Unqueriable for Packed<PlaceElem> {}
-
 #[scope]
 impl PlaceElem {
     #[elem]
@@ -161,7 +161,7 @@ pub enum PlacementScope {
     /// 現在の列に配置する。
     #[default]
     Column,
-    /// 親要素に対して相対的な位置に配置され、コンテンツがすべての列にまたがって表示されます。
+    /// 親要素に対して相対的な位置に配置され、コンテンツが全ての列にまたがって表示されます。
     Parent,
 }
 

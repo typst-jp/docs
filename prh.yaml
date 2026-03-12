@@ -1,0 +1,223 @@
+version: 1
+
+rules:
+  # 固有名詞
+  - expected: Typst
+    pattern: /(?<![-#])\b[Tt][Yy][Pp][Ss][Tt]\b(?!-)/
+    specs:
+      - from: typst
+        to: Typst
+      - from: typst is a new markup-based typesetting system that is designed to be as powerful as LaTeX while being much easier to learn and use.
+        to: Typst is a new markup-based typesetting system that is designed to be as powerful as LaTeX while being much easier to learn and use.
+      - from: typstは、学術用途のために新たに生まれたマークアップベースの組版システムです。
+        to: Typstは、学術用途のために新たに生まれたマークアップベースの組版システムです。
+      - from: ttypstt
+        to: ttypstt
+      - from: "{#typst}"
+        to: "{#typst}"
+      - from: "{#when-typst}"
+        to: "{#when-typst}"
+      - from: typst-jp
+        to: typst-jp
+  # 表記ゆれ
+  # 誤検知やユースケースに合わせて適宜調整してください
+  - expected: 挙げる
+    patterns:
+      - あげる
+  - expected: あたり
+    patterns:
+      - 当たり
+      - 当り
+  - expected: 扱う
+    patterns:
+      - あつかう
+  - expected: 新たな
+    patterns:
+      - あらたな
+  - expected: 表$1
+    patterns:
+      - /あらわ(さ|し|す|せ|そ)/
+  - expected: 現れる
+    patterns:
+      - あらわれる
+  - expected: あわせて
+    pattern: /(?<!組み)合わせて|併せて/
+  - expected: いくつか
+    patterns:
+      - 幾つか
+  - expected: いくらか
+    patterns:
+      - 幾らか
+  - expected: 至る
+    patterns:
+      - いたる
+  - expected: いっそう
+    patterns:
+      - 一層
+  - expected: いったん
+    patterns:
+      - 一旦
+  - expected: 一方
+    patterns:
+      - いっぽう
+  - expected: 入れる
+    patterns:
+      - いれる
+  - expected: $1付き文字
+    patterns:
+      - /(上|下)付き添え字/
+      - /(上|下)付き添字/
+  - expected: 受ける
+    patterns:
+      - うける
+  - expected: 概ね
+    patterns:
+      - おおむね
+  - expected: 起きる
+    patterns:
+      - おきる
+  - expected: 起こる
+    patterns:
+      - おこる
+  - expected: おすすめ
+    patterns:
+      - お勧め
+      - オススメ
+  - expected: 主な
+    patterns:
+      - おもな
+  - expected: 主に
+    patterns:
+      - おもに
+  - expected: および
+    patterns:
+      - 及び
+  - expected: 及ぼす
+    patterns:
+      - およぼす
+  - expected: かかわる
+    patterns:
+      - 関わる
+      - 係わる
+  - expected: 方
+    patterns:
+      - かた
+  - expected: きわめて
+    patterns:
+      - 極めて
+  - expected: 講じる
+    patterns:
+      - こうじる
+  - expected: 講ずる
+    patterns:
+      - こうずる
+  - expected: 超える
+    patterns:
+      - こえる
+  - expected: ごと
+    patterns:
+      - 毎
+  - expected: こととする
+    patterns:
+      - 事とする
+  - expected: 際$1
+    pattern: /(?<!実)さい(に|の|、)/
+  - expected: さまざま
+    patterns:
+      - 様々
+  - expected: さらなる
+    patterns:
+      - 更なる
+  - expected: さらに
+    patterns:
+      - /(?<!変)更に/
+  - expected: したがって、
+    patterns:
+      - 従って、
+  - expected: しだいに
+    patterns:
+      - 次第に
+  - expected: すなわち
+    patterns:
+      - 即ち
+  - expected: 全て
+    patterns:
+      - すべて
+  - expected: 添え字
+    pattern: 添字
+  - expected: その他
+    patterns:
+      - そのほか
+  - expected: 例えば
+    patterns:
+      - たとえば
+  - expected: 常に
+    pattern: つねに
+  - expected: できる
+    patterns:
+      - 出来る
+  - expected: 通り
+    patterns:
+      - とおり
+  - expected: ともに
+    patterns:
+      - 共に
+  - expected: ともない
+    patterns:
+      - 伴い
+  - expected: 捉え
+    patterns:
+      - とらえ
+  - expected: 半ば
+    patterns:
+      - なかば
+  - expected: 除き
+    patterns:
+      - のぞき
+  - expected: 後
+    patterns:
+      - のち
+  - expected: 再び
+    patterns:
+      - ふたたび
+  - expected: 振る舞
+    patterns:
+      - ふるま
+      - 振舞
+  - expected: 冪乗
+    patterns:
+      - /べき乗(?!根)/
+      - /累乗(?!根)/
+  - expected: 冪根
+    patterns:
+      - 累乗根
+      - べき根
+      - べき乗根
+      - 冪乗根
+  - expected: 用い$1
+    pattern: /もちい(る|て|た|られる)/
+  - expected: 持つ
+    patterns:
+      - もつ
+  - expected: もとに
+    patterns:
+      - 基に
+      - 元に
+  - expected: 基づく
+    patterns:
+      - もとづく
+  - expected: よく
+    patterns:
+      - 良く
+  - expected: 呼ぶ
+    patterns:
+      - よぶ
+  - expected: わかる
+    patterns:
+      - 分かる
+  - expected: 分ける
+    patterns:
+      - わける
+  - expected: わけではない
+    patterns:
+      - 訳ではない

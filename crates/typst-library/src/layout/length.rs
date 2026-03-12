@@ -3,12 +3,12 @@ use std::fmt::{self, Debug, Formatter};
 use std::ops::{Add, Div, Mul, Neg};
 
 use comemo::Tracked;
-use ecow::{eco_format, EcoString};
+use ecow::{EcoString, eco_format};
 use typst_syntax::Span;
 use typst_utils::Numeric;
 
-use crate::diag::{bail, HintedStrResult, SourceResult};
-use crate::foundations::{func, scope, ty, Context, Fold, Repr, Resolve, StyleChain};
+use crate::diag::{HintedStrResult, SourceResult, bail};
+use crate::foundations::{Context, Fold, Repr, Resolve, StyleChain, func, scope, ty};
 use crate::layout::{Abs, Em};
 
 /// 文脈に応じた単位で表現される場合もある、大きさまたは距離。
@@ -97,7 +97,7 @@ impl Length {
     /// このlengthをポイントに変換します。
     ///
     /// このlengthの`em`単位の値が（単に`2pt`ではなく`5em + 2pt`のように）非ゼロの場合にエラーが発生して失敗します。
-    /// 長さの`em`成分を無視するために（`(5em + 2pt).abs.pt()`のように）`abs`フィールドを使用してください（したがって数値部分のみが変換されます）。
+    /// 長さの`em`成分を無視するために（`(5em + 2pt).abs.pt()`のように）`abs`フィールドを使用してください（したがって、数値部分のみが変換されます）。
     #[func(name = "pt", title = "Points")]
     pub fn to_pt(&self, span: Span) -> SourceResult<f64> {
         self.ensure_that_em_is_zero(span, "pt")?;

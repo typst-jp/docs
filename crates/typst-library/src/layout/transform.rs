@@ -1,11 +1,5 @@
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{
-    cast, elem, Content, NativeElement, Packed, Show, Smart, StyleChain,
-};
-use crate::layout::{
-    Abs, Alignment, Angle, BlockElem, HAlignment, Length, Ratio, Rel, VAlignment,
-};
+use crate::foundations::{Content, Smart, cast, elem};
+use crate::layout::{Abs, Alignment, Angle, HAlignment, Length, Ratio, Rel, VAlignment};
 
 /// レイアウトに影響を与えないコンテンツの移動。
 ///
@@ -24,7 +18,13 @@ use crate::layout::{
 ///   )
 /// ))
 /// ```
-#[elem(Show)]
+///
+/// # Accessibility
+/// Moving is transparent to Assistive Technology (AT). Your content will be
+/// read in the order it appears in the source, regardless of any visual
+/// movement. If you need to hide content from AT altogether in PDF export,
+/// consider using [`pdf.artifact`].
+#[elem]
 pub struct MoveElem {
     /// コンテンツの水平方向の変位。
     pub dx: Rel<Length>,
@@ -35,14 +35,6 @@ pub struct MoveElem {
     /// 移動させたいコンテンツ。
     #[required]
     pub body: Content,
-}
-
-impl Show for Packed<MoveElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::single_layouter(self.clone(), engine.routines.layout_move)
-            .pack()
-            .spanned(self.span()))
-    }
 }
 
 /// レイアウトに影響を与えないコンテンツの回転。
@@ -59,14 +51,13 @@ impl Show for Packed<MoveElem> {
 ///     .map(i => rotate(24deg * i)[X]),
 /// )
 /// ```
-#[elem(Show)]
+#[elem]
 pub struct RotateElem {
     /// 回転させる量。
     ///
     /// ```example
     /// #rotate(-1.571rad)[Space!]
     /// ```
-    ///
     #[positional]
     pub angle: Angle,
 
@@ -103,14 +94,6 @@ pub struct RotateElem {
     pub body: Content,
 }
 
-impl Show for Packed<RotateElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::single_layouter(self.clone(), engine.routines.layout_rotate)
-            .pack()
-            .spanned(self.span()))
-    }
-}
-
 /// レイアウトに影響を与えないコンテンツの拡大縮小。
 ///
 /// 単一の軸で負のスケールを指定することで、コンテンツを反転表示できます。
@@ -121,7 +104,7 @@ impl Show for Packed<RotateElem> {
 /// #scale(x: -100%)[This is mirrored.]
 /// #scale(x: -100%, reflow: true)[This is mirrored.]
 /// ```
-#[elem(Show)]
+#[elem]
 pub struct ScaleElem {
     /// 位置引数として両方の軸の拡大縮小率を設定します。
     /// これは`x`と`y`を同じ値で設定する省略記法です。
@@ -173,14 +156,6 @@ pub struct ScaleElem {
     pub body: Content,
 }
 
-impl Show for Packed<ScaleElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::single_layouter(self.clone(), engine.routines.layout_scale)
-            .pack()
-            .spanned(self.span()))
-    }
-}
-
 /// To what size something shall be scaled.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
 pub enum ScaleAmount {
@@ -209,14 +184,13 @@ cast! {
 ///   This is some fake italic text.
 /// ]
 /// ```
-#[elem(Show)]
+#[elem]
 pub struct SkewElem {
     /// 水平方向のスキュー角。
     ///
     /// ```example
     /// #skew(ax: 30deg)[Skewed]
     /// ```
-    ///
     #[default(Angle::zero())]
     pub ax: Angle,
 
@@ -225,7 +199,6 @@ pub struct SkewElem {
     /// ```example
     /// #skew(ay: 30deg)[Skewed]
     /// ```
-    ///
     #[default(Angle::zero())]
     pub ay: Angle,
 
@@ -256,14 +229,6 @@ pub struct SkewElem {
     /// スキュー変形するコンテンツ。
     #[required]
     pub body: Content,
-}
-
-impl Show for Packed<SkewElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::single_layouter(self.clone(), engine.routines.layout_skew)
-            .pack()
-            .spanned(self.span()))
-    }
 }
 
 /// A scale-skew-translate transformation.
@@ -298,6 +263,20 @@ impl Transform {
     /// A scale transform.
     pub const fn scale(sx: Ratio, sy: Ratio) -> Self {
         Self { sx, sy, ..Self::identity() }
+    }
+
+    /// A scale transform at a specific position.
+    pub fn scale_at(sx: Ratio, sy: Ratio, px: Abs, py: Abs) -> Self {
+        Self::translate(px, py)
+            .pre_concat(Self::scale(sx, sy))
+            .pre_concat(Self::translate(-px, -py))
+    }
+
+    /// A rotate transform at a specific position.
+    pub fn rotate_at(angle: Angle, px: Abs, py: Abs) -> Self {
+        Self::translate(px, py)
+            .pre_concat(Self::rotate(angle))
+            .pre_concat(Self::translate(-px, -py))
     }
 
     /// A rotate transform.

@@ -9,9 +9,11 @@
   "devDependencies": {
     "@types/bun": "latest",
     "textlint": "^15.2.2",
+    "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-plugin-html": "^1.0.1",
-    "textlint-rule-preset-jtf-style": "^3.0.3"
+    "textlint-rule-preset-jtf-style": "^3.0.3",
+    "textlint-rule-prh": "^6.1.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

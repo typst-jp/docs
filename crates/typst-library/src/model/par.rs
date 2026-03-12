@@ -1,18 +1,20 @@
+use ecow::eco_format;
 use typst_utils::singleton;
 
-use crate::diag::{bail, SourceResult};
+use crate::diag::{HintedStrResult, SourceResult, StrResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, dict, elem, scope, Args, Cast, Construct, Content, Dict, NativeElement, Packed,
-    Smart, Unlabellable, Value,
+    AlternativeFold, Args, Cast, CastInfo, Construct, Content, Dict, Fold, FromValue,
+    IntoValue, NativeElement, Packed, Reflect, Smart, Unlabellable, Value, cast, dict,
+    elem, scope,
 };
-use crate::introspection::{Count, CounterUpdate, Locatable};
-use crate::layout::{Em, HAlignment, Length, OuterHAlignment};
+use crate::introspection::{Count, CounterUpdate, Locatable, Tagged, Unqueriable};
+use crate::layout::{Abs, Em, HAlignment, Length, OuterHAlignment, Ratio, Rel};
 use crate::model::Numbering;
 
 /// テキストコンテンツの論理的な区分。
 ///
-/// Typstは _インラインレベル_ の要素を自動的に段落にまとめます。
+/// Typstは_インラインレベル_の要素を自動的に段落にまとめます。
 /// インラインレベルの要素には、[テキスト]($text)、 [水平方向の空白]($h)、
 /// [ボックス]($box)、[インライン数式]($math.equation)が含まれます。
 ///
@@ -64,6 +66,7 @@ use crate::model::Numbering;
 /// この仕組みはHTMLエクスポートにのみ適用されますが、
 /// 近い将来PDFへのサポートも計画されています。
 ///
+/// - PDFエクスポートでは、段落に対してのみ`P`タグが生成されます。
 /// - HTMLエクスポートでは、段落に対してのみ`<p>`タグが生成されます。
 ///
 /// 独自の再利用可能なコンポーネントを作成する際には、
@@ -93,12 +96,12 @@ use crate::model::Numbering;
 /// let $a$ be the smallest of the
 /// three integers. Then, we ...
 /// ```
-#[elem(scope, title = "Paragraph")]
+#[elem(scope, title = "Paragraph", Locatable, Tagged)]
 pub struct ParElem {
     /// 行間。
     ///
-    /// leadingは、
-    /// ある行の[下端]($text.bottom-edge)と次の行の[上端]($text.top-edge)との間隔を定義します。
+    /// leadingは、ある行の[下端]($text.bottom-edge)と次の行の
+    /// [上端]($text.top-edge)との間隔を定義します。
     /// デフォルトでは、これら2つのプロパティはフォントによって決まりますが、
     /// テキストのsetルールを使用して手動で設定することもできます。
     ///
@@ -108,7 +111,103 @@ pub struct ParElem {
     /// bottom-edgeを `{-0.2em}` に設定すると、
     /// ちょうど`{2em}`のベースライン間隔になります。
     /// top-edgeとbottom-edgeの値の正確な配分が最初の行と最後の行の境界に影響を与えます。
-    #[resolve]
+    ///
+    /// ```preview
+    /// // Color palette
+    /// #let c = (
+    ///   par-line: aqua.transparentize(60%),
+    ///   leading-line: blue,
+    ///   leading-text: blue.darken(20%),
+    ///   spacing-line: orange.mix(red).darken(15%),
+    ///   spacing-text: orange.mix(red).darken(20%),
+    /// )
+    ///
+    /// // A sample text for measuring font metrics.
+    /// #let sample-text = [A]
+    ///
+    /// // Number of lines in each paragraph
+    /// #let n-lines = (4, 4, 2)
+    /// #let annotated-lines = (4, 8)
+    ///
+    /// // The wide margin is for annotations
+    /// #set page(width: 350pt, margin: (x: 20%))
+    ///
+    /// #context {
+    ///   let text-height = measure(sample-text).height
+    ///   let line-height = text-height + par.leading.to-absolute()
+    ///
+    ///   let jumps = n-lines
+    ///     .map(n => ((text-height,) * n).intersperse(par.leading))
+    ///     .intersperse(par.spacing)
+    ///     .flatten()
+    ///
+    ///   place(grid(
+    ///     ..jumps
+    ///       .enumerate()
+    ///       .map(((i, h)) => if calc.even(i) {
+    ///         // Draw a stripe for the line
+    ///         block(height: h, width: 100%, fill: c.par-line)
+    ///       } else {
+    ///         // Put an annotation for the gap
+    ///         let sw(a, b) = if h == par.leading { a } else { b }
+    ///
+    ///         align(end, block(
+    ///           height: h,
+    ///           outset: (right: sw(0.5em, 1em)),
+    ///           stroke: (
+    ///             left: none,
+    ///             rest: 0.5pt + sw(c.leading-line, c.spacing-line),
+    ///           ),
+    ///           if i / 2 <= sw(..annotated-lines) {
+    ///             place(horizon, dx: 1.3em, text(
+    ///               0.8em,
+    ///               sw(c.leading-text, c.spacing-text),
+    ///               sw([leading], [spacing]),
+    ///             ))
+    ///           },
+    ///         ))
+    ///       })
+    ///   ))
+    ///
+    ///   // Mark top and bottom edges
+    ///   place(
+    ///     // pos: top/bottom edge
+    ///     // dy: Δy to the last mark
+    ///     // kind: leading/spacing
+    ///     for (pos, dy, kind) in (
+    ///       (bottom, text-height, "leading"),
+    ///       (top, par.leading, "leading"),
+    ///       (bottom, (n-lines.first() - 1) * line-height - par.leading, "spacing"),
+    ///       (top, par.spacing, "spacing"),
+    ///     ) {
+    ///       v(dy)
+    ///
+    ///       let c-text = c.at(kind + "-text")
+    ///       let c-line = c.at(kind + "-line")
+    ///
+    ///       place(end, box(
+    ///         height: 0pt,
+    ///         grid(
+    ///           columns: 2,
+    ///           column-gutter: 0.2em,
+    ///           align: pos,
+    ///           move(
+    ///             // Compensate optical illusion
+    ///             dy: if pos == top { -0.2em } else { 0.05em },
+    ///             text(0.8em, c-text)[#repr(pos) edge],
+    ///           ),
+    ///           line(length: 1em, stroke: 0.5pt + c-line),
+    ///         ),
+    ///       ))
+    ///     },
+    ///   )
+    /// }
+    ///
+    /// #set par(justify: true)
+    /// #set text(luma(25%), overhang: false)
+    /// #show ". ": it => it + parbreak()
+    /// #lorem(55)
+    /// ```
     #[default(Em::new(0.65).into())]
     pub leading: Length,
 
@@ -122,7 +221,6 @@ pub struct ParElem {
     /// そのブロックの[`above`]($block.above)または[`below`]($block.below)プロパティが段落間の間隔よりも優先されます。
     /// 例えば、
     /// 見出しはより良い外観のためにデフォルトで下側の間隔を狭くしています。
-    #[resolve]
     #[default(Em::new(1.2).into())]
     pub spacing: Length,
 
@@ -135,10 +233,113 @@ pub struct ParElem {
     /// 最後の行が[両端揃えされた改行]($linebreak.justify)で終わらない限り、
     /// 現在の[alignment]($align.alignment)は依然として
     /// 最終行の配置に影響を与えることに注意してください。
+    ///
+    /// デフォルトでは、Typstは単語間の空白のみを調整して両端揃えを実現します。
+    /// ただし、[`justification-limits`プロパティ]($par.justification-limits)を使うと、
+    /// 文字間の間隔調整も許可できます。
     #[default(false)]
     pub justify: bool,
 
-    /// 改行位置の決定方法
+    /// 両端揃え中に単語間・文字間の間隔をどの程度まで調整できるか。
+    ///
+    /// 両端揃えでは、行の幅を測定幅いっぱいに揃えるために、
+    /// 行を伸ばしたり縮めたりする必要があります。
+    /// そのため、デフォルトでは単語間の空白を調整します。
+    /// さらに、文字間の空白も調整できます。
+    /// このプロパティで、これらの調整の下限と上限を設定できます。
+    ///
+    /// このプロパティは`spacing`と`tracking`の2つのエントリを持つ辞書を受け取り、
+    /// それぞれに`min`と`max`のキーを含む辞書を指定します。
+    /// `min`はどこまで縮められるかの下限、`max`はどこまで広げられるかの上限です。
+    ///
+    /// - `spacing`エントリは単語間の空白の幅をどの程度まで調整できるかを定義します。
+    ///   これは[`text.spacing`]と密接に関係しており、`min`と`max`は
+    ///   `spacing`プロパティと同様に[相対長さ]($relative)を受け取ります。
+    ///
+    ///   `min`が`{100%}`であれば空白は通常のサイズを維持し（縮まりません）、
+    ///   `{90% - 0.01em}`であれば、空白の幅は通常の90%から
+    ///   現在のフォントサイズの0.01倍を引いた幅まで縮められます。
+    ///   同様に`max`が`{100% + 0.02em}`であれば、空白の幅は
+    ///   現在のフォントサイズの0.02倍だけ広げられます。
+    ///   比率部分は常に正でなければなりません。
+    ///   一方、長さ部分は`min`では正であってはならず、`max`では負であってはなりません。
+    ///
+    ///   なお、行を両端揃えする他の方法がない場合、空白は`max`を超えて
+    ///   拡張されることがあります。ただし、その前に他の両端揃えの手段
+    ///   （`tracking`エントリの設定に応じて文字間隔を広げるなど）が
+    ///   まず最大限まで使われます。
+    ///
+    /// - `tracking`エントリは文字間の間隔をどの程度まで調整できるかを定義します。
+    ///   これは[`text.tracking`]と密接に関係しており、`min`と`max`は
+    ///   `tracking`プロパティと同様に[長さ]($length)を受け取ります。
+    ///   `spacing`とは異なり、相対長さは受け取りません。
+    ///   文字ごとに相対長さの基準が変わってしまい、見た目が不均一になるためです。
+    ///   `spacing`と比べた場合の挙動は、基準が常に`{100%}`であるかのように扱われます。
+    ///
+    ///   それ以外では、`min`と`max`の挙動は`spacing`と同じです。
+    ///   `max`が`{0.01em}`であれば、全ての文字ペアの間に
+    ///   現在のフォントサイズの0.01倍に相当する追加の間隔を挿入できます。
+    ///   これは空白と文字の間の隙間も含むため、空白に対しては
+    ///   `tracking`の値が`spacing`の値に加算されます。
+    ///
+    /// `spacing`または`tracking`のどちらか一方しか指定しない場合、
+    /// もう一方は以前に設定された値（以前に設定されていなければデフォルト）を維持します。
+    ///
+    /// 文字単位の両端揃えを有効にする場合、`min`と`max`は
+    /// `{0.01em}`〜`{0.02em}`程度（`min`は負の値）にするのがよい目安です。
+    /// 同じ値を使うとベースラインとして良好ですが、
+    /// 2つの値を個別に調整すると、下の例のようによりバランスよく見えることがあります。
+    /// 範囲を広げすぎると不自然になりやすいので注意してください。
+    ///
+    /// 文字単位の両端揃えは、特に細いカラムで両端揃えの見栄えを改善できる
+    /// 影響力のあるマイクロタイポグラフィ技法です。
+    /// ただし、全てのフォントや言語で機能するわけではありません。
+    /// 例えば、筆記体のフォントは文字同士が連結されるため、
+    /// 文字単位の両端揃えを行うと接続部分がぎこちなく見えることがあります。
+    ///
+    /// ```example:"Character-level justification"
+    /// #let example(name) = columns(2, gutter: 10pt)[
+    ///   #place(top, float: true, scope: "parent", strong(name))
+    /// >>> Anne Christine Bayley (1~June 1934 – 31~December 2024) was an
+    /// >>> English surgeon. She was awarded the Order of the British Empire
+    /// >>> for her research into HIV/AIDS patients in Zambia and for
+    /// >>> documenting the spread of the disease among heterosexual patients in
+    /// >>> Africa. In addition to her clinical work, she was a lecturer and
+    /// >>> head of the surgery department at the University of Zambia School of
+    /// >>> Medicine. In the 1990s, she returned to England, where she was
+    /// >>> ordained as an Anglican priest. She continued to be active in Africa
+    /// >>> throughout her retirement years.
+    /// <<<   /* Text from https://en.wikipedia.org/wiki/Anne_Bayley */
+    /// ]
+    ///
+    /// #set page(width: 440pt, height: 21em, margin: 15pt)
+    /// #set par(justify: true)
+    /// #set text(size: 0.8em)
+    ///
+    /// #grid(
+    ///   columns: (1fr, 1fr),
+    ///   gutter: 20pt,
+    ///   {
+    ///     // These are Typst's default limits.
+    ///     set par(justification-limits: (
+    ///       spacing: (min: 100% * 2 / 3, max: 150%),
+    ///       tracking: (min: 0em, max: 0em),
+    ///     ))
+    ///     example[Word-level justification]
+    ///   },
+    ///   {
+    ///     // These are our custom character-level limits.
+    ///     set par(justification-limits: (
+    ///       tracking: (min: -0.01em, max: 0.02em),
+    ///     ))
+    ///     example[Character-level justification]
+    ///   },
+    /// )
+    /// ```
+    #[fold]
+    pub justification_limits: JustificationLimits,
+
+    /// 改行位置の決定方法。
     ///
     /// このプロパティがデフォルトの`{auto}`に設定されている場合、
     /// 両端揃えされた段落に対して最適化された改行が行われます。
@@ -213,7 +414,6 @@ pub struct ParElem {
     ///
     /// #lorem(15)
     /// ```
-    #[resolve]
     pub hanging_indent: Length,
 
     /// 段落のコンテンツ。
@@ -227,7 +427,188 @@ impl ParElem {
     type ParLine;
 }
 
-/// How to determine line breaks in a paragraph.
+/// 両端揃え時の空白配分の範囲を設定します。
+#[derive(Debug, Copy, Clone, PartialEq, Hash)]
+pub struct JustificationLimits {
+    /// 単語間の空白に対する制限（空白幅に対する相対値）。
+    spacing: Option<Limits<Rel>>,
+    /// 文字間の空白に対する制限（グリフ幅に追加）。
+    tracking: Option<Limits<Length>>,
+}
+
+impl JustificationLimits {
+    /// 単語間の空白に対する制限を取得します。
+    pub fn spacing(&self) -> &Limits<Rel> {
+        self.spacing.as_ref().unwrap_or(&Limits::SPACING_DEFAULT)
+    }
+
+    /// 文字間の空白に対する制限を取得します。
+    pub fn tracking(&self) -> &Limits<Length> {
+        self.tracking.as_ref().unwrap_or(&Limits::TRACKING_DEFAULT)
+    }
+}
+
+cast! {
+    JustificationLimits,
+    self => {
+        let mut dict = Dict::new();
+        if let Some(spacing) = &self.spacing {
+            dict.insert("spacing".into(), spacing.into_value());
+        }
+        if let Some(tracking) = &self.tracking {
+            dict.insert("tracking".into(), tracking.into_value());
+        }
+        Value::Dict(dict)
+    },
+    mut dict: Dict => {
+        let spacing = dict
+            .take("spacing")
+            .ok()
+            .map(|v| Limits::cast(v, "spacing"))
+            .transpose()?;
+        let tracking = dict
+            .take("tracking")
+            .ok()
+            .map(|v| Limits::cast(v, "tracking"))
+            .transpose()?;
+        dict.finish(&["spacing", "tracking"])?;
+        Self { spacing, tracking }
+    },
+}
+
+impl Fold for JustificationLimits {
+    fn fold(self, outer: Self) -> Self {
+        Self {
+            spacing: self.spacing.fold_or(outer.spacing),
+            tracking: self.tracking.fold_or(outer.tracking),
+        }
+    }
+}
+
+impl Default for JustificationLimits {
+    fn default() -> Self {
+        Self {
+            spacing: Some(Limits::SPACING_DEFAULT),
+            tracking: Some(Limits::TRACKING_DEFAULT),
+        }
+    }
+}
+
+/// 空白を縮められる最小値と伸ばせる最大値を定めます。
+#[derive(Debug, Copy, Clone, PartialEq, Hash)]
+pub struct Limits<T> {
+    /// 許容される最小の調整量。
+    pub min: T,
+    /// 許容される最大の調整量。
+    pub max: T,
+}
+
+impl Limits<Rel> {
+    const SPACING_DEFAULT: Self = Self {
+        min: Rel::new(Ratio::new(2.0 / 3.0), Length::zero()),
+        max: Rel::new(Ratio::new(1.5), Length::zero()),
+    };
+}
+
+impl Limits<Length> {
+    const TRACKING_DEFAULT: Self = Self { min: Length::zero(), max: Length::zero() };
+}
+
+impl<T: Reflect> Reflect for Limits<T> {
+    fn input() -> CastInfo {
+        Dict::input()
+    }
+
+    fn output() -> CastInfo {
+        Dict::output()
+    }
+
+    fn castable(value: &Value) -> bool {
+        Dict::castable(value)
+    }
+}
+
+impl<T: IntoValue> IntoValue for Limits<T> {
+    fn into_value(self) -> Value {
+        Value::Dict(dict! {
+            "min" => self.min,
+            "max" => self.max,
+        })
+    }
+}
+
+impl<T> Limits<T> {
+    /// Not implementing `FromValue` here because we want to pass the `field`
+    /// for the error message. Ideally, the casting infrastructure would be
+    /// bit more flexible here.
+    fn cast(value: Value, field: &str) -> HintedStrResult<Self>
+    where
+        T: FromValue + Limit,
+    {
+        let mut dict: Dict = value.cast()?;
+        let mut take = |key, check: fn(T) -> StrResult<T>| {
+            dict.take(key)?
+                .cast::<T>()
+                .map_err(|hinted| hinted.message().clone())
+                .and_then(check)
+                .map_err(|err| {
+                    eco_format!("`{key}` value of `{field}` is invalid ({err})")
+                })
+        };
+        let min = take("min", Limit::checked_min)?;
+        let max = take("max", Limit::checked_max)?;
+        dict.finish(&["min", "max"])?;
+        Ok(Self { min, max })
+    }
+}
+
+impl<T> Fold for Limits<T> {
+    fn fold(self, _: Self) -> Self {
+        self
+    }
+}
+
+/// Validation for limit components.
+trait Limit: Sized {
+    fn checked_min(self) -> StrResult<Self>;
+    fn checked_max(self) -> StrResult<Self>;
+}
+
+impl Limit for Length {
+    fn checked_min(self) -> StrResult<Self> {
+        if self.abs > Abs::zero() || self.em > Em::zero() {
+            bail!("length must be negative or zero");
+        }
+        Ok(self)
+    }
+
+    fn checked_max(self) -> StrResult<Self> {
+        if self.abs < Abs::zero() || self.em < Em::zero() {
+            bail!("length must be positive or zero");
+        }
+        Ok(self)
+    }
+}
+
+impl Limit for Rel<Length> {
+    fn checked_min(self) -> StrResult<Self> {
+        if self.rel <= Ratio::zero() {
+            bail!("ratio must be positive");
+        }
+        self.abs.checked_min()?;
+        Ok(self)
+    }
+
+    fn checked_max(self) -> StrResult<Self> {
+        if self.rel <= Ratio::zero() {
+            bail!("ratio must be positive");
+        }
+        self.abs.checked_max()?;
+        Ok(self)
+    }
+}
+
+/// 段落の改行位置の決定方法。
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum Linebreaks {
     /// シンプルなファーストフィット方式で改行位置を決定します。
@@ -348,7 +729,7 @@ impl Unlabellable for Packed<ParbreakElem> {}
 /// ```
 ///
 /// この要素は、行番号の[alignment]($par.line.number-align)[margin]($par.line.number-margin)など、
-/// 行の番号付けの様々な設定を制御できる追加オプションを提供します。
+/// 行の番号付けのさまざまな設定を制御できる追加オプションを提供します。
 /// さらに、
 /// [`numbering-scope`]($par.line.numbering-scope)オプションを使用すると、
 /// ページごとに番号をリセットするかどうかの制御が可能です。
@@ -364,6 +745,15 @@ pub struct ParLine {
     /// Roses are red. \
     /// Violets are blue. \
     /// Typst is there for you.
+    /// ```
+    ///
+    /// ```example
+    /// >>> #set page(width: 200pt, margin: (left: 3em))
+    /// #set par.line(
+    ///   numbering: i => if calc.rem(i, 5) == 0 or i == 1 { i },
+    /// )
+    ///
+    /// #lorem(60)
     /// ```
     #[ghost]
     pub numbering: Option<Numbering>,
@@ -467,7 +857,7 @@ impl Construct for ParLine {
 ///
 /// Note that, currently, manually resetting the line number counter is not
 /// supported.
-#[derive(Debug, Cast, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum LineNumberingScope {
     /// 行番号カウンターが文書全体にまたがり、
     /// 決して自動的にリセットされないことを示します。
@@ -481,7 +871,7 @@ pub enum LineNumberingScope {
 ///
 /// This element is added to each line in a paragraph and later searched to
 /// find out where to add line numbers.
-#[elem(Construct, Locatable, Count)]
+#[elem(Construct, Unqueriable, Locatable, Count)]
 pub struct ParLineMarker {
     #[internal]
     #[required]

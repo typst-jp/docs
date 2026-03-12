@@ -1,10 +1,9 @@
 use typst_syntax::Spanned;
 
-use crate::diag::{error, At, HintedString, SourceResult};
+use crate::diag::{At, HintedString, SourceResult, error};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, Cast, Content, Derived, Label, Packed, Show, Smart, StyleChain,
-    Synthesize,
+    Cast, Content, Derived, Label, Packed, Smart, StyleChain, Synthesize, cast, elem,
 };
 use crate::introspection::Locatable;
 use crate::model::bibliography::Works;
@@ -29,7 +28,8 @@ use crate::text::{Lang, Region, TextElem};
 /// #bibliography("works.bib")
 /// ```
 ///
-/// ソース名にスラッシュなど`<>`構文では認識されない文字が含まれている場合は、代わりにlabelを明示的に呼び出すことで参照できます。
+/// ソース名にスラッシュなど`<>`構文では認識されない文字が含まれている場合は、
+/// 代わりにlabelを明示的に呼び出すことで参照できます。
 ///
 /// ```typ
 /// Computer Modern is an example of a modernist serif typeface.
@@ -41,7 +41,7 @@ use crate::text::{Lang, Region, TextElem};
 /// この関数は間接的に専用の構文を持っています。
 /// [References]($ref)は参考文献を引用するために使用可能です。
 /// ラベルは参照キーに対応します。
-#[elem(Synthesize)]
+#[elem(Locatable, Synthesize)]
 pub struct CiteElem {
     /// 引用する文献を特定するラベルである参照キー。
     ///
@@ -58,7 +58,7 @@ pub struct CiteElem {
 
     /// ページ番号や章番号などの引用の補足語。
     ///
-    /// [References]($ref)の構文では、角括弧で囲むことで補足語を追加できます。
+    /// Referencesの構文では、角括弧で囲むことで補足語を追加できます。
     ///
     /// ```example
     /// This has been proven. @distress[p.~7]
@@ -83,23 +83,20 @@ pub struct CiteElem {
     pub form: Option<CitationForm>,
     /// 引用スタイル。
     ///
-    /// This can be:
-    /// - `{auto}` to automatically use the
-    ///   [bibliography's style]($bibliography.style) for citations.
-    /// - A string with the name of one of the built-in styles (see below). Some
-    ///   of the styles listed below appear twice, once with their full name and
-    ///   once with a short alias.
-    /// - A path string to a [CSL file](https://citationstyles.org/). For more
-    ///   details about paths, see the [Paths section]($syntax/#paths).
-    /// - Raw bytes from which a CSL style should be decoded.
+    /// 以下のいずれかの方法で指定します。
+    /// - `{auto}`で[参考文献のスタイル]($bibliography.style)を自動的に使用します。
+    /// - 組み込みスタイル（下記参照）のいずれかの名前を持つ文字列。
+    ///   以下に挙げるスタイルのいくつかは、フルネームと短いエイリアスの2回表示されています。
+    /// - [CSLファイル](https://citationstyles.org/)へのパスを示す文字列。
+    ///   パスに関する詳細は[パスの章]($syntax/#paths)を参照してください。
+    /// - CSLスタイルがデコードされるべき生バイト。
     #[parse(match args.named::<Spanned<Smart<CslSource>>>("style")? {
         Some(Spanned { v: Smart::Custom(source), span }) => Some(Smart::Custom(
-            CslStyle::load(engine.world, Spanned::new(source, span))?
+            CslStyle::load(engine, Spanned::new(source, span))?
         )),
         Some(Spanned { v: Smart::Auto, .. }) => Some(Smart::Auto),
         None => None,
     })]
-    #[borrowed]
     pub style: Smart<Derived<CslSource, CslStyle>>,
 
     /// The text language setting where the citation is.
@@ -116,8 +113,8 @@ pub struct CiteElem {
 impl Synthesize for Packed<CiteElem> {
     fn synthesize(&mut self, _: &mut Engine, styles: StyleChain) -> SourceResult<()> {
         let elem = self.as_mut();
-        elem.push_lang(TextElem::lang_in(styles));
-        elem.push_region(TextElem::region_in(styles));
+        elem.lang = Some(styles.get(TextElem::lang));
+        elem.region = Some(styles.get(TextElem::region));
         Ok(())
     }
 }
@@ -127,7 +124,7 @@ cast! {
     v: Content => v.unpack::<Self>().map_err(|_| "expected citation")?,
 }
 
-/// The form of the citation.
+/// 引用の形式。
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum CitationForm {
     /// 現在設定しているスタイルの標準的な方法で表示する。
@@ -147,16 +144,15 @@ pub enum CitationForm {
 ///
 /// This is automatically created from adjacent citations during show rule
 /// application.
-#[elem(Locatable, Show)]
+#[elem(Locatable)]
 pub struct CiteGroup {
     /// The citations.
     #[required]
     pub children: Vec<Packed<CiteElem>>,
 }
 
-impl Show for Packed<CiteGroup> {
-    #[typst_macros::time(name = "cite", span = self.span())]
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
+impl Packed<CiteGroup> {
+    pub fn realize(&self, engine: &mut Engine) -> SourceResult<Content> {
         let location = self.location().unwrap();
         let span = self.span();
         Works::generate(engine)

@@ -30,7 +30,7 @@ $ x < y => x gt.eq.not y $
 
 # 改行
 数式には改行を含めることもできます。
-各行には、その場所で配置することを指定する、1つまたは複数の _配置点_（`&`）を含めることができます。
+各行には、その場所で配置することを指定する、1つまたは複数の_配置点_（`&`）を含めることができます。
 
 ```example
 $ sum_(k=0)^n k
@@ -40,7 +40,7 @@ $ sum_(k=0)^n k
 
 # 関数呼び出し
 数式モードはハッシュプレフィックスを用いない特別な関数呼び出しをサポートしています。
-このような「数式呼び出し」内では、引数リストは以下のとおりコード中とは少し異なる動作をします。
+このような「数式呼び出し」内では、引数リストは以下の通りコード中とは少し異なる動作をします。
 
 - その中では、Typstは依然として「数式モード」です。
 したがって、その中で数式を直接書くことができますが、コード式を渡すには（数式構文で利用可能なstringを除いて）ハッシュ構文を使う必要があります。
@@ -64,7 +64,7 @@ $ lim_x =
 前にハッシュがある関数呼び出しは通常のコードの関数呼び出しで、これらの規則に影響されません。
 
 # 配置
-数式が複数の _配置点_（`&`）を含む場合、右揃えと左揃えが交互に行われる列のブロックが作成されます。
+数式が複数の_配置点_（`&`）を含む場合、右揃えと左揃えが交互に行われる列のブロックが作成されます。
 以下の例では、`(3x + y) / 7`という式は右揃えで、`= 9`が左揃えです。
 "given"という単語も左揃えです。これは`&&`が行内に2つの配置点を作成し、2回配置方法が切り替わるためです。
 `& &`と`&&`は全く同じように振る舞います。
@@ -90,3 +90,20 @@ $ sum_(i in NN) 1 + i $
 # mathモジュール
 全ての数学関数は、数式中ではデフォルトで利用できる`math`[モジュール]($scripting/#modules)に属しています。
 数式外では、`math.`プレフィックスを付けるとアクセスできます。
+
+# Accessibility
+To make math accessible, you must provide alternative descriptions of equations
+in natural language using the [`alt` parameter of
+`math.equation`]($math.equation.alt). For more information, see the [Textual
+Representations section of the Accessibility
+Guide]($guides/accessibility/#textual-representations).
+
+```example
+#math.equation(
+  alt: "d S equals delta q divided by T",
+  $ d "S" = (delta q) / T $,
+)
+```
+
+In the future, Typst will automatically make equations without alternative
+descriptions accessible in HTML and PDF 2.0 export.

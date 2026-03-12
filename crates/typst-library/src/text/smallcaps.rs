@@ -1,7 +1,4 @@
-use crate::diag::SourceResult;
-use crate::engine::Engine;
-use crate::foundations::{elem, Content, Packed, Show, StyleChain};
-use crate::text::TextElem;
+use crate::foundations::{Content, elem};
 
 /// スモールキャピタルでテキストを表示。
 ///
@@ -13,9 +10,9 @@ use crate::text::TextElem;
 ///
 /// # スモールキャピタルのフォント
 /// デフォルトでは、この関数はフォントのOpenTypeフィーチャーの`smcp`および`c2sc`を使用します。
-/// すべてのフォントがこれらのフィーチャーをサポートしているわけではありません。
+/// 全てのフォントがこれらのフィーチャーをサポートしているわけではありません。
 /// スモールキャピタルは専用のフォントとして提供されることがあります。
-/// この例として _Latin Modern_ フォントファミリーが該当します。
+/// この例として_Latin Modern_フォントファミリーが該当します。
 /// この場合、show-setルールを用いてスモールキャピタルでのテキストの見た目がカスタマイズできます。
 ///
 /// ```typ
@@ -25,7 +22,7 @@ use crate::text::TextElem;
 /// 将来的に、この関数は標準サイズの文字からスモールキャピタルの文字を合成することをサポートする予定ですが、まだ実装されていません。
 ///
 /// # スモールキャピタルの見出し
-/// [showルール]($styling/#show-rules)を用いて見出しすべてにスモールキャピタルを適用できます。
+/// [showルール]($styling/#show-rules)を用いて見出し全てにスモールキャピタルを適用できます。
 /// 以下の例では、見出しを中央揃えにし、通常の太字フォントの無効化も行っています。
 ///
 /// ```example
@@ -41,7 +38,7 @@ use crate::text::TextElem;
 /// = Introduction
 /// #lorem(40)
 /// ```
-#[elem(title = "Small Capitals", Show)]
+#[elem(title = "Small Capitals")]
 pub struct SmallcapsElem {
     /// 大文字も同様にスモールキャピタルに変更するかどうか。
     ///
@@ -56,14 +53,6 @@ pub struct SmallcapsElem {
     /// スモールキャピタルで表示するコンテンツ。
     #[required]
     pub body: Content,
-}
-
-impl Show for Packed<SmallcapsElem> {
-    #[typst_macros::time(name = "smallcaps", span = self.span())]
-    fn show(&self, _: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        let sc = if self.all(styles) { Smallcaps::All } else { Smallcaps::Minuscules };
-        Ok(self.body.clone().styled(TextElem::set_smallcaps(Some(sc))))
-    }
 }
 
 /// What becomes small capitals.

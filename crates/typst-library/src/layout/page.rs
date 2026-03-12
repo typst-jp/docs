@@ -1,16 +1,14 @@
-use std::borrow::Cow;
 use std::num::NonZeroUsize;
 use std::ops::RangeInclusive;
 use std::str::FromStr;
 
-use comemo::Track;
-use typst_utils::{singleton, NonZeroExt, Scalar};
+use typst_utils::{NonZeroExt, Scalar, singleton};
 
-use crate::diag::{bail, SourceResult};
+use crate::diag::{SourceResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, Args, AutoValue, Cast, Construct, Content, Context, Dict, Fold, Func,
-    NativeElement, Set, Smart, StyleChain, Value,
+    Args, AutoValue, Cast, Construct, Content, Dict, Fold, NativeElement, Set, Smart,
+    Value, cast, elem,
 };
 use crate::introspection::Introspector;
 use crate::layout::{
@@ -26,9 +24,9 @@ use crate::visualize::{Color, Paint};
 /// この関数は主にsetルールでページのプロパティに影響を与えるために使用されますが、引数を独自のページセットに明示的にレンダリングするためにも使用できます。
 ///
 /// ページでは幅と高さに`{auto}`が設定可能です。
-/// この場合、ページは各軸方向においてコンテンツに合わせて大きくなります。
+/// この場合、ページは各軸方向においてコンテンツにあわせて大きくなります。
 ///
-/// [ページセットアップガイド]($guides/page-setup-guide)では多くの例とともにこの関数と関連する関数を用いてどのように文書をセットアップするかを説明しています。
+/// [ページセットアップガイド]($guides/page-setup)では多くの例とともにこの関数と関連する関数を用いてどのように文書をセットアップするかを説明しています。
 ///
 /// # 例
 /// ```example
@@ -37,6 +35,10 @@ use crate::visualize::{Color, Paint};
 ///
 /// There you go, US friends!
 /// ```
+///
+/// # アクセシビリティ
+/// ページのヘッダー、フッター、前景、背景の内容は支援技術（AT）には読み上げられません。
+/// 文書内で重要な情報は本文に含めてください。
 #[elem(Construct)]
 pub struct PageElem {
     /// 幅と高さを設定するための標準的な紙の大きさ。
@@ -58,7 +60,6 @@ pub struct PageElem {
     ///   box(square(width: 1cm))
     /// }
     /// ```
-    #[resolve]
     #[parse(
         let paper = args.named_or_find::<Paper>("paper")?;
         args.named("width")?
@@ -71,8 +72,9 @@ pub struct PageElem {
     /// ページの高さ。
     ///
     /// これが`{auto}`に設定された場合、[改ページ]($pagebreak)は手動で挿入したときのみ発火させることができます。
-    /// このドキュメントのほとんどの例では、ページの高さに `{auto}` を指定しており、コンテンツに合わせて動的に伸縮するようにしています。
-    #[resolve]
+    /// あるいは、別の空でないページセットルールを追加したときに発火します。
+    /// このドキュメントのほとんどの例では、ページの高さに `{auto}` を指定しており、
+    /// コンテンツにあわせて動的に伸縮するようにしています。
     #[parse(
         args.named("height")?
             .or_else(|| paper.map(|paper| Smart::Custom(paper.height().into())))
@@ -106,21 +108,22 @@ pub struct PageElem {
     /// ページの余白。
     ///
     /// - `{auto}`: 余白が自動的に短辺の2.5/21倍の大きさに設定されます。
-    /// A4のページでは2.5cmの余白になります。
+    ///   A4のページでは2.5cmの余白になります。
     /// - 単一の長さ指定: 全ての辺に同じ大きさの余白を適用します。
     /// - 辞書指定: 辞書を用いることで余白を個々に設定可能です。
-    ///  この辞書に含められるキーは以下のとおりです。リストは優先順位の順に並んでいます。
+    ///   この辞書に含められるキーは以下の通りです。リストは優先順位の順に並んでいます。
     ///   - `top`: 上部の余白。
     ///   - `right`: 右側の余白。
     ///   - `bottom`: 下部の余白。
     ///   - `left`: 左側の余白。
-    ///   - `inside`: ページの内側の余白([綴じ]($page.binding)側).
-    ///   - `outside`: ページの外側の余白([綴じ]($page.binding)の反対側).
+    ///   - `inside`: ページの内側の余白([綴じ]($page.binding)側)。
+    ///   - `outside`: ページの外側の余白([綴じ]($page.binding)の反対側)。
     ///   - `x`: 水平方向の余白。
     ///   - `y`: 垂直方向の余白。
     ///   - `rest`: 明示的に指定されていない残り全ての余白。
     ///
-    /// `left`と`right`の値は`inside`と`outside`の値と同時に指定できません。
+    /// 全てのキーは省略可能で、未指定のキーは以前の設定（未設定なら既定値）を使用します。
+    /// また、`left`と`right`は`inside`と`outside`と同時に指定できません。
     ///
     /// ```example
     /// #set page(
@@ -184,13 +187,23 @@ pub struct PageElem {
     /// #set text(fill: rgb("fdfdfd"))
     /// *Dark mode enabled.*
     /// ```
-    #[borrowed]
     #[ghost]
     pub fill: Smart<Option<Paint>>,
 
     /// ページ[番号]($numbering)の付け方。
+    /// [ページセットアップガイド]($guides/page-setup/#page-numbers)の
+    /// ページ番号カスタマイズも参照してください。
     ///
-    /// `footer`（もしくは上部配置番号付けの場合は`header`）が明示的に与えられた場合、numberingは無視されます。
+    /// 1つまたは2つの数を取る[番号付けパターンまたは関数]($numbering)を受け取ります：
+    /// 1. 1つ目は現在のページ番号。
+    /// 2. 2つ目は総ページ数。番号付けパターンでは省略できますが、関数の場合は常に両方が渡されます。
+    ///
+    /// これらはページカウンターにより制御される論理番号であり、物理的なページ番号と一致しない場合があります。
+    /// 具体的には`{counter(page)}`の[現在値]($counter.get)と[最終値]($counter.final)です。
+    /// 詳細は[`counter`]($counter/#page-counter)を参照してください。
+    ///
+    /// 明示的な[`footer`]($page.footer)（または[上部配置]($page.number-align)の
+    /// 番号付け時は[`header`]($page.header)）が与えられた場合、numberingは無視されます。
     ///
     /// ```example
     /// #set page(
@@ -201,7 +214,6 @@ pub struct PageElem {
     ///
     /// #lorem(48)
     /// ```
-    #[borrowed]
     #[ghost]
     pub numbering: Option<Numbering>,
 
@@ -241,7 +253,7 @@ pub struct PageElem {
     /// ページの上部余白を埋めます。
     ///
     /// - コンテンツが与えられた場合: ヘッダーとしてコンテンツを表示します。
-    /// - `{auto}`: `numbering`が設定されており、`number-align`が`top`の場合ページ番号を表示します。
+    /// - `{auto}`: [`numbering`]($page.numbering)が設定されており、[`number-align`]($page.number-align)が`top`の場合ページ番号を表示します。
     /// - `{none}`: ヘッダーを表示しません。
     ///
     /// ```example
@@ -257,12 +269,10 @@ pub struct PageElem {
     ///
     /// #lorem(19)
     /// ```
-    #[borrowed]
     #[ghost]
     pub header: Smart<Option<Content>>,
 
     /// 上部余白方向のヘッダーの上昇量。
-    #[resolve]
     #[default(Ratio::new(0.3).into())]
     #[ghost]
     pub header_ascent: Rel<Length>,
@@ -271,7 +281,7 @@ pub struct PageElem {
     /// ページの下部余白を埋めます。
     ///
     /// - コンテンツが与えられた場合: フッターとしてコンテンツを表示します。
-    /// - `{auto}`: `numbering`が設定されており、`number-align`が`bottom`の場合ページ番号を表示します。
+    /// - `{auto}`: [`numbering`]($page.numbering)が設定されており、[`number-align`]($page.number-align)が`bottom`の場合ページ番号を表示します。
     /// - `{none}`: フッターを表示しません。
     ///
     /// 単純なページ番号を使用する場合は、一般的に`numbering`プロパティで十分です。
@@ -294,12 +304,10 @@ pub struct PageElem {
     ///
     /// #lorem(48)
     /// ```
-    #[borrowed]
     #[ghost]
     pub footer: Smart<Option<Content>>,
 
     /// 下部余白方向のフッターの下降量。
-    #[resolve]
     #[default(Ratio::new(0.3).into())]
     #[ghost]
     pub footer_descent: Rel<Length>,
@@ -320,7 +328,6 @@ pub struct PageElem {
     /// In the year 2023, we plan to take
     /// over the world (of typesetting).
     /// ```
-    #[borrowed]
     #[ghost]
     pub background: Option<Content>,
 
@@ -329,13 +336,12 @@ pub struct PageElem {
     /// このコンテンツはページ本文の上に重なって表示されます。
     ///
     /// ```example
-    /// #set page(foreground: text(24pt)[🥸])
+    /// #set page(foreground: text(24pt)[🤓])
     ///
     /// Reviewer 2 has marked our paper
     /// "Weak Reject" because they did
     /// not understand our approach...
     /// ```
-    #[borrowed]
     #[ghost]
     pub foreground: Option<Content>,
 
@@ -386,6 +392,13 @@ impl LocalName for PageElem {
 /// == Compound Theory
 /// In 1984, the first ...
 /// ```
+///
+/// 手動の改ページがなくても、コンテンツは設定されたページサイズに基づいて自動的に改ページされます。
+/// [ページの高さ]($page.height)を`{auto}`にすると、手動改ページが現れるまで
+/// ページが動的に伸びます。
+///
+/// ページ分割は、ページの先頭や末尾に単独の行が残る（_widows_ / _orphans_）ことを
+/// 避けようとします。この挙動は[`text.costs`]で調整できます。
 #[elem(title = "Page Break")]
 pub struct PagebreakElem {
     /// `{true}`の場合、現在のページが既に空のとき改ページは行われません。
@@ -440,7 +453,7 @@ pub struct PagedDocument {
 }
 
 /// A finished page.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Hash)]
 pub struct Page {
     /// The frame that defines the page.
     pub frame: Frame,
@@ -459,7 +472,7 @@ pub struct Page {
     pub supplement: Content,
     /// The logical page number (controlled by `counter(page)` and may thus not
     /// match the physical number).
-    pub number: usize,
+    pub number: u64,
 }
 
 impl Page {
@@ -517,11 +530,10 @@ cast! {
     Margin,
     self => {
         let two_sided = self.two_sided.unwrap_or(false);
-        if !two_sided && self.sides.is_uniform() {
-            if let Some(left) = self.sides.left {
+        if !two_sided && self.sides.is_uniform()
+            && let Some(left) = self.sides.left {
                 return left.into_value();
             }
-        }
 
         let mut dict = Dict::new();
         let mut handle = |key: &str, component: Option<Smart<Rel<Length>>>| {
@@ -622,43 +634,6 @@ cast! {
         Alignment::RIGHT => Self::Right,
         _ => bail!("must be `left` or `right`"),
     },
-}
-
-/// A header, footer, foreground or background definition.
-#[derive(Debug, Clone, Hash)]
-pub enum Marginal {
-    /// Bare content.
-    Content(Content),
-    /// A closure mapping from a page number to content.
-    Func(Func),
-}
-
-impl Marginal {
-    /// Resolve the marginal based on the page number.
-    pub fn resolve(
-        &self,
-        engine: &mut Engine,
-        styles: StyleChain,
-        page: usize,
-    ) -> SourceResult<Cow<'_, Content>> {
-        Ok(match self {
-            Self::Content(content) => Cow::Borrowed(content),
-            Self::Func(func) => Cow::Owned(
-                func.call(engine, Context::new(None, Some(styles)).track(), [page])?
-                    .display(),
-            ),
-        })
-    }
-}
-
-cast! {
-    Marginal,
-    self => match self {
-        Self::Content(v) => v.into_value(),
-        Self::Func(v) => v.into_value(),
-    },
-    v: Content => Self::Content(v),
-    v: Func => Self::Func(v),
 }
 
 /// A list of page ranges to be exported.
