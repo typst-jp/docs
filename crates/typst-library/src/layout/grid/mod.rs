@@ -1,20 +1,22 @@
 pub mod resolve;
 
-use std::num::NonZeroUsize;
+use std::num::{NonZeroU32, NonZeroUsize};
 use std::sync::Arc;
 
 use comemo::Track;
-use smallvec::{smallvec, SmallVec};
+use smallvec::{SmallVec, smallvec};
 use typst_utils::NonZeroExt;
 
-use crate::diag::{bail, At, HintedStrResult, HintedString, SourceResult};
+use crate::diag::{At, HintedStrResult, HintedString, SourceResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, scope, Array, CastInfo, Content, Context, Fold, FromValue, Func,
-    IntoValue, NativeElement, Packed, Reflect, Resolve, Show, Smart, StyleChain, Value,
+    Array, CastInfo, Content, Context, Fold, FromValue, Func, IntoValue, Packed, Reflect,
+    Resolve, Smart, StyleChain, Synthesize, Value, cast, elem, scope,
 };
+use crate::introspection::Tagged;
+use crate::layout::resolve::{CellGrid, grid_to_cellgrid};
 use crate::layout::{
-    Alignment, BlockElem, Length, OuterHAlignment, OuterVAlignment, Rel, Sides, Sizing,
+    Alignment, Length, OuterHAlignment, OuterVAlignment, Rel, Sides, Sizing,
 };
 use crate::model::{TableCell, TableFooter, TableHLine, TableHeader, TableVLine};
 use crate::visualize::{Paint, Stroke};
@@ -26,12 +28,17 @@ use crate::visualize::{Paint, Stroke};
 /// 複雑なレイアウトが作成できるような、列と行の大きさに関する設定方法が複数あります。
 ///
 /// グリッド要素とテーブル要素はとてもよく似た挙動をする一方で、これらは異なる用途が想定されており、セマンティクスが異なります。
-/// グリッド要素はプレゼンテーションおよびレイアウトに使われることが想定されている一方で、[`{table}`]($table)要素は、複数の関連するデータ項目を表すことが大まかに想定されています。
-/// 将来、Typstは出力に注釈を付与し、スクリーンリーダーが`table`要素の内容を表として読み上げられるようになる予定です。
-/// 一方、グリッドのコンテンツは、文書の流れに沿った複数のコンテンツブロックと同様に読み上げられる予定です。
+/// グリッド要素はプレゼンテーションおよびレイアウトに使われることが想定されている一方で、[`table`]要素は、複数の関連するデータ項目を表すことが大まかに想定されています。
 /// これらの要素に対するsetルールとshowルールは、互いに影響しません。
+/// Refer to the [Accessibility Section]($grid/#accessibility) to learn how grids and
+/// tables are presented to users of Assistive Technology (AT) like screen
+/// readers.
+///
+/// # Sizing the tracks { #track-size }
 ///
 /// グリッドの大きさは引数に指定されたトラックサイズによって決定されます。
+/// There are multiple sizing parameters: [`columns`]($grid.columns),
+/// [`rows`]($grid.rows) and [`gutter`]($grid.gutter).
 /// 大きさを設定する各パラメーターは同じ値を受け入れるため、ここでまとめて説明します。
 /// 各sizing引数は個々のトラックサイズの配列を受け入れます。
 /// トラックサイズは以下のいずれかです。
@@ -50,7 +57,7 @@ use crate::visualize::{Paint, Stroke};
 ///
 /// # 例
 /// 以下の例は異なるトラックサイズオプションの実演です。
-/// また、1つのセルをグリッドの2つのトラックにまたがせるために[`grid.cell`]($grid.cell)をどう使うのかも示しています。
+/// また、1つのセルをグリッドの2つのトラックにまたがせるために[`grid.cell`]をどう使うのかも示しています。
 ///
 /// ```example
 /// // We use `rect` to emphasize the
@@ -86,52 +93,98 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// # グリッドのスタイル設定
+/// # グリッドのスタイル設定 { #styling }
+/// The grid and table elements work similarly. For a hands-on explanation,
+/// refer to the [Table Guide]($guides/tables/#fills); for a quick overview,
+/// continue reading.
+///
 /// グリッドの外観はさまざまなパラメーターでカスタマイズできます。
 /// 以下のものが最も重要です。
 ///
-/// - [`fill`]($grid.fill)は全てのセルに背景を設定します。
 /// - [`align`]($grid.align)はセルの配置方法を変更します。
-/// - [`inset`]($grid.inset)は各セル内に任意のパディングを追加します。
+/// - [`inset`]($grid.inset)はセル内に任意のパディングを追加します。
+/// - [`fill`]($grid.fill)はセルに背景を設定します。
 /// - [`stroke`]($grid.stroke)は特定のストロークでグリッドの線をオプションで有効化します。
 ///
-/// もし単一セルに対して上記のオプションの1つを上書きしなければならない場合は、[`grid.cell`]($grid.cell)要素が使用できます。
-/// 同様に、個々のグリッドの線も[`grid.hline`]($grid.hline)要素や[`grid.vline`]($grid.vline)要素を用いて上書きできます。
+/// To meet different needs, there are various ways to set them.
 ///
-/// 別の方法として、外観オプションをセルの位置（列と行）に依存させる必要がある場合、`fill`や`align`に`(column, row) => value`という形式の関数を指定できます。
-/// [`grid.cell`]($grid.cell)に対してもshowルールを使用できます。
-/// 詳細はその要素の例や以下の例を参照してください。
+/// もし個々のセルに対して上記のオプションを上書きする必要がある場合は、[`grid.cell`]要素が使用できます。
+/// 同様に、個々のグリッドの線も[`grid.hline`]や[`grid.vline`]要素を用いて上書きできます。
 ///
-/// グリッドやテーブルの実際の使い方が簡素かつ読みやすくなるため、基本的にスタイル設定にはsetルールとshowルールを用いることを推奨します。
-/// これによって、グリッドの外観を1か所で簡単に変更もできます。
+/// To configure an overall style for a grid, you may instead specify the option
+/// in any of the following fashions:
+///
+/// - As a single value that applies to all cells.
+/// - As an array of values corresponding to each column. The array will be
+///   cycled if there are more columns than the array has items.
+/// - As a function in the form of `(x, y) => value`. It receives the cell's
+///   column and row indices (both starting from zero) and should return the
+///   value to apply to that cell.
+///
+/// ```example
+/// #grid(
+///   columns: 5,
+///
+///   // By a single value
+///   align: center,
+///   // By a single but more complicated value
+///   inset: (x: 2pt, y: 3pt),
+///   // By an array of values (cycling)
+///   fill: (rgb("#239dad50"), none),
+///   // By a function that returns a value
+///   stroke: (x, y) => if calc.rem(x + y, 3) == 0 { 0.5pt },
+///
+///   ..range(5 * 3).map(n => numbering("A", n + 1))
+/// )
+/// ```
+///
+/// On top of that, you may [apply styling rules]($styling) to [`grid`] and
+/// [`grid.cell`]. Especially, the [`x`]($grid.cell.x) and [`y`]($grid.cell.y)
+/// fields of `grid.cell` can be used in a [`where`]($function.where) selector,
+/// making it possible to style cells at specific columns or rows, or individual
+/// positions.
 ///
 /// ## ストロークのスタイル設定の優先順位
-/// グリッドセルのストローク指定方法は3種類あります。
+/// 上記で説明したように、グリッドセルのストローク指定方法は3種類あります。
 /// [`{grid.cell}`の`stroke`フィールド]($grid.cell.stroke)を用いる方法、[`{grid.hline}`]($grid.hline)と[`{grid.vline}`]($grid.vline)を用いる方法、[`{grid}`の`stroke`フィールド]($grid.stroke)を用いる方法です。
 /// これらの設定が複数存在し、競合する場合、`hline`と`vline`の設定が最優先となり、続いて優先されるのが`cell`の設定で、最後に`grid`の設定が適用されます。
 ///
 /// さらに、グリッドの繰り返されたヘッダーおよびフッターのストロークは、通常のセルのストロークよりも優先されます。
-#[elem(scope, Show)]
+///
+/// # Accessibility
+/// Grids do not carry any special semantics. Assistive Technology (AT) does not
+/// offer the ability to navigate two-dimensionally by cell in grids. If you
+/// want to present tabular data, use the [`table`] element instead.
+///
+/// AT will read the grid cells in their semantic order. Usually, this is the
+/// order in which you passed them to the grid. However, if you manually
+/// positioned them using [`grid.cell`'s `x` and `y` arguments]($grid.cell.x),
+/// cells will be read row by row, from left to right (in left-to-right
+/// documents). A cell will be read when its position is first reached.
+#[elem(scope, Synthesize, Tagged)]
 pub struct GridElem {
     /// 列の数または各列の大きさ。
     ///
     /// トラックサイズの配列か整数を指定します。
     /// 整数を渡した場合、その数だけ`auto`サイズ列を持つグリッドが作成されます。
     /// rowsおよびguttersとは異なり、単一のトラックサイズを指定するとただ一つの列が作成されることに注意してください。
-    #[borrowed]
+    ///
+    /// See the [track size section](#track-size) above for more details.
     pub columns: TrackSizings,
 
     /// 行の数。
     ///
     /// 定義した行に収まらないセルがある場合、セルが無くなるまで最後の行が繰り返されます。
-    #[borrowed]
+    ///
+    /// See the [track size section](#track-size) above for more details.
     pub rows: TrackSizings,
 
     /// 行間と列間の間隔。
+    /// これは[`column-gutter`]($grid.column-gutter)と[`row-gutter`]($grid.row-gutter)を同じ値で設定する省略記法です。
     ///
     /// 定義した数よりも多くgutterがある場合、最後のgutterが繰り返されます。
     ///
-    /// これは`column-gutter`と`row-gutter`を同じ値で設定する省略記法です。
+    /// See the [track size section](#track-size) above for more details.
     #[external]
     pub gutter: TrackSizings,
 
@@ -140,19 +193,52 @@ pub struct GridElem {
         let gutter = args.named("gutter")?;
         args.named("column-gutter")?.or_else(|| gutter.clone())
     )]
-    #[borrowed]
     pub column_gutter: TrackSizings,
 
     /// 行間の間隔。
     #[parse(args.named("row-gutter")?.or_else(|| gutter.clone()))]
-    #[borrowed]
     pub row_gutter: TrackSizings,
+
+    /// How much to pad the cells' content.
+    ///
+    /// To specify a uniform inset for all cells, you can use a single length
+    /// for all sides, or a dictionary of lengths for individual sides. See the
+    /// [box's documentation]($box.inset) for more details.
+    ///
+    /// To specify varying inset for different cells, you can:
+    /// - use a single inset for all cells
+    /// - use an array of insets corresponding to each column
+    /// - use a function that maps a cell's position to its inset
+    ///
+    /// See the [styling section](#styling) above for more details.
+    ///
+    /// In addition, you can find an example at the [`table.inset`] parameter.
+    #[fold]
+    pub inset: Celled<Sides<Option<Rel<Length>>>>,
+
+    /// How to align the cells' content.
+    ///
+    /// If set to `{auto}`, the outer alignment is used.
+    ///
+    /// You can specify the alignment in any of the following fashions:
+    /// - use a single alignment for all cells
+    /// - use an array of alignments corresponding to each column
+    /// - use a function that maps a cell's position to its alignment
+    ///
+    /// See the [styling section](#styling) above for details.
+    ///
+    /// In addition, you can find an example at the [`table.align`] parameter.
+    pub align: Celled<Smart<Alignment>>,
 
     /// セルの塗り潰し方。
     ///
-    /// colorかcolorを返す関数を指定できます。
-    /// 関数は0始まりの列番号と行番号を受け取ります。
-    /// これは縞模様のグリッドの実装に使えます。
+    /// This can be:
+    /// - a single color for all cells
+    /// - an array of colors corresponding to each column
+    /// - a function that maps a cell's position to its color
+    ///
+    /// Most notably, arrays and functions are useful for creating striped grids.
+    /// See the [styling section](#styling) above for more details.
     ///
     /// ```example
     /// #grid(
@@ -168,26 +254,61 @@ pub struct GridElem {
     ///   [O], [X], [O], [X],
     /// )
     /// ```
-    #[borrowed]
     pub fill: Celled<Option<Paint>>,
-
-    /// セルのコンテンツをどう配置するか。
-    ///
-    /// 単一のalignment、（各列に対応する）alignmentの配列、alignmentを返す関数のいずれかが使用可能です。
-    /// この関数はセルの0始まりの列と行のインデックスを受け取ります。
-    /// `{auto}`に設定された場合は外側の配置が使用されます。
-    ///
-    /// この引数に関する例は[`table.align`]($table.align)パラメーターにあります。
-    #[borrowed]
-    pub align: Celled<Smart<Alignment>>,
 
     /// セルの[ストローク]($stroke)をどうするか。
     ///
     /// デフォルトではグリッドにストロークはありませんが、このオプションを所望のストロークに設定すれば変更できます。
     ///
-    /// `gutter`オプションによって作成されたセル間の空白を横切る線を配置する必要がある場合や、複数の特定のセル間のストロークを上書きする必要がある場合は、グリッドセルにあわせて[`grid.hline`]($grid.hline)および[`grid.vline`]($grid.vline)のいずれか、または両方を指定することを検討してください。
+    /// [`gutter`]($grid.gutter)オプションによって作成されたセル間の空白を横切る線を配置する必要がある場合や、複数の特定のセル間のストロークを上書きする必要がある場合は、グリッドセルにあわせて[`grid.hline`]および[`grid.vline`]のいずれか、または両方を指定することを検討してください。
     ///
-    /// ```example
+    /// To specify the same stroke for all cells, you can use a single [stroke]
+    /// for all sides, or a dictionary of [strokes]($stroke) for individual
+    /// sides. See the [rectangle's documentation]($rect.stroke) for more
+    /// details.
+    ///
+    /// To specify varying strokes for different cells, you can:
+    /// - use a single stroke for all cells
+    /// - use an array of strokes corresponding to each column
+    /// - use a function that maps a cell's position to its stroke
+    ///
+    /// See the [styling section](#styling) above for more details.
+    ///
+    /// ```example:"Passing a function to set a stroke based on position"
+    /// #set page(width: 420pt)
+    /// #set text(number-type: "old-style")
+    /// #show grid.cell.where(y: 0): set text(size: 1.3em)
+    ///
+    /// #grid(
+    ///   columns: (1fr, 2fr, 2fr),
+    ///   row-gutter: 1.5em,
+    ///   inset: (left: 0.5em),
+    ///   stroke: (x, y) => if x > 0 { (left: 0.5pt + gray) },
+    ///   align: horizon,
+    ///
+    ///   [Winter \ 2007 \ Season],
+    ///   [Aaron Copland \ *The Tender Land* \ January 2007],
+    ///   [Eric Satie \ *Gymnopedie 1, 2* \ February 2007],
+    ///
+    ///   [],
+    ///   [Jan 12 \ *Middlebury College \ Center for the Arts* \ 20:00],
+    ///   [Feb 2 \ *Johnson State College Dibden Center for the Arts* \ 19:30],
+    ///
+    ///   [],
+    ///   [Skip a week \ #text(0.8em)[_Prepare your exams!_]],
+    ///   [Feb 9 \ *Castleton State College \ Fine Arts Center* \ 19:30],
+    ///
+    ///   [],
+    ///   [Jan 26, 27 \ *Lyndon State College Alexander Twilight Theater* \ 20:00],
+    ///   [
+    ///     Feb 17 --- #smallcaps[Anniversary] \
+    ///     *Middlebury College \ Center for the Arts* \
+    ///     19:00 #text(0.7em)[(for a special guest)]
+    ///   ],
+    /// )
+    /// ```
+    ///
+    /// ```example:"Folding the stroke dictionary"
     /// #set page(height: 13em, width: 26em)
     ///
     /// #let cv(..jobs) = grid(
@@ -197,7 +318,7 @@ pub struct GridElem {
     ///     (right: (
     ///       paint: luma(180),
     ///       thickness: 1.5pt,
-    ///       dash: "dotted"
+    ///       dash: "dotted",
     ///     ))
     ///   },
     ///   grid.header(grid.cell(colspan: 2)[
@@ -253,17 +374,14 @@ pub struct GridElem {
     ///   ),
     /// )
     /// ```
-    #[resolve]
     #[fold]
     pub stroke: Celled<Sides<Option<Option<Arc<Stroke>>>>>,
 
-    /// セル内のコンテンツに対するパディングの大きさ。
-    ///
-    /// この引数に関する例は[`table.inset`]($table.inset)パラメーターにあります。
-    #[fold]
-    pub inset: Celled<Sides<Option<Rel<Length>>>>,
+    #[internal]
+    #[synthesized]
+    pub grid: Arc<CellGrid>,
 
-    /// グリッドセルのコンテンツと、[`grid.hline`]($grid.hline)要素および[`grid.vline`]($grid.vline)要素で指定される任意のグリッド線。
+    /// グリッドセルのコンテンツと、[`grid.hline`]および[`grid.vline`]要素で指定される任意のグリッド線。
     ///
     /// セルは行優先で埋められます。
     #[variadic]
@@ -288,11 +406,15 @@ impl GridElem {
     type GridFooter;
 }
 
-impl Show for Packed<GridElem> {
-    fn show(&self, engine: &mut Engine, _: StyleChain) -> SourceResult<Content> {
-        Ok(BlockElem::multi_layouter(self.clone(), engine.routines.layout_grid)
-            .pack()
-            .spanned(self.span()))
+impl Synthesize for Packed<GridElem> {
+    fn synthesize(
+        &mut self,
+        engine: &mut Engine,
+        styles: StyleChain,
+    ) -> SourceResult<()> {
+        let grid = grid_to_cellgrid(self, engine, styles)?;
+        self.grid = Some(Arc::new(grid));
+        Ok(())
     }
 }
 
@@ -309,7 +431,7 @@ cast! {
 }
 
 /// Any child of a grid element.
-#[derive(Debug, PartialEq, Clone, Hash)]
+#[derive(Debug, Clone, PartialEq, Hash)]
 pub enum GridChild {
     Header(Packed<GridHeader>),
     Footer(Packed<GridFooter>),
@@ -353,7 +475,7 @@ impl TryFrom<Content> for GridChild {
 }
 
 /// A grid item, which is the basic unit of grid specification.
-#[derive(Debug, PartialEq, Clone, Hash)]
+#[derive(Debug, Clone, PartialEq, Hash)]
 pub enum GridItem {
     HLine(Packed<GridHLine>),
     VLine(Packed<GridVLine>),
@@ -421,12 +543,23 @@ impl TryFrom<Content> for GridItem {
 /// 繰り返し可能なグリッドのヘッダー。
 ///
 /// `repeat`が`true`に設定されている場合、ヘッダーは改ページごとに繰り返されます。
-/// 例として[`table.header`]($table.header)要素および[`grid.stroke`]($grid.stroke)パラメーターのドキュメントを参照してください。
+/// 例として[`table.header`]要素および[`grid.stroke`]パラメーターのドキュメントを参照してください。
 #[elem(name = "header", title = "Grid Header")]
 pub struct GridHeader {
     /// ページごとにヘッダーを繰り返すかどうか。
     #[default(true)]
     pub repeat: bool,
+
+    /// The level of the header. Must not be zero.
+    ///
+    /// This allows repeating multiple headers at once. Headers with different
+    /// levels can repeat together, as long as they have ascending levels.
+    ///
+    /// Notably, when a header with a lower level starts repeating, all higher
+    /// or equal level headers stop repeating (they are "replaced" by the new
+    /// header).
+    #[default(NonZeroU32::ONE)]
+    pub level: NonZeroU32,
 
     /// ヘッダー内のセルと線。
     #[variadic]
@@ -435,7 +568,7 @@ pub struct GridHeader {
 
 /// 繰り返し可能なグリッドのフッター。
 ///
-/// [`grid.header`]($grid.header)要素と同様に各ページで繰り返し可能です。
+/// [`grid.header`]要素と同様に各ページで繰り返し可能です。
 ///
 /// フッターの後に他のグリッドセルを配置できません。
 #[elem(name = "footer", title = "Grid Footer")]
@@ -454,11 +587,11 @@ pub struct GridFooter {
 /// グリッドの`stroke`フィールドを用いて指定されたものを含めてセルごとに設定されたストロークを上書きします。
 /// グリッドの`column-gutter`オプションで作成されたセル間の間隔をまたげます。
 ///
-/// この関数の例は[`table.hline`]($table.hline)要素のドキュメントにあります。
+/// この関数の例は[`table.hline`]要素のドキュメントにあります。
 #[elem(name = "hline", title = "Grid Horizontal Line")]
 pub struct GridHLine {
     /// 配置される水平方向の線の上にある行（0始まり）。
-    /// `position`フィールドが`{bottom}`に設定されている場合、指定された番号の行の下に線が配置されます（詳細はフィールドのドキュメントを参照してください）。
+    /// `position`フィールドが`{bottom}`に設定されている場合、指定された番号の行の下に線が配置されます（詳細は[`grid.hline.position`]を参照してください）。
     ///
     /// `{auto}`を指定すると、その行が配置されるのは、グリッドの子要素のうち、その行より前にある、最後に自動配置されたセル（すなわち座標が上書きされていないセル）の下の行になります。
     /// その行の前にそのようなセルが存在しない場合、グリッドの一番上（0行目）に配置されます。
@@ -478,7 +611,6 @@ pub struct GridHLine {
     ///
     /// `{none}`を指定すると、水平方向の線の範囲にこれまで配置された全ての線が削除されます。
     /// これには水平方向の線の下にあるhlineやセルごとのストロークが含まれます。
-    #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
@@ -499,7 +631,7 @@ pub struct GridHLine {
 #[elem(name = "vline", title = "Grid Vertical Line")]
 pub struct GridVLine {
     /// 配置される垂直方向の線の前にある列（0始まり）。
-    /// `position`フィールドが`{end}`に設定されている場合、指定された番号の列の後に線が配置されます（詳細はフィールドのドキュメントを参照してください）。
+    /// `position`フィールドが`{end}`に設定されている場合、指定された番号の列の後に線が配置されます（詳細は[`grid.vline.position`]を参照してください）。
     ///
     /// `{auto}`を指定すると、垂直方向の線が配置されるのは、グリッドの子要素のうち、その線より前にある、最後に自動配置されたセル（すなわち座標が上書きされていないセル）の後の列になります。
     /// 垂直方向の線の前にそのようなセルが存在しない場合、グリッドの最初の列（0列目）に配置されます。
@@ -518,7 +650,6 @@ pub struct GridVLine {
     ///
     /// `{none}`を指定すると、垂直方向の線の範囲にこれまで配置された全ての線が削除されます。
     /// これには垂直方向の線の下にあるvlineやセルごとのストロークが含まれます。
-    #[resolve]
     #[fold]
     #[default(Some(Arc::new(Stroke::default())))]
     pub stroke: Option<Arc<Stroke>>,
@@ -572,8 +703,8 @@ pub struct GridVLine {
 ///
 /// `grid.cell`に対してshowルールを用いると全てのセルに一括でスタイル設定ができます。
 /// 例えば、セルの位置に基づいてスタイルを適用できます。
-/// より詳しく知りたい場合は[`table.cell`]($table.cell)要素の例を参照してください。
-#[elem(name = "cell", title = "Grid Cell", Show)]
+/// より詳しく知りたい場合は[`table.cell`]要素の例を参照してください。
+#[elem(name = "cell", title = "Grid Cell")]
 pub struct GridCell {
     /// セルの本文。
     #[required]
@@ -642,19 +773,22 @@ pub struct GridCell {
     #[default(NonZeroUsize::ONE)]
     pub rowspan: NonZeroUsize,
 
-    /// セルの[fill]($grid.fill)の上書き。
-    pub fill: Smart<Option<Paint>>,
+    /// セルの[inset]($grid.inset)の上書き。
+    pub inset: Smart<Sides<Option<Rel<Length>>>>,
 
     /// セルの[alignment]($grid.align)の上書き。
     pub align: Smart<Alignment>,
 
-    /// セルの[inset]($grid.inset)の上書き。
-    pub inset: Smart<Sides<Option<Rel<Length>>>>,
+    /// セルの[fill]($grid.fill)の上書き。
+    pub fill: Smart<Option<Paint>>,
 
     /// セルの[stroke]($grid.stroke)の上書き。
-    #[resolve]
     #[fold]
     pub stroke: Sides<Option<Option<Arc<Stroke>>>>,
+
+    #[internal]
+    #[parse(Some(false))]
+    pub is_repeated: bool,
 
     /// このcellがまたぐ行のページまたぎを許すかどうか。
     /// `{auto}`に設定された場合、固定サイズの行のみをまたぐセルは分割不可となり、`{auto}`サイズの行を少なくとも1つ含むセルは分割可能となります。
@@ -666,15 +800,16 @@ cast! {
     v: Content => v.into(),
 }
 
-impl Show for Packed<GridCell> {
-    fn show(&self, _engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        show_grid_cell(self.body.clone(), self.inset(styles), self.align(styles))
-    }
-}
-
 impl Default for Packed<GridCell> {
     fn default() -> Self {
-        Packed::new(GridCell::new(Content::default()))
+        Packed::new(
+            // Explicitly set colspan and rowspan to ensure they won't be
+            // overridden by set rules (default cells are created after
+            // colspans and rowspans are processed in the resolver)
+            GridCell::new(Content::default())
+                .with_colspan(NonZeroUsize::ONE)
+                .with_rowspan(NonZeroUsize::ONE),
+        )
     }
 }
 
@@ -685,28 +820,6 @@ impl From<Content> for GridCell {
     }
 }
 
-/// Function with common code to display a grid cell or table cell.
-pub(crate) fn show_grid_cell(
-    mut body: Content,
-    inset: Smart<Sides<Option<Rel<Length>>>>,
-    align: Smart<Alignment>,
-) -> SourceResult<Content> {
-    let inset = inset.unwrap_or_default().map(Option::unwrap_or_default);
-
-    if inset != Sides::default() {
-        // Only pad if some inset is not 0pt.
-        // Avoids a bug where using .padded() in any way inside Show causes
-        // alignment in align(...) to break.
-        body = body.padded(inset);
-    }
-
-    if let Smart::Custom(alignment) = align {
-        body = body.aligned(alignment);
-    }
-
-    Ok(body)
-}
-
 /// A value that can be configured per cell.
 #[derive(Debug, Clone, PartialEq, Hash)]
 pub enum Celled<T> {
@@ -714,7 +827,8 @@ pub enum Celled<T> {
     Value(T),
     /// A closure mapping from cell coordinates to a value.
     Func(Func),
-    /// An array of alignment values corresponding to each column.
+    /// An array of values corresponding to each column. The array will be
+    /// cycled if there are more columns than the array has items.
     Array(Vec<T>),
 }
 

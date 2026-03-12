@@ -1,12 +1,12 @@
-use smallvec::{smallvec, SmallVec};
+use smallvec::{SmallVec, smallvec};
 use typst_syntax::Spanned;
-use typst_utils::{default_math_class, Numeric};
+use typst_utils::{Numeric, default_math_class};
 use unicode_math_class::MathClass;
 
-use crate::diag::{bail, At, HintedStrResult, StrResult};
+use crate::diag::{At, HintedStrResult, StrResult, bail};
 use crate::foundations::{
-    array, cast, dict, elem, Array, Content, Dict, Fold, NoneValue, Resolve, Smart,
-    StyleChain, Symbol, Value,
+    Array, Content, Dict, Fold, NoneValue, Resolve, Smart, StyleChain, Symbol, Value,
+    array, cast, dict, elem,
 };
 use crate::layout::{Abs, Em, HAlignment, Length, Rel};
 use crate::math::Mathy;
@@ -18,6 +18,10 @@ const DEFAULT_COL_GAP: Em = Em::new(0.5);
 /// 列ベクトル。
 ///
 /// ベクトルの要素内のコンテンツは[`align`]($math.vec.align)パラメーターか`&`記号を用いて配置できます。
+///
+/// This function is for typesetting vector components. To typeset a symbol that
+/// represents a vector, [`arrow`]($math.accent) and [`bold`]($math.bold) are
+/// commonly used.
 ///
 /// # 例
 /// ```example
@@ -44,7 +48,6 @@ pub struct VecElem {
     /// #set math.vec(align: right)
     /// $ vec(-1, 1, -1) $
     /// ```
-    #[resolve]
     #[default(HAlignment::Center)]
     pub align: HAlignment,
 
@@ -54,7 +57,6 @@ pub struct VecElem {
     /// #set math.vec(gap: 1em)
     /// $ vec(1, 2) $
     /// ```
-    #[resolve]
     #[default(DEFAULT_ROW_GAP.into())]
     pub gap: Rel<Length>,
 
@@ -100,7 +102,6 @@ pub struct MatElem {
     /// #set math.mat(align: right)
     /// $ mat(-1, 1, 1; 1, -1, 1; 1, 1, -1) $
     /// ```
-    #[resolve]
     #[default(HAlignment::Center)]
     pub align: HAlignment,
 
@@ -108,10 +109,10 @@ pub struct MatElem {
     ///
     /// - `{none}`: 線は描画されません。
     /// - 単一の数値: 指定された列番号の後に垂直方向の線を描画します。
-    /// 負数の場合は最後の列から数え始めます。
+    ///   負数の場合は最後の列から数え始めます。
     /// - 辞書: 水平方向および垂直方向の両方で複数の補助線を描画できます。
-    /// 加えて線のスタイルを設定可能です。
-    /// 辞書には以下のキーを含めることができます。
+    ///   加えて線のスタイルを設定可能です。
+    ///   辞書には以下のキーを含めることができます。
     ///   - `hline`: 水平方向の線を描画するオフセット。
     ///     例えば、オフセットを`2`とすると行列の2行目の後に水平方向の線が描かれます。
     ///     単一の線を描く場合は整数を、複数の線の場合は整数の配列を受け取ります。
@@ -119,19 +120,19 @@ pub struct MatElem {
     ///   - `vline`: 垂直方向の線を描画するオフセット。
     ///     例えば、オフセットを`2`とすると行列の2列目の後に垂直方向の線が描かれます。
     ///     単一の線を描く場合は整数を、複数の線の場合は整数の配列を受け取ります。
+    ///     単一の数値を指定する場合と同様に、負数の場合は末尾から数え始めます。
     ///   - `stroke`: 線の[ストローク]($stroke)。
     ///     `{auto}`が指定された場合、0.05emの太さで四角い線端になります。
     ///
-    /// ```example
+    /// ```example:"Basic usage"
     /// $ mat(1, 0, 1; 0, 1, 2; augment: #2) $
     /// // Equivalent to:
     /// $ mat(1, 0, 1; 0, 1, 2; augment: #(-1)) $
     /// ```
     ///
-    /// ```example
+    /// ```example:"Customizing the augmentation line"
     /// $ mat(0, 0, 0; 1, 1, 1; augment: #(hline: 1, stroke: 2pt + green)) $
     /// ```
-    #[resolve]
     #[fold]
     pub augment: Option<Augment>,
 
@@ -152,7 +153,6 @@ pub struct MatElem {
     /// #set math.mat(row-gap: 1em)
     /// $ mat(1, 2; 3, 4) $
     /// ```
-    #[resolve]
     #[parse(
         let gap = args.named("gap")?;
         args.named("row-gap")?.or(gap)
@@ -166,7 +166,6 @@ pub struct MatElem {
     /// #set math.mat(column-gap: 1em)
     /// $ mat(1, 2; 3, 4) $
     /// ```
-    #[resolve]
     #[parse(args.named("column-gap")?.or(gap))]
     #[default(DEFAULT_COL_GAP.into())]
     pub column_gap: Rel<Length>,
@@ -248,7 +247,6 @@ pub struct CasesElem {
     /// #set math.cases(gap: 1em)
     /// $ x = cases(1, 2) $
     /// ```
-    #[resolve]
     #[default(DEFAULT_ROW_GAP.into())]
     pub gap: Rel<Length>,
 
@@ -270,7 +268,7 @@ cast! {
     Delimiter,
     self => self.0.into_value(),
     _: NoneValue => Self::none(),
-    v: Symbol => Self::char(v.get())?,
+    v: Symbol => Self::char(v.get().parse::<char>().map_err(|_| "expected a single-codepoint symbol")?)?,
     v: char => Self::char(v)?,
 }
 

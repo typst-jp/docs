@@ -1,5 +1,5 @@
 # General
-# .vscode
+.vscode
 .idea
 _things
 desktop.ini
@@ -26,6 +26,11 @@ package-lock.json
 # Nix
 /result
 .direnv/
+
+# typst-jp/docs specific ignore rules
+
+# General
+!.vscode
 
 # Generated documentation
 /assets

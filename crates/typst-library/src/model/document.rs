@@ -1,11 +1,12 @@
 use ecow::EcoString;
 
-use crate::diag::{bail, HintedStrResult, SourceResult};
+use crate::diag::{HintedStrResult, SourceResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, Args, Array, Construct, Content, Datetime, Fields, OneOrMultiple, Smart,
-    StyleChain, Styles, Value,
+    Args, Array, Construct, Content, Datetime, OneOrMultiple, Smart, StyleChain, Styles,
+    Value, cast, elem,
 };
+use crate::text::{Locale, TextElem};
 
 /// 文書とそのメタデータのルート要素。
 ///
@@ -26,9 +27,13 @@ use crate::foundations::{
 #[elem(Construct)]
 pub struct DocumentElem {
     /// 文書のタイトル。
-    /// これはPDFビューアーのウィンドウタイトルとして表示されることが多いです。
+    /// これはPDFビューアーのウィンドウタイトルやブラウザタブに表示されます。
     ///
-    /// これはコンテンツで指定可能ですが、PDFビューアーがプレーンテキストのタイトルしかサポートしないために、変換時に情報が失われる可能性があります。
+    /// タイトルの設定はアクセシビリティ上重要であり、他の文書の中から識別しやすくなります。
+    /// PDF/UAへのエクスポート時にはタイトルが必須です。
+    ///
+    /// これはコンテンツで指定可能ですが、PDFビューアーがプレーンテキストのタイトルしかサポートしないため、
+    /// 変換時に情報が失われる可能性があります。
     #[ghost]
     pub title: Option<Content>,
 
@@ -97,6 +102,12 @@ pub struct DocumentInfo {
     pub keywords: Vec<EcoString>,
     /// The document's creation date.
     pub date: Smart<Option<Datetime>>,
+    /// The document's language, set from the first top-level set rule, e.g.
+    ///
+    /// ```typc
+    /// set text(lang: "...", region: "...")
+    /// ```
+    pub locale: Smart<Locale>,
 }
 
 impl DocumentInfo {
@@ -105,23 +116,43 @@ impl DocumentInfo {
     /// Document set rules are a bit special, so we need to do this manually.
     pub fn populate(&mut self, styles: &Styles) {
         let chain = StyleChain::new(styles);
-        let has = |field| styles.has::<DocumentElem>(field as _);
-        if has(<DocumentElem as Fields>::Enum::Title) {
-            self.title =
-                DocumentElem::title_in(chain).map(|content| content.plain_text());
+        if styles.has(DocumentElem::title) {
+            self.title = chain
+                .get_ref(DocumentElem::title)
+                .as_ref()
+                .map(|content| content.plain_text());
         }
-        if has(<DocumentElem as Fields>::Enum::Author) {
-            self.author = DocumentElem::author_in(chain).0;
+        if styles.has(DocumentElem::author) {
+            self.author = chain.get_cloned(DocumentElem::author).0;
         }
-        if has(<DocumentElem as Fields>::Enum::Description) {
-            self.description =
-                DocumentElem::description_in(chain).map(|content| content.plain_text());
+        if styles.has(DocumentElem::description) {
+            self.description = chain
+                .get_ref(DocumentElem::description)
+                .as_ref()
+                .map(|content| content.plain_text());
         }
-        if has(<DocumentElem as Fields>::Enum::Keywords) {
-            self.keywords = DocumentElem::keywords_in(chain).0;
+        if styles.has(DocumentElem::keywords) {
+            self.keywords = chain.get_cloned(DocumentElem::keywords).0;
         }
-        if has(<DocumentElem as Fields>::Enum::Date) {
-            self.date = DocumentElem::date_in(chain);
+        if styles.has(DocumentElem::date) {
+            self.date = chain.get(DocumentElem::date);
         }
+    }
+
+    /// Populate this document info with locale details from the given styles.
+    pub fn populate_locale(&mut self, styles: &Styles) {
+        if self.locale.is_custom() {
+            return;
+        }
+
+        let chain = StyleChain::new(styles);
+        let mut locale: Option<Locale> = None;
+        if styles.has(TextElem::lang) {
+            locale.get_or_insert_default().lang = chain.get(TextElem::lang);
+        }
+        if styles.has(TextElem::region) {
+            locale.get_or_insert_default().region = chain.get(TextElem::region);
+        }
+        self.locale = Smart::from(locale);
     }
 }

@@ -2,17 +2,17 @@ use std::cmp::Ordering;
 use std::hash::Hash;
 use std::ops::{Add, Sub};
 
-use ecow::{eco_format, EcoString, EcoVec};
+use ecow::{EcoString, EcoVec, eco_format};
 use time::error::{Format, InvalidFormatDescription};
 use time::macros::format_description;
-use time::{format_description, Month, PrimitiveDateTime};
+use time::{Month, PrimitiveDateTime, format_description};
 
-use crate::diag::{bail, StrResult};
+use crate::World;
+use crate::diag::{StrResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, func, repr, scope, ty, Dict, Duration, Repr, Smart, Str, Value,
+    Dict, Duration, Repr, Smart, Str, Value, cast, func, repr, scope, ty,
 };
-use crate::World;
 
 /// 日付、時刻、またはその両方を表します。
 ///
@@ -65,7 +65,7 @@ use crate::World;
 /// ```
 ///
 /// # フォーマット
-/// [`display`]($datetime.display)メソッドを使うことで、日時をカスタマイズして表示するフォーマットを指定できます。日時のフォーマットは、_コンポーネント_ に _修飾子_ を組み合わせることで指定します。
+/// [`display`]($datetime.display)メソッドを使うことで、日時をカスタマイズして表示するフォーマットを指定できます。日時のフォーマットは、_コンポーネント_に_修飾子_を組み合わせることで指定します。
 /// コンポーネントは、日時の中の特定の部分（例えば年や月など）を表します。そして修飾子を使うことで、そのコンポーネントをどのように表示するかを細かく設定できます。
 /// コンポーネントを表示するには、コンポーネントの名前を角かっこで囲みます（例：`[[year]]`は年を表示します）。修飾子を追加するには、コンポーネント名の後に半角スペースを入れ、修飾子名、コロン（:）、修飾子の値を記述します（例：`[[month repr:short]]`は月名を短縮形で表示します）。
 ///
@@ -102,7 +102,7 @@ use crate::World;
 ///
 /// 全てのコンポーネントが常に使用できるとは限らない点には注意してください。例えば、`{datetime(year: 2023, month: 10, day: 13)}`のようにして新しい`datetime`を作成すると、内部的には日付のみが保持されるため、`hour`や`minute`のようなコンポーネントは使用できません。それらは特定の時刻が指定された`datetime`でのみ動作します。
 #[ty(scope, cast)]
-#[derive(Debug, Clone, Copy, PartialEq, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Hash)]
 pub enum Datetime {
     /// Representation as a date.
     Date(time::Date),

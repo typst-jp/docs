@@ -1,14 +1,13 @@
 use comemo::Track;
 
-use crate::diag::{bail, SourceResult};
+use crate::diag::{SourceResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
-    cast, elem, scope, Array, Content, Context, Depth, Func, NativeElement, Packed, Show,
-    Smart, StyleChain, Styles, TargetElem, Value,
+    Array, Content, Context, Depth, Func, NativeElement, Packed, Smart, StyleChain,
+    Styles, Value, cast, elem, scope,
 };
-use crate::html::{tag, HtmlElem};
-use crate::layout::{BlockElem, Em, Length, VElem};
-use crate::model::{ParElem, ParbreakElem};
+use crate::introspection::{Locatable, Tagged};
+use crate::layout::{Em, Length};
 use crate::text::TextElem;
 
 /// 箇条書きリスト。
@@ -42,13 +41,12 @@ use crate::text::TextElem;
 /// 行頭にハイフンとスペースを置くことでリスト項目を作成します。
 /// リスト項目には複数の段落や、他のブロックレベルコンテンツを含めることができます。
 /// リスト項目の記号よりも深く字下げされた全てのコンテンツは、そのリスト項目の一部になります。
-#[elem(scope, title = "Bullet List", Show)]
+#[elem(scope, title = "Bullet List", Locatable, Tagged)]
 pub struct ListElem {
     /// リストのデフォルトの[spacing]($list.spacing)を定義します。
-    /// これが`{false}`の場合、 項目の間隔は[paragraph spacing]($par.spacing)によって決まります。
+    /// これが`{false}`の場合、項目の間隔は[paragraph spacing]($par.spacing)によって決まります。
     /// `{true}`の場合、代わりに[paragraph leading]($par.leading)が使用されます。
-    /// これによりリストがよりコンパクトになり、
-    /// 各項目が短い場合に見栄えがよくなります。
+    /// これによりリストがよりコンパクトになり、各項目が短い場合に見栄えがよくなります。
     ///
     /// マークアップモードでは、
     /// この引数の値は項目が空行で区切られているかどうかに基づいて決定されます。
@@ -86,7 +84,6 @@ pub struct ListElem {
     ///   - Items
     /// - Items
     /// ```
-    #[borrowed]
     #[default(ListMarker::Content(vec![
         // These are all available in the default font, vertically centered, and
         // roughly of the same size (with the last one having slightly lower
@@ -98,11 +95,9 @@ pub struct ListElem {
     pub marker: ListMarker,
 
     /// 各項目のインデント。
-    #[resolve]
     pub indent: Length,
 
     /// 各項目のマーカーと本文の間隔を指定します。
-    #[resolve]
     #[default(Em::new(0.5).into())]
     pub body_indent: Length,
 
@@ -126,7 +121,7 @@ pub struct ListElem {
     #[variadic]
     pub children: Vec<Packed<ListItem>>,
 
-    /// The nesting depth.
+    /// ネストの深さ。
     #[internal]
     #[fold]
     #[ghost]
@@ -139,45 +134,8 @@ impl ListElem {
     type ListItem;
 }
 
-impl Show for Packed<ListElem> {
-    fn show(&self, engine: &mut Engine, styles: StyleChain) -> SourceResult<Content> {
-        let tight = self.tight(styles);
-
-        if TargetElem::target_in(styles).is_html() {
-            return Ok(HtmlElem::new(tag::ul)
-                .with_body(Some(Content::sequence(self.children.iter().map(|item| {
-                    // Text in wide lists shall always turn into paragraphs.
-                    let mut body = item.body.clone();
-                    if !tight {
-                        body += ParbreakElem::shared();
-                    }
-                    HtmlElem::new(tag::li)
-                        .with_body(Some(body))
-                        .pack()
-                        .spanned(item.span())
-                }))))
-                .pack()
-                .spanned(self.span()));
-        }
-
-        let mut realized =
-            BlockElem::multi_layouter(self.clone(), engine.routines.layout_list)
-                .pack()
-                .spanned(self.span());
-
-        if tight {
-            let leading = ParElem::leading_in(styles);
-            let spacing =
-                VElem::new(leading.into()).with_weak(true).with_attach(true).pack();
-            realized = spacing + realized;
-        }
-
-        Ok(realized)
-    }
-}
-
 /// 箇条書きリストの項目。
-#[elem(name = "item", title = "Bullet List Item")]
+#[elem(name = "item", title = "Bullet List Item", Tagged)]
 pub struct ListItem {
     /// 項目の本文。
     #[required]

@@ -1,4 +1,6 @@
-use crate::foundations::{func, Cast, Content, Smart};
+use codex::styling::MathVariant;
+
+use crate::foundations::{Cast, Content, func};
 use crate::math::EquationElem;
 
 /// 数式中の太字フォントスタイル。
@@ -11,7 +13,7 @@ pub fn bold(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_bold(true))
+    body.set(EquationElem::bold, true)
 }
 
 /// 数式中の立体（非斜体）フォントスタイル。
@@ -24,7 +26,7 @@ pub fn upright(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_italic(Smart::Custom(false)))
+    body.set(EquationElem::italic, Some(false))
 }
 
 /// 数式中の斜体フォントスタイル。
@@ -35,7 +37,7 @@ pub fn italic(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_italic(Smart::Custom(true)))
+    body.set(EquationElem::italic, Some(true))
 }
 
 /// 数式中のセリフ（ローマン）フォントスタイル。
@@ -46,7 +48,7 @@ pub fn serif(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_variant(MathVariant::Serif))
+    body.set(EquationElem::variant, Some(MathVariant::Plain))
 }
 
 /// 数式中のサンセリフフォントスタイル。
@@ -59,7 +61,7 @@ pub fn sans(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_variant(MathVariant::Sans))
+    body.set(EquationElem::variant, Some(MathVariant::SansSerif))
 }
 
 /// 数式中のカリグラフィーフォントスタイル。
@@ -68,29 +70,47 @@ pub fn sans(
 /// Let $cal(P)$ be the set of ...
 /// ```
 ///
-/// このスタイルはLaTeXの`\mathcal`と`\mathscr`の両方に対応します。
-/// これは両スタイルが同じUnicodeのコードポイントを共有しているためです。
-/// このため、スタイル間の切り替えは[フォントフィーチャー]($text.features)を用いてサポートされているフォントでのみ可能です。
-///
-/// デフォルトの数式フォントでは、ラウンドハンドスタイル（丸みを帯びた筆記体）が`ss01`フィーチャーとして利用可能です。
-/// したがって、以下のように独自の`\mathscr`が定義できます。
+/// This is the default calligraphic/script style for most math fonts. See
+/// [`scr`]($math.scr) for more on how to get the other style (roundhand).
+#[func(title = "Calligraphic", keywords = ["mathcal", "chancery"])]
+pub fn cal(
+    /// The content to style.
+    body: Content,
+) -> Content {
+    body.set(EquationElem::variant, Some(MathVariant::Chancery))
+}
+
+/// Script (roundhand) font style in math.
 ///
 /// ```example
+/// $scr(L)$ is not the set of linear
+/// maps $cal(L)$.
+/// ```
+///
+/// There are two ways that fonts can support differentiating `cal` and `scr`.
+/// The first is using Unicode variation sequences. This works out of the box
+/// in Typst, however only a few math fonts currently support this.
+///
+/// The other way is using [font features]($text.features). For example, the
+/// roundhand style might be available in a font through the
+/// _[stylistic set]($text.stylistic-set) 1_ (`ss01`) feature. To use it in
+/// Typst, you could then define your own version of `scr` like in the example
+/// below.
+///
+/// ```example:"Recreation using stylistic set 1"
 /// #let scr(it) = text(
-///   features: ("ss01",),
-///   box($cal(it)$),
+///   stylistic-set: 1,
+///   $cal(it)$,
 /// )
 ///
 /// We establish $cal(P) != scr(P)$.
 /// ```
-///
-/// （ボックスは概念的には不要ですが、現在のTypstの数式テキストスタイル処理の制約により必要です）
-#[func(title = "Calligraphic", keywords = ["mathcal", "mathscr"])]
-pub fn cal(
+#[func(title = "Script Style", keywords = ["mathscr", "roundhand"])]
+pub fn scr(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_variant(MathVariant::Cal))
+    body.set(EquationElem::variant, Some(MathVariant::Roundhand))
 }
 
 /// 数式中のフラクトゥールフォントスタイル。
@@ -103,7 +123,7 @@ pub fn frak(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_variant(MathVariant::Frak))
+    body.set(EquationElem::variant, Some(MathVariant::Fraktur))
 }
 
 /// 数式中の等幅フォントスタイル。
@@ -116,7 +136,7 @@ pub fn mono(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_variant(MathVariant::Mono))
+    body.set(EquationElem::variant, Some(MathVariant::Monospace))
 }
 
 /// 数式中の黒板太字（double-struck）フォントスタイル。
@@ -133,13 +153,12 @@ pub fn bb(
     /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
-    body.styled(EquationElem::set_variant(MathVariant::Bb))
+    body.set(EquationElem::variant, Some(MathVariant::DoubleStruck))
 }
 
 /// 数式中でディスプレイスタイルを強制します。
 ///
 /// これはブロック数式における標準サイズです。
-
 /// ```example
 /// $sum_i x_i/2 = display(sum_i x_i/2)$
 /// ```
@@ -152,8 +171,8 @@ pub fn display(
     #[default(false)]
     cramped: bool,
 ) -> Content {
-    body.styled(EquationElem::set_size(MathSize::Display))
-        .styled(EquationElem::set_cramped(cramped))
+    body.set(EquationElem::size, MathSize::Display)
+        .set(EquationElem::cramped, cramped)
 }
 
 /// 数式中でインライン（テキスト）スタイルを強制します。
@@ -173,8 +192,8 @@ pub fn inline(
     #[default(false)]
     cramped: bool,
 ) -> Content {
-    body.styled(EquationElem::set_size(MathSize::Text))
-        .styled(EquationElem::set_cramped(cramped))
+    body.set(EquationElem::size, MathSize::Text)
+        .set(EquationElem::cramped, cramped)
 }
 
 /// 数式中でスクリプトスタイルを強制します。
@@ -193,8 +212,8 @@ pub fn script(
     #[default(true)]
     cramped: bool,
 ) -> Content {
-    body.styled(EquationElem::set_size(MathSize::Script))
-        .styled(EquationElem::set_cramped(cramped))
+    body.set(EquationElem::size, MathSize::Script)
+        .set(EquationElem::cramped, cramped)
 }
 
 /// 数式中で第2スクリプトスタイルを強制します。
@@ -213,14 +232,14 @@ pub fn sscript(
     #[default(true)]
     cramped: bool,
 ) -> Content {
-    body.styled(EquationElem::set_size(MathSize::ScriptScript))
-        .styled(EquationElem::set_cramped(cramped))
+    body.set(EquationElem::size, MathSize::ScriptScript)
+        .set(EquationElem::cramped, cramped)
 }
 
 /// The size of elements in an equation.
 ///
 /// See the TeXbook p. 141.
-#[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Cast, Hash)]
+#[derive(Debug, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash, Cast)]
 pub enum MathSize {
     /// Second-level sub- and superscripts.
     ScriptScript,
@@ -230,16 +249,4 @@ pub enum MathSize {
     Text,
     /// Math on its own line.
     Display,
-}
-
-/// A mathematical style variant, as defined by Unicode.
-#[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Cast, Hash)]
-pub enum MathVariant {
-    #[default]
-    Serif,
-    Sans,
-    Cal,
-    Frak,
-    Mono,
-    Bb,
 }

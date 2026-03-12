@@ -5,7 +5,7 @@
   title: Variants
   category: math
   path: ["math"]
-  filter: ["serif", "sans", "frak", "mono", "bb", "cal"]
+  filter: ["serif", "sans", "frak", "mono", "bb", "cal", "scr"]
   details: |
     数式中の別書体。
 
@@ -35,19 +35,18 @@
   title: Under/Over
   category: math
   path: ["math"]
-  filter:
-    [
-      "underline",
-      "overline",
-      "underbrace",
-      "overbrace",
-      "underbracket",
-      "overbracket",
-      "underparen",
-      "overparen",
-      "undershell",
-      "overshell",
-    ]
+  filter: [
+    "underline",
+    "overline",
+    "underbrace",
+    "overbrace",
+    "underbracket",
+    "overbracket",
+    "underparen",
+    "overparen",
+    "undershell",
+    "overshell",
+  ]
   details: |
     数式の一部の上部または下部の区切り文字。
 
@@ -100,11 +99,19 @@
     `lr`関数を用いると、2つの区切り文字を対応させ、内部のコンテンツに合わせた大きさに拡大縮小できます。
     これは構文的に対応が取れる区切り文字においては自動的に行われますが、`lr`を用いることで2つの任意の区切り文字を対応させ、その大きさを正確に制御することができます。
     `lr`関数以外にも、Typstは、絶対値、切り捨て値、切り上げ値、ノルムを表す区切り文字ペアを生成する関数をさらにいくつか提供しています。
+
+    To prevent a delimiter from being matched by Typst, and thus auto-scaled,
+    escape it with a backslash. To instead disable auto-scaling completely, use
+    `{set math.lr(size: 1em)}`.
+
     # 例
     ```example
     $ [a, b/2] $
     $ lr(]sum_(x=1)^n], size: #50%) x $
     $ abs((x + y) / 2) $
+    $ \{ (x / y) \} $
+    #set math.lr(size: 1em)
+    $ { (a / b), a, b in (0; 1/2] } $
     ```
 
 - name: calc
@@ -117,6 +124,55 @@
     これらの定義は`calc`モジュールの一部であり、デフォルトではインポートされません。
     以下に挙げる関数のほかに、`calc`モジュールは定数`pi`、`tau`、`e`、および`inf`
     を定義しています。
+
+- name: std
+  title: Standard library
+  category: foundations
+  path: ["std"]
+  details: |
+    A module that contains all globally accessible items.
+
+    # Using "shadowed" definitions
+    The `std` module is useful whenever you overrode a name from the global
+    scope (this is called _shadowing_). For instance, you might have used the
+    name `text` for a parameter. To still access the `text` element, write
+    `std.text`.
+
+    ```example
+    >>> #set page(margin: (left: 3em))
+    #let par = [My special paragraph.]
+    #let special(text) = {
+      set std.text(style: "italic")
+      set std.par.line(numbering: "1")
+      text
+    }
+
+    #special(par)
+
+    #lorem(10)
+    ```
+
+    # Conditional access
+    You can also use this in combination with the [dictionary
+    constructor]($dictionary) to conditionally access global definitions. This
+    can, for instance, be useful to use new or experimental functionality when
+    it is available, while falling back to an alternative implementation if
+    used on an older Typst version. In particular, this allows us to create
+    [polyfills](https://en.wikipedia.org/wiki/Polyfill_(programming)).
+
+    This can be as simple as creating an alias to prevent warning messages, for
+    example, conditionally using `pattern` in Typst version 0.12, but using
+    [`tiling`] in newer versions. Since the parameters accepted by the `tiling`
+    function match those of the older `pattern` function, using the `tiling`
+    function when available and falling back to `pattern` otherwise will unify
+    the usage across all versions. Note that, when creating a polyfill,
+    [`sys.version`]($category/foundations/sys) can also be very useful.
+
+    ```typ
+    #let tiling = if "tiling" in std { tiling } else { pattern }
+
+    ...
+    ```
 
 - name: sys
   title: System
@@ -137,7 +193,7 @@
       single or double quotes.
 
       The value is always of type [string]($str). More complex data
-      may be parsed manually using functions like [`json.decode`]($json.decode).
+      may be parsed manually using functions like [`json`]($json).
 
 - name: sym
   title: General
@@ -158,8 +214,36 @@
   category: symbols
   path: ["emoji"]
   details: |
-    Named emoji.
+    Named emojis.
 
     For example, `#emoji.face` produces the 😀 emoji. If you frequently use
     certain emojis, you can also import them from the `emoji` module (`[#import
-    emoji: face]`) to use them without the `#emoji.` prefix.
+    emoji: face]`) to use them without the `emoji.` prefix.
+
+- name: typed
+  title: Typed HTML
+  category: html
+  path: ["html"]
+  details: |
+    A typed layer over raw HTML elements.
+
+    The `html` module provides a typed layer over the raw [`html.elem`] function
+    that allows you to conveniently create HTML elements. HTML attributes are
+    exposed as function parameters that accept Typst types and automatically
+    take care of converting those into the appropriate HTML.
+
+    Some parameters are common to all typed HTML functions. These are listed at
+    the bottom in the [Global Attributes](#global-attributes) section instead of
+    explicitly on each element for readability.
+
+    # Example
+    ```typ
+    #html.video(
+      controls: true,
+      width: 1280,
+      height: 720,
+      src: "sunrise.mp4",
+    )[
+      Your browser does not support the video tag.
+    ]
+    ```
