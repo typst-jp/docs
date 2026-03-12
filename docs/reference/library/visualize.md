@@ -2,7 +2,7 @@
 
 より高度な図やプロットを作成したい場合は、
 [CeTZ](https://github.com/johannes-wolf/cetz)パッケージや、
-あなたのユースケースに合わせた、より専門的な[パッケージ]($universe)も参照してください。
+用途に合わせた、より専門的な[パッケージ]($universe)も参照してください。
 
 # アクセシビリティ { #accessibility }
 
