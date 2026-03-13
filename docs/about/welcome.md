@@ -47,4 +47,4 @@ description: Typstドキュメント日本語版について
 
 はい。Webサイトの生成ツールは[typst-community/typst-docs-web](https://github.com/typst-community/typst-docs-web)で配布されており、Apache-2.0 licenseで利用可能です。
 
-TypstのコンパイラとドキュメントはOSSですが、WebサイトはOSSではありません。そこで、コミュニティ主導でドキュメントのWebサイトの生成ツールを開発する必要がありました。OSSではないWebサイトのアセットを含まないため、Webサイトのデザインは独自のものとなっています。
+TypstのコンパイラとドキュメントはOSSですが、WebサイトはOSSではありません。そのため、コミュニティ主導でドキュメントのWebサイトの生成ツールを開発する必要がありました。OSSではないWebサイトのアセットを含まないため、Webサイトのデザインは独自のものとなっています。
