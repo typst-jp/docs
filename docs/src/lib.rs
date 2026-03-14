@@ -269,8 +269,8 @@ fn about_pages(resolver: &dyn Resolver) -> PageModel {
     let mut page = md_page(resolver, resolver.base(), load!("about/welcome.md"));
     let base = format!("{}about/", resolver.base());
     page.children = vec![
-        md_page(resolver, &base, load!("about/contributing.md")),
-        md_page(resolver, &base, load!("about/translating_guidelines.md")),
+        md_page(resolver, &base, load!("../CONTRIBUTING.md")),
+        md_page(resolver, &base, load!("../TRANSLATING_GUIDELINES.md")),
     ];
     page
 }
