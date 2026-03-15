@@ -13,14 +13,32 @@ A community-driven Japanese translation of the [Typst Documentation](https://typ
 
 The documentation is available at <https://typst-jp.github.io/docs/>. For project details, please refer to [About the Japanese Edition](https://typst-jp.github.io/docs/about/).
 
-## 謝辞 / Acknowledgments
+## ライセンス / License
 
-このプロジェクトは[typst/typst](https://github.com/typst/typst)からの派生プロジェクトであり、上流の貢献者を含めた全ての貢献者によって支えられています。
+<!-- textlint-disable prh -->
 
-This project is supported by all contributors, including the contributors of the upstream [typst/typst](https://github.com/typst/typst) project.
+[typst/typst]: https://github.com/typst/typst
 
-<a href="https://github.com/typst-jp/docs/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=typst-jp/docs" />
-</a>
+このプロジェクトは[typst/typst]からの派生プロジェクトであり、Apache-2.0 licenseでライセンスされています。
 
-Made with [contrib.rocks](https://contrib.rocks).
+This project is derived from [typst/typst] and is licensed under the Apache-2.0 license.
+
+<!-- textlint-enable -->
+
+## 管理者 / Maintainers
+
+[CODEOWNERS]: https://github.com/typst-jp/docs/blob/main/.github/CODEOWNERS
+
+現在アクティブなレビュワーは[CODEOWNERS]ファイルを参照してください。
+
+Currently active reviewers are listed in [CODEOWNERS] file.
+
+- [@mkpoli](https://github.com/mkpoli)
+- [@3w36zj6](https://github.com/3w36zj6)
+- [@stepney141](https://github.com/stepney141)
+- [@gomazarashi](https://github.com/gomazarashi)
+- [@monaqa](https://github.com/monaqa)
+- [@kimushun1101](https://github.com/kimushun1101)
+- [@zr-tex8r](https://github.com/zr-tex8r)
+- [@m1sk9](https://github.com/m1sk9)
+- [@ultimatile](https://github.com/ultimatile)
