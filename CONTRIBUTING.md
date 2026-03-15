@@ -4,7 +4,7 @@ description: |
 ---
 # 貢献ガイドライン
 
-**Note:** 当プロジェクトの[README](https://github.com/typst-jp/docs/blob/main/README.md)や「[はじめに：Typst Japanese Communityより](https://typst-jp.github.io/docs/)」、[Typst公式](https://typst.app/)の[ライセンス](https://github.com/typst/typst/blob/main/LICENSE)や[コントリビューション・ガイド](https://github.com/typst/typst/blob/main/CONTRIBUTING.md)も併せてご参照ください。
+**Note:** 当プロジェクトの[README](https://github.com/typst-jp/docs/blob/main/README.md)や「[はじめに：Typst Japanese Communityより](https://typst-jp.github.io/docs/)」、[Typst公式](https://typst.app/)の[ライセンス](https://github.com/typst/typst/blob/main/LICENSE)や[コントリビューション・ガイド](https://github.com/typst/typst/blob/main/CONTRIBUTING.md)もあわせてご参照ください。
 
 Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ちいただき、どうもありがとうございます。
 
@@ -115,7 +115,7 @@ mise run generate-docs
 
 Webサイトの生成にはNode.jsとViteとHonoを使用しています。また、パッケージ管理にBunを使用しています。
 
-`mise run generate-web`を実行すると、`docs.json`を基にWebサイトのデータが`website/typst-docs-web/dist/`に生成されます。
+`mise run generate-web`を実行すると、`docs.json`をもとにWebサイトのデータが`website/typst-docs-web/dist/`に生成されます。
 
 ```sh
 mise run generate-web
