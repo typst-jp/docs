@@ -4,7 +4,7 @@ description: |
 ---
 # 貢献ガイドライン
 
-**Note:** 当プロジェクトの[README](https://github.com/typst-jp/docs/blob/main/README.md)や「[はじめに：Typst Japanese Communityより](https://typst-jp.github.io/docs/)」、[Typst公式](https://typst.app/)の[ライセンス](https://github.com/typst/typst/blob/main/LICENSE)や[コントリビューション・ガイド](https://github.com/typst/typst/blob/main/CONTRIBUTING.md)もあわせてご参照ください。
+**Note:** 当プロジェクトの[README](https://github.com/typst-jp/docs/blob/main/README.md)や「[日本語版について](https://typst-jp.github.io/docs/about/)」、[Typst公式](https://typst.app/)の[ライセンス](https://github.com/typst/typst/blob/main/LICENSE)や[コントリビューション・ガイド](https://github.com/typst/typst/blob/main/CONTRIBUTING.md)もあわせてご参照ください。
 
 Typst日本語ドキュメント翻訳プロジェクトにご興味をお持ちいただき、どうもありがとうございます。
 
