@@ -1,6 +1,9 @@
-# Typstドキュメント日本語版
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/172375917" width="128" height="128">
+  <h1>Typstドキュメント日本語版</h1>
 
-[![CI/CD for website](https://github.com/typst-jp/docs/actions/workflows/website.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/docs/actions/workflows/website.yml)
+  [![CI/CD for website](https://github.com/typst-jp/docs/actions/workflows/website.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/docs/actions/workflows/website.yml)
+</div>
 
 [Typst Documentation](https://typst.app/docs/)のコミュニティ主導による日本語版。
 
