@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://avatars.githubusercontent.com/u/172375917" width="128" height="128">
+  <img src="https://avatars.githubusercontent.com/u/172375917" width="128" height="128" alt="typst-jpのロゴ">
   <h1>Typstドキュメント日本語版</h1>
 
   [![CI/CD for website](https://github.com/typst-jp/docs/actions/workflows/website.yml/badge.svg?branch=main&event=push)](https://github.com/typst-jp/docs/actions/workflows/website.yml)
