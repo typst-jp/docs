@@ -96,6 +96,7 @@ pub fn provide(resolver: &dyn Resolver) -> Vec<PageModel> {
         guide_pages(resolver),
         changelog_pages(resolver),
         japanese_pages(resolver),
+        about_pages(resolver),
         md_page(resolver, base, load!("glossary.md")),
     ]
 }
@@ -259,6 +260,17 @@ fn japanese_pages(resolver: &dyn Resolver) -> PageModel {
         md_page(resolver, &base, load!("japanese/templates.md")),
         md_page(resolver, &base, load!("japanese/packages.md")),
         md_page(resolver, &base, load!("japanese/articles.md")),
+    ];
+    page
+}
+
+/// Build the about section.
+fn about_pages(resolver: &dyn Resolver) -> PageModel {
+    let mut page = md_page(resolver, resolver.base(), load!("about/welcome.md"));
+    let base = format!("{}about/", resolver.base());
+    page.children = vec![
+        md_page(resolver, &base, load!("../CONTRIBUTING.md")),
+        md_page(resolver, &base, load!("../TRANSLATING_GUIDELINES.md")),
     ];
     page
 }
@@ -1019,6 +1031,9 @@ pub fn urlify(title: &str) -> EcoString {
         "日本語テンプレート" => "templates".into(),
         "日本語向けパッケージ" => "packages".into(),
         "日本語記事" => "articles".into(),
+        "日本語版について" => "about".into(),
+        "貢献ガイドライン" => "contributing".into(),
+        "翻訳ガイドライン" => "translating-guidelines".into(),
         "用語集" => "glossary".into(),
         _ => title
             .chars()
