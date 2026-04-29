@@ -807,7 +807,7 @@ fn group_page(
 
     outline.push(OutlineItem {
         id: "functions".into(),
-        name: "Functions".into(),
+        name: "関数".into(),
         children: outline_items,
     });
 
