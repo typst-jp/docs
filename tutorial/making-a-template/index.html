@@ -147,7 +147,7 @@ parameter isn't given.</p>
 You are <span class="typ-func">#</span><span class="typ-func">amazed</span><span class="typ-punct">[</span>beautiful<span class="typ-punct">]</span>!
 I am <span class="typ-func">#</span><span class="typ-func">amazed</span><span class="typ-punct">(</span>color<span class="typ-punct">:</span> purple<span class="typ-punct">)</span><span class="typ-punct">[</span>amazed<span class="typ-punct">]</span>!
 </code></pre><div class="preview"><img src="/docs/assets/de3b1f5b9b2c4f6a9672c242956d317.png" alt="Preview"></div></div>
-<p>テンプレートは<code>amazed</code>のようなカスタム関数でドキュメント全体をラップすることで機能します。しかし、文書全体を巨大な関数呼び出しでラップするのは面倒でしょう！代わりに、「everything」showルールを使用して、より洗練されたコードで同じことを実現できます。そのようなshowルールを書くには、showキーワードの直後にコロンを置き、関数を提供します。この関数にはドキュメントの残りの部分がパラメータとして渡されます。関数はこのコンテンツに対して何でも行うことができます。<code>amazed</code>関数は単一のコンテンツ引数で呼び出せるので、showルールに名前で渡すだけで良いのです。試してみましょう。</p>
+<p>テンプレートは<code>amazed</code>のようなカスタム関数でドキュメント全体をラップすることで機能します。しかし、文書全体を巨大な関数呼び出しでラップするのは面倒でしょう！代わりに、「everything」showルールを使用して、より洗練されたコードで同じことを実現できます。そのようなshowルールを書くには、showキーワードの直後にコロンを置き、関数を提供します。この関数にはドキュメントの残りの部分がパラメーターとして渡されます。関数はこのコンテンツに対して何でも行うことができます。<code>amazed</code>関数は単一のコンテンツ引数で呼び出せるので、showルールに名前で渡すだけで良いのです。試してみましょう。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">show</span><span class="typ-punct">:</span> <span class="typ-func">amazed</span>
 I choose to focus on the good
 in my life and let go of any
@@ -207,7 +207,7 @@ It&#39;s going great so far!
 <p>さらに、コンテンツブロックの代わりに中括弧で囲まれたコードブロックを使用しました。この方法では、全てのsetルールや関数呼び出しの前に<code>#</code>を付ける必要がなくなります。代わりに、コードブロック内に直接マークアップを書くことはできなくなります。</p>
 </li>
 </ol>
-<p>また、タイトルがどこから来ているかに注目してください。以前は変数に格納しましたが、今はテンプレート関数の最初のパラメータとして受け取っています。そのために、everythingのshowルールにクロージャー（その場で使用される名前のない関数）を渡しました。<code>conf</code>関数は2つの引数（タイトルと本文）を期待しますが、showルールは本文のみを渡すからです。したがって、論文のタイトルを設定し、showルールからの単一パラメータを使用できる新しい関数定義を追加します。</p>
+<p>また、タイトルがどこから来ているかに注目してください。以前は変数に格納しましたが、今はテンプレート関数の最初のパラメーターとして受け取っています。そのために、everythingのshowルールにクロージャー（その場で使用される名前のない関数）を渡しました。<code>conf</code>関数は2つの引数（タイトルと本文）を期待しますが、showルールは本文のみを渡すからです。したがって、論文のタイトルを設定し、showルールからの単一パラメーターを使用できる新しい関数定義を追加します。</p>
 <h2 id="named-arguments">名前付き引数を持つテンプレート</h2>
 <p>前章の論文にはタイトルと著者リストがありました。これらの要素をテンプレートに追加しましょう。タイトルに加えて、所属機関を含む著者リストと論文の要約をテンプレートに受け付けるようにします。可読性を保つために、これらを名前付き引数として追加します。最終的には、次のように機能させたいと思います。</p>
 <pre><code><span class="typ-key">#</span><span class="typ-key">show</span><span class="typ-punct">:</span> doc <span class="typ-op">=&gt;</span> <span class="typ-func">conf</span><span class="typ-punct">(</span>
@@ -233,8 +233,8 @@ It&#39;s going great so far!
 
 <span class="typ-escape">...</span>
 </code></pre>
-<p>この新しいテンプレート関数を構築しましょう。まず、<code>title</code>引数にデフォルト値を追加します。これにより、タイトルを指定せずにテンプレートを呼び出すことができます。また、空のデフォルト値を持つ名前付き引数として<code>authors</code>および<code>abstract</code>パラメータを追加します。次に、前章からタイトル、要約、著者を生成するコードをテンプレートにコピーし、固定の詳細をパラメータに置き換えます。</p>
-<p>新しい<code>authors</code>パラメータは、<code>name</code>、<code>affiliation</code>、<code>email</code>というキーを持つ<a href="/docs/reference/foundations/dictionary/">辞書</a>の<a href="/docs/reference/foundations/array/">配列</a>を想定しています。任意の数の著者を持つことができるため、著者リストに1列、2列、または3列が必要かどうかを動的に決定します。まず、<code>authors</code>配列の<a href="/docs/reference/foundations/array/#definitions-len"><code>.len()</code></a>メソッドを使用して著者の数を決定します。次に、列数を著者数と3の最小値に設定し、3列以上作成しないようにします。3人以上の著者がいる場合は、代わりに新しい行が挿入されます。この目的のために、<code>grid</code>関数に<code>row-gutter</code>パラメータも追加しました。そうしないと、行同士が近すぎてしまいます。辞書から著者の詳細を抽出するには、<a href="/docs/reference/scripting/#fields">フィールドアクセス構文</a>を使用します。</p>
+<p>この新しいテンプレート関数を構築しましょう。まず、<code>title</code>引数にデフォルト値を追加します。これにより、タイトルを指定せずにテンプレートを呼び出すことができます。また、空のデフォルト値を持つ名前付き引数として<code>authors</code>および<code>abstract</code>パラメーターを追加します。次に、前章からタイトル、要約、著者を生成するコードをテンプレートにコピーし、固定の詳細をパラメーターに置き換えます。</p>
+<p>新しい<code>authors</code>パラメーターは、<code>name</code>、<code>affiliation</code>、<code>email</code>というキーを持つ<a href="/docs/reference/foundations/dictionary/">辞書</a>の<a href="/docs/reference/foundations/array/">配列</a>を想定しています。任意の数の著者を持つことができるため、著者リストに1列、2列、または3列が必要かどうかを動的に決定します。まず、<code>authors</code>配列の<a href="/docs/reference/foundations/array/#definitions-len"><code>.len()</code></a>メソッドを使用して著者の数を決定します。次に、列数を著者数と3の最小値に設定し、3列以上作成しないようにします。3人以上の著者がいる場合は、代わりに新しい行が挿入されます。この目的のために、<code>grid</code>関数に<code>row-gutter</code>パラメーターも追加しました。そうしないと、行同士が近すぎてしまいます。辞書から著者の詳細を抽出するには、<a href="/docs/reference/scripting/#fields">フィールドアクセス構文</a>を使用します。</p>
 <p>各著者についてグリッドに引数を提供する必要があります。ここで配列の<a href="/docs/reference/foundations/array/#definitions-map"><code>map</code>メソッド</a>が便利です。これは引数として関数を取り、その関数が配列の各アイテムで呼び出されます。各著者の詳細をフォーマットし、コンテンツ値を含む新しい配列を返す関数を渡します。これで、グリッドの複数の引数として使用したい値の配列ができました。<a href="/docs/reference/foundations/arguments/"><code>spread</code>演算子</a>を使用してこれを実現できます。これは配列を取り、その各アイテムを関数の個別の引数として適用します。</p>
 <p>結果のテンプレート関数は次のようになります。</p>
 <pre><code><span class="typ-key">#</span><span class="typ-key">let</span> <span class="typ-func">conf</span><span class="typ-punct">(</span>
