@@ -221,3 +221,10 @@ rules:
   - expected: わけではない
     patterns:
       - 訳ではない
+  # カタカナ語の末尾の長音の統一
+  - expected: コンピューター
+    pattern: /コンピュータ(?!ー)/
+  - expected: パラメーター
+    pattern: /パラメータ(?!ー)/
+  - expected: ブラウザー
+    pattern: /ブラウザ(?!ー)/
