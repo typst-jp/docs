@@ -13,4 +13,4 @@ Typstが描画する全ての図形とパスは、PDFエクスポート時に支
 このカテゴリーの関数を使ってセマンティックな意味を持つ図を作成する場合は、
 [`figure`]関数で囲んでアクセシブルにしてください。
 [テキストによる表現]($guides/accessibility/#textual-representations)を提供するには、
-figure関数の [`alt`パラメーター]($figure.alt)で指定します。
+`figure`関数の[`alt`パラメーター]($figure.alt)で指定します。
