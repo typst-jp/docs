@@ -45,6 +45,9 @@ jobs:
           git checkout HEAD -- .github/
           git reset HEAD .github/
 
+          # Keep "deleted by us" files deleted
+          git status --porcelain | grep '^DU' | cut -c 4- | xargs -r git rm
+
           # Commit the merge with conflict markers
           git commit -a -m "Merge upstream changes from ${{ github.event.inputs.upstream_ref }}"
 
