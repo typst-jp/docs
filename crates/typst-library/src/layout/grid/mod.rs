@@ -30,17 +30,14 @@ use crate::visualize::{Paint, Stroke};
 /// グリッド要素とテーブル要素はとてもよく似た挙動をする一方で、これらは異なる用途が想定されており、セマンティクスが異なります。
 /// グリッド要素はプレゼンテーションおよびレイアウトに使われることが想定されている一方で、[`table`]要素は、複数の関連するデータ項目を表すことが大まかに想定されています。
 /// これらの要素に対するsetルールとshowルールは、互いに影響しません。
-/// Refer to the [Accessibility Section]($grid/#accessibility) to learn how grids and
-/// tables are presented to users of Assistive Technology (AT) like screen
-/// readers.
+/// グリッドやテーブルがスクリーンリーダーなどの支援技術（AT）のユーザーにどのように表示されるかについては、[アクセシビリティのセクション]($grid/#accessibility)を参照してください。
 ///
-/// # Sizing the tracks { #track-size }
+/// # トラックのサイズ設定 { #track-size }
 ///
 /// グリッドの大きさは引数に指定されたトラックサイズによって決定されます。
-/// There are multiple sizing parameters: [`columns`]($grid.columns),
-/// [`rows`]($grid.rows) and [`gutter`]($grid.gutter).
-/// 大きさを設定する各パラメーターは同じ値を受け入れるため、ここでまとめて説明します。
-/// 各sizing引数は個々のトラックサイズの配列を受け入れます。
+/// サイズの設定パラメーターとして、[`columns`]($grid.columns)、[`rows`]($grid.rows)および[`gutter`]($grid.gutter)があります。
+/// 各サイズ設定パラメーターは同じ値を受け入れるため、ここでまとめて説明します。
+/// 各サイズ設定パラメーターはトラックサイズの配列を受け入れます。
 /// トラックサイズは以下のいずれかです。
 ///
 /// - `{auto}`: トラックはコンテンツに合わせた大きさとなり、残りのスペース全体まで大きくなります。
@@ -94,9 +91,9 @@ use crate::visualize::{Paint, Stroke};
 /// ```
 ///
 /// # グリッドのスタイル設定 { #styling }
-/// The grid and table elements work similarly. For a hands-on explanation,
-/// refer to the [Table Guide]($guides/tables/#fills); for a quick overview,
-/// continue reading.
+/// グリッド要素とテーブル要素の動作は似ています。
+/// 実践的な説明については[テーブルガイド]($guides/tables/#fills)を参照してください。
+/// 概要を知りたい場合はこのまま読み進めてください。
 ///
 /// グリッドの外観はさまざまなパラメーターでカスタマイズできます。
 /// 以下のものが最も重要です。
@@ -106,20 +103,16 @@ use crate::visualize::{Paint, Stroke};
 /// - [`fill`]($grid.fill)はセルに背景を設定します。
 /// - [`stroke`]($grid.stroke)は特定のストロークでグリッドの線をオプションで有効化します。
 ///
-/// To meet different needs, there are various ways to set them.
+/// 多様なニーズに対応するため、さまざまな設定方法があります。
 ///
 /// もし個々のセルに対して上記のオプションを上書きする必要がある場合は、[`grid.cell`]要素が使用できます。
 /// 同様に、個々のグリッドの線も[`grid.hline`]や[`grid.vline`]要素を用いて上書きできます。
 ///
-/// To configure an overall style for a grid, you may instead specify the option
-/// in any of the following fashions:
+/// あるいは、グリッド全体のスタイルを設定するには、以下のいずれかの方法でオプションを指定できます。
 ///
-/// - As a single value that applies to all cells.
-/// - As an array of values corresponding to each column. The array will be
-///   cycled if there are more columns than the array has items.
-/// - As a function in the form of `(x, y) => value`. It receives the cell's
-///   column and row indices (both starting from zero) and should return the
-///   value to apply to that cell.
+/// - 全てのセルに適用される単一の値。
+/// - 各列に対応する値の配列。配列の要素数が列数より少ない場合、配列は繰り返し使用されます。
+/// - `(x, y) => value`の形式の関数。セルの列と行の（いずれも0始まりの）インデックスを受け取り、そのセルに適用する値を返します。
 ///
 /// ```example
 /// #grid(
@@ -138,11 +131,8 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// On top of that, you may [apply styling rules]($styling) to [`grid`] and
-/// [`grid.cell`]. Especially, the [`x`]($grid.cell.x) and [`y`]($grid.cell.y)
-/// fields of `grid.cell` can be used in a [`where`]($function.where) selector,
-/// making it possible to style cells at specific columns or rows, or individual
-/// positions.
+/// さらに、[`grid`]や[`grid.cell`]に[スタイルルール]($styling)を適用できます。
+/// 特に、`grid.cell`の[`x`]($grid.cell.x)と[`y`]($grid.cell.y)フィールドは[`where`]($function.where)セレクターで使用でき、特定の列や行、または特定の位置にあるセルにスタイルを適用できます。
 ///
 /// ## ストロークのスタイル設定の優先順位
 /// 上記で説明したように、グリッドセルのストローク指定方法は3種類あります。
@@ -151,16 +141,15 @@ use crate::visualize::{Paint, Stroke};
 ///
 /// さらに、グリッドの繰り返されたヘッダーおよびフッターのストロークは、通常のセルのストロークよりも優先されます。
 ///
-/// # Accessibility
-/// Grids do not carry any special semantics. Assistive Technology (AT) does not
-/// offer the ability to navigate two-dimensionally by cell in grids. If you
-/// want to present tabular data, use the [`table`] element instead.
+/// # アクセシビリティ
+/// グリッドには特別なセマンティクスはありません。
+/// 支援技術（AT）は、グリッド内のセルを2次元的に移動する機能を提供しません。
+/// 表形式のデータを表示したい場合は、代わりに[`table`]要素を使用してください。
 ///
-/// AT will read the grid cells in their semantic order. Usually, this is the
-/// order in which you passed them to the grid. However, if you manually
-/// positioned them using [`grid.cell`'s `x` and `y` arguments]($grid.cell.x),
-/// cells will be read row by row, from left to right (in left-to-right
-/// documents). A cell will be read when its position is first reached.
+/// ATはグリッドセルを所定の順序で読み上げます。
+/// 通常、これはグリッドに渡した順序です。
+/// ただし、[`grid.cell`の`x`および`y`引数]($grid.cell.x)を使用して手動で配置した場合、セルは行ごとに左から右に（左から右に書く文書の場合）読み上げられます。
+/// セルは、その位置に最初に到達した時点で読み上げられます。
 #[elem(scope, Synthesize, Tagged)]
 pub struct GridElem {
     /// 列の数または各列の大きさ。
@@ -169,14 +158,14 @@ pub struct GridElem {
     /// 整数を渡した場合、その数だけ`auto`サイズ列を持つグリッドが作成されます。
     /// rowsおよびguttersとは異なり、単一のトラックサイズを指定するとただ一つの列が作成されることに注意してください。
     ///
-    /// See the [track size section](#track-size) above for more details.
+    /// 詳細は上記の[トラックのサイズ設定のセクション](#track-size)を参照してください。
     pub columns: TrackSizings,
 
     /// 行の数。
     ///
     /// 定義した行に収まらないセルがある場合、セルが無くなるまで最後の行が繰り返されます。
     ///
-    /// See the [track size section](#track-size) above for more details.
+    /// 詳細は上記の[トラックのサイズ設定のセクション](#track-size)を参照してください。
     pub rows: TrackSizings,
 
     /// 行間と列間の間隔。
@@ -184,7 +173,7 @@ pub struct GridElem {
     ///
     /// 定義した数よりも多くgutterがある場合、最後のgutterが繰り返されます。
     ///
-    /// See the [track size section](#track-size) above for more details.
+    /// 詳細は上記の[トラックのサイズ設定のセクション](#track-size)を参照してください。
     #[external]
     pub gutter: TrackSizings,
 
@@ -199,46 +188,45 @@ pub struct GridElem {
     #[parse(args.named("row-gutter")?.or_else(|| gutter.clone()))]
     pub row_gutter: TrackSizings,
 
-    /// How much to pad the cells' content.
+    /// セルのコンテンツのパディング量。
     ///
-    /// To specify a uniform inset for all cells, you can use a single length
-    /// for all sides, or a dictionary of lengths for individual sides. See the
-    /// [box's documentation]($box.inset) for more details.
+    /// 全てのセルに一律のインセットを指定するには、全ての辺に対して単一のlengthを使用するか、各辺のlengthを指定する辞書を使用します。
+    /// 詳細は[boxのドキュメント]($box.inset)を参照してください。
     ///
-    /// To specify varying inset for different cells, you can:
-    /// - use a single inset for all cells
-    /// - use an array of insets corresponding to each column
-    /// - use a function that maps a cell's position to its inset
+    /// セルごとに異なるインセットを指定するには、以下の方法があります。
+    /// - 全てのセルに対して単一のインセットを使用する
+    /// - 各列に対応するインセットの配列を使用する
+    /// - セルの位置をインセットに変換する関数を使用する
     ///
-    /// See the [styling section](#styling) above for more details.
+    /// 詳細は上記の[スタイル設定のセクション](#styling)を参照してください。
     ///
-    /// In addition, you can find an example at the [`table.inset`] parameter.
+    /// また、[`table.inset`]パラメーターの例も参照してください。
     #[fold]
     pub inset: Celled<Sides<Option<Rel<Length>>>>,
 
-    /// How to align the cells' content.
+    /// セルのコンテンツのalignment。
     ///
-    /// If set to `{auto}`, the outer alignment is used.
+    /// `{auto}`に設定された場合、外側のalignmentが使用されます。
     ///
-    /// You can specify the alignment in any of the following fashions:
-    /// - use a single alignment for all cells
-    /// - use an array of alignments corresponding to each column
-    /// - use a function that maps a cell's position to its alignment
+    /// 以下のいずれかの方法でalignmentを指定できます。
+    /// - 全てのセルに対して単一のalignmentを使用する
+    /// - 各列に対応するalignmentの配列を使用する
+    /// - セルの位置をalignmentに変換する関数を使用する
     ///
-    /// See the [styling section](#styling) above for details.
+    /// 詳細は上記の[スタイル設定のセクション](#styling)を参照してください。
     ///
-    /// In addition, you can find an example at the [`table.align`] parameter.
+    /// また、[`table.align`]パラメーターの例も参照してください。
     pub align: Celled<Smart<Alignment>>,
 
     /// セルの塗り潰し方。
     ///
-    /// This can be:
-    /// - a single color for all cells
-    /// - an array of colors corresponding to each column
-    /// - a function that maps a cell's position to its color
+    /// 以下のいずれかを指定できます。
+    /// - 全てのセルに対する単一のcolor
+    /// - 各列に対応するcolorの配列
+    /// - セルの位置をcolorに変換する関数
     ///
-    /// Most notably, arrays and functions are useful for creating striped grids.
-    /// See the [styling section](#styling) above for more details.
+    /// 特に、配列や関数はストライプ状のグリッドを作成するのに便利です。
+    /// 詳細は上記の[スタイル設定のセクション](#styling)を参照してください。
     ///
     /// ```example
     /// #grid(
@@ -262,17 +250,15 @@ pub struct GridElem {
     ///
     /// [`gutter`]($grid.gutter)オプションによって作成されたセル間の空白を横切る線を配置する必要がある場合や、複数の特定のセル間のストロークを上書きする必要がある場合は、グリッドセルにあわせて[`grid.hline`]および[`grid.vline`]のいずれか、または両方を指定することを検討してください。
     ///
-    /// To specify the same stroke for all cells, you can use a single [stroke]
-    /// for all sides, or a dictionary of [strokes]($stroke) for individual
-    /// sides. See the [rectangle's documentation]($rect.stroke) for more
-    /// details.
+    /// 全てのセルに同じストロークを指定するには、全ての辺に対して単一の[ストローク]($stroke)を使用するか、各辺の[ストローク]($stroke)を指定する辞書を使用します。
+    /// 詳細は[長方形のドキュメント]($rect.stroke)を参照してください。
     ///
-    /// To specify varying strokes for different cells, you can:
-    /// - use a single stroke for all cells
-    /// - use an array of strokes corresponding to each column
-    /// - use a function that maps a cell's position to its stroke
+    /// セルごとに異なるストロークを指定するには、以下の方法があります。
+    /// - 全てのセルに対して単一のストロークを使用する
+    /// - 各列に対応するストロークの配列を使用する
+    /// - セルの位置をストロークに変換する関数を使用する
     ///
-    /// See the [styling section](#styling) above for more details.
+    /// 詳細は上記の[スタイル設定のセクション](#styling)を参照してください。
     ///
     /// ```example:"Passing a function to set a stroke based on position"
     /// #set page(width: 420pt)
@@ -550,14 +536,12 @@ pub struct GridHeader {
     #[default(true)]
     pub repeat: bool,
 
-    /// The level of the header. Must not be zero.
+    /// ヘッダーのレベル。0にはできません。
     ///
-    /// This allows repeating multiple headers at once. Headers with different
-    /// levels can repeat together, as long as they have ascending levels.
+    /// これにより、複数のヘッダーを同時に繰り返せます。
+    /// 異なるレベルを持つヘッダーは、レベルが昇順であれば一緒に繰り返せます。
     ///
-    /// Notably, when a header with a lower level starts repeating, all higher
-    /// or equal level headers stop repeating (they are "replaced" by the new
-    /// header).
+    /// 特に、より低いレベルのヘッダーが繰り返しを開始すると、それ以上のレベルのヘッダーの繰り返しは停止します（新しいヘッダーに「置き換え」られます）。
     #[default(NonZeroU32::ONE)]
     pub level: NonZeroU32,
 
