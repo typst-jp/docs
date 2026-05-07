@@ -65,10 +65,9 @@ pub struct AccentElem {
     #[default(Rel::one())]
     pub size: Rel<Length>,
 
-    /// Whether to remove the dot on top of lowercase i and j when adding a top
-    /// accent.
+    /// 上付きのアクセント記号を追加する際に、小文字のiおよびjの上の点を取り除くかどうか。
     ///
-    /// This enables the `dtls` OpenType feature.
+    /// OpenTypeフィーチャーの`dtls`が有効になります。
     ///
     /// ```example
     /// $hat(dotless: #false, i)$
