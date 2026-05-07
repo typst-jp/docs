@@ -22,10 +22,9 @@ use crate::layout::Length;
 /// ]
 /// ```
 ///
-/// # Accessibility
-/// Repeated content is automatically marked as an [artifact]($pdf.artifact) and
-/// hidden from Assistive Technology (AT). Do not use this function to create
-/// content that contributes to the meaning of your document.
+/// # アクセシビリティ
+/// 繰り返されたコンテンツは自動的に[アーティファクト]($pdf.artifact)としてマークされ、支援技術（AT）からは認識されません。
+/// 文書の意味に寄与するコンテンツを作成する目的でこの関数を使用しないでください。
 #[elem(Tagged)]
 pub struct RepeatElem {
     /// 繰り返すコンテンツ。
