@@ -19,9 +19,8 @@ const DEFAULT_COL_GAP: Em = Em::new(0.5);
 ///
 /// ベクトルの要素内のコンテンツは[`align`]($math.vec.align)パラメーターか`&`記号を用いて配置できます。
 ///
-/// This function is for typesetting vector components. To typeset a symbol that
-/// represents a vector, [`arrow`]($math.accent) and [`bold`]($math.bold) are
-/// commonly used.
+/// この関数はベクトルの成分を組版するためのものです。
+/// ベクトルを表す記号の組版には、[`arrow`]($math.accent)や[`bold`]($math.bold)がよく用いられます。
 ///
 /// # 例
 /// ```example
