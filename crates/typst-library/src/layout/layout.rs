@@ -28,10 +28,8 @@ use crate::introspection::Locatable;
 /// ページに直接置かれた場合は、ページの寸法からそのマージンを引いたものを受け取ります。
 /// これは主に[測定]($measure)と組み合わせるときに便利です。
 ///
-/// To retrieve the _remaining_ height of the page rather than its full size,
-/// you can wrap your `layout` call in a `{block(height: 1fr)}`. This works
-/// because the block automatically grows to fill the remaining space (see the
-/// [fraction] documentation for more details).
+/// `layout`の呼び出しを`{block(height: 1fr)}`でラップすることで、ページ全体の高さではなく、_残りの_高さを取得できます。
+/// これが動作するのは、残りのスペースを埋めるようにブロックが自動的に拡張するためです（詳細は[fraction]のドキュメントを参照してください）。
 ///
 /// ```example
 /// #set page(height: 150pt)
