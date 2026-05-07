@@ -66,22 +66,15 @@ pub struct BoxElem {
 
     /// ボックスのコンテンツのパディング量。
     ///
+    /// 全ての辺に対する単一の長さ、または辺ごとの長さの辞書を指定できます。
+    /// 辞書を渡す場合、以下のキーを優先度順に含めることができます。
+    /// `top`、`right`、`bottom`、`left`（それぞれ対応する辺を制御）、`x`、`y`（それぞれ水平方向および垂直方向のインセットを制御）、`rest`（辞書の他のエントリーで設定されない全てのインセットを対象とする）です。
+    /// 全てのキーはオプションで、省略されたキーは以前に設定された値、または一度も設定されていなければデフォルト値が使用されます。
+    ///
+    /// このパラメーターで指定する[相対的な長さ]($relative)は[アウトセット]($box.outset)を除いたボックスサイズに対する相対値です。
+    /// 相対的なインセットやアウトセットは、コンテナを基準とする[幅]($box.width)や[高さ](box.height)の相対値とは基準が異なることに注意してください。
+    ///
     /// _注意:_ ボックスがテキストを含むとき、その正確な大きさは現在の[テキストの端]($text.top-edge)に依存します。
-    /// How much to pad the box's content.
-    ///
-    /// This can be a single length for all sides or a dictionary of lengths
-    /// for individual sides. When passing a dictionary, it can contain the
-    /// following keys in order of precedence: `top`, `right`, `bottom`, `left`
-    /// (controlling the respective cell sides), `x`, `y` (controlling vertical
-    /// and horizontal insets), and `rest` (covers all insets not styled by
-    /// other dictionary entries). All keys are optional; omitted keys will use
-    /// their previously set value, or the default value if never set.
-    ///
-    /// [Relative lengths]($relative) are relative to the box size without
-    /// outset.
-    ///
-    /// _Note:_ When the box contains text, its exact size depends on the
-    /// current [text edges]($text.top-edge).
     ///
     /// ```example
     /// #rect(inset: 0pt)[Tight]
@@ -90,10 +83,9 @@ pub struct BoxElem {
     pub inset: Sides<Option<Rel<Length>>>,
     /// レイアウトに影響を与えずにボックスの大きさを拡大する量。
     ///
-    /// This can be a single length for all sides or a dictionary of lengths for
-    /// individual sides. [Relative lengths]($relative) are relative to the box
-    /// size without outset. See the documentation for [inset]($box.inset) above
-    /// for further details.
+    /// 全ての辺に対する単一の長さ、または辺ごとの長さの辞書を指定できます。
+    /// [相対的な長さ]($relative)はアウトセットを除いたボックスサイズに対する相対値です。
+    /// 詳細は上記の[インセット]($box.inset)のドキュメントを参照してください。
     ///
     /// これはパディングが行のレイアウトに影響を与えるのを防ぐために便利です。
     /// 以下の例より一般的な場合については、[未加工テキストのblockパラメーター]($raw.block)のドキュメントを参照してください。
