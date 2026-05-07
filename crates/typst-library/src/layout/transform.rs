@@ -19,11 +19,10 @@ use crate::layout::{Abs, Alignment, Angle, HAlignment, Length, Ratio, Rel, VAlig
 /// ))
 /// ```
 ///
-/// # Accessibility
-/// Moving is transparent to Assistive Technology (AT). Your content will be
-/// read in the order it appears in the source, regardless of any visual
-/// movement. If you need to hide content from AT altogether in PDF export,
-/// consider using [`pdf.artifact`].
+/// # アクセシビリティ
+/// 移動は支援技術（AT）に対して透過的です。
+/// コンテンツは視覚的な移動に関係なく、ソースに現れる順序で読み上げられます。
+/// PDFエクスポートにおいてATからコンテンツを完全に隠す必要がある場合は、[`pdf.artifact`]の使用を検討してください。
 #[elem]
 pub struct MoveElem {
     /// コンテンツの水平方向の変位。
