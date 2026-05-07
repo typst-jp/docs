@@ -27,20 +27,20 @@ pub struct FracElem {
     #[required]
     pub denom: Content,
 
-    /// How the fraction should be laid out.
+    /// 分数のレイアウト方法。
     ///
-    /// ```example:"Styles"
+    /// ```example:"スタイル"
     /// $ frac(x, y, style: "vertical") $
     /// $ frac(x, y, style: "skewed") $
     /// $ frac(x, y, style: "horizontal") $
     /// ```
     ///
-    /// ```example:"Setting the default"
+    /// ```example:"デフォルトの設定"
     /// #set math.frac(style: "skewed")
     /// $ a / b $
     /// ```
     ///
-    /// ```example:"Handling of grouping parentheses"
+    /// ```example:"グループ化括弧の扱い"
     /// // Grouping parentheses are removed.
     /// #set math.frac(style: "vertical")
     /// $ (a + b) / b $
@@ -54,7 +54,7 @@ pub struct FracElem {
     /// $ (a + b) / b $
     /// ```
     ///
-    /// ```example:"Different styles in inline vs block equations"
+    /// ```example:"インライン数式とブロック数式でのスタイル"
     /// // This changes the style for inline equations only.
     /// #show math.equation.where(block: false): set math.frac(style: "horizontal")
     ///
@@ -82,13 +82,12 @@ pub struct FracElem {
 /// Fraction style
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum FracStyle {
-    /// Stacked numerator and denominator with a bar.
+    /// 分子と分母を横棒で重ねます。
     #[default]
     Vertical,
-    /// Numerator and denominator separated by a slash.
+    /// 分子と分母をスラッシュで区切ります。
     Skewed,
-    /// Numerator and denominator placed inline and parentheses are not
-    /// absorbed.
+    /// 分子と分母をインラインで配置し、丸括弧をそのまま保持します。
     Horizontal,
 }
 
