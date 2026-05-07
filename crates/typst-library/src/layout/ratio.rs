@@ -9,21 +9,18 @@ use crate::foundations::{Repr, repr, ty};
 /// 百分率。
 ///
 /// 数値の後にパーセント記号を付けて表記します。
+/// 比率は、ページやコンテナに対するレイアウト要素の相対的なサイズを指定するために、[相対的な長さ]($relative)の一部として用いられることが最も一般的です。
 ///
 /// ```example
 /// #rect(width: 25%)
 /// ```
 ///
-/// However, they can also describe any other property that is relative to some
-/// base, e.g. an amount of [horizontal scaling]($scale.x) or the
-/// [height of parentheses]($math.lr.size) relative to the height of the content
-/// they enclose.
+/// 百分率はその他にも、何らかの基準に対する相対量を表せます。例えば、[水平方向の拡大縮小量]($scale.x)や、囲まれたコンテンツの高さに対する[括弧の高さ]($math.lr.size)などです。
 ///
-/// # Scripting
-/// Within your own code, you can use ratios as you like. You can multiply them
-/// with various other types as shown below:
+/// # スクリプト記述
+/// 自身のコード内では、百分率を自由に使用できます。以下の表のように、さまざまな型と乗算できます。
 ///
-/// |  Multiply by    |  Example                | Result          |
+/// |  乗算する型     |  例                     | 結果            |
 /// |-----------------|-------------------------|-----------------|
 /// | [`ratio`]       | `{27% * 10%}`           | `{2.7%}`        |
 /// | [`length`]      | `{27% * 100pt}`         | `{27pt}`        |
@@ -33,8 +30,7 @@ use crate::foundations::{Repr, repr, ty};
 /// | [`float`]       | `{27% * 0.37037}`       | `{10%}`         |
 /// | [`fraction`]    | `{27% * 3fr}`           | `{0.81fr}`      |
 ///
-/// When ratios are [displayed]($repr) in the document, they are rounded to two
-/// significant digits for readability.
+/// 百分率が文書中に[表示]($repr)される際は、可読性のため有効数字2桁に丸められます。
 #[ty(cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Ratio(Scalar);
