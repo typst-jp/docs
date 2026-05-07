@@ -56,11 +56,9 @@ use crate::layout::{Alignment, Em, Length, Rel};
 ///
 /// ゼロ幅の弱い空白は、関数呼び出しと次の単語との間の空白を削除する役割を果たします。
 ///
-/// # Accessibility
-/// Assistive Technology (AT) will always read the placed element at the point
-/// where it logically appears in the document, regardless of where this
-/// function physically moved it. Put its markup where it would make the most
-/// sense in the reading order.
+/// # アクセシビリティ
+/// 支援技術（AT）は、この関数が物理的にどこに移動させたかに関係なく、配置された要素を文書中で論理的に現れる位置で常に読み上げます。
+/// 読み上げ順序として最も意味が通る位置にマークアップを配置してください。
 #[elem(scope, Unqueriable, Locatable, Tagged)]
 pub struct PlaceElem {
     /// コンテンツを配置する基準となる親コンテナ内の位置。
