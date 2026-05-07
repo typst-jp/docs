@@ -91,12 +91,9 @@ $ sum_(i in NN) 1 + i $
 全ての数学関数は、数式中ではデフォルトで利用できる`math`[モジュール]($scripting/#modules)に属しています。
 数式外では、`math.`プレフィックスを付けるとアクセスできます。
 
-# Accessibility
-To make math accessible, you must provide alternative descriptions of equations
-in natural language using the [`alt` parameter of
-`math.equation`]($math.equation.alt). For more information, see the [Textual
-Representations section of the Accessibility
-Guide]($guides/accessibility/#textual-representations).
+# アクセシビリティ
+数式をアクセシブルにするには、[`math.equation`の`alt`パラメーター]($math.equation.alt)を使い、自然言語による数式の代替説明を提供する必要があります。
+詳細は[アクセシビリティガイドの「テキストによる表現」セクション]($guides/accessibility/#textual-representations)を参照してください。
 
 ```example
 #math.equation(
@@ -105,5 +102,4 @@ Guide]($guides/accessibility/#textual-representations).
 )
 ```
 
-In the future, Typst will automatically make equations without alternative
-descriptions accessible in HTML and PDF 2.0 export.
+将来的には、HTMLおよびPDF 2.0エクスポートにおいてTypstは代替説明のない数式を自動的にアクセシブルにする予定です。
