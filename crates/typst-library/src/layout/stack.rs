@@ -17,10 +17,9 @@ use crate::layout::{Dir, Spacing};
 /// )
 /// ```
 ///
-/// # Accessibility
-/// Stacks do not carry any special semantics. The contents of the stack are
-/// read by Assistive Technology (AT) in the order in which they have been
-/// passed to this function.
+/// # アクセシビリティ
+/// スタックは特別なセマンティクスを持ちません。
+/// スタックのコンテンツは、この関数に渡された順序のまま支援技術（AT）によって読み上げられます。
 #[elem]
 pub struct StackElem {
     /// アイテムを積み重ねる向き。可能な値は以下の通りです。
