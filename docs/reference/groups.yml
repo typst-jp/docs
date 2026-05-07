@@ -100,9 +100,8 @@
     これは構文的に対応が取れる区切り文字においては自動的に行われますが、`lr`を用いることで2つの任意の区切り文字を対応させ、その大きさを正確に制御することができます。
     `lr`関数以外にも、Typstは、絶対値、切り捨て値、切り上げ値、ノルムを表す区切り文字ペアを生成する関数をさらにいくつか提供しています。
 
-    To prevent a delimiter from being matched by Typst, and thus auto-scaled,
-    escape it with a backslash. To instead disable auto-scaling completely, use
-    `{set math.lr(size: 1em)}`.
+    区切り文字をTypstに対応付けさせず、自動拡大縮小も行わせないようにするには、バックスラッシュでエスケープしてください。
+    あるいは自動拡大縮小自体を完全に無効化したい場合は、`{set math.lr(size: 1em)}`を使用してください。
 
     # 例
     ```example
