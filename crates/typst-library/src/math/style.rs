@@ -70,32 +70,30 @@ pub fn sans(
 /// Let $cal(P)$ be the set of ...
 /// ```
 ///
-/// This is the default calligraphic/script style for most math fonts. See
-/// [`scr`]($math.scr) for more on how to get the other style (roundhand).
+/// これは大半の数式フォントにおけるデフォルトのカリグラフィー／スクリプトスタイルです。
+/// もう一方のスタイル（roundhand）の指定方法については[`scr`]($math.scr)を参照してください。
 #[func(title = "Calligraphic", keywords = ["mathcal", "chancery"])]
 pub fn cal(
-    /// The content to style.
+    /// スタイルを適用するコンテンツ。
     body: Content,
 ) -> Content {
     body.set(EquationElem::variant, Some(MathVariant::Chancery))
 }
 
-/// Script (roundhand) font style in math.
+/// 数式中のスクリプト（roundhand）フォントスタイル。
 ///
 /// ```example
 /// $scr(L)$ is not the set of linear
 /// maps $cal(L)$.
 /// ```
 ///
-/// There are two ways that fonts can support differentiating `cal` and `scr`.
-/// The first is using Unicode variation sequences. This works out of the box
-/// in Typst, however only a few math fonts currently support this.
+/// フォントが`cal`と`scr`を区別できるようにする方法は2つあります。
+/// 1つはUnicodeの異体シーケンスを用いる方法です。
+/// これはTypstでそのまま動作しますが、現時点でこの方式をサポートする数式フォントはわずかです。
 ///
-/// The other way is using [font features]($text.features). For example, the
-/// roundhand style might be available in a font through the
-/// _[stylistic set]($text.stylistic-set) 1_ (`ss01`) feature. To use it in
-/// Typst, you could then define your own version of `scr` like in the example
-/// below.
+/// もう1つは[フォントフィーチャー]($text.features)を用いる方法です。
+/// 例えば、roundhandスタイルがフォントの_[スタイリスティックセット]($text.stylistic-set)1_（`ss01`）フィーチャーを通じて利用できる場合があります。
+/// 以下の例のように独自の`scr`関数を定義するとTypstで使用できます。
 ///
 /// ```example:"Recreation using stylistic set 1"
 /// #let scr(it) = text(
