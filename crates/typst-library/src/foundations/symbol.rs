@@ -16,18 +16,15 @@ use crate::foundations::{
     elem, func, scope, ty,
 };
 
-/// A Unicode symbol.
+/// Unicode記号。
 ///
-/// Typst defines common symbols so that they can easily be written with
-/// standard keyboards. The symbols are defined in modules, from which they can
-/// be accessed using [field access notation]($scripting/#fields):
+/// Typstは、標準のキーボードで簡単に入力できるよう、よく使われる記号を定義しています。
+/// 記号はモジュール内に定義されており、[フィールドアクセス記法]($scripting/#fields)でアクセスできます。
 ///
-/// - General symbols are defined in the [`sym` module]($category/symbols/sym)
-///   and are accessible without the `sym.` prefix in math mode.
-/// - Emoji are defined in the [`emoji` module]($category/symbols/emoji)
+/// - 一般的な記号は[`sym`モジュール]($category/symbols/sym)に定義されており、数式モードでは`sym.`接頭辞なしでアクセスできます。
+/// - 絵文字は[`emoji`モジュール]($category/symbols/emoji)に定義されています。
 ///
-/// Moreover, you can define custom symbols with this type's constructor
-/// function.
+/// さらに、この型のコンストラクター関数を用いてカスタム記号を定義できます。
 ///
 /// ```example
 /// #sym.arrow.r \
@@ -36,10 +33,9 @@ use crate::foundations::{
 /// #emoji.face.halo
 /// ```
 ///
-/// Many symbols have different variants, which can be selected by appending the
-/// modifiers with dot notation. The order of the modifiers is not relevant.
-/// Visit the documentation pages of the symbol modules and click on a symbol to
-/// see its available variants.
+/// 多くの記号には異なるバリアントがあり、ドット記法で修飾子を付加することで選択できます。
+/// 修飾子の順序は問いません。
+/// 記号モジュールのドキュメントページにアクセスし、記号をクリックすると、利用可能なバリアントを確認できます。
 ///
 /// ```example
 /// $arrow.l$ \
@@ -218,7 +214,7 @@ impl Symbol {
 
 #[scope]
 impl Symbol {
-    /// Create a custom symbol with modifiers.
+    /// 修飾子付きのカスタム記号を生成します。
     ///
     /// ```example
     /// #let envelope = symbol(
@@ -238,13 +234,11 @@ impl Symbol {
     #[func(constructor)]
     pub fn construct(
         span: Span,
-        /// The variants of the symbol.
+        /// 記号のバリアント。
         ///
-        /// Can be a just a string consisting of a single character for the
-        /// modifierless variant or an array with two strings specifying the modifiers
-        /// and the symbol. Individual modifiers should be separated by dots. When
-        /// displaying a symbol, Typst selects the first from the variants that have
-        /// all attached modifiers and the minimum number of other modifiers.
+        /// 修飾子のないバリアントの場合は単一の文字からなる文字列、それ以外の場合は修飾子と記号を指定する2つの文字列の配列を指定できます。
+        /// 各修飾子はドットで区切ります。
+        /// 記号を表示する際、Typstは付加された全ての修飾子を含み、それ以外の修飾子の数が最小であるバリアントの中から最初のものを選択します。
         #[variadic]
         variants: Vec<Spanned<SymbolVariant>>,
     ) -> SourceResult<Symbol> {
