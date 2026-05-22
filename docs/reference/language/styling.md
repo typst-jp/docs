@@ -71,31 +71,23 @@ showルールの基本的な記述方法は、show-setルールです。
 But this stays black.
 ```
 
-With show-set rules you can mix and match properties from different functions to
-achieve many different effects. But they still limit you to what is predefined
-in Typst. For maximum flexibility, you can instead write a _transformational_
-show rule that defines how to format an element from scratch. To write such a
-show rule, replace the set rule after the colon with an arbitrary [function]($function).
-This function receives the element in question and can return arbitrary content.
-The function is often defined inline as `{it => ..}` using the
-[unnamed function syntax]($function/#unnamed). The function's parameter is
-typically named `it` by convention.
+show-setルールを使えば、異なる関数のプロパティを組み合わせてさまざまな効果を得られます。
+しかし、この記述方法による設定はTypst標準で定義されている範囲に制約されています。
+より柔軟な設定方法として、要素の整形方法をゼロから定義する_変換型_showルールによる記述も可能です。
+このようなshowルールを記述するには、コロンの後のsetルールを任意の[関数]($function)に置き換えます。
+この関数は対象の要素を受け取り、任意のコンテンツを返せます。
+関数は多くの場合、[無名関数構文]($function/#unnamed)を使って`{it => ..}`のようにインラインで定義されます。
+慣例として、関数のパラメーターには`it`という名前が使われます。
 
-The available [fields]($scripting/#fields) on the element passed to the function
-match the parameters of the respective element function. Below, we define a show
-rule that formats headings for a fantasy encyclopedia.
+関数に渡される要素で利用可能な[フィールド]($scripting/#fields)は、対応する要素関数のパラメーターと一致します。
+以下では、ファンタジー百科事典向けに見出しを整形するshowルールを定義します。
 
-The show rule itself adds tilde characters around the title (these must be
-escaped with a backslash because otherwise they would indicate a non-breaking
-space), emphasizes the title with italics, and then displays the heading counter
-after the title.
+このshowルール自体は、タイトルの両側にチルダ文字を加え（このチルダはバックスラッシュでエスケープする必要があります。エスケープしないとノーブレークスペースとして解釈されてしまうためです）、タイトルをイタリック体で強調表示し、その後ろに見出しカウンターを表示します。
 
-For this example, we also wanted center alignment and a different font. While we
-could've added these set rules into the existing show rule, we instead added
-them as separate show-set rules. This is good practice because now these rules
-can still be overridden by later show-set rules in the document, keeping styling
-composable. In contrast, set rules within a transformational show rule would not
-be overridable anymore.
+この例では、中央揃えと別のフォントの適用もあわせて行いたいと考えました。
+これらのsetルールを既存のshowルールの中に書き加えることもできましたが、ここでは別々のshow-setルールとして追加しています。
+こうすることで、これらのルールは文書中の後続のshow-setルールによって上書き可能なままとなり、スタイル設定を組み合わせやすい状態が保たれます。
+これに対し、変換型showルールの内部に書かれたsetルールは、後から上書きできなくなります。
 
 ```example
 #set heading(numbering: "(I)")
