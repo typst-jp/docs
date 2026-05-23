@@ -260,7 +260,7 @@ pub struct GridElem {
     ///
     /// 詳細は上記の[スタイル設定のセクション](#styling)を参照してください。
     ///
-    /// ```example:"Passing a function to set a stroke based on position"
+    /// ```example:"関数を渡して位置に基づくストロークを設定"
     /// #set page(width: 420pt)
     /// #set text(number-type: "old-style")
     /// #show grid.cell.where(y: 0): set text(size: 1.3em)
@@ -294,7 +294,7 @@ pub struct GridElem {
     /// )
     /// ```
     ///
-    /// ```example:"Folding the stroke dictionary"
+    /// ```example:"ストロークの辞書の畳み込み"
     /// #set page(height: 13em, width: 26em)
     ///
     /// #let cv(..jobs) = grid(
