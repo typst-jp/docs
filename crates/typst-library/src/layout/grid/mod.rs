@@ -204,7 +204,7 @@ pub struct GridElem {
     #[fold]
     pub inset: Celled<Sides<Option<Rel<Length>>>>,
 
-    /// セルのコンテンツのalignment。
+    /// セルのコンテンツの配置方法。
     ///
     /// `{auto}`に設定された場合、外側のalignmentが使用されます。
     ///
