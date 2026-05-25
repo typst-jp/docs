@@ -91,7 +91,7 @@ $ sum_(i in NN) 1 + i $
 全ての数学関数は、数式中ではデフォルトで利用できる`math`[モジュール]($scripting/#modules)に属しています。
 数式外では、`math.`プレフィックスを付けるとアクセスできます。
 
-# アクセシビリティ
+# アクセシビリティ { #accessibility }
 数式をアクセシブルにするには、[`math.equation`の`alt`パラメーター]($math.equation.alt)を使い、自然言語による数式の代替説明を提供する必要があります。
 詳細は[アクセシビリティガイドの「テキストによる表現」セクション]($guides/accessibility/#textual-representations)を参照してください。
 
