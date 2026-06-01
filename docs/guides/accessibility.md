@@ -59,7 +59,7 @@ Typstの慣用的な使い方、すなわち組み込みのマークアップや
 - 文書の他の部分を参照する場合は、単に参照をタイプするのではなく、ラベルと[`ref`]($ref)または`@references`を使用する
 - キャプションを提供する場合は、テキストを関数呼び出しの下に追加するのではなく、[`figure`要素の`caption`引数]($figure.caption)を使用する
 
-要素のデフォルトのスタイルを調整したい時であっても、独自のカスタム関数で置き換えるのではなく、[setルール]($styling/#set-rules)、show-setルール、そして[showルール]($styling/#show-rules)を使用して外観をカスタマイズしてください。以下は、ドキュメント内の強い強調の見た目を変更する方法の例です。
+要素のデフォルトのスタイルを調整したい時であっても、独自のカスタム関数で置き換えるのではなく、[setルール]($styling/#set-rules)、show-setルール、そして[showルール]($styling/#show-rules)を使用して外観をカスタマイズしてください。以下は、文書内の強い強調の見た目を変更する方法の例です。
 
 ```example
 // Change how text inside of strong emphasis looks
