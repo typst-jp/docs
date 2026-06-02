@@ -82,7 +82,7 @@ pub struct FracElem {
 /// Fraction style
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum FracStyle {
-    /// 分子と分母を横棒で重ねます。
+    /// 分子と分母を上下に配置し、横棒で区切ります。
     #[default]
     Vertical,
     /// 分子と分母をスラッシュで区切ります。
