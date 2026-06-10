@@ -41,7 +41,7 @@ pub struct UnderlineElem {
     /// )
     /// ```
     pub extent: Length,
-    /// 字形と衝突する線の部分を省略するかどうか。
+    /// グリフと衝突する線の部分を省略するかどうか。
     ///
     /// ```example
     /// This #underline(evade: true)[is great].
@@ -104,7 +104,7 @@ pub struct OverlineElem {
     /// #overline(underline[Typography Today])
     /// ```
     pub extent: Length,
-    /// 字形と衝突する線の部分を省略するかどうか。
+    /// グリフと衝突する線の部分を省略するかどうか。
     ///
     /// ```example
     /// #overline(

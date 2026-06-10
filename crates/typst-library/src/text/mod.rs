@@ -1053,7 +1053,7 @@ cast! {
 /// Metrics that describe the top edge of text.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum TopEdgeMetric {
-    /// フォントアセンダー。通常、これは全ての字形の高さを超えます。
+    /// フォントアセンダー。通常、これは全てのグリフの高さを超えます。
     Ascender,
     /// 大文字の高さの近似値。
     CapHeight,
@@ -1061,7 +1061,7 @@ pub enum TopEdgeMetric {
     XHeight,
     /// 文字が置かれるベースライン。
     Baseline,
-    /// 字形が持つバウンディングボックスの上端。
+    /// グリフが持つバウンディングボックスの上端。
     Bounds,
 }
 
@@ -1103,9 +1103,9 @@ cast! {
 pub enum BottomEdgeMetric {
     /// 文字が置かれるベースライン。
     Baseline,
-    /// フォントディセンダー。通常、これは全ての字形の深さを超えます。
+    /// フォントディセンダー。通常、これは全てのグリフの深さを超えます。
     Descender,
-    /// 字形が持つバウンディングボックスの下端。
+    /// グリフが持つバウンディングボックスの下端。
     Bounds,
 }
 
