@@ -69,7 +69,7 @@ description: |
 | foundations | 基礎 | カテゴリ名 |
 | data loading | データの読み込み | カテゴリ名 |
 | bookmark | ブックマーク | PDFの見出しブックマークなど |
-| glyph | グリフ | フォント内の文字の視覚的表現 |
+| glyph | グリフ | フォント内の文字の視覚的表現。letterform（字形）と訳し分ける |
 | artifact | アーティファクト | [`pdf.artifact`]($pdf.artifact)を参照 |
 | hyphenation | ハイフネーション | 単語の途中での行分割 |
 | clip path | クリッピングパス | 描画の切り抜き領域 |
@@ -86,3 +86,4 @@ description: |
 | grapheme cluster | 書記素クラスター | 1つの文字として認識される文字の組み合わせ |
 | variation sequence | 字形指示列 | 基底文字と字形選択子の並び。訳語は[JIS X 0221（国際符号化文字集合（UCS））](https://www.jisc.go.jp/app/jis/general/GnrJISNumberNameSearchList?show&jisStdNo=X0221)に準拠 |
 | variation selector | 字形選択子 | 直前の文字の字形を指定する制御用文字。訳語は[JIS X 0221（国際符号化文字集合（UCS））](https://www.jisc.go.jp/app/jis/general/GnrJISNumberNameSearchList?show&jisStdNo=X0221)に準拠 |
+| letterform | 字形 | 文字を実際に図形として表現したもの。訳語は[JIS Z 8125（印刷用語―デジタル印刷）](https://www.jisc.go.jp/app/jis/general/GnrJISNumberNameSearchList?show&jisStdNo=Z8125)の対訳に準拠。glyph（グリフ）と訳し分ける |
