@@ -49,7 +49,7 @@ impl Dir {
     pub const TTB: Self = Self::TTB;
     pub const BTT: Self = Self::BTT;
 
-    /// 指定した引数を始点とするdirectionを返します。
+    /// 指定した引数を始点とする向きを返します。
     ///
     /// ```example
     /// #direction.from(left) \
