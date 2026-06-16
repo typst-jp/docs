@@ -67,7 +67,7 @@ impl Dir {
         }
     }
 
-    /// 指定した引数を終点とするdirectionを返します。
+    /// 指定した引数を終点とする向きを返します。
     ///
     /// ```example
     /// #direction.to(left) \
