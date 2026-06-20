@@ -207,7 +207,7 @@ pub struct FigureElem {
     ///
     /// カウンターの値を変更して番号をスキップしたり、
     /// カウンターをリセットしたりしたい場合は、[`where`]($function.where)セレクターを使用して、
-    /// 各種類の図表に対応する[counter]にアクセスできます。
+    /// 各種類の図表に対応する[カウンター]($counter)にアクセスできます。
     ///
     /// - [表]($table)の場合: `{counter(figure.where(kind: table))}`
     /// - [画像]($image)の場合: `{counter(figure.where(kind: image))}`
