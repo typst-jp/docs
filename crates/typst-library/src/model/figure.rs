@@ -234,7 +234,7 @@ pub struct FigureElem {
     /// )
     /// ```
     ///
-    /// showルール内で適切なカウンターを便利に使用するために、`counter`フィールドにアクセスできます。
+    /// `counter`フィールドにアクセスすることで、showルール内で適切なカウンターが活用できます。
     /// これについては、
     /// [`figure.caption`要素の`body`フィールド]($figure.caption.body)のドキュメントに例があります。
     pub kind: Smart<FigureKind>,
