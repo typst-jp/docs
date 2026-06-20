@@ -95,8 +95,8 @@ use crate::visualize::ImageElem;
 /// ```
 ///
 /// # アクセシビリティ
-/// [`alt`]($figure.alt) パラメーターを使用して、
-/// スクリーンリーダーやその他の支援技術(AT)のための図表の[代替説明]($guides/accessibility/#textual-representations)を提供できます。
+/// [`alt`]($figure.alt)パラメーターを使用して、
+/// スクリーンリーダーやその他の支援技術（AT）のための図表の[代替説明]($guides/accessibility/#textual-representations)を提供できます。
 /// 詳細については、
 /// [ドキュメント]($figure.alt)を参照してください。
 ///
