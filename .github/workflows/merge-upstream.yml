@@ -45,10 +45,11 @@ jobs:
           git checkout HEAD -- .github/
           git reset HEAD .github/
 
-          # Keep "deleted by us" files deleted
+          # Resolve delete/modify conflicts by keeping the deletion
           git status --porcelain=v1 -z | while IFS= read -r -d '' entry; do
             case "$entry" in
               "DU "*) git rm -- "${entry#DU }" ;;
+              "UD "*) git rm -- "${entry#UD }" ;;
             esac
           done
 
