@@ -3,49 +3,43 @@ description: Typstチュートリアル
 ---
 
 # テンプレートを作成する
-このチュートリアルの前回の3つの章では、Typstでドキュメントを書く方法、基本的なスタイルを適用する方法、そして出版社のスタイルガイドに準拠するために外観を詳細にカスタマイズする方法を学びました。前章で作成した論文が大成功を収めたため、同じ会議のための続報論文を書くよう依頼されました。今回は、前章で作成したスタイルを再利用可能なテンプレートに変換したいと思います。この章では、あなたとあなたのチームが単一のshowルールで使用できるテンプレートの作成方法を学びます。始めましょう！
 
-## Reusing data with variables { #variables }
-In the past chapters, most of the content of the document was entered by hand.
-In the third chapter, we used the `document` element and context to cut down on
-repetition and only enter the title once. But in practice, there may be many
-more things that occur multiple times in your document. There are multiple good
-reasons to just define these repeated values once:
+このチュートリアルの前回の3つの章では、Typstで文書を書く方法、基本的なスタイルを適用する方法、そして出版社のスタイルガイドに準拠するために外観を詳細にカスタマイズする方法を学びました。前章で作成した論文が大成功を収めたため、同じ会議のための続報論文を書くよう依頼されました。今回は、前章で作成したスタイルを再利用可能なテンプレートに変換したいと思います。この章では、あなたとあなたのチームが単一のshowルールで使用できるテンプレートの作成方法を学びます。始めましょう！
 
-1. It makes changing them later easier
-2. It allows you to quickly find all instances where you used something
-3. It makes it easy to be consistent throughout
-4. For long or hard-to-enter repeated segments, a shorter variable name is often
-   more convenient to type
+## 変数によるデータの再利用 { #variables }
 
-If you were using a conventional word processor, you might resort to using a
-placeholder value that you can later search for. In Typst, however, you can
-instead use variables to safely store content and reuse it across your whole
-document through a variable name.
+これまでの章では、文書のコンテンツの大部分を手入力していました。
+第3章では、`document`要素とコンテキストを使うことで重複を減らし、タイトルを1回だけ入力する方法を学びました。
+しかし実際には、文書中に複数回現れるものは他にも多くあります。
+こうした繰り返し現れる値を1度だけ定義することには、以下のような複数の利点があります。
 
-The technique of using context to reproduce an element's property we have
-learned earlier is not always the most appropriate for this: Typst's built-in
-elements focus on semantic properties like the title and description of a
-document, or things that directly relate to typesetting, like the text size.
+1. 後からの変更が容易になる
+2. 何かを使用した全ての箇所をすぐに見つけられる
+3. 文書全体の一貫性を保ちやすい
+4. 長いものや入力が難しい繰り返し要素に対して、短い変数名の方が入力しやすいことが多い
 
-For our example, we want to take a look at Typst's pronunciation. One of the
-best ways to transcribe pronunciation is the International Phonetic Alphabet
-(IPA). But because it uses characters not found on common keyboards, typing IPA
-repeatedly can become cumbersome. So let's instead define a variable that we can
-reference multiple times.
+従来のワードプロセッサーを使っているなら、後で検索できるようなプレースホルダー値を使う手もあるでしょう。
+しかしTypstでは、代わりに変数を使ってコンテンツを安全に保管し、変数名を通じて文書全体で再利用できます。
+
+これまでに学んだ、コンテキストを使って要素のプロパティを再現するテクニックは、必ずしもこの用途には適していません。
+Typstの組み込み要素は、文書のタイトルや説明のような意味的なプロパティ、あるいはテキストサイズのように直接組版にかかわるものに焦点を当てているためです。
+
+例として、Typstの発音記号を見てみましょう。
+発音を表記する最良の方法の1つは国際音声記号（IPA）です。
+しかしIPAには一般的なキーボードに存在しない文字が含まれているため、繰り返し入力するのは煩雑になります。
+そこで、複数回参照できる変数を定義してみましょう。
 
 ```typ
 #let ipa = [taɪpst]
 ```
 
-Here, we use a new keyword, `{let}`, to indicate a variable definition. Then,
-we put the name of our variable, in this case, `ipa`. Finally, we type an equals
-sign and the value of our variable. It is enclosed in square brackets because
-it is content, mirroring how you would call a function accepting content. In
-other words, this syntax mirrors the phrase _"Let the variable `ipa` have the
-value `{[taɪpst]}`."_
+ここで新しいキーワード`{let}`を使って、変数定義であることを示しています。
+続けて変数名（この場合は`ipa`）を書きます。
+最後に、等号と変数の値を書きます。
+値はコンテンツであるため角括弧で囲まれており、これはコンテンツを受け取る関数を呼び出すときと同じ書き方を反映しています。
+言い換えると、この構文は_「変数`ipa`に値`{[taɪpst]}`を持たせる」_というフレーズを表現しています。
 
-Now, we can use the variable in our document:
+これで文書中で変数を使用できます。
 
 ```example
 #let ipa = [taɪpst]
@@ -60,12 +54,10 @@ pronounce Typst is #ipa.
 )
 ```
 
-In the example, you can see that the variable can be used both in markup
-(prefixed with a `#`) and in a function call (by just typing its name). Of
-course, we can change the value of the variable and all its occurrences will
-automatically change with it. Let's make it a bit clearer what is IPA and what
-is normal prose by rendering IPA in italics. We are also using slashes which, by
-convention, often enclose IPA.
+この例では、変数がマークアップ中（`#`を前に付ける）と関数呼び出し中（変数名をそのまま記述する）の両方で使用できることがわかります。
+もちろん、変数の値を変更すれば、全ての出現箇所も自動的に変わります。
+IPAと通常の散文をより明確に区別するため、IPAを斜体で表示してみましょう。
+慣習的にIPAを囲むのに使われるスラッシュも追加します。
 
 ```example
 #let ipa = text(
@@ -83,19 +75,16 @@ pronounce Typst is #ipa.
 )
 ```
 
-Here, we called the text function and assigned its _return value_ to the
-variable. When you call a function, it processes its arguments and then yields
-another value (often content). So far in this tutorial, we called most
-functions directly in markup, like this: `[#text(fill: red)[CRIMSON!]]`. This
-call to the text function returns the red text as a return value. Because we
-placed it in markup, its return value just immediately got inserted into the
-content we wrote. With variables, we can instead store it to use it later or
-compose it with other values.
+ここでは、text関数を呼び出してその_戻り値_を変数に代入しています。
+関数を呼び出すと、引数を処理して別の値（多くの場合コンテンツ）を返します。
+このチュートリアルではこれまで、`[#text(fill: red)[CRIMSON!]]`のように、ほとんどの関数をマークアップ中で直接呼び出してきました。
+このtext関数の呼び出しは、戻り値として赤色のテキストを返します。
+これをマークアップ中に置いたため、戻り値はそのまま私たちが書いたコンテンツに即座に挿入されていました。
+変数を使うと、代わりに後で使用したり、他の値と組み合わせたりするために値を保存できます。
 
-Variables are not limited to storing content: they can store any data type Typst
-knows about. Throughout this tutorial, you made use of many data types when you
-passed them to Typst's built-in functions. Here is an example assigning each of
-them to a variable:
+変数はコンテンツの保存に限られません。Typstが知っている任意のデータ型を保存できます。
+このチュートリアル全体を通して、Typstの組み込み関数に渡す際にさまざまなデータ型を利用してきました。
+以下は、それぞれの型を変数に代入する例です。
 
 ```typ
 // Content with markup inside
@@ -123,10 +112,10 @@ them to a variable:
 #let focus = center
 ```
 
-In this chapter of the tutorial, you will leverage variables and your own
-functions to build templates that can be reused across multiple documents.
+このチュートリアルの本章では、変数と独自の関数を活用して、複数の文書で再利用できるテンプレートを構築します。
 
 ## 簡易テンプレート { #toy-template }
+
 Typstでは、テンプレートは文書全体をラップできる関数です。その方法を学ぶために、まずは独自の関数の書き方を復習しましょう。関数は何でもできるので、少し奇抜なものを作ってみませんか？
 
 ```example
@@ -135,22 +124,17 @@ Typstでは、テンプレートは文書全体をラップできる関数です
 You are #amazed[beautiful]!
 ```
 
-Comparing this against the previous section, you may have noticed that this
-looks a lot like a variable definition using `{let}`. This instinct is correct:
-Functions are just another data type. Here, we are defining the variable
-`amazed`, assigning it a function that takes a single argument, `term`, and
-returns content with the `term` surrounded by sparkles. We also put the whole
-thing in a [`box`]($box) so that the term we are amazed by cannot be separated from
-its sparkles by a line break. The special function definition syntax makes the
-definition shorter and more readable, but you can also use the regular variable
-definition syntax (see [the scripting reference]($scripting/#bindings) for
-details). After its definition, we are able to call the function just like all
-built-in functions.
+前のセクションと比較すると、これが`{let}`を使った変数定義によく似ていることに気付くかもしれません。
+この直感は正しく、関数は単なるもう1つのデータ型です。
+ここでは変数`amazed`を定義し、`term`という単一の引数を取り、`term`の両側にきらめきを付けたコンテンツを返す関数を割り当てています。
+さらに、感心している語が改行できらめきから分離されないように、全体を[`box`]($box)で囲んでいます。
+この特別な関数定義の構文は、定義をより短く読みやすくしますが、通常の変数定義の構文を使うこともできます（詳細は[スクリプト記述]($scripting/#bindings)を参照）。
+定義後は、組み込み関数と同じように関数を呼び出せます。
 
-Many functions that come with Typst have optional named parameters. Our
-functions can also have them. Let's add a parameter to our function that lets us
-choose the color of the text. We need to provide a default color in case the
-parameter isn't given.
+Typstの組み込み関数の多くにはオプションの名前付き引数があります。
+私たちの関数にもそれを持たせられます。
+テキストの色を選べるパラメーターを関数に追加してみましょう。
+パラメーターが与えられなかった場合に備えて、デフォルトの色を指定する必要があります。
 
 ```example
 #let amazed(term, color: blue) = {
@@ -161,7 +145,7 @@ You are #amazed[beautiful]!
 I am #amazed(color: purple)[amazed]!
 ```
 
-テンプレートは`amazed`のようなカスタム関数でドキュメント全体をラップすることで機能します。しかし、文書全体を巨大な関数呼び出しでラップするのは面倒でしょう！代わりに、「everything」showルールを使用して、より洗練されたコードで同じことを実現できます。そのようなshowルールを書くには、showキーワードの直後にコロンを置き、関数を提供します。この関数にはドキュメントの残りの部分がパラメーターとして渡されます。関数はこのコンテンツに対して何でも行うことができます。`amazed`関数は単一のコンテンツ引数で呼び出せるので、showルールに名前で渡すだけで良いのです。試してみましょう。
+テンプレートは`amazed`のようなカスタム関数で文書全体をラップすることで機能します。しかし、文書全体を巨大な関数呼び出しでラップするのは面倒でしょう！代わりに、"everything" showルールを使用して、より洗練されたコードで同じことが実現できます。そのようなshowルールを書くには、showキーワードの直後にコロンを置き、関数を提供します。この関数には文書の残りの部分がパラメーターとして渡されます。関数はこのコンテンツに対して任意の処理が可能です。`amazed`関数は単一のコンテンツ引数で呼び出せるので、showルールに名前で渡すだけで良いのです。試してみましょう。
 
 ```example
 >>> #let amazed(term, color: blue) = {
@@ -177,7 +161,8 @@ In fact, I am amazing!
 これで文書全体が`amazed`関数に渡され、文書をその関数でラップしたかのように機能します。もちろん、この特定の関数ではあまり有用ではありませんが、setルールと名前付き引数と組み合わせると、非常に強力になります。
 
 ## setルールとshowルールの埋め込み { #set-and-show-rules }
-テンプレートにいくつかのsetルールとshowルールを適用するには、関数内のコンテンツブロックで`set`と`show`を使用し、そのコンテンツブロックにドキュメントを挿入します。
+
+テンプレートにいくつかのsetルールとshowルールを適用するには、関数内のコンテンツブロックで`set`と`show`を使用し、そのコンテンツブロックに文書を挿入します。
 
 ```example
 #let template(doc) = [
@@ -191,7 +176,7 @@ I am learning something cool today.
 It's going great so far!
 ```
 
-前章で発見したように、setルールはそのコンテンツブロック内の全てに適用されます。everythingのshowルールが文書全体を`template`関数に渡すため、テンプレート内のテキストのsetルールと文字列のshowルールが文書全体に適用されます。この知識を使って、前章で作成した論文の本文スタイルを再現するテンプレートを作成しましょう。
+前章で発見したように、setルールはそのコンテンツブロック内の全てに適用されます。everything showルールが文書全体を`template`関数に渡すため、テンプレート内のテキストのsetルールと文字列のshowルールが文書全体に適用されます。この知識を使って、前章で作成した論文の本文スタイルを再現するテンプレートを作成しましょう。
 
 ```example
 #let conf(title, doc) = {
@@ -253,13 +238,14 @@ It's going great so far!
 
 コードの大部分は前章からコピーペーストしました。2つの違いがあります。
 
-1. everythingのshowルールを使用して、全てを`conf`関数でラップしました。この関数はいくつかのsetルールとshowルールを適用し、最後に渡されたコンテンツをそのまま出力します。
+1. everything showルールを使用して、全てを`conf`関数でラップしました。この関数はいくつかのsetルールとshowルールを適用し、最後に渡されたコンテンツをそのまま出力します。
 
-2. さらに、コンテンツブロックの代わりに中括弧で囲まれたコードブロックを使用しました。この方法では、全てのsetルールや関数呼び出しの前に`#`を付ける必要がなくなります。代わりに、コードブロック内に直接マークアップを書くことはできなくなります。
+2. さらに、コンテンツブロックの代わりに中括弧で囲まれたコードブロックを使用しました。この方法では、全てのsetルールや関数呼び出しの前に`#`を付ける必要がなくなります。代わりに、コードブロック内に直接マークアップを書けなくなります。
 
-また、タイトルがどこから来ているかに注目してください。以前は変数に格納しましたが、今はテンプレート関数の最初のパラメーターとして受け取っています。そのために、everythingのshowルールにクロージャー（その場で使用される名前のない関数）を渡しました。`conf`関数は2つの引数（タイトルと本文）を期待しますが、showルールは本文のみを渡すからです。したがって、論文のタイトルを設定し、showルールからの単一パラメーターを使用できる新しい関数定義を追加します。
+また、タイトルがどこから来ているかに注目してください。以前は変数に格納しましたが、今はテンプレート関数の最初のパラメーターとして受け取っています。そのために、everything showルールにクロージャー（その場で使用される名前のない関数）を渡しました。`conf`関数は2つの引数（タイトルと本文）を期待しますが、showルールは本文のみを渡すからです。したがって、論文のタイトルを設定し、showルールからの単一パラメーターを使用できる新しい関数定義を追加します。
 
 ## 名前付き引数を持つテンプレート { #named-arguments }
+
 前章の論文にはタイトルと著者リストがありました。これらの要素をテンプレートに追加しましょう。タイトルに加えて、所属機関を含む著者リストと論文の要約をテンプレートに受け付けるようにします。可読性を保つために、これらを名前付き引数として追加します。最終的には、次のように機能させたいと思います。
 
 ```typ
@@ -287,9 +273,9 @@ It's going great so far!
 ...
 ```
 
-この新しいテンプレート関数を構築しましょう。まず、`title`引数にデフォルト値を追加します。これにより、タイトルを指定せずにテンプレートを呼び出すことができます。また、空のデフォルト値を持つ名前付き引数として`authors`および`abstract`パラメーターを追加します。次に、前章からタイトル、要約、著者を生成するコードをテンプレートにコピーし、固定の詳細をパラメーターに置き換えます。
+この新しいテンプレート関数を構築しましょう。まず、`title`引数にデフォルト値を追加します。これにより、タイトルを指定せずにテンプレートを呼び出せます。また、空のデフォルト値を持つ名前付き引数として`authors`および`abstract`パラメーターを追加します。次に、前章からタイトル、要約、著者を生成するコードをテンプレートにコピーし、固定の詳細をパラメーターに置き換えます。
 
-新しい`authors`パラメーターは、`name`、`affiliation`、`email`というキーを持つ[辞書]($dictionary)の[配列]($array)を想定しています。任意の数の著者を持つことができるため、著者リストに1列、2列、または3列が必要かどうかを動的に決定します。まず、`authors`配列の[`.len()`]($array.len)メソッドを使用して著者の数を決定します。次に、列数を著者数と3の最小値に設定し、3列以上作成しないようにします。3人以上の著者がいる場合は、代わりに新しい行が挿入されます。この目的のために、`grid`関数に`row-gutter`パラメーターも追加しました。そうしないと、行同士が近すぎてしまいます。辞書から著者の詳細を抽出するには、[フィールドアクセス構文]($scripting/#fields)を使用します。
+新しい`authors`パラメーターは、`name`、`affiliation`、`email`というキーを持つ[辞書]($dictionary)の[配列]($array)を想定しています。任意の数の著者を持てるため、著者リストに1列、2列、または3列が必要かどうかを動的に決定します。まず、`authors`配列の[`.len()`]($array.len)メソッドを使用して著者の数を決定します。次に、列数を著者数と3の最小値に設定し、3列以上作成しないようにします。4人以上の著者がいる場合は、代わりに新しい行が挿入されます。この目的のために、`grid`関数に`row-gutter`パラメーターも追加しました。そうしないと、行同士が近すぎてしまいます。辞書から著者の詳細を抽出するには、[フィールドアクセス構文]($scripting/#fields)を使用します。
 
 各著者についてグリッドに引数を提供する必要があります。ここで配列の[`map`メソッド]($array.map)が便利です。これは引数として関数を取り、その関数が配列の各アイテムで呼び出されます。各著者の詳細をフォーマットし、コンテンツ値を含む新しい配列を返す関数を渡します。これで、グリッドの複数の引数として使用したい値の配列ができました。[`spread`演算子]($arguments)を使用してこれを実現できます。これは配列を取り、その各アイテムを関数の個別の引数として適用します。
 
@@ -339,7 +325,8 @@ It's going great so far!
 ```
 
 ## 別ファイル { #separate-file }
-多くの場合、テンプレートは別のファイルで指定され、それからドキュメントにインポートされます。この方法では、メインファイルはすっきりとし、テンプレートを簡単に再利用できます。ファイルパネルでプラスボタンをクリックして新しいテキストファイルを作成し、`conf.typ`という名前を付けます。`conf`関数定義をその新しいファイルに移動します。これで、showルールの前にインポートを追加することで、メインファイルからアクセスできます。`{import}`キーワードとコロンの間にファイルのパスを指定し、インポートしたい関数に名前を付けます。
+
+多くの場合、テンプレートは別のファイルで指定され、それから文書にインポートされます。この方法では、メインファイルはすっきりとし、テンプレートを簡単に再利用できます。ファイルパネルでプラスボタンをクリックして新しいテキストファイルを作成し、`conf.typ`という名前を付けます。`conf`関数定義をその新しいファイルに移動します。これで、showルールの前にインポートを追加することで、メインファイルからアクセスできます。`{import}`キーワードとコロンの間にファイルのパスを指定し、インポートしたい関数に名前を付けます。
 
 テンプレートの適用をより洗練させるためにできるもう1つのことは、関数の[`.with`]($function.with)メソッドを使用して、全ての名前付き引数を事前に設定することです。これにより、クロージャーを記述してテンプレートリストの最後にコンテンツ引数を追加する必要がなくなります。[Typst Universe]($universe)のテンプレートは、この関数呼び出しのスタイルで動作するように設計されています。
 
@@ -457,7 +444,8 @@ It's going great so far!
 これで会議論文を、その会議用の再利用可能なテンプレートに変換しました！[フォーラム](https://forum.typst.app/)や[TypstのDiscordサーバー](https://discord.gg/2uDybryKPe)で共有して、他の人も使えるようにしてみてはいかがでしょうか？
 
 ## まとめ { #review }
-おめでとうございます！Typstのチュートリアルを完了しました。このセクションでは、独自の関数を定義する方法と、再利用可能なドキュメントスタイルを定義するテンプレートを作成・適用する方法を学びました。あなたは多くを学び、ここまで来ました。これでTypstを使用して独自の文書を作成し、他の人と共有することができます。
+
+おめでとうございます！Typstのチュートリアルを完了しました。このセクションでは、独自の関数を定義する方法と、再利用可能な文書スタイルを定義するテンプレートを作成・適用する方法を学びました。あなたは多くを学び、ここまで来ました。これでTypstを使用して独自の文書を作成し、他の人と共有できます。
 
 私たちはまだ非常に若いプロジェクトであり、フィードバックを求めています。質問、提案、またはバグを発見した場合は、[フォーラム](https://forum.typst.app/)、[Discordサーバー](https://discord.gg/2uDybryKPe)、[GitHub](https://github.com/typst/typst/)、またはウェブアプリのフィードバックフォーム（ヘルプメニューからいつでも利用可能）でお知らせください。
 
