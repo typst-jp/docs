@@ -12,7 +12,7 @@ description: Typstチュートリアル
 まず、エディターの左上にある戻るアイコンでアプリのダッシュボードに戻ります。
 次に、左のツールバーのプラスアイコンを選択し、チームを作成します。
 最後に、新しいチームをクリックし、チーム名の横にあるmanage teamをクリックして設定に進みます。
-これで教員をメールで招待することができます。
+これで教員をメールで招待できます。
 
 ![The team settings](3-advanced-team-settings.png)
 
@@ -20,7 +20,7 @@ description: Typstチュートリアル
 プロジェクトを開き、左のツールバーの歯車アイコンを選んで設定に行き、Ownerのドロップダウンから新しいチームを選択します。
 変更を保存するのを忘れないでください！
 
-あなたの教員もプロジェクトを編集することができ、お互いにリアルタイムで変更を確認できます。
+あなたの教員もプロジェクトを編集でき、お互いにリアルタイムで変更を確認できます。
 公式の[Discordサーバー](https://discord.gg/2uDybryKPe)に参加して他のユーザーを見つけ、一緒にチームを組んでみることも可能です！
 
 ## 学会ガイドライン { #guidelines }
@@ -166,7 +166,7 @@ paper together with our supervisor, we'll add our own and their name.
 
 著者情報が記載された2つのブロックが隣り合わせにレイアウトされています。
 このレイアウトを作るために[`grid`]($grid)関数を使っています。
-これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御することができます。
+これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御できます。
 `columns`引数には、[相対長さ]($relative)または[割合]($fraction)の配列を渡します。
 この場合、2つの等しい割合のサイズを渡し、使用可能なスペースを2つの等しい列に分割するように指示します。
 次に、grid関数に2つのコンテンツ引数を渡しました。
@@ -219,7 +219,7 @@ size apart.
 
 それでは、アブストラクトを追加しましょう。
 学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。
-Now, let's add the abstract. Remember that the conference wants the abstract to be set ragged and centered.
+Now, let's add the abstract. Remember that the conference wants the abstract to be set ragged and centered。
 
 ```example:0,0,612,317.5
 >>> #set page(
