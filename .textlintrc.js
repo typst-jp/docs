@@ -10,6 +10,7 @@ module.exports = {
     },
   },
   rules: {
+    "preset-ja-technical-writing": true,
     "preset-jtf-style": {
       // デフォルトで無効のため
       "2.1.5.カタカナ": true,
