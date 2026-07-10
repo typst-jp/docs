@@ -10,7 +10,22 @@ module.exports = {
     },
   },
   rules: {
-    "preset-ja-technical-writing": true,
+    "preset-ja-technical-writing": {
+      // 原文に依存するため
+      "max-comma": false,
+      // 原文に依存するため
+      "max-ten": false,
+      // 原文に依存するため
+      "ja-no-weak-phrase": false,
+      // 原文に依存するため
+      "ja-no-successive-word": false,
+      // 原文に依存するため
+      "no-mix-dearu-desumasu": false,
+      // 原文に依存するため
+      "no-exclamation-question-mark": false,
+      // 原文に依存するため
+      "sentence-length": false,
+    },
     "preset-jtf-style": {
       // デフォルトで無効のため
       "2.1.5.カタカナ": true,
