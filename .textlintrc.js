@@ -25,6 +25,10 @@ module.exports = {
       "no-exclamation-question-mark": false,
       // 原文に依存するため
       "sentence-length": false,
+      "max-kanji-continuous-len": {
+        max: 6,
+        allow: ["国際標準化機構", "米国社会保障局"],
+      },
     },
     "preset-jtf-style": {
       // デフォルトで無効のため

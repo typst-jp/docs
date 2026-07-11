@@ -3,6 +3,8 @@ description: |
   Typstに関する日本語記事のまとめです。
 ---
 
+<!-- textlint-disable ja-technical-writing/max-kanji-continuous-len -->
+
 # 日本語記事
 
 Typstに関する日本語の記事は[Zenn](https://zenn.dev/)や[Qiita](https://qiita.com/)に沢山掲載されています。以下のリンクからその一覧が見られます。

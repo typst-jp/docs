@@ -72,7 +72,7 @@ description: Typstチュートリアル
 ここでは、ページ番号の付け方を定義する[numbering pattern]($numbering)を指定できます。
 例えば`{"1"}`と設定すると、Typstは素のページ番号のみを表示します。
 また`{"(1/1)"}`と設定すると、カッコで囲まれた現在のページと総ページ数が表示されるでしょう。
-さらに、カスタム関数を用意して完全に好みの書式にすることも可能です。
+さらに、カスタム関数を用意して完全に好みの書式にできます。
 
 ## タイトルとアブストラクトの作成 { #title-and-abstract }
 それでは、タイトルとアブストラクトを追加しましょう。
@@ -173,7 +173,7 @@ paper together with our supervisor, we'll add our own and their name.
 ひとつは主著者であるあなたの情報で、もうひとつは指導教員の情報です。
 ここでも `align` 関数を使用して、コンテンツを列の中央に配置しています。
 grid関数はセルを指定するコンテンツ引数を任意の数で受け取れます。
-行は自動的に追加されますが、`rows`引数で手動でサイズを指定することも可能です。
+行は自動的に追加されますが、`rows`引数を使えば手動でサイズを指定できます。
 
 Looking at the authors and the title, they are a bit too close together. You can
 address this by using another show-set rule to configure the space below the
@@ -550,7 +550,7 @@ place関数は引数として配置とコンテンツを受け取ります。
 また、コンテンツはcenter引数を継承しているため、各パーツごとに行っていた明示的な `{align(center, ...)}` 呼び出しも削除できます。
 
 最後に見出しのスタイルの設定をしましょう。
-ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
+ガイドラインに従うため、見出しは中央揃えにして、小さな大文字を使わなければなりません。
 `heading`関数はそのような設定を提供していないため、独自の見出しshowルールを書く必要があります。
 
 - A show-set rule to make headings center-aligned
@@ -745,11 +745,14 @@ take these fields into account.
 - ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載 ✓
 
 これで、全てのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。
+
+<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
 <img
   src="3-advanced-paper.png"
   alt="The finished paper"
   style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 500px; max-width: 100%; display: block; margin: 24px auto;"
 >
+<!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
 
 ## まとめ
 このセクションでは、ヘッダーとフッターの作成方法、関数とスコープを使用してローカルにスタイルをオーバーライドする方法、[`grid`]関数を使用してより複雑なレイアウトを作成する方法、個々の関数と文書全体のshowルールを記述する方法を学びました。

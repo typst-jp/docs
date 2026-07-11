@@ -3,6 +3,8 @@ description: |
   Typstの日本語テンプレートのまとめです。
 ---
 
+<!-- textlint-disable ja-technical-writing/max-kanji-continuous-len -->
+
 # 日本語テンプレート
 
 ## 一般
