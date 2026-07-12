@@ -1,4 +1,5 @@
 ---
+title: 日本語記事
 description: |
   Typstに関する日本語記事のまとめです。
 ---
