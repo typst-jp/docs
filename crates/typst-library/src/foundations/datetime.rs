@@ -52,7 +52,7 @@ use crate::foundations::{
 /// #distance.hours()
 /// ```
 ///
-/// datetimeとdurationを加減算することで、新しい日時（オフセットされたdatetime）を取得することもできます。
+/// datetimeとdurationを加減算することで、新しい日時（オフセットされたdatetime）も取得できます。
 /// ```example
 /// #let date = datetime(day: 1, month: 3, year: 2024)
 /// #let two-days = duration(days: 2)

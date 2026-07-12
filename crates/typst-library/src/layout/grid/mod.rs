@@ -80,7 +80,7 @@ use crate::visualize::{Paint, Stroke};
 /// )
 /// ```
 ///
-/// また、文字列やコンテンツの配列をグリッドに[展開](#arguments/#spreading)して、セルを埋めることもできます。
+/// また、文字列やコンテンツの配列をグリッドに[展開](#arguments/#spreading)して、セルを埋められます。
 ///
 /// ```example
 /// #grid(

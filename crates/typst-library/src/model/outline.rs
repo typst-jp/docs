@@ -115,7 +115,7 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 ///   [`page` number]($outline.entry.page)、およびそれらの間を埋めるフィラー（点線など）を組み合わせます。
 ///
 /// これらの関数を個別に使うことで、アウトライン項目の書式を変更できます。
-/// 例えば、フィラーやページ番号を完全に削除したい場合は、次のようなshowルールを書くことができます。
+/// 例えば、フィラーやページ番号を完全に削除したい場合は、次のようなshowルールを書けます。
 ///
 /// ```example
 /// #show outline.entry: it => link(
