@@ -7,14 +7,14 @@ use crate::foundations::{Array, Context, LocatableSelector, Value, func};
 /// 文書中の要素の検索。
 ///
 /// `query`関数を用いると特定の型やラベルを持った要素を文書内から探せます。
-/// 使用するにはまず[コンテキスト]($context)が利用可能であることを確かめる必要があります。
+/// 使用するには、まず[コンテキスト]($context)が利用可能であることを確かめる必要があります。
 ///
 
 /// # 要素の探索
 /// 以下の例では、[`outline`]を用いる代わりに手動で目次を作成しています。
 ///
 /// このために、まず第1レベルの見出しで`outlined`がtrueなものを検索します。
-/// この例において第1レベルの見出しのみを検索する目的は、第2レベル以下の見出しが目次に含まれないようにすることです。
+/// この例で第1レベルの見出しのみを検索する目的は、第2レベル以下の見出しを目次から除外することです。
 /// `outlined`フィールドは"Table of Contents"という見出し自身を取り除くために使われます。
 ///
 /// `query`関数を使用可能にするため、`context`を作成していることに注意してください。
@@ -58,7 +58,7 @@ use crate::foundations::{Array, Context, LocatableSelector, Value, func};
 /// #lorem(18)
 /// ```
 ///
-/// ページ番号を取得するために、まず[`location`]($content.location)メソッドを用いて`query`が返す要素のロケーションを取得します。
+/// ページ番号を取得するため、まず[`location`]($content.location)メソッドを用いて`query`が返す要素のロケーションを取得します。
 /// 続けて、その位置にある[ページの番号付け]($location.page-numbering)と[ページカウンター]($counter/#page-counter)を取得し、カウンターに番号付けを適用します。
 ///
 /// # 注意事項 { #caution }
@@ -96,7 +96,7 @@ use crate::foundations::{Array, Context, LocatableSelector, Value, func};
 /// #metadata("This is a note") <note>
 /// ```
 ///
-/// Typst CLIを用いて以下のようにこのファイルに対してクエリを実行できます。
+/// Typst CLIを用いて、以下のようにこのファイルを対象にクエリを実行できます。
 /// ```sh
 /// $ typst query example.typ "<note>"
 /// [
@@ -110,7 +110,7 @@ use crate::foundations::{Array, Context, LocatableSelector, Value, func};
 ///
 /// ## 特定のフィールドの取得
 ///
-/// 結果となる要素の特定の1つのフィールドにのみ興味があることが多いです。
+/// 多くの場合、結果となる要素では特定の1つのフィールドだけが関心の対象です。
 /// `metadata`要素の場合、`value`フィールドが興味の対象です。
 /// `--field`引数を用いてこのフィールドのみを抽出できます。
 ///

@@ -37,7 +37,7 @@ pub struct StackElem {
     #[default(Dir::TTB)]
     pub dir: Dir,
 
-    /// 明示的に間隔が与えられなかった場合にアイテム間に挿入される間隔。
+    /// 明示的に間隔が与えられなかった場合に挿入されるアイテム間の間隔。
     pub spacing: Option<Spacing>,
 
     /// 軸に沿って積み重ねる子要素。

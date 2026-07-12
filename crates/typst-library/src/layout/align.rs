@@ -13,7 +13,7 @@ use crate::text::TextElem;
 /// コンテンツを水平方向・垂直方向に配置。
 ///
 /// # 例
-/// コンテンツを水平方向に中央揃えにすることから始めましょう。
+/// コンテンツを水平方向で中央揃えにすることから始めましょう。
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(center)
@@ -24,7 +24,7 @@ use crate::text::TextElem;
 /// A work of art, a visual throne
 /// ```
 ///
-/// 垂直方向に中央揃えにするには_horizon_配置を使用します。
+/// 垂直方向で中央揃えにするには_horizon_配置を使用します。
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(horizon)

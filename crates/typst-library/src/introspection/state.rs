@@ -65,7 +65,7 @@ use crate::routines::Routines;
 /// ここで、Typstはまずshowルール以降の文書本体を処理し、`Introduction`見出しを検知します。
 /// 続いて`template`関数に生成コンテンツを渡します。
 /// その後、初めて`Outline`を検知します。
-/// 単にカウンター値を増やすと`Introduction`は`1`に、`Outline`は`2`となります。
+/// 単にカウンター値を増やすと`Introduction`は`1`、`Outline`は`2`となります。
 ///
 /// # Typstにおける状態管理 { #state-in-typst }
 /// それでは代わりにどうするのでしょうか？
