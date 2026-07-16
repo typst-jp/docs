@@ -104,11 +104,11 @@ use crate::visualize::ImageElem;
 /// 図形、または視覚化に代替説明を追加できます。
 /// グラフィックが純粋に装飾目的であり、セマンティックな意味を持たない場合は、
 /// 代わりに[`pdf.artifact`]で囲むことを検討してください。
-/// これにより、PDFにエクスポートする際にATから認識されなくなります。
+/// これにより、PDFへのエクスポート時にATから認識されなくなります。
 ///
 /// ATは、図表の[`placement`]($figure.placement)による配置とは関係なく、
 /// その図表が文書中に現れる位置で常に読み上げます。
-/// 読み上げ順序の中で最も自然になる位置にそのマークアップを配置してください。
+/// 読み上げ順序の中で最も自然な位置にそのマークアップを配置してください。
 #[elem(scope, Locatable, Tagged, Synthesize, Count, ShowSet, Refable, Outlinable)]
 pub struct FigureElem {
     /// 図表のコンテンツ。多くの場合、 [image] が使われます。
@@ -513,7 +513,7 @@ pub struct FigureCaption {
 
     /// キャプション名。
     ///
-    /// 独自のキャプションに改変するために
+    /// キャプションを独自のものへ改変するために
     /// `kind`、`supplement`、`counter`、`numbering`、`location`が同時に使えます。
     ///
     /// ```example

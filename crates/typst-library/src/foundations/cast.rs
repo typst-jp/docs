@@ -516,7 +516,7 @@ cast! {
     "unary" => MathClass::Unary,
     /// `times`のような二項演算子。
     "binary" => MathClass::Binary,
-    /// `+`のような単項にも二項にもなる演算子。
+    /// `+`のような単項と二項のどちらにもなる演算子。
     "vary" => MathClass::Vary,
 }
 
