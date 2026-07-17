@@ -132,7 +132,7 @@ use crate::text::TextElem;
 pub struct RefElem {
     /// 参照されるべき対象ラベル。
     ///
-    /// ドキュメント内で定義されたラベル、または[`form`]($ref.form)が`{"normal"}`の場合は[`bibliography`]の項目でも構いません。
+    /// ドキュメント内で定義されたラベルか、[`form`]($ref.form)が`{"normal"}`の場合は[`bibliography`]の項目でも構いません。
     #[required]
     pub target: Label,
 
