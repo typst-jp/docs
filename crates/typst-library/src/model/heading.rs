@@ -65,7 +65,7 @@ use crate::text::{FontWeight, LocalName, TextElem, TextSize};
 /// これは文書内で1つだけにすべきHTMLの`<h1>`とは異なります。
 ///
 /// そのためHTMLエクスポートでは、[`title`]要素が`<h1>`になり、見出しは
-/// `<h2>`以下になります（レベル1は`<h2>`、レベル2は`<h3>`という具合）。
+/// `<h2>`以下になります（レベル1なら`<h2>`、レベル2なら`<h3>`という具合）。
 #[elem(Locatable, Tagged, Synthesize, Count, ShowSet, LocalName, Refable, Outlinable)]
 pub struct HeadingElem {
     /// 1から始まる、見出しの絶対的なネストの深さ。
