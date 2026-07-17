@@ -27,7 +27,7 @@ module.exports = {
       "sentence-length": false,
       "max-kanji-continuous-len": {
         max: 6,
-        allow: ["国際標準化機構", "米国社会保障局"],
+        allow: ["国際標準化機構", "米国社会保障局", "日本語組版情報"],
       },
     },
     "preset-jtf-style": {

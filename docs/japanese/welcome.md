@@ -3,11 +3,7 @@ title: 日本語組版情報
 description: Typstの日本語組版のための情報を提供します。
 ---
 
-<!-- textlint-disable ja-technical-writing/max-kanji-continuous-len -->
-
 # 日本語組版情報
-
-<!-- textlint-enable ja-technical-writing/max-kanji-continuous-len -->
 
 このページでは、Typstで日本語組版をするユーザー向けの情報を提供します。有益な情報をお持ちの方は、ぜひIssueやPull Requestを通じて貢献してください。
 
