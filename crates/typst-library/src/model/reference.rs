@@ -132,13 +132,14 @@ use crate::text::TextElem;
 pub struct RefElem {
     /// 参照されるべき対象ラベル。
     ///
-    /// ドキュメント内で定義されたラベルか、[`form`]($ref.form)が`{"normal"}`の場合は[`bibliography`]の項目でも構いません。
+    /// ドキュメント内で定義されたラベルか、`{"normal"}`の[`form`]($ref.form)を使う場合は[`bibliography`]の項目でも構いません。
     #[required]
     pub target: Label,
 
     /// 参照の補足語。
     ///
-    /// [`form`]($ref.form)が`{"normal"}`の場合：
+    /// [`form`]($ref.form)が`{"normal"}`の場合は以下の通りです。
+    ///
     /// - 見出しや図への参照では、この値が参照番号の前に追加されます。
     /// - 文献引用の場合は、ページ番号などを追記するのに使えます。
     ///
