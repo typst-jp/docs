@@ -1015,7 +1015,7 @@ pub fn quo(
     floor(divided).at(span)
 }
 
-/// 一連の値の`p`ノルムを計算。
+/// 一連の値のpノルムを計算。
 ///
 /// ```example
 /// #calc.norm(1, 2, -3, 0.5) \
@@ -1023,11 +1023,11 @@ pub fn quo(
 /// ```
 #[func(title = "𝑝-Norm")]
 pub fn norm(
-    /// `p`ノルムを計算するための`p`の値。
+    /// pノルムを計算するための`p`の値。
     #[named]
     #[default(Spanned::new(2.0, Span::detached()))]
     p: Spanned<f64>,
-    /// `p`ノルムを計算する一連の値。空の場合、`0.0`を返します。
+    /// pノルムを計算する一連の値。空の場合、`0.0`を返します。
     #[variadic]
     values: Vec<f64>,
 ) -> SourceResult<f64> {
