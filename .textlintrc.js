@@ -26,7 +26,7 @@ module.exports = {
       // 原文に依存するため
       "sentence-length": false,
       "ja-unnatural-alphabet": {
-        allow: ["pノルム"],
+        allow: ["/[A-Z]/", "n", "pノルム"],
       },
       "max-kanji-continuous-len": {
         max: 6,
