@@ -98,7 +98,7 @@ pub struct HeadingElem {
     pub depth: NonZeroUsize,
 
     /// 各見出しの`{level}`の開始オフセットであり、
-    /// 相対的な`{depth}`を絶対的な`{level}`に変換するため使用されます。
+    /// 相対的な`{depth}`を絶対的な`{level}`へ変換するために使用されます。
     ///
     /// ```example
     /// = Level 1
