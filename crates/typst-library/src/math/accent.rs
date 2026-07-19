@@ -65,7 +65,7 @@ pub struct AccentElem {
     #[default(Rel::one())]
     pub size: Rel<Length>,
 
-    /// 上付きのアクセント記号を追加する際に、小文字のiおよびjの上の点を取り除くかどうか。
+    /// 上付きのアクセント記号を追加する際に、小文字の`i`および`j`の上の点を取り除くかどうか。
     ///
     /// OpenTypeフィーチャーの`dtls`が有効になります。
     ///

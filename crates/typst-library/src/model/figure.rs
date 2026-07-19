@@ -39,7 +39,7 @@ use crate::visualize::ImageElem;
 /// ) <glacier>
 /// ```
 ///
-/// 図表に [tables]($table) を挿入してキャプションを付けることもできます。
+/// 図表に [tables]($table) を挿入してキャプションも付けられます。
 /// 図表は表を含むことを検出し、自動的に別のカウンターを使用します。
 ///
 /// ```example
@@ -58,7 +58,7 @@ use crate::visualize::ImageElem;
 ///
 /// # 図表の動作
 /// デフォルトでは、図表はコンテンツの流れの中に配置されます。
-/// 図表をページの上部または下部に配置するには、[`placement`]($figure.placement)引数を使用します。
+/// 図表をページ上部または下部に配置するには、[`placement`]($figure.placement)引数を使用します。
 ///
 /// 図表が大きすぎてそのコンテンツがページをまたいで分割可能な場合（例えば大きな表が含まれている場合）、このshowルールで図表自体もページをまたいで分割可能です。
 /// ```typ
@@ -81,7 +81,7 @@ use crate::visualize::ImageElem;
 /// ```
 ///
 /// [`where`]($function.where)セレクターを使うことで、このようなルールを特定の種類の図表に適用可能です。
-/// 例えば、図表の種類が表の場合はキャプションを表の上に配置し、他の種類ではキャプションを下に配置するには、次のようなshow-setルールを記述します。
+/// 例えば、図表の種類が表の場合はキャプションを表の上に配置し、他の種類ではキャプションを下に配置するなら、次のようなshow-setルールを記述します。
 ///
 /// ```example
 /// #show figure.where(
@@ -104,11 +104,11 @@ use crate::visualize::ImageElem;
 /// 図形、または視覚化に代替説明を追加できます。
 /// グラフィックが純粋に装飾目的であり、セマンティックな意味を持たない場合は、
 /// 代わりに[`pdf.artifact`]で囲むことを検討してください。
-/// これにより、PDFにエクスポートする際にATから認識されなくなります。
+/// これにより、PDFへのエクスポート時にATから認識されなくなります。
 ///
-/// ATは、図表の[`placement`]($figure.placement)による配置に関係なく、
+/// ATは、図表の[`placement`]($figure.placement)による配置とは関係なく、
 /// その図表が文書中に現れる位置で常に読み上げます。
-/// 読み上げ順序の中で最も自然になる位置にそのマークアップを配置してください。
+/// 読み上げ順序の中で最も自然な位置にそのマークアップを配置してください。
 #[elem(scope, Locatable, Tagged, Synthesize, Count, ShowSet, Refable, Outlinable)]
 pub struct FigureElem {
     /// 図表のコンテンツ。多くの場合、 [image] が使われます。
@@ -207,7 +207,7 @@ pub struct FigureElem {
     ///
     /// カウンターの値を変更して番号をスキップしたり、
     /// カウンターをリセットしたりしたい場合は、[`where`]($function.where)セレクターを使用して、
-    /// 各種類の図表に対応する[カウンター]($counter)にアクセスできます。
+    /// 各種類の図表に対応する[カウンター]($counter)へアクセスできます。
     ///
     /// - [表]($table)の場合: `{counter(figure.where(kind: table))}`
     /// - [画像]($image)の場合: `{counter(figure.where(kind: image))}`
@@ -513,7 +513,7 @@ pub struct FigureCaption {
 
     /// キャプション名。
     ///
-    /// 独自のキャプションに改変するために
+    /// キャプションを独自のものへ改変するために
     /// `kind`、`supplement`、`counter`、`numbering`、`location`が同時に使えます。
     ///
     /// ```example

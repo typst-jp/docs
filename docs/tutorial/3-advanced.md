@@ -12,7 +12,7 @@ description: Typstチュートリアル
 まず、エディターの左上にある戻るアイコンでアプリのダッシュボードに戻ります。
 次に、左のツールバーのプラスアイコンを選択し、チームを作成します。
 最後に、新しいチームをクリックし、チーム名の横にあるmanage teamをクリックして設定に進みます。
-これで教員をメールで招待することができます。
+これで教員をメールで招待できます。
 
 ![The team settings](3-advanced-team-settings.png)
 
@@ -20,7 +20,7 @@ description: Typstチュートリアル
 プロジェクトを開き、左のツールバーの歯車アイコンを選んで設定に行き、Ownerのドロップダウンから新しいチームを選択します。
 変更を保存するのを忘れないでください！
 
-あなたの教員もプロジェクトを編集することができ、お互いにリアルタイムで変更を確認できます。
+あなたの教員もプロジェクトを編集でき、お互いにリアルタイムで変更を確認できます。
 公式の[Discordサーバー](https://discord.gg/2uDybryKPe)に参加して他のユーザーを見つけ、一緒にチームを組んでみることも可能です！
 
 ## 学会ガイドライン { #guidelines }
@@ -72,7 +72,7 @@ description: Typstチュートリアル
 ここでは、ページ番号の付け方を定義する[numbering pattern]($numbering)を指定できます。
 例えば`{"1"}`と設定すると、Typstは素のページ番号のみを表示します。
 また`{"(1/1)"}`と設定すると、カッコで囲まれた現在のページと総ページ数が表示されるでしょう。
-さらに、カスタム関数を用意して完全に好みの書式にすることも可能です。
+さらに、カスタム関数を用意して完全に好みの書式にできます。
 
 ## タイトルとアブストラクトの作成 { #title-and-abstract }
 それでは、タイトルとアブストラクトを追加しましょう。
@@ -166,14 +166,14 @@ paper together with our supervisor, we'll add our own and their name.
 
 著者情報が記載された2つのブロックが隣り合わせにレイアウトされています。
 このレイアウトを作るために[`grid`]($grid)関数を使っています。
-これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御することができます。
+これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御できます。
 `columns`引数には、[相対長さ]($relative)または[割合]($fraction)の配列を渡します。
 この場合、2つの等しい割合のサイズを渡し、使用可能なスペースを2つの等しい列に分割するように指示します。
 次に、grid関数に2つのコンテンツ引数を渡しました。
 ひとつは主著者であるあなたの情報で、もうひとつは指導教員の情報です。
 ここでも `align` 関数を使用して、コンテンツを列の中央に配置しています。
 grid関数はセルを指定するコンテンツ引数を任意の数で受け取れます。
-行は自動的に追加されますが、`rows`引数で手動でサイズを指定することも可能です。
+行は自動的に追加されますが、`rows`引数を使えば手動でサイズを指定できます。
 
 Looking at the authors and the title, they are a bit too close together. You can
 address this by using another show-set rule to configure the space below the
@@ -219,7 +219,7 @@ size apart.
 
 それでは、アブストラクトを追加しましょう。
 学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。
-Now, let's add the abstract. Remember that the conference wants the abstract to be set ragged and centered.
+Now, let's add the abstract. Remember that the conference wants the abstract to be set ragged and centered。
 
 ```example:0,0,612,317.5
 >>> #set page(
@@ -550,7 +550,7 @@ place関数は引数として配置とコンテンツを受け取ります。
 また、コンテンツはcenter引数を継承しているため、各パーツごとに行っていた明示的な `{align(center, ...)}` 呼び出しも削除できます。
 
 最後に見出しのスタイルの設定をしましょう。
-ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
+ガイドラインに従うため、見出しは中央揃えにして、小さな大文字を使わなければなりません。
 `heading`関数はそのような設定を提供していないため、独自の見出しshowルールを書く必要があります。
 
 - A show-set rule to make headings center-aligned
@@ -745,11 +745,14 @@ take these fields into account.
 - ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載 ✓
 
 これで、全てのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。
+
+<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
 <img
   src="3-advanced-paper.png"
   alt="The finished paper"
   style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 500px; max-width: 100%; display: block; margin: 24px auto;"
 >
+<!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
 
 ## まとめ
 このセクションでは、ヘッダーとフッターの作成方法、関数とスコープを使用してローカルにスタイルをオーバーライドする方法、[`grid`]関数を使用してより複雑なレイアウトを作成する方法、個々の関数と文書全体のshowルールを記述する方法を学びました。

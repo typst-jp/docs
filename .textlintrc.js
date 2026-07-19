@@ -10,6 +10,29 @@ module.exports = {
     },
   },
   rules: {
+    "preset-ja-technical-writing": {
+      // 原文に依存するため
+      "max-comma": false,
+      // 原文に依存するため
+      "max-ten": false,
+      // 原文に依存するため
+      "ja-no-weak-phrase": false,
+      // 原文に依存するため
+      "ja-no-successive-word": false,
+      // 原文に依存するため
+      "no-mix-dearu-desumasu": false,
+      // 原文に依存するため
+      "no-exclamation-question-mark": false,
+      // 原文に依存するため
+      "sentence-length": false,
+      "ja-unnatural-alphabet": {
+        allow: ["/[A-Z]/", "n", "pノルム"],
+      },
+      "max-kanji-continuous-len": {
+        max: 6,
+        allow: ["国際標準化機構", "米国社会保障局", "日本語組版情報"],
+      },
+    },
     "preset-jtf-style": {
       // デフォルトで無効のため
       "2.1.5.カタカナ": true,

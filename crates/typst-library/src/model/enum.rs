@@ -34,7 +34,7 @@ use crate::model::{ListItemLike, ListLike, Numbering, NumberingPattern};
 /// ```
 ///
 /// setルールを用いることで、
-/// 全てのリストを異なる番号付けスタイルに簡単に切り替えることができます。
+/// 全てのリストを異なる番号付けスタイルに簡単に切り替えられます。
 /// ```example
 /// #set enum(numbering: "a)")
 ///
@@ -43,7 +43,7 @@ use crate::model::{ListItemLike, ListLike, Numbering, NumberingPattern};
 /// ```
 ///
 /// また、[`enum.item`]($enum.item)を使用して、
-/// リストの各項目の番号を自由にカスタマイズすることもできます。
+/// リストの各項目の番号を自由にカスタマイズできます。
 ///
 /// ```example
 /// #enum(
@@ -61,7 +61,7 @@ use crate::model::{ListItemLike, ListLike, Numbering, NumberingPattern};
 /// - 行の先頭に数字とピリオドを付けると、
 ///   明示的に番号を指定したリスト項目が作成されます。
 ///
-/// リストの項目には、複数の段落やその他のブロックレベルのコンテンツを含めることができます。
+/// リストの項目には、複数の段落やその他のブロックレベルのコンテンツを含められます。
 /// 項目のマーカーよりもインデントが深いコンテンツは全て、
 /// その項目の一部となります。
 #[elem(scope, title = "Numbered List", Locatable, Tagged)]
@@ -169,9 +169,9 @@ pub struct EnumElem {
     /// 一般的に、水平方向の番号の配置には`{start}`よりも`{end}`を選択することが推奨されます。
     /// なぜなら、番号がテキストに向かってではなくテキストから離れる方向に伸びることによって、
     /// 特定の視覚的な問題を回避できるからです。
-    /// しかし、このオプションを使用することで、この動作を上書きすることができます。
+    /// しかし、このオプションを使用することで、この動作を上書きできます。
     /// （また、[unordered list]($list)は異なる方法を用いており、直接`marker`コンテンツに配置を指定することで、
-    /// これを行っていることに注意してください）
+    /// これを実現していることに注意してください）
     ///
     /// ````example
     /// #set enum(number-align: start + bottom)
