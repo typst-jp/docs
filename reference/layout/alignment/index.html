@@ -26,13 +26,13 @@
 <li><code>horizon</code>: 垂直方向の中央に配置。</li>
 <li><code>bottom</code>: 下側に配置。</li>
 </ul>
-<p>これらの値はグローバルスコープでも、alignment型のスコープでも用いることができます。
-したがって、以下の2つのどちらでも書くことができます。</p>
+<p>これらの値はグローバルスコープでも、alignment型のスコープでも使えます。
+したがって、以下の2つのどちらでも書けます。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span><span class="typ-punct">[</span>Hi<span class="typ-punct">]</span>
 <span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>alignment<span class="typ-punct">.</span>center<span class="typ-punct">)</span><span class="typ-punct">[</span>Hi<span class="typ-punct">]</span>
 </code></pre><div class="preview"><img src="/docs/assets/669ac68cb04f4942797f66b87e297c20.png" alt="Preview"></div></div>
 <h2 id="2次元配置">2次元配置</h2>
-<p>両方の軸に沿った配置を同時に行うには、<code>+</code>演算子を用いて2種類の配置を足し合わせます。
+<p>両方の軸に沿って同時に配置するには、<code>+</code>演算子を用いて2種類の配置を足し合わせます。
 例えば、<code>top + right</code>はコンテンツを右上隅に配置します。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">page</span><span class="typ-punct">(</span>height<span class="typ-punct">:</span> <span class="typ-num">3cm</span><span class="typ-punct">)</span>
 <span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>center <span class="typ-op">+</span> bottom<span class="typ-punct">)</span><span class="typ-punct">[</span>Hi<span class="typ-punct">]</span>

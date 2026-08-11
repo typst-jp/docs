@@ -48,7 +48,7 @@ behaviour of these natural structures.
 <span class="typ-marker">+</span> The geology
 </code></pre><div class="preview"><img src="/docs/assets/53720741b852350f277645c8bff80fae.png" alt="Preview"></div></div>
 <p>箇条書きリストを追加したい場合は、<code>+</code> 文字の代わりに <code>-</code> 文字を使用します。
-また、リストをネストすることもできます。
+また、リストはネストできます。
 例えば、上記のリストの最初の項目にサブリストを追加するには、それをインデントします。</p>
 <div class="previewed-code"><pre><code><span class="typ-marker">+</span> The climate
   <span class="typ-marker">-</span> Temperature
@@ -67,7 +67,7 @@ Typstでは、PNG、JPEG、GIF、SVG、PDF、WebPの形式の画像をサポー�
 レポートに用いる画像ファイルを選んでください。</p>
 <p><img src="/docs/assets/1-writing-upload.png" alt="Upload dialog" /></p>
 <p>以前にも見てきたように、Typstでは特定の記号（<em>マークアップ</em>と呼ばれる）が特有の意味を持ちます。
-<code>=</code>、<code>-</code>、<code>+</code>、<code>_</code> をそれぞれ見出し、リスト、強調テキストを作成するために使用することができます。
+<code>=</code>、<code>-</code>、<code>+</code>、<code>_</code> をそれぞれ見出し、リスト、強調テキストを作成するために使用できます。
 しかし、文書に挿入したいもの全てに特別な記号を割り当てると、すぐに分かりづらく、そして扱いづらくなってしまいます。
 そのため、Typstでは一般的な書式にのみマークアップ記号を用意し、それ以外は全て<em>関数</em>を使って挿入します。</p>
 <p>ページに画像を表示させるためには、Typstの<a href="/docs/reference/visualize/image/"><code>image</code></a>関数を使用します。</p>
@@ -87,7 +87,7 @@ Typstは引数リスト内でさまざまなデータ型を認識します。
 </code></pre><div class="preview"><img src="/docs/assets/96969d2883b3704b1ffcc1a849e66084.png" alt="Preview"></div></div>
 <p><code>width</code> 引数は <a href="/docs/reference/layout/relative/">相対的な長さ</a> です。
 上の例では、画像がページの幅の <code><span class="typ-num">70%</span></code> を占めるようにパーセンテージを指定しています。
-また、<code><span class="typ-num">1cm</span></code> や <code><span class="typ-num">0.7in</span></code> のような絶対値を指定することもできます。</p>
+また、<code><span class="typ-num">1cm</span></code> や <code><span class="typ-num">0.7in</span></code> のような絶対値も指定できます。</p>
 <p>テキストと同様に、画像もデフォルトではページの左側に配置されます。さらに、図表の説明（キャプション）も欠けています。
 これらを修正するために、<a href="/docs/reference/model/figure/">figure</a> 関数を使用しましょう。
 この関数には、名前付きでない通常の引数（位置引数）として、図表を指定する必要があります。さらにオプションとして、図表に付ける説明文（<code>caption</code>）を名前付き引数で指定できます。</p>
@@ -95,7 +95,7 @@ Typstは引数リスト内でさまざまなデータ型を認識します。
 これは、 <code>image</code> 関数の呼び出し前にある <code>#</code> 記号を削除する必要があることを意味します。
 <code>#</code> 記号は、マークアップ内でテキストと関数呼び出しを区別するために書くものなのです。</p>
 <p>キャプションの中には、任意のマークアップを含めることが出来ます。
-ある関数の引数としてマークアップを指定するためには、それを角括弧 <code> </code> で囲みます。この「マークアップが角括弧で囲まれている構造」のことを、<em>コンテンツブロック</em>と呼ばれます</p>
+ある関数の引数としてマークアップを指定するためには、それを角括弧 <code> </code> で囲みます。この「マークアップが角括弧で囲まれている構造」のことを、<em>コンテンツブロック</em>と呼びます。</p>
 <div class="previewed-code"><pre><code><span class="typ-func">#</span><span class="typ-func">figure</span><span class="typ-punct">(</span>
   <span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;glacier.jpg&quot;</span><span class="typ-punct">,</span> width<span class="typ-punct">:</span> <span class="typ-num">70%</span><span class="typ-punct">)</span><span class="typ-punct">,</span>
   caption<span class="typ-punct">:</span> <span class="typ-punct">[</span>
@@ -108,7 +108,7 @@ Typstは引数リスト内でさまざまなデータ型を認識します。
 その場合、まず図にラベルを付けます。
 ラベルとは、文書内の要素を一意に識別するための名前のことです。先ほど挿入した図の後ろに、その図のラベルを山括弧 <code>&lt; &gt;</code> で囲んで書き加えます。
 これで、テキスト内で <code>@</code> 記号を書いた後ろにラベル名を指定すると、その図を参照できるようになりました。
-見出しや方程式もラベルを付けて参照可能にすることができます。</p>
+見出しや方程式もラベルを付けて参照可能にできます。</p>
 <div class="previewed-code"><pre><code>Glaciers as the one shown in
 <span class="typ-ref">@glaciers</span> will cease to exist if
 we don&#39;t take action soon!
@@ -126,7 +126,7 @@ we don&#39;t take action soon!
 <p>コンテンツブロックはテキストを含むことができますが、それ以外にもさまざまなマークアップ、関数呼び出しなどを含むことができます。
 一方、文字列は本当に<em>文字の並び</em>に過ぎません。</p>
 <p>例えば、image関数は、引数として画像ファイルへのパスが渡されることを想定しています。ここに文章の段落や他の画像を渡しても意味がありません。
-image関数の引数としてマークアップがダメで文字列が許可されるのは、そういうわけなのです。
+image関数の引数として、マークアップではなく文字列が許可されるのは、そういうわけなのです。
 それとは反対に、文字列はコンテンツブロックが期待される場所であればどこにでも書くことが出来ます。なぜなら、文字列は単なる文字の並びであり、文字の並びは有効なコンテンツの一種だからです。</p>
 </div>
 <h2 id="bibliography">参考文献の追加</h2>
@@ -135,10 +135,10 @@ image関数の引数としてマークアップがダメで文字列が許可さ
 この関数は、引数として参考文献ファイルへのパスが渡されることを想定しています。</p>
 <p>Typstでは、ネイティブな参考文献の形式として<a href="https://github.com/typst/hayagriva/blob/main/docs/file-format.md">Hayagriva</a>を使用していますが、
 互換性のためにBibLaTeXファイルも使用できます。
-クラスメートが既に文献調査を行い、<code>.bib</code> ファイルを送ってくれたので、それを使用しましょう。
+クラスメートが既に文献を調査し、<code>.bib</code> ファイルを送ってくれたので、それを使用しましょう。
 ファイルパネルを通じてファイルをアップロードし、Typst appでアクセスできるようにします。</p>
-<p>文書に参考文献が追加されている場合、参考文献欄にある文献を文中で引用することができます。
-引用はラベルへの参照と同じ構文を使用します。デフォルトでは、文中に文献の引用を記述した時点で初めて、その文献がTypstの参考文献セクションに表示されるようになっています。
+<p>文書に参考文献が追加されている場合、参考文献欄にある文献を文中で引用できます。
+引用はラベルへの参照と同じ構文を使用します。デフォルトでは、文中で文献を引用した時点で初めて、その文献がTypstの参考文献セクションへ表示されるようになっています。
 Typstはさまざまな引用および参考文献のスタイルをサポートしています。詳細については <a href="/docs/reference/model/bibliography/#parameters-style">リファレンス</a>を参照してください。</p>
 <div class="previewed-code"><pre><code><span class="typ-heading">= Methods</span>
 We follow the glacier melting models
@@ -170,7 +170,7 @@ by the following equation:
 <span class="typ-math-delim">$</span> Q = <span class="typ-pol">rho</span> A v + <span class="typ-str">&quot;time offset&quot;</span> <span class="typ-math-delim">$</span>
 </code></pre><div class="preview"><img src="/docs/assets/2526a88c6062287f852db218a9e59280.png" alt="Preview"></div></div>
 <p>レポートには総和の式も必要です。
-<code>sum</code> 記号を使用して、総和の範囲を下付き文字と上付き文字で指定することができます。</p>
+<code>sum</code> 記号を使用して、総和の範囲を下付き文字と上付き文字で指定できます。</p>
 <div class="previewed-code"><pre><code>Total displaced soil by glacial flow:
 
 <span class="typ-math-delim">$</span> 7.32 <span class="typ-pol">beta</span> +

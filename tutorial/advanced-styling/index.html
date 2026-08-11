@@ -23,12 +23,12 @@
 まず、エディターの左上にある戻るアイコンでアプリのダッシュボードに戻ります。
 次に、左のツールバーのプラスアイコンを選択し、チームを作成します。
 最後に、新しいチームをクリックし、チーム名の横にあるmanage teamをクリックして設定に進みます。
-これで教員をメールで招待することができます。</p>
+これで教員をメールで招待できます。</p>
 <p><img src="/docs/assets/3-advanced-team-settings.png" alt="The team settings" /></p>
 <p>次に、プロジェクトをチームに移動します。
 プロジェクトを開き、左のツールバーの歯車アイコンを選んで設定に行き、Ownerのドロップダウンから新しいチームを選択します。
 変更を保存するのを忘れないでください！</p>
-<p>あなたの教員もプロジェクトを編集することができ、お互いにリアルタイムで変更を確認できます。
+<p>あなたの教員もプロジェクトを編集でき、お互いにリアルタイムで変更を確認できます。
 公式の<a href="https://discord.gg/2uDybryKPe">Discordサーバー</a>に参加して他のユーザーを見つけ、一緒にチームを組んでみることも可能です！</p>
 <h2 id="guidelines">学会ガイドライン</h2>
 <p>レイアウトのガイドラインは学会ウェブサイトに掲載されております。
@@ -72,7 +72,7 @@
 ここでは、ページ番号の付け方を定義する<a href="/docs/reference/model/numbering/">numbering pattern</a>を指定できます。
 例えば<code><span class="typ-str">&quot;1&quot;</span></code>と設定すると、Typstは素のページ番号のみを表示します。
 また<code><span class="typ-str">&quot;(1/1)&quot;</span></code>と設定すると、カッコで囲まれた現在のページと総ページ数が表示されるでしょう。
-さらに、カスタム関数を用意して完全に好みの書式にすることも可能です。</p>
+さらに、カスタム関数を用意して完全に好みの書式にできます。</p>
 <h2 id="title-and-abstract">タイトルとアブストラクトの作成</h2>
 <p>それでは、タイトルとアブストラクトを追加しましょう。
 Typst comes with a <a href="/docs/reference/model/title/"><code>title</code></a> function. Let's start by providing our title as an argument:</p>
@@ -135,14 +135,14 @@ paper together with our supervisor, we'll add our own and their name.</p>
 </code></pre><div class="preview"><img src="/docs/assets/4790f48caf3dcd84b8fea8c0326a2aee.png" alt="Preview"></div></div>
 <p>著者情報が記載された2つのブロックが隣り合わせにレイアウトされています。
 このレイアウトを作るために<a href="/docs/reference/layout/grid/"><code>grid</code></a>関数を使っています。
-これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御することができます。
+これにより、各列の大きさや、どのコンテンツをどのセルに入れるかを正確に制御できます。
 <code>columns</code>引数には、<a href="/docs/reference/layout/relative/">相対長さ</a>または<a href="/docs/reference/layout/fraction/">割合</a>の配列を渡します。
 この場合、2つの等しい割合のサイズを渡し、使用可能なスペースを2つの等しい列に分割するように指示します。
 次に、grid関数に2つのコンテンツ引数を渡しました。
 ひとつは主著者であるあなたの情報で、もうひとつは指導教員の情報です。
 ここでも <code>align</code> 関数を使用して、コンテンツを列の中央に配置しています。
 grid関数はセルを指定するコンテンツ引数を任意の数で受け取れます。
-行は自動的に追加されますが、<code>rows</code>引数で手動でサイズを指定することも可能です。</p>
+行は自動的に追加されますが、<code>rows</code>引数を使えば手動でサイズを指定できます。</p>
 <p>Looking at the authors and the title, they are a bit too close together. You can
 address this by using another show-set rule to configure the space below the
 title. The title, the grid, paragraphs, and all other elements that Typst
@@ -169,7 +169,7 @@ Here, we used it to space the title and the author list exactly 1.2× the font
 size apart.</p>
 <p>それでは、アブストラクトを追加しましょう。
 学会は、アブストラクトを中央に配置することを望んでいることを忘れないでください。
-Now, let's add the abstract. Remember that the conference wants the abstract to be set ragged and centered.</p>
+Now, let's add the abstract. Remember that the conference wants the abstract to be set ragged and centered。</p>
 <div class="previewed-code"><pre><code><span class="typ-escape">...</span>
 
 <span class="typ-func">#</span><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">)</span><span class="typ-punct">[</span>
@@ -365,7 +365,7 @@ place関数は引数として配置とコンテンツを受け取ります。
 これにより、<a href="/docs/reference/layout/v/"><code>v</code></a>関数を使用する代わりに、本文との間にスペースを設けています。
 また、コンテンツはcenter引数を継承しているため、各パーツごとに行っていた明示的な <code><span class="typ-func">align</span><span class="typ-punct">(</span>center<span class="typ-punct">,</span> <span class="typ-op">..</span><span class="typ-punct">.</span><span class="typ-punct">)</span></code> 呼び出しも削除できます。</p>
 <p>最後に見出しのスタイルの設定をしましょう。
-ガイドラインに従うために、見出しは中央揃えにして、小さな大文字を使わなければなりません。
+ガイドラインに従うため、見出しは中央揃えにして、小さな大文字を使わなければなりません。
 <code>heading</code>関数はそのような設定を提供していないため、独自の見出しshowルールを書く必要があります。</p>
 <ul>
 <li>A show-set rule to make headings center-aligned</li>
@@ -444,13 +444,15 @@ take these fields into account.</p>
 <li>第2レベルの見出しは斜体で、本文と同じ大きさ ✓</li>
 <li>ページはUSレターサイズとし、下中央にページ番号を付け、各ページの右上に論文のタイトルを記載 ✓</li>
 </ul>
-<p>これで、全てのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。
-&lt;img
+<p>これで、全てのスタイルに準拠し、論文を学会に提出できます！完成した論文は次のようになっています。</p>
+<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
+<p>&lt;img
 src="3-advanced-paper.png"
 alt="The finished paper"
 style="box-shadow: 0 4px 12px rgb(89 85 101 / 20%); width: 500px; max-width: 100%; display: block; margin: 24px auto;"</p>
 <blockquote>
 </blockquote>
+<!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
 <h2 id="まとめ">まとめ</h2>
 <p>このセクションでは、ヘッダーとフッターの作成方法、関数とスコープを使用してローカルにスタイルをオーバーライドする方法、<a href="/docs/reference/layout/grid/" title="`grid`"><code>grid</code></a>関数を使用してより複雑なレイアウトを作成する方法、個々の関数と文書全体のshowルールを記述する方法を学びました。
 You also learned how to access element properties with context.

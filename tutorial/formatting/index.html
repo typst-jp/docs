@@ -37,7 +37,7 @@
 <p>ここで、関数の全ての引数は括弧の中で指定されるべきではないか？と思うでしょう。
 なぜ括弧の<em>後</em>にコンテンツを記述する2つ目の角括弧があるのでしょうか？
 答えは、関数にコンテンツを渡すことはTypstではよくあるため、特別な構文があるからです。
-コンテンツを引数リストの中に入れる代わりに、通常の引数の後に角括弧内でコンテンツを直接書くことが可能であり、これによりカンマ区切りを減らすことができます。</p>
+コンテンツを引数リストの中へ入れる代わりに、通常の引数の後に角括弧内でコンテンツを直接書けます。これにより、カンマ区切りを減らせます。</p>
 <p>上で見たように、これは正しく動作します。<a href="/docs/reference/text/text/" title="`text`"><code>text</code></a>関数を使えば、その範囲内の全てのテキストのフォントを調整できます。しかし、無数の関数で文書を囲み、選択的に各場所でスタイルを適用しようとするとすぐに面倒になります。</p>
 <p>幸いなことに、Typstにはもっと簡潔な記法があります。
 <em>setルール</em>を使えば、以後現れる全てのコンテンツに対してスタイル設定を適用可能です。
@@ -78,7 +78,7 @@ setルールを書くときは、スタイルを設定したい要素の種類�
 <li><a href="/docs/reference/model/heading/"><code>heading</code></a> 見出しの見た目や番号付</li>
 <li><a href="/docs/reference/model/document/"><code>document</code></a> タイトルや著者情報などPDF出力に含まれるメタデータ</li>
 </ul>
-<p>関数のパラメーターは全て設定できるわけではありません。
+<p>関数のパラメーターを全て設定できるわけではありません。
 一般的に、関数のパラメーターを設定できるのは、関数に<em>どのように</em>実行させるかを指示するパラメーターだけであり、関数に<em>何を</em>実行させるかを指示するパラメーターは設定できません。
 関数のリファレンスページには、設定可能なパラメーターが示されています。</p>
 <p>文書にもう少しスタイルを追加してみましょう。
@@ -117,10 +117,10 @@ behaviour of these natural structures.
 <p>ここで注目していただきたい点を以下に記載します。</p>
 <p>まず、<a href="/docs/reference/layout/page/"><code>page</code></a> setルールです。
 これはページサイズと余白の2つの引数を受け取ります。
-ページサイズは文字列であり、Typstは<a href="/docs/reference/layout/page/#parameters-paper">多くの標準ページサイズ</a>を受け付けますが、カスタムページサイズを指定することもできます。
+ページサイズは文字列であり、Typstは<a href="/docs/reference/layout/page/#parameters-paper">多くの標準ページサイズ</a>を受け付けますが、カスタムページサイズも指定できます。
 余白は<a href="/docs/reference/foundations/dictionary/">辞書型</a>で指定します。辞書型とはキーと値のペアの集まりです。
 この場合、キーは<code>x</code>と<code>y</code>で、値はそれぞれ水平マージンと垂直マージンです。
-<code>left</code>, <code>right</code>, <code>top</code>, and <code>bottom</code>をキーとする辞書を渡すことで、各辺に別々の余白を指定することもできます。</p>
+<code>left</code>, <code>right</code>, <code>top</code>, and <code>bottom</code>をキーとする辞書を渡すことで、各辺に別々の余白も指定できます。</p>
 <p>つぎに<a href="/docs/reference/text/text/"><code>text</code></a> setルールです。
 ここでは、フォントサイズを<code><span class="typ-num">10pt</span></code>、フォントの種類を <code><span class="typ-str">&quot;New Computer Modern&quot;</span></code>に設定します。
 Typst appには多くのフォントが用意されております。
@@ -129,7 +129,7 @@ text関数の引数リストにいるとき、補完パネルで利用可能な�
 これは<a href="/docs/reference/layout/length/">length</a>の値として指定され、<code>em</code>という単位を使ってフォントのサイズに対する行間を指定しています。
 <code><span class="typ-num">1em</span></code>は現在のフォントサイズ（デフォルトは<code><span class="typ-num">11pt</span></code>）に相当します。</p>
 <p>最後に、中央揃えに垂直配置を追加して、画像をページの下部に配置しました。
-垂直配置と水平配置を <code><span class="typ-op">+</span></code> 演算子で組み合わせることで2次元配置を指定できます。</p>
+垂直配置と水平配置を <code><span class="typ-op">+</span></code> 演算子で組み合わせることで、2次元配置を指定できます。</p>
 <h2 id="sophistication">洗練のヒント</h2>
 <p>文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
 これを行うには、<a href="/docs/reference/model/heading/" title="`heading`"><code>heading</code></a>関数の<code>numbering</code>パラメーターを設定します。</p>
@@ -146,7 +146,7 @@ text関数の引数リストにいるとき、補完パネルで利用可能な�
 </code></pre><div class="preview"><img src="/docs/assets/e16b45d2ef3501cceeac862bc2945d73.png" alt="Preview"></div></div>
 <p>番号付けのパラメーターとして文字列 <code>「<span class="typ-num">1.</span>」</code> を指定しました。
 これは、見出しにアラビア数字で番号を付け、各レベルの番号の間にドットを置くようにTypstに指示します。
-見出しに<a href="/docs/reference/model/numbering/">文字、ローマ数字、記号</a>を使用することも可能です。</p>
+見出しに<a href="/docs/reference/model/numbering/">文字、ローマ数字、記号</a>も使用できます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">set</span> <span class="typ-func">heading</span><span class="typ-punct">(</span>numbering<span class="typ-punct">:</span> <span class="typ-str">&quot;1.a&quot;</span><span class="typ-punct">)</span>
 
 <span class="typ-heading">= Introduction</span>
@@ -167,10 +167,10 @@ text関数の引数リストにいるとき、補完パネルで利用可能な�
 他のマークアップ要素も同様に機能し、対応する関数呼び出しのための<em>シンタックスシュガー</em>に過ぎません。</p>
 </div>
 <h2 id="show-rule">showルール</h2>
-<p>書式設定によりレポートの出来栄えにかなり満足してきましたが、最後にひとつだけ修正が必要な点があります。
+<p>書式設定によりレポートの出来栄えにかなり満足してきましたが、最後にひとつだけ修正が必要です。
 あなたが書いているレポートは、より大きなプロジェクトのためのものであり、そのプロジェクト名には、たとえ散文であっても、常にロゴを添えるべきでしょう。</p>
-<p>1つの方法として、検索と置換を使ってロゴを添える全ての場所に<code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;logo.svg&quot;</span><span class="typ-punct">)</span></code>の呼び出しを追加することもできますが、それはとても面倒です。
-別の方法として、<a href="/docs/reference/foundations/function/#defining-functions">カスタム関数を定義する</a>ことで、常にロゴを画像として生成することもできます。
+<p>1つの方法として、検索と置換を使ってロゴを添える全ての場所に<code><span class="typ-func">#</span><span class="typ-func">image</span><span class="typ-punct">(</span><span class="typ-str">&quot;logo.svg&quot;</span><span class="typ-punct">)</span></code>の呼び出しを追加もできますが、それはとても面倒です。
+別の方法として、<a href="/docs/reference/foundations/function/#defining-functions">カスタム関数を定義する</a>ことで、常にロゴを画像として生成できます。
 しかし、これらよりももっと簡単な方法があります。</p>
 <p>showルールを使用すると、Typstが特定の要素をどのように表示するかを再定義できます。
 これにより、Typstがどの要素をどのように表示するかを指定します。
@@ -201,7 +201,7 @@ Typstがマークアップの代わりにコードを期待している場合、
 <p>Typst文書に基本的な書式を適用する方法を分かりいただけたと思います。
 setルールを用いて、フォントを設定し、段落の両端を揃え、ページ寸法を変更し、見出しに番号を追加する方法を学びました。
 また、基本的なshowルールを使用して、文書全体のテキストの表示方法を変更する方法も学びました。</p>
-<p>ここで学んだ方法で作成したレポートを提出すると、あなたの指導教員はそれをとても気に入り、学会用の論文に仕立てたいと言うでしょう！
+<p>ここで学んだ方法を使って作成したレポートを提出すると、あなたの指導教員はそれをとても気に入り、学会用の論文に仕立てたいと言うでしょう！
 次章では、より高度なshowルールと関数を使用して、文書を論文としてフォーマットする方法を学びます。</p></div></div><a href="https://typst.app/docs/tutorial/formatting/" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center px-3 py-2 rounded-md border border-gray-200 bg-white hover:border-gray-500 hover:bg-gray-50 transition-all duration-200 w-fit"><div class="w-4 h-4 mr-2 text-gray-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-world" role="graphics-symbol"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg></div><span class="text-sm font-medium text-gray-800 group-hover:text-gray-900 transition-colors">原文（英語）を開く</span><div class="w-4 h-4 ml-2 text-gray-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" role="graphics-symbol"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg></div></a><div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12"><a href="/docs/tutorial/writing-in-typst/" class="flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"><div class="flex items-center mb-3"><div class="w-6 h-6 text-gray-400 mr-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left" role="graphics-symbol"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg></div><strong class="text-base font-semibold text-gray-800">前のページ</strong></div><p class="text-sm text-gray-600">Typstで執筆するには</p></a><a href="/docs/tutorial/advanced-styling/" class="flex flex-col p-6 bg-white border border-gray-200 rounded-lg hover:border-gray-500 hover:bg-gray-50 transition-all duration-200"><div class="flex items-center mb-3 justify-between"><strong class="text-base font-semibold text-gray-800">次のページ</strong><div class="w-6 h-6 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right" role="graphics-symbol"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg></div></div><p class="text-sm text-gray-600">高度なスタイリング</p></a></div></main><div class="flex-col w-full md:w-60 lg:w-72 ml-4 hidden xl:block"><nav id="page-overview" class="flex-none w-full px-3.5 py-3 border border-neutral-200/60 rounded-md bg-white sticky top-[80px] mt-4 mb-8 h-[calc(100vh-80px-1rem)] overflow-auto"><strong class="block mb-2 text-sm text-neutral-500 font-semibold tracking-wide">目次</strong><ol class="space-y-1 false text-sm text-neutral-700"><li data-assoc="set-rule"><a href="#set-rule" class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors">Set Rule</a></li><li data-assoc="autocomplete"><a href="#autocomplete" class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors">Autocomplete</a></li><li data-assoc="page-setup"><a href="#page-setup" class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors">Page Setup</a></li><li data-assoc="sophistication"><a href="#sophistication" class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors">Sophistication</a></li><li data-assoc="show-rule"><a href="#show-rule" class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors">Show Rule</a></li><li data-assoc="review"><a href="#review" class="block px-2 py-1 rounded hover:bg-neutral-100 transition-colors">Review</a></li></ol></nav></div></div></div><div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-16" x-show="searchOpen" x-cloak="true" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-on:click="searchOpen = false" x-on:keydown.escape.window="searchOpen = false" x-trap.noscroll="searchOpen" x-effect="if (searchOpen) { setTimeout(() =&gt; { const input = $el.querySelector(&#39;.pagefind-ui__search-input&#39;); if (input) input.focus(); }, 100) }"><div class="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4" x-on:click="$event.stopPropagation()" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"><div class="flex flex-col max-h-[80vh]"><link href="/docs/pagefind/pagefind-ui.css" rel="stylesheet"/><script src="/docs/pagefind/pagefind-ui.js"></script><div class="flex justify-between items-center p-4 border-b border-gray-200 flex-shrink-0"><h2 class="text-lg font-semibold">検索</h2><button type="button" class="text-gray-400 hover:text-gray-600" x-on:click="searchOpen = false" aria-label="検索を閉じる"><div class="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x" role="graphics-symbol"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M18 6l-12 12"></path><path d="M6 6l12 12"></path></svg></div></button></div><div class="p-4 overflow-y-auto flex-1"><div id="search"></div></div><script>window.addEventListener('DOMContentLoaded', (event) => {
 	new PagefindUI({ element: "#search", showSubResults: true });
 });

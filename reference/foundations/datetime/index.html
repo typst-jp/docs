@@ -46,7 +46,7 @@
 <span class="typ-key">#</span><span class="typ-key">let</span> distance <span class="typ-op">=</span> first-of-march <span class="typ-op">-</span> first-of-jan
 <span class="typ-pol">#</span><span class="typ-pol">distance</span><span class="typ-punct">.</span><span class="typ-func">hours</span><span class="typ-punct">(</span><span class="typ-punct">)</span>
 </code></pre><div class="preview"><img src="/docs/assets/c4920f9ef579222c3ca2c76488051bfc.png" alt="Preview"></div></div>
-<p>datetimeとdurationを加減算することで、新しい日時（オフセットされたdatetime）を取得することもできます。</p>
+<p>datetimeとdurationを加減算することで、新しい日時（オフセットされたdatetime）も取得できます。</p>
 <div class="previewed-code"><pre><code><span class="typ-key">#</span><span class="typ-key">let</span> date <span class="typ-op">=</span> <span class="typ-func">datetime</span><span class="typ-punct">(</span>day<span class="typ-punct">:</span> <span class="typ-num">1</span><span class="typ-punct">,</span> month<span class="typ-punct">:</span> <span class="typ-num">3</span><span class="typ-punct">,</span> year<span class="typ-punct">:</span> <span class="typ-num">2024</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">let</span> two-days <span class="typ-op">=</span> <span class="typ-func">duration</span><span class="typ-punct">(</span>days<span class="typ-punct">:</span> <span class="typ-num">2</span><span class="typ-punct">)</span>
 <span class="typ-key">#</span><span class="typ-key">let</span> two-days-earlier <span class="typ-op">=</span> date <span class="typ-op">-</span> two-days
