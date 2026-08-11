@@ -6,7 +6,7 @@
 
 # アクセシビリティ { #accessibility }
 
-Typstが描画する全ての図形とパスは、PDFエクスポート時に支援技術（Assistive Technology、AT）から認識されないようにするために
+Typstが描画する全ての図形とパスは、PDFエクスポート時に支援技術（Assistive Technology、AT）から認識されないよう、
 [アーティファクト]($pdf.artifact)として自動的にマークされます。
 ただし、その内容（存在する場合）はアクセシブルなままです。
 

@@ -49,11 +49,11 @@ use crate::text::{Lang, LocalName, Region, SmallcapsElem, SubElem, SuperElem, Te
 /// - BibLaTeX `.bib` ファイル。
 ///
 /// 文書内に参考文献を追加すると、参照構文（`[@key]`）や引用関数の明示的な呼び出し（`[#cite(<key>)]`）を使って
-/// [引用]($cite)を始めることができます。参考文献リストには、文書内で参照された作品の文献だけが表示されます。
+/// [引用]($cite)を始められます。参考文献リストには、文書内で参照された作品の文献だけが表示されます。
 ///
 /// # スタイル
 /// Typstは、内蔵の[引用と参考文献スタイル]($bibliography.style)を幅広く取り揃えています。
-/// さらに、独自の[CSL](https://citationstyles.org/)（Citation Style Language）ファイルを追加して使用することもできます。
+/// さらに、独自の[CSL](https://citationstyles.org/)（Citation Style Language）ファイルを追加して使用できます。
 /// どのスタイルを使えばいいか迷う方のために、分野ごとによく使われるスタイルを以下の表にまとめています。
 ///
 /// | 分野 | よく使われるスタイル |
@@ -97,7 +97,7 @@ pub struct BibliographyElem {
     /// - `{none}`に設定すると、参考文献のタイトルは何も表示されません。
     /// - 独自のタイトルはコンテンツで渡します。
     ///
-    /// 参考文献の見出しはデフォルトでは番号が振られませんが、show-setルールで強制的に見出し番号をつけることも可能です。
+    /// 参考文献の見出しはデフォルトでは番号が振られませんが、show-setルールで強制的に見出し番号もつけられます。
     /// `{show bibliography: set heading(numbering: "1.")}`
     pub title: Smart<Option<Content>>,
 

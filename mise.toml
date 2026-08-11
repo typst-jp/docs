@@ -7,7 +7,6 @@ pinact = "3.1.1"
 jq = "1.8.1"
 
 [settings]
-yes = true
 idiomatic_version_file_enable_tools = []
 
 # As of mise v2025.11.11, the `vars` configuration does not support arrays in JSON file.

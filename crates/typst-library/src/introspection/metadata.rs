@@ -5,7 +5,7 @@ use crate::introspection::Locatable;
 ///
 /// この要素は[`query`]関数や[`typst query`]($reference/introspection/query/#command-line-queries)を用いてコマンドラインから取得できます。
 /// その目的は任意の値を内省システムに公開することです。
-/// メタデータの値を他と識別するために、[`label`]を付けて、それを検索することができます。
+/// メタデータの値を他と識別するために、[`label`]を付けて、それを検索できます。
 ///
 /// `metadata`要素は、外部に任意の値を公開できるため、特にコマンドラインクエリで便利です。
 ///

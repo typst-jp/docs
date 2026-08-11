@@ -3,6 +3,8 @@ title: 初期バージョン
 description: Typstの初期バージョンにおける変更点
 ---
 
+<!-- textlint-disable ja-technical-writing/no-unmatched-pair -->
+
 # Typstの初期バージョンにおける変更点
 
 ## March 28, 2023

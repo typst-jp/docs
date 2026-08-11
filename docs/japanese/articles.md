@@ -1,7 +1,10 @@
 ---
+title: 日本語記事
 description: |
   Typstに関する日本語記事のまとめです。
 ---
+
+<!-- textlint-disable ja-technical-writing/max-kanji-continuous-len -->
 
 # 日本語記事
 
