@@ -19,6 +19,7 @@ description: |
 | styling | スタイル設定 | カテゴリ名など |
 | set rule | setルール | [スタイル設定]($styling)に出てきます |
 | show rule | showルール | [スタイル設定]($styling)に出てきます |
+| everything show rule | everything showルール | 呼び出された場所以降の文書全てに変換を適用するshowルール、[テンプレートの作成]($tutorial/making-a-template)に出てきます |
 | markup | マークアップ | Typstのデフォルトモード |
 | script | スクリプト | Typstのスクリプトモード、「#」で始まる行 |
 | figure | 図表 | キャプション付きの図表、`image`ではない |

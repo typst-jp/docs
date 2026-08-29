@@ -121,7 +121,7 @@ Typstは、最も一般的な文書要素に対する組み込みのマークア
 | set-ifルール               | `{set text(..) if .. }`        | [Styling]($styling/#set-rules)        |
 | show-setルール             | `{show heading: set block(..)}` | [Styling]($styling/#show-rules)     |
 | 関数付きshowルール         | `{show raw: it => {..}}`       | [Styling]($styling/#show-rules)       |
-| show-everythingルール      | `{show: template}`             | [Styling]($styling/#show-rules)       |
+| everything showルール      | `{show: template}`             | [Styling]($styling/#show-rules)       |
 | コンテキスト式             | `{context text.lang}`          | [Context]($context)                   |
 | 条件式                     | `{if x == 1 {..} else {..}}`   | [Scripting]($scripting/#conditionals) |
 | forループ                  | `{for x in (1, 2, 3) {..}}`    | [Scripting]($scripting/#loops)        |
