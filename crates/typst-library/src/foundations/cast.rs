@@ -498,6 +498,7 @@ cast! {
         MathClass::Vary => "vary",
         MathClass::Special => "special",
     }),
+<<<<<<< HEAD
     /// 特別でない要素のデフォルトクラス。
     "normal" => MathClass::Normal,
     /// カンマなどの句読点。
@@ -517,6 +518,27 @@ cast! {
     /// `times`のような二項演算子。
     "binary" => MathClass::Binary,
     /// `+`のような単項と二項のどちらにもなる演算子。
+=======
+    /// The default class for non-special things.
+    "normal" => MathClass::Normal,
+    /// Punctuation, e.g. a comma.
+    "punctuation" => MathClass::Punctuation,
+    /// An opening delimiter, e.g. `(`.
+    "opening" => MathClass::Opening,
+    /// A closing delimiter, e.g. `)`.
+    "closing" => MathClass::Closing,
+    /// A delimiter that is the same on both sides, e.g. `|`.
+    "fence" => MathClass::Fence,
+    /// A large operator like `sum`.
+    "large" => MathClass::Large,
+    /// A relation like `=` or `prec`.
+    "relation" => MathClass::Relation,
+    /// A unary operator like `not`.
+    "unary" => MathClass::Unary,
+    /// A binary operator like `times`.
+    "binary" => MathClass::Binary,
+    /// An operator that can be both unary or binary like `+`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     "vary" => MathClass::Vary,
 }
 

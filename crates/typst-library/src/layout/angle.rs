@@ -8,6 +8,7 @@ use typst_utils::{Numeric, Scalar};
 
 use crate::foundations::{Repr, func, repr, scope, ty};
 
+<<<<<<< HEAD
 /// 回転を表す角度。
 ///
 /// Typstは以下の角度の単位をサポートしています。
@@ -16,6 +17,16 @@ use crate::foundations::{Repr, func, repr, scope, ty};
 /// - ラジアン: `{3.14rad}`
 ///
 /// # 例
+=======
+/// An angle describing a rotation.
+///
+/// Typst supports the following angular units:
+///
+/// - Degrees: `{180deg}`
+/// - Radians: `{3.14rad}`
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #rotate(10deg)[Hello there!]
 /// ```
@@ -104,13 +115,21 @@ impl Angle {
 
 #[scope]
 impl Angle {
+<<<<<<< HEAD
     /// 角度をラジアンに変換します。
+=======
+    /// Converts this angle to radians.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(name = "rad", title = "Radians")]
     pub fn to_rad(self) -> f64 {
         self.to_unit(AngleUnit::Rad)
     }
 
+<<<<<<< HEAD
     /// 角度を度に変換します。
+=======
+    /// Converts this angle to degrees.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(name = "deg", title = "Degrees")]
     pub fn to_deg(self) -> f64 {
         self.to_unit(AngleUnit::Deg)

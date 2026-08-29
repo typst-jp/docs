@@ -1,12 +1,20 @@
 use std::hash::{Hash, Hasher};
 use std::sync::{Arc, OnceLock};
 
+<<<<<<< HEAD
+=======
+use ecow::eco_format;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use image::{DynamicImage, EncodableLayout, GenericImageView, Rgba};
 use krilla::image::{BitsPerComponent, CustomImage, ImageColorspace};
 use krilla::pdf::PdfDocument;
 use krilla::surface::Surface;
 use krilla_svg::{SurfaceExt, SvgSettings};
+<<<<<<< HEAD
 use typst_library::diag::{SourceResult, bail};
+=======
+use typst_library::diag::{At, SourceResult};
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use typst_library::foundations::Smart;
 use typst_library::layout::{Abs, Angle, Ratio, Size, Transform};
 use typst_library::visualize::{
@@ -48,10 +56,16 @@ pub(crate) fn handle_image(
             surface.push_transform(&exif_transform.to_krilla());
             let mut surface = defer(surface, |s| s.pop());
 
+<<<<<<< HEAD
             let image = match convert_raster(raster.clone(), interpolate) {
                 None => bail!(span, "failed to process image"),
                 Some(i) => i,
             };
+=======
+            let image = convert_raster(raster.clone(), interpolate)
+                .map_err(|err| eco_format!("failed to process image ({err})"))
+                .at(span)?;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
             if !gc.image_to_spans.contains_key(&image) {
                 gc.image_to_spans.insert(image.clone(), span);
@@ -189,7 +203,11 @@ impl CustomImage for PdfRasterImage {
 fn convert_raster(
     raster: RasterImage,
     interpolate: bool,
+<<<<<<< HEAD
 ) -> Option<krilla::image::Image> {
+=======
+) -> Result<krilla::image::Image, String> {
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     if let RasterFormat::Exchange(ExchangeFormat::Jpg) = raster.format() {
         let image_data: Arc<dyn AsRef<[u8]> + Send + Sync> =
             Arc::new(raster.data().clone());

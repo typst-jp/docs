@@ -4,8 +4,14 @@ use ecow::EcoVec;
 use krilla::tagging::{self as kt, Node, Tag, TagGroup, TagKind};
 use krilla::tagging::{Identifier, TagTree};
 use smallvec::SmallVec;
+<<<<<<< HEAD
 use typst_library::diag::{SourceDiagnostic, SourceResult, error};
 use typst_library::text::Locale;
+=======
+use typst_library::diag::{At, SourceDiagnostic, SourceResult, error};
+use typst_library::text::Locale;
+use typst_syntax::Span;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 use crate::PdfOptions;
 use crate::convert::{GlobalContext, to_span};
@@ -49,7 +55,11 @@ impl<'a> Resolver<'a> {
 }
 
 pub fn resolve(gc: &mut GlobalContext) -> SourceResult<(Option<Locale>, TagTree)> {
+<<<<<<< HEAD
     gc.tags.tree.assert_finished_traversal();
+=======
+    gc.tags.tree.assert_finished_traversal().at(Span::detached())?;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
     if !disabled(gc) {
         context::finish(&mut gc.tags.tree);

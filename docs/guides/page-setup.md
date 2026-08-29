@@ -1,9 +1,17 @@
 ---
 description: |
+<<<<<<< HEAD
   Typstでページサイズ、余白、ページ番号を設定するための詳しいガイドです。魅力的で見やすいレイアウトを素早く作成する方法を学びましょう。
 ---
 
 # ページ設定ガイド
+=======
+  An in-depth guide to setting page dimensions, margins, and page numbers in
+  Typst. Learn how to create appealing and clear layouts and get there quickly.
+---
+
+# Page Setup Guide
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 Your page setup is a big part of the first impression your document gives. Line
 lengths, margins, and columns influence
 [appearance](https://practicaltypography.com/page-margins.html) and
@@ -186,7 +194,11 @@ conditionally remove the header on the first page:
 
 This example may look intimidating, but let's break it down: By using the
 `{context}` keyword, we are telling Typst that the header depends on where we
+<<<<<<< HEAD
 are in the document. We then ask Typst if the page [counter]($counter) is larger than one
+=======
+are in the document. We then ask Typst if the page [counter] is larger than one
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 at our (context-dependent) current position. The page counter starts at one, so
 we are skipping the header on a single page. Counters may have multiple levels.
 This feature is used for items like headings, but the page counter will always
@@ -199,7 +211,11 @@ the first page instead.
 The technique described in the previous section can be adapted to perform more
 advanced tasks using Typst's labels. For example, pages with big tables could
 omit their headers to help keep clutter down. We will mark our tables with a
+<<<<<<< HEAD
 `<big-table>` [label]($label) and use the [query system]($query) to find out if such a
+=======
+`<big-table>` [label] and use the [query system]($query) to find out if such a
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 label exists on the current page:
 
 ```typ
@@ -331,9 +347,15 @@ This page has a custom footer.
 ```
 
 In this example, we use the number of pages to create an array of
+<<<<<<< HEAD
 [circles]($circle). The circles are wrapped in a [box]($box) so they can all appear on
 the same line because they are blocks and would otherwise create paragraph
 breaks. The length of this [array]($array) depends on the current page number.
+=======
+[circles]($circle). The circles are wrapped in a [box] so they can all appear on
+the same line because they are blocks and would otherwise create paragraph
+breaks. The length of this [array] depends on the current page number.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 We then insert the circles at the right side of the footer, with 1pt of space
 between them. The join method of an array will attempt to
@@ -350,7 +372,11 @@ want to start with the first page only after the title page. Or maybe you need
 to skip a few page numbers because you will insert pages into the final printed
 product.
 
+<<<<<<< HEAD
 The right way to modify the page number is to manipulate the page [counter]($counter). The
+=======
+The right way to modify the page number is to manipulate the page [counter]. The
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 simplest manipulation is to set the counter back to 1.
 
 ```typ
@@ -370,7 +396,11 @@ counter and `n + 5` is the return value of our function.
 
 In case you need to retrieve the actual page number instead of the value of the
 page counter, you can use the [`page`]($location.page) method on the return
+<<<<<<< HEAD
 value of the [`here`]($here) function:
+=======
+value of the [`here`] function:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 ```example
 #counter(page).update(n => n + 5)

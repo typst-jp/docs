@@ -222,9 +222,15 @@ fn collect_items<'a>(
 
     // Add fallback text to expand the line height, if necessary.
     if !items.iter().any(|item| matches!(item, Item::Text(_)))
+<<<<<<< HEAD
         && let Some(fallback) = fallback
     {
         items.push(fallback, LogicalIndex::FALLBACK_TEXT);
+=======
+        && let Some((idx, fallback)) = fallback
+    {
+        items.push(fallback, idx);
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     }
 }
 
@@ -287,7 +293,11 @@ fn collect_range<'a>(
     range: Range,
     trim: &Trim,
     items: &mut Items<'a>,
+<<<<<<< HEAD
     fallback: &mut Option<ItemEntry<'a>>,
+=======
+    fallback: &mut Option<(LogicalIndex, ItemEntry<'a>)>,
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ) {
     for (i, (subrange, item)) in p.slice(range.clone()) {
         let idx = LogicalIndex::from_item_index(i);
@@ -310,7 +320,11 @@ fn collect_range<'a>(
             // When there is no text, still keep this as a fallback item, which
             // we can use to force a non-zero line-height when the line doesn't
             // contain any other text.
+<<<<<<< HEAD
             *fallback = Some(ItemEntry::from(Item::Text(shaped.empty())));
+=======
+            *fallback = Some((idx, ItemEntry::from(Item::Text(shaped.empty()))));
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             continue;
         }
 
@@ -782,7 +796,10 @@ pub struct LogicalIndex(usize);
 
 impl LogicalIndex {
     const START_HYPHEN: Self = Self(0);
+<<<<<<< HEAD
     const FALLBACK_TEXT: Self = Self(usize::MAX - 1);
+=======
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     const END_HYPHEN: Self = Self(usize::MAX);
 
     /// Create a logical index from the index of an item in the [`p.items`](Preparation::items).

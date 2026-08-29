@@ -19,7 +19,12 @@ $f(x) sin(y)$
 // Test ignored vs non-ignored spaces.
 $f (x), f(x)$ \
 $[a|b], [a | b]$ \
+<<<<<<< HEAD
 $a"is"b, a "is" b$
+=======
+$a"is"b, a "is" b$ \
+$A"B"C, A "B" C$
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 --- math-spacing-predefined ---
 // Test predefined spacings.

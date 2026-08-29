@@ -2,7 +2,11 @@ use krilla::action::{Action, LinkAction};
 use krilla::annotation::Target;
 use krilla::destination::XyzDestination;
 use krilla::geom as kg;
+<<<<<<< HEAD
 use typst_library::diag::{SourceResult, bail};
+=======
+use typst_library::diag::{At, ExpectInternal, SourceResult, bail};
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use typst_library::layout::{Abs, Point, Position, Size};
 use typst_library::model::Destination;
 use typst_syntax::Span;
@@ -84,7 +88,13 @@ pub(crate) fn handle_link(
         return Ok(());
     }
 
+<<<<<<< HEAD
     let (group_id, link) = gc.tags.tree.parent_link().expect("link parent");
+=======
+    let (group_id, link) = (gc.tags.tree.parent_link())
+        .expect_internal("expected link ancestor in logical tree")
+        .at(Span::detached())?;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     let alt = link.alt.as_ref().map(Into::into);
 
     if gc.tags.tree.parent_artifact().is_some() {

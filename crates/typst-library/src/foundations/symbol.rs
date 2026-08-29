@@ -16,6 +16,7 @@ use crate::foundations::{
     elem, func, scope, ty,
 };
 
+<<<<<<< HEAD
 /// Unicode記号。
 ///
 /// Typstは、標準のキーボードで簡単に入力できるよう、よく使われる記号を定義しています。
@@ -25,6 +26,20 @@ use crate::foundations::{
 /// - 絵文字は[`emoji`モジュール]($category/symbols/emoji)に定義されています。
 ///
 /// さらに、この型のコンストラクター関数を用いてカスタム記号を定義できます。
+=======
+/// A Unicode symbol.
+///
+/// Typst defines common symbols so that they can easily be written with
+/// standard keyboards. The symbols are defined in modules, from which they can
+/// be accessed using [field access notation]($scripting/#fields):
+///
+/// - General symbols are defined in the [`sym` module]($category/symbols/sym)
+///   and are accessible without the `sym.` prefix in math mode.
+/// - Emoji are defined in the [`emoji` module]($category/symbols/emoji)
+///
+/// Moreover, you can define custom symbols with this type's constructor
+/// function.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #sym.arrow.r \
@@ -33,9 +48,16 @@ use crate::foundations::{
 /// #emoji.face.halo
 /// ```
 ///
+<<<<<<< HEAD
 /// 多くの記号には異なるバリアントがあり、ドット記法で修飾子を付加することで選択できます。
 /// 修飾子の順序は問いません。
 /// 記号モジュールのドキュメントページにアクセスし、記号をクリックすると、利用可能なバリアントを確認できます。
+=======
+/// Many symbols have different variants, which can be selected by appending the
+/// modifiers with dot notation. The order of the modifiers is not relevant.
+/// Visit the documentation pages of the symbol modules and click on a symbol to
+/// see its available variants.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $arrow.l$ \
@@ -146,7 +168,11 @@ impl Symbol {
             "○" => Ok(crate::math::accent::circle::func()),
             "→" => Ok(crate::math::accent::arrow::func()),
             "←" => Ok(crate::math::accent::arrow_l::func()),
+<<<<<<< HEAD
             "↔" => Ok(crate::math::accent::arrow_l_r::func()),
+=======
+            "↔" | "↔\u{fe0e}" => Ok(crate::math::accent::arrow_l_r::func()),
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             "⇀" => Ok(crate::math::accent::harpoon::func()),
             "↼" => Ok(crate::math::accent::harpoon_lt::func()),
             _ => bail!("symbol {self} is not callable"),
@@ -214,7 +240,11 @@ impl Symbol {
 
 #[scope]
 impl Symbol {
+<<<<<<< HEAD
     /// 修飾子付きのカスタム記号を生成します。
+=======
+    /// Create a custom symbol with modifiers.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #let envelope = symbol(
@@ -234,11 +264,21 @@ impl Symbol {
     #[func(constructor)]
     pub fn construct(
         span: Span,
+<<<<<<< HEAD
         /// 記号のバリアント。
         ///
         /// 修飾子のないバリアントの場合は単一の文字からなる文字列、それ以外の場合は修飾子と記号を指定する2つの文字列の配列を指定できます。
         /// 各修飾子はドットで区切ります。
         /// 記号を表示する際、Typstは付加された全ての修飾子を含み、それ以外の修飾子の数が最小であるバリアントの中から最初のものを選択します。
+=======
+        /// The variants of the symbol.
+        ///
+        /// Can be a just a string consisting of a single character for the
+        /// modifierless variant or an array with two strings specifying the modifiers
+        /// and the symbol. Individual modifiers should be separated by dots. When
+        /// displaying a symbol, Typst selects the first from the variants that have
+        /// all attached modifiers and the minimum number of other modifiers.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[variadic]
         variants: Vec<Spanned<SymbolVariant>>,
     ) -> SourceResult<Symbol> {

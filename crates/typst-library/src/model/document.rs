@@ -8,12 +8,21 @@ use crate::foundations::{
 };
 use crate::text::{Locale, TextElem};
 
+<<<<<<< HEAD
 /// 文書とそのメタデータのルート要素。
 ///
 /// 全ての文書は、自動的に`document`（文書）要素でラップされます。
 /// この文書要素は自分で作成できません。
 /// この関数は、[setルール]($styling/#set-rules)と組み合わせて文書のメタデータを指定する場合にのみ使用されます。
 /// setルールは、レイアウトコンテナの内部に置いてはいけません。
+=======
+/// The root element of a document and its metadata.
+///
+/// All documents are automatically wrapped in a `document` element. You cannot
+/// create a document element yourself. This function is only used with
+/// [set rules]($styling/#set-rules) to specify document metadata. Such a set
+/// rule must not occur inside of any layout container.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #set document(title: [Hello])
@@ -22,6 +31,7 @@ use crate::text::{Locale, TextElem};
 /// embeds metadata into the PDF!
 /// ```
 ///
+<<<<<<< HEAD
 /// この関数で設定したメタデータは、文書内には表示されません。
 /// 代わりに、コンパイルされたPDFファイル内に埋め込まれます。
 #[elem(Construct)]
@@ -57,6 +67,47 @@ pub struct DocumentElem {
     /// PDFに埋め込むためには、yearの値が0以上でなくてはなりません。
     ///
     /// バイト単位で同一に再現できるPDFを出力したい場合には、`{auto}`以外の値を設定してください。
+=======
+/// Note that metadata set with this function is not rendered within the
+/// document. Instead, it is embedded in the compiled PDF file.
+#[elem(Construct)]
+pub struct DocumentElem {
+    /// The document's title. This is rendered as the title of the PDF viewer
+    /// window or the browser tab of the page.
+    ///
+    /// Adding a title is important for accessibility, as it makes it easier to
+    /// navigate to your document and identify it among other open documents.
+    /// When exporting to PDF/UA, a title is required.
+    ///
+    /// While this can be arbitrary content, PDF viewers only support plain text
+    /// titles, so the conversion might be lossy.
+    #[ghost]
+    pub title: Option<Content>,
+
+    /// The document's authors.
+    #[ghost]
+    pub author: OneOrMultiple<EcoString>,
+
+    /// The document's description.
+    #[ghost]
+    pub description: Option<Content>,
+
+    /// The document's keywords.
+    #[ghost]
+    pub keywords: OneOrMultiple<EcoString>,
+
+    /// The document's creation date.
+    ///
+    /// If this is `{auto}` (default), Typst uses the current date and time.
+    /// Setting it to `{none}` prevents Typst from embedding any creation date
+    /// into the PDF metadata.
+    ///
+    /// The year component must be at least zero in order to be embedded into a
+    /// PDF.
+    ///
+    /// If you want to create byte-by-byte reproducible PDFs, set this to
+    /// something other than `{auto}`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[ghost]
     pub date: Smart<Option<Datetime>>,
 }

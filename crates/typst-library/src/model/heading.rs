@@ -13,6 +13,7 @@ use crate::layout::{BlockElem, Em, Length};
 use crate::model::{Numbering, Outlinable, Refable, Supplement};
 use crate::text::{FontWeight, LocalName, TextElem, TextSize};
 
+<<<<<<< HEAD
 /// セクションの見出し。
 ///
 /// 見出しを使うことで、文書をセクションとして構造化できます。
@@ -35,6 +36,33 @@ use crate::text::{FontWeight, LocalName, TextElem, TextSize};
 /// これにより、見出しがページ末に残り本文が次ページに送られる「孤立」状態を防げます。
 ///
 /// # 例
+=======
+/// A section heading.
+///
+/// With headings, you can structure your document into sections. Each heading
+/// has a _level,_ which starts at one and is unbounded upwards. This level
+/// indicates the logical role of the following content (section, subsection,
+/// etc.) A top-level heading indicates a top-level section of the document (not
+/// the document's title). To insert a title, use the [`title`]($title) element
+/// instead.
+///
+/// Typst can automatically number your headings for you. To enable numbering,
+/// specify how you want your headings to be numbered with a
+/// [numbering pattern or function]($numbering).
+///
+/// Independently of the numbering, Typst can also automatically generate an
+/// [outline] of all headings for you. To exclude one or more headings from this
+/// outline, you can set the `outlined` parameter to `{false}`.
+///
+/// When writing a [show rule]($styling/#show-rules) that accesses the
+/// [`body` field]($heading.body) to create a completely custom look for
+/// headings, make sure to wrap the content in a [`block`]($block) (which is
+/// implicitly [sticky]($block.sticky) for headings through a built-in show-set
+/// rule). This prevents headings from becoming "orphans", i.e. remaining
+/// at the end of the page with the following content being on the next page.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set heading(numbering: "1.a)")
 ///
@@ -45,6 +73,7 @@ use crate::text::{FontWeight, LocalName, TextElem, TextSize};
 /// To start, ...
 /// ```
 ///
+<<<<<<< HEAD
 /// # 構文
 /// 見出しには専用の構文があります。
 /// 行の先頭に等号を1つ以上入力し、その後にスペースを入力することで見出しを作成できます。
@@ -74,6 +103,42 @@ pub struct HeadingElem {
     /// これは主に[showルール]($styling/#show-rules)で利用する際に役立ちます
     /// （[`where`]($function.where)セレクターを使う場合や
     /// 表示された見出しのレベルに直接アクセスする場合など）。
+=======
+/// # Syntax
+/// Headings have dedicated syntax: They can be created by starting a line with
+/// one or multiple equals signs, followed by a space. The number of equals
+/// signs determines the heading's logical nesting depth. The `{offset}` field
+/// can be set to configure the starting depth.
+///
+/// # Accessibility
+/// Headings are important for accessibility, as they help users of Assistive
+/// Technologies (AT) like screen readers to navigate within your document.
+/// Screen reader users will be able to skip from heading to heading, or get an
+/// overview of all headings in the document.
+///
+/// To make your headings accessible, you should not skip heading levels. This
+/// means that you should start with a first-level heading. Also, when the
+/// previous heading was of level 3, the next heading should be of level 3
+/// (staying at the same depth), level 4 (going exactly one level deeper), or
+/// level 1 or 2 (new hierarchically higher headings).
+///
+/// # HTML export
+/// As mentioned above, a top-level heading indicates a top-level section of
+/// the document rather than its title. This is in contrast to the HTML `<h1>`
+/// element of which there should be only one per document.
+///
+/// For this reason, in HTML export, a [`title`] element will turn into an
+/// `<h1>` and headings turn into `<h2>` and lower (a level 1 heading thus turns
+/// into `<h2>`, a level 2 heading into `<h3>`, etc).
+#[elem(Locatable, Tagged, Synthesize, Count, ShowSet, LocalName, Refable, Outlinable)]
+pub struct HeadingElem {
+    /// The absolute nesting depth of the heading, starting from one. If set
+    /// to `{auto}`, it is computed from `{offset + depth}`.
+    ///
+    /// This is primarily useful for usage in [show rules]($styling/#show-rules)
+    /// (either with [`where`]($function.where) selectors or by accessing the
+    /// level directly on a shown heading).
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #show heading.where(level: 2): set text(red)
@@ -87,6 +152,7 @@ pub struct HeadingElem {
     /// ```
     pub level: Smart<NonZeroUsize>,
 
+<<<<<<< HEAD
     /// 1から始まる、見出しの相対的なネストの深さ。
     /// この値は`{offset}`と組み合わせて、実際の`{level}`を計算するのに用いられます。
     ///
@@ -99,6 +165,20 @@ pub struct HeadingElem {
 
     /// 各見出しの`{level}`の開始オフセットであり、
     /// 相対的な`{depth}`を絶対的な`{level}`へ変換するために使用されます。
+=======
+    /// The relative nesting depth of the heading, starting from one. This is
+    /// combined with `{offset}` to compute the actual `{level}`.
+    ///
+    /// This is set by the heading syntax, such that `[== Heading]` creates a
+    /// heading with logical depth of 2, but actual level `{offset + 2}`. If you
+    /// construct a heading manually, you should typically prefer this over
+    /// setting the absolute level.
+    #[default(NonZeroUsize::ONE)]
+    pub depth: NonZeroUsize,
+
+    /// The starting offset of each heading's `{level}`, used to turn its
+    /// relative `{depth}` into its absolute `{level}`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// = Level 1
@@ -112,8 +192,14 @@ pub struct HeadingElem {
     /// ```
     #[default(0)]
     pub offset: usize,
+<<<<<<< HEAD
     /// 見出しを番号付けする方法。
     /// [番号付けパターンまたは関数]($numbering)を指定できます（複数の数値を受け取ります）。
+=======
+
+    /// How to number the heading. Accepts a
+    /// [numbering pattern or function]($numbering) taking multiple numbers.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set heading(numbering: "1.a.")
@@ -124,6 +210,7 @@ pub struct HeadingElem {
     /// ```
     pub numbering: Option<Numbering>,
 
+<<<<<<< HEAD
     /// 解決済みのプレーンテキストの番号。
     ///
     /// このフィールドは内部用で、PDFのしおり作成にのみ使われます。
@@ -131,16 +218,35 @@ pub struct HeadingElem {
     /// カウンターや番号付けパターンを具体的な文字列として解決するために必要です。
     ///
     /// `numbering`が`None`の場合は設定されません。
+=======
+    /// The resolved plain-text numbers.
+    ///
+    /// This field is internal and only used for creating PDF bookmarks. We
+    /// don't currently have access to `World`, `Engine`, or `styles` in export,
+    /// which is needed to resolve the counter and numbering pattern into a
+    /// concrete string.
+    ///
+    /// This remains unset if `numbering` is `None`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[internal]
     #[synthesized]
     pub numbers: EcoString,
 
+<<<<<<< HEAD
     /// 見出しに用いる補足語。
     ///
     /// 見出しを参照する際、補足語が参照番号の前に追加されます。
     ///
     /// 関数を指定した場合、参照された見出しが引数として渡され、
     /// その関数は表示されるコンテンツを返す必要があります。
+=======
+    /// A supplement for the heading.
+    ///
+    /// For references to headings, this is added before the referenced number.
+    ///
+    /// If a function is specified, it is passed the referenced heading and
+    /// should return content.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set heading(numbering: "1.", supplement: [Chapter])
@@ -153,11 +259,19 @@ pub struct HeadingElem {
     /// ```
     pub supplement: Smart<Option<Supplement>>,
 
+<<<<<<< HEAD
     /// 見出しを[目次]($outline)に表示するかどうか。
     ///
     /// なお、このプロパティを`{true}`に設定すると、
     /// PDFへのエクスポート時に、見出しがPDFの目次にしおりとしても表示されます。
     /// この動作を変更するには、`bookmarked`プロパティを使用してください。
+=======
+    /// Whether the heading should appear in the [outline].
+    ///
+    /// Note that this property, if set to `{true}`, ensures the heading is also
+    /// shown as a bookmark in the exported PDF's outline (when exporting to
+    /// PDF). To change that behavior, use the `bookmarked` property.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #outline()
@@ -172,6 +286,7 @@ pub struct HeadingElem {
     #[default(true)]
     pub outlined: bool,
 
+<<<<<<< HEAD
     /// エクスポートされたPDFの目次に見出しをしおりとして表示するかどうか。
     /// PNGなどの他のエクスポート形式には影響しません。
     ///
@@ -180,6 +295,16 @@ pub struct HeadingElem {
     /// PDFエクスポート時の目次に表示されることを示します。
     /// このプロパティを`{true}`（しおりあり）または`{false}`（しおりなし）に設定すると、
     /// この動作を無視します。
+=======
+    /// Whether the heading should appear as a bookmark in the exported PDF's
+    /// outline. Doesn't affect other export formats, such as PNG.
+    ///
+    /// The default value of `{auto}` indicates that the heading will only
+    /// appear in the exported PDF's outline if its `outlined` property is set
+    /// to `{true}`, that is, if it would also be listed in Typst's [outline].
+    /// Setting this property to either `{true}` (bookmark) or `{false}` (don't
+    /// bookmark) bypasses that behavior.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #heading[Normal heading]
@@ -194,11 +319,19 @@ pub struct HeadingElem {
     #[default(Smart::Auto)]
     pub bookmarked: Smart<bool>,
 
+<<<<<<< HEAD
     /// 見出しの最初の行を除く全ての行に適用されるインデント。
     ///
     /// デフォルト値の`{auto}`では、見出しが[テキスト方向]($text.dir)の
     /// [start]($direction.start)に揃えられている場合、番号の幅をインデントとして
     /// 使用します。中央揃えやそれ以外の配置ではインデントしません。
+=======
+    /// The indent all but the first line of a heading should have.
+    ///
+    /// The default value of `{auto}` uses the width of the numbering as indent
+    /// if the heading is aligned at the [start]($direction.start) of the [text
+    /// direction]($text.dir), and no indent for center and other alignments.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set heading(numbering: "1.")
@@ -210,7 +343,11 @@ pub struct HeadingElem {
     #[default(Smart::Auto)]
     pub hanging_indent: Smart<Length>,
 
+<<<<<<< HEAD
     /// 見出しのタイトル。
+=======
+    /// The heading's title.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }
@@ -240,12 +377,28 @@ impl Synthesize for Packed<HeadingElem> {
 
         if let Some((numbering, location)) =
             self.numbering.get_ref(styles).as_ref().zip(self.location())
+<<<<<<< HEAD
         {
             self.numbers = Some(
                 self.counter()
                     .display_at_loc(engine, location, styles, numbering)?
                     .plain_text(),
             );
+=======
+            // We are not early returning on error here because of
+            // https://github.com/typst/typst/issues/7428
+            //
+            // A more comprehensive fix might introduce the error catching logic
+            // of show rules for synthesis, too.
+            && let Ok(numbers) = self.counter().display_at_loc(
+                engine,
+                location,
+                styles,
+                numbering,
+            )
+        {
+            self.numbers = Some(numbers.plain_text());
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         }
 
         let elem = self.as_mut();

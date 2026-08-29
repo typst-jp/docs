@@ -60,6 +60,13 @@
 #test(calc.rem(decimal("-7"), decimal("3")), decimal("-1"))
 #test(calc.rem(decimal("-7"), decimal("-3")), decimal("-1"))
 
+<<<<<<< HEAD
+=======
+// Ensure `i64::MIN % -1` will not overflow and panic.
+#test(calc.rem(int("-9223372036854775808"), -1), 0)
+#test(calc.rem(float("-9223372036854775808"), -1.0), 0.0)
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- calc-rem-divisor-zero-1 ---
 // Error: 14-15 divisor must not be zero
 #calc.rem(5, 0)
@@ -97,6 +104,13 @@
 // Error: 35-50 divisor must not be zero
 #calc.div-euclid(decimal("3.00"), decimal("0.00"))
 
+<<<<<<< HEAD
+=======
+--- calc-div-euclid-too-large ---
+// Error: 2-50 the result is too large
+#calc.div-euclid(int("-9223372036854775808"), -1)
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- calc-rem-euclid ---
 // Test the `rem-euclid` function.
 #test(calc.rem-euclid(7, 3), 1)
@@ -110,6 +124,13 @@
 #test(calc.rem-euclid(decimal("-7"), decimal("-3")), decimal("2"))
 #test(calc.rem-euclid(decimal("2.5"), decimal("2")), decimal("0.5"))
 
+<<<<<<< HEAD
+=======
+// Ensure `i64::MIN % -1` will not overflow and panic.
+#test(calc.rem-euclid(int("-9223372036854775808"), -1), 0)
+#test(calc.rem-euclid(float("-9223372036854775808"), -1.0), 0.0)
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- calc-rem-euclid-divisor-zero-1 ---
 // Error: 21-22 divisor must not be zero
 #calc.rem-euclid(5, 0)
@@ -144,6 +165,13 @@
 // Error: 27-41 divisor must not be zero
 #calc.quo(decimal("4.0"), decimal("0.0"))
 
+<<<<<<< HEAD
+=======
+--- calc-quo-too-large ---
+// Error: 2-43 the result is too large
+#calc.quo(int("-9223372036854775808"), -1)
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- calc-min-and-max ---
 // Test the `min` and `max` functions.
 #test(calc.min(2, -4), -4)
@@ -298,6 +326,13 @@
 #test(calc.gcd(0, 0), 0)
 #test(calc.gcd(7, 0), 7)
 
+<<<<<<< HEAD
+=======
+--- calc-gcd-too-large ---
+// Error: 2-43 the result is too large
+#calc.gcd(int("-9223372036854775808"), -1)
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- calc-lcm ---
 // Test the `lcm` function.
 #test(calc.lcm(112, 77), 1232)

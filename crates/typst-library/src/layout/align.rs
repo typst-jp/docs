@@ -10,10 +10,17 @@ use crate::foundations::{
 use crate::layout::{Abs, Axes, Axis, Dir, Side};
 use crate::text::TextElem;
 
+<<<<<<< HEAD
 /// コンテンツを水平方向・垂直方向に配置。
 ///
 /// # 例
 /// コンテンツを水平方向で中央揃えにすることから始めましょう。
+=======
+/// Aligns content horizontally and vertically.
+///
+/// # Example
+/// Let's start with centering our content horizontally:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(center)
@@ -24,7 +31,11 @@ use crate::text::TextElem;
 /// A work of art, a visual throne
 /// ```
 ///
+<<<<<<< HEAD
 /// 垂直方向で中央揃えにするには_horizon_配置を使用します。
+=======
+/// To center something vertically, use _horizon_ alignment:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set page(height: 120pt)
 /// #set align(horizon)
@@ -34,9 +45,16 @@ use crate::text::TextElem;
 /// a new paragraph.
 /// ```
 ///
+<<<<<<< HEAD
 /// # 配置の組み合わせ
 /// `+`演算子を用いて2種類の配置を組み合わせられます。
 /// setルールの代わりに関数形式を用いて1つのコンテンツのみに適用してみましょう。
+=======
+/// # Combining alignments
+/// You can combine two alignments with the `+` operator. Let's also only apply
+/// this to one piece of content by using the function form instead of a set
+/// rule:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set page(height: 120pt)
 /// Though left in the beginning ...
@@ -48,9 +66,15 @@ use crate::text::TextElem;
 /// ]
 /// ```
 ///
+<<<<<<< HEAD
 /// # 配置のネスト
 /// レイアウトコンテナおよびその内部の要素にさまざまな配置設定を適用できます。
 /// このようにすることで複雑なレイアウトを作成できます。
+=======
+/// # Nested alignment
+/// You can use varying alignments for layout containers and the elements within
+/// them. This way, you can create intricate layouts:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #align(center, block[
@@ -63,16 +87,27 @@ use crate::text::TextElem;
 /// ])
 /// ```
 ///
+<<<<<<< HEAD
 /// # 同一行での配置設定
 /// `align` 関数はブロックレベルで配置するため、常に現在のパラグラフを中断します。
 /// 同じ行の一部を異なる配置にするためには、代わりに[比率間隔]($h)を使用しなければなりません。
+=======
+/// # Alignment within the same line
+/// The `align` function performs block-level alignment and thus always
+/// interrupts the current paragraph. To have different alignment for parts
+/// of the same line, you should use [fractional spacing]($h) instead:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// Start #h(1fr) End
 /// ```
 #[elem]
 pub struct AlignElem {
+<<<<<<< HEAD
     /// 両方の軸に沿った[alignment]。
+=======
+    /// The [alignment] along both axes.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set page(height: 6cm)
@@ -89,11 +124,16 @@ pub struct AlignElem {
     #[default]
     pub alignment: Alignment,
 
+<<<<<<< HEAD
     /// 配置するコンテンツ。
+=======
+    /// The content to align.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 /// 軸に沿って何かを[align]する位置。
 ///
 /// 取りうる値は以下の通りです。
@@ -108,24 +148,55 @@ pub struct AlignElem {
 ///
 /// これらの値はグローバルスコープでも、alignment型のスコープでも使えます。
 /// したがって、以下の2つのどちらでも書けます。
+=======
+/// Where to align something along an axis.
+///
+/// Possible values are:
+/// - `start`: Aligns at the [start]($direction.start) of the [text
+///   direction]($text.dir).
+/// - `end`: Aligns at the [end]($direction.end) of the [text
+///   direction]($text.dir).
+/// - `left`: Align at the left.
+/// - `center`: Aligns in the middle, horizontally.
+/// - `right`: Aligns at the right.
+/// - `top`: Aligns at the top.
+/// - `horizon`: Aligns in the middle, vertically.
+/// - `bottom`: Align at the bottom.
+///
+/// These values are available globally and also in the alignment type's scope,
+/// so you can write either of the following two:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #align(center)[Hi]
 /// #align(alignment.center)[Hi]
 /// ```
 ///
+<<<<<<< HEAD
 /// # 2次元配置
 /// 両方の軸に沿って同時に配置するには、`+`演算子を用いて2種類の配置を足し合わせます。
 /// 例えば、`top + right`はコンテンツを右上隅に配置します。
+=======
+/// # 2D alignments
+/// To align along both axes at the same time, add the two alignments using the
+/// `+` operator. For example, `top + right` aligns the content to the top right
+/// corner.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #set page(height: 3cm)
 /// #align(center + bottom)[Hi]
 /// ```
 ///
+<<<<<<< HEAD
 /// # フィールド
 /// `x`、`y`フィールドには、それぞれ配置の水平成分と垂直成分が（別の`alignment`として）保持されます。
 /// これらは`{none}`になる可能性があります。
+=======
+/// # Fields
+/// The `x` and `y` fields hold the alignment's horizontal and vertical
+/// components, respectively (as yet another `alignment`). They may be `{none}`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #(top + right).x \
@@ -177,10 +248,17 @@ impl Alignment {
     pub const HORIZON: Self = Alignment::V(VAlignment::Horizon);
     pub const BOTTOM: Self = Alignment::V(VAlignment::Bottom);
 
+<<<<<<< HEAD
     /// このalignmentが属する軸。
     /// -  `start`、`left`、`center`、`right`および`end`の場合は`{"horizontal"}`
     /// - `top`、`horizon`および`bottom`の場合は`{"vertical"}`
     /// - 2次元配置の場合は`{none}`
+=======
+    /// The axis this alignment belongs to.
+    /// - `{"horizontal"}` for `start`, `left`, `center`, `right`, and `end`
+    /// - `{"vertical"}` for `top`, `horizon`, and `bottom`
+    /// - `{none}` for 2-dimensional alignments
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #left.axis() \
@@ -195,7 +273,11 @@ impl Alignment {
         }
     }
 
+<<<<<<< HEAD
     /// 逆の配置。
+=======
+    /// The inverse alignment.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #top.inv() \

@@ -21,6 +21,7 @@ use crate::math::EquationElem;
 use crate::model::{FigureElem, FootnoteElem, HeadingElem, Numbering, NumberingPattern};
 use crate::routines::Routines;
 
+<<<<<<< HEAD
 /// ページや要素などの数え上げ。
 ///
 /// counter関数を用いることで、ページや見出し、図表などのカウンターにアクセスしたり、修正を加えたりできます。
@@ -33,6 +34,23 @@ use crate::routines::Routines;
 /// [`get`]($counter.get)関数を用いると、生のカウンター値にアクセスできます。
 /// この関数は[配列]($array)を返します。
 /// カウンターは（節や小節などの見出しでは）複数のレベルを持ち、配列の各アイテムが1つのレベルに対応します。
+=======
+/// Counts through pages, elements, and more.
+///
+/// With the counter function, you can access and modify counters for pages,
+/// headings, figures, and more. Moreover, you can define custom counters for
+/// other things you want to count.
+///
+/// Since counters change throughout the course of the document, their current
+/// value is _contextual._ It is recommended to read the chapter on [context]
+/// before continuing here.
+///
+/// # Accessing a counter { #accessing }
+/// To access the raw value of a counter, we can use the [`get`]($counter.get)
+/// function. This function returns an [array]: Counters can have multiple
+/// levels (in the case of headings for sections, subsections, and so on), and
+/// each item in the array corresponds to one level.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #set heading(numbering: "1.")
@@ -42,10 +60,18 @@ use crate::routines::Routines;
 /// #context counter(heading).get()
 /// ```
 ///
+<<<<<<< HEAD
 /// # カウンターの表示 { #displaying }
 /// しばしば、カウンター値をより人間が読みやすい形で表示したいことがあります。
 /// そうするために、カウンターの[`display`]($counter.display)関数を呼び出します。
 /// この関数は現在のカウンター値を取得し、与えられた形式か自動的に推論された[番号付け]($numbering)で整形します。
+=======
+/// # Displaying a counter { #displaying }
+/// Often, we want to display the value of a counter in a more human-readable
+/// way. To do that, we can call the [`display`]($counter.display) function on
+/// the counter. This function retrieves the current counter value and formats
+/// it either with a provided or with an automatically inferred [numbering].
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #set heading(numbering: "1.")
@@ -63,6 +89,7 @@ use crate::routines::Routines;
 /// }
 /// ```
 ///
+<<<<<<< HEAD
 /// # カウンターの変更 { #modifying }
 /// `step`および`update`メソッドを用いてカウンターを変更できます。
 ///
@@ -76,6 +103,23 @@ use crate::routines::Routines;
 ///
 /// 見出しのカウンターは見出しが表示される前にインクリメントされます。
 /// そのため、2回目のupdateの後にカウンターが6であったとしても`Analysis`は7になります。
+=======
+/// # Modifying a counter { #modifying }
+/// To modify a counter, you can use the `step` and `update` methods:
+///
+/// - The `step` method increases the value of the counter by one. Because
+///   counters can have multiple levels , it optionally takes a `level`
+///   argument. If given, the counter steps at the given depth.
+///
+/// - The `update` method allows you to arbitrarily modify the counter. In its
+///   basic form, you give it an integer (or an array for multiple levels). For
+///   more flexibility, you can instead also give it a function that receives
+///   the current value and returns a new value.
+///
+/// The heading counter is stepped before the heading is displayed, so
+/// `Analysis` gets the number seven even though the counter is at six after the
+/// second update.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #set heading(numbering: "1.")
@@ -97,11 +141,19 @@ use crate::routines::Routines;
 /// }
 /// ```
 ///
+<<<<<<< HEAD
 /// # ページカウンター
 /// ページカウンターは特別です。
 /// 改ページごとに値がインクリメントされます。
 /// しかし、他のカウンターと同様に手動でインクリメントもできます。
 /// 例えば、前書きではローマ数字のページ番号を使い、メインのコンテンツではアラビア数字のページ番号へ変更し、ページカウンターを1にリセットできます。
+=======
+/// # Page counter
+/// The page counter is special. It is automatically stepped at each pagebreak.
+/// But like other counters, you can also step it manually. For example, you
+/// could have Roman page numbers for your preface, then switch to Arabic page
+/// numbers for your main content and reset the page counter to one.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// >>> #set page(
@@ -124,9 +176,15 @@ use crate::routines::Routines;
 /// Arabic numbers.
 /// ```
 ///
+<<<<<<< HEAD
 /// # カスタムカウンター
 /// 独自のカウンターを定義するには文字列をキーとして`counter`関数を呼び出します。
 /// このキーはグローバルにカウンターを識別します。
+=======
+/// # Custom counters
+/// To define your own counter, call the `counter` function with a string as a
+/// key. This key identifies the counter globally.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #let mine = counter("mycounter")
@@ -137,10 +195,20 @@ use crate::routines::Routines;
 /// #context mine.display()
 /// ```
 ///
+<<<<<<< HEAD
 /// # インクリメント方法
 /// カスタムカウンターを定義して使用する場合、一般にカウンターを最初にインクリメントしてから表示するべきです。
 /// こうすることで、カウンターのインクリメント動作をインクリメントする要素に依存させられます。
 /// 例えばtheoremのカウンターを実装する場合、theoremの定義では最初にカウンターのstepを書いてインクリメントし、その後に初めてカウンターとtheoremの内容を表示します。
+=======
+/// # How to step
+/// When you define and use a custom counter, in general, you should first step
+/// the counter and then display it. This way, the stepping behaviour of a
+/// counter can depend on the element it is stepped for. If you were writing a
+/// counter for, let's say, theorems, your theorem's definition would thus first
+/// include the counter step and only then display the counter and the theorem's
+/// contents.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #let c = counter("theorem")
@@ -154,6 +222,7 @@ use crate::routines::Routines;
 /// #theorem[$2 < 3$]
 /// ```
 ///
+<<<<<<< HEAD
 /// この背景にある考え方は、見出しカウンターの例で説明するのが最適です。
 /// 見出しカウンターの更新は、その見出しのレベルに依存します。
 /// 見出しの直前にインクリメントすることで、第2レベルの見出しがあるとき、`1`から`1.1`へと正しく更新できます。
@@ -165,6 +234,22 @@ use crate::routines::Routines;
 /// # タイムトラベル
 /// カウンターはタイムトラベルができます！
 /// カウンターの最終的な値は実際に到達する前にわかりますし、文書の任意の特定の場所での値がどうなっていたかさえ決定できます。
+=======
+/// The rationale behind this is best explained on the example of the heading
+/// counter: An update to the heading counter depends on the heading's level. By
+/// stepping directly before the heading, we can correctly step from `1` to
+/// `1.1` when encountering a level 2 heading. If we were to step after the
+/// heading, we wouldn't know what to step to.
+///
+/// Because counters should always be stepped before the elements they count,
+/// they always start at zero. This way, they are at one for the first display
+/// (which happens after the first step).
+///
+/// # Time travel
+/// Counters can travel through time! You can find out the final value of the
+/// counter before it is reached and even determine what the value was at any
+/// particular location in the document.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #let mine = counter("mycounter")
@@ -185,9 +270,16 @@ use crate::routines::Routines;
 /// #mine.step()
 /// ```
 ///
+<<<<<<< HEAD
 /// # その他の状態 { #other-state }
 /// `counter`型は[state]型と密接に関係しています。
 /// Typstにおける状態管理のより詳しい詳細と、なぜ単に普通の変数をカウンターとして用いないのかについては、stateのドキュメントを参照してください。
+=======
+/// # Other kinds of state { #other-state }
+/// The `counter` type is closely related to [state] type. Read its
+/// documentation for more details on state management in Typst and why it
+/// doesn't just use normal variables for counters.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 #[ty(scope)]
 #[derive(Debug, Clone, PartialEq, Hash)]
 pub struct Counter(CounterKey);
@@ -391,6 +483,7 @@ impl Counter {
 
 #[scope]
 impl Counter {
+<<<<<<< HEAD
     /// キーで識別される新しいカウンターの作成。
     #[func(constructor)]
     pub fn construct(
@@ -403,15 +496,38 @@ impl Counter {
         ///   - 要素関数が与えられた場合、その型を持つ要素がカウントされます
         ///   - [`where`]($function.where)セレクターが与えられた場合、特定フィールドの要素がカウントされます
         ///   - [`{<label>}`]($label)が与えられた場合、そのラベルを持つ要素がカウントされます
+=======
+    /// Create a new counter identified by a key.
+    #[func(constructor)]
+    pub fn construct(
+        /// The key that identifies this counter globally.
+        ///
+        /// - If it is a string, creates a custom counter that is only affected
+        ///   by manual updates,
+        /// - If it is the [`page`] function, counts through pages,
+        /// - If it is a [selector], counts through elements that match the
+        ///   selector. For example,
+        ///   - provide an element function: counts elements of that type,
+        ///   - provide a [`where`]($function.where) selector:
+        ///     counts a type of element with specific fields,
+        ///   - provide a [`{<label>}`]($label): counts elements with that label.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         key: CounterKey,
     ) -> Counter {
         Self::new(key)
     }
 
+<<<<<<< HEAD
     /// 現在のロケーションでのカウンター値を取得。
     /// カウンターが1つの数値しか持たない場合でも、常に整数の配列を返します。
     ///
     /// これは`{counter.at(here())}`と等価です。
+=======
+    /// Retrieves the value of the counter at the current location. Always
+    /// returns an array of integers, even if the counter has just one number.
+    ///
+    /// This is equivalent to `{counter.at(here())}`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn get(
         &self,
@@ -423,13 +539,19 @@ impl Counter {
         self.at_loc(engine, loc)
     }
 
+<<<<<<< HEAD
     /// 番号付けされたカウンターの現在の値の表示および戻り値としての整形された出力。
+=======
+    /// Displays the current value of the counter with a numbering and returns
+    /// the formatted output.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn display(
         self,
         engine: &mut Engine,
         context: Tracked<Context>,
         span: Span,
+<<<<<<< HEAD
     /// カウンターをどのように表示するか指定する[番号付けのパターンまたは関数]($numbering)。
     /// 関数が与えられた場合、カウンターの各数値が別々の引数として関数に渡されます。
     /// 見出しの番号付けを関数指定するときなどの、引数の数値の数が変化する場合は[引数シンク]($arguments)が使用できます。
@@ -441,6 +563,23 @@ impl Counter {
     /// 有効化された場合、トップレベルのカウンターの現在値と最終値を一緒に表示します。
     /// 両者のスタイル設定は1つの番号付けパターンで指定できます。
     /// これは、ページのnumberingプロパティで`{"1 / 1"}`のようなパターンが与えられたときに、現在のページ番号と総ページ数を表示するために使用されます。
+=======
+        /// A [numbering pattern or a function]($numbering), which specifies how
+        /// to display the counter. If given a function, that function receives
+        /// each number of the counter as a separate argument. If the amount of
+        /// numbers varies, e.g. for the heading argument, you can use an
+        /// [argument sink]($arguments).
+        ///
+        /// If this is omitted or set to `{auto}`, displays the counter with the
+        /// numbering style for the counted element or with the pattern
+        /// `{"1.1"}` if no such style exists.
+        #[default]
+        numbering: Smart<Numbering>,
+        /// If enabled, displays the current and final top-level count together.
+        /// Both can be styled through a single numbering pattern. This is used
+        /// by the page numbering property to display the current and total
+        /// number of pages when a pattern like `{"1 / 1"}` is given.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[named]
         #[default(false)]
         both: bool,
@@ -449,26 +588,44 @@ impl Counter {
         self.display_impl(engine, loc, numbering, both, context.styles().ok())
     }
 
+<<<<<<< HEAD
     /// 指定された位置のカウンター値の取得。
     /// カウンターが1つの数値しか持たない場合でも、常に整数の配列を返します。
     ///
     /// `selector`は文書中で厳密に1つだけの要素にマッチしなければなりません。
     /// この目的で最も便利なセレクターは[ラベル]($label)と[ロケーション]($location)です。
+=======
+    /// Retrieves the value of the counter at the given location. Always returns
+    /// an array of integers, even if the counter has just one number.
+    ///
+    /// The `selector` must match exactly one element in the document. The most
+    /// useful kinds of selectors for this are [labels]($label) and
+    /// [locations]($location).
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn at(
         &self,
         engine: &mut Engine,
         context: Tracked<Context>,
         span: Span,
+<<<<<<< HEAD
     /// カウンター値を取得する場所。
+=======
+        /// The place at which the counter's value should be retrieved.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         selector: LocatableSelector,
     ) -> SourceResult<CounterState> {
         let loc = selector.resolve_unique(engine.introspector, context).at(span)?;
         self.at_loc(engine, loc)
     }
 
+<<<<<<< HEAD
     /// 文書の終わりでのカウンター値の取得。
     /// カウンターが1つの数値しか持たない場合でも、常に整数の配列を返します。
+=======
+    /// Retrieves the value of the counter at the end of the document. Always
+    /// returns an array of integers, even if the counter has just one number.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn final_(
         &self,
@@ -486,18 +643,33 @@ impl Counter {
         Ok(state)
     }
 
+<<<<<<< HEAD
     /// カウンター値を1増加。
     ///
     /// 更新は、返り値であるコンテンツが文書中に挿入された位置で適用されます。
     /// 文書中に出力がなければ何も起こりません！
     /// 例えば`{let _ = counter(page).step()}`と書いた場合が、この何も起きないときに該当します。
     /// カウンターの更新は常にレイアウト順に適用されるため、この場合にはTypstはいつカウンターをインクリメントするのか分かりません。
+=======
+    /// Increases the value of the counter by one.
+    ///
+    /// The update will be in effect at the position where the returned content
+    /// is inserted into the document. If you don't put the output into the
+    /// document, nothing happens! This would be the case, for example, if you
+    /// write `{let _ = counter(page).step()}`. Counter updates are always
+    /// applied in layout order and in that case, Typst wouldn't know when to
+    /// step the counter.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func]
     pub fn step(
         self,
         span: Span,
+<<<<<<< HEAD
     /// カウンターをインクリメントする深さ。
     /// デフォルトは`{1}`です。
+=======
+        /// The depth at which to step the counter. Defaults to `{1}`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[named]
         #[default(NonZeroUsize::ONE)]
         level: NonZeroUsize,
@@ -505,15 +677,29 @@ impl Counter {
         self.update(span, CounterUpdate::Step(level))
     }
 
+<<<<<<< HEAD
     /// カウンター値の更新。
     ///
     /// `step`と同様に、生成されたコンテンツが文書中へ配置されたときに限り更新が発生します。
+=======
+    /// Updates the value of the counter.
+    ///
+    /// Just like with `step`, the update only occurs if you put the resulting
+    /// content into the document.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func]
     pub fn update(
         self,
         span: Span,
+<<<<<<< HEAD
     /// 整数か整数の配列が与えられた場合、カウンターをその値に設定します。
     /// 関数が与えられた場合、その関数は（各数値を別々の引数として）前のカウンターの値を受け取り、新しい値を（整数または配列で）返さなければなりません。
+=======
+        /// If given an integer or array of integers, sets the counter to that
+        /// value. If given a function, that function receives the previous
+        /// counter value (with each number as a separate argument) and has to
+        /// return the new value (integer or array).
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         update: CounterUpdate,
     ) -> Content {
         CounterUpdateElem::new(self.0, update).pack().spanned(span)

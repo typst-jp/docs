@@ -6,21 +6,42 @@ use typst_utils::{Numeric, Scalar};
 
 use crate::foundations::{Repr, repr, ty};
 
+<<<<<<< HEAD
 /// 百分率。
 ///
 /// 数値の後にパーセント記号を付けて表記します。
 /// 百分率は、ページやコンテナに対するレイアウト要素の相対的なサイズを指定するために、[相対長さ]($relative)の一部として用いられることが最も一般的です。
+=======
+/// A ratio of a whole.
+///
+/// A ratio is written as a number, followed by a percent sign. Ratios most
+/// often appear as part of a [relative length]($relative), to specify the size
+/// of some layout element relative to the page or some container.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #rect(width: 25%)
 /// ```
 ///
+<<<<<<< HEAD
 /// 百分率はその他にも、何らかの基準に対する相対量を表せます。例えば、[水平方向の拡大縮小量]($scale.x)や、囲まれたコンテンツの高さに対する[括弧の高さ]($math.lr.size)などです。
 ///
 /// # スクリプト記述
 /// 自身のコード内では、百分率を自由に使用できます。以下の表のように、さまざまな型と乗算できます。
 ///
 /// |  乗算する型     |  例                     | 結果            |
+=======
+/// However, they can also describe any other property that is relative to some
+/// base, e.g. an amount of [horizontal scaling]($scale.x) or the
+/// [height of parentheses]($math.lr.size) relative to the height of the content
+/// they enclose.
+///
+/// # Scripting
+/// Within your own code, you can use ratios as you like. You can multiply them
+/// with various other types as shown below:
+///
+/// |  Multiply by    |  Example                | Result          |
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// |-----------------|-------------------------|-----------------|
 /// | [`ratio`]       | `{27% * 10%}`           | `{2.7%}`        |
 /// | [`length`]      | `{27% * 100pt}`         | `{27pt}`        |
@@ -30,7 +51,12 @@ use crate::foundations::{Repr, repr, ty};
 /// | [`float`]       | `{27% * 0.37037}`       | `{10%}`         |
 /// | [`fraction`]    | `{27% * 3fr}`           | `{0.81fr}`      |
 ///
+<<<<<<< HEAD
 /// 百分率が文書中に[表示]($repr)される際は、可読性のため有効数字2桁に丸められます。
+=======
+/// When ratios are [displayed]($repr) in the document, they are rounded to two
+/// significant digits for readability.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 #[ty(cast)]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Ratio(Scalar);

@@ -162,3 +162,15 @@ Cannot be used as @intro
 --- issue-5719-heading-nested ---
 // Headings may not be nested like this.
 = = A
+<<<<<<< HEAD
+=======
+
+--- issue-7428-heading-numbering-errors ---
+// Ensure that the error from the first layout iteration is silenced.
+#set heading(numbering: (n, ..nums) => {
+  assert(n > 0)
+  [#n]
+})
+
+= A
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

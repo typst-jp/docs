@@ -4,7 +4,10 @@ use std::ops::Range;
 use ecow::EcoString;
 use heck::{ToKebabCase, ToTitleCase};
 use pulldown_cmark as md;
+<<<<<<< HEAD
 use pulldown_cmark_escape::escape_html;
+=======
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use serde::{Deserialize, Serialize};
 use typed_arena::Arena;
 use typst::diag::{FileError, FileResult, StrResult};
@@ -62,8 +65,12 @@ impl Html {
         let options = md::Options::ENABLE_TABLES
             | md::Options::ENABLE_FOOTNOTES
             | md::Options::ENABLE_STRIKETHROUGH
+<<<<<<< HEAD
             | md::Options::ENABLE_HEADING_ATTRIBUTES
             | md::Options::ENABLE_CJK_FRIENDLY_EMPHASIS;
+=======
+            | md::Options::ENABLE_HEADING_ATTRIBUTES;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
         // Convert `[foo]` to `[foo]($foo)`.
         let mut link = |broken: md::BrokenLink| {
@@ -193,7 +200,11 @@ impl<'a> Handler<'a> {
     fn handle(&mut self, event: &mut md::Event<'a>) -> bool {
         match event {
             // Rewrite Markdown images.
+<<<<<<< HEAD
             md::Event::Start(md::Tag::Image { dest_url: path, .. }) => {
+=======
+            md::Event::Start(md::Tag::Image(_, path, _)) => {
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 *path = self.handle_image(path).into();
             }
 
@@ -207,12 +218,20 @@ impl<'a> Handler<'a> {
             }
 
             // Register HTML headings for the outline.
+<<<<<<< HEAD
             md::Event::Start(md::Tag::Heading { level, id, .. }) => {
+=======
+            md::Event::Start(md::Tag::Heading(level, id, _)) => {
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 self.handle_heading(id, level);
             }
 
             // Also handle heading closings.
+<<<<<<< HEAD
             md::Event::End(md::TagEnd::Heading(level)) => {
+=======
+            md::Event::End(md::Tag::Heading(level, _, _)) => {
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 nest_heading(level, self.nesting());
             }
 
@@ -227,13 +246,20 @@ impl<'a> Handler<'a> {
             }
 
             // Rewrite links.
+<<<<<<< HEAD
             md::Event::Start(md::Tag::Link { link_type: ty, dest_url: dest, .. }) => {
+=======
+            md::Event::Start(md::Tag::Link(ty, dest, _)) => {
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 assert!(
                     matches!(
                         ty,
                         md::LinkType::Inline
                             | md::LinkType::Reference
+<<<<<<< HEAD
                             | md::LinkType::Shortcut
+=======
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                             | md::LinkType::ShortcutUnknown
                             | md::LinkType::Autolink
                     ),
@@ -266,7 +292,11 @@ impl<'a> Handler<'a> {
                 self.code = EcoString::new();
                 return false;
             }
+<<<<<<< HEAD
             md::Event::End(md::TagEnd::CodeBlock) => {
+=======
+            md::Event::End(md::Tag::CodeBlock(md::CodeBlockKind::Fenced(_))) => {
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 let Some(lang) = self.lang.take() else { return false };
                 let html = code_block(self.resolver, &lang, &self.code);
                 *event = md::Event::Html(html.raw.into());
@@ -298,7 +328,11 @@ impl<'a> Handler<'a> {
 
     fn handle_heading(
         &mut self,
+<<<<<<< HEAD
         id_slot: &mut Option<md::CowStr<'a>>,
+=======
+        id_slot: &mut Option<&'a str>,
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         level: &mut md::HeadingLevel,
     ) {
         nest_heading(level, self.nesting());
@@ -310,13 +344,20 @@ impl<'a> Handler<'a> {
         let default = body.map(|text| text.to_kebab_case());
         let has_id = id_slot.is_some();
 
+<<<<<<< HEAD
         let id = match id_slot.take() {
             Some(id) => {
                 if Some(id.as_ref()) == default.as_deref() {
+=======
+        let id: &'a str = match (&id_slot, default) {
+            (Some(id), default) => {
+                if Some(*id) == default.as_deref() {
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                     eprintln!("heading id #{id} was specified unnecessarily");
                 }
                 id
             }
+<<<<<<< HEAD
             None => match default {
                 Some(default) => md::CowStr::Borrowed(self.ids.alloc(default).as_str()),
                 None => panic!("missing heading id {}", self.text),
@@ -328,6 +369,19 @@ impl<'a> Handler<'a> {
             _ if id.starts_with('v') && id.contains('.') => id.as_ref().into(),
             Some(body) if !has_id => body.as_ref().into(),
             _ => id.as_ref().to_title_case().into(),
+=======
+            (None, Some(default)) => self.ids.alloc(default).as_str(),
+            (None, None) => panic!("missing heading id {}", self.text),
+        };
+
+        *id_slot = (!id.is_empty()).then_some(id);
+
+        // Special case for things like "v0.3.0".
+        let name = match &body {
+            _ if id.starts_with('v') && id.contains('.') => id.into(),
+            Some(body) if !has_id => body.as_ref().into(),
+            _ => id.to_title_case().into(),
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         };
 
         let mut children = &mut self.outline;
@@ -339,8 +393,12 @@ impl<'a> Handler<'a> {
             depth -= 1;
         }
 
+<<<<<<< HEAD
         children.push(OutlineItem { id: id.as_ref().into(), name, children: vec![] });
         *id_slot = (!id.is_empty()).then_some(id);
+=======
+        children.push(OutlineItem { id: id.into(), name, children: vec![] });
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     }
 
     fn handle_link(&self, link: &str) -> StrResult<String> {
@@ -438,7 +496,11 @@ fn code_block(resolver: &dyn Resolver, tag: &str, text: &str) -> Html {
 
     if lang.is_empty() {
         let mut buf = String::from("<pre>");
+<<<<<<< HEAD
         escape_html(&mut buf, &display).unwrap();
+=======
+        md::escape::escape_html(&mut buf, &display).unwrap();
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         buf.push_str("</pre>");
         return Html::new(buf);
     } else if !matches!(lang, "example" | "typ" | "preview") {

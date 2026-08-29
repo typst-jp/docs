@@ -59,8 +59,11 @@ fn resolve_known(head: &str, base: &str) -> Option<String> {
         "$pdf" => format!("{base}reference/pdf"),
         "$guides" => format!("{base}guides"),
         "$changelog" => format!("{base}changelog"),
+<<<<<<< HEAD
         "$japanese" => format!("{base}japanese"),
         "$about" => format!("{base}about"),
+=======
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         "$universe" => "https://typst.app/universe".into(),
         _ => return None,
     })

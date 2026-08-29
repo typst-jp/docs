@@ -8,6 +8,7 @@ use crate::foundations::{Repr, func, scope, ty};
 use crate::layout::Position;
 use crate::model::Numbering;
 
+<<<<<<< HEAD
 /// 文書中の要素の識別。
 ///
 /// locationは文書中の要素を一意に識別し、ページ中での絶対位置へのアクセスを提供します。
@@ -35,6 +36,38 @@ use crate::model::Numbering;
 ///
 /// ロケータブルでない要素でも、ラベルが付いている場合は
 /// クエリで観測できることがあります。
+=======
+/// Identifies an element in the document.
+///
+/// A location uniquely identifies an element in the document and lets you
+/// access its absolute position on the pages. You can retrieve the current
+/// location with the [`here`] function and the location of a queried or shown
+/// element with the [`location()`]($content.location) method on content.
+///
+/// # Locatable elements { #locatable }
+/// Elements that are automatically assigned a location are called _locatable._
+/// For efficiency reasons, not all elements are locatable.
+///
+/// - In the [Model category]($category/model), most elements are locatable.
+///   This is because semantic elements like [headings]($heading) and
+///   [figures]($figure) are often used with introspection.
+///
+/// - In the [Text category]($category/text), the [`raw`] element, and the
+///   decoration elements [`underline`], [`overline`], [`strike`], and
+///   [`highlight`] are locatable as these are also quite semantic in nature.
+///
+/// - In the [Introspection category]($category/introspection), the [`metadata`]
+///   element is locatable as being queried for is its primary purpose.
+///
+/// - In the other categories, most elements are not locatable. Exceptions are
+///   [`math.equation`] and [`image`].
+///
+/// To find out whether a specific element is locatable, you can try to
+/// [`query`] for it.
+///
+/// Note that you can still observe elements that are not locatable in queries
+/// through other means, for instance, when they have a label attached to them.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 #[ty(scope)]
 #[derive(Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Location(u128);
@@ -62,6 +95,7 @@ impl Location {
 
 #[scope]
 impl Location {
+<<<<<<< HEAD
     /// このlocationのページ番号を返します。
     ///
     /// このlocationの[ページカウンター]($counter)の値を返すのではなく、（1始まりの）実際のページ番号を返すことに注意してください。
@@ -69,6 +103,18 @@ impl Location {
     /// ページカウンターの値が知りたい場合は代わりに`{counter(page).at(loc)}`を使用してください。
     ///
     /// [`here`]と組み合わせることで現在のコンテキストにおける実際のページ番号が取得できます。
+=======
+    /// Returns the page number for this location.
+    ///
+    /// Note that this does not return the value of the [page counter]($counter)
+    /// at this location, but the true page number (starting from one).
+    ///
+    /// If you want to know the value of the page counter, use
+    /// `{counter(page).at(loc)}` instead.
+    ///
+    /// Can be used with [`here`] to retrieve the physical page position
+    /// of the current context:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// ```example
     /// #context [
     ///   I am located on
@@ -80,20 +126,39 @@ impl Location {
         engine.introspector.page(self)
     }
 
+<<<<<<< HEAD
     /// このlocationのページ番号とx座標とy座標を辞書で返します。
     /// ページ番号は1始まりで、座標はページの左上から測ります。
     ///
     /// ページ番号のみに興味がある場合は、代わりに`page()`を使用すると不要な処理を省略できます。
+=======
+    /// Returns a dictionary with the page number and the x, y position for this
+    /// location. The page number starts at one and the coordinates are measured
+    /// from the top-left of the page.
+    ///
+    /// If you only need the page number, use `page()` instead as it allows
+    /// Typst to skip unnecessary work.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func]
     pub fn position(self, engine: &mut Engine) -> Position {
         engine.introspector.position(self)
     }
 
+<<<<<<< HEAD
     /// このlocationのページ番号の番号付けパターンを返します。
     /// これにより、ページカウンターの表示する際に、その位置での番号付けを取得できます。
     /// これは独自の索引やアウトラインを作成する場合に便利です。
     ///
     /// そのロケーションのページの番号付けが`{none}`に設定されていた場合、`{none}`を返します。
+=======
+    /// Returns the page numbering pattern of the page at this location. This
+    /// can be used when displaying the page counter in order to obtain the
+    /// local numbering. This is useful if you are building custom indices or
+    /// outlines.
+    ///
+    /// If the page numbering is set to `{none}` at that location, this function
+    /// returns `{none}`.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func]
     pub fn page_numbering(self, engine: &mut Engine) -> Option<Numbering> {
         engine.introspector.page_numbering(self).cloned()

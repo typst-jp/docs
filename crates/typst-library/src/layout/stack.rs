@@ -3,11 +3,20 @@ use std::fmt::{self, Debug, Formatter};
 use crate::foundations::{Content, cast, elem};
 use crate::layout::{Dir, Spacing};
 
+<<<<<<< HEAD
 /// コンテンツと間隔を垂直または水平方向に配置。
 ///
 /// スタックは、ある軸に沿ってアイテムのリストを配置し、各アイテム間に任意の間隔を設定します。
 ///
 /// # 例
+=======
+/// Arranges content and spacing horizontally or vertically.
+///
+/// The stack places a list of items along an axis, with optional spacing
+/// between each item.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #stack(
 ///   dir: ttb,
@@ -17,6 +26,7 @@ use crate::layout::{Dir, Spacing};
 /// )
 /// ```
 ///
+<<<<<<< HEAD
 /// # アクセシビリティ
 /// スタックは特別なセマンティクスを持ちません。
 /// スタックのコンテンツは、この関数に渡された順序のまま支援技術（AT）によって読み上げられます。
@@ -41,6 +51,36 @@ pub struct StackElem {
     pub spacing: Option<Spacing>,
 
     /// 軸に沿って積み重ねる子要素。
+=======
+/// # Accessibility
+/// Stacks do not carry any special semantics. The contents of the stack are
+/// read by Assistive Technology (AT) in the order in which they have been
+/// passed to this function.
+#[elem]
+pub struct StackElem {
+    /// The direction along which the items are stacked. Possible values are:
+    ///
+    /// - `{ltr}`: Left to right.
+    /// - `{rtl}`: Right to left.
+    /// - `{ttb}`: Top to bottom.
+    /// - `{btt}`: Bottom to top.
+    ///
+    /// You can use the `start` and `end` methods to obtain the initial and
+    /// final points (respectively) of a direction, as `alignment`. You can also
+    /// use the `axis` method to determine whether a direction is
+    /// `{"horizontal"}` or `{"vertical"}`. The `inv` method returns a
+    /// direction's inverse direction.
+    ///
+    /// For example, `{ttb.start()}` is `top`, `{ttb.end()}` is `bottom`,
+    /// `{ttb.axis()}` is `{"vertical"}` and `{ttb.inv()}` is equal to `btt`.
+    #[default(Dir::TTB)]
+    pub dir: Dir,
+
+    /// Spacing to insert between items where no explicit spacing was provided.
+    pub spacing: Option<Spacing>,
+
+    /// The children to stack along the axis.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[variadic]
     pub children: Vec<StackChild>,
 }

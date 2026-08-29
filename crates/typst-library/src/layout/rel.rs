@@ -8,6 +8,7 @@ use typst_utils::Numeric;
 use crate::foundations::{Fold, Repr, Resolve, StyleChain, cast, ty};
 use crate::layout::{Abs, Em, Length, Ratio};
 
+<<<<<<< HEAD
 /// 既知の長さに対する相対的な長さ。
 ///
 /// この型は[length]と[ratio]の組み合わせです。
@@ -17,16 +18,35 @@ use crate::layout::{Abs, Em, Length, Ratio};
 /// # ページに対する相対的な長さ
 /// よくある利用例として、（[ブロック]($block)、[長方形]($rect)などの）レイアウト要素の幅や高さをページ幅に対する百分率の値を用いて設定する場合があります。
 /// 以下の例では長方形の幅が`{25%}`に設定されており、ページの_内部_幅（幅からマージンを引いたもの）の4分の1を占めます。
+=======
+/// A length in relation to some known length.
+///
+/// This type is a combination of a [length] with a [ratio]. It results from
+/// addition and subtraction of a length and a ratio. Wherever a relative length
+/// is expected, you can also use a bare length or ratio.
+///
+/// # Relative to the page
+/// A common use case is setting the width or height of a layout element (e.g.,
+/// [block], [rect], etc.) as a certain percentage of the width of the page.
+/// Here, the rectangle's width is set to `{25%}`, so it takes up one fourth of
+/// the page's _inner_ width (the width minus margins).
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #rect(width: 25%)
 /// ```
 ///
+<<<<<<< HEAD
 /// 相対長さが想定されているあらゆる箇所で長さや百分率を単体で指定できますが、両者を自由に組み合わせられます。
+=======
+/// Bare lengths or ratios are always valid where relative lengths are expected,
+/// but the two can also be freely mixed:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #rect(width: 25% + 1cm)
 /// ```
 ///
+<<<<<<< HEAD
 /// ページの_全体_幅を占めるように要素のサイズを設定したい場合、いくつかの選択肢があります（具体的な用途に大きく依存します）。
 ///
 /// 1. ページのマージンを`{0pt}`に設定する（`[#set page(margin: 0pt)]`）
@@ -38,6 +58,23 @@ use crate::layout::{Abs, Em, Length, Ratio};
 ///
 /// # コンテナに対する相対的な長さ
 /// （[長方形]($rect)などの）レイアウト要素がページの直接の子孫ではなく、（[ブロック]($block)などの）別のレイアウトコンテナ内で入れ子になっている場合、相対的な幅はコンテナを基準とした値になります。
+=======
+/// If you're trying to size an element so that it takes up the page's _full_
+/// width, you have a few options (this highly depends on your exact use case):
+///
+/// 1. Set page margins to `{0pt}` (`[#set page(margin: 0pt)]`)
+/// 2. Multiply the ratio by the known full page width (`{21cm * 69%}`)
+/// 3. Use padding which will negate the margins (`[#pad(x: -2.5cm, ...)]`)
+/// 4. Use the page [background](page.background) or
+///    [foreground](page.foreground) field as those don't take margins into
+///    account (note that it will render the content outside of the document
+///    flow, see [place] to control the content position)
+///
+/// # Relative to a container
+/// When a layout element (e.g. a [rect]) is nested in another layout container
+/// (e.g. a [block]) instead of being a direct descendant of the page, relative
+/// widths become relative to the container:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #block(
@@ -47,12 +84,22 @@ use crate::layout::{Abs, Em, Length, Ratio};
 /// )
 /// ```
 ///
+<<<<<<< HEAD
 /// # スクリプト記述
 /// 相対長さは[百分率]($ratio)、[整数]($int)、[浮動小数点数]($float)と乗算できます。
 ///
 /// 相対長さは以下のフィールドを持ちます。
 /// - `length`: 長さ成分。
 /// - `ratio`: 百分率成分。
+=======
+/// # Scripting
+/// You can multiply relative lengths by [ratios]($ratio), [integers]($int), and
+/// [floats]($float).
+///
+/// A relative length has the following fields:
+/// - `length`: Its [length] component.
+/// - `ratio`: Its [ratio] component.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #(100% - 50pt).length \
@@ -61,9 +108,15 @@ use crate::layout::{Abs, Em, Length, Ratio};
 #[ty(cast, name = "relative", title = "Relative Length")]
 #[derive(Default, Copy, Clone, Eq, PartialEq, Hash)]
 pub struct Rel<T: Numeric = Length> {
+<<<<<<< HEAD
     /// 相対成分。
     pub rel: Ratio,
     /// 絶対成分。
+=======
+    /// The relative part.
+    pub rel: Ratio,
+    /// The absolute part.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     pub abs: T,
 }
 

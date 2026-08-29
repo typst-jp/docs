@@ -35,7 +35,11 @@
 #table(
   columns: 3,
   column-gutter: 3pt,
+<<<<<<< HEAD
   [a], [b], [c],
+=======
+  table.header([a], [b], [c]),
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   [d], [e], [f],
   [g], [h], [i]
 )
@@ -44,7 +48,11 @@
 #table(
   columns: 3,
   row-gutter: 3pt,
+<<<<<<< HEAD
   [a], [b], [c],
+=======
+  table.header([a], [b], [c]),
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   [d], [e], [f],
   [g], [h], [i]
 )
@@ -53,11 +61,39 @@
 #table(
   columns: 3,
   gutter: 3pt,
+<<<<<<< HEAD
   [a], [b], [c],
+=======
+  table.header([a], [b], [c]),
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   [d], [e], [f],
   [g], [h], [i]
 )
 
+<<<<<<< HEAD
+=======
+--- table-wide-header-table html ---
+#table(
+  columns: 3,
+  table.header(
+    [a], [b], [c],
+    [d], [e], [f],
+    [g], [h], [i]
+  )
+)
+
+--- table-wide-header-gutter-table html ---
+#table(
+  columns: 3,
+  gutter: 3pt,
+  table.header(
+    [a], [b], [c],
+    [d], [e], [f],
+    [g], [h], [i]
+  )
+)
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- multi-header-table html ---
 #table(
   columns: 2,
@@ -86,6 +122,37 @@
   ),
 )
 
+<<<<<<< HEAD
+=======
+--- multi-header-table-gutter html ---
+#table(
+  columns: 2,
+  gutter: 3pt,
+  table.header(
+    [First], [Header]
+  ),
+  table.header(
+    [Second], [Header]
+  ),
+  table.header(
+    [Level 2], [Header],
+    level: 2,
+  ),
+  table.header(
+    [Level 3], [Header],
+    level: 3,
+  ),
+
+  [Body], [Cells],
+  [Yet], [More],
+
+  table.footer(
+    [Footer], [Row],
+    [Ending], [Table],
+  ),
+)
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- multi-header-inside-table html ---
 #table(
   columns: 2,

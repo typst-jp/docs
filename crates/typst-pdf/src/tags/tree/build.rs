@@ -19,7 +19,14 @@ use ecow::EcoVec;
 use krilla::tagging::{ArtifactType, ListNumbering, Tag, TagKind};
 use rustc_hash::FxHashMap;
 use smallvec::SmallVec;
+<<<<<<< HEAD
 use typst_library::diag::{SourceDiagnostic, SourceResult, bail, error};
+=======
+use typst_library::diag::{
+    At, ExpectInternal, SourceDiagnostic, SourceResult, assert_internal, bail, error,
+    panic_internal,
+};
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use typst_library::foundations::{Content, ContextElem};
 use typst_library::introspection::Location;
 use typst_library::layout::{
@@ -180,6 +187,7 @@ pub fn build(document: &PagedDocument, options: &PdfOptions) -> SourceResult<Tre
         visit_frame(&mut tree, &page.frame)?;
     }
 
+<<<<<<< HEAD
     assert!(tree.stack.is_empty(), "tags weren't properly closed");
     assert!(tree.unfinished_stacks.is_empty(), "tags weren't properly closed");
     assert_eq!(
@@ -187,11 +195,30 @@ pub fn build(document: &PagedDocument, options: &PdfOptions) -> SourceResult<Tre
         tree.progressions.last(),
         "tags weren't properly closed"
     );
+=======
+    if let Some(last) = tree.stack.last() {
+        panic_internal("tags weren't properly closed")
+            .at(tree.groups.get(last.id).span)?;
+    }
+    assert_internal(tree.unfinished_stacks.is_empty(), "tags weren't properly closed")
+        .at(Span::detached())?;
+    assert_internal(
+        tree.progressions.first() == tree.progressions.last(),
+        "tags weren't properly closed",
+    )
+    .at(Span::detached())?;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
     // Insert logical children into the tree.
     #[allow(clippy::iter_over_hash_type)]
     for (loc, children) in tree.logical_children.iter() {
+<<<<<<< HEAD
         let located = tree.groups.by_loc(loc).expect("parent group");
+=======
+        let located = (tree.groups.by_loc(loc))
+            .expect_internal("parent group")
+            .at(Span::detached())?;
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
         if options.is_pdf_ua() && located.multiple_parents {
             let validator = options.standards.config.validator().as_str();

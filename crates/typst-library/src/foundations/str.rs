@@ -327,6 +327,10 @@ impl Str {
             UnicodeNormalForm::Nfkd => self.nfkd().collect(),
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// Whether the string contains the specified pattern.
     ///
     /// This method also has dedicated syntax: You can write `{"bc" in "abcd"}`

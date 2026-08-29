@@ -16,6 +16,7 @@ use crate::foundations::{
     Selector, Type, Value, cast, repr, scope, ty,
 };
 
+<<<<<<< HEAD
 /// 引数値から戻り値への写像。
 ///
 /// 関数名の直後に括弧で囲まれたカンマ区切りの関数の_引数_のリストを書くことにより関数を呼び出せます。
@@ -28,6 +29,22 @@ use crate::foundations::{
 /// 詳細は[数式のドキュメント]($category/math)を参照して下さい。
 ///
 /// # 例
+=======
+/// A mapping from argument values to a return value.
+///
+/// You can call a function by writing a comma-separated list of function
+/// _arguments_ enclosed in parentheses directly after the function name.
+/// Additionally, you can pass any number of trailing content block arguments
+/// to a function _after_ the normal argument list. If the normal argument list
+/// would become empty, it can be omitted. Typst supports positional and named
+/// arguments. The former are identified by position and type, while the latter
+/// are written as `name: value`.
+///
+/// Within math mode, function calls have special behaviour. See the
+/// [math documentation]($category/math) for more details.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// // Call a function.
 /// #list([A], [B])
@@ -40,6 +57,7 @@ use crate::foundations::{
 /// #list[A][B]
 /// ```
 ///
+<<<<<<< HEAD
 /// 関数はTypstにおいて基礎となる構成要素です。
 /// Typstはさまざまな組版タスクに応じた関数を提供しています。
 /// さらには、作成されるマークアップの裏側では関数が用いられており、全てのスタイル設定は関数を介して行われます。
@@ -69,6 +87,49 @@ use crate::foundations::{
 /// 意味のある値を何も返さない関数は、代わりに[`none`]を返します。
 /// このような関数について、戻り値の型はドキュメント中で明示的に指定されていません
 /// （この例としては[`array.push`]が該当します）。
+=======
+/// Functions are a fundamental building block of Typst. Typst provides
+/// functions for a variety of typesetting tasks. Moreover, the markup you write
+/// is backed by functions and all styling happens through functions. This
+/// reference lists all available functions and how you can use them. Please
+/// also refer to the documentation about [set]($styling/#set-rules) and
+/// [show]($styling/#show-rules) rules to learn about additional ways you can
+/// work with functions in Typst.
+///
+/// # Element functions
+/// Some functions are associated with _elements_ like [headings]($heading) or
+/// [tables]($table). When called, these create an element of their respective
+/// kind. In contrast to normal functions, they can further be used in [set
+/// rules]($styling/#set-rules), [show rules]($styling/#show-rules), and
+/// [selectors]($selector).
+///
+/// # Function scopes
+/// Functions can hold related definitions in their own scope, similar to a
+/// [module]($scripting/#modules). Examples of this are [`assert.eq`] or
+/// [`list.item`]. However, this feature is currently only available for
+/// built-in functions.
+///
+/// # Defining functions
+/// You can define your own function with a [let binding]($scripting/#bindings)
+/// that has a parameter list after the binding's name. The parameter list can
+/// contain mandatory positional parameters, named parameters with default
+/// values and [argument sinks]($arguments).
+///
+/// The right-hand side of a function binding is the function body, which can be
+/// a block or any other expression. It defines the function's return value and
+/// can depend on the parameters. If the function body is a [code
+/// block]($scripting/#blocks), the return value is the result of joining the
+/// values of each expression in the block.
+///
+/// Within a function body, the `return` keyword can be used to exit early and
+/// optionally specify a return value. If no explicit return value is given, the
+/// body evaluates to the result of joining all expressions preceding the
+/// `return`.
+///
+/// Functions that don't return any meaningful value return [`none`] instead.
+/// The return type of such functions is not explicitly specified in the
+/// documentation. (An example of this is [`array.push`]).
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #let alert(body, fill: red) = {
@@ -91,6 +152,7 @@ use crate::foundations::{
 /// ]
 /// ```
 ///
+<<<<<<< HEAD
 /// # 関数のインポート
 /// 関数は、`{import}`を用いてあるファイル（[`module`]($scripting/#modules)）から別のファイルにインポートできます。
 /// 例えば、上記の例にある`alert`関数を`foo.typ`というファイルに定義したとします。
@@ -100,12 +162,28 @@ use crate::foundations::{
 /// 引数リストに続けて `=>` と関数本体を指定することで、バインディングを作らずに無名関数も作成できます。
 /// もし関数の引数が1つだけならば、引数リストの周りに括弧を付ける必要はありません。
 /// 無名関数は主にshowルールで用いると便利ですが、page関数の[`footer`]($page.footer)プロパティのような、関数を引数に取る設定可能プロパティでも便利です。
+=======
+/// # Importing functions
+/// Functions can be imported from one file ([`module`]($scripting/#modules)) into
+/// another using `{import}`. For example, assume that we have defined the `alert`
+/// function from the previous example in a file called `foo.typ`. We can import
+/// it into another file by writing `{import "foo.typ": alert}`.
+///
+/// # Unnamed functions { #unnamed }
+/// You can also create an unnamed function without creating a binding by
+/// specifying a parameter list followed by `=>` and the function body. If your
+/// function has just one parameter, the parentheses around the parameter list
+/// are optional. Unnamed functions are mainly useful for show rules, but also
+/// for settable properties that take functions like the page function's
+/// [`footer`]($page.footer) property.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #show "once?": it => [#it #it]
 /// once?
 /// ```
 ///
+<<<<<<< HEAD
 /// # 関数の純粋性に関する注意
 /// Typstにおいて関数は全て_純粋_です。
 /// これは同じ引数からは常に同じ結果が返ってくることを意味します。
@@ -113,6 +191,16 @@ use crate::foundations::{
 ///
 /// 唯一の例外は[`array.push(value)`]($array.push)のような組み込みメソッドです。
 /// これらは呼び出された対象を変更できます。
+=======
+/// # Note on function purity
+/// In Typst, all functions are _pure._ This means that for the same
+/// arguments, they always return the same result. They cannot "remember" things to
+/// produce another value when they are called a second time.
+///
+/// The only exception are built-in methods like
+/// [`array.push(value)`]($array.push). These can modify the values they are
+/// called on.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 #[ty(scope, cast, name = "function")]
 #[derive(Clone, Hash)]
 #[allow(clippy::derived_hash_with_manual_eq)]
@@ -338,12 +426,20 @@ impl Func {
 
 #[scope]
 impl Func {
+<<<<<<< HEAD
     /// 指定した引数を事前に適用した新しい関数を返します。
+=======
+    /// Returns a new function that has the given arguments pre-applied.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func]
     pub fn with(
         self,
         args: &mut Args,
+<<<<<<< HEAD
         /// 関数に適用する引数。
+=======
+        /// The arguments to apply to the function.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[external]
         #[variadic]
         arguments: Vec<Value>,
@@ -355,7 +451,12 @@ impl Func {
         }
     }
 
+<<<<<<< HEAD
     /// この関数に属する要素のうち、与えられた引数と同じ値のフィールドを持つものを絞り込むセレクターを返します。
+=======
+    /// Returns a selector that filters for elements belonging to this function
+    /// whose fields have the values of the given arguments.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #show heading.where(level: 2): set text(blue)
@@ -367,7 +468,11 @@ impl Func {
     pub fn where_(
         self,
         args: &mut Args,
+<<<<<<< HEAD
         /// 絞り込むフィールド。
+=======
+        /// The fields to filter for.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[variadic]
         #[external]
         fields: Vec<Value>,

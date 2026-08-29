@@ -5,16 +5,25 @@ use crate::foundations::{Content, Smart, elem};
 use crate::layout::{Em, Length};
 use crate::text::{FontMetrics, ScriptMetrics, TextSize};
 
+<<<<<<< HEAD
 /// テキストを下付き文字でレンダリング。
 ///
 /// テキストは小さくレンダリングされ、ベースラインは低くなります。
 ///
 /// # 例
+=======
+/// Renders text in subscript.
+///
+/// The text is rendered smaller and its baseline is lowered.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// Revenue#sub[yearly]
 /// ```
 #[elem(title = "Subscript", Tagged)]
 pub struct SubElem {
+<<<<<<< HEAD
     /// フォントの下付き文字専用のグリフを優先するかどうか。
     ///
     /// 理想的にはフォントがOpenTypeフィーチャーの`subs`で下付きグリフを提供します。
@@ -22,6 +31,18 @@ pub struct SubElem {
     ///
     /// `{false}`にすると、フォントが下付きグリフを持っていても合成を使用します。
     /// `{true}`でも、フォントに必要なグリフがない場合は合成にフォールバックします。
+=======
+    /// Whether to use subscript glyphs from the font if available.
+    ///
+    /// Ideally, subscripts glyphs are provided by the font (using the `subs`
+    /// OpenType feature). Otherwise, Typst is able to synthesize subscripts by
+    /// lowering and scaling down regular glyphs.
+    ///
+    /// When this is set to `{false}`, synthesized glyphs will be used
+    /// regardless of whether the font provides dedicated subscript glyphs. When
+    /// `{true}`, synthesized glyphs may still be used in case the font does not
+    /// provide the necessary subscript glyphs.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// N#sub(typographic: true)[1]
@@ -30,6 +51,7 @@ pub struct SubElem {
     #[default(true)]
     pub typographic: bool,
 
+<<<<<<< HEAD
     /// 合成した下付き文字のベースラインの下方向シフト。
     ///
     /// これは合成時のみ有効です。つまり、`typographic`が`true`かつ、
@@ -49,20 +71,54 @@ pub struct SubElem {
     pub size: Smart<TextSize>,
 
     /// 下付き文字で表示するテキスト。
+=======
+    /// The downward baseline shift for synthesized subscripts.
+    ///
+    /// This only applies to synthesized subscripts. In other words, this has no
+    /// effect if `typographic` is `{true}` and the font provides the necessary
+    /// subscript glyphs.
+    ///
+    /// If set to `{auto}`, the baseline is shifted according to the metrics
+    /// provided by the font, with a fallback to `{0.2em}` in case the font does
+    /// not define the necessary metrics.
+    pub baseline: Smart<Length>,
+
+    /// The font size for synthesized subscripts.
+    ///
+    /// This only applies to synthesized subscripts. In other words, this has no
+    /// effect if `typographic` is `{true}` and the font provides the necessary
+    /// subscript glyphs.
+    ///
+    /// If set to `{auto}`, the size is scaled according to the metrics provided
+    /// by the font, with a fallback to `{0.6em}` in case the font does not
+    /// define the necessary metrics.
+    pub size: Smart<TextSize>,
+
+    /// The text to display in subscript.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 /// テキストを上付き文字でレンダリング。
 ///
 /// テキストは小さくレンダリングされ、ベースラインは高くなります。
 ///
 /// # 例
+=======
+/// Renders text in superscript.
+///
+/// The text is rendered smaller and its baseline is raised.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// 1#super[st] try!
 /// ```
 #[elem(title = "Superscript", Tagged)]
 pub struct SuperElem {
+<<<<<<< HEAD
     /// フォントの上付き文字専用のグリフを優先するかどうか。
     ///
     /// 理想的にはフォントがOpenTypeフィーチャーの`sups`で上付きグリフを提供します。
@@ -70,6 +126,18 @@ pub struct SuperElem {
     ///
     /// `{false}`にすると、フォントが上付きグリフを持っていても合成を使用します。
     /// `{true}`でも、フォントに必要なグリフがない場合は合成にフォールバックします。
+=======
+    /// Whether to use superscript glyphs from the font if available.
+    ///
+    /// Ideally, superscripts glyphs are provided by the font (using the `sups`
+    /// OpenType feature). Otherwise, Typst is able to synthesize superscripts
+    /// by raising and scaling down regular glyphs.
+    ///
+    /// When this is set to `{false}`, synthesized glyphs will be used
+    /// regardless of whether the font provides dedicated superscript glyphs.
+    /// When `{true}`, synthesized glyphs may still be used in case the font
+    /// does not provide the necessary superscript glyphs.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// N#super(typographic: true)[1]
@@ -78,6 +146,7 @@ pub struct SuperElem {
     #[default(true)]
     pub typographic: bool,
 
+<<<<<<< HEAD
     /// 合成した上付き文字のベースラインの下方向シフト。
     ///
     /// これは合成時のみ有効です。つまり、`typographic`が`true`かつ、
@@ -100,6 +169,35 @@ pub struct SuperElem {
     pub size: Smart<TextSize>,
 
     /// 上付き文字で表示するテキスト。
+=======
+    /// The downward baseline shift for synthesized superscripts.
+    ///
+    /// This only applies to synthesized superscripts. In other words, this has
+    /// no effect if `typographic` is `{true}` and the font provides the
+    /// necessary superscript glyphs.
+    ///
+    /// If set to `{auto}`, the baseline is shifted according to the metrics
+    /// provided by the font, with a fallback to `{-0.5em}` in case the font
+    /// does not define the necessary metrics.
+    ///
+    /// Note that, since the baseline shift is applied downward, you will need
+    /// to provide a negative value for the content to appear as raised above
+    /// the normal baseline.
+    pub baseline: Smart<Length>,
+
+    /// The font size for synthesized superscripts.
+    ///
+    /// This only applies to synthesized superscripts. In other words, this has
+    /// no effect if `typographic` is `{true}` and the font provides the
+    /// necessary superscript glyphs.
+    ///
+    /// If set to `{auto}`, the size is scaled according to the metrics provided
+    /// by the font, with a fallback to `{0.6em}` in case the font does not
+    /// define the necessary metrics.
+    pub size: Smart<TextSize>,
+
+    /// The text to display in superscript.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }

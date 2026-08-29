@@ -12,7 +12,11 @@ use bumpalo::Bump;
 use bumpalo::collections::{CollectIn, String as BumpString, Vec as BumpVec};
 use comemo::Track;
 use ecow::EcoString;
+<<<<<<< HEAD
 use typst_library::diag::{At, SourceResult, bail};
+=======
+use typst_library::diag::{At, SourceResult, bail, warning};
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use typst_library::engine::Engine;
 use typst_library::foundations::{
     Content, Context, ContextElem, Element, NativeElement, NativeShowRule, Packed,
@@ -608,6 +612,7 @@ fn visit_styled<'a>(
                 info.populate_locale(&local)
             }
         } else if elem == PageElem::ELEM {
+<<<<<<< HEAD
             if !matches!(s.kind, RealizationKind::LayoutDocument { .. }) {
                 bail!(
                     style.span(),
@@ -618,6 +623,24 @@ fn visit_styled<'a>(
             // When there are page styles, we "break free" from our show rule cage.
             pagebreak = true;
             s.outside = true;
+=======
+            match s.kind {
+                RealizationKind::LayoutDocument { .. } => {
+                    // When there are page styles, we "break free" from our show
+                    // rule cage.
+                    pagebreak = true;
+                    s.outside = true;
+                }
+                RealizationKind::HtmlDocument { .. } => s.engine.sink.warn(warning!(
+                    style.span(),
+                    "page set rule was ignored during HTML export"
+                )),
+                _ => bail!(
+                    style.span(),
+                    "page configuration is not allowed inside of containers"
+                ),
+            }
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         }
     }
 

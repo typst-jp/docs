@@ -10,6 +10,7 @@ use crate::diag::SourceResult;
 use crate::engine::Engine;
 use crate::foundations::{Context, Func, Str, Value, cast, func};
 
+<<<<<<< HEAD
 /// 順序に応じた番号付け。
 ///
 /// 番号付けは、一連の数値をコンテンツとしてどのように表示するかを定義します。
@@ -20,6 +21,19 @@ use crate::foundations::{Context, Func, Str, Value, cast, func};
 /// そのままの形で繰り返し使用されます。
 ///
 /// # 例
+=======
+/// Applies a numbering to a sequence of numbers.
+///
+/// A numbering defines how a sequence of numbers should be displayed as
+/// content. It is defined either through a pattern string or an arbitrary
+/// function.
+///
+/// A numbering pattern consists of counting symbols, for which the actual
+/// number is substituted, their prefixes, and one suffix. The prefixes and the
+/// suffix are displayed as-is.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #numbering("1.1)", 1, 2, 3) \
 /// #numbering("1.a.i", 1, 2) \
@@ -33,12 +47,24 @@ use crate::foundations::{Context, Func, Str, Value, cast, func};
 /// )
 /// ```
 ///
+<<<<<<< HEAD
 /// # 番号付けのパターン指定と関数指定
 /// Typstではパターン指定または関数指定で番号付けを定義できる場面がいくつかあります。
 /// 例えば、[見出し]($heading)や[図表]($figure)などに番号を付ける際に使用します。
 /// いずれの場合も、指定の形式は後述する[`numbering`]($numbering.numbering)パラメーターと同じです。
 ///
 /// 次の例は、番号付け用の関数が、単に数値を受け取って[`content`]を返す通常の[function]であることを示しています。
+=======
+/// # Numbering patterns and numbering functions
+/// There are multiple instances where you can provide a numbering pattern or
+/// function in Typst. For example, when defining how to number
+/// [headings]($heading) or [figures]($figure). Every time, the expected format
+/// is the same as the one described below for the
+/// [`numbering`]($numbering.numbering) parameter.
+///
+/// The following example illustrates that a numbering function is just a
+/// regular [function] that accepts numbers and returns [`content`].
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #let unary(.., last) = "|" * last
 /// #set heading(numbering: unary)
@@ -50,6 +76,7 @@ use crate::foundations::{Context, Func, Str, Value, cast, func};
 pub fn numbering(
     engine: &mut Engine,
     context: Tracked<Context>,
+<<<<<<< HEAD
     /// 番号付けの表示形式を定義します。
     ///
     /// **カウント記号**として使用できるパターン文字は `1`, `a`, `A`, `i`, `I`, `α`, `Α`, `一`, `壹`, `あ`, `い`, `ア`, `イ`, `א`, `가`, `ㄱ`, `*`, `١`, `۱`, `१`, `১`, `ক`, `①`, `⓵`があります。
@@ -74,6 +101,40 @@ pub fn numbering(
     ///
     /// 番号付けがパターン指定であり、カウント記号よりも多くの数値が指定された場合、
     /// 最後のカウント記号とそのプレフィックスが繰り返されます。
+=======
+    /// Defines how the numbering works.
+    ///
+    /// **Counting symbols** are `1`, `a`, `A`, `i`, `I`, `α`, `Α`, `一`, `壹`,
+    /// `あ`, `い`, `ア`, `イ`, `א`, `가`, `ㄱ`, `*`, `١`, `۱`, `१`, `১`, `ক`,
+    /// `①`, and `⓵`. They are replaced by the number in the sequence,
+    /// preserving the original case.
+    ///
+    /// The `*` character means that symbols should be used to count, in the
+    /// order of `*`, `†`, `‡`, `§`, `¶`, `‖`. If there are more than six
+    /// items, the number is represented using repeated symbols.
+    ///
+    /// **Suffixes** are all characters after the last counting symbol. They are
+    /// displayed as-is at the end of any rendered number.
+    ///
+    /// **Prefixes** are all characters that are neither counting symbols nor
+    /// suffixes. They are displayed as-is at in front of their rendered
+    /// equivalent of their counting symbol.
+    ///
+    /// This parameter can also be an arbitrary function that gets each number
+    /// as an individual argument. When given a function, the `numbering`
+    /// function just forwards the arguments to that function. While this is not
+    /// particularly useful in itself, it means that you can just give arbitrary
+    /// numberings to the `numbering` function without caring whether they are
+    /// defined as a pattern or function.
+    numbering: Numbering,
+    /// The numbers to apply the numbering to. Must be non-negative.
+    ///
+    /// In general, numbers are counted from one. A number of zero indicates
+    /// that the first element has not yet appeared.
+    ///
+    /// If `numbering` is a pattern and more numbers than counting symbols are
+    /// given, the last counting symbol with its prefix is repeated.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[variadic]
     numbers: Vec<u64>,
 ) -> SourceResult<Value> {

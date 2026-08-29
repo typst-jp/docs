@@ -1,4 +1,5 @@
 use std::num::NonZeroUsize;
+<<<<<<< HEAD
 use crate::foundations::{Content, elem};
 use crate::layout::{Length, Ratio, Rel};
 
@@ -17,6 +18,49 @@ use crate::layout::{Length, Ratio, Rel};
 ///
 /// # 段組の中断 { #breaking-out }
 /// （例えば、論文のタイトルのように）段組を一時的に中断する場合は、親スコープでのフロート配置を使用してください。
+=======
+
+use crate::foundations::{Content, elem};
+use crate::layout::{Length, Ratio, Rel};
+
+/// Separates a region into multiple equally sized columns.
+///
+/// The `column` function lets you separate the interior of any container into
+/// multiple columns. It will currently not balance the height of the columns.
+/// Instead, the columns will take up the height of their container or the
+/// remaining height on the page. Support for balanced columns is planned for
+/// the future.
+///
+/// When arranging content across multiple columns, use [`colbreak`]($colbreak)
+/// to explicitly continue in the next column.
+///
+/// # Example
+/// ```example
+/// #columns(2, gutter: 8pt)[
+///   This text is in the
+///   first column.
+///
+///   #colbreak()
+///
+///   This text is in the
+///   second column.
+/// ]
+/// ```
+///
+/// # Page-level columns { #page-level }
+/// If you need to insert columns across your whole document, use the `{page}`
+/// function's [`columns` parameter]($page.columns) instead. This will create
+/// the columns directly at the page-level rather than wrapping all of your
+/// content in a layout container. As a result, things like
+/// [pagebreaks]($pagebreak), [footnotes]($footnote), and [line
+/// numbers]($par.line) will continue to work as expected. For more information,
+/// also read the [relevant part of the page setup
+/// guide]($guides/page-setup/#columns).
+///
+/// # Breaking out of columns { #breaking-out }
+/// To temporarily break out of columns (e.g. for a paper's title), use
+/// parent-scoped floating placement:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example:single
 /// #set page(columns: 2, height: 150pt)
@@ -34,26 +78,48 @@ use crate::layout::{Length, Ratio, Rel};
 /// ```
 #[elem]
 pub struct ColumnsElem {
+<<<<<<< HEAD
     /// 段数。
+=======
+    /// The number of columns.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[positional]
     #[default(NonZeroUsize::new(2).unwrap())]
     pub count: NonZeroUsize,
 
+<<<<<<< HEAD
     /// 段間。
     #[default(Ratio::new(0.04).into())]
     pub gutter: Rel<Length>,
 
     /// 段内にレイアウトされるべきコンテンツ。
+=======
+    /// The size of the gutter space between each column.
+    #[default(Ratio::new(0.04).into())]
+    pub gutter: Rel<Length>,
+
+    /// The content that should be layouted into the columns.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }
 
+<<<<<<< HEAD
 /// 強制的な段の区切り。
 ///
 /// この関数は、一段組やページ中の最後の段で使用されると、[改ページ]($pagebreak)と同じように振る舞います。
 /// それ以外の場合、段区切りの後のコンテンツは次の段に配置されます。
 ///
 /// # 例
+=======
+/// Forces a column break.
+///
+/// The function will behave like a [page break]($pagebreak) when used in a
+/// single column layout or the last column on a page. Otherwise, content after
+/// the column break will be placed in the next column.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set page(columns: 2)
 /// Preliminary findings from our
@@ -72,7 +138,12 @@ pub struct ColumnsElem {
 /// ```
 #[elem(title = "Column Break")]
 pub struct ColbreakElem {
+<<<<<<< HEAD
     /// `{true}`の場合、現在の段がすでに空のとき段区切りが実行されません。
+=======
+    /// If `{true}`, the column break is skipped if the current column is
+    /// already empty.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[default(false)]
     pub weak: bool,
 }

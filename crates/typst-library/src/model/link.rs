@@ -7,8 +7,13 @@ use ecow::{EcoString, eco_format};
 use crate::diag::{SourceResult, StrResult, bail};
 use crate::engine::Engine;
 use crate::foundations::{
+<<<<<<< HEAD
     Args, Construct, Content, Label, Packed, Repr, Selector, ShowSet, Smart,
     StyleChain, Styles, cast, elem,
+=======
+    Args, Construct, Content, Label, Packed, Repr, Selector, ShowSet, Smart, StyleChain,
+    Styles, cast, elem,
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 };
 use crate::introspection::{
     Counter, CounterKey, Introspector, Locatable, Location, Tagged,
@@ -17,12 +22,21 @@ use crate::layout::{PageElem, Position};
 use crate::model::{NumberingPattern, Refable};
 use crate::text::{LocalName, TextElem};
 
+<<<<<<< HEAD
 /// URLや文書中の位置へのリンク。
 ///
 /// デフォルトでは、リンクの外見は通常のテキストと変わりません。
 /// しかし、showルールを使うことで、簡単に任意のスタイルを適用できます。
 ///
 /// # 例
+=======
+/// Links to a URL or a location in the document.
+///
+/// By default, links do not look any different from normal text. However,
+/// you can easily apply a style of your choice with a show rule.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #show link: underline
 ///
@@ -34,6 +48,7 @@ use crate::text::{LocalName, TextElem};
 /// ]
 /// ```
 ///
+<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// `http://`や`https://`で始まるテキストは、自動的にリンクに変換されます。
@@ -102,6 +117,90 @@ pub struct LinkElem {
     ///   - [整数]($int)型の`page`キーと[`length`]型の`x`座標、`y`座標を持つ辞書。
     ///     ページ番号は1から始まり、
     ///     座標はページの左上隅からの相対位置です。
+=======
+/// # Syntax
+/// This function also has dedicated syntax: Text that starts with `http://` or
+/// `https://` is automatically turned into a link.
+///
+/// # Hyphenation
+/// If you enable hyphenation or justification, by default, it will not apply to
+/// links to prevent unwanted hyphenation in URLs. You can opt out of this
+/// default via `{show link: set text(hyphenate: true)}`.
+///
+/// # Accessibility
+/// The destination of a link should be clear from the link text itself, or at
+/// least from the text immediately surrounding it. In PDF export, Typst will
+/// automatically generate a tooltip description for links based on their
+/// destination. For links to URLs, the URL itself will be used as the tooltip.
+///
+/// # Links in HTML export
+/// In HTML export, a link to a [label] or [location] will be turned into a
+/// fragment link to a named anchor point. To support this, targets without an
+/// existing ID will automatically receive an ID in the DOM. How this works
+/// varies by which kind of HTML node(s) the link target turned into:
+///
+/// - If the link target turned into a single HTML element, that element will
+///   receive the ID. This is, for instance, typically the case when linking to
+///   a top-level heading (which turns into a single `<h2>` element).
+///
+/// - If the link target turned into a single text node, the node will be
+///   wrapped in a `<span>`, which will then receive the ID.
+///
+/// - If the link target turned into multiple nodes, the first node will receive
+///   the ID.
+///
+/// - If the link target turned into no nodes at all, an empty span will be
+///   generated to serve as a link target.
+///
+/// If you rely on a specific DOM structure, you should ensure that the link
+/// target turns into one or multiple elements, as the compiler makes no
+/// guarantees on the precise segmentation of text into text nodes.
+///
+/// If present, the automatic ID generation tries to reuse the link target's
+/// label to create a human-readable ID. A label can be reused if:
+///
+/// - All characters are alphabetic or numeric according to Unicode, or a
+///   hyphen, or an underscore.
+///
+/// - The label does not start with a digit or hyphen.
+///
+/// These rules ensure that the label is both a valid CSS identifier and a valid
+/// URL fragment for linking.
+///
+/// As IDs must be unique in the DOM, duplicate labels might need disambiguation
+/// when reusing them as IDs. The precise rules for this are as follows:
+///
+/// - If a label can be reused and is unique in the document, it will directly
+///   be used as the ID.
+///
+/// - If it's reusable, but not unique, a suffix consisting of a hyphen and an
+///   integer will be added. For instance, if the label `<mylabel>` exists
+///   twice, it would turn into `mylabel-1` and `mylabel-2`.
+///
+/// - Otherwise, a unique ID of the form `loc-` followed by an integer will be
+///   generated.
+#[elem(Locatable)]
+pub struct LinkElem {
+    /// The destination the link points to.
+    ///
+    /// - To link to web pages, `dest` should be a valid URL string. If the URL
+    ///   is in the `mailto:` or `tel:` scheme and the `body` parameter is
+    ///   omitted, the email address or phone number will be the link's body,
+    ///   without the scheme.
+    ///
+    /// - To link to another part of the document, `dest` can take one of three
+    ///   forms:
+    ///   - A [label] attached to an element. If you also want automatic text
+    ///     for the link based on the element, consider using a
+    ///     [reference]($ref) instead.
+    ///
+    ///   - A [`location`] (typically retrieved from [`here`], [`locate`] or
+    ///     [`query`]).
+    ///
+    ///   - A dictionary with a `page` key of type [integer]($int) and `x` and
+    ///     `y` coordinates of type [length]. Pages are counted from one, and
+    ///     the coordinates are relative to the page's top left corner.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// = Introduction <intro>
@@ -118,10 +217,17 @@ pub struct LinkElem {
     )]
     pub dest: LinkTarget,
 
+<<<<<<< HEAD
     /// リンクとして表示するコンテンツ。
     ///
     /// `dest`がURL文字列の場合、このパラメーターは省略可能です。
     /// この場合、URLがリンクとして表示されます。
+=======
+    /// The content that should become a link.
+    ///
+    /// If `dest` is an URL string, the parameter can be omitted. In this case,
+    /// the URL will be shown as the link.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     #[parse(match &dest {
         LinkTarget::Dest(Destination::Url(url)) => match args.eat()? {

@@ -9,9 +9,15 @@ use crate::layout::{BlockElem, Em, PadElem};
 use crate::model::{CitationForm, CiteElem};
 use crate::text::{SmartQuotes, SpaceElem, TextElem};
 
+<<<<<<< HEAD
 /// 引用文を表示し、オプションとして帰属情報を併記する。
 ///
 /// # 例
+=======
+/// Displays a quote alongside an optional attribution.
+///
+/// # Example
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// Plato is often misquoted as the author of #quote[I know that I know
 /// nothing], however, this is a derivation form his original quote:
@@ -28,8 +34,13 @@ use crate::text::{SmartQuotes, SpaceElem, TextElem};
 /// ]
 /// ```
 ///
+<<<<<<< HEAD
 /// デフォルトでは、ブロック引用には左右それぞれ `{1em}` のパディングが設定されており、
 /// 配置やパディングはshowルールで制御できます。
+=======
+/// By default block quotes are padded left and right by `{1em}`, alignment and
+/// padding can be controlled with show rules:
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set quote(block: true)
 /// #show quote: set align(center)
@@ -43,7 +54,11 @@ use crate::text::{SmartQuotes, SpaceElem, TextElem};
 /// ```
 #[elem(Locatable, Tagged, ShowSet)]
 pub struct QuoteElem {
+<<<<<<< HEAD
     /// ブロック引用にするかどうか。
+=======
+    /// Whether this is a block quote.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// An inline citation would look like
@@ -61,6 +76,7 @@ pub struct QuoteElem {
     /// ```
     pub block: bool,
 
+<<<<<<< HEAD
     /// 引用文の両端を二重引用符で囲むかどうか。
     ///
     /// 使用される二重引用符は、[smartquote]の`quotes`プロパティから推測され、
@@ -70,6 +86,18 @@ pub struct QuoteElem {
     /// - `{false}`: 引用文を二重引用符で囲みません。
     /// - `{auto}`: 引用文を二重引用符で囲むかどうかを、`block`プロパティに基づいて推測します。
     ///   `block`が`{false}`の場合、二重引用符が自動的に追加されます。
+=======
+    /// Whether double quotes should be added around this quote.
+    ///
+    /// The double quotes used are inferred from the `quotes` property on
+    /// [smartquote], which is affected by the `lang` property on [text].
+    ///
+    /// - `{true}`: Wrap this quote in double quotes.
+    /// - `{false}`: Do not wrap this quote in double quotes.
+    /// - `{auto}`: Infer whether to wrap this quote in double quotes based on
+    ///   the `block` property. If `block` is `{false}`, double quotes are
+    ///   automatically added.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set text(lang: "de")
@@ -86,9 +114,15 @@ pub struct QuoteElem {
     /// ```
     pub quotes: Smart<bool>,
 
+<<<<<<< HEAD
     /// 引用文の帰属情報。通常は著者名や出典元を指します。
     /// 参考文献を指すラベルや任意のコンテンツも設定できます。
     /// デフォルトではブロック引用にのみ表示されますが、`{show}`ルールを使用して変更できます。
+=======
+    /// The attribution of this quote, usually the author or source. Can be a
+    /// label pointing to a bibliography entry or any content. By default only
+    /// displayed for block quotes, but can be changed using a `{show}` rule.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #quote(attribution: [René Descartes])[
@@ -121,7 +155,11 @@ pub struct QuoteElem {
     /// ```
     pub attribution: Option<Attribution>,
 
+<<<<<<< HEAD
     /// 引用文。
+=======
+    /// The quote.
+>>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 
