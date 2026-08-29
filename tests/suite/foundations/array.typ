@@ -552,10 +552,7 @@
 --- array-reduce-unexpected-argument ---
 // Error: 19-21 unexpected argument
 #(1, 2, 3).reduce(() => none)
-<<<<<<< HEAD
-=======
 
 --- issue-6285-crashed-with-sorting-non-total-order ---
 // Error: 2-66 cannot compare none and string
 #(("a", "b", "c", "d", "e", "z") * 3 + ("c", none, "a")).sorted()
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

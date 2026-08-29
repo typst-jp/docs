@@ -105,11 +105,7 @@ contexts:
     - match: '\'
 ```.text
 
-<<<<<<< HEAD
-// Error: 35-56 failed to parse syntax (Error while compiling regex '/': Parsing error at position 0: Backslash without following character)
-=======
 // Error: 35-56 failed to parse syntax (Error while compiling regex '\': Parsing error at position 0: Backslash without following character)
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 #raw("text", lang: "a", syntaxes: bytes(sublime-syntax))
 
 --- raw-theme ---

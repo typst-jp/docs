@@ -2,15 +2,10 @@
 
 --- math-accent-sym-call ---
 // Test function call.
-<<<<<<< HEAD
-$grave(a), acute(b), hat(f), tilde(§), macron(ä), diaer(a), ä \
- breve(\&), dot(!), circle(a), caron(@), arrow(Z), arrow.l(Z)$
-=======
 $ grave(a), acute(b), hat(f), tilde(§), macron(ä), dash(ä), breve(ä), \
   dot(!), dot.double(a), diaer(a), dot.triple(a), dot.quad(a), circle(a), \
   acute.double(a), caron(@), arrow(Z), arrow.l(Z), arrow.l.r(Z), \
   harpoon(a), harpoon.lt(a) $
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 --- math-accent-align ---
 $ x &= p \ dot(x) &= v \ dot.double(x) &= a \ dot.triple(x) &= j \ dot.quad(x) &= s $
@@ -99,8 +94,6 @@ $accent(sum, \u{0330}), accent(sum, \u{0330}, size: #50%), accent(H, \u{032D}, s
 $hat(accent(L, \u{0330})), accent(circle(p), \u{0323}),
   macron(accent(caron(accent(A, \u{20ED})), \u{0333})) \
   breve(accent(eta, \u{032E})) = accent(breve(eta), \u{032E})$
-<<<<<<< HEAD
-=======
 
 --- math-accent-string-too-long ---
 // Error: 17-21 expected exactly one character
@@ -142,4 +135,3 @@ $accent(A, std.emoji.arrow.l.r)$
 
 // Error: 13-47 expected exactly one character
 $accent(A, #symbol("\u{2194}\u{fe0e}\u{fe0f}"))$
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

@@ -348,14 +348,11 @@ A
   A
 ]
 
-<<<<<<< HEAD
-=======
 --- page-set-html html ---
 // Warning: 2-16 page set rule was ignored during HTML export
 #set page("a4")
 Hi
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- issue-2631-page-header-ordering ---
 #set text(6pt)
 #show heading: set text(6pt, weight: "regular")
@@ -402,8 +399,6 @@ text
 #metadata(none)
 #set page(fill: red)
 2
-<<<<<<< HEAD
-=======
 
 --- issue-7292-page-width-auto-margin-zero ---
 #set page(width: auto, height: 100pt, margin: 0pt)
@@ -413,4 +408,3 @@ text
 
 --- issue-7292-page-size-auto-margin-zero ---
 #set page(width: auto, height: auto, margin: 0pt)
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

@@ -34,7 +34,6 @@ pub fn module() -> Module {
     Module::new("html", html)
 }
 
-<<<<<<< HEAD
 /// Typstのコンテンツを含むことができるHTML要素。
 ///
 /// TypstのHTMLエクスポートは、ほとんどの要素に対して適切なタグを自動的に生成します。
@@ -51,23 +50,6 @@ pub fn module() -> Module {
 ///
 /// 通常、Typstは`html`、`head`、および`body`タグを生成します。
 /// 代わりにこの関数でそれらを作成した場合、Typstは自身の生成するタグを省略します。
-=======
-/// An HTML element that can contain Typst content.
-///
-/// Typst's HTML export automatically generates the appropriate tags for most
-/// elements. However, sometimes, it is desirable to retain more control. For
-/// example, when using Typst to generate your blog, you could use this function
-/// to wrap each article in an `<article>` tag.
-///
-/// Typst is aware of what is valid HTML. A tag and its attributes must form
-/// syntactically valid HTML. Some tags, like `meta` do not accept content.
-/// Hence, you must not provide a body for them. We may add more checks in the
-/// future, so be sure that you are generating valid HTML when using this
-/// function.
-///
-/// Normally, Typst will generate `html`, `head`, and `body` tags for you. If
-/// you instead create them with this function, Typst will omit its own tags.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```typ
 /// #html.elem("div", attrs: (style: "background: aqua"))[
@@ -76,7 +58,6 @@ pub fn module() -> Module {
 /// ```
 #[elem(name = "elem")]
 pub struct HtmlElem {
-<<<<<<< HEAD
     /// 要素のタグ。
     #[required]
     pub tag: HtmlTag,
@@ -87,18 +68,6 @@ pub struct HtmlElem {
     /// HTML要素の内容。
     ///
     /// 本文には任意のTypstコンテンツを指定できます。
-=======
-    /// The element's tag.
-    #[required]
-    pub tag: HtmlTag,
-
-    /// The element's HTML attributes.
-    pub attrs: HtmlAttrs,
-
-    /// The contents of the HTML element.
-    ///
-    /// The body can be arbitrary Typst content.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[positional]
     pub body: Option<Content>,
 
@@ -107,7 +76,6 @@ pub struct HtmlElem {
     #[synthesized]
     pub parent: Location,
 
-<<<<<<< HEAD
     /// 役割は、最上位のスタイル設定されたHTML要素に適用されるべきですが、
     /// その子孫には適用されません。スタイルセットルールが今後追加されて、
     /// サブツリーではなく特定の要素に適用される場合は、
@@ -120,19 +88,6 @@ pub struct HtmlElem {
     /// 意図せずに付与されてしまう傾向があります。
     /// これは多少のハックですが、`role`プロパティは純粋に内部的なものであり、
     /// その使用方法は私たちが制御しているため、十分です。
-=======
-    /// A role that should be applied to the top-level styled HTML element, but
-    /// not its descendants. If we ever get set rules that apply to a specific
-    /// element instead of a subtree, they could supplant this. If we need the
-    /// same mechanism for things like `class`, this could potentially also be
-    /// extended to arbitrary attributes. It's minimal for now.
-    ///
-    /// This is ignored for `<p>` elements as it otherwise tends to
-    /// unintentionally attach to paragraphs resulting from grouping of a single
-    /// element instead of attaching to that element. This is a bit of a hack,
-    /// but good enough for now as the `role` property is purely internal and
-    /// we control what it is used for.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[internal]
     #[ghost]
     pub role: Option<EcoString>,
@@ -173,7 +128,6 @@ impl HtmlElem {
     }
 }
 
-<<<<<<< HEAD
 /// コンテンツをインラインSVGとしてレイアウトする要素。
 ///
 /// TypstのコンテンツにはHTMLへの変換に不適切なものがあります。
@@ -186,21 +140,6 @@ impl HtmlElem {
 #[elem]
 pub struct FrameElem {
     /// レイアウト対象のコンテンツ。
-=======
-/// An element that lays out its content as an inline SVG.
-///
-/// Sometimes, converting Typst content to HTML is not desirable. This can be
-/// the case for plots and other content that relies on positioning and styling
-/// to convey its message.
-///
-/// This function allows you to use the Typst layout engine that would also be
-/// used for PDF, SVG, and PNG export to render a part of your document exactly
-/// how it would appear when exported in one of these formats. It embeds the
-/// content as an inline SVG.
-#[elem]
-pub struct FrameElem {
-    /// The content that shall be laid out.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[positional]
     #[required]
     pub body: Content,

@@ -1,5 +1,4 @@
 ---
-<<<<<<< HEAD
 description: Typstチュートリアル
 ---
 
@@ -12,24 +11,6 @@ description: Typstチュートリアル
 ## setルール { #set-rule }
 前章で見たように、Typstにはコンテンツを_挿入する_関数（例：[`image`]関数）と、引数として受け取ったコンテンツを*操作する*関数（例：[`align`]関数）があります。
 例えば、フォントを変更したいとき、最初に思いつくことは、それを行う関数を探して、その関数で文書全体を囲むことでしょう。
-=======
-description: Typst's tutorial.
----
-
-# Formatting
-So far, you have written a report with some text, a few equations and images.
-However, it still looks very plain. Your teaching assistant does not yet know
-that you are using a new typesetting system, and you want your report to fit in
-with the other student's submissions. In this chapter, we will see how to format
-your report using Typst's styling system.
-
-## Set rules
-As we have seen in the previous chapter, Typst has functions that _insert_
-content (e.g. the [`image`] function) and others that _manipulate_ content that
-they received as arguments (e.g. the [`align`] function). The first impulse you
-might have when you want, for example, to change the font, could be to look
-for a function that does that and wrap the complete document in it.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 ```example
 #text(font: "New Computer Modern")[
@@ -45,7 +26,6 @@ for a function that does that and wrap the complete document in it.
 ]
 ```
 
-<<<<<<< HEAD
 ここで、関数の全ての引数は括弧の中で指定されるべきではないか？と思うでしょう。
 なぜ括弧の_後_にコンテンツを記述する2つ目の角括弧があるのでしょうか？
 答えは、関数にコンテンツを渡すことはTypstではよくあるため、特別な構文があるからです。
@@ -56,23 +36,6 @@ for a function that does that and wrap the complete document in it.
 幸いなことに、Typstにはもっと簡潔な記法があります。
 _setルール_を使えば、以後現れる全てのコンテンツに対してスタイル設定を適用可能です。
 `{set}`キーワードを入力し、その後に設定したい関数の名前と引数のリストを括弧で囲んでsetルールを記述します。
-=======
-Wait, shouldn't all arguments of a function be specified within parentheses? Why
-is there a second set of square brackets with content _after_ the parentheses?
-The answer is that, as passing content to a function is such a common thing to
-do in Typst, there is special syntax for it: Instead of putting the content
-inside of the argument list, you can write it in square brackets directly after
-the normal arguments, saving on punctuation.
-
-As seen above, that works. With the [`text`] function, we can adjust the font
-for all text within it. However, wrapping the document in countless functions
-and applying styles selectively and in-situ can quickly become cumbersome.
-
-Fortunately, Typst has a more elegant solution. With _set rules,_ you can apply
-style properties to all occurrences of some kind of content. You write a set
-rule by entering the `{set}` keyword, followed by the name of the function whose
-properties you want to set, and a list of arguments in parentheses.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 ```example
 #set text(
@@ -92,7 +55,6 @@ water).
 
 <div class="info-box">
 
-<<<<<<< HEAD
 ここで起こっていることをより専門的な用語で説明すると、
 setルールでは、ある関数のパラメーターに、それ以降にその関数を使うときのデフォルト値を設定しています。
 </div>
@@ -125,47 +87,6 @@ setルールを書くときは、スタイルを設定したい要素の種類�
 文書にもう少しスタイルを追加してみましょう。
 余白を大きくし、セリフ体のフォントを使用します。
 この例では、ページサイズも設定します。
-=======
-Want to know in more technical terms what is happening here?
-
-Set rules can be conceptualized as setting default values
-for some of the parameters of a function for all future
-uses of that function.
-</div>
-
-## The autocomplete panel { #autocomplete }
-If you followed along and tried a few things in the app, you might have noticed
-that always after you enter a `#` character, a panel pops up to show you the
-available functions, and, within an argument list, the available parameters.
-That's the autocomplete panel. It can be very useful while you are writing your
-document: You can apply its suggestions by hitting the Return key or navigate to
-the desired completion with the arrow keys. The panel can be dismissed by
-hitting the Escape key and opened again by typing `#` or hitting
-<kbd>Ctrl</kbd> + <kbd>Space</kbd>. Use the autocomplete panel to discover the
-right arguments for functions. Most suggestions come with a small description of
-what they do.
-
-![Autocomplete panel](2-formatting-autocomplete.png)
-
-## Set up the page { #page-setup }
-Back to set rules: When writing a rule, you choose the function depending on
-what type of element you want to style. Here is a list of some functions that
-are commonly used in set rules:
-
-- [`text`] to set font family, size, color, and other properties of text
-- [`page`] to set the page size, margins, headers, enable columns, and footers
-- [`par`] to justify paragraphs, set line spacing, and more
-- [`heading`] to set the appearance of headings and enable numbering
-- [`document`] to set the metadata contained in the PDF output, such as title
-  and author
-
-Not all function parameters can be set. In general, only parameters that tell
-a function _how_ to do something can be set, not those that tell it _what_ to
-do it with. The function reference pages indicate which parameters are settable.
-
-Let's add a few more styles to our document. We want larger margins and a serif
-font. For the purposes of the example, we'll also set another page size.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 ```example
 #set page(
@@ -210,7 +131,6 @@ behaviour of these natural structures.
 ]
 ```
 
-<<<<<<< HEAD
 ここで注目していただきたい点を以下に記載します。
 
 まず、[`page`]($page) setルールです。
@@ -235,36 +155,6 @@ text関数の引数リストにいるとき、補完パネルで利用可能な�
 ## 洗練のヒント { #sophistication }
 文書をより明確に構成するために、今度は見出しに番号を付けたいと思います。
 これを行うには、[`heading`]関数の`numbering`パラメーターを設定します。
-=======
-There are a few things of note here.
-
-First is the [`page`] set rule. It receives two arguments: the page size and
-margins for the page. The page size is a string. Typst accepts [many standard
-page sizes,]($page.paper) but you can also specify a custom page size. The
-margins are specified as a [dictionary.]($dictionary) Dictionaries are a
-collection of key-value pairs. In this case, the keys are `x` and `y`, and the
-values are the horizontal and vertical margins, respectively. We could also have
-specified separate margins for each side by passing a dictionary with the keys
-`{left}`, `{right}`, `{top}`, and `{bottom}`.
-
-Next is the set [`text`] set rule. Here, we set the font size to `{10pt}` and
-font family to `{"New Computer Modern"}`. The Typst app comes with many fonts
-that you can try for your document. When you are in the text function's argument
-list, you can discover the available fonts in the autocomplete panel.
-
-We have also set the spacing between lines (a.k.a. leading): It is specified as
-a [length] value, and we used the `em` unit to specify the leading relative to
-the size of the font: `{1em}` is equivalent to the current font size (which
-defaults to `{11pt}`).
-
-Finally, we have bottom aligned our image by adding a vertical alignment to our
-center alignment. Vertical and horizontal alignments can be combined with the
-`{+}` operator to yield a 2D alignment.
-
-## A hint of sophistication { #sophistication }
-To structure our document more clearly, we now want to number our headings. We
-can do this by setting the `numbering` parameter of the [`heading`] function.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 ```example
 >>> #set text(font: "New Computer Modern")
@@ -280,16 +170,9 @@ can do this by setting the `numbering` parameter of the [`heading`] function.
 #lorem(15)
 ```
 
-<<<<<<< HEAD
 番号付けのパラメーターとして文字列 `{「1.」}` を指定しました。
 これは、見出しにアラビア数字で番号を付け、各レベルの番号の間にドットを置くようにTypstに指示します。
 見出しに[文字、ローマ数字、記号]($numbering)も使用できます。
-=======
-We specified the string `{"1."}` as the numbering parameter. This tells Typst to
-number the headings with arabic numerals and to put a dot between the number of
-each level. We can also use [letters, roman numerals, and symbols]($numbering)
-for our headings:
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 ```example
 >>> #set text(font: "New Computer Modern")
@@ -305,7 +188,6 @@ for our headings:
 #lorem(15)
 ```
 
-<<<<<<< HEAD
 この例では、[`lorem`]関数を使って仮テキストを生成しています。
 この関数は引数に数値を取り、その単語数の_Lorem Ipsum_テキストを生成します。
 
@@ -330,38 +212,6 @@ Typstは内部的に`[= Conclusion]`と書くたびに`heading`関数を呼び�
 showルールを使用すると、Typstが特定の要素をどのように表示するかを再定義できます。
 これにより、Typstがどの要素をどのように表示するかを指定します。
 Showルールはテキストのインスタンスや多くの関数、さらには文書全体にも適用可能です。
-=======
-This example also uses the [`lorem`] function to generate some placeholder text.
-This function takes a number as an argument and generates that many words of
-_Lorem Ipsum_ text.
-
-<div class="info-box">
-
-Did you wonder why the headings and text set rules apply to all text and headings,
-even if they are not produced with the respective functions?
-
-Typst internally calls the `heading` function every time you write
-`[= Conclusion]`. In fact, the function call `[#heading[Conclusion]]` is
-equivalent to the heading markup above. Other markup elements work similarly,
-they are only _syntax sugar_ for the corresponding function calls.
-</div>
-
-## Show rules
-You are already pretty happy with how this turned out. But one last thing needs
-to be fixed: The report you are writing is intended for a larger project and
-that project's name should always be accompanied by a logo, even in prose.
-
-You consider your options. You could add an `[#image("logo.svg")]` call before
-every instance of the logo using search and replace. That sounds very tedious.
-Instead, you could maybe
-[define a custom function]($function/#defining-functions) that always yields the
-logo with its image. However, there is an even easier way:
-
-With show rules, you can redefine how Typst displays certain elements. You
-specify which elements Typst should show differently and how they should look.
-Show rules can be applied to instances of text, many functions, and even the
-whole document.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 ```example
 #show "ArtosFlow": name => box[
@@ -377,7 +227,6 @@ ArtosFlow project. ArtosFlow is a
 project of the Artos Institute.
 ```
 
-<<<<<<< HEAD
 この例には新しい構文がたくさんあります。
 ここでは、`{show}`キーワードを記述し、その後に表示させたいテキストの文字列とコロンを記述しています。
 そして、表示したいコンテンツを引数として受け取る関数を書いています。
@@ -397,29 +246,3 @@ setルールを用いて、フォントを設定し、段落の両端を揃え�
 
 ここで学んだ方法を使って作成したレポートを提出すると、あなたの指導教員はそれをとても気に入り、学会用の論文に仕立てたいと言うでしょう！
 次章では、より高度なshowルールと関数を使用して、文書を論文としてフォーマットする方法を学びます。
-=======
-There is a lot of new syntax in this example: We write the `{show}` keyword,
-followed by a string of text we want to show differently and a colon. Then, we
-write a function that takes the content that shall be shown as an argument.
-Here, we called that argument `name`. We can now use the `name` variable in the
-function's body to print the ArtosFlow name. Our show rule adds the logo image
-in front of the name and puts the result into a box to prevent linebreaks from
-occurring between logo and name. The image is also put inside of a box, so that
-it does not appear in its own paragraph.
-
-The calls to the first box function and the image function did not require a
-leading `#` because they were not embedded directly in markup. When Typst
-expects code instead of markup, the leading `#` is not needed to access
-functions, keywords, and variables. This can be observed in parameter lists,
-function definitions, and [code blocks]($scripting).
-
-## Review
-You now know how to apply basic formatting to your Typst documents. You learned
-how to set the font, justify your paragraphs, change the page dimensions, and
-add numbering to your headings with set rules. You also learned how to use a
-basic show rule to change how text appears throughout your document.
-
-You have handed in your report. Your supervisor was so happy with it that they
-want to adapt it into a conference paper! In the next section, we will learn how
-to format your document as a paper using more advanced show rules and functions.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

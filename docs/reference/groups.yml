@@ -7,16 +7,9 @@
   path: ["math"]
   filter: ["serif", "sans", "frak", "mono", "bb", "cal", "scr"]
   details: |
-<<<<<<< HEAD
     数式中の別書体。
 
     数式フォントには各文字に対して複数の書体・字体のバリエーションが用意されているため、これらの関数は[`text`]関数とは異なります。
-=======
-    Alternate typefaces within formulas.
-
-    These functions are distinct from the [`text`] function because math fonts
-    contain multiple variants of each letter.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 - name: styles
   title: Styles
@@ -24,16 +17,9 @@
   path: ["math"]
   filter: ["upright", "italic", "bold"]
   details: |
-<<<<<<< HEAD
     数式中の別字体。
 
     数式フォントには各文字に対して複数の書体・字体のバリエーションが用意されているため、これらの関数は[`text`]関数とは異なります。
-=======
-    Alternate letterforms within formulas.
-
-    These functions are distinct from the [`text`] function because math fonts
-    contain multiple variants of each letter.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 - name: sizes
   title: Sizes
@@ -41,17 +27,9 @@
   path: ["math"]
   filter: ["display", "inline", "script", "sscript"]
   details: |
-<<<<<<< HEAD
     数式中の式に大きさに関するスタイルを強制します。
 
     これらの関数を用いると、数式要素の大きさを、ブロック/インライン数式中や、根号、下付き文字、上付き文字の中で使われているかのようなものに手動で設定できます。
-=======
-    Forced size styles for expressions within formulas.
-
-    These functions allow manual configuration of the size of equation elements
-    to make them look as in a display/inline equation or as if used in a root or
-    sub/superscripts.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 - name: underover
   title: Under/Over
@@ -70,16 +48,9 @@
     "overshell",
   ]
   details: |
-<<<<<<< HEAD
     数式の一部の上部または下部の区切り文字。
 
     波括弧や角括弧を用いると、それら自身の上部または下部にオプションの注釈を追加できます。
-=======
-    Delimiters above or below parts of an equation.
-
-    The braces and brackets further allow you to add an optional annotation
-    below or above themselves.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 - name: roots
   title: Roots
@@ -87,15 +58,9 @@
   path: ["math"]
   filter: ["root", "sqrt"]
   details: |
-<<<<<<< HEAD
     平方根とその他の冪根。
 
     # 例
-=======
-    Square and non-square roots.
-
-    # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ```example
     $ sqrt(3 - 2 sqrt(2)) = sqrt(2) - 1 $
     $ root(3, x) $
@@ -107,7 +72,6 @@
   path: ["math"]
   filter: ["attach", "scripts", "limits"]
   details: |
-<<<<<<< HEAD
     下付き文字、上付き文字、limits。
 
     アタッチメントは下付き文字、上付き文字、limitsのいずれかで表示できます。
@@ -116,33 +80,13 @@
     上部と下部の長いアタッチメント（例えば上部に文字がある矢印）に合うようにベースを伸縮させたい場合は[`stretch`]($math.stretch)関数を使用してください。
 
     # 例
-=======
-    Subscript, superscripts, and limits.
-
-    Attachments can be displayed either as sub/superscripts, or limits. Typst
-    automatically decides which is more suitable depending on the base, but you
-    can also control this manually with the `scripts` and `limits` functions.
-
-    If you want the base to stretch to fit long top and bottom attachments (for
-    example, an arrow with text above it), use the [`stretch`]($math.stretch)
-    function.
-
-    # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ```example
     $ sum_(i=0)^n a_i = 2^(1+i) $
     ```
 
-<<<<<<< HEAD
     # 構文
     この関数にはベースの後ろのアタッチメントのための専用の構文があります。
     下付き文字、すなわち下部のアタッチメントにはアンダースコア（`_`）を、上付き文字、すなわち上部のアタッチメントにはサーカムフレックス（`^`）を使用してください。
-=======
-    # Syntax
-    This function also has dedicated syntax for attachments after the base: Use
-    the underscore (`_`) to indicate a subscript i.e. bottom attachment and the
-    hat (`^`) to indicate a superscript i.e. top attachment.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 - name: lr
   title: Left/Right
@@ -150,7 +94,6 @@
   path: ["math"]
   filter: ["lr", "mid", "abs", "norm", "floor", "ceil", "round"]
   details: |
-<<<<<<< HEAD
     区切り文字の対応。
 
     `lr`関数を用いると、2つの区切り文字を対応させ、内部のコンテンツにあわせて大きさを拡大縮小できます。
@@ -161,22 +104,6 @@
     あるいは自動的な拡大縮小自体を完全に無効化したい場合は、`{set math.lr(size: 1em)}`を使用してください。
 
     # 例
-=======
-    Delimiter matching.
-
-    The `lr` function allows you to match two delimiters and scale them with the
-    content they contain. While this also happens automatically for delimiters
-    that match syntactically, `lr` allows you to match two arbitrary delimiters
-    and control their size exactly. Apart from the `lr` function, Typst provides
-    a few more functions that create delimiter pairings for absolute, ceiled,
-    and floored values as well as norms.
-
-    To prevent a delimiter from being matched by Typst, and thus auto-scaled,
-    escape it with a backslash. To instead disable auto-scaling completely, use
-    `{set math.lr(size: 1em)}`.
-
-    # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ```example
     $ [a, b/2] $
     $ lr(]sum_(x=1)^n], size: #50%) x $
@@ -191,7 +118,6 @@
   category: foundations
   path: ["calc"]
   details: |
-<<<<<<< HEAD
     数値の計算と処理を行うためのモジュール。
 
     これらの定義は`calc`モジュールの一部であり、デフォルトではインポートされません。
@@ -199,17 +125,7 @@
     を定義しています。
 
 - name: std
-  title: Standard library
-=======
-    Module for calculations and processing of numeric values.
-
-    These definitions are part of the `calc` module and not imported by default.
-    In addition to the functions listed below, the `calc` module also defines
-    the constants `pi`, `tau`, `e`, and `inf`.
-
-- name: std
   title: Standard Library
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   category: foundations
   path: ["std"]
   details: |
@@ -322,20 +238,11 @@
     # Example
     ```typ
     #html.video(
-<<<<<<< HEAD
-      controls: true,
-      width: 1280,
-      height: 720,
-      src: "sunrise.mp4",
-    )[
-      Your browser does not support the video tag.
-=======
       controls: true,
       width: 1280,
       height: 720,
       src: "sunrise.mp4",
     )[
       Your browser does not support the video tag.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ]
     ```

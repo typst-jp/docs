@@ -643,14 +643,11 @@ pub struct TextElem {
     /// #set text(ligatures: false)
     /// A fine ligature.
     /// ```
-<<<<<<< HEAD
-=======
     ///
     /// Note that some programming fonts use other OpenType font features to
     /// implement "ligatures," including the contextual alternates (`calt`)
     /// feature, which is also enabled by default. Use the general
     /// [`features`]($text.features) parameter to control such features.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[default(true)]
     #[ghost]
     pub ligatures: bool,
@@ -729,17 +726,11 @@ pub struct TextElem {
     /// - If given a dictionary mapping to numbers, sets the features
     ///   identified by the keys to the values.
     ///
-<<<<<<< HEAD
-    /// ```example
-=======
     /// ```example:"Give an array of strings"
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// // Enable the `frac` feature manually.
     /// #set text(features: ("frac",))
     /// 1/2
     /// ```
-<<<<<<< HEAD
-=======
     ///
     /// ```example:"Give a dictionary mapping to numbers"
     /// #set text(font: "Cascadia Code")
@@ -748,7 +739,6 @@ pub struct TextElem {
     /// #set text(features: (calt: 0))
     /// =>
     /// ```
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[fold]
     #[ghost]
     pub features: FontFeatures,
@@ -1076,7 +1066,6 @@ cast! {
 /// Metrics that describe the top edge of text.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum TopEdgeMetric {
-<<<<<<< HEAD
     /// フォントアセンダー。通常、これは全てのグリフの高さを超えます。
     Ascender,
     /// 大文字の高さの近似値。
@@ -1086,17 +1075,6 @@ pub enum TopEdgeMetric {
     /// 文字が置かれるベースライン。
     Baseline,
     /// グリフが持つバウンディングボックスの上端。
-=======
-    /// The font's ascender, which typically exceeds the height of all glyphs.
-    Ascender,
-    /// The approximate height of uppercase letters.
-    CapHeight,
-    /// The approximate height of non-ascending lowercase letters.
-    XHeight,
-    /// The baseline on which the letters rest.
-    Baseline,
-    /// The top edge of the glyph's bounding box.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     Bounds,
 }
 
@@ -1136,19 +1114,11 @@ cast! {
 /// Metrics that describe the bottom edge of text.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum BottomEdgeMetric {
-<<<<<<< HEAD
     /// 文字が置かれるベースライン。
     Baseline,
     /// フォントディセンダー。通常、これは全てのグリフの深さを超えます。
     Descender,
     /// グリフが持つバウンディングボックスの下端。
-=======
-    /// The baseline on which the letters rest.
-    Baseline,
-    /// The font's descender, which typically exceeds the depth of all glyphs.
-    Descender,
-    /// The bottom edge of the glyph's bounding box.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     Bounds,
 }
 

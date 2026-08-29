@@ -1,15 +1,10 @@
 use std::fmt::Write;
 use std::ops::Range;
 use std::path::PathBuf;
-<<<<<<< HEAD
-
-use ecow::eco_vec;
-=======
 use std::sync::LazyLock;
 
 use ecow::eco_vec;
 use regex::{Captures, Regex};
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use tiny_skia as sk;
 use typst::diag::{SourceDiagnostic, SourceResult, Warned};
 use typst::layout::{Abs, Frame, FrameItem, PagedDocument, Transform};
@@ -245,18 +240,8 @@ impl<'a> Runner<'a> {
             return;
         }
 
-<<<<<<< HEAD
-        let message = if diag.message.contains("\\u{") {
-            &diag.message
-        } else {
-            &diag.message.replace("\\", "/")
-        };
-        let range = self.world.range(diag.span);
-        self.validate_note(kind, diag.span.id(), range.clone(), message);
-=======
         let range = self.world.range(diag.span);
         self.validate_note(kind, diag.span.id(), range.clone(), &diag.message);
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
         // Check hints.
         for hint in &diag.hints {
@@ -276,8 +261,6 @@ impl<'a> Runner<'a> {
         range: Option<Range<usize>>,
         message: &str,
     ) {
-<<<<<<< HEAD
-=======
         // HACK: Replace backslashes path sepators with slashes for cross
         // platform reproducible error messages.
         static RE: LazyLock<Regex> =
@@ -287,7 +270,6 @@ impl<'a> Runner<'a> {
             format!("({} {} {})", &caps[1], &caps[2], path)
         });
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         // Try to find perfect match.
         let file = file.unwrap_or(self.test.source.id());
         if let Some((i, _)) = self.test.notes.iter().enumerate().find(|&(i, note)| {

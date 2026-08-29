@@ -23,24 +23,12 @@ use crate::layout::{
 use crate::model::{HeadingElem, NumberingPattern, ParElem, Refable};
 use crate::pdf::PdfMarkerTag;
 use crate::text::{LocalName, SpaceElem, TextElem};
-<<<<<<< HEAD
 /// 目次や図表などのアウトライン。
 ///
 /// この関数は、指定した[`depth`]($outline.depth)までに登場する要素を文書内から抽出し、その一覧（アウトライン）を生成します。
 /// 各要素には、その見出しやキャプションとともに、その要素の番号やページ番号がアウトライン形式で表示されます。
 ///
 /// # 例
-=======
-
-/// A table of contents, figures, or other elements.
-///
-/// This function generates a list of all occurrences of an element in the
-/// document, up to a given [`depth`]($outline.depth). The element's numbering
-/// and page number will be displayed in the outline alongside its title or
-/// caption.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set heading(numbering: "1.")
 /// #outline()
@@ -53,7 +41,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// #lorem(10)
 /// ```
 ///
-<<<<<<< HEAD
 /// # 見出し以外のアウトライン { #alternative-outlines }
 /// デフォルト設定では、この関数は目次（セクション見出しのアウトライン）を生成します。
 /// `target`パラメーターを設定することで、見出し以外の要素のアウトラインも生成できます。
@@ -63,20 +50,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 ///
 /// [`where`]($function.where)セレクターを使わずに`figure`のみの指定もできますが、その場合は画像や表、
 /// またその他の素材も含む_全て_の図表がアウトラインに表示されます。
-=======
-/// # Alternative outlines
-/// In its default configuration, this function generates a table of contents.
-/// By setting the `target` parameter, the outline can be used to generate a
-/// list of other kinds of elements than headings.
-///
-/// In the example below, we list all figures containing images by setting
-/// `target` to `{figure.where(kind: image)}`. Just the same, we could have set
-/// it to `{figure.where(kind: table)}` to generate a list of tables.
-///
-/// We could also set it to just `figure`, without using a [`where`]($function.where)
-/// selector, but then the list would contain _all_ figures, be it ones
-/// containing images, tables, or other material.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #outline(
@@ -90,7 +63,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// )
 /// ```
 ///
-<<<<<<< HEAD
 /// # アウトラインのスタイル { #styling-the-outline }
 /// 基本的に、アウトライン本体やその項目に対してプロパティを設定することでスタイルを変更できます。
 /// これにより、アウトラインの[タイトル]($outline.title)、項目の[インデント]($outline.indent)、
@@ -102,22 +74,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// ## 項目同士の間隔調整 { #entry-spacing }
 /// アウトラインの各項目は[ブロック要素]($block)であるため、通常のブロック間隔設定を用いて、
 /// 項目同士の間隔を調整できます。
-=======
-/// # Styling the outline
-/// At the most basic level, you can style the outline by setting properties on
-/// it and its entries. This way, you can customize the outline's
-/// [title]($outline.title), how outline entries are
-/// [indented]($outline.indent), and how the space between an entry's text and
-/// its page number should be [filled]($outline.entry.fill).
-///
-/// Richer customization is possible through configuration of the outline's
-/// [entries]($outline.entry). The outline generates one entry for each outlined
-/// element.
-///
-/// ## Spacing the entries { #entry-spacing }
-/// Outline entries are [blocks]($block), so you can adjust the spacing between
-/// them with normal block-spacing rules:
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #show outline.entry.where(
@@ -133,7 +89,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// == ACME Tools
 /// ```
 ///
-<<<<<<< HEAD
 /// ## アウトライン項目の構築 { #building-an-entry }
 /// 項目の外観を完全に制御するために、`outline.entry`を変更するshowルールも書けます。
 /// ただし、アウトライン項目を適切に書式設定・インデントするための処理は非常に複雑であり、
@@ -142,18 +97,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// そのため、必要な部分だけを組み合わせて項目を構築できるよう、さまざまな補助関数が提供されています。
 ///
 /// アウトライン項目に対する既定のshowルールは次のようになっています[^1]。
-=======
-/// ## Building an outline entry from its parts { #building-an-entry }
-/// For full control, you can also write a transformational show rule on
-/// `outline.entry`. However, the logic for properly formatting and indenting
-/// outline entries is quite complex and the outline entry itself only contains
-/// two fields: The level and the outlined element.
-///
-/// For this reason, various helper functions are provided. You can mix and
-/// match these to compose an entry from just the parts you like.
-///
-/// The default show rule for an outline entry looks like this[^1]:
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```typ
 /// #show outline.entry: it => link(
 ///   it.element.location(),
@@ -161,7 +104,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// )
 /// ```
 ///
-<<<<<<< HEAD
 /// - [`indented`]($outline.entry.indented)関数は、任意のプレフィックスと内部コンテンツを受け取り、
 ///   適切なインデントを自動的に適用します。
 ///   これにより、異なる項目同士がきれいに揃い、長い見出しも正しく折り返されます。
@@ -174,23 +116,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 ///
 /// これらの関数を個別に使うことで、アウトライン項目の書式を変更できます。
 /// 例えば、フィラーやページ番号を完全に削除したい場合は、次のようなshowルールを書けます。
-=======
-/// - The [`indented`]($outline.entry.indented) function takes an optional
-///   prefix and inner content and automatically applies the proper indentation
-///   to it, such that different entries align nicely and long headings wrap
-///   properly.
-///
-/// - The [`prefix`]($outline.entry.prefix) function formats the element's
-///   numbering (if any). It also appends a supplement for certain elements.
-///
-/// - The [`inner`]($outline.entry.inner) function combines the element's
-///   [`body`]($outline.entry.body), the filler, and the
-///   [`page` number]($outline.entry.page).
-///
-/// You can use these individual functions to format the outline entry in
-/// different ways. Let's say, you'd like to fully remove the filler and page
-/// numbers. To achieve this, you could write a show rule like this:
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #show outline.entry: it => link(
@@ -206,7 +131,6 @@ use crate::text::{LocalName, SpaceElem, TextElem};
 /// == History
 /// ```
 ///
-<<<<<<< HEAD
 /// [^1]: 数式のアウトラインはこのルールの例外で、本文を持たないためインデント付きのレイアウトは使用しません。
 #[elem(scope, keywords = ["Table of Contents", "toc"], ShowSet, LocalName, Locatable, Tagged)]
 pub struct OutlineElem {
@@ -225,30 +149,6 @@ pub struct OutlineElem {
     /// 特定の種類の要素（画像や表など）だけを含む図表をアウトライン表示したい場合は、
     /// [`where`]($function.where)セレクターで目的の種類を指定できます。
     /// 詳細は[見出し以外のアウトライン]($outline/#alternative-outlines)のセクションをご参照ください。
-=======
-/// [^1]: The outline of equations is the exception to this rule as it does not
-///       have a body and thus does not use indented layout.
-#[elem(scope, keywords = ["Table of Contents", "toc"], ShowSet, LocalName, Locatable, Tagged)]
-pub struct OutlineElem {
-    /// The title of the outline.
-    ///
-    /// - When set to `{auto}`, an appropriate title for the
-    ///   [text language]($text.lang) will be used.
-    /// - When set to `{none}`, the outline will not have a title.
-    /// - A custom title can be set by passing content.
-    ///
-    /// The outline's heading will not be numbered by default, but you can
-    /// force it to be with a show-set rule:
-    /// `{show outline: set heading(numbering: "1.")}`
-    pub title: Smart<Option<Content>>,
-
-    /// The type of element to include in the outline.
-    ///
-    /// To list figures containing a specific kind of element, like an image or
-    /// a table, you can specify the desired kind in a [`where`]($function.where)
-    /// selector. See the section on [alternative outlines]($outline/#alternative-outlines)
-    /// for more details.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #outline(
@@ -268,13 +168,8 @@ pub struct OutlineElem {
     #[default(LocatableSelector(HeadingElem::ELEM.select()))]
     pub target: LocatableSelector,
 
-<<<<<<< HEAD
     /// アウトラインに含める要素の最大レベル。
     /// この引数が`{none}`の場合は、全ての要素が含まれます。
-=======
-    /// The maximum level up to which elements are included in the outline. When
-    /// this argument is `{none}`, all elements are included.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set heading(numbering: "1.")
@@ -291,7 +186,6 @@ pub struct OutlineElem {
     /// ```
     pub depth: Option<NonZeroUsize>,
 
-<<<<<<< HEAD
     /// どのようにアウトライン項目をインデントするか。
     ///
     /// - `{auto}`: 入れ子になった項目の番号やプレフィックスを、親項目のタイトル位置に揃えてインデントします。
@@ -305,26 +199,6 @@ pub struct OutlineElem {
     /// - [関数]($function): 関数を使ってさらに細かくカスタマイズできます。
     ///   関数はネストレベルが引数として渡され（最上位要素は0）、相対長さを返します。
     ///   例えば`{n => n * 2em}`なら、単に`{2em}`を指定した場合と同じ結果になります。
-=======
-    /// How to indent the outline's entries.
-    ///
-    /// - `{auto}`: Indents the numbering/prefix of a nested entry with the
-    ///   title of its parent entry. If the entries are not numbered (e.g., via
-    ///   [heading numbering]($heading.numbering)), this instead simply inserts
-    ///   a fixed amount of `{1.2em}` indent per level.
-    ///
-    /// - [Relative length]($relative): Indents the entry by the specified
-    ///   length per nesting level. Specifying `{2em}`, for instance, would
-    ///   indent top-level headings by `{0em}` (not nested), second level
-    ///   headings by `{2em}` (nested once), third-level headings by `{4em}`
-    ///   (nested twice) and so on.
-    ///
-    /// - [Function]($function): You can further customize this setting with a
-    ///   function. That function receives the nesting level as a parameter
-    ///   (starting at 0 for top-level headings/elements) and should return a
-    ///   (relative) length. For example, `{n => n * 2em}` would be equivalent
-    ///   to just specifying `{2em}`.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// >>> #show heading: none
@@ -567,7 +441,6 @@ pub trait Outlinable: Refable {
     fn body(&self) -> Content;
 }
 
-<<<<<<< HEAD
 /// アウトライン内の項目。
 ///
 /// show-setルールやshowルールをアウトライン項目に適用することで、アウトラインの見た目を柔軟にカスタマイズできます。
@@ -593,37 +466,6 @@ pub struct OutlineEntry {
     /// `{box(width: 1fr, it.fill)}`のように可変長の[`box`]でラップすることが推奨されます。
     ///
     /// [`repeat`]を使う場合には、[`gap`]($repeat.gap)プロパティを調整すると、fillの見た目を微調整できます。
-=======
-/// Represents an entry line in an outline.
-///
-/// With show-set and show rules on outline entries, you can richly customize
-/// the outline's appearance. See the
-/// [section on styling the outline]($outline/#styling-the-outline) for details.
-#[elem(scope, name = "entry", title = "Outline Entry", Locatable, Tagged)]
-pub struct OutlineEntry {
-    /// The nesting level of this outline entry. Starts at `{1}` for top-level
-    /// entries.
-    #[required]
-    pub level: NonZeroUsize,
-
-    /// The element this entry refers to. Its location will be available
-    /// through the [`location`]($content.location) method on the content
-    /// and can be [linked]($link) to.
-    #[required]
-    pub element: Content,
-
-    /// Content to fill the space between the title and the page number. Can be
-    /// set to `{none}` to disable filling.
-    ///
-    /// The `fill` will be placed into a fractionally sized box that spans the
-    /// space between the entry's body and the page number. When using show
-    /// rules to override outline entries, it is thus recommended to wrap the
-    /// fill in a [`box`] with fractional width, i.e.
-    /// `{box(width: 1fr, it.fill)}`.
-    ///
-    /// When using [`repeat`], the [`gap`]($repeat.gap) property can be useful
-    /// to tweak the visual weight of the fill.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set outline.entry(fill: line(length: 100%))
@@ -638,13 +480,8 @@ pub struct OutlineEntry {
     ))]
     pub fill: Option<Content>,
 
-<<<<<<< HEAD
     /// アウトライン項目から所属アウトラインへアクセスできるようにします。
     /// これはハックであり、将来的には適切な祖先参照の仕組みに置き換えるべきものです。
-=======
-    /// Lets outline entries access the outline they are part of. This is a bit
-    /// of a hack and should be superseded by a proper ancestry mechanism.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[ghost]
     #[internal]
     pub parent: Option<Packed<OutlineElem>>,
@@ -652,7 +489,6 @@ pub struct OutlineEntry {
 
 #[scope]
 impl OutlineEntry {
-<<<<<<< HEAD
     /// インデント付きの項目レイアウトを作成するための補助関数。
     /// プレフィックスと項目本文を、インデントを考慮して配置します。
     ///
@@ -665,28 +501,12 @@ impl OutlineEntry {
     /// インデントされますが、内部コンテンツはアウトライン全体で整列されるのではなく、
     /// 指定された`gap`分だけプレフィックスからオフセットされます。
     /// 視覚的な説明は[`outline.indent`]を参照してください。
-=======
-    /// A helper function for producing an indented entry layout: Lays out a
-    /// prefix and the rest of the entry in an indent-aware way.
-    ///
-    /// If the parent outline's [`indent`]($outline.indent) is `{auto}`, the
-    /// inner content of all entries at level `N` is aligned with the prefix of
-    /// all entries at level `N + 1`, leaving at least `gap` space between the
-    /// prefix and inner parts. Furthermore, the `inner` contents of all entries
-    /// at the same level are aligned.
-    ///
-    /// If the outline's indent is a fixed value or a function, the prefixes are
-    /// indented, but the inner contents are simply offset from the prefix by
-    /// the specified `gap`, rather than aligning outline-wide. For a visual
-    /// explanation, see [`outline.indent`].
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn indented(
         &self,
         engine: &mut Engine,
         context: Tracked<Context>,
         span: Span,
-<<<<<<< HEAD
         /// `prefix`は、レベルが1段低い項目の`inner`コンテンツと揃うように配置されます。
         ///
         /// デフォルトのshowルールでは`it.prefix()`ですが、自由にカスタマイズできます。
@@ -696,20 +516,6 @@ impl OutlineEntry {
         /// デフォルトのshowルールでは`it.inner()`ですが、自由にカスタマイズできます。
         inner: Content,
         /// プレフィックスと内部コンテンツの間の間隔です。
-=======
-        /// The `prefix` is aligned with the `inner` content of entries that
-        /// have level one less.
-        ///
-        /// In the default show rule, this is just `it.prefix()`, but it can be
-        /// freely customized.
-        prefix: Option<Content>,
-        /// The formatted inner content of the entry.
-        ///
-        /// In the default show rule, this is just `it.inner()`, but it can be
-        /// freely customized.
-        inner: Content,
-        /// The gap between the prefix and the inner content.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[named]
         #[default(Em::new(0.5).into())]
         gap: Length,
@@ -783,18 +589,10 @@ impl OutlineEntry {
             .spanned(span))
     }
 
-<<<<<<< HEAD
     /// 要素の番号付け（存在する場合）の出力形式。
     ///
     /// また、図や数式の場合は、通常のアウトラインと同様に要素の補足語も追加します。
     /// 例えば、見出しであれば`1.1`と出力されますが、図であれば`Figure 1`と出力されます。
-=======
-    /// Formats the element's numbering (if any).
-    ///
-    /// This also appends the element's supplement in case of figures or
-    /// equations. For instance, it would output `1.1` for a heading, but
-    /// `Figure 1` for a figure, as is usual for outlines.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn prefix(
         &self,
@@ -811,15 +609,9 @@ impl OutlineEntry {
         Ok(Some(outlinable.prefix(numbers)))
     }
 
-<<<<<<< HEAD
     /// 項目の規定の内部コンテンツを生成。
     ///
     /// これには、本文とフィラー、ページ番号が含まれます。
-=======
-    /// Creates the default inner content of the entry.
-    ///
-    /// This includes the body, the fill, and page number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn inner(
         &self,
@@ -832,27 +624,15 @@ impl OutlineEntry {
         self.build_inner(context, span, body, page)
     }
 
-<<<<<<< HEAD
     /// アウトライン内で参照される要素の代わりに表示される内容。
     /// 見出しの場合は[`body`]($heading.body)、図表の場合はキャプション、数式の場合は空欄となります。
-=======
-    /// The content which is displayed in place of the referred element at its
-    /// entry in the outline. For a heading, this is its
-    /// [`body`]($heading.body); for a figure a caption and for equations, it is
-    /// empty.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func]
     pub fn body(&self) -> StrResult<Content> {
         Ok(self.outlinable()?.body())
     }
 
-<<<<<<< HEAD
     /// 要素の項目のページ番号。
     /// これは参照されるページに対する番号付け設定の書式で出力されます。
-=======
-    /// The page number of this entry's element, formatted with the numbering
-    /// set for the referenced page.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[func(contextual)]
     pub fn page(
         &self,

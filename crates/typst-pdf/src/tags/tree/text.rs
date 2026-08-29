@@ -1,11 +1,7 @@
 use krilla::tagging::{LineHeight, NaiveRgbColor, TextDecorationType};
 use typst_library::diag::{SourceDiagnostic, error};
 use typst_library::foundations::{Content, Packed, Smart};
-<<<<<<< HEAD
-use typst_library::layout::{Abs, Length};
-=======
 use typst_library::layout::Length;
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use typst_library::text::{
     HighlightElem, OverlineElem, ScriptKind, StrikeElem, SubElem, SuperElem, TextItem,
     TextSize, UnderlineElem,
@@ -20,13 +16,8 @@ use crate::util::AbsExt;
 
 #[derive(Debug, Clone)]
 pub struct TextAttrs {
-<<<<<<< HEAD
-    /// Store the last resolved set of text attribute. The resolution isn't that
-    /// expensive, but for large bodies of text it is resolved quite often.
-=======
     /// Store the last resolved set of text attributes. The resolution isn't
     /// that expensive, but for large bodies of text it is resolved quite often.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     last_resolved: Option<(TextParams, ResolvedTextAttrs)>,
     items: Vec<(GroupId, TextAttr)>,
 }
@@ -122,21 +113,6 @@ impl TextDecoKind {
     }
 }
 
-<<<<<<< HEAD
-#[derive(Debug, Copy, Clone, Eq, PartialEq)]
-struct TextParams {
-    pub font_index: u32,
-    pub size: Abs,
-}
-
-impl TextParams {
-    fn new(text: &TextItem) -> TextParams {
-        TextParams {
-            // Comparing font indices is enough.
-            font_index: text.font.index(),
-            size: text.size,
-        }
-=======
 /// A hash of relevant text parameters.
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 struct TextParams(u128);
@@ -144,7 +120,6 @@ struct TextParams(u128);
 impl TextParams {
     fn new(text: &TextItem) -> TextParams {
         TextParams(typst_utils::hash128(&(&text.font, text.size)))
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     }
 }
 

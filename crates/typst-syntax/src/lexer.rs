@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 use std::num::IntErrorKind;
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use ecow::{EcoString, eco_format};
 use unicode_ident::{is_xid_continue, is_xid_start};
 use unicode_script::{Script, UnicodeScript};
@@ -835,8 +832,6 @@ impl Lexer<'_> {
         let number = self.s.from(start);
         let suffix = self.s.eat_while(|c: char| c.is_ascii_alphanumeric() || c == '%');
 
-<<<<<<< HEAD
-=======
         // Parse large integer literals as floats
         if base == 10
             && !is_float
@@ -847,7 +842,6 @@ impl Lexer<'_> {
             is_float = true;
         }
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         let mut suffix_result = match suffix {
             "" => Ok(None),
             "pt" | "mm" | "cm" | "in" | "deg" | "rad" | "em" | "fr" | "%" => Ok(Some(())),

@@ -28,7 +28,6 @@ use crate::routines::Routines;
 use crate::text::{FontFamily, FontList, LocalName, TextElem, TextSize};
 use crate::visualize::Color;
 
-<<<<<<< HEAD
 /// オプションでシンタックスハイライトを持つ生テキスト。
 ///
 /// テキストをそのまま等幅フォントで表示します。
@@ -39,20 +38,6 @@ use crate::visualize::Color;
 /// `raw`の代わりに[`text`]($text)でフォントを等幅に設定してください。
 ///
 /// # 例
-=======
-/// Raw text with optional syntax highlighting.
-///
-/// Displays the text verbatim and in a monospace font. This is typically used
-/// to embed computer code into your document.
-///
-/// Note that text given to this element cannot contain arbitrary formatting,
-/// such as `[*strong*]` or `[_emphasis_]`, as it is displayed verbatim. If
-/// you'd like to display any kind of content with a monospace font, instead of
-/// using [`raw`], you should change its font to a monospace font using the
-/// [`text`]($text) function.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ````example
 /// Adding `rbx` to `rcx` gives
 /// the desired result.
@@ -72,17 +57,11 @@ use crate::visualize::Color;
 /// also trimmed.
 /// ````
 ///
-<<<<<<< HEAD
 /// また、プログラミング的に文字列から[`raw`]要素を作成できます（オプションの[`lang`]($raw.lang)引数を用いて言語タグを提供できます）。
-=======
-/// You can also construct a [`raw`] element programmatically from a string (and
-/// provide the language tag via the optional [`lang`]($raw.lang) argument).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #raw("fn " + "main() {}", lang: "rust")
 /// ```
 ///
-<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// テキストを1つまたは3つ以上のバッククォート（`` ` ``）で囲むと生テキストにできます。
@@ -117,49 +96,6 @@ use crate::visualize::Color;
 ///
 /// Cascadia Codeでrawテキストを表示。
 /// Pythonコードは今は大きく見えます。
-=======
-/// # Syntax
-/// This function also has dedicated syntax. You can enclose text in 1 or 3+
-/// backticks (`` ` ``) to make it raw. Two backticks produce empty raw text.
-/// This works both in markup and code.
-///
-/// When you use three or more backticks, you can additionally specify a
-/// language tag for syntax highlighting directly after the opening backticks.
-/// Within raw blocks, everything (except for the language tag, if applicable)
-/// is rendered as is, in particular, there are no escape sequences.
-///
-/// The language tag is an identifier that directly follows the opening
-/// backticks only if there are three or more backticks. If your text starts
-/// with something that looks like an identifier, but no syntax highlighting is
-/// needed, start the text with a single space (which will be trimmed) or use
-/// the single backtick syntax. If your text should start or end with a
-/// backtick, put a space before or after it (it will be trimmed).
-///
-/// If no syntax highlighting is available by default for your specified
-/// language tag (or if you want to override the built-in definition), you may
-/// provide a custom syntax specification file to the
-/// [`syntaxes`]($raw.syntaxes) field.
-///
-/// # Styling
-/// By default, the `raw` element uses the `DejaVu Sans Mono` font (included
-/// with Typst), with a smaller font size of `{0.8em}` (that is, 80% of
-/// the global font size). This is because monospace fonts tend to be visually
-/// larger than non-monospace fonts.
-///
-/// You can customize these properties with show-set rules:
-///
-/// ````example
-/// // Switch to Cascadia Code for both
-/// // inline and block raw.
-/// #show raw: set text(font: "Cascadia Code")
-///
-/// // Reset raw blocks to the same size as normal text,
-/// // but keep inline raw at the reduced size.
-/// #show raw.where(block: true): set text(1em / 0.8)
-///
-/// Now using the `Cascadia Code` font for raw text.
-/// Here's some Python code. It looks larger now:
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```py
 /// def python():
@@ -167,7 +103,6 @@ use crate::visualize::Color;
 /// ```
 /// ````
 ///
-<<<<<<< HEAD
 /// さらに、[`theme`]($raw.theme)でシンタックスハイライトの色をカスタマイズできます。
 ///
 /// rawブロックの見た目を完全に制御したい場合は、
@@ -178,19 +113,6 @@ use crate::visualize::Color;
 /// [CJK-Latin間隔]($text.cjk-latin-spacing)
 /// （および[rawブロック]($raw.block)の[両端揃え]($par.justify)）が
 /// 既定で無効化されます。
-=======
-/// In addition, you can customize the syntax highlighting colors by setting
-/// a custom theme through the [`theme`]($raw.theme) field.
-///
-/// For complete customization of the appearance of a raw block, a show rule
-/// on [`raw.line`]($raw.line) could be helpful, such as to add line numbers.
-///
-/// Note that, in raw text, typesetting features like
-/// [hyphenation]($text.hyphenate), [overhang]($text.overhang),
-/// [CJK-Latin spacing]($text.cjk-latin-spacing) (and
-/// [justification]($par.justify) for [raw blocks]($raw.block)) will be
-/// disabled by default.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 #[elem(
     scope,
     title = "Raw Text / Code",
@@ -203,20 +125,11 @@ use crate::visualize::Color;
     PlainText
 )]
 pub struct RawElem {
-<<<<<<< HEAD
     /// 生テキスト。
     ///
     /// 自動化のために、rawブロックを使ってカスタム構文をクリエイティブに作成できます。
     ///
     /// ````example
-=======
-    /// The raw text.
-    ///
-    /// You can also use raw blocks creatively to create custom syntaxes for
-    /// your automations.
-    ///
-    /// ````example:"Implementing a DSL using raw and show rules"
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// // Parse numbers in raw blocks with the
     /// // `mydsl` tag and sum them up.
     /// #show raw.where(lang: "mydsl"): it => {
@@ -234,18 +147,10 @@ pub struct RawElem {
     #[required]
     pub text: RawContent,
 
-<<<<<<< HEAD
     /// 生テキストを独立したブロックとして表示するかどうか。
     ///
     /// マークアップモードでは、バッククォート1つを使うとこれは`{false}`になります。
     /// バッククォート3つ使うと、囲まれたコンテンツが1つ以上の改行を含む場合は`{true}`になります。
-=======
-    /// Whether the raw text is displayed as a separate block.
-    ///
-    /// In markup mode, using one-backtick notation makes this `{false}`.
-    /// Using three-backtick notation makes it `{true}` if the enclosed content
-    /// contains at least one line break.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ````example
     /// // Display inline code in a small box
@@ -276,19 +181,9 @@ pub struct RawElem {
     #[default(false)]
     pub block: bool,
 
-<<<<<<< HEAD
     /// シンタックスハイライトする言語。
     ///
     /// Markdownで用いられている一般的な言語以外では、[Typst markup]($reference/syntax/#markup)の`{"typ"}`、[Typst code]($reference/syntax/#code)の`{"typc"}`、[Typst math]($reference/syntax/#math)の`{"typm"}`のタグがそれぞれサポートされています。
-=======
-    /// The language to syntax-highlight in.
-    ///
-    /// Apart from typical language tags known from Markdown, this supports the
-    /// `{"typ"}`, `{"typc"}`, and `{"typm"}` tags for
-    /// [Typst markup]($reference/syntax/#markup),
-    /// [Typst code]($reference/syntax/#code), and
-    /// [Typst math]($reference/syntax/#math), respectively.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ````example
     /// ```typ
@@ -299,22 +194,10 @@ pub struct RawElem {
     /// ````
     pub lang: Option<EcoString>,
 
-<<<<<<< HEAD
     /// rawブロック中の各行が持つべき水平方向の配置。
     /// このオプションはrawブロックではない（`block: false`が指定されるか、マークアップモードで1つのバッククォートが使用された）場合は無視されます。
     ///
     /// これはデフォルトでは`{start}`で、現在のコンテキストの配置によらず、生テキストがブロック内部の書き始めの位置揃えになることを意味します（例えば、内部テキストを中央揃えにせずrawブロックを中央揃えにできます）。
-=======
-    /// The horizontal alignment that each line in a raw block should have.
-    /// This option is ignored if this is not a raw block (if specified
-    /// `block: false` or single backticks were used in markup mode).
-    ///
-    /// By default, this is set to `{start}`, meaning that raw text is
-    /// aligned towards the start of the text direction inside the block
-    /// by default, regardless of the current context's alignment (allowing
-    /// you to center the raw block itself without centering the text inside
-    /// it, for example).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ````example
     /// #set raw(align: center)
@@ -327,7 +210,6 @@ pub struct RawElem {
     #[default(HAlignment::Start)]
     pub align: HAlignment,
 
-<<<<<<< HEAD
     /// 追加で読み込む構文定義。
     /// 構文定義は[`sublime-syntax`ファイル形式](https://www.sublimetext.com/docs/syntax.html)でなければなりません。
     ///
@@ -337,17 +219,6 @@ pub struct RawElem {
     /// パスに関する詳細は[パスのセクション]($syntax/#paths)を参照してください。
     /// - 構文をデコードするための生バイト列。
     /// - 各アイテムが上記のいずれかである配列。
-=======
-    /// Additional syntax definitions to load. The syntax definitions should be
-    /// in the [`sublime-syntax` file format](https://www.sublimetext.com/docs/syntax.html).
-    ///
-    /// You can pass any of the following values:
-    ///
-    /// - A path string to load a syntax file from the given path. For more
-    ///   details about paths, see the [Paths section]($syntax/#paths).
-    /// - Raw bytes from which the syntax should be decoded.
-    /// - An array where each item is one of the above.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ````example
     /// #set raw(syntaxes: "SExpressions.sublime-syntax")
@@ -367,7 +238,6 @@ pub struct RawElem {
     #[fold]
     pub syntaxes: Derived<OneOrMultiple<DataSource>, Vec<RawSyntax>>,
 
-<<<<<<< HEAD
     /// シンタックスハイライトに用いるテーマ。
     /// テーマは[`tmTheme`ファイル形式](https://www.sublimetext.com/docs/color_schemes_tmtheme.html)でなければなりません。
     ///
@@ -382,25 +252,6 @@ pub struct RawElem {
     /// テーマの適用はハイライトされたテキストの色にのみ影響を与えます。テーマの前景および背景プロパティは無視され、生テキストの色の制御は残ります。
     /// [`text`]関数を用いて前景色を、[ブロックの塗り潰し]($block.fill)を用いて背景色を、それぞれ手動で設定できます。
     /// [`xml`]関数でもこれらのプロパティをテーマから抽出できます。
-=======
-    /// The theme to use for syntax highlighting. Themes should be in the
-    /// [`tmTheme` file format](https://www.sublimetext.com/docs/color_schemes_tmtheme.html).
-    ///
-    /// You can pass any of the following values:
-    ///
-    /// - `{none}`: Disables syntax highlighting.
-    /// - `{auto}`: Highlights with Typst's default theme.
-    /// - A path string to load a theme file from the given path. For more
-    ///   details about paths, see the [Paths section]($syntax/#paths).
-    /// - Raw bytes from which the theme should be decoded.
-    ///
-    /// Applying a theme only affects the color of specifically highlighted
-    /// text. It does not consider the theme's foreground and background
-    /// properties, so that you retain control over the color of raw text. You
-    /// can apply the foreground color yourself with the [`text`] function and
-    /// the background with a [filled block]($block.fill). You could also use
-    /// the [`xml`] function to extract these properties from the theme.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ````example
     /// #set raw(theme: "halcyon.tmTheme")
@@ -426,13 +277,8 @@ pub struct RawElem {
     })]
     pub theme: Smart<Option<Derived<DataSource, RawTheme>>>,
 
-<<<<<<< HEAD
     /// スペースで測ったタブ幅。
     /// タブは、次のタブ幅の整数倍位置までのスペースで置き換えられます。
-=======
-    /// The size for a tab stop in spaces. A tab is replaced with enough spaces to
-    /// align with the next multiple of the size.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ````example
     /// #set raw(tab-size: 8)
@@ -802,7 +648,6 @@ fn format_theme_error(error: syntect::LoadingError) -> LoadError {
     LoadError::new(pos, "failed to parse theme", error)
 }
 
-<<<<<<< HEAD
 /// ハイライトされた生テキストの行。
 ///
 /// これは[`raw`]要素によって合成される補助要素です。
@@ -824,30 +669,6 @@ pub struct RawLine {
     pub text: EcoString,
 
     /// ハイライトされた生テキスト。
-=======
-/// A highlighted line of raw text.
-///
-/// This is a helper element that is synthesized by [`raw`] elements.
-///
-/// It allows you to access various properties of the line, such as the line
-/// number, the raw non-highlighted text, the highlighted text, and whether it
-/// is the first or last line of the raw block.
-#[elem(name = "line", title = "Raw Text / Code Line", Tagged, PlainText)]
-pub struct RawLine {
-    /// The line number of the raw line inside of the raw block, starts at 1.
-    #[required]
-    pub number: i64,
-
-    /// The total number of lines in the raw block.
-    #[required]
-    pub count: i64,
-
-    /// The line of raw text.
-    #[required]
-    pub text: EcoString,
-
-    /// The highlighted raw text.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }

@@ -11,7 +11,6 @@ use crate::layout::{
 };
 use crate::visualize::{Paint, Stroke};
 
-<<<<<<< HEAD
 /// コンテンツの大きさを持つインラインレベルのコンテナ。
 ///
 /// インライン数式、テキスト、ボックスを除く全ての要素はブロックレベルであり、[段落]($par)の中に含められません。
@@ -19,16 +18,6 @@ use crate::visualize::{Paint, Stroke};
 /// ボックスの大きさはデフォルトでは受け取ったコンテンツと同じですが、明示的にも指定できます。
 ///
 /// # 例
-=======
-/// An inline-level container that sizes content.
-///
-/// All elements except inline math, text, and boxes are block-level and cannot
-/// occur inside of a [paragraph]($par). The box function can be used to
-/// integrate such elements into a paragraph. Boxes take the size of their
-/// contents by default but can also be sized explicitly.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// Refer to the docs
 /// #box(
@@ -39,47 +28,28 @@ use crate::visualize::{Paint, Stroke};
 /// ```
 #[elem]
 pub struct BoxElem {
-<<<<<<< HEAD
     /// ボックスの幅。
     ///
     /// ボックスは以下の例で示すように、[比率]($fraction)を用いて幅を指定できます。
     ///
     /// _注意:_ 現在、パラグラフ内で比率指定が可能なのはボックスおよびその幅のみです。
     /// 比率で指定した大きさを持つ画像や図形などは今後サポートされる可能性があります。
-=======
-    /// The width of the box.
-    ///
-    /// Boxes can have [fractional]($fraction) widths, as the example below
-    /// demonstrates.
-    ///
-    /// _Note:_ Currently, only boxes and only their widths might be fractionally
-    /// sized within paragraphs. Support for fractionally sized images, shapes,
-    /// and more might be added in the future.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// Line in #box(width: 1fr, line(length: 100%)) between.
     /// ```
     pub width: Sizing,
 
-<<<<<<< HEAD
     /// ボックスの高さ。
     pub height: Smart<Rel<Length>>,
 
     /// ボックスのベースラインをシフトさせる量。
-=======
-    /// The height of the box.
-    pub height: Smart<Rel<Length>>,
-
-    /// An amount to shift the box's baseline by.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// Image: #box(baseline: 40%, image("tiger.jpg", width: 2cm)).
     /// ```
     pub baseline: Rel<Length>,
 
-<<<<<<< HEAD
     /// ボックスの背景色。
     /// 詳細は[rectangleのドキュメント]($rect.fill)を参照してください。
     pub fill: Option<Paint>,
@@ -105,46 +75,13 @@ pub struct BoxElem {
     /// 相対的なインセットやアウトセットは、コンテナを基準とする[幅]($box.width)や[高さ]($box.height)の相対値とは基準が異なることに注意してください。
     ///
     /// _注意:_ ボックスがテキストを含むとき、その正確な大きさは現在の[テキストの端]($text.top-edge)に依存します。
-=======
-    /// The box's background color. See the
-    /// [rectangle's documentation]($rect.fill) for more details.
-    pub fill: Option<Paint>,
-
-    /// The box's border color. See the
-    /// [rectangle's documentation]($rect.stroke) for more details.
-    #[fold]
-    pub stroke: Sides<Option<Option<Stroke>>>,
-
-    /// How much to round the box's corners. See the
-    /// [rectangle's documentation]($rect.radius) for more details.
-    #[fold]
-    pub radius: Corners<Option<Rel<Length>>>,
-
-    /// How much to pad the box's content.
-    ///
-    /// This can be a single length for all sides or a dictionary of lengths
-    /// for individual sides. When passing a dictionary, it can contain the
-    /// following keys in order of precedence: `top`, `right`, `bottom`, `left`
-    /// (controlling the respective cell sides), `x`, `y` (controlling vertical
-    /// and horizontal insets), and `rest` (covers all insets not styled by
-    /// other dictionary entries). All keys are optional; omitted keys will use
-    /// their previously set value, or the default value if never set.
-    ///
-    /// [Relative lengths]($relative) for this parameter are relative to the box
-    /// size excluding [outset]($box.outset). Note that relative insets and
-    /// outsets are different from relative [widths]($box.width) and
-    /// [heights]($box.height), which are relative to the container.
-    ///
-    /// _Note:_ When the box contains text, its exact size depends on the
-    /// current [text edges]($text.top-edge).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #rect(inset: 0pt)[Tight]
     /// ```
     #[fold]
     pub inset: Sides<Option<Rel<Length>>>,
-<<<<<<< HEAD
+
     /// レイアウトに影響を与えずにボックスの大きさを拡大する量。
     ///
     /// 全ての辺に対する単一の長さ、または辺ごとの長さの辞書を指定できます。
@@ -153,19 +90,6 @@ pub struct BoxElem {
     ///
     /// これはパディングが行のレイアウトに影響を与えるのを防ぐために便利です。
     /// 以下の例より一般的な場合については、[未加工テキストのblockパラメーター]($raw.block)のドキュメントを参照してください。
-=======
-
-    /// How much to expand the box's size without affecting the layout.
-    ///
-    /// This can be a single length for all sides or a dictionary of lengths for
-    /// individual sides. [Relative lengths]($relative) for this parameter are
-    /// relative to the box size excluding outset. See the documentation for
-    /// [inset]($box.inset) above for further details.
-    ///
-    /// This is useful to prevent padding from affecting line layout. For a
-    /// generalized version of the example below, see the documentation for the
-    /// [raw text's block parameter]($raw.block).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// An inline
@@ -179,15 +103,8 @@ pub struct BoxElem {
     #[fold]
     pub outset: Sides<Option<Rel<Length>>>,
 
-<<<<<<< HEAD
     /// ボックスの内側のコンテンツをクリッピングするかどうか。
     /// クリッピングは、ボックスの境界を超えたコンテンツを隠すため、ボックスのコンテンツがボックス本体よりも大きい場合に便利です。
-=======
-    /// Whether to clip the content inside the box.
-    ///
-    /// Clipping is useful when the box's content is larger than the box itself,
-    /// as any content that exceeds the box's bounds will be hidden.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #box(
@@ -200,11 +117,7 @@ pub struct BoxElem {
     #[default(false)]
     pub clip: bool,
 
-<<<<<<< HEAD
     /// ボックスのコンテンツ。
-=======
-    /// The contents of the box.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[positional]
     pub body: Option<Content>,
 }
@@ -265,7 +178,6 @@ pub enum InlineItem {
     Frame(Frame),
 }
 
-<<<<<<< HEAD
 /// ブロックレベルのコンテナ。
 ///
 /// このようなコンテナは、コンテンツを区切り、その大きさを調整し、背景や枠線を付与するために使用できます。
@@ -275,20 +187,6 @@ pub enum InlineItem {
 ///
 /// # 例
 /// ブロックを使用すると、複数のページに渡って分割されるコンテンツに背景を与えられます。
-=======
-/// A block-level container.
-///
-/// Such a container can be used to separate content, size it, and give it a
-/// background or border.
-///
-/// Blocks are also the primary way to control whether text becomes part of a
-/// paragraph or not. See [the paragraph documentation]($par/#what-becomes-a-paragraph)
-/// for more details.
-///
-/// # Examples
-/// With a block, you can give a background to content while still allowing it
-/// to break across multiple pages.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set page(height: 100pt)
 /// #block(
@@ -299,12 +197,7 @@ pub enum InlineItem {
 /// )
 /// ```
 ///
-<<<<<<< HEAD
 /// ブロックは、特にshowルールを記述する際、本来インラインとなる要素を強制的にブロックレベルとして扱う場合にも有用です。
-=======
-/// Blocks are also useful to force elements that would otherwise be inline to
-/// become block-level, especially when writing show rules.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #show heading: it => it.body
 /// = Blockless
@@ -316,11 +209,7 @@ pub enum InlineItem {
 /// ```
 #[elem]
 pub struct BlockElem {
-<<<<<<< HEAD
     /// ブロックの幅。
-=======
-    /// The block's width.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set align(center)
@@ -333,14 +222,8 @@ pub struct BlockElem {
     /// ```
     pub width: Smart<Rel<Length>>,
 
-<<<<<<< HEAD
     /// ブロックの高さ。
     /// 高さがページに残された余白より大きく、[`breakable`]($block.breakable)を`{true}`に設定した場合、 ブロックは残りの高さで次のページに続きます。
-=======
-    /// The block's height. When the height is larger than the remaining space
-    /// on a page and [`breakable`]($block.breakable) is `{true}`, the
-    /// block will continue on the next page with the remaining height.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set page(height: 80pt)
@@ -353,11 +236,7 @@ pub struct BlockElem {
     /// ```
     pub height: Sizing,
 
-<<<<<<< HEAD
     /// ブロックが分割可能で次のページに継続するかどうか。
-=======
-    /// Whether the block can be broken and continue on the next page.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set page(height: 80pt)
@@ -371,7 +250,6 @@ pub struct BlockElem {
     #[default(true)]
     pub breakable: bool,
 
-<<<<<<< HEAD
     /// ブロックの背景色。
     /// 詳細は[rectangleのドキュメント]($rect.fill)を参照してください。
     pub fill: Option<Paint>,
@@ -405,46 +283,6 @@ pub struct BlockElem {
     /// `above`と`below`の値は異なる可能性があるため、[context]ブロックでは`{block.above}`と `{block.below}`にのみアクセスでき、`{block.spacing}`には直接アクセスできません。
     ///
     /// このプロパティはshowルールと組み合わせて使用することで、任意のブロックレベル要素の周りの間隔を調整できます。
-=======
-    /// The block's background color. See the
-    /// [rectangle's documentation]($rect.fill) for more details.
-    pub fill: Option<Paint>,
-
-    /// The block's border color. See the
-    /// [rectangle's documentation]($rect.stroke) for more details.
-    #[fold]
-    pub stroke: Sides<Option<Option<Stroke>>>,
-
-    /// How much to round the block's corners. See the
-    /// [rectangle's documentation]($rect.radius) for more details.
-    #[fold]
-    pub radius: Corners<Option<Rel<Length>>>,
-
-    /// How much to pad the block's content. See the
-    /// [box's documentation]($box.inset) for more details.
-    #[fold]
-    pub inset: Sides<Option<Rel<Length>>>,
-
-    /// How much to expand the block's size without affecting the layout. See
-    /// the [box's documentation]($box.outset) for more details.
-    #[fold]
-    pub outset: Sides<Option<Rel<Length>>>,
-
-    /// The spacing around the block. When `{auto}`, inherits the paragraph
-    /// [`spacing`]($par.spacing).
-    ///
-    /// For two adjacent blocks, the larger of the first block's `above` and the
-    /// second block's `below` spacing wins. Moreover, block spacing takes
-    /// precedence over paragraph [`spacing`]($par.spacing).
-    ///
-    /// Note that this is only a shorthand to set `above` and `below` to the
-    /// same value. Since the values for `above` and `below` might differ, a
-    /// [context] block only provides access to `{block.above}` and
-    /// `{block.below}`, not to `{block.spacing}` directly.
-    ///
-    /// This property can be used in combination with a show rule to adjust the
-    /// spacing around arbitrary block-level elements.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set align(center)
@@ -458,18 +296,13 @@ pub struct BlockElem {
     #[default(Em::new(1.2).into())]
     pub spacing: Spacing,
 
-<<<<<<< HEAD
     /// このブロックとその前のブロックとの間隔。
-=======
-    /// The spacing between this block and its predecessor.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[parse(
         let spacing = args.named("spacing")?;
         args.named("above")?.or(spacing)
     )]
     pub above: Smart<Spacing>,
 
-<<<<<<< HEAD
     /// このブロックとその後のブロックとの間隔。
     #[parse(args.named("below")?.or(spacing))]
     pub below: Smart<Spacing>,
@@ -477,16 +310,6 @@ pub struct BlockElem {
     /// ブロックの内側のコンテンツをクリッピングするかどうか。
     ///
     /// クリッピングは、ブロックの境界を超えたコンテンツを隠すため、ブロックのコンテンツがブロック本体よりも大きい場合に便利です。
-=======
-    /// The spacing between this block and its successor.
-    #[parse(args.named("below")?.or(spacing))]
-    pub below: Smart<Spacing>,
-
-    /// Whether to clip the content inside the block.
-    ///
-    /// Clipping is useful when the block's content is larger than the block itself,
-    /// as any content that exceeds the block's bounds will be hidden.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #block(
@@ -499,17 +322,9 @@ pub struct BlockElem {
     #[default(false)]
     pub clip: bool,
 
-<<<<<<< HEAD
     /// このブロックが、次のブロックとの間に区切りを入れることなく続ける必要があるかどうか。
     ///
     /// この設定は、ページの下部で見出しが孤立することを防ぐために、見出しブロックに対してデフォルトで適用されています。
-=======
-    /// Whether this block must stick to the following one, with no break in
-    /// between.
-    ///
-    /// This is, by default, set on heading blocks to prevent orphaned headings
-    /// at the bottom of the page.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// >>> #set page(height: 140pt)
@@ -523,11 +338,7 @@ pub struct BlockElem {
     #[default(false)]
     pub sticky: bool,
 
-<<<<<<< HEAD
     /// ブロックのコンテンツ。
-=======
-    /// The contents of the block.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[positional]
     pub body: Option<BlockBody>,
 }

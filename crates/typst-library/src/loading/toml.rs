@@ -6,7 +6,6 @@ use crate::engine::Engine;
 use crate::foundations::{Dict, Str, func, scope};
 use crate::loading::{DataSource, Load, Readable};
 
-<<<<<<< HEAD
 /// TOMLファイルから構造化データを読み込む。
 ///
 /// 読み込むファイルには有効なTOMLテーブルが含まれていなければなりません。
@@ -18,19 +17,6 @@ use crate::loading::{DataSource, Load, Readable};
 /// `title`、`version`、および`authors`のキーを持つテーブルで構成されています。
 ///
 /// # 例
-=======
-/// Reads structured data from a TOML file.
-///
-/// The file must contain a valid TOML table. The TOML values will be converted
-/// into corresponding Typst values as listed in the [table below](#conversion).
-///
-/// The function returns a dictionary representing the TOML table.
-///
-/// The TOML file in the example consists of a table with the keys `title`,
-/// `version`, and `authors`.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #let details = toml("details.toml")
 ///
@@ -40,7 +26,6 @@ use crate::loading::{DataSource, Load, Readable};
 ///   .join(", ", last: " and "))
 /// ```
 ///
-<<<<<<< HEAD
 /// # 変換の詳細 { #conversion }
 ///
 /// まず、TOML文書はテーブルです。その他の値はテーブルに入れて
@@ -79,47 +64,6 @@ use crate::loading::{DataSource, Load, Readable};
 pub fn toml(
     engine: &mut Engine,
     /// TOMLファイルの[パス]($syntax/#paths)、または生のTOMLバイト列。
-=======
-/// # Conversion details { #conversion }
-///
-/// First of all, TOML documents are tables. Other values must be put in a table
-/// to be encoded or decoded.
-///
-/// | TOML value | Converted into Typst |
-/// | ---------- | -------------------- |
-/// | string     | [`str`]              |
-/// | integer    | [`int`]              |
-/// | float      | [`float`]            |
-/// | boolean    | [`bool`]             |
-/// | datetime   | [`datetime`]         |
-/// | array      | [`array`]            |
-/// | table      | [`dictionary`]       |
-///
-/// | Typst value                           | Converted into TOML            |
-/// | ------------------------------------- | ------------------------------ |
-/// | types that can be converted from TOML | corresponding TOML value       |
-/// | `{none}`                              | ignored                        |
-/// | [`bytes`]                             | string via [`repr`]            |
-/// | [`symbol`]                            | string                         |
-/// | [`content`]                           | a table describing the content |
-/// | other types ([`length`], etc.)        | string via [`repr`]            |
-///
-/// ## Notes
-/// - Be aware that TOML integers larger than 2<sup>63</sup>-1 or smaller
-///   than -2<sup>63</sup> cannot be represented losslessly in Typst, and an
-///   error will be thrown according to the
-///   [specification](https://toml.io/en/v1.0.0#integer).
-///
-/// - Bytes are not encoded as TOML arrays for performance and readability
-///   reasons. Consider using [`cbor.encode`] for binary data.
-///
-/// - The `repr` function is [for debugging purposes only]($repr/#debugging-only),
-///   and its output is not guaranteed to be stable across Typst versions.
-#[func(scope, title = "TOML")]
-pub fn toml(
-    engine: &mut Engine,
-    /// A [path]($syntax/#paths) to a TOML file or raw TOML bytes.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     source: Spanned<DataSource>,
 ) -> SourceResult<Dict> {
     let loaded = source.load(engine.world)?;
@@ -129,32 +73,20 @@ pub fn toml(
 
 #[scope]
 impl toml {
-<<<<<<< HEAD
     /// TOMLの文字列やバイト列から構造化データを読み込む。
     #[func(title = "Decode TOML")]
     #[deprecated(
         message = "`toml.decode`は非推奨です。代わりにバイト列を直接`toml`に渡してください。",
-=======
-    /// Reads structured data from a TOML string/bytes.
-    #[func(title = "Decode TOML")]
-    #[deprecated(
-        message = "`toml.decode` is deprecated, directly pass bytes to `toml` instead",
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         until = "0.15.0"
     )]
     pub fn decode(
         engine: &mut Engine,
-<<<<<<< HEAD
         /// TOMLデータ。
-=======
-        /// TOML data.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         data: Spanned<Readable>,
     ) -> SourceResult<Dict> {
         toml(engine, data.map(Readable::into_source))
     }
 
-<<<<<<< HEAD
     /// 構造化データをTOML文字列にエンコードする。
     #[func(title = "Encode TOML")]
     pub fn encode(
@@ -163,16 +95,6 @@ impl toml {
         /// TOML文書はテーブルなので、辞書のみが適しています。
         value: Spanned<Dict>,
         /// TOMLを整形表示するかどうか。
-=======
-    /// Encodes structured data into a TOML string.
-    #[func(title = "Encode TOML")]
-    pub fn encode(
-        /// Value to be encoded.
-        ///
-        /// TOML documents are tables. Therefore, only dictionaries are suitable.
-        value: Spanned<Dict>,
-        /// Whether to pretty-print the resulting TOML.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[named]
         #[default(true)]
         pretty: bool,

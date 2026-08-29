@@ -55,8 +55,6 @@ Look #link("https://github.com/typst/typst")[this #parbreak() thing].
 
 --- link-tags-with-parbreak pdftags nopdfua ---
 Look #link("https://github.com/typst/typst")[this #parbreak() thing].
-<<<<<<< HEAD
-=======
 
 --- issue-7301-link-tags-empty-link-body pdftags ---
 #link("asf")[#none\ #none]
@@ -69,4 +67,3 @@ Look #link("https://github.com/typst/typst")[this #parbreak() thing].
 
 --- issue-7301-link-tags-empty-link-body-mutliple pdftags ---
 #link("asf")[#none\ #none] #link("asf")[#none\ #none]
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

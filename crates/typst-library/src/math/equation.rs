@@ -18,7 +18,6 @@ use crate::math::MathSize;
 use crate::model::{Numbering, Outlinable, ParLine, Refable, Supplement};
 use crate::text::{FontFamily, FontList, FontWeight, LocalName, Locale, TextElem};
 
-<<<<<<< HEAD
 /// 数式。
 ///
 /// 数式は、テキスト内にインラインで表示でき、独立したブロックとしても表示できます。
@@ -26,15 +25,6 @@ use crate::text::{FontFamily, FontList, FontWeight, LocalName, Locale, TextElem}
 /// 開始ドル記号の直後と終了ドル記号の直前に少なくとも1つのスペースを挿入してください。
 ///
 /// # 例
-=======
-/// A mathematical equation.
-///
-/// Can be displayed inline with text or as a separate block. An equation
-/// becomes block-level through the presence of whitespace after the opening
-/// dollar sign and whitespace before the closing dollar sign.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #set text(font: "New Computer Modern")
 ///
@@ -47,7 +37,6 @@ use crate::text::{FontFamily, FontList, FontWeight, LocalName, Locale, TextElem}
 /// $ sum_(k=1)^n k = (n(n+1)) / 2 $
 /// ```
 ///
-<<<<<<< HEAD
 /// デフォルトでは、ブロックレベルの数式はページをまたいで分割されません。
 /// これは`{show math.equation: set block(breakable: true)}`を使用して変更できます。
 ///
@@ -66,25 +55,6 @@ pub struct EquationElem {
     /// ブロックレベル数式への[番号付け]($numbering)方法。
     ///
     /// 1つの数値を受け取る[番号付けパターンまたは関数]($numbering)を受け入れます。
-=======
-/// By default, block-level equations will not break across pages. This can be
-/// changed through `{show math.equation: set block(breakable: true)}`.
-///
-/// # Syntax
-/// This function also has dedicated syntax: Write mathematical markup within
-/// dollar signs to create an equation. Starting and ending the equation with
-/// whitespace lifts it into a separate block that is centered horizontally.
-/// For more details about math syntax, see the
-/// [main math page]($category/math).
-#[elem(Locatable, Tagged, Synthesize, ShowSet, Count, LocalName, Refable, Outlinable)]
-pub struct EquationElem {
-    /// Whether the equation is displayed as a separate block.
-    #[default(false)]
-    pub block: bool,
-
-    /// How to number block-level equations. Accepts a
-    /// [numbering pattern or function]($numbering) taking a single number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set math.equation(numbering: "(1)")
@@ -97,21 +67,12 @@ pub struct EquationElem {
     /// ```
     pub numbering: Option<Numbering>,
 
-<<<<<<< HEAD
     /// 数式番号の配置。
     ///
     /// デフォルトでは、数式の配置は`{end + horizon}`です。
     /// 水平方向の成分には`{right}`、`{left}`、
     /// またはテキスト方向の`{start}`と`{end}`を使用できます。
     /// 垂直方向の成分には、`{top}`、`{horizon}`、または`{bottom}`を使用できます。
-=======
-    /// The alignment of the equation numbering.
-    ///
-    /// By default, the alignment is `{end + horizon}`. For the horizontal
-    /// component, you can use `{right}`, `{left}`, or `{start}` and `{end}`
-    /// of the text direction; for the vertical component, you can use
-    /// `{top}`, `{horizon}`, or `{bottom}`.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set math.equation(numbering: "(1)", number-align: bottom)
@@ -123,21 +84,12 @@ pub struct EquationElem {
     #[default(SpecificAlignment::Both(OuterHAlignment::End, VAlignment::Horizon))]
     pub number_align: SpecificAlignment<OuterHAlignment, VAlignment>,
 
-<<<<<<< HEAD
     /// 数式に用いる補足語。
     ///
     /// 見出しを参照する際、補足語が参照番号の前に追加されます。
     ///
     /// 関数を指定した場合、参照された数式が引数として渡され、
     /// その関数は表示されるコンテンツを返す必要があります。
-=======
-    /// A supplement for the equation.
-    ///
-    /// For references to equations, this is added before the referenced number.
-    ///
-    /// If a function is specified, it is passed the referenced equation and
-    /// should return content.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set math.equation(numbering: "(1)", supplement: [Eq.])
@@ -150,39 +102,22 @@ pub struct EquationElem {
     /// ```
     pub supplement: Smart<Option<Supplement>>,
 
-<<<<<<< HEAD
     /// 数式の別説明。
     ///
     /// 数式全体を自然言語で説明する必要があり、補助技術向けに利用されます。
     /// 詳細は[アクセシビリティガイドのテキスト表現]($guides/accessibility/#textual-representations)
     /// を参照してください。
-=======
-    /// An alternative description of the mathematical equation.
-    ///
-    /// This should describe the full equation in natural language and will be
-    /// made available to Assistive Technology. You can learn more in the
-    /// [Textual Representations section of the Accessibility
-    /// Guide]($guides/accessibility/#textual-representations).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #math.equation(
     ///   alt: "integral from 1 to infinity of a x squared plus b with respect to x",
-<<<<<<< HEAD
-    ///   $ integral_1^oo a x^2 + b med d x $,
-=======
     ///   block: true,
     ///   $ integral_1^oo a x^2 + b dif x $,
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// )
     /// ```
     pub alt: Option<EcoString>,
 
-<<<<<<< HEAD
     /// 数式のコンテンツ。
-=======
-    /// The contents of the equation.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 

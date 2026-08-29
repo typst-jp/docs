@@ -2,11 +2,7 @@ use crate::foundations::{Content, Packed, elem};
 use crate::layout::{Length, Rel};
 use crate::math::{EquationElem, Mathy};
 
-<<<<<<< HEAD
 /// オプションのアタッチメントを持つベースとなる関数。
-=======
-/// A base with optional attachments.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $ attach(
@@ -16,7 +12,6 @@ use crate::math::{EquationElem, Mathy};
 /// ```
 #[elem(Mathy)]
 pub struct AttachElem {
-<<<<<<< HEAD
     /// アタッチメントを取り付けるベース。
     #[required]
     pub base: Content,
@@ -41,35 +36,6 @@ pub struct AttachElem {
     pub tr: Option<Content>,
 
     /// 右下のアタッチメント（ベースの後）。
-=======
-    /// The base to which things are attached.
-    #[required]
-    pub base: Content,
-
-    /// The top attachment, smartly positioned at top-right or above the base.
-    ///
-    /// You can wrap the base in `{limits()}` or `{scripts()}` to override the
-    /// smart positioning.
-    pub t: Option<Content>,
-
-    /// The bottom attachment, smartly positioned at the bottom-right or below
-    /// the base.
-    ///
-    /// You can wrap the base in `{limits()}` or `{scripts()}` to override the
-    /// smart positioning.
-    pub b: Option<Content>,
-
-    /// The top-left attachment (before the base).
-    pub tl: Option<Content>,
-
-    /// The bottom-left attachment (before base).
-    pub bl: Option<Content>,
-
-    /// The top-right attachment (after the base).
-    pub tr: Option<Content>,
-
-    /// The bottom-right attachment (after the base).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     pub br: Option<Content>,
 }
 
@@ -112,68 +78,41 @@ impl Packed<AttachElem> {
     }
 }
 
-<<<<<<< HEAD
 /// グループ化されたプライム記号。
-=======
-/// Grouped primes.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $ a'''_b = a^'''_b $
 /// ```
 ///
-<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文があり、primes関数の代わりにアポストロフィー記号を使います。
 /// これらは自動的に前の要素に付加され、次の上付き文字のレベルに移動します。
 #[elem(Mathy)]
 pub struct PrimesElem {
     /// グループ化するプライム記号の数。
-=======
-/// # Syntax
-/// This function has dedicated syntax: use apostrophes instead of primes. They
-/// will automatically attach to the previous element, moving superscripts to
-/// the next level.
-#[elem(Mathy)]
-pub struct PrimesElem {
-    /// The number of grouped primes.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub count: usize,
 }
 
-<<<<<<< HEAD
 /// アタッチメントを添え字として表示することをベースに強制。
-=======
-/// Forces a base to display attachments as scripts.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $ scripts(sum)_1^2 != sum_1^2 $
 /// ```
 #[elem(Mathy)]
 pub struct ScriptsElem {
-<<<<<<< HEAD
     /// 添え字を取り付けるベース。
-=======
-    /// The base to attach the scripts to.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }
 
-<<<<<<< HEAD
 /// アタッチメントをlimitsとして表示することをベースに強制。
-=======
-/// Forces a base to display attachments as limits.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $ limits(A)_1^2 != A_1^2 $
 /// ```
 #[elem(Mathy)]
 pub struct LimitsElem {
-<<<<<<< HEAD
     /// limitsを取り付けるベース。
     #[required]
     pub body: Content,
@@ -181,37 +120,16 @@ pub struct LimitsElem {
     /// インライン数式でもlimits表示を強制するかどうか。
     ///
     /// （例えばshowルールを用いて）limitsをグローバルに適用する場合、通常は無効にすることをおすすめします。
-=======
-    /// The base to attach the limits to.
-    #[required]
-    pub body: Content,
-
-    /// Whether to also force limits in inline equations.
-    ///
-    /// When applying limits globally (e.g., through a show rule), it is
-    /// typically a good idea to disable this.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[default(true)]
     pub inline: bool,
 }
 
-<<<<<<< HEAD
 /// グリフを伸縮します。
 ///
 /// この関数は、上部および下部アタッチメントがフィットするよう、自動的にアタッチメントのベースを伸縮させることにも使えます。
 ///
 /// 伸縮可能なグリフは限られており、どのグリフが伸縮可能かは使用する数式フォントに依存するため注意してください。
 /// ただし、この点に関して多くの数式フォントで違いはありません。
-=======
-/// Stretches a glyph.
-///
-/// This function can also be used to automatically stretch the base of an
-/// attachment, so that it fits the top and bottom attachments.
-///
-/// Note that only some glyphs can be stretched, and which ones can depend on
-/// the math font being used. However, most math fonts are the same in this
-/// regard.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $ H stretch(=)^"define" U + p V $
@@ -221,20 +139,11 @@ pub struct LimitsElem {
 /// ```
 #[elem(Mathy)]
 pub struct StretchElem {
-<<<<<<< HEAD
     /// 伸縮させるグリフ。
     #[required]
     pub body: Content,
 
     /// グリフおよびそのアタッチメントを基準とした伸縮の大きさ。
-=======
-    /// The glyph to stretch.
-    #[required]
-    pub body: Content,
-
-    /// The size to stretch to, relative to the maximum size of the glyph and
-    /// its attachments.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[default(Rel::one())]
     pub size: Rel<Length>,
 }

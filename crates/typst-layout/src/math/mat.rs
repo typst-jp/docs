@@ -7,10 +7,7 @@ use typst_library::math::{Augment, AugmentOffsets, CasesElem, MatElem, VecElem};
 use typst_library::text::TextElem;
 use typst_library::visualize::{FillRule, FixedStroke, Geometry, LineCap, Shape};
 use typst_syntax::Span;
-<<<<<<< HEAD
-=======
 use unicode_math_class::MathClass;
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 use super::{
     AlignmentResult, DELIM_SHORT_FALL, FrameFragment, GlyphFragment, LeftRightAlternator,
@@ -352,10 +349,7 @@ fn layout_delimiters(
             ctx.layout_into_fragment(&SymbolElem::packed(left_c).spanned(span), styles)?;
         left.stretch_vertical(ctx, target, short_fall);
         left.center_on_axis();
-<<<<<<< HEAD
-=======
         left.set_class(MathClass::Opening);
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         ctx.push(left);
     }
 
@@ -366,10 +360,7 @@ fn layout_delimiters(
             ctx.layout_into_fragment(&SymbolElem::packed(right_c).spanned(span), styles)?;
         right.stretch_vertical(ctx, target, short_fall);
         right.center_on_axis();
-<<<<<<< HEAD
-=======
         right.set_class(MathClass::Closing);
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         ctx.push(right);
     }
 

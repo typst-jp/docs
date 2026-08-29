@@ -58,11 +58,7 @@ pub fn module() -> Module {
     Module::new("calc", scope)
 }
 
-<<<<<<< HEAD
 /// 絶対値。
-=======
-/// Calculates the absolute value of a numeric value.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.abs(-5) \
@@ -72,11 +68,7 @@ pub fn module() -> Module {
 /// ```
 #[func(title = "Absolute")]
 pub fn abs(
-<<<<<<< HEAD
     /// 絶対値を計算する値。
-=======
-    /// The value whose absolute value to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: ToAbs,
 ) -> Value {
     value.0
@@ -97,11 +89,7 @@ cast! {
     v: Decimal => Self(Value::Decimal(v.abs()))
 }
 
-<<<<<<< HEAD
 /// 冪乗。
-=======
-/// Raises a value to some exponent.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.pow(2, 3) \
@@ -110,19 +98,11 @@ cast! {
 #[func(title = "Power")]
 pub fn pow(
     span: Span,
-<<<<<<< HEAD
     /// 冪乗の底（てい）。
     ///
     /// 値が[`decimal`]の場合、指数は[整数]($int)でなければなりません。
     base: DecNum,
     /// 冪乗の指数。
-=======
-    /// The base of the power.
-    ///
-    /// If this is a [`decimal`], the exponent can only be an [integer]($int).
-    base: DecNum,
-    /// The exponent of the power.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     exponent: Spanned<Num>,
 ) -> SourceResult<DecNum> {
     match exponent.v {
@@ -171,11 +151,7 @@ pub fn pow(
     }
 }
 
-<<<<<<< HEAD
 /// eの冪乗。
-=======
-/// Raises a value to some exponent of e.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.exp(1)
@@ -183,11 +159,7 @@ pub fn pow(
 #[func(title = "Exponential")]
 pub fn exp(
     span: Span,
-<<<<<<< HEAD
     /// 冪乗の指数。
-=======
-    /// The exponent of the power.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     exponent: Spanned<Num>,
 ) -> SourceResult<f64> {
     match exponent.v {
@@ -208,11 +180,7 @@ pub fn exp(
     Ok(result)
 }
 
-<<<<<<< HEAD
 /// 平方根。
-=======
-/// Calculates the square root of a number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.sqrt(16) \
@@ -220,11 +188,7 @@ pub fn exp(
 /// ```
 #[func(title = "Square Root")]
 pub fn sqrt(
-<<<<<<< HEAD
     /// 平方根を計算する数値。負の値は取れません。
-=======
-    /// The number whose square root to calculate. Must be non-negative.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: Spanned<Num>,
 ) -> SourceResult<f64> {
     if value.v.float() < 0.0 {
@@ -233,15 +197,9 @@ pub fn sqrt(
     Ok(value.v.float().sqrt())
 }
 
-<<<<<<< HEAD
 /// n乗根。
 ///
 /// 負の値の場合、nは奇数でなければなりません。
-=======
-/// Calculates the real nth root of a number.
-///
-/// If the number is negative, then n must be odd.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.root(16.0, 4) \
@@ -249,15 +207,9 @@ pub fn sqrt(
 /// ```
 #[func]
 pub fn root(
-<<<<<<< HEAD
     /// 根を取る対象の式。
     radicand: f64,
     /// 被開方数の何乗根を取るか。
-=======
-    /// The expression to take the root of.
-    radicand: f64,
-    /// Which root of the radicand to take.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     index: Spanned<i64>,
 ) -> SourceResult<f64> {
     if index.v == 0 {
@@ -276,16 +228,9 @@ pub fn root(
     }
 }
 
-<<<<<<< HEAD
 /// サイン（正弦）の計算。
 ///
 /// 整数または浮動小数点数で呼び出された場合、それらはラジアンとして解釈されます。
-=======
-/// Calculates the sine of an angle.
-///
-/// When called with an integer or a float, they will be interpreted as
-/// radians.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.sin(1.5) \
@@ -293,11 +238,7 @@ pub fn root(
 /// ```
 #[func(title = "Sine")]
 pub fn sin(
-<<<<<<< HEAD
     /// サインを計算する角度。
-=======
-    /// The angle whose sine to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     angle: AngleLike,
 ) -> f64 {
     match angle {
@@ -307,16 +248,9 @@ pub fn sin(
     }
 }
 
-<<<<<<< HEAD
 /// コサイン（余弦）の計算。
 ///
 /// 整数または浮動小数点数で呼び出された場合、それらはラジアンとして解釈されます。
-=======
-/// Calculates the cosine of an angle.
-///
-/// When called with an integer or a float, they will be interpreted as
-/// radians.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.cos(1.5) \
@@ -324,11 +258,7 @@ pub fn sin(
 /// ```
 #[func(title = "Cosine")]
 pub fn cos(
-<<<<<<< HEAD
     /// コサインを計算する角度。
-=======
-    /// The angle whose cosine to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     angle: AngleLike,
 ) -> f64 {
     match angle {
@@ -338,16 +268,9 @@ pub fn cos(
     }
 }
 
-<<<<<<< HEAD
 /// タンジェント（正接）の計算。
 ///
 /// 整数または浮動小数点数に対して呼び出された場合、それらはラジアンとして解釈されます。
-=======
-/// Calculates the tangent of an angle.
-///
-/// When called with an integer or a float, they will be interpreted as
-/// radians.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.tan(1.5) \
@@ -355,11 +278,7 @@ pub fn cos(
 /// ```
 #[func(title = "Tangent")]
 pub fn tan(
-<<<<<<< HEAD
     /// タンジェントを計算する角度。
-=======
-    /// The angle whose tangent to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     angle: AngleLike,
 ) -> f64 {
     match angle {
@@ -369,11 +288,7 @@ pub fn tan(
     }
 }
 
-<<<<<<< HEAD
 /// アークサイン（逆正弦）の計算。
-=======
-/// Calculates the arcsine of a number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.asin(0) \
@@ -381,11 +296,7 @@ pub fn tan(
 /// ```
 #[func(title = "Arcsine")]
 pub fn asin(
-<<<<<<< HEAD
     /// アークサインを計算する値。値は-1から1の間でなければなりません。
-=======
-    /// The number whose arcsine to calculate. Must be between -1 and 1.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: Spanned<Num>,
 ) -> SourceResult<Angle> {
     let val = value.v.float();
@@ -395,11 +306,7 @@ pub fn asin(
     Ok(Angle::rad(val.asin()))
 }
 
-<<<<<<< HEAD
 /// アークコサイン（逆余弦）の計算。
-=======
-/// Calculates the arccosine of a number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.acos(0) \
@@ -407,11 +314,7 @@ pub fn asin(
 /// ```
 #[func(title = "Arccosine")]
 pub fn acos(
-<<<<<<< HEAD
     /// アークコサインを計算する値。値は-1から1の間でなければなりません。
-=======
-    /// The number whose arccosine to calculate. Must be between -1 and 1.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: Spanned<Num>,
 ) -> SourceResult<Angle> {
     let val = value.v.float();
@@ -421,11 +324,7 @@ pub fn acos(
     Ok(Angle::rad(val.acos()))
 }
 
-<<<<<<< HEAD
 /// アークタンジェント（逆正接）の計算。
-=======
-/// Calculates the arctangent of a number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.atan(0) \
@@ -433,25 +332,15 @@ pub fn acos(
 /// ```
 #[func(title = "Arctangent")]
 pub fn atan(
-<<<<<<< HEAD
     /// アークタンジェントを計算する値。
-=======
-    /// The number whose arctangent to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: Num,
 ) -> Angle {
     Angle::rad(value.float().atan())
 }
 
-<<<<<<< HEAD
 /// 四象限アークタンジェントの計算。
 ///
 /// 引数の順序は`(y, x)`ではなく`(x, y)`です。
-=======
-/// Calculates the four-quadrant arctangent of a coordinate.
-///
-/// The arguments are `(x, y)`, not `(y, x)`.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.atan2(1, 1) \
@@ -459,25 +348,15 @@ pub fn atan(
 /// ```
 #[func(title = "Four-quadrant Arctangent")]
 pub fn atan2(
-<<<<<<< HEAD
     /// X座標。
     x: Num,
     /// Y座標。
-=======
-    /// The X coordinate.
-    x: Num,
-    /// The Y coordinate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     y: Num,
 ) -> Angle {
     Angle::rad(f64::atan2(y.float(), x.float()))
 }
 
-<<<<<<< HEAD
 /// ハイパーボリックサイン（双曲線正弦）を計算。
-=======
-/// Calculates the hyperbolic sine of a hyperbolic angle.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.sinh(0) \
@@ -485,21 +364,13 @@ pub fn atan2(
 /// ```
 #[func(title = "Hyperbolic Sine")]
 pub fn sinh(
-<<<<<<< HEAD
     /// ハイパーボリックサインを計算する双曲角。
-=======
-    /// The hyperbolic angle whose hyperbolic sine to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: f64,
 ) -> f64 {
     value.sinh()
 }
 
-<<<<<<< HEAD
 /// ハイパーボリックコサイン（双曲線余弦）を計算。
-=======
-/// Calculates the hyperbolic cosine of a hyperbolic angle.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.cosh(0) \
@@ -507,21 +378,13 @@ pub fn sinh(
 /// ```
 #[func(title = "Hyperbolic Cosine")]
 pub fn cosh(
-<<<<<<< HEAD
     /// ハイパーボリックコサインを計算する双曲角。
-=======
-    /// The hyperbolic angle whose hyperbolic cosine to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: f64,
 ) -> f64 {
     value.cosh()
 }
 
-<<<<<<< HEAD
 /// ハイパーボリックタンジェント（双曲線正接）を計算。
-=======
-/// Calculates the hyperbolic tangent of a hyperbolic angle.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.tanh(0) \
@@ -529,25 +392,15 @@ pub fn cosh(
 /// ```
 #[func(title = "Hyperbolic Tangent")]
 pub fn tanh(
-<<<<<<< HEAD
     /// ハイパーボリックタンジェントを計算する双曲角。
-=======
-    /// The hyperbolic angle whose hyperbolic tangent to calculate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: f64,
 ) -> f64 {
     value.tanh()
 }
 
-<<<<<<< HEAD
 /// 数値の対数。
 ///
 /// 底（てい）が指定されていない場合、対数は10を底として計算されます。
-=======
-/// Calculates the logarithm of a number.
-///
-/// If the base is not specified, the logarithm is calculated in base 10.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.log(100)
@@ -555,15 +408,9 @@ pub fn tanh(
 #[func(title = "Logarithm")]
 pub fn log(
     span: Span,
-<<<<<<< HEAD
     /// 対数を計算する数値。正の値（0を除く）である必要があります。
     value: Spanned<Num>,
     /// 対数の底（てい）。ゼロであってはなりません。
-=======
-    /// The number whose logarithm to calculate. Must be strictly positive.
-    value: Spanned<Num>,
-    /// The base of the logarithm. May not be zero.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[named]
     #[default(Spanned::new(10.0, Span::detached()))]
     base: Spanned<f64>,
@@ -594,11 +441,7 @@ pub fn log(
     Ok(result)
 }
 
-<<<<<<< HEAD
 /// 数値の自然対数。
-=======
-/// Calculates the natural logarithm of a number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.ln(calc.e)
@@ -606,11 +449,7 @@ pub fn log(
 #[func(title = "Natural Logarithm")]
 pub fn ln(
     span: Span,
-<<<<<<< HEAD
     /// 対数を計算する数値。正の値（0を除く）である必要があります。
-=======
-    /// The number whose logarithm to calculate. Must be strictly positive.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: Spanned<Num>,
 ) -> SourceResult<f64> {
     let number = value.v.float();
@@ -626,37 +465,22 @@ pub fn ln(
     Ok(result)
 }
 
-<<<<<<< HEAD
 /// 数値の階乗。
-=======
-/// Calculates the factorial of a number.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.fact(5)
 /// ```
 #[func(title = "Factorial")]
 pub fn fact(
-<<<<<<< HEAD
     /// 階乗を計算する数値。0または正の値である必要があります。
-=======
-    /// The number whose factorial to calculate. Must be non-negative.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     number: u64,
 ) -> StrResult<i64> {
     Ok(fact_impl(1, number).ok_or_else(too_large)?)
 }
 
-<<<<<<< HEAD
 /// 順列の計算。
 ///
 /// 順列、つまり、`n`個の項目から`k`個を、順序を区別して選択する組み合わせの数を返します。
-=======
-/// Calculates a permutation.
-///
-/// Returns the `k`-permutation of `n`, or the number of ways to choose `k`
-/// items from a set of `n` with regard to order.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $ "perm"(n, k) &= n!/((n - k)!) \
@@ -664,15 +488,9 @@ pub fn fact(
 /// ```
 #[func(title = "Permutation")]
 pub fn perm(
-<<<<<<< HEAD
     /// 基数。0または正の値である必要があります。
     base: u64,
     /// 順列の数。0または正の値である必要があります。
-=======
-    /// The base number. Must be non-negative.
-    base: u64,
-    /// The number of permutations. Must be non-negative.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     numbers: u64,
 ) -> StrResult<i64> {
     // By convention.
@@ -700,31 +518,18 @@ fn fact_impl(start: u64, end: u64) -> Option<i64> {
     count.try_into().ok()
 }
 
-<<<<<<< HEAD
 /// 二項係数の計算。
 ///
 /// `n`個の項目から`k`個を順序を区別せず選択する組み合わせの数を返します。
-=======
-/// Calculates a binomial coefficient.
-///
-/// Returns the `k`-combination of `n`, or the number of ways to choose `k`
-/// items from a set of `n` without regard to order.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.binom(10, 5)
 /// ```
 #[func(title = "Binomial")]
 pub fn binom(
-<<<<<<< HEAD
     /// 上側の係数。0または正の値である必要があります。
     n: u64,
     /// 下側の係数。0または正の値である必要があります。
-=======
-    /// The upper coefficient. Must be non-negative.
-    n: u64,
-    /// The lower coefficient. Must be non-negative.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     k: u64,
 ) -> StrResult<i64> {
     Ok(binom_impl(n, k).ok_or_else(too_large)?)
@@ -752,41 +557,19 @@ fn binom_impl(n: u64, k: u64) -> Option<i64> {
     result.try_into().ok()
 }
 
-<<<<<<< HEAD
 /// 2つの整数値の最大公約数。
-=======
-/// Calculates the greatest common divisor of two integers.
 ///
 /// This will error if the result of integer division would be larger than the
 /// maximum 64-bit signed integer.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.gcd(7, 42)
 /// ```
 #[func(title = "Greatest Common Divisor")]
 pub fn gcd(
-<<<<<<< HEAD
     /// 1つ目の整数値。
     a: i64,
     /// 2つ目の整数値。
-    b: i64,
-) -> i64 {
-    let (mut a, mut b) = (a, b);
-    while b != 0 {
-        let temp = b;
-        b = a % b;
-        a = temp;
-    }
-
-    a.abs()
-}
-
-/// 2つの整数値の最小公倍数。
-=======
-    /// The first integer.
-    a: i64,
-    /// The second integer.
     b: i64,
 ) -> StrResult<i64> {
     let (mut a, mut b) = (a, b);
@@ -799,54 +582,33 @@ pub fn gcd(
     Ok(a.abs())
 }
 
-/// Calculates the least common multiple of two integers.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
+/// 2つの整数値の最小公倍数。
 ///
 /// ```example
 /// #calc.lcm(96, 13)
 /// ```
 #[func(title = "Least Common Multiple")]
 pub fn lcm(
-<<<<<<< HEAD
     /// 1つ目の整数値。
     a: i64,
     /// 2つ目の整数値。
-=======
-    /// The first integer.
-    a: i64,
-    /// The second integer.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     b: i64,
 ) -> StrResult<i64> {
     if a == b {
         return Ok(a.abs());
     }
 
-<<<<<<< HEAD
-    Ok(a.checked_div(gcd(a, b))
-=======
     Ok(a.checked_div(gcd(a, b)?)
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         .and_then(|gcd| gcd.checked_mul(b))
         .map(|v| v.abs())
         .ok_or_else(too_large)?)
 }
 
-<<<<<<< HEAD
 /// 数値を最も近い整数値に切り捨て。
 ///
 /// もしその値がすでに整数であれば、そのまま返されます。
 ///
 /// この関数は常に[整数値]($int)を返し、結果となる[`float`]や[`decimal`]が64ビット符号付き整数の最大値より大きい、または最小値より小さい場合はエラーとなります。
-=======
-/// Rounds a number down to the nearest integer.
-///
-/// If the number is already an integer, it is returned unchanged.
-///
-/// Note that this function will always return an [integer]($int), and will
-/// error if the resulting [`float`] or [`decimal`] is larger than the maximum
-/// 64-bit signed integer or smaller than the minimum for that type.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.floor(500.1)
@@ -856,11 +618,7 @@ pub fn lcm(
 /// ```
 #[func]
 pub fn floor(
-<<<<<<< HEAD
     /// 切り下げる数値。
-=======
-    /// The number to round down.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: DecNum,
 ) -> StrResult<i64> {
     match value {
@@ -871,21 +629,11 @@ pub fn floor(
     }
 }
 
-<<<<<<< HEAD
 /// 数値を最も近い整数値に切り上げ。
 ///
 /// もしその値がすでに整数であれば、そのまま返されます。
 ///
 /// この関数は常に[整数値]($int)を返し、結果となる[`float`]や[`decimal`]が64ビット符号付き整数の最大値より大きい、または最小値より小さい場合はエラーとなります。
-=======
-/// Rounds a number up to the nearest integer.
-///
-/// If the number is already an integer, it is returned unchanged.
-///
-/// Note that this function will always return an [integer]($int), and will
-/// error if the resulting [`float`] or [`decimal`] is larger than the maximum
-/// 64-bit signed integer or smaller than the minimum for that type.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.ceil(500.1)
@@ -895,11 +643,7 @@ pub fn floor(
 /// ```
 #[func]
 pub fn ceil(
-<<<<<<< HEAD
     /// 切り上げる数値。
-=======
-    /// The number to round up.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: DecNum,
 ) -> StrResult<i64> {
     match value {
@@ -910,21 +654,11 @@ pub fn ceil(
     }
 }
 
-<<<<<<< HEAD
 /// 数値の整数部分を切り出し。
 ///
 /// もしその値がすでに整数であれば、そのまま返されます。
 ///
 /// この関数は常に[整数値]($int)を返し、結果となる[`float`]や[`decimal`]が64ビット符号付き整数の最大値より大きい、または最小値より小さい場合はエラーとなります。
-=======
-/// Returns the integer part of a number.
-///
-/// If the number is already an integer, it is returned unchanged.
-///
-/// Note that this function will always return an [integer]($int), and will
-/// error if the resulting [`float`] or [`decimal`] is larger than the maximum
-/// 64-bit signed integer or smaller than the minimum for that type.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.trunc(15.9)
@@ -934,11 +668,7 @@ pub fn ceil(
 /// ```
 #[func(title = "Truncate")]
 pub fn trunc(
-<<<<<<< HEAD
     /// 整数部分を切り出す数値。
-=======
-    /// The number to truncate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: DecNum,
 ) -> StrResult<i64> {
     match value {
@@ -949,15 +679,9 @@ pub fn trunc(
     }
 }
 
-<<<<<<< HEAD
 /// 数値の小数部分を切り出し。
 ///
 /// もしその値が整数であれば、`0`を返します。
-=======
-/// Returns the fractional part of a number.
-///
-/// If the number is an integer, returns `0`.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.fract(-3.1)
@@ -966,11 +690,7 @@ pub fn trunc(
 /// ```
 #[func(title = "Fractional")]
 pub fn fract(
-<<<<<<< HEAD
     /// 小数部分を切り出す数値。
-=======
-    /// The number to truncate.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: DecNum,
 ) -> DecNum {
     match value {
@@ -980,7 +700,6 @@ pub fn fract(
     }
 }
 
-<<<<<<< HEAD
 /// 数値を四捨五入します。
 ///
 /// オプションで、小数点以下の桁数も指定できます。
@@ -991,28 +710,6 @@ pub fn fract(
 /// 関数の出力を明示的に[`int`]にもできますが、その`float`や`decimal`が64ビット符号付き整数の最大値より大きい場合、または最小値より小さい場合はエラーとなることに注意してください。
 ///
 /// さらに、この関数は、整数や`decimal`の最大値または最小値を超えて丸めようとするとエラーになる場合があります。数値が`float`の場合、そのような試みは、最大値や最小値に対してそれぞれ`{float.inf}`と`{-float.inf}`を返します。
-=======
-/// Rounds a number to the nearest integer.
-///
-/// Half-integers are rounded away from zero.
-///
-/// Optionally, a number of decimal places can be specified. If negative, its
-/// absolute value will indicate the amount of significant integer digits to
-/// remove before the decimal point.
-///
-/// Note that this function will return the same type as the operand. That is,
-/// applying `round` to a [`float`] will return a `float`, and to a [`decimal`],
-/// another `decimal`. You may explicitly convert the output of this function to
-/// an integer with [`int`], but note that such a conversion will error if the
-/// `float` or `decimal` is larger than the maximum 64-bit signed integer or
-/// smaller than the minimum integer.
-///
-/// In addition, this function can error if there is an attempt to round beyond
-/// the maximum or minimum integer or `decimal`. If the number is a `float`,
-/// such an attempt will cause `{float.inf}` or `{-float.inf}` to be returned
-/// for maximum and minimum respectively.
-///
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #calc.round(3.1415, digits: 2)
 /// #assert(calc.round(3) == 3)
@@ -1029,20 +726,11 @@ pub fn fract(
 /// ```
 #[func]
 pub fn round(
-<<<<<<< HEAD
     /// 四捨五入する数値。
     value: DecNum,
     /// 正の値の場合、小数点以下の桁数。
     ///
     /// 負の値の場合、小数点より左側で切り捨てる有効整数桁数。
-=======
-    /// The number to round.
-    value: DecNum,
-    /// If positive, the number of decimal places.
-    ///
-    /// If negative, the number of significant integer digits that should be
-    /// removed before the decimal point.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[named]
     #[default(0)]
     digits: i64,
@@ -1061,11 +749,7 @@ pub fn round(
     }
 }
 
-<<<<<<< HEAD
 /// 数値を最小値と最大値の間にクランプ。
-=======
-/// Clamps a number between a minimum and maximum value.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.clamp(5, 0, 4)
@@ -1077,19 +761,11 @@ pub fn round(
 #[func]
 pub fn clamp(
     span: Span,
-<<<<<<< HEAD
     /// クランプする数値。
     value: DecNum,
     /// 最小値（この値を含む）。
     min: DecNum,
     /// 最大値（この値を含む）。
-=======
-    /// The number to clamp.
-    value: DecNum,
-    /// The inclusive minimum value.
-    min: DecNum,
-    /// The inclusive maximum value.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     max: Spanned<DecNum>,
 ) -> SourceResult<DecNum> {
     // Ignore if there are incompatible types (decimal and float) since that
@@ -1108,11 +784,7 @@ pub fn clamp(
         .at(span)
 }
 
-<<<<<<< HEAD
 /// 一連の値の最小値を決定。
-=======
-/// Determines the minimum of a sequence of values.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.min(1, -3, -5, 20, 3, 6) \
@@ -1121,23 +793,14 @@ pub fn clamp(
 #[func(title = "Minimum")]
 pub fn min(
     span: Span,
-<<<<<<< HEAD
     /// 最小値を抽出する一連の値。空であってはなりません。
-=======
-    /// The sequence of values from which to extract the minimum.
-    /// Must not be empty.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[variadic]
     values: Vec<Spanned<Value>>,
 ) -> SourceResult<Value> {
     minmax(span, values, Ordering::Less)
 }
 
-<<<<<<< HEAD
 /// 一連の値の最大値を決定。
-=======
-/// Determines the maximum of a sequence of values.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.max(1, -3, -5, 20, 3, 6) \
@@ -1146,12 +809,7 @@ pub fn min(
 #[func(title = "Maximum")]
 pub fn max(
     span: Span,
-<<<<<<< HEAD
     ///  最大値を抽出する一連の値。空であってはなりません。
-=======
-    /// The sequence of values from which to extract the maximum.
-    /// Must not be empty.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[variadic]
     values: Vec<Spanned<Value>>,
 ) -> SourceResult<Value> {
@@ -1179,11 +837,7 @@ fn minmax(
     Ok(extremum)
 }
 
-<<<<<<< HEAD
 /// 整数値が偶数かどうかを判定。
-=======
-/// Determines whether an integer is even.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.even(4) \
@@ -1192,21 +846,13 @@ fn minmax(
 /// ```
 #[func]
 pub fn even(
-<<<<<<< HEAD
     /// 偶数かどうかをチェックする数値。
-=======
-    /// The number to check for evenness.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: i64,
 ) -> bool {
     value % 2 == 0
 }
 
-<<<<<<< HEAD
 /// 整数値が奇数かどうかを判断。
-=======
-/// Determines whether an integer is odd.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.odd(4) \
@@ -1215,31 +861,17 @@ pub fn even(
 /// ```
 #[func]
 pub fn odd(
-<<<<<<< HEAD
     /// 奇数かどうかをチェックする数値。
-=======
-    /// The number to check for oddness.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     value: i64,
 ) -> bool {
     value % 2 != 0
 }
 
-<<<<<<< HEAD
 /// 2つの数値の剰余を計算。
 ///
 /// `calc.rem(x, y)`の値は常に`x`と同じ符号を持ち、`y`よりも小さい絶対値になります。
 ///
 /// [`decimal`]が入力され、被除数が除数に比べて絶対値が小さすぎる場合はエラーになることがあります。
-=======
-/// Calculates the remainder of two numbers.
-///
-/// The value `calc.rem(x, y)` always has the same sign as `x`, and is smaller
-/// in magnitude than `y`.
-///
-/// This can error if given a [`decimal`] input and the dividend is too small in
-/// magnitude compared to the divisor.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.rem(7, 3) \
@@ -1251,15 +883,9 @@ pub fn odd(
 #[func(title = "Remainder")]
 pub fn rem(
     span: Span,
-<<<<<<< HEAD
     /// 剰余の被除数。
     dividend: DecNum,
     /// 剰余の除数。
-=======
-    /// The dividend of the remainder.
-    dividend: DecNum,
-    /// The divisor of the remainder.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     divisor: Spanned<DecNum>,
 ) -> SourceResult<DecNum> {
     if divisor.v.is_zero() {
@@ -1269,13 +895,9 @@ pub fn rem(
     dividend
         .apply2(
             divisor.v,
-<<<<<<< HEAD
-            |a, b| Some(DecNum::Int(a % b)),
-=======
             // `checked_rem` can only overflow on `i64::MIN % -1` which is
             // mathematically zero.
             |a, b| Some(DecNum::Int(a.checked_rem(b).unwrap_or(0))),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             |a, b| Some(DecNum::Float(a % b)),
             |a, b| a.checked_rem(b).map(DecNum::Decimal),
         )
@@ -1285,20 +907,12 @@ pub fn rem(
         .at(span)
 }
 
-<<<<<<< HEAD
 /// 2つの数値のユークリッド除算。
 ///
 /// この計算の結果は、商を被除数が除数の`{n}`倍以上になる整数`{n}`へ丸めた値です。
-=======
-/// Performs euclidean division of two numbers.
-///
-/// The result of this computation is that of a division rounded to the integer
-/// `{n}` such that the dividend is greater than or equal to `{n}` times
-/// the divisor.
 ///
 /// This can error if the resulting number is larger than the maximum value or
 /// smaller than the minimum value for its type.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.div-euclid(7, 3) \
@@ -1311,15 +925,9 @@ pub fn rem(
 #[func(title = "Euclidean Division")]
 pub fn div_euclid(
     span: Span,
-<<<<<<< HEAD
     /// 除算の被除数。
     dividend: DecNum,
     /// 除算の除数。
-=======
-    /// The dividend of the division.
-    dividend: DecNum,
-    /// The divisor of the division.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     divisor: Spanned<DecNum>,
 ) -> SourceResult<DecNum> {
     if divisor.v.is_zero() {
@@ -1329,11 +937,7 @@ pub fn div_euclid(
     dividend
         .apply2(
             divisor.v,
-<<<<<<< HEAD
-            |a, b| Some(DecNum::Int(a.div_euclid(b))),
-=======
             |a, b| a.checked_div_euclid(b).map(DecNum::Int),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             |a, b| Some(DecNum::Float(a.div_euclid(b))),
             |a, b| a.checked_div_euclid(b).map(DecNum::Decimal),
         )
@@ -1343,24 +947,12 @@ pub fn div_euclid(
         .at(span)
 }
 
-<<<<<<< HEAD
 /// 除算の最小の非負剰余を計算。
 ///
 /// 警告：浮動小数点数の丸め誤差により、被除数が除数よりも極端に小さく、かつ負の値である場合、剰余が除数の絶対値と等しくなる可能性があります。
 /// これは浮動小数点数の入力にのみ当てはまります。
 ///
 /// また、[`decimal`]を入力した場合、被除数が除数に比べて桁違いに小さい場合はエラーとなることがあります。
-=======
-/// This calculates the least nonnegative remainder of a division.
-///
-/// Warning: Due to a floating point round-off error, the remainder may equal
-/// the absolute value of the divisor if the dividend is much smaller in
-/// magnitude than the divisor and the dividend is negative. This only applies
-/// for floating point inputs.
-///
-/// In addition, this can error if given a [`decimal`] input and the dividend is
-/// too small in magnitude compared to the divisor.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.rem-euclid(7, 3) \
@@ -1373,15 +965,9 @@ pub fn div_euclid(
 #[func(title = "Euclidean Remainder", keywords = ["modulo", "modulus"])]
 pub fn rem_euclid(
     span: Span,
-<<<<<<< HEAD
     /// 剰余の被除数。
     dividend: DecNum,
     /// 剰余の除数。
-=======
-    /// The dividend of the remainder.
-    dividend: DecNum,
-    /// The divisor of the remainder.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     divisor: Spanned<DecNum>,
 ) -> SourceResult<DecNum> {
     if divisor.v.is_zero() {
@@ -1391,13 +977,9 @@ pub fn rem_euclid(
     dividend
         .apply2(
             divisor.v,
-<<<<<<< HEAD
-            |a, b| Some(DecNum::Int(a.rem_euclid(b))),
-=======
             // `checked_rem_euclid` can only overflow on `i64::MIN % -1` which
             // is mathematically zero.
             |a, b| Some(DecNum::Int(a.checked_rem_euclid(b).unwrap_or(0))),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             |a, b| Some(DecNum::Float(a.rem_euclid(b))),
             |a, b| a.checked_rem_euclid(b).map(DecNum::Decimal),
         )
@@ -1407,17 +989,11 @@ pub fn rem_euclid(
         .at(span)
 }
 
-<<<<<<< HEAD
 /// 2つの数値の商（切り捨て除算）を計算します。
-///
-/// この関数は常に[整数値]($int)を返し、結果となる[`float`]や[`decimal`]が64ビット符号付き整数の最大値より大きい、または最小値より小さい場合はエラーとなることに注意してください。
-=======
-/// Calculates the quotient (floored division) of two numbers.
 ///
 /// Note that this function will always return an [integer]($int), and will
 /// error if the resulting number is larger than the maximum 64-bit signed
 /// integer or smaller than the minimum for that type.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// $ "quo"(a, b) &= floor(a/b) \
@@ -1427,15 +1003,9 @@ pub fn rem_euclid(
 #[func(title = "Quotient")]
 pub fn quo(
     span: Span,
-<<<<<<< HEAD
     /// 商の被除数。
     dividend: DecNum,
     /// 商の除数。
-=======
-    /// The dividend of the quotient.
-    dividend: DecNum,
-    /// The divisor of the quotient.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     divisor: Spanned<DecNum>,
 ) -> SourceResult<i64> {
     if divisor.v.is_zero() {
@@ -1445,11 +1015,7 @@ pub fn quo(
     let divided = dividend
         .apply2(
             divisor.v,
-<<<<<<< HEAD
-            |a, b| Some(DecNum::Int(a / b)),
-=======
             |a, b| a.checked_div(b).map(DecNum::Int),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             |a, b| Some(DecNum::Float(a / b)),
             |a, b| a.checked_div(b).map(DecNum::Decimal),
         )
@@ -1461,11 +1027,7 @@ pub fn quo(
     floor(divided).at(span)
 }
 
-<<<<<<< HEAD
 /// 一連の値のpノルムを計算。
-=======
-/// Calculates the p-norm of a sequence of values.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 ///
 /// ```example
 /// #calc.norm(1, 2, -3, 0.5) \
@@ -1473,20 +1035,11 @@ pub fn quo(
 /// ```
 #[func(title = "𝑝-Norm")]
 pub fn norm(
-<<<<<<< HEAD
     /// pノルムを計算するための`p`の値。
     #[named]
     #[default(Spanned::new(2.0, Span::detached()))]
     p: Spanned<f64>,
     /// pノルムを計算する一連の値。空の場合、`0.0`を返します。
-=======
-    /// The p value to calculate the p-norm of.
-    #[named]
-    #[default(Spanned::new(2.0, Span::detached()))]
-    p: Spanned<f64>,
-    /// The sequence of values from which to calculate the p-norm.
-    /// Returns `0.0` if empty.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[variadic]
     values: Vec<f64>,
 ) -> SourceResult<f64> {

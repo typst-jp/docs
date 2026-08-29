@@ -720,10 +720,7 @@ impl Array {
         last: Option<Value>,
         /// What to return if the array is empty.
         #[named]
-<<<<<<< HEAD
-=======
         #[default]
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         default: Option<Value>,
     ) -> StrResult<Value> {
         let len = self.0.len();
@@ -894,13 +891,10 @@ impl Array {
         #[named]
         by: Option<Func>,
     ) -> SourceResult<Array> {
-<<<<<<< HEAD
-=======
         // We use `glidesort` instead of the standard library sorting algorithm
         // to prevent panics in case the comparison function does not define a
         // valid order (see https://github.com/typst/typst/pull/5627 and
         // https://github.com/typst/typst/issues/6285).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         match by {
             Some(by) => {
                 let mut are_in_order = |mut x, mut y| {
@@ -921,14 +915,7 @@ impl Array {
                         }
                     }
                 };
-<<<<<<< HEAD
-                // If a comparison function is provided, we use `glidesort`
-                // instead of the standard library sorting algorithm to prevent
-                // panics in case the comparison function does not define a
-                // valid order (see https://github.com/typst/typst/pull/5627).
-=======
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 let mut result = Ok(());
                 let mut vec = self.0.into_iter().enumerate().collect::<Vec<_>>();
                 glidesort::sort_by(&mut vec, |(i, x), (j, y)| {
@@ -981,19 +968,10 @@ impl Array {
                     Some(f) => f.call(engine, context, [x]),
                     None => Ok(x),
                 };
-<<<<<<< HEAD
-                // If no comparison function is provided, we know the order is
-                // valid, so we can use the standard library sort and prevent an
-                // extra allocation.
-                let mut result = Ok(());
-                let mut vec = self.0;
-                vec.make_mut().sort_by(|a, b| {
-=======
 
                 let mut result = Ok(());
                 let mut vec = self.0;
                 glidesort::sort_by(vec.make_mut(), |a, b| {
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                     match (key_of(a.clone()), key_of(b.clone())) {
                         (Ok(a), Ok(b)) => ops::compare(&a, &b).unwrap_or_else(|err| {
                             if result.is_ok() {

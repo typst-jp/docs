@@ -85,13 +85,6 @@ fn build_font(typst_font: Font) -> SourceResult<krilla::text::Font> {
         Arc::new(typst_font.data().clone());
 
     match krilla::text::Font::new(font_data.into(), typst_font.index()) {
-<<<<<<< HEAD
-        None => {
-            let font_str = display_font(&typst_font);
-            bail!(Span::detached(), "failed to process font {font_str}");
-        }
-        Some(f) => Ok(f),
-=======
         Some(f) => Ok(f),
         None => {
             bail!(
@@ -100,7 +93,6 @@ fn build_font(typst_font: Font) -> SourceResult<krilla::text::Font> {
                 display_font(Some(&typst_font))
             )
         }
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     }
 }
 

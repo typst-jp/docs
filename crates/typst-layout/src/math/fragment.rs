@@ -839,9 +839,6 @@ fn assemble(
     }
 
     match axis {
-<<<<<<< HEAD
-        Axis::X => base.size.x = full,
-=======
         Axis::X => {
             base.size.x = full;
             let (ascent, descent) = glyphs
@@ -852,7 +849,6 @@ fn assemble(
             base.baseline = Some(ascent.at(base.item.size));
             base.size.y = (ascent + descent).at(base.item.size);
         }
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         Axis::Y => {
             base.baseline = None;
             base.size.y = full;

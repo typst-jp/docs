@@ -10,21 +10,12 @@ use crate::introspection::{Locatable, Tagged};
 use crate::layout::{Em, Length};
 use crate::text::TextElem;
 
-<<<<<<< HEAD
 /// 箇条書きリスト。
 ///
 /// 各項目の先頭にマーカーを付け、
 /// 一連の項目を縦に並べて表示します。
 ///
 /// # 例
-=======
-/// A bullet list.
-///
-/// Displays a sequence of items vertically, with each item introduced by a
-/// marker.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// Normal list.
 /// - Text
@@ -45,7 +36,6 @@ use crate::text::TextElem;
 /// )
 /// ```
 ///
-<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// 行頭にハイフンとスペースを置くことでリスト項目を作成します。
@@ -63,26 +53,6 @@ pub struct ListElem {
     /// 項目間に空行がなく連続している場合、この値は`{true}`に設定されますが、
     /// 項目間が空行で区切られている場合は`{false}`に設定されます。
     /// マークアップで定義された間隔はsetルールで上書きできません。
-=======
-/// # Syntax
-/// This functions also has dedicated syntax: Start a line with a hyphen,
-/// followed by a space to create a list item. A list item can contain multiple
-/// paragraphs and other block-level content. All content that is indented
-/// more than an item's marker becomes part of that item.
-#[elem(scope, title = "Bullet List", Locatable, Tagged)]
-pub struct ListElem {
-    /// Defines the default [spacing]($list.spacing) of the list. If it is
-    /// `{false}`, the items are spaced apart with
-    /// [paragraph spacing]($par.spacing). If it is `{true}`, they use
-    /// [paragraph leading]($par.leading) instead. This makes the list more
-    /// compact, which can look better if the items are short.
-    ///
-    /// In markup mode, the value of this parameter is determined based on
-    /// whether items are separated with a blank line. If items directly follow
-    /// each other, this is set to `{true}`; if items are separated by a blank
-    /// line, this is set to `{false}`. The markup-defined tightness cannot be
-    /// overridden with set rules.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// - If a list has a lot of text, and
@@ -95,7 +65,6 @@ pub struct ListElem {
     #[default(true)]
     pub tight: bool,
 
-<<<<<<< HEAD
     /// 各項目の先頭に付けるマーカー。
     ///
     /// 単純なコンテンツの代わりに、ネストされたリストに使用する、
@@ -103,15 +72,6 @@ pub struct ListElem {
     /// リストのネストの深さがマーカーの数を超えた場合、使用されるマーカーは循環します。
     /// 完全に制御したい場合は、
     /// リストのネストの深さ（`{0}`から開始する）に応じて、使用するマーカーを決める関数も渡せます。
-=======
-    /// The marker which introduces each item.
-    ///
-    /// Instead of plain content, you can also pass an array with multiple
-    /// markers that should be used for nested lists. If the list nesting depth
-    /// exceeds the number of markers, the markers are cycled. For total
-    /// control, you may pass a function that maps the list's nesting depth
-    /// (starting from `{0}`) to a desired marker.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set list(marker: [--])
@@ -134,7 +94,6 @@ pub struct ListElem {
     ]))]
     pub marker: ListMarker,
 
-<<<<<<< HEAD
     /// 各項目のインデント。
     pub indent: Length,
 
@@ -153,26 +112,6 @@ pub struct ListElem {
     ///
     /// list構文を使用する場合、forループのような構造を挟んでも、
     /// 隣接する項目は自動的にリストとしてまとめられます。
-=======
-    /// The indent of each item.
-    pub indent: Length,
-
-    /// The spacing between the marker and the body of each item.
-    #[default(Em::new(0.5).into())]
-    pub body_indent: Length,
-
-    /// The spacing between the items of the list.
-    ///
-    /// If set to `{auto}`, uses paragraph [`leading`]($par.leading) for tight
-    /// lists and paragraph [`spacing`]($par.spacing) for wide (non-tight)
-    /// lists.
-    pub spacing: Smart<Length>,
-
-    /// The bullet list's children.
-    ///
-    /// When using the list syntax, adjacent items are automatically collected
-    /// into lists, even through constructs like for loops.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #for letter in "ABC" [
@@ -182,11 +121,7 @@ pub struct ListElem {
     #[variadic]
     pub children: Vec<Packed<ListItem>>,
 
-<<<<<<< HEAD
     /// ネストの深さ。
-=======
-    /// The nesting depth.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[internal]
     #[fold]
     #[ghost]
@@ -199,17 +134,10 @@ impl ListElem {
     type ListItem;
 }
 
-<<<<<<< HEAD
 /// 箇条書きリストの項目。
 #[elem(name = "item", title = "Bullet List Item", Tagged)]
 pub struct ListItem {
     /// 項目の本文。
-=======
-/// A bullet list item.
-#[elem(name = "item", title = "Bullet List Item", Tagged)]
-pub struct ListItem {
-    /// The item's body.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     pub body: Content,
 }

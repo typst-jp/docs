@@ -33,7 +33,6 @@ use crate::model::Figurable;
 use crate::text::{LocalName, Locale, families};
 use crate::visualize::image::pdf::PdfDocument;
 
-<<<<<<< HEAD
 /// ラスターまたはベクター画像。
 ///
 /// 画像を[`figure`]で囲むことで、番号とキャプションを与えられます。
@@ -42,17 +41,6 @@ use crate::visualize::image::pdf::PdfDocument;
 /// 画像を強制的にインラインにするには、[`box`]の中に入れてください。
 ///
 /// # 例
-=======
-/// A raster or vector graphic.
-///
-/// You can wrap the image in a [`figure`] to give it a number and caption.
-///
-/// Like most elements, images are _block-level_ by default and thus do not
-/// integrate themselves into adjacent paragraphs. To force an image to become
-/// inline, put it into a [`box`].
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// #figure(
 ///   image("molecular.jpg", width: 80%),
@@ -64,19 +52,11 @@ use crate::visualize::image::pdf::PdfDocument;
 /// ```
 #[elem(scope, Locatable, Tagged, Synthesize, LocalName, Figurable)]
 pub struct ImageElem {
-<<<<<<< HEAD
     /// 画像ファイルへの[path]($syntax/#paths)、
     /// またはサポートされている[format]($image.format)の画像データの生バイト。
     ///
     /// バイト列を使う場合は、生のピクセルデータを左から右へ、上から下へと並べた
     /// 行優先（row-major）形式で指定します。
-=======
-    /// A [path]($syntax/#paths) to an image file or raw bytes making up an
-    /// image in one of the supported [formats]($image.format).
-    ///
-    /// Bytes can be used to specify raw pixel data in a row-major,
-    /// left-to-right, top-to-bottom format.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #let original = read("diagram.svg")
@@ -96,7 +76,6 @@ pub struct ImageElem {
     )]
     pub source: Derived<DataSource, Loaded>,
 
-<<<<<<< HEAD
     /// 画像のフォーマット。
     ///
     /// デフォルトでは、フォーマットは自動的に検出されます。
@@ -129,43 +108,6 @@ pub struct ImageElem {
     ///
     /// 幅のピクセル数、高さのピクセル数、指定したエンコーディングでのチャンネル数をかけ合わせたものが
     /// `source`のデータと一致しなければなりません。
-=======
-    /// The image's format.
-    ///
-    /// By default, the format is detected automatically. Typically, you thus
-    /// only need to specify this when providing raw bytes as the
-    /// [`source`]($image.source) (even then, Typst will try to figure out the
-    /// format automatically, but that's not always possible).
-    ///
-    /// Supported formats are `{"png"}`, `{"jpg"}`, `{"gif"}`, `{"svg"}`,
-    /// `{"pdf"}`, `{"webp"}` as well as raw pixel data.
-    ///
-    /// Note that several restrictions apply when using PDF files as images:
-    ///
-    /// - When exporting to PDF, any PDF image file used must have a version
-    ///   equal to or lower than the [export target PDF
-    ///   version]($pdf/#pdf-versions).
-    /// - PDF files as images are currently not supported when exporting with a
-    ///   specific PDF standard, like PDF/A-3 or PDF/UA-1. In these cases, you
-    ///   can instead use SVGs to embed vector images.
-    /// - The image file must not be password-protected.
-    /// - Tags in your PDF image will not be preserved. Instead, you must
-    ///   provide an [alternative description]($image.alt) to make the image
-    ///   accessible.
-    ///
-    /// When providing raw pixel data as the `source`, you must specify a
-    /// dictionary with the following keys as the `format`:
-    /// - `encoding` ([str]): The encoding of the pixel data. One of:
-    ///   - `{"rgb8"}` (three 8-bit channels: red, green, blue)
-    ///   - `{"rgba8"}` (four 8-bit channels: red, green, blue, alpha)
-    ///   - `{"luma8"}` (one 8-bit channel)
-    ///   - `{"lumaa8"}` (two 8-bit channels: luma and alpha)
-    /// - `width` ([int]): The pixel width of the image.
-    /// - `height` ([int]): The pixel height of the image.
-    ///
-    /// The pixel width multiplied by the height multiplied by the channel count
-    /// for the specified encoding must then match the `source` data.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #image(
@@ -189,7 +131,6 @@ pub struct ImageElem {
     /// ```
     pub format: Smart<ImageFormat>,
 
-<<<<<<< HEAD
     /// 画像の幅。
     pub width: Smart<Rel<Length>>,
 
@@ -217,39 +158,6 @@ pub struct ImageElem {
     /// 与えられた領域に対して、画像をどのように調整するか。
     /// 領域は `width` や `height` フィールドで定義します。
     /// 領域の縦横比が画像の縦横比と同じであれば、`fit` で見た目が変わらないことに注意してください。
-=======
-    /// The width of the image.
-    pub width: Smart<Rel<Length>>,
-
-    /// The height of the image.
-    pub height: Sizing,
-
-    /// An alternative description of the image.
-    ///
-    /// This text is used by Assistive Technology (AT) like screen readers to
-    /// describe the image to users with visual impairments.
-    ///
-    /// When the image is wrapped in a [`figure`]($figure), use this parameter
-    /// rather than the [figure's `alt` parameter]($figure.alt) to describe the
-    /// image. The only exception to this rule is when the image and the other
-    /// contents in the figure form a single semantic unit. In this case, use
-    /// the figure's `alt` parameter to describe the entire composition and do
-    /// not use this parameter.
-    ///
-    /// You can learn how to write good alternative descriptions in the
-    /// [Accessibility Guide]($guides/accessibility/#textual-representations).
-    pub alt: Option<EcoString>,
-
-    /// The page number that should be embedded as an image. This attribute only
-    /// has an effect for PDF files.
-    #[default(NonZeroUsize::ONE)]
-    pub page: NonZeroUsize,
-
-    /// How the image should adjust itself to a given area (the area is defined
-    /// by the `width` and `height` fields). Note that `fit` doesn't visually
-    /// change anything if the area's aspect ratio is the same as the image's
-    /// one.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ///
     /// ```example
     /// #set page(width: 300pt, height: 50pt, margin: 10pt)
@@ -260,7 +168,6 @@ pub struct ImageElem {
     #[default(ImageFit::Cover)]
     pub fit: ImageFit,
 
-<<<<<<< HEAD
     /// ビューアーに対して、画像をどのように拡大縮小すべきかを示すヒント。
     ///
     /// `{auto}`に設定した場合、デフォルトの動作はビューアーに委ねられます。
@@ -274,21 +181,6 @@ pub struct ImageElem {
     ///
     /// ICCプロファイルは、画像の色をどのように解釈するかを定義するものです。
     /// `{auto}`に設定した場合、Typstは画像からICCプロファイルを抽出しようとします。
-=======
-    /// A hint to viewers how they should scale the image.
-    ///
-    /// When set to `{auto}`, the default is left up to the viewer. For PNG
-    /// export, Typst will default to smooth scaling, like most PDF and SVG
-    /// viewers.
-    ///
-    /// _Note:_ The exact look may differ across PDF viewers.
-    pub scaling: Smart<ImageScaling>,
-
-    /// An ICC profile for the image.
-    ///
-    /// ICC profiles define how to interpret the colors in an image. When set
-    /// to `{auto}`, Typst will try to extract an ICC profile from the image.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[parse(match args.named::<Spanned<Smart<DataSource>>>("icc")? {
         Some(Spanned { v: Smart::Custom(source), span }) => Some(Smart::Custom({
             let loaded = Spanned::new(&source, span).load(engine.world)?;
@@ -299,11 +191,7 @@ pub struct ImageElem {
     })]
     pub icc: Smart<Derived<DataSource, Bytes>>,
 
-<<<<<<< HEAD
     /// この要素のロケール（代替説明に使用）。
-=======
-    /// The locale of this element (used for the alternative description).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[internal]
     #[synthesized]
     pub locale: Locale,
@@ -319,22 +207,14 @@ impl Synthesize for Packed<ImageElem> {
 #[scope]
 #[allow(clippy::too_many_arguments)]
 impl ImageElem {
-<<<<<<< HEAD
     /// バイト列または文字列からラスター画像またはベクター画像をデコードする。
     #[func(title = "Decode Image")]
     #[deprecated(
         message = "`image.decode`は非推奨です。代わりにバイト列を直接`image`に渡してください。",
-=======
-    /// Decode a raster or vector graphic from bytes or a string.
-    #[func(title = "Decode Image")]
-    #[deprecated(
-        message = "`image.decode` is deprecated, directly pass bytes to `image` instead",
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         until = "0.15.0"
     )]
     pub fn decode(
         span: Span,
-<<<<<<< HEAD
         /// 画像としてデコードするデータ。SVGの場合は文字列です。
         data: Spanned<Readable>,
         /// 画像のフォーマット。デフォルトでは自動的に検出されます。
@@ -353,26 +233,6 @@ impl ImageElem {
         #[named]
         fit: Option<ImageFit>,
         /// ビューアーがどのように拡大縮小すべきかを示すヒント。
-=======
-        /// The data to decode as an image. Can be a string for SVGs.
-        data: Spanned<Readable>,
-        /// The image's format. Detected automatically by default.
-        #[named]
-        format: Option<Smart<ImageFormat>>,
-        /// The width of the image.
-        #[named]
-        width: Option<Smart<Rel<Length>>>,
-        /// The height of the image.
-        #[named]
-        height: Option<Sizing>,
-        /// A text describing the image.
-        #[named]
-        alt: Option<Option<EcoString>>,
-        /// How the image should adjust itself to a given area.
-        #[named]
-        fit: Option<ImageFit>,
-        /// A hint to viewers how they should scale the image.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         #[named]
         scaling: Option<Smart<ImageScaling>>,
     ) -> StrResult<Content> {
@@ -551,7 +411,6 @@ impl Figurable for Packed<ImageElem> {}
 /// How an image should adjust itself to a given area,
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum ImageFit {
-<<<<<<< HEAD
     /// 領域を完全にカバーします。
     /// 水平または垂直方向にのみ画像をトリミングすることで、アスペクト比を保持します。
     /// これがデフォルトです。
@@ -561,19 +420,6 @@ pub enum ImageFit {
     Contain,
     /// たとえ画像が歪むことになっても、その領域を正確に埋めるよう引き伸ばします。
     /// アスペクト比は保たれず、画像は切り取られません。
-=======
-    /// The image should completely cover the area (preserves aspect ratio by
-    /// cropping the image only horizontally or vertically). This is the
-    /// default.
-    Cover,
-    /// The image should be fully contained in the area (preserves aspect
-    /// ratio; doesn't crop the image; one dimension can be narrower than
-    /// specified).
-    Contain,
-    /// The image should be stretched so that it exactly fills the area, even if
-    /// this means that the image will be distorted (doesn't preserve aspect
-    /// ratio and doesn't crop the image).
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     Stretch,
 }
 
@@ -766,11 +612,7 @@ fn is_svg(data: &[u8]) -> bool {
 /// A vector graphics format.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum VectorFormat {
-<<<<<<< HEAD
     /// Webサイトに用いられるベクターフォーマット。
-=======
-    /// The vector graphics format of the web.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     Svg,
     /// High-fidelity document and graphics format, with focus on exact
     /// reproduction in print.
@@ -805,16 +647,9 @@ cast! {
 /// The image scaling algorithm a viewer should use.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum ImageScaling {
-<<<<<<< HEAD
     /// バイリニア補間などの平滑化アルゴリズムを用いて拡大縮小します。
     Smooth,
     /// 最近傍補間などのアルゴリズムで拡大縮小し、
     /// ピクセルで構成された画像の見た目を保ちます。
-=======
-    /// Scale with a smoothing algorithm such as bilinear interpolation.
-    Smooth,
-    /// Scale with nearest neighbor or a similar algorithm to preserve the
-    /// pixelated look of the image.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     Pixelated,
 }

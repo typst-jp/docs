@@ -95,12 +95,6 @@ pub fn provide(resolver: &dyn Resolver) -> Vec<PageModel> {
         reference_pages(resolver),
         guide_pages(resolver),
         changelog_pages(resolver),
-<<<<<<< HEAD
-        japanese_pages(resolver),
-        about_pages(resolver),
-        md_page(resolver, base, load!("glossary.md")),
-=======
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ]
 }
 
@@ -196,10 +190,7 @@ fn reference_pages(resolver: &dyn Resolver) -> PageModel {
 fn guide_pages(resolver: &dyn Resolver) -> PageModel {
     let mut page = md_page(resolver, resolver.base(), load!("guides/welcome.md"));
     let base = format!("{}guides/", resolver.base());
-<<<<<<< HEAD
     page.title = "ガイド".into();
-=======
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     page.children = vec![
         md_page_with_title(
             resolver,
@@ -228,13 +219,9 @@ fn guide_pages(resolver: &dyn Resolver) -> PageModel {
 fn changelog_pages(resolver: &dyn Resolver) -> PageModel {
     let mut page = md_page(resolver, resolver.base(), load!("changelog/welcome.md"));
     let base = format!("{}changelog/", resolver.base());
-<<<<<<< HEAD
     page.title = "変更履歴".into();
     page.children = vec![
-=======
-    page.children = vec![
         md_page(resolver, &base, load!("changelog/0.14.1.md")),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         md_page(resolver, &base, load!("changelog/0.14.0.md")),
         md_page(resolver, &base, load!("changelog/0.13.1.md")),
         md_page(resolver, &base, load!("changelog/0.13.0.md")),
@@ -252,39 +239,6 @@ fn changelog_pages(resolver: &dyn Resolver) -> PageModel {
         md_page(resolver, &base, load!("changelog/0.2.0.md")),
         md_page(resolver, &base, load!("changelog/0.1.0.md")),
         md_page(resolver, &base, load!("changelog/earlier.md")),
-<<<<<<< HEAD
-    ]
-    .into_iter()
-    .map(|child| {
-        let route = eco_format!("{base}{}/", urlify(child.title.as_str()));
-        PageModel { route, ..child }
-    })
-    .collect();
-
-    page
-}
-
-/// Build the japanese section.
-fn japanese_pages(resolver: &dyn Resolver) -> PageModel {
-    let mut page = md_page(resolver, resolver.base(), load!("japanese/welcome.md"));
-    let base = format!("{}japanese/", resolver.base());
-    page.children = vec![
-        md_page(resolver, &base, load!("japanese/templates.md")),
-        md_page(resolver, &base, load!("japanese/packages.md")),
-        md_page(resolver, &base, load!("japanese/articles.md")),
-    ];
-    page
-}
-
-/// Build the about section.
-fn about_pages(resolver: &dyn Resolver) -> PageModel {
-    let mut page = md_page(resolver, resolver.base(), load!("about/welcome.md"));
-    let base = format!("{}about/", resolver.base());
-    page.children = vec![
-        md_page(resolver, &base, load!("../CONTRIBUTING.md")),
-        md_page(resolver, &base, load!("../TRANSLATING_GUIDELINES.md")),
-=======
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     ];
     page
 }
@@ -407,17 +361,12 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         items.sort_by_cached_key(|item| item.name.clone());
     }
 
-<<<<<<< HEAD
-    let _title = EcoString::from(match category {
-=======
     let title = EcoString::from(match category {
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         Category::Pdf | Category::Html | Category::Png | Category::Svg => {
             category.name().to_uppercase()
         }
         _ => category.name().to_title_case(),
     });
-<<<<<<< HEAD
     let translated_title = EcoString::from(match category {
         Category::Foundations => "基礎",
         Category::Model => "モデル",
@@ -446,14 +395,6 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
             name: "定義".into(),
             children: vec![],
         });
-=======
-
-    let details = Html::markdown(resolver, docs, Some(1));
-    let mut outline = vec![OutlineItem::from_name("Summary")];
-    outline.extend(details.outline());
-    if !items.is_empty() {
-        outline.push(OutlineItem::from_name("Definitions"));
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     }
     if shorthands.is_some() {
         outline.push(OutlineItem::from_name("Shorthands"));
@@ -461,25 +402,15 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
 
     PageModel {
         route,
-<<<<<<< HEAD
         title: translated_title.clone().into(),
         description: eco_format!(
             "Typstにおける{translated_title}に関連する関数のドキュメント"
-=======
-        title: title.clone(),
-        description: eco_format!(
-            "Documentation for functions related to {title} in Typst."
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         ),
         part: None,
         outline,
         body: BodyModel::Category(CategoryModel {
             name: category.name(),
-<<<<<<< HEAD
-            title: translated_title,
-=======
             title,
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             details,
             items,
             shorthands,
@@ -665,18 +596,12 @@ fn details_blocks(docs: &str) -> Vec<RawDetailsBlock<'_>> {
                 let tag = &docs[fence_idx + fence_len..lang_tag_end].trim();
                 let title = ExampleArgs::from_tag(tag).title;
 
-<<<<<<< HEAD
-                // First, push non-fenced content.
-                if found > 0 {
-                    res.push(RawDetailsBlock::Markdown(&docs[i..fence_idx]));
-=======
                 // First, push non-fenced content. It might be all whitespaces
                 // if it's between two consecutive fences. Therefore, we have to
                 // trim it before checking.
                 let content_before_fence = &docs[i..fence_idx];
                 if !content_before_fence.trim().is_empty() {
                     res.push(RawDetailsBlock::Markdown(content_before_fence));
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 }
 
                 // Then, find the end of the fence.
@@ -699,15 +624,11 @@ fn details_blocks(docs: &str) -> Vec<RawDetailsBlock<'_>> {
                 i = fence_end;
             }
             None => {
-<<<<<<< HEAD
-                res.push(RawDetailsBlock::Markdown(&docs[i..]));
-=======
                 // Push the remaining content only if it's non-empty after trimming.
                 let slice = &docs[i..];
                 if !slice.trim().is_empty() {
                     res.push(RawDetailsBlock::Markdown(slice));
                 }
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 break;
             }
         }
@@ -765,15 +686,11 @@ fn func_outline(model: &FuncModel, id_base: &str) -> Vec<OutlineItem> {
     let mut outline = vec![];
 
     if id_base.is_empty() {
-<<<<<<< HEAD
         outline.push(OutlineItem {
             id: "summary".into(),
             name: "概要".into(),
             children: vec![],
         });
-=======
-        outline.push(OutlineItem::from_name("Summary"));
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         for block in &model.details {
             if let DetailsBlock::Html(html) = block {
                 outline.extend(html.outline());
@@ -783,11 +700,7 @@ fn func_outline(model: &FuncModel, id_base: &str) -> Vec<OutlineItem> {
         if !model.params.is_empty() {
             outline.push(OutlineItem {
                 id: "parameters".into(),
-<<<<<<< HEAD
                 name: "引数".into(),
-=======
-                name: "Parameters".into(),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 children: model
                     .params
                     .iter()
@@ -830,11 +743,7 @@ fn scope_outline(scope: &[FuncModel], id_base: &str) -> Option<OutlineItem> {
         })
         .collect();
 
-<<<<<<< HEAD
     Some(OutlineItem { id, name: "定義".into(), children })
-=======
-    Some(OutlineItem { id, name: "Definitions".into(), children })
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 }
 
 /// Create a page for a group of functions.
@@ -844,15 +753,11 @@ fn group_page(
     group: &GroupData,
 ) -> (PageModel, CategoryItem) {
     let mut functions = vec![];
-<<<<<<< HEAD
     let mut outline = vec![OutlineItem {
         id: "summary".into(),
         name: "概要".into(),
         children: vec![],
     }];
-=======
-    let mut outline = vec![OutlineItem::from_name("Summary")];
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
     let path: Vec<_> = group.path.iter().map(|s| s.as_str()).collect();
     let details = Html::markdown(resolver, &group.details, Some(1));
@@ -877,11 +782,7 @@ fn group_page(
 
     outline.push(OutlineItem {
         id: "functions".into(),
-<<<<<<< HEAD
         name: "関数".into(),
-=======
-        name: "Functions".into(),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         children: outline_items,
     });
 
@@ -981,25 +882,17 @@ fn type_model(resolver: &dyn Resolver, ty: &Type) -> TypeModel {
 
 /// Produce an outline for a type page.
 fn type_outline(model: &TypeModel) -> Vec<OutlineItem> {
-<<<<<<< HEAD
     let mut outline = vec![OutlineItem {
         id: "summary".into(),
         name: "概要".into(),
         children: vec![],
     }];
-=======
-    let mut outline = vec![OutlineItem::from_name("Summary")];
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     outline.extend(model.details.outline());
 
     if let Some(func) = &model.constructor {
         outline.push(OutlineItem {
             id: "constructor".into(),
-<<<<<<< HEAD
             name: "コンストラクタ".into(),
-=======
-            name: "Constructor".into(),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             children: func_outline(func, "constructor"),
         });
     }
@@ -1037,10 +930,6 @@ fn symbols_model(resolver: &dyn Resolver, group: &GroupData) -> SymbolsModel {
 
         for (variant, value, deprecation_message) in symbol.variants() {
             let value_char = value.parse::<char>().ok();
-<<<<<<< HEAD
-
-=======
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             let shorthand = |list: &[(&'static str, char)]| {
                 value_char.and_then(|c| {
                     list.iter().copied().find(|&(_, x)| x == c).map(|(s, _)| s)
@@ -1059,12 +948,7 @@ fn symbols_model(resolver: &dyn Resolver, group: &GroupData) -> SymbolsModel {
                 }),
                 value: value.into(),
                 // Matches casting `Symbol` to `Accent`
-<<<<<<< HEAD
-                accent: value_char
-                    .is_some_and(|c| typst::math::Accent::combine(c).is_some()),
-=======
                 accent: typst::math::Accent::combining(value).is_some(),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 alternates: symbol
                     .variants()
                     .filter(|(other, _, _)| other != &variant)
@@ -1096,7 +980,6 @@ fn get_module<'a>(parent: &'a Module, name: &str) -> StrResult<&'a Module> {
 
 /// Turn a title into an URL fragment.
 pub fn urlify(title: &str) -> EcoString {
-<<<<<<< HEAD
     match title {
         "チュートリアル" => "tutorial".into(),
         "Typstで執筆するには" => "writing-in-typst".into(),
@@ -1134,16 +1017,6 @@ pub fn urlify(title: &str) -> EcoString {
             })
             .collect(),
     }
-=======
-    title
-        .chars()
-        .map(|c| c.to_ascii_lowercase())
-        .map(|c| match c {
-            'a'..='z' | '0'..='9' | '.' => c,
-            _ => '-',
-        })
-        .collect()
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 }
 
 /// Extract the first line of documentation.
@@ -1280,8 +1153,6 @@ mod tests {
             "/"
         }
     }
-<<<<<<< HEAD
-=======
 
     #[test]
     fn test_parsing_details_blocks() {
@@ -1315,5 +1186,4 @@ Empty lines after the final example should also be dropped.
         matches!(blocks[3], RawDetailsBlock::Example { .. });
         matches!(blocks[4], RawDetailsBlock::Example { .. });
     }
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 }

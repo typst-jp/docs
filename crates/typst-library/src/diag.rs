@@ -1,9 +1,6 @@
 //! Diagnostics.
 
-<<<<<<< HEAD
-=======
 use std::backtrace::{Backtrace, BacktraceStatus};
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use std::fmt::{self, Display, Formatter, Write as _};
 use std::io;
 use std::path::{Path, PathBuf};
@@ -872,8 +869,6 @@ pub fn format_xml_like_error(format: &str, error: roxmltree::Error) -> LoadError
 
     LoadError { pos: pos.into(), message }
 }
-<<<<<<< HEAD
-=======
 
 /// Asserts a condition, generating an internal compiler error with the provided
 /// message on failure.
@@ -926,4 +921,3 @@ fn internal_error(msg: &str) -> HintedString {
 
     error
 }
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

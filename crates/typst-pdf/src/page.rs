@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-use std::num::NonZeroUsize;
-=======
 use std::num::NonZeroU32;
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 use krilla::page::{NumberingStyle, PageLabel};
 use typst_library::model::Numbering;
@@ -53,11 +49,7 @@ impl PageLabelExt for PageLabel {
                 (!prefix.is_empty()).then(|| prefix.clone())
             };
 
-<<<<<<< HEAD
-            let offset = style.and(number.try_into().ok().and_then(NonZeroUsize::new));
-=======
             let offset = style.and(number.try_into().ok().and_then(NonZeroU32::new));
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             Some(PageLabel::new(style, prefix.map(Into::into), offset))
         }
     }
@@ -66,11 +58,7 @@ impl PageLabelExt for PageLabel {
         PageLabel::new(
             Some(NumberingStyle::Arabic),
             None,
-<<<<<<< HEAD
-            number.try_into().ok().and_then(NonZeroUsize::new),
-=======
             number.try_into().ok().and_then(NonZeroU32::new),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         )
     }
 }

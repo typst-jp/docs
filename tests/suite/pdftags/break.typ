@@ -24,8 +24,6 @@ Start of the first paragraph #link(target)[
 
 --- break-tags-issue-7020 pdftags nopdfua ---
 Foo #quote($$ + parbreak())
-<<<<<<< HEAD
-=======
 
 --- issue-7257-break-tags-show-par-none pdftags ---
 #show par: none
@@ -34,4 +32,3 @@ Foo #quote($$ + parbreak())
 // Hint: 3-6 please report this as a bug
 // Hint: 3-6 set `RUST_BACKTRACE` to `1` or `full` to capture a backtrace
 #[= A]B
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

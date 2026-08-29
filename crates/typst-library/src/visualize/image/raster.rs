@@ -240,21 +240,12 @@ cast! {
 /// A raster format typically used in image exchange, with efficient encoding.
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum ExchangeFormat {
-<<<<<<< HEAD
     /// イラストや透明グラフィック用のラスターフォーマット。
     Png,
     /// 写真に適した非可逆ラスターフォーマット。
     Jpg,
     /// 短いアニメーションクリップによく使われるラスターフォーマット。
     /// TypstはGIFを読み込めるが、静止画となってしまう。
-=======
-    /// Raster format for illustrations and transparent graphics.
-    Png,
-    /// Lossy raster format suitable for photos.
-    Jpg,
-    /// Raster format that is typically used for short animated clips. Typst can
-    /// load GIFs, but they will become static.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     Gif,
     /// Raster format that supports both lossy and lossless compression.
     Webp,

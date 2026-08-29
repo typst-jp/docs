@@ -35,11 +35,7 @@
 #table(
   columns: 3,
   column-gutter: 3pt,
-<<<<<<< HEAD
-  [a], [b], [c],
-=======
   table.header([a], [b], [c]),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   [d], [e], [f],
   [g], [h], [i]
 )
@@ -48,11 +44,7 @@
 #table(
   columns: 3,
   row-gutter: 3pt,
-<<<<<<< HEAD
-  [a], [b], [c],
-=======
   table.header([a], [b], [c]),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   [d], [e], [f],
   [g], [h], [i]
 )
@@ -61,17 +53,11 @@
 #table(
   columns: 3,
   gutter: 3pt,
-<<<<<<< HEAD
-  [a], [b], [c],
-=======
   table.header([a], [b], [c]),
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   [d], [e], [f],
   [g], [h], [i]
 )
 
-<<<<<<< HEAD
-=======
 --- table-wide-header-table html ---
 #table(
   columns: 3,
@@ -93,7 +79,6 @@
   )
 )
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- multi-header-table html ---
 #table(
   columns: 2,
@@ -122,8 +107,6 @@
   ),
 )
 
-<<<<<<< HEAD
-=======
 --- multi-header-table-gutter html ---
 #table(
   columns: 2,
@@ -152,7 +135,6 @@
   ),
 )
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 --- multi-header-inside-table html ---
 #table(
   columns: 2,

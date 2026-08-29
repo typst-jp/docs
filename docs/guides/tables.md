@@ -1,17 +1,9 @@
 ---
 description: |
-<<<<<<< HEAD
   表の罫線の変更方法がわからない？表を回転したい？このガイドでは、Typstで表を扱うために必要な知識をすべて解説します。
 ---
 
 # 表ガイド
-=======
-  Not sure how to change table strokes? Need to rotate a table? This guide
-  explains all you need to know about tables in Typst.
----
-
-# Table Guide
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 Tables are a great way to present data to your readers in an easily readable,
 compact, and organized manner. They are not only used for numerical values, but
 also survey responses, task planning, schedules, and more. Because of this wide
@@ -170,11 +162,7 @@ the last column is `1fr` wide as to fill the whole page.
 )
 ```
 
-<<<<<<< HEAD
-Here, we have passed our list of column lengths as an [array]($array), enclosed in round
-=======
 Here, we have passed our list of column lengths as an [array], enclosed in round
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 parentheses, with its elements separated by commas. The first two columns are
 automatically sized, so that they take on the size of their content and the
 third column is sized as `{1fr}` so that it fills up the remainder of the space
@@ -494,11 +482,7 @@ depends on the modification you want to make and your intent:
 - Do you want to change, add, or remove the stroke around a single cell? Use the
   `table.cell` element in the argument list of your table call.
 - Do you want to change, add, or remove a single horizontal or vertical stroke
-<<<<<<< HEAD
-  in a single table? Use the [`table.hline`]($table.hline) and [`table.vline`]($table.vline) elements in the
-=======
   in a single table? Use the [`table.hline`] and [`table.vline`] elements in the
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   argument list of your table call.
 
 We will go over all of these options with examples next! First, we will tackle
@@ -584,13 +568,8 @@ achieve more complex stroking patterns.
 
 ### Adding individual lines in the table { #individual-lines }
 If you want to add a single horizontal or vertical line in your table, for
-<<<<<<< HEAD
-example to separate a group of rows, you can use the [`table.hline`]($table.hline) and
-[`table.vline`]($table.vline) elements for horizontal and vertical lines, respectively. Add
-=======
 example to separate a group of rows, you can use the [`table.hline`] and
 [`table.vline`] elements for horizontal and vertical lines, respectively. Add
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 them to the argument list of the `table` function just like you would add
 individual cells and a header.
 
@@ -820,15 +799,9 @@ calendar.
 >>>
 >>> #show table.cell.where(y: 0): strong
 #set table(stroke: (x, y) => (
-<<<<<<< HEAD
-  left: if x == 0 or y > 0 { 1pt } else { 0pt },
-  right: 1pt,
-  top: if y <= 1 { 1pt } else { 0pt },
-=======
   left: if x == 0 or y > 0 { 1pt } else { 0pt },
   right: 1pt,
   top: if y <= 1 { 1pt } else { 0pt },
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   bottom: 1pt,
 ))
 
@@ -884,19 +857,11 @@ rows, since it is the last entry in the array.
 You can use multiple mechanisms to align the content in your table. You can
 either use the `table` function's `align` argument to set the alignment for your
 whole table (or use it in a set rule to set the alignment for tables throughout
-<<<<<<< HEAD
-your document) or the [`align`]($align) function (or `table.cell`'s `align` argument) to
-override the alignment of a single cell.
-
-When using the `table` function's align argument, you can choose between three
-methods to specify an [alignment]($alignment):
-=======
 your document) or the [`align`] function (or `table.cell`'s `align` argument) to
 override the alignment of a single cell.
 
 When using the `table` function's align argument, you can choose between three
 methods to specify an [alignment]:
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 - Just specify a single alignment like `right` (aligns in the top-right corner)
   or `center + horizon` (centers all cell content). This changes the alignment
@@ -970,11 +935,7 @@ you can group for example a sales data table by quarter in the first row and by
 months in the second row.
 
 A merged cell spans multiple rows and/or columns. You can achieve it with the
-<<<<<<< HEAD
-[`table.cell`]($table.cell) function's `rowspan` and `colspan` arguments: Just specify how
-=======
 [`table.cell`] function's `rowspan` and `colspan` arguments: Just specify how
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 many rows or columns you want your cell to span.
 
 The example below contains an attendance calendar for an office with in-person
@@ -1075,11 +1036,7 @@ on the right of the table.
     inset: (x: 0.6em,),
     stroke: (_, y) => (
       x: 1pt,
-<<<<<<< HEAD
-      top: if y <= 1 { 1pt } else { 0pt },
-=======
       top: if y <= 1 { 1pt } else { 0pt },
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
       bottom: 1pt,
     ),
     align: (left, right, right, right, right, left),
@@ -1132,11 +1089,7 @@ upright:
     inset: (x: 0.6em,),
     stroke: (_, y) => (
       x: 1pt,
-<<<<<<< HEAD
-      top: if y <= 1 { 1pt } else { 0pt },
-=======
       top: if y <= 1 { 1pt } else { 0pt },
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
       bottom: 1pt,
     ),
     align: (left, right, right, right, right, left),
@@ -1163,38 +1116,22 @@ upright:
 ```
 
 Here, we take the same table and the other content we want to set with it and
-<<<<<<< HEAD
-put it into a call to the [`page`]($page) function while supplying `{true}` to the
-`flipped` argument. This will instruct Typst to create new pages with width and
-height swapped and place the contents of the function call onto a new page.
-Notice how the page number is also on the long edge of the paper now. At the
-bottom of the page, we use the [`pad`]($pad) function to constrain the width of the
-=======
 put it into a call to the [`page`] function while supplying `{true}` to the
 `flipped` argument. This will instruct Typst to create new pages with width and
 height swapped and place the contents of the function call onto a new page.
 Notice how the page number is also on the long edge of the paper now. At the
 bottom of the page, we use the [`pad`] function to constrain the width of the
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 paragraph to achieve a nice and legible line length.
 
 ## How to break a table across pages? { #table-across-pages }
 It is best to contain a table on a single page. However, some tables just have
 many rows, so breaking them across pages becomes unavoidable. Fortunately, Typst
 supports breaking tables across pages out of the box. If you are using the
-<<<<<<< HEAD
-[`table.header`]($table.header) and [`table.footer`]($table.footer) functions, their contents will be repeated
-on each page as the first and last rows, respectively. If you want to disable
-this behavior, you can set `repeat` to `{false}` on either of them.
-
-If you have placed your table inside of a [figure]($figure), it becomes unable to break
-=======
 [`table.header`] and [`table.footer`] functions, their contents will be repeated
 on each page as the first and last rows, respectively. If you want to disable
 this behavior, you can set `repeat` to `{false}` on either of them.
 
 If you have placed your table inside of a [figure], it becomes unable to break
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 across pages by default. However, you can change this behavior. Let's take a
 look:
 
@@ -1224,11 +1161,7 @@ look:
 )
 ```
 
-<<<<<<< HEAD
-A figure automatically produces a [block]($block) which cannot break by default.
-=======
 A figure automatically produces a [block] which cannot break by default.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 However, we can reconfigure the block of the figure using a show rule to make it
 `breakable`. Now, the figure spans multiple pages with the headers and footers
 repeating.
@@ -1267,11 +1200,7 @@ whom the metric applies), Code, the year, and the number of transistors per
 microprocessor. Only the last two columns change between each row, so we can
 disregard "Entity" and "Code".
 
-<<<<<<< HEAD
-First, let's start by loading this file with the [`csv`]($csv) function. It accepts
-=======
 First, let's start by loading this file with the [`csv`] function. It accepts
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 the file name of the file we want to load as a string argument:
 
 ```typ
@@ -1327,22 +1256,6 @@ style:
 #let moore = csv("moore.csv")
 
 #table(
-<<<<<<< HEAD
-   columns: moore.first().len(),
-   ..moore.map(m => m.slice(2)).flatten(),
-)
-```
-
-This example renders the same as the previous one, but first uses the `map`
-function to change each row of the data. We pass a function to map that gets run
-on each row of the CSV and returns a new value to replace that row with. We use
-it to discard the first two columns with `slice`. Then, we spread the data into
-the `table` function. However, we need to pass a one-dimensional array and
-`moore`'s value is two-dimensional (that means that each of its row values
-contains an array with the cell data). That's why we call `flatten` which
-converts it to a one-dimensional array. We also extract the number of columns
-from the data itself.
-=======
    columns: 2,
    ..moore.map(m => m.slice(2, 4)).flatten(),
 )
@@ -1358,7 +1271,6 @@ The `flatten` function converts this nested structure into a one-dimensional
 array, which is required when spreading the data into the `table` function.
 Finally, we explicitly specify `{columns: 2}` because we are keeping exactly two
 columns from each row.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 
 Now that we have nice code for our table, we should try to also make the table
 itself nice! The transistor counts go from millions in 1995 to trillions in 2021
@@ -1414,28 +1326,17 @@ cells itself conveys information.
 To make this difference clear to other software and allow templates to heavily
 style tables, Typst has two functions for grid and table layout:
 
-<<<<<<< HEAD
-- The [`table`]($table) function explained throughout this guide which is intended for
-  tabular data.
-- The [`grid`]($grid) function which is intended for presentational purposes and page
-=======
 - The [`table`] function explained throughout this guide which is intended for
   tabular data.
 - The [`grid`] function which is intended for presentational purposes and page
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
   layout.
 
 Both elements work the same way and have the same arguments. You can apply
 everything you have learned about tables in this guide to grids. There are only
 three differences:
 
-<<<<<<< HEAD
-- You'll need to use the [`grid.cell`]($grid.cell), [`grid.vline`]($grid.vline), and [`grid.hline`]($grid.hline)
-  elements instead of [`table.cell`]($table.cell), [`table.vline`]($table.vline), and [`table.hline`]($table.hline).
-=======
 - You'll need to use the [`grid.cell`], [`grid.vline`], and [`grid.hline`]
   elements instead of [`table.cell`], [`table.vline`], and [`table.hline`].
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 - The grid has different defaults: It draws no strokes by default and has no
   spacing (`inset`) inside of its cells.
 - Elements like `figure` do not react to grids since they are supposed to have

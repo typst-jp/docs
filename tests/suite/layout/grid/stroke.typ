@@ -437,8 +437,6 @@
 --- grid-vline-position-top ---
 // Error: 24-27 expected `start`, `left`, `right`, or `end`, found top
 #table.vline(position: top)
-<<<<<<< HEAD
-=======
 
 --- issue-7398-grid-line-end-oob ---
 #set page(width: auto)
@@ -449,4 +447,3 @@
   table.vline(end: 3),
   table.hline(end: 3),
 )
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

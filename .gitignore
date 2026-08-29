@@ -26,7 +26,6 @@ package-lock.json
 # Nix
 /result
 .direnv/
-<<<<<<< HEAD
 
 # typst-jp/docs specific ignore rules
 
@@ -36,5 +35,3 @@ package-lock.json
 # Generated documentation
 /assets
 /docs.json
-=======
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363

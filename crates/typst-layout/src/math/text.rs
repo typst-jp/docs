@@ -97,11 +97,6 @@ fn layout_inline_text(
             .chars()
             .flat_map(|c| to_style(c, MathStyle::select(c, variant, bold, italic)))
             .collect();
-<<<<<<< HEAD
-
-        let spaced = styled_text.graphemes(true).nth(1).is_some();
-=======
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
         let elem = TextElem::packed(styled_text).spanned(span);
 
         // There isn't a natural width for a paragraph in a math environment;
@@ -121,11 +116,7 @@ fn layout_inline_text(
         Ok(FrameFragment::new(styles, frame)
             .with_class(MathClass::Alphabetic)
             .with_text_like(true)
-<<<<<<< HEAD
-            .with_spaced(spaced))
-=======
             .with_spaced(true))
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     }
 }
 

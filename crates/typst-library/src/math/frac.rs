@@ -4,21 +4,14 @@ use crate::diag::bail;
 use crate::foundations::{Cast, Content, Value, elem};
 use crate::math::Mathy;
 
-<<<<<<< HEAD
 /// 分数。
 ///
 /// # 例
-=======
-/// A mathematical fraction.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// $ 1/2 < (x+1)/2 $
 /// $ ((x+1)) / 2 = frac(a, b) $
 /// ```
 ///
-<<<<<<< HEAD
 /// # 構文
 /// この関数には専用の構文もあります。
 /// 隣接する式をスラッシュで区切ると、分数になります。
@@ -37,45 +30,17 @@ pub struct FracElem {
     /// 分数のレイアウト方法。
     ///
     /// ```example:"スタイル"
-=======
-/// # Syntax
-/// This function also has dedicated syntax: Use a slash to turn neighbouring
-/// expressions into a fraction. Multiple atoms can be grouped into a single
-/// expression using round grouping parentheses. Such parentheses are removed
-/// from the output, but you can nest multiple to force them.
-#[elem(title = "Fraction", Mathy)]
-pub struct FracElem {
-    /// The fraction's numerator.
-    #[required]
-    pub num: Content,
-
-    /// The fraction's denominator.
-    #[required]
-    pub denom: Content,
-
-    /// How the fraction should be laid out.
-    ///
-    /// ```example:"Styles"
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// $ frac(x, y, style: "vertical") $
     /// $ frac(x, y, style: "skewed") $
     /// $ frac(x, y, style: "horizontal") $
     /// ```
     ///
-<<<<<<< HEAD
     /// ```example:"デフォルトの設定"
-=======
-    /// ```example:"Setting the default"
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// #set math.frac(style: "skewed")
     /// $ a / b $
     /// ```
     ///
-<<<<<<< HEAD
     /// ```example:"グループ化括弧の扱い"
-=======
-    /// ```example:"Handling of grouping parentheses"
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// // Grouping parentheses are removed.
     /// #set math.frac(style: "vertical")
     /// $ (a + b) / b $
@@ -89,11 +54,7 @@ pub struct FracElem {
     /// $ (a + b) / b $
     /// ```
     ///
-<<<<<<< HEAD
     /// ```example:"インライン数式とブロック数式でのスタイル"
-=======
-    /// ```example:"Different styles in inline vs block equations"
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     /// // This changes the style for inline equations only.
     /// #show math.equation.where(block: false): set math.frac(style: "horizontal")
     ///
@@ -121,7 +82,6 @@ pub struct FracElem {
 /// Fraction style
 #[derive(Debug, Default, Copy, Clone, Eq, PartialEq, Hash, Cast)]
 pub enum FracStyle {
-<<<<<<< HEAD
     /// 分子と分母を上下に配置し、横棒で区切ります。
     #[default]
     Vertical,
@@ -134,40 +94,17 @@ pub enum FracStyle {
 /// 二項係数。
 ///
 /// # 例
-=======
-    /// Stacked numerator and denominator with a bar.
-    #[default]
-    Vertical,
-    /// Numerator and denominator separated by a slash.
-    Skewed,
-    /// Numerator and denominator placed inline and parentheses are not
-    /// absorbed.
-    Horizontal,
-}
-
-/// A binomial expression.
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// $ binom(n, k) $
 /// $ binom(n, k_1, k_2, k_3, ..., k_m) $
 /// ```
 #[elem(title = "Binomial", Mathy)]
 pub struct BinomElem {
-<<<<<<< HEAD
     /// 二項係数の上側の数。
     #[required]
     pub upper: Content,
 
     /// 二項係数の下側の数。
-=======
-    /// The binomial's upper index.
-    #[required]
-    pub upper: Content,
-
-    /// The binomial's lower index.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     #[variadic]
     #[parse(

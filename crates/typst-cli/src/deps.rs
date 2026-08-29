@@ -64,11 +64,7 @@ fn write_deps_make(
     dest: &Output,
     outputs: &[Output],
 ) -> io::Result<()> {
-<<<<<<< HEAD
-    let mut dest = dest.open()?;
-=======
     let mut buffer = Vec::new();
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     for (i, output) in outputs.iter().enumerate() {
         let path = match output {
             Output::Path(path) => path.as_os_str(),
@@ -86,12 +82,6 @@ fn write_deps_make(
         // processed.
         let Some(string) = path.to_str() else { continue };
         if i != 0 {
-<<<<<<< HEAD
-            dest.write_all(b" ")?;
-        }
-        dest.write_all(munge(string).as_bytes())?;
-    }
-=======
             buffer.write_all(b" ")?;
         }
         buffer.write_all(munge(string).as_bytes())?;
@@ -100,7 +90,6 @@ fn write_deps_make(
     // Only create the deps file in case of valid output paths.
     let mut dest = dest.open()?;
     dest.write_all(&buffer)?;
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     dest.write_all(b":")?;
 
     for dep in relative_dependencies(world)? {

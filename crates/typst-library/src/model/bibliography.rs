@@ -4,10 +4,6 @@ use std::fmt::{self, Debug, Formatter};
 use std::num::NonZeroUsize;
 use std::path::Path;
 use std::sync::{Arc, LazyLock};
-<<<<<<< HEAD
-=======
-
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use comemo::{Track, Tracked};
 use ecow::{EcoString, EcoVec, eco_format};
 use hayagriva::archive::ArchivedStyle;
@@ -43,7 +39,6 @@ use crate::model::{
 use crate::routines::Routines;
 use crate::text::{Lang, LocalName, Region, SmallcapsElem, SubElem, SuperElem, TextElem};
 
-<<<<<<< HEAD
 /// 参考文献 / 引用文献リスト。
 ///
 /// 次の2つの形式のどちらかの参考文献ファイルへのパスを指定してこの関数を呼び出すと、新しい参考文献リストを作成できます。
@@ -71,41 +66,6 @@ use crate::text::{Lang, LocalName, Region, SmallcapsElem, SubElem, SuperElem, Te
 /// | 物理学 | `{"american-physics-society"}` |
 ///
 /// # 例
-=======
-/// A bibliography / reference listing.
-///
-/// You can create a new bibliography by calling this function with a path
-/// to a bibliography file in either one of two formats:
-///
-/// - A Hayagriva `.yaml`/`.yml` file. Hayagriva is a new bibliography
-///   file format designed for use with Typst. Visit its
-///   [documentation](https://github.com/typst/hayagriva/blob/main/docs/file-format.md)
-///   for more details.
-/// - A BibLaTeX `.bib` file.
-///
-/// As soon as you add a bibliography somewhere in your document, you can start
-/// citing things with reference syntax (`[@key]`) or explicit calls to the
-/// [citation]($cite) function (`[#cite(<key>)]`). The bibliography will only
-/// show entries for works that were referenced in the document.
-///
-/// # Styles
-/// Typst offers a wide selection of built-in
-/// [citation and bibliography styles]($bibliography.style). Beyond those, you
-/// can add and use custom [CSL](https://citationstyles.org/) (Citation Style
-/// Language) files. Wondering which style to use? Here are some good defaults
-/// based on what discipline you're working in:
-///
-/// | Fields          | Typical Styles                                         |
-/// |-----------------|--------------------------------------------------------|
-/// | Engineering, IT | `{"ieee"}`                                             |
-/// | Psychology, Life Sciences | `{"apa"}`                                    |
-/// | Social sciences | `{"chicago-author-date"}`                              |
-/// | Humanities      | `{"mla"}`, `{"chicago-notes"}`, `{"harvard-cite-them-right"}` |
-/// | Economics       | `{"harvard-cite-them-right"}`                          |
-/// | Physics         | `{"american-physics-society"}`                         |
-///
-/// # Example
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 /// ```example
 /// This was already noted by
 /// pirates long ago. @arrgh
@@ -117,7 +77,6 @@ use crate::text::{Lang, LocalName, Region, SmallcapsElem, SubElem, SuperElem, Te
 /// ```
 #[elem(Locatable, Synthesize, ShowSet, LocalName)]
 pub struct BibliographyElem {
-<<<<<<< HEAD
     /// 1つまたは複数のHayagriva`.yaml`やBibLaTeX`.bib`ファイルへのパスや生バイト。
     ///
     /// 以下の形式で指定できます。
@@ -125,16 +84,6 @@ pub struct BibliographyElem {
     ///   パスに関する詳細は[パスの章]($syntax/#paths)をご参照ください。
     /// - 参考文献情報がデコードできる生バイト。
     /// - 上記を要素とする配列。
-=======
-    /// One or multiple paths to or raw bytes for Hayagriva `.yaml` and/or
-    /// BibLaTeX `.bib` files.
-    ///
-    /// This can be a:
-    /// - A path string to load a bibliography file from the given path. For
-    ///   more details about paths, see the [Paths section]($syntax/#paths).
-    /// - Raw bytes from which the bibliography should be decoded.
-    /// - An array where each item is one of the above.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[required]
     #[parse(
         let sources = args.expect("sources")?;
@@ -142,7 +91,6 @@ pub struct BibliographyElem {
     )]
     pub sources: Derived<OneOrMultiple<DataSource>, Bibliography>,
 
-<<<<<<< HEAD
     /// 参考文献のタイトル。
     ///
     /// - `{auto}`に設定すると、[テキストの言語]($text.lang)に適したタイトルが表示されます。これがデフォルトです。
@@ -168,37 +116,6 @@ pub struct BibliographyElem {
     /// - [CSL ファイル](https://citationstyles.org/)へのパスを示す文字列。
     ///   パスに関する詳細は[Pathセクション]($syntax/#paths)を参照してください。
     /// - CSLスタイルがデコードされるべき生バイト。
-=======
-    /// The title of the bibliography.
-    ///
-    /// - When set to `{auto}`, an appropriate title for the
-    ///   [text language]($text.lang) will be used. This is the default.
-    /// - When set to `{none}`, the bibliography will not have a title.
-    /// - A custom title can be set by passing content.
-    ///
-    /// The bibliography's heading will not be numbered by default, but you can
-    /// force it to be with a show-set rule:
-    /// `{show bibliography: set heading(numbering: "1.")}`
-    pub title: Smart<Option<Content>>,
-
-    /// Whether to include all works from the given bibliography files, even
-    /// those that weren't cited in the document.
-    ///
-    /// To selectively add individual cited works without showing them, you can
-    /// also use the `cite` function with [`form`]($cite.form) set to `{none}`.
-    #[default(false)]
-    pub full: bool,
-
-    /// The bibliography style.
-    ///
-    /// This can be:
-    /// - A string with the name of one of the built-in styles (see below). Some
-    ///   of the styles listed below appear twice, once with their full name and
-    ///   once with a short alias.
-    /// - A path string to a [CSL file](https://citationstyles.org/). For more
-    ///   details about paths, see the [Paths section]($syntax/#paths).
-    /// - Raw bytes from which a CSL style should be decoded.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[parse(match args.named::<Spanned<CslSource>>("style")? {
         Some(source) => Some(CslStyle::load(engine, source)?),
         None => None,
@@ -209,20 +126,12 @@ pub struct BibliographyElem {
     })]
     pub style: Derived<CslSource, CslStyle>,
 
-<<<<<<< HEAD
     /// 参考文献の言語設定。
-=======
-    /// The language setting where the bibliography is.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[internal]
     #[synthesized]
     pub lang: Lang,
 
-<<<<<<< HEAD
     /// 参考文献の地域設定。
-=======
-    /// The region setting where the bibliography is.
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     #[internal]
     #[synthesized]
     pub region: Option<Region>,

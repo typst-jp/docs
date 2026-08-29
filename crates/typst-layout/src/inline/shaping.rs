@@ -1100,19 +1100,6 @@ fn determine_shift(
             // "subs"/"sups" to the feature list if supported by the font.
             // In case of a problem, we just early exit
             let gsub = font.rusty().tables().gsub?;
-<<<<<<< HEAD
-            let subtable_index =
-                gsub.features.find(settings.kind.feature())?.lookup_indices.get(0)?;
-            let coverage = gsub
-                .lookups
-                .get(subtable_index)?
-                .subtables
-                .get::<SubstitutionSubtable>(0)?
-                .coverage();
-            text.chars()
-                .all(|c| {
-                    font.rusty().glyph_index(c).is_some_and(|i| coverage.contains(i))
-=======
             let lookups = gsub.features.find(settings.kind.feature())?.lookup_indices;
             text.chars()
                 .all(|c| {
@@ -1124,7 +1111,6 @@ fn determine_shift(
                             lookup.subtables.into_iter::<SubstitutionSubtable>()
                         })
                         .any(|subtable| subtable.coverage().contains(i))
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
                 })
                 .then(|| {
                     // If we can use the OpenType feature, we can keep the text

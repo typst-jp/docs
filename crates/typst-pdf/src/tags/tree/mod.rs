@@ -9,11 +9,7 @@ use krilla::surface::Surface;
 use krilla::tagging::{ArtifactType, ContentTag, Tag};
 use rustc_hash::FxHashMap;
 use smallvec::SmallVec;
-<<<<<<< HEAD
-use typst_library::diag::SourceDiagnostic;
-=======
 use typst_library::diag::{HintedStrResult, SourceDiagnostic, assert_internal};
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
 use typst_library::foundations::Packed;
 use typst_library::introspection::Location;
 use typst_library::layout::{Inherit, PagedDocument};
@@ -78,24 +74,6 @@ impl Tree {
         Some(self.ctx.bboxes.get_mut(id))
     }
 
-<<<<<<< HEAD
-    pub fn assert_finished_traversal(&self) {
-        assert_eq!(
-            self.prog_cursor + 1,
-            self.progressions.len(),
-            "tree traversal didn't complete properly"
-        );
-        assert_eq!(
-            self.break_cursor,
-            self.breaks.len(),
-            "tree traversal didn't complete properly"
-        );
-        assert_eq!(
-            self.unfinished_cursor,
-            self.unfinished.len(),
-            "tree traversal didn't complete properly"
-        );
-=======
     pub fn assert_finished_traversal(&self) -> HintedStrResult<()> {
         assert_internal(
             self.prog_cursor + 1 == self.progressions.len(),
@@ -110,7 +88,6 @@ impl Tree {
             "tree traversal didn't complete properly",
         )?;
         Ok(())
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
     }
 }
 
@@ -406,12 +383,6 @@ fn close_group(tree: &mut Tree, surface: &mut Surface, id: GroupId) -> GroupId {
         GroupKind::LogicalParent(elem) => {
             let loc = elem.location().unwrap();
             // Insert logical children when closing the logical parent, so they
-<<<<<<< HEAD
-            // are at the end of the group.
-            if let Some(children) = tree.logical_children.get(&loc) {
-                tree.groups.push_groups(id, children);
-            }
-=======
             // are at the end of the group. In some cases there might be
             // multiple parent groups with the same location, only insert the
             // children for the first parent group.
@@ -422,7 +393,6 @@ fn close_group(tree: &mut Tree, surface: &mut Surface, id: GroupId) -> GroupId {
                 tree.groups.push_groups(id, children);
             }
 
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
             tree.groups.push_group(direct_parent, id);
         }
         GroupKind::LogicalChild(inherit, logical_parent) => {

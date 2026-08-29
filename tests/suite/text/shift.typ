@@ -89,8 +89,6 @@ A#super(highlight[4])
 1#super[st], 2#super[nd], 3#super[rd].
 
 log#sub[2], log#sub[3], log#sub[variable].
-<<<<<<< HEAD
-=======
 
 --- issue-7249-multiple-lookup-tables ---
 // We increase the font size to make sure the difference is visible in the
@@ -104,4 +102,3 @@ A#super[(test)] \
 // Source Serif 4 does not support `sups` for backticks, so this should be
 // synthesized.
 A#super[test\`]
->>>>>>> eb2027e55f17a91cc2025c7a71674a2c5ea3a363
