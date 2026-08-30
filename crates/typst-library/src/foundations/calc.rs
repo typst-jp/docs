@@ -559,6 +559,9 @@ fn binom_impl(n: u64, k: u64) -> Option<i64> {
 
 /// 2つの整数値の最大公約数。
 ///
+/// This will error if the result of integer division would be larger than the
+/// maximum 64-bit signed integer.
+///
 /// ```example
 /// #calc.gcd(7, 42)
 /// ```
@@ -568,15 +571,15 @@ pub fn gcd(
     a: i64,
     /// 2つ目の整数値。
     b: i64,
-) -> i64 {
+) -> StrResult<i64> {
     let (mut a, mut b) = (a, b);
     while b != 0 {
         let temp = b;
-        b = a % b;
+        b = a.checked_rem(b).ok_or_else(too_large)?;
         a = temp;
     }
 
-    a.abs()
+    Ok(a.abs())
 }
 
 /// 2つの整数値の最小公倍数。
@@ -595,7 +598,7 @@ pub fn lcm(
         return Ok(a.abs());
     }
 
-    Ok(a.checked_div(gcd(a, b))
+    Ok(a.checked_div(gcd(a, b)?)
         .and_then(|gcd| gcd.checked_mul(b))
         .map(|v| v.abs())
         .ok_or_else(too_large)?)
@@ -892,7 +895,9 @@ pub fn rem(
     dividend
         .apply2(
             divisor.v,
-            |a, b| Some(DecNum::Int(a % b)),
+            // `checked_rem` can only overflow on `i64::MIN % -1` which is
+            // mathematically zero.
+            |a, b| Some(DecNum::Int(a.checked_rem(b).unwrap_or(0))),
             |a, b| Some(DecNum::Float(a % b)),
             |a, b| a.checked_rem(b).map(DecNum::Decimal),
         )
@@ -905,6 +910,9 @@ pub fn rem(
 /// 2つの数値のユークリッド除算。
 ///
 /// この計算の結果は、商を被除数が除数の`{n}`倍以上になる整数`{n}`へ丸めた値です。
+///
+/// This can error if the resulting number is larger than the maximum value or
+/// smaller than the minimum value for its type.
 ///
 /// ```example
 /// #calc.div-euclid(7, 3) \
@@ -929,7 +937,7 @@ pub fn div_euclid(
     dividend
         .apply2(
             divisor.v,
-            |a, b| Some(DecNum::Int(a.div_euclid(b))),
+            |a, b| a.checked_div_euclid(b).map(DecNum::Int),
             |a, b| Some(DecNum::Float(a.div_euclid(b))),
             |a, b| a.checked_div_euclid(b).map(DecNum::Decimal),
         )
@@ -969,7 +977,9 @@ pub fn rem_euclid(
     dividend
         .apply2(
             divisor.v,
-            |a, b| Some(DecNum::Int(a.rem_euclid(b))),
+            // `checked_rem_euclid` can only overflow on `i64::MIN % -1` which
+            // is mathematically zero.
+            |a, b| Some(DecNum::Int(a.checked_rem_euclid(b).unwrap_or(0))),
             |a, b| Some(DecNum::Float(a.rem_euclid(b))),
             |a, b| a.checked_rem_euclid(b).map(DecNum::Decimal),
         )
@@ -981,7 +991,9 @@ pub fn rem_euclid(
 
 /// 2つの数値の商（切り捨て除算）を計算します。
 ///
-/// この関数は常に[整数値]($int)を返し、結果となる[`float`]や[`decimal`]が64ビット符号付き整数の最大値より大きい、または最小値より小さい場合はエラーとなることに注意してください。
+/// Note that this function will always return an [integer]($int), and will
+/// error if the resulting number is larger than the maximum 64-bit signed
+/// integer or smaller than the minimum for that type.
 ///
 /// ```example
 /// $ "quo"(a, b) &= floor(a/b) \
@@ -1003,7 +1015,7 @@ pub fn quo(
     let divided = dividend
         .apply2(
             divisor.v,
-            |a, b| Some(DecNum::Int(a / b)),
+            |a, b| a.checked_div(b).map(DecNum::Int),
             |a, b| Some(DecNum::Float(a / b)),
             |a, b| a.checked_div(b).map(DecNum::Decimal),
         )

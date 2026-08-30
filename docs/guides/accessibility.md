@@ -203,6 +203,7 @@ image関数と同様に、figure関数も[alt属性]($figure.alt)を持ちます
 ```typ
 #math.equation(
   alt: "a squared plus b squared equals c squared",
+  block: true,
   $ a^2 + b^2 = c^2 $,
 )
 ```

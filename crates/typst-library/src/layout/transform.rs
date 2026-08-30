@@ -8,8 +8,8 @@ use crate::layout::{Abs, Alignment, Angle, HAlignment, Length, Ratio, Rel, VAlig
 ///
 /// # 例
 /// ```example
-/// #rect(inset: 0pt, move(
-///   dx: 6pt, dy: 6pt,
+/// #rect(inset: 0pt, fill: gray, move(
+///   dx: 4pt, dy: 6pt,
 ///   rect(
 ///     inset: 8pt,
 ///     fill: white,

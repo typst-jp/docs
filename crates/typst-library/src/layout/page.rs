@@ -197,7 +197,10 @@ pub struct PageElem {
     /// 1つまたは2つの数を取る[番号付けパターンまたは関数]($numbering)を受け取ります。
     ///
     /// 1. 1つ目は現在のページ番号。
-    /// 2. 2つ目は総ページ数。番号付けパターンでは省略できますが、関数の場合は常に両方が渡されます。
+    /// 2. The second number is the total number of pages. In a numbering
+    ///    pattern, the second number can be omitted. If a function is passed,
+    ///    it will receive one argument in the context of links or references,
+    ///    and two arguments when producing the visible page numbers.
     ///
     /// これらはページカウンターにより制御される論理番号であり、物理的なページ番号と一致しない場合があります。
     /// 具体的には`{counter(page)}`の[現在値]($counter.get)と[最終値]($counter.final)です。

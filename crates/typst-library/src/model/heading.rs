@@ -112,6 +112,7 @@ pub struct HeadingElem {
     /// ```
     #[default(0)]
     pub offset: usize,
+
     /// 見出しを番号付けする方法。
     /// [番号付けパターンまたは関数]($numbering)を指定できます（複数の数値を受け取ります）。
     ///
@@ -240,12 +241,19 @@ impl Synthesize for Packed<HeadingElem> {
 
         if let Some((numbering, location)) =
             self.numbering.get_ref(styles).as_ref().zip(self.location())
+            // We are not early returning on error here because of
+            // https://github.com/typst/typst/issues/7428
+            //
+            // A more comprehensive fix might introduce the error catching logic
+            // of show rules for synthesis, too.
+            && let Ok(numbers) = self.counter().display_at_loc(
+                engine,
+                location,
+                styles,
+                numbering,
+            )
         {
-            self.numbers = Some(
-                self.counter()
-                    .display_at_loc(engine, location, styles, numbering)?
-                    .plain_text(),
-            );
+            self.numbers = Some(numbers.plain_text());
         }
 
         let elem = self.as_mut();

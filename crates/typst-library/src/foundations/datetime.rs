@@ -276,6 +276,12 @@ impl Datetime {
 
     /// 現在の日付を取得。
     ///
+    /// In the CLI, this can be overridden with the `--creation-timestamp`
+    /// argument or by setting the
+    /// [`SOURCE_DATE_EPOCH`](https://reproducible-builds.org/specs/source-date-epoch/)
+    /// environment variable. In both cases, the value should be given as a UNIX
+    /// timestamp.
+    ///
     /// ```example
     /// Today's date is
     /// #datetime.today().display().

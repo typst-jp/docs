@@ -1,4 +1,5 @@
 use std::num::NonZeroUsize;
+
 use crate::foundations::{Content, elem};
 use crate::layout::{Length, Ratio, Rel};
 
@@ -8,6 +9,22 @@ use crate::layout::{Length, Ratio, Rel};
 /// 現在、段の高さのバランスは取れません。
 /// その代わり、段はコンテナの高さかページの残りの高さを占めます。
 /// バランスを取った段組は将来的にサポートされる予定です。
+///
+/// When arranging content across multiple columns, use [`colbreak`]($colbreak)
+/// to explicitly continue in the next column.
+///
+/// # Example
+/// ```example
+/// #columns(2, gutter: 8pt)[
+///   This text is in the
+///   first column.
+///
+///   #colbreak()
+///
+///   This text is in the
+///   second column.
+/// ]
+/// ```
 ///
 /// # ページレベルの段組 { #page-level }
 /// ドキュメント全体に渡る段組を挿入する必要がある場合は、代わりに`{page}`関数の[`columns`パラメーター]($page.columns)を使用してください。

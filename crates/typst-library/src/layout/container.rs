@@ -81,6 +81,7 @@ pub struct BoxElem {
     /// ```
     #[fold]
     pub inset: Sides<Option<Rel<Length>>>,
+
     /// レイアウトに影響を与えずにボックスの大きさを拡大する量。
     ///
     /// 全ての辺に対する単一の長さ、または辺ごとの長さの辞書を指定できます。

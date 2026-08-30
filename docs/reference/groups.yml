@@ -125,7 +125,7 @@
     を定義しています。
 
 - name: std
-  title: Standard library
+  title: Standard Library
   category: foundations
   path: ["std"]
   details: |
@@ -238,11 +238,11 @@
     # Example
     ```typ
     #html.video(
-      controls: true,
-      width: 1280,
-      height: 720,
-      src: "sunrise.mp4",
+      controls: true,
+      width: 1280,
+      height: 720,
+      src: "sunrise.mp4",
     )[
-      Your browser does not support the video tag.
+      Your browser does not support the video tag.
     ]
     ```

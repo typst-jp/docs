@@ -51,8 +51,8 @@ use crate::layout::{Abs, Em, Length, Ratio};
 /// 相対長さは[百分率]($ratio)、[整数]($int)、[浮動小数点数]($float)と乗算できます。
 ///
 /// 相対長さは以下のフィールドを持ちます。
-/// - `length`: 長さ成分。
-/// - `ratio`: 百分率成分。
+/// - `length`: [長さ]($length)成分。
+/// - `ratio`: [百分率]($ratio)成分。
 ///
 /// ```example
 /// #(100% - 50pt).length \

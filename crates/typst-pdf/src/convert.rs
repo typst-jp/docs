@@ -13,7 +13,9 @@ use krilla::{Document, SerializeSettings};
 use krilla_svg::render_svg_glyph;
 use rustc_hash::{FxBuildHasher, FxHashMap, FxHashSet};
 use smallvec::SmallVec;
-use typst_library::diag::{SourceDiagnostic, SourceResult, bail, error};
+use typst_library::diag::{
+    At, ExpectInternal, SourceDiagnostic, SourceResult, bail, error,
+};
 use typst_library::foundations::{NativeElement, Repr};
 use typst_library::introspection::{Location, Tag};
 use typst_library::layout::{
@@ -118,10 +120,15 @@ fn convert_pages(gc: &mut GlobalContext, document: &mut Document) -> SourceResul
             // Don't export this page.
             continue;
         } else {
-            let mut settings = PageSettings::new(
-                typst_page.frame.width().to_f32(),
-                typst_page.frame.height().to_f32(),
-            );
+            // PDF 1.4 upwards to 1.7 specifies a minimum page size of 3x3 units.
+            // PDF 2.0 doesn't define an explicit limit, but krilla and probably
+            // some viewers won't handle pages that have zero sized pages.
+            let mut settings = PageSettings::from_wh(
+                typst_page.frame.width().to_f32().max(3.0),
+                typst_page.frame.height().to_f32().max(3.0),
+            )
+            .expect_internal("invalid page size")
+            .at(Span::detached())?;
 
             if let Some(label) = typst_page
                 .numbering
@@ -399,8 +406,8 @@ pub(crate) fn handle_group(
     Ok(())
 }
 
-#[typst_macros::time(name = "finish export")]
 /// Finish a krilla document and handle export errors.
+#[typst_macros::time(name = "finish export")]
 fn finish(
     document: Document,
     gc: GlobalContext,
@@ -411,11 +418,11 @@ fn finish(
     match document.finish() {
         Ok(r) => Ok(r),
         Err(e) => match e {
-            KrillaError::Font(f, s) => {
-                let font_str = display_font(gc.fonts_backward.get(&f).unwrap());
+            KrillaError::Font(f, err) => {
                 bail!(
                     Span::detached(),
-                    "failed to process font {font_str}: {s}";
+                    "failed to process {} ({err})",
+                    display_font(gc.fonts_backward.get(&f));
                     hint: "make sure the font is valid";
                     hint: "the used font might be unsupported by Typst"
                 );
@@ -427,9 +434,9 @@ fn finish(
                     .collect::<EcoVec<_>>();
                 Err(errors)
             }
-            KrillaError::Image(_, loc) => {
+            KrillaError::Image(_, loc, err) => {
                 let span = to_span(loc);
-                bail!(span, "failed to process image");
+                bail!(span, "failed to process image ({err})");
             }
             KrillaError::SixteenBitImage(image, _) => {
                 let span = gc.image_to_spans.get(&image).unwrap();
@@ -536,8 +543,9 @@ fn convert_error(
         ),
         ValidationError::ContainsNotDefGlyph(f, loc, text) => error!(
             to_span(*loc),
-            "{prefix} the text '{text}' cannot be displayed using {}",
-            display_font(gc.fonts_backward.get(f).unwrap());
+            "{prefix} the text `{}` could not be displayed with {}",
+            text.repr(),
+            display_font(gc.fonts_backward.get(f));
             hint: "try using a different font"
         ),
         ValidationError::NoCodepointMapping(_, _, loc) => {
@@ -576,8 +584,8 @@ fn convert_error(
         }
         ValidationError::RestrictedLicense(f) => error!(
             Span::detached(),
-            "{prefix} license of font {} is too restrictive",
-            display_font(gc.fonts_backward.get(f).unwrap()).repr();
+            "{prefix} license of {} is too restrictive",
+            display_font(gc.fonts_backward.get(f));
             hint: "the font has specified \"Restricted License embedding\" in its metadata";
             hint: "restrictive font licenses are prohibited by {} because they limit the suitability for archival",
             validator.as_str()

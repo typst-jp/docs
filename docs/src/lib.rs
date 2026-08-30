@@ -95,9 +95,6 @@ pub fn provide(resolver: &dyn Resolver) -> Vec<PageModel> {
         reference_pages(resolver),
         guide_pages(resolver),
         changelog_pages(resolver),
-        japanese_pages(resolver),
-        about_pages(resolver),
-        md_page(resolver, base, load!("glossary.md")),
     ]
 }
 
@@ -224,6 +221,7 @@ fn changelog_pages(resolver: &dyn Resolver) -> PageModel {
     let base = format!("{}changelog/", resolver.base());
     page.title = "変更履歴".into();
     page.children = vec![
+        md_page(resolver, &base, load!("changelog/0.14.1.md")),
         md_page(resolver, &base, load!("changelog/0.14.0.md")),
         md_page(resolver, &base, load!("changelog/0.13.1.md")),
         md_page(resolver, &base, load!("changelog/0.13.0.md")),
@@ -241,36 +239,6 @@ fn changelog_pages(resolver: &dyn Resolver) -> PageModel {
         md_page(resolver, &base, load!("changelog/0.2.0.md")),
         md_page(resolver, &base, load!("changelog/0.1.0.md")),
         md_page(resolver, &base, load!("changelog/earlier.md")),
-    ]
-    .into_iter()
-    .map(|child| {
-        let route = eco_format!("{base}{}/", urlify(child.title.as_str()));
-        PageModel { route, ..child }
-    })
-    .collect();
-
-    page
-}
-
-/// Build the japanese section.
-fn japanese_pages(resolver: &dyn Resolver) -> PageModel {
-    let mut page = md_page(resolver, resolver.base(), load!("japanese/welcome.md"));
-    let base = format!("{}japanese/", resolver.base());
-    page.children = vec![
-        md_page(resolver, &base, load!("japanese/templates.md")),
-        md_page(resolver, &base, load!("japanese/packages.md")),
-        md_page(resolver, &base, load!("japanese/articles.md")),
-    ];
-    page
-}
-
-/// Build the about section.
-fn about_pages(resolver: &dyn Resolver) -> PageModel {
-    let mut page = md_page(resolver, resolver.base(), load!("about/welcome.md"));
-    let base = format!("{}about/", resolver.base());
-    page.children = vec![
-        md_page(resolver, &base, load!("../CONTRIBUTING.md")),
-        md_page(resolver, &base, load!("../TRANSLATING_GUIDELINES.md")),
     ];
     page
 }
@@ -393,7 +361,7 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         items.sort_by_cached_key(|item| item.name.clone());
     }
 
-    let _title = EcoString::from(match category {
+    let title = EcoString::from(match category {
         Category::Pdf | Category::Html | Category::Png | Category::Svg => {
             category.name().to_uppercase()
         }
@@ -442,7 +410,7 @@ fn category_page(resolver: &dyn Resolver, category: Category) -> PageModel {
         outline,
         body: BodyModel::Category(CategoryModel {
             name: category.name(),
-            title: translated_title,
+            title,
             details,
             items,
             shorthands,
@@ -628,9 +596,12 @@ fn details_blocks(docs: &str) -> Vec<RawDetailsBlock<'_>> {
                 let tag = &docs[fence_idx + fence_len..lang_tag_end].trim();
                 let title = ExampleArgs::from_tag(tag).title;
 
-                // First, push non-fenced content.
-                if found > 0 {
-                    res.push(RawDetailsBlock::Markdown(&docs[i..fence_idx]));
+                // First, push non-fenced content. It might be all whitespaces
+                // if it's between two consecutive fences. Therefore, we have to
+                // trim it before checking.
+                let content_before_fence = &docs[i..fence_idx];
+                if !content_before_fence.trim().is_empty() {
+                    res.push(RawDetailsBlock::Markdown(content_before_fence));
                 }
 
                 // Then, find the end of the fence.
@@ -653,7 +624,11 @@ fn details_blocks(docs: &str) -> Vec<RawDetailsBlock<'_>> {
                 i = fence_end;
             }
             None => {
-                res.push(RawDetailsBlock::Markdown(&docs[i..]));
+                // Push the remaining content only if it's non-empty after trimming.
+                let slice = &docs[i..];
+                if !slice.trim().is_empty() {
+                    res.push(RawDetailsBlock::Markdown(slice));
+                }
                 break;
             }
         }
@@ -955,7 +930,6 @@ fn symbols_model(resolver: &dyn Resolver, group: &GroupData) -> SymbolsModel {
 
         for (variant, value, deprecation_message) in symbol.variants() {
             let value_char = value.parse::<char>().ok();
-
             let shorthand = |list: &[(&'static str, char)]| {
                 value_char.and_then(|c| {
                     list.iter().copied().find(|&(_, x)| x == c).map(|(s, _)| s)
@@ -974,8 +948,7 @@ fn symbols_model(resolver: &dyn Resolver, group: &GroupData) -> SymbolsModel {
                 }),
                 value: value.into(),
                 // Matches casting `Symbol` to `Accent`
-                accent: value_char
-                    .is_some_and(|c| typst::math::Accent::combine(c).is_some()),
+                accent: typst::math::Accent::combining(value).is_some(),
                 alternates: symbol
                     .variants()
                     .filter(|(other, _, _)| other != &variant)
@@ -1179,5 +1152,38 @@ mod tests {
         fn base(&self) -> &str {
             "/"
         }
+    }
+
+    #[test]
+    fn test_parsing_details_blocks() {
+        let docs = r#"
+A brief description of the parameter.
+
+```example
+A basic example.
+```
+
+Further descriptions.
+
+```example
+An _advanced_ example.
+```
+
+```example
+Immediately followed by another example.
+There should be no additional markdown block between them.
+
+Empty lines after the final example should also be dropped.
+```
+
+"#;
+        let blocks = details_blocks(docs);
+
+        assert_eq!(blocks.len(), 5);
+        matches!(blocks[0], RawDetailsBlock::Markdown { .. });
+        matches!(blocks[1], RawDetailsBlock::Example { .. });
+        matches!(blocks[2], RawDetailsBlock::Markdown { .. });
+        matches!(blocks[3], RawDetailsBlock::Example { .. });
+        matches!(blocks[4], RawDetailsBlock::Example { .. });
     }
 }
