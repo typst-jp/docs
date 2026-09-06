@@ -25,8 +25,8 @@ clap = { workspace = true, optional = true }
 codex = { workspace = true }
 ecow = { workspace = true }
 heck = { workspace = true }
-pulldown-cmark = { git = "https://github.com/3w36zj6/pulldown-cmark-cjk-friendly", rev = "ccdd8e0" }
-pulldown-cmark-escape = { git = "https://github.com/3w36zj6/pulldown-cmark-cjk-friendly", rev = "ccdd8e0" }
+pulldown-cmark = { git = "https://github.com/pulldown-cmark/pulldown-cmark", rev = "f978fb051404b483b344813d4b0235414b5e4f8f" }
+pulldown-cmark-escape = { git = "https://github.com/pulldown-cmark/pulldown-cmark", rev = "f978fb051404b483b344813d4b0235414b5e4f8f" }
 regex = { workspace = true }
 rustc-hash = { workspace = true }
 serde = { workspace = true }
