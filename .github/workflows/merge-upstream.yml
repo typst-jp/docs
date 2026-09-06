@@ -15,6 +15,8 @@ permissions:
 jobs:
   merge-upstream:
     runs-on: ubuntu-24.04
+    env:
+      UPSTREAM_REF: ${{ github.event.inputs.upstream_ref }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
@@ -30,17 +32,20 @@ jobs:
 
       - name: Create new branch
         run: |
-          git checkout -b feature/merge-upstream-${{ github.event.inputs.upstream_ref }}
+          git check-ref-format "refs/tags/$UPSTREAM_REF"
+          git checkout -b "feature/merge-upstream-$UPSTREAM_REF"
 
-      - name: Add upstream remote
+      - name: Fetch upstream tag
         run: |
           git remote add upstream https://github.com/typst/typst.git
-          git fetch upstream
+          git fetch --no-tags upstream \
+            "refs/tags/$UPSTREAM_REF:refs/remotes/upstream-tags/$UPSTREAM_REF"
 
       - name: Attempt merge with commit markers
         run: |
           # Try to merge but allow conflicts
-          TARGET_COMMIT=$(git rev-parse "${{ github.event.inputs.upstream_ref }}")
+          TARGET_COMMIT=$(git rev-parse --verify \
+            "refs/remotes/upstream-tags/$UPSTREAM_REF^{commit}")
           git merge --no-commit --no-ff "$TARGET_COMMIT" || {
             # Continue only when the merge started and stopped because of conflicts.
             test -f "$(git rev-parse --git-path MERGE_HEAD)" || exit 1
@@ -65,20 +70,30 @@ jobs:
 
           # Do not silently resolve non-text conflicts outside generated files.
           while IFS= read -r -d '' file; do
-            if ! grep -q '^<<<<<<< ' "$file" \
-              || ! grep -qx '=======' "$file" \
-              || ! grep -q '^>>>>>>> ' "$file"; then
-              echo "::error file=$file::Unresolved conflict without conflict markers"
+            if [[ ! -f "$file" ]]; then
+              echo "::error file=$file::Unresolved conflict is not a regular file"
+              exit 1
+            fi
+
+            if ! grep -Iq . -- "$file"; then
+              echo "::error file=$file::Unresolved binary conflict outside tests/ref/"
+              exit 1
+            fi
+
+            if ! grep -q '^<<<<<<< ' -- "$file" \
+              || ! grep -qx '=======' -- "$file" \
+              || ! grep -q '^>>>>>>> ' -- "$file"; then
+              echo "::error file=$file::Unresolved text conflict without conflict markers"
               exit 1
             fi
           done < <(git diff --name-only --diff-filter=U -z)
 
           # Commit the merge with conflict markers
-          git commit -a -m "Merge upstream changes from ${{ github.event.inputs.upstream_ref }}"
+          git commit -a -m "Merge upstream changes from $UPSTREAM_REF"
 
       - name: Push branch
         run: |
-          git push --force origin feature/merge-upstream-${{ github.event.inputs.upstream_ref }}
+          git push --force origin "feature/merge-upstream-$UPSTREAM_REF"
 
       - name: Create Pull Request
         id: create-pr
@@ -95,9 +110,9 @@ jobs:
             const pr = await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head: "feature/merge-upstream-${{ github.event.inputs.upstream_ref }}",
+              head: `feature/merge-upstream-${process.env.UPSTREAM_REF}`,
               base: "main",
-              title: "Merge upstream ${{ github.event.inputs.upstream_ref }}",
+              title: `Merge upstream ${process.env.UPSTREAM_REF}`,
               body: process.env.PR_BODY
             });
             core.setOutput("pr_number", pr.data.number);
