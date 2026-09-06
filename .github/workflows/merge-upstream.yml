@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          fetch-depth: 0
 
       - name: Configure Git
         run: |
@@ -38,8 +40,11 @@ jobs:
       - name: Attempt merge with commit markers
         run: |
           # Try to merge but allow conflicts
-          TARGET_COMMIT=$(git rev-parse ${{ github.event.inputs.upstream_ref }})
-          git merge --no-commit --no-ff --allow-unrelated-histories $TARGET_COMMIT || true
+          TARGET_COMMIT=$(git rev-parse "${{ github.event.inputs.upstream_ref }}")
+          git merge --no-commit --no-ff "$TARGET_COMMIT" || {
+            # Continue only when the merge started and stopped because of conflicts.
+            test -f "$(git rev-parse --git-path MERGE_HEAD)" || exit 1
+          }
 
           # Remove upstream `.github/` directory
           git checkout HEAD -- .github/
@@ -51,6 +56,22 @@ jobs:
               "UD "*) git rm -- "${entry#UD }" ;;
             esac
           done
+
+          # Generated test references always follow upstream.
+          while IFS= read -r -d '' file; do
+            git checkout --theirs -- "$file"
+            git add -- "$file"
+          done < <(git diff --name-only --diff-filter=U -z -- tests/ref/)
+
+          # Do not silently resolve non-text conflicts outside generated files.
+          while IFS= read -r -d '' file; do
+            if ! grep -q '^<<<<<<< ' "$file" \
+              || ! grep -qx '=======' "$file" \
+              || ! grep -q '^>>>>>>> ' "$file"; then
+              echo "::error file=$file::Unresolved conflict without conflict markers"
+              exit 1
+            fi
+          done < <(git diff --name-only --diff-filter=U -z)
 
           # Commit the merge with conflict markers
           git commit -a -m "Merge upstream changes from ${{ github.event.inputs.upstream_ref }}"
