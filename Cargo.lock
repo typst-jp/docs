@@ -2094,8 +2094,8 @@ dependencies = [
 
 [[package]]
 name = "pulldown-cmark"
-version = "0.13.0"
-source = "git+https://github.com/3w36zj6/pulldown-cmark-cjk-friendly?rev=ccdd8e0#ccdd8e0bd2ed96da7786272250b79a996911fd05"
+version = "0.13.1"
+source = "git+https://github.com/pulldown-cmark/pulldown-cmark?rev=f978fb051404b483b344813d4b0235414b5e4f8f#f978fb051404b483b344813d4b0235414b5e4f8f"
 dependencies = [
  "bitflags 2.9.1",
  "getopts",
@@ -2107,7 +2107,7 @@ dependencies = [
 [[package]]
 name = "pulldown-cmark-escape"
 version = "0.11.0"
-source = "git+https://github.com/3w36zj6/pulldown-cmark-cjk-friendly?rev=ccdd8e0#ccdd8e0bd2ed96da7786272250b79a996911fd05"
+source = "git+https://github.com/pulldown-cmark/pulldown-cmark?rev=f978fb051404b483b344813d4b0235414b5e4f8f#f978fb051404b483b344813d4b0235414b5e4f8f"
 
 [[package]]
 name = "pxfm"
