@@ -7164,7 +7164,7 @@
                     "details": [
                       {
                         "kind": "html",
-                        "content": "<p>現在の日付を取得。</p>\n<p>In the CLI, this can be overridden with the <code>--creation-timestamp</code>\nargument or by setting the\n<a href=\"https://reproducible-builds.org/specs/source-date-epoch/\"><code>SOURCE_DATE_EPOCH</code></a>\nenvironment variable. In both cases, the value should be given as a UNIX\ntimestamp.</p>"
+                        "content": "<p>現在の日付を取得。</p>\n<p>CLIでは、<code>--creation-timestamp</code>引数を指定するか、<a href=\"https://reproducible-builds.org/specs/source-date-epoch/\"><code>SOURCE_DATE_EPOCH</code></a>環境変数を設定することで、これを上書きできます。\nいずれの場合も、値はUNIXタイムスタンプとして指定する必要があります。</p>"
                       },
                       {
                         "kind": "example",
