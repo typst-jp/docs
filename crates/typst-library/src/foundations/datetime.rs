@@ -276,11 +276,8 @@ impl Datetime {
 
     /// 現在の日付を取得。
     ///
-    /// In the CLI, this can be overridden with the `--creation-timestamp`
-    /// argument or by setting the
-    /// [`SOURCE_DATE_EPOCH`](https://reproducible-builds.org/specs/source-date-epoch/)
-    /// environment variable. In both cases, the value should be given as a UNIX
-    /// timestamp.
+    /// CLIでは、`--creation-timestamp`引数を指定するか、[`SOURCE_DATE_EPOCH`](https://reproducible-builds.org/specs/source-date-epoch/)環境変数を設定することで、これを上書きできます。
+    /// いずれの場合も、値はUNIXタイムスタンプとして指定する必要があります。
     ///
     /// ```example
     /// Today's date is
