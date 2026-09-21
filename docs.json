@@ -5475,7 +5475,7 @@
                     "details": [
                       {
                         "kind": "html",
-                        "content": "<p>2つの整数値の最大公約数。</p>\n<p>This will error if the result of integer division would be larger than the\nmaximum 64-bit signed integer.</p>"
+                        "content": "<p>2つの整数値の最大公約数。</p>\n<p>整数除算の結果が64ビット符号付き整数の最大値より大きくなる場合はエラーとなります。</p>"
                       },
                       {
                         "kind": "example",
@@ -6293,7 +6293,7 @@
                     "details": [
                       {
                         "kind": "html",
-                        "content": "<p>2つの数値のユークリッド除算。</p>\n<p>この計算の結果は、商を被除数が除数の<code>n</code>倍以上になる整数<code>n</code>へ丸めた値です。</p>\n<p>This can error if the resulting number is larger than the maximum value or\nsmaller than the minimum value for its type.</p>"
+                        "content": "<p>2つの数値のユークリッド除算。</p>\n<p>この計算の結果は、商を被除数が除数の<code>n</code>倍以上になる整数<code>n</code>へ丸めた値です。</p>\n<p>結果の数値がその型の最大値より大きい、または最小値より小さい場合はエラーとなることがあります。</p>"
                       },
                       {
                         "kind": "example",
@@ -6450,7 +6450,7 @@
                     "details": [
                       {
                         "kind": "html",
-                        "content": "<p>2つの数値の商（切り捨て除算）を計算します。</p>\n<p>Note that this function will always return an <a href=\"/docs/reference/foundations/int/\">integer</a>, and will\nerror if the resulting number is larger than the maximum 64-bit signed\ninteger or smaller than the minimum for that type.</p>"
+                        "content": "<p>2つの数値の商（切り捨て除算）を計算します。</p>\n<p>この関数は常に<a href=\"/docs/reference/foundations/int/\">整数値</a>を返し、結果の数値が64ビット符号付き整数の最大値より大きい、またはその型の最小値より小さい場合はエラーとなることに注意してください。</p>"
                       },
                       {
                         "kind": "example",
