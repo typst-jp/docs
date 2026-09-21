@@ -559,8 +559,7 @@ fn binom_impl(n: u64, k: u64) -> Option<i64> {
 
 /// 2つの整数値の最大公約数。
 ///
-/// This will error if the result of integer division would be larger than the
-/// maximum 64-bit signed integer.
+/// 整数除算の結果が64ビット符号付き整数の最大値より大きくなる場合はエラーとなります。
 ///
 /// ```example
 /// #calc.gcd(7, 42)
@@ -911,8 +910,7 @@ pub fn rem(
 ///
 /// この計算の結果は、商を被除数が除数の`{n}`倍以上になる整数`{n}`へ丸めた値です。
 ///
-/// This can error if the resulting number is larger than the maximum value or
-/// smaller than the minimum value for its type.
+/// 結果の数値がその型の最大値より大きい、または最小値より小さい場合はエラーとなることがあります。
 ///
 /// ```example
 /// #calc.div-euclid(7, 3) \
@@ -991,9 +989,7 @@ pub fn rem_euclid(
 
 /// 2つの数値の商（切り捨て除算）を計算します。
 ///
-/// Note that this function will always return an [integer]($int), and will
-/// error if the resulting number is larger than the maximum 64-bit signed
-/// integer or smaller than the minimum for that type.
+/// この関数は常に[整数値]($int)を返し、結果の数値が64ビット符号付き整数の最大値より大きい、またはその型の最小値より小さい場合はエラーとなることに注意してください。
 ///
 /// ```example
 /// $ "quo"(a, b) &= floor(a/b) \
