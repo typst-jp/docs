@@ -112907,8 +112907,8 @@
                 "children": []
               },
               {
-                "id": "redaction",
-                "name": "Redaction",
+                "id": "墨消し",
+                "name": "墨消し",
                 "children": []
               },
               {
@@ -112938,7 +112938,7 @@
                 "details": [
                   {
                     "kind": "html",
-                    "content": "<p>レイアウトに影響を与えないコンテンツの隠蔽。</p>\n<p><code>hide</code>関数を用いると、レイアウトにコンテンツを「認識」させながらコンテンツを隠せます。\nこれは何らかのコンテンツと全く同じ大きさを持つ空白を作る際に便利です。</p>\n<h2 id=\"例\">例</h2>\n<div class=\"previewed-code\"><pre><code>Hello Jane <span class=\"typ-escape\">\\</span>\n<span class=\"typ-func\">#</span><span class=\"typ-func\">hide</span><span class=\"typ-punct\">[</span>Hello<span class=\"typ-punct\">]</span> Joe\n</code></pre><div class=\"preview\"><img src=\"/docs/assets/c348a83fa35ef3b84e31782980f262ae.png\" alt=\"Preview\"></div></div>\n<h2 id=\"redaction\">Redaction</h2>\n<p>This function may also be useful for redacting content as its arguments are\nneither present visually nor accessible to Assistive Technology. That said,\nthere can be <em>some</em> traces of the hidden content (such as a bookmarked\nheading in the PDF's Document Outline).</p>\n<p>Note that, depending on the circumstances, it may be possible for content to\nbe reverse engineered based on its size in the layout. We thus do not\nrecommend using this function to hide highly sensitive information.</p>"
+                    "content": "<p>レイアウトに影響を与えないコンテンツの隠蔽。</p>\n<p><code>hide</code>関数を用いると、レイアウトにコンテンツを「認識」させながらコンテンツを隠せます。\nこれは何らかのコンテンツと全く同じ大きさを持つ空白を作る際に便利です。</p>\n<h2 id=\"例\">例</h2>\n<div class=\"previewed-code\"><pre><code>Hello Jane <span class=\"typ-escape\">\\</span>\n<span class=\"typ-func\">#</span><span class=\"typ-func\">hide</span><span class=\"typ-punct\">[</span>Hello<span class=\"typ-punct\">]</span> Joe\n</code></pre><div class=\"preview\"><img src=\"/docs/assets/c348a83fa35ef3b84e31782980f262ae.png\" alt=\"Preview\"></div></div>\n<h2 id=\"墨消し\">墨消し</h2>\n<p>この関数は、引数が視覚的に表示されず、支援技術からもアクセスできないため、コンテンツを墨消しする際にも便利かもしれません。\nただし、隠したコンテンツの痕跡は<em>多少</em>残ることがあります（PDFの目次にブックマークとして表示される見出しなど）。</p>\n<p>状況によっては、レイアウト上のサイズからコンテンツの内容を推測できる可能性がある点に注意してください。\nそのため、機密性の高い情報を隠す目的でこの関数を使用することはおすすめしません。</p>"
                   }
                 ],
                 "self": false,
