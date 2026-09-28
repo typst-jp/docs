@@ -552,12 +552,7 @@ pub struct GridHeader {
 
 /// 繰り返し可能なグリッドのフッター。
 ///
-<<<<<<< HEAD
 /// [`grid.header`]要素と同様に各ページで繰り返し可能です。
-=======
-/// Just like the [`grid.header`] element, the footer can repeat itself on every
-/// page of the grid.
->>>>>>> b33de9de113c91c184214b299bd7a8eb3070c3ab
 ///
 /// フッターの後に他のグリッドセルを配置できません。
 #[elem(name = "footer", title = "Grid Footer")]
