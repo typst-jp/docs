@@ -7,305 +7,257 @@ description: Typstの初期バージョンにおける変更点
 
 # Typstの初期バージョンにおける変更点
 
-## March 28, 2023
-- **Breaking changes:**
-  - Enumerations now require a space after their marker, that is, `[1.ok]` must
-    now be written as `[1. ok]`
-  - Changed default style for [term lists]($terms): Does not include a colon
-    anymore and has a bit more indent
+## 2023年3月28日
+- **破壊的変更**
+  - 番号付きリストのマーカーの後にスペースが必要になりました。つまり、`[1.ok]`は`[1. ok]`と書く必要があります。
+  - [用語リスト]($terms)のデフォルトのスタイルを変更しました。コロンがなくなり、インデントが少し大きくなりました。
 
-- Command line interface
-  - Added `--font-path` argument for CLI
-  - Embedded default fonts in CLI binary
-  - Fixed build of CLI if `git` is not installed
+- コマンドラインインターフェース
+  - CLIに`--font-path`引数を追加しました。
+  - CLIバイナリにデフォルトのフォントを埋め込みました。
+  - `git`がインストールされていない場合のCLIのビルドを修正しました。
 
-- Miscellaneous improvements
-  - Added support for disabling [matrix]($math.mat) and [vector]($math.vec)
-    delimiters. Generally with `[#set math.mat(delim: none)]` or one-off with
-    `[$mat(delim: #none, 1, 2; 3, 4)$]`.
-  - Added [`separator`]($terms.separator) argument to term lists
-  - Added [`round`]($math.round) function for equations
-  - Numberings now allow zeros. To reset a counter, you can write
-    `[#counter(..).update(0)]`
-  - Added documentation for `{page()}` and `{position()}` methods on
-    [`location`]($location) type
-  - Added symbols for double, triple, and quadruple dot accent
-  - Added smart quotes for Norwegian Bokmål
-  - Added Nix flake
-  - Fixed bibliography ordering in IEEE style
-  - Fixed parsing of decimals in math: `[$1.2/3.4$]`
-  - Fixed parsing of unbalanced delimiters in fractions: `[$1/(2 (x)$]`
-  - Fixed unexpected parsing of numbers as enumerations, e.g. in `[1.2]`
-  - Fixed combination of page fill and header
-  - Fixed compiler crash if [`repeat`]($repeat) is used in page with automatic width
-  - Fixed [matrices]($math.mat) with explicit delimiter
-  - Fixed [`indent`]($terms.indent) property of term lists
-  - Numerous documentation fixes
-  - Links in bibliographies are now affected by link styling
-  - Fixed hovering over comments in web app
+- その他の改善
+  - [行列]($math.mat)と[ベクトル]($math.vec)の区切り文字を無効にするサポートを追加しました。全体に適用するには`[#set math.mat(delim: none)]`、個別に適用するには`[$mat(delim: #none, 1, 2; 3, 4)$]`を使用します。
+  - 用語リストに[`separator`]($terms.separator)引数を追加しました。
+  - 数式用の[`round`]($math.round)関数を追加しました。
+  - 番号付けでゼロを使用できるようになりました。カウンターをリセットするには、`[#counter(..).update(0)]`と書けます。
+  - [`location`]($location)型の`{page()}`と`{position()}`メソッドのドキュメントを追加しました。
+  - 2点、3点、4点のドットアクセント用の記号を追加しました。
+  - ノルウェー語のブークモール用のスマートクォートを追加しました。
+  - Nix flakeを追加しました。
+  - IEEEスタイルでの参考文献の順序を修正しました。
+  - 数式での小数のパースを修正しました。例：`[$1.2/3.4$]`。
+  - 分数内で対応が取れていない区切り文字のパースを修正しました。例：`[$1/(2 (x)$]`。
+  - `[1.2]`などの数値が意図せず番号付きリストとしてパースされる問題を修正しました。
+  - ページの塗りつぶしとヘッダーの組み合わせを修正しました。
+  - 幅が自動のページで[`repeat`]($repeat)を使用した場合のコンパイラーのクラッシュを修正しました。
+  - 区切り文字を明示的に指定した[行列]($math.mat)を修正しました。
+  - 用語リストの[`indent`]($terms.indent)プロパティを修正しました。
+  - ドキュメントを多数修正しました。
+  - 参考文献内のリンクにもリンクのスタイル設定が適用されるようになりました。
+  - Webアプリでコメントにカーソルを合わせたときの動作を修正しました。
 
 <contributors from="v23-03-21" to="v23-03-28" />
 
-## March 21, 2023
-- Reference and bibliography management
-  - [Bibliographies]($bibliography) and [citations]($cite) (currently supported
-    styles are APA, Chicago Author Date, IEEE, and MLA)
-  - You can now [reference]($ref) sections, figures, formulas, and works from
-    the bibliography with `[@label]`
-  - You can make an element referenceable with a label:
+## 2023年3月21日
+- 参照と参考文献の管理
+  - [参考文献]($bibliography)と[引用]($cite)をサポートしました。現在サポートされているスタイルはAPA、Chicago Author Date、IEEE、MLAです。
+  - `[@label]`を使用して、節、図表、数式、参考文献内の文献を[参照]($ref)できるようになりました。
+  - ラベルを付けることで、要素を参照可能にできます。
     - `[= Introduction <intro>]`
     - `[$ A = pi r^2 $ <area>]`
 
-- Introspection system for interactions between different parts of the document
-  - [`counter`]($counter) function
-    - Access and modify counters for pages, headings, figures, and equations
-    - Define and use your own custom counters
-    - Time travel: Find out what the counter value was or will be at some other
-      point in the document (e.g. when you're building a list of figures, you
-      can determine the value of the figure counter at any given figure).
-    - Counters count in layout order and not in code order
-  - [`state`]($state) function
-    - Manage arbitrary state across your document
-    - Time travel: Find out the value of your state at any position in the
-      document
-    - State is modified in layout order and not in code order
-  - [`query`]($query) function
-    - Find all occurrences of an element or a label, either in the whole
-      document or before/after some location
-    - Link to elements, find out their position on the pages and access their
-      fields
-    - Example use cases: Custom list of figures or page header with current
-      chapter title
-  - [`locate`]($locate) function
-    - Determines the location of itself in the final layout
-    - Can be accessed to get the `page` and `x`, `y` coordinates
-    - Can be used with counters and state to find out their values at that
-      location
-    - Can be used with queries to find elements before or after its location
+- 文書内の異なる部分を連携させるための内省システム
+  - [`counter`]($counter)関数
+    - ページ、見出し、図表、数式のカウンターにアクセスし、変更できます。
+    - 独自のカウンターを定義し、使用できます。
+    - タイムトラベル：文書内の別の位置での過去や未来のカウンターの値を取得できます。例えば、図表一覧を作成するときに、任意の図表での図表カウンターの値を取得できます。
+    - カウンターはコードの順序ではなく、レイアウトの順序で数えます。
+  - [`state`]($state)関数
+    - 文書全体にわたって任意の状態を管理できます。
+    - タイムトラベル：文書内の任意の位置での状態の値を取得できます。
+    - 状態はコードの順序ではなく、レイアウトの順序で変更されます。
+  - [`query`]($query)関数
+    - 文書全体、またはあるロケーションの前後で、要素やラベルが出現する箇所を全て検索できます。
+    - 要素へのリンクを作成し、ページ上の位置を取得し、フィールドにアクセスできます。
+    - 使用例：独自の図表一覧や、現在の章のタイトルを表示するページヘッダー。
+  - [`locate`]($locate)関数
+    - 最終的なレイアウト内での自身のロケーションを特定します。
+    - アクセスして`page`と`x`、`y`座標を取得できます。
+    - カウンターや状態と組み合わせて、そのロケーションでの値を取得できます。
+    - 検索と組み合わせて、自身のロケーションの前後にある要素を見つけられます。
 
-- New [`measure`]($measure) function
-  - Measure the layouted size of elements
-  - To be used in combination with the new `style` function that lets you
-    generate different content based on the style context something is inserted
-    into (because that affects the measured size of content)
+- 新しい[`measure`]($measure)関数
+  - 要素をレイアウトしたときのサイズを測定します。
+  - 新しい`style`関数と組み合わせて使用します。この関数では、コンテンツが挿入される先のスタイルコンテキストに応じて、異なるコンテンツを生成できます。スタイルコンテキストは、コンテンツのサイズの測定結果に影響するためです。
 
-- Exposed content representation
-  - Content is not opaque anymore
-  - Content can be compared for equality
-  - The tree of content elements can be traversed with code
-  - Can be observed in hover tooltips or with [`repr`]($repr)
-  - New [methods]($content) on content: `func`, `has`, `at`, and `location`
-  - All optional fields on elements are now settable
-  - More uniform field names (`heading.title` becomes `heading.body`,
-    `list.items` becomes `list.children`, and a few more changes)
+- コンテンツの内部表現を公開
+  - コンテンツが不透明ではなくなりました。
+  - コンテンツの等価性を比較できるようになりました。
+  - コンテンツ要素のツリーをコードで走査できるようになりました。
+  - ホバー時のツールチップや[`repr`]($repr)で確認できます。
+  - コンテンツに新しい[メソッド]($content)として`func`、`has`、`at`、`location`を追加しました。
+  - 要素のオプションのフィールドを全て設定できるようになりました。
+  - フィールド名の統一を進めました。`heading.title`を`heading.body`に、`list.items`を`list.children`に変更するなど、いくつかの変更を加えました。
 
-- Further improvements
-  - Added [`figure`]($figure) function
-  - Added [`numbering`]($math.equation.numbering) parameter on equation function
-  - Added [`numbering`]($page.numbering) and
-    [`number-align`]($page.number-align) parameters on page function
-  - The page function's [`header`]($page.header) and [`footer`]($page.footer)
-    parameters do not take functions anymore. If you want to customize them
-    based on the page number, use the new [`numbering`]($page.numbering)
-    parameter or [`counter`]($counter) function instead.
-  - Added [`footer-descent`]($page.footer-descent) and
-    [`header-ascent`]($page.header-ascent) parameters
-  - Better default alignment in header and footer
-  - Fixed Arabic vowel placement
-  - Fixed PDF font embedding issues
-  - Renamed `math.formula` to [`math.equation`]($math.equation)
-  - Font family must be a named argument now: `[#set text(font: "..")]`
-  - Added support for [hanging indent]($par.hanging-indent)
-  - Renamed paragraph `indent` to [`first-line-indent`]($par.first-line-indent)
-  - More accurate [logarithm]($calc.log) when base is `2` or `10`
-  - Improved some error messages
-  - Fixed layout of [`terms`]($terms) list
+- その他の改善
+  - [`figure`]($figure)関数を追加しました。
+  - 数式関数に[`numbering`]($math.equation.numbering)パラメーターを追加しました。
+  - ページ関数に[`numbering`]($page.numbering)と[`number-align`]($page.number-align)パラメーターを追加しました。
+  - ページ関数の[`header`]($page.header)と[`footer`]($page.footer)パラメーターは、関数を受け取らなくなりました。ページ番号に応じてカスタマイズする場合は、代わりに新しい[`numbering`]($page.numbering)パラメーターか[`counter`]($counter)関数を使用してください。
+  - [`footer-descent`]($page.footer-descent)と[`header-ascent`]($page.header-ascent)パラメーターを追加しました。
+  - ヘッダーとフッターのデフォルトの配置を改善しました。
+  - アラビア語の母音の配置を修正しました。
+  - PDFへのフォント埋め込みの問題を修正しました。
+  - `math.formula`を[`math.equation`]($math.equation)にリネームしました。
+  - フォントファミリーは名前付き引数で指定する必要があります。例：`[#set text(font: "..")]`。
+  - [ぶら下げインデント]($par.hanging-indent)のサポートを追加しました。
+  - 段落の`indent`を[`first-line-indent`]($par.first-line-indent)にリネームしました。
+  - 底が`2`または`10`の場合の[対数]($calc.log)の精度を改善しました。
+  - いくつかのエラーメッセージを改善しました。
+  - [`terms`]($terms)リストのレイアウトを修正しました。
 
-- Web app improvements
-  - Added template gallery
-  - Added buttons to insert headings, equations, raw blocks, and references
-  - Jump to the source of something by clicking on it in the preview panel
-    (works for text, equations, images, and more)
-  - You can now upload your own fonts and use them in your project
-  - Hover debugging and autocompletion now takes multiple files into account and
-    works in show rules
-  - Hover tooltips now automatically collapse multiple consecutive equal values
-  - The preview now automatically scrolls to the right place when you type
-  - Links are now clickable in the preview area
-  - Toolbar, preview, and editor can now all be hidden
-  - Added autocompletion for raw block language tags
-  - Added autocompletion in SVG files
-  - New back button instead of four-dots button
-  - Lots of bug fixes
+- Webアプリの改善
+  - テンプレートギャラリーを追加しました。
+  - 見出し、数式、rawブロック、参照を挿入するボタンを追加しました。
+  - プレビューパネルでクリックして、その箇所のソースへ移動できるようになりました。文章、数式、画像などに対応しています。
+  - 独自のフォントをアップロードして、プロジェクトで使用できるようになりました。
+  - ホバー時のデバッグと自動補完が複数のファイルを考慮し、showルール内でも動作するようになりました。
+  - ホバー時のツールチップで、連続する複数の同じ値を自動的に折りたたむようになりました。
+  - 入力時に、プレビューが適切な位置へ自動的にスクロールするようになりました。
+  - プレビュー領域内のリンクをクリックできるようになりました。
+  - ツールバー、プレビュー、エディターを全て非表示にできます。
+  - rawブロックの言語タグの自動補完を追加しました。
+  - SVGファイルでの自動補完を追加しました。
+  - 4つの点のボタンを、新しい戻るボタンに置き換えました。
+  - 多数のバグを修正しました。
 
-## February 25, 2023
-- Font changes
-  - New default font: Linux Libertine
-  - New default font for raw blocks: DejaVu Sans Mono
-  - New default font for math: Book weight of New Computer Modern Math
-  - Lots of new math fonts available
-  - Removed Latin Modern fonts in favor of New Computer Modern family
-  - Removed unnecessary smallcaps fonts which are already accessible through the
-    corresponding main font and the [`smallcaps`]($smallcaps) function
-- Improved default spacing for headings
-- Added [`panic`]($panic) function
-- Added [`clusters`]($str.clusters) and [`codepoints`]($str.codepoints) methods
-  for strings
-- Support for multiple authors in [`set document`]($document.author)
-- Fixed crash when string is accessed at a position that is not a char boundary
-- Fixed semicolon parsing in `[#var ;]`
-- Fixed incremental parsing when inserting backslash at end of `[#"abc"]`
-- Fixed names of a few font families (including Noto Sans Symbols and New
-  Computer Modern families)
-- Fixed autocompletion for font families
-- Improved incremental compilation for user-defined functions
+## 2023年2月25日
+- フォントの変更
+  - 新しいデフォルトのフォントとしてLinux Libertineを採用しました。
+  - rawブロックの新しいデフォルトのフォントとしてDejaVu Sans Monoを採用しました。
+  - 数式の新しいデフォルトのフォントとしてNew Computer Modern MathのBookウェイトを採用しました。
+  - 多数の新しい数式フォントを使用できるようになりました。
+  - Latin Modernフォントを削除し、New Computer Modernファミリーに置き換えました。
+  - 対応するメインフォントと[`smallcaps`]($smallcaps)関数で既に使用できる、不要なスモールキャピタル用フォントを削除しました。
+- 見出しのデフォルトの間隔を改善しました。
+- [`panic`]($panic)関数を追加しました。
+- 文字列に[`clusters`]($str.clusters)と[`codepoints`]($str.codepoints)メソッドを追加しました。
+- [`set document`]($document.author)で複数の著者をサポートしました。
+- 文字の境界ではない位置で文字列にアクセスした場合のクラッシュを修正しました。
+- `[#var ;]`でのセミコロンのパースを修正しました。
+- `[#"abc"]`の末尾にバックスラッシュを挿入したときのインクリメンタルパースを修正しました。
+- いくつかのフォントファミリーの名前を修正しました。Noto Sans SymbolsとNew Computer Modernファミリーも含まれます。
+- フォントファミリーの自動補完を修正しました。
+- ユーザー定義関数のインクリメンタルコンパイルを改善しました。
 
-## February 15, 2023
-- [Box]($box) and [block]($block) have gained `fill`, `stroke`, `radius`, and `inset`
-  properties
-- Blocks may now be explicitly sized, fixed-height blocks can still break across
-  pages
-- Blocks can now be configured to be [`breakable`]($block.breakable) or not
-- [Numbering style]($enum.numbering) can now be configured for nested enums
-- [Markers]($list.marker) can now be configured for nested lists
-- The [`eval`]($eval) function now expects code instead of markup and returns an
-  arbitrary value. Markup can still be evaluated by surrounding the string with
-  brackets.
-- PDFs generated by Typst now contain XMP metadata
-- Link boxes are now disabled in PDF output
-- Tables don't produce small empty cells before a pagebreak anymore
-- Fixed raw block highlighting bug
+## 2023年2月15日
+- [ボックス]($box)と[ブロック]($block)に`fill`、`stroke`、`radius`、`inset`プロパティを追加しました。
+- ブロックのサイズを明示的に指定できるようになりました。高さが固定のブロックも、引き続き複数ページにまたがることができます。
+- ブロックで[`breakable`]($block.breakable)かどうかを設定できるようになりました。
+- ネストされた番号付きリストの[番号付けのスタイル]($enum.numbering)を設定できるようになりました。
+- ネストされたリストの[マーカー]($list.marker)を設定できるようになりました。
+- [`eval`]($eval)関数はマークアップではなくコードを受け取り、任意の値を返すようになりました。文字列を角括弧で囲めば、引き続きマークアップを評価できます。
+- Typstが生成するPDFにXMPメタデータが含まれるようになりました。
+- PDF出力でリンクボックスを無効にしました。
+- 表が改ページの前に小さな空のセルを生成しなくなりました。
+- rawブロックのシンタックスハイライトのバグを修正しました。
 
-## February 12, 2023
-- Shapes, images, and transformations (move/rotate/scale/repeat) are now
-  block-level. To integrate them into a paragraph, use a [`box`]($box) as with other
-  elements.
-- A colon is now required in an "everything" show rule: Write `{show: it => ..}`
-  instead of `{show it => ..}`. This prevents intermediate states that ruin your
-  whole document.
-- Non-math content like a shape or table in a math formula is now centered
-  vertically
-- Support for widow and orphan prevention within containers
-- Support for [RTL]($text.dir) in lists, grids, and tables
-- Support for explicit `{auto}` sizing for boxes and shapes
-- Support for fractional (i.e. `{1fr}`) widths for boxes
-- Fixed bug where columns jump to next page
-- Fixed bug where list items have no leading
-- Fixed relative sizing in lists, squares and grid auto columns
-- Fixed relative displacement in [`place`]($place) function
-- Fixed that lines don't have a size
-- Fixed bug where `{set document(..)}` complains about being after content
-- Fixed parsing of `{not in}` operation
-- Fixed hover tooltips in math
-- Fixed bug where a heading show rule may not contain a pagebreak when an
-  outline is present
-- Added [`baseline`]($box.baseline) property on [`box`]($box)
-- Added [`tg`]($math.op) and [`ctg`]($math.op) operators in math
-- Added delimiter setting for [`cases`]($math.cases) function
-- Parentheses are now included when accepting a function autocompletion
+## 2023年2月12日
+- 図形、画像、変換（移動、回転、拡大縮小、繰り返し）がブロックレベルになりました。段落に組み込むには、他の要素と同様に[`box`]($box)を使用してください。
+- everything showルールにコロンが必要になりました。`{show it => ..}`ではなく`{show: it => ..}`と書いてください。これにより、編集中の中間状態で文書全体が崩れることを防ぎます。
+- 数式内の図形や表など、数式以外のコンテンツの垂直方向の配置を中央揃えに変更しました。
+- コンテナー内でウィドウとオーファンの防止をサポートしました。
+- リスト、グリッド、表で[RTL]($text.dir)をサポートしました。
+- ボックスと図形のサイズに、明示的な`{auto}`の指定をサポートしました。
+- ボックスの幅に比率（つまり`{1fr}`）の指定をサポートしました。
+- 段が次のページに移動するバグを修正しました。
+- リストの項目に行間がないバグを修正しました。
+- リスト、正方形、グリッドの自動サイズの列での相対サイズ指定を修正しました。
+- [`place`]($place)関数での相対変位を修正しました。
+- 線にサイズがない問題を修正しました。
+- `{set document(..)}`がコンテンツの後にあるというエラーを出すバグを修正しました。
+- `{not in}`演算のパースを修正しました。
+- 数式でのホバー時のツールチップを修正しました。
+- アウトラインが存在する場合に、見出しのshowルールに改ページを含められないバグを修正しました。
+- [`box`]($box)に[`baseline`]($box.baseline)プロパティを追加しました。
+- 数式に[`tg`]($math.op)と[`ctg`]($math.op)演算子を追加しました。
+- [`cases`]($math.cases)関数に区切り文字の設定を追加しました。
+- 関数の自動補完を確定したときに、丸括弧も挿入されるようになりました。
 
-## February 2, 2023
-- Merged text and math symbols, renamed a few symbols (including `infty` to
-  `infinity` with the alias `oo`)
-- Fixed missing italic mappings
-- Math italics correction is now applied properly
-- Parentheses now scale in `[$zeta(x/2)$]`
-- Fixed placement of large root index
-- Fixed spacing in `[$abs(-x)$]`
-- Fixed inconsistency between text and identifiers in math
-- Accents are now ignored when positioning superscripts
-- Fixed vertical alignment in matrices
-- Fixed `text` set rule in `raw` show rule
-- Heading and list markers now parse consistently
-- Allow arbitrary math directly in content
+## 2023年2月2日
+- 文章と数式の記号を統合し、いくつかの記号をリネームしました。`infty`を`infinity`に変更し、別名として`oo`を追加する変更も含まれます。
+- イタリック体へのマッピングの欠落を修正しました。
+- 数式のイタリック補正が正しく適用されるようになりました。
+- `[$zeta(x/2)$]`で丸括弧が拡大縮小されるようになりました。
+- 大きな根指数の配置を修正しました。
+- `[$abs(-x)$]`での間隔を修正しました。
+- 数式内の文章と識別子の不整合を修正しました。
+- 上付き文字の位置を決める際に、アクセントを無視するようになりました。
+- 行列の垂直方向の配置を修正しました。
+- `raw`のshowルール内の`text`のsetルールを修正しました。
+- 見出しとリストのマーカーが一貫した方法でパースされるようになりました。
+- コンテンツ内に任意の数式を直接記述できるようになりました。
 
-## January 30, 2023
-[Go to the announcement blog post.](https://typst.app/blog/2023/january-update)
-- New expression syntax in markup/math
-  - Blocks cannot be directly embedded in markup anymore
-  - Like other expressions, they now require a leading hash
-  - More expressions available with hash, including literals (`[#"string"]`) as
-    well as field access and method call without space: `[#emoji.face]`
-- New import syntax
-  - `[#import "module.typ"]` creates binding named `module`
-  - `[#import "module.typ": a, b]` or `[#import "module.typ": *]` to import
-    items
-  - `[#import emoji: face, turtle]` to import from already bound module
-- New symbol handling
-  - Removed symbol notation
-  - Symbols are now in modules: `{sym}`, `{emoji}`, and `{math}`
-  - Math module also reexports all of `{sym}`
-  - Modified through field access, still order-independent
-  - Unknown modifiers are not allowed anymore
-  - Support for custom symbol definitions with `symbol` function
-  - Symbols now listed in documentation
-- New `{math}` module
-  - Contains all math-related functions
-  - Variables and function calls directly in math (without hash) access this
-    module instead of the global scope, but can also access local variables
-  - Can be explicitly used in code, e.g. `[#set math.vec(delim: "[")]`
-- Delimiter matching in math
-   - Any opening delimiters matches any closing one
-   - When matched, they automatically scale
-   - To prevent scaling, escape them
-   - To forcibly match two delimiters, use `lr` function
-   - Line breaks may occur between matched delimiters
-   - Delimiters may also be unbalanced
-   - You can also use the `lr` function to scale the brackets (or just one
-     bracket) to a specific size manually
-- Multi-line math with alignment
-  - The `\` character inserts a line break
-  - The `&` character defines an alignment point
-  - Alignment points also work for underbraces, vectors, cases, and matrices
-  - Multiple alignment points are supported
-- More capable math function calls
-  - Function calls directly in math can now take code expressions with hash
-  - They can now also take named arguments
-  - Within math function calls, semicolons turn preceding arguments to arrays to
-    support matrices: `[$mat(1, 2; 3, 4)$]`
-- Arbitrary content in math
-  - Text, images, and other arbitrary content can now be embedded in math
-  - Math now also supports font fallback to support e.g. CJK and emoji
-- More math features
-  - New text operators: `op` function, `lim`, `max`, etc.
-  - New matrix function: `mat`
-  - New n-ary roots with `root` function: `[$root(3, x)$]`
-  - New under- and overbraces, -brackets, and -lines
-  - New `abs` and `norm` functions
-  - New shorthands: `[|`, `|]`, and `||`
-  - New `attach` function, overridable attachments with `script` and `limit`
-  - Manual spacing in math, with `h`, `thin`, `med`, `thick` and `quad`
-  - Symbols and other content may now be used like a function, e.g.
-    `[$zeta(x)$]`
-  - Added Fira Math font, removed Noto Sans Math font
-  - Support for alternative math fonts through `[#show math.formula: set
-    text("Fira Math")]`
-- More library improvements
-  - New `calc` module, `abs`, `min`, `max`, `even`, `odd` and `mod` moved there
-  - New `message` argument on `{assert}` function
-  - The `pairs` method on dictionaries now returns an array of length-2 arrays
-    instead of taking a closure
-  - The method call `{dict.at("key")}` now always fails if `"key"` doesn't exist
-    Previously, it was allowed in assignments. Alternatives are `{dict.key = x}`
-    and `{dict.insert("key", x)}`.
-- Smarter editor functionality
-  - Autocompletion for local variables
-  - Autocompletion for methods available on a value
-  - Autocompletion for symbols and modules
-  - Autocompletion for imports
-  - Hover over an identifier to see its value(s)
-- Further editor improvements
-  - New Font menu with previews
-  - Single projects may now be shared with share links
-  - New dashboard experience if projects are shared with you
-  - Keyboard Shortcuts are now listed in the menus and there are more of them
-  - New Offline indicator
-  - Tooltips for all buttons
-  - Improved account protection
-  - Moved Status indicator into the error list button
-- Further fixes
-  - Multiple bug fixes for incremental parser
-  - Fixed closure parameter capturing
-  - Fixed tons of math bugs
-  - Bugfixes for performance, file management, editing reliability
-  - Added redirection to the page originally navigated to after signin
+## 2023年1月30日
+[告知のブログ記事をご覧ください。](https://typst.app/blog/2023/january-update)
+- マークアップと数式での新しい式の構文
+  - マークアップにブロックを直接埋め込めなくなりました。
+  - 他の式と同様に、先頭にハッシュが必要になりました。
+  - リテラル（`[#"string"]`）や、スペースを挟まないフィールドアクセスとメソッド呼び出し（`[#emoji.face]`）など、ハッシュ付きで使用できる式が増えました。
+- 新しいインポート構文
+  - `[#import "module.typ"]`は`module`という名前のバインディングを作成します。
+  - `[#import "module.typ": a, b]`または`[#import "module.typ": *]`で項目をインポートできます。
+  - `[#import emoji: face, turtle]`で、既にバインドされたモジュールからインポートできます。
+- 記号の新しい扱い方
+  - 記号の表記法を削除しました。
+  - 記号の配置先を`{sym}`、`{emoji}`、`{math}`モジュール内に変更しました。
+  - 数式モジュールは`{sym}`の全てを再エクスポートします。
+  - フィールドアクセスで修飾でき、引き続き順序は問いません。
+  - 未知の修飾子を使用できなくなりました。
+  - `symbol`関数で独自の記号を定義するサポートを追加しました。
+  - ドキュメントに記号の一覧を掲載しました。
+- 新しい`{math}`モジュール
+  - 数式に関連する全ての関数を含みます。
+  - 数式内で直接記述された変数や関数呼び出し（ハッシュなし）は、グローバルスコープではなく、このモジュールにアクセスします。ローカル変数にもアクセスできます。
+  - コード内でも明示的に使用できます。例：`[#set math.vec(delim: "[")]`。
+- 数式内の区切り文字の対応付け
+   - どの開き区切り文字も、どの閉じ区切り文字とも対応付けられます。
+   - 対応付けられると、自動的に拡大縮小されます。
+   - 拡大縮小を防ぐには、区切り文字をエスケープしてください。
+   - 2つの区切り文字を強制的に対応付けるには、`lr`関数を使用してください。
+   - 対応付けられた区切り文字の間で改行が発生する場合もあります。
+   - 区切り文字の対応が取れていなくてもかまいません。
+   - また、`lr`関数で、括弧（または片側の括弧のみ）を指定したサイズへ手動で拡大縮小できます。
+- 配置を揃えた複数行の数式
+  - `\`文字は改行を挿入します。
+  - `&`文字は配置点を定義します。
+  - 配置点は、下側の波括弧、ベクトル、場合分け、行列でも使用できます。
+  - 配置点は複数指定できます。
+- 数式関数の呼び出し機能の拡充
+  - 数式内での直接の関数呼び出しに、ハッシュ付きのコード式を渡せるようになりました。
+  - 名前付き引数も渡せるようになりました。
+  - 行列に対応するため、数式関数の呼び出し内でセミコロンを使用すると、それまでの引数が配列に変換されます。例：`[$mat(1, 2; 3, 4)$]`。
+- 数式内の任意のコンテンツ
+  - 数式内に文章、画像、その他の任意のコンテンツを埋め込めるようになりました。
+  - CJKや絵文字などに対応するため、数式でもフォントフォールバックをサポートしました。
+- その他の数式機能
+  - 新しいテキスト演算子として`op`関数、`lim`、`max`などを追加しました。
+  - 新しい行列関数`mat`を追加しました。
+  - `root`関数でn乗根を使用できるようになりました。例：`[$root(3, x)$]`。
+  - 上側と下側の波括弧、角括弧、線を追加しました。
+  - 新しい`abs`関数と`norm`関数を追加しました。
+  - 新しいショートハンドとして`[|`、`|]`、`||`を追加しました。
+  - 新しい`attach`関数を追加し、`script`と`limit`でアタッチメントを上書きできるようになりました。
+  - `h`、`thin`、`med`、`thick`、`quad`で、数式内の間隔を手動で指定できるようになりました。
+  - 記号やその他のコンテンツを関数のように使用できるようになりました。例：`[$zeta(x)$]`。
+  - Fira Mathフォントを追加し、Noto Sans Mathフォントを削除しました。
+  - `[#show math.formula: set
+    text("Fira Math")]`で、別の数式フォントを使用できるようになりました。
+- その他のライブラリの改善
+  - 新しい`calc`モジュールを追加し、`abs`、`min`、`max`、`even`、`odd`、`mod`を移動しました。
+  - `{assert}`関数に新しい`message`引数を追加しました。
+  - 辞書の`pairs`メソッドはクロージャーを受け取る代わりに、長さ2の配列からなる配列を返すようになりました。
+  - メソッド呼び出し`{dict.at("key")}`は、`"key"`が存在しない場合は必ず失敗するようになりました。以前は代入で使用できました。代わりに`{dict.key = x}`と`{dict.insert("key", x)}`を使用できます。
+- エディター機能の高度化
+  - ローカル変数の自動補完を追加しました。
+  - 値に対して使用できるメソッドの自動補完を追加しました。
+  - 記号とモジュールの自動補完を追加しました。
+  - インポートの自動補完を追加しました。
+  - 識別子にカーソルを合わせると、その値を確認できます。
+- その他のエディターの改善
+  - プレビュー付きの新しいフォントメニューを追加しました。
+  - 個別のプロジェクトを共有リンクで共有できるようになりました。
+  - プロジェクトが共有された場合のダッシュボードの使い勝手を刷新しました。
+  - メニューでキーボードショートカットを表示するようになり、種類も増えました。
+  - 新しいオフライン表示を追加しました。
+  - 全てのボタンにツールチップを追加しました。
+  - アカウントの保護を改善しました。
+  - ステータス表示をエラー一覧のボタン内に移動しました。
+- その他の修正
+  - インクリメンタルパーサーの複数のバグを修正しました。
+  - クロージャーのパラメーターにかかわるキャプチャ処理を修正しました。
+  - 数式の多数のバグを修正しました。
+  - パフォーマンス、ファイル管理、編集の信頼性に関するバグを修正しました。
+  - サインイン後に、最初にアクセスしたページへリダイレクトする機能を追加しました。
