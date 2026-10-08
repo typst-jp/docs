@@ -145228,48 +145228,48 @@
       {
         "route": "/docs/changelog/0.1.0/",
         "title": "0.1.0",
-        "description": "Changes in Typst 0.1.0",
+        "description": "Typst 0.1.0の変更点",
         "part": null,
         "outline": [
           {
-            "id": "breaking-changes",
-            "name": "Breaking changes",
+            "id": "破壊的変更",
+            "name": "破壊的変更",
             "children": []
           },
           {
-            "id": "figure-improvements",
-            "name": "Figure improvements",
+            "id": "図表の改善",
+            "name": "図表の改善",
             "children": []
           },
           {
-            "id": "bibliography-improvements",
-            "name": "Bibliography improvements",
+            "id": "参考文献の改善",
+            "name": "参考文献の改善",
             "children": []
           },
           {
-            "id": "drawing-additions",
-            "name": "Drawing additions",
+            "id": "描画機能の追加",
+            "name": "描画機能の追加",
             "children": []
           },
           {
-            "id": "command-line-interface",
-            "name": "Command line interface",
+            "id": "コマンドラインインターフェース",
+            "name": "コマンドラインインターフェース",
             "children": []
           },
           {
-            "id": "miscellaneous-improvements",
-            "name": "Miscellaneous improvements",
+            "id": "その他の改善",
+            "name": "その他の改善",
             "children": []
           },
           {
-            "id": "contributors",
-            "name": "Contributors",
+            "id": "貢献者",
+            "name": "貢献者",
             "children": []
           }
         ],
         "body": {
           "kind": "html",
-          "content": "<h1>Version 0.1.0 (April 04, 2023)</h1>\n<h2 id=\"breaking-changes\">Breaking changes</h2>\n<ul>\n<li>When using the CLI, you now have to use subcommands:\n<ul>\n<li><code>typst compile file.typ</code> or <code>typst c file.typ</code> to create a PDF</li>\n<li><code>typst watch file.typ</code> or <code>typst w file.typ</code> to compile and watch</li>\n<li><code>typst fonts</code> to list all fonts</li>\n</ul>\n</li>\n<li>Manual counters now start at zero. Read the \"How to step\" section\n<a href=\"/docs/reference/introspection/counter/\">here</a> for more details</li>\n<li>The <a href=\"/docs/reference/model/bibliography/#parameters-style\">bibliography styles</a> <code><span class=\"typ-str\">&quot;author-date&quot;</span></code> and\n<code><span class=\"typ-str\">&quot;author-title&quot;</span></code> were renamed to <code><span class=\"typ-str\">&quot;chicago-author-date&quot;</span></code> and\n<code><span class=\"typ-str\">&quot;chicago-author-title&quot;</span></code></li>\n</ul>\n<h2 id=\"figure-improvements\">Figure improvements</h2>\n<ul>\n<li>Figures now automatically detect their content and adapt their behavior.\nFigures containing tables, for instance, are automatically prefixed with\n\"Table X\" and have a separate counter</li>\n<li>The figure's supplement (e.g. \"Figure\" or \"Table\") can now be customized</li>\n<li>In addition, figures can now be completely customized because the show rule\ngives access to the automatically resolved kind, supplement, and counter</li>\n</ul>\n<h2 id=\"bibliography-improvements\">Bibliography improvements</h2>\n<ul>\n<li>The <a href=\"/docs/reference/model/bibliography/\"><code>bibliography</code></a> now also accepts multiple bibliography paths (as an\narray)</li>\n<li>Parsing of BibLaTeX files is now more permissive (accepts non-numeric edition,\npages, volumes, dates, and Jabref-style comments; fixed abbreviation parsing)</li>\n<li>Labels and references can now include <code>:</code> and <code>.</code> except at the end</li>\n<li>Fixed APA bibliography ordering</li>\n</ul>\n<h2 id=\"drawing-additions\">Drawing additions</h2>\n<ul>\n<li>Added <a href=\"/docs/reference/visualize/polygon/\"><code>polygon</code></a> function for drawing polygons</li>\n<li>Added support for clipping in <a href=\"/docs/reference/layout/box/#parameters-clip\">boxes</a> and <a href=\"/docs/reference/layout/block/#parameters-clip\">blocks</a></li>\n</ul>\n<h2 id=\"command-line-interface\">Command line interface</h2>\n<ul>\n<li>Now returns with non-zero status code if there is an error</li>\n<li>Now watches the root directory instead of the current one</li>\n<li>Now puts the PDF file next to input file by default</li>\n<li>Now accepts more kinds of input files (e.g. <code>/dev/stdin</code>)</li>\n<li>Added <code>--open</code> flag to directly open the PDF</li>\n</ul>\n<h2 id=\"miscellaneous-improvements\">Miscellaneous improvements</h2>\n<ul>\n<li>Added <a href=\"/docs/reference/data-loading/yaml/\"><code>yaml</code></a> function to load data from YAML files</li>\n<li>Added basic i18n for a few more languages (IT, RU, ZH, FR, PT)</li>\n<li>Added numbering support for Hebrew</li>\n<li>Added support for <a href=\"/docs/reference/foundations/int/\">integers</a> with base 2, 8, and 16</li>\n<li>Added symbols for double bracket and laplace operator</li>\n<li>The <a href=\"/docs/reference/model/link/\"><code>link</code></a> function now accepts <a href=\"/docs/reference/foundations/label/\">labels</a></li>\n<li>The link syntax now allows more characters</li>\n<li>Improved justification of Japanese and Chinese text</li>\n<li>Calculation functions behave more consistently w.r.t to non-real results</li>\n<li>Replaced deprecated angle brackets</li>\n<li>Reduced maximum function call depth from 256 to 64</li>\n<li>Fixed <a href=\"/docs/reference/model/par/#parameters-first-line-indent\"><code>first-line-indent</code></a> being not applied when a\nparagraph starts with styled text</li>\n<li>Fixed extraneous spacing in unary operators in equations</li>\n<li>Fixed block spacing, e.g. in <code><span class=\"typ-func\">block</span><span class=\"typ-punct\">(</span>above<span class=\"typ-punct\">:</span> <span class=\"typ-num\">1cm</span><span class=\"typ-punct\">,</span> below<span class=\"typ-punct\">:</span> <span class=\"typ-num\">1cm</span><span class=\"typ-punct\">,</span> <span class=\"typ-op\">..</span><span class=\"typ-punct\">)</span></code></li>\n<li>Fixed styling of text operators in math</li>\n<li>Fixed invalid parsing of language tag in raw block with a single backtick</li>\n<li>Fixed bugs with displaying counters and state</li>\n<li>Fixed crash related to page counter</li>\n<li>Fixed crash when <a href=\"/docs/reference/foundations/symbol/\"><code>symbol</code></a> function was called without arguments</li>\n<li>Fixed crash in bibliography generation</li>\n<li>Fixed access to label of certain content elements</li>\n<li>Fixed line number in error message for CSV parsing</li>\n<li>Fixed invalid autocompletion after certain markup elements</li>\n</ul>\n<h2 id=\"contributors\">Contributors</h2>"
+          "content": "<h1>バージョン0.1.0（2023年4月4日）</h1>\n<h2 id=\"破壊的変更\">破壊的変更</h2>\n<ul>\n<li>CLIを使用する場合、サブコマンドが必要になりました。\n<ul>\n<li>PDFを作成するには<code>typst compile file.typ</code>または<code>typst c file.typ</code>を使用します。</li>\n<li>コンパイルして変更を監視するには<code>typst watch file.typ</code>または<code>typst w file.typ</code>を使用します。</li>\n<li>全てのフォントを一覧表示するには<code>typst fonts</code>を使用します。</li>\n</ul>\n</li>\n<li>手動で更新するカウンターはゼロから始まるようになりました。詳細は、<a href=\"/docs/reference/introspection/counter/\">こちら</a>の「インクリメント方法」セクションをお読みください。</li>\n<li><a href=\"/docs/reference/model/bibliography/#parameters-style\">参考文献のスタイル</a>の<code><span class=\"typ-str\">&quot;author-date&quot;</span></code>と<code><span class=\"typ-str\">&quot;author-title&quot;</span></code>を<code><span class=\"typ-str\">&quot;chicago-author-date&quot;</span></code>と<code><span class=\"typ-str\">&quot;chicago-author-title&quot;</span></code>にリネームしました。</li>\n</ul>\n<h2 id=\"図表の改善\">図表の改善</h2>\n<ul>\n<li>図表はコンテンツを自動的に検出し、それに応じて動作を調整するようになりました。例えば、表を含む図表には自動的に「Table X」という接頭辞が付き、別のカウンターが使用されます。</li>\n<li>図表の補足語（「Figure」や「Table」など）をカスタマイズできるようになりました。</li>\n<li>さらに、showルールで自動的に決定された種類、補足語、カウンターにアクセスできるため、図表を完全にカスタマイズできるようになりました。</li>\n</ul>\n<h2 id=\"参考文献の改善\">参考文献の改善</h2>\n<ul>\n<li><a href=\"/docs/reference/model/bibliography/\"><code>bibliography</code></a>が複数の参考文献のパスも配列として受け取るようになりました。</li>\n<li>BibLaTeXファイルのパースで許容される形式が増えました。版、ページ、巻、日付の数値以外の値と、Jabref形式のコメントを受け付けるようになり、略語のパースも修正しました。</li>\n<li>ラベルと参照に、末尾を除いて<code>:</code>と<code>.</code>を含められるようになりました。</li>\n<li>APAスタイルでの参考文献の順序を修正しました。</li>\n</ul>\n<h2 id=\"描画機能の追加\">描画機能の追加</h2>\n<ul>\n<li>多角形を描画するための<a href=\"/docs/reference/visualize/polygon/\"><code>polygon</code></a>関数を追加しました。</li>\n<li><a href=\"/docs/reference/layout/box/#parameters-clip\">ボックス</a>と<a href=\"/docs/reference/layout/block/#parameters-clip\">ブロック</a>でクリッピングをサポートしました。</li>\n</ul>\n<h2 id=\"コマンドラインインターフェース\">コマンドラインインターフェース</h2>\n<ul>\n<li>エラーが発生した場合、ゼロ以外のステータスコードで終了するようになりました。</li>\n<li>現在のディレクトリではなく、ルートディレクトリを監視するようになりました。</li>\n<li>デフォルトで入力ファイルの隣にPDFファイルを出力するようになりました。</li>\n<li>より多くの種類の入力ファイル（<code>/dev/stdin</code>など）を受け付けるようになりました。</li>\n<li>PDFを直接開くための<code>--open</code>フラグを追加しました。</li>\n</ul>\n<h2 id=\"その他の改善\">その他の改善</h2>\n<ul>\n<li>YAMLファイルからデータを読み込むための<a href=\"/docs/reference/data-loading/yaml/\"><code>yaml</code></a>関数を追加しました。</li>\n<li>さらにいくつかの言語（IT、RU、ZH、FR、PT）で基本的な国際化に対応しました。</li>\n<li>ヘブライ語の番号付けをサポートしました。</li>\n<li>2、8、16進数の<a href=\"/docs/reference/foundations/int/\">整数</a>をサポートしました。</li>\n<li>二重角括弧とラプラス演算子の記号を追加しました。</li>\n<li><a href=\"/docs/reference/model/link/\"><code>link</code></a>関数が<a href=\"/docs/reference/foundations/label/\">ラベル</a>を受け取るようになりました。</li>\n<li>リンクの構文でより多くの文字を使用できるようになりました。</li>\n<li>日本語と中国語の文章の均等割り付けを改善しました。</li>\n<li>計算結果が実数でない場合の計算関数の動作が、より一貫するようになりました。</li>\n<li>非推奨の山括弧を置き換えました。</li>\n<li>関数呼び出しの最大深度を256から64に減らしました。</li>\n<li>スタイル設定された文章で段落が始まる場合に、<a href=\"/docs/reference/model/par/#parameters-first-line-indent\"><code>first-line-indent</code></a>が適用されない問題を修正しました。</li>\n<li>数式の単項演算子での余分な間隔を修正しました。</li>\n<li><code><span class=\"typ-func\">block</span><span class=\"typ-punct\">(</span>above<span class=\"typ-punct\">:</span> <span class=\"typ-num\">1cm</span><span class=\"typ-punct\">,</span> below<span class=\"typ-punct\">:</span> <span class=\"typ-num\">1cm</span><span class=\"typ-punct\">,</span> <span class=\"typ-op\">..</span><span class=\"typ-punct\">)</span></code>などでのブロックの間隔を修正しました。</li>\n<li>数式のテキスト演算子のスタイル設定を修正しました。</li>\n<li>バッククォートが1つのrawブロックで、言語タグを誤ってパースする問題を修正しました。</li>\n<li>カウンターと状態の表示に関するバグを修正しました。</li>\n<li>ページカウンターに関連するクラッシュを修正しました。</li>\n<li><a href=\"/docs/reference/foundations/symbol/\"><code>symbol</code></a>関数を引数なしで呼び出した場合のクラッシュを修正しました。</li>\n<li>参考文献の生成時のクラッシュを修正しました。</li>\n<li>特定のコンテンツ要素のラベルへのアクセスを修正しました。</li>\n<li>CSVのパース時のエラーメッセージに表示される行番号を修正しました。</li>\n<li>特定のマークアップ要素の後で自動補完が正しく動作しない問題を修正しました。</li>\n</ul>\n<h2 id=\"貢献者\">貢献者</h2>"
         },
         "children": []
       },
